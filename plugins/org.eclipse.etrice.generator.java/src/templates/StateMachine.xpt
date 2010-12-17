@@ -1,0 +1,228 @@
+«REM»
+/*******************************************************************************
+ * Copyright (c) 2010 protos software gmbh (http://www.protos.de).
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * CONTRIBUTORS:
+ * 		Thomas Schuetz and Henrik Rentz-Reichert (initial contribution)
+ * 
+ *******************************************************************************/
+«ENDREM»
+«IMPORT room»;
+«IMPORT etricegen»;
+
+«EXTENSION extensions::Extensions»
+«EXTENSION org::eclipse::xtend::util::stdlib::io»
+
+
+«DEFINE stateMachine FOR ExpandedActorClass»
+«LET this.actorClass AS ac»
+//******************************************
+// START of generated code for FSM
+//******************************************
+
+// State IDs for FSM
+«LET ac.getNumberOfInheritedBaseStates() AS offset»
+«FOREACH ac.stateMachine.getBaseStateList() AS state ITERATOR iter»protected static final int «state.getStateId()» = «iter.counter1+1+offset»;
+«ENDFOREACH»«ENDLET»
+protected static final String stateStrings[] = {"<no state>","<top>",«FOREACH ac.getAllBaseStates() AS state ITERATOR iter SEPARATOR ","»"«state.getStatePathName()»"
+«ENDFOREACH»};
+
+// history
+// TODOHRR: history defined in ActorClassBase, init in constructor
+//		history = new int[5];
+//		for (int i = 0; i < history.length; i++) {
+//			history[i] = NO_STATE;
+//		}
+protected int history[] = {NO_STATE,NO_STATE«FOREACH ac.getAllBaseStates() AS state»,NO_STATE«ENDFOREACH»};
+
+«LET this.getOwnTransitionChains() AS chains»
+«LET this.getTransitionChains().size-chains.size AS offset»
+// transition chains
+«FOREACH chains AS tc ITERATOR i»protected static final int «tc.getChainId()» = «i.counter1+offset»;
+«ENDFOREACH»«ENDLET»«ENDLET»
+
+«LET this.getOwnTriggers() AS triggers»
+// triggers for FSM
+«FOREACH triggers AS mif»protected static final int «this.getTriggerCodeName(mif)» = IFITEM_«mif.from.name» + EVT_SHIFT*«this.getMessageID(mif)»;
+«ENDFOREACH»«ENDLET»
+
+// receiveEvent contains the main implementation of the FSM
+@Override
+public void receiveEvent(InterfaceItemBase ifitem, int evt, Object... generic_data) {
+	int trigger = ifitem.getLocalId() + EVT_SHIFT*evt;
+	int chain = NOT_CAUGHT;
+	int catching_state = NO_STATE;
+	boolean is_handler = false;
+	
+	switch (state) {
+		«FOREACH this.stateMachine.getLeafStateList() AS state»
+		case «state.getStateId()»:
+			«LET this.getActiveTriggers(state) AS atlist»
+			«IF !atlist.isEmpty»
+				switch(trigger) {
+				«FOREACH atlist AS at»
+					case «this.getTriggerCodeName(at.trigger)»:
+						«LET this.hasGuard(at) AS needData»
+						«IF needData»{ «at.msg.getTypedDataDefinition()»«ENDIF»
+						«FOREACH at.transitions AS tt SEPARATOR " else "»
+							«LET this.getChain(tt) AS chain»
+							«EXPAND guard(at.trigger, this) FOR chain.transition»
+							{
+								chain = «chain.getChainId()»;
+								catching_state = «chain.getContextId()»;
+								«IF chain.isHandler()»is_handler = true;«ENDIF»
+							}
+							«ENDLET»
+						«ENDFOREACH»
+						«IF needData»}«ENDIF»
+						«ENDLET»
+					break;
+				«ENDFOREACH»
+				}
+			«ENDIF»«ENDLET»
+			break;
+		«ENDFOREACH»
+	}
+	if (chain != NOT_CAUGHT) {
+		exitTo(state, catching_state, is_handler);
+		int next = executeTransitionChain(chain, ifitem, generic_data);
+		next = enterHistory(next, is_handler);
+		setState(next);
+	}
+}
+
+private void setState(int new_state) {
+	DebuggingService.getInstance().addActorState(this,stateStrings[new_state]);
+	if (stateStrings[new_state]!="Idle") {
+		// TODOTS: model switch for activation
+		System.out.println(getInstancePath() + " -> " + stateStrings[new_state]);
+	}	
+	this.state = new_state;
+}
+
+protected void executeInitTransition() {
+	«LET this.stateMachine.getInitTransition() AS initt»
+		int chain = «this.getChain(initt).getChainId()»;
+		int next = executeTransitionChain(chain, null, null);
+		next = enterHistory(next, false);
+		setState(next);
+	«ENDLET»
+}
+
+/**
+ * calls exit codes while exiting from the current state to one of its
+ * parent states while remembering the history
+ * @param current - the current state
+ * @param to - the final parent state
+ * @param handler - entry and exit codes are called only if not handler (for handler TransitionPoints)
+ */
+private void exitTo(int current, int to, boolean handler) {
+	while (current!=to) {
+		switch (current) {
+			«FOREACH this.stateMachine.getBaseStateList() AS state»
+				case «state.getStateId()»:
+					«IF state.hasExitCode()»if (!handler) «state.getExitCodeOperationName()»();«ENDIF»
+					history[«state.getParentStateId()»] = «state.getStateId()»;
+					current = «state.getParentStateId()»;
+					break;
+			«ENDFOREACH»
+		}
+	}
+}
+/**
+ * calls action, entry and exit codes along a transition chain. The generic data are cast to typed data
+ * matching the trigger of this chain. The ID of the final state is returned
+ * @param chain - the chain ID
+ * @param generic_data - the generic data pointer
+ * @return the ID of the final state
+ */
+private int executeTransitionChain(int chain, InterfaceItemBase ifitem, Object[] generic_data) {
+	switch (chain) {
+		«LET this.getTransitionChains() AS chains»
+		«FOREACH chains AS tc»
+			case «tc.getChainId()»:
+			{
+				«this.getExecuteChainCode(tc)»
+			}
+		«ENDFOREACH»«ENDLET»
+	}
+	return NO_STATE;
+}
+/**
+ * calls entry codes while entering a state's history. The ID of the final leaf state is returned
+ * @param state - the state which is entered
+ * @param handler - entry code is executed if not handler
+ * @return - the ID of the final leaf state
+ */
+private int enterHistory(int state, boolean handler) {
+	while (true) {
+		switch (state) {
+			«FOREACH this.stateMachine.getBaseStateList() AS state»
+			case «state.getStateId()»:
+				«IF state.hasEntryCode()»if (!handler) «state.getEntryCodeOperationName()»();«ENDIF»
+				«IF state.isLeaf()»
+				return state;
+				«ELSE»
+				if (history[state]==NO_STATE) {
+					«LET state.subgraph.getInitTransition() AS initt»
+					«IF initt!=null»
+						int chain = «this.getChain(initt).getChainId()»;
+						int next = executeTransitionChain(chain, null, null);
+						state = enterHistory(next, false);
+					«ENDIF»
+					«ENDLET»
+					state = «state.subgraph.getInitState().getStateId()»;
+				}
+				else {
+					state = history[state];
+				}
+				break;
+				«ENDIF»
+			«ENDFOREACH»
+		}
+	}
+}
+
+//*** Entry and Exit Codes
+«FOREACH this.stateMachine.getStateList() AS state»
+	«IF this.isOwnObject(state)»
+		«IF state.hasEntryCode()»
+			protected void «state.getEntryCodeOperationName()»() {
+				«this.getEntryCode(state)»}
+		«ENDIF»
+		«IF state.hasExitCode()»
+			protected void «state.getExitCodeOperationName()»() {
+				«this.getExitCode(state)»}
+		«ENDIF»
+	«ENDIF»
+«ENDFOREACH»
+
+//*** Action Codes
+«FOREACH this.stateMachine.getTransitionList() AS tr»
+	«IF this.isOwnObject(tr) && tr.hasActionCode()»
+		protected void «tr.getActionCodeOperationName()»(«IF NonInitialTransition.isInstance(tr)»InterfaceItemBase ifitem«this.getArgumentList(tr)»«ENDIF») {
+			«this.getActionCode(tr)»}
+	«ENDIF»
+«ENDFOREACH»
+	 
+//******************************************
+// END of generated code for FSM
+//******************************************
+«ENDLET»
+«ENDDEFINE»
+
+«DEFINE guard(String trigger, ExpandedActorClass ac) FOR TriggeredTransition»
+	«LET this.triggers.selectFirst(e|ac.isMatching(e, trigger)) AS tr»
+		«IF tr.hasGuard()»
+			if («ac.getCode(tr.guard.guard)»)
+		«ENDIF»
+	«ENDLET»
+«ENDDEFINE»
+
+«DEFINE guard(String trigger, ExpandedActorClass ac) FOR Transition»
+/* error */
+«ENDDEFINE»

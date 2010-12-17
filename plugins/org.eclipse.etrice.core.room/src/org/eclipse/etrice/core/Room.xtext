@@ -1,0 +1,376 @@
+/*******************************************************************************
+ * Copyright (c) 2010 protos software gmbh (http://www.protos.de).
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * CONTRIBUTORS:
+ * 		Thomas Schuetz and Henrik Rentz-Reichert (initial contribution)
+ * 
+ *******************************************************************************/
+
+/**
+ * @author Henrik Rentz-Reichert and Thomas Schuetz
+ *
+ * XText Grammar for ROOM models 
+ * this grammar is the base for the ROOM tool eTrice
+ * 
+ */
+
+grammar org.eclipse.etrice.core.Room with org.eclipse.xtext.common.Terminals
+
+generate room "http://www.eclipse.org/etrice/Room"
+
+RoomModel :
+'RoomModel' name=FQN '{'
+	(imports+=Import)*
+	(
+		dataClasses+=DataClass	|
+		protocolClasses+=ProtocolClass |
+		actorClasses+=ActorClass  |
+		subSystemClasses+=SubSystemClass |
+		systems+=LogicalSystem
+	)+
+	'}'
+;
+
+RoomClass: DataClass | ProtocolClass | StructureClass;
+StructureClass: ActorContainerClass | LogicalSystem;
+ActorContainerClass: ActorClass | SubSystemClass;
+
+// **************************************************************
+// data class
+
+// cf. decision DSL2: fixed size data types
+// convert appropriately for Java and issue an error if size not available
+enum PrimitiveType: 
+	void = 'void' |
+	int8 = 'int8' |
+	int16 = 'int16' |
+	int32 = 'int32' |
+	uint8 = 'uint8' |
+	uint16 = 'uint16' |
+	uint32 = 'uint32' |
+	float32 = 'float32' |
+	float64 = 'float64' |
+	boolean = 'boolean' |
+	string = 'string' |
+	char = 'char';
+	
+	
+TypedID:
+	name=ID ':' type=Type;
+FreeTypedID:
+	name=ID ':' type=FreeType;
+	
+Type: prim=PrimitiveType | type=[DataClass|FQN];
+FreeType: prim=PrimitiveType | type=ID;
+
+// TODOHRR: define detail level language?
+DataClass:
+	'DataClass' name=ID ('extends' base=[DataClass|FQN])? '{'
+		(imports+=Import)*
+		attributes+=Attribute+
+		operations+=Operation*
+	'}';
+
+Attribute:
+	'Attribute' name=ID ('[' size=INT ']')? ':' type=Type;
+
+// TODOHRR: pass arguments and return value by value/reference
+Operation:
+	'Operation' name=ID '(' (arguments+=FreeTypedID (',' arguments+=FreeTypedID)*)? ')' (':' returntype=FreeType)? 
+		detailCode=DetailCode
+	;
+
+// **************************************************************
+// protocol class
+
+ProtocolClass:
+	'ProtocolClass' name=ID ('extends' base=[ProtocolClass|FQN])? '{'
+		('usercode1' userCode1=DetailCode)?
+		('usercode2' userCode2=DetailCode)?
+		'incoming' '{' incomingMessages+=Message* '}'
+		'outgoing' '{' outgoingMessages+=Message* '}'
+		('regular' 'PortClass' regular=PortClass)?
+		('conjugate' 'PortClass' conjugate=PortClass)?
+		(semantics=ProtocolSemantics)?
+	'}';
+	
+Message:
+	'Message' name=ID '(' (arguments+=TypedID (',' arguments+=TypedID)*)? ')';
+
+PortClass:
+	'{'
+		('usercode' userCode=DetailCode)?
+		(attributes+=Attribute |
+		operations+=Operation |
+		msgHandlers+=MessageHandler)+
+	'}';
+
+MessageHandler:
+	'handle' msg=[Message|ID]
+		detailCode=DetailCode
+	;
+
+ProtocolSemantics:
+	'semantics' '{'
+		rules+=SemanticsRule+
+	'}';
+
+SemanticsRule: SemanticsInRule | SemanticsOutRule;
+
+SemanticsInRule: 'in' msg=[Message|ID] '->' '{'
+		followUps+=SemanticsRule*
+	'}';
+
+SemanticsOutRule: 'out' msg=[Message|ID] '->' '{'
+		followUps+=SemanticsRule*
+	'}';
+
+// **************************************************************
+// actor class
+
+// some notes on ports
+//
+// in ROOM ports can be contained in the structure and/or the interface
+// p in s ==> internal end port
+// p in i ==> relay port
+// p in i and p in s ==> external end port
+// since double containment is not supported we decided to define external ports as reference to interface ports
+ActorClass:
+	(abstract?='abstract')? 'ActorClass' name=ID ('extends' base=[ActorClass|FQN])? '{'
+		('Interface' '{'
+			ifPorts+=Port*
+			ifSPPs+=SPPRef*
+		'}')?
+		('Structure' '{'
+			('usercode1' userCode1=DetailCode)?
+			('usercode2' userCode2=DetailCode)?
+			(intPorts+=Port |
+			extPorts+=ExternalPort)*
+			serviceImplementations+=ServiceImplementation*
+			strSAPs+=SAPRef*
+			attributes+=Attribute*
+			actorRefs+=ActorRef*
+			bindings+=Binding*
+			connections+=LayerConnection*
+		'}')?
+		('Behavior' '{'
+			operations+=Operation*
+			(stateMachine=StateMachine)?
+		'}')?
+	'}';
+
+InterfaceItem: Port | SAPRef | SPPRef;
+
+Port:
+	(conjugated?='conjugated')? 'Port' name=ID ('[' multiplicity=INT ']')? ':' protocol=[ProtocolClass|FQN] ;
+ExternalPort:
+	'external' 'Port' ifport=[Port|ID] ;
+
+SAPRef:
+	// we omitted the SAP type (Timing/Frame/Exception)
+	'SAP' name=ID ':' protocol=[ProtocolClass|FQN] ;
+
+SPPRef:
+	'SPP' name=ID ':' protocol=[ProtocolClass|FQN] ;
+ServiceImplementation:
+	'ServiceImplementation' 'of' spp=[SPPRef|ID];
+
+LogicalSystem:
+	'LogicalSystem' name=ID '{'
+		subSystems+=SubSystemRef+
+		bindings+=Binding*
+		connections+=LayerConnection*
+	'}';
+
+ActorContainerRef: SubSystemRef | ActorRef;
+
+SubSystemRef:
+	'SubSystemRef' name=ID ':' type=[SubSystemClass|FQN];
+
+SubSystemClass:
+	'SubSystemClass' name=ID '{'
+		relayPorts+=Port*
+		ifSPPs+=SPPRef*
+		actorRefs+=ActorRef+
+		bindings+=Binding*
+		connections+=LayerConnection*
+		threads+=LogicalThread*
+	'}';
+
+LogicalThread:
+	'LogicalThread' name=ID '{'
+		instances+=ActorInstancePath (',' instances+=ActorInstancePath)*
+	'}';
+
+ActorInstancePath:
+	segments+=ID ('.' segments+=ID)*;
+	
+// TODOHRR: bindings for replicated ports
+// (1) declare several bindings
+// (2) use a notation with 1 to n bindings
+Binding:
+	'Binding' endpoint1=BindingEndPoint 'and' endpoint2=BindingEndPoint ;
+	
+BindingEndPoint:
+	(actorRef=[ActorContainerRef|ID]'.')?  port=[Port|ID];
+
+LayerConnection:
+	'LayerConnection' from=SAPoint 'satisfied_by' to=SPPoint 
+;
+
+SAPoint: RefSAPoint | RelaySAPoint;
+
+RefSAPoint:
+	// satisfies a sub actor
+	'ref' ref=[ActorContainerRef|ID];
+RelaySAPoint:
+	// relays from own interface
+	'relay_sap' relay=[SPPRef|ID];
+
+SPPoint:
+	ref=[ActorContainerRef|ID] '.'  service=[SPPRef|ID]
+;
+
+// TODOHRR: support replicated actors
+ActorRef:
+	'ActorRef' name=ID ':' type=[ActorClass|FQN];
+
+
+// **************************************************************
+// state machine
+
+StateGraphNode: State | ChoicePoint | TrPoint;
+StateGraphItem: StateGraphNode | Transition;
+
+State: BaseState | RefinedState;
+
+StateGraph:
+	'{'
+		(
+			states+=State |
+			trPoints+=TrPoint |
+			chPoints+=ChoicePoint |
+			transitions+=Transition
+		)+
+	'}';
+
+StateMachine returns StateGraph:
+	'StateMachine' '{'
+		(
+			states+=State |
+			trPoints+=TrPoint |
+			chPoints+=ChoicePoint |
+			transitions+=Transition
+		)+
+	'}';
+
+// entry and exit code have multiplicity many: in BaseState to be able to add derived class codes here,
+// in RefinedState to still have both features in the common base class State
+BaseState:
+	'State' name=ID '{'
+		('entry' entryCode=DetailCode)?
+		('exit' exitCode=DetailCode)?
+		('subgraph' subgraph=StateGraph)?
+	'}';
+
+RefinedState:
+	'RefinedState' base=[BaseState|FQN] '{'
+		('entry' entryCode=DetailCode)?
+		('exit' exitCode=DetailCode)?
+		('subgraph' subgraph=StateGraph)?
+	'}';
+
+// TODOHRR: provide a means to call super class code (cf. ROOM p. 310f)
+// super() keyword or flag like in Trice
+DetailCode:
+	'{'
+		commands+=STRING+
+	'}';
+
+TrPoint: TransitionPoint | EntryPoint | ExitPoint;
+
+TransitionPoint:
+	(handler?='handler')? 'TransitionPoint' name=ID;
+
+EntryPoint:
+	'EntryPoint' name=ID;
+
+ExitPoint:
+	'ExitPoint' name=ID;
+
+ChoicePoint:
+	'ChoicePoint' name=ID;
+
+Transition: InitialTransition | NonInitialTransition;
+NonInitialTransition: TriggeredTransition | ContinuationTransition | CPBranchTransition;
+
+InitialTransition:
+	'Transition' (name=ID)? ':' 'initial' '->' to=TransitionTerminal '{'
+		('action' action=DetailCode)? 
+	'}';
+
+ContinuationTransition:
+	'Transition' (name=ID)? ':' from=TransitionTerminal '->' to=TransitionTerminal '{'
+		('action' action=DetailCode)? 
+	'}';
+
+TriggeredTransition:
+	'Transition' (name=ID)? ':' from=TransitionTerminal '->' to=TransitionTerminal '{'
+		'triggers' '{'
+			triggers+=Trigger ('or' triggers+=Trigger)*
+		'}'
+		('action' action=DetailCode)? 
+	'}';
+
+CPBranchTransition:
+	'Transition' (name=ID)? ':' from=TransitionTerminal '->' to=TransitionTerminal '{'
+		'cond' condition=DetailCode
+		('action' action=DetailCode)? 
+	'}';
+
+TransitionTerminal: StateTerminal | TrPointTerminal | SubStateTrPointTerminal | ChoicepointTerminal;
+
+StateTerminal:
+	state=[BaseState|ID];
+TrPointTerminal:
+	'my' trPoint=[TrPoint|ID];
+SubStateTrPointTerminal:
+	trPoint=[TrPoint|ID] 'of' state=[BaseState|ID];
+ChoicepointTerminal:
+	'cp' cp=[ChoicePoint|ID];
+
+//TransitionSource: TransitionTerminal|ChoicePointCaseRef|ChoicePointDefaultRef;
+//TransitionSource: TransitionTerminal|ChoicePointRef;
+//TransitionDest: TransitionTerminal|ChoicePointRef;
+
+//ChoicePointCaseRef: 'cp' cp=[ChoicePoint|ID] 'case' case=[ChoicePointCase|ID];
+//ChoicePointDefaultRef: 'cp' cp=[ChoicePoint|ID] 'default';
+//ChoicePointRef: 'cp' cp=[ChoicePoint|ID];
+
+Trigger:
+		'<' msgFromIfPairs+=MessageFromIf ('|' msgFromIfPairs+=MessageFromIf)*
+		(guard=Guard)? '>'
+;
+
+MessageFromIf:
+	message=[Message|ID] ':' from=[InterfaceItem|ID]
+;
+
+Guard:
+	'guard' guard=DetailCode;
+
+// **************************************************************
+// general
+
+Import :
+	'import' importedNamespace=ImportedFQN;
+
+ImportedFQN:
+	FQN ('.' '*')?;
+
+FQN:
+	ID ('.' ID)*;

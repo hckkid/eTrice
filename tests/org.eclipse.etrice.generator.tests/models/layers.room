@@ -1,0 +1,136 @@
+RoomModel layers {
+
+	ProtocolClass PServiceA {
+		incoming {
+			Message in1 ()
+		}
+		outgoing {
+			Message out1 ()
+		}
+	}
+
+	ProtocolClass PServiceB {
+		incoming {
+			Message in2 ()
+		}
+		outgoing {
+			Message out2 ()
+		}
+	}
+
+	ProtocolClass PServiceC {
+		incoming {
+			Message in3 ()
+		}
+		outgoing {
+			Message out3 ()
+		}
+	}
+
+	SubSystemClass CMain {
+		ActorRef app : AApplication
+		ActorRef services : AServices
+		
+		LayerConnection ref app satisfied_by services.serviceA
+		LayerConnection ref app satisfied_by services.serviceB
+	}
+
+	ActorClass AApplication {
+		Structure {
+			ActorRef subsysA : ASubSysA
+			ActorRef subsysB : ASubSysB
+		}
+	}
+
+	ActorClass ASubSysA {
+		Structure {
+			ActorRef userX : AServiceUser1
+			ActorRef userY : AServiceUser2
+			ActorRef userZ : AServiceUser2
+		}
+	}
+
+	ActorClass ASubSysB {
+		Interface {
+			SPP service : PServiceC
+		}
+		Structure {
+			ActorRef userX : AServiceUser1
+			ActorRef userY : AServiceUser1
+			ActorRef userZ : AServiceUser3
+			ActorRef svcC : AServiceC
+			
+			LayerConnection relay_sap service satisfied_by svcC.service
+		}
+	}
+
+	ActorClass AServiceUser1 {
+		Structure {
+			SAP sap : PServiceA
+		}
+	}
+
+	ActorClass AServiceUser2 {
+		Structure {
+			SAP sap : PServiceB
+		}
+	}
+
+	ActorClass AServiceUser3 {
+		Structure {
+			SAP sap : PServiceC
+		}
+	}
+
+	ActorClass AServices {
+		Interface {
+			SPP serviceA : PServiceA
+			SPP serviceB : PServiceB
+		}
+		Structure {
+			ActorRef svcA : AServiceA
+			ActorRef svcB : AServiceB
+			
+			LayerConnection relay_sap serviceA satisfied_by svcA.service
+			LayerConnection relay_sap serviceB satisfied_by svcB.service
+		}
+	}
+
+	ActorClass AServiceA {
+		Interface {
+			SPP service : PServiceA
+		}
+		Structure {
+			ServiceImplementation of service
+		}
+	}
+
+	ActorClass AServiceB {
+		Interface {
+			SPP service : PServiceB
+		}
+		Structure {
+			ActorRef impl : AServiceBImpl
+			LayerConnection relay_sap service satisfied_by impl.service
+		}
+	}
+
+	ActorClass AServiceBImpl {
+		Interface {
+			SPP service : PServiceB 
+		}
+		Structure {
+			ServiceImplementation of service
+		}
+	}
+
+	ActorClass AServiceC {
+		Interface {
+			SPP service : PServiceC 
+		}
+		Structure {
+			ServiceImplementation of service
+		}
+	}
+
+}

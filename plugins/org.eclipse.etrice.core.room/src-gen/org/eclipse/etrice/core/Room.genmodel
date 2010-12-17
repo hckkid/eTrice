@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.etrice.core.room/src-gen"
+    editDirectory="/org.eclipse.etrice.core.room.edit/src" editorDirectory="/org.eclipse.etrice.core.room.editor/src"
+    modelPluginID="org.eclipse.etrice.core.room" forceOverwrite="true" modelName="Room"
+    updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.etrice.core.room.edit"
+    editorPluginID="org.eclipse.etrice.core.room.editor">
+  <genPackages prefix="Room" basePackage="org.eclipse.etrice.core" disposableProviderFactory="true"
+      ecorePackage="Room.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Room.ecore#//PrimitiveType">
+      <genEnumLiterals ecoreEnumLiteral="Room.ecore#//PrimitiveType/void"/>
+      <genEnumLiterals ecoreEnumLiteral="Room.ecore#//PrimitiveType/int8"/>
+      <genEnumLiterals ecoreEnumLiteral="Room.ecore#//PrimitiveType/int16"/>
+      <genEnumLiterals ecoreEnumLiteral="Room.ecore#//PrimitiveType/int32"/>
+      <genEnumLiterals ecoreEnumLiteral="Room.ecore#//PrimitiveType/uint8"/>
+      <genEnumLiterals ecoreEnumLiteral="Room.ecore#//PrimitiveType/uint16"/>
+      <genEnumLiterals ecoreEnumLiteral="Room.ecore#//PrimitiveType/uint32"/>
+      <genEnumLiterals ecoreEnumLiteral="Room.ecore#//PrimitiveType/float32"/>
+      <genEnumLiterals ecoreEnumLiteral="Room.ecore#//PrimitiveType/float64"/>
+      <genEnumLiterals ecoreEnumLiteral="Room.ecore#//PrimitiveType/boolean"/>
+      <genEnumLiterals ecoreEnumLiteral="Room.ecore#//PrimitiveType/string"/>
+      <genEnumLiterals ecoreEnumLiteral="Room.ecore#//PrimitiveType/char"/>
+    </genEnums>
+    <genClasses ecoreClass="Room.ecore#//RoomModel">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//RoomModel/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//RoomModel/imports"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//RoomModel/dataClasses"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//RoomModel/protocolClasses"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//RoomModel/actorClasses"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//RoomModel/subSystemClasses"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//RoomModel/systems"/>
+    </genClasses>
+    <genClasses ecoreClass="Room.ecore#//RoomClass">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//RoomClass/name"/>
+    </genClasses>
+    <genClasses ecoreClass="Room.ecore#//StructureClass">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//StructureClass/bindings"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//StructureClass/connections"/>
+    </genClasses>
+    <genClasses ecoreClass="Room.ecore#//ActorContainerClass">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//ActorContainerClass/ifSPPs"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//ActorContainerClass/actorRefs"/>
+    </genClasses>
+    <genClasses ecoreClass="Room.ecore#//TypedID">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//TypedID/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//TypedID/type"/>
+    </genClasses>
+    <genClasses ecoreClass="Room.ecore#//FreeTypedID">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//FreeTypedID/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//FreeTypedID/type"/>
+    </genClasses>
+    <genClasses ecoreClass="Room.ecore#//Type">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//Type/prim"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//Type/type"/>
+    </genClasses>
+    <genClasses ecoreClass="Room.ecore#//FreeType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//FreeType/prim"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//FreeType/type"/>
+    </genClasses>
+    <genClasses ecoreClass="Room.ecore#//DataClass">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//DataClass/base"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//DataClass/imports"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//DataClass/attributes"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//DataClass/operations"/>
+    </genClasses>
+    <genClasses ecoreClass="Room.ecore#//Attribute">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//Attribute/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//Attribute/size"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//Attribute/type"/>
+    </genClasses>
+    <genClasses ecoreClass="Room.ecore#//Operation">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//Operation/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//Operation/arguments"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//Operation/returntype"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//Operation/detailCode"/>
+    </genClasses>
+    <genClasses ecoreClass="Room.ecore#//ProtocolClass">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//ProtocolClass/base"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//ProtocolClass/userCode1"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//ProtocolClass/userCode2"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//ProtocolClass/incomingMessages"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//ProtocolClass/outgoingMessages"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//ProtocolClass/regular"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//ProtocolClass/conjugate"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//ProtocolClass/semantics"/>
+    </genClasses>
+    <genClasses ecoreClass="Room.ecore#//Message">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//Message/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//Message/arguments"/>
+    </genClasses>
+    <genClasses ecoreClass="Room.ecore#//PortClass">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//PortClass/userCode"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//PortClass/attributes"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//PortClass/operations"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//PortClass/msgHandlers"/>
+    </genClasses>
+    <genClasses ecoreClass="Room.ecore#//MessageHandler">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//MessageHandler/msg"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//MessageHandler/detailCode"/>
+    </genClasses>
+    <genClasses ecoreClass="Room.ecore#//ProtocolSemantics">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//ProtocolSemantics/rules"/>
+    </genClasses>
+    <genClasses ecoreClass="Room.ecore#//SemanticsRule">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//SemanticsRule/msg"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//SemanticsRule/followUps"/>
+    </genClasses>
+    <genClasses ecoreClass="Room.ecore#//SemanticsInRule"/>
+    <genClasses ecoreClass="Room.ecore#//SemanticsOutRule"/>
+    <genClasses ecoreClass="Room.ecore#//ActorClass">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//ActorClass/abstract"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//ActorClass/base"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//ActorClass/ifPorts"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//ActorClass/userCode1"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//ActorClass/userCode2"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//ActorClass/intPorts"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//ActorClass/extPorts"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//ActorClass/serviceImplementations"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//ActorClass/strSAPs"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//ActorClass/attributes"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//ActorClass/operations"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//ActorClass/stateMachine"/>
+    </genClasses>
+    <genClasses ecoreClass="Room.ecore#//InterfaceItem">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//InterfaceItem/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//InterfaceItem/protocol"/>
+    </genClasses>
+    <genClasses ecoreClass="Room.ecore#//Port">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//Port/conjugated"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//Port/multiplicity"/>
+    </genClasses>
+    <genClasses ecoreClass="Room.ecore#//ExternalPort">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//ExternalPort/ifport"/>
+    </genClasses>
+    <genClasses ecoreClass="Room.ecore#//SAPRef"/>
+    <genClasses ecoreClass="Room.ecore#//SPPRef"/>
+    <genClasses ecoreClass="Room.ecore#//ServiceImplementation">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//ServiceImplementation/spp"/>
+    </genClasses>
+    <genClasses ecoreClass="Room.ecore#//LogicalSystem">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//LogicalSystem/subSystems"/>
+    </genClasses>
+    <genClasses ecoreClass="Room.ecore#//ActorContainerRef">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//ActorContainerRef/name"/>
+    </genClasses>
+    <genClasses ecoreClass="Room.ecore#//SubSystemRef">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//SubSystemRef/type"/>
+    </genClasses>
+    <genClasses ecoreClass="Room.ecore#//SubSystemClass">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//SubSystemClass/relayPorts"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//SubSystemClass/threads"/>
+    </genClasses>
+    <genClasses ecoreClass="Room.ecore#//LogicalThread">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//LogicalThread/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//LogicalThread/instances"/>
+    </genClasses>
+    <genClasses ecoreClass="Room.ecore#//ActorInstancePath">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//ActorInstancePath/segments"/>
+    </genClasses>
+    <genClasses ecoreClass="Room.ecore#//Binding">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//Binding/endpoint1"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//Binding/endpoint2"/>
+    </genClasses>
+    <genClasses ecoreClass="Room.ecore#//BindingEndPoint">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//BindingEndPoint/actorRef"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//BindingEndPoint/port"/>
+    </genClasses>
+    <genClasses ecoreClass="Room.ecore#//LayerConnection">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//LayerConnection/from"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//LayerConnection/to"/>
+    </genClasses>
+    <genClasses ecoreClass="Room.ecore#//SAPoint"/>
+    <genClasses ecoreClass="Room.ecore#//RefSAPoint">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//RefSAPoint/ref"/>
+    </genClasses>
+    <genClasses ecoreClass="Room.ecore#//RelaySAPoint">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//RelaySAPoint/relay"/>
+    </genClasses>
+    <genClasses ecoreClass="Room.ecore#//SPPoint">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//SPPoint/ref"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//SPPoint/service"/>
+    </genClasses>
+    <genClasses ecoreClass="Room.ecore#//ActorRef">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//ActorRef/type"/>
+    </genClasses>
+    <genClasses ecoreClass="Room.ecore#//StateGraphNode"/>
+    <genClasses ecoreClass="Room.ecore#//StateGraphItem"/>
+    <genClasses ecoreClass="Room.ecore#//State">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//State/entryCode"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//State/exitCode"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//State/subgraph"/>
+    </genClasses>
+    <genClasses ecoreClass="Room.ecore#//StateGraph">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//StateGraph/states"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//StateGraph/trPoints"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//StateGraph/chPoints"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//StateGraph/transitions"/>
+    </genClasses>
+    <genClasses ecoreClass="Room.ecore#//BaseState">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//BaseState/name"/>
+    </genClasses>
+    <genClasses ecoreClass="Room.ecore#//RefinedState">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//RefinedState/base"/>
+      <genOperations ecoreOperation="Room.ecore#//RefinedState/getName"/>
+    </genClasses>
+    <genClasses ecoreClass="Room.ecore#//DetailCode">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//DetailCode/commands"/>
+    </genClasses>
+    <genClasses ecoreClass="Room.ecore#//TrPoint">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//TrPoint/name"/>
+    </genClasses>
+    <genClasses ecoreClass="Room.ecore#//TransitionPoint">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//TransitionPoint/handler"/>
+    </genClasses>
+    <genClasses ecoreClass="Room.ecore#//EntryPoint"/>
+    <genClasses ecoreClass="Room.ecore#//ExitPoint"/>
+    <genClasses ecoreClass="Room.ecore#//ChoicePoint">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//ChoicePoint/name"/>
+    </genClasses>
+    <genClasses ecoreClass="Room.ecore#//Transition">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//Transition/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//Transition/to"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//Transition/action"/>
+    </genClasses>
+    <genClasses ecoreClass="Room.ecore#//NonInitialTransition">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//NonInitialTransition/from"/>
+    </genClasses>
+    <genClasses ecoreClass="Room.ecore#//InitialTransition"/>
+    <genClasses ecoreClass="Room.ecore#//ContinuationTransition"/>
+    <genClasses ecoreClass="Room.ecore#//TriggeredTransition">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//TriggeredTransition/triggers"/>
+    </genClasses>
+    <genClasses ecoreClass="Room.ecore#//CPBranchTransition">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//CPBranchTransition/condition"/>
+    </genClasses>
+    <genClasses ecoreClass="Room.ecore#//TransitionTerminal"/>
+    <genClasses ecoreClass="Room.ecore#//StateTerminal">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//StateTerminal/state"/>
+    </genClasses>
+    <genClasses ecoreClass="Room.ecore#//TrPointTerminal">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//TrPointTerminal/trPoint"/>
+    </genClasses>
+    <genClasses ecoreClass="Room.ecore#//SubStateTrPointTerminal">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//SubStateTrPointTerminal/trPoint"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//SubStateTrPointTerminal/state"/>
+    </genClasses>
+    <genClasses ecoreClass="Room.ecore#//ChoicepointTerminal">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//ChoicepointTerminal/cp"/>
+    </genClasses>
+    <genClasses ecoreClass="Room.ecore#//Trigger">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//Trigger/msgFromIfPairs"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//Trigger/guard"/>
+    </genClasses>
+    <genClasses ecoreClass="Room.ecore#//MessageFromIf">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//MessageFromIf/message"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//MessageFromIf/from"/>
+    </genClasses>
+    <genClasses ecoreClass="Room.ecore#//Guard">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//Guard/guard"/>
+    </genClasses>
+    <genClasses ecoreClass="Room.ecore#//Import">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//Import/importedNamespace"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

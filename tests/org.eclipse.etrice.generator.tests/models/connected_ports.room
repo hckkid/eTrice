@@ -1,0 +1,80 @@
+RoomModel connected_ports {
+	ProtocolClass PTest {
+		incoming {
+			Message in1 ()
+		}
+		outgoing {
+			Message out1 ()
+		}
+	}
+
+	SubSystemClass CMain {
+		ActorRef test_a1 : ATestA
+		ActorRef test_a2 : ATestA
+		ActorRef test_a3 : ATestA
+		ActorRef test_b : ATestB
+		
+		Binding test_b.plain and test_a1.relay
+		Binding test_a1.ext_end and test_b.repl
+		Binding test_b.repl and test_a2.ext_end
+		Binding test_b.repl and test_a3.ext_end
+		Binding test_b.repl_relay and test_a2.relay
+		Binding test_b.repl_relay and test_a3.relay
+	}
+
+	ActorClass ATestA {
+		Interface {
+			Port relay : PTest
+			Port ext_end : PTest
+		}
+		Structure {
+			external Port ext_end
+			conjugated Port int_end : PTest
+			ActorRef sub : ASub
+			Binding sub.p1 and relay
+			Binding sub.p2 and int_end
+		}
+		Behavior {
+		}
+	}
+
+	ActorClass ATestB {
+		Interface {
+			conjugated Port plain : PTest
+			conjugated Port repl [3] : PTest
+			conjugated Port repl_relay [3] : PTest
+		}
+		Structure {
+			external Port plain
+			external Port repl
+			ActorRef sub1 : ASubB
+			Binding repl_relay and sub1.p
+		}
+		Behavior {
+		}
+	}
+
+	ActorClass ASub {
+		Interface {
+			Port p1 : PTest
+			Port p2 : PTest
+		}
+		Structure {
+			external Port p1
+			external Port p2
+		}
+		Behavior {
+		}
+	}
+
+	ActorClass ASubB {
+		Interface {
+			conjugated Port p [3] : PTest
+		}
+		Structure {
+			external Port p
+		}
+		Behavior {
+		}
+	}
+}

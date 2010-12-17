@@ -1,0 +1,32 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: ROOM DSL
+Bundle-Vendor: eTrice (Incubation)
+Bundle-Version: 0.1.0
+Bundle-SymbolicName: org.eclipse.etrice.core.room;singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: org.eclipse.xtext;bundle-version="1.0.1",
+ org.eclipse.xtext.generator;bundle-version="1.0.1";resolution:=optional,
+ de.itemis.xtext.antlr;bundle-version="1.0.1";resolution:=optional,
+ org.apache.commons.logging;bundle-version="1.0.4";resolution:=optional,
+ org.eclipse.emf.codegen.ecore;bundle-version="2.6.0";resolution:=optional,
+ org.eclipse.emf.mwe.utils;bundle-version="1.0.0";resolution:=optional,
+ org.eclipse.emf.mwe2.launch;bundle-version="1.0.1";resolution:=optional,
+ com.ibm.icu;bundle-version="4.2.1";resolution:=optional,
+ org.eclipse.xtext.xtend;bundle-version="1.0.1";resolution:=optional,
+ org.eclipse.xtext.util;bundle-version="1.0.1",
+ org.eclipse.emf.ecore;bundle-version="2.6.0",
+ org.eclipse.emf.common;bundle-version="2.6.0",
+ org.antlr.runtime;bundle-version="3.0.0"
+Import-Package: org.apache.log4j
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: org.eclipse.etrice.core,
+ org.eclipse.etrice.core.naming,
+ org.eclipse.etrice.core.parseTreeConstruction,
+ org.eclipse.etrice.core.parser.antlr,
+ org.eclipse.etrice.core.parser.antlr.internal,
+ org.eclipse.etrice.core.room,
+ org.eclipse.etrice.core.room.impl,
+ org.eclipse.etrice.core.room.util,
+ org.eclipse.etrice.core.services,
+ org.eclipse.etrice.core.validation

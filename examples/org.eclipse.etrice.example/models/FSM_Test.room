@@ -1,0 +1,331 @@
+RoomModel FSM_Test {
+
+	DataClass d_Packet {
+			Attribute data : int32
+	}
+
+	ProtocolClass p_SimpleProtocol {
+		incoming {
+			Message data ()
+		}
+		outgoing {
+			Message ack ()
+			Message nak ()
+			Message poll ()
+		}
+	}
+
+	ProtocolClass p_HFSM {
+		incoming {
+			Message m1 ()
+			Message m2 ()
+			Message m3 ()
+			Message m4 ()
+			Message m5 ()
+			Message m6 ()
+			Message reset ()
+			Message m7 ()
+			Message m8 ()
+		}
+		outgoing {
+			Message result ()
+		}
+	}
+
+	SubSystemClass ComponentFlat {
+			ActorRef Node1 : a_ProtocolFSM
+			ActorRef Tester : a_Tester
+			ActorRef Node2 : a_ProtocolFSM
+			Binding Node1.in_port and Tester.sender
+			Binding Node1.out_port and Node2.in_port
+			Binding Node2.out_port and Tester.receiver
+	}
+
+	ActorClass a_ProtocolFSM {
+		Interface {
+			conjugated Port out_port : p_SimpleProtocol
+			Port in_port : p_SimpleProtocol
+		}
+		Structure {
+			external Port out_port
+			external Port in_port
+		}
+		Behavior {
+			StateMachine {
+				State Idle {}
+				State WaitingForAck {}
+				Transition tr0: initial -> Idle {}
+				Transition tr1: Idle -> WaitingForAck {
+					triggers {
+						<data:in_port						>
+					}
+					action {
+						"out_port.data();"
+						""
+					}
+				}
+				Transition tr2: WaitingForAck -> Idle {
+					triggers {
+						<ack:out_port						>
+					}
+					action {
+						"in_port.ack();in_port.poll();in_port.poll();in_port.poll();"
+						""
+					}
+				}
+			}
+		}
+	}
+
+	ActorClass a_Tester {
+		Interface {
+			conjugated Port sender : p_SimpleProtocol
+			Port receiver : p_SimpleProtocol
+		}
+		Structure {
+			external Port sender
+			external Port receiver
+		}
+		Behavior {
+			StateMachine {
+				State Start {
+					entry {
+						"sender.data();"
+					}
+					exit {
+						"//Start Exit"
+					}
+				}
+				State DataReceived {
+					entry {
+						"//DataReceived Entry"
+					}
+					exit {
+						"//DataReceived Exit"
+					}
+				}
+				State TheEnd {
+					entry {
+						"// TheEnd Entry"
+					}
+					exit {
+						"// TheEnd Exit"
+					}
+				}
+				Transition tr0: initial -> Start {
+					action {
+						"//Init Action"
+					}
+				}
+				Transition tr1: Start -> DataReceived {
+					triggers {
+						<data:receiver						>
+					}
+					action {
+						"receiver.ack();"
+						""
+					}
+				}
+				Transition tr2: DataReceived -> TheEnd {
+					triggers {
+						<ack:sender						>
+					}
+				}
+				Transition tr3: TheEnd -> TheEnd {
+					triggers {
+						<poll:sender						>
+					}
+					action {
+						"//poll action"
+					}
+				}
+			}
+		}
+	}
+
+	SubSystemClass ComponentHierarchical {
+			ActorRef HFSM : a_HFSM
+			ActorRef Tester : a_HFSM_Tester
+			Binding Tester.testee and HFSM.fct
+			
+			LogicalThread t1 {
+				Tester.ac1,
+				Tester,
+				HFSM
+			}
+	}
+
+	ActorClass AC1 {}
+	ActorClass a_HFSM {
+		Interface {
+			Port fct : p_HFSM
+		}
+		Structure {
+			external Port fct
+		}
+		Behavior {
+			StateMachine {
+				State State1 {
+					entry {
+						"//State1 entry"
+					}
+					exit {
+						"//State1 exit"
+					}
+				}
+				State State2 {
+					entry {
+						"//State2 entry"
+					}
+					exit {
+						"//State2 exit"
+					}
+				subgraph {
+						State State1 {
+							entry {
+								"//State2_State1 entry"
+							}
+							exit {
+								"//State2_State1 entry"
+							}
+						}
+						State State2 {
+							entry {
+								"//State2_State2 entry"
+							}
+							exit {
+								"//State2_State2 exit"
+							}
+						}
+						EntryPoint tp0
+						ExitPoint tp1
+						TransitionPoint tp3
+						handler TransitionPoint tp4
+						Transition tr0: my tp0 -> State1 {
+							action {
+								"//State2 entrypoint m1 to State2_State1 action"
+							}
+						}
+						Transition tr1: State1 -> State2 {
+							triggers {
+								<m2:fct								>
+							}
+							action {
+								"//State2_State1 to State2_State2 action"
+							}
+						}
+						Transition tr2: State2 -> my tp1 {
+							triggers {
+								<m3:fct								>
+							}
+							action {
+								"//State2_State2 m3 to exitpoint action"
+							}
+						}
+						Transition tr3: my tp3 -> my tp3 {
+							triggers {
+								<m5:fct								>
+							}
+							action {
+								"//State2 inner self transition m5 action"
+							}
+						}
+						Transition tr4: my tp4 -> my tp4 {
+							triggers {
+								<m6:fct								>
+							}
+							action {
+								"//State2 inner self transition handler m6 action"
+							}
+						}
+					}
+				}
+				State State3 {
+					entry {
+						"//State3 entry"
+					}
+					exit {
+						"//State3 exit"
+					}
+				}
+				State State4 {
+					entry {
+						"//State4 entry"
+					}
+					exit {
+						"//State4 exit"
+					}
+				}
+				TransitionPoint tp0
+				TransitionPoint tp1
+				Transition tr0: initial -> State1 {
+					action {
+						"//init action"
+					}
+				}
+				Transition tr1: State1 -> tp0 of State2 {
+					triggers {
+						<m1:fct						>
+					}
+					action {
+						"//State1 m1 State2 action"
+					}
+				}
+				Transition tr2: tp1 of State2 -> State3 {
+					action {
+						"//State2 to State3 action"
+					}
+				}
+				Transition tr3: State2 -> State4 {
+					triggers {
+						<m4:fct						>
+					}
+					action {
+						"//State2 to State4 action"
+					}
+				}
+				Transition tr4: my tp0 -> State1 {
+					triggers {
+						<reset:fct						>
+					}
+					action {
+						"// TOP reset State1 action"
+					}
+				}
+				Transition tr5: State2 -> State2 {
+					triggers {
+						<m7:fct						>
+					}
+					action {
+						"//State2 external self transition m7 action"
+					}
+				}
+				Transition tr6: my tp1 -> my tp1 {
+					triggers {
+						<m8:fct						>
+					}
+					action {
+						"//TOP external self transition m8 action"
+					}
+				}
+			}
+		}
+	}
+
+	ActorClass a_HFSM_Tester {
+		Interface {
+			conjugated Port testee : p_HFSM
+		}
+		Structure {
+			external Port testee
+			ActorRef ac1: AC1
+		}
+		Behavior {
+			StateMachine {
+				State State1 {}
+				Transition tr0: initial -> State1 {}
+			}
+		}
+	}
+
+}

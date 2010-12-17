@@ -1,0 +1,154 @@
+RoomModel layers.t {
+
+	import room.basic.service.timing.*
+
+	ProtocolClass PServiceA {
+		incoming {
+			Message in1 ()
+		}
+		outgoing {
+			Message out1 ()
+		}
+	}
+
+	ProtocolClass PServiceB {
+		incoming {
+			Message in2 ()
+		}
+		outgoing {
+			Message out2 ()
+		}
+	}
+
+	ProtocolClass PServiceC {
+		incoming {
+			Message in3 ()
+		}
+		outgoing {
+			Message out3 ()
+		}
+	}
+
+	ActorClass ComponentMain {
+		Interface {
+		}
+		Structure {
+			ActorRef app : AApplication
+			ActorRef services : AServices
+		}
+		Behavior {
+		}
+	}
+
+	ActorClass AApplication {
+		Interface {
+		}
+		Structure {
+			ActorRef subsysA : ASubSysA
+			ActorRef subsysB : ASubSysB
+		}
+		Behavior {
+		}
+	}
+
+	ActorClass ASubSysA {
+		Interface {
+		}
+		Structure {
+			ActorRef userX : AServiceUser1
+			ActorRef userY : AServiceUser2
+			ActorRef userZ : AServiceUser2
+		}
+		Behavior {
+		}
+	}
+
+	ActorClass ASubSysB {
+		Interface {
+		}
+		Structure {
+			ActorRef userX : AServiceUser1
+			ActorRef userY : AServiceUser1
+			ActorRef userZ : AServiceUser3
+			ActorRef svcC : AServiceC
+		}
+		Behavior {
+		}
+	}
+
+	ActorClass AServices {
+		Interface {
+		}
+		Structure {
+			ActorRef svcA : AServiceA
+			ActorRef svcB : AServiceB
+		}
+		Behavior {
+		}
+	}
+
+	ActorClass AServiceUser1 {
+		Interface {
+		}
+		Structure {
+		}
+		Behavior {
+		}
+	}
+
+	ActorClass AServiceUser2 {
+		Interface {
+		}
+		Structure {
+		}
+		Behavior {
+		}
+	}
+
+	ActorClass AServiceA {
+		Interface {
+		}
+		Structure {
+		}
+		Behavior {
+		}
+	}
+
+	ActorClass AServiceB {
+		Interface {
+		}
+		Structure {
+			ActorRef impl : AServiceBImpl
+		}
+		Behavior {
+		}
+	}
+
+	ActorClass AServiceBImpl {
+		Interface {
+		}
+		Structure {
+		}
+		Behavior {
+		}
+	}
+
+	ActorClass AServiceUser3 {
+		Interface {
+		}
+		Structure {
+		}
+		Behavior {
+		}
+	}
+
+	ActorClass AServiceC {
+		Interface {
+		}
+		Structure {
+		}
+		Behavior {
+		}
+	}
+
+}

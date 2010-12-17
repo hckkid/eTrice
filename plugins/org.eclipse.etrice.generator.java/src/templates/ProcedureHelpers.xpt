@@ -1,0 +1,55 @@
+«REM»
+/*******************************************************************************
+ * Copyright (c) 2010 protos software gmbh (http://www.protos.de).
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * CONTRIBUTORS:
+ * 		Thomas Schuetz and Henrik Rentz-Reichert (initial contribution)
+ * 
+ *******************************************************************************/
+«ENDREM»
+«IMPORT room»;
+
+«EXTENSION extensions::Extensions»
+
+«DEFINE ActorClassPortIF FOR ActorClass»
+	«IF this.extPorts.size > 0»implements«ENDIF»
+	«FOREACH this.extPorts AS ep»public «ep.ifport.protocol.name»«IF ep.ifport.conjugated==true»Conj«ENDIF»Port «ep.ifport.name» = null; 
+	«ENDFOREACH»
+	
+«ENDDEFINE»
+
+«DEFINE UserCode FOR DetailCode »
+	«IF this!=null»
+	//--------------------- begin user code
+		«FOREACH this.commands AS command»	«command»
+		«ENDFOREACH»//--------------------- end user code
+	«ENDIF»
+«ENDDEFINE»
+
+«DEFINE Attributes FOR List[Attribute] »
+	//--------------------- attributes
+	«FOREACH this AS attribute»private «attribute.type.typeName()» «attribute.name»; 
+	«ENDFOREACH»
+«ENDDEFINE»
+
+«DEFINE AttributeSettersGetters FOR List[Attribute] »
+	//--------------------- attribute setters and getters
+	«FOREACH this AS attribute»public void set«attribute.name.toFirstUpper()» («attribute.type.typeName()» «attribute.name») {
+		 this.«attribute.name» = «attribute.name»;
+	}
+	public «attribute.type.typeName()» get«attribute.name.toFirstUpper()» () {
+		return «attribute.name»;
+	}«ENDFOREACH»
+«ENDDEFINE»
+
+«DEFINE Operations FOR List[Operation] »
+	//--------------------- operations
+	«FOREACH this AS operation»public «IF operation.returntype==null»void«ELSE»«operation.returntype.freeTypeName()»«ENDIF» «operation.name» («FOREACH operation.arguments AS argument SEPARATOR ", "»«argument.type.freeTypeName()» «argument.name»«ENDFOREACH»){
+		«FOREACH operation.detailCode.commands AS command»	«command»
+		«ENDFOREACH»
+	}«ENDFOREACH»
+«ENDDEFINE»

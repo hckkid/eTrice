@@ -1,0 +1,23 @@
+RoomModel base {
+	ProtocolClass PTest {
+		incoming {
+		}
+		outgoing {
+		}
+	}
+	
+	SubSystemClass CMain {
+		ActorRef test: ATest
+	}
+	
+	ActorClass ATest {
+		Interface {
+			Port relay: PTest
+			Port externalEnd: PTest
+		}
+		Structure {
+			Port internalEnd: PTest
+			external Port externalEnd
+		}
+	}
+}

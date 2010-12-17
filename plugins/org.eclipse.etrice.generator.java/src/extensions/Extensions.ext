@@ -1,0 +1,190 @@
+/*******************************************************************************
+ * Copyright (c) 2010 protos software gmbh (http://www.protos.de).
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * CONTRIBUTORS:
+ * 		Thomas Schuetz and Henrik Rentz-Reichert (initial contribution)
+ * 
+ *******************************************************************************/
+
+/*
+	collection of convenience functions for code generation
+*/
+
+import room;
+import etricegen;
+
+extension org::eclipse::xtend::util::stdlib::naming;
+
+///////////////////////////////////////////////////////////////////////////////
+// general
+
+// package and path for room classes
+String getPackage(RoomClass rc): ((RoomModel)rc.eRootContainer).name;
+String getPackage(ExpandedActorClass rc): ((RoomModel)rc.actorClass.eRootContainer).name;
+String getPath(RoomClass rc): getPathFromPackage(getPackage(rc));
+
+// make a valid identifier from a path string
+String getPathName(String path): path.replaceAll("/","_");
+
+private String getPathFromPackage(String packageName):
+    packageName.replaceAll("\\.", "/") + "/";
+
+///////////////////////////////////////////////////////////////////////////////
+// types
+
+// type names for Type class (distinguish Primitive and DataClass)
+String toJavaType(PrimitiveType prim):
+switch(prim.toString()) {
+	case 'uint8': 'undefined_type'
+	case 'uint16': 'undefined_type'
+	case 'uint32': 'undefined_type'
+	case 'int8': 'undefined_type'
+	case 'int16': 'short'
+	case 'int32': 'int'
+	case 'float32': 'float'
+	case 'float64': 'double'
+	default: prim.toString()};
+String toJavaObjectType(PrimitiveType prim):
+switch(prim.toString()) {
+	case 'uint8': 'undefined_type'
+	case 'uint16': 'undefined_type'
+	case 'uint32': 'undefined_type'
+	case 'int8': 'undefined_type'
+	case 'int16': 'Short'
+	case 'int32': 'Integer'
+	case 'float32': 'Float'
+	case 'float64': 'Double'
+	default: prim.toString()};
+String typeName(Type type): type.type!=null? type.type.name : type.prim.toJavaType();
+String freeTypeName(FreeType type): type.type!=null? type.type : type.prim.toJavaType();
+String typeObjectName(Type type): type.type!=null? type.type.name : type.prim.toJavaObjectType();
+
+// default values for data
+String defaultValue(PrimitiveType prim):
+switch(prim.toString()) {
+	case 'uint8': '0'
+	case 'uint16': '0'
+	case 'uint32': '0'
+	case 'int8': '0'
+	case 'int16': '0'
+	case 'int32': '0'
+	case 'float32': '0.0'
+	case 'float64': '0.0'
+	default: prim.toString()};
+String defaultValue(TypedID a): a.type.type!=null? "new "+a.type.type.name+"()" : a.type.prim.defaultValue();
+
+///////////////////////////////////////////////////////////////////////////////
+// protocol and messages
+
+// message lists with super class messages, super classes first
+cached List[Message] getAllIncomingMessages(ProtocolClass pc): pc.base!=null? pc.base.getAllIncomingMessages().union(pc.incomingMessages) : pc.incomingMessages;
+cached List[Message] getAllOutgoingMessages(ProtocolClass pc): pc.base!=null? pc.base.getAllOutgoingMessages().union(pc.outgoingMessages) : pc.outgoingMessages;
+List[Message] getIncoming(ProtocolClass pc, boolean conj): conj? pc.getAllOutgoingMessages():pc.getAllIncomingMessages();
+List[Message] getOutgoing(ProtocolClass pc, boolean conj): conj? pc.getAllIncomingMessages():pc.getAllOutgoingMessages();
+
+PortClass getPortClass(ProtocolClass pc, boolean conj): conj? pc.conjugate:pc.regular;
+
+boolean handlesSend(ProtocolClass pc, boolean conj): pc.getPortClass(conj)==null? false:!pc.getPortClass(conj).msgHandlers.select(e|pc.getOutgoing(conj).contains(e.msg)).isEmpty;
+boolean handlesReceive(ProtocolClass pc, boolean conj): pc.getPortClass(conj)==null? false:!pc.getPortClass(conj).msgHandlers.select(e|pc.getIncoming(conj).contains(e.msg)).isEmpty;
+List[MessageHandler] getReceiveHandlers(ProtocolClass pc, boolean conj): pc.getPortClass(conj)==null? {}:pc.getPortClass(conj).msgHandlers.select(e|pc.getIncoming(conj).contains(e.msg));
+List[MessageHandler] getSendHandlers(ProtocolClass pc, boolean conj): pc.getPortClass(conj)==null? {}:pc.getPortClass(conj).msgHandlers.select(e|pc.getOutgoing(conj).contains(e.msg));
+
+MessageHandler getSendHandler(Message m, boolean conj): ((ProtocolClass)m.eContainer).getSendHandlers(conj).selectFirst(e|e.msg==m);
+
+boolean isIncoming(Message m): ((ProtocolClass)m.eContainer).getAllIncomingMessages().contains(m);
+String getCodeName(Message m): m.isIncoming()? "IN_"+m.name:"OUT_"+m.name;
+
+///////////////////////////////////////////////////////////////////////////////
+// actor structure
+
+// getting port class names from ProtocolClass, Port and ExternalPort
+String getPortClassName(ProtocolClass p, boolean conj): p.name+((conj)? "ConjPort" : "Port");
+String getPortClassName(Port p): p.multiplicity>1? getPortClassName(p.protocol, p.conjugated)+"Repl" : getPortClassName(p.protocol, p.conjugated);
+String getPortClassName(ExternalPort p): getPortClassName(p.ifport.protocol, p.ifport.conjugated);
+String getPortClassName(SAPRef sap): sap.protocol.getPortClassName(true);
+String getPortClassName(ServiceImplementation svc): svc.spp.protocol.getPortClassName(false)+"Repl";
+
+// collect internal and external end ports into one list
+// HOWTO: ac.extPorts.collect(e|e.ifport) can be abbreviated to ac.extPorts.ifport
+List[Port] getEndPorts(ActorClass ac): ac.intPorts.union(ac.extPorts.ifport);
+
+// collect also super class features (super classes first)
+//private List[Port] getAllEndPorts(ActorClass ac): ac.base!=null? ac.base.getAllEndPorts().union(ac.getEndPorts()) : ac.getEndPorts();
+//private List[Attribute] getAllAttributes(ActorClass ac): ac.base!=null? ac.base.getAllAttributes().union(ac.attributes) : ac.attributes;
+//private List[Operation] getAllOperations(ActorClass ac): ac.base!=null? ac.base.getAllOperations().union(ac.operations) : ac.operations;
+
+
+// HOWTO: polymorphic dispatching (alias method overloading) in xtend
+// state names from State sub-classes
+//private String getStateName(State state): null;	// polymorphic placeholder (abstract rule)
+//private String getStateName(BaseState state): state.name;
+//private String getStateName(RefinedState state): state.base.name;
+
+// Init Transition
+Transition getInitTransition(StateGraph sg): sg.transitions.typeSelect(InitialTransition).first(); 
+private getTerminalFromToTransition(Transition trans): trans.to;
+getStateFromTerminal(TransitionTerminal tt): null;
+BaseState getStateFromTerminal(StateTerminal tt): tt.state;
+//getStateFromTerminal(TrPointTerminal tt): tt.trPoint;
+//getStateFromTerminal(SubStateTrPointTerminal tt): tt.state; 
+//getStateFromTerminal(ChoicepointTerminal tt): tt.cp; 
+BaseState getInitState(StateGraph sg) : sg.getInitTransition().getTerminalFromToTransition().getStateFromTerminal();
+
+// state lists
+boolean isLeaf(State s): s.subgraph==null;
+List[State] getLeafStateList(StateGraph sg): sg.states.collect(e|e.getLeafStateList()).flatten();
+List[State] getLeafStateList(State s): s.isLeaf()? s : s.subgraph.getLeafStateList();
+
+List[State] getStateList(StateGraph sg): sg.states.collect(e|e.getStateList()).flatten();
+List[State] getStateList(State s): s.isLeaf()? s : s.subgraph.getStateList().add(s).flatten();
+int getNumberOfInheritedStates(ActorClass ac): ac.base==null? 0:(ac.base.stateMachine.getStateList().size+ac.base.getNumberOfInheritedStates());
+List[State] getAllStates(ActorClass ac): ac.base==null? ac.stateMachine.getStateList() : ac.base.getAllStates().union(ac.stateMachine.getStateList());
+
+List[State] getBaseStateList(StateGraph sg): sg.getStateList().select(e|BaseState.isInstance(e));
+int getNumberOfInheritedBaseStates(ActorClass ac): ac.base==null? 0:(ac.base.stateMachine.getBaseStateList().size+ac.base.getNumberOfInheritedBaseStates());
+List[State] getAllBaseStates(ActorClass ac): ac.base==null? ac.stateMachine.getBaseStateList() : ac.base.getAllBaseStates().union(ac.stateMachine.getBaseStateList());
+
+
+// detail code
+boolean hasEntryCode(State s): s.entryCode.commands.size>0;
+boolean hasExitCode(State s): s.exitCode.commands.size>0;
+cached String getEntryCode(ExpandedActorClass ac, State s):
+	RefinedState.isInstance(s)? "super."+s.getEntryCodeOperationName()+"();\n"+ac.getCode(s.entryCode) : ac.getCode(s.entryCode);
+cached String getExitCode(ExpandedActorClass ac, State s):
+	RefinedState.isInstance(s)? ac.getCode(s.exitCode)+"super."+s.getEntryCodeOperationName()+"();\n" : ac.getCode(s.exitCode);
+boolean hasActionCode(Transition t): t.action.commands.size>0;
+boolean hasGuard(Trigger tr): tr.guard!=null && tr.guard.guard!=null && tr.guard.guard.commands.size>0;
+boolean hasGuard(ExpandedActorClass ac, ActiveTrigger at): at.transitions.triggers.exists(e|ac.isMatching(e, at.trigger) && e.hasGuard());
+cached String getActionCode(ExpandedActorClass ac, Transition t): ac.getCode(t.action);
+cached String getEntryCodeOperationName(State s): JAVA org.eclipse.etrice.generator.java.JavaGenerator.getEntryCodeOperationName(org.eclipse.etrice.core.room.State);
+cached String getExitCodeOperationName(State s): JAVA org.eclipse.etrice.generator.java.JavaGenerator.getExitCodeOperationName(org.eclipse.etrice.core.room.State);
+cached String getActionCodeOperationName(Transition t): JAVA org.eclipse.etrice.generator.java.JavaGenerator.getActionCodeOperationName(org.eclipse.etrice.core.room.Transition);
+cached String getChainId(TransitionChain t): JAVA org.eclipse.etrice.generator.java.JavaGenerator.getChainId(org.eclipse.etrice.generator.etricegen.TransitionChain);
+
+// State Name and StateID
+cached String getStatePathName(State s): JAVA org.eclipse.etrice.generator.java.JavaGenerator.getStatePathName(org.eclipse.etrice.core.room.State);
+cached String getStateId(State s): JAVA org.eclipse.etrice.generator.java.JavaGenerator.getStateId(org.eclipse.etrice.core.room.State);
+cached String getParentStateId(State s): JAVA org.eclipse.etrice.generator.java.JavaGenerator.getParentStateId(org.eclipse.etrice.core.room.State);
+
+String getContextId(TransitionChain tc): tc.getStateContext().getStateId();
+String getExecuteChainCode(ExpandedActorClass ac, TransitionChain tc): JAVA org.eclipse.etrice.generator.java.JavaGenerator.getExecuteChain(org.eclipse.etrice.generator.etricegen.ExpandedActorClass, org.eclipse.etrice.generator.etricegen.TransitionChain);
+
+// getTransitionList
+List[Transition] getTransitionList(State s): s.isLeaf()? {} : s.subgraph.transitions;
+List[Transition] getTransitionList(StateGraph sg): sg.transitions.union(sg.states.getTransitionList());
+
+// transition data
+private boolean hasData(TriggeredTransition tt): !tt.triggers.msgFromIfPairs.message.select(e|!e.arguments.isEmpty).isEmpty;
+private String getDataTypeCast(TriggeredTransition tt): tt.triggers.msgFromIfPairs.message.select(e|!e.arguments.isEmpty).first().arguments.first().type.typeObjectName();
+private String getDataType(TriggeredTransition tt): tt.triggers.msgFromIfPairs.message.select(e|!e.arguments.isEmpty).first().arguments.first().type.typeName();
+String getArgumentList(ExpandedActorClass xpac, Transition t): JAVA org.eclipse.etrice.generator.java.JavaGenerator.getArgumentList(org.eclipse.etrice.generator.etricegen.ExpandedActorClass, org.eclipse.etrice.core.room.Transition);
+String getTypedDataDefinition(Message m): JAVA org.eclipse.etrice.generator.java.JavaGenerator.getTypedData(org.eclipse.etrice.core.room.Message);
+
+// stop Operation
+boolean overridesStop(ActorClass ac): !ac.operations.select(e|e.name=="stop"&&e.arguments.isEmpty&&e.returntype==null).isEmpty
+		|| (ac.base!=null && ac.base.overridesStop());
+

@@ -1,0 +1,27 @@
+#generated MSC for Trace2UML
+	/MainComponent/HFSM_Tests/HFSM >-- /MainComponent/HFSM_Tests/Tester init_action
+	/MainComponent/HFSM_Tests/HFSM >-- /MainComponent/HFSM_Tests/Tester s1_entry
+	/MainComponent/HFSM_Tests/HFSM >>> State1
+	/MainComponent/HFSM_Tests/Tester >>> State1
+	/MainComponent/HFSM_Tests/HFSM --> /MainComponent/HFSM_Tests/Tester init_action
+	/MainComponent/HFSM_Tests/Tester >>> State2
+	/MainComponent/HFSM_Tests/HFSM --> /MainComponent/HFSM_Tests/Tester s1_entry
+	/MainComponent/HFSM_Tests/Tester >-- /MainComponent/HFSM_Tests/HFSM m1
+	/MainComponent/HFSM_Tests/Tester >>> State3
+	/MainComponent/HFSM_Tests/Tester --> /MainComponent/HFSM_Tests/HFSM m1
+	/MainComponent/HFSM_Tests/HFSM >-- /MainComponent/HFSM_Tests/Tester s1_exit
+	/MainComponent/HFSM_Tests/HFSM >-- /MainComponent/HFSM_Tests/Tester s1_m1_s2_action
+	/MainComponent/HFSM_Tests/HFSM >-- /MainComponent/HFSM_Tests/Tester s2_entry
+	/MainComponent/HFSM_Tests/HFSM >-- /MainComponent/HFSM_Tests/Tester s2_m1_s2s1_action
+	/MainComponent/HFSM_Tests/HFSM >-- /MainComponent/HFSM_Tests/Tester s2s1_entry
+	/MainComponent/HFSM_Tests/HFSM >>> State2_State1
+	/MainComponent/HFSM_Tests/HFSM --> /MainComponent/HFSM_Tests/Tester s1_exit
+	/MainComponent/HFSM_Tests/Tester >>> State4
+	/MainComponent/HFSM_Tests/HFSM --> /MainComponent/HFSM_Tests/Tester s1_m1_s2_action
+	/MainComponent/HFSM_Tests/Tester >>> State5
+	/MainComponent/HFSM_Tests/HFSM --> /MainComponent/HFSM_Tests/Tester s2_entry
+	/MainComponent/HFSM_Tests/Tester >>> State6
+	/MainComponent/HFSM_Tests/HFSM --> /MainComponent/HFSM_Tests/Tester s2_m1_s2s1_action
+	/MainComponent/HFSM_Tests/Tester >>> State7
+	/MainComponent/HFSM_Tests/HFSM --> /MainComponent/HFSM_Tests/Tester s2s1_entry
+	/MainComponent/HFSM_Tests/Tester >>> TestPass

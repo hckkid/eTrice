@@ -1,0 +1,25 @@
+RoomModel hierarchy {
+
+	SubSystemClass CMain {
+		ActorRef l1a : ALevel1
+		ActorRef l1b : ALevel1
+	}
+	
+	ActorClass ALevel1 {
+		Structure {
+			ActorRef l2a : ALevel2
+			ActorRef l2b : ALevel2
+		}
+	}
+
+	ActorClass ALevel2 {
+		Structure {
+			ActorRef l3a : ALevel3
+			ActorRef l3b : ALevel3
+			ActorRef l3c : ALevel3
+		}
+	}
+	
+	ActorClass ALevel3 {
+	}
+}

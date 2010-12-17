@@ -1,0 +1,1 @@
+http://www.eclipse.org/Xtext/documentation/latest/xtext.html#templates

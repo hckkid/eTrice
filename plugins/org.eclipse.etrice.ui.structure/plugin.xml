@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.graphiti.ui.diagramTypes">
+      <diagramType
+            id="org.eclipse.etrice.ui.structure.diagramType"
+            name="ROOM Structure Diagram Type"
+            type="room.structure">
+      </diagramType>
+   </extension>
+   <extension
+         point="org.eclipse.graphiti.ui.diagramTypeProviders">
+      <diagramTypeProvider
+            class="org.eclipse.etrice.ui.structure.DiagramTypeProvider"
+            id="org.eclipse.etrice.ui.structure.diagramTypeProvider"
+            name="ROOM Structure Editor">
+         <diagramType
+               id="org.eclipse.etrice.ui.structure.diagramType">
+         </diagramType>
+         <imageProvider
+               id="org.eclipse.etrice.ui.structure.ImageProvider">
+         </imageProvider>
+      </diagramTypeProvider>
+   </extension>
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            class="org.eclipse.etrice.ui.structure.editor.StructureEditor"
+            contributorClass="org.eclipse.graphiti.ui.editor.DiagramEditorActionBarContributor"
+            default="true"
+            extensions="structure"
+            icon="icons/Structure.gif"
+            id="org.eclipse.etrice.ui.structure.editor.StructureEditor"
+            matchingStrategy="org.eclipse.graphiti.ui.editor.DiagramEditorFactory$DiagramEditorMatchingStrategy"
+            name="ROOM Structure Editor">
+         <contentTypeBinding
+               contentTypeId="org.eclipse.graphiti.content.diagram">
+         </contentTypeBinding>
+      </editor>
+   </extension>
+   
+   <extension
+         point="org.eclipse.graphiti.ui.imageProviders">
+      <imageProvider
+            class="org.eclipse.etrice.ui.structure.ImageProvider"
+            id="org.eclipse.etrice.ui.structure.ImageProvider">
+      </imageProvider>
+   </extension>
+
+</plugin>
