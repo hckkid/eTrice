@@ -1,1 +1,2 @@
 bin
+src-gen/    # ignore all files in the build/ directory
