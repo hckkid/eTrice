@@ -4,7 +4,7 @@
     <children xmi:type="notation:Node" xmi:id="_ajilUvVFEd-4fo1YBnNwaQ" type="4001"/>
     <children xmi:type="notation:Node" xmi:id="_ajilU_VFEd-4fo1YBnNwaQ" type="5001">
       <children xmi:type="notation:Node" xmi:id="_ajilVPVFEd-4fo1YBnNwaQ" type="2001">
-        <element xmi:type="ecore:EAttribute" href="../../../src-gen/de/protos/Room.ecore#//RoomModel/name"/>
+        <element xmi:type="ecore:EAttribute" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//RoomModel/name"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_ajilVfVFEd-4fo1YBnNwaQ"/>
       </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_ajilVvVFEd-4fo1YBnNwaQ"/>
@@ -17,14 +17,14 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_ajilXPVFEd-4fo1YBnNwaQ"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_ajilXfVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="../../../src-gen/de/protos/Room.ecore#//RoomModel"/>
+    <element xmi:type="ecore:EClass" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//RoomModel"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ajilXvVFEd-4fo1YBnNwaQ" x="515" y="-415"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_ajilX_VFEd-4fo1YBnNwaQ" type="1001">
     <children xmi:type="notation:Node" xmi:id="_ajilYPVFEd-4fo1YBnNwaQ" type="4001"/>
     <children xmi:type="notation:Node" xmi:id="_ajilYfVFEd-4fo1YBnNwaQ" type="5001">
       <children xmi:type="notation:Node" xmi:id="_ajilYvVFEd-4fo1YBnNwaQ" type="2001">
-        <element xmi:type="ecore:EAttribute" href="../../../src-gen/de/protos/Room.ecore#//RoomClass/name"/>
+        <element xmi:type="ecore:EAttribute" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//RoomClass/name"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_ajilY_VFEd-4fo1YBnNwaQ"/>
       </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_ajilZPVFEd-4fo1YBnNwaQ"/>
@@ -37,7 +37,7 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_ajilavVFEd-4fo1YBnNwaQ"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_ajila_VFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="../../../src-gen/de/protos/Room.ecore#//RoomClass"/>
+    <element xmi:type="ecore:EClass" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//RoomClass"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ajilbPVFEd-4fo1YBnNwaQ" x="1115" y="-305"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_ajilbfVFEd-4fo1YBnNwaQ" type="1001">
@@ -53,7 +53,7 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_ajildvVFEd-4fo1YBnNwaQ"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_ajild_VFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="../../../src-gen/de/protos/Room.ecore#//StructureClass"/>
+    <element xmi:type="ecore:EClass" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//StructureClass"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ajilePVFEd-4fo1YBnNwaQ" x="1180" y="-125"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_ajilefVFEd-4fo1YBnNwaQ" type="1001">
@@ -69,58 +69,58 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_ajilgvVFEd-4fo1YBnNwaQ"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_ajilg_VFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="../../../src-gen/de/protos/Room.ecore#//ActorContainerClass"/>
+    <element xmi:type="ecore:EClass" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//ActorContainerClass"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ajilhPVFEd-4fo1YBnNwaQ" x="1125" y="30"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_ajilhfVFEd-4fo1YBnNwaQ" type="1005">
     <children xmi:type="notation:Node" xmi:id="_ajilhvVFEd-4fo1YBnNwaQ" type="4010"/>
     <children xmi:type="notation:Node" xmi:id="_ajilh_VFEd-4fo1YBnNwaQ" type="5008">
       <children xmi:type="notation:Node" xmi:id="_ajiliPVFEd-4fo1YBnNwaQ" type="2006">
-        <element xmi:type="ecore:EEnumLiteral" href="../../../src-gen/de/protos/Room.ecore#//PrimitiveType/void"/>
+        <element xmi:type="ecore:EEnumLiteral" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//PrimitiveType/void"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_ajilifVFEd-4fo1YBnNwaQ"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_ajilivVFEd-4fo1YBnNwaQ" type="2006">
-        <element xmi:type="ecore:EEnumLiteral" href="../../../src-gen/de/protos/Room.ecore#//PrimitiveType/int8"/>
+        <element xmi:type="ecore:EEnumLiteral" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//PrimitiveType/int8"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_ajili_VFEd-4fo1YBnNwaQ"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_ajiljPVFEd-4fo1YBnNwaQ" type="2006">
-        <element xmi:type="ecore:EEnumLiteral" href="../../../src-gen/de/protos/Room.ecore#//PrimitiveType/int16"/>
+        <element xmi:type="ecore:EEnumLiteral" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//PrimitiveType/int16"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_ajiljfVFEd-4fo1YBnNwaQ"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_ajiljvVFEd-4fo1YBnNwaQ" type="2006">
-        <element xmi:type="ecore:EEnumLiteral" href="../../../src-gen/de/protos/Room.ecore#//PrimitiveType/int32"/>
+        <element xmi:type="ecore:EEnumLiteral" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//PrimitiveType/int32"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_ajilj_VFEd-4fo1YBnNwaQ"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_ajilkPVFEd-4fo1YBnNwaQ" type="2006">
-        <element xmi:type="ecore:EEnumLiteral" href="../../../src-gen/de/protos/Room.ecore#//PrimitiveType/uint8"/>
+        <element xmi:type="ecore:EEnumLiteral" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//PrimitiveType/uint8"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_ajilkfVFEd-4fo1YBnNwaQ"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_ajilkvVFEd-4fo1YBnNwaQ" type="2006">
-        <element xmi:type="ecore:EEnumLiteral" href="../../../src-gen/de/protos/Room.ecore#//PrimitiveType/uint16"/>
+        <element xmi:type="ecore:EEnumLiteral" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//PrimitiveType/uint16"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_ajilk_VFEd-4fo1YBnNwaQ"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_ajillPVFEd-4fo1YBnNwaQ" type="2006">
-        <element xmi:type="ecore:EEnumLiteral" href="../../../src-gen/de/protos/Room.ecore#//PrimitiveType/uint32"/>
+        <element xmi:type="ecore:EEnumLiteral" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//PrimitiveType/uint32"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_ajillfVFEd-4fo1YBnNwaQ"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_ajillvVFEd-4fo1YBnNwaQ" type="2006">
-        <element xmi:type="ecore:EEnumLiteral" href="../../../src-gen/de/protos/Room.ecore#//PrimitiveType/float32"/>
+        <element xmi:type="ecore:EEnumLiteral" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//PrimitiveType/float32"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_ajill_VFEd-4fo1YBnNwaQ"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_ajilmPVFEd-4fo1YBnNwaQ" type="2006">
-        <element xmi:type="ecore:EEnumLiteral" href="../../../src-gen/de/protos/Room.ecore#//PrimitiveType/float64"/>
+        <element xmi:type="ecore:EEnumLiteral" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//PrimitiveType/float64"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_ajilmfVFEd-4fo1YBnNwaQ"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_ajilmvVFEd-4fo1YBnNwaQ" type="2006">
-        <element xmi:type="ecore:EEnumLiteral" href="../../../src-gen/de/protos/Room.ecore#//PrimitiveType/boolean"/>
+        <element xmi:type="ecore:EEnumLiteral" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//PrimitiveType/boolean"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_ajilm_VFEd-4fo1YBnNwaQ"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_ajilnPVFEd-4fo1YBnNwaQ" type="2006">
-        <element xmi:type="ecore:EEnumLiteral" href="../../../src-gen/de/protos/Room.ecore#//PrimitiveType/string"/>
+        <element xmi:type="ecore:EEnumLiteral" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//PrimitiveType/string"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_ajilnfVFEd-4fo1YBnNwaQ"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_ajilnvVFEd-4fo1YBnNwaQ" type="2006">
-        <element xmi:type="ecore:EEnumLiteral" href="../../../src-gen/de/protos/Room.ecore#//PrimitiveType/char"/>
+        <element xmi:type="ecore:EEnumLiteral" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//PrimitiveType/char"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_ajiln_VFEd-4fo1YBnNwaQ"/>
       </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_ajiloPVFEd-4fo1YBnNwaQ"/>
@@ -128,14 +128,14 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_ajilovVFEd-4fo1YBnNwaQ"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_ajilo_VFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EEnum" href="../../../src-gen/de/protos/Room.ecore#//PrimitiveType"/>
+    <element xmi:type="ecore:EEnum" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//PrimitiveType"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ajilpPVFEd-4fo1YBnNwaQ" x="100" y="-386"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_ajilpfVFEd-4fo1YBnNwaQ" type="1001">
     <children xmi:type="notation:Node" xmi:id="_ajilpvVFEd-4fo1YBnNwaQ" type="4001"/>
     <children xmi:type="notation:Node" xmi:id="_ajilp_VFEd-4fo1YBnNwaQ" type="5001">
       <children xmi:type="notation:Node" xmi:id="_ajilqPVFEd-4fo1YBnNwaQ" type="2001">
-        <element xmi:type="ecore:EAttribute" href="../../../src-gen/de/protos/Room.ecore#//TypedID/name"/>
+        <element xmi:type="ecore:EAttribute" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//TypedID/name"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_ajilqfVFEd-4fo1YBnNwaQ"/>
       </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_ajilqvVFEd-4fo1YBnNwaQ"/>
@@ -148,14 +148,14 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_ajilsPVFEd-4fo1YBnNwaQ"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_ajilsfVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="../../../src-gen/de/protos/Room.ecore#//TypedID"/>
+    <element xmi:type="ecore:EClass" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//TypedID"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ajilsvVFEd-4fo1YBnNwaQ" x="475" y="125"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_ajils_VFEd-4fo1YBnNwaQ" type="1001">
     <children xmi:type="notation:Node" xmi:id="_ajiltPVFEd-4fo1YBnNwaQ" type="4001"/>
     <children xmi:type="notation:Node" xmi:id="_ajiltfVFEd-4fo1YBnNwaQ" type="5001">
       <children xmi:type="notation:Node" xmi:id="_ajiltvVFEd-4fo1YBnNwaQ" type="2001">
-        <element xmi:type="ecore:EAttribute" href="../../../src-gen/de/protos/Room.ecore#//FreeTypedID/name"/>
+        <element xmi:type="ecore:EAttribute" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//FreeTypedID/name"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_ajilt_VFEd-4fo1YBnNwaQ"/>
       </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_ajiluPVFEd-4fo1YBnNwaQ"/>
@@ -168,14 +168,14 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_ajilvvVFEd-4fo1YBnNwaQ"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_ajilv_VFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="../../../src-gen/de/protos/Room.ecore#//FreeTypedID"/>
+    <element xmi:type="ecore:EClass" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//FreeTypedID"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ajilwPVFEd-4fo1YBnNwaQ" x="285" y="130"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_ajilwfVFEd-4fo1YBnNwaQ" type="1001">
     <children xmi:type="notation:Node" xmi:id="_ajilwvVFEd-4fo1YBnNwaQ" type="4001"/>
     <children xmi:type="notation:Node" xmi:id="_ajilw_VFEd-4fo1YBnNwaQ" type="5001">
       <children xmi:type="notation:Node" xmi:id="_ajilxPVFEd-4fo1YBnNwaQ" type="2001">
-        <element xmi:type="ecore:EAttribute" href="../../../src-gen/de/protos/Room.ecore#//Type/prim"/>
+        <element xmi:type="ecore:EAttribute" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//Type/prim"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_ajilxfVFEd-4fo1YBnNwaQ"/>
       </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_ajilxvVFEd-4fo1YBnNwaQ"/>
@@ -188,18 +188,18 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_ajilzPVFEd-4fo1YBnNwaQ"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_ajilzfVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="../../../src-gen/de/protos/Room.ecore#//Type"/>
+    <element xmi:type="ecore:EClass" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//Type"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ajilzvVFEd-4fo1YBnNwaQ" x="470" y="245"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_ajilz_VFEd-4fo1YBnNwaQ" type="1001">
     <children xmi:type="notation:Node" xmi:id="_ajil0PVFEd-4fo1YBnNwaQ" type="4001"/>
     <children xmi:type="notation:Node" xmi:id="_ajil0fVFEd-4fo1YBnNwaQ" type="5001">
       <children xmi:type="notation:Node" xmi:id="_ajil0vVFEd-4fo1YBnNwaQ" type="2001">
-        <element xmi:type="ecore:EAttribute" href="../../../src-gen/de/protos/Room.ecore#//FreeType/prim"/>
+        <element xmi:type="ecore:EAttribute" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//FreeType/prim"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_ajil0_VFEd-4fo1YBnNwaQ"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_ajil1PVFEd-4fo1YBnNwaQ" type="2001">
-        <element xmi:type="ecore:EAttribute" href="../../../src-gen/de/protos/Room.ecore#//FreeType/type"/>
+        <element xmi:type="ecore:EAttribute" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//FreeType/type"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_ajil1fVFEd-4fo1YBnNwaQ"/>
       </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_ajil1vVFEd-4fo1YBnNwaQ"/>
@@ -212,7 +212,7 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_ajil3PVFEd-4fo1YBnNwaQ"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_ajil3fVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="../../../src-gen/de/protos/Room.ecore#//FreeType"/>
+    <element xmi:type="ecore:EClass" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//FreeType"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ajil3vVFEd-4fo1YBnNwaQ" x="270" y="220"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_ajil3_VFEd-4fo1YBnNwaQ" type="1001">
@@ -228,18 +228,18 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_ajil6PVFEd-4fo1YBnNwaQ"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_ajil6fVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="../../../src-gen/de/protos/Room.ecore#//DataClass"/>
+    <element xmi:type="ecore:EClass" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//DataClass"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ajil6vVFEd-4fo1YBnNwaQ" x="505" y="-65"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_ajil6_VFEd-4fo1YBnNwaQ" type="1001">
     <children xmi:type="notation:Node" xmi:id="_ajil7PVFEd-4fo1YBnNwaQ" type="4001"/>
     <children xmi:type="notation:Node" xmi:id="_ajil7fVFEd-4fo1YBnNwaQ" type="5001">
       <children xmi:type="notation:Node" xmi:id="_ajil7vVFEd-4fo1YBnNwaQ" type="2001">
-        <element xmi:type="ecore:EAttribute" href="../../../src-gen/de/protos/Room.ecore#//Attribute/name"/>
+        <element xmi:type="ecore:EAttribute" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//Attribute/name"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_ajil7_VFEd-4fo1YBnNwaQ"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_ajil8PVFEd-4fo1YBnNwaQ" type="2001">
-        <element xmi:type="ecore:EAttribute" href="../../../src-gen/de/protos/Room.ecore#//Attribute/size"/>
+        <element xmi:type="ecore:EAttribute" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//Attribute/size"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_ajil8fVFEd-4fo1YBnNwaQ"/>
       </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_ajil8vVFEd-4fo1YBnNwaQ"/>
@@ -252,14 +252,14 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_ajil-PVFEd-4fo1YBnNwaQ"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_ajil-fVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="../../../src-gen/de/protos/Room.ecore#//Attribute"/>
+    <element xmi:type="ecore:EClass" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//Attribute"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ajil-vVFEd-4fo1YBnNwaQ" x="440" y="370"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_ajil-_VFEd-4fo1YBnNwaQ" type="1001">
     <children xmi:type="notation:Node" xmi:id="_ajil_PVFEd-4fo1YBnNwaQ" type="4001"/>
     <children xmi:type="notation:Node" xmi:id="_ajil_fVFEd-4fo1YBnNwaQ" type="5001">
       <children xmi:type="notation:Node" xmi:id="_ajil_vVFEd-4fo1YBnNwaQ" type="2001">
-        <element xmi:type="ecore:EAttribute" href="../../../src-gen/de/protos/Room.ecore#//Operation/name"/>
+        <element xmi:type="ecore:EAttribute" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//Operation/name"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_ajil__VFEd-4fo1YBnNwaQ"/>
       </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_ajimAPVFEd-4fo1YBnNwaQ"/>
@@ -272,7 +272,7 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_ajimBvVFEd-4fo1YBnNwaQ"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_ajimB_VFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="../../../src-gen/de/protos/Room.ecore#//Operation"/>
+    <element xmi:type="ecore:EClass" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//Operation"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ajimCPVFEd-4fo1YBnNwaQ" x="245" y="365"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_ajimCfVFEd-4fo1YBnNwaQ" type="1001">
@@ -288,14 +288,14 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_ajimEvVFEd-4fo1YBnNwaQ"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_ajimE_VFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="../../../src-gen/de/protos/Room.ecore#//ProtocolClass"/>
+    <element xmi:type="ecore:EClass" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//ProtocolClass"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ajimFPVFEd-4fo1YBnNwaQ" x="805" y="-65"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_ajimFfVFEd-4fo1YBnNwaQ" type="1001">
     <children xmi:type="notation:Node" xmi:id="_ajimFvVFEd-4fo1YBnNwaQ" type="4001"/>
     <children xmi:type="notation:Node" xmi:id="_ajimF_VFEd-4fo1YBnNwaQ" type="5001">
       <children xmi:type="notation:Node" xmi:id="_ajimGPVFEd-4fo1YBnNwaQ" type="2001">
-        <element xmi:type="ecore:EAttribute" href="../../../src-gen/de/protos/Room.ecore#//Message/name"/>
+        <element xmi:type="ecore:EAttribute" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//Message/name"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_ajimGfVFEd-4fo1YBnNwaQ"/>
       </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_ajimGvVFEd-4fo1YBnNwaQ"/>
@@ -308,7 +308,7 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_ajimIPVFEd-4fo1YBnNwaQ"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_ajimIfVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="../../../src-gen/de/protos/Room.ecore#//Message"/>
+    <element xmi:type="ecore:EClass" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//Message"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ajimIvVFEd-4fo1YBnNwaQ" x="795" y="120"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_ajimI_VFEd-4fo1YBnNwaQ" type="1001">
@@ -324,7 +324,7 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_ajimLPVFEd-4fo1YBnNwaQ"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_ajimLfVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="../../../src-gen/de/protos/Room.ecore#//PortClass"/>
+    <element xmi:type="ecore:EClass" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//PortClass"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ajimLvVFEd-4fo1YBnNwaQ" x="615" y="650"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_ajimL_VFEd-4fo1YBnNwaQ" type="1001">
@@ -340,7 +340,7 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_ajimOPVFEd-4fo1YBnNwaQ"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_ajimOfVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="../../../src-gen/de/protos/Room.ecore#//MessageHandler"/>
+    <element xmi:type="ecore:EClass" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//MessageHandler"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ajimOvVFEd-4fo1YBnNwaQ" x="615" y="550"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_ajimO_VFEd-4fo1YBnNwaQ" type="1001">
@@ -356,7 +356,7 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_ajimRPVFEd-4fo1YBnNwaQ"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_ajimRfVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="../../../src-gen/de/protos/Room.ecore#//ProtocolSemantics"/>
+    <element xmi:type="ecore:EClass" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//ProtocolSemantics"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ajimRvVFEd-4fo1YBnNwaQ" x="790" y="220"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_ajimR_VFEd-4fo1YBnNwaQ" type="1001">
@@ -372,7 +372,7 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_ajimUPVFEd-4fo1YBnNwaQ"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_ajimUfVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="../../../src-gen/de/protos/Room.ecore#//SemanticsRule"/>
+    <element xmi:type="ecore:EClass" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//SemanticsRule"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ajimUvVFEd-4fo1YBnNwaQ" x="775" y="320"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_ajimU_VFEd-4fo1YBnNwaQ" type="1001">
@@ -388,7 +388,7 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_ajimXPVFEd-4fo1YBnNwaQ"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_ajimXfVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="../../../src-gen/de/protos/Room.ecore#//SemanticsInRule"/>
+    <element xmi:type="ecore:EClass" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//SemanticsInRule"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ajimXvVFEd-4fo1YBnNwaQ" x="630" y="475"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_ajimX_VFEd-4fo1YBnNwaQ" type="1001">
@@ -404,7 +404,7 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_ajimaPVFEd-4fo1YBnNwaQ"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_ajimafVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="../../../src-gen/de/protos/Room.ecore#//SemanticsOutRule"/>
+    <element xmi:type="ecore:EClass" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//SemanticsOutRule"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ajimavVFEd-4fo1YBnNwaQ" x="770" y="475"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_ajima_VFEd-4fo1YBnNwaQ" type="1001">
@@ -420,7 +420,7 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_ajimdPVFEd-4fo1YBnNwaQ"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_ajimdfVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="../../../src-gen/de/protos/Room.ecore#//ActorClass"/>
+    <element xmi:type="ecore:EClass" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//ActorClass"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ajimdvVFEd-4fo1YBnNwaQ" x="1025" y="245"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_ajimd_VFEd-4fo1YBnNwaQ" type="1001">
@@ -436,7 +436,7 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_ajimgPVFEd-4fo1YBnNwaQ"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_ajimgfVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="../../../src-gen/de/protos/Room.ecore#//InterfaceItem"/>
+    <element xmi:type="ecore:EClass" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//InterfaceItem"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ajimgvVFEd-4fo1YBnNwaQ" x="2130" y="805"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_ajimg_VFEd-4fo1YBnNwaQ" type="1001">
@@ -452,7 +452,7 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_ajimjPVFEd-4fo1YBnNwaQ"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_ajimjfVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="../../../src-gen/de/protos/Room.ecore#//Port"/>
+    <element xmi:type="ecore:EClass" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//Port"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ajimjvVFEd-4fo1YBnNwaQ" x="2265" y="940"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_ajimj_VFEd-4fo1YBnNwaQ" type="1001">
@@ -468,7 +468,7 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_ajimmPVFEd-4fo1YBnNwaQ"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_ajimmfVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="../../../src-gen/de/protos/Room.ecore#//ExternalPort"/>
+    <element xmi:type="ecore:EClass" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//ExternalPort"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ajimmvVFEd-4fo1YBnNwaQ" x="2255" y="1015"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_ajimm_VFEd-4fo1YBnNwaQ" type="1001">
@@ -484,7 +484,7 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_ajimpPVFEd-4fo1YBnNwaQ"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_ajimpfVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="../../../src-gen/de/protos/Room.ecore#//SAPRef"/>
+    <element xmi:type="ecore:EClass" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//SAPRef"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ajimpvVFEd-4fo1YBnNwaQ" x="2110" y="940"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_ajimp_VFEd-4fo1YBnNwaQ" type="1001">
@@ -500,7 +500,7 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_ajimsPVFEd-4fo1YBnNwaQ"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_ajimsfVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="../../../src-gen/de/protos/Room.ecore#//SPPRef"/>
+    <element xmi:type="ecore:EClass" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//SPPRef"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ajimsvVFEd-4fo1YBnNwaQ" x="1865" y="935"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_ajims_VFEd-4fo1YBnNwaQ" type="1001">
@@ -516,7 +516,7 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_ajimvPVFEd-4fo1YBnNwaQ"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_ajimvfVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="../../../src-gen/de/protos/Room.ecore#//ServiceImplementation"/>
+    <element xmi:type="ecore:EClass" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//ServiceImplementation"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ajimvvVFEd-4fo1YBnNwaQ" x="1600" y="895"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_ajimv_VFEd-4fo1YBnNwaQ" type="1001">
@@ -532,14 +532,14 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_ajimyPVFEd-4fo1YBnNwaQ"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_ajimyfVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="../../../src-gen/de/protos/Room.ecore#//LogicalSystem"/>
+    <element xmi:type="ecore:EClass" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//LogicalSystem"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ajimyvVFEd-4fo1YBnNwaQ" x="1285" y="30"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_ajimy_VFEd-4fo1YBnNwaQ" type="1001">
     <children xmi:type="notation:Node" xmi:id="_ajimzPVFEd-4fo1YBnNwaQ" type="4001"/>
     <children xmi:type="notation:Node" xmi:id="_ajimzfVFEd-4fo1YBnNwaQ" type="5001">
       <children xmi:type="notation:Node" xmi:id="_ajimzvVFEd-4fo1YBnNwaQ" type="2001">
-        <element xmi:type="ecore:EAttribute" href="../../../src-gen/de/protos/Room.ecore#//ActorContainerRef/name"/>
+        <element xmi:type="ecore:EAttribute" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//ActorContainerRef/name"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_ajimz_VFEd-4fo1YBnNwaQ"/>
       </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_ajim0PVFEd-4fo1YBnNwaQ"/>
@@ -552,7 +552,7 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_ajim1vVFEd-4fo1YBnNwaQ"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_ajim1_VFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="../../../src-gen/de/protos/Room.ecore#//ActorContainerRef"/>
+    <element xmi:type="ecore:EClass" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//ActorContainerRef"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ajim2PVFEd-4fo1YBnNwaQ" x="1745" y="245"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_ajim2fVFEd-4fo1YBnNwaQ" type="1001">
@@ -568,7 +568,7 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_ajim4vVFEd-4fo1YBnNwaQ"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_ajim4_VFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="../../../src-gen/de/protos/Room.ecore#//SubSystemRef"/>
+    <element xmi:type="ecore:EClass" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//SubSystemRef"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ajim5PVFEd-4fo1YBnNwaQ" x="1650" y="540"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_ajim5fVFEd-4fo1YBnNwaQ" type="1001">
@@ -584,14 +584,14 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_ajim7vVFEd-4fo1YBnNwaQ"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_ajim7_VFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="../../../src-gen/de/protos/Room.ecore#//SubSystemClass"/>
+    <element xmi:type="ecore:EClass" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//SubSystemClass"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ajim8PVFEd-4fo1YBnNwaQ" x="1155" y="245"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_ajim8fVFEd-4fo1YBnNwaQ" type="1001">
     <children xmi:type="notation:Node" xmi:id="_ajim8vVFEd-4fo1YBnNwaQ" type="4001"/>
     <children xmi:type="notation:Node" xmi:id="_ajim8_VFEd-4fo1YBnNwaQ" type="5001">
       <children xmi:type="notation:Node" xmi:id="_ajim9PVFEd-4fo1YBnNwaQ" type="2001">
-        <element xmi:type="ecore:EAttribute" href="../../../src-gen/de/protos/Room.ecore#//LogicalThread/name"/>
+        <element xmi:type="ecore:EAttribute" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//LogicalThread/name"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_ajim9fVFEd-4fo1YBnNwaQ"/>
       </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_ajim9vVFEd-4fo1YBnNwaQ"/>
@@ -604,14 +604,14 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_ajim_PVFEd-4fo1YBnNwaQ"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_ajim_fVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="../../../src-gen/de/protos/Room.ecore#//LogicalThread"/>
+    <element xmi:type="ecore:EClass" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//LogicalThread"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ajim_vVFEd-4fo1YBnNwaQ" x="1005" y="735"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_ajim__VFEd-4fo1YBnNwaQ" type="1001">
     <children xmi:type="notation:Node" xmi:id="_ajinAPVFEd-4fo1YBnNwaQ" type="4001"/>
     <children xmi:type="notation:Node" xmi:id="_ajinAfVFEd-4fo1YBnNwaQ" type="5001">
       <children xmi:type="notation:Node" xmi:id="_ajinAvVFEd-4fo1YBnNwaQ" type="2001">
-        <element xmi:type="ecore:EAttribute" href="../../../src-gen/de/protos/Room.ecore#//ActorInstancePath/segments"/>
+        <element xmi:type="ecore:EAttribute" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//ActorInstancePath/segments"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_ajinA_VFEd-4fo1YBnNwaQ"/>
       </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_ajinBPVFEd-4fo1YBnNwaQ"/>
@@ -624,7 +624,7 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_ajinCvVFEd-4fo1YBnNwaQ"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_ajinC_VFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="../../../src-gen/de/protos/Room.ecore#//ActorInstancePath"/>
+    <element xmi:type="ecore:EClass" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//ActorInstancePath"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ajinDPVFEd-4fo1YBnNwaQ" x="1000" y="840"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_ajinDfVFEd-4fo1YBnNwaQ" type="1001">
@@ -640,7 +640,7 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_ajinFvVFEd-4fo1YBnNwaQ"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_ajinF_VFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="../../../src-gen/de/protos/Room.ecore#//Binding"/>
+    <element xmi:type="ecore:EClass" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//Binding"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ajinGPVFEd-4fo1YBnNwaQ" x="2405" y="315"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_ajinGfVFEd-4fo1YBnNwaQ" type="1001">
@@ -656,7 +656,7 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_ajinIvVFEd-4fo1YBnNwaQ"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_ajinI_VFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="../../../src-gen/de/protos/Room.ecore#//BindingEndPoint"/>
+    <element xmi:type="ecore:EClass" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//BindingEndPoint"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ajinJPVFEd-4fo1YBnNwaQ" x="2415" y="470"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_ajinJfVFEd-4fo1YBnNwaQ" type="1001">
@@ -672,7 +672,7 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_ajinLvVFEd-4fo1YBnNwaQ"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_ajinL_VFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="../../../src-gen/de/protos/Room.ecore#//LayerConnection"/>
+    <element xmi:type="ecore:EClass" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//LayerConnection"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ajinMPVFEd-4fo1YBnNwaQ" x="2115" y="275"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_ajinMfVFEd-4fo1YBnNwaQ" type="1001">
@@ -688,7 +688,7 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_ajinOvVFEd-4fo1YBnNwaQ"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_ajinO_VFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="../../../src-gen/de/protos/Room.ecore#//SAPoint"/>
+    <element xmi:type="ecore:EClass" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//SAPoint"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ajinPPVFEd-4fo1YBnNwaQ" x="2190" y="485"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_ajinPfVFEd-4fo1YBnNwaQ" type="1001">
@@ -704,7 +704,7 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_ajinRvVFEd-4fo1YBnNwaQ"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_ajinR_VFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="../../../src-gen/de/protos/Room.ecore#//RefSAPoint"/>
+    <element xmi:type="ecore:EClass" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//RefSAPoint"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ajinSPVFEd-4fo1YBnNwaQ" x="2125" y="615"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_ajinSfVFEd-4fo1YBnNwaQ" type="1001">
@@ -720,7 +720,7 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_ajinUvVFEd-4fo1YBnNwaQ"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_ajinU_VFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="../../../src-gen/de/protos/Room.ecore#//RelaySAPoint"/>
+    <element xmi:type="ecore:EClass" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//RelaySAPoint"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ajinVPVFEd-4fo1YBnNwaQ" x="2330" y="615"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_ajinVfVFEd-4fo1YBnNwaQ" type="1001">
@@ -736,7 +736,7 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_ajinXvVFEd-4fo1YBnNwaQ"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_ajinX_VFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="../../../src-gen/de/protos/Room.ecore#//SPPoint"/>
+    <element xmi:type="ecore:EClass" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//SPPoint"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ajinYPVFEd-4fo1YBnNwaQ" x="2045" y="500"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_ajinYfVFEd-4fo1YBnNwaQ" type="1001">
@@ -752,7 +752,7 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_ajinavVFEd-4fo1YBnNwaQ"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_ajina_VFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="../../../src-gen/de/protos/Room.ecore#//ActorRef"/>
+    <element xmi:type="ecore:EClass" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//ActorRef"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ajinbPVFEd-4fo1YBnNwaQ" x="1800" y="535"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_ajinbfVFEd-4fo1YBnNwaQ" type="1001">
@@ -768,7 +768,7 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_ajindvVFEd-4fo1YBnNwaQ"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_ajind_VFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="../../../src-gen/de/protos/Room.ecore#//StateGraphNode"/>
+    <element xmi:type="ecore:EClass" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//StateGraphNode"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ajinePVFEd-4fo1YBnNwaQ" x="100" y="1605"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_ajinefVFEd-4fo1YBnNwaQ" type="1001">
@@ -784,7 +784,7 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_ajingvVFEd-4fo1YBnNwaQ"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_ajing_VFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="../../../src-gen/de/protos/Room.ecore#//StateGraphItem"/>
+    <element xmi:type="ecore:EClass" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//StateGraphItem"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ajinhPVFEd-4fo1YBnNwaQ" x="1482" y="1230"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_ajinhfVFEd-4fo1YBnNwaQ" type="1001">
@@ -800,7 +800,7 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_ajinjvVFEd-4fo1YBnNwaQ"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_ajinj_VFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="../../../src-gen/de/protos/Room.ecore#//State"/>
+    <element xmi:type="ecore:EClass" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//State"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ajinkPVFEd-4fo1YBnNwaQ" x="70" y="1830"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_ajinkfVFEd-4fo1YBnNwaQ" type="1001">
@@ -816,14 +816,14 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_ajinmvVFEd-4fo1YBnNwaQ"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_ajinm_VFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="../../../src-gen/de/protos/Room.ecore#//StateGraph"/>
+    <element xmi:type="ecore:EClass" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//StateGraph"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ajinnPVFEd-4fo1YBnNwaQ" x="1470" y="1090"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_ajinnfVFEd-4fo1YBnNwaQ" type="1001">
     <children xmi:type="notation:Node" xmi:id="_ajinnvVFEd-4fo1YBnNwaQ" type="4001"/>
     <children xmi:type="notation:Node" xmi:id="_ajinn_VFEd-4fo1YBnNwaQ" type="5001">
       <children xmi:type="notation:Node" xmi:id="_ajinoPVFEd-4fo1YBnNwaQ" type="2001">
-        <element xmi:type="ecore:EAttribute" href="../../../src-gen/de/protos/Room.ecore#//BaseState/name"/>
+        <element xmi:type="ecore:EAttribute" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//BaseState/name"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_ajinofVFEd-4fo1YBnNwaQ"/>
       </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_ajinovVFEd-4fo1YBnNwaQ"/>
@@ -836,7 +836,7 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_ajinqPVFEd-4fo1YBnNwaQ"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_ajinqfVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="../../../src-gen/de/protos/Room.ecore#//BaseState"/>
+    <element xmi:type="ecore:EClass" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//BaseState"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ajinqvVFEd-4fo1YBnNwaQ" x="-100" y="2000"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_ajinq_VFEd-4fo1YBnNwaQ" type="1001">
@@ -848,7 +848,7 @@
     </children>
     <children xmi:type="notation:Node" xmi:id="_ajinsfVFEd-4fo1YBnNwaQ" type="5002">
       <children xmi:type="notation:Node" xmi:id="_ajinsvVFEd-4fo1YBnNwaQ" type="2002">
-        <element xmi:type="ecore:EOperation" href="../../../src-gen/de/protos/Room.ecore#//RefinedState/getName"/>
+        <element xmi:type="ecore:EOperation" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//RefinedState/getName"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_ajins_VFEd-4fo1YBnNwaQ"/>
       </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_ajintPVFEd-4fo1YBnNwaQ"/>
@@ -856,14 +856,14 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_ajintvVFEd-4fo1YBnNwaQ"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_ajint_VFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="../../../src-gen/de/protos/Room.ecore#//RefinedState"/>
+    <element xmi:type="ecore:EClass" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//RefinedState"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ajinuPVFEd-4fo1YBnNwaQ" x="125" y="2000"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_ajinufVFEd-4fo1YBnNwaQ" type="1001">
     <children xmi:type="notation:Node" xmi:id="_ajinuvVFEd-4fo1YBnNwaQ" type="4001"/>
     <children xmi:type="notation:Node" xmi:id="_ajinu_VFEd-4fo1YBnNwaQ" type="5001">
       <children xmi:type="notation:Node" xmi:id="_ajinvPVFEd-4fo1YBnNwaQ" type="2001">
-        <element xmi:type="ecore:EAttribute" href="../../../src-gen/de/protos/Room.ecore#//DetailCode/commands"/>
+        <element xmi:type="ecore:EAttribute" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//DetailCode/commands"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_ajinvfVFEd-4fo1YBnNwaQ"/>
       </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_ajinvvVFEd-4fo1YBnNwaQ"/>
@@ -876,14 +876,14 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_ajinxPVFEd-4fo1YBnNwaQ"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_ajinxfVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="../../../src-gen/de/protos/Room.ecore#//DetailCode"/>
+    <element xmi:type="ecore:EClass" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//DetailCode"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ajinxvVFEd-4fo1YBnNwaQ" x="1020" y="1525"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_ajinx_VFEd-4fo1YBnNwaQ" type="1001">
     <children xmi:type="notation:Node" xmi:id="_ajinyPVFEd-4fo1YBnNwaQ" type="4001"/>
     <children xmi:type="notation:Node" xmi:id="_ajinyfVFEd-4fo1YBnNwaQ" type="5001">
       <children xmi:type="notation:Node" xmi:id="_ajinyvVFEd-4fo1YBnNwaQ" type="2001">
-        <element xmi:type="ecore:EAttribute" href="../../../src-gen/de/protos/Room.ecore#//TrPoint/name"/>
+        <element xmi:type="ecore:EAttribute" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//TrPoint/name"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_ajiny_VFEd-4fo1YBnNwaQ"/>
       </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_ajinzPVFEd-4fo1YBnNwaQ"/>
@@ -896,14 +896,14 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_ajin0vVFEd-4fo1YBnNwaQ"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_ajin0_VFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="../../../src-gen/de/protos/Room.ecore#//TrPoint"/>
+    <element xmi:type="ecore:EClass" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//TrPoint"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ajin1PVFEd-4fo1YBnNwaQ" x="455" y="1828"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_ajin1fVFEd-4fo1YBnNwaQ" type="1001">
     <children xmi:type="notation:Node" xmi:id="_ajin1vVFEd-4fo1YBnNwaQ" type="4001"/>
     <children xmi:type="notation:Node" xmi:id="_ajin1_VFEd-4fo1YBnNwaQ" type="5001">
       <children xmi:type="notation:Node" xmi:id="_ajin2PVFEd-4fo1YBnNwaQ" type="2001">
-        <element xmi:type="ecore:EAttribute" href="../../../src-gen/de/protos/Room.ecore#//TransitionPoint/handler"/>
+        <element xmi:type="ecore:EAttribute" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//TransitionPoint/handler"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_ajin2fVFEd-4fo1YBnNwaQ"/>
       </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_ajin2vVFEd-4fo1YBnNwaQ"/>
@@ -916,7 +916,7 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_ajin4PVFEd-4fo1YBnNwaQ"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_ajin4fVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="../../../src-gen/de/protos/Room.ecore#//TransitionPoint"/>
+    <element xmi:type="ecore:EClass" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//TransitionPoint"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ajin4vVFEd-4fo1YBnNwaQ" x="325" y="1998"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_ajin4_VFEd-4fo1YBnNwaQ" type="1001">
@@ -932,7 +932,7 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_ajin7PVFEd-4fo1YBnNwaQ"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_ajin7fVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="../../../src-gen/de/protos/Room.ecore#//EntryPoint"/>
+    <element xmi:type="ecore:EClass" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//EntryPoint"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ajin7vVFEd-4fo1YBnNwaQ" x="505" y="2003"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_ajin7_VFEd-4fo1YBnNwaQ" type="1001">
@@ -948,14 +948,14 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_ajin-PVFEd-4fo1YBnNwaQ"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_ajin-fVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="../../../src-gen/de/protos/Room.ecore#//ExitPoint"/>
+    <element xmi:type="ecore:EClass" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//ExitPoint"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ajin-vVFEd-4fo1YBnNwaQ" x="665" y="2008"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_ajin-_VFEd-4fo1YBnNwaQ" type="1001">
     <children xmi:type="notation:Node" xmi:id="_ajin_PVFEd-4fo1YBnNwaQ" type="4001"/>
     <children xmi:type="notation:Node" xmi:id="_ajin_fVFEd-4fo1YBnNwaQ" type="5001">
       <children xmi:type="notation:Node" xmi:id="_ajin_vVFEd-4fo1YBnNwaQ" type="2001">
-        <element xmi:type="ecore:EAttribute" href="../../../src-gen/de/protos/Room.ecore#//ChoicePoint/name"/>
+        <element xmi:type="ecore:EAttribute" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//ChoicePoint/name"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_ajin__VFEd-4fo1YBnNwaQ"/>
       </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_ajioAPVFEd-4fo1YBnNwaQ"/>
@@ -968,14 +968,14 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_ajioBvVFEd-4fo1YBnNwaQ"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_ajioB_VFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="../../../src-gen/de/protos/Room.ecore#//ChoicePoint"/>
+    <element xmi:type="ecore:EClass" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//ChoicePoint"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ajioCPVFEd-4fo1YBnNwaQ" x="-70" y="1820"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_ajioCfVFEd-4fo1YBnNwaQ" type="1001">
     <children xmi:type="notation:Node" xmi:id="_ajioCvVFEd-4fo1YBnNwaQ" type="4001"/>
     <children xmi:type="notation:Node" xmi:id="_ajioC_VFEd-4fo1YBnNwaQ" type="5001">
       <children xmi:type="notation:Node" xmi:id="_ajioDPVFEd-4fo1YBnNwaQ" type="2001">
-        <element xmi:type="ecore:EAttribute" href="../../../src-gen/de/protos/Room.ecore#//Transition/name"/>
+        <element xmi:type="ecore:EAttribute" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//Transition/name"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_ajioDfVFEd-4fo1YBnNwaQ"/>
       </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_ajioDvVFEd-4fo1YBnNwaQ"/>
@@ -988,7 +988,7 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_ajioFPVFEd-4fo1YBnNwaQ"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_ajioFfVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="../../../src-gen/de/protos/Room.ecore#//Transition"/>
+    <element xmi:type="ecore:EClass" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//Transition"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ajioFvVFEd-4fo1YBnNwaQ" x="1481" y="1644"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_ajioF_VFEd-4fo1YBnNwaQ" type="1001">
@@ -1004,7 +1004,7 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_ajioIPVFEd-4fo1YBnNwaQ"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_ajioIfVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="../../../src-gen/de/protos/Room.ecore#//NonInitialTransition"/>
+    <element xmi:type="ecore:EClass" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//NonInitialTransition"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ajioIvVFEd-4fo1YBnNwaQ" x="1551" y="1772"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_ajioI_VFEd-4fo1YBnNwaQ" type="1001">
@@ -1020,7 +1020,7 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_ajioLPVFEd-4fo1YBnNwaQ"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_ajioLfVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="../../../src-gen/de/protos/Room.ecore#//InitialTransition"/>
+    <element xmi:type="ecore:EClass" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//InitialTransition"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ajioLvVFEd-4fo1YBnNwaQ" x="1130" y="1890"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_ajioL_VFEd-4fo1YBnNwaQ" type="1001">
@@ -1036,7 +1036,7 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_ajioOPVFEd-4fo1YBnNwaQ"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_ajioOfVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="../../../src-gen/de/protos/Room.ecore#//ContinuationTransition"/>
+    <element xmi:type="ecore:EClass" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//ContinuationTransition"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ajioOvVFEd-4fo1YBnNwaQ" x="1552" y="1883"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_ajioO_VFEd-4fo1YBnNwaQ" type="1001">
@@ -1052,7 +1052,7 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_ajioRPVFEd-4fo1YBnNwaQ"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_ajioRfVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="../../../src-gen/de/protos/Room.ecore#//TriggeredTransition"/>
+    <element xmi:type="ecore:EClass" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//TriggeredTransition"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ajioRvVFEd-4fo1YBnNwaQ" x="1790" y="1890"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_ajioR_VFEd-4fo1YBnNwaQ" type="1001">
@@ -1068,7 +1068,7 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_ajioUPVFEd-4fo1YBnNwaQ"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_ajioUfVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="../../../src-gen/de/protos/Room.ecore#//CPBranchTransition"/>
+    <element xmi:type="ecore:EClass" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//CPBranchTransition"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ajioUvVFEd-4fo1YBnNwaQ" x="1328" y="1883"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_ajioU_VFEd-4fo1YBnNwaQ" type="1001">
@@ -1084,7 +1084,7 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_ajioXPVFEd-4fo1YBnNwaQ"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_ajioXfVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="../../../src-gen/de/protos/Room.ecore#//TransitionTerminal"/>
+    <element xmi:type="ecore:EClass" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//TransitionTerminal"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ajioXvVFEd-4fo1YBnNwaQ" x="1450" y="2020"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_ajioX_VFEd-4fo1YBnNwaQ" type="1001">
@@ -1100,7 +1100,7 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_ajioaPVFEd-4fo1YBnNwaQ"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_ajioafVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="../../../src-gen/de/protos/Room.ecore#//StateTerminal"/>
+    <element xmi:type="ecore:EClass" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//StateTerminal"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ajioavVFEd-4fo1YBnNwaQ" x="1209" y="2262"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_ajioa_VFEd-4fo1YBnNwaQ" type="1001">
@@ -1116,7 +1116,7 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_ajiodPVFEd-4fo1YBnNwaQ"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_ajiodfVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="../../../src-gen/de/protos/Room.ecore#//TrPointTerminal"/>
+    <element xmi:type="ecore:EClass" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//TrPointTerminal"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ajiodvVFEd-4fo1YBnNwaQ" x="1724" y="2257"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_ajiod_VFEd-4fo1YBnNwaQ" type="1001">
@@ -1132,7 +1132,7 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_ajiogPVFEd-4fo1YBnNwaQ"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_ajiogfVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="../../../src-gen/de/protos/Room.ecore#//SubStateTrPointTerminal"/>
+    <element xmi:type="ecore:EClass" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//SubStateTrPointTerminal"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ajiogvVFEd-4fo1YBnNwaQ" x="1379" y="2262"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_ajiog_VFEd-4fo1YBnNwaQ" type="1001">
@@ -1148,7 +1148,7 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_ajiojPVFEd-4fo1YBnNwaQ"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_ajiojfVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="../../../src-gen/de/protos/Room.ecore#//ChoicepointTerminal"/>
+    <element xmi:type="ecore:EClass" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//ChoicepointTerminal"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ajiojvVFEd-4fo1YBnNwaQ" x="1560" y="2259"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_ajioj_VFEd-4fo1YBnNwaQ" type="1001">
@@ -1164,7 +1164,7 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_ajiomPVFEd-4fo1YBnNwaQ"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_ajiomfVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="../../../src-gen/de/protos/Room.ecore#//Trigger"/>
+    <element xmi:type="ecore:EClass" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//Trigger"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ajiomvVFEd-4fo1YBnNwaQ" x="980" y="1725"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_ajiom_VFEd-4fo1YBnNwaQ" type="1001">
@@ -1180,7 +1180,7 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_ajiopPVFEd-4fo1YBnNwaQ"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_ajiopfVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="../../../src-gen/de/protos/Room.ecore#//MessageFromIf"/>
+    <element xmi:type="ecore:EClass" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//MessageFromIf"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ajiopvVFEd-4fo1YBnNwaQ" x="945" y="1815"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_ajiop_VFEd-4fo1YBnNwaQ" type="1001">
@@ -1196,14 +1196,14 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_ajiosPVFEd-4fo1YBnNwaQ"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_ajiosfVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="../../../src-gen/de/protos/Room.ecore#//Guard"/>
+    <element xmi:type="ecore:EClass" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//Guard"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ajiosvVFEd-4fo1YBnNwaQ" x="1290" y="1545"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_ajios_VFEd-4fo1YBnNwaQ" type="1001">
     <children xmi:type="notation:Node" xmi:id="_ajiotPVFEd-4fo1YBnNwaQ" type="4001"/>
     <children xmi:type="notation:Node" xmi:id="_ajiotfVFEd-4fo1YBnNwaQ" type="5001">
       <children xmi:type="notation:Node" xmi:id="_ajiotvVFEd-4fo1YBnNwaQ" type="2001">
-        <element xmi:type="ecore:EAttribute" href="../../../src-gen/de/protos/Room.ecore#//Import/importedNamespace"/>
+        <element xmi:type="ecore:EAttribute" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//Import/importedNamespace"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_ajiot_VFEd-4fo1YBnNwaQ"/>
       </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_ajiouPVFEd-4fo1YBnNwaQ"/>
@@ -1216,11 +1216,11 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_ajiovvVFEd-4fo1YBnNwaQ"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_ajiov_VFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="../../../src-gen/de/protos/Room.ecore#//Import"/>
+    <element xmi:type="ecore:EClass" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//Import"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ajiowPVFEd-4fo1YBnNwaQ" x="270" y="-310"/>
   </children>
   <styles xmi:type="notation:DiagramStyle" xmi:id="_ajiowfVFEd-4fo1YBnNwaQ"/>
-  <element xmi:type="ecore:EPackage" href="../../../src-gen/de/protos/Room.ecore#/"/>
+  <element xmi:type="ecore:EPackage" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#/"/>
   <edges xmi:type="notation:Edge" xmi:id="_ajiowvVFEd-4fo1YBnNwaQ" type="3002" source="_ajilUfVFEd-4fo1YBnNwaQ" target="_ajios_VFEd-4fo1YBnNwaQ">
     <children xmi:type="notation:Node" xmi:id="_ajiow_VFEd-4fo1YBnNwaQ" type="4011">
       <layoutConstraint xmi:type="notation:Location" xmi:id="_ajioxPVFEd-4fo1YBnNwaQ" x="-10" y="-10"/>
@@ -1230,7 +1230,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_ajiox_VFEd-4fo1YBnNwaQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_ajioyPVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="../../../src-gen/de/protos/Room.ecore#//RoomModel/imports"/>
+    <element xmi:type="ecore:EReference" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//RoomModel/imports"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ajioyfVFEd-4fo1YBnNwaQ" points="[-13, 23, 78, -131]$[-62, 105, 29, -49]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajioyvVFEd-4fo1YBnNwaQ" id="(0.12173913043478261,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajioy_VFEd-4fo1YBnNwaQ" id="(0.8203883495145631,1.0)"/>
@@ -1244,7 +1244,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_ajio0fVFEd-4fo1YBnNwaQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_ajio0vVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="../../../src-gen/de/protos/Room.ecore#//RoomModel/dataClasses"/>
+    <element xmi:type="ecore:EReference" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//RoomModel/dataClasses"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ajio0_VFEd-4fo1YBnNwaQ" points="[2, 49, -12, -342]$[13, 350, -1, -41]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajio1PVFEd-4fo1YBnNwaQ" id="(0.24347826086956523,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajio1fVFEd-4fo1YBnNwaQ" id="(0.5196078431372549,1.0)"/>
@@ -1258,7 +1258,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_ajio2_VFEd-4fo1YBnNwaQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_ajio3PVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="../../../src-gen/de/protos/Room.ecore#//RoomModel/protocolClasses"/>
+    <element xmi:type="ecore:EReference" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//RoomModel/protocolClasses"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ajio3fVFEd-4fo1YBnNwaQ" points="[31, 49, -218, -342]$[223, 350, -26, -41]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajio3vVFEd-4fo1YBnNwaQ" id="(0.6608695652173913,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajio3_VFEd-4fo1YBnNwaQ" id="(0.3333333333333333,1.0)"/>
@@ -1272,7 +1272,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_ajio5fVFEd-4fo1YBnNwaQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_ajio5vVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="../../../src-gen/de/protos/Room.ecore#//RoomModel/actorClasses"/>
+    <element xmi:type="ecore:EReference" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//RoomModel/actorClasses"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ajio5_VFEd-4fo1YBnNwaQ" points="[20, 29, -447, -672]$[439, 660, -28, -41]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajio6PVFEd-4fo1YBnNwaQ" id="(0.8260869565217391,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajio6fVFEd-4fo1YBnNwaQ" id="(0.5,1.0)"/>
@@ -1286,7 +1286,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_ajio7_VFEd-4fo1YBnNwaQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_ajio8PVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="../../../src-gen/de/protos/Room.ecore#//RoomModel/subSystemClasses"/>
+    <element xmi:type="ecore:EReference" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//RoomModel/subSystemClasses"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ajio8fVFEd-4fo1YBnNwaQ" points="[0, 0, 0, 266]$[0, -266, 0, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajio8vVFEd-4fo1YBnNwaQ" id="(0.4956521739130435,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajio8_VFEd-4fo1YBnNwaQ" id="(0.5,1.0)"/>
@@ -1300,7 +1300,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_ajio-fVFEd-4fo1YBnNwaQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_ajio-vVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="../../../src-gen/de/protos/Room.ecore#//RoomModel/systems"/>
+    <element xmi:type="ecore:EReference" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//RoomModel/systems"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ajio-_VFEd-4fo1YBnNwaQ" points="[0, 0, 315, 60]$[-315, -60, 0, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajio_PVFEd-4fo1YBnNwaQ" id="(0.3652173913043478,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajio_fVFEd-4fo1YBnNwaQ" id="(0.5,1.0)"/>
@@ -1314,7 +1314,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_ajipA_VFEd-4fo1YBnNwaQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_ajipBPVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="../../../src-gen/de/protos/Room.ecore#//StructureClass/bindings"/>
+    <element xmi:type="ecore:EReference" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//StructureClass/bindings"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ajipBfVFEd-4fo1YBnNwaQ" points="[0, 0, -1161, 60]$[1161, -60, 0, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajipBvVFEd-4fo1YBnNwaQ" id="(0.7475728155339806,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajipB_VFEd-4fo1YBnNwaQ" id="(0.5,1.0)"/>
@@ -1328,7 +1328,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_ajipDfVFEd-4fo1YBnNwaQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_ajipDvVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="../../../src-gen/de/protos/Room.ecore#//StructureClass/connections"/>
+    <element xmi:type="ecore:EReference" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//StructureClass/connections"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ajipD_VFEd-4fo1YBnNwaQ" points="[0, 0, 332, 60]$[-332, -60, 0, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajipEPVFEd-4fo1YBnNwaQ" id="(0.24271844660194175,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajipEfVFEd-4fo1YBnNwaQ" id="(0.5,1.0)"/>
@@ -1350,7 +1350,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_ajipHfVFEd-4fo1YBnNwaQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_ajipHvVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="../../../src-gen/de/protos/Room.ecore#//ActorContainerClass/ifSPPs"/>
+    <element xmi:type="ecore:EReference" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//ActorContainerClass/ifSPPs"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ajipH_VFEd-4fo1YBnNwaQ" points="[31, 41, -662, -905]$[582, 759, -111, -187]$[668, 905, -25, -41]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajipIPVFEd-4fo1YBnNwaQ" id="(0.717391304347826,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajipIfVFEd-4fo1YBnNwaQ" id="(0.5,1.0)"/>
@@ -1364,7 +1364,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_ajipJ_VFEd-4fo1YBnNwaQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_ajipKPVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="../../../src-gen/de/protos/Room.ecore#//ActorContainerClass/actorRefs"/>
+    <element xmi:type="ecore:EReference" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//ActorContainerClass/actorRefs"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ajipKfVFEd-4fo1YBnNwaQ" points="[0, 0, 0, 68]$[0, -68, 0, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajipKvVFEd-4fo1YBnNwaQ" id="(0.4420289855072464,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajipK_VFEd-4fo1YBnNwaQ" id="(0.5,1.0)"/>
@@ -1386,7 +1386,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_ajipN_VFEd-4fo1YBnNwaQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_ajipOPVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="../../../src-gen/de/protos/Room.ecore#//TypedID/type"/>
+    <element xmi:type="ecore:EReference" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//TypedID/type"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ajipOfVFEd-4fo1YBnNwaQ" points="[0, 0, 346, 60]$[-346, -60, 0, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajipOvVFEd-4fo1YBnNwaQ" id="(0.25217391304347825,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajipO_VFEd-4fo1YBnNwaQ" id="(0.5,1.0)"/>
@@ -1400,7 +1400,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_ajipQfVFEd-4fo1YBnNwaQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_ajipQvVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="../../../src-gen/de/protos/Room.ecore#//FreeTypedID/type"/>
+    <element xmi:type="ecore:EReference" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//FreeTypedID/type"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ajipQ_VFEd-4fo1YBnNwaQ" points="[0, 0, -141, 235]$[141, -235, 0, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajipRPVFEd-4fo1YBnNwaQ" id="(0.4956521739130435,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajipRfVFEd-4fo1YBnNwaQ" id="(0.2465753424657534,1.0)"/>
@@ -1414,7 +1414,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_ajipS_VFEd-4fo1YBnNwaQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_ajipTPVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="../../../src-gen/de/protos/Room.ecore#//Type/type"/>
+    <element xmi:type="ecore:EReference" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//Type/type"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ajipTfVFEd-4fo1YBnNwaQ" points="[0, 0, -144, 60]$[144, -60, 0, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajipTvVFEd-4fo1YBnNwaQ" id="(0.6643835616438356,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajipT_VFEd-4fo1YBnNwaQ" id="(0.2549019607843137,1.0)"/>
@@ -1428,7 +1428,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_ajipVfVFEd-4fo1YBnNwaQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_ajipVvVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="../../../src-gen/de/protos/Room.ecore#//DataClass/base"/>
+    <element xmi:type="ecore:EReference" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//DataClass/base"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ajipV_VFEd-4fo1YBnNwaQ" points="[0, 0, 0, 0]$[0, 0, 0, 0]"/>
   </edges>
   <edges xmi:type="notation:Edge" xmi:id="_ajipWPVFEd-4fo1YBnNwaQ" type="3002" source="_ajil3_VFEd-4fo1YBnNwaQ" target="_ajios_VFEd-4fo1YBnNwaQ">
@@ -1440,7 +1440,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_ajipXfVFEd-4fo1YBnNwaQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_ajipXvVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="../../../src-gen/de/protos/Room.ecore#//DataClass/imports"/>
+    <element xmi:type="ecore:EReference" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//DataClass/imports"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ajipX_VFEd-4fo1YBnNwaQ" points="[0, 0, 338, 60]$[-338, -60, 0, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajipYPVFEd-4fo1YBnNwaQ" id="(0.19607843137254902,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajipYfVFEd-4fo1YBnNwaQ" id="(0.9077669902912622,1.0)"/>
@@ -1454,7 +1454,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_ajipZ_VFEd-4fo1YBnNwaQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_ajipaPVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="../../../src-gen/de/protos/Room.ecore#//DataClass/attributes"/>
+    <element xmi:type="ecore:EReference" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//DataClass/attributes"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ajipafVFEd-4fo1YBnNwaQ" points="[-4, 41, 43, -460]$[-40, 435, 7, -66]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajipavVFEd-4fo1YBnNwaQ" id="(0.39215686274509803,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajipa_VFEd-4fo1YBnNwaQ" id="(0.5130434782608696,1.0)"/>
@@ -1468,7 +1468,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_ajipcfVFEd-4fo1YBnNwaQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_ajipcvVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="../../../src-gen/de/protos/Room.ecore#//DataClass/operations"/>
+    <element xmi:type="ecore:EReference" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//DataClass/operations"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ajipc_VFEd-4fo1YBnNwaQ" points="[-25, 41, 267, -438]$[-262, 430, 30, -49]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajipdPVFEd-4fo1YBnNwaQ" id="(0.5980392156862745,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajipdfVFEd-4fo1YBnNwaQ" id="(0.24347826086956523,1.0)"/>
@@ -1490,7 +1490,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_ajipgfVFEd-4fo1YBnNwaQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_ajipgvVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="../../../src-gen/de/protos/Room.ecore#//Attribute/type"/>
+    <element xmi:type="ecore:EReference" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//Attribute/type"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ajipg_VFEd-4fo1YBnNwaQ" points="[17, -66, -32, 125]$[36, -142, -13, 49]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajiphPVFEd-4fo1YBnNwaQ" id="(0.25217391304347825,1.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajiphfVFEd-4fo1YBnNwaQ" id="(0.3287671232876712,0.0)"/>
@@ -1504,7 +1504,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_ajipi_VFEd-4fo1YBnNwaQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_ajipjPVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="../../../src-gen/de/protos/Room.ecore#//Operation/arguments"/>
+    <element xmi:type="ecore:EReference" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//Operation/arguments"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ajipjfVFEd-4fo1YBnNwaQ" points="[0, 0, 149, 60]$[-149, -60, 0, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajipjvVFEd-4fo1YBnNwaQ" id="(0.24347826086956523,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajipj_VFEd-4fo1YBnNwaQ" id="(0.4956521739130435,1.0)"/>
@@ -1518,7 +1518,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_ajiplfVFEd-4fo1YBnNwaQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_ajiplvVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="../../../src-gen/de/protos/Room.ecore#//Operation/returntype"/>
+    <element xmi:type="ecore:EReference" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//Operation/returntype"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ajipl_VFEd-4fo1YBnNwaQ" points="[0, 0, 0, 346]$[0, -346, 0, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajipmPVFEd-4fo1YBnNwaQ" id="(0.4956521739130435,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajipmfVFEd-4fo1YBnNwaQ" id="(0.5,1.0)"/>
@@ -1532,7 +1532,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_ajipn_VFEd-4fo1YBnNwaQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_ajipoPVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="../../../src-gen/de/protos/Room.ecore#//Operation/detailCode"/>
+    <element xmi:type="ecore:EReference" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//Operation/detailCode"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ajipofVFEd-4fo1YBnNwaQ" points="[0, 0, -2347, 60]$[2347, -60, 0, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajipovVFEd-4fo1YBnNwaQ" id="(0.7478260869565218,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajipo_VFEd-4fo1YBnNwaQ" id="(0.07482993197278912,1.0)"/>
@@ -1546,7 +1546,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_ajipqfVFEd-4fo1YBnNwaQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_ajipqvVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="../../../src-gen/de/protos/Room.ecore#//ProtocolClass/base"/>
+    <element xmi:type="ecore:EReference" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//ProtocolClass/base"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ajipq_VFEd-4fo1YBnNwaQ" points="[0, 0, 0, 0]$[0, 0, 0, 0]"/>
   </edges>
   <edges xmi:type="notation:Edge" xmi:id="_ajiprPVFEd-4fo1YBnNwaQ" type="3002" source="_ajimCfVFEd-4fo1YBnNwaQ" target="_ajinufVFEd-4fo1YBnNwaQ">
@@ -1558,7 +1558,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_ajipsfVFEd-4fo1YBnNwaQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_ajipsvVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="../../../src-gen/de/protos/Room.ecore#//ProtocolClass/userCode1"/>
+    <element xmi:type="ecore:EReference" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//ProtocolClass/userCode1"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ajips_VFEd-4fo1YBnNwaQ" points="[4, 41, -179, -1598]$[177, 1590, -6, -49]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajiptPVFEd-4fo1YBnNwaQ" id="(0.8725490196078431,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajiptfVFEd-4fo1YBnNwaQ" id="(0.38095238095238093,1.0)"/>
@@ -1572,7 +1572,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_ajipu_VFEd-4fo1YBnNwaQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_ajipvPVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="../../../src-gen/de/protos/Room.ecore#//ProtocolClass/userCode2"/>
+    <element xmi:type="ecore:EReference" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//ProtocolClass/userCode2"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ajipvfVFEd-4fo1YBnNwaQ" points="[5, 41, -180, -1598]$[179, 1590, -6, -49]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajipvvVFEd-4fo1YBnNwaQ" id="(0.7450980392156863,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajipv_VFEd-4fo1YBnNwaQ" id="(0.30612244897959184,1.0)"/>
@@ -1586,7 +1586,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_ajipxfVFEd-4fo1YBnNwaQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_ajipxvVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="../../../src-gen/de/protos/Room.ecore#//ProtocolClass/incomingMessages"/>
+    <element xmi:type="ecore:EReference" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//ProtocolClass/incomingMessages"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ajipx_VFEd-4fo1YBnNwaQ" points="[3, 41, 0, -193]$[3, 185, 0, -49]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajipyPVFEd-4fo1YBnNwaQ" id="(0.6176470588235294,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajipyfVFEd-4fo1YBnNwaQ" id="(0.6608695652173913,1.0)"/>
@@ -1600,7 +1600,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_ajipz_VFEd-4fo1YBnNwaQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_ajip0PVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="../../../src-gen/de/protos/Room.ecore#//ProtocolClass/outgoingMessages"/>
+    <element xmi:type="ecore:EReference" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//ProtocolClass/outgoingMessages"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ajip0fVFEd-4fo1YBnNwaQ" points="[0, 0, 0, 299]$[0, -299, 0, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajip0vVFEd-4fo1YBnNwaQ" id="(0.5,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajip0_VFEd-4fo1YBnNwaQ" id="(0.4956521739130435,1.0)"/>
@@ -1614,7 +1614,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_ajip2fVFEd-4fo1YBnNwaQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_ajip2vVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="../../../src-gen/de/protos/Room.ecore#//ProtocolClass/regular"/>
+    <element xmi:type="ecore:EReference" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//ProtocolClass/regular"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ajip2_VFEd-4fo1YBnNwaQ" points="[0, 0, 143, 68]$[-143, -68, 0, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajip3PVFEd-4fo1YBnNwaQ" id="(0.39215686274509803,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajip3fVFEd-4fo1YBnNwaQ" id="(0.6666666666666666,1.0)"/>
@@ -1628,7 +1628,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_ajip4_VFEd-4fo1YBnNwaQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_ajip5PVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="../../../src-gen/de/protos/Room.ecore#//ProtocolClass/conjugate"/>
+    <element xmi:type="ecore:EReference" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//ProtocolClass/conjugate"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ajip5fVFEd-4fo1YBnNwaQ" points="[0, 0, 167, 68]$[-167, -68, 0, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajip5vVFEd-4fo1YBnNwaQ" id="(0.29411764705882354,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajip5_VFEd-4fo1YBnNwaQ" id="(0.3333333333333333,1.0)"/>
@@ -1642,7 +1642,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_ajip7fVFEd-4fo1YBnNwaQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_ajip7vVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="../../../src-gen/de/protos/Room.ecore#//ProtocolClass/semantics"/>
+    <element xmi:type="ecore:EReference" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//ProtocolClass/semantics"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ajip7_VFEd-4fo1YBnNwaQ" points="[0, 0, 315, 68]$[-315, -68, 0, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajip8PVFEd-4fo1YBnNwaQ" id="(0.19607843137254902,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajip8fVFEd-4fo1YBnNwaQ" id="(0.5,1.0)"/>
@@ -1664,7 +1664,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_ajip_fVFEd-4fo1YBnNwaQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_ajip_vVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="../../../src-gen/de/protos/Room.ecore#//Message/arguments"/>
+    <element xmi:type="ecore:EReference" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//Message/arguments"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ajip__VFEd-4fo1YBnNwaQ" points="[-13, -3, 263, 41]$[-220, -36, 56, 8]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajiqAPVFEd-4fo1YBnNwaQ" id="(0.12173913043478261,1.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajiqAfVFEd-4fo1YBnNwaQ" id="(0.5130434782608696,0.0)"/>
@@ -1678,7 +1678,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_ajiqB_VFEd-4fo1YBnNwaQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_ajiqCPVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="../../../src-gen/de/protos/Room.ecore#//PortClass/userCode"/>
+    <element xmi:type="ecore:EReference" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//PortClass/userCode"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ajiqCfVFEd-4fo1YBnNwaQ" points="[17, 41, -373, -883]$[369, 875, -21, -49]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajiqCvVFEd-4fo1YBnNwaQ" id="(0.47058823529411764,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajiqC_VFEd-4fo1YBnNwaQ" id="(0.22448979591836735,1.0)"/>
@@ -1692,7 +1692,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_ajiqEfVFEd-4fo1YBnNwaQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_ajiqEvVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="../../../src-gen/de/protos/Room.ecore#//PortClass/attributes"/>
+    <element xmi:type="ecore:EReference" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//PortClass/attributes"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ajiqE_VFEd-4fo1YBnNwaQ" points="[0, 0, 2679, 60]$[-2679, -60, 0, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajiqFPVFEd-4fo1YBnNwaQ" id="(0.11764705882352941,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajiqFfVFEd-4fo1YBnNwaQ" id="(0.8347826086956521,1.0)"/>
@@ -1706,7 +1706,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_ajiqG_VFEd-4fo1YBnNwaQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_ajiqHPVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="../../../src-gen/de/protos/Room.ecore#//PortClass/operations"/>
+    <element xmi:type="ecore:EReference" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//PortClass/operations"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ajiqHfVFEd-4fo1YBnNwaQ" points="[0, 0, 309, 236]$[-309, -236, 0, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajiqHvVFEd-4fo1YBnNwaQ" id="(0.23529411764705882,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajiqH_VFEd-4fo1YBnNwaQ" id="(0.7478260869565218,1.0)"/>
@@ -1720,7 +1720,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_ajiqJfVFEd-4fo1YBnNwaQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_ajiqJvVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="../../../src-gen/de/protos/Room.ecore#//PortClass/msgHandlers"/>
+    <element xmi:type="ecore:EReference" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//PortClass/msgHandlers"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ajiqJ_VFEd-4fo1YBnNwaQ" points="[0, 0, 163, 85]$[-163, -85, 0, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajiqKPVFEd-4fo1YBnNwaQ" id="(0.35294117647058826,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajiqKfVFEd-4fo1YBnNwaQ" id="(0.5,1.0)"/>
@@ -1734,7 +1734,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_ajiqL_VFEd-4fo1YBnNwaQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_ajiqMPVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="../../../src-gen/de/protos/Room.ecore#//MessageHandler/msg"/>
+    <element xmi:type="ecore:EReference" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//MessageHandler/msg"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ajiqMfVFEd-4fo1YBnNwaQ" points="[0, 0, -354, 60]$[354, -60, 0, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajiqMvVFEd-4fo1YBnNwaQ" id="(0.3333333333333333,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajiqM_VFEd-4fo1YBnNwaQ" id="(0.3652173913043478,1.0)"/>
@@ -1748,7 +1748,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_ajiqOfVFEd-4fo1YBnNwaQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_ajiqOvVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="../../../src-gen/de/protos/Room.ecore#//MessageHandler/detailCode"/>
+    <element xmi:type="ecore:EReference" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//MessageHandler/detailCode"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ajiqO_VFEd-4fo1YBnNwaQ" points="[0, 0, -1303, 60]$[1303, -60, 0, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajiqPPVFEd-4fo1YBnNwaQ" id="(0.6666666666666666,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajiqPfVFEd-4fo1YBnNwaQ" id="(0.14965986394557823,1.0)"/>
@@ -1762,7 +1762,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_ajiqQ_VFEd-4fo1YBnNwaQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_ajiqRPVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="../../../src-gen/de/protos/Room.ecore#//ProtocolSemantics/rules"/>
+    <element xmi:type="ecore:EReference" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//ProtocolSemantics/rules"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ajiqRfVFEd-4fo1YBnNwaQ" points="[-2, 41, 0, -100]$[-2, 100, 0, -41]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajiqRvVFEd-4fo1YBnNwaQ" id="(0.5,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajiqR_VFEd-4fo1YBnNwaQ" id="(0.75,1.0)"/>
@@ -1776,7 +1776,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_ajiqTfVFEd-4fo1YBnNwaQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_ajiqTvVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="../../../src-gen/de/protos/Room.ecore#//SemanticsRule/msg"/>
+    <element xmi:type="ecore:EReference" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//SemanticsRule/msg"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ajiqT_VFEd-4fo1YBnNwaQ" points="[0, 0, -492, 60]$[492, -60, 0, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajiqUPVFEd-4fo1YBnNwaQ" id="(0.5,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajiqUfVFEd-4fo1YBnNwaQ" id="(0.24347826086956523,1.0)"/>
@@ -1790,7 +1790,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_ajiqV_VFEd-4fo1YBnNwaQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_ajiqWPVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="../../../src-gen/de/protos/Room.ecore#//SemanticsRule/followUps"/>
+    <element xmi:type="ecore:EReference" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//SemanticsRule/followUps"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ajiqWfVFEd-4fo1YBnNwaQ" points="[0, 0, 0, 0]$[0, 0, 0, 0]"/>
   </edges>
   <edges xmi:type="notation:Edge" xmi:id="_ajiqWvVFEd-4fo1YBnNwaQ" type="3003" source="_ajimU_VFEd-4fo1YBnNwaQ" target="_ajimR_VFEd-4fo1YBnNwaQ">
@@ -1818,7 +1818,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_ajiqa_VFEd-4fo1YBnNwaQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_ajiqbPVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="../../../src-gen/de/protos/Room.ecore#//ActorClass/base"/>
+    <element xmi:type="ecore:EReference" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//ActorClass/base"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ajiqbfVFEd-4fo1YBnNwaQ" points="[0, 0, 0, 0]$[0, 0, 0, 0]"/>
   </edges>
   <edges xmi:type="notation:Edge" xmi:id="_ajiqbvVFEd-4fo1YBnNwaQ" type="3002" source="_ajima_VFEd-4fo1YBnNwaQ" target="_ajimg_VFEd-4fo1YBnNwaQ">
@@ -1830,7 +1830,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_ajiqc_VFEd-4fo1YBnNwaQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_ajiqdPVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="../../../src-gen/de/protos/Room.ecore#//ActorClass/ifPorts"/>
+    <element xmi:type="ecore:EReference" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//ActorClass/ifPorts"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ajiqdfVFEd-4fo1YBnNwaQ" points="[21, 12, -1154, -724]$[1161, 726, -14, -10]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajiqdvVFEd-4fo1YBnNwaQ" id="(0.7941176470588235,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajiqd_VFEd-4fo1YBnNwaQ" id="(0.14814814814814814,1.0)"/>
@@ -1844,7 +1844,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_ajiqffVFEd-4fo1YBnNwaQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_ajiqfvVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="../../../src-gen/de/protos/Room.ecore#//ActorClass/userCode1"/>
+    <element xmi:type="ecore:EReference" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//ActorClass/userCode1"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ajiqf_VFEd-4fo1YBnNwaQ" points="[0, 41, -7, -1288]$[7, 1280, 0, -49]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajiqgPVFEd-4fo1YBnNwaQ" id="(0.6568627450980392,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajiqgfVFEd-4fo1YBnNwaQ" id="(0.5374149659863946,1.0)"/>
@@ -1858,7 +1858,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_ajiqh_VFEd-4fo1YBnNwaQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_ajiqiPVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="../../../src-gen/de/protos/Room.ecore#//ActorClass/userCode2"/>
+    <element xmi:type="ecore:EReference" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//ActorClass/userCode2"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ajiqifVFEd-4fo1YBnNwaQ" points="[1, 41, -10, -1288]$[10, 1280, -1, -49]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajiqivVFEd-4fo1YBnNwaQ" id="(0.5098039215686274,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajiqi_VFEd-4fo1YBnNwaQ" id="(0.4557823129251701,1.0)"/>
@@ -1872,7 +1872,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_ajiqkfVFEd-4fo1YBnNwaQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_ajiqkvVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="../../../src-gen/de/protos/Room.ecore#//ActorClass/intPorts"/>
+    <element xmi:type="ecore:EReference" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//ActorClass/intPorts"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ajiqk_VFEd-4fo1YBnNwaQ" points="[14, 8, -1205, -728]$[1154, 696, -65, -40]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajiqlPVFEd-4fo1YBnNwaQ" id="(0.8627450980392157,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajiqlfVFEd-4fo1YBnNwaQ" id="(0.654320987654321,1.0)"/>
@@ -1886,7 +1886,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_ajiqm_VFEd-4fo1YBnNwaQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_ajiqnPVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="../../../src-gen/de/protos/Room.ecore#//ActorClass/extPorts"/>
+    <element xmi:type="ecore:EReference" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//ActorClass/extPorts"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ajiqnfVFEd-4fo1YBnNwaQ" points="[28, 18, -1180, -793]$[1158, 777, -50, -34]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajiqnvVFEd-4fo1YBnNwaQ" id="(0.7254901960784313,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajiqn_VFEd-4fo1YBnNwaQ" id="(0.5,1.0)"/>
@@ -1900,7 +1900,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_ajiqpfVFEd-4fo1YBnNwaQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_ajiqpvVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="../../../src-gen/de/protos/Room.ecore#//ActorClass/serviceImplementations"/>
+    <element xmi:type="ecore:EReference" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//ActorClass/serviceImplementations"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ajiqp_VFEd-4fo1YBnNwaQ" points="[36, 41, -571, -650]$[570, 650, -37, -41]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajiqqPVFEd-4fo1YBnNwaQ" id="(0.43137254901960786,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajiqqfVFEd-4fo1YBnNwaQ" id="(0.49673202614379086,1.0)"/>
@@ -1914,7 +1914,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_ajiqr_VFEd-4fo1YBnNwaQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_ajiqsPVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="../../../src-gen/de/protos/Room.ecore#//ActorClass/strSAPs"/>
+    <element xmi:type="ecore:EReference" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//ActorClass/strSAPs"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ajiqsfVFEd-4fo1YBnNwaQ" points="[0, 0, -163, 68]$[163, -68, 0, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajiqsvVFEd-4fo1YBnNwaQ" id="(0.5882352941176471,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajiqs_VFEd-4fo1YBnNwaQ" id="(0.5,1.0)"/>
@@ -1928,7 +1928,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_ajiqufVFEd-4fo1YBnNwaQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_ajiquvVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="../../../src-gen/de/protos/Room.ecore#//ActorClass/attributes"/>
+    <element xmi:type="ecore:EReference" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//ActorClass/attributes"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ajiqu_VFEd-4fo1YBnNwaQ" points="[-7, 2, 510, -189]$[-479, 177, 38, -14]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajiqvPVFEd-4fo1YBnNwaQ" id="(0.0392156862745098,0.627906976744186)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajiqvfVFEd-4fo1YBnNwaQ" id="(0.6695652173913044,1.0)"/>
@@ -1942,7 +1942,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_ajiqw_VFEd-4fo1YBnNwaQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_ajiqxPVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="../../../src-gen/de/protos/Room.ecore#//ActorClass/operations"/>
+    <element xmi:type="ecore:EReference" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//ActorClass/operations"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ajiqxfVFEd-4fo1YBnNwaQ" points="[-34, 7, 724, -162]$[-701, 156, 57, -13]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajiqxvVFEd-4fo1YBnNwaQ" id="(0.3431372549019608,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajiqx_VFEd-4fo1YBnNwaQ" id="(0.4956521739130435,1.0)"/>
@@ -1956,7 +1956,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_ajiqzfVFEd-4fo1YBnNwaQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_ajiqzvVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="../../../src-gen/de/protos/Room.ecore#//ActorClass/stateMachine"/>
+    <element xmi:type="ecore:EReference" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//ActorClass/stateMachine"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ajiqz_VFEd-4fo1YBnNwaQ" points="[7, 16, -369, -870]$[359, 845, -17, -41]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajiq0PVFEd-4fo1YBnNwaQ" id="(0.9313725490196079,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajiq0fVFEd-4fo1YBnNwaQ" id="(0.24509803921568626,1.0)"/>
@@ -1978,7 +1978,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_ajiq3fVFEd-4fo1YBnNwaQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_ajiq3vVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="../../../src-gen/de/protos/Room.ecore#//InterfaceItem/protocol"/>
+    <element xmi:type="ecore:EReference" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//InterfaceItem/protocol"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ajiq3_VFEd-4fo1YBnNwaQ" points="[0, 0, 722, 60]$[-722, -60, 0, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajiq4PVFEd-4fo1YBnNwaQ" id="(0.4956521739130435,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajiq4fVFEd-4fo1YBnNwaQ" id="(0.6666666666666666,1.0)"/>
@@ -2000,7 +2000,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_ajiq7fVFEd-4fo1YBnNwaQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_ajiq7vVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="../../../src-gen/de/protos/Room.ecore#//ExternalPort/ifport"/>
+    <element xmi:type="ecore:EReference" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//ExternalPort/ifport"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ajiq7_VFEd-4fo1YBnNwaQ" points="[0, 0, 0, 60]$[0, -60, 0, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajiq8PVFEd-4fo1YBnNwaQ" id="(0.5,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajiq8fVFEd-4fo1YBnNwaQ" id="(0.3148148148148148,1.0)"/>
@@ -2030,7 +2030,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_ajirA_VFEd-4fo1YBnNwaQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_ajirBPVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="../../../src-gen/de/protos/Room.ecore#//ServiceImplementation/spp"/>
+    <element xmi:type="ecore:EReference" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//ServiceImplementation/spp"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ajirBfVFEd-4fo1YBnNwaQ" points="[0, 0, 114, 85]$[-113, -61, 1, 24]$[-114, -85, 0, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajirBvVFEd-4fo1YBnNwaQ" id="(0.49673202614379086,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajirB_VFEd-4fo1YBnNwaQ" id="(0.6666666666666666,1.0)"/>
@@ -2044,7 +2044,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_ajirDfVFEd-4fo1YBnNwaQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_ajirDvVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="../../../src-gen/de/protos/Room.ecore#//LogicalSystem/subSystems"/>
+    <element xmi:type="ecore:EReference" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//LogicalSystem/subSystems"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ajirD_VFEd-4fo1YBnNwaQ" points="[0, 0, 0, 60]$[0, -60, 0, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajirEPVFEd-4fo1YBnNwaQ" id="(0.5,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajirEfVFEd-4fo1YBnNwaQ" id="(0.5,1.0)"/>
@@ -2066,7 +2066,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_ajirHfVFEd-4fo1YBnNwaQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_ajirHvVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="../../../src-gen/de/protos/Room.ecore#//SubSystemRef/type"/>
+    <element xmi:type="ecore:EReference" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//SubSystemRef/type"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ajirH_VFEd-4fo1YBnNwaQ" points="[0, 0, -284, 60]$[284, -60, 0, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajirIPVFEd-4fo1YBnNwaQ" id="(0.6634615384615384,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajirIfVFEd-4fo1YBnNwaQ" id="(0.24561403508771928,1.0)"/>
@@ -2088,7 +2088,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_ajirLfVFEd-4fo1YBnNwaQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_ajirLvVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="../../../src-gen/de/protos/Room.ecore#//SubSystemClass/relayPorts"/>
+    <element xmi:type="ecore:EReference" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//SubSystemClass/relayPorts"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ajirL_VFEd-4fo1YBnNwaQ" points="[29, 20, -1005, -716]$[1027, 730, -7, -6]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajirMPVFEd-4fo1YBnNwaQ" id="(0.7456140350877193,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajirMfVFEd-4fo1YBnNwaQ" id="(0.07407407407407407,1.0)"/>
@@ -2102,7 +2102,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_ajirN_VFEd-4fo1YBnNwaQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_ajirOPVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="../../../src-gen/de/protos/Room.ecore#//SubSystemClass/threads"/>
+    <element xmi:type="ecore:EReference" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//SubSystemClass/threads"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ajirOfVFEd-4fo1YBnNwaQ" points="[0, 0, 502, 60]$[-502, -60, 0, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajirOvVFEd-4fo1YBnNwaQ" id="(0.24561403508771928,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajirO_VFEd-4fo1YBnNwaQ" id="(0.4956521739130435,1.0)"/>
@@ -2124,7 +2124,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_ajirR_VFEd-4fo1YBnNwaQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_ajirSPVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="../../../src-gen/de/protos/Room.ecore#//LogicalThread/instances"/>
+    <element xmi:type="ecore:EReference" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//LogicalThread/instances"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ajirSfVFEd-4fo1YBnNwaQ" points="[0, 0, 0, 60]$[0, -60, 0, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajirSvVFEd-4fo1YBnNwaQ" id="(0.4956521739130435,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajirS_VFEd-4fo1YBnNwaQ" id="(0.41007194244604317,1.0)"/>
@@ -2138,7 +2138,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_ajirUfVFEd-4fo1YBnNwaQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_ajirUvVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="../../../src-gen/de/protos/Room.ecore#//Binding/endpoint1"/>
+    <element xmi:type="ecore:EReference" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//Binding/endpoint1"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ajirU_VFEd-4fo1YBnNwaQ" points="[0, 0, 0, 68]$[0, -68, 0, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajirVPVFEd-4fo1YBnNwaQ" id="(0.5,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajirVfVFEd-4fo1YBnNwaQ" id="(0.5,1.0)"/>
@@ -2152,7 +2152,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_ajirW_VFEd-4fo1YBnNwaQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_ajirXPVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="../../../src-gen/de/protos/Room.ecore#//Binding/endpoint2"/>
+    <element xmi:type="ecore:EReference" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//Binding/endpoint2"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ajirXfVFEd-4fo1YBnNwaQ" points="[0, 0, 0, 68]$[0, -68, 0, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajirXvVFEd-4fo1YBnNwaQ" id="(0.5,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajirX_VFEd-4fo1YBnNwaQ" id="(0.5,1.0)"/>
@@ -2166,7 +2166,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_ajirZfVFEd-4fo1YBnNwaQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_ajirZvVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="../../../src-gen/de/protos/Room.ecore#//BindingEndPoint/actorRef"/>
+    <element xmi:type="ecore:EReference" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//BindingEndPoint/actorRef"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ajirZ_VFEd-4fo1YBnNwaQ" points="[0, 0, 1428, 77]$[-1428, -77, 0, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajiraPVFEd-4fo1YBnNwaQ" id="(0.3275862068965517,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajirafVFEd-4fo1YBnNwaQ" id="(0.828125,1.0)"/>
@@ -2180,7 +2180,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_ajirb_VFEd-4fo1YBnNwaQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_ajircPVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="../../../src-gen/de/protos/Room.ecore#//BindingEndPoint/port"/>
+    <element xmi:type="ecore:EReference" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//BindingEndPoint/port"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ajircfVFEd-4fo1YBnNwaQ" points="[0, 0, -2572, 60]$[2572, -60, 0, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajircvVFEd-4fo1YBnNwaQ" id="(0.6637931034482759,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajirc_VFEd-4fo1YBnNwaQ" id="(0.037037037037037035,1.0)"/>
@@ -2194,7 +2194,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_ajirefVFEd-4fo1YBnNwaQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_ajirevVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="../../../src-gen/de/protos/Room.ecore#//LayerConnection/from"/>
+    <element xmi:type="ecore:EReference" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//LayerConnection/from"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ajire_VFEd-4fo1YBnNwaQ" points="[0, 1, -16, -210]$[13, 170, -3, -41]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajirfPVFEd-4fo1YBnNwaQ" id="(0.7203389830508474,0.9767441860465116)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajirffVFEd-4fo1YBnNwaQ" id="(0.24509803921568626,1.0)"/>
@@ -2208,7 +2208,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_ajirg_VFEd-4fo1YBnNwaQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_ajirhPVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="../../../src-gen/de/protos/Room.ecore#//LayerConnection/to"/>
+    <element xmi:type="ecore:EReference" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//LayerConnection/to"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ajirhfVFEd-4fo1YBnNwaQ" points="[0, 0, -295, 68]$[295, -68, 0, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajirhvVFEd-4fo1YBnNwaQ" id="(0.6610169491525424,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajirh_VFEd-4fo1YBnNwaQ" id="(0.5,1.0)"/>
@@ -2222,7 +2222,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_ajirjfVFEd-4fo1YBnNwaQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_ajirjvVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="../../../src-gen/de/protos/Room.ecore#//RefSAPoint/ref"/>
+    <element xmi:type="ecore:EReference" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//RefSAPoint/ref"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ajirj_VFEd-4fo1YBnNwaQ" points="[0, 0, -235, 77]$[235, -77, 0, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajirkPVFEd-4fo1YBnNwaQ" id="(0.7450980392156863,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajirkfVFEd-4fo1YBnNwaQ" id="(0.125,1.0)"/>
@@ -2244,7 +2244,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_ajirnfVFEd-4fo1YBnNwaQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_ajirnvVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="../../../src-gen/de/protos/Room.ecore#//RelaySAPoint/relay"/>
+    <element xmi:type="ecore:EReference" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//RelaySAPoint/relay"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ajirn_VFEd-4fo1YBnNwaQ" points="[-58, 41, 457, -320]$[-456, 320, 59, -41]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajiroPVFEd-4fo1YBnNwaQ" id="(0.6666666666666666,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajirofVFEd-4fo1YBnNwaQ" id="(0.16666666666666666,1.0)"/>
@@ -2266,7 +2266,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_ajirrfVFEd-4fo1YBnNwaQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_ajirrvVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="../../../src-gen/de/protos/Room.ecore#//SPPoint/ref"/>
+    <element xmi:type="ecore:EReference" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//SPPoint/ref"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ajirr_VFEd-4fo1YBnNwaQ" points="[0, 0, 221, 77]$[-221, -77, 0, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajirsPVFEd-4fo1YBnNwaQ" id="(0.3333333333333333,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajirsfVFEd-4fo1YBnNwaQ" id="(0.6640625,1.0)"/>
@@ -2280,7 +2280,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_ajirt_VFEd-4fo1YBnNwaQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_ajiruPVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="../../../src-gen/de/protos/Room.ecore#//SPPoint/service"/>
+    <element xmi:type="ecore:EReference" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//SPPoint/service"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ajirufVFEd-4fo1YBnNwaQ" points="[-18, 41, 195, -435]$[-195, 435, 18, -41]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajiruvVFEd-4fo1YBnNwaQ" id="(0.6666666666666666,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajiru_VFEd-4fo1YBnNwaQ" id="(0.3333333333333333,1.0)"/>
@@ -2294,7 +2294,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_ajirwfVFEd-4fo1YBnNwaQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_ajirwvVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="../../../src-gen/de/protos/Room.ecore#//ActorRef/type"/>
+    <element xmi:type="ecore:EReference" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//ActorRef/type"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ajirw_VFEd-4fo1YBnNwaQ" points="[-74, -30, 750, 301]$[-749, -302, 75, 29]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajirxPVFEd-4fo1YBnNwaQ" id="(0.7450980392156863,1.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajirxfVFEd-4fo1YBnNwaQ" id="(0.2549019607843137,0.0)"/>
@@ -2324,7 +2324,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_ajir1_VFEd-4fo1YBnNwaQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_ajir2PVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="../../../src-gen/de/protos/Room.ecore#//State/entryCode"/>
+    <element xmi:type="ecore:EReference" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//State/entryCode"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ajir2fVFEd-4fo1YBnNwaQ" points="[0, 0, -1056, 256]$[989, -90, -67, 166]$[1056, -256, 0, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajir2vVFEd-4fo1YBnNwaQ" id="(0.16666666666666666,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajir2_VFEd-4fo1YBnNwaQ" id="(0.8435374149659864,1.0)"/>
@@ -2338,7 +2338,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_ajir4fVFEd-4fo1YBnNwaQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_ajir4vVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="../../../src-gen/de/protos/Room.ecore#//State/exitCode"/>
+    <element xmi:type="ecore:EReference" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//State/exitCode"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ajir4_VFEd-4fo1YBnNwaQ" points="[0, 0, -1050, 256]$[1050, -256, 0, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajir5PVFEd-4fo1YBnNwaQ" id="(0.3333333333333333,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajir5fVFEd-4fo1YBnNwaQ" id="(0.9183673469387755,1.0)"/>
@@ -2352,7 +2352,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_ajir6_VFEd-4fo1YBnNwaQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_ajir7PVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="../../../src-gen/de/protos/Room.ecore#//State/subgraph"/>
+    <element xmi:type="ecore:EReference" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//State/subgraph"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ajir7fVFEd-4fo1YBnNwaQ" points="[0, 0, 0, 68]$[0, -68, 0, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajir7vVFEd-4fo1YBnNwaQ" id="(0.5,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajir7_VFEd-4fo1YBnNwaQ" id="(0.5,1.0)"/>
@@ -2374,7 +2374,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_ajir-_VFEd-4fo1YBnNwaQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_ajir_PVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="../../../src-gen/de/protos/Room.ecore#//StateGraph/states"/>
+    <element xmi:type="ecore:EReference" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//StateGraph/states"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ajir_fVFEd-4fo1YBnNwaQ" points="[0, 0, 0, -68]$[0, 68, 0, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajir_vVFEd-4fo1YBnNwaQ" id="(0.5,1.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajir__VFEd-4fo1YBnNwaQ" id="(0.5,0.0)"/>
@@ -2388,7 +2388,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_ajisBfVFEd-4fo1YBnNwaQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_ajisBvVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="../../../src-gen/de/protos/Room.ecore#//StateGraph/trPoints"/>
+    <element xmi:type="ecore:EReference" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//StateGraph/trPoints"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ajisB_VFEd-4fo1YBnNwaQ" points="[0, 0, -280, 77]$[280, -77, 0, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajisCPVFEd-4fo1YBnNwaQ" id="(0.7450980392156863,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajisCfVFEd-4fo1YBnNwaQ" id="(0.1565217391304348,1.0)"/>
@@ -2402,7 +2402,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_ajisD_VFEd-4fo1YBnNwaQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_ajisEPVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="../../../src-gen/de/protos/Room.ecore#//StateGraph/chPoints"/>
+    <element xmi:type="ecore:EReference" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//StateGraph/chPoints"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ajisEfVFEd-4fo1YBnNwaQ" points="[0, 0, 0, 77]$[0, -77, 0, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajisEvVFEd-4fo1YBnNwaQ" id="(0.5,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajisE_VFEd-4fo1YBnNwaQ" id="(0.8260869565217391,1.0)"/>
@@ -2416,7 +2416,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_ajisGfVFEd-4fo1YBnNwaQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_ajisGvVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="../../../src-gen/de/protos/Room.ecore#//StateGraph/transitions"/>
+    <element xmi:type="ecore:EReference" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//StateGraph/transitions"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ajisG_VFEd-4fo1YBnNwaQ" points="[5, 41, -66, -562]$[65, 554, -6, -49]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajisHPVFEd-4fo1YBnNwaQ" id="(0.24509803921568626,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajisHfVFEd-4fo1YBnNwaQ" id="(0.7478260869565218,1.0)"/>
@@ -2438,7 +2438,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_ajisKfVFEd-4fo1YBnNwaQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_ajisKvVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="../../../src-gen/de/protos/Room.ecore#//RefinedState/base"/>
+    <element xmi:type="ecore:EReference" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//RefinedState/base"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ajisK_VFEd-4fo1YBnNwaQ" points="[0, 0, 46, 60]$[-46, -60, 0, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajisLPVFEd-4fo1YBnNwaQ" id="(0.2482758620689655,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajisLfVFEd-4fo1YBnNwaQ" id="(0.7478260869565218,1.0)"/>
@@ -2500,7 +2500,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_ajisV_VFEd-4fo1YBnNwaQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_ajisWPVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="../../../src-gen/de/protos/Room.ecore#//Transition/to"/>
+    <element xmi:type="ecore:EReference" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//Transition/to"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ajisWfVFEd-4fo1YBnNwaQ" points="[0, 0, -890, 68]$[890, -68, 0, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajisWvVFEd-4fo1YBnNwaQ" id="(0.7478260869565218,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajisW_VFEd-4fo1YBnNwaQ" id="(0.12403100775193798,1.0)"/>
@@ -2514,7 +2514,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_ajisYfVFEd-4fo1YBnNwaQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_ajisYvVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="../../../src-gen/de/protos/Room.ecore#//Transition/action"/>
+    <element xmi:type="ecore:EReference" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//Transition/action"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ajisY_VFEd-4fo1YBnNwaQ" points="[0, 0, 725, 60]$[-725, -60, 0, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajisZPVFEd-4fo1YBnNwaQ" id="(0.24347826086956523,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajisZfVFEd-4fo1YBnNwaQ" id="(0.7687074829931972,1.0)"/>
@@ -2536,7 +2536,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_ajiscfVFEd-4fo1YBnNwaQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_ajiscvVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="../../../src-gen/de/protos/Room.ecore#//NonInitialTransition/from"/>
+    <element xmi:type="ecore:EReference" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//NonInitialTransition/from"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ajisc_VFEd-4fo1YBnNwaQ" points="[-27, 41, 161, -248]$[-161, 248, 27, -41]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajisdPVFEd-4fo1YBnNwaQ" id="(0.8955223880597015,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajisdfVFEd-4fo1YBnNwaQ" id="(0.24806201550387597,1.0)"/>
@@ -2574,7 +2574,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_ajisjfVFEd-4fo1YBnNwaQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_ajisjvVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="../../../src-gen/de/protos/Room.ecore#//TriggeredTransition/triggers"/>
+    <element xmi:type="ecore:EReference" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//TriggeredTransition/triggers"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ajisj_VFEd-4fo1YBnNwaQ" points="[0, 0, 924, 60]$[-924, -60, 0, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajiskPVFEd-4fo1YBnNwaQ" id="(0.24817518248175183,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajiskfVFEd-4fo1YBnNwaQ" id="(0.5,1.0)"/>
@@ -2596,7 +2596,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_ajisnfVFEd-4fo1YBnNwaQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_ajisnvVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="../../../src-gen/de/protos/Room.ecore#//CPBranchTransition/condition"/>
+    <element xmi:type="ecore:EReference" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//CPBranchTransition/condition"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ajisn_VFEd-4fo1YBnNwaQ" points="[0, 0, 252, 309]$[-252, -309, 0, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajisoPVFEd-4fo1YBnNwaQ" id="(0.3308270676691729,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajisofVFEd-4fo1YBnNwaQ" id="(0.6870748299319728,1.0)"/>
@@ -2618,7 +2618,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_ajisrfVFEd-4fo1YBnNwaQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_ajisrvVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="../../../src-gen/de/protos/Room.ecore#//StateTerminal/state"/>
+    <element xmi:type="ecore:EReference" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//StateTerminal/state"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ajisr_VFEd-4fo1YBnNwaQ" points="[0, 0, -250, 60]$[250, -60, 0, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajissPVFEd-4fo1YBnNwaQ" id="(0.6666666666666666,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajissfVFEd-4fo1YBnNwaQ" id="(0.24347826086956523,1.0)"/>
@@ -2640,7 +2640,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_ajisvfVFEd-4fo1YBnNwaQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_ajisvvVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="../../../src-gen/de/protos/Room.ecore#//TrPointTerminal/trPoint"/>
+    <element xmi:type="ecore:EReference" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//TrPointTerminal/trPoint"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ajisv_VFEd-4fo1YBnNwaQ" points="[0, 0, -107, 77]$[107, -77, 0, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajiswPVFEd-4fo1YBnNwaQ" id="(0.6637168141592921,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajiswfVFEd-4fo1YBnNwaQ" id="(0.3217391304347826,1.0)"/>
@@ -2662,7 +2662,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_ajiszfVFEd-4fo1YBnNwaQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_ajiszvVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="../../../src-gen/de/protos/Room.ecore#//SubStateTrPointTerminal/trPoint"/>
+    <element xmi:type="ecore:EReference" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//SubStateTrPointTerminal/trPoint"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ajisz_VFEd-4fo1YBnNwaQ" points="[0, 0, 1003, 385]$[-1003, -385, 0, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajis0PVFEd-4fo1YBnNwaQ" id="(0.8292682926829268,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajis0fVFEd-4fo1YBnNwaQ" id="(0.48695652173913045,1.0)"/>
@@ -2676,7 +2676,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_ajis1_VFEd-4fo1YBnNwaQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_ajis2PVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="../../../src-gen/de/protos/Room.ecore#//SubStateTrPointTerminal/state"/>
+    <element xmi:type="ecore:EReference" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//SubStateTrPointTerminal/state"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ajis2fVFEd-4fo1YBnNwaQ" points="[0, 0, -76, 60]$[76, -60, 0, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajis2vVFEd-4fo1YBnNwaQ" id="(0.6646341463414634,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajis2_VFEd-4fo1YBnNwaQ" id="(0.4956521739130435,1.0)"/>
@@ -2698,7 +2698,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_ajis5_VFEd-4fo1YBnNwaQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_ajis6PVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="../../../src-gen/de/protos/Room.ecore#//ChoicepointTerminal/cp"/>
+    <element xmi:type="ecore:EReference" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//ChoicepointTerminal/cp"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ajis6fVFEd-4fo1YBnNwaQ" points="[0, 0, -128, 77]$[128, -77, 0, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajis6vVFEd-4fo1YBnNwaQ" id="(0.5390070921985816,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajis6_VFEd-4fo1YBnNwaQ" id="(0.40869565217391307,1.0)"/>
@@ -2720,7 +2720,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_ajis9_VFEd-4fo1YBnNwaQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_ajis-PVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="../../../src-gen/de/protos/Room.ecore#//Trigger/msgFromIfPairs"/>
+    <element xmi:type="ecore:EReference" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//Trigger/msgFromIfPairs"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ajis-fVFEd-4fo1YBnNwaQ" points="[0, 0, 256, 68]$[-256, -68, 0, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajis-vVFEd-4fo1YBnNwaQ" id="(0.24509803921568626,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajis-_VFEd-4fo1YBnNwaQ" id="(0.5,1.0)"/>
@@ -2734,7 +2734,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_ajitAfVFEd-4fo1YBnNwaQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_ajitAvVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="../../../src-gen/de/protos/Room.ecore#//Trigger/guard"/>
+    <element xmi:type="ecore:EReference" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//Trigger/guard"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ajitA_VFEd-4fo1YBnNwaQ" points="[0, 0, -311, 139]$[311, -139, 0, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajitBPVFEd-4fo1YBnNwaQ" id="(0.49019607843137253,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajitBfVFEd-4fo1YBnNwaQ" id="(0.5,1.0)"/>
@@ -2748,7 +2748,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_ajitC_VFEd-4fo1YBnNwaQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_ajitDPVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="../../../src-gen/de/protos/Room.ecore#//MessageFromIf/message"/>
+    <element xmi:type="ecore:EReference" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//MessageFromIf/message"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ajitDfVFEd-4fo1YBnNwaQ" points="[0, 0, 86, 1646]$[138, -253, 224, 1393]$[-86, -1646, 0, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajitDvVFEd-4fo1YBnNwaQ" id="(0.26785714285714285,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajitD_VFEd-4fo1YBnNwaQ" id="(0.8260869565217391,1.0)"/>
@@ -2762,7 +2762,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_ajitFfVFEd-4fo1YBnNwaQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_ajitFvVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="../../../src-gen/de/protos/Room.ecore#//MessageFromIf/from"/>
+    <element xmi:type="ecore:EReference" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//MessageFromIf/from"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ajitF_VFEd-4fo1YBnNwaQ" points="[0, 0, 450, 60]$[-450, -60, 0, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajitGPVFEd-4fo1YBnNwaQ" id="(0.13392857142857142,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajitGfVFEd-4fo1YBnNwaQ" id="(0.7217391304347827,1.0)"/>
@@ -2776,7 +2776,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_ajitH_VFEd-4fo1YBnNwaQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_ajitIPVFEd-4fo1YBnNwaQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="../../../src-gen/de/protos/Room.ecore#//Guard/guard"/>
+    <element xmi:type="ecore:EReference" href="../../../../../src-gen/org/eclipse/etrice/core/Room.ecore#//Guard/guard"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ajitIfVFEd-4fo1YBnNwaQ" points="[0, 0, 192, 60]$[-192, -60, 0, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajitIvVFEd-4fo1YBnNwaQ" id="(0.5,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ajitI_VFEd-4fo1YBnNwaQ" id="(0.6122448979591837,1.0)"/>
