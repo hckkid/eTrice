@@ -16,7 +16,7 @@ package org.eclipse.etrice.integration.tests;
 import static org.junit.Assert.assertEquals;
 
 import org.eclipse.emf.mwe2.launch.runtime.Mwe2Launcher;
-import org.eclipse.etrice.integration.tests.ComponentMain;
+import org.eclipse.etrice.integration.tests.SubSystemHFSMTest;
 import org.eclipse.etrice.integration.tests.a_HFSM_Tester;
 import org.junit.After;
 import org.junit.Before;
@@ -43,13 +43,13 @@ public class IntegrationTestFSMGenerator {
 	
 	@Test(timeout=1000)
 	public void testHFSM(){
-		ComponentMain main_component = new ComponentMain(null,"MainComponent");
+		SubSystemHFSMTest main_component = new SubSystemHFSMTest(null,"MainComponent");
 		main_component.init(); // lifecycle init
 		main_component.start(); // lifecycle start
 		
 		main_component.waitTerminate();
 		
-		assertEquals(a_HFSM_Tester.STATE_TestPass ,main_component.getInstance("/MainComponent/HFSM_Tests/Tester").getState());
+		assertEquals(a_HFSM_Tester.STATE_TestPass ,main_component.getInstance("/MainComponent/application/HFSM_Tests/Tester").getState());
 		
 		// end the lifecycle
 		main_component.stop(); // lifecycle stop
