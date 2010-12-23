@@ -1,0 +1,55 @@
+RoomModel Example_1 {
+
+	ProtocolClass MyProtocol {
+		incoming {
+			Message in1 ()
+			Message in2 ()
+		}
+		outgoing {
+			Message out1 ()
+		}
+	}
+
+	LogicalSystem SystemMain {
+		SubSystemRef subsystem : SubSystemMain
+	}
+
+	SubSystemClass SubSystemMain {
+		ActorRef application : App_SubSystemMain
+	}
+
+	// automatically inserted App_SubSystemMain
+	ActorClass App_SubSystemMain {
+		Structure {
+			ActorRef actor : MyActor
+		}
+	}
+
+	ActorClass MyActor {
+		Interface {
+			Port p2 : MyProtocol
+		}
+		Structure {
+			conjugated Port p1 : MyProtocol
+			ActorRef sub : SubActor
+			Binding p1 and sub.p1
+			Binding p2 and sub.p2
+		}
+		Behavior {
+		}
+	}
+
+	ActorClass SubActor {
+		Interface {
+			Port p1 : MyProtocol
+			Port p2 : MyProtocol
+		}
+		Structure {
+			external Port p1
+			external Port p2
+		}
+		Behavior {
+		}
+	}
+
+}
