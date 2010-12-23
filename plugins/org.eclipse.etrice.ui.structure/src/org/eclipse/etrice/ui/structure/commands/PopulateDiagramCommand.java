@@ -17,9 +17,25 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.transaction.RecordingCommand;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
+import org.eclipse.etrice.core.room.ActorClass;
+import org.eclipse.etrice.core.room.ActorContainerClass;
+import org.eclipse.etrice.core.room.ActorContainerRef;
+import org.eclipse.etrice.core.room.ActorRef;
+import org.eclipse.etrice.core.room.Binding;
+import org.eclipse.etrice.core.room.BindingEndPoint;
+import org.eclipse.etrice.core.room.InterfaceItem;
+import org.eclipse.etrice.core.room.LayerConnection;
+import org.eclipse.etrice.core.room.LogicalSystem;
+import org.eclipse.etrice.core.room.Port;
+import org.eclipse.etrice.core.room.RefSAPoint;
+import org.eclipse.etrice.core.room.RelaySAPoint;
+import org.eclipse.etrice.core.room.SAPoint;
+import org.eclipse.etrice.core.room.SPPRef;
+import org.eclipse.etrice.core.room.SPPoint;
+import org.eclipse.etrice.core.room.StructureClass;
+import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.ui.structure.DiagramAccess;
 import org.eclipse.etrice.ui.structure.support.ActorContainerRefSupport;
-import org.eclipse.etrice.ui.structure.support.PortSupport;
 import org.eclipse.etrice.ui.structure.support.StructureClassSupport;
 import org.eclipse.graphiti.dt.IDiagramTypeProvider;
 import org.eclipse.graphiti.features.IAddFeature;
@@ -33,24 +49,6 @@ import org.eclipse.graphiti.mm.pictograms.Diagram;
 import org.eclipse.graphiti.mm.pictograms.PictogramElement;
 import org.eclipse.graphiti.mm.pictograms.Shape;
 import org.eclipse.graphiti.ui.services.GraphitiUi;
-
-import org.eclipse.etrice.core.room.ActorClass;
-import org.eclipse.etrice.core.room.ActorContainerClass;
-import org.eclipse.etrice.core.room.ActorContainerRef;
-import org.eclipse.etrice.core.room.ActorRef;
-import org.eclipse.etrice.core.room.Binding;
-import org.eclipse.etrice.core.room.BindingEndPoint;
-import org.eclipse.etrice.core.room.InterfaceItem;
-import org.eclipse.etrice.core.room.LayerConnection;
-import org.eclipse.etrice.core.room.Port;
-import org.eclipse.etrice.core.room.RefSAPoint;
-import org.eclipse.etrice.core.room.RelaySAPoint;
-import org.eclipse.etrice.core.room.SAPoint;
-import org.eclipse.etrice.core.room.SPPRef;
-import org.eclipse.etrice.core.room.SPPoint;
-import org.eclipse.etrice.core.room.StructureClass;
-import org.eclipse.etrice.core.room.SubSystemClass;
-import org.eclipse.etrice.core.room.LogicalSystem;
 
 public class PopulateDiagramCommand extends RecordingCommand {
 
@@ -192,7 +190,7 @@ public class PopulateDiagramCommand extends RecordingCommand {
 		AddContext addContext = new AddContext();
 		addContext.setNewObject(obj);
 		addContext.setTargetContainer(acShape);
-		addContext.setX(pos-ActorContainerRefSupport.DEFAULT_SIZE_X/2);
+		addContext.setX(pos+StructureClassSupport.MARGIN-(ActorContainerRefSupport.DEFAULT_SIZE_X/2+ActorContainerRefSupport.MARGIN));
 		addContext.setY(4*StructureClassSupport.MARGIN);
 		
 		ContainerShape refShape = (ContainerShape) featureProvider.addIfPossible(addContext);
@@ -204,8 +202,8 @@ public class PopulateDiagramCommand extends RecordingCommand {
 		AddContext addContext = new AddContext();
 		addContext.setNewObject(item);
 		addContext.setTargetContainer(acShape);
-		addContext.setX(pos-PortSupport.ITEM_SIZE/2);
-		addContext.setY(0);
+		addContext.setX(pos+StructureClassSupport.MARGIN);
+		addContext.setY(StructureClassSupport.MARGIN);
 		
 		ContainerShape pe = (ContainerShape) featureProvider.addIfPossible(addContext);
 		assert(!pe.getAnchors().isEmpty()): "interface item should have an anchor";

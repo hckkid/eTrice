@@ -160,8 +160,8 @@ public class InterfaceItemSupport {
 				Graphiti.getPeService().setPropertyValue(containerShape, PROP_KIND, kind);
 				
 				// we have relative coordinates here
-				int x = context.getX();
-				int y = context.getY();
+				int x = context.getX()-size;
+				int y = context.getY()-size;
 				int width = acShape.getGraphicsAlgorithm().getWidth();
 				int height = acShape.getGraphicsAlgorithm().getHeight();
 				if (internal) {
@@ -728,8 +728,8 @@ public class InterfaceItemSupport {
 		AddContext addContext = new AddContext();
 		addContext.setNewObject(ownObject);
 		addContext.setTargetContainer(refShape);
-		addContext.setX(x);
-		addContext.setY(y);
+		addContext.setX(x + ITEM_SIZE_SMALL);
+		addContext.setY(y + ITEM_SIZE_SMALL);
 		ContainerShape pe = (ContainerShape) featureProvider.addIfPossible(addContext);
 		assert(!pe.getAnchors().isEmpty()): "port must have an anchor";
 	}
