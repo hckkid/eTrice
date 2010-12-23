@@ -45,6 +45,10 @@ import org.eclipse.graphiti.ui.features.DefaultFeatureProvider;
 import org.eclipse.graphiti.util.ColorConstant;
 import org.eclipse.graphiti.util.IColorConstant;
 
+import org.eclipse.etrice.core.room.ActorClass;
+import org.eclipse.etrice.core.room.ActorContainerClass;
+import org.eclipse.etrice.core.room.InterfaceItem;
+import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.StructureClass;
 
 public class StructureClassSupport {
@@ -245,7 +249,12 @@ public class StructureClassSupport {
 				int height = context.getHeight()-MARGIN;
 				int xmax = 0;
 				int ymax = 0;
-				for (Shape childShape : ((ContainerShape)context.getShape()).getChildren()) {
+				ContainerShape containerShape = (ContainerShape)context.getShape();
+				StructureClass sc = (StructureClass) getBusinessObjectForPictogramElement(containerShape);
+				for (Shape childShape : containerShape.getChildren()) {
+					if (isOnInterface(sc, getBusinessObjectForPictogramElement(childShape)))
+						continue;
+					
 					GraphicsAlgorithm ga = childShape.getGraphicsAlgorithm();
 					int x = ga.getX()+ga.getWidth()-ActorContainerRefSupport.MARGIN;
 					int y = ga.getY()+ga.getHeight()-ActorContainerRefSupport.MARGIN;
@@ -260,6 +269,50 @@ public class StructureClassSupport {
 					return false;
 				
 				return true;
+			}
+			
+			@Override
+			public void resizeShape(IResizeShapeContext context) {
+				ContainerShape containerShape = (ContainerShape) context.getShape();
+				StructureClass sc = (StructureClass) getBusinessObjectForPictogramElement(containerShape);
+				
+				if (containerShape.getGraphicsAlgorithm()!=null) {
+					GraphicsAlgorithm containerGa = containerShape.getGraphicsAlgorithm();
+					if (containerGa.getGraphicsAlgorithmChildren().size()==1) {
+						// scale interface item coordinates
+						// we refer to the visible rectangle which defines the border of our structure class
+						// since the margin is not scaled
+						GraphicsAlgorithm ga = containerGa.getGraphicsAlgorithmChildren().get(0);
+						double sx = (context.getWidth()-2*MARGIN)/(double)ga.getWidth();
+						double sy = (context.getHeight()-2*MARGIN)/(double)ga.getHeight();
+						
+						for (Shape childShape : containerShape.getChildren()) {
+							if (isOnInterface(sc, getBusinessObjectForPictogramElement(childShape))) {
+								ga = childShape.getGraphicsAlgorithm();
+								ga.setX((int) (ga.getX()*sx));
+								ga.setY((int) (ga.getY()*sy));
+							}
+						}
+					}
+				}
+				super.resizeShape(context);
+			}
+
+			private boolean isOnInterface(StructureClass sc, Object childBo) {
+				boolean onInterface = false;
+				if (childBo instanceof InterfaceItem) {
+					// in general InterfaceItem sit on the interface...
+					onInterface = true;
+					
+					// ...with the exception of internal end ports
+					if (childBo instanceof Port) {
+						if (sc instanceof ActorClass) {
+							if (((ActorClass) sc).getIntPorts().contains(childBo))
+								onInterface = false;
+						}
+					}
+				}
+				return onInterface;
 			}
 		}
 		

@@ -73,6 +73,7 @@ import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorContainerClass;
 import org.eclipse.etrice.core.room.ActorContainerRef;
 import org.eclipse.etrice.core.room.ActorRef;
+import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.LogicalSystem;
 import org.eclipse.etrice.core.room.RoomFactory;
 import org.eclipse.etrice.core.room.StructureClass;
@@ -584,30 +585,35 @@ public class ActorContainerRefSupport {
 					if (width < MIN_SIZE_X+MARGIN || height < MIN_SIZE_Y+MARGIN)
 						return false;
 				
-				// TODOHRR: check interface ports and saps
-
-				int xmax = 0;
-				int ymax = 0;
-				for (Shape childShape : ((ContainerShape)context.getShape()).getChildren()) {
-					GraphicsAlgorithm ga = childShape.getGraphicsAlgorithm();
-					
-					// don't consider Text
-					if (!(ga instanceof Text)) {
-						// ga is the invisible rect of the port
-						int x = ga.getX()+ga.getWidth()-ActorContainerRefSupport.MARGIN;
-						int y = ga.getY()+ga.getHeight()-ActorContainerRefSupport.MARGIN;
-						if (x>xmax)
-							xmax = x;
-						if (y>ymax)
-							ymax = y;
+				return true;
+			}
+			
+			@Override
+			public void resizeShape(IResizeShapeContext context) {
+				Shape shape = context.getShape();
+				
+				if (shape.getGraphicsAlgorithm()!=null) {
+					GraphicsAlgorithm containerGa = shape.getGraphicsAlgorithm();
+					if (containerGa.getGraphicsAlgorithmChildren().size()==1) {
+						// scale interface item coordinates
+						// we refer to the visible rectangle which defines the border of our structure class
+						// since the margin is not scaled
+						GraphicsAlgorithm ga = containerGa.getGraphicsAlgorithmChildren().get(0);
+						double sx = (context.getWidth()-2*MARGIN)/(double)ga.getWidth();
+						double sy = (context.getHeight()-2*MARGIN)/(double)ga.getHeight();
+						
+						for (Shape childShape : ((ContainerShape)context.getShape()).getChildren()) {
+							Object childBo = getBusinessObjectForPictogramElement(childShape);
+							if (childBo instanceof InterfaceItem) {
+								ga = childShape.getGraphicsAlgorithm();
+								ga.setX((int) (ga.getX()*sx));
+								ga.setY((int) (ga.getY()*sy));
+							}
+							
+						}
 					}
 				}
-				if (width>0 && width<xmax)
-					return false;
-				if (height>0 && height<ymax)
-					return false;
-				
-				return true;
+				super.resizeShape(context);
 			}
 		}
 		
