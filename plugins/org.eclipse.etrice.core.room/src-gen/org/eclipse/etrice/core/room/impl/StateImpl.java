@@ -236,6 +236,16 @@ public class StateImpl extends StateGraphNodeImpl implements State
    * <!-- end-user-doc -->
    * @generated
    */
+  public String getName()
+  {
+    return (this instanceof org.eclipse.etrice.core.room.BaseState)? ((org.eclipse.etrice.core.room.BaseState)this).getName() :((org.eclipse.etrice.core.room.RefinedState)this).getBase()==null? "":((org.eclipse.etrice.core.room.RefinedState)this).getBase().getName();
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {

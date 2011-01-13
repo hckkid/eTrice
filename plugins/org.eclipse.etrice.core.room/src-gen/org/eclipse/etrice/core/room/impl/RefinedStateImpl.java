@@ -111,16 +111,6 @@ public class RefinedStateImpl extends StateImpl implements RefinedState
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getName()
-  {
-    return getBase()==null? "":getBase().getName();
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {

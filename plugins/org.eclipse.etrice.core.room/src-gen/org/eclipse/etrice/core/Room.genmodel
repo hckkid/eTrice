@@ -191,6 +191,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//State/entryCode"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//State/exitCode"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//State/subgraph"/>
+      <genOperations ecoreOperation="Room.ecore#//State/getName"/>
     </genClasses>
     <genClasses ecoreClass="Room.ecore#//StateGraph">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//StateGraph/states"/>
@@ -203,7 +204,6 @@
     </genClasses>
     <genClasses ecoreClass="Room.ecore#//RefinedState">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//RefinedState/base"/>
-      <genOperations ecoreOperation="Room.ecore#//RefinedState/getName"/>
     </genClasses>
     <genClasses ecoreClass="Room.ecore#//DetailCode">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//DetailCode/commands"/>

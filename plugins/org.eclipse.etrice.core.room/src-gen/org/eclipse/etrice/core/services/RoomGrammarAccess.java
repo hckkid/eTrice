@@ -313,6 +313,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_7 = (Keyword)cGroup.eContents().get(7);
 		
 		//// TODOHRR: define detail level language?
+		//
 		//DataClass:
 		//	"DataClass" name=ID ("extends" base=[DataClass|FQN])? "{" imports+=Import* attributes+=Attribute+
 		//	operations+=Operation* "}";
@@ -450,6 +451,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cDetailCodeDetailCodeParserRuleCall_6_0 = (RuleCall)cDetailCodeAssignment_6.eContents().get(0);
 		
 		//// TODOHRR: pass arguments and return value by value/reference
+		//
 		//Operation:
 		//	"Operation" name=ID "(" (arguments+=FreeTypedID ("," arguments+=FreeTypedID)*)? ")" (":" returntype=FreeType)?
 		//	detailCode=DetailCode;
@@ -559,7 +561,9 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_17 = (Keyword)cGroup.eContents().get(17);
 		
 		//// **************************************************************
+		//
 		//// protocol class
+		//
 		//ProtocolClass:
 		//	"ProtocolClass" name=ID ("extends" base=[ProtocolClass|FQN])? "{" ("usercode1" userCode1=DetailCode)? ("usercode2"
 		//	userCode2=DetailCode)? "incoming" "{" incomingMessages+=Message* "}" "outgoing" "{" outgoingMessages+=Message* "}"
@@ -1065,14 +1069,23 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_8 = (Keyword)cGroup.eContents().get(8);
 		
 		//// **************************************************************
+		//
 		//// actor class
+		//
 		//// some notes on ports
+		//
 		////
+		//
 		//// in ROOM ports can be contained in the structure and/or the interface
+		//
 		//// p in s ==> internal end port
+		//
 		//// p in i ==> relay port
+		//
 		//// p in i and p in s ==> external end port
+		//
 		//// since double containment is not supported we decided to define external ports as reference to interface ports
+		//
 		//ActorClass:
 		//	abstract?="abstract"? "ActorClass" name=ID ("extends" base=[ActorClass|FQN])? "{" ("Interface" "{" ifPorts+=Port*
 		//	ifSPPs+=SPPRef* "}")? ("Structure" "{" ("usercode1" userCode1=DetailCode)? ("usercode2" userCode2=DetailCode)?
@@ -1398,14 +1411,17 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cProtocolProtocolClassFQNParserRuleCall_3_0_1 = (RuleCall)cProtocolProtocolClassCrossReference_3_0.eContents().get(1);
 		
 		//SAPRef: // we omitted the SAP type (Timing/Frame/Exception)
+		//
 		//	"SAP" name=ID ":" protocol=[ProtocolClass|FQN];
 		public ParserRule getRule() { return rule; }
 
 		//// we omitted the SAP type (Timing/Frame/Exception)
+		//
 		//"SAP" name=ID ":" protocol=[ProtocolClass|FQN]
 		public Group getGroup() { return cGroup; }
 
 		//// we omitted the SAP type (Timing/Frame/Exception)
+		//
 		//"SAP"
 		public Keyword getSAPKeyword_0() { return cSAPKeyword_0; }
 
@@ -1801,8 +1817,11 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cEndpoint2BindingEndPointParserRuleCall_3_0 = (RuleCall)cEndpoint2Assignment_3.eContents().get(0);
 		
 		//// TODOHRR: bindings for replicated ports
+		//
 		//// (1) declare several bindings
+		//
 		//// (2) use a notation with 1 to n bindings
+		//
 		//Binding:
 		//	"Binding" endpoint1=BindingEndPoint "and" endpoint2=BindingEndPoint;
 		public ParserRule getRule() { return rule; }
@@ -1938,14 +1957,17 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cRefActorContainerRefIDTerminalRuleCall_1_0_1 = (RuleCall)cRefActorContainerRefCrossReference_1_0.eContents().get(1);
 		
 		//RefSAPoint: // satisfies a sub actor
+		//
 		//	"ref" ref=[ActorContainerRef];
 		public ParserRule getRule() { return rule; }
 
 		//// satisfies a sub actor
+		//
 		//"ref" ref=[ActorContainerRef]
 		public Group getGroup() { return cGroup; }
 
 		//// satisfies a sub actor
+		//
 		//"ref"
 		public Keyword getRefKeyword_0() { return cRefKeyword_0; }
 
@@ -1968,14 +1990,17 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cRelaySPPRefIDTerminalRuleCall_1_0_1 = (RuleCall)cRelaySPPRefCrossReference_1_0.eContents().get(1);
 		
 		//RelaySAPoint: // relays from own interface
+		//
 		//	"relay_sap" relay=[SPPRef];
 		public ParserRule getRule() { return rule; }
 
 		//// relays from own interface
+		//
 		//"relay_sap" relay=[SPPRef]
 		public Group getGroup() { return cGroup; }
 
 		//// relays from own interface
+		//
 		//"relay_sap"
 		public Keyword getRelay_sapKeyword_0() { return cRelay_sapKeyword_0; }
 
@@ -2041,6 +2066,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cTypeActorClassFQNParserRuleCall_3_0_1 = (RuleCall)cTypeActorClassCrossReference_3_0.eContents().get(1);
 		
 		//// TODOHRR: support replicated actors
+		//
 		//ActorRef:
 		//	"ActorRef" name=ID ":" type=[ActorClass|FQN];
 		public ParserRule getRule() { return rule; }
@@ -2078,7 +2104,9 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cTrPointParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		
 		//// **************************************************************
+		//
 		//// state machine
+		//
 		//StateGraphNode:
 		//	State | ChoicePoint | TrPoint;
 		public ParserRule getRule() { return rule; }
@@ -2274,7 +2302,9 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_6 = (Keyword)cGroup.eContents().get(6);
 		
 		//// entry and exit code have multiplicity many: in BaseState to be able to add derived class codes here,
+		//
 		//// in RefinedState to still have both features in the common base class State
+		//
 		//BaseState:
 		//	"State" name=ID "{" ("entry" entryCode=DetailCode)? ("exit" exitCode=DetailCode)? ("subgraph" subgraph=StateGraph)?
 		//	"}";
@@ -2430,7 +2460,9 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
 		//// TODOHRR: provide a means to call super class code (cf. ROOM p. 310f)
+		//
 		//// super() keyword or flag like in Trice
+		//
 		//DetailCode:
 		//	"{" commands+=STRING+ "}";
 		public ParserRule getRule() { return rule; }
@@ -3118,11 +3150,17 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cGreaterThanSignKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
 		////TransitionSource: TransitionTerminal|ChoicePointCaseRef|ChoicePointDefaultRef;
+		//
 		////TransitionSource: TransitionTerminal|ChoicePointRef;
+		//
 		////TransitionDest: TransitionTerminal|ChoicePointRef;
+		//
 		////ChoicePointCaseRef: 'cp' cp=[ChoicePoint|ID] 'case' case=[ChoicePointCase|ID];
+		//
 		////ChoicePointDefaultRef: 'cp' cp=[ChoicePoint|ID] 'default';
+		//
 		////ChoicePointRef: 'cp' cp=[ChoicePoint|ID];
+		//
 		//Trigger:
 		//	"<" msgFromIfPairs+=MessageFromIf ("|" msgFromIfPairs+=MessageFromIf)* guard=Guard? ">";
 		public ParserRule getRule() { return rule; }
@@ -3233,7 +3271,9 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cImportedNamespaceImportedFQNParserRuleCall_1_0 = (RuleCall)cImportedNamespaceAssignment_1.eContents().get(0);
 		
 		//// **************************************************************
+		//
 		//// general
+		//
 		//Import:
 		//	"import" importedNamespace=ImportedFQN;
 		public ParserRule getRule() { return rule; }
@@ -3337,9 +3377,13 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cCharCharKeyword_11_0 = (Keyword)cCharEnumLiteralDeclaration_11.eContents().get(0);
 		
 		//// **************************************************************
+		//
 		//// data class
+		//
 		//// cf. decision DSL2: fixed size data types
+		//
 		//// convert appropriately for Java and issue an error if size not available
+		//
 		//enum PrimitiveType:
 		//	void | int8 | int16 | int32 | uint8 | uint16 | uint32 | float32 | float64 | boolean | string | char;
 		public EnumRule getRule() { return rule; }
@@ -3555,9 +3599,13 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//// **************************************************************
+	//
 	//// data class
+	//
 	//// cf. decision DSL2: fixed size data types
+	//
 	//// convert appropriately for Java and issue an error if size not available
+	//
 	//enum PrimitiveType:
 	//	void | int8 | int16 | int32 | uint8 | uint16 | uint32 | float32 | float64 | boolean | string | char;
 	public PrimitiveTypeElements getPrimitiveTypeAccess() {
@@ -3609,6 +3657,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//// TODOHRR: define detail level language?
+	//
 	//DataClass:
 	//	"DataClass" name=ID ("extends" base=[DataClass|FQN])? "{" imports+=Import* attributes+=Attribute+
 	//	operations+=Operation* "}";
@@ -3631,6 +3680,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//// TODOHRR: pass arguments and return value by value/reference
+	//
 	//Operation:
 	//	"Operation" name=ID "(" (arguments+=FreeTypedID ("," arguments+=FreeTypedID)*)? ")" (":" returntype=FreeType)?
 	//	detailCode=DetailCode;
@@ -3643,7 +3693,9 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//// **************************************************************
+	//
 	//// protocol class
+	//
 	//ProtocolClass:
 	//	"ProtocolClass" name=ID ("extends" base=[ProtocolClass|FQN])? "{" ("usercode1" userCode1=DetailCode)? ("usercode2"
 	//	userCode2=DetailCode)? "incoming" "{" incomingMessages+=Message* "}" "outgoing" "{" outgoingMessages+=Message* "}"
@@ -3729,14 +3781,23 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//// **************************************************************
+	//
 	//// actor class
+	//
 	//// some notes on ports
+	//
 	////
+	//
 	//// in ROOM ports can be contained in the structure and/or the interface
+	//
 	//// p in s ==> internal end port
+	//
 	//// p in i ==> relay port
+	//
 	//// p in i and p in s ==> external end port
+	//
 	//// since double containment is not supported we decided to define external ports as reference to interface ports
+	//
 	//ActorClass:
 	//	abstract?="abstract"? "ActorClass" name=ID ("extends" base=[ActorClass|FQN])? "{" ("Interface" "{" ifPorts+=Port*
 	//	ifSPPs+=SPPRef* "}")? ("Structure" "{" ("usercode1" userCode1=DetailCode)? ("usercode2" userCode2=DetailCode)?
@@ -3782,6 +3843,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//SAPRef: // we omitted the SAP type (Timing/Frame/Exception)
+	//
 	//	"SAP" name=ID ":" protocol=[ProtocolClass|FQN];
 	public SAPRefElements getSAPRefAccess() {
 		return (pSAPRef != null) ? pSAPRef : (pSAPRef = new SAPRefElements());
@@ -3873,8 +3935,11 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//// TODOHRR: bindings for replicated ports
+	//
 	//// (1) declare several bindings
+	//
 	//// (2) use a notation with 1 to n bindings
+	//
 	//Binding:
 	//	"Binding" endpoint1=BindingEndPoint "and" endpoint2=BindingEndPoint;
 	public BindingElements getBindingAccess() {
@@ -3916,6 +3981,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//RefSAPoint: // satisfies a sub actor
+	//
 	//	"ref" ref=[ActorContainerRef];
 	public RefSAPointElements getRefSAPointAccess() {
 		return (pRefSAPoint != null) ? pRefSAPoint : (pRefSAPoint = new RefSAPointElements());
@@ -3926,6 +3992,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//RelaySAPoint: // relays from own interface
+	//
 	//	"relay_sap" relay=[SPPRef];
 	public RelaySAPointElements getRelaySAPointAccess() {
 		return (pRelaySAPoint != null) ? pRelaySAPoint : (pRelaySAPoint = new RelaySAPointElements());
@@ -3946,6 +4013,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//// TODOHRR: support replicated actors
+	//
 	//ActorRef:
 	//	"ActorRef" name=ID ":" type=[ActorClass|FQN];
 	public ActorRefElements getActorRefAccess() {
@@ -3957,7 +4025,9 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//// **************************************************************
+	//
 	//// state machine
+	//
 	//StateGraphNode:
 	//	State | ChoicePoint | TrPoint;
 	public StateGraphNodeElements getStateGraphNodeAccess() {
@@ -4009,7 +4079,9 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//// entry and exit code have multiplicity many: in BaseState to be able to add derived class codes here,
+	//
 	//// in RefinedState to still have both features in the common base class State
+	//
 	//BaseState:
 	//	"State" name=ID "{" ("entry" entryCode=DetailCode)? ("exit" exitCode=DetailCode)? ("subgraph" subgraph=StateGraph)?
 	//	"}";
@@ -4033,7 +4105,9 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//// TODOHRR: provide a means to call super class code (cf. ROOM p. 310f)
+	//
 	//// super() keyword or flag like in Trice
+	//
 	//DetailCode:
 	//	"{" commands+=STRING+ "}";
 	public DetailCodeElements getDetailCodeAccess() {
@@ -4207,11 +4281,17 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	////TransitionSource: TransitionTerminal|ChoicePointCaseRef|ChoicePointDefaultRef;
+	//
 	////TransitionSource: TransitionTerminal|ChoicePointRef;
+	//
 	////TransitionDest: TransitionTerminal|ChoicePointRef;
+	//
 	////ChoicePointCaseRef: 'cp' cp=[ChoicePoint|ID] 'case' case=[ChoicePointCase|ID];
+	//
 	////ChoicePointDefaultRef: 'cp' cp=[ChoicePoint|ID] 'default';
+	//
 	////ChoicePointRef: 'cp' cp=[ChoicePoint|ID];
+	//
 	//Trigger:
 	//	"<" msgFromIfPairs+=MessageFromIf ("|" msgFromIfPairs+=MessageFromIf)* guard=Guard? ">";
 	public TriggerElements getTriggerAccess() {
@@ -4243,7 +4323,9 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//// **************************************************************
+	//
 	//// general
+	//
 	//Import:
 	//	"import" importedNamespace=ImportedFQN;
 	public ImportElements getImportAccess() {

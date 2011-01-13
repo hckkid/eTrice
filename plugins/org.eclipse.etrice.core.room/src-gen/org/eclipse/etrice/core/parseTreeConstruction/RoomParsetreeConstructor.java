@@ -1449,6 +1449,7 @@ protected class FreeType_TypeAssignment_1 extends AssignmentToken  {
 /************ begin Rule DataClass ****************
  *
  * // TODOHRR: define detail level language?
+ * 
  * DataClass:
  * 	"DataClass" name=ID ("extends" base=[DataClass|FQN])? "{" imports+=Import* attributes+=Attribute+
  * 	operations+=Operation* "}";
@@ -2082,6 +2083,7 @@ protected class Attribute_TypeAssignment_4 extends AssignmentToken  {
 /************ begin Rule Operation ****************
  *
  * // TODOHRR: pass arguments and return value by value/reference
+ * 
  * Operation:
  * 	"Operation" name=ID "(" (arguments+=FreeTypedID ("," arguments+=FreeTypedID)*)? ")" (":" returntype=FreeType)?
  * 	detailCode=DetailCode;
@@ -2525,7 +2527,9 @@ protected class Operation_DetailCodeAssignment_6 extends AssignmentToken  {
 /************ begin Rule ProtocolClass ****************
  *
  * // **************************************************************
+ * 
  * // protocol class
+ * 
  * ProtocolClass:
  * 	"ProtocolClass" name=ID ("extends" base=[ProtocolClass|FQN])? "{" ("usercode1" userCode1=DetailCode)? ("usercode2"
  * 	userCode2=DetailCode)? "incoming" "{" incomingMessages+=Message* "}" "outgoing" "{" outgoingMessages+=Message* "}"
@@ -4926,14 +4930,23 @@ protected class SemanticsOutRule_RightCurlyBracketKeyword_5 extends KeywordToken
 /************ begin Rule ActorClass ****************
  *
  * // **************************************************************
+ * 
  * // actor class
+ * 
  * // some notes on ports
+ * 
  * //
+ * 
  * // in ROOM ports can be contained in the structure and/or the interface
+ * 
  * // p in s ==> internal end port
+ * 
  * // p in i ==> relay port
+ * 
  * // p in i and p in s ==> external end port
+ * 
  * // since double containment is not supported we decided to define external ports as reference to interface ports
+ * 
  * ActorClass:
  * 	abstract?="abstract"? "ActorClass" name=ID ("extends" base=[ActorClass|FQN])? "{" ("Interface" "{" ifPorts+=Port*
  * 	ifSPPs+=SPPRef* "}")? ("Structure" "{" ("usercode1" userCode1=DetailCode)? ("usercode2" userCode2=DetailCode)?
@@ -6855,11 +6868,13 @@ protected class ExternalPort_IfportAssignment_2 extends AssignmentToken  {
 /************ begin Rule SAPRef ****************
  *
  * SAPRef: // we omitted the SAP type (Timing/Frame/Exception)
+ * 
  * 	"SAP" name=ID ":" protocol=[ProtocolClass|FQN];
  *
  **/
 
 // // we omitted the SAP type (Timing/Frame/Exception)
+// 
 // "SAP" name=ID ":" protocol=[ProtocolClass|FQN]
 protected class SAPRef_Group extends GroupToken {
 	
@@ -6890,6 +6905,7 @@ protected class SAPRef_Group extends GroupToken {
 }
 
 // // we omitted the SAP type (Timing/Frame/Exception)
+// 
 // "SAP"
 protected class SAPRef_SAPKeyword_0 extends KeywordToken  {
 	
@@ -8700,8 +8716,11 @@ protected class ActorInstancePath_SegmentsAssignment_1_1 extends AssignmentToken
 /************ begin Rule Binding ****************
  *
  * // TODOHRR: bindings for replicated ports
+ * 
  * // (1) declare several bindings
+ * 
  * // (2) use a notation with 1 to n bindings
+ * 
  * Binding:
  * 	"Binding" endpoint1=BindingEndPoint "and" endpoint2=BindingEndPoint;
  *
@@ -9325,11 +9344,13 @@ protected class SAPoint_RelaySAPointParserRuleCall_1 extends RuleCallToken {
 /************ begin Rule RefSAPoint ****************
  *
  * RefSAPoint: // satisfies a sub actor
+ * 
  * 	"ref" ref=[ActorContainerRef];
  *
  **/
 
 // // satisfies a sub actor
+// 
 // "ref" ref=[ActorContainerRef]
 protected class RefSAPoint_Group extends GroupToken {
 	
@@ -9360,6 +9381,7 @@ protected class RefSAPoint_Group extends GroupToken {
 }
 
 // // satisfies a sub actor
+// 
 // "ref"
 protected class RefSAPoint_RefKeyword_0 extends KeywordToken  {
 	
@@ -9425,11 +9447,13 @@ protected class RefSAPoint_RefAssignment_1 extends AssignmentToken  {
 /************ begin Rule RelaySAPoint ****************
  *
  * RelaySAPoint: // relays from own interface
+ * 
  * 	"relay_sap" relay=[SPPRef];
  *
  **/
 
 // // relays from own interface
+// 
 // "relay_sap" relay=[SPPRef]
 protected class RelaySAPoint_Group extends GroupToken {
 	
@@ -9460,6 +9484,7 @@ protected class RelaySAPoint_Group extends GroupToken {
 }
 
 // // relays from own interface
+// 
 // "relay_sap"
 protected class RelaySAPoint_Relay_sapKeyword_0 extends KeywordToken  {
 	
@@ -9660,6 +9685,7 @@ protected class SPPoint_ServiceAssignment_2 extends AssignmentToken  {
 /************ begin Rule ActorRef ****************
  *
  * // TODOHRR: support replicated actors
+ * 
  * ActorRef:
  * 	"ActorRef" name=ID ":" type=[ActorClass|FQN];
  *
@@ -9815,7 +9841,9 @@ protected class ActorRef_TypeAssignment_3 extends AssignmentToken  {
 /************ begin Rule StateGraphNode ****************
  *
  * // **************************************************************
+ * 
  * // state machine
+ * 
  * StateGraphNode:
  * 	State | ChoicePoint | TrPoint;
  *
@@ -10835,7 +10863,9 @@ protected class StateMachine_RightCurlyBracketKeyword_3 extends KeywordToken  {
 /************ begin Rule BaseState ****************
  *
  * // entry and exit code have multiplicity many: in BaseState to be able to add derived class codes here,
+ * 
  * // in RefinedState to still have both features in the common base class State
+ * 
  * BaseState:
  * 	"State" name=ID "{" ("entry" entryCode=DetailCode)? ("exit" exitCode=DetailCode)? ("subgraph" subgraph=StateGraph)?
  * 	"}";
@@ -11679,7 +11709,9 @@ protected class RefinedState_RightCurlyBracketKeyword_6 extends KeywordToken  {
 /************ begin Rule DetailCode ****************
  *
  * // TODOHRR: provide a means to call super class code (cf. ROOM p. 310f)
+ * 
  * // super() keyword or flag like in Trice
+ * 
  * DetailCode:
  * 	"{" commands+=STRING+ "}";
  *
@@ -14929,11 +14961,17 @@ protected class ChoicepointTerminal_CpAssignment_1 extends AssignmentToken  {
 /************ begin Rule Trigger ****************
  *
  * //TransitionSource: TransitionTerminal|ChoicePointCaseRef|ChoicePointDefaultRef;
+ * 
  * //TransitionSource: TransitionTerminal|ChoicePointRef;
+ * 
  * //TransitionDest: TransitionTerminal|ChoicePointRef;
+ * 
  * //ChoicePointCaseRef: 'cp' cp=[ChoicePoint|ID] 'case' case=[ChoicePointCase|ID];
+ * 
  * //ChoicePointDefaultRef: 'cp' cp=[ChoicePoint|ID] 'default';
+ * 
  * //ChoicePointRef: 'cp' cp=[ChoicePoint|ID];
+ * 
  * Trigger:
  * 	"<" msgFromIfPairs+=MessageFromIf ("|" msgFromIfPairs+=MessageFromIf)* guard=Guard? ">";
  *
@@ -15447,7 +15485,9 @@ protected class Guard_GuardAssignment_1 extends AssignmentToken  {
 /************ begin Rule Import ****************
  *
  * // **************************************************************
+ * 
  * // general
+ * 
  * Import:
  * 	"import" importedNamespace=ImportedFQN;
  *

@@ -26,7 +26,7 @@ process(ecore::EPackage this) :
 process(EClass this) :
     switch (name) {
         case "Port": (eAllAttributes.select(e|e.name=="multiplicity").first().setDefaultValueLiteral("1"))
-        case "RefinedState": (addOperation("getName", getEcoreDataType("EString")))
+        case "State": (addOperation("getName", getEcoreDataType("EString")))
         default:    null
     }
 ;
@@ -49,7 +49,10 @@ create EAnnotation newDelegatingBodyAnnotation(EOperation op) :
         setSource("http://www.eclipse.org/emf/2002/GenModel") ->
         d.setKey("body") ->
         switch (op.name) {
-	        case "getName": (d.setValue("return getBase()==null? \"\":getBase().getName();"))
+	        case "getName": (d.setValue("return (this instanceof org.eclipse.etrice.core.room.BaseState)? "
+	        +"((org.eclipse.etrice.core.room.BaseState)this).getName() :"
+	        +"((org.eclipse.etrice.core.room.RefinedState)this).getBase()==null?"
+	        +" \"\":((org.eclipse.etrice.core.room.RefinedState)this).getBase().getName();"))
 	        default:    null
 	    } ->
         details.add(d) ->

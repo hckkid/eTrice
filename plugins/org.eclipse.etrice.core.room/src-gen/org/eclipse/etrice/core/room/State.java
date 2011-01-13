@@ -105,4 +105,13 @@ public interface State extends StateGraphNode
    */
   void setSubgraph(StateGraph value);
 
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @model kind="operation"
+   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return (this instanceof org.eclipse.etrice.core.room.BaseState)? ((org.eclipse.etrice.core.room.BaseState)this).getName() :((org.eclipse.etrice.core.room.RefinedState)this).getBase()==null? \"\":((org.eclipse.etrice.core.room.RefinedState)this).getBase().getName();'"
+   * @generated
+   */
+  String getName();
+
 } // State
