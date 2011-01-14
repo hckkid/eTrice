@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.graphiti.ui.diagramTypes">
+      <diagramType
+            id="org.eclipse.etrice.ui.behavior.diagramType"
+            name="ROOM Behavior Diagram Type"
+            type="room.behavior">
+      </diagramType>
+   </extension>
+   <extension
+         point="org.eclipse.graphiti.ui.diagramTypeProviders">
+      <diagramTypeProvider
+            class="org.eclipse.etrice.ui.behavior.DiagramTypeProvider"
+            id="org.eclipse.etrice.ui.behavior.diagramTypeProvider"
+            name="ROOM Behavior Editor">
+         <diagramType
+               id="org.eclipse.etrice.ui.behavior.diagramType">
+         </diagramType>
+         <imageProvider
+               id="org.eclipse.etrice.ui.behavior.ImageProvider">
+         </imageProvider>
+      </diagramTypeProvider>
+   </extension>
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            class="org.eclipse.etrice.ui.behavior.editor.BehaviorEditor"
+            contributorClass="org.eclipse.graphiti.ui.editor.DiagramEditorActionBarContributor"
+            default="true"
+            extensions="behavior"
+            icon="icons/Behavior.gif"
+            id="org.eclipse.etrice.ui.behavior.editor.BehaviorEditor"
+            matchingStrategy="org.eclipse.graphiti.ui.editor.DiagramEditorFactory$DiagramEditorMatchingStrategy"
+            name="ROOM Behavior Editor">
+         <contentTypeBinding
+               contentTypeId="org.eclipse.graphiti.content.diagram">
+         </contentTypeBinding>
+      </editor>
+   </extension>
+   
+   <extension
+         point="org.eclipse.graphiti.ui.imageProviders">
+      <imageProvider
+            class="org.eclipse.etrice.ui.behavior.ImageProvider"
+            id="org.eclipse.etrice.ui.behavior.ImageProvider">
+      </imageProvider>
+   </extension>
+
+</plugin>
