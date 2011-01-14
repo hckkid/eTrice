@@ -441,6 +441,8 @@ public class RoomFragmentProvider implements IFragmentProvider {
 	private StateGraph getStateGraph(RoomClass rc, String remainder) {
 		if (rc instanceof ActorClass) {
 			StateGraph sg = ((ActorClass) rc).getStateMachine();
+			if (sg==null)
+				((ActorClass) rc).setStateMachine(RoomFactory.eINSTANCE.createStateGraph());
 			int begin = 0;
 			int end = remainder.indexOf(SEP);
 			while (end>=0) {
