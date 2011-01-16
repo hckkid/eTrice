@@ -18,6 +18,7 @@ import org.eclipse.core.databinding.validation.ValidationStatus;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Shell;
@@ -34,6 +35,8 @@ import org.eclipse.etrice.core.room.StructureClass;
 import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.core.room.SubSystemRef;
 import org.eclipse.etrice.core.room.LogicalSystem;
+import org.eclipse.etrice.ui.common.dialogs.AbstractPropertyDialog;
+import org.eclipse.etrice.ui.structure.Activator;
 
 public class ActorContainerRefPropertyDialog extends AbstractPropertyDialog {
 	
@@ -149,6 +152,11 @@ public class ActorContainerRefPropertyDialog extends AbstractPropertyDialog {
 		}
 
 		name.setFocus();
+	}
+
+	@Override
+	protected Image getImage() {
+		return Activator.getImage("icons/Structure.gif");
 	}
 
 }

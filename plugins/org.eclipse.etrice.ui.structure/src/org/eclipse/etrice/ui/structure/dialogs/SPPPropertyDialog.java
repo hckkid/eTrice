@@ -21,6 +21,7 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.etrice.core.validation.ValidationUtil;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Shell;
@@ -33,6 +34,8 @@ import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.etrice.core.room.SPPRef;
+import org.eclipse.etrice.ui.common.dialogs.AbstractPropertyDialog;
+import org.eclipse.etrice.ui.structure.Activator;
 
 public class SPPPropertyDialog extends AbstractPropertyDialog {
 
@@ -135,5 +138,10 @@ public class SPPPropertyDialog extends AbstractPropertyDialog {
 		createDecorator(protocol, "no protocol selected");
 		
 		name.setFocus();
+	}
+
+	@Override
+	protected Image getImage() {
+		return Activator.getImage("icons/Structure.gif");
 	}
 }

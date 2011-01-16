@@ -22,6 +22,7 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.etrice.core.validation.ValidationUtil;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
@@ -41,6 +42,8 @@ import org.eclipse.etrice.core.room.RoomFactory;
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.etrice.core.room.SubSystemClass;
+import org.eclipse.etrice.ui.common.dialogs.AbstractPropertyDialog;
+import org.eclipse.etrice.ui.structure.Activator;
 
 public class PortPropertyDialog extends AbstractPropertyDialog {
 
@@ -260,5 +263,10 @@ public class PortPropertyDialog extends AbstractPropertyDialog {
 		}
 		
 		super.okPressed();
+	}
+
+	@Override
+	protected Image getImage() {
+		return Activator.getImage("icons/Structure.gif");
 	}
 }
