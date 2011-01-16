@@ -19,7 +19,10 @@ import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.Binding;
 import org.eclipse.etrice.core.room.BindingEndPoint;
 import org.eclipse.etrice.core.room.DataClass;
+import org.eclipse.etrice.core.room.EntryPoint;
+import org.eclipse.etrice.core.room.ExitPoint;
 import org.eclipse.etrice.core.room.ExternalPort;
+import org.eclipse.etrice.core.room.InitialTransition;
 import org.eclipse.etrice.core.room.LayerConnection;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.ProtocolClass;
@@ -27,7 +30,12 @@ import org.eclipse.etrice.core.room.RefSAPoint;
 import org.eclipse.etrice.core.room.RelaySAPoint;
 import org.eclipse.etrice.core.room.SPPRef;
 import org.eclipse.etrice.core.room.ServiceImplementation;
+import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.StructureClass;
+import org.eclipse.etrice.core.room.SubStateTrPointTerminal;
+import org.eclipse.etrice.core.room.TrPointTerminal;
+import org.eclipse.etrice.core.room.Transition;
+import org.eclipse.etrice.core.room.TransitionTerminal;
 
 public class ValidationUtil {
 
@@ -432,5 +440,47 @@ public class ValidationUtil {
 				return isConnectedDst(src, acr, ((ActorClass)sc).getBase(), exclude);
 		}
 		return false;
+	}
+	
+	public static boolean isConnectable(TransitionTerminal src, TransitionTerminal tgt, StateGraph sg) {
+		// TODOHRR-B validation for transitions
+		
+		if (!isConnectable(src, sg))
+			return false;
+		
+		if (tgt instanceof TrPointTerminal) {
+			if (((TrPointTerminal) tgt).getTrPoint() instanceof EntryPoint)
+				return false;
+			// TransitionPoint and ExitPoint are valid
+		}
+		else if (tgt instanceof SubStateTrPointTerminal) {
+			if (((SubStateTrPointTerminal) tgt).getTrPoint() instanceof EntryPoint)
+				return false;
+			// ExitPoint is valid
+		}
+
+		return true;
+	}
+	
+	public static boolean isConnectable(TransitionTerminal src, StateGraph sg) {
+		if (src==null) {
+			for (Transition t : sg.getTransitions()) {
+				if (t instanceof InitialTransition)
+					// there already is a InitialTransition
+					return false;
+			}
+		}
+		else if (src instanceof TrPointTerminal) {
+			if (((TrPointTerminal) src).getTrPoint() instanceof ExitPoint)
+				return false;
+			// TransitionPoint and EntryPoint are valid
+		}
+		else if (src instanceof SubStateTrPointTerminal) {
+			if (((SubStateTrPointTerminal) src).getTrPoint() instanceof ExitPoint)
+				return false;
+			// EntryPoint is valid
+		}
+		
+		return true;
 	}
 }

@@ -357,7 +357,7 @@ public class RoomFragmentProvider implements IFragmentProvider {
 		
 		int begin = remainder.lastIndexOf(SEP);
 		if (begin<0)
-			return null;
+			begin = 0;
 		
 		String name = remainder.substring(begin, remainder.length());
 		for (Transition t : sg.getTransitions()) {
@@ -374,7 +374,7 @@ public class RoomFragmentProvider implements IFragmentProvider {
 		
 		int begin = remainder.lastIndexOf(SEP);
 		if (begin<0)
-			return null;
+			begin = 0;
 		
 		String name = remainder.substring(begin, remainder.length());
 		if (name.equals(INIT_TRANS)) {
@@ -392,7 +392,7 @@ public class RoomFragmentProvider implements IFragmentProvider {
 		
 		int begin = remainder.lastIndexOf(SEP);
 		if (begin<0)
-			return null;
+			begin = 0;
 		
 		String name = remainder.substring(begin, remainder.length());
 		for (ChoicePoint cp : sg.getChPoints()) {
@@ -409,7 +409,7 @@ public class RoomFragmentProvider implements IFragmentProvider {
 		
 		int begin = remainder.lastIndexOf(SEP);
 		if (begin<0)
-			return null;
+			begin = 0;
 		
 		String name = remainder.substring(begin, remainder.length());
 		for (TrPoint tp : sg.getTrPoints()) {
@@ -426,7 +426,7 @@ public class RoomFragmentProvider implements IFragmentProvider {
 		
 		int begin = remainder.lastIndexOf(SEP);
 		if (begin<0)
-			return null;
+			begin = 0;
 		
 		String name = remainder.substring(begin, remainder.length());
 		for (State s : sg.getStates()) {

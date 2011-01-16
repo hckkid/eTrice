@@ -13,6 +13,8 @@
 
 package org.eclipse.etrice.core.naming;
 
+import java.util.HashSet;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.room.BaseState;
 import org.eclipse.etrice.core.room.CPBranchTransition;
@@ -207,4 +209,18 @@ public class RoomNameProvider {
 		return null;
 	}
 
+	public static String getUniqueTransitionName(StateGraph sg) {
+		HashSet<String> names = new HashSet<String>();
+		for (Transition t : sg.getTransitions()) {
+			names.add(t.getName());
+		}
+		
+		for (int i = 0; i < 1000; i++) {
+			String name = "tr"+i;
+			if (!names.contains(name))
+				return name;
+		}
+		
+		return "not_unique";
+	}
 }
