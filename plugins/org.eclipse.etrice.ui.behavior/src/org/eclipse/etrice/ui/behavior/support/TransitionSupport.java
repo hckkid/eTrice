@@ -14,8 +14,27 @@ package org.eclipse.etrice.ui.behavior.support;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.etrice.core.naming.RoomNameProvider;
+import org.eclipse.etrice.core.room.BaseState;
+import org.eclipse.etrice.core.room.CPBranchTransition;
+import org.eclipse.etrice.core.room.ChoicePoint;
+import org.eclipse.etrice.core.room.ChoicepointTerminal;
+import org.eclipse.etrice.core.room.ContinuationTransition;
+import org.eclipse.etrice.core.room.InitialTransition;
+import org.eclipse.etrice.core.room.RefinedState;
+import org.eclipse.etrice.core.room.RoomFactory;
+import org.eclipse.etrice.core.room.State;
+import org.eclipse.etrice.core.room.StateGraph;
+import org.eclipse.etrice.core.room.StateTerminal;
+import org.eclipse.etrice.core.room.SubStateTrPointTerminal;
+import org.eclipse.etrice.core.room.TrPoint;
+import org.eclipse.etrice.core.room.TrPointTerminal;
+import org.eclipse.etrice.core.room.Transition;
+import org.eclipse.etrice.core.room.TransitionTerminal;
+import org.eclipse.etrice.core.room.TriggeredTransition;
 import org.eclipse.etrice.core.validation.ValidationUtil;
 import org.eclipse.etrice.ui.behavior.ImageProvider;
+import org.eclipse.etrice.ui.behavior.dialogs.TransitionPropertyDialog;
 import org.eclipse.graphiti.dt.IDiagramTypeProvider;
 import org.eclipse.graphiti.features.IAddFeature;
 import org.eclipse.graphiti.features.ICreateConnectionFeature;
@@ -26,17 +45,25 @@ import org.eclipse.graphiti.features.IUpdateFeature;
 import org.eclipse.graphiti.features.context.IAddConnectionContext;
 import org.eclipse.graphiti.features.context.IAddContext;
 import org.eclipse.graphiti.features.context.ICreateConnectionContext;
+import org.eclipse.graphiti.features.context.ICustomContext;
+import org.eclipse.graphiti.features.context.IDoubleClickContext;
 import org.eclipse.graphiti.features.context.IRemoveContext;
 import org.eclipse.graphiti.features.context.IUpdateContext;
 import org.eclipse.graphiti.features.context.impl.AddConnectionContext;
 import org.eclipse.graphiti.features.context.impl.RemoveContext;
+import org.eclipse.graphiti.features.custom.AbstractCustomFeature;
+import org.eclipse.graphiti.features.custom.ICustomFeature;
 import org.eclipse.graphiti.features.impl.AbstractAddFeature;
 import org.eclipse.graphiti.features.impl.AbstractCreateConnectionFeature;
 import org.eclipse.graphiti.features.impl.AbstractUpdateFeature;
 import org.eclipse.graphiti.features.impl.Reason;
+import org.eclipse.graphiti.mm.GraphicsAlgorithmContainer;
+import org.eclipse.graphiti.mm.algorithms.Polygon;
 import org.eclipse.graphiti.mm.algorithms.Polyline;
+import org.eclipse.graphiti.mm.algorithms.Text;
 import org.eclipse.graphiti.mm.pictograms.Anchor;
 import org.eclipse.graphiti.mm.pictograms.Connection;
+import org.eclipse.graphiti.mm.pictograms.ConnectionDecorator;
 import org.eclipse.graphiti.mm.pictograms.ContainerShape;
 import org.eclipse.graphiti.mm.pictograms.PictogramElement;
 import org.eclipse.graphiti.services.Graphiti;
@@ -47,28 +74,19 @@ import org.eclipse.graphiti.tb.IToolBehaviorProvider;
 import org.eclipse.graphiti.ui.features.DefaultFeatureProvider;
 import org.eclipse.graphiti.util.ColorConstant;
 import org.eclipse.graphiti.util.IColorConstant;
-
-import org.eclipse.etrice.core.room.ActorClass;
-import org.eclipse.etrice.core.room.ActorContainerClass;
-import org.eclipse.etrice.core.room.ActorContainerRef;
-import org.eclipse.etrice.core.room.Binding;
-import org.eclipse.etrice.core.room.BindingEndPoint;
-import org.eclipse.etrice.core.room.LogicalSystem;
-import org.eclipse.etrice.core.room.Port;
-import org.eclipse.etrice.core.room.RoomFactory;
-import org.eclipse.etrice.core.room.StructureClass;
-import org.eclipse.etrice.core.room.SubSystemClass;
+import org.eclipse.jface.window.Window;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.PlatformUI;
 
 public class TransitionSupport {
 
 	private static final IColorConstant LINE_COLOR = new ColorConstant(0, 0, 0);
+	private static final int LINE_WIDTH = 1;
 
-	class FeatureProvider extends DefaultFeatureProvider {
+	static class FeatureProvider extends DefaultFeatureProvider {
 		
 		private class CreateFeature extends AbstractCreateConnectionFeature {
 			
-			private boolean justStarted = false;
-
 			public CreateFeature(IFeatureProvider fp) {
 				super(fp, "Transition", "create Transition");
 			}
@@ -80,135 +98,153 @@ public class TransitionSupport {
 	
 			@Override
 			public boolean canCreate(ICreateConnectionContext context) {
-				Port src = getPort(context.getSourceAnchor());
-				Port tgt = getPort(context.getTargetAnchor());
-				ActorContainerRef srcRef = getRef(context.getSourceAnchor());
+				TransitionTerminal src = getTransitionTerminal(context.getSourceAnchor());
+				TransitionTerminal tgt = getTransitionTerminal(context.getTargetAnchor());
 				
-				if (justStarted) {
-					justStarted = false;
-					beginHighLightMatches(src, srcRef);
-				}
-				
-				if (src==null || tgt==null) {
+				if (src==null && !isInitialPoint(context.getSourceAnchor()))
 					return false;
-				}
-				
-				StructureClass ac = getParent(context);
-				if (ac==null) {
+				if (tgt==null)
 					return false;
-				}
 				
-				ActorContainerRef tgtRef = getRef(context.getTargetAnchor());
+				StateGraph sg = getStateGraph(context);
+				if (sg==null)
+					return false;
 				
-				return ValidationUtil.isConnectable(src, srcRef, tgt, tgtRef, ac);
+				return ValidationUtil.isConnectable(src, tgt, sg);
 			}
 			
 			public boolean canStartConnection(ICreateConnectionContext context) {
-				Port src = getPort(context.getSourceAnchor());
-				boolean canStart = src!=null;
-				if (canStart) {
-					ActorContainerRef ref = getRef(context.getSourceAnchor());
-					if (ref==null) {
-						// this port is local, i.e. owned by the parent itself
-						ActorContainerClass acc = (ActorContainerClass) src.eContainer();
-						if (!ValidationUtil.isConnectable(src, null, acc))
-							canStart = false;
-					}
-					else {
-						ActorContainerClass acc = (ActorContainerClass) ref.eContainer();
-						if (!ValidationUtil.isConnectable(src, ref, acc))
-							canStart = false;
-					}
-				}
-				if (canStart)
-					justStarted = true;
-				return canStart;
-			}
-
-			private Port getPort(Anchor anchor) {
-				if (anchor != null) {
-					Object obj = getBusinessObjectForPictogramElement(anchor.getParent());
-					if (obj instanceof Port) {
-						return (Port) obj;
-					}
-				}
-				return null;
-			}
-			
-			public StructureClass getParent(ICreateConnectionContext context) {
-				ContainerShape shape = (ContainerShape) context.getSourcePictogramElement().eContainer();
-				Object bo = getBusinessObjectForPictogramElement(shape);
-				if (bo instanceof StructureClass)
-					return (StructureClass) bo;
+				TransitionTerminal src = getTransitionTerminal(context.getSourceAnchor());
+				if (src==null && !isInitialPoint(context.getSourceAnchor()))
+					return false;
 				
-				shape = (ContainerShape) shape.eContainer();
-				bo = getBusinessObjectForPictogramElement(shape);
-				if (bo instanceof StructureClass)
-					return (StructureClass) bo;
+				StateGraph sg = getStateGraph(context);
+				if (sg==null)
+					return false;
 				
-				return null;
-			}
-			
-			public ActorContainerRef getRef(Anchor anchor) {
-				ContainerShape shape = (ContainerShape) anchor.getParent().eContainer();
-				Object bo = getBusinessObjectForPictogramElement(shape);
-				if (bo instanceof ActorContainerRef)
-					return (ActorContainerRef) bo;
-
-				return null;
+				return ValidationUtil.isConnectable(src, sg);
 			}
 			
 			@Override
 			public Connection create(ICreateConnectionContext context) {
 				Connection newConnection = null;
 				
-				endHighLightMatches();
-				
-				Port src = getPort(context.getSourceAnchor());
-				Port dst = getPort(context.getTargetAnchor());
-				StructureClass ac = getParent(context);
-				if (src!=null && dst!=null && ac!=null) {
-					Binding bind = RoomFactory.eINSTANCE.createBinding();
-					BindingEndPoint ep1 = RoomFactory.eINSTANCE.createBindingEndPoint();
-					ActorContainerRef ar1 = getRef(context.getSourceAnchor());
-					ep1.setPort(src);
-					ep1.setActorRef(ar1);
-					BindingEndPoint ep2 = RoomFactory.eINSTANCE.createBindingEndPoint();
-					ActorContainerRef ar2 = getRef(context.getTargetAnchor());
-					ep2.setPort(dst);
-					ep2.setActorRef(ar2);
-					bind.setEndpoint1(ep1);
-					bind.setEndpoint2(ep2);
-					ac.getBindings().add(bind);
+				TransitionTerminal src = getTransitionTerminal(context.getSourceAnchor());
+				TransitionTerminal dst = getTransitionTerminal(context.getTargetAnchor());
+				StateGraph sg = getStateGraph(context);
+				if (dst!=null && sg!=null) {
+
+					// TODOHRR-B transition dialog
+					// allow switch between default and non-default CP branch? This would change the transition type
+					
+					Transition trans = null;
+					if (src==null) {
+						InitialTransition t = RoomFactory.eINSTANCE.createInitialTransition();
+						t.setTo(dst);
+						trans = t;
+					}
+					else if (src instanceof SubStateTrPointTerminal) {
+						ContinuationTransition t = RoomFactory.eINSTANCE.createContinuationTransition();
+						t.setFrom(src);
+						t.setTo(dst);
+						trans = t;
+					}
+					else if (src instanceof ChoicepointTerminal) {
+						// TODOHRR-B distinguish default branch (ContinuationTransition) and non-default
+						CPBranchTransition t = RoomFactory.eINSTANCE.createCPBranchTransition();
+						t.setFrom(src);
+						t.setTo(dst);
+						trans = t;
+					}
+					else {
+						TriggeredTransition t = RoomFactory.eINSTANCE.createTriggeredTransition();
+						t.setFrom(src);
+						t.setTo(dst);
+						trans = t;
+					}
+
+					if (trans instanceof InitialTransition) {
+						trans.setName("init");
+					}
+					else {
+						String name = RoomNameProvider.getUniqueTransitionName(sg);
+						trans.setName(name);
+					}
+					
+		        	Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+		        	TransitionPropertyDialog dlg = new TransitionPropertyDialog(shell, sg, trans);
+					if (dlg.open()!=Window.OK)
+						// find a method to abort creation
+						//throw new RuntimeException();
+						return null;
+
+					sg.getTransitions().add(trans);
 					
 					AddConnectionContext addContext = new AddConnectionContext(context.getSourceAnchor(), context.getTargetAnchor());
-					addContext.setNewObject(bind);
+					addContext.setNewObject(trans);
 					newConnection = (Connection) getFeatureProvider().addIfPossible(addContext);
 				}
 				
 				return newConnection;
 			}
-			
-			private void beginHighLightMatches(Port port, ActorContainerRef ref) {
-				if (port==null)
-					return;
-				
-				StructureClass acc = (ActorContainerClass) ((ref!=null)? ref.eContainer():port.eContainer());
-				if (acc instanceof ActorClass) {
-					
-				}
-				else if (acc instanceof SubSystemClass) {
-					
-				}
-				else if (acc instanceof LogicalSystem) {
-					
-				}
-				else {
-					assert(false): "unknown kind of StructureClass";
-				}
-			}
 
-			private void endHighLightMatches() {
+			private boolean isInitialPoint(Anchor anchor) {
+				if (anchor!=null) {
+					Object obj = getBusinessObjectForPictogramElement(anchor.getParent());
+					if (obj instanceof StateGraph) {
+						Object parent = getBusinessObjectForPictogramElement((ContainerShape) anchor.getParent().eContainer());
+						if (parent instanceof StateGraph)
+							return true;
+					}
+				}
+				return false;
+			}
+			
+			private TransitionTerminal getTransitionTerminal(Anchor anchor) {
+				if (anchor != null) {
+					Object obj = getBusinessObjectForPictogramElement(anchor.getParent());
+					if (obj instanceof TrPoint) {
+						Object parent = getBusinessObjectForPictogramElement((ContainerShape) anchor.getParent().eContainer());
+						if (parent instanceof State) {
+							BaseState state = (parent instanceof RefinedState)? ((RefinedState)parent).getBase() : (BaseState)parent;
+							SubStateTrPointTerminal sstpt = RoomFactory.eINSTANCE.createSubStateTrPointTerminal();
+							sstpt.setState(state);
+							sstpt.setTrPoint((TrPoint) obj);
+							return sstpt;
+						}
+						else {
+							TrPointTerminal tpt = RoomFactory.eINSTANCE.createTrPointTerminal();
+							tpt.setTrPoint((TrPoint) obj);
+							return tpt;
+						}
+					}
+					else if (obj instanceof State) {
+						BaseState state = (obj instanceof RefinedState)? ((RefinedState)obj).getBase() : (BaseState)obj;
+						StateTerminal st = RoomFactory.eINSTANCE.createStateTerminal();
+						st.setState(state);
+						return st;
+					}
+					else if (obj instanceof ChoicePoint) {
+						ChoicepointTerminal ct = RoomFactory.eINSTANCE.createChoicepointTerminal();
+						ct.setCp((ChoicePoint) obj);
+						return ct;
+					}
+				}
+				return null;
+			}
+			
+			public StateGraph getStateGraph(ICreateConnectionContext context) {
+				ContainerShape shape = (ContainerShape) context.getSourcePictogramElement().eContainer();
+				Object bo = getBusinessObjectForPictogramElement(shape);
+				if (bo instanceof StateGraph)
+					return (StateGraph) bo;
+				
+				shape = (ContainerShape) shape.eContainer();
+				bo = getBusinessObjectForPictogramElement(shape);
+				if (bo instanceof StateGraph)
+					return (StateGraph) bo;
+				
+				return null;
 			}
 		}
 		
@@ -220,7 +256,7 @@ public class TransitionSupport {
 
 			@Override
 			public boolean canAdd(IAddContext context) {
-				if (context instanceof IAddConnectionContext && context.getNewObject() instanceof Binding) {
+				if (context instanceof IAddConnectionContext && context.getNewObject() instanceof Transition) {
 					return true;
 				}
 				return false;
@@ -229,10 +265,9 @@ public class TransitionSupport {
 			@Override
 			public PictogramElement add(IAddContext context) {
 				IAddConnectionContext addConContext = (IAddConnectionContext) context;
-				Binding addedEReference = (Binding) context.getNewObject();
+				Transition trans = (Transition) context.getNewObject();
 
 				IPeCreateService peCreateService = Graphiti.getPeCreateService();
-				// CONNECTION WITH POLYLINE
 				Connection connection = peCreateService.createFreeFormConnection(getDiagram());
 				connection.setStart(addConContext.getSourceAnchor());
 				connection.setEnd(addConContext.getTargetAnchor());
@@ -242,11 +277,38 @@ public class TransitionSupport {
 				IGaService gaService = Graphiti.getGaService();
 				Polyline polyline = gaService.createPolyline(connection);
 				polyline.setForeground(manageColor(LINE_COLOR));
+				polyline.setLineWidth(LINE_WIDTH);
+
+		        ConnectionDecorator cd = peCreateService
+		              .createConnectionDecorator(connection, false, 1.0, true);
+		        createArrow(cd);
+		        
+		        ConnectionDecorator textDecorator =
+		            peCreateService.createConnectionDecorator(connection, true,
+		            0.5, true);
+		        Text text = gaService.createDefaultText(textDecorator);
+		        text.setForeground(manageColor(IColorConstant.BLACK));
+		        gaService.setLocation(text, 10, 0);
+		        text.setValue("label");
+
 
 				// create link and wire it
-				link(connection, addedEReference);
+				link(connection, trans);
 
 				return connection;
+			}
+			
+			private Polyline createArrow(GraphicsAlgorithmContainer gaContainer) {
+
+				IGaService gaService = Graphiti.getGaService();
+				Polygon polygon =
+					gaService.createPolygon(gaContainer, new int[] { -15, 5, 0, 0, -15, -5 });
+
+				polygon.setForeground(manageColor(LINE_COLOR));
+				polygon.setBackground(manageColor(LINE_COLOR));
+				polygon.setLineWidth(LINE_WIDTH);
+
+				return polygon;
 			}
 			
 		}
@@ -270,7 +332,7 @@ public class TransitionSupport {
 			public IReason updateNeeded(IUpdateContext context) {
 				Object bo = getBusinessObjectForPictogramElement(context.getPictogramElement());
 				if (bo instanceof EObject && ((EObject)bo).eIsProxy()) {
-					return Reason.createTrueReason("Binding deleted from model");
+					return Reason.createTrueReason("Transition deleted from model");
 				}
 				return Reason.createFalseReason();
 			}
@@ -291,6 +353,63 @@ public class TransitionSupport {
 				}
 				return false;
 			}
+		}
+		
+		private static class PropertyFeature extends AbstractCustomFeature {
+
+			private String name;
+			private String description;
+
+			public PropertyFeature(IFeatureProvider fp) {
+				super(fp);
+				this.name = "Edit Transition";
+				this.description = "Edit Transition";
+			}
+
+			@Override
+			public String getName() {
+				return name;
+			}
+			
+			@Override
+			public String getDescription() {
+				return description;
+			}
+			
+			@Override
+			public boolean canExecute(ICustomContext context) {
+				PictogramElement[] pes = context.getPictogramElements();
+				if (pes != null && pes.length == 1) {
+					PictogramElement pe = pes[0];
+					if (pe instanceof ConnectionDecorator)
+						pe = (PictogramElement) pe.eContainer();
+					if (!(pe instanceof Connection))
+						return false;
+					
+					Object bo = getBusinessObjectForPictogramElement(pe);
+					if (bo instanceof Transition) {
+						return true;
+					}
+				}
+				return false;
+			}
+
+			@Override
+			public void execute(ICustomContext context) {
+				PictogramElement pe = context.getPictogramElements()[0];
+				if (pe instanceof ConnectionDecorator)
+					pe = (PictogramElement) pe.eContainer();
+				Transition trans = (Transition) getBusinessObjectForPictogramElement(pe);
+				StateGraph sg = (StateGraph)trans.eContainer();
+				
+				Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+				TransitionPropertyDialog dlg = new TransitionPropertyDialog(shell, sg, trans);
+				if (dlg.open()!=Window.OK)
+					// TODOHRR: introduce a method to revert changes, does hasDoneChanges=false roll back changes?
+					//throw new RuntimeException();
+					return;
+			}
+			
 		}
 		
 		private IFeatureProvider fp;
@@ -314,12 +433,22 @@ public class TransitionSupport {
 		public IUpdateFeature getUpdateFeature(IUpdateContext context) {
 			return new UpdateFeature(fp);
 		}
+		
+		@Override
+		public ICustomFeature[] getCustomFeatures(ICustomContext context) {
+			return new ICustomFeature[] { new PropertyFeature(fp) };
+		}
 	}
 	
 	class BehaviorProvider extends DefaultToolBehaviorProvider {
 
 		public BehaviorProvider(IDiagramTypeProvider dtp) {
 			super(dtp);
+		}
+		
+		@Override
+		public ICustomFeature getDoubleClickFeature(IDoubleClickContext context) {
+			return new FeatureProvider.PropertyFeature(getDiagramTypeProvider().getFeatureProvider());
 		}
 	}
 	

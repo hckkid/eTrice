@@ -14,15 +14,11 @@ package org.eclipse.etrice.ui.behavior.support;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.etrice.core.room.ActorClass;
-import org.eclipse.etrice.core.room.ActorContainerClass;
 import org.eclipse.etrice.core.room.ActorContainerRef;
 import org.eclipse.etrice.core.room.EntryPoint;
 import org.eclipse.etrice.core.room.ExitPoint;
 import org.eclipse.etrice.core.room.InterfaceItem;
-import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.RoomFactory;
-import org.eclipse.etrice.core.room.SPPRef;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.TrPoint;
@@ -773,7 +769,7 @@ public class TrPointSupport {
 			ccc.setSourceAnchor(anchor);
 			
 			ContextButtonEntry button = new ContextButtonEntry(null, context);
-			button.setText("Create Binding");
+			button.setText("Create Transition");
 			button.setIconId(ImageProvider.IMG_TRANSITION);
 			ICreateConnectionFeature[] features = getFeatureProvider().getCreateConnectionFeatures();
 			for (ICreateConnectionFeature feature : features) {

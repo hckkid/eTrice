@@ -40,6 +40,7 @@ import org.eclipse.graphiti.features.context.IUpdateContext;
 import org.eclipse.graphiti.features.custom.ICustomFeature;
 import org.eclipse.graphiti.mm.algorithms.GraphicsAlgorithm;
 import org.eclipse.graphiti.mm.algorithms.styles.LineStyle;
+import org.eclipse.graphiti.mm.pictograms.ConnectionDecorator;
 import org.eclipse.graphiti.mm.pictograms.PictogramElement;
 import org.eclipse.graphiti.mm.pictograms.Shape;
 import org.eclipse.graphiti.tb.DefaultToolBehaviorProvider;
@@ -130,7 +131,8 @@ public class ProviderDispatcher {
 		public ICustomFeature[] getCustomFeatures(ICustomContext context) {
 			return concatAll(
 					trPointSupport.getFeatureProvider().getCustomFeatures(context),
-					stateSupport.getFeatureProvider().getCustomFeatures(context)
+					stateSupport.getFeatureProvider().getCustomFeatures(context),
+					transitionSupport.getFeatureProvider().getCustomFeatures(context)
 				);
 		}
 	}
@@ -312,6 +314,8 @@ public class ProviderDispatcher {
 		
 		protected IToolBehaviorProvider getToolBehaviorProvider(PictogramElement pe) {
 			IFeatureProvider fp = getFeatureProvider();
+			if (pe instanceof ConnectionDecorator)
+				pe = (PictogramElement) pe.eContainer();
 			EObject bo = (EObject) fp.getBusinessObjectForPictogramElement(pe);
 			if (bo==null)
 				return null;

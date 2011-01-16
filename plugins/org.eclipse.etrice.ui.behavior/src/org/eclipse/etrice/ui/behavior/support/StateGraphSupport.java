@@ -235,7 +235,6 @@ public class StateGraphSupport {
 				}
 
 				// TODOHRR: check for refs added in model not present in diagram
-				// also add bindings and layer connections
 				
 				return true;
 			}
@@ -252,12 +251,16 @@ public class StateGraphSupport {
 				if (!super.canResizeShape(context))
 					return false;
 
+				ContainerShape containerShape = (ContainerShape)context.getShape();
+				Object bo = getBusinessObjectForPictogramElement(containerShape);
+				if (bo instanceof EObject && ((EObject)bo).eIsProxy())
+					return false;
+				
 				int width = context.getWidth()-MARGIN;
 				int height = context.getHeight()-MARGIN;
 				int xmax = 0;
 				int ymax = 0;
-				ContainerShape containerShape = (ContainerShape)context.getShape();
-				StateGraph sg = (StateGraph) getBusinessObjectForPictogramElement(containerShape);
+				StateGraph sg = (StateGraph) bo;
 				for (Shape childShape : containerShape.getChildren()) {
 					if (isOnInterface(sg, getBusinessObjectForPictogramElement(childShape)))
 						continue;
