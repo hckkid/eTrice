@@ -21,6 +21,7 @@ import org.eclipse.core.databinding.DataBindingContext;
 import org.eclipse.core.databinding.UpdateValueStrategy;
 import org.eclipse.core.databinding.beans.PojoObservables;
 import org.eclipse.core.databinding.conversion.Converter;
+import org.eclipse.core.databinding.conversion.IConverter;
 import org.eclipse.core.databinding.observable.ChangeEvent;
 import org.eclipse.core.databinding.observable.IChangeListener;
 import org.eclipse.core.databinding.validation.IValidator;
@@ -28,6 +29,7 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jface.databinding.swt.ISWTObservable;
 import org.eclipse.jface.databinding.swt.SWTObservables;
 import org.eclipse.jface.dialogs.IDialogConstants;
@@ -177,24 +179,43 @@ public abstract class AbstractPropertyDialog extends FormDialog {
 	}
 	
 	protected Text createText(Composite parent, String label, EObject obj, EAttribute att, IValidator validator) {
+		return createText(parent, label, obj, att, validator, false);
+	}
+	
+	protected Text createText(Composite parent, String label, EObject obj, EAttribute att, IValidator validator, boolean multiline) {
+		return createText(parent, label, obj, att, validator, null, null, multiline);
+	}
+	
+	protected Text createText(Composite parent, String label, EObject obj, EStructuralFeature feat, IValidator validator, IConverter s2m, IConverter m2s, boolean multiline) {
 		Label l = toolkit.createLabel(parent, label, SWT.NONE);
 		l.setLayoutData(new GridData(SWT.NONE));
 		
-		Text text = toolkit.createText(parent, "", SWT.BORDER);
+		int style = SWT.BORDER;
+		if (multiline)
+			style |= SWT.MULTI;
+		Text text = toolkit.createText(parent, "", style);
 		text.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		UpdateValueStrategy t2m = null;
 		UpdateValueStrategy m2t = null;
-		if (validator!=null) {
+		if (validator!=null || s2m!=null || m2s!=null) {
 			t2m = new UpdateValueStrategy();
-			t2m.setAfterConvertValidator(validator);
-			t2m.setBeforeSetValidator(validator);
+			if (s2m!=null)
+				t2m.setConverter(s2m);
+			if (validator!=null) {
+				t2m.setAfterConvertValidator(validator);
+				t2m.setBeforeSetValidator(validator);
+			}
 			m2t = new UpdateValueStrategy();
-			m2t.setAfterConvertValidator(validator);
-			m2t.setBeforeSetValidator(validator);
+			if (m2s!=null)
+				m2t.setConverter(m2s);
+			if (validator!=null) {
+				m2t.setAfterConvertValidator(validator);
+				m2t.setBeforeSetValidator(validator);
+			}
 		}
 		bindingContext.bindValue(SWTObservables.observeText(text, SWT.Modify), PojoObservables.observeValue(
-				obj, att.getName()), t2m, m2t);
+				obj, feat.getName()), t2m, m2t);
 		
 		return text;
 	}
