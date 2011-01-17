@@ -238,4 +238,34 @@ public class RoomNameProvider {
 		
 		return "not_unique";
 	}
+	
+	public static String getTransitionLabelName(Transition t) {
+		String name = null;
+		if (t instanceof InitialTransition) {
+			return "init";
+		}
+		else {
+			NonInitialTransition nit = (NonInitialTransition) t;
+			if (nit.getFrom() instanceof ChoicepointTerminal) {
+				if (nit instanceof ContinuationTransition)
+					return "[else]";
+				
+				if (nit instanceof CPBranchTransition) {
+					CPBranchTransition cpt = (CPBranchTransition) nit;
+					if (cpt.getCondition()!=null && !cpt.getCondition().getCommands().isEmpty())
+						return "["+cpt.getCondition().getCommands().get(0)+"]";
+				}
+
+				return "[?]";
+			}
+			
+			if (t.getName()!=null)
+				name = t.getName()+": ";
+			else
+				name ="";
+			
+			// TODOHRR: add triggers
+		}
+		return name;
+	}
 }
