@@ -12,14 +12,21 @@
 
 package org.eclipse.etrice.ui.behavior.support;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.etrice.ui.behavior.DiagramAccess;
+import org.eclipse.etrice.core.room.ActorClass;
+import org.eclipse.etrice.core.room.ActorContainerRef;
+import org.eclipse.etrice.core.room.ActorRef;
+import org.eclipse.etrice.core.room.BaseState;
+import org.eclipse.etrice.core.room.RefinedState;
+import org.eclipse.etrice.core.room.RoomFactory;
+import org.eclipse.etrice.core.room.State;
+import org.eclipse.etrice.core.room.StateGraph;
+import org.eclipse.etrice.core.room.SubSystemRef;
+import org.eclipse.etrice.core.room.TrPoint;
 import org.eclipse.etrice.ui.behavior.ImageProvider;
+import org.eclipse.etrice.ui.behavior.dialogs.StatePropertyDialog;
 import org.eclipse.graphiti.dt.IDiagramTypeProvider;
 import org.eclipse.graphiti.features.IAddFeature;
 import org.eclipse.graphiti.features.ICreateFeature;
@@ -57,7 +64,6 @@ import org.eclipse.graphiti.mm.algorithms.styles.Color;
 import org.eclipse.graphiti.mm.algorithms.styles.Orientation;
 import org.eclipse.graphiti.mm.pictograms.ChopboxAnchor;
 import org.eclipse.graphiti.mm.pictograms.ContainerShape;
-import org.eclipse.graphiti.mm.pictograms.Diagram;
 import org.eclipse.graphiti.mm.pictograms.PictogramElement;
 import org.eclipse.graphiti.mm.pictograms.Shape;
 import org.eclipse.graphiti.services.Graphiti;
@@ -65,28 +71,12 @@ import org.eclipse.graphiti.services.IGaService;
 import org.eclipse.graphiti.services.IPeCreateService;
 import org.eclipse.graphiti.tb.DefaultToolBehaviorProvider;
 import org.eclipse.graphiti.tb.IToolBehaviorProvider;
-import org.eclipse.graphiti.ui.features.AbstractDrillDownFeature;
 import org.eclipse.graphiti.ui.features.DefaultFeatureProvider;
 import org.eclipse.graphiti.util.ColorConstant;
 import org.eclipse.graphiti.util.IColorConstant;
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
-
-import org.eclipse.etrice.core.room.ActorClass;
-import org.eclipse.etrice.core.room.ActorContainerClass;
-import org.eclipse.etrice.core.room.ActorContainerRef;
-import org.eclipse.etrice.core.room.ActorRef;
-import org.eclipse.etrice.core.room.BaseState;
-import org.eclipse.etrice.core.room.InterfaceItem;
-import org.eclipse.etrice.core.room.LogicalSystem;
-import org.eclipse.etrice.core.room.RefinedState;
-import org.eclipse.etrice.core.room.RoomFactory;
-import org.eclipse.etrice.core.room.State;
-import org.eclipse.etrice.core.room.StateGraph;
-import org.eclipse.etrice.core.room.StructureClass;
-import org.eclipse.etrice.core.room.SubSystemRef;
-import org.eclipse.etrice.core.room.TrPoint;
 
 public class StateSupport {
 	
@@ -152,13 +142,12 @@ public class StateSupport {
 	        	BaseState s = RoomFactory.eINSTANCE.createBaseState();
 	        	s.setName("state");
 		        
-	        	// TODOHRR-B StatePropertyDialog
-//	        	Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-//				StatePropertyDialog dlg = new StatePropertyDialog(shell, s, sc, true);
-//				if (dlg.open()!=Window.OK)
-//					// find a method to abort creation
-//					//throw new RuntimeException();
-//					return EMPTY;
+	        	Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+				StatePropertyDialog dlg = new StatePropertyDialog(shell, s, sg);
+				if (dlg.open()!=Window.OK)
+					// find a method to abort creation
+					//throw new RuntimeException();
+					return EMPTY;
 
 		        sg.getStates().add(s);
 		        
@@ -211,14 +200,8 @@ public class StateSupport {
 					final Rectangle invisibleRectangle = gaService.createInvisibleRectangle(containerShape);
 					gaService.setLocationAndSize(invisibleRectangle,
 							context.getX(), context.getY(), width + 2*MARGIN, height + 2*MARGIN);
-	
-					RoundedRectangle rect = gaService.createRoundedRectangle(invisibleRectangle, CORNER_WIDTH, CORNER_WIDTH);
-					rect.setForeground(lineColor);
-					rect.setBackground(manageColor(BACKGROUND));
-					rect.setLineWidth(LINE_WIDTH);
-					gaService.setLocationAndSize(rect, MARGIN, MARGIN, width, height);
 
-					addSubStructureHint(s, rect, lineColor);
+					RoundedRectangle rect = createFigure(s, invisibleRectangle, lineColor, manageColor(BACKGROUND));
 					
 					// anchor for direct transitions to this state
 					ChopboxAnchor anchor = peCreateService.createChopboxAnchor(containerShape);
@@ -349,13 +332,13 @@ public class StateSupport {
 			public void execute(ICustomContext context) {
 				State s = (State) getBusinessObjectForPictogramElement(context.getPictogramElements()[0]);
 				Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-				StructureClass sc = (StructureClass)s.eContainer();
+				StateGraph sg = (StateGraph)s.eContainer();
 				
-	        	// TODOHRR-B StatePropertyDialog
-//				StatePropertyDialog dlg = new StatePropertyDialog(shell, s, sc, false);
-//				if (dlg.open()!=Window.OK)
-//					// TODOHRR: introduce a method to revert changes
-//					throw new RuntimeException();
+				StatePropertyDialog dlg = new StatePropertyDialog(shell, s, sg);
+				if (dlg.open()!=Window.OK)
+					// TODOHRR: introduce a method to revert changes
+					//throw new RuntimeException();
+					return;
 				
 				updateFigure(s, context);
 			}
@@ -365,47 +348,18 @@ public class StateSupport {
 				ContainerShape container = (ContainerShape)pe;
 				
 				// we clear the figure and rebuild it
-//				GraphicsAlgorithm invisibleRect = pe.getGraphicsAlgorithm();
-//				invisibleRect.getGraphicsAlgorithmChildren().clear();
+				GraphicsAlgorithm invisibleRect = pe.getGraphicsAlgorithm();
+				invisibleRect.getGraphicsAlgorithmChildren().clear();
 				
-//				createPortFigure(acr, false, container, invisibleRect, manageColor(DARK_COLOR), manageColor(BRIGHT_COLOR));
+				createFigure(s, invisibleRect, manageColor(LINE_COLOR), manageColor(BACKGROUND));
 				
-				GraphicsAlgorithm ga = container.getChildren().get(1).getGraphicsAlgorithm();
+				GraphicsAlgorithm ga = container.getChildren().get(0).getGraphicsAlgorithm();
 				if (ga instanceof Text) {
 					((Text)ga).setValue(s.getName());
 				}
 
 			}
 			
-		}
-		
-		private static class DrillDownFeature extends AbstractCustomFeature {
-
-			public DrillDownFeature(IFeatureProvider fp) {
-				super(fp);
-			}
-
-			@Override
-			public String getName() {
-				return "Open associated diagram";
-			}
-			
-			@Override
-			public boolean canExecute(ICustomContext context) {
-				PictogramElement[] pes = context.getPictogramElements();
-				if (pes != null && pes.length == 1) {
-					Object bo = getBusinessObjectForPictogramElement(pes[0]);
-					if (bo instanceof State) {
-						return true;
-					}
-				}
-				return false;
-			}
-
-			@Override
-			public void execute(ICustomContext context) {
-				// TODOHRR-B implement state context switch
-			}
 		}
 		
 		private class UpdateFeature extends AbstractUpdateFeature {
@@ -534,7 +488,7 @@ public class StateSupport {
 					
 					if (bo instanceof State) {
 						State s = (State) bo;
-						ContainerShape acShape = context.getTargetContainer();
+						//ContainerShape sgShape = context.getTargetContainer();
 						ActorClass ac = (ActorClass) getDiagram().getLink().getBusinessObjects().get(0);
 						
 						// TODOHRR: also check coordinates (no overlap with state graph boundaries)
@@ -603,6 +557,23 @@ public class StateSupport {
 			this.fp = fp;
 		}
 	
+		public static RoundedRectangle createFigure(State s,
+				GraphicsAlgorithm invisibleRect, Color darkColor,
+				Color brightColor) {
+			
+			IGaService gaService = Graphiti.getGaService();
+
+			RoundedRectangle rect = gaService.createRoundedRectangle(invisibleRect, CORNER_WIDTH, CORNER_WIDTH);
+			rect.setForeground(darkColor);
+			rect.setBackground(brightColor);
+			rect.setLineWidth(LINE_WIDTH);
+			gaService.setLocationAndSize(rect, MARGIN, MARGIN, invisibleRect.getWidth()-2*MARGIN, invisibleRect.getHeight()-2*MARGIN);
+
+			addSubStructureHint(s, rect, darkColor);
+			
+			return rect;
+		}
+
 		@Override
 		public ICreateFeature[] getCreateFeatures() {
 			return new ICreateFeature[] { new CreateFeature(fp) };
@@ -708,7 +679,7 @@ public class StateSupport {
 		
 		@Override
 		public ICustomFeature getDoubleClickFeature(IDoubleClickContext context) {
-			return new FeatureProvider.DrillDownFeature(getDiagramTypeProvider().getFeatureProvider());
+			return new FeatureProvider.PropertyFeature(getDiagramTypeProvider().getFeatureProvider());
 		}
 	}
 	
