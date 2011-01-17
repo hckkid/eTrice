@@ -16,6 +16,17 @@ import java.util.Arrays;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.naming.RoomFragmentProvider;
+import org.eclipse.etrice.core.room.ChoicePoint;
+import org.eclipse.etrice.core.room.State;
+import org.eclipse.etrice.core.room.StateGraph;
+import org.eclipse.etrice.core.room.TrPoint;
+import org.eclipse.etrice.core.room.Transition;
+import org.eclipse.etrice.core.room.util.RoomSwitch;
+import org.eclipse.etrice.ui.behavior.support.ChoicePointSupport;
+import org.eclipse.etrice.ui.behavior.support.StateGraphSupport;
+import org.eclipse.etrice.ui.behavior.support.StateSupport;
+import org.eclipse.etrice.ui.behavior.support.TrPointSupport;
+import org.eclipse.etrice.ui.behavior.support.TransitionSupport;
 import org.eclipse.graphiti.dt.IDiagramTypeProvider;
 import org.eclipse.graphiti.features.IAddFeature;
 import org.eclipse.graphiti.features.ICreateConnectionFeature;
@@ -51,22 +62,6 @@ import org.eclipse.graphiti.tb.SelectionInfoImpl;
 import org.eclipse.graphiti.ui.features.DefaultFeatureProvider;
 import org.eclipse.graphiti.util.IColorConstant;
 
-import org.eclipse.etrice.core.room.ActorContainerRef;
-import org.eclipse.etrice.core.room.Binding;
-import org.eclipse.etrice.core.room.LayerConnection;
-import org.eclipse.etrice.core.room.Port;
-import org.eclipse.etrice.core.room.SPPRef;
-import org.eclipse.etrice.core.room.State;
-import org.eclipse.etrice.core.room.StateGraph;
-import org.eclipse.etrice.core.room.StructureClass;
-import org.eclipse.etrice.core.room.TrPoint;
-import org.eclipse.etrice.core.room.Transition;
-import org.eclipse.etrice.core.room.util.RoomSwitch;
-import org.eclipse.etrice.ui.behavior.support.StateGraphSupport;
-import org.eclipse.etrice.ui.behavior.support.StateSupport;
-import org.eclipse.etrice.ui.behavior.support.TrPointSupport;
-import org.eclipse.etrice.ui.behavior.support.TransitionSupport;
-
 public class ProviderDispatcher {
 
 	private class FeatureProviderSwitch extends RoomSwitch<IFeatureProvider> {
@@ -81,9 +76,8 @@ public class ProviderDispatcher {
         			return stateGraphSupport.getFeatureProvider();
         		if (RoomFragmentProvider.isTrPoint(theEObject))
         			return trPointSupport.getFeatureProvider();
-        		// TODOHRR-B cp
-//        		if (RoomFragmentProvider.isChoicePoint(theEObject))
-//        			return choicePointSupport.getFeatureProvider();
+        		if (RoomFragmentProvider.isChoicePoint(theEObject))
+        			return choicePointSupport.getFeatureProvider();
         		if (RoomFragmentProvider.isStateGraph(theEObject))
         			return stateGraphSupport.getFeatureProvider();
         		if (RoomFragmentProvider.isTransition(theEObject))
@@ -100,6 +94,10 @@ public class ProviderDispatcher {
 		@Override
 		public IFeatureProvider caseTrPoint(TrPoint object) {
 			return trPointSupport.getFeatureProvider();
+		}
+		@Override
+		public IFeatureProvider caseChoicePoint(ChoicePoint object) {
+			return choicePointSupport.getFeatureProvider();
 		}
 		@Override
 		public IFeatureProvider caseState(State object) {
@@ -120,6 +118,7 @@ public class ProviderDispatcher {
 			return concatAll(
 					stateGraphSupport.getFeatureProvider().getCreateFeatures(),
 					trPointSupport.getFeatureProvider().getCreateFeatures(),
+					choicePointSupport.getFeatureProvider().getCreateFeatures(),
 					stateSupport.getFeatureProvider().getCreateFeatures()
 				);
 		}
@@ -149,9 +148,8 @@ public class ProviderDispatcher {
         			return stateGraphSupport.getToolBehaviorProvider();
         		if (RoomFragmentProvider.isTrPoint(theEObject))
         			return trPointSupport.getToolBehaviorProvider();
-        		// TODOHRR-B cp
-//        		if (RoomFragmentProvider.isChoicePoint(theEObject))
-//        			return choicePointSupport.getToolBehaviorProvider();
+        		if (RoomFragmentProvider.isChoicePoint(theEObject))
+        			return choicePointSupport.getToolBehaviorProvider();
         		if (RoomFragmentProvider.isStateGraph(theEObject))
         			return stateGraphSupport.getToolBehaviorProvider();
         		if (RoomFragmentProvider.isTransition(theEObject))
@@ -165,12 +163,14 @@ public class ProviderDispatcher {
 		public IToolBehaviorProvider caseStateGraph(StateGraph object) {
 			return stateGraphSupport.getToolBehaviorProvider();
 		}
-		
 		@Override
 		public IToolBehaviorProvider caseTrPoint(TrPoint object) {
 			return trPointSupport.getToolBehaviorProvider();
 		}
-		
+		@Override
+		public IToolBehaviorProvider caseChoicePoint(ChoicePoint object) {
+			return choicePointSupport.getToolBehaviorProvider();
+		}
 		@Override
 		public IToolBehaviorProvider caseState(State object) {
 			return stateSupport.getToolBehaviorProvider();
@@ -180,7 +180,7 @@ public class ProviderDispatcher {
 		public IToolBehaviorProvider caseTransition(Transition object) {
 			return transitionSupport.getToolBehaviorProvider();
 		}
-		
+
 		@Override
 		public IToolBehaviorProvider defaultCase(EObject object) {
 			return null;
@@ -344,6 +344,7 @@ public class ProviderDispatcher {
 	
 	private StateGraphSupport stateGraphSupport;
 	private TrPointSupport trPointSupport;
+	private ChoicePointSupport choicePointSupport;
 	private StateSupport stateSupport;
 	private TransitionSupport transitionSupport;
 	
@@ -361,6 +362,7 @@ public class ProviderDispatcher {
 
 		stateGraphSupport = new StateGraphSupport(dtp, dispatchingFP);
 		trPointSupport = new TrPointSupport(dtp, dispatchingFP);
+		choicePointSupport = new ChoicePointSupport(dtp, dispatchingFP);
 		stateSupport = new StateSupport(dtp, dispatchingFP);
 		transitionSupport = new TransitionSupport(dtp, dispatchingFP);
 		

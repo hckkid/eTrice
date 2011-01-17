@@ -14,7 +14,8 @@ public class StringToDetailCode extends Converter {
 	public Object convert(Object fromObject) {
 		if (fromObject instanceof String) {
 			String code = (String) fromObject;
-			String[] cmds = code.split("\n");
+			// TODOHRR: make work also for UNIX/Mac line endings
+			String[] cmds = code.split("\r\n");
 			DetailCode dc = RoomFactory.eINSTANCE.createDetailCode();
 			for (int i = 0; i < cmds.length; i++) {
 				dc.getCommands().add(cmds[i]);

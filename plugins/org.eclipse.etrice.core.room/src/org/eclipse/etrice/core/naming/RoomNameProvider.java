@@ -223,4 +223,19 @@ public class RoomNameProvider {
 		
 		return "not_unique";
 	}
+
+	public static String getUniqueChoicePointName(StateGraph sg) {
+		HashSet<String> names = new HashSet<String>();
+		for (ChoicePoint t : sg.getChPoints()) {
+			names.add(t.getName());
+		}
+		
+		for (int i = 0; i < 1000; i++) {
+			String name = "cp"+i;
+			if (!names.contains(name))
+				return name;
+		}
+		
+		return "not_unique";
+	}
 }
