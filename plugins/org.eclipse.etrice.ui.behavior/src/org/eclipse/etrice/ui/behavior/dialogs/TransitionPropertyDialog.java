@@ -5,6 +5,7 @@ import org.eclipse.core.databinding.validation.IValidator;
 import org.eclipse.core.databinding.validation.ValidationStatus;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.etrice.core.room.CPBranchTransition;
 import org.eclipse.etrice.core.room.InitialTransition;
 import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.etrice.core.room.StateGraph;
@@ -57,9 +58,7 @@ public class TransitionPropertyDialog extends AbstractPropertyDialog {
 	protected void createContent(IManagedForm mform, Composite body,
 			DataBindingContext bindingContext) {
 		
-		boolean initTrans = (trans instanceof InitialTransition);
-		
-		if (!initTrans) {
+		if (!(trans instanceof InitialTransition)) {
 			NameValidator nv = new NameValidator();
 			
 			Text name = createText(body, "Name:", trans, RoomPackage.eINSTANCE.getTransition_Name(), nv);
@@ -71,10 +70,20 @@ public class TransitionPropertyDialog extends AbstractPropertyDialog {
 		
 		DetailCodeToString m2s = new DetailCodeToString();
 		StringToDetailCode s2m = new StringToDetailCode();
-		Text action = createText(body, "Action Code:", trans, RoomPackage.eINSTANCE.getTransition_Action(), null, s2m, m2s, true);
-		GridData gd = new GridData(GridData.FILL_HORIZONTAL);
-		gd.heightHint = 100;
-		action.setLayoutData(gd);
+
+		if (trans instanceof CPBranchTransition) {
+			Text cond = createText(body, "Condition:", trans, RoomPackage.eINSTANCE.getCPBranchTransition_Condition(), null, s2m, m2s, true);
+			GridData gd = new GridData(GridData.FILL_HORIZONTAL);
+			gd.heightHint = 100;
+			cond.setLayoutData(gd);
+		}
+		
+		{
+			Text action = createText(body, "Action Code:", trans, RoomPackage.eINSTANCE.getTransition_Action(), null, s2m, m2s, true);
+			GridData gd = new GridData(GridData.FILL_HORIZONTAL);
+			gd.heightHint = 100;
+			action.setLayoutData(gd);
+		}
 	}
 
 }

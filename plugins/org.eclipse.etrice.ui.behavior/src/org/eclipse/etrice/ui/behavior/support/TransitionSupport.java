@@ -16,11 +16,11 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.room.BaseState;
-import org.eclipse.etrice.core.room.CPBranchTransition;
 import org.eclipse.etrice.core.room.ChoicePoint;
 import org.eclipse.etrice.core.room.ChoicepointTerminal;
 import org.eclipse.etrice.core.room.ContinuationTransition;
 import org.eclipse.etrice.core.room.InitialTransition;
+import org.eclipse.etrice.core.room.NonInitialTransition;
 import org.eclipse.etrice.core.room.RefinedState;
 import org.eclipse.etrice.core.room.RoomFactory;
 import org.eclipse.etrice.core.room.State;
@@ -150,8 +150,18 @@ public class TransitionSupport {
 						trans = t;
 					}
 					else if (src instanceof ChoicepointTerminal) {
-						// TODOHRR-B distinguish default branch (ContinuationTransition) and non-default
-						CPBranchTransition t = RoomFactory.eINSTANCE.createCPBranchTransition();
+						boolean dfltBranch = true;
+						for (Transition tr : sg.getTransitions()) {
+							if (tr instanceof ContinuationTransition) {
+								TransitionTerminal from = ((ContinuationTransition) tr).getFrom();
+								if (from instanceof ChoicepointTerminal) {
+									if (((ChoicepointTerminal) from).getCp()==((ChoicepointTerminal)src).getCp())
+										dfltBranch = false;
+								}
+							}
+						}
+						NonInitialTransition t = dfltBranch? RoomFactory.eINSTANCE.createContinuationTransition()
+								: RoomFactory.eINSTANCE.createCPBranchTransition();
 						t.setFrom(src);
 						t.setTo(dst);
 						trans = t;
@@ -289,7 +299,7 @@ public class TransitionSupport {
 		        Text text = gaService.createDefaultText(textDecorator);
 		        text.setForeground(manageColor(IColorConstant.BLACK));
 		        gaService.setLocation(text, 10, 0);
-		        text.setValue("label");
+		        text.setValue(RoomNameProvider.getTransitionLabelName(trans));
 
 
 				// create link and wire it
@@ -408,6 +418,8 @@ public class TransitionSupport {
 					// TODOHRR: introduce a method to revert changes, does hasDoneChanges=false roll back changes?
 					//throw new RuntimeException();
 					return;
+				
+				updateLabel(trans, (Connection) pe);
 			}
 			
 		}
@@ -437,6 +449,17 @@ public class TransitionSupport {
 		@Override
 		public ICustomFeature[] getCustomFeatures(ICustomContext context) {
 			return new ICustomFeature[] { new PropertyFeature(fp) };
+		}
+		
+		protected static void updateLabel(Transition trans, Connection conn) {
+			if (conn.getConnectionDecorators().size()<2)
+				return;
+			
+			ConnectionDecorator cd = conn.getConnectionDecorators().get(1);
+			if (cd.getGraphicsAlgorithm() instanceof Text) {
+				Text label = (Text) cd.getGraphicsAlgorithm();
+				label.setValue(RoomNameProvider.getTransitionLabelName(trans));
+			}
 		}
 	}
 	

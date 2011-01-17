@@ -128,11 +128,10 @@ public class ProviderDispatcher {
 	
 		public ICreateFeature[] getCreateFeatures() {
 			return concatAll(
-					stateGraphSupport.getFeatureProvider().getCreateFeatures(),
-					trPointSupport.getFeatureProvider().getCreateFeatures(),
+					stateSupport.getFeatureProvider().getCreateFeatures(),
 					initialPointSupport.getFeatureProvider().getCreateFeatures(),
-					choicePointSupport.getFeatureProvider().getCreateFeatures(),
-					stateSupport.getFeatureProvider().getCreateFeatures()
+					trPointSupport.getFeatureProvider().getCreateFeatures(),
+					choicePointSupport.getFeatureProvider().getCreateFeatures()
 				);
 		}
 

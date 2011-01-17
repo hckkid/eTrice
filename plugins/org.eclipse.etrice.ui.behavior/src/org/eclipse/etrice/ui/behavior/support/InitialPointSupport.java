@@ -49,7 +49,6 @@ import org.eclipse.graphiti.mm.pictograms.Anchor;
 import org.eclipse.graphiti.mm.pictograms.AnchorContainer;
 import org.eclipse.graphiti.mm.pictograms.ChopboxAnchor;
 import org.eclipse.graphiti.mm.pictograms.ContainerShape;
-import org.eclipse.graphiti.mm.pictograms.Diagram;
 import org.eclipse.graphiti.mm.pictograms.PictogramElement;
 import org.eclipse.graphiti.mm.pictograms.Shape;
 import org.eclipse.graphiti.services.Graphiti;
@@ -110,7 +109,7 @@ public class InitialPointSupport {
 						EObject obj = context.getTargetContainer().getLink().getBusinessObjects().get(0);
 						if (obj instanceof StateGraph) {
 							ContainerShape parent = context.getTargetContainer().getContainer();
-							if (parent instanceof Diagram) {
+							if (! (parent instanceof StateGraph)) {
 								StateGraph sg = (StateGraph) obj;
 								for (Transition t : sg.getTransitions()) {
 									if (t instanceof InitialTransition)
