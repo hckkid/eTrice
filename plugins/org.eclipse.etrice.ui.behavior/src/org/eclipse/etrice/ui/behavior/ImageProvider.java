@@ -25,6 +25,7 @@ public class ImageProvider extends AbstractImageProvider {
 	public static final String IMG_ENTRYPOINT = PREFIX + "entrypoint";
 	public static final String IMG_EXITPOINT = PREFIX + "exitpoint";
 	public static final String IMG_CP = PREFIX + "cp";
+	public static final String IMG_INITIAL = PREFIX + "initial";
 	public static final String IMG_TRANSITION = PREFIX + "transition";
 
 	@Override
@@ -33,6 +34,7 @@ public class ImageProvider extends AbstractImageProvider {
 		addImageFilePath(IMG_TRPOINT, "icons/TrPoint.gif");
 		addImageFilePath(IMG_ENTRYPOINT, "icons/EntryPoint.gif");
 		addImageFilePath(IMG_EXITPOINT, "icons/ExitPoint.gif");
+		addImageFilePath(IMG_INITIAL, "icons/InitialPoint.gif");
 		addImageFilePath(IMG_CP, "icons/ChoicePoint.gif");
 		addImageFilePath(IMG_TRANSITION, "icons/Transition.gif");
 	}

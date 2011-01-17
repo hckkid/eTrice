@@ -23,6 +23,7 @@ import org.eclipse.etrice.core.room.TrPoint;
 import org.eclipse.etrice.core.room.Transition;
 import org.eclipse.etrice.core.room.util.RoomSwitch;
 import org.eclipse.etrice.ui.behavior.support.ChoicePointSupport;
+import org.eclipse.etrice.ui.behavior.support.InitialPointSupport;
 import org.eclipse.etrice.ui.behavior.support.StateGraphSupport;
 import org.eclipse.etrice.ui.behavior.support.StateSupport;
 import org.eclipse.etrice.ui.behavior.support.TrPointSupport;
@@ -52,6 +53,7 @@ import org.eclipse.graphiti.features.custom.ICustomFeature;
 import org.eclipse.graphiti.mm.algorithms.GraphicsAlgorithm;
 import org.eclipse.graphiti.mm.algorithms.styles.LineStyle;
 import org.eclipse.graphiti.mm.pictograms.ConnectionDecorator;
+import org.eclipse.graphiti.mm.pictograms.ContainerShape;
 import org.eclipse.graphiti.mm.pictograms.PictogramElement;
 import org.eclipse.graphiti.mm.pictograms.Shape;
 import org.eclipse.graphiti.tb.DefaultToolBehaviorProvider;
@@ -65,6 +67,8 @@ import org.eclipse.graphiti.util.IColorConstant;
 public class ProviderDispatcher {
 
 	private class FeatureProviderSwitch extends RoomSwitch<IFeatureProvider> {
+		private ContainerShape parent = null;
+
 		@Override
 		public IFeatureProvider doSwitch(EObject theEObject) {
         	
@@ -88,6 +92,14 @@ public class ProviderDispatcher {
 		
 		@Override
 		public IFeatureProvider caseStateGraph(StateGraph object) {
+			if (parent!=null && parent.getLink()!=null) {
+				if (parent.getLink().getBusinessObjects().size()>0) {
+					EObject bo = parent.getLink().getBusinessObjects().get(0);
+					if (bo instanceof StateGraph)
+						return initialPointSupport.getFeatureProvider();
+				}
+				parent = null;
+			}
 			return stateGraphSupport.getFeatureProvider();
 		}
 		
@@ -118,6 +130,7 @@ public class ProviderDispatcher {
 			return concatAll(
 					stateGraphSupport.getFeatureProvider().getCreateFeatures(),
 					trPointSupport.getFeatureProvider().getCreateFeatures(),
+					initialPointSupport.getFeatureProvider().getCreateFeatures(),
 					choicePointSupport.getFeatureProvider().getCreateFeatures(),
 					stateSupport.getFeatureProvider().getCreateFeatures()
 				);
@@ -134,9 +147,15 @@ public class ProviderDispatcher {
 					transitionSupport.getFeatureProvider().getCustomFeatures(context)
 				);
 		}
+
+		public void setParentContainer(ContainerShape parent) {
+			this.parent  = parent;
+		}
 	}
 
 	private class ToolBehaviorProviderSwitch extends RoomSwitch<IToolBehaviorProvider> {
+		private ContainerShape parent = null;
+
 		@Override
 		public IToolBehaviorProvider doSwitch(EObject theEObject) {
         	
@@ -161,6 +180,14 @@ public class ProviderDispatcher {
 		
 		@Override
 		public IToolBehaviorProvider caseStateGraph(StateGraph object) {
+			if (parent!=null && parent.getLink()!=null) {
+				if (parent.getLink().getBusinessObjects().size()>0) {
+					EObject bo = parent.getLink().getBusinessObjects().get(0);
+					if (bo instanceof StateGraph)
+						return initialPointSupport.getToolBehaviorProvider();
+				}
+				parent = null;
+			}
 			return stateGraphSupport.getToolBehaviorProvider();
 		}
 		@Override
@@ -185,6 +212,10 @@ public class ProviderDispatcher {
 		public IToolBehaviorProvider defaultCase(EObject object) {
 			return null;
 		}
+
+		public void setParentContainer(ContainerShape parent) {
+			this.parent  = parent;
+		}
 		
 	}
 
@@ -206,6 +237,7 @@ public class ProviderDispatcher {
 		
 		@Override
 		public IAddFeature getAddFeature(IAddContext context) {
+			featureSwitch.setParentContainer(context.getTargetContainer());
 			IFeatureProvider fp = featureSwitch.doSwitch(((EObject) context.getNewObject()));
 			if (fp==null)
 				return super.getAddFeature(context);
@@ -215,34 +247,34 @@ public class ProviderDispatcher {
 
 		@Override
 	    public ILayoutFeature getLayoutFeature(ILayoutContext context) {
-	        IFeatureProvider fp = featureSwitch.doSwitch(getBusinessObject(context));
-			if (fp==null)
-				return super.getLayoutFeature(context);
-			else
+			IFeatureProvider fp = getFeatureProvider(context);
+			if (fp!=null)
 				return fp.getLayoutFeature(context);
+			else
+				return super.getLayoutFeature(context);
 	    }
 		
 		@Override
 		public IMoveShapeFeature getMoveShapeFeature(IMoveShapeContext context) {
-	        IFeatureProvider fp = featureSwitch.doSwitch(getBusinessObject(context));
-			if (fp==null)
-				return super.getMoveShapeFeature(context);
-			else
+			IFeatureProvider fp = getFeatureProvider(context);
+			if (fp!=null)
 				return fp.getMoveShapeFeature(context);
+			else
+				return super.getMoveShapeFeature(context);
 		}
 		
 		@Override
 		public IResizeShapeFeature getResizeShapeFeature(IResizeShapeContext context) {
-	        IFeatureProvider fp = featureSwitch.doSwitch(getBusinessObject(context));
-			if (fp==null)
-				return super.getResizeShapeFeature(context);
-			else
+			IFeatureProvider fp = getFeatureProvider(context);
+			if (fp!=null)
 				return fp.getResizeShapeFeature(context);
+			else
+				return super.getResizeShapeFeature(context);
 		}
 		
 		@Override
 		public IUpdateFeature getUpdateFeature(IUpdateContext context) {
-	        IFeatureProvider fp = featureSwitch.doSwitch(getBusinessObject(context));
+			IFeatureProvider fp = getFeatureProvider(context);
 			if (fp!=null)
 				return fp.getUpdateFeature(context);
 			else
@@ -251,7 +283,7 @@ public class ProviderDispatcher {
 		
 		@Override
 		public IDeleteFeature getDeleteFeature(IDeleteContext context) {
-	        IFeatureProvider fp = featureSwitch.doSwitch(getBusinessObject(context));
+			IFeatureProvider fp = getFeatureProvider(context);
 			if (fp!=null)
 				return fp.getDeleteFeature(context);
 			else
@@ -260,7 +292,7 @@ public class ProviderDispatcher {
 		
 		@Override
 		public IRemoveFeature getRemoveFeature(IRemoveContext context) {
-	        IFeatureProvider fp = featureSwitch.doSwitch(getBusinessObject(context));
+			IFeatureProvider fp = getFeatureProvider(context);
 			if (fp!=null)
 				return fp.getRemoveFeature(context);
 			else
@@ -276,6 +308,17 @@ public class ProviderDispatcher {
 			PictogramElement pictogramElement = context.getPictogramElement();
 			EObject bo = (EObject) getBusinessObjectForPictogramElement(pictogramElement);
 			return bo;
+		}
+		
+		private IFeatureProvider getFeatureProvider(IPictogramElementContext context) {
+			EObject eco = context.getPictogramElement().eContainer();
+			if (eco instanceof ContainerShape) {
+				featureSwitch.setParentContainer((ContainerShape) eco);
+				IFeatureProvider fp = featureSwitch.doSwitch(getBusinessObject(context));
+				if (fp!=null)
+					return fp;
+			}
+			return null;
 		}
 	}
 	
@@ -319,6 +362,14 @@ public class ProviderDispatcher {
 			EObject bo = (EObject) fp.getBusinessObjectForPictogramElement(pe);
 			if (bo==null)
 				return null;
+
+			EObject eco = pe.eContainer();
+			if (eco instanceof ContainerShape) {
+				behaviorSwitch.setParentContainer((ContainerShape) eco);
+				IToolBehaviorProvider bp = behaviorSwitch.doSwitch(bo);
+				if (bp!=null)
+					return bp;
+			}
 			
 			IToolBehaviorProvider bp = behaviorSwitch.doSwitch(bo);
 			return bp;
@@ -344,6 +395,7 @@ public class ProviderDispatcher {
 	
 	private StateGraphSupport stateGraphSupport;
 	private TrPointSupport trPointSupport;
+	private InitialPointSupport initialPointSupport;
 	private ChoicePointSupport choicePointSupport;
 	private StateSupport stateSupport;
 	private TransitionSupport transitionSupport;
@@ -362,6 +414,7 @@ public class ProviderDispatcher {
 
 		stateGraphSupport = new StateGraphSupport(dtp, dispatchingFP);
 		trPointSupport = new TrPointSupport(dtp, dispatchingFP);
+		initialPointSupport = new InitialPointSupport(dtp, dispatchingFP);
 		choicePointSupport = new ChoicePointSupport(dtp, dispatchingFP);
 		stateSupport = new StateSupport(dtp, dispatchingFP);
 		transitionSupport = new TransitionSupport(dtp, dispatchingFP);
