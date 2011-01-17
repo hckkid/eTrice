@@ -12,6 +12,7 @@
 
 package org.eclipse.etrice.ui.structure.editor;
 
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.etrice.ui.structure.Activator;
 import org.eclipse.graphiti.ui.editor.DiagramEditor;
 import org.eclipse.swt.graphics.Image;
@@ -30,4 +31,12 @@ public class StructureEditor extends DiagramEditor {
 		return Activator.getImage("icons/Structure.gif");
 	}
 
+	@Override
+	protected void initializeGraphicalViewer() {
+		super.initializeGraphicalViewer();
+		
+		ResourceSet rs = getEditingDomain().getResourceSet();
+		if (rs.getResources().size()>1)
+			rs.getResources().get(1).setTrackingModification(true);
+	}
 }
