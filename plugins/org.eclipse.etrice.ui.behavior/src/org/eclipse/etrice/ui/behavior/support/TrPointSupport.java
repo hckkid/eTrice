@@ -17,7 +17,6 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.etrice.core.room.ActorContainerRef;
 import org.eclipse.etrice.core.room.EntryPoint;
 import org.eclipse.etrice.core.room.ExitPoint;
-import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.RoomFactory;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraph;
@@ -25,6 +24,7 @@ import org.eclipse.etrice.core.room.TrPoint;
 import org.eclipse.etrice.core.room.TransitionPoint;
 import org.eclipse.etrice.ui.behavior.ImageProvider;
 import org.eclipse.etrice.ui.behavior.NoResizeFeature;
+import org.eclipse.etrice.ui.behavior.dialogs.TrPointPropertyDialog;
 import org.eclipse.graphiti.dt.IDiagramTypeProvider;
 import org.eclipse.graphiti.features.IAddFeature;
 import org.eclipse.graphiti.features.ICreateConnectionFeature;
@@ -83,6 +83,9 @@ import org.eclipse.graphiti.ui.features.DefaultDeleteFeature;
 import org.eclipse.graphiti.ui.features.DefaultFeatureProvider;
 import org.eclipse.graphiti.util.ColorConstant;
 import org.eclipse.graphiti.util.IColorConstant;
+import org.eclipse.jface.window.Window;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.PlatformUI;
 
 public class TrPointSupport {
 	
@@ -143,12 +146,12 @@ public class TrPointSupport {
 		        StateGraph sg = (StateGraph) context.getTargetContainer().getLink().getBusinessObjects().get(0);
 		        
 		        // TODOHRR-B add property dialog
-//		        Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-//		        SPPPropertyDialog dlg = new SPPPropertyDialog(shell, spp, acc, true, false);
-//				if (dlg.open()!=Window.OK)
-//					// find a method to abort creation
-//					//throw new RuntimeException();
-//					return EMPTY;
+		        Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+				TrPointPropertyDialog dlg = new TrPointPropertyDialog(shell, tp, sg, false);
+				if (dlg.open()!=Window.OK)
+					// find a method to abort creation
+					//throw new RuntimeException();
+					return EMPTY;
 				
 				doneChanges = true;
 				
@@ -370,9 +373,7 @@ public class TrPointSupport {
 				if (pes != null && pes.length == 1 && pes[0] instanceof ContainerShape) {
 					Object bo = getBusinessObjectForPictogramElement(pes[0]);
 					if (bo instanceof TrPoint) {
-						ContainerShape container = (ContainerShape)pes[0];
-						bo = getBusinessObjectForPictogramElement(container);
-						return (bo instanceof StateGraph);
+						return true;
 					}
 				}
 				return false;
@@ -380,19 +381,21 @@ public class TrPointSupport {
 
 			@Override
 			public void execute(ICustomContext context) {
-				TrPoint tp = (TrPoint) getBusinessObjectForPictogramElement(context.getPictogramElements()[0]);
-				StateGraph acc = (StateGraph)tp.eContainer();
-				boolean subtp = isSubTP(context.getPictogramElements()[0]);
+				PictogramElement pe = context.getPictogramElements()[0];
+				TrPoint tp = (TrPoint) getBusinessObjectForPictogramElement(pe);
+				StateGraph sg = (StateGraph)tp.eContainer();
+				boolean subtp = isSubTP(pe);
 				
-				// TODOHRR-B property dialog
-//				Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-//				SPPPropertyDialog dlg = new SPPPropertyDialog(shell, tp, acc, false, subtp);
-//				if (dlg.open()!=Window.OK)
-//					// TODOHRR: introduce a method to revert changes, does hasDoneChanges=false roll back changes?
-//					//throw new RuntimeException();
-//					return;
+				Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+				TrPointPropertyDialog dlg = new TrPointPropertyDialog(shell, tp, sg, subtp);
+				if (dlg.open()!=Window.OK)
+					// TODOHRR: introduce a method to revert changes, does hasDoneChanges=false roll back changes?
+					//throw new RuntimeException();
+					return;
 				
-				updateSPPFigure(tp, context.getPictogramElements()[0], manageColor(DARK_COLOR), manageColor(BRIGHT_COLOR));
+				String kind = getItemKind(tp);
+				Graphiti.getPeService().setPropertyValue(pe, PROP_KIND, kind);
+				updateTrPointFigure(tp, pe, manageColor(DARK_COLOR), manageColor(BRIGHT_COLOR));
 			}
 			
 		}
@@ -409,14 +412,14 @@ public class TrPointSupport {
 				if (bo instanceof EObject && ((EObject)bo).eIsProxy())
 					return true;
 				
-				return bo instanceof InterfaceItem;
+				return bo instanceof TrPoint;
 			}
 
 			@Override
 			public IReason updateNeeded(IUpdateContext context) {
 				Object bo = getBusinessObjectForPictogramElement(context.getPictogramElement());
 				if (bo instanceof EObject && ((EObject)bo).eIsProxy()) {
-					return Reason.createTrueReason("InterfaceItem deleted from model");
+					return Reason.createTrueReason("Transition Point deleted from model");
 				}
 				TrPoint tp = (TrPoint) bo;
 				
@@ -469,7 +472,7 @@ public class TrPointSupport {
 				boolean inherited = isInherited(tp, bo, containerShape);
 				
 				Color dark = manageColor(inherited? INHERITED_COLOR:DARK_COLOR);
-				updateSPPFigure(tp, containerShape, dark, manageColor(BRIGHT_COLOR));
+				updateTrPointFigure(tp, containerShape, dark, manageColor(BRIGHT_COLOR));
 				String kind = getItemKind(tp);
 				Graphiti.getPeService().setPropertyValue(containerShape, PROP_KIND, kind);
 				return true;
@@ -605,7 +608,7 @@ public class TrPointSupport {
 			}
 		}
 
-		private static void updateSPPFigure(TrPoint tp, PictogramElement pe, Color dark, Color bright) {
+		private static void updateTrPointFigure(TrPoint tp, PictogramElement pe, Color dark, Color bright) {
 			ContainerShape container = (ContainerShape)pe;
 			
 			// we clear the figure and rebuild it
@@ -763,7 +766,7 @@ public class TrPointSupport {
 			ccc.setSourcePictogramElement(pe);
 			Anchor anchor = null;
 			if (pe instanceof AnchorContainer) {
-				// our spp has four fixed point anchor - we choose the first one
+				// our transition point has four fixed point anchor - we choose the first one
 				anchor = ((ContainerShape)pe).getAnchors().get(0);
 			}
 			ccc.setSourceAnchor(anchor);
