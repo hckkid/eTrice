@@ -335,6 +335,9 @@ public class TransitionSupport {
 				if (bo instanceof EObject && ((EObject)bo).eIsProxy())
 					return true;
 				
+				if (bo instanceof Transition)
+					return true;
+				
 				return false;
 			}
 
@@ -344,12 +347,26 @@ public class TransitionSupport {
 				if (bo instanceof EObject && ((EObject)bo).eIsProxy()) {
 					return Reason.createTrueReason("Transition deleted from model");
 				}
+				
+				if (bo instanceof Transition) {
+					Transition t = (Transition) bo;
+					Connection conn = (Connection)context.getPictogramElement();
+					if (conn.getConnectionDecorators().size()>=2) {
+						ConnectionDecorator cd = conn.getConnectionDecorators().get(1);
+						if (cd.getGraphicsAlgorithm() instanceof Text) {
+							Text label = (Text) cd.getGraphicsAlgorithm();
+							if (!label.getValue().equals(RoomNameProvider.getTransitionLabelName(t)))
+								return Reason.createTrueReason("Label needs update");
+						}
+					}
+				}
+				
 				return Reason.createFalseReason();
 			}
 
 			@Override
 			public boolean update(IUpdateContext context) {
-				ContainerShape containerShape = (ContainerShape)context.getPictogramElement();
+				Connection containerShape = (Connection)context.getPictogramElement();
 				Object bo = getBusinessObjectForPictogramElement(containerShape);
 				if (bo instanceof EObject && ((EObject)bo).eIsProxy()) {
 					IRemoveContext rc = new RemoveContext(containerShape);
@@ -361,7 +378,26 @@ public class TransitionSupport {
 					EcoreUtil.delete((EObject) bo);
 					return true;
 				}
-				return false;
+				
+				boolean updated = false;
+				
+				if (bo instanceof Transition) {
+					Transition t = (Transition) bo;
+					Connection conn = (Connection)context.getPictogramElement();
+					if (conn.getConnectionDecorators().size()>=2) {
+						ConnectionDecorator cd = conn.getConnectionDecorators().get(1);
+						if (cd.getGraphicsAlgorithm() instanceof Text) {
+							Text label = (Text) cd.getGraphicsAlgorithm();
+							String transitionLabelName = RoomNameProvider.getTransitionLabelName(t);
+							if (!label.getValue().equals(transitionLabelName)) {
+								label.setValue(transitionLabelName);
+								updated = true;
+							}
+						}
+					}
+				}
+
+				return updated;
 			}
 		}
 		
