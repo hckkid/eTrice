@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.core.databinding.DataBindingContext;
-import org.eclipse.core.databinding.beans.PojoObservables;
-import org.eclipse.core.databinding.observable.value.IObservableValue;
 import org.eclipse.core.databinding.validation.IValidator;
 import org.eclipse.core.databinding.validation.ValidationStatus;
 import org.eclipse.core.runtime.IStatus;
@@ -15,7 +13,9 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.CPBranchTransition;
+import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.ExternalPort;
+import org.eclipse.etrice.core.room.Guard;
 import org.eclipse.etrice.core.room.InitialTransition;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.Message;
@@ -23,7 +23,6 @@ import org.eclipse.etrice.core.room.MessageFromIf;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.RoomFactory;
 import org.eclipse.etrice.core.room.RoomPackage;
-import org.eclipse.etrice.core.room.SAPRef;
 import org.eclipse.etrice.core.room.SPPRef;
 import org.eclipse.etrice.core.room.ServiceImplementation;
 import org.eclipse.etrice.core.room.StateGraph;
@@ -32,11 +31,6 @@ import org.eclipse.etrice.core.room.Trigger;
 import org.eclipse.etrice.core.room.TriggeredTransition;
 import org.eclipse.etrice.ui.behavior.Activator;
 import org.eclipse.etrice.ui.common.dialogs.AbstractPropertyDialog;
-import org.eclipse.jface.databinding.swt.IWidgetValueProperty;
-import org.eclipse.jface.databinding.swt.SWTObservables;
-import org.eclipse.jface.databinding.swt.WidgetProperties;
-import org.eclipse.jface.databinding.viewers.ViewerProperties;
-import org.eclipse.jface.databinding.viewers.ViewersObservables;
 import org.eclipse.jface.viewers.IBaseLabelProvider;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredContentProvider;
@@ -47,11 +41,14 @@ import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.FocusEvent;
+import org.eclipse.swt.events.FocusListener;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
@@ -151,12 +148,18 @@ public class TransitionPropertyDialog extends AbstractPropertyDialog {
 	private List<InterfaceItem> interfaceItems = new ArrayList<InterfaceItem>();
 	private TableViewer triggerViewer;
 	private EList<Message> currentMsgs;
+	private DetailCodeToString m2s;
+	private StringToDetailCode s2m;
+	private Text guardText;
 
 	public TransitionPropertyDialog(Shell shell, StateGraph sg, Transition trans) {
 		super(shell, "Edit Transition");
 		this.sg = sg;
 		this.trans = trans;
 		this.ac = getActorClass(sg);
+
+		m2s = new DetailCodeToString();
+		s2m = new StringToDetailCode();
 		
 		collectInterfaceItems();
 	}
@@ -206,24 +209,12 @@ public class TransitionPropertyDialog extends AbstractPropertyDialog {
 		if (trans instanceof TriggeredTransition) {
 			FormToolkit toolkit = mform.getToolkit();
 
-			initIfEmpty();
-
 			Label l = toolkit.createLabel(body, "Triggers:", SWT.NONE);
 			GridData gd = new GridData(GridData.FILL_HORIZONTAL);
 			gd.horizontalSpan = 2;
 			l.setLayoutData(gd);
 
-			Composite triggerCompartment = toolkit.createComposite(body);
-			triggerCompartment.setLayout(new GridLayout(3, false));
-			gd = new GridData(GridData.FILL_HORIZONTAL);
-			gd.horizontalSpan = 2;
-			triggerCompartment.setLayoutData(gd);
-			
-			triggerViewer = createTriggerTable(triggerCompartment, toolkit);
-			mifViewer = createMifTable(triggerCompartment, toolkit);
-			
-			createInterfaceCombo(triggerCompartment, toolkit);
-			createMessageCombo(toolkit, triggerCompartment);
+			createTriggerCompartment(body, toolkit);
 
 			addListeners();
 			
@@ -236,9 +227,6 @@ public class TransitionPropertyDialog extends AbstractPropertyDialog {
 //					prop.observeDetail(tableObs)
 //				);
 		}
-
-		DetailCodeToString m2s = new DetailCodeToString();
-		StringToDetailCode s2m = new StringToDetailCode();
 
 		if (trans instanceof CPBranchTransition) {
 			Text cond = createText(body, "Condition:", trans, RoomPackage.eINSTANCE.getCPBranchTransition_Condition(), null, s2m, m2s, true);
@@ -255,16 +243,157 @@ public class TransitionPropertyDialog extends AbstractPropertyDialog {
 		}
 	}
 
+	private void createTriggerCompartment(Composite body, FormToolkit toolkit) {
+		Composite triggerCompartment = toolkit.createComposite(body);
+		triggerCompartment.setLayout(new GridLayout(3, false));
+		GridData gd = new GridData(GridData.FILL_HORIZONTAL);
+		gd.horizontalSpan = 2;
+		triggerCompartment.setLayoutData(gd);
+		
+		createTriggerTable(triggerCompartment, toolkit);
+		createMifTable(triggerCompartment, toolkit);
+		
+		createMifCompartment(triggerCompartment, toolkit);
+	}
+
+	private void createTriggerTable(Composite triggerCompartment, FormToolkit toolkit) {
+		Composite tableCompartment = toolkit.createComposite(triggerCompartment);
+		tableCompartment.setLayout(new GridLayout(2, false));
+		GridData gd = new GridData(GridData.FILL_HORIZONTAL);
+		tableCompartment.setLayoutData(gd);
+
+		Table triggerTable = toolkit.createTable(tableCompartment, SWT.NONE | SWT.SINGLE);
+		gd = new GridData(GridData.FILL_HORIZONTAL);
+		gd.heightHint = 50;
+		gd.horizontalSpan = 2;
+		triggerTable.setLayoutData(gd);
+		triggerViewer = new TableViewer(triggerTable);
+		triggerViewer.setContentProvider(new TriggerContentProvider());
+		triggerViewer.setLabelProvider(new TriggerLabelProvider());
+		triggerViewer.setInput(trans);
+
+		if (((TriggeredTransition) trans).getTriggers().isEmpty())
+			addNewTrigger();
+		
+		Button add = toolkit.createButton(tableCompartment, "Add", SWT.NONE);
+		gd = new GridData(GridData.FILL_HORIZONTAL);
+		add.setLayoutData(gd);
+		
+		final Button remove = toolkit.createButton(tableCompartment, "Remove", SWT.NONE);
+		gd = new GridData(GridData.FILL_HORIZONTAL);
+		remove.setLayoutData(gd);
+		if (((TriggeredTransition) trans).getTriggers().size()==1)
+			remove.setEnabled(false);
+		
+		add.addSelectionListener(new SelectionListener() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				addNewTrigger();
+				remove.setEnabled(true);
+			}
+			
+			@Override
+			public void widgetDefaultSelected(SelectionEvent e) {
+				widgetSelected(e);
+			}
+		});
+		
+		remove.addSelectionListener(new SelectionListener() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				removeCurrentTrigger();
+				if (((TriggeredTransition) trans).getTriggers().size()==1)
+					remove.setEnabled(false);
+			}
+			
+			@Override
+			public void widgetDefaultSelected(SelectionEvent e) {
+				widgetSelected(e);
+			}
+		});
+	}
+
+	private void removeCurrentTrigger() {
+		Object element = ((IStructuredSelection)triggerViewer.getSelection()).getFirstElement();
+		((TriggeredTransition) trans).getTriggers().remove(element);
+		triggerViewer.refresh();
+		triggerViewer.setSelection(new StructuredSelection(((TriggeredTransition) trans).getTriggers().get(0)), true);
+	}
+
+	private void createMifTable(Composite triggerCompartment, FormToolkit toolkit) {
+		Composite tableCompartment = toolkit.createComposite(triggerCompartment);
+		tableCompartment.setLayout(new GridLayout(2, false));
+		GridData gd = new GridData(GridData.FILL_HORIZONTAL);
+		tableCompartment.setLayoutData(gd);
+
+		Table mifTable = toolkit.createTable(tableCompartment, SWT.NONE | SWT.SINGLE);
+		gd = new GridData(GridData.FILL_HORIZONTAL);
+		gd.heightHint = 50;
+		gd.horizontalSpan = 2;
+		mifTable.setLayoutData(gd);
+		mifViewer = new TableViewer(mifTable);
+		mifViewer.setContentProvider(new MessageFromInterfaceContentProvider());
+		mifViewer.setLabelProvider(new MessageFromInterfaceLabelProvider());
+		
+		Button add = toolkit.createButton(tableCompartment, "Add", SWT.NONE);
+		gd = new GridData(GridData.FILL_HORIZONTAL);
+		add.setLayoutData(gd);
+		
+		Button remove = toolkit.createButton(tableCompartment, "Remove", SWT.NONE);
+		gd = new GridData(GridData.FILL_HORIZONTAL);
+		remove.setLayoutData(gd);
+	}
+
+	private void createMifCompartment(Composite triggerCompartment, FormToolkit toolkit) {
+		Composite mifCompartment = toolkit.createComposite(triggerCompartment);
+		mifCompartment.setLayout(new GridLayout(2, false));
+		GridData gd = new GridData(GridData.FILL_HORIZONTAL);
+		gd.verticalAlignment = SWT.BEGINNING;
+		mifCompartment.setLayoutData(gd);
+
+		createInterfaceCombo(mifCompartment, toolkit);
+		createMessageCombo(mifCompartment, toolkit);
+		
+		Label l = toolkit.createLabel(mifCompartment, "Guard:", SWT.NONE);
+		l.setLayoutData(new GridData());
+
+		guardText = toolkit.createText(mifCompartment, "", SWT.BORDER | SWT.MULTI);
+		guardText.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+	}
+
+	private void createInterfaceCombo(Composite triggerCompartment,
+			FormToolkit toolkit) {
+		
+		Label l = toolkit.createLabel(triggerCompartment, "Interface Item:", SWT.NONE);
+		l.setLayoutData(new GridData());
+
+		interfaceCombo = new Combo(triggerCompartment, SWT.READ_ONLY);
+		GridData gd = new GridData(GridData.FILL_HORIZONTAL);
+		interfaceCombo.setLayoutData(gd);
+		interfaceCombo.setVisibleItemCount(10);
+		toolkit.adapt(interfaceCombo, true, true);
+		
+		for (InterfaceItem item : interfaceItems) {
+			interfaceCombo.add(item.getName());
+		}
+	}
+
+	private void createMessageCombo(Composite triggerCompartment, FormToolkit toolkit) {
+		
+		Label l = toolkit.createLabel(triggerCompartment, "Message:", SWT.NONE);
+		l.setLayoutData(new GridData());
+
+		messageCombo = new Combo(triggerCompartment, SWT.READ_ONLY);
+		messageCombo.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+		messageCombo.setVisibleItemCount(10);
+		toolkit.adapt(messageCombo, true, true);
+	}
+
 	private void addListeners() {
 		triggerViewer.addSelectionChangedListener(new ISelectionChangedListener() {
 			@Override
 			public void selectionChanged(SelectionChangedEvent event) {
-				if (event.getSelection() instanceof IStructuredSelection) {
-					Object firstElement = ((IStructuredSelection) event.getSelection()).getFirstElement();
-					mifViewer.setInput(firstElement);
-					if (firstElement instanceof Trigger)
-						mifViewer.setSelection(new StructuredSelection(((Trigger)firstElement).getMsgFromIfPairs().get(0)), true);
-				}
+				updateMifAndGuard();
 			}
 		});
 
@@ -292,23 +421,33 @@ public class TransitionPropertyDialog extends AbstractPropertyDialog {
 			public void widgetSelected(SelectionEvent e) {
 				updateMessage();
 			}
-			
 			@Override
 			public void widgetDefaultSelected(SelectionEvent e) {
 				widgetSelected(e);
 			}
 		});
+		
+		guardText.addFocusListener(new FocusListener() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				Object element = ((IStructuredSelection)triggerViewer.getSelection()).getFirstElement();
+				if (element instanceof Trigger) {
+					DetailCode dc = (DetailCode) s2m.convert(guardText.getText());
+					Guard guard = null;
+					if (dc!=null) {
+						guard = RoomFactory.eINSTANCE.createGuard();
+						guard.setGuard(dc);
+					}
+					((Trigger) element).setGuard(guard);
+				}
+			}
+			@Override
+			public void focusGained(FocusEvent e) {
+			}
+		});
 	}
 
-	private void createMessageCombo(FormToolkit toolkit,
-			Composite triggerCompartment) {
-		messageCombo = new Combo(triggerCompartment, SWT.READ_ONLY);
-		messageCombo.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		messageCombo.setVisibleItemCount(10);
-		toolkit.adapt(messageCombo, true, true);
-	}
-
-	protected void updateMessage() {
+	private void updateMessage() {
 		String msgName = messageCombo.getItem(messageCombo.getSelectionIndex());
 		for (Message message : currentMsgs) {
 			if (msgName.equals(message.getName())) {
@@ -322,7 +461,7 @@ public class TransitionPropertyDialog extends AbstractPropertyDialog {
 		mifViewer.refresh();
 	}
 
-	protected void updateInterfaceItem() {
+	private void updateInterfaceItem() {
 		String ifName = interfaceCombo.getItem(interfaceCombo.getSelectionIndex());
 		for (InterfaceItem item : interfaceItems) {
 			if (item.getName().equals(ifName)) {
@@ -337,19 +476,7 @@ public class TransitionPropertyDialog extends AbstractPropertyDialog {
 		mifViewer.refresh();
 	}
 
-	private void createInterfaceCombo(Composite triggerCompartment,
-			FormToolkit toolkit) {
-		interfaceCombo = new Combo(triggerCompartment, SWT.READ_ONLY);
-		interfaceCombo.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		interfaceCombo.setVisibleItemCount(10);
-		toolkit.adapt(interfaceCombo, true, true);
-		
-		for (InterfaceItem item : interfaceItems) {
-			interfaceCombo.add(item.getName());
-		}
-	}
-
-	protected void updateCombos() {
+	private void updateCombos() {
 		messageCombo.removeAll();
 		
 		if (mifViewer.getSelection() instanceof IStructuredSelection) {
@@ -360,22 +487,20 @@ public class TransitionPropertyDialog extends AbstractPropertyDialog {
 				for (int i = 0; i < items.length; i++) {
 					if (items[i].equals(mif.getFrom().getName())) {
 						interfaceCombo.select(i);
-						boolean regular = true;
-						if (mif.getFrom() instanceof Port) {
-							if (((Port)mif.getFrom()).isConjugated())
-								regular = false;
-						}
-						else if (mif.getFrom() instanceof SPPRef)
-							regular = false;
-						currentMsgs = regular? mif.getFrom().getProtocol().getIncomingMessages()
-								: mif.getFrom().getProtocol().getOutgoingMessages();
+						setCurrentMessages(mif);
 						int pos = 0;
-						int idx = 0;
+						int idx = -1;
 						for (Message message : currentMsgs) {
 							messageCombo.add(message.getName());
 							if (message==mif.getMessage())
 								idx = pos;
 							++pos;
+						}
+						if (idx==-1) {
+							idx = 0;
+							mif.setMessage(currentMsgs.get(idx));
+							triggerViewer.refresh();
+							mifViewer.refresh();
 						}
 						messageCombo.select(idx);
 						break;
@@ -385,44 +510,46 @@ public class TransitionPropertyDialog extends AbstractPropertyDialog {
 		}
 	}
 
-	private TableViewer createMifTable(Composite triggerCompartment,
-			FormToolkit toolkit) {
-		GridData gd;
-		Table mifTable = toolkit.createTable(triggerCompartment, SWT.NONE | SWT.SINGLE);
-		gd = new GridData(GridData.FILL_HORIZONTAL);
-		gd.heightHint = 100;
-		gd.verticalSpan = 2;
-		mifTable.setLayoutData(gd);
-		final TableViewer mifViewer = new TableViewer(mifTable);
-		mifViewer.setContentProvider(new MessageFromInterfaceContentProvider());
-		mifViewer.setLabelProvider(new MessageFromInterfaceLabelProvider());
-		return mifViewer;
+	private void setCurrentMessages(MessageFromIf mif) {
+		boolean regular = true;
+		if (mif.getFrom() instanceof Port) {
+			if (((Port)mif.getFrom()).isConjugated())
+				regular = false;
+		}
+		else if (mif.getFrom() instanceof SPPRef)
+			regular = false;
+		currentMsgs = regular? mif.getFrom().getProtocol().getIncomingMessages()
+				: mif.getFrom().getProtocol().getOutgoingMessages();
 	}
 
-	private TableViewer createTriggerTable(Composite body, FormToolkit toolkit) {
-		Table triggerTable = toolkit.createTable(body, SWT.NONE | SWT.SINGLE);
-		GridData gd = new GridData(GridData.FILL_HORIZONTAL);
-		gd.heightHint = 100;
-		gd.verticalSpan = 2;
-		triggerTable.setLayoutData(gd);
-		TableViewer triggerViewer = new TableViewer(triggerTable);
-		triggerViewer.setContentProvider(new TriggerContentProvider());
-		triggerViewer.setLabelProvider(new TriggerLabelProvider());
-		triggerViewer.setInput(trans);
-		return triggerViewer;
+	private void addNewTrigger() {
+		Trigger tri = RoomFactory.eINSTANCE.createTrigger();
+		EList<Trigger> triggers = ((TriggeredTransition) trans).getTriggers();
+		triggers.add(tri);
+
+		if (!interfaceItems.isEmpty()) {
+			MessageFromIf mif = RoomFactory.eINSTANCE.createMessageFromIf();
+			mif.setFrom(interfaceItems.get(0));
+			mif.setMessage(interfaceItems.get(0).getProtocol().getIncomingMessages().get(0));
+			tri.getMsgFromIfPairs().add(mif);
+		}
+
+		triggerViewer.refresh();
+		triggerViewer.setSelection(new StructuredSelection(triggers.get(triggers.size()-1)), true);
 	}
 
-	private void initIfEmpty() {
-		if (((TriggeredTransition) trans).getTriggers().isEmpty()) {
-			Trigger tri = RoomFactory.eINSTANCE.createTrigger();
-			((TriggeredTransition) trans).getTriggers().add(tri);
-
-			if (!interfaceItems.isEmpty()) {
-				MessageFromIf mif = RoomFactory.eINSTANCE.createMessageFromIf();
-				mif.setFrom(interfaceItems.get(0));
-				mif.setMessage(interfaceItems.get(0).getProtocol().getIncomingMessages().get(0));
-				tri.getMsgFromIfPairs().add(mif);
-			}
+	private void updateMifAndGuard() {
+		Object selected = ((IStructuredSelection) triggerViewer.getSelection()).getFirstElement();
+		mifViewer.setInput(selected);
+		if (selected instanceof Trigger) {
+			mifViewer.setSelection(new StructuredSelection(((Trigger)selected).getMsgFromIfPairs().get(0)), true);
+			Guard guard2 = ((Trigger) selected).getGuard();
+			String text = null;
+			if (guard2!=null)
+				text = (String) m2s.convert(guard2.getGuard());
+			if (text==null)
+				text = "";
+			guardText.setText(text);
 		}
 	}
 
