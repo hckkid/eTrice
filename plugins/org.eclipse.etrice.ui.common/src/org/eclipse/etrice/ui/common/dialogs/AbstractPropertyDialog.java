@@ -291,4 +291,8 @@ public abstract class AbstractPropertyDialog extends FormDialog {
 
         return controlDecoration;
 	}
+
+	protected DataBindingContext getBindingContext() {
+		return bindingContext;
+	}
 }
