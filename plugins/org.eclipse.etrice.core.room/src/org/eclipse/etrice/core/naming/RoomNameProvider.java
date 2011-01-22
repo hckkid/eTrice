@@ -264,8 +264,37 @@ public class RoomNameProvider {
 			else
 				name ="";
 			
-			// TODOHRR: add triggers
+			if (t instanceof TriggeredTransition) {
+				boolean first = true;
+				for (Trigger trig : ((TriggeredTransition) t).getTriggers()) {
+					if (first)
+						first = false;
+					else
+						name += "or";
+					name += getTriggerLabel(trig);
+				}
+			}
 		}
 		return name;
+	}
+	
+	public static String getTriggerLabel(Trigger trig) {
+		String name = "<";
+		boolean first = true;
+		for (MessageFromIf mif : trig.getMsgFromIfPairs()) {
+			if (first)
+				first = false;
+			else
+				name += "|";
+			name += getMsgFromIfLabel(mif);
+		}
+		if (trig.getGuard()!=null && !trig.getGuard().getGuard().getCommands().isEmpty())
+			name += " guard {"+trig.getGuard().getGuard().getCommands().get(0)+"}";
+		
+		return name+">";
+	}
+
+	public static String getMsgFromIfLabel(MessageFromIf mif) {
+		return mif.getMessage().getName()+":"+mif.getFrom().getName();
 	}
 }
