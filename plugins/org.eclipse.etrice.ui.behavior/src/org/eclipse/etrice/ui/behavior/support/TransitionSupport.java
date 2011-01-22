@@ -35,6 +35,7 @@ import org.eclipse.etrice.core.room.TriggeredTransition;
 import org.eclipse.etrice.core.validation.ValidationUtil;
 import org.eclipse.etrice.ui.behavior.ImageProvider;
 import org.eclipse.etrice.ui.behavior.dialogs.TransitionPropertyDialog;
+import org.eclipse.graphiti.datatypes.ILocation;
 import org.eclipse.graphiti.dt.IDiagramTypeProvider;
 import org.eclipse.graphiti.features.IAddFeature;
 import org.eclipse.graphiti.features.ICreateConnectionFeature;
@@ -62,10 +63,12 @@ import org.eclipse.graphiti.mm.algorithms.GraphicsAlgorithm;
 import org.eclipse.graphiti.mm.algorithms.Polygon;
 import org.eclipse.graphiti.mm.algorithms.Polyline;
 import org.eclipse.graphiti.mm.algorithms.Text;
+import org.eclipse.graphiti.mm.algorithms.styles.Point;
 import org.eclipse.graphiti.mm.pictograms.Anchor;
 import org.eclipse.graphiti.mm.pictograms.Connection;
 import org.eclipse.graphiti.mm.pictograms.ConnectionDecorator;
 import org.eclipse.graphiti.mm.pictograms.ContainerShape;
+import org.eclipse.graphiti.mm.pictograms.FreeFormConnection;
 import org.eclipse.graphiti.mm.pictograms.PictogramElement;
 import org.eclipse.graphiti.services.Graphiti;
 import org.eclipse.graphiti.services.IGaService;
@@ -280,10 +283,15 @@ public class TransitionSupport {
 				Transition trans = (Transition) context.getNewObject();
 
 				IPeCreateService peCreateService = Graphiti.getPeCreateService();
-				Connection connection = peCreateService.createFreeFormConnection(getDiagram());
+				FreeFormConnection connection = peCreateService.createFreeFormConnection(getDiagram());
 				connection.setStart(addConContext.getSourceAnchor());
 				connection.setEnd(addConContext.getTargetAnchor());
-				
+
+				if (addConContext.getSourceAnchor()==addConContext.getTargetAnchor()) {
+					Point pt = createSelfTransitionBendPoint(connection);
+					connection.getBendpoints().add(pt);
+				}
+
 				Graphiti.getPeService().setPropertyValue(connection, Constants.TYPE_KEY, Constants.TRANS_TYPE);
 
 				IGaService gaService = Graphiti.getGaService();
@@ -308,6 +316,16 @@ public class TransitionSupport {
 				link(connection, trans);
 
 				return connection;
+			}
+
+			private Point createSelfTransitionBendPoint(FreeFormConnection connection) {
+				ILocation begin = Graphiti.getPeService().getLocationRelativeToDiagram(connection.getStart());
+				
+				// TODOHRR: algorithm to determine self transition bend point position 
+				int deltaX = 0;
+				int deltaY = StateGraphSupport.MARGIN*3;
+				
+				return Graphiti.getGaService().createPoint(begin.getX()+deltaX, begin.getY()+deltaY);
 			}
 			
 			private Polyline createArrow(GraphicsAlgorithmContainer gaContainer) {
