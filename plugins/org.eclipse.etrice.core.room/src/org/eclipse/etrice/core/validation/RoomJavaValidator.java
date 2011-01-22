@@ -20,11 +20,14 @@ import org.eclipse.etrice.core.room.ActorInstancePath;
 import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.Binding;
 import org.eclipse.etrice.core.room.DataClass;
+import org.eclipse.etrice.core.room.EntryPoint;
+import org.eclipse.etrice.core.room.ExitPoint;
 import org.eclipse.etrice.core.room.LayerConnection;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RoomClass;
 import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.etrice.core.room.SubSystemClass;
+import org.eclipse.etrice.core.room.TransitionPoint;
 import org.eclipse.etrice.core.validation.AbstractRoomJavaValidator;
 import org.eclipse.xtext.validation.Check;
 
@@ -117,5 +120,23 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 	public void checkServiceCompatibility(LayerConnection conn) {
 		if (!ValidationUtil.isValid(conn))
 			error(ValidationUtil.getErrorMessage(), RoomPackage.LAYER_CONNECTION);
+	}
+	
+	@Check
+	public void checkEntryPointAllowed(EntryPoint ep) {
+		if (!ValidationUtil.isValid(ep))
+			error(ValidationUtil.getErrorMessage(), RoomPackage.ENTRY_POINT);
+	}
+	
+	@Check
+	public void checkEntryPointAllowed(ExitPoint ep) {
+		if (!ValidationUtil.isValid(ep))
+			error(ValidationUtil.getErrorMessage(), RoomPackage.EXIT_POINT);
+	}
+	
+	@Check
+	public void checkEntryPointAllowed(TransitionPoint ep) {
+		if (!ValidationUtil.isValid(ep))
+			error(ValidationUtil.getErrorMessage(), RoomPackage.TRANSITION_POINT);
 	}
 }

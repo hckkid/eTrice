@@ -30,11 +30,14 @@ import org.eclipse.etrice.core.room.RefSAPoint;
 import org.eclipse.etrice.core.room.RelaySAPoint;
 import org.eclipse.etrice.core.room.SPPRef;
 import org.eclipse.etrice.core.room.ServiceImplementation;
+import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.StructureClass;
 import org.eclipse.etrice.core.room.SubStateTrPointTerminal;
+import org.eclipse.etrice.core.room.TrPoint;
 import org.eclipse.etrice.core.room.TrPointTerminal;
 import org.eclipse.etrice.core.room.Transition;
+import org.eclipse.etrice.core.room.TransitionPoint;
 import org.eclipse.etrice.core.room.TransitionTerminal;
 
 public class ValidationUtil {
@@ -482,5 +485,15 @@ public class ValidationUtil {
 		}
 		
 		return true;
+	}
+
+	public static boolean isValid(TrPoint tp) {
+		if (tp instanceof TransitionPoint)
+			return true;
+		
+		if (tp.eContainer().eContainer() instanceof State)
+			return true;
+		
+		return error("entry and exit points forbidden on top level state graph");
 	}
 }
