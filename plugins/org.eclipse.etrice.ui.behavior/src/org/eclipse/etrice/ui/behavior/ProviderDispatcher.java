@@ -390,6 +390,15 @@ public class ProviderDispatcher {
 //			si.setSecondarySelectionBackgroundColor(IColorConstant.LIGHT_GRAY);
 			return si;
 		}
+		
+		@Override
+		public String getToolTip(GraphicsAlgorithm ga) {
+	        IToolBehaviorProvider bp = getToolBehaviorProvider(ga.getPictogramElement());
+	        if (bp==null)
+	        	return super.getToolTip(ga);
+	        else
+	        	return bp.getToolTip(ga);
+		}
 	}
 	
 	private StateGraphSupport stateGraphSupport;

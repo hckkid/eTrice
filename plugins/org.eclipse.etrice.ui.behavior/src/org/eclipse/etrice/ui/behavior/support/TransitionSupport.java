@@ -58,6 +58,7 @@ import org.eclipse.graphiti.features.impl.AbstractCreateConnectionFeature;
 import org.eclipse.graphiti.features.impl.AbstractUpdateFeature;
 import org.eclipse.graphiti.features.impl.Reason;
 import org.eclipse.graphiti.mm.GraphicsAlgorithmContainer;
+import org.eclipse.graphiti.mm.algorithms.GraphicsAlgorithm;
 import org.eclipse.graphiti.mm.algorithms.Polygon;
 import org.eclipse.graphiti.mm.algorithms.Polyline;
 import org.eclipse.graphiti.mm.algorithms.Text;
@@ -82,6 +83,7 @@ public class TransitionSupport {
 
 	private static final IColorConstant LINE_COLOR = new ColorConstant(0, 0, 0);
 	private static final int LINE_WIDTH = 1;
+	private static final int MAX_LABEL_LENGTH = 20;
 
 	static class FeatureProvider extends DefaultFeatureProvider {
 		
@@ -299,7 +301,7 @@ public class TransitionSupport {
 		        Text text = gaService.createDefaultText(textDecorator);
 		        text.setForeground(manageColor(IColorConstant.BLACK));
 		        gaService.setLocation(text, 10, 0);
-		        text.setValue(RoomNameProvider.getTransitionLabelName(trans));
+		        text.setValue(getLabel(trans));
 
 
 				// create link and wire it
@@ -355,7 +357,7 @@ public class TransitionSupport {
 						ConnectionDecorator cd = conn.getConnectionDecorators().get(1);
 						if (cd.getGraphicsAlgorithm() instanceof Text) {
 							Text label = (Text) cd.getGraphicsAlgorithm();
-							if (!label.getValue().equals(RoomNameProvider.getTransitionLabelName(t)))
+							if (!label.getValue().equals(getLabel(t)))
 								return Reason.createTrueReason("Label needs update");
 						}
 					}
@@ -388,7 +390,7 @@ public class TransitionSupport {
 						ConnectionDecorator cd = conn.getConnectionDecorators().get(1);
 						if (cd.getGraphicsAlgorithm() instanceof Text) {
 							Text label = (Text) cd.getGraphicsAlgorithm();
-							String transitionLabelName = RoomNameProvider.getTransitionLabelName(t);
+							String transitionLabelName = getLabel(t);
 							if (!label.getValue().equals(transitionLabelName)) {
 								label.setValue(transitionLabelName);
 								updated = true;
@@ -494,8 +496,15 @@ public class TransitionSupport {
 			ConnectionDecorator cd = conn.getConnectionDecorators().get(1);
 			if (cd.getGraphicsAlgorithm() instanceof Text) {
 				Text label = (Text) cd.getGraphicsAlgorithm();
-				label.setValue(RoomNameProvider.getTransitionLabelName(trans));
+				label.setValue(getLabel(trans));
 			}
+		}
+		
+		protected static String getLabel(Transition trans) {
+			String label = RoomNameProvider.getTransitionLabelName(trans);
+			if (label.length()>MAX_LABEL_LENGTH)
+				label = label.substring(0, MAX_LABEL_LENGTH)+"...";
+			return label;
 		}
 	}
 	
@@ -508,6 +517,20 @@ public class TransitionSupport {
 		@Override
 		public ICustomFeature getDoubleClickFeature(IDoubleClickContext context) {
 			return new FeatureProvider.PropertyFeature(getDiagramTypeProvider().getFeatureProvider());
+		}
+		
+		@Override
+		public String getToolTip(GraphicsAlgorithm ga) {
+			// if this is called we know there is a business object!=null
+			PictogramElement pe = ga.getPictogramElement();
+			if (pe instanceof ConnectionDecorator)
+				pe = (PictogramElement) pe.eContainer();
+			
+			EObject bo = Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(pe);
+			if (bo instanceof Transition)
+				return RoomNameProvider.getTransitionLabelName((Transition) bo);
+			
+			return super.getToolTip(ga);
 		}
 	}
 	
