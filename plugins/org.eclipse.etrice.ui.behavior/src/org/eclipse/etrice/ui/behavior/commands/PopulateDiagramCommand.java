@@ -39,7 +39,6 @@ import org.eclipse.graphiti.features.context.impl.AddConnectionContext;
 import org.eclipse.graphiti.features.context.impl.AddContext;
 import org.eclipse.graphiti.mm.algorithms.styles.Point;
 import org.eclipse.graphiti.mm.pictograms.Anchor;
-import org.eclipse.graphiti.mm.pictograms.Connection;
 import org.eclipse.graphiti.mm.pictograms.ContainerShape;
 import org.eclipse.graphiti.mm.pictograms.Diagram;
 import org.eclipse.graphiti.mm.pictograms.FreeFormConnection;
@@ -56,31 +55,41 @@ public class PopulateDiagramCommand extends RecordingCommand {
 	private static final String CP = "cp:";
 	private static final String SEP = ".";
 
-	
 	private ActorClass ac;
 	private Diagram diagram;
+	private IFeatureProvider fp;
 
 	public PopulateDiagramCommand(Diagram diag, ActorClass ac, TransactionalEditingDomain domain) {
 		super(domain);
 		this.diagram = diag;
 		this.ac = ac;
+
+		IDiagramTypeProvider dtp = GraphitiUi.getExtensionManager().createDiagramTypeProvider(diagram, "org.eclipse.etrice.ui.behavior.diagramTypeProvider"); //$NON-NLS-1$
+		fp = dtp.getFeatureProvider();
 	}
 
 	@Override
 	protected void doExecute() {
-		IDiagramTypeProvider dtp = GraphitiUi.getExtensionManager().createDiagramTypeProvider(diagram, "org.eclipse.etrice.ui.behavior.diagramTypeProvider"); //$NON-NLS-1$
-		IFeatureProvider fp = dtp.getFeatureProvider();
 		
 		if (ac.getStateMachine()==null)
 			ac.setStateMachine(RoomFactory.eINSTANCE.createStateGraph());
 		
-		addStateGraph(ac.getStateMachine(), fp);
+		// we use a temporary structure to create the whole tree
+		StateGraphContext tree = StateGraphContext.createContextTree(ac);
+		
+		addStateGraph(tree, diagram, fp);
+		
+		// TODOHRR: activate top level only
+		
+		// if the container shape tree doesn't work we place all state graphs directly in the diagram
+		// might also be easier to switch context - but not traversing the tree since the room model
+		// doesn't reflect our context hierarchy
 	}
 
-	private void addStateGraph(StateGraph sg, IFeatureProvider fp) {
+	private void addStateGraph(StateGraphContext ctx, ContainerShape parent, IFeatureProvider fp) {
 		AddContext addContext = new AddContext();
-		addContext.setNewObject(sg);
-		addContext.setTargetContainer(diagram);
+		addContext.setNewObject(ctx.getStateGraph());
+		addContext.setTargetContainer(parent);
 		addContext.setX(StateGraphSupport.MARGIN);
 		addContext.setY(StateGraphSupport.MARGIN);
 		
@@ -88,21 +97,26 @@ public class PopulateDiagramCommand extends RecordingCommand {
 		if (sgShape!=null) {
 			final HashMap<String, Anchor> node2anchor = new HashMap<String, Anchor>();
 			
-			addInitialPointIff(sg, sgShape, fp, node2anchor);
-			addTransitionPoints(sg, sgShape, fp, node2anchor);
-			addStates(sg, sgShape, fp, node2anchor);
-			addChoicePoints(sg, sgShape, fp, node2anchor);
+			addInitialPointIff(ctx.getStateGraph(), sgShape, fp, node2anchor);
+			addTransitionPoints(ctx.getStateGraph(), sgShape, fp, node2anchor);
+			addStates(ctx.getStateGraph(), sgShape, fp, node2anchor);
+			addChoicePoints(ctx.getStateGraph(), sgShape, fp, node2anchor);
 			
-			addTransitions(sg, sgShape, fp, node2anchor);
+			addTransitions(ctx.getStateGraph(), sgShape, fp, node2anchor);
+			
+			// recursion
+			for (StateGraphContext sub : ctx.getChildren()) {
+				addStateGraph(sub, sgShape, fp);
+			}
 		}
 	}
 
-	private void addTransitions(StateGraph sg, ContainerShape sgShape,
+	private void addTransitions(StateGraph ctx, ContainerShape sgShape,
 			IFeatureProvider fp, HashMap<String, Anchor> node2anchor) {
 
-		for (Transition trans : sg.getTransitions()) {
-			String from = (trans instanceof InitialTransition)? INITIAL:getKey(((NonInitialTransition)trans).getFrom(), sg);
-			String to = getKey(trans.getTo(), sg);
+		for (Transition trans : ctx.getTransitions()) {
+			String from = (trans instanceof InitialTransition)? INITIAL:getKey(((NonInitialTransition)trans).getFrom(), ctx);
+			String to = getKey(trans.getTo(), ctx);
 			Anchor src = node2anchor.get(from);
 			Anchor dst = node2anchor.get(to);
 
@@ -120,16 +134,16 @@ public class PopulateDiagramCommand extends RecordingCommand {
 		}
 	}
 
-	private void addTransitionPoints(StateGraph sg, ContainerShape sgShape,
+	private void addTransitionPoints(StateGraph ctx, ContainerShape sgShape,
 			IFeatureProvider fp, HashMap<String, Anchor> node2anchor) {
 		
 		int width = sgShape.getGraphicsAlgorithm().getGraphicsAlgorithmChildren().get(0).getWidth();
-		int n = sg.getTrPoints().size();
+		int n = ctx.getTrPoints().size();
 		int delta = width/(n+1);
 		
 		int pos = delta;
-		for (TrPoint tp : sg.getTrPoints()) {
-			addTrPoint(tp, sg, sgShape, pos, fp, node2anchor);
+		for (TrPoint tp : ctx.getTrPoints()) {
+			addTrPoint(tp, ctx, sgShape, pos, fp, node2anchor);
 			pos += delta;
 		}
 	}
