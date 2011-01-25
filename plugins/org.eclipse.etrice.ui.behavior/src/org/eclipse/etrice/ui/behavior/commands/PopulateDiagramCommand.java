@@ -77,7 +77,7 @@ public class PopulateDiagramCommand extends RecordingCommand {
 		// we use a temporary structure to create the whole tree
 		StateGraphContext tree = StateGraphContext.createContextTree(ac);
 		
-		addStateGraph(tree, diagram, fp);
+		addStateGraph(tree, diagram);
 		
 		// TODOHRR: activate top level only
 		
@@ -86,7 +86,7 @@ public class PopulateDiagramCommand extends RecordingCommand {
 		// doesn't reflect our context hierarchy
 	}
 
-	private void addStateGraph(StateGraphContext ctx, ContainerShape parent, IFeatureProvider fp) {
+	private void addStateGraph(StateGraphContext ctx, ContainerShape parent) {
 		AddContext addContext = new AddContext();
 		addContext.setNewObject(ctx.getStateGraph());
 		addContext.setTargetContainer(parent);
@@ -97,22 +97,22 @@ public class PopulateDiagramCommand extends RecordingCommand {
 		if (sgShape!=null) {
 			final HashMap<String, Anchor> node2anchor = new HashMap<String, Anchor>();
 			
-			addInitialPointIff(ctx.getStateGraph(), sgShape, fp, node2anchor);
-			addTransitionPoints(ctx.getStateGraph(), sgShape, fp, node2anchor);
-			addStates(ctx.getStateGraph(), sgShape, fp, node2anchor);
-			addChoicePoints(ctx.getStateGraph(), sgShape, fp, node2anchor);
+			addInitialPointIff(ctx.getStateGraph(), sgShape, node2anchor);
+			addTransitionPoints(ctx.getStateGraph(), sgShape, node2anchor);
+			addStates(ctx.getStateGraph(), sgShape, node2anchor);
+			addChoicePoints(ctx.getStateGraph(), sgShape, node2anchor);
 			
-			addTransitions(ctx.getStateGraph(), sgShape, fp, node2anchor);
+			addTransitions(ctx.getStateGraph(), sgShape, node2anchor);
 			
 			// recursion
 			for (StateGraphContext sub : ctx.getChildren()) {
-				addStateGraph(sub, sgShape, fp);
+				addStateGraph(sub, sgShape);
 			}
 		}
 	}
 
 	private void addTransitions(StateGraph ctx, ContainerShape sgShape,
-			IFeatureProvider fp, HashMap<String, Anchor> node2anchor) {
+			HashMap<String, Anchor> node2anchor) {
 
 		for (Transition trans : ctx.getTransitions()) {
 			String from = (trans instanceof InitialTransition)? INITIAL:getKey(((NonInitialTransition)trans).getFrom(), ctx);
@@ -135,7 +135,7 @@ public class PopulateDiagramCommand extends RecordingCommand {
 	}
 
 	private void addTransitionPoints(StateGraph ctx, ContainerShape sgShape,
-			IFeatureProvider fp, HashMap<String, Anchor> node2anchor) {
+			HashMap<String, Anchor> node2anchor) {
 		
 		int width = sgShape.getGraphicsAlgorithm().getGraphicsAlgorithmChildren().get(0).getWidth();
 		int n = ctx.getTrPoints().size();
@@ -143,13 +143,13 @@ public class PopulateDiagramCommand extends RecordingCommand {
 		
 		int pos = delta;
 		for (TrPoint tp : ctx.getTrPoints()) {
-			addTrPoint(tp, ctx, sgShape, pos, fp, node2anchor);
+			addTrPoint(tp, ctx, sgShape, pos, node2anchor);
 			pos += delta;
 		}
 	}
 
 	private void addTrPoint(TrPoint tp, StateGraph sg, ContainerShape sgShape,
-			int pos, IFeatureProvider fp, HashMap<String, Anchor> node2anchor) {
+			int pos, HashMap<String, Anchor> node2anchor) {
 		AddContext addContext = new AddContext();
 		addContext.setNewObject(tp);
 		addContext.setTargetContainer(sgShape);
@@ -162,7 +162,7 @@ public class PopulateDiagramCommand extends RecordingCommand {
 	}
 
 	private void addStates(StateGraph sg, ContainerShape sgShape,
-			IFeatureProvider fp, HashMap<String, Anchor> node2anchor) {
+			HashMap<String, Anchor> node2anchor) {
 		
 		int width = sgShape.getGraphicsAlgorithm().getGraphicsAlgorithmChildren().get(0).getWidth();
 		int n = sg.getStates().size();
@@ -170,13 +170,13 @@ public class PopulateDiagramCommand extends RecordingCommand {
 		
 		int pos = delta;
 		for (State s : sg.getStates()) {
-			addState(s, sg, sgShape, pos, fp, node2anchor);
+			addState(s, sg, sgShape, pos, node2anchor);
 			pos += delta;
 		}
 	}
 
 	private void addState(State s, StateGraph sg, ContainerShape sgShape,
-			int pos, IFeatureProvider fp, HashMap<String, Anchor> node2anchor) {
+			int pos, HashMap<String, Anchor> node2anchor) {
 		AddContext addContext = new AddContext();
 		addContext.setNewObject(s);
 		addContext.setTargetContainer(sgShape);
@@ -189,7 +189,7 @@ public class PopulateDiagramCommand extends RecordingCommand {
 	}
 
 	private void addChoicePoints(StateGraph sg, ContainerShape sgShape,
-			IFeatureProvider fp, HashMap<String, Anchor> node2anchor) {
+			HashMap<String, Anchor> node2anchor) {
 		
 		int width = sgShape.getGraphicsAlgorithm().getGraphicsAlgorithmChildren().get(0).getWidth();
 		int n = sg.getChPoints().size();
@@ -197,13 +197,13 @@ public class PopulateDiagramCommand extends RecordingCommand {
 		
 		int pos = delta;
 		for (ChoicePoint cp : sg.getChPoints()) {
-			addChoicePoint(cp, sg, sgShape, pos, fp, node2anchor);
+			addChoicePoint(cp, sg, sgShape, pos, node2anchor);
 			pos += delta;
 		}
 	}
 
 	private void addChoicePoint(ChoicePoint cp, StateGraph sg, ContainerShape sgShape,
-			int pos, IFeatureProvider fp, HashMap<String, Anchor> node2anchor) {
+			int pos, HashMap<String, Anchor> node2anchor) {
 		AddContext addContext = new AddContext();
 		addContext.setNewObject(cp);
 		addContext.setTargetContainer(sgShape);
@@ -213,6 +213,30 @@ public class PopulateDiagramCommand extends RecordingCommand {
 		ContainerShape pe = (ContainerShape) fp.addIfPossible(addContext);
 		assert(!pe.getAnchors().isEmpty()): "choice point should have an anchor";
 		node2anchor.put(getKey(cp, sg), pe.getAnchors().get(0));
+	}
+
+	private void addInitialPointIff(StateGraph sg, ContainerShape sgShape,
+			HashMap<String, Anchor> node2anchor) {
+
+		boolean hasInitialTransition = false;
+		for (Transition t : sg.getTransitions()) {
+			if (t instanceof InitialTransition) {
+				hasInitialTransition = true;
+				break;
+			}
+		}
+		if (!hasInitialTransition)
+			return;
+		
+		AddContext addContext = new AddContext();
+		addContext.setNewObject(sg);
+		addContext.setTargetContainer(sgShape);
+		addContext.setX(3*StateGraphSupport.MARGIN);
+		addContext.setY(3*StateGraphSupport.MARGIN);
+		
+		ContainerShape pe = (ContainerShape) fp.addIfPossible(addContext);
+		assert(!pe.getAnchors().isEmpty()): "initial point should have an anchor";
+		node2anchor.put(INITIAL, pe.getAnchors().get(0));
 	}
 
 	private static String getKey(EObject obj, StateGraph sg) {
@@ -257,29 +281,5 @@ public class PopulateDiagramCommand extends RecordingCommand {
 		}
 		assert(false): "unexpected type";
 		return null;
-	}
-
-	private void addInitialPointIff(StateGraph sg, ContainerShape sgShape,
-			IFeatureProvider fp, HashMap<String, Anchor> node2anchor) {
-
-		boolean hasInitialTransition = false;
-		for (Transition t : sg.getTransitions()) {
-			if (t instanceof InitialTransition) {
-				hasInitialTransition = true;
-				break;
-			}
-		}
-		if (!hasInitialTransition)
-			return;
-		
-		AddContext addContext = new AddContext();
-		addContext.setNewObject(sg);
-		addContext.setTargetContainer(sgShape);
-		addContext.setX(3*StateGraphSupport.MARGIN);
-		addContext.setY(3*StateGraphSupport.MARGIN);
-		
-		ContainerShape pe = (ContainerShape) fp.addIfPossible(addContext);
-		assert(!pe.getAnchors().isEmpty()): "initial point should have an anchor";
-		node2anchor.put(INITIAL, pe.getAnchors().get(0));
 	}
 }
