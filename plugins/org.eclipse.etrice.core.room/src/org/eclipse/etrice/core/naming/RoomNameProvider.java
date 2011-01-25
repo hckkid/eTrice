@@ -297,4 +297,21 @@ public class RoomNameProvider {
 	public static String getMsgFromIfLabel(MessageFromIf mif) {
 		return mif.getMessage().getName()+":"+mif.getFrom().getName();
 	}
+
+	public static String getStateGraphLabel(StateGraph sg) {
+		if (sg.eContainer() instanceof State) {
+			State s = (State) sg.eContainer();
+			return getStatePathLabel(s);
+		}
+		else
+			return "/";
+	}
+
+	public static String getStatePathLabel(State s) {
+		if (s.eContainer().eContainer() instanceof State) {
+			return getStatePathLabel((State) s.eContainer().eContainer())+"/"+s.getName();
+		}
+		else
+			return "/"+s.getName();
+	}
 }
