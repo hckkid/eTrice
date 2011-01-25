@@ -46,6 +46,7 @@ import org.eclipse.graphiti.features.context.IMoveShapeContext;
 import org.eclipse.graphiti.features.context.IRemoveContext;
 import org.eclipse.graphiti.features.context.IResizeShapeContext;
 import org.eclipse.graphiti.features.context.IUpdateContext;
+import org.eclipse.graphiti.features.context.impl.AddContext;
 import org.eclipse.graphiti.features.context.impl.RemoveContext;
 import org.eclipse.graphiti.features.custom.AbstractCustomFeature;
 import org.eclipse.graphiti.features.custom.ICustomFeature;
@@ -87,14 +88,14 @@ public class StateSupport {
 	public static final int MIN_SIZE_Y = 30;
 	public static final int MARGIN = 20;
 	public static final int CORNER_WIDTH = 20;
-	public static final int HINT_CORNER_WIDTH = 10;
+	public static final int HINT_CORNER_WIDTH = 5;
 	
 	private static final IColorConstant LINE_COLOR = new ColorConstant(0, 0, 0);
 	private static final IColorConstant INHERITED_COLOR = new ColorConstant(100, 100, 100);
 	private static final IColorConstant BACKGROUND = new ColorConstant(200, 200, 200);
 
 	private static class FeatureProvider extends DefaultFeatureProvider {
-		
+
 		private class CreateFeature extends AbstractCreateFeature {
 	
 			public CreateFeature(IFeatureProvider fp) {
@@ -344,11 +345,10 @@ public class StateSupport {
 			}
 
 			private void updateFigure(State s, ICustomContext context) {
-				PictogramElement pe = context.getPictogramElements()[0];
-				ContainerShape container = (ContainerShape)pe;
+				ContainerShape container = (ContainerShape)context.getPictogramElements()[0];
 				
 				// we clear the figure and rebuild it
-				GraphicsAlgorithm invisibleRect = pe.getGraphicsAlgorithm();
+				GraphicsAlgorithm invisibleRect = context.getPictogramElements()[0].getGraphicsAlgorithm();
 				invisibleRect.getGraphicsAlgorithmChildren().clear();
 				
 				createFigure(s, invisibleRect, manageColor(LINE_COLOR), manageColor(BACKGROUND));
@@ -360,6 +360,107 @@ public class StateSupport {
 
 			}
 			
+		}
+		
+		private static class GoDownFeature extends AbstractCustomFeature implements
+				ICustomFeature {
+
+			public GoDownFeature(IFeatureProvider fp) {
+				super(fp);
+			}
+
+			@Override
+			public String getName() {
+				return "Switch to SubGraph";
+			}
+			
+			@Override
+			public String getDescription() {
+				return "Switch Context to SubGraph";
+			}
+
+			@Override
+			public boolean canExecute(ICustomContext context) {
+				ContainerShape container = (ContainerShape)context.getPictogramElements()[0];
+				Object bo = getBusinessObjectForPictogramElement(container);
+				if (bo instanceof State) {
+					if (((State) bo).getSubgraph()!=null)
+						return true;
+				}
+				return false;
+			}
+			
+			@Override
+			public void execute(ICustomContext context) {
+				getDiagramEditor().selectPictogramElements(new PictogramElement[] {});
+				ContainerShape container = (ContainerShape)context.getPictogramElements()[0];
+				Object bo = getBusinessObjectForPictogramElement(container);
+				if (bo instanceof State) {
+					if (((State) bo).getSubgraph()!=null)
+						ContextSwitcher.switchTo(getDiagram(), ((State) bo).getSubgraph());
+				}
+			}
+			
+			@Override
+			public boolean hasDoneChanges() {
+				return false;
+			}
+		}
+		
+		private static class CreateSubGraphFeature extends AbstractCustomFeature implements
+				ICustomFeature {
+
+			public CreateSubGraphFeature(IFeatureProvider fp) {
+				super(fp);
+			}
+
+			@Override
+			public String getName() {
+				return "Create SubGraph";
+			}
+			
+			@Override
+			public String getDescription() {
+				return "Create and Switch to New SubGraph";
+			}
+
+			@Override
+			public boolean canExecute(ICustomContext context) {
+				ContainerShape container = (ContainerShape)context.getPictogramElements()[0];
+				Object bo = getBusinessObjectForPictogramElement(container);
+				if (bo instanceof State) {
+					if (((State) bo).getSubgraph()==null)
+						return true;
+				}
+				return false;
+			}
+			
+			@Override
+			public void execute(ICustomContext context) {
+				getDiagramEditor().selectPictogramElements(new PictogramElement[] {});
+
+				ContainerShape container = (ContainerShape)context.getPictogramElements()[0];
+				Object bo = getBusinessObjectForPictogramElement(container);
+				if (bo instanceof State) {
+					State s = (State) bo;
+					s.setSubgraph(RoomFactory.eINSTANCE.createStateGraph());
+
+					AddContext addContext = new AddContext();
+					addContext.setNewObject(s.getSubgraph());
+					addContext.setTargetContainer(getDiagram());
+					addContext.setX(StateGraphSupport.MARGIN);
+					addContext.setY(StateGraphSupport.MARGIN);
+					PictogramElement subGraphShape = getFeatureProvider().addIfPossible(addContext);
+					if (subGraphShape!=null) {
+						RoundedRectangle borderRect = (RoundedRectangle) subGraphShape.getGraphicsAlgorithm().getGraphicsAlgorithmChildren().get(0);
+						ActorClass ac = (ActorClass) getDiagram().getLink().getBusinessObjects().get(0);
+						Color lineColor = manageColor(isInherited(s, ac)?INHERITED_COLOR:LINE_COLOR);
+						addSubStructureHint(s, borderRect, lineColor);
+					}
+					
+					ContextSwitcher.switchTo(getDiagram(), s.getSubgraph());
+				}
+			}
 		}
 		
 		private class UpdateFeature extends AbstractUpdateFeature {
@@ -407,7 +508,6 @@ public class StateSupport {
 					boolean hasSubStruct = hasSubStructure(s);
 					GraphicsAlgorithm invisibleRect = containerShape.getGraphicsAlgorithm();
 					if (!invisibleRect.getGraphicsAlgorithmChildren().isEmpty()) {
-						
 						GraphicsAlgorithm borderRect = invisibleRect.getGraphicsAlgorithmChildren().get(0);
 						if (hasSubStruct && borderRect.getGraphicsAlgorithmChildren().isEmpty())
 							return Reason.createTrueReason("Ref has sub structure now");
@@ -452,13 +552,19 @@ public class StateSupport {
 				State s = (State) bo;
 				{
 					boolean hasSubStruct = hasSubStructure(s);
-					if (hasSubStruct && containerShape.getGraphicsAlgorithm().getGraphicsAlgorithmChildren().isEmpty()) {
-						ActorClass ac = (ActorClass) getDiagram().getLink().getBusinessObjects().get(0);
-						Color lineColor = manageColor(isInherited(s, ac)?INHERITED_COLOR:LINE_COLOR);
-						addSubStructureHint(s, (RoundedRectangle) containerShape.getGraphicsAlgorithm(), lineColor);
+
+					GraphicsAlgorithm invisibleRect = containerShape.getGraphicsAlgorithm();
+					if (!invisibleRect.getGraphicsAlgorithmChildren().isEmpty()) {
+						GraphicsAlgorithm borderRect = invisibleRect.getGraphicsAlgorithmChildren().get(0);
+						if (hasSubStruct && borderRect.getGraphicsAlgorithmChildren().isEmpty()) {
+							ActorClass ac = (ActorClass) getDiagram().getLink().getBusinessObjects().get(0);
+							Color lineColor = manageColor(isInherited(s, ac)?INHERITED_COLOR:LINE_COLOR);
+							addSubStructureHint(s, (RoundedRectangle) borderRect, lineColor);
+						}
+						else if (!hasSubStruct && !borderRect.getGraphicsAlgorithmChildren().isEmpty()) {
+							containerShape.getGraphicsAlgorithm().getGraphicsAlgorithmChildren().clear();
+						}
 					}
-					else if (!hasSubStruct && !containerShape.getGraphicsAlgorithm().getGraphicsAlgorithmChildren().isEmpty())
-						containerShape.getGraphicsAlgorithm().getGraphicsAlgorithmChildren().clear();
 				}
 				
 				int last = containerShape.getChildren().size()-1;
@@ -607,7 +713,7 @@ public class StateSupport {
 		
 		@Override
 		public ICustomFeature[] getCustomFeatures(ICustomContext context) {
-			return new ICustomFeature[] { new PropertyFeature(fp) };
+			return new ICustomFeature[] { new PropertyFeature(fp), new GoDownFeature(fp), new CreateSubGraphFeature(fp) };
 		}
 
 		protected static String getLabel(ActorContainerRef acr) {
@@ -642,14 +748,14 @@ public class StateSupport {
 				RoundedRectangle rect, Color lineColor) {
 			
 			if (hasSubStructure(s)) {
-				int x = rect.getWidth()-30;
-				int y = 20;
+				int x = rect.getWidth()-25;
+				int y = 3;
 				IGaService gaService = Graphiti.getGaService();
 				RoundedRectangle hint1 = gaService.createRoundedRectangle(rect, HINT_CORNER_WIDTH, HINT_CORNER_WIDTH);
 				hint1.setForeground(lineColor);
 				hint1.setFilled(false);
 				hint1.setLineWidth(LINE_WIDTH);
-				gaService.setLocationAndSize(hint1, x, y, 20, 10);
+				gaService.setLocationAndSize(hint1, x, y, 15, 8);
 			}
 		}
 	}
@@ -679,7 +785,7 @@ public class StateSupport {
 		
 		@Override
 		public ICustomFeature getDoubleClickFeature(IDoubleClickContext context) {
-			return new FeatureProvider.PropertyFeature(getDiagramTypeProvider().getFeatureProvider());
+			return new FeatureProvider.GoDownFeature(getDiagramTypeProvider().getFeatureProvider());
 		}
 	}
 	

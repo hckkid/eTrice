@@ -15,7 +15,10 @@ package org.eclipse.etrice.ui.behavior.support;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.room.ActorClass;
+import org.eclipse.etrice.core.room.RefinedState;
+import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.StructureClass;
 import org.eclipse.etrice.core.room.TrPoint;
@@ -28,11 +31,15 @@ import org.eclipse.graphiti.features.IRemoveFeature;
 import org.eclipse.graphiti.features.IResizeShapeFeature;
 import org.eclipse.graphiti.features.IUpdateFeature;
 import org.eclipse.graphiti.features.context.IAddContext;
+import org.eclipse.graphiti.features.context.ICustomContext;
+import org.eclipse.graphiti.features.context.IDoubleClickContext;
 import org.eclipse.graphiti.features.context.ILayoutContext;
 import org.eclipse.graphiti.features.context.IRemoveContext;
 import org.eclipse.graphiti.features.context.IResizeShapeContext;
 import org.eclipse.graphiti.features.context.IUpdateContext;
 import org.eclipse.graphiti.features.context.impl.RemoveContext;
+import org.eclipse.graphiti.features.custom.AbstractCustomFeature;
+import org.eclipse.graphiti.features.custom.ICustomFeature;
 import org.eclipse.graphiti.features.impl.AbstractAddFeature;
 import org.eclipse.graphiti.features.impl.AbstractLayoutFeature;
 import org.eclipse.graphiti.features.impl.AbstractUpdateFeature;
@@ -41,6 +48,9 @@ import org.eclipse.graphiti.features.impl.Reason;
 import org.eclipse.graphiti.mm.algorithms.GraphicsAlgorithm;
 import org.eclipse.graphiti.mm.algorithms.Rectangle;
 import org.eclipse.graphiti.mm.algorithms.RoundedRectangle;
+import org.eclipse.graphiti.mm.algorithms.Text;
+import org.eclipse.graphiti.mm.algorithms.styles.Font;
+import org.eclipse.graphiti.mm.algorithms.styles.Orientation;
 import org.eclipse.graphiti.mm.pictograms.ContainerShape;
 import org.eclipse.graphiti.mm.pictograms.Diagram;
 import org.eclipse.graphiti.mm.pictograms.PictogramElement;
@@ -65,7 +75,7 @@ public class StateGraphSupport {
 	private static final IColorConstant LINE_COLOR = new ColorConstant(0, 0, 0);
 	private static final IColorConstant BACKGROUND = new ColorConstant(255, 255, 255);
 
-	private class FeatureProvider extends DefaultFeatureProvider {
+	private static class FeatureProvider extends DefaultFeatureProvider {
 	
 		private class AddFeature extends AbstractAddFeature {
 	
@@ -100,8 +110,8 @@ public class StateGraphSupport {
 				int width = context.getWidth() <= 0 ? DEFAULT_SIZE_X : context.getWidth();
 				int height = context.getHeight() <= 0 ? DEFAULT_SIZE_Y : context.getHeight();
 	
+				IGaService gaService = Graphiti.getGaService();
 				{
-					IGaService gaService = Graphiti.getGaService();
 
 					// create invisible outer rectangle expanded by
 					// the width needed for the ports
@@ -125,14 +135,26 @@ public class StateGraphSupport {
 						link(getDiagram(), sg.eContainer());
 					}
 				}
+				
+				{
+					Shape labelShape = peCreateService.createShape(containerShape, false);
+					Text label = gaService.createDefaultText(labelShape, RoomNameProvider.getStateGraphLabel(sg));
+					label.setForeground(manageColor(LINE_COLOR));
+					label.setBackground(manageColor(LINE_COLOR));
+					label.setHorizontalAlignment(Orientation.ALIGNMENT_LEFT);
+					label.setVerticalAlignment(Orientation.ALIGNMENT_TOP);
+					Font font = label.getFont();
+					font.setSize((int) (label.getFont().getSize()*1.2));
+					font.setBold(true);
+					label.setFont(font);
+					gaService.setLocationAndSize(label, 2*MARGIN, MARGIN, width-4*MARGIN, 2*MARGIN);
+				}
 	
 				// call the layout feature
 				layoutPictogramElement(containerShape);
 	
 				return containerShape;
-	
 			}
-	
 		}
 	
 		private class LayoutFeature extends AbstractLayoutFeature {
@@ -191,6 +213,57 @@ public class StateGraphSupport {
 	
 		}
 		
+		private static class GoUpFeature extends AbstractCustomFeature implements
+				ICustomFeature {
+
+			public GoUpFeature(IFeatureProvider fp) {
+				super(fp);
+			}
+
+			@Override
+			public String getName() {
+				return "Switch to SuperGraph";
+			}
+			
+			@Override
+			public String getDescription() {
+				return "Switch Context to SuperGraph";
+			}
+
+			@Override
+			public boolean canExecute(ICustomContext context) {
+				ContainerShape container = (ContainerShape)context.getPictogramElements()[0];
+				Object bo = getBusinessObjectForPictogramElement(container);
+				if (bo instanceof StateGraph) {
+					if (((StateGraph) bo).eContainer() instanceof State)
+						return true;
+				}
+				return false;
+			}
+			
+			@Override
+			public void execute(ICustomContext context) {
+				ContainerShape container = (ContainerShape)context.getPictogramElements()[0];
+				Object bo = getBusinessObjectForPictogramElement(container);
+				if (bo instanceof StateGraph) {
+					StateGraph sg = (StateGraph) bo;
+					if (sg.eContainer() instanceof State) {
+						State s = (State) sg.eContainer();
+						while (s instanceof RefinedState)
+							s = ((RefinedState)s).getBase();
+						
+						StateGraph superSG = (StateGraph) s.eContainer();
+						ContextSwitcher.switchTo(getDiagram(), superSG);
+					}
+				}
+			}
+			
+			@Override
+			public boolean hasDoneChanges() {
+				return false;
+			}
+		}
+		
 		private class UpdateFeature extends AbstractUpdateFeature {
 
 			public UpdateFeature(IFeatureProvider fp) {
@@ -213,8 +286,9 @@ public class StateGraphSupport {
 					return Reason.createTrueReason("State Graph deleted from model");
 				}
 				
-				// TODOHRR: check for refs added in model not present in diagram
+				// TODOHRR: update of state graph - check for refs added in model not present in diagram
 				// also inherited
+				// also label
 				
 				return Reason.createFalseReason();
 			}
@@ -340,6 +414,11 @@ public class StateGraphSupport {
 				IResizeShapeContext context) {
 			return new ResizeFeature(fp);
 		}
+		
+		@Override
+		public ICustomFeature[] getCustomFeatures(ICustomContext context) {
+			return new ICustomFeature[] { new GoUpFeature(fp) };
+		}
 	}
 
 	private class BehaviorProvider extends DefaultToolBehaviorProvider {
@@ -363,6 +442,11 @@ public class StateGraphSupport {
             GraphicsAlgorithm rectangle =
                 invisible.getGraphicsAlgorithmChildren().get(0);
             return rectangle;
+		}
+		
+		@Override
+		public ICustomFeature getDoubleClickFeature(IDoubleClickContext context) {
+			return new FeatureProvider.GoUpFeature(getDiagramTypeProvider().getFeatureProvider());
 		}
 	}
 

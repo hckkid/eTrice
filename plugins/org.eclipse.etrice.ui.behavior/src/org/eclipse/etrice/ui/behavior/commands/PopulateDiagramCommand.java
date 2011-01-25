@@ -22,7 +22,6 @@ import org.eclipse.etrice.core.room.ChoicePoint;
 import org.eclipse.etrice.core.room.ChoicepointTerminal;
 import org.eclipse.etrice.core.room.InitialTransition;
 import org.eclipse.etrice.core.room.NonInitialTransition;
-import org.eclipse.etrice.core.room.RoomFactory;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.StateTerminal;
@@ -31,6 +30,7 @@ import org.eclipse.etrice.core.room.TrPoint;
 import org.eclipse.etrice.core.room.TrPointTerminal;
 import org.eclipse.etrice.core.room.Transition;
 import org.eclipse.etrice.core.room.TransitionTerminal;
+import org.eclipse.etrice.ui.behavior.support.ContextSwitcher;
 import org.eclipse.etrice.ui.behavior.support.StateGraphSupport;
 import org.eclipse.graphiti.datatypes.ILocation;
 import org.eclipse.graphiti.dt.IDiagramTypeProvider;
@@ -43,6 +43,7 @@ import org.eclipse.graphiti.mm.pictograms.ContainerShape;
 import org.eclipse.graphiti.mm.pictograms.Diagram;
 import org.eclipse.graphiti.mm.pictograms.FreeFormConnection;
 import org.eclipse.graphiti.mm.pictograms.PictogramElement;
+import org.eclipse.graphiti.mm.pictograms.Shape;
 import org.eclipse.graphiti.services.Graphiti;
 import org.eclipse.graphiti.ui.services.GraphitiUi;
 
@@ -71,19 +72,29 @@ public class PopulateDiagramCommand extends RecordingCommand {
 	@Override
 	protected void doExecute() {
 		
-		if (ac.getStateMachine()==null)
-			ac.setStateMachine(RoomFactory.eINSTANCE.createStateGraph());
-		
 		// we use a temporary structure to create the whole tree
 		StateGraphContext tree = StateGraphContext.createContextTree(ac);
 		
 		addStateGraph(tree, diagram);
 		
-		// TODOHRR: activate top level only
-		
+		activateTopLevel();
+	}
+
+	private void activateTopLevel() {
 		// if the container shape tree doesn't work we place all state graphs directly in the diagram
 		// might also be easier to switch context - but not traversing the tree since the room model
 		// doesn't reflect our context hierarchy
+		
+		if (!diagram.getChildren().isEmpty()) {
+			Shape shape = diagram.getChildren().get(0);
+			EObject bo = Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(shape);
+			if (bo instanceof StateGraph) {
+				ContextSwitcher.switchTo(diagram, (StateGraph) bo);
+				return;
+			}
+		}
+		
+		assert(false): "state graph expected";
 	}
 
 	private void addStateGraph(StateGraphContext ctx, ContainerShape parent) {
@@ -106,7 +117,7 @@ public class PopulateDiagramCommand extends RecordingCommand {
 			
 			// recursion
 			for (StateGraphContext sub : ctx.getChildren()) {
-				addStateGraph(sub, sgShape);
+				addStateGraph(sub, parent);
 			}
 		}
 	}

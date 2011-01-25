@@ -8,6 +8,7 @@ import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.BaseState;
 import org.eclipse.etrice.core.room.ChoicePoint;
 import org.eclipse.etrice.core.room.RefinedState;
+import org.eclipse.etrice.core.room.RoomFactory;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.TrPoint;
@@ -26,9 +27,12 @@ class StateGraphContext {
 	
 	static StateGraphContext createContextTree(ActorClass ac) {
 		ArrayList<ActorClass> classes = new ArrayList<ActorClass>();
-		while (ac!=null) {
-			classes.add(0, ac);
-			ac = ac.getBase();
+		{
+			ActorClass a = ac;
+			while (a!=null) {
+				classes.add(0, a);
+				a = a.getBase();
+			}
 		}
 		
 		obj2ctx.clear();
@@ -40,6 +44,13 @@ class StateGraphContext {
 				else
 					tree.merge(cls.getStateMachine());
 			}
+		}
+		
+		if (tree==null) {
+			// this is the case if no state machine was defined yet
+			if (ac.getStateMachine()==null)
+				ac.setStateMachine(RoomFactory.eINSTANCE.createStateGraph());
+			tree = new StateGraphContext(ac.getStateMachine());
 		}
 		
 		return tree;
