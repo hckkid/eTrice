@@ -17,7 +17,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.room.ActorClass;
-import org.eclipse.etrice.core.room.RefinedState;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.StructureClass;
@@ -130,10 +129,6 @@ public class StateGraphSupport {
 	
 					// create link and wire it
 					link(containerShape, sg);
-					
-					if (sg.eContainer() instanceof ActorClass) {
-						link(getDiagram(), sg.eContainer());
-					}
 				}
 				
 				{
@@ -247,14 +242,7 @@ public class StateGraphSupport {
 				Object bo = getBusinessObjectForPictogramElement(container);
 				if (bo instanceof StateGraph) {
 					StateGraph sg = (StateGraph) bo;
-					if (sg.eContainer() instanceof State) {
-						State s = (State) sg.eContainer();
-						while (s instanceof RefinedState)
-							s = ((RefinedState)s).getBase();
-						
-						StateGraph superSG = (StateGraph) s.eContainer();
-						ContextSwitcher.switchTo(getDiagram(), superSG);
-					}
+					ContextSwitcher.goUp(getDiagram(), sg);
 				}
 			}
 			
