@@ -1,0 +1,4 @@
+RoomModel ActorClass1 {
+	ActorClass MyActorClass {
+	}
+}
