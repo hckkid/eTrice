@@ -12,6 +12,7 @@
 
 package org.eclipse.etrice.ui.structure;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Collections;
 
@@ -48,21 +49,36 @@ public class DiagramAccess {
 			return null;
 		
 		URI uri = resource.getURI();
-		if (!uri.isPlatformResource())
-			return null;
 		
-		uri = uri.trimSegments(1);
-		IFolder parentFolder = ResourcesPlugin.getWorkspace().getRoot().getFolder(new Path(uri.toPlatformString(true)));
+		// TODOHRR: put common diagram access code into ui.common
+		// make abstract methods get fileEtension() and populateDiagram()
+		
+		String modelName = ((RoomModel) sc.eContainer()).getName();
+		
+		URI diagURI = null;
+		boolean exists = false;
+		if (uri.isPlatformResource()) {
+			uri = uri.trimSegments(1);
+			IFolder parentFolder = ResourcesPlugin.getWorkspace().getRoot().getFolder(new Path(uri.toPlatformString(true)));
 
-		IFolder diagramFolder = parentFolder.getFolder(DIAGRAMS_FOLDER_NAME);
+			IFolder diagramFolder = parentFolder.getFolder(DIAGRAMS_FOLDER_NAME);
+			
+			IFile diagramFile = diagramFolder.getFile(modelName+"."+sc.getName()+".structure");
+			diagURI = URI.createPlatformResourceURI(diagramFile.getFullPath().toString(), true);
+			exists = diagramFile.exists();
+		}
+		else {
+			uri = uri.trimSegments(1);
+			File diagramFile = new File(uri.toFileString());
+			diagramFile = new File(diagramFile.getParent()
+					+File.separator+DIAGRAMS_FOLDER_NAME
+					+File.separator+modelName+"."+sc.getName()+".structure");
+			diagURI = URI.createFileURI(diagramFile.getPath());
+			exists = diagramFile.exists();
+		}
 		
-		RoomModel model = (RoomModel) sc.eContainer();
-		
-		IFile diagramFile = diagramFolder.getFile(model.getName()+"."+sc.getName()+".structure");
-		URI diagURI = URI.createPlatformResourceURI(diagramFile.getFullPath().toString(), true);
-
 		ResourceSet rs = new ResourceSetImpl();
-		if (diagramFile.exists()) {
+		if (exists) {
 			Resource diagRes = rs.getResource(diagURI, true);
 			if (diagRes.getContents().isEmpty())
 				return null;
