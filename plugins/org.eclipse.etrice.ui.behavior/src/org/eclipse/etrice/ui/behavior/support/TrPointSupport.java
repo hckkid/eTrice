@@ -14,6 +14,7 @@ package org.eclipse.etrice.ui.behavior.support;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.room.ActorContainerRef;
 import org.eclipse.etrice.core.room.EntryPoint;
 import org.eclipse.etrice.core.room.ExitPoint;
@@ -143,9 +144,8 @@ public class TrPointSupport {
 					tp = RoomFactory.eINSTANCE.createTransitionPoint();
 					break;
 				}
-		        tp.setName("tp");
-		    	
-		        StateGraph sg = (StateGraph) context.getTargetContainer().getLink().getBusinessObjects().get(0);
+				StateGraph sg = (StateGraph) Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(context.getTargetContainer());
+		        tp.setName(RoomNameProvider.getUniqueTrPointName(sg));
 		        
 		        // TODOHRR-B add property dialog
 		        Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();

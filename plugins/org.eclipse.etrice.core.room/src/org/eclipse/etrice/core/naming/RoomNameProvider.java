@@ -226,12 +226,42 @@ public class RoomNameProvider {
 
 	public static String getUniqueChoicePointName(StateGraph sg) {
 		HashSet<String> names = new HashSet<String>();
-		for (ChoicePoint t : sg.getChPoints()) {
-			names.add(t.getName());
+		for (ChoicePoint cp : sg.getChPoints()) {
+			names.add(cp.getName());
 		}
 		
 		for (int i = 0; i < 1000; i++) {
 			String name = "cp"+i;
+			if (!names.contains(name))
+				return name;
+		}
+		
+		return "not_unique";
+	}
+
+	public static String getUniqueTrPointName(StateGraph sg) {
+		HashSet<String> names = new HashSet<String>();
+		for (TrPoint tp : sg.getTrPoints()) {
+			names.add(tp.getName());
+		}
+		
+		for (int i = 0; i < 1000; i++) {
+			String name = "tp"+i;
+			if (!names.contains(name))
+				return name;
+		}
+		
+		return "not_unique";
+	}
+
+	public static String getUniqueStateName(StateGraph sg) {
+		HashSet<String> names = new HashSet<String>();
+		for (State s : sg.getStates()) {
+			names.add(s.getName());
+		}
+		
+		for (int i = 0; i < 1000; i++) {
+			String name = "s"+i;
 			if (!names.contains(name))
 				return name;
 		}

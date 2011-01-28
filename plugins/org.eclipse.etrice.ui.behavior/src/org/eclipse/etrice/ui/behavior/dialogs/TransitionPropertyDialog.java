@@ -227,6 +227,7 @@ public class TransitionPropertyDialog extends AbstractPropertyDialog {
 			createDecorator(name, "invalid name");
 			
 			name.setFocus();
+			name.selectAll();
 		}
 		
 		if (trans instanceof TriggeredTransition) {

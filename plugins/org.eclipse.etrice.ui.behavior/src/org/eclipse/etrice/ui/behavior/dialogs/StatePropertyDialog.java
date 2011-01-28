@@ -78,6 +78,7 @@ public class StatePropertyDialog extends AbstractPropertyDialog {
 			createDecorator(name, "invalid name");
 			
 			name.setFocus();
+			name.selectAll();
 		}
 		else {
 			Text name = mform.getToolkit().createText(body, "Name:", SWT.BORDER);
