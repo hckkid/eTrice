@@ -512,8 +512,9 @@ public class ValidationUtil {
 				all.addAll(ac.getStrSAPs());
 			}
 			for (InterfaceItem ii : all) {
-				if (ii!=item && ii.getName().equals(item.getName()))
-					return false;
+				if (ii!=item && ii.getName().equals(item.getName())) {
+					return error("name already used in base class "+((ActorClass)ii.eContainer()).getName());
+				}
 			}
 		}
 		// else
