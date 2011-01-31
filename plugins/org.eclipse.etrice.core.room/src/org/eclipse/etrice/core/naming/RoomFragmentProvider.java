@@ -656,6 +656,9 @@ public class RoomFragmentProvider implements IFragmentProvider {
 				if (ar.getName().equals(name))
 					return ar;
 			}
+			if (rc instanceof ActorClass)
+				if (((ActorClass) rc).getBase()!=null)
+					return getActorContainerRef(((ActorClass) rc).getBase(), name);
 		}
 		else if (rc instanceof LogicalSystem) {
 			for (SubSystemRef ssr : ((LogicalSystem) rc).getSubSystems()) {
