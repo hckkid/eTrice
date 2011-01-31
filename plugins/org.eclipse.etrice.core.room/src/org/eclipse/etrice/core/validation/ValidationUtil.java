@@ -12,6 +12,8 @@
 
 package org.eclipse.etrice.core.validation;
 
+import java.util.ArrayList;
+
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorContainerClass;
 import org.eclipse.etrice.core.room.ActorContainerRef;
@@ -23,6 +25,7 @@ import org.eclipse.etrice.core.room.EntryPoint;
 import org.eclipse.etrice.core.room.ExitPoint;
 import org.eclipse.etrice.core.room.ExternalPort;
 import org.eclipse.etrice.core.room.InitialTransition;
+import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.LayerConnection;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.ProtocolClass;
@@ -495,5 +498,27 @@ public class ValidationUtil {
 			return true;
 		
 		return error("entry and exit points forbidden on top level state graph");
+	}
+
+	public static boolean isUniqueName(InterfaceItem item) {
+		if (item.eContainer() instanceof ActorClass) {
+			ArrayList<InterfaceItem> all = new ArrayList<InterfaceItem>();
+			ActorClass ac = (ActorClass) item.eContainer();
+			while (ac.getBase()!=null) {
+				ac = ac.getBase();
+				all.addAll(ac.getIfPorts());
+				all.addAll(ac.getIntPorts());
+				all.addAll(ac.getIfSPPs());
+				all.addAll(ac.getStrSAPs());
+			}
+			for (InterfaceItem ii : all) {
+				if (ii!=item && ii.getName().equals(item.getName()))
+					return false;
+			}
+		}
+		// else
+		// we don't have to check SubSystemClasses since this is done by xtext (standard namespace)
+		
+		return true;
 	}
 }

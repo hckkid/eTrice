@@ -20,6 +20,7 @@ import org.eclipse.etrice.core.room.ActorInstancePath;
 import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.Binding;
 import org.eclipse.etrice.core.room.DataClass;
+import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.LayerConnection;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RoomClass;
@@ -123,5 +124,11 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 	public void checkTrPoint(TrPoint tp) {
 		if (!ValidationUtil.isValid(tp))
 			error(ValidationUtil.getErrorMessage(), RoomPackage.TR_POINT);
+	}
+	
+	@Check
+	public void checkInterfaceItemUniqueName(InterfaceItem item) {
+		if (!ValidationUtil.isUniqueName(item))
+			error(ValidationUtil.getErrorMessage(), RoomPackage.INTERFACE_ITEM__NAME);
 	}
 }
