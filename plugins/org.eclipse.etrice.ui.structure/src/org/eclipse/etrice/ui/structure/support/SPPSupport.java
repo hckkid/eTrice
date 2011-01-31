@@ -140,6 +140,19 @@ public class SPPSupport extends InterfaceItemSupport {
 			}
 
 			@Override
+			public boolean canExecute(ICustomContext context) {
+				if (!super.canExecute(context))
+					return false;
+				
+				PictogramElement[] pes = context.getPictogramElements();
+				if (pes != null && pes.length == 1 && pes[0] instanceof ContainerShape) {
+					Object bo = getBusinessObjectForPictogramElement(pes[0]);
+					return (bo instanceof SPPRef);
+				}
+				return false;
+			}
+
+			@Override
 			public void execute(ICustomContext context) {
 				SPPRef spp = (SPPRef) getBusinessObjectForPictogramElement(context.getPictogramElements()[0]);
 				Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();

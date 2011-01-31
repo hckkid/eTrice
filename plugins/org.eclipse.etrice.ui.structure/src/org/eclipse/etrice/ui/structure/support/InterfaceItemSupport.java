@@ -417,12 +417,11 @@ public class InterfaceItemSupport {
 				if (pes != null && pes.length == 1 && pes[0] instanceof ContainerShape) {
 					Object bo = getBusinessObjectForPictogramElement(pes[0]);
 					if (bo instanceof InterfaceItem) {
-						ContainerShape container = (ContainerShape)pes[0];
-						bo = getBusinessObjectForPictogramElement(container);
-						if (bo instanceof ActorContainerRef)
-							return false;
+						ContainerShape shape = ((ContainerShape)pes[0]).getContainer();
+						InterfaceItem item = (InterfaceItem) bo;
+						Object parentBO = getBusinessObjectForPictogramElement(shape.getContainer());
 						
-						return true;
+						return !isRefItem(shape) && !isInherited(item, parentBO, shape);
 					}
 				}
 				return false;
@@ -436,7 +435,7 @@ public class InterfaceItemSupport {
 			}
 
 			public boolean canRemove(IRemoveContext context) {
-				return !isRefItem(context.getPictogramElement());
+				return false;
 			}
 		}
 		
@@ -448,7 +447,11 @@ public class InterfaceItemSupport {
 			
 			@Override
 			public boolean canDelete(IDeleteContext context) {
-				return !isRefItem(context.getPictogramElement());
+				ContainerShape shape = (ContainerShape) context.getPictogramElement();
+				InterfaceItem item = (InterfaceItem) getBusinessObjectForPictogramElement(shape);
+				Object parentBO = getBusinessObjectForPictogramElement(shape.getContainer());
+				
+				return !isRefItem(shape) && !isInherited(item, parentBO, shape);
 			}
 		}
 		

@@ -19,6 +19,7 @@ import org.eclipse.etrice.ui.structure.ImageProvider;
 import org.eclipse.graphiti.dt.IDiagramTypeProvider;
 import org.eclipse.graphiti.features.IAddFeature;
 import org.eclipse.graphiti.features.ICreateConnectionFeature;
+import org.eclipse.graphiti.features.IDeleteFeature;
 import org.eclipse.graphiti.features.IFeatureProvider;
 import org.eclipse.graphiti.features.IReason;
 import org.eclipse.graphiti.features.IRemoveFeature;
@@ -26,6 +27,7 @@ import org.eclipse.graphiti.features.IUpdateFeature;
 import org.eclipse.graphiti.features.context.IAddConnectionContext;
 import org.eclipse.graphiti.features.context.IAddContext;
 import org.eclipse.graphiti.features.context.ICreateConnectionContext;
+import org.eclipse.graphiti.features.context.IDeleteContext;
 import org.eclipse.graphiti.features.context.IRemoveContext;
 import org.eclipse.graphiti.features.context.IUpdateContext;
 import org.eclipse.graphiti.features.context.impl.AddConnectionContext;
@@ -33,17 +35,20 @@ import org.eclipse.graphiti.features.context.impl.RemoveContext;
 import org.eclipse.graphiti.features.impl.AbstractAddFeature;
 import org.eclipse.graphiti.features.impl.AbstractCreateConnectionFeature;
 import org.eclipse.graphiti.features.impl.AbstractUpdateFeature;
+import org.eclipse.graphiti.features.impl.DefaultRemoveFeature;
 import org.eclipse.graphiti.features.impl.Reason;
 import org.eclipse.graphiti.mm.algorithms.Polyline;
 import org.eclipse.graphiti.mm.pictograms.Anchor;
 import org.eclipse.graphiti.mm.pictograms.Connection;
 import org.eclipse.graphiti.mm.pictograms.ContainerShape;
+import org.eclipse.graphiti.mm.pictograms.Diagram;
 import org.eclipse.graphiti.mm.pictograms.PictogramElement;
 import org.eclipse.graphiti.services.Graphiti;
 import org.eclipse.graphiti.services.IGaService;
 import org.eclipse.graphiti.services.IPeCreateService;
 import org.eclipse.graphiti.tb.DefaultToolBehaviorProvider;
 import org.eclipse.graphiti.tb.IToolBehaviorProvider;
+import org.eclipse.graphiti.ui.features.DefaultDeleteFeature;
 import org.eclipse.graphiti.ui.features.DefaultFeatureProvider;
 import org.eclipse.graphiti.util.ColorConstant;
 import org.eclipse.graphiti.util.IColorConstant;
@@ -61,7 +66,8 @@ import org.eclipse.etrice.core.room.SubSystemClass;
 
 public class BindingSupport {
 
-	private static final IColorConstant LINE_COLOR = new ColorConstant(0, 0, 0);
+	public static final IColorConstant LINE_COLOR = new ColorConstant(0, 0, 0);
+	public static final IColorConstant INHERITED_COLOR = new ColorConstant(100, 100, 100);
 
 	class FeatureProvider extends DefaultFeatureProvider {
 		
@@ -231,6 +237,8 @@ public class BindingSupport {
 				IAddConnectionContext addConContext = (IAddConnectionContext) context;
 				Binding addedEReference = (Binding) context.getNewObject();
 
+				boolean inherited = isInherited(getDiagram(), addedEReference);
+				
 				IPeCreateService peCreateService = Graphiti.getPeCreateService();
 				// CONNECTION WITH POLYLINE
 				Connection connection = peCreateService.createFreeFormConnection(getDiagram());
@@ -241,7 +249,7 @@ public class BindingSupport {
 
 				IGaService gaService = Graphiti.getGaService();
 				Polyline polyline = gaService.createPolyline(connection);
-				polyline.setForeground(manageColor(LINE_COLOR));
+				polyline.setForeground(manageColor(inherited?INHERITED_COLOR:LINE_COLOR));
 
 				// create link and wire it
 				link(connection, addedEReference);
@@ -293,6 +301,37 @@ public class BindingSupport {
 			}
 		}
 		
+		private class RemoveFeature extends DefaultRemoveFeature {
+
+			public RemoveFeature(IFeatureProvider fp) {
+				super(fp);
+			}
+			
+			@Override
+			public boolean canRemove(IRemoveContext context) {
+				return false;
+			}
+		}
+		
+		private class DeleteFeature extends DefaultDeleteFeature {
+
+			public DeleteFeature(IFeatureProvider fp) {
+				super(fp);
+			}
+			
+			@Override
+			public boolean canDelete(IDeleteContext context) {
+				EObject bo = Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(context.getPictogramElement());
+				if (bo instanceof Binding) {
+					Binding b = (Binding) bo;
+					if (isInherited(getDiagram(), b))
+						return false;
+				}
+				
+				return true;
+			}
+		}
+		
 		private IFeatureProvider fp;
 		
 		public FeatureProvider(IDiagramTypeProvider dtp, IFeatureProvider fp) {
@@ -300,6 +339,11 @@ public class BindingSupport {
 			this.fp = fp;
 		}
 
+		private boolean isInherited(Diagram diag, Binding b) {
+			ActorClass ac = (ActorClass) Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(diag.getChildren().get(0));
+			return (b.eContainer()!=ac);
+		}
+		
 		@Override
 		public ICreateConnectionFeature[] getCreateConnectionFeatures() {
 			return new ICreateConnectionFeature[] { new CreateFeature(fp) };
@@ -313,6 +357,16 @@ public class BindingSupport {
 		@Override
 		public IUpdateFeature getUpdateFeature(IUpdateContext context) {
 			return new UpdateFeature(fp);
+		}
+		
+		@Override
+		public IRemoveFeature getRemoveFeature(IRemoveContext context) {
+			return new RemoveFeature(fp);
+		}
+		
+		@Override
+		public IDeleteFeature getDeleteFeature(IDeleteContext context) {
+			return new DeleteFeature(fp);
 		}
 	}
 	

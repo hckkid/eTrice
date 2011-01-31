@@ -147,6 +147,19 @@ public class PortSupport extends InterfaceItemSupport {
 			}
 
 			@Override
+			public boolean canExecute(ICustomContext context) {
+				if (!super.canExecute(context))
+					return false;
+				
+				PictogramElement[] pes = context.getPictogramElements();
+				if (pes != null && pes.length == 1 && pes[0] instanceof ContainerShape) {
+					Object bo = getBusinessObjectForPictogramElement(pes[0]);
+					return (bo instanceof Port);
+				}
+				return false;
+			}
+			
+			@Override
 			public void execute(ICustomContext context) {
 				Object bo = getBusinessObjectForPictogramElement(context.getPictogramElements()[0]);
 				if (bo instanceof Port) {

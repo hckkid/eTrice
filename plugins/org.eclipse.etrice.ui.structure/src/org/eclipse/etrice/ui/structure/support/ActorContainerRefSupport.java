@@ -24,6 +24,7 @@ import org.eclipse.etrice.ui.structure.dialogs.ActorContainerRefPropertyDialog;
 import org.eclipse.graphiti.dt.IDiagramTypeProvider;
 import org.eclipse.graphiti.features.IAddFeature;
 import org.eclipse.graphiti.features.ICreateFeature;
+import org.eclipse.graphiti.features.IDeleteFeature;
 import org.eclipse.graphiti.features.IFeatureProvider;
 import org.eclipse.graphiti.features.ILayoutFeature;
 import org.eclipse.graphiti.features.IMoveShapeFeature;
@@ -34,6 +35,7 @@ import org.eclipse.graphiti.features.IUpdateFeature;
 import org.eclipse.graphiti.features.context.IAddContext;
 import org.eclipse.graphiti.features.context.ICreateContext;
 import org.eclipse.graphiti.features.context.ICustomContext;
+import org.eclipse.graphiti.features.context.IDeleteContext;
 import org.eclipse.graphiti.features.context.IDoubleClickContext;
 import org.eclipse.graphiti.features.context.ILayoutContext;
 import org.eclipse.graphiti.features.context.IMoveShapeContext;
@@ -48,6 +50,7 @@ import org.eclipse.graphiti.features.impl.AbstractCreateFeature;
 import org.eclipse.graphiti.features.impl.AbstractLayoutFeature;
 import org.eclipse.graphiti.features.impl.AbstractUpdateFeature;
 import org.eclipse.graphiti.features.impl.DefaultMoveShapeFeature;
+import org.eclipse.graphiti.features.impl.DefaultRemoveFeature;
 import org.eclipse.graphiti.features.impl.DefaultResizeShapeFeature;
 import org.eclipse.graphiti.features.impl.Reason;
 import org.eclipse.graphiti.mm.algorithms.GraphicsAlgorithm;
@@ -66,6 +69,7 @@ import org.eclipse.graphiti.services.IPeCreateService;
 import org.eclipse.graphiti.tb.DefaultToolBehaviorProvider;
 import org.eclipse.graphiti.tb.IToolBehaviorProvider;
 import org.eclipse.graphiti.ui.features.AbstractDrillDownFeature;
+import org.eclipse.graphiti.ui.features.DefaultDeleteFeature;
 import org.eclipse.graphiti.ui.features.DefaultFeatureProvider;
 import org.eclipse.graphiti.util.ColorConstant;
 import org.eclipse.graphiti.util.IColorConstant;
@@ -92,9 +96,9 @@ public class ActorContainerRefSupport {
 	public static final int MIN_SIZE_Y = 60;
 	public static final int MARGIN = 20;
 	
-	private static final IColorConstant LINE_COLOR = new ColorConstant(0, 0, 0);
-	private static final IColorConstant INHERITED_COLOR = new ColorConstant(100, 100, 100);
-	private static final IColorConstant BACKGROUND = new ColorConstant(200, 200, 200);
+	public static final IColorConstant LINE_COLOR = new ColorConstant(0, 0, 0);
+	public static final IColorConstant INHERITED_COLOR = new ColorConstant(100, 100, 100);
+	public static final IColorConstant BACKGROUND = new ColorConstant(200, 200, 200);
 
 	private static class FeatureProvider extends DefaultFeatureProvider {
 		
@@ -345,7 +349,8 @@ public class ActorContainerRefSupport {
 				if (pes != null && pes.length == 1) {
 					Object bo = getBusinessObjectForPictogramElement(pes[0]);
 					if (bo instanceof ActorContainerRef) {
-						return true;
+						EObject parent = (EObject) getBusinessObjectForPictogramElement((PictogramElement) pes[0].eContainer());
+						return !isInherited((ActorContainerRef)bo, parent);
 					}
 				}
 				return false;
@@ -544,6 +549,39 @@ public class ActorContainerRefSupport {
 			}
 		}
 		
+		private class RemoveFeature extends DefaultRemoveFeature {
+
+			public RemoveFeature(IFeatureProvider fp) {
+				super(fp);
+			}
+
+			@Override
+			public boolean canRemove(IRemoveContext context) {
+				return false;
+			}
+		}
+		
+		private class DeleteFeature extends DefaultDeleteFeature {
+
+			public DeleteFeature(IFeatureProvider fp) {
+				super(fp);
+			}
+
+			@Override
+			public boolean canDelete(IDeleteContext context) {
+				Object bo = getBusinessObjectForPictogramElement(context.getPictogramElement());
+				
+				if (bo instanceof ActorContainerRef) {
+					ActorContainerRef ar = (ActorContainerRef) bo;
+					ContainerShape acShape = (ContainerShape) context.getPictogramElement().eContainer();
+					EObject parent = acShape.getLink().getBusinessObjects().get(0);
+					return !isInherited(ar, parent);
+				}
+				
+				return false;
+			}
+		}
+		
 		private class MoveShapeFeature extends DefaultMoveShapeFeature {
 	
 			public MoveShapeFeature(IFeatureProvider fp) {
@@ -657,6 +695,16 @@ public class ActorContainerRefSupport {
 		public IResizeShapeFeature getResizeShapeFeature(
 				IResizeShapeContext context) {
 			return new ResizeFeature(fp);
+		}
+		
+		@Override
+		public IRemoveFeature getRemoveFeature(IRemoveContext context) {
+			return new RemoveFeature(fp);
+		}
+		
+		@Override
+		public IDeleteFeature getDeleteFeature(IDeleteContext context) {
+			return new DeleteFeature(fp);
 		}
 		
 		@Override
