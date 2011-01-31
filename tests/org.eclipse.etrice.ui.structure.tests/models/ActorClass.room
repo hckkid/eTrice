@@ -1,4 +1,4 @@
-RoomModel ActorClass1 {
+RoomModel ActorClass {
 	ActorClass MyActorClass {
 	}
 }

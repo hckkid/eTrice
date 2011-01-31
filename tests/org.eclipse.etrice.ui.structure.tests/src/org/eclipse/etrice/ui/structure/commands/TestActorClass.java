@@ -10,6 +10,7 @@ import org.eclipse.graphiti.mm.pictograms.ContainerShape;
 import org.eclipse.graphiti.mm.pictograms.Diagram;
 import org.eclipse.graphiti.mm.pictograms.Shape;
 import org.eclipse.graphiti.services.Graphiti;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -18,6 +19,11 @@ public class TestActorClass extends TestBase {
 	@Before
 	public void setUp() {
 		loadModelFile();
+	}
+	
+	@After
+	public void tearDown() {
+		removeDiagramsDirectory();
 	}
 	
 	@Override

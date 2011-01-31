@@ -2,6 +2,7 @@ package org.eclipse.etrice.ui.structure.commands;
 
 import static org.junit.Assert.fail;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.LinkedList;
@@ -31,6 +32,15 @@ public abstract class TestBase {
 		loadModels(getModelFileName());
 	}
 
+	protected void removeDiagramsDirectory() {
+		File diagDir = new File(basePath+File.separator+"diagrams");
+		File[] files = diagDir.listFiles();
+		for (int i = 0; i < files.length; i++) {
+			files[i].delete();
+		}
+		diagDir.delete();
+	}
+	
 	private void loadModels(String modelName) {
 		XtextResourceSet rs = new XtextResourceSet();
 		rs.addLoadOption(XtextResource.OPTION_RESOLVE_ALL, Boolean.TRUE);
