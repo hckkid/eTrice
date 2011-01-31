@@ -34,11 +34,14 @@ public abstract class TestBase {
 
 	protected void removeDiagramsDirectory() {
 		File diagDir = new File(basePath+File.separator+"diagrams");
-		File[] files = diagDir.listFiles();
-		for (int i = 0; i < files.length; i++) {
-			files[i].delete();
+		if (diagDir.isDirectory()) {
+			File[] files = diagDir.listFiles();
+			if (files!=null)
+				for (int i = 0; i < files.length; i++) {
+					files[i].delete();
+				}
+			diagDir.delete();
 		}
-		diagDir.delete();
 	}
 	
 	private void loadModels(String modelName) {

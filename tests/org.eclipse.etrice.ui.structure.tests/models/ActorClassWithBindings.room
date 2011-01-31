@@ -1,0 +1,34 @@
+RoomModel ActorClassWithPorts {
+	ProtocolClass MyProtocol {
+		incoming {
+			Message in1 ()
+			Message in2 ()
+		}
+		outgoing {
+			Message out1 ()
+		}
+	}
+	
+	ActorClass SubActor {
+		Interface {
+			Port fct: MyProtocol
+		}
+	}
+	
+	ActorClass MyActorClass {
+		Interface {
+			Port ip : MyProtocol
+			Port xp : MyProtocol
+		}
+		Structure {
+			conjugated Port sp : MyProtocol
+			external Port xp
+
+			ActorRef sub_a : SubActor
+			ActorRef sub_b : SubActor
+			
+			Binding ip and sub_a.fct
+			Binding sp and sub_b.fct
+		}
+	}
+}
