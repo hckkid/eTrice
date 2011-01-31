@@ -68,7 +68,6 @@ public class DiagramAccess {
 			exists = diagramFile.exists();
 		}
 		else {
-			uri = uri.trimSegments(1);
 			File diagramFile = new File(uri.toFileString());
 			diagramFile = new File(diagramFile.getParent()
 					+File.separator+DIAGRAMS_FOLDER_NAME
