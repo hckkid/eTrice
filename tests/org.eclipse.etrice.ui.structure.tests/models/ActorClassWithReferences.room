@@ -1,4 +1,4 @@
-RoomModel ActorClassWithPorts {
+RoomModel ActorClassWithReferences {
 	ProtocolClass MyProtocol {
 		incoming {
 			Message in1 ()

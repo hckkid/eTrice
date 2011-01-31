@@ -1,0 +1,57 @@
+RoomModel ActorClassWithInheritance {
+	ProtocolClass MyProtocol {
+		incoming {
+			Message in1 ()
+			Message in2 ()
+		}
+		outgoing {
+			Message out1 ()
+		}
+	}
+	
+	ProtocolClass MyControl {
+		incoming {
+			Message in1 ()
+		}
+		outgoing {
+			Message out1 ()
+		}
+	}
+	
+	ActorClass SubActor {
+		Interface {
+			Port fct: MyProtocol
+			Port ctl: MyControl
+		}
+	}
+	
+	ActorClass MyBaseClass {
+		Interface {
+			Port ip : MyProtocol
+		}
+		Structure {
+			ActorRef sub_a : SubActor
+			
+			Binding ip and sub_a.fct
+		}
+	}
+	
+	ActorClass MyActorClass extends MyBaseClass {
+		Interface {
+			Port p : MyProtocol
+		}
+		Structure {
+			conjugated Port ctl : MyControl
+			conjugated Port sp1 : MyProtocol
+			conjugated Port sp2 : MyProtocol
+			external Port p
+
+			ActorRef sub_b : SubActor
+			ActorRef sub_c : SubActor
+			
+			Binding ctl and sub_a.ctl
+			Binding sp1 and sub_b.fct
+			Binding sp2 and sub_c.fct
+		}
+	}
+}
