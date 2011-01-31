@@ -101,11 +101,6 @@ public class PopulateDiagramCommand extends RecordingCommand {
 	        	EList<? extends ActorContainerRef> subSystems = sys.getSubSystems();
 				addRefItems(subSystems, acShape, width, featureProvider, ifitem2anchor);
 			}
-			
-			// bindings
-			for (Binding bind : sc.getBindings()) {
-				addBinding(bind, featureProvider, ifitem2anchor);
-			}
 
 			// layer connections
 			for (LayerConnection lc : sc.getConnections()) {
@@ -119,6 +114,11 @@ public class PopulateDiagramCommand extends RecordingCommand {
 				// add inherited ports and refs and bindings (and preserve layout)
 				if (base!=null)
 					addInheritedItems(base, acShape, ifitem2anchor, featureProvider);
+			}
+			
+			// bindings
+			for (Binding bind : sc.getBindings()) {
+				addBinding(bind, featureProvider, ifitem2anchor);
 			}
 		}
 		
