@@ -4,13 +4,18 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * CONTRIBUTORS:
+ * 		Thomas Schuetz and Henrik Rentz-Reichert (initial contribution)
+ * 
  *******************************************************************************/
 
 
 package org.eclipse.etrice.runtime.java.messaging;
 
 /**
- * The message service is a thread and contains a message queue and a dispatcher.
+ * The MessageService the backbone of the asynchroneous communication inside a SubSystem
+ * It usually contains a thread a message queue and a dispatcher
  * 
  * @author Thomas Schuetz
  *

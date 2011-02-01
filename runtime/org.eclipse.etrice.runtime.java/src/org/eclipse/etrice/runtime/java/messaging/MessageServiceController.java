@@ -1,8 +1,26 @@
+/*******************************************************************************
+ * Copyright (c) 2011 protos software gmbh (http://www.protos.de).
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * CONTRIBUTORS:
+ * 		Thomas Schuetz
+ * 
+ *******************************************************************************/
+
 package org.eclipse.etrice.runtime.java.messaging;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The MessageServiceController controls lifecycle of and access to all MessageServices in one SubSystem
+ * 
+ * @author Thomas Schuetz
+ *
+ */
 
 public class MessageServiceController {
 
@@ -52,6 +70,9 @@ public class MessageServiceController {
 		}
 	}
 
+	/**
+	 * waitTerminate waits blocking for all MessageServices to terminate 
+	 */
 	private void waitTerminate() {
 		for (MessageService msgSrv : messageServiceList){
 			try {

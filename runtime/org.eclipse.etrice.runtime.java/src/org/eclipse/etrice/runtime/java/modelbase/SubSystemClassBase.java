@@ -16,7 +16,8 @@ import org.eclipse.etrice.runtime.java.messaging.RTObject;
 import org.eclipse.etrice.runtime.java.messaging.RTServices;
 
 /**
- * The base class for model component classes.
+ * The base class for all SubSystems.
+ * It and its derived classes take care of the instantiation, binding (connection) and complete lifecycle of all Actor Classes of a SubSystem
  * 
  * @author Henrik Rentz-Reichert
  *
