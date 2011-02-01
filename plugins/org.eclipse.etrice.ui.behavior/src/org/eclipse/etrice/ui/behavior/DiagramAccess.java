@@ -17,6 +17,7 @@ import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.StructureClass;
 import org.eclipse.etrice.ui.behavior.commands.PopulateDiagramCommand;
+import org.eclipse.etrice.ui.behavior.editor.BehaviorEditor;
 import org.eclipse.etrice.ui.common.DiagramAccessBase;
 import org.eclipse.graphiti.mm.pictograms.Diagram;
 
@@ -43,7 +44,7 @@ public class DiagramAccess extends DiagramAccessBase {
 	 */
 	@Override
 	protected String getEditorId() {
-		return "BehaviorEditor.BEHAVIOR_EDITOR_ID";
+		return BehaviorEditor.BEHAVIOR_EDITOR_ID;
 	}
 
 	/* (non-Javadoc)
