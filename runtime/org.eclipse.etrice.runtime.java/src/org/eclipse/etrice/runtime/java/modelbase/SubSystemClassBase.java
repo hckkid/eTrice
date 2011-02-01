@@ -13,6 +13,7 @@ import org.eclipse.etrice.runtime.java.messaging.Address;
 import org.eclipse.etrice.runtime.java.messaging.IRTObject;
 import org.eclipse.etrice.runtime.java.messaging.MessageService;
 import org.eclipse.etrice.runtime.java.messaging.RTObject;
+import org.eclipse.etrice.runtime.java.messaging.RTServices;
 
 /**
  * The base class for model component classes.
@@ -24,7 +25,6 @@ public abstract class SubSystemClassBase extends RTObject {
 
 	private static SubSystemClassBase instance = null;
 	
-	private MessageService msgService = null;
 	private boolean running = false;
 	protected ActorClassBase[] instances = null;
 
@@ -53,8 +53,8 @@ public abstract class SubSystemClassBase extends RTObject {
 		System.out.println("*** MainComponent "+getInstancePath()+"::init ***");
 
 		// MessageService
-		msgService = new MessageService(this, new Address(0, 0, 0),
-				"MessageService");
+		RTServices.getInstance().getMsgSrvCtrl().addMsgSrv(new MessageService(this, new Address(0, 0, 0),	"MessageService0"));
+		//instantiateMessageServices();
 		
 		instantiateActors();
 
@@ -65,7 +65,9 @@ public abstract class SubSystemClassBase extends RTObject {
 			}
 	}
 
+	//public abstract void instantiateMessageServices();
 	public abstract void instantiateActors();
+	
 	
 	public void start() {
 		// start all actor instances
@@ -75,31 +77,13 @@ public abstract class SubSystemClassBase extends RTObject {
 			}
 
 		// start all message services
-		msgService.start();
+		RTServices.getInstance().getMsgSrvCtrl().start();
 		
 		running = true;
 	}
-
-	public void terminate() {
-		if (!running)
-			return;
-		
-		running = false;
-		
-		// terminate all message services
-		msgService.terminate();
-	}
-
-	public void waitTerminate() {
-		try {
-			msgService.join();
-		} catch (InterruptedException e1) {
-		}
-	}
 	
 	public void stop() {
-		terminate();
-		waitTerminate();
+		RTServices.getInstance().getMsgSrvCtrl().stop();
 
 		// stop all actor instances
 		if (instances!=null)
@@ -121,7 +105,7 @@ public abstract class SubSystemClassBase extends RTObject {
 	}
 	
 	public MessageService getMsgService() {
-		return msgService;
+		return RTServices.getInstance().getMsgSrvCtrl().getMessageService(0);
 	}
 	
 	public ActorClassBase getInstance(int i) {
