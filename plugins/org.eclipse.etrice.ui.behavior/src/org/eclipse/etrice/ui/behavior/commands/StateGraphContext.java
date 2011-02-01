@@ -26,6 +26,9 @@ class StateGraphContext {
 	static HashMap<EObject, StateGraphContext> obj2ctx = new HashMap<EObject, StateGraphContext>();
 	
 	static StateGraphContext createContextTree(ActorClass ac) {
+		
+		// TODOHRR: should we have the top level state graph always be the one of our actor class?
+
 		ArrayList<ActorClass> classes = new ArrayList<ActorClass>();
 		{
 			ActorClass a = ac;

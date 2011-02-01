@@ -48,6 +48,7 @@ import org.eclipse.graphiti.features.context.IRemoveContext;
 import org.eclipse.graphiti.features.context.IResizeShapeContext;
 import org.eclipse.graphiti.features.context.ITargetContext;
 import org.eclipse.graphiti.features.context.IUpdateContext;
+import org.eclipse.graphiti.features.context.impl.AddContext;
 import org.eclipse.graphiti.features.context.impl.CreateConnectionContext;
 import org.eclipse.graphiti.features.context.impl.RemoveContext;
 import org.eclipse.graphiti.features.custom.AbstractCustomFeature;
@@ -70,6 +71,7 @@ import org.eclipse.graphiti.mm.pictograms.Anchor;
 import org.eclipse.graphiti.mm.pictograms.AnchorContainer;
 import org.eclipse.graphiti.mm.pictograms.ChopboxAnchor;
 import org.eclipse.graphiti.mm.pictograms.ContainerShape;
+import org.eclipse.graphiti.mm.pictograms.Diagram;
 import org.eclipse.graphiti.mm.pictograms.PictogramElement;
 import org.eclipse.graphiti.mm.pictograms.Shape;
 import org.eclipse.graphiti.services.Graphiti;
@@ -90,7 +92,7 @@ import org.eclipse.ui.PlatformUI;
 public class TrPointSupport {
 	
 	public static final int ITEM_SIZE = StateGraphSupport.MARGIN;
-	public static final int ITEM_SIZE_SMALL = StateSupport.MARGIN;
+	public static final int ITEM_SIZE_SMALL = StateSupport.MARGIN/2;
 
 	protected static final int LINE_WIDTH = 2;
 	protected static final IColorConstant DARK_COLOR = new ColorConstant(0, 0, 0);
@@ -196,6 +198,9 @@ public class TrPointSupport {
 						if (obj instanceof StateGraph) {
 							return true;
 						}
+						if (obj instanceof State) {
+							return true;
+						}
 					}
 				}
 				return false;
@@ -209,7 +214,7 @@ public class TrPointSupport {
 				boolean inherited = isInherited(tp, bo, acShape);
 				boolean subtp = (bo instanceof State);
 	
-				int margin = subtp?ITEM_SIZE_SMALL:ITEM_SIZE;
+				int margin = subtp?StateSupport.MARGIN:StateGraphSupport.MARGIN;
 				int size = subtp?ITEM_SIZE_SMALL:ITEM_SIZE;
 
 				// CONTAINER SHAPE WITH RECTANGLE
@@ -250,7 +255,7 @@ public class TrPointSupport {
 				IGaService gaService = Graphiti.getGaService();
 				{
 					final Rectangle invisibleRectangle = gaService.createInvisibleRectangle(containerShape);
-					gaService.setLocationAndSize(invisibleRectangle, x, y, 2*size, 2*size);
+					gaService.setLocationAndSize(invisibleRectangle, x, y, 2*margin, 2*margin);
 	
 					createFigure(tp, subtp,
 							containerShape,
@@ -269,7 +274,7 @@ public class TrPointSupport {
 					label.setBackground(dark);
 					label.setHorizontalAlignment(Orientation.ALIGNMENT_CENTER);
 					label.setVerticalAlignment(Orientation.ALIGNMENT_CENTER);
-					gaService.setLocationAndSize(label, 0, 3*size/2, 2*size, size/2);
+					gaService.setLocationAndSize(label, 0, 3*margin/2, 2*margin, margin/2);
 					adjustLabel(label, x, y, width, margin, size);
 				}
 
@@ -558,6 +563,7 @@ public class TrPointSupport {
 				ContainerShape containerShape,
 				GraphicsAlgorithm invisibleRectangle, Color darkColor, Color brightColor) {
 
+			int margin = subtp?StateSupport.MARGIN:StateGraphSupport.MARGIN;
 			int size = subtp?ITEM_SIZE_SMALL:ITEM_SIZE;
 			int line = subtp?LINE_WIDTH/2:LINE_WIDTH;
 			
@@ -569,7 +575,8 @@ public class TrPointSupport {
 			circle.setBackground(brightColor);
 			circle.setLineWidth(line);
 			int s2 = size/2;
-			gaService.setLocationAndSize(circle, s2, s2, size, size);
+			int offset = margin-s2;
+			gaService.setLocationAndSize(circle, offset, offset, size, size);
 
 			if (tp instanceof TransitionPoint) {
 				if (((TransitionPoint) tp).isHandler())
@@ -581,15 +588,15 @@ public class TrPointSupport {
 				diamond.setForeground(darkColor);
 				diamond.setBackground(brightColor);
 				diamond.setLineWidth(line);
-				gaService.setLocation(diamond, s2, s2);
+				gaService.setLocation(diamond, offset, offset);
 			}
 			else if (tp instanceof EntryPoint) {
 				int sq = (int) (0.707106*s2);
-				int l1[] = new int[] { size-sq, size+sq, size+sq, size-sq };
+				int l1[] = new int[] { margin-sq, margin+sq, margin+sq, margin-sq };
 				Polyline line1 = gaService.createPolyline(invisibleRectangle, l1);
 				line1.setLineWidth(line);
 				line1.setForeground(darkColor);
-				int l2[] = new int[] { size-sq, size-sq, size+sq, size+sq };
+				int l2[] = new int[] { margin-sq, margin-sq, margin+sq, margin+sq };
 				Polyline line2 = gaService.createPolyline(invisibleRectangle, l2);
 				line2.setLineWidth(line);
 				line2.setForeground(darkColor);
@@ -704,24 +711,30 @@ public class TrPointSupport {
 		}
 
 		protected static void adjustLabel(Text label, int x, int y, int width, int margin, int size) {
-			Orientation align = Orientation.ALIGNMENT_CENTER;
-			label.setHorizontalAlignment(align);
+			Orientation halign = Orientation.ALIGNMENT_CENTER;
+			Orientation valign = Orientation.ALIGNMENT_CENTER;
 	
-			int pos = 3*size/2;
+			int pos = 0;
 			
 			if (x<=margin)
-				align = Orientation.ALIGNMENT_LEFT;
+				halign = Orientation.ALIGNMENT_LEFT;
 			else if ((width-margin)<=x)
-				align = Orientation.ALIGNMENT_RIGHT;
-			if (y<=margin)
+				halign = Orientation.ALIGNMENT_RIGHT;
+			if (y<=margin) {
 				pos = 0;
-	
-			if (align!=label.getHorizontalAlignment()) {
-				label.setHorizontalAlignment(align);
+				valign = Orientation.ALIGNMENT_BOTTOM;
 			}
+			else {
+				pos = 5*margin/4;
+				valign = Orientation.ALIGNMENT_TOP;
+			}
+	
+			label.setHorizontalAlignment(halign);
+			label.setVerticalAlignment(valign);
+
 			if (pos!=label.getY()) {
 				IGaService gaService = Graphiti.getGaService();
-				gaService.setLocationAndSize(label, 0, pos, 2*size, size/2);
+				gaService.setLocationAndSize(label, 0, pos, 2*margin, 3*margin/4);
 			}
 		}
 		
@@ -803,4 +816,65 @@ public class TrPointSupport {
 	public IToolBehaviorProvider getToolBehaviorProvider() {
 		return tbp;
 	}
+
+	public static void createSubTrPoints(State s, ContainerShape stateShape, IFeatureProvider fp) {
+		if (s.getSubgraph()==null)
+			return;
+		
+		ContainerShape diag = stateShape;
+		while (diag!=null) {
+			if (diag instanceof Diagram)
+				break;
+			diag = diag.getContainer();
+		}
+		assert(diag!=null): "Diagram expected";
+		ContainerShape subGraphShape = ContextSwitcher.getContext((Diagram) diag, s.getSubgraph());
+		assert(subGraphShape!=null): "sub graph should be present";
+		
+		GraphicsAlgorithm invisibleRect = stateShape.getGraphicsAlgorithm();
+		GraphicsAlgorithm borderRect = invisibleRect.getGraphicsAlgorithmChildren().get(0);
+		GraphicsAlgorithm invisibleSubRect = subGraphShape.getGraphicsAlgorithm();
+		GraphicsAlgorithm borderSubRect = invisibleSubRect.getGraphicsAlgorithmChildren().get(0);
+		double scaleX = borderRect.getWidth() /(double)borderSubRect.getWidth();
+		double scaleY = borderRect.getHeight()/(double)borderSubRect.getHeight();
+		
+		for (TrPoint tp : s.getSubgraph().getTrPoints()) {
+			if (!(tp instanceof TransitionPoint)) {
+				int x=0, y=0;
+				for (Shape childShape : subGraphShape.getChildren()) {
+					Object bo = fp.getBusinessObjectForPictogramElement(childShape);
+					if (bo==tp) {
+						x = (int) (childShape.getGraphicsAlgorithm().getX()*scaleX);
+						y = (int) (childShape.getGraphicsAlgorithm().getY()*scaleY);
+						break;
+					}
+				}
+				addItem(tp, x, y, stateShape, fp);
+			}
+		}
+	}
+
+	public static void createInheritedSubTrPoints(State s, ContainerShape containerShape, IFeatureProvider fp) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private static void addItem(EObject ownObject, int x, int y,
+			ContainerShape stateShape, IFeatureProvider fp) {
+		AddContext addContext = new AddContext();
+		addContext.setNewObject(ownObject);
+		addContext.setTargetContainer(stateShape);
+		addContext.setX(x + ITEM_SIZE_SMALL);
+		addContext.setY(y + ITEM_SIZE_SMALL);
+		ContainerShape pe = (ContainerShape) fp.addIfPossible(addContext);
+		assert(pe!=null): "transition point should have been created";
+		assert(!pe.getAnchors().isEmpty()): "transition point must have an anchor";
+	}
+	
+//	private static EObject getOwnObject(EObject obj, ResourceSet rs) {
+//		URI uri = EcoreUtil.getURI(obj);
+//		EObject own = rs.getEObject(uri, true);
+//		assert(own!=null): "own object must exist";
+//		return own;
+//	}
 }
