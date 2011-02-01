@@ -72,8 +72,9 @@ public class MessageServiceController {
 
 	/**
 	 * waitTerminate waits blocking for all MessageServices to terminate 
+	 * ! not threadsafe !
 	 */
-	private void waitTerminate() {
+	public void waitTerminate() {
 		for (MessageService msgSrv : messageServiceList){
 			try {
 				msgSrv.join();
