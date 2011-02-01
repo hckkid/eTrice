@@ -20,6 +20,8 @@ import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ChoicePoint;
 import org.eclipse.etrice.core.room.ChoicepointTerminal;
+import org.eclipse.etrice.core.room.EntryPoint;
+import org.eclipse.etrice.core.room.ExitPoint;
 import org.eclipse.etrice.core.room.InitialTransition;
 import org.eclipse.etrice.core.room.NonInitialTransition;
 import org.eclipse.etrice.core.room.State;
@@ -72,6 +74,8 @@ public class PopulateDiagramCommand extends RecordingCommand {
 	@Override
 	protected void doExecute() {
 		
+		fp.link(diagram, ac);
+		
 		// we use a temporary structure to create the whole tree
 		StateGraphContext tree = StateGraphContext.createContextTree(ac);
 		
@@ -81,12 +85,9 @@ public class PopulateDiagramCommand extends RecordingCommand {
 	}
 
 	private void activateTopLevel() {
-		// if the container shape tree doesn't work we place all state graphs directly in the diagram
-		// might also be easier to switch context - but not traversing the tree since the room model
-		// doesn't reflect our context hierarchy
-		
 		if (!diagram.getChildren().isEmpty()) {
-			Shape shape = diagram.getChildren().get(0);
+			// since we made a depth first recursion the top level state graph appears last
+			Shape shape = diagram.getChildren().get(diagram.getChildren().size()-1);
 			EObject bo = Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(shape);
 			if (bo instanceof StateGraph) {
 				ContextSwitcher.switchTo(diagram, (StateGraph) bo);
@@ -98,6 +99,11 @@ public class PopulateDiagramCommand extends RecordingCommand {
 	}
 
 	private void addStateGraph(StateGraphContext ctx, ContainerShape parent) {
+		// depth first recursion to have sub transition points in place
+		for (StateGraphContext sub : ctx.getChildren()) {
+			addStateGraph(sub, parent);
+		}
+
 		AddContext addContext = new AddContext();
 		addContext.setNewObject(ctx.getStateGraph());
 		addContext.setTargetContainer(parent);
@@ -114,11 +120,6 @@ public class PopulateDiagramCommand extends RecordingCommand {
 			addChoicePoints(ctx.getStateGraph(), sgShape, node2anchor);
 			
 			addTransitions(ctx.getStateGraph(), sgShape, node2anchor);
-			
-			// recursion
-			for (StateGraphContext sub : ctx.getChildren()) {
-				addStateGraph(sub, parent);
-			}
 		}
 	}
 
@@ -195,8 +196,10 @@ public class PopulateDiagramCommand extends RecordingCommand {
 		addContext.setY(StateGraphSupport.DEFAULT_SIZE_Y/4);
 		
 		ContainerShape pe = (ContainerShape) fp.addIfPossible(addContext);
+		assert(pe!=null): "state should have been created";
 		assert(!pe.getAnchors().isEmpty()): "state should have an anchor";
-		node2anchor.put(getKey(s, sg), pe.getAnchors().get(0));
+		
+		getAnchors(s, pe, node2anchor);
 	}
 
 	private void addChoicePoints(StateGraph sg, ContainerShape sgShape,
@@ -222,6 +225,7 @@ public class PopulateDiagramCommand extends RecordingCommand {
 		addContext.setY(StateGraphSupport.DEFAULT_SIZE_Y/2);
 		
 		ContainerShape pe = (ContainerShape) fp.addIfPossible(addContext);
+		assert(pe!=null): "choice point should have been created";
 		assert(!pe.getAnchors().isEmpty()): "choice point should have an anchor";
 		node2anchor.put(getKey(cp, sg), pe.getAnchors().get(0));
 	}
@@ -246,8 +250,30 @@ public class PopulateDiagramCommand extends RecordingCommand {
 		addContext.setY(3*StateGraphSupport.MARGIN);
 		
 		ContainerShape pe = (ContainerShape) fp.addIfPossible(addContext);
+		assert(pe!=null): "initial point should have been created";
 		assert(!pe.getAnchors().isEmpty()): "initial point should have an anchor";
 		node2anchor.put(INITIAL, pe.getAnchors().get(0));
+	}
+
+	private void getAnchors(State state, PictogramElement stateShape,
+			final HashMap<String, Anchor> node2anchor) {
+		
+		if (stateShape instanceof ContainerShape) {
+			node2anchor.put(getKey(state, null), ((ContainerShape)stateShape).getAnchors().get(0));
+			for (Shape child : ((ContainerShape) stateShape).getChildren()) {
+				if (child instanceof ContainerShape) {
+					ContainerShape childShape = (ContainerShape) child;
+					if (!childShape.getAnchors().isEmpty()) {
+						if (!childShape.getLink().getBusinessObjects().isEmpty()) {
+							EObject obj = childShape.getLink().getBusinessObjects().get(0);
+							if (obj instanceof EntryPoint || obj instanceof ExitPoint) {
+								node2anchor.put(getKey(obj, null), childShape.getAnchors().get(0));
+							}
+						}
+					}
+				}
+			}
+		}
 	}
 
 	private static String getKey(EObject obj, StateGraph sg) {
