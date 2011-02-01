@@ -32,7 +32,7 @@
 
 «DEFINE Attributes FOR List[Attribute] »
 	//--------------------- attributes
-	«FOREACH this AS attribute»private «attribute.type.typeName()» «attribute.name»; 
+	«FOREACH this AS attribute»protected «attribute.type.typeName()» «attribute.name»; 
 	«ENDFOREACH»
 «ENDDEFINE»
 
