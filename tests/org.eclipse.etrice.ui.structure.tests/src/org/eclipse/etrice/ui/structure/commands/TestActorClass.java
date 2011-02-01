@@ -52,7 +52,7 @@ public class TestActorClass extends TestBase {
 	@Test
 	public void testActorClass() {
 		 ActorClass ac = getModels().get(0).getActorClasses().get(0);
-		 Diagram diagram = DiagramAccess.getDiagram(ac);
+		 Diagram diagram = new DiagramAccess().getDiagram(ac);
 		 
 		 assertEquals("diagram children", 1, diagram.getChildren().size());
 		 

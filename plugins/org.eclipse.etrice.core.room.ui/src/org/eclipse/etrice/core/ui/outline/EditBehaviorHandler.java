@@ -43,8 +43,10 @@ public class EditBehaviorHandler extends AbstractHandler {
 					public void process(XtextResource resource) throws Exception {
 						if (resource != null) {
 							EObject object = resource.getEObject(node.getURI().fragment());
-							if (object instanceof ActorClass)
-								DiagramAccess.openDiagramEditor((ActorClass) object);
+							if (object instanceof ActorClass) {
+								DiagramAccess diagramAccess = new DiagramAccess();
+								diagramAccess.openDiagramEditor((ActorClass) object);
+							}
 						}
 					}
 				});

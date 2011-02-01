@@ -44,8 +44,10 @@ public class EditStructureHandler extends AbstractHandler {
 					public void process(XtextResource resource) throws Exception {
 						if (resource != null) {
 							EObject object = resource.getEObject(node.getURI().fragment());
-							if (object instanceof StructureClass)
-								DiagramAccess.openDiagramEditor((StructureClass) object);
+							if (object instanceof StructureClass) {
+								DiagramAccess diagramAccess = new DiagramAccess();
+								diagramAccess.openDiagramEditor((StructureClass) object);
+							}
 						}
 					}
 				});

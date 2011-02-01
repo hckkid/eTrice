@@ -654,7 +654,7 @@ public class InterfaceItemSupport {
 			
 			// the diagram will be created and initialized if not present
 			// TODOHRR: how to proceed if diagram not up to date?
-			Diagram refDiag = DiagramAccess.getDiagram(refClass);
+			Diagram refDiag = new DiagramAccess().getDiagram(refClass);
 
 			ResourceSet rs = acr.eResource().getResourceSet();
 			
@@ -693,7 +693,7 @@ public class InterfaceItemSupport {
 	public static void createInheritedRefItems(ActorContainerRef acr, ContainerShape arShape, IFeatureProvider featureProvider) {
 		
 		ActorClass ac = (ActorClass) acr.eContainer();
-		Diagram refDiag = DiagramAccess.getDiagram(ac);
+		Diagram refDiag = new DiagramAccess().getDiagram(ac);
 
 		ResourceSet rs = ac.eResource().getResourceSet();
 		

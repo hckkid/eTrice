@@ -419,11 +419,14 @@ public class ActorContainerRefSupport {
 			protected Collection<Diagram> getDiagrams() {
 				ArrayList<Diagram> result = new ArrayList<Diagram>();
 				if (ref!=null) {
+					DiagramAccess diagramAccess = new DiagramAccess();
 					if (ref instanceof ActorRef) {
-						result.add(DiagramAccess.getDiagram(((ActorRef) ref).getType()));
+						Diagram diagram = diagramAccess.getDiagram(((ActorRef) ref).getType());
+						result.add(diagram);
 					}
 					else if (ref instanceof SubSystemRef) {
-						result.add(DiagramAccess.getDiagram(((SubSystemRef) ref).getType()));
+						Diagram diagram = diagramAccess.getDiagram(((SubSystemRef) ref).getType());
+						result.add(diagram);
 					}
 				}
 				return result;

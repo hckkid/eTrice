@@ -62,7 +62,7 @@ public class TestActorClassWithReferences extends TestBase {
 	
 	@Test
 	public void checkReferences() {
-		Diagram diagram = DiagramAccess.getDiagram(ac);
+		Diagram diagram = new DiagramAccess().getDiagram(ac);
 		ContainerShape shape = (ContainerShape) diagram.getChildren().get(0);
 		assertEquals("actor class child shapes", 5, shape.getChildren().size());
 

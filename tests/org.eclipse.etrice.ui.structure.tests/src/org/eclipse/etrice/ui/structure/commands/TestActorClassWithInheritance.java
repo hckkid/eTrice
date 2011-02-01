@@ -85,7 +85,7 @@ public class TestActorClassWithInheritance extends TestBase {
 	
 	@Test
 	public void checkReferences() {
-		Diagram diagram = DiagramAccess.getDiagram(ac);
+		Diagram diagram = new DiagramAccess().getDiagram(ac);
 		ContainerShape shape = (ContainerShape) diagram.getChildren().get(0);
 		EObject bo = Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(shape);
 		assertTrue("bo is ActorClass", bo instanceof ActorClass);
@@ -137,7 +137,7 @@ public class TestActorClassWithInheritance extends TestBase {
 
 	@Test
 	public void checkBindings() {
-		Diagram diagram = DiagramAccess.getDiagram(ac);
+		Diagram diagram = new DiagramAccess().getDiagram(ac);
 		ContainerShape shape = (ContainerShape) diagram.getChildren().get(0);
 		EObject bo = Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(shape);
 		assertTrue("bo is ActorClass", bo instanceof ActorClass);

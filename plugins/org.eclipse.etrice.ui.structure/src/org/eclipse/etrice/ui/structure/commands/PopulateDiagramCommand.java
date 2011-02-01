@@ -244,7 +244,7 @@ public class PopulateDiagramCommand extends RecordingCommand {
 		
 		// we don't have to recurse since the base class diagram already contains all inherited items
 		
-		Diagram refDiag = DiagramAccess.getDiagram(ac);
+		Diagram refDiag = new DiagramAccess().getDiagram(ac);
 
 		ResourceSet rs = ac.eResource().getResourceSet();
 		
