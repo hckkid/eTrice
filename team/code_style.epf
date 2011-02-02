@@ -1,8 +1,8 @@
-#Fri Jan 28 07:47:05 CET 2011
+#Wed Feb 02 07:04:37 CET 2011
 /instance/org.eclipse.jdt.ui/org.eclipse.jdt.ui.overrideannotation=true
 /instance/org.eclipse.jdt.ui/org.eclipse.jdt.ui.formatterprofiles.version=11
 /instance/org.eclipse.jdt.core/org.eclipse.jdt.core.codeComplete.fieldSuffixes=
-/instance/org.eclipse.jdt.ui/org.eclipse.jdt.ui.text.custom_code_templates=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?><templates><template autoinsert\="false" context\="filecomment_context" deleted\="false" description\="Comment for created Java files" enabled\="true" id\="org.eclipse.jdt.ui.text.codetemplates.filecomment" name\="filecomment">/*******************************************************************************\r\n * Copyright (c) 2010 protos software gmbh (http\://www.protos.de).\r\n * All rights reserved. This program and the accompanying materials\r\n * are made available under the terms of the Eclipse Public License v1.0\r\n * which accompanies this distribution, and is available at\r\n * http\://www.eclipse.org/legal/epl-v10.html\r\n * \r\n * CONTRIBUTORS\:\r\n * \t\tThomas Schuetz and Henrik Rentz-Reichert (initial contribution)\r\n * \r\n *******************************************************************************/\r\n</template></templates>
+/instance/org.eclipse.jdt.ui/org.eclipse.jdt.ui.text.custom_code_templates=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?><templates><template autoinsert\="false" context\="filecomment_context" deleted\="false" description\="Comment for created Java files" enabled\="true" id\="org.eclipse.jdt.ui.text.codetemplates.filecomment" name\="filecomment">/*******************************************************************************\r\n * Copyright (c) 2011 protos software gmbh (http\://www.protos.de).\r\n * All rights reserved. This program and the accompanying materials\r\n * are made available under the terms of the Eclipse Public License v1.0\r\n * which accompanies this distribution, and is available at\r\n * http\://www.eclipse.org/legal/epl-v10.html\r\n * \r\n * CONTRIBUTORS\:\r\n * \t\tThomas Schuetz and Henrik Rentz-Reichert (initial contribution)\r\n * \r\n *******************************************************************************/\r\n</template></templates>
 \!/=
 /instance/org.eclipse.jdt.ui/org.eclipse.jdt.ui.ignorelowercasenames=true
 /instance/org.eclipse.jdt.core/org.eclipse.jdt.core.codeComplete.localSuffixes=
@@ -15,6 +15,7 @@
 /instance/org.eclipse.jdt.ui/org.eclipse.jdt.ui.gettersetter.use.is=true
 /instance/org.eclipse.jdt.ui/org.eclipse.jdt.ui.exception.name=e
 /instance/org.eclipse.jdt.core/org.eclipse.jdt.core.codeComplete.staticFieldSuffixes=
+/instance/org.eclipse.jdt.ui/org.eclipse.jdt.ui.javadoc=true
 /instance/org.eclipse.jdt.core/org.eclipse.jdt.core.codeComplete.staticFieldPrefixes=
 /instance/org.eclipse.jdt.ui/org.eclipse.jdt.ui.importorder=java;javax;org;com;
 @org.eclipse.jdt.ui=3.6.0.v20100602-1600
