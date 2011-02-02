@@ -8,6 +8,7 @@
 
 package org.eclipse.etrice.ui.behavior.editor;
 
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.etrice.ui.behavior.Activator;
 import org.eclipse.graphiti.ui.editor.DiagramEditor;
 import org.eclipse.swt.graphics.Image;
@@ -24,6 +25,15 @@ public class BehaviorEditor extends DiagramEditor {
 	@Override
 	public Image getDefaultImage() {
 		return Activator.getImage("icons/Behavior.gif");
+	}
+
+	@Override
+	protected void initializeGraphicalViewer() {
+		super.initializeGraphicalViewer();
+		
+		ResourceSet rs = getEditingDomain().getResourceSet();
+		if (rs.getResources().size()>1)
+			rs.getResources().get(1).setTrackingModification(true);
 	}
 
 }
