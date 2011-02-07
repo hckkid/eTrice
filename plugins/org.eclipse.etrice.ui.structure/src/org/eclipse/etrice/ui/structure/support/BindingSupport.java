@@ -106,7 +106,7 @@ public class BindingSupport {
 				
 				ActorContainerRef tgtRef = getRef(context.getTargetAnchor());
 				
-				return ValidationUtil.isConnectable(src, srcRef, tgt, tgtRef, ac);
+				return ValidationUtil.isConnectable(src, srcRef, tgt, tgtRef, ac).isOk();
 			}
 			
 			public boolean canStartConnection(ICreateConnectionContext context) {
@@ -117,12 +117,12 @@ public class BindingSupport {
 					if (ref==null) {
 						// this port is local, i.e. owned by the parent itself
 						ActorContainerClass acc = (ActorContainerClass) src.eContainer();
-						if (!ValidationUtil.isConnectable(src, null, acc))
+						if (!ValidationUtil.isConnectable(src, null, acc).isOk())
 							canStart = false;
 					}
 					else {
 						ActorContainerClass acc = (ActorContainerClass) ref.eContainer();
-						if (!ValidationUtil.isConnectable(src, ref, acc))
+						if (!ValidationUtil.isConnectable(src, ref, acc).isOk())
 							canStart = false;
 					}
 				}

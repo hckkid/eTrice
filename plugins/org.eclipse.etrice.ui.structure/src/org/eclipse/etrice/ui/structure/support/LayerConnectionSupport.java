@@ -94,7 +94,7 @@ public class LayerConnectionSupport {
 				ActorContainerRef tgtRef = getRef(context.getTargetAnchor());
 				StructureClass sc = getParent(context);
 				
-				return ValidationUtil.isConnectable(src, srcRef, tgt, tgtRef, sc);
+				return ValidationUtil.isConnectable(src, srcRef, tgt, tgtRef, sc).isOk();
 			}
 			
 			public boolean canStartConnection(ICreateConnectionContext context) {

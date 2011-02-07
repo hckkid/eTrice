@@ -115,7 +115,7 @@ public class TransitionSupport {
 				if (sg==null)
 					return false;
 				
-				return ValidationUtil.isConnectable(src, tgt, sg);
+				return ValidationUtil.isConnectable(src, tgt, sg).isOk();
 			}
 			
 			public boolean canStartConnection(ICreateConnectionContext context) {
@@ -127,7 +127,7 @@ public class TransitionSupport {
 				if (sg==null)
 					return false;
 				
-				return ValidationUtil.isConnectable(src, sg);
+				return ValidationUtil.isConnectable(src, sg).isOk();
 			}
 			
 			@Override

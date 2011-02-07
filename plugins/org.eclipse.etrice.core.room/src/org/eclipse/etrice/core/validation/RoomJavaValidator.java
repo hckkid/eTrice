@@ -20,13 +20,18 @@ import org.eclipse.etrice.core.room.ActorInstancePath;
 import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.Binding;
 import org.eclipse.etrice.core.room.DataClass;
+import org.eclipse.etrice.core.room.InitialTransition;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.LayerConnection;
+import org.eclipse.etrice.core.room.NonInitialTransition;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RoomClass;
 import org.eclipse.etrice.core.room.RoomPackage;
+import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.core.room.TrPoint;
+import org.eclipse.etrice.core.room.Transition;
+import org.eclipse.etrice.core.validation.ValidationUtil.Result;
 import org.eclipse.xtext.validation.Check;
 
  
@@ -110,25 +115,43 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 	
 	@Check
 	public void checkPortCompatibility(Binding bind) {
-		if (!ValidationUtil.isValid(bind))
-			error(ValidationUtil.getErrorMessage(), RoomPackage.BINDING);
+		Result result = ValidationUtil.isValid(bind);
+		if (!result.isOk())
+			error(result.getMsg(), RoomPackage.BINDING);
 	}
 	
 	@Check
 	public void checkServiceCompatibility(LayerConnection conn) {
-		if (!ValidationUtil.isValid(conn))
-			error(ValidationUtil.getErrorMessage(), RoomPackage.LAYER_CONNECTION);
+		Result result = ValidationUtil.isValid(conn);
+		if (!result.isOk())
+			error(result.getMsg(), RoomPackage.LAYER_CONNECTION);
 	}
 	
 	@Check
 	public void checkTrPoint(TrPoint tp) {
-		if (!ValidationUtil.isValid(tp))
-			error(ValidationUtil.getErrorMessage(), RoomPackage.TR_POINT);
+		Result result = ValidationUtil.isValid(tp);
+		if (!result.isOk())
+			error(result.getMsg(), RoomPackage.TR_POINT);
 	}
 	
 	@Check
 	public void checkInterfaceItemUniqueName(InterfaceItem item) {
-		if (!ValidationUtil.isUniqueName(item))
-			error(ValidationUtil.getErrorMessage(), RoomPackage.INTERFACE_ITEM__NAME);
+		Result result = ValidationUtil.isUniqueName(item);
+		if (!result.isOk())
+			error(result.getMsg(), RoomPackage.INTERFACE_ITEM__NAME);
+	}
+	
+	@Check
+	public void checkTransition(Transition trans) {
+		if (trans instanceof InitialTransition) {
+			Result result = ValidationUtil.isConnectable(null, trans.getTo(), trans, (StateGraph)trans.eContainer());
+			if (!result.isOk())
+				error(result.getMsg(), RoomPackage.TRANSITION);
+		}
+		else {
+			Result result = ValidationUtil.isConnectable(((NonInitialTransition)trans).getFrom(), trans.getTo(), trans, (StateGraph)trans.eContainer());
+			if (!result.isOk())
+				error(result.getMsg(), RoomPackage.TRANSITION);
+		}
 	}
 }
