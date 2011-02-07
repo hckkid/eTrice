@@ -31,6 +31,7 @@ public class StructureEditor extends DiagramEditor {
 		return Activator.getImage("icons/Structure.gif");
 	}
 
+	@SuppressWarnings("restriction")
 	@Override
 	protected void initializeGraphicalViewer() {
 		super.initializeGraphicalViewer();
