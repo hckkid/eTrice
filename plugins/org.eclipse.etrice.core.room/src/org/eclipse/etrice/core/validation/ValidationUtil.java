@@ -518,6 +518,9 @@ public class ValidationUtil {
 	public static Result isConnectableSrc(TransitionTerminal src, Transition trans, StateGraph sg) {
 		if (src==null) {
 			for (Transition t : sg.getTransitions()) {
+				if (t==trans)
+					continue;
+
 				if (t instanceof InitialTransition)
 					return Result.error("there already is an InitialTransition");
 			}
