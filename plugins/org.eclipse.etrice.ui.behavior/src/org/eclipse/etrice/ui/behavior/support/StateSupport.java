@@ -65,6 +65,7 @@ import org.eclipse.graphiti.mm.algorithms.styles.Color;
 import org.eclipse.graphiti.mm.algorithms.styles.Orientation;
 import org.eclipse.graphiti.mm.pictograms.ChopboxAnchor;
 import org.eclipse.graphiti.mm.pictograms.ContainerShape;
+import org.eclipse.graphiti.mm.pictograms.Diagram;
 import org.eclipse.graphiti.mm.pictograms.PictogramElement;
 import org.eclipse.graphiti.mm.pictograms.Shape;
 import org.eclipse.graphiti.services.Graphiti;
@@ -124,7 +125,7 @@ public class StateSupport {
 		        
 		        StateGraph sg = (StateGraph) context.getTargetContainer().getLink().getBusinessObjects().get(0);
 		        
-				boolean inherited = isInherited(sg);
+				boolean inherited = isInherited(getDiagram(), sg);
 
 				if (inherited) {
 					// TODOHRR: handling of refined state - also consider refining action codes
@@ -132,7 +133,7 @@ public class StateSupport {
 					// we have to insert a refined state first
 					RefinedState rs = RoomFactory.eINSTANCE.createRefinedState();
 					rs.setBase((BaseState) sg.eContainer());
-					ActorClass ac = getActorClass();
+					ActorClass ac = getActorClass(getDiagram());
 					ac.getStateMachine().getStates().add(rs);
 					
 					// now we change the context
@@ -195,7 +196,7 @@ public class StateSupport {
 				int width = context.getWidth() <= 0 ? DEFAULT_SIZE_X : context.getWidth();
 				int height = context.getHeight() <= 0 ? DEFAULT_SIZE_Y : context.getHeight();
 			
-				boolean inherited = isInherited(s);
+				boolean inherited = isInherited(getDiagram(), s);
 				Color lineColor = manageColor(inherited?INHERITED_COLOR:LINE_COLOR);
 				IGaService gaService = Graphiti.getGaService();
 				{
@@ -280,7 +281,7 @@ public class StateSupport {
 					if (bo instanceof State) {
 						State s = (State) bo;
 						ga.getGraphicsAlgorithmChildren().clear();
-						Color lineColor = manageColor(isInherited(s)?INHERITED_COLOR:LINE_COLOR);
+						Color lineColor = manageColor(isInherited(getDiagram(), s)?INHERITED_COLOR:LINE_COLOR);
 						addSubStructureHint(s, (RoundedRectangle) ga, lineColor);
 					}
 
@@ -449,8 +450,8 @@ public class StateSupport {
 					addContext.setY(StateGraphSupport.MARGIN);
 					PictogramElement subGraphShape = getFeatureProvider().addIfPossible(addContext);
 					if (subGraphShape!=null) {
-						RoundedRectangle borderRect = (RoundedRectangle) subGraphShape.getGraphicsAlgorithm().getGraphicsAlgorithmChildren().get(0);
-						boolean inherited = ((FeatureProvider)getFeatureProvider()).isInherited(s);
+						RoundedRectangle borderRect = (RoundedRectangle) container.getGraphicsAlgorithm().getGraphicsAlgorithmChildren().get(0);
+						boolean inherited = isInherited(getDiagram(), s);
 						Color lineColor = manageColor(inherited?INHERITED_COLOR:LINE_COLOR);
 						addSubStructureHint(s, borderRect, lineColor);
 					}
@@ -554,7 +555,7 @@ public class StateSupport {
 					if (!invisibleRect.getGraphicsAlgorithmChildren().isEmpty()) {
 						GraphicsAlgorithm borderRect = invisibleRect.getGraphicsAlgorithmChildren().get(0);
 						if (hasSubStruct && borderRect.getGraphicsAlgorithmChildren().isEmpty()) {
-							Color lineColor = manageColor(isInherited(s)?INHERITED_COLOR:LINE_COLOR);
+							Color lineColor = manageColor(isInherited(getDiagram(), s)?INHERITED_COLOR:LINE_COLOR);
 							addSubStructureHint(s, (RoundedRectangle) borderRect, lineColor);
 						}
 						else if (!hasSubStruct && !borderRect.getGraphicsAlgorithmChildren().isEmpty()) {
@@ -594,7 +595,7 @@ public class StateSupport {
 						
 						// TODOHRR: also check coordinates (no overlap with state graph boundaries)
 						
-						return !isInherited(s);
+						return !isInherited(getDiagram(), s);
 					}
 				}
 				
@@ -711,8 +712,11 @@ public class StateSupport {
 			return new ICustomFeature[] { new PropertyFeature(fp), new GoDownFeature(fp), new CreateSubGraphFeature(fp) };
 		}
 
-		private ActorClass getActorClass() {
-			return (ActorClass) getDiagramTypeProvider().getDiagram().getLink().getBusinessObjects().get(0);
+		private static ActorClass getActorClass(Diagram diag) {
+			EObject bo = Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(diag);
+			if (bo instanceof ActorClass)
+				return (ActorClass) bo;
+			return null;
 		}
 
 		protected static String getLabel(ActorContainerRef acr) {
@@ -728,8 +732,8 @@ public class StateSupport {
 			return acr.getName()+"\n("+className+")";
 		}
 		
-		protected boolean isInherited(EObject obj) {
-			ActorClass parent = getActorClass();
+		protected static boolean isInherited(Diagram diag, EObject obj) {
+			ActorClass parent = getActorClass(diag);
 			while (obj!=null) {
 				if (obj instanceof ActorClass)
 					return obj!=parent;
