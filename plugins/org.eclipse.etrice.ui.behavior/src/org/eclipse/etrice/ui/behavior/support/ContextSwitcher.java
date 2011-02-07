@@ -2,6 +2,7 @@ package org.eclipse.etrice.ui.behavior.support;
 
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.RefinedState;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraph;
@@ -25,6 +26,13 @@ public class ContextSwitcher {
 			// and finally go up
 			StateGraph superSG = (StateGraph) s.eContainer();
 			ContextSwitcher.switchTo(diagram, superSG);
+		}
+	}
+
+	public static void switchTop(Diagram diagram) {
+		EObject bo = Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(diagram);
+		if (bo instanceof ActorClass) {
+			switchTo(diagram, ((ActorClass) bo).getStateMachine());
 		}
 	}
 	
