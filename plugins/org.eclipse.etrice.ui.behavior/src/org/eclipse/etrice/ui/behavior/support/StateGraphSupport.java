@@ -135,13 +135,13 @@ public class StateGraphSupport {
 					Text label = gaService.createDefaultText(labelShape, RoomNameProvider.getStateGraphLabel(sg));
 					label.setForeground(manageColor(LINE_COLOR));
 					label.setBackground(manageColor(LINE_COLOR));
-					label.setHorizontalAlignment(Orientation.ALIGNMENT_LEFT);
+					label.setHorizontalAlignment(Orientation.ALIGNMENT_RIGHT);
 					label.setVerticalAlignment(Orientation.ALIGNMENT_TOP);
 					Font font = label.getFont();
 					font.setSize((int) (label.getFont().getSize()*1.2));
 					font.setBold(true);
 					label.setFont(font);
-					gaService.setLocationAndSize(label, 2*MARGIN, MARGIN, width-4*MARGIN, 2*MARGIN);
+					gaService.setLocationAndSize(label, 0, MARGIN, width, 2*MARGIN);
 				}
 	
 				// call the layout feature
