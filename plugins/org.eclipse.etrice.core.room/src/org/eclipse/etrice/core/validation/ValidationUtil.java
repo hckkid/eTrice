@@ -487,7 +487,7 @@ public class ValidationUtil {
 
 				if (t.getTo() instanceof TrPointTerminal) {
 					TrPointTerminal tpt = (TrPointTerminal)t.getTo();
-					if (tpt.getTrPoint()==((TrPointTerminal) src).getTrPoint())
+					if (tpt.getTrPoint()==((TrPointTerminal) tgt).getTrPoint())
 						return Result.error("target transition point already is connected");
 				}
 			}
@@ -502,7 +502,7 @@ public class ValidationUtil {
 
 				if (t.getTo() instanceof SubStateTrPointTerminal) {
 					SubStateTrPointTerminal tpt = (SubStateTrPointTerminal)t.getTo();
-					if (tpt.getTrPoint()==((SubStateTrPointTerminal) src).getTrPoint())
+					if (tpt.getTrPoint()==((SubStateTrPointTerminal) tgt).getTrPoint())
 						return Result.error("target transition point already is connected");
 				}
 			}
