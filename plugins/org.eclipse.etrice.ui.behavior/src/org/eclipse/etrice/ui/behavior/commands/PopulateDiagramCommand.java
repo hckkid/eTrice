@@ -81,29 +81,10 @@ public class PopulateDiagramCommand extends RecordingCommand {
 		
 		addStateGraph(tree, diagram);
 		
-		activateTopLevel();
-	}
-
-	private void activateTopLevel() {
-		if (!diagram.getChildren().isEmpty()) {
-			// since we made a depth first recursion the top level state graph appears last
-			Shape shape = diagram.getChildren().get(diagram.getChildren().size()-1);
-			EObject bo = Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(shape);
-			if (bo instanceof StateGraph) {
-				ContextSwitcher.switchTo(diagram, (StateGraph) bo);
-				return;
-			}
-		}
-		
-		assert(false): "state graph expected";
+		ContextSwitcher.switchTop(diagram);
 	}
 
 	private void addStateGraph(StateGraphContext ctx, ContainerShape parent) {
-		// depth first recursion to have sub transition points in place
-		for (StateGraphContext sub : ctx.getChildren()) {
-			addStateGraph(sub, parent);
-		}
-
 		AddContext addContext = new AddContext();
 		addContext.setNewObject(ctx.getStateGraph());
 		addContext.setTargetContainer(parent);
@@ -111,15 +92,34 @@ public class PopulateDiagramCommand extends RecordingCommand {
 		addContext.setY(StateGraphSupport.MARGIN);
 		
 		ContainerShape sgShape = (ContainerShape) fp.addIfPossible(addContext);
-		if (sgShape!=null) {
-			final HashMap<String, Anchor> node2anchor = new HashMap<String, Anchor>();
-			
-			addInitialPointIff(ctx.getStateGraph(), sgShape, node2anchor);
-			addTransitionPoints(ctx.getStateGraph(), sgShape, node2anchor);
-			addStates(ctx.getStateGraph(), sgShape, node2anchor);
-			addChoicePoints(ctx.getStateGraph(), sgShape, node2anchor);
-			
-			addTransitions(ctx.getStateGraph(), sgShape, node2anchor);
+		if (sgShape==null)
+			return;
+		
+		final HashMap<String, Anchor> node2anchor = new HashMap<String, Anchor>();
+		
+		addInitialPointIff(ctx.getStateGraph(), sgShape, node2anchor);
+		addTransitionPoints(ctx.getStateGraph(), sgShape, node2anchor);
+		addStates(ctx.getStateGraph(), sgShape, node2anchor);
+		addChoicePoints(ctx.getStateGraph(), sgShape, node2anchor);
+
+		for (StateGraphContext sub : ctx.getChildren()) {
+			addStateGraph(sub, parent);
+		}
+		
+		getSubTpAnchors(sgShape, node2anchor);
+		
+		addTransitions(ctx.getStateGraph(), sgShape, node2anchor);
+	}
+
+	/**
+	 * @param sgShape
+	 * @param node2anchor
+	 */
+	private void getSubTpAnchors(ContainerShape sgShape, HashMap<String, Anchor> node2anchor) {
+		for (Shape childShape : sgShape.getChildren()) {
+			EObject bo = Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(childShape);
+			if (bo instanceof State)
+				getAnchors((State) bo, childShape, node2anchor);
 		}
 	}
 
@@ -198,8 +198,6 @@ public class PopulateDiagramCommand extends RecordingCommand {
 		ContainerShape pe = (ContainerShape) fp.addIfPossible(addContext);
 		assert(pe!=null): "state should have been created";
 		assert(!pe.getAnchors().isEmpty()): "state should have an anchor";
-		
-		getAnchors(s, pe, node2anchor);
 	}
 
 	private void addChoicePoints(StateGraph sg, ContainerShape sgShape,

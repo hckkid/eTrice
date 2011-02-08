@@ -12,9 +12,10 @@
 
 package org.eclipse.etrice.ui.behavior.support;
 
+import java.util.List;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.etrice.core.room.ActorContainerRef;
 import org.eclipse.etrice.core.room.EntryPoint;
 import org.eclipse.etrice.core.room.ExitPoint;
 import org.eclipse.etrice.core.room.RoomFactory;
@@ -71,7 +72,6 @@ import org.eclipse.graphiti.mm.pictograms.Anchor;
 import org.eclipse.graphiti.mm.pictograms.AnchorContainer;
 import org.eclipse.graphiti.mm.pictograms.ChopboxAnchor;
 import org.eclipse.graphiti.mm.pictograms.ContainerShape;
-import org.eclipse.graphiti.mm.pictograms.Diagram;
 import org.eclipse.graphiti.mm.pictograms.PictogramElement;
 import org.eclipse.graphiti.mm.pictograms.Shape;
 import org.eclipse.graphiti.services.Graphiti;
@@ -209,9 +209,9 @@ public class TrPointSupport {
 			@Override
 			public PictogramElement add(IAddContext context) {
 				TrPoint tp = (TrPoint) context.getNewObject();
-				ContainerShape acShape = context.getTargetContainer();
-				Object bo = getBusinessObjectForPictogramElement(acShape);
-				boolean inherited = isInherited(tp, bo, acShape);
+				ContainerShape parentShape = context.getTargetContainer();
+				Object bo = getBusinessObjectForPictogramElement(parentShape);
+				boolean inherited = isInherited(tp, bo, parentShape);
 				boolean subtp = (bo instanceof State);
 	
 				int margin = subtp?StateSupport.MARGIN:StateGraphSupport.MARGIN;
@@ -220,35 +220,48 @@ public class TrPointSupport {
 				// CONTAINER SHAPE WITH RECTANGLE
 				IPeCreateService peCreateService = Graphiti.getPeCreateService();
 				ContainerShape containerShape =
-					peCreateService.createContainerShape(acShape, true);
+					peCreateService.createContainerShape(parentShape, true);
 	
 				Graphiti.getPeService().setPropertyValue(containerShape, Constants.TYPE_KEY, Constants.TRP_TYPE);
 				
 				String kind = getItemKind(tp);
 				Graphiti.getPeService().setPropertyValue(containerShape, PROP_KIND, kind);
 				
-				// we have relative coordinates here
-				int x = context.getX()-size;
-				int y = context.getY()-size;
-				int width = acShape.getGraphicsAlgorithm().getWidth();
-				int height = acShape.getGraphicsAlgorithm().getHeight();
+				// the context point is the midpoint relative to the invisible rectangle
+				int x = context.getX();
+				int y = context.getY();
+				int width = parentShape.getGraphicsAlgorithm().getWidth();
+				int height = parentShape.getGraphicsAlgorithm().getHeight();
 				{
 					int dx = (x<=width/2)? x:width-x;
 					int dy = (y<=height/2)? y:height-y;
 					if (dx>dy) {
 						// keep x, project y
 						if (y<=height/2)
-							y = 0;
+							y = margin;
 						else
-							y = height-2*margin;
+							y = height-margin;
+						
+						if (x<margin)
+							x = margin;
+						else if (x>width-margin)
+							x = width-margin;
 					}
 					else {
 						// keep y, project x
 						if (x<=width/2)
-							x = 0;
+							x = margin;
 						else
-							x = width-2*margin;
+							x = width-margin;
+						
+						if (y<margin)
+							y = margin;
+						else if (y>height-margin)
+							y = height-margin;
 					}
+					// finally we subtract the midpoint to get coordinates of the upper left corner
+					x -= margin;
+					y -= margin;
 				}
 				
 				Color dark = manageColor(inherited? INHERITED_COLOR:DARK_COLOR);
@@ -278,6 +291,9 @@ public class TrPointSupport {
 					adjustLabel(label, x, y, width, margin, size);
 				}
 
+				if (!subtp)
+					createParentTP(tp, containerShape, parentShape);
+				
 				// call the layout feature
 				layoutPictogramElement(containerShape);
 	
@@ -285,6 +301,39 @@ public class TrPointSupport {
 	
 			}
 
+			/**
+			 * @param tp
+			 * @param tpShape
+			 * @param subGraphShape 
+			 */
+			private void createParentTP(TrPoint tp, ContainerShape tpShape, ContainerShape subGraphShape) {
+				if ((tp instanceof TransitionPoint))
+					return;
+				
+				if (!(tp.eContainer().eContainer() instanceof State))
+					return;
+				
+				State s = (State) tp.eContainer().eContainer();
+				List<PictogramElement> elements = Graphiti.getLinkService().getPictogramElements(getDiagram(), s);
+				assert(elements.size()==1): "expected unique pe";
+				assert(elements.get(0) instanceof ContainerShape): "expected state shape";
+				ContainerShape stateShape = (ContainerShape) elements.get(0);
+				GraphicsAlgorithm invisibleRect = stateShape.getGraphicsAlgorithm();
+				GraphicsAlgorithm borderRect = invisibleRect.getGraphicsAlgorithmChildren().get(0);
+				GraphicsAlgorithm invisibleSubRect = subGraphShape.getGraphicsAlgorithm();
+				GraphicsAlgorithm borderSubRect = invisibleSubRect.getGraphicsAlgorithmChildren().get(0);
+				double scaleX = borderRect.getWidth() /(double)borderSubRect.getWidth();
+				double scaleY = borderRect.getHeight()/(double)borderSubRect.getHeight();
+				
+				// use midpoint coordinates relative to border rectangle
+				// result is again in midpoint coordinates relative to the parent border rectangle
+				int mp = StateGraphSupport.MARGIN+ITEM_SIZE/2;
+				int x = (int) ((tpShape.getGraphicsAlgorithm().getX()+mp-StateGraphSupport.MARGIN)*scaleX);
+				int y = (int) ((tpShape.getGraphicsAlgorithm().getY()+mp-StateGraphSupport.MARGIN)*scaleY);
+				
+				// pass coordinates relative to invisible rectangle
+				addItem(tp, x+StateSupport.MARGIN, y+StateSupport.MARGIN, stateShape, fp);
+			}
 		}
 		
 		protected class MoveShapeFeature extends DefaultMoveShapeFeature {
@@ -307,9 +356,10 @@ public class TrPointSupport {
 						if (isInherited(tp, parentBO, acShape))
 							return false;
 						
-						boolean refport = (parentBO instanceof ActorContainerRef);
-						int margin = refport?StateSupport.MARGIN:StateGraphSupport.MARGIN;
-						return isValidPosition(context, context, margin);
+						if (isSubTP(context.getPictogramElement()))
+							return false;
+						
+						return isValidPosition(context, context, StateGraphSupport.MARGIN);
 					}
 					return false;
 				}
@@ -321,11 +371,8 @@ public class TrPointSupport {
 			protected void postMoveShape(IMoveShapeContext context) {
 				ContainerShape shapeToMove = (ContainerShape) context.getShape();
 	
-				ContainerShape acShape = context.getTargetContainer();
-				boolean subtp = (getBusinessObjectForPictogramElement(acShape) instanceof ActorContainerRef);
-	
-				int margin = subtp?StateSupport.MARGIN:StateGraphSupport.MARGIN;
-				int size = subtp?StateSupport.MARGIN:ITEM_SIZE;
+				int margin = StateGraphSupport.MARGIN;
+				int size = ITEM_SIZE;
 	
 				int x = context.getX();
 				int y = context.getY();
@@ -492,7 +539,7 @@ public class TrPointSupport {
 			}
 
 			public boolean canRemove(IRemoveContext context) {
-				return !isSubTP(context.getPictogramElement());
+				return false;
 			}
 		}
 		
@@ -505,6 +552,29 @@ public class TrPointSupport {
 			@Override
 			public boolean canDelete(IDeleteContext context) {
 				return !isSubTP(context.getPictogramElement());
+			}
+			
+			/* (non-Javadoc)
+			 * @see org.eclipse.graphiti.ui.features.DefaultDeleteFeature#preDelete(org.eclipse.graphiti.features.context.IDeleteContext)
+			 */
+			@Override
+			public void preDelete(IDeleteContext context) {
+				super.preDelete(context);
+
+				// remove all associated pictogram elements except the doomed one
+				IFeatureProvider featureProvider = getFeatureProvider();
+				EObject bo = Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(context.getPictogramElement());
+				List<PictogramElement> elements = Graphiti.getLinkService().getPictogramElements(getDiagram(), bo);
+				for (PictogramElement pe : elements) {
+					if (pe==context.getPictogramElement())
+						continue;
+					
+					IRemoveContext rc = new RemoveContext(pe);
+					IRemoveFeature removeFeature = featureProvider.getRemoveFeature(rc);
+					if (removeFeature != null) {
+						removeFeature.remove(rc);
+					}
+				}
 			}
 		}
 		
@@ -635,14 +705,10 @@ public class TrPointSupport {
 			if (!(pe instanceof ContainerShape))
 				return false;
 			
-			ContainerShape acShape = ((ContainerShape)pe).getContainer();
+			ContainerShape parentShape = ((ContainerShape)pe).getContainer();
+			EObject parent = Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(parentShape);
 			
-			if (acShape.getLink()==null || acShape.getLink().getBusinessObjects().isEmpty())
-				return false;
-			
-			Object parent = acShape.getLink().getBusinessObjects().get(0);
-			
-			return (parent instanceof ActorContainerRef);
+			return (parent instanceof State);
 		}
 		
 		protected static boolean isInherited(TrPoint tp, Object container, ContainerShape cs) {
@@ -671,7 +737,7 @@ public class TrPointSupport {
 			int x = loc.getX();
 			int y = loc.getY();
 			if (loc instanceof ICreateContext) {
-				// adjust position as relative to visible rectangle
+				// adjust position as relative to border rectangle
 				x -= margin;
 				y -= margin;
 			}
@@ -817,55 +883,14 @@ public class TrPointSupport {
 		return tbp;
 	}
 
-	public static void createSubTrPoints(State s, ContainerShape stateShape, IFeatureProvider fp) {
-		if (s.getSubgraph()==null)
-			return;
-		
-		ContainerShape diag = stateShape;
-		while (diag!=null) {
-			if (diag instanceof Diagram)
-				break;
-			diag = diag.getContainer();
-		}
-		assert(diag!=null): "Diagram expected";
-		ContainerShape subGraphShape = ContextSwitcher.getContext((Diagram) diag, s.getSubgraph());
-		assert(subGraphShape!=null): "sub graph should be present";
-		
-		GraphicsAlgorithm invisibleRect = stateShape.getGraphicsAlgorithm();
-		GraphicsAlgorithm borderRect = invisibleRect.getGraphicsAlgorithmChildren().get(0);
-		GraphicsAlgorithm invisibleSubRect = subGraphShape.getGraphicsAlgorithm();
-		GraphicsAlgorithm borderSubRect = invisibleSubRect.getGraphicsAlgorithmChildren().get(0);
-		double scaleX = borderRect.getWidth() /(double)borderSubRect.getWidth();
-		double scaleY = borderRect.getHeight()/(double)borderSubRect.getHeight();
-		
-		for (TrPoint tp : s.getSubgraph().getTrPoints()) {
-			if (!(tp instanceof TransitionPoint)) {
-				int x=0, y=0;
-				for (Shape childShape : subGraphShape.getChildren()) {
-					Object bo = fp.getBusinessObjectForPictogramElement(childShape);
-					if (bo==tp) {
-						x = (int) (childShape.getGraphicsAlgorithm().getX()*scaleX);
-						y = (int) (childShape.getGraphicsAlgorithm().getY()*scaleY);
-						break;
-					}
-				}
-				addItem(tp, x, y, stateShape, fp);
-			}
-		}
-	}
-
-	public static void createInheritedSubTrPoints(State s, ContainerShape containerShape, IFeatureProvider fp) {
-		// TODO Auto-generated method stub
-		
-	}
-
 	private static void addItem(EObject ownObject, int x, int y,
 			ContainerShape stateShape, IFeatureProvider fp) {
 		AddContext addContext = new AddContext();
 		addContext.setNewObject(ownObject);
 		addContext.setTargetContainer(stateShape);
-		addContext.setX(x + ITEM_SIZE_SMALL);
-		addContext.setY(y + ITEM_SIZE_SMALL);
+
+		addContext.setX(x);
+		addContext.setY(y);
 		ContainerShape pe = (ContainerShape) fp.addIfPossible(addContext);
 		assert(pe!=null): "transition point should have been created";
 		assert(!pe.getAnchors().isEmpty()): "transition point must have an anchor";

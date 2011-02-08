@@ -212,11 +212,6 @@ public class StateSupport {
 					
 					// create link and wire it
 					link(containerShape, s);
-					
-					TrPointSupport.createSubTrPoints(s, containerShape, fp);
-					if (inherited || s instanceof RefinedState) {
-						TrPointSupport.createInheritedSubTrPoints(s, containerShape, fp);
-					}
 				}
 				
 				{

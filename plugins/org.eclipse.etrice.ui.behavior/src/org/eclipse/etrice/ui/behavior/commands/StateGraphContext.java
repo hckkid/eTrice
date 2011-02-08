@@ -27,7 +27,9 @@ class StateGraphContext {
 	
 	static StateGraphContext createContextTree(ActorClass ac) {
 		
-		// TODOHRR: should we have the top level state graph always be the one of our actor class?
+		// the top level state graph is always the one of our actor class
+		if (ac.getStateMachine()==null)
+			ac.setStateMachine(RoomFactory.eINSTANCE.createStateGraph());
 
 		ArrayList<ActorClass> classes = new ArrayList<ActorClass>();
 		{
@@ -47,13 +49,6 @@ class StateGraphContext {
 				else
 					tree.merge(cls.getStateMachine());
 			}
-		}
-		
-		if (tree==null) {
-			// this is the case if no state machine was defined yet
-			if (ac.getStateMachine()==null)
-				ac.setStateMachine(RoomFactory.eINSTANCE.createStateGraph());
-			tree = new StateGraphContext(ac.getStateMachine());
 		}
 		
 		return tree;
