@@ -395,6 +395,53 @@ public class TrPointSupport {
 				if (ga instanceof Text) {
 					adjustLabel((Text) ga, x, y, width, margin, size);
 				}
+				
+				adjustSubTPs(shapeToMove);
+			}
+
+			/**
+			 * @param shapeToMove
+			 */
+			private void adjustSubTPs(ContainerShape shapeToMove) {
+				EObject bo = Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(shapeToMove);
+				if (!(bo instanceof TrPoint)) {
+					assert(false): "expected TrPoint";
+					return;
+				}
+				if (bo instanceof TransitionPoint)
+					return;
+				
+				List<PictogramElement> elements = Graphiti.getLinkService().getPictogramElements(getDiagram(), bo);
+				if (elements.size()!=2) {
+					assert(false): "should be this TrPoint and one sub TrPoint";
+					return;
+				}
+				PictogramElement subTpShape = elements.get(0);
+				if (subTpShape==shapeToMove)
+					subTpShape = elements.get(1);
+
+				// for the coordinate transformation we need the border rectangles of our
+				// state graph and that of the states state graph which contains the sub tp
+				GraphicsAlgorithm invisibleRect = shapeToMove.getContainer().getGraphicsAlgorithm();
+				GraphicsAlgorithm borderRect = invisibleRect.getGraphicsAlgorithmChildren().get(0);
+				GraphicsAlgorithm invisibleSubRect = ((ContainerShape)subTpShape.eContainer()).getGraphicsAlgorithm();
+				GraphicsAlgorithm borderSubRect = invisibleSubRect.getGraphicsAlgorithmChildren().get(0);
+				double scaleX = borderSubRect.getWidth() /(double)borderRect.getWidth();
+				double scaleY = borderSubRect.getHeight()/(double)borderRect.getHeight();
+				
+				// transform mid point into target coordinates
+				int x = (int) (shapeToMove.getGraphicsAlgorithm().getX()*scaleX);
+				int y = (int) (shapeToMove.getGraphicsAlgorithm().getY()*scaleY);
+				
+				// mid point relative to border rectangle -> upper left corner relative to invisible rectangle
+				// (doesn't change anything)
+				
+				Graphiti.getGaService().setLocation(subTpShape.getGraphicsAlgorithm(), x, y, avoidNegativeCoordinates());
+				
+				GraphicsAlgorithm ga = ((ContainerShape)subTpShape).getChildren().get(0).getGraphicsAlgorithm();
+				if (ga instanceof Text) {
+					adjustLabel((Text) ga, x, y, borderRect.getWidth(), StateGraphSupport.MARGIN, ITEM_SIZE_SMALL);
+				}
 			}
 		}
 	
