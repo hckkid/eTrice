@@ -526,10 +526,11 @@ public class ValidationUtil {
 			}
 		}
 		else if (src instanceof TrPointTerminal) {
-			if (((TrPointTerminal) src).getTrPoint() instanceof ExitPoint)
+			TrPoint srcTP = ((TrPointTerminal) src).getTrPoint();
+			if (srcTP instanceof ExitPoint)
 				return Result.error("exit point can not be transition sources");
 			// TransitionPoint and EntryPoint are valid
-			if (src instanceof EntryPoint) {
+			if (srcTP instanceof EntryPoint) {
 				for (Transition t : sg.getTransitions()) {
 					if (t==trans)
 						continue;
@@ -537,7 +538,7 @@ public class ValidationUtil {
 					if (t instanceof NonInitialTransition) {
 						if (((NonInitialTransition) t).getFrom() instanceof TrPointTerminal) {
 							TrPointTerminal tpt = (TrPointTerminal)((NonInitialTransition) t).getFrom();
-							if (tpt.getTrPoint()==((TrPointTerminal) src).getTrPoint())
+							if (tpt.getTrPoint()==srcTP)
 								return Result.error("source transition point already is connected");
 						}
 					}
