@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: eTrice Behavior Diagram Tests
+Bundle-SymbolicName: org.eclipse.etrice.ui.behavior.tests
+Bundle-Version: 0.1.0
+Bundle-Activator: org.eclipse.etrice.ui.behavior.BehaviorActivator
+Bundle-Vendor: eTrice (Incubation)
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.junit;bundle-version="4.8.1",
+ org.eclipse.etrice.core.room;bundle-version="0.1.0",
+ org.eclipse.etrice.ui.behavior;bundle-version="0.1.0",
+ org.eclipse.xtext;bundle-version="1.0.1",
+ org.eclipse.graphiti;bundle-version="0.7.0",
+ org.eclipse.etrice.ui.common;bundle-version="0.1.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
