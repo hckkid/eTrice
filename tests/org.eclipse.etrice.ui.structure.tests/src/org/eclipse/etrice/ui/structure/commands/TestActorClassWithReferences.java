@@ -16,11 +16,15 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+import java.net.URL;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.Port;
+import org.eclipse.etrice.tests.base.TestBase;
 import org.eclipse.etrice.ui.structure.DiagramAccess;
+import org.eclipse.etrice.ui.structure.StructureTestActivator;
 import org.eclipse.graphiti.mm.algorithms.Text;
 import org.eclipse.graphiti.mm.pictograms.ContainerShape;
 import org.eclipse.graphiti.mm.pictograms.Diagram;
@@ -90,6 +94,14 @@ public class TestActorClassWithReferences extends TestBase {
 			}
 		}
 		assertEquals("number of actor references", 2, nRefs);
+	}
+
+	/* (non-Javadoc)
+	 * @see org.eclipse.etrice.tests.base.TestBase#getModelsDirectoy()
+	 */
+	@Override
+	protected URL getModelsDirectoy() {
+		return StructureTestActivator.getInstance().getBundle().getEntry("models");
 	}
 
 }

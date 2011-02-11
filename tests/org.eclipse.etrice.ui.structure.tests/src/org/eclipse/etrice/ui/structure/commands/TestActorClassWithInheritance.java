@@ -18,6 +18,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
+import java.net.URL;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
@@ -25,24 +26,29 @@ import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.Binding;
 import org.eclipse.etrice.core.room.Port;
+import org.eclipse.etrice.tests.base.TestBase;
 import org.eclipse.etrice.ui.structure.DiagramAccess;
+import org.eclipse.etrice.ui.structure.StructureTestActivator;
 import org.eclipse.etrice.ui.structure.support.ActorContainerRefSupport;
 import org.eclipse.etrice.ui.structure.support.BindingSupport;
 import org.eclipse.graphiti.mm.algorithms.GraphicsAlgorithm;
 import org.eclipse.graphiti.mm.algorithms.Rectangle;
 import org.eclipse.graphiti.mm.algorithms.Text;
-import org.eclipse.graphiti.mm.algorithms.styles.Color;
 import org.eclipse.graphiti.mm.pictograms.Connection;
 import org.eclipse.graphiti.mm.pictograms.ContainerShape;
 import org.eclipse.graphiti.mm.pictograms.Diagram;
 import org.eclipse.graphiti.mm.pictograms.PictogramElement;
 import org.eclipse.graphiti.mm.pictograms.Shape;
 import org.eclipse.graphiti.services.Graphiti;
-import org.eclipse.graphiti.util.IColorConstant;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * Unit test for the structure of an actor class with inheritance
+ *
+ * @author Henrik Rentz-Reichert initial contribution and API
+ */
 public class TestActorClassWithInheritance extends TestBase {
 
 	private ActorClass ac = null;
@@ -73,16 +79,6 @@ public class TestActorClassWithInheritance extends TestBase {
 		return "ActorClassWithInheritance.room";
 	}
 	
-	private boolean isEqual(Color c, IColorConstant cc) {
-		if (c.getRed()!=cc.getRed())
-			return false;
-		if (c.getGreen()!=cc.getGreen())
-			return false;
-		if (c.getBlue()!=cc.getBlue())
-			return false;
-		return true;
-	}
-	
 	@Test
 	public void checkReferences() {
 		Diagram diagram = new DiagramAccess().getDiagram(ac);
@@ -108,7 +104,7 @@ public class TestActorClassWithInheritance extends TestBase {
 				boolean inherited = (ar.eContainer()!=ac);
 					
 				assertNotNull("ga is there (invisible rectangle)", childShape.getGraphicsAlgorithm());
-				assertTrue("ga is invisible rectangle", childShape.getGraphicsAlgorithm() instanceof Rectangle);
+				assertTrue("ga is rectangle", childShape.getGraphicsAlgorithm() instanceof Rectangle);
 				assertFalse("ga is invisible", childShape.getGraphicsAlgorithm().getFilled());
 				assertFalse("ga is invisible", childShape.getGraphicsAlgorithm().getLineVisible());
 				assertEquals("border rect", 1, childShape.getGraphicsAlgorithm().getGraphicsAlgorithmChildren().size());
@@ -174,6 +170,14 @@ public class TestActorClassWithInheritance extends TestBase {
 			pes = Graphiti.getLinkService().getPictogramElements(diagram, ((ActorRef)b.getEndpoint2().getActorRef()));
 			assertEquals("instances of second ref", 1, pes.size());
 		}
+	}
+
+	/* (non-Javadoc)
+	 * @see org.eclipse.etrice.tests.base.TestBase#getModelsDirectoy()
+	 */
+	@Override
+	protected URL getModelsDirectoy() {
+		return StructureTestActivator.getInstance().getBundle().getEntry("models");
 	}
 
 }

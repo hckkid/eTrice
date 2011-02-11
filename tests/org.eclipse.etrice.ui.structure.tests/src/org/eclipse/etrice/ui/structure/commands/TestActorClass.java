@@ -15,9 +15,13 @@ package org.eclipse.etrice.ui.structure.commands;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.net.URL;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.room.ActorClass;
+import org.eclipse.etrice.tests.base.TestBase;
 import org.eclipse.etrice.ui.structure.DiagramAccess;
+import org.eclipse.etrice.ui.structure.StructureTestActivator;
 import org.eclipse.graphiti.mm.pictograms.ContainerShape;
 import org.eclipse.graphiti.mm.pictograms.Diagram;
 import org.eclipse.graphiti.mm.pictograms.Shape;
@@ -61,5 +65,13 @@ public class TestActorClass extends TestBase {
 		 
 		 EObject bo = Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(shape);
 		 assertTrue("top level business object is ActorClass", bo instanceof ActorClass);
+	}
+
+	/* (non-Javadoc)
+	 * @see org.eclipse.etrice.tests.base.TestBase#getModelsDirectoy()
+	 */
+	@Override
+	protected URL getModelsDirectoy() {
+		return StructureTestActivator.getInstance().getBundle().getEntry("models");
 	}
 }

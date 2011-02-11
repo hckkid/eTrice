@@ -17,6 +17,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
+import java.net.URL;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
@@ -24,7 +25,9 @@ import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.Binding;
 import org.eclipse.etrice.core.room.Port;
+import org.eclipse.etrice.tests.base.TestBase;
 import org.eclipse.etrice.ui.structure.DiagramAccess;
+import org.eclipse.etrice.ui.structure.StructureTestActivator;
 import org.eclipse.graphiti.mm.pictograms.Connection;
 import org.eclipse.graphiti.mm.pictograms.ContainerShape;
 import org.eclipse.graphiti.mm.pictograms.Diagram;
@@ -110,5 +113,13 @@ public class ActorClassWithBindings extends TestBase {
 			pes = Graphiti.getLinkService().getPictogramElements(diagram, ((ActorRef)b.getEndpoint2().getActorRef()));
 			assertEquals("instances of second ref", 1, pes.size());
 		}
+	}
+
+	/* (non-Javadoc)
+	 * @see org.eclipse.etrice.tests.base.TestBase#getModelsDirectoy()
+	 */
+	@Override
+	protected URL getModelsDirectoy() {
+		return StructureTestActivator.getInstance().getBundle().getEntry("models");
 	}
 }
