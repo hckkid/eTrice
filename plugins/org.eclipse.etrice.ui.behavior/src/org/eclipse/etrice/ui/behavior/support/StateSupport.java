@@ -91,8 +91,8 @@ public class StateSupport {
 	public static final int CORNER_WIDTH = 20;
 	public static final int HINT_CORNER_WIDTH = 5;
 	
-	private static final IColorConstant LINE_COLOR = new ColorConstant(0, 0, 0);
-	private static final IColorConstant INHERITED_COLOR = new ColorConstant(100, 100, 100);
+	public static final IColorConstant LINE_COLOR = new ColorConstant(0, 0, 0);
+	public static final IColorConstant INHERITED_COLOR = new ColorConstant(100, 100, 100);
 	private static final IColorConstant BACKGROUND = new ColorConstant(200, 200, 200);
 
 	private static class FeatureProvider extends DefaultFeatureProvider {

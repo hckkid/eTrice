@@ -22,4 +22,5 @@ Require-Bundle: org.eclipse.etrice.core.room;bundle-version="0.1.0",
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-Vendor: eTrice (Incubation)
-Export-Package: org.eclipse.etrice.ui.behavior
+Export-Package: org.eclipse.etrice.ui.behavior,
+ org.eclipse.etrice.ui.behavior.support;x-friends:="org.eclipse.etrice.ui.behavior.tests"

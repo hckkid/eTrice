@@ -95,8 +95,8 @@ public class TrPointSupport {
 	public static final int ITEM_SIZE_SMALL = StateSupport.MARGIN/2;
 
 	protected static final int LINE_WIDTH = 2;
-	protected static final IColorConstant DARK_COLOR = new ColorConstant(0, 0, 0);
-	protected static final IColorConstant INHERITED_COLOR = new ColorConstant(100, 100, 100);
+	public static final IColorConstant DARK_COLOR = new ColorConstant(0, 0, 0);
+	public static final IColorConstant INHERITED_COLOR = new ColorConstant(100, 100, 100);
 	protected static final IColorConstant BRIGHT_COLOR = new ColorConstant(255, 255, 255);
 	protected static final String PROP_KIND = "item-kind";
 	
