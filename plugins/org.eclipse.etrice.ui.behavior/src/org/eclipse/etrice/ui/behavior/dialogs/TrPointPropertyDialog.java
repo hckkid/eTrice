@@ -68,6 +68,7 @@ public class TrPointPropertyDialog extends AbstractPropertyDialog {
 		createDecorator(name, "invalid name");
 		
 		name.setFocus();
+		name.selectAll();
 	}
 
 }

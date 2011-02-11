@@ -238,6 +238,37 @@ public class RoomNameProvider {
 		
 		return "not_unique";
 	}
+
+	public static String getUniqueTrPointName(StateGraph sg) {
+		HashSet<String> names = new HashSet<String>();
+		for (TrPoint tp : sg.getTrPoints()) {
+			names.add(tp.getName());
+		}
+		
+		for (int i = 0; i < 1000; i++) {
+			String name = "tp"+i;
+			if (!names.contains(name))
+				return name;
+		}
+		
+		return "not_unique";
+	}
+
+	public static String getUniqueStateName(StateGraph sg) {
+		HashSet<String> names = new HashSet<String>();
+		for (State s : sg.getStates()) {
+			if (s instanceof BaseState)
+				names.add(s.getName());
+		}
+		
+		for (int i = 0; i < 1000; i++) {
+			String name = "state"+i;
+			if (!names.contains(name))
+				return name;
+		}
+		
+		return "not_unique";
+	}
 	
 	public static String getTransitionLabelName(Transition t) {
 		String name = null;

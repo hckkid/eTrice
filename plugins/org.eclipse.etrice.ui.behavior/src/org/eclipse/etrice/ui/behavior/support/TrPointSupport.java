@@ -16,6 +16,8 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.etrice.core.naming.RoomNameProvider;
+import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.EntryPoint;
 import org.eclipse.etrice.core.room.ExitPoint;
 import org.eclipse.etrice.core.room.RoomFactory;
@@ -143,9 +145,8 @@ public class TrPointSupport {
 					tp = RoomFactory.eINSTANCE.createTransitionPoint();
 					break;
 				}
-		        tp.setName("tp");
-		    	
-		        StateGraph sg = (StateGraph) context.getTargetContainer().getLink().getBusinessObjects().get(0);
+				StateGraph sg = (StateGraph) context.getTargetContainer().getLink().getBusinessObjects().get(0);
+		        tp.setName(RoomNameProvider.getUniqueTrPointName(sg));
 		        
 		        // TODOHRR-B add property dialog
 		        Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
@@ -172,6 +173,10 @@ public class TrPointSupport {
 					if (context.getTargetContainer().getLink().getBusinessObjects().size()==1) {
 						EObject obj = context.getTargetContainer().getLink().getBusinessObjects().get(0);
 						if (obj instanceof StateGraph) {
+							StateGraph sg = (StateGraph) obj;
+							if (sg.eContainer() instanceof ActorClass)
+								if (type!=Type.TRANS_POINT)
+									return false;
 							return isValidPosition(context, context, StateGraphSupport.MARGIN);
 						}
 					}

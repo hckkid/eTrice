@@ -15,6 +15,7 @@ package org.eclipse.etrice.ui.behavior.support;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorContainerRef;
 import org.eclipse.etrice.core.room.ActorRef;
@@ -144,7 +145,7 @@ public class StateSupport {
 				
 				// create new State
 	        	BaseState s = RoomFactory.eINSTANCE.createBaseState();
-	        	s.setName("state");
+	        	s.setName(RoomNameProvider.getUniqueStateName(sg));
 		        
 	        	Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 				StatePropertyDialog dlg = new StatePropertyDialog(shell, s, sg);
