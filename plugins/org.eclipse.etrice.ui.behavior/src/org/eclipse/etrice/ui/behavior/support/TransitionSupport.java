@@ -19,6 +19,7 @@ import org.eclipse.etrice.core.room.BaseState;
 import org.eclipse.etrice.core.room.ChoicePoint;
 import org.eclipse.etrice.core.room.ChoicepointTerminal;
 import org.eclipse.etrice.core.room.ContinuationTransition;
+import org.eclipse.etrice.core.room.EntryPoint;
 import org.eclipse.etrice.core.room.InitialTransition;
 import org.eclipse.etrice.core.room.NonInitialTransition;
 import org.eclipse.etrice.core.room.RefinedState;
@@ -148,7 +149,8 @@ public class TransitionSupport {
 						t.setTo(dst);
 						trans = t;
 					}
-					else if (src instanceof SubStateTrPointTerminal) {
+					else if (src instanceof SubStateTrPointTerminal
+							|| (src instanceof TrPointTerminal && ((TrPointTerminal)src).getTrPoint() instanceof EntryPoint)) {
 						ContinuationTransition t = RoomFactory.eINSTANCE.createContinuationTransition();
 						t.setFrom(src);
 						t.setTo(dst);
