@@ -18,6 +18,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.room.ActorClass;
+import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.ui.behavior.DiagramAccess;
 import org.eclipse.graphiti.mm.pictograms.ContainerShape;
@@ -29,12 +30,12 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * unit test of a flat state machine (defined by FlatStateMachine.room)
+ * unit test of a hierarchical state machine (defined by HierarchicalStateMachine.room)
  * 
  * @author Henrik Rentz-Reichert initial contribution and API
  *
  */
-public class TestFlatStateMachine extends AbstractStateMachineTest {
+public class TestHierarchicalStateMachine extends AbstractStateMachineTest {
 
 	@Before
 	public void setUp() {
@@ -48,7 +49,7 @@ public class TestFlatStateMachine extends AbstractStateMachineTest {
 	
 	@Override
 	protected String getModelFileName() {
-		return "FlatStateMachine.room";
+		return "HierarchicalStateMachine.room";
 	}
 	
 	@Test
@@ -62,13 +63,15 @@ public class TestFlatStateMachine extends AbstractStateMachineTest {
 		ActorClass ac = getModels().get(0).getActorClasses().get(0);
 		Diagram diagram = new DiagramAccess().getDiagram(ac);
 		
-		assertEquals("diagram children", 1, diagram.getChildren().size());
+		// top and one sub state graph
+		assertEquals("diagram children", 2, diagram.getChildren().size());
 
-		Shape shape = diagram.getChildren().get(0);
-		assertTrue("top level shape is container shape", shape instanceof ContainerShape);
-
-		EObject bo = Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(shape);
-		assertTrue("top level business object is StateGraph", bo instanceof StateGraph);
+		for (Shape shape : diagram.getChildren()) {
+			assertTrue("top level shape is container shape", shape instanceof ContainerShape);
+			
+			EObject bo = Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(shape);
+			assertTrue("top level business object is StateGraph", bo instanceof StateGraph);
+		}
 	}
 
 	@Test
@@ -76,8 +79,13 @@ public class TestFlatStateMachine extends AbstractStateMachineTest {
 		ActorClass ac = getModels().get(0).getActorClasses().get(0);
 		Diagram diagram = new DiagramAccess().getDiagram(ac);
 		
-		Shape shape = diagram.getChildren().get(0);
-		StateGraph sg = (StateGraph) Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(shape);
+		ac = (ActorClass) Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(diagram);
+		StateGraph sg = ac.getStateMachine();
 		testStateGraph(diagram, sg);
+		
+		for (State s : sg.getStates()) {
+			if (s.getSubgraph()!=null)
+				testStateGraph(diagram, s.getSubgraph());
+		}
 	}
 }

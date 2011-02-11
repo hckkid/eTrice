@@ -13,18 +13,23 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+import java.net.URL;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ChoicePoint;
+import org.eclipse.etrice.core.room.EntryPoint;
+import org.eclipse.etrice.core.room.ExitPoint;
 import org.eclipse.etrice.core.room.InitialTransition;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.StateGraphItem;
 import org.eclipse.etrice.core.room.TrPoint;
 import org.eclipse.etrice.core.room.Transition;
+import org.eclipse.etrice.core.room.TransitionPoint;
 import org.eclipse.etrice.tests.base.TestBase;
+import org.eclipse.etrice.ui.behavior.BehaviorTestActivator;
 import org.eclipse.etrice.ui.behavior.support.StateSupport;
 import org.eclipse.etrice.ui.behavior.support.TrPointSupport;
 import org.eclipse.graphiti.mm.algorithms.Ellipse;
@@ -41,7 +46,7 @@ import org.eclipse.graphiti.services.Graphiti;
  * 
  * @author Henrik Rentz-Reichert - API and initial contribution
  */
-public abstract class TestStateMachineBase extends TestBase {
+public abstract class AbstractStateMachineTest extends TestBase {
 
 	/**
 	 * test general conditions for state graphs
@@ -79,7 +84,7 @@ public abstract class TestStateMachineBase extends TestBase {
 		
 		for (TrPoint tp : sg.getTrPoints()) {
 			elements = Graphiti.getLinkService().getPictogramElements(diagram, tp);
-			assertEquals("PEs for our tp", 1, elements.size());
+			assertEquals("PEs for our tp", (tp instanceof TransitionPoint)? 1:2, elements.size());
 			assertTrue("PE is shape", elements.get(0) instanceof Shape);
 			checkTrpGAs(ac, tp, (Shape) elements.get(0));
 		}
@@ -123,7 +128,12 @@ public abstract class TestStateMachineBase extends TestBase {
 		assertTrue("ga is ellipse", shape.getGraphicsAlgorithm() instanceof Rectangle);
 		assertFalse("ga is invisible", shape.getGraphicsAlgorithm().getFilled());
 		assertFalse("ga is invisible", shape.getGraphicsAlgorithm().getLineVisible());
-		assertEquals("border rect", 1, shape.getGraphicsAlgorithm().getGraphicsAlgorithmChildren().size());
+		int nga = 1;
+		if (tp instanceof EntryPoint)
+			nga = 3;
+		else if (tp instanceof ExitPoint)
+			nga = 2;
+		assertEquals("border rect", nga, shape.getGraphicsAlgorithm().getGraphicsAlgorithmChildren().size());
 		GraphicsAlgorithm borderRect = shape.getGraphicsAlgorithm().getGraphicsAlgorithmChildren().get(0);
 		assertTrue("border rect is rounded rectangle", borderRect instanceof Ellipse);
 		if (isInherited(ac,tp))
@@ -147,5 +157,13 @@ public abstract class TestStateMachineBase extends TestBase {
 			owner = owner.eContainer();
 		}
 		return ac!=owner;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.eclipse.etrice.tests.base.TestBase#getModelsDirectoy()
+	 */
+	@Override
+	protected URL getModelsDirectoy() {
+		return BehaviorTestActivator.getDefault().getBundle().getEntry("models");
 	}
 }
