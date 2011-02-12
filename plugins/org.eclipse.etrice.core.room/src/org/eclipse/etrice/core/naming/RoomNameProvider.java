@@ -16,6 +16,8 @@ package org.eclipse.etrice.core.naming;
 import java.util.HashSet;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.etrice.core.room.ActorContainerRef;
+import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.BaseState;
 import org.eclipse.etrice.core.room.CPBranchTransition;
 import org.eclipse.etrice.core.room.ChoicePoint;
@@ -32,6 +34,7 @@ import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.StateGraphItem;
 import org.eclipse.etrice.core.room.StateTerminal;
 import org.eclipse.etrice.core.room.SubStateTrPointTerminal;
+import org.eclipse.etrice.core.room.SubSystemRef;
 import org.eclipse.etrice.core.room.TrPoint;
 import org.eclipse.etrice.core.room.TrPointTerminal;
 import org.eclipse.etrice.core.room.Transition;
@@ -268,6 +271,19 @@ public class RoomNameProvider {
 		}
 		
 		return "not_unique";
+	}
+
+	public static String getRefLabelName(ActorContainerRef acr) {
+		String className = "<unknown>";
+		if (acr instanceof ActorRef) {
+			if (((ActorRef)acr).getType()!=null)
+				className = ((ActorRef)acr).getType().getName();
+		}
+		else if (acr instanceof SubSystemRef) {
+			if (((SubSystemRef)acr).getType()!=null)
+				className = ((SubSystemRef)acr).getType().getName();
+		}
+		return acr.getName()+"\n("+className+")";
 	}
 	
 	public static String getTransitionLabelName(Transition t) {
