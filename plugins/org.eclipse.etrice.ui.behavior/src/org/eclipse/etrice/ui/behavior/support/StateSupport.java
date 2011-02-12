@@ -12,7 +12,6 @@
 
 package org.eclipse.etrice.ui.behavior.support;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.etrice.core.naming.RoomNameProvider;
@@ -246,9 +245,8 @@ public class StateSupport {
 				if (!(pe instanceof ContainerShape))
 					return false;
 	
-				EList<EObject> businessObjects = pe.getLink().getBusinessObjects();
-				return businessObjects.size() == 1
-						&& businessObjects.get(0) instanceof State;
+				Object bo = getBusinessObjectForPictogramElement(pe);
+				return bo instanceof State;
 			}
 	
 			@Override
@@ -263,8 +261,8 @@ public class StateSupport {
 				int w = containerGa.getWidth();
 				int h = containerGa.getHeight();
 	
-				if (containerGa.getGraphicsAlgorithmChildren().size()==1) {
-					// the visible outer frame
+				if (containerGa.getGraphicsAlgorithmChildren().size()>=1) {
+					// the visible border
 					GraphicsAlgorithm ga = containerGa.getGraphicsAlgorithmChildren().get(0);
 					
 					int nw = w-2*MARGIN;
@@ -281,9 +279,9 @@ public class StateSupport {
 						addSubStructureHint(s, (RoundedRectangle) ga, lineColor);
 					}
 
-					int last = containerShape.getChildren().size()-1;
-					if (last>=0) {
-						GraphicsAlgorithm childGA = containerShape.getChildren().get(last).getGraphicsAlgorithm();
+					if (!containerShape.getChildren().isEmpty()) {
+						GraphicsAlgorithm childGA = containerShape.getChildren().get(0).getGraphicsAlgorithm();
+						assert(childGA instanceof Text): "label expected";
 						childGA.setWidth(nw);
 						childGA.setHeight(nh);
 					}
