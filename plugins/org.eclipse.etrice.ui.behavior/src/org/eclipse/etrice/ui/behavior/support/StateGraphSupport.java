@@ -16,6 +16,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.etrice.core.naming.RoomNameProvider;
+import org.eclipse.etrice.core.room.ChoicePoint;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.StructureClass;
@@ -326,13 +327,23 @@ public class StateGraphSupport {
 					if (isOnInterface(sg, getBusinessObjectForPictogramElement(childShape)))
 						continue;
 					
-					GraphicsAlgorithm ga = childShape.getGraphicsAlgorithm();
-					int x = ga.getX()+ga.getWidth()-StateSupport.MARGIN;
-					int y = ga.getY()+ga.getHeight()-StateSupport.MARGIN;
-					if (x>xmax)
-						xmax = x;
-					if (y>ymax)
-						ymax = y;
+					bo = getBusinessObjectForPictogramElement(childShape);
+					int margin = -1;
+					if (bo instanceof State)
+						margin = StateSupport.MARGIN;
+					else if (bo instanceof TrPoint)
+						margin = StateSupport.MARGIN;
+					else if (bo instanceof ChoicePoint)
+						margin = StateSupport.MARGIN;
+					if (margin>=0) {
+						GraphicsAlgorithm ga = childShape.getGraphicsAlgorithm();
+						int x = ga.getX()+ga.getWidth()-margin;
+						int y = ga.getY()+ga.getHeight()-margin;
+						if (x>xmax)
+							xmax = x;
+						if (y>ymax)
+							ymax = y;
+					}
 				}
 				if (width>0 && width<xmax)
 					return false;
