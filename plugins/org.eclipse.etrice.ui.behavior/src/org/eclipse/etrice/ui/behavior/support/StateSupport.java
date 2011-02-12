@@ -202,7 +202,7 @@ public class StateSupport {
 				{
 					final Rectangle invisibleRectangle = gaService.createInvisibleRectangle(containerShape);
 					gaService.setLocationAndSize(invisibleRectangle,
-							context.getX(), context.getY(), width + 2*MARGIN, height + 2*MARGIN);
+							context.getX()-(width/2+MARGIN), context.getY()-(height/2+MARGIN), width + 2*MARGIN, height + 2*MARGIN);
 
 					RoundedRectangle rect = createFigure(s, invisibleRectangle, lineColor, manageColor(BACKGROUND));
 					

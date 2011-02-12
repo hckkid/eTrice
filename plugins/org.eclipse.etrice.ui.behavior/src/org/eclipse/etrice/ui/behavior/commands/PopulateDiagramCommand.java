@@ -32,8 +32,10 @@ import org.eclipse.etrice.core.room.TrPoint;
 import org.eclipse.etrice.core.room.TrPointTerminal;
 import org.eclipse.etrice.core.room.Transition;
 import org.eclipse.etrice.core.room.TransitionTerminal;
+import org.eclipse.etrice.ui.behavior.support.ChoicePointSupport;
 import org.eclipse.etrice.ui.behavior.support.ContextSwitcher;
 import org.eclipse.etrice.ui.behavior.support.StateGraphSupport;
+import org.eclipse.etrice.ui.behavior.support.StateSupport;
 import org.eclipse.graphiti.datatypes.ILocation;
 import org.eclipse.graphiti.dt.IDiagramTypeProvider;
 import org.eclipse.graphiti.features.IFeatureProvider;
@@ -155,7 +157,7 @@ public class PopulateDiagramCommand extends RecordingCommand {
 		
 		int pos = delta;
 		for (TrPoint tp : ctx.getTrPoints()) {
-			addTrPoint(tp, ctx, sgShape, pos, node2anchor);
+			addTrPoint(tp, ctx, sgShape, pos+StateSupport.MARGIN, node2anchor);
 			pos += delta;
 		}
 	}
@@ -182,7 +184,7 @@ public class PopulateDiagramCommand extends RecordingCommand {
 		
 		int pos = delta;
 		for (State s : sg.getStates()) {
-			addState(s, sg, sgShape, pos, node2anchor);
+			addState(s, sg, sgShape, pos+StateSupport.MARGIN, node2anchor);
 			pos += delta;
 		}
 	}
@@ -209,7 +211,7 @@ public class PopulateDiagramCommand extends RecordingCommand {
 		
 		int pos = delta;
 		for (ChoicePoint cp : sg.getChPoints()) {
-			addChoicePoint(cp, sg, sgShape, pos, node2anchor);
+			addChoicePoint(cp, sg, sgShape, pos+ChoicePointSupport.ITEM_SIZE, node2anchor);
 			pos += delta;
 		}
 	}
