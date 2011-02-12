@@ -13,8 +13,8 @@
 package org.eclipse.etrice.ui.structure.support;
 
 import org.eclipse.etrice.core.validation.ValidationUtil;
+import org.eclipse.etrice.ui.common.support.NoResizeFeature;
 import org.eclipse.etrice.ui.structure.ImageProvider;
-import org.eclipse.etrice.ui.structure.NoResizeFeature;
 import org.eclipse.etrice.ui.structure.dialogs.SPPPropertyDialog;
 import org.eclipse.graphiti.dt.IDiagramTypeProvider;
 import org.eclipse.graphiti.features.IAddFeature;
