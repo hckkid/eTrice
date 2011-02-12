@@ -481,16 +481,7 @@ public class ValidationUtil {
 			if (((TrPointTerminal) tgt).getTrPoint() instanceof EntryPoint)
 				return Result.error("entry point can not be transition target");
 			// TransitionPoint and ExitPoint are valid destinations
-			for (Transition t : sg.getTransitions()) {
-				if (t==trans)
-					continue;
-
-				if (t.getTo() instanceof TrPointTerminal) {
-					TrPointTerminal tpt = (TrPointTerminal)t.getTo();
-					if (tpt.getTrPoint()==((TrPointTerminal) tgt).getTrPoint())
-						return Result.error("target transition point already is connected");
-				}
-			}
+			// ExitPoint can be multiply connected inside a state
 		}
 		else if (tgt instanceof SubStateTrPointTerminal) {
 			if (((SubStateTrPointTerminal) tgt).getTrPoint() instanceof ExitPoint)
@@ -528,7 +519,7 @@ public class ValidationUtil {
 		else if (src instanceof TrPointTerminal) {
 			TrPoint srcTP = ((TrPointTerminal) src).getTrPoint();
 			if (srcTP instanceof ExitPoint)
-				return Result.error("exit point can not be transition sources");
+				return Result.error("exit point can not be transition source");
 			// TransitionPoint and EntryPoint are valid
 			if (srcTP instanceof EntryPoint) {
 				for (Transition t : sg.getTransitions()) {
