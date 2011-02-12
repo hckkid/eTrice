@@ -77,6 +77,7 @@ import org.eclipse.jface.window.Window;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
 
+import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorContainerClass;
 import org.eclipse.etrice.core.room.ActorContainerRef;
@@ -237,23 +238,25 @@ public class ActorContainerRefSupport {
 					
 					// create link and wire it
 					link(containerShape, ar);
-					
-					if (inherited) {
-						InterfaceItemSupport.createInheritedRefItems(ar, containerShape, fp);
-					}
-					else {
-						InterfaceItemSupport.createRefItems(ar, containerShape, fp);
-					}
 				}
 				
+				// the first child shape is the label
 				{
 					Shape labelShape = peCreateService.createShape(containerShape, false);
-					Text label = gaService.createDefaultText(labelShape, getLabel(ar));
+					Text label = gaService.createDefaultText(labelShape, RoomNameProvider.getRefLabelName(ar));
 					label.setForeground(lineColor);
 					label.setBackground(lineColor);
 					label.setHorizontalAlignment(Orientation.ALIGNMENT_CENTER);
 					label.setVerticalAlignment(Orientation.ALIGNMENT_CENTER);
 					gaService.setLocationAndSize(label, MARGIN, MARGIN, width, height);
+				}
+				
+				// other child shapes may follow
+				if (inherited) {
+					InterfaceItemSupport.createInheritedRefItems(ar, containerShape, fp);
+				}
+				else {
+					InterfaceItemSupport.createRefItems(ar, containerShape, fp);
 				}
 	
 				// call the layout feature
@@ -313,9 +316,9 @@ public class ActorContainerRefSupport {
 						addSubStructureHint(acr, (Rectangle) ga, lineColor);
 					}
 
-					int last = containerShape.getChildren().size()-1;
-					if (last>=0) {
-						GraphicsAlgorithm childGA = containerShape.getChildren().get(last).getGraphicsAlgorithm();
+					if (!containerShape.getChildren().isEmpty()) {
+						GraphicsAlgorithm childGA = containerShape.getChildren().get(0).getGraphicsAlgorithm();
+						assert(childGA instanceof Text): "label expected";
 						childGA.setWidth(nw);
 						childGA.setHeight(nh);
 					}
@@ -492,12 +495,11 @@ public class ActorContainerRefSupport {
 				}
 				
 				// check class name
-				int last = containerShape.getChildren().size()-1;
-				if (last>=0) {
-					GraphicsAlgorithm ga = containerShape.getChildren().get(last).getGraphicsAlgorithm();
+				if (!containerShape.getChildren().isEmpty()) {
+					GraphicsAlgorithm ga = containerShape.getChildren().get(0).getGraphicsAlgorithm();
 					if (ga instanceof Text) {
 						if (bo instanceof ActorContainerRef) {
-							String label = getLabel((ActorContainerRef) bo);
+							String label = RoomNameProvider.getRefLabelName((ActorContainerRef) bo);
 							if (!((Text)ga).getValue().equals(label))
 								return Reason.createTrueReason("Class name is out of date");
 						}
@@ -536,12 +538,11 @@ public class ActorContainerRefSupport {
 						containerShape.getGraphicsAlgorithm().getGraphicsAlgorithmChildren().clear();
 				}
 				
-				int last = containerShape.getChildren().size()-1;
-				if (last>=0) {
-					GraphicsAlgorithm ga = containerShape.getChildren().get(last).getGraphicsAlgorithm();
+				if (!containerShape.getChildren().isEmpty()) {
+					GraphicsAlgorithm ga = containerShape.getChildren().get(0).getGraphicsAlgorithm();
 					if (ga instanceof Text) {
 						if (bo instanceof ActorContainerRef) {
-							((Text)ga).setValue(getLabel((ActorContainerRef) bo));
+							((Text)ga).setValue(RoomNameProvider.getRefLabelName((ActorContainerRef) bo));
 						}
 					}
 				}
@@ -713,19 +714,6 @@ public class ActorContainerRefSupport {
 		@Override
 		public ICustomFeature[] getCustomFeatures(ICustomContext context) {
 			return new ICustomFeature[] { new PropertyFeature(fp), new DrillDownFeature(fp) };
-		}
-
-		protected static String getLabel(ActorContainerRef acr) {
-			String className = "<unknown>";
-			if (acr instanceof ActorRef) {
-				if (((ActorRef)acr).getType()!=null)
-					className = ((ActorRef)acr).getType().getName();
-			}
-			else if (acr instanceof SubSystemRef) {
-				if (((SubSystemRef)acr).getType()!=null)
-					className = ((SubSystemRef)acr).getType().getName();
-			}
-			return acr.getName()+"\n("+className+")";
 		}
 		
 		protected static boolean isInherited(ActorContainerRef ar, EObject parent) {
