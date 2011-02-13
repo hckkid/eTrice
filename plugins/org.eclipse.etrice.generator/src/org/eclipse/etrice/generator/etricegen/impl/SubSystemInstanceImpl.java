@@ -7,9 +7,14 @@
 package org.eclipse.etrice.generator.etricegen.impl;
 
 
+import java.util.HashMap;
+
+import org.eclipse.etrice.core.room.ActorInstancePath;
+import org.eclipse.etrice.core.room.LogicalThread;
 import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.generator.etricegen.Counter;
 import org.eclipse.etrice.generator.etricegen.ETriceGenPackage;
+import org.eclipse.etrice.generator.etricegen.InstanceBase;
 import org.eclipse.etrice.generator.etricegen.SubSystemInstance;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -55,6 +60,8 @@ public class SubSystemInstanceImpl extends StructureInstanceImpl implements SubS
 	 */
 	protected Counter objCounter;
 
+	private HashMap<String, Integer> inst2thread = null;
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -153,6 +160,41 @@ public class SubSystemInstanceImpl extends StructureInstanceImpl implements SubS
 		}
 		else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ETriceGenPackage.SUB_SYSTEM_INSTANCE__OBJ_COUNTER, newObjCounter, newObjCounter));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public int getThreadId(InstanceBase instance) {
+		if (instance==null)
+			return -1;
+		
+		if (inst2thread==null) {
+			inst2thread = new HashMap<String, Integer>();
+			
+			// create mapping
+			int tid = 1;
+			for (LogicalThread ls : getSubSystemClass().getThreads()) {
+				for (ActorInstancePath inst : ls.getInstances()) {
+					String path = getPath();
+					for (String seg : inst.getSegments()) {
+						path += InstanceBase.pathDelim+seg;
+					}
+					inst2thread.put(path, tid);
+				}
+				tid++;
+			}
+		}
+		
+		// if mapping exists use that
+		Integer tid = inst2thread.get(instance.getPath());
+		if (tid!=null)
+			return tid;
+		
+		// use own thread id
+		return getThreadId();
 	}
 
 	/**

@@ -78,4 +78,12 @@ public interface SubSystemInstance extends StructureInstance {
 	 */
 	void setObjCounter(Counter value);
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	int getThreadId(InstanceBase instance);
+
 } // ComponentInstance

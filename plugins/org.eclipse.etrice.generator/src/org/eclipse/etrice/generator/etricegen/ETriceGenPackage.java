@@ -210,13 +210,22 @@ public interface ETriceGenPackage extends EPackage {
 	int INSTANCE_BASE__OBJ_ID = 2;
 
 	/**
+	 * The feature id for the '<em><b>Thread Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INSTANCE_BASE__THREAD_ID = 3;
+
+	/**
 	 * The number of structural features of the '<em>Instance Base</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INSTANCE_BASE_FEATURE_COUNT = 3;
+	int INSTANCE_BASE_FEATURE_COUNT = 4;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.etrice.generator.etricegen.impl.StructureInstanceImpl <em>Structure Instance</em>}' class.
@@ -254,6 +263,15 @@ public interface ETriceGenPackage extends EPackage {
 	 * @ordered
 	 */
 	int STRUCTURE_INSTANCE__OBJ_ID = INSTANCE_BASE__OBJ_ID;
+
+	/**
+	 * The feature id for the '<em><b>Thread Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRUCTURE_INSTANCE__THREAD_ID = INSTANCE_BASE__THREAD_ID;
 
 	/**
 	 * The feature id for the '<em><b>Instances</b></em>' containment reference list.
@@ -381,6 +399,15 @@ public interface ETriceGenPackage extends EPackage {
 	 * @ordered
 	 */
 	int SUB_SYSTEM_INSTANCE__OBJ_ID = STRUCTURE_INSTANCE__OBJ_ID;
+
+	/**
+	 * The feature id for the '<em><b>Thread Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SUB_SYSTEM_INSTANCE__THREAD_ID = STRUCTURE_INSTANCE__THREAD_ID;
 
 	/**
 	 * The feature id for the '<em><b>Instances</b></em>' containment reference list.
@@ -528,6 +555,15 @@ public interface ETriceGenPackage extends EPackage {
 	int ACTOR_INSTANCE__OBJ_ID = STRUCTURE_INSTANCE__OBJ_ID;
 
 	/**
+	 * The feature id for the '<em><b>Thread Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTOR_INSTANCE__THREAD_ID = STRUCTURE_INSTANCE__THREAD_ID;
+
+	/**
 	 * The feature id for the '<em><b>Instances</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -664,6 +700,15 @@ public interface ETriceGenPackage extends EPackage {
 	int INTERFACE_ITEM_INSTANCE__OBJ_ID = INSTANCE_BASE__OBJ_ID;
 
 	/**
+	 * The feature id for the '<em><b>Thread Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTERFACE_ITEM_INSTANCE__THREAD_ID = INSTANCE_BASE__THREAD_ID;
+
+	/**
 	 * The feature id for the '<em><b>Peers</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -717,6 +762,15 @@ public interface ETriceGenPackage extends EPackage {
 	 * @ordered
 	 */
 	int PORT_INSTANCE__OBJ_ID = INTERFACE_ITEM_INSTANCE__OBJ_ID;
+
+	/**
+	 * The feature id for the '<em><b>Thread Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PORT_INSTANCE__THREAD_ID = INTERFACE_ITEM_INSTANCE__THREAD_ID;
 
 	/**
 	 * The feature id for the '<em><b>Peers</b></em>' reference list.
@@ -829,6 +883,15 @@ public interface ETriceGenPackage extends EPackage {
 	int SAP_INSTANCE__OBJ_ID = INTERFACE_ITEM_INSTANCE__OBJ_ID;
 
 	/**
+	 * The feature id for the '<em><b>Thread Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SAP_INSTANCE__THREAD_ID = INTERFACE_ITEM_INSTANCE__THREAD_ID;
+
+	/**
 	 * The feature id for the '<em><b>Peers</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -891,6 +954,15 @@ public interface ETriceGenPackage extends EPackage {
 	 * @ordered
 	 */
 	int SPP_INSTANCE__OBJ_ID = INSTANCE_BASE__OBJ_ID;
+
+	/**
+	 * The feature id for the '<em><b>Thread Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SPP_INSTANCE__THREAD_ID = INSTANCE_BASE__THREAD_ID;
 
 	/**
 	 * The feature id for the '<em><b>Spp</b></em>' reference.
@@ -964,6 +1036,15 @@ public interface ETriceGenPackage extends EPackage {
 	 * @ordered
 	 */
 	int SERVICE_IMPL_INSTANCE__OBJ_ID = INTERFACE_ITEM_INSTANCE__OBJ_ID;
+
+	/**
+	 * The feature id for the '<em><b>Thread Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SERVICE_IMPL_INSTANCE__THREAD_ID = INTERFACE_ITEM_INSTANCE__THREAD_ID;
 
 	/**
 	 * The feature id for the '<em><b>Peers</b></em>' reference list.
@@ -1222,6 +1303,15 @@ public interface ETriceGenPackage extends EPackage {
 	 * @ordered
 	 */
 	int EXPANDED_ACTOR_CLASS__ACTOR_REFS = RoomPackage.ACTOR_CLASS__ACTOR_REFS;
+
+	/**
+	 * The feature id for the '<em><b>Abstract</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPANDED_ACTOR_CLASS__ABSTRACT = RoomPackage.ACTOR_CLASS__ABSTRACT;
 
 	/**
 	 * The feature id for the '<em><b>Base</b></em>' reference.
@@ -1501,6 +1591,17 @@ public interface ETriceGenPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getInstanceBase_ObjId();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.etrice.generator.etricegen.InstanceBase#getThreadId <em>Thread Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Thread Id</em>'.
+	 * @see org.eclipse.etrice.generator.etricegen.InstanceBase#getThreadId()
+	 * @see #getInstanceBase()
+	 * @generated
+	 */
+	EAttribute getInstanceBase_ThreadId();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.etrice.generator.etricegen.StructureInstance <em>Structure Instance</em>}'.
@@ -2155,6 +2256,14 @@ public interface ETriceGenPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute INSTANCE_BASE__OBJ_ID = eINSTANCE.getInstanceBase_ObjId();
+
+		/**
+		 * The meta object literal for the '<em><b>Thread Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute INSTANCE_BASE__THREAD_ID = eINSTANCE.getInstanceBase_ThreadId();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.etrice.generator.etricegen.impl.StructureInstanceImpl <em>Structure Instance</em>}' class.

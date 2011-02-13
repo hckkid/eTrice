@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.eclipse.etrice.generator.etricegen.InstanceBase#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.etrice.generator.etricegen.InstanceBase#getPath <em>Path</em>}</li>
  *   <li>{@link org.eclipse.etrice.generator.etricegen.InstanceBase#getObjId <em>Obj Id</em>}</li>
+ *   <li>{@link org.eclipse.etrice.generator.etricegen.InstanceBase#getThreadId <em>Thread Id</em>}</li>
  * </ul>
  * </p>
  *
@@ -99,5 +100,21 @@ public interface InstanceBase extends EObject {
 	 * @generated
 	 */
 	void setObjId(int value);
+
+	/**
+	 * Returns the value of the '<em><b>Thread Id</b></em>' attribute.
+	 * The default value is <code>"-1"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Thread Id</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Thread Id</em>' attribute.
+	 * @see org.eclipse.etrice.generator.etricegen.ETriceGenPackage#getInstanceBase_ThreadId()
+	 * @model default="-1" changeable="false" derived="true"
+	 * @generated
+	 */
+	int getThreadId();
 
 } // InstanceBase

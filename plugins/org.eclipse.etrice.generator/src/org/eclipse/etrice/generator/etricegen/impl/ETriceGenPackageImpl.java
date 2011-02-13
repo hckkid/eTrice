@@ -372,6 +372,15 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getInstanceBase_ThreadId() {
+		return (EAttribute)instanceBaseEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getStructureInstance() {
 		return structureInstanceEClass;
 	}
@@ -843,6 +852,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 		createEAttribute(instanceBaseEClass, INSTANCE_BASE__NAME);
 		createEAttribute(instanceBaseEClass, INSTANCE_BASE__PATH);
 		createEAttribute(instanceBaseEClass, INSTANCE_BASE__OBJ_ID);
+		createEAttribute(instanceBaseEClass, INSTANCE_BASE__THREAD_ID);
 
 		structureInstanceEClass = createEClass(STRUCTURE_INSTANCE);
 		createEReference(structureInstanceEClass, STRUCTURE_INSTANCE__INSTANCES);
@@ -979,6 +989,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 		initEAttribute(getInstanceBase_Name(), ecorePackage.getEString(), "name", null, 0, 1, InstanceBase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getInstanceBase_Path(), ecorePackage.getEString(), "path", null, 0, 1, InstanceBase.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEAttribute(getInstanceBase_ObjId(), ecorePackage.getEInt(), "objId", null, 0, 1, InstanceBase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getInstanceBase_ThreadId(), ecorePackage.getEInt(), "threadId", "-1", 0, 1, InstanceBase.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		initEClass(structureInstanceEClass, StructureInstance.class, "StructureInstance", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getStructureInstance_Instances(), this.getActorInstance(), null, "instances", null, 0, -1, StructureInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -994,6 +1005,9 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 		initEClass(subSystemInstanceEClass, SubSystemInstance.class, "SubSystemInstance", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSubSystemInstance_SubSystemClass(), theRoomPackage.getSubSystemClass(), null, "subSystemClass", null, 0, 1, SubSystemInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSubSystemInstance_ObjCounter(), this.getCounter(), null, "objCounter", null, 0, 1, SubSystemInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		op = addEOperation(subSystemInstanceEClass, ecorePackage.getEInt(), "getThreadId", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getInstanceBase(), "instance", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(actorInstanceEClass, ActorInstance.class, "ActorInstance", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getActorInstance_ActorClass(), theRoomPackage.getActorClass(), null, "actorClass", null, 0, 1, ActorInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

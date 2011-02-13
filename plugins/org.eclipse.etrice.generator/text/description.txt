@@ -27,6 +27,7 @@ Package etricegen <http://www.eclipse.org/etrice/generator>
     Attribute name : EString
     Attribute /path : EString
     Attribute objId : EInt
+    Attribute /threadId : EInt
 
   Class StructureInstance -> InstanceBase
     Reference instances : ActorInstance<<0..*>>
@@ -42,6 +43,7 @@ Package etricegen <http://www.eclipse.org/etrice/generator>
   Class SubSystemInstance -> StructureInstance
     Reference subSystemClass : SubSystemClass
     Reference objCounter : Counter
+    Operation getThreadId(InstanceBase) : EInt
 
   Class ActorInstance -> StructureInstance
     Reference actorClass : ActorClass

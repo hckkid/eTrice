@@ -19,4 +19,6 @@ public interface InstanceBaseValidator {
 	boolean validateName(String value);
 	boolean validatePath(String value);
 	boolean validateObjId(int value);
+
+	boolean validateThreadId(int value);
 }

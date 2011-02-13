@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.etrice.generator.etricegen.ETriceGenPackage;
 import org.eclipse.etrice.generator.etricegen.InstanceBase;
+import org.eclipse.etrice.generator.etricegen.SubSystemInstance;
 
 /**
  * <!-- begin-user-doc -->
@@ -27,6 +28,7 @@ import org.eclipse.etrice.generator.etricegen.InstanceBase;
  *   <li>{@link org.eclipse.etrice.generator.etricegen.impl.InstanceBaseImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.etrice.generator.etricegen.impl.InstanceBaseImpl#getPath <em>Path</em>}</li>
  *   <li>{@link org.eclipse.etrice.generator.etricegen.impl.InstanceBaseImpl#getObjId <em>Obj Id</em>}</li>
+ *   <li>{@link org.eclipse.etrice.generator.etricegen.impl.InstanceBaseImpl#getThreadId <em>Thread Id</em>}</li>
  * </ul>
  * </p>
  *
@@ -82,6 +84,26 @@ public abstract class InstanceBaseImpl extends EObjectImpl implements InstanceBa
 	 * @ordered
 	 */
 	protected int objId = OBJ_ID_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getThreadId() <em>Thread Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getThreadId()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final int THREAD_ID_EDEFAULT = -1;
+
+	/**
+	 * The cached value of the '{@link #getThreadId() <em>Thread Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getThreadId()
+	 * @generated
+	 * @ordered
+	 */
+	protected int threadId = THREAD_ID_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -164,6 +186,33 @@ public abstract class InstanceBaseImpl extends EObjectImpl implements InstanceBa
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public int getThreadId() {
+		if (threadId<0) {
+			if (this instanceof SubSystemInstance)
+				threadId = 0;
+			else {
+				EObject parent = eContainer();
+				while (parent!=null) {
+					if (parent instanceof SubSystemInstance)
+						break;
+					parent = parent.eContainer();
+				}
+				if (parent!=null) {
+					threadId = ((SubSystemInstance)parent).getThreadId(this);
+					if (threadId<0 && eContainer() instanceof InstanceBase)
+						// not mapped, use parent thread id
+						threadId = ((InstanceBase)eContainer()).getThreadId();
+				}
+			}
+		}
+		return threadId;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -175,6 +224,8 @@ public abstract class InstanceBaseImpl extends EObjectImpl implements InstanceBa
 				return getPath();
 			case ETriceGenPackage.INSTANCE_BASE__OBJ_ID:
 				return getObjId();
+			case ETriceGenPackage.INSTANCE_BASE__THREAD_ID:
+				return getThreadId();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -229,6 +280,8 @@ public abstract class InstanceBaseImpl extends EObjectImpl implements InstanceBa
 				return PATH_EDEFAULT == null ? getPath() != null : !PATH_EDEFAULT.equals(getPath());
 			case ETriceGenPackage.INSTANCE_BASE__OBJ_ID:
 				return objId != OBJ_ID_EDEFAULT;
+			case ETriceGenPackage.INSTANCE_BASE__THREAD_ID:
+				return threadId != THREAD_ID_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -247,6 +300,8 @@ public abstract class InstanceBaseImpl extends EObjectImpl implements InstanceBa
 		result.append(name);
 		result.append(", objId: ");
 		result.append(objId);
+		result.append(", threadId: ");
+		result.append(threadId);
 		result.append(')');
 		return result.toString();
 	}
