@@ -371,6 +371,8 @@ public class InstanceModelBuilder {
 		instance.setObjId(objCounter.getAndIncrementCount());
 		instance.setSubSystemClass(comp);
 		
+		// TODOHRR: enumerate object ids per thread
+		
 		for (ActorRef ar : comp.getActorRefs()) {
 			instance.getInstances().add(recursivelyCreateActorInstances(objCounter, ar));
 		}
