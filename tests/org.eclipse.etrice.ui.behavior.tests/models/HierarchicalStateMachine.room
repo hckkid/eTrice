@@ -1,0 +1,88 @@
+RoomModel ActorClassWithPorts {
+	ActorClass MyActorClass {
+		Interface {
+			Port ip: MyProtocol
+			Port xp: MyProtocol
+		}
+		Structure {
+			external Port xp
+			conjugated Port sp: MyProtocol
+		}
+		Behavior {
+			StateMachine {
+				Transition tr0: my tptop -> my tptop {
+					triggers {
+						<in2: xp>
+					}
+				}
+				Transition tr1: state1 -> cp cp0 {
+					triggers {
+						<out1: sp>
+					}
+				}
+				Transition tr2: cp cp0 -> elseState {
+				}
+				Transition tr3: cp cp0 -> ifState {
+					cond {
+						"true"
+					}
+				}
+				Transition init: initial -> enter of state1 {
+				}
+				Transition tr4: leave of state1 -> ifState {
+				}
+				ChoicePoint cp0
+				TransitionPoint tptop
+				State state1 {
+					entry {
+						"//entry"
+					}
+					exit {
+						"//exit"
+					}
+					subgraph {
+						Transition tr0: my tp -> my tp {
+							triggers {
+								<in1: xp>
+							}
+						}
+						Transition tr1: second -> my leave {
+							triggers {
+								<in2: xp>
+							}
+						}
+						Transition tr2: first -> second {
+							triggers {
+								<out1: sp>
+							}
+						}
+						Transition tr3: my enter -> first {
+						}
+						EntryPoint enter
+						ExitPoint leave
+						TransitionPoint tp
+						State first {
+						}
+						State second {
+						}
+					}
+				}
+				State elseState {
+				}
+				State ifState {
+				}
+			}
+		}
+	}
+
+	ProtocolClass MyProtocol {
+		incoming {
+			Message in1()
+			Message in2()
+		}
+		outgoing {
+			Message out1()
+		}
+	}
+
+}
