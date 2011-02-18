@@ -352,6 +352,24 @@ public class ExpandedActorClassImpl extends ActorClassImpl implements ExpandedAc
 			}
 		}
 	}
+
+	/**
+	 * @param sg
+	 */
+	private void checkTransitionChains(StateGraph sg) {
+		for (Transition t : sg.getTransitions()) {
+			TransitionChain chain = getChain(t);
+			if (chain==null)
+				if (!getActorClass().isAbstract())
+					validationError("transition is not part of a transition chain (only allowed for abstract actor classes)", t);
+		}
+		
+		// recursion
+		for (State s : sg.getStates()) {
+			if (s.getSubgraph()!=null)
+				checkTransitionChains(s.getSubgraph());
+		}
+	}
 	
 	private void doChecks(StateGraph sg) {
 		
@@ -768,6 +786,7 @@ public class ExpandedActorClassImpl extends ActorClassImpl implements ExpandedAc
 		findLeafStateTriggers(getStateMachine());
 		fillTriggerStringMap();
 		findTransitionChains(getStateMachine());
+		checkTransitionChains(getStateMachine());
 	}
 
 	/**
