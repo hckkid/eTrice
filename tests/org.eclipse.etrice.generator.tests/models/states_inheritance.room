@@ -62,22 +62,26 @@ RoomModel states_inheritance.t {
 		}
 	}
 
-	SubSystemClass CMain {
-		ActorRef application : AApplication_CMain
-		ActorRef timingService : ATimingService
-
-		LayerConnection ref application satisfied_by timingService.timerSPP
-		LayerConnection ref application satisfied_by timingService.timeoutSPP
+	LogicalSystem SystemMain {
+		SubSystemRef subsystem : SubSystemMain
 	}
 
-	// automatically inserted AApplication_CMain
-	ActorClass AApplication_CMain {
+	SubSystemClass SubSystemMain {
+		ActorRef application : App_SubSystemMain
+		ActorRef services : ATimingService
+
+		LayerConnection ref application satisfied_by services.timerSPP
+		LayerConnection ref application satisfied_by services.timeoutSPP
+	}
+
+	// automatically inserted App_SubSystemMain
+	ActorClass App_SubSystemMain {
 		Structure {
-			ActorRef test : ADerived
+			ActorRef derived : ADerived
 		}
 	}
 
-	ActorClass ATest {
+	abstract ActorClass ATest {
 		Interface {
 			Port fct : PTest1
 		}
@@ -90,15 +94,25 @@ RoomModel states_inheritance.t {
 		Behavior {
 			StateMachine {
 				State State1 {}
-				State State2 {}
+				State State2 {
+					subgraph {
+						EntryPoint tp0
+						EntryPoint tp1
+						EntryPoint tp2
+						EntryPoint tp3
+						ExitPoint tp4
+					}
+				}
 				State State3 {
-				subgraph {
+					subgraph {
 						State State1 {}
 						State State2 {}
 						State State3 {}
+						EntryPoint tp0
 						EntryPoint tp1
 						TransitionPoint tp2
 						ExitPoint tp3
+						ExitPoint tp4
 						handler TransitionPoint tp5
 						Transition tr0: initial -> State1 {}
 						Transition tr1: my tp1 -> State3 {}
@@ -134,23 +148,23 @@ RoomModel states_inheritance.t {
 						}
 					}
 				}
-				State State4 {}
+				State State4 {
+					subgraph {
+						EntryPoint tp0
+					}
+				}
 				TransitionPoint tp0
 				TransitionPoint tp1
 				ChoicePoint CP1
 				Transition tr0: initial -> State1 {}
-				Transition tr1: State1 -> State2 {
+				Transition tr1: State1 -> tp0 of State2 {
 					triggers {
 						<a:fct>
 					}
 				}
-				Transition tr2: State2 -> cp CP1 {
-					triggers {
-						<b:fct>
-					}
-				}
+				Transition tr2: tp4 of State2 -> cp CP1 {}
 				Transition tr3: cp CP1 -> State1 {}
-				Transition tr4: cp CP1 -> State3 {
+				Transition tr4: cp CP1 -> tp0 of State3 {
 					cond {
 						"data==2"
 					}
@@ -160,18 +174,14 @@ RoomModel states_inheritance.t {
 						<a:fct>
 					}
 				}
-				Transition tr6: cp CP1 -> State4 {
+				Transition tr6: cp CP1 -> tp0 of State4 {
 					cond {
 						"data==3"
 					}
 				}
-				Transition tr7: tp3 of State3 -> State2 {}
-				Transition tr8: State3 -> State2 {
-					triggers {
-						<c:fct>
-					}
-				}
-				Transition tr9: my tp1 -> State2 {
+				Transition tr7: tp3 of State3 -> tp1 of State2 {}
+				Transition tr8: tp4 of State3 -> tp2 of State2 {}
+				Transition tr9: my tp1 -> tp3 of State2 {
 					triggers {
 						<timerTick:timer>
 					}
@@ -186,11 +196,21 @@ RoomModel states_inheritance.t {
 		}
 		Structure {
 			external Port port
-			SAP timer: PTimer
-			SAP timeout: PTimeout
 		}
 		Behavior {
 			StateMachine {
+				RefinedState State2 {
+					subgraph {
+						State Intermediate {}
+						Transition init: initial -> Intermediate {}
+						Transition tr0: my tp0 -> Intermediate {}
+						Transition tr1: Intermediate -> my tp4 {
+							triggers {
+								<x:sub>
+							}
+						}
+					}
+				}
 				RefinedState State3 {
 					subgraph {
 						State State4 {}
@@ -208,6 +228,11 @@ RoomModel states_inheritance.t {
 							}
 						}
 						Transition tr11: State4 -> my tp3 {
+							triggers {
+								<z:sub>
+							}
+						}
+						Transition tr12: State2 -> my tp4 {
 							triggers {
 								<z:sub>
 							}
