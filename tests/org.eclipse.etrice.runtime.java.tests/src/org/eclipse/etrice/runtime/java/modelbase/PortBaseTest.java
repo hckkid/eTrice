@@ -47,7 +47,7 @@ public class PortBaseTest extends TestCase {
 	class MyPortBase extends PortBase {
 		public MyPortBase(IEventReceiver parent, String name, int localId, int idx, Address address,
 				Address peerAddress, IMessageReceiver msgReceiver) {
-			super(parent, name, localId, idx, address, peerAddress/*, msgReceiver*/);
+			super(parent, name, localId, idx, address, peerAddress);
 		}
 
 		public void receive(Message msg) {

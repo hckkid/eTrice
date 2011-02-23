@@ -74,7 +74,6 @@ public class MessageService extends Thread implements IMessageReceiver,
 		}
 		else {
 			lastMessageTimestamp = System.currentTimeMillis();
-			//System.out.printf("%i. msgServ %i addr.Thread \n",address.threadID,msg.getAddress().threadID);
 			messageDispatcher.receive(msg);
 		}
 
