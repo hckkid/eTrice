@@ -19,6 +19,7 @@ import java.util.List;
  * The MessageServiceController controls lifecycle of and access to all MessageServices in one SubSystem
  * 
  * @author Thomas Schuetz
+ * @author Thomas Jung
  *
  */
 
