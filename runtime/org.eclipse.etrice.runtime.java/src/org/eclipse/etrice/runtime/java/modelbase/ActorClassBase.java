@@ -13,6 +13,7 @@ import org.eclipse.etrice.runtime.java.messaging.IMessageReceiver;
 import org.eclipse.etrice.runtime.java.messaging.IRTObject;
 import org.eclipse.etrice.runtime.java.messaging.Message;
 import org.eclipse.etrice.runtime.java.messaging.MessageService;
+import org.eclipse.etrice.runtime.java.messaging.RTServices;
 
 /**
  * The base class for model actor classes.
@@ -36,13 +37,14 @@ public abstract class ActorClassBase extends EventReceiver implements IMessageRe
 	 */
 	protected int state;
 
-	private MessageService msgsvc = null;
+	private MessageService ownMsgsvc = null;
+	private Address ownAddr = null;
 	
-	public ActorClassBase(IRTObject parent, String name, IMessageReceiver msgsvc) {
+	public ActorClassBase(IRTObject parent, String name, Address ownAddr) {
 		super(parent, name);
 		
-		if (msgsvc instanceof MessageService)
-			this.msgsvc = (MessageService) msgsvc;
+		this.ownAddr = ownAddr;
+		ownMsgsvc = RTServices.getInstance().getMsgSvcCtrl().getMsgSvc(this.ownAddr.threadID);
 	}
 
 	public String toString(){
@@ -77,6 +79,6 @@ public abstract class ActorClassBase extends EventReceiver implements IMessageRe
 	}
 
 	public MessageService getMsgsvc() {
-		return msgsvc;
+		return ownMsgsvc;
 	}
 }
