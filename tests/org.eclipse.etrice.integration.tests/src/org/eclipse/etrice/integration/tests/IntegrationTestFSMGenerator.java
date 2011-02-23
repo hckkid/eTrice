@@ -48,6 +48,8 @@ public class IntegrationTestFSMGenerator {
 		main_component.init(); // lifecycle init
 		main_component.start(); // lifecycle start
 		
+		RTServices.getInstance().getMsgSvcCtrl().waitTerminate();
+		
 		// TODOTS: Test broken -> repair after changes for multi threading
 //		main_component.waitTerminate();
 		

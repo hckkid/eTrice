@@ -27,6 +27,8 @@
 «FILE getPath(cc)+cc.name+".java"»
 package «getPackage(cc)»;
 
+import org.eclipse.etrice.runtime.java.messaging.MessageService;
+import org.eclipse.etrice.runtime.java.messaging.RTServices;
 import org.eclipse.etrice.runtime.java.messaging.Address;
 import org.eclipse.etrice.runtime.java.messaging.IRTObject;
 import org.eclipse.etrice.runtime.java.modelbase.ActorClassBase;
@@ -44,13 +46,24 @@ public class «comp.name» extends SubSystemClassBase {
 	}
 
 	@Override	
+	public void instantiateMessageServices(){
+	
+		RTServices.getInstance().getMsgSvcCtrl().addMsgSvc(new MessageService(this, new Address(0, 0, 0),"MessageService_Main"));
+		«FOREACH comp.subSystemClass.threads AS thread ITERATOR tid»
+			RTServices.getInstance().getMsgSvcCtrl().addMsgSvc(new MessageService(this, new Address(0, «tid.counter0»+1, 0),"MessageService_«thread.name»"));
+		«ENDFOREACH»
+		}
+
+	@Override
 	public void instantiateActors(){
 		// all addresses
 		«FOREACH comp.allContainedInstances AS ai»
+		// actor instance «ai.path» itself
+		Address addr«ai.path.getPathName()»= new Address(0,«ai.threadId»,«ai.objId»);
 			// interface items of «ai.path»«FOREACH ai.orderedIfItemInstances AS pi»
-				«IF ServiceImplInstance.isInstance(pi) || pi.peers.size>1»«FOREACH pi.peers AS peer ITERATOR i»Address addr«pi.path.getPathName()»_«i.counter0» = new Address(0,0,«pi.objId»+«i.counter0»);
+				«IF ServiceImplInstance.isInstance(pi) || pi.peers.size>1»«FOREACH pi.peers AS peer ITERATOR i»Address addr«pi.path.getPathName()»_«i.counter0» = new Address(0,«pi.threadId»,«pi.objId»+«i.counter0»);
 					«ENDFOREACH»
-				«ELSE»Address addr«pi.path.getPathName()» = new Address(0,0,«pi.objId»);
+				«ELSE»Address addr«pi.path.getPathName()» = new Address(0,«ai.threadId»,«pi.objId»);
 				«ENDIF»
 			«ENDFOREACH»
 		«ENDFOREACH»
@@ -60,7 +73,7 @@ public class «comp.name» extends SubSystemClassBase {
 		«FOREACH comp.allContainedInstances AS ai»instances[«comp.allContainedInstances.indexOf(ai)»] = new «ai.actorClass.name»(
 				«IF SubSystemInstance.isInstance(ai.eContainer)»this«ELSE»instances[«comp.allContainedInstances.indexOf(ai.eContainer)»]«ENDIF»,
 				"«ai.name»",
-				getMsgService(),
+				addr«ai.path.getPathName()»,
 				// own interface item addresses
 				new Address[][] {«FOREACH ai.orderedIfItemInstances AS pi SEPARATOR ","»{«IF ServiceImplInstance.isInstance(pi) || pi.peers.size>1»«FOREACH pi.peers AS peer ITERATOR i SEPARATOR ","»addr«pi.path.getPathName()»_«i.counter0»«ENDFOREACH»
 					«ELSE»addr«pi.path.getPathName()»

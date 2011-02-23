@@ -19,7 +19,7 @@ import org.eclipse.etrice.runtime.java.messaging.IMessageReceiver;
  */
 public abstract class PortBase extends InterfaceItemBase {
 	
-	public PortBase (IEventReceiver actor, String name, int localId, int idx, Address address, Address peerAddress, IMessageReceiver msgReceiver){
-		super(actor, name, localId, idx, address, peerAddress, msgReceiver);
+	public PortBase (IEventReceiver actor, String name, int localId, int idx, Address address, Address peerAddress){
+		super(actor, name, localId, idx, address, peerAddress);
 	}
 }

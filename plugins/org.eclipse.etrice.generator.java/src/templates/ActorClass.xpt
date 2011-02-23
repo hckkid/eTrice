@@ -76,22 +76,22 @@ public «IF ac.abstract»abstract «ENDIF»class «ac.name» extends «IF ac.base!=null
 	«EXPAND ProcedureHelpers::Operations FOR ac.operations»
 
 	//--------------------- construction
-	public «ac.name»(IRTObject parent, String name, IMessageReceiver msgsvc, Address[][] port_addr, Address[][] peer_addr){
+	public «ac.name»(IRTObject parent, String name, Address ownAddr, Address[][] port_addr, Address[][] peer_addr){
 		«IF ac.base==null»
-		super(parent, name, msgsvc);
+		super(parent, name, ownAddr);
 		«ELSE»
-		super(parent, name, msgsvc, port_addr, peer_addr);
+		super(parent, name, ownAddr, port_addr, peer_addr);
 		«ENDIF»
 		setClassName("«ac.name»");
 		
 		// own ports«FOREACH ac.getEndPorts() AS ep»
-		«ep.name» = new «ep.getPortClassName()»(this, "«ep.name»", IFITEM_«ep.name», «IF ep.multiplicity==1»0, «ENDIF»port_addr[IFITEM_«ep.name»]«IF ep.multiplicity==1»[0]«ENDIF», peer_addr[IFITEM_«ep.name»]«IF ep.multiplicity==1»[0]«ENDIF», msgsvc); 
+		«ep.name» = new «ep.getPortClassName()»(this, "«ep.name»", IFITEM_«ep.name», «IF ep.multiplicity==1»0, «ENDIF»port_addr[IFITEM_«ep.name»]«IF ep.multiplicity==1»[0]«ENDIF», peer_addr[IFITEM_«ep.name»]«IF ep.multiplicity==1»[0]«ENDIF»); 
 		«ENDFOREACH»
 		// own saps«FOREACH ac.strSAPs AS sap»
-		«sap.name» = new «sap.getPortClassName()»(this, "«sap.name»", IFITEM_«sap.name», 0, port_addr[IFITEM_«sap.name»][0], peer_addr[IFITEM_«sap.name»][0], msgsvc); 
+		«sap.name» = new «sap.getPortClassName()»(this, "«sap.name»", IFITEM_«sap.name», 0, port_addr[IFITEM_«sap.name»][0], peer_addr[IFITEM_«sap.name»][0]); 
 		«ENDFOREACH»
 		// own service implementations«FOREACH ac.serviceImplementations AS svc»
-		«svc.spp.name» = new «svc.getPortClassName()»(this, "«svc.spp.name»", IFITEM_«svc.spp.name», port_addr[IFITEM_«svc.spp.name»], peer_addr[IFITEM_«svc.spp.name»], msgsvc); 
+		«svc.spp.name» = new «svc.getPortClassName()»(this, "«svc.spp.name»", IFITEM_«svc.spp.name», port_addr[IFITEM_«svc.spp.name»], peer_addr[IFITEM_«svc.spp.name»]); 
 		«ENDFOREACH»
 	}
 	
