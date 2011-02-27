@@ -1,13 +1,16 @@
 package org.eclipse.etrice.generator.etricegen;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 
 public interface IDiagnostician {
 
-	void warning(String msg, EObject source);
-	void warning(String msg, EObject source, int feature);
-	void error(String msg, EObject source);
-	void error(String msg, EObject source, int feature);
+	static final int INSIGNIFICANT_INDEX = -1;
+	
+	void warning(String msg, EObject source, EStructuralFeature feature);
+	void warning(String msg, EObject source, EStructuralFeature feature, int idx);
+	void error(String msg, EObject source, EStructuralFeature feature);
+	void error(String msg, EObject source, EStructuralFeature feature, int idx);
 	
 	boolean isFailed();
 }

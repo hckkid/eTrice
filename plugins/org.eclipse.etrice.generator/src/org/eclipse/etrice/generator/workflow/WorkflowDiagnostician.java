@@ -13,6 +13,7 @@
 package org.eclipse.etrice.generator.workflow;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.generator.builder.ILogger;
 import org.eclipse.etrice.generator.etricegen.IDiagnostician;
@@ -28,12 +29,12 @@ public class WorkflowDiagnostician implements IDiagnostician {
 	}
 	
 	@Override
-	public void warning(String msg, EObject source) {
-		warning(msg, source, -1);
+	public void warning(String msg, EObject source, EStructuralFeature feature) {
+		warning(msg, source, feature, INSIGNIFICANT_INDEX);
 	}
 
 	@Override
-	public void warning(String msg, EObject source, int feature) {
+	public void warning(String msg, EObject source, EStructuralFeature feature, int index) {
 		String location = RoomNameProvider.getLocation(source);
 		if (location==null || location.isEmpty())
 			logger.logInfo(msg);
@@ -42,12 +43,12 @@ public class WorkflowDiagnostician implements IDiagnostician {
 	}
 
 	@Override
-	public void error(String msg, EObject source) {
-		error(msg, source, -1);
+	public void error(String msg, EObject source, EStructuralFeature feature) {
+		error(msg, source, feature, INSIGNIFICANT_INDEX);
 	}
 
 	@Override
-	public void error(String msg, EObject source, int feature) {
+	public void error(String msg, EObject source, EStructuralFeature feature, int index) {
 		failed  = true;
 		String location = RoomNameProvider.getLocation(source);
 		if (location==null || location.isEmpty())
