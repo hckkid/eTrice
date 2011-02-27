@@ -19,27 +19,28 @@ import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RefinedState;
 import org.eclipse.xtext.naming.DefaultDeclarativeQualifiedNameProvider;
+import org.eclipse.xtext.naming.QualifiedName;
 
 
 public class RoomQualifiedNameProvider extends
 		DefaultDeclarativeQualifiedNameProvider {
 
-    public String qualifiedName(RefinedState rs) {
-		String fqn = "";
+    public QualifiedName qualifiedName(RefinedState rs) {
+    	QualifiedName fqn = QualifiedName.create();
 		BaseState base = rs.getBase();
 		if (base!=null)
 		{
-			fqn = base.getName();
+			fqn = QualifiedName.create(base.getName());
 			EObject parent = base.eContainer();
 			while (parent instanceof BaseState) {
-				fqn = ((BaseState)parent).getName()+"."+fqn;
+				fqn = QualifiedName.create(((BaseState)parent).getName()).append(fqn);
 				parent = parent.eContainer();
 			}
 		}
 		return fqn;
     }
 
-    public String qualifiedName(Message m) {
+    public QualifiedName qualifiedName(Message m) {
     	ProtocolClass pc = (ProtocolClass) m.eContainer();
     	String list;
     	if (pc.getIncomingMessages().contains(m))
@@ -47,7 +48,6 @@ public class RoomQualifiedNameProvider extends
     	else
     		list = "out";
     	
-    	return getQualifiedName(pc)+getDelimiter()+list+getDelimiter()+m.getName();
+    	return getFullyQualifiedName(pc).append(list).append(m.getName());
     }
-
 }
