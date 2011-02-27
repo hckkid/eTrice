@@ -21,7 +21,7 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.handlers.HandlerUtil;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
-import org.eclipse.xtext.ui.editor.outline.ContentOutlineNode;
+import org.eclipse.xtext.ui.editor.outline.impl.EObjectNode;
 import org.eclipse.xtext.ui.editor.utils.EditorUtils;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
@@ -36,14 +36,14 @@ public class EditStructureHandler extends AbstractHandler {
 		if (selection instanceof IStructuredSelection) {
 			IStructuredSelection ss = (IStructuredSelection) selection;
 			Object sel = ss.getFirstElement();
-			if (sel instanceof ContentOutlineNode) {
-				final ContentOutlineNode node = (ContentOutlineNode) sel;
+			if (sel instanceof EObjectNode) {
+				final EObjectNode node = (EObjectNode) sel;
 				XtextEditor xtextEditor = EditorUtils.getActiveXtextEditor(event);
 				xtextEditor.getDocument().readOnly(new IUnitOfWork.Void<XtextResource>() {
 					@Override
 					public void process(XtextResource resource) throws Exception {
 						if (resource != null) {
-							EObject object = resource.getEObject(node.getURI().fragment());
+							EObject object = resource.getEObject(node.getEObjectURI().fragment());
 							if (object instanceof StructureClass) {
 								DiagramAccess diagramAccess = new DiagramAccess();
 								diagramAccess.openDiagramEditor((StructureClass) object);

@@ -15,6 +15,7 @@ package org.eclipse.etrice.core.ui;
 import java.util.LinkedList;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.etrice.core.validation.RoomJavaValidator;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.CheckMode;
@@ -30,24 +31,24 @@ public class RoomModelValidator extends RoomJavaValidator implements ILogger {
 		private boolean failed = false;
 
 		@Override
-		public void warning(String msg, EObject source) {
-			warning(msg, source, -1);
+		public void warning(String msg, EObject source, EStructuralFeature feature) {
+			warning(msg, source, feature, INSIGNIFICANT_INDEX);
 		}
 
 		@Override
-		public void warning(String msg, EObject source, int feature) {
-			issueWarning(msg, source, feature);
+		public void warning(String msg, EObject source, EStructuralFeature feature, int index) {
+			issueWarning(msg, source, feature, index);
 		}
 
 		@Override
-		public void error(String msg, EObject source) {
-			error(msg, source, -1);
+		public void error(String msg, EObject source, EStructuralFeature feature) {
+			error(msg, source, feature, INSIGNIFICANT_INDEX);
 		}
 
 		@Override
-		public void error(String msg, EObject source, int feature) {
+		public void error(String msg, EObject source, EStructuralFeature feature, int index) {
 			failed = true;
-			issueError(msg, source, feature);
+			issueError(msg, source, feature, index);
 		}
 
 		@Override
@@ -72,12 +73,16 @@ public class RoomModelValidator extends RoomJavaValidator implements ILogger {
 		}
 	}
 	
-	public void issueError(String msg, EObject source, int feature) {
-		error(msg, source, feature);
+	public void issueError(String msg, EObject source, EStructuralFeature feature, int index) {
+		if (index==IDiagnostician.INSIGNIFICANT_INDEX)
+			index = INSIGNIFICANT_INDEX;
+		error(msg, source, feature, index);
 	}
 
-	public void issueWarning(String msg, EObject source, int feature) {
-		warning(msg, source, feature);
+	public void issueWarning(String msg, EObject source, EStructuralFeature feature, int index) {
+		if (index==IDiagnostician.INSIGNIFICANT_INDEX)
+			index = INSIGNIFICANT_INDEX;
+		warning(msg, source, feature, index);
 	}
 
 	@Override

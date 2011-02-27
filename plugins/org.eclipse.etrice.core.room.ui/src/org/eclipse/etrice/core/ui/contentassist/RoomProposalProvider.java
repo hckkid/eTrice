@@ -46,7 +46,7 @@ public class RoomProposalProvider extends AbstractRoomProposalProvider {
 			if (candidate == null)
 				return null;
 			ICompletionProposal result = null;
-			String proposal = candidate.getName();
+			String proposal = candidate.getName().toString();
 			if (ruleName != null)
 				proposal = getValueConverter().toString(proposal, ruleName);
 			EObject objectOrProxy = candidate.getEObjectOrProxy();
@@ -56,7 +56,7 @@ public class RoomProposalProvider extends AbstractRoomProposalProvider {
 				if (!filter.accept(contentAssistContext, candidate))
 					return null;
 			
-			StyledString displayString = getStyledDisplayString(objectOrProxy, candidate.getQualifiedName(), candidate.getName());
+			StyledString displayString = getStyledDisplayString(objectOrProxy, candidate.getQualifiedName().toString(), candidate.getName().toString());
 			Image image = getImage(objectOrProxy);
 			result = createCompletionProposal(proposal, displayString, image, contentAssistContext);
 			getPriorityHelper().adjustCrossReferencePriority(result, contentAssistContext.getPrefix());			
