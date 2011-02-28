@@ -8,17 +8,12 @@
 
 package org.eclipse.etrice.ui.behavior.editor;
 
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.transaction.RecordingCommand;
 import org.eclipse.etrice.ui.behavior.Activator;
-import org.eclipse.etrice.ui.behavior.commands.AddMssingTransitionNamesCommand;
-import org.eclipse.etrice.ui.behavior.support.ContextSwitcher;
-import org.eclipse.emf.common.command.Command;
-import org.eclipse.graphiti.ui.editor.DiagramEditor;
+import org.eclipse.etrice.ui.common.editor.RoomDiagramEditor;
 import org.eclipse.swt.graphics.Image;
 
 
-public class BehaviorEditor extends DiagramEditor {
+public class BehaviorEditor extends RoomDiagramEditor {
 
 	public static final String BEHAVIOR_EDITOR_ID = "org.eclipse.etrice.ui.behavior.editor.BehaviorEditor";
 	
@@ -30,26 +25,4 @@ public class BehaviorEditor extends DiagramEditor {
 	public Image getDefaultImage() {
 		return Activator.getImage("icons/Behavior.gif");
 	}
-
-	@SuppressWarnings("restriction")
-	@Override
-	protected void initializeGraphicalViewer() {
-		super.initializeGraphicalViewer();
-		
-		ResourceSet rs = getEditingDomain().getResourceSet();
-		if (rs.getResources().size()>1)
-			rs.getResources().get(1).setTrackingModification(true);
-		
-		Command cmd = new RecordingCommand(getEditingDomain()) {
-			@Override
-			protected void doExecute() {
-				ContextSwitcher.switchTop(getDiagramTypeProvider().getDiagram());
-			}
-		};
-		getEditingDomain().getCommandStack().execute(cmd);
-
-		cmd = new AddMssingTransitionNamesCommand(getDiagramTypeProvider().getDiagram(), getEditingDomain());
-		getEditingDomain().getCommandStack().execute(cmd);
-	}
-
 }
