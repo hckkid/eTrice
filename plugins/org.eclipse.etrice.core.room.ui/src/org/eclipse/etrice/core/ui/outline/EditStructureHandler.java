@@ -15,7 +15,9 @@ package org.eclipse.etrice.core.ui.outline;
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.handlers.HandlerUtil;
@@ -28,6 +30,13 @@ import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.etrice.core.room.StructureClass;
 import org.eclipse.etrice.ui.structure.DiagramAccess;
 
+/**
+ * Handler for outline menu item to open structure editor.
+ * The handler will ask to save unsaved editor before opening the diagram.
+ *
+ * @author Henrik Rentz-Reichert initial contribution and API
+ *
+ */
 public class EditStructureHandler extends AbstractHandler {
 
 	@Override
@@ -39,6 +48,11 @@ public class EditStructureHandler extends AbstractHandler {
 			if (sel instanceof ContentOutlineNode) {
 				final ContentOutlineNode node = (ContentOutlineNode) sel;
 				XtextEditor xtextEditor = EditorUtils.getActiveXtextEditor(event);
+				if (xtextEditor.isDirty()) {
+					if (!MessageDialog.openQuestion(xtextEditor.getSite().getShell(), "Save model file", "The editor will be saved before opening the diagram editor.\nProceed?"))
+						return null;
+					xtextEditor.doSave(new NullProgressMonitor());
+				}
 				xtextEditor.getDocument().readOnly(new IUnitOfWork.Void<XtextResource>() {
 					@Override
 					public void process(XtextResource resource) throws Exception {
