@@ -361,8 +361,10 @@ public class ExpandedActorClassImpl extends ActorClassImpl implements ExpandedAc
 		for (Transition t : sg.getTransitions()) {
 			TransitionChain chain = getChain(t);
 			if (chain==null)
-				if (!getActorClass().isAbstract())
-					validationError("transition is not part of a transition chain (only allowed for abstract actor classes)", t);
+				if (!getActorClass().isAbstract()) {
+					int idx = sg.getTransitions().indexOf(t);
+					validationError("transition is not part of a transition chain (only allowed for abstract actor classes)", sg, RoomPackage.eINSTANCE.getStateGraph_Transitions(), idx);
+				}
 		}
 		
 		// recursion
