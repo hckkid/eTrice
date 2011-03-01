@@ -13,6 +13,9 @@
 package org.eclipse.etrice.core.ui;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
+
+import org.eclipse.etrice.core.ui.outline.RoomOutlinePage;
 
 /**
  * Use this class to register components to be used within the IDE.
@@ -23,7 +26,16 @@ public class RoomUiModule extends org.eclipse.etrice.core.ui.AbstractRoomUiModul
 	}
 
 	// contributed by org.eclipse.xtext.generator.validation.JavaValidatorFragment
-	@org.eclipse.xtext.service.SingletonBinding(eager=true)	public Class<? extends org.eclipse.etrice.core.validation.RoomJavaValidator> bindRoomJavaValidator() {
+	@org.eclipse.xtext.service.SingletonBinding(eager=true)
+	public Class<? extends org.eclipse.etrice.core.validation.RoomJavaValidator> bindRoomJavaValidator() {
 		return org.eclipse.etrice.core.ui.RoomModelValidator.class;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.eclipse.xtext.ui.DefaultUiModule#bindIContentOutlinePage()
+	 */
+	@Override
+	public Class<? extends IContentOutlinePage> bindIContentOutlinePage() {
+		return RoomOutlinePage.class;
 	}
 }

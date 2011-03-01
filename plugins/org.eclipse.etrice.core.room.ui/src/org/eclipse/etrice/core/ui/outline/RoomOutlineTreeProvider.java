@@ -21,13 +21,8 @@ import org.eclipse.etrice.core.room.SAPRef;
 import org.eclipse.etrice.core.room.SPPRef;
 import org.eclipse.etrice.core.room.ServiceImplementation;
 import org.eclipse.etrice.core.room.State;
-import org.eclipse.etrice.core.room.StructureClass;
-import org.eclipse.swt.graphics.Image;
-import org.eclipse.xtext.nodemodel.ICompositeNode;
-import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 import org.eclipse.xtext.ui.editor.outline.impl.DefaultOutlineTreeProvider;
-import org.eclipse.xtext.util.TextRegion;
 
 /**
  * customization of the default outline structure
@@ -40,17 +35,6 @@ public class RoomOutlineTreeProvider extends DefaultOutlineTreeProvider {
 	private static final String BEHAVIOR_LABEL = "Behavior";
 	private static final String STRUCTURE_LABEL = "Structure";
 	private static final String INTERFACE_LABEL = "Interface";
-
-	protected void _createNode(IOutlineNode parentNode, StructureClass modelElement) {
-		Object text = textDispatcher.invoke(modelElement);
-		Image image = imageDispatcher.invoke(modelElement);
-		StructureClassNode eObjectNode = new StructureClassNode(modelElement, parentNode, image, text,
-				isLeafDispatcher.invoke(modelElement));
-		ICompositeNode parserNode = NodeModelUtils.getNode(modelElement);
-		if (parserNode != null)
-			eObjectNode.setTextRegion(new TextRegion(parserNode.getOffset(), parserNode.getLength()));
-		eObjectNode.setShortTextRegion(locationInFileProvider.getSignificantTextRegion(modelElement));
-	}
 	
 	protected boolean _isLeaf(ActorClass ac) {
 		if (ac.getIfPorts().size()>0 || ac.getIfSPPs().size()>0) {

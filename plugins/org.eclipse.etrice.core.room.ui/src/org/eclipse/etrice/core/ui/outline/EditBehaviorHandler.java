@@ -16,11 +16,18 @@ import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.etrice.core.naming.RoomFragmentProvider;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.ui.behavior.DiagramAccess;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.ui.IWorkbench;
+import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.IWorkbenchPart;
+import org.eclipse.ui.IWorkbenchWindow;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.handlers.HandlerUtil;
+import org.eclipse.ui.views.contentoutline.ContentOutline;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.outline.impl.EObjectNode;
@@ -55,4 +62,28 @@ public class EditBehaviorHandler extends AbstractHandler {
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.core.commands.AbstractHandler#isEnabled()
+	 */
+	@Override
+	public boolean isEnabled() {
+		IWorkbench wb = PlatformUI.getWorkbench();
+		IWorkbenchWindow win = wb.getActiveWorkbenchWindow();
+		IWorkbenchPage page = win.getActivePage();
+		IWorkbenchPart part = page.getActivePart();
+		if (part instanceof ContentOutline) {
+			ISelection selection = ((ContentOutline)part).getSelection();
+			if (selection instanceof IStructuredSelection) {
+				IStructuredSelection ss = (IStructuredSelection) selection;
+				Object sel = ss.getFirstElement();
+				if (sel instanceof EObjectNode) {
+					EObjectNode node = (EObjectNode) sel;
+					if (RoomFragmentProvider.isActorClass(node.getEObjectURI().fragment()))
+						return true;
+				}
+			}
+		}
+
+		return false;
+	}
 }
