@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde version="3.6"?>
 
-<target name="eTrice development" sequenceNumber="16">
+<target name="eTrice development" sequenceNumber="17">
 <locations>
 <location path="${eTriceTargetInstallationPath}\eclipse-SDK-3.7M5-win32\eclipse" type="Profile"/>
 <location path="${eTriceTargetInstallationPath}\plugins" type="Directory"/>
