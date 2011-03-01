@@ -20,13 +20,20 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.ui.IWorkbench;
+import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.IWorkbenchPart;
+import org.eclipse.ui.IWorkbenchWindow;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.handlers.HandlerUtil;
+import org.eclipse.ui.views.contentoutline.ContentOutline;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
-import org.eclipse.xtext.ui.editor.outline.ContentOutlineNode;
+import org.eclipse.xtext.ui.editor.outline.impl.EObjectNode;
 import org.eclipse.xtext.ui.editor.utils.EditorUtils;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
+import org.eclipse.etrice.core.naming.RoomFragmentProvider;
 import org.eclipse.etrice.core.room.StructureClass;
 import org.eclipse.etrice.ui.structure.DiagramAccess;
 
@@ -45,8 +52,8 @@ public class EditStructureHandler extends AbstractHandler {
 		if (selection instanceof IStructuredSelection) {
 			IStructuredSelection ss = (IStructuredSelection) selection;
 			Object sel = ss.getFirstElement();
-			if (sel instanceof ContentOutlineNode) {
-				final ContentOutlineNode node = (ContentOutlineNode) sel;
+			if (sel instanceof EObjectNode) {
+				final EObjectNode node = (EObjectNode) sel;
 				XtextEditor xtextEditor = EditorUtils.getActiveXtextEditor(event);
 				if (xtextEditor.isDirty()) {
 					if (!MessageDialog.openQuestion(xtextEditor.getSite().getShell(), "Save model file", "The editor will be saved before opening the diagram editor.\nProceed?"))
@@ -57,7 +64,7 @@ public class EditStructureHandler extends AbstractHandler {
 					@Override
 					public void process(XtextResource resource) throws Exception {
 						if (resource != null) {
-							EObject object = resource.getEObject(node.getURI().fragment());
+							EObject object = resource.getEObject(node.getEObjectURI().fragment());
 							if (object instanceof StructureClass) {
 								DiagramAccess diagramAccess = new DiagramAccess();
 								diagramAccess.openDiagramEditor((StructureClass) object);
@@ -68,6 +75,31 @@ public class EditStructureHandler extends AbstractHandler {
 			}
 		}
 		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.eclipse.core.commands.AbstractHandler#isEnabled()
+	 */
+	@Override
+	public boolean isEnabled() {
+		IWorkbench wb = PlatformUI.getWorkbench();
+		IWorkbenchWindow win = wb.getActiveWorkbenchWindow();
+		IWorkbenchPage page = win.getActivePage();
+		IWorkbenchPart part = page.getActivePart();
+		if (part instanceof ContentOutline) {
+			ISelection selection = ((ContentOutline)part).getSelection();
+			if (selection instanceof IStructuredSelection) {
+				IStructuredSelection ss = (IStructuredSelection) selection;
+				Object sel = ss.getFirstElement();
+				if (sel instanceof EObjectNode) {
+					EObjectNode node = (EObjectNode) sel;
+					String fragment = node.getEObjectURI().fragment();
+					return RoomFragmentProvider.isStructureClass(fragment);
+				}
+			}
+		}
+
+		return false;
 	}
 
 }

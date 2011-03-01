@@ -12,6 +12,7 @@ import org.eclipse.etrice.runtime.java.messaging.AbstractMessageReceiver;
 import org.eclipse.etrice.runtime.java.messaging.Address;
 import org.eclipse.etrice.runtime.java.messaging.IMessageReceiver;
 import org.eclipse.etrice.runtime.java.messaging.MessageService;
+import org.eclipse.etrice.runtime.java.messaging.RTServices;
 
 /**
  * The abstract base class for actor class interface items like ports and saps.
@@ -21,30 +22,37 @@ import org.eclipse.etrice.runtime.java.messaging.MessageService;
  */
 public abstract class InterfaceItemBase extends AbstractMessageReceiver {
 	
-	private IMessageReceiver msgReceiver;
+	private IMessageReceiver ownMsgReceiver;
+	private IMessageReceiver peerMsgReceiver;
 	private int localId;
 	private int idx;
 	private Address peerAddress;
 
-	public InterfaceItemBase (IEventReceiver actor, String name, int localId, int idx, Address address, Address peerAddress, IMessageReceiver msgReceiver){
-		super(actor, address, name);
-		this.msgReceiver = msgReceiver;
+	public InterfaceItemBase (IEventReceiver actor, String name, int localId, int idx, Address ownAddress, Address peerAddress){
+		super(actor, ownAddress, name);
+		this.ownMsgReceiver = RTServices.getInstance().getMsgSvcCtrl().getMsgSvc(ownAddress.threadID);
+		this.peerMsgReceiver = RTServices.getInstance().getMsgSvcCtrl().getMsgSvc(peerAddress.threadID);
 		this.localId = localId;
 		this.idx = idx;
 		this.peerAddress = peerAddress;
 		
-		if (getAddress()!=null && msgReceiver instanceof MessageService) {
-			MessageService ms = (MessageService) msgReceiver;
+		if (getAddress()!=null && this.ownMsgReceiver instanceof MessageService) {
+			MessageService ms = (MessageService) this.ownMsgReceiver;
+			// register at the own dispatcher to receive messages
 			ms.getMessageDispatcher().addMessageReceiver(this);
 		}
 	}
 
 	protected IMessageReceiver getMsgReceiver() {
-		return msgReceiver;
+		return ownMsgReceiver;
+	}
+
+	protected IMessageReceiver getPeerMsgReceiver() {
+		return peerMsgReceiver;
 	}
 
 	public void setMsgReceiver(IMessageReceiver msgReceiver) {
-		this.msgReceiver = msgReceiver;
+		this.ownMsgReceiver = msgReceiver;
 	}
 	
 	public IEventReceiver getActor() {

@@ -19,25 +19,27 @@ import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
-
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.etrice.core.room.ActorClass;
+import org.eclipse.etrice.core.room.ActorContainerClass;
 import org.eclipse.etrice.core.room.ActorContainerRef;
 import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.Binding;
 import org.eclipse.etrice.core.room.BindingEndPoint;
-import org.eclipse.etrice.core.room.RefSAPoint;
-import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.core.room.ExternalPort;
 import org.eclipse.etrice.core.room.LayerConnection;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.ProtocolClass;
+import org.eclipse.etrice.core.room.RefSAPoint;
 import org.eclipse.etrice.core.room.RelaySAPoint;
 import org.eclipse.etrice.core.room.RoomModel;
+import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.etrice.core.room.SAPRef;
 import org.eclipse.etrice.core.room.SAPoint;
 import org.eclipse.etrice.core.room.SPPRef;
 import org.eclipse.etrice.core.room.SPPoint;
 import org.eclipse.etrice.core.room.ServiceImplementation;
+import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.core.room.SubSystemRef;
 import org.eclipse.etrice.generator.etricegen.ActorInstance;
 import org.eclipse.etrice.generator.etricegen.BindingInstance;
@@ -206,11 +208,11 @@ public class InstanceModelBuilder {
 				obj = ((SubSystemInstance)si).getSubSystemClass();
 			else
 				obj = si;
-			diagnostician.error("A service can only be offered once per actor instance, consider pushing one down to a contained actor!", obj);
+			diagnostician.error("A service can only be offered once per actor instance, consider pushing one down to a contained actor!", obj, RoomPackage.eINSTANCE.getActorContainerClass_IfSPPs());
 		}
 		else {
 			if (ci.getFromSPP()!=null && ci.getFromSPP().getSpp().getProtocol()!=pc) {
-				diagnostician.error("Layer connection must connect same protocols!", ci.getConnection());
+				diagnostician.error("Layer connection must connect same protocols!", ci.getConnection(), RoomPackage.eINSTANCE.getLayerConnection_From());
 			}
 			else {
 				// now we follow the layer connections
@@ -232,14 +234,16 @@ public class InstanceModelBuilder {
 							assert(false);
 						}
 						if (!found) {
-							diagnostician.error("An SPP mus be connected by a layer connection or implemented by a ServiceImplementation!", sppi.getSpp());
+							ActorContainerClass acr = (ActorContainerClass) sppi.getSpp().eContainer();
+							int idx = acr.getIfSPPs().indexOf(sppi.getSpp());
+							diagnostician.error("An SPP mus be connected by a layer connection or implemented by a ServiceImplementation!", sppi.getSpp(), RoomPackage.eINSTANCE.getActorContainerClass_IfSPPs(), idx);
 						}
 						return;
 					}
 					else {
 						ci = sppi.getOutgoing();
 						if (ci.getToSPP().getSpp().getProtocol()!=pc) {
-							diagnostician.error("Layer connection must connect same protocols!", ci.getConnection());
+							diagnostician.error("Layer connection must connect same protocols!", ci.getConnection(), RoomPackage.eINSTANCE.getLayerConnection_From());
 							return;
 						}
 					}
@@ -301,7 +305,9 @@ public class InstanceModelBuilder {
 		}
 		while (sii!=null);
 		
-		diagnostician.error("SAP not satisfied!", sap.getSap());
+		ActorClass ac = (ActorClass) sap.getSap().eContainer();
+		int idx = ac.getStrSAPs().indexOf(sap.getSap());
+		diagnostician.error("SAP not satisfied!", sap.getSap(), RoomPackage.eINSTANCE.getActorClass_StrSAPs(), idx);
 	}
 
 	/**
@@ -346,8 +352,10 @@ public class InstanceModelBuilder {
 							if (b.getEndpoint2().getPort()==port)
 								++count;
 						}
-						if (count>1)
-							diagnostician.error("relay port is multiply connected inside its actor class", port);
+						if (count>1) {
+							int idx = ac.getIfPorts().indexOf(port);
+							diagnostician.error("relay port is multiply connected inside its actor class", port, RoomPackage.eINSTANCE.getActorClass_IfPorts(), idx);
+						}
 					}
 				}
 			}
@@ -534,7 +542,8 @@ public class InstanceModelBuilder {
 				bi.getPorts().add(getPortInstance(ai, bind.getEndpoint2()));
 			}
 			else {
-				diagnostician.error("binding connects two ports of the same actor", bind, -1);
+				int idx = bindings.indexOf(bind);
+				diagnostician.error("binding connects two ports of the same actor", bind, RoomPackage.eINSTANCE.getStructureClass_Bindings(), idx);
 			}
 			
 			ai.getBindings().add(bi);
@@ -565,8 +574,11 @@ public class InstanceModelBuilder {
 			}
 			else if (from instanceof RelaySAPoint) {
 				SPPInstance sppi = getSPPInstance(si, null, ((RelaySAPoint)from).getRelay());
-				if (sppi.getOutgoing()!=null)
-					diagnostician.error("SPPRef has several outgoing layer connections!", sppi.getSpp());
+				if (sppi.getOutgoing()!=null) {
+					ActorContainerClass acr = (ActorContainerClass) sppi.getSpp().eContainer();
+					int idx = acr.getIfSPPs().indexOf(sppi.getSpp());
+					diagnostician.error("SPPRef has several outgoing layer connections!", sppi.getSpp(), RoomPackage.eINSTANCE.getActorContainerClass_IfSPPs(), idx);
+				}
 				ci.setFromSPP(sppi);
 			}
 			else {
@@ -635,8 +647,11 @@ public class InstanceModelBuilder {
 		if (be.getActorRef()==null) {
 			for (PortInstance pi : si.getPorts()) {
 				if (pi.getPort()==be.getPort()) {
-					if (pi.getKind()==PortKind.EXTERNAL)
-						diagnostician.error("binding connects external end port to sub-actor interface", be.eContainer(), -1);
+					if (pi.getKind()==PortKind.EXTERNAL) {
+						EStructuralFeature feature = (((Binding)be.eContainer()).getEndpoint1()==be)? RoomPackage.eINSTANCE.getBinding_Endpoint1()
+								: RoomPackage.eINSTANCE.getBinding_Endpoint2();
+						diagnostician.error("binding connects external end port to sub-actor interface", be.eContainer(), feature);
+					}
 					return pi;
 				}
 			}
@@ -646,8 +661,11 @@ public class InstanceModelBuilder {
 				if (subai.getName().equals(be.getActorRef().getName())) {
 					for (PortInstance pi : subai.getPorts()) {
 						if (pi.getPort()==be.getPort()) {
-							if (pi.getKind()==PortKind.INTERNAL)
-								diagnostician.error("binding connects to sub-actor internal end port", be.eContainer(), -1);
+							if (pi.getKind()==PortKind.INTERNAL) {
+								EStructuralFeature feature = (((Binding)be.eContainer()).getEndpoint1()==be)? RoomPackage.eINSTANCE.getBinding_Endpoint1()
+										: RoomPackage.eINSTANCE.getBinding_Endpoint2();
+								diagnostician.error("binding connects to sub-actor internal end port", be.eContainer(), feature);
+							}
 							return pi;
 						}
 					}
@@ -720,11 +738,30 @@ public class InstanceModelBuilder {
 				ActorInstance ai = (ActorInstance) obj;
 				for (PortInstance pi : ai.getPorts()) {
 					if (pi.getKind()!=PortKind.RELAY) {
-						if (pi.getBindings().size()>pi.getPort().getMultiplicity())
+						if (pi.getBindings().size()>pi.getPort().getMultiplicity()) {
+							EStructuralFeature feature = null;
+							int idx = IDiagnostician.INSIGNIFICANT_INDEX;
+							if (pi.getPort().eContainer() instanceof ActorClass) {
+								ActorClass ac = (ActorClass) pi.getPort().eContainer();
+								idx = ac.getIfPorts().indexOf(pi.getPort());
+								if (idx>=0) {
+									feature = RoomPackage.eINSTANCE.getActorClass_IfPorts();
+								}
+								else {
+									feature = RoomPackage.eINSTANCE.getActorClass_IntPorts();
+									idx = ac.getIntPorts().indexOf(pi.getPort());
+								}
+							}
+							else if (pi.getPort().eContainer() instanceof SubSystemClass) {
+								SubSystemClass ssc = (SubSystemClass) pi.getPort().eContainer();
+								feature = RoomPackage.eINSTANCE.getSubSystemClass_RelayPorts();
+								idx = ssc.getRelayPorts().indexOf(pi.getPort());
+							}
 							diagnostician.error("number of peers "+pi.getBindings().size()
 									+ " of port "+pi.getName()
 									+" exceeds multiplicity "+pi.getPort().getMultiplicity()
-									+" in instance "+ai.getPath(), pi);
+									+" in instance "+ai.getPath(), pi, feature, idx);
+						}
 					}
 				}
 			}

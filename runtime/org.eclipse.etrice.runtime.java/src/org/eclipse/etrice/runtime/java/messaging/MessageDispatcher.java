@@ -38,7 +38,7 @@ public class MessageDispatcher extends RTObject implements IMessageReceiver {
 			node_map.put(receiver.getAddress().objectID, receiver);
 		}
 		else if(receiver.getAddress().threadID != address.threadID){
-			thread_map.put(receiver.getAddress().objectID, receiver);
+			thread_map.put(receiver.getAddress().threadID, receiver);
 		}
 		else {
 			local_map.put(receiver.getAddress().objectID, receiver);
@@ -53,7 +53,7 @@ public class MessageDispatcher extends RTObject implements IMessageReceiver {
 			receiver = node_map.get(msg.getAddress().objectID);
 		}
 		else if(msg.getAddress().threadID != address.threadID){
-			receiver = thread_map.get(msg.getAddress().objectID);
+			receiver = thread_map.get(msg.getAddress().threadID);
 		}
 		else {
 			// Same node, same thread -> local call Dispatch Map

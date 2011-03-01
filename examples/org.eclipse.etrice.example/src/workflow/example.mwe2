@@ -1,6 +1,5 @@
 module workflow.example
 
-import workflow.RoomGenerator
 import org.eclipse.emf.mwe.utils.*
 
 var destDir = "src-gen"
@@ -11,7 +10,7 @@ Workflow {
 		directory = destDir
 	}
 
-	component = @RoomGenerator {
+	component = @workflow.RoomGenerator {
 		sourceDir = "models"
 		targetDir = destDir
 	}

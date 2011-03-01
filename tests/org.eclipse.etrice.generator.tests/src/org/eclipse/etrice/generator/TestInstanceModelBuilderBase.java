@@ -26,6 +26,7 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.xtext.resource.XtextResource;
@@ -56,20 +57,20 @@ public class TestInstanceModelBuilderBase {
 	class Diagnostician implements IDiagnostician {
 
 		@Override
-		public void warning(String msg, EObject source) {
+		public void warning(String msg, EObject source, EStructuralFeature feature) {
 		}
 
 		@Override
-		public void warning(String msg, EObject source, int feature) {
+		public void warning(String msg, EObject source, EStructuralFeature feature, int index) {
 		}
 
 		@Override
-		public void error(String msg, EObject source) {
+		public void error(String msg, EObject source, EStructuralFeature feature) {
 			fail(msg+RoomNameProvider.getLocation(source));
 		}
 
 		@Override
-		public void error(String msg, EObject source, int feature) {
+		public void error(String msg, EObject source, EStructuralFeature feature, int index) {
 			fail(msg+RoomNameProvider.getLocation(source));
 		}
 

@@ -38,8 +38,7 @@ public class MessageService extends Thread implements IMessageReceiver,
 		this.parent = parent;
 		address = addr;
 		this.name = name;
-		messageDispatcher = new MessageDispatcher(this, new Address(addr.nodeID,
-				addr.threadID, addr.objectID + 1), "Dispatcher");
+		messageDispatcher = new MessageDispatcher(this, new Address(addr.nodeID,addr.threadID, addr.objectID + 1), "Dispatcher");
 		messageQueue = new MessageSeQueue(this, "Queue");
 	}
 

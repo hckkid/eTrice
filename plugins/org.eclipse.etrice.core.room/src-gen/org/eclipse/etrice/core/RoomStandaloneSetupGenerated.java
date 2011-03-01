@@ -39,6 +39,5 @@ public class RoomStandaloneSetupGenerated implements ISetup {
 
 
 
-
 	}
 }

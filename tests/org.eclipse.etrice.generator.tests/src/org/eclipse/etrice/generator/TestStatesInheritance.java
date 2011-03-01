@@ -70,22 +70,22 @@ public class TestStatesInheritance extends TestInstanceModelBuilderBase {
 	
 	@Test
 	public void testNumbers() {
-		assertEquals("number of states", 12, instances.get(RoomPackage.eINSTANCE.getBaseState()).size());
+		assertEquals("number of states", 11, instances.get(RoomPackage.eINSTANCE.getBaseState()).size());
 		assertEquals("number of choice points", 1, instances.get(RoomPackage.eINSTANCE.getChoicePoint()).size());
 		assertEquals("number of transition points", 5, instances.get(RoomPackage.eINSTANCE.getTransitionPoint()).size());
-		assertEquals("number of entry points", 8, instances.get(RoomPackage.eINSTANCE.getEntryPoint()).size());
-		assertEquals("number of exit points", 3, instances.get(RoomPackage.eINSTANCE.getExitPoint()).size());
-		assertEquals("number of initial transitions", 4, instances.get(RoomPackage.eINSTANCE.getInitialTransition()).size());
+		assertEquals("number of entry points", 2, instances.get(RoomPackage.eINSTANCE.getEntryPoint()).size());
+		assertEquals("number of exit points", 1, instances.get(RoomPackage.eINSTANCE.getExitPoint()).size());
+		assertEquals("number of initial transitions", 3, instances.get(RoomPackage.eINSTANCE.getInitialTransition()).size());
 		assertEquals("number of triggered transitions", 17, instances.get(RoomPackage.eINSTANCE.getTriggeredTransition()).size());
-		assertEquals("number of continuation transitions", 7, instances.get(RoomPackage.eINSTANCE.getContinuationTransition()).size());
+		assertEquals("number of continuation transitions", 4, instances.get(RoomPackage.eINSTANCE.getContinuationTransition()).size());
 		assertEquals("number of branch transitions", 3, instances.get(RoomPackage.eINSTANCE.getCPBranchTransition()).size());
 	}
 	
 	@Test
 	public void testXPACGeneral() {
 		EList<TransitionChain> chains = xpac.getTransitionChains();
-		assertEquals("number of chains", 21, chains.size());
-		assertEquals("numer of triggers", 9, xpac.getTriggers().size());
+		assertEquals("number of chains", 20, chains.size());
+		assertEquals("numer of triggers", 8, xpac.getTriggers().size());
 	}
 	
 	@Test
@@ -104,10 +104,10 @@ public class TestStatesInheritance extends TestInstanceModelBuilderBase {
 		
 		s = (State) getStateGraphItem(states, "State2");
 		assertNotNull("state exists", s);
-		assertEquals("number of incoming transitions", 3, xpac.getIncomingTransitions(s).size());
-		assertEquals("number of outgoing transitions", 0, xpac.getOutgoingTransitions(s).size());
+		assertEquals("number of incoming transitions", 4, xpac.getIncomingTransitions(s).size());
+		assertEquals("number of outgoing transitions", 1, xpac.getOutgoingTransitions(s).size());
 		
-		assertEquals("active triggers", 0, xpac.getActiveTriggers(s).size());
+		assertEquals("active triggers", 3, xpac.getActiveTriggers(s).size());
 
 		ArrayList<EObject> cps = instances.get(RoomPackage.eINSTANCE.getChoicePoint());
 		

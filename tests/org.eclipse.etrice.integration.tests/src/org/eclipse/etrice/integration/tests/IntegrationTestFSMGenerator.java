@@ -48,8 +48,7 @@ public class IntegrationTestFSMGenerator {
 		main_component.init(); // lifecycle init
 		main_component.start(); // lifecycle start
 		
-		// TODOTS: Test broken -> repair after changes for multi threading
-//		main_component.waitTerminate();
+		RTServices.getInstance().getMsgSvcCtrl().waitTerminate();
 		
 		assertEquals(a_HFSM_Tester.STATE_TestPass ,main_component.getInstance("/MainComponent/application/HFSM_Tests/Tester").getState());
 		

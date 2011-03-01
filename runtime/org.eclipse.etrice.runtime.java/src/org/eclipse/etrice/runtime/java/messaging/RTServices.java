@@ -32,7 +32,7 @@ public class RTServices {
 		return instance;
 	}
 	
-	public MessageServiceController getMsgSrvCtrl(){
+	public MessageServiceController getMsgSvcCtrl(){
 		assert(messageServiceController != null);
 		return messageServiceController;
 	}

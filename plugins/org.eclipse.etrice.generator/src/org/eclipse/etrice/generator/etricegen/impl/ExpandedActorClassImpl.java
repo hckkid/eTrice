@@ -21,6 +21,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.etrice.core.room.ActorClass;
@@ -203,12 +204,12 @@ public class ExpandedActorClassImpl extends ActorClassImpl implements ExpandedAc
 			eNotify(new ENotificationImpl(this, Notification.SET, ETriceGenPackage.EXPANDED_ACTOR_CLASS__ACTOR_CLASS, oldActorClass, actorClass));
 	}
 
-	private void validationError(String msg, EObject obj) {
-		validationError(msg, obj, -1);
+	private void validationError(String msg, EObject obj, EStructuralFeature feature) {
+		validationError(msg, obj, feature, IDiagnostician.INSIGNIFICANT_INDEX);
 	}
 	
-	private void validationError(String msg, EObject obj, int feature) {
-		validator.error(msg, copy2orig.get(obj), feature);
+	private void validationError(String msg, EObject obj, EStructuralFeature feature, int idx) {
+		validator.error(msg, copy2orig.get(obj), feature, idx);
 	}
 	
 	private void buildStateGraph() {
@@ -360,8 +361,10 @@ public class ExpandedActorClassImpl extends ActorClassImpl implements ExpandedAc
 		for (Transition t : sg.getTransitions()) {
 			TransitionChain chain = getChain(t);
 			if (chain==null)
-				if (!getActorClass().isAbstract())
-					validationError("transition is not part of a transition chain (only allowed for abstract actor classes)", t);
+				if (!getActorClass().isAbstract()) {
+					int idx = sg.getTransitions().indexOf(t);
+					validationError("transition is not part of a transition chain (only allowed for abstract actor classes)", sg, RoomPackage.eINSTANCE.getStateGraph_Transitions(), idx);
+				}
 		}
 		
 		// recursion
@@ -391,66 +394,70 @@ public class ExpandedActorClassImpl extends ActorClassImpl implements ExpandedAc
 					// i.e. no incoming transition of the state itself
 					NodeData data = node2data.get((State)sg.eContainer());
 					if (data!=null && data.getLoopTransitions().size()!=data.getInTrans().size())
-						validationError(getName()+": Having no initial transition in a nested state is valid only if there is no transition to history except of self transitions!", sg.eContainer(), RoomPackage.STATE__SUBGRAPH);
+						validationError(getName()+": Having no initial transition in a nested state is valid only if there is no transition to history except of self transitions!",
+								sg.eContainer(), RoomPackage.eINSTANCE.getState_Subgraph());
 				}
 			}
 			else {
-				validationError(getName()+": The TOP level has to have an initial transition!", sg, RoomPackage.STATE_GRAPH__TRANSITIONS);
+				validationError(getName()+": The TOP level has to have an initial transition!", sg, RoomPackage.eINSTANCE.getStateGraph_Transitions());
 			}
 		}
 		else {
 			if (initCount>1)
-				validationError(getName()+": There has to be exactly one initial transition!", sg, RoomPackage.STATE_GRAPH__TRANSITIONS);
+				validationError(getName()+": There has to be exactly one initial transition!", sg, RoomPackage.eINSTANCE.getStateGraph_Transitions());
 		}
 		
 		for (ChoicePoint cp : sg.getChPoints()) {
 			NodeData data = node2data.get(cp);
+			int idx = sg.getChPoints().indexOf(cp);
+			
 			if (data==null) {
-				validationError(getName()+": ChoicePoint is not connected!", cp, -1);
+				validationError(getName()+": ChoicePoint is not connected!", cp, RoomPackage.eINSTANCE.getStateGraph_ChPoints(), idx);
 			}
 			else {
 				if (data.getInTrans().size()!=1)
-					validationError(getName()+": ChoicePoint has "+data.getInTrans().size()+" incoming transitions!", cp, -1);
+					validationError(getName()+": ChoicePoint has "+data.getInTrans().size()+" incoming transitions!", cp, RoomPackage.eINSTANCE.getStateGraph_ChPoints(), idx);
 				if (data.getOutTrans().size()<2)
-					validationError(getName()+": ChoicePoint should have 2 or more branches but has "+data.getOutTrans().size(), cp, -1);
+					validationError(getName()+": ChoicePoint should have 2 or more branches but has "+data.getOutTrans().size(), cp, RoomPackage.eINSTANCE.getStateGraph_ChPoints(), idx);
 				if (getDefaultBranch(data.getOutTrans())==null)
-					validationError(getName()+": ChoicePoint has no default branch!", cp, -1);
+					validationError(getName()+": ChoicePoint has no default branch!", cp, RoomPackage.eINSTANCE.getStateGraph_ChPoints(), idx);
 				if (!data.getLoopTransitions().isEmpty())
-					validationError(getName()+": ChoicePoint is connected to itself!", cp, -1);
+					validationError(getName()+": ChoicePoint is connected to itself!", cp, RoomPackage.eINSTANCE.getStateGraph_ChPoints(), idx);
 			}
 		}
 		
 		for (TrPoint tp : sg.getTrPoints()) {
 			NodeData data = node2data.get(tp);
+			int idx = sg.getChPoints().indexOf(tp);
 			
 			if (data==null) {
 				if (!getActorClass(tp).isAbstract())
-					validationError(getName()+": TrPoint is not connected", tp, -1);
+					validationError(getName()+": TrPoint is not connected", tp, RoomPackage.eINSTANCE.getStateGraph_TrPoints(), idx);
 			}
 			else {
 				if ((tp instanceof EntryPoint)||(tp instanceof ExitPoint)) {
 					// non-abstract classes must have incoming transitions for entry and exit points
 					if (!isAbstract() && data.getInTrans().isEmpty())
-						validationError(getName()+": TrPoint has no incoming transition!", tp, -1);
+						validationError(getName()+": TrPoint has no incoming transition!", tp, RoomPackage.eINSTANCE.getStateGraph_TrPoints(), idx);
 					
 					if (getActorClass(tp).isAbstract()) {
 						// transition points inherited from abstract base classes
 						// (of from abstract classes themselves) must not have more than one outgoing transition
 						if (data.getOutTrans().size()>1)
-							validationError(getName()+": TrPoint must have at most one outgoing transition!", tp, -1);
+							validationError(getName()+": TrPoint must have at most one outgoing transition!", tp, RoomPackage.eINSTANCE.getStateGraph_TrPoints(), idx);
 					}
 					else {
 						// non-abstract or non-inherited transition points must have one outgoing transition
 						if (data.getOutTrans().size()!=1)
-							validationError(getName()+": TrPoint must have exactly one outgoing transition!", tp, -1);
+							validationError(getName()+": TrPoint must have exactly one outgoing transition!", tp, RoomPackage.eINSTANCE.getStateGraph_TrPoints(), idx);
 					}
 					
 					if (!data.getLoopTransitions().isEmpty())
-						validationError(getName()+": TrPoint must have no self transitions!", tp, -1);
+						validationError(getName()+": TrPoint must have no self transitions!", tp, RoomPackage.eINSTANCE.getStateGraph_TrPoints(), idx);
 				}
 				else if (tp instanceof TransitionPoint) {
 					if (data.getOutTrans().size()<data.getLoopTransitions().size())
-						validationError(getName()+": TrPoint must have no incoming transitions!", tp, -1);
+						validationError(getName()+": TrPoint must have no incoming transitions!", tp, RoomPackage.eINSTANCE.getStateGraph_TrPoints(), idx);
 				}
 			}
 		}
@@ -521,11 +528,11 @@ public class ExpandedActorClassImpl extends ActorClassImpl implements ExpandedAc
 										guardRequired = true;
 									if (guardRequired) {
 										if (trig.getGuard()==null)
-											validationError("Transitions with same trigger on same level have to be guarded!", t, RoomPackage.TRIGGERED_TRANSITION__TRIGGERS);
+											validationError("Transitions with same trigger on same level have to be guarded!", t, RoomPackage.eINSTANCE.getTriggeredTransition_Triggers());
 										if (trig.getGuard().getGuard()==null)
-											validationError("Transitions with same trigger on same level have to be guarded!", t, RoomPackage.TRIGGERED_TRANSITION__TRIGGERS);
+											validationError("Transitions with same trigger on same level have to be guarded!", t, RoomPackage.eINSTANCE.getTriggeredTransition_Triggers());
 										if (!trig.getGuard().getGuard().getCommands().isEmpty())
-											validationError("Transitions with same trigger on same level have to be guarded!", t, RoomPackage.TRIGGERED_TRANSITION__TRIGGERS);
+											validationError("Transitions with same trigger on same level have to be guarded!", t, RoomPackage.eINSTANCE.getTriggeredTransition_Triggers());
 									}
 									at.getTransitions().add(tt);
 								}
@@ -682,28 +689,28 @@ public class ExpandedActorClassImpl extends ActorClassImpl implements ExpandedAc
 					else {
 						if (args.size()>0) {
 							if (mif.getMessage().getArguments().size()!=args.size()) {
-								validationError("If one MessageFromIf has data all have to have data for a given transition!", mif.getMessage());
+								validationError("If one MessageFromIf has data all have to have data for a given transition!", t, RoomPackage.eINSTANCE.getTriggeredTransition_Triggers());
 							}
 							else {
 								for (TypedID arg : args) {
 									TypedID a = mif.getMessage().getArguments().get(0);
 									if (arg.getType().getPrim()!=a.getType().getPrim())
-										validationError("The data types of all MessageFromIf have to be the same!", mif.getMessage());
+										validationError("The data types of all MessageFromIf have to be the same!", t, RoomPackage.eINSTANCE.getTriggeredTransition_Triggers());
 									if (arg.getType().getType()!=a.getType().getType())
-										validationError("The data types of all MessageFromIf have to be the same!", mif.getMessage());
+										validationError("The data types of all MessageFromIf have to be the same!", t, RoomPackage.eINSTANCE.getTriggeredTransition_Triggers());
 								}
 							}
 						}
 						else {
 							if (mif.getMessage().getArguments().size()!=0)
-								validationError("If one MessageFromIf has no data all have to have no data for a given transition!", mif.getMessage());
+								validationError("If one MessageFromIf has no data all have to have no data for a given transition!", t, RoomPackage.eINSTANCE.getTriggeredTransition_Triggers());
 						}
 					}
 				}
 			}
 	
 			if (first)
-				validationError("Triggered transition has to have a message from interface!", t);
+				validationError("Triggered transition has to have a message from interface!", t, RoomPackage.eINSTANCE.getTriggeredTransition_Triggers());
 		}
 		
 		collectChainTransitions(tc, t);
@@ -730,8 +737,10 @@ public class ExpandedActorClassImpl extends ActorClassImpl implements ExpandedAc
 		
 		for (Transition next : getOutgoingTransitions(node)) {
 			// from the second transition in the chain on we have:
-			if (next instanceof TriggeredTransition)
-				validationError("Segments following the triggering transition can have no triggers!\n", next, -1);
+			if (next instanceof TriggeredTransition) {
+				int idx = ((StateGraph)next.eContainer()).getTransitions().indexOf(next);
+				validationError("Segments following the triggering transition can have no triggers!\n", next, RoomPackage.eINSTANCE.getStateGraph_Transitions(), idx);
+			}
 			
 			collectChainTransitions(tc, next);
 		}

@@ -19,6 +19,7 @@ import java.util.List;
  * The MessageServiceController controls lifecycle of and access to all MessageServices in one SubSystem
  * 
  * @author Thomas Schuetz
+ * @author Thomas Jung
  *
  */
 
@@ -30,23 +31,35 @@ public class MessageServiceController {
 		messageServiceList = new ArrayList<MessageService>();
 	}
 
-	public void addMsgSrv(MessageService msgSrv){
+	public void addMsgSvc(MessageService msgSvc){
 		// TODOTS: Who is parent of MessageServices ?
-		assert(msgSrv.getAddress().threadID == messageServiceList.size());
-		messageServiceList.add(msgSrv);
+		assert(msgSvc.getAddress().threadID == messageServiceList.size());
+		messageServiceList.add(msgSvc);
 	}
 	
-	public MessageService getMessageService(int threadID){
+	public MessageService getMsgSvc(int threadID){
 		assert(threadID < messageServiceList.size());
 		return messageServiceList.get(threadID);
 	}
-
-
+	
+	//the connectAll method connects all messageServices 
+	//it is included for test purposes
+	//currently it is not called
+	public void connectAll(){
+		for (int i=0; i < messageServiceList.size(); i++){
+			MessageDispatcher dispatcher = getMsgSvc(i).getMessageDispatcher();
+			for (int j=0;j < messageServiceList.size();j++){
+				if(i!=j){
+				     dispatcher.addMessageReceiver(RTServices.getInstance().getMsgSvcCtrl().getMsgSvc(j));
+				}
+			}
+		}
+	}
 	
 	public void start() {
 		// start all message services
-		for (MessageService msgSrv : messageServiceList){
-			msgSrv.start();
+		for (MessageService msgSvc : messageServiceList){
+			msgSvc.start();
 			// TODOTS: start in order of priorities
 		}
 		running = true;
@@ -64,8 +77,8 @@ public class MessageServiceController {
 		running = false;
 		
 		// terminate all message services
-		for (MessageService msgSrv : messageServiceList){
-			msgSrv.terminate();
+		for (MessageService msgSvc : messageServiceList){
+			msgSvc.terminate();
 			// TODOTS: stop in order of priorities
 		}
 	}
@@ -75,9 +88,9 @@ public class MessageServiceController {
 	 * ! not threadsafe !
 	 */
 	public void waitTerminate() {
-		for (MessageService msgSrv : messageServiceList){
+		for (MessageService msgSvc : messageServiceList){
 			try {
-				msgSrv.join();
+				msgSvc.join();
 				} 
 			catch (InterruptedException e1) {
 			}

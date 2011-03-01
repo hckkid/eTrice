@@ -254,7 +254,7 @@ RoomModel org.eclipse.etrice.integration.tests {
 				State State7 {}
 				State TestPass {
 					entry {
-						"SubSystemClassBase.getInstance().terminate();"
+						"getMsgsvc().terminate();"
 					}
 				}
 				Transition tr0: initial -> State1 {}

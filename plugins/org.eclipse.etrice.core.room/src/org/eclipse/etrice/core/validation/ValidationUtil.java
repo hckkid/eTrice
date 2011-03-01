@@ -14,6 +14,8 @@ package org.eclipse.etrice.core.validation;
 
 import java.util.ArrayList;
 
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorContainerClass;
 import org.eclipse.etrice.core.room.ActorContainerRef;
@@ -32,6 +34,7 @@ import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RefSAPoint;
 import org.eclipse.etrice.core.room.RelaySAPoint;
+import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.etrice.core.room.SPPRef;
 import org.eclipse.etrice.core.room.ServiceImplementation;
 import org.eclipse.etrice.core.room.State;
@@ -49,25 +52,42 @@ public class ValidationUtil {
 	public static class Result {
 		private boolean ok;
 		private String msg;
+		private EObject source;
+		private EStructuralFeature feature;
+		private int index;
 
 		static Result ok() {
-			return new Result(true, "");
+			return new Result(true, "", null, null, 0);
+		}
+		static Result error(String msg, EObject source, EStructuralFeature feature, int index) {
+			return new Result(false, msg, source, feature, index);
 		}
 		static Result error(String msg) {
-			return new Result(false, msg);
+			return new Result(false, msg, null, null, 0);
 		}
 		
-		private Result(boolean ok, String msg) {
+		private Result(boolean ok, String msg, EObject source, EStructuralFeature feature, int index) {
 			this.ok = ok;
 			this.msg = msg;
+			this.source = source;
+			this.feature = feature;
+			this.index = index;
 		}
 
 		public boolean isOk() {
 			return ok;
 		}
-
 		public String getMsg() {
 			return msg;
+		}
+		public EObject getSource() {
+			return source;
+		}
+		public EStructuralFeature getFeature() {
+			return feature;
+		}
+		public int getIndex() {
+			return index;
 		}
 	}
 	
@@ -479,13 +499,13 @@ public class ValidationUtil {
 		
 		if (tgt instanceof TrPointTerminal) {
 			if (((TrPointTerminal) tgt).getTrPoint() instanceof EntryPoint)
-				return Result.error("entry point can not be transition target");
+				return Result.error("entry point can not be transition target", tgt, RoomPackage.eINSTANCE.getTrPointTerminal_TrPoint(), 0);
 			// TransitionPoint and ExitPoint are valid destinations
 			// ExitPoint can be multiply connected inside a state
 		}
 		else if (tgt instanceof SubStateTrPointTerminal) {
 			if (((SubStateTrPointTerminal) tgt).getTrPoint() instanceof ExitPoint)
-				return Result.error("sub state exit point can not be transition target");
+				return Result.error("sub state exit point can not be transition target", tgt, RoomPackage.eINSTANCE.getSubStateTrPointTerminal_TrPoint(), 0);
 			// sub state EntryPoint is valid as destination
 			for (Transition t : sg.getTransitions()) {
 				if (t==trans)
@@ -494,7 +514,7 @@ public class ValidationUtil {
 				if (t.getTo() instanceof SubStateTrPointTerminal) {
 					SubStateTrPointTerminal tpt = (SubStateTrPointTerminal)t.getTo();
 					if (tpt.getTrPoint()==((SubStateTrPointTerminal) tgt).getTrPoint())
-						return Result.error("target transition point already is connected");
+						return Result.error("target transition point already is connected", tgt, RoomPackage.eINSTANCE.getSubStateTrPointTerminal_TrPoint(), 0);
 				}
 			}
 		}
@@ -513,13 +533,13 @@ public class ValidationUtil {
 					continue;
 
 				if (t instanceof InitialTransition)
-					return Result.error("there already is an InitialTransition");
+					return Result.error("there already is an InitialTransition", sg, RoomPackage.eINSTANCE.getStateGraph_Transitions(), sg.getTransitions().indexOf(trans));
 			}
 		}
 		else if (src instanceof TrPointTerminal) {
 			TrPoint srcTP = ((TrPointTerminal) src).getTrPoint();
 			if (srcTP instanceof ExitPoint)
-				return Result.error("exit point can not be transition source");
+				return Result.error("exit point can not be transition source", trans, RoomPackage.eINSTANCE.getTrPointTerminal_TrPoint(), 0);
 			// TransitionPoint and EntryPoint are valid
 			if (srcTP instanceof EntryPoint) {
 				for (Transition t : sg.getTransitions()) {
@@ -530,7 +550,7 @@ public class ValidationUtil {
 						if (((NonInitialTransition) t).getFrom() instanceof TrPointTerminal) {
 							TrPointTerminal tpt = (TrPointTerminal)((NonInitialTransition) t).getFrom();
 							if (tpt.getTrPoint()==srcTP)
-								return Result.error("source transition point already is connected");
+								return Result.error("source transition point already is connected", src, RoomPackage.eINSTANCE.getTrPointTerminal_TrPoint(), 0);
 						}
 					}
 				}
@@ -538,7 +558,7 @@ public class ValidationUtil {
 		}
 		else if (src instanceof SubStateTrPointTerminal) {
 			if (((SubStateTrPointTerminal) src).getTrPoint() instanceof EntryPoint)
-				return Result.error("sub state entry point can not be transition source");
+				return Result.error("sub state entry point can not be transition source", src, RoomPackage.eINSTANCE.getSubStateTrPointTerminal_TrPoint(), 0);
 			// ExitPoint is valid as source
 			for (Transition t : sg.getTransitions()) {
 				if (t==trans)
@@ -548,7 +568,7 @@ public class ValidationUtil {
 					if (((NonInitialTransition) t).getFrom() instanceof SubStateTrPointTerminal) {
 						SubStateTrPointTerminal tpt = (SubStateTrPointTerminal)((NonInitialTransition) t).getFrom();
 						if (tpt.getTrPoint()==((SubStateTrPointTerminal) src).getTrPoint())
-							return Result.error("target transition point already is connected");
+							return Result.error("source transition point already is connected", src, RoomPackage.eINSTANCE.getSubStateTrPointTerminal_TrPoint(), 0);
 					}
 				}
 			}
@@ -564,7 +584,9 @@ public class ValidationUtil {
 		if (tp.eContainer().eContainer() instanceof State)
 			return Result.ok();
 		
-		return Result.error("entry and exit points forbidden on top level state graph");
+		StateGraph sg = (StateGraph) tp.eContainer();
+		int idx = sg.getTrPoints().indexOf(tp);
+		return Result.error("entry and exit points forbidden on top level state graph", tp.eContainer(), RoomPackage.eINSTANCE.getStateGraph_TrPoints(), idx);
 	}
 
 	public static Result isUniqueName(InterfaceItem item) {

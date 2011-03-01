@@ -87,12 +87,12 @@ static public class «name» extends PortBase {
 	«ENDIF»
 	
 	// constructors
-	public «name»(IEventReceiver actor, String name, int localId, Address addr, Address peerAddress, IMessageReceiver msgService) {
-		super(actor, name, localId, 0, addr, peerAddress, msgService);
+	public «name»(IEventReceiver actor, String name, int localId, Address addr, Address peerAddress) {
+		super(actor, name, localId, 0, addr, peerAddress);
 		DebuggingService.getInstance().addPortInstance(this);
 	}
-	public «name»(IEventReceiver actor, String name, int localId, int idx, Address addr, Address peerAddress, IMessageReceiver msgService) {
-		super(actor, name, localId, idx, addr, peerAddress, msgService);
+	public «name»(IEventReceiver actor, String name, int localId, int idx, Address addr, Address peerAddress) {
+		super(actor, name, localId, idx, addr, peerAddress);
 		DebuggingService.getInstance().addPortInstance(this);
 	}
 
@@ -142,12 +142,12 @@ static public class «name»Repl {
 	private int replication;
 
 	public «name»Repl(IEventReceiver actor, String name, int localId, Address[] addr,
-			Address[] peerAddress, IMessageReceiver msgService) {
+			Address[] peerAddress) {
 		replication = addr.length;
 		ports = new ArrayList<«this.name».«name»>(replication);
 		for (int i=0; i<replication; ++i) {
 			ports.add(new «name»(
-					actor, name+i, localId, i, addr[i], peerAddress[i], msgService));
+					actor, name+i, localId, i, addr[i], peerAddress[i]));
 		}
 	}
 	
@@ -212,8 +212,8 @@ public interface I«name»{
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[«dir»_«this.name»]);
 			}
 			if (getPeerAddress()!=null)
-			«IF this.arguments.isEmpty»getMsgReceiver().receive(new EventMessage(getPeerAddress(), «dir»_«this.name»));
-			«ELSE» getMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), «dir»_«this.name», new Object[]{«FOREACH this.arguments AS a SEPARATOR ","» «a.name»«ENDFOREACH»}));
+			«IF this.arguments.isEmpty»getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), «dir»_«this.name»));
+			«ELSE» getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), «dir»_«this.name», new Object[]{«FOREACH this.arguments AS a SEPARATOR ","» «a.name»«ENDFOREACH»}));
 			«ENDIF»
 		«ENDIF»
 	}

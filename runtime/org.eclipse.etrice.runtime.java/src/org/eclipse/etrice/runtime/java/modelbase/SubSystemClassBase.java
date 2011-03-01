@@ -54,8 +54,12 @@ public abstract class SubSystemClassBase extends RTObject {
 		System.out.println("*** MainComponent "+getInstancePath()+"::init ***");
 
 		// MessageService
-		RTServices.getInstance().getMsgSrvCtrl().addMsgSrv(new MessageService(this, new Address(0, 0, 0),	"MessageService0"));
-		//instantiateMessageServices();
+		instantiateMessageServices();
+		
+		// this is the place to connect the message services if necessary
+		// normaly the ports will address the correct target message service directly
+		// it is just for test purposes 
+		// RTServices.getInstance().getMsgSvcCtrl().connectAll();
 		
 		instantiateActors();
 
@@ -66,7 +70,7 @@ public abstract class SubSystemClassBase extends RTObject {
 			}
 	}
 
-	//public abstract void instantiateMessageServices();
+	public abstract void instantiateMessageServices();
 	public abstract void instantiateActors();
 	
 	
@@ -78,13 +82,13 @@ public abstract class SubSystemClassBase extends RTObject {
 			}
 
 		// start all message services
-		RTServices.getInstance().getMsgSrvCtrl().start();
+		RTServices.getInstance().getMsgSvcCtrl().start();
 		
 		running = true;
 	}
 	
 	public void stop() {
-		RTServices.getInstance().getMsgSrvCtrl().stop();
+		RTServices.getInstance().getMsgSvcCtrl().stop();
 
 		// stop all actor instances
 		if (instances!=null)
@@ -105,8 +109,8 @@ public abstract class SubSystemClassBase extends RTObject {
 		System.out.println("*** MainComponent "+getInstancePath()+"::destroy ***");
 	}
 	
-	public MessageService getMsgService() {
-		return RTServices.getInstance().getMsgSrvCtrl().getMessageService(0);
+	public MessageService getMsgService(int idx) {
+		return RTServices.getInstance().getMsgSvcCtrl().getMsgSvc(idx);
 	}
 	
 	public ActorClassBase getInstance(int i) {

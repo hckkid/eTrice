@@ -41,7 +41,7 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 	@Check
 	public void checkTypeNameStartsWithCapital(RoomClass type) {
 		if (!Character.isUpperCase(type.getName().charAt(0))) {
-			warning("Name should start with a capital", RoomPackage.ROOM_CLASS__NAME);
+			warning("Name should start with a capital", RoomPackage.eINSTANCE.getRoomClass_Name());
 		}
 	}
 
@@ -51,7 +51,7 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 			ActorClass ac = (ActorClass) ar.eContainer();
 			
 			if (ValidationUtil.isReferencing(ar.getType(), ac)) {
-				error("Actor reference is circular", RoomPackage.ACTOR_REF__TYPE);
+				error("Actor reference is circular", RoomPackage.eINSTANCE.getActorRef_Type());
 			}
 		}
 	}
@@ -63,7 +63,7 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 		
 		DataClass base = dc.getBase();
 		if (base!=null && ValidationUtil.isBaseOf(dc, base))
-			error("Base classes are circular", RoomPackage.ACTOR_CLASS__BASE);
+			error("Base classes are circular", RoomPackage.eINSTANCE.getActorClass_Base());
 	}
 
 	@Check
@@ -73,7 +73,7 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 		
 		ProtocolClass base = pc.getBase();
 		if (base!=null && ValidationUtil.isBaseOf(pc, base))
-			error("Base classes are circular", RoomPackage.ACTOR_CLASS__BASE);
+			error("Base classes are circular", RoomPackage.eINSTANCE.getActorClass_Base());
 	}
 
 	@Check
@@ -83,7 +83,7 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 		
 		ActorClass base = ac.getBase();
 		if (base!=null && ValidationUtil.isBaseOf(ac, base))
-			error("Base classes are circular", RoomPackage.ACTOR_CLASS__BASE);
+			error("Base classes are circular", RoomPackage.eINSTANCE.getActorClass_Base());
 	}
 	
 	private SubSystemClass getSubSystemClass(EObject obj) {
@@ -109,7 +109,7 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 				}
 			}
 			if (!found)
-				error("wrong actor instance path (segment number "+ai.getSegments().indexOf(seg)+")", RoomPackage.ACTOR_INSTANCE_PATH__SEGMENTS);
+				error("wrong actor instance path (segment number "+ai.getSegments().indexOf(seg)+")", RoomPackage.eINSTANCE.getActorInstancePath_Segments());
 		}
 	}
 	
@@ -117,28 +117,28 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 	public void checkPortCompatibility(Binding bind) {
 		Result result = ValidationUtil.isValid(bind);
 		if (!result.isOk())
-			error(result.getMsg(), RoomPackage.BINDING);
+			error(result.getMsg(), RoomPackage.eINSTANCE.getBinding_Endpoint1());
 	}
 	
 	@Check
 	public void checkServiceCompatibility(LayerConnection conn) {
 		Result result = ValidationUtil.isValid(conn);
 		if (!result.isOk())
-			error(result.getMsg(), RoomPackage.LAYER_CONNECTION);
+			error(result.getMsg(), RoomPackage.eINSTANCE.getLayerConnection_From());
 	}
 	
 	@Check
 	public void checkTrPoint(TrPoint tp) {
 		Result result = ValidationUtil.isValid(tp);
 		if (!result.isOk())
-			error(result.getMsg(), RoomPackage.TR_POINT);
+			error(result.getMsg(), result.getSource(), result.getFeature(), result.getIndex());
 	}
 	
 	@Check
 	public void checkInterfaceItemUniqueName(InterfaceItem item) {
 		Result result = ValidationUtil.isUniqueName(item);
 		if (!result.isOk())
-			error(result.getMsg(), RoomPackage.INTERFACE_ITEM__NAME);
+			error(result.getMsg(), RoomPackage.eINSTANCE.getInterfaceItem_Name());
 	}
 	
 	@Check
@@ -146,12 +146,12 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 		if (trans instanceof InitialTransition) {
 			Result result = ValidationUtil.isConnectable(null, trans.getTo(), trans, (StateGraph)trans.eContainer());
 			if (!result.isOk())
-				error(result.getMsg(), RoomPackage.TRANSITION);
+				error(result.getMsg(), result.getSource(), result.getFeature(), result.getIndex());
 		}
 		else {
 			Result result = ValidationUtil.isConnectable(((NonInitialTransition)trans).getFrom(), trans.getTo(), trans, (StateGraph)trans.eContainer());
 			if (!result.isOk())
-				error(result.getMsg(), RoomPackage.TRANSITION);
+				error(result.getMsg(), result.getSource(), result.getFeature(), result.getIndex());
 		}
 	}
 }

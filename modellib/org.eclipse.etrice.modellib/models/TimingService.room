@@ -1,5 +1,4 @@
 RoomModel room.basic.service.timing {
-
 	ProtocolClass PTimer {
 		usercode1 {
 			"import java.util.TimerTask;"
@@ -73,7 +72,7 @@ RoomModel room.basic.service.timing {
 				DebuggingService.getInstance().addMessageAsyncOut(getAddress(),
 						getPeerAddress(), messageStrings[OUT_timerTick]);
 	
-				getMsgReceiver().receive(
+				getPeerMsgReceiver().receive(
 						new EventWithDataMessage(getPeerAddress(), OUT_timerTick, id));"
 			}
 		}
@@ -100,7 +99,7 @@ RoomModel room.basic.service.timing {
 				DebuggingService.getInstance().addMessageAsyncOut(getAddress(),
 						getPeerAddress(), messageStrings[IN_Start]);
 	
-				getMsgReceiver()
+				getPeerMsgReceiver()
 						.receive(
 								new EventWithDataMessage(getPeerAddress(),
 										IN_Start, new TimerData(time_ms, ++currentId)));"
@@ -112,7 +111,7 @@ RoomModel room.basic.service.timing {
 	
 				if (active) {
 					active = false;
-					getMsgReceiver().receive(
+					getPeerMsgReceiver().receive(
 							new EventWithDataMessage(getPeerAddress(), IN_Kill, currentId));
 				}"
 			}
@@ -192,7 +191,7 @@ RoomModel room.basic.service.timing {
 				DebuggingService.getInstance().addMessageAsyncOut(getAddress(),
 						getPeerAddress(), messageStrings[OUT_timeoutTick]);
 	
-				getMsgReceiver().receive(
+				getPeerMsgReceiver().receive(
 						new EventWithDataMessage(getPeerAddress(), OUT_timeoutTick, id));"
 			}
 		}
@@ -220,7 +219,7 @@ RoomModel room.basic.service.timing {
 				DebuggingService.getInstance().addMessageAsyncOut(getAddress(),
 						getPeerAddress(), messageStrings[IN_Start]);
 	
-				getMsgReceiver()
+				getPeerMsgReceiver()
 						.receive(
 								new EventWithDataMessage(getPeerAddress(),
 										IN_Start, new TimeoutData(time_ms, ++currentId)));"
@@ -232,13 +231,13 @@ RoomModel room.basic.service.timing {
 	
 				if (active) {
 					active = false;
-					getMsgReceiver().receive(
+					getPeerMsgReceiver().receive(
 							new EventWithDataMessage(getPeerAddress(), IN_Kill, new Integer(currentId)));
 				}"
 			}
 		}
 	}
-
+	
 	ActorClass ATimingService {
 		Interface {
 			SPP timer: PTimer
