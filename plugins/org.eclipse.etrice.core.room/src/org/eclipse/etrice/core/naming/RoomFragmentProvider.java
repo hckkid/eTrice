@@ -182,6 +182,32 @@ public class RoomFragmentProvider implements IFragmentProvider {
 		return fallback.getEObject(fragment);
 	}
 
+	public static boolean isActorClass(String fragment) {
+		if (fragment.startsWith(RoomPackage.eINSTANCE.getActorClass().getName()))
+			return true;
+		
+		return false;
+	}
+
+	public static boolean isStructureClass(String fragment) {
+		if (fragment.startsWith(RoomPackage.eINSTANCE.getActorClass().getName()))
+			return true;
+		if (fragment.startsWith(RoomPackage.eINSTANCE.getSubSystemClass().getName()))
+			return true;
+		if (fragment.startsWith(RoomPackage.eINSTANCE.getLogicalSystem().getName()))
+			return true;
+		
+		return false;
+	}
+
+	public static boolean isStructureClass(EObject obj) {
+		URI uri = EcoreUtil.getURI(obj);
+		if (uri!=null && uri.fragment()!=null) {
+			return isStructureClass(uri.fragment());
+		}
+		return false;
+	}
+	
 	public static boolean isPort(EObject obj) {
 		URI uri = EcoreUtil.getURI(obj);
 		return uri!=null && uri.fragment()!=null && uri.fragment().startsWith(RoomPackage.eINSTANCE.getPort().getName());
@@ -257,19 +283,6 @@ public class RoomFragmentProvider implements IFragmentProvider {
 			if (uri.fragment().startsWith(RoomPackage.eINSTANCE.getCPBranchTransition().getName()))
 				return true;
 			if (uri.fragment().startsWith(RoomPackage.eINSTANCE.getTriggeredTransition().getName()))
-				return true;
-		}
-		return false;
-	}
-
-	public static boolean isStructureClass(EObject obj) {
-		URI uri = EcoreUtil.getURI(obj);
-		if (uri!=null && uri.fragment()!=null) {
-			if (uri.fragment().startsWith(RoomPackage.eINSTANCE.getActorClass().getName()))
-				return true;
-			if (uri.fragment().startsWith(RoomPackage.eINSTANCE.getSubSystemClass().getName()))
-				return true;
-			if (uri.fragment().startsWith(RoomPackage.eINSTANCE.getLogicalSystem().getName()))
 				return true;
 		}
 		return false;
