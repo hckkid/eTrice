@@ -43,7 +43,7 @@ import org.eclipse.ui.part.FileEditorInput;
  */
 public abstract class DiagramAccessBase {
 
-	private static final String DIAGRAMS_FOLDER_NAME = "diagrams";
+	private static final String DIAGRAMS_FOLDER_NAME = ".diagrams";
 
 	/**
 	 * 
