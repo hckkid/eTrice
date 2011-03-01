@@ -15,8 +15,10 @@ package org.eclipse.etrice.core.ui.outline;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.Attribute;
+import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.Operation;
 import org.eclipse.etrice.core.room.Port;
+import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.SAPRef;
 import org.eclipse.etrice.core.room.SPPRef;
 import org.eclipse.etrice.core.room.ServiceImplementation;
@@ -35,6 +37,8 @@ public class RoomOutlineTreeProvider extends DefaultOutlineTreeProvider {
 	private static final String BEHAVIOR_LABEL = "Behavior";
 	private static final String STRUCTURE_LABEL = "Structure";
 	private static final String INTERFACE_LABEL = "Interface";
+	private static final Object INCOMING_LABEL = "incoming";
+	private static final Object OUTGOING_LABEL = "outgoing";
 	
 	protected boolean _isLeaf(ActorClass ac) {
 		if (ac.getIfPorts().size()>0 || ac.getIfSPPs().size()>0) {
@@ -113,4 +117,33 @@ public class RoomOutlineTreeProvider extends DefaultOutlineTreeProvider {
 		return true;
 	}
 	
+	protected void _createChildren(IOutlineNode parentNode, ProtocolClass pc) {
+		if (pc.getIncomingMessages().size()>0) {
+			new ExtraOutlineNode(pc, parentNode, INCOMING_LABEL);
+		}
+		if (pc.getOutgoingMessages().size()>0) {
+			new ExtraOutlineNode(pc, parentNode, OUTGOING_LABEL);
+		}
+	}	
+	
+	protected void _createChildren(ExtraOutlineNode parentNode, ProtocolClass pc) {
+		if (parentNode.getText().equals(INCOMING_LABEL)) {
+			for (Message m : pc.getIncomingMessages()) {
+				createNode(parentNode, m);
+			}
+		}
+		if (parentNode.getText().equals(OUTGOING_LABEL)) {
+			for (Message m : pc.getOutgoingMessages()) {
+				createNode(parentNode, m);
+			}
+		}
+	}
+	
+	protected boolean _isLeaf(Message m) {
+		return true;
+	}
+	
+	protected boolean _isLeaf(Operation o) {
+		return true;
+	}
 }
