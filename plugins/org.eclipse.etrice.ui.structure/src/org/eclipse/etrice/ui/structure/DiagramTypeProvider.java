@@ -12,17 +12,29 @@
 
 package org.eclipse.etrice.ui.structure;
 
+import org.eclipse.etrice.core.RoomStandaloneSetup;
 import org.eclipse.graphiti.dt.AbstractDiagramTypeProvider;
 import org.eclipse.graphiti.tb.IToolBehaviorProvider;
+import org.eclipse.xtext.scoping.IScopeProvider;
+
+import com.google.inject.Inject;
+import com.google.inject.Injector;
 
 public class DiagramTypeProvider extends AbstractDiagramTypeProvider {
 
 	private IToolBehaviorProvider[] toolBehaviorProviders;
 	private ProviderDispatcher dispatcher;
+	
+	@Inject
+	private IScopeProvider scopeProvider;
 
 	public DiagramTypeProvider() {
 		super();
-		dispatcher = new ProviderDispatcher(this);
+        
+		Injector injector = RoomStandaloneSetup.doSetup();
+        injector.injectMembers(this);
+
+        dispatcher = new ProviderDispatcher(this);
 		setFeatureProvider(dispatcher.getFeatureProvider());
 	}
 
@@ -35,4 +47,8 @@ public class DiagramTypeProvider extends AbstractDiagramTypeProvider {
         }
         return toolBehaviorProviders;
     }
+
+	public IScopeProvider getScopeProvider() {
+		return scopeProvider;
+	}
 }
