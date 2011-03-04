@@ -1,0 +1,30 @@
+RoomModel test {
+	ProtocolClass MyProtocol {
+		incoming {
+			Message in1()
+		}
+		outgoing {
+		}
+	}
+	
+	ActorClass A {
+		Interface {
+			Port p: MyProtocol
+		}
+	}
+
+	ActorClass B {
+		Interface {
+			Port p: MyProtocol
+		}
+	}
+
+	ActorClass C {
+		Structure {
+			ActorRef a: A
+			ActorRef b: B
+			
+			Binding a.p and b.p
+		}
+	}
+}
