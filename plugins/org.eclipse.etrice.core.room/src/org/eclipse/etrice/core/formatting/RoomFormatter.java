@@ -41,6 +41,7 @@ public class RoomFormatter extends AbstractDeclarativeFormatter {
 			c.setIndentationIncrement().after(pair.getFirst());
 			c.setLinewrap().before(pair.getSecond());
 			c.setIndentationDecrement().before(pair.getSecond());
+			c.setSpace(" ").between(pair.getFirst(), pair.getSecond());
 		}		
 	
 		for (Keyword k: f.findKeywords("(", "|")) {
