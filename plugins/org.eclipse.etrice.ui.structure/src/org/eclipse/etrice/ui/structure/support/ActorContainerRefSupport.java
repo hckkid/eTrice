@@ -143,14 +143,6 @@ public class ActorContainerRefSupport {
 		        	
 		        	// create ActorRef
 		        	ActorRef ar = RoomFactory.eINSTANCE.createActorRef();
-		        	ar.setName("");
-			        
-		        	Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-					ActorContainerRefPropertyDialog dlg = new ActorContainerRefPropertyDialog(shell, ar, sc, true);
-					if (dlg.open()!=Window.OK)
-						// find a method to abort creation
-						//throw new RuntimeException();
-						return EMPTY;
 
 			        acc.getActorRefs().add(ar);
 		        	newRef = ar;
@@ -161,18 +153,19 @@ public class ActorContainerRefSupport {
 		        	
 		        	// create ActorRef
 		        	SubSystemRef ssr = RoomFactory.eINSTANCE.createSubSystemRef();
-		        	ssr.setName("");
-			        
-		        	Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-					ActorContainerRefPropertyDialog dlg = new ActorContainerRefPropertyDialog(shell, ssr, sc, true);
-					if (dlg.open()!=Window.OK)
-						// find a method to abort creation
-						//throw new RuntimeException();
-						return EMPTY;
 		        	
 		        	sys.getSubSystems().add(ssr);
 		        	newRef = ssr;
 		        }
+		        
+		        newRef.setName(RoomNameProvider.getUniqueActorContainerRefName(sc));
+
+		        Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+		        ActorContainerRefPropertyDialog dlg = new ActorContainerRefPropertyDialog(shell, newRef, sc, true);
+				if (dlg.open()!=Window.OK)
+					// find a method to abort creation
+					//throw new RuntimeException();
+					return EMPTY;
 		        
 		        addGraphicalRepresentation(context, newRef);
 		        

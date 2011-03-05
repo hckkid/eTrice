@@ -21,6 +21,7 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.etrice.core.validation.ValidationUtil;
+import org.eclipse.etrice.core.validation.ValidationUtil.Result;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
@@ -54,44 +55,11 @@ public class PortPropertyDialog extends AbstractPropertyDialog {
 			if (value instanceof String) {
 				String name = (String) value;
 				
-				if (name.isEmpty())
-					return ValidationStatus.error("name must not be empty");
-				
-				// TODOHRR: check valid identifier
-				// TODOHRR: use ValidationUtil
-				
-				if (acc instanceof ActorClass) {
-					if (nameExists((ActorClass) acc, name))
-						return ValidationStatus.error("name already exists");
-				}
-				else if (acc instanceof SubSystemClass) {
-					SubSystemClass ssc = (SubSystemClass) acc;
-					for (Port p : ssc.getRelayPorts()) {
-						if (p!=port && p.getName().equals(name))
-							return ValidationStatus.error("name already exists");
-					}
-				}
-				else {
-					assert(false): "unexpected type";
-				}
-				return Status.OK_STATUS;
+				Result result = ValidationUtil.isUniqueName(port, name);
+				if (!result.isOk())
+					return ValidationStatus.error(result.getMsg());
 			}
 			return Status.OK_STATUS;
-		}
-
-		private boolean nameExists(ActorClass ac, String name) {
-			for (Port p : ac.getIfPorts()) {
-				if (p!=port && p.getName().equals(name))
-					return true;
-			}
-			for (Port p : ac.getIntPorts()) {
-				if (p!=port && p.getName().equals(name))
-					return true;
-			}
-			if (ac.getBase()!=null)
-				return nameExists(ac.getBase(), name);
-			
-			return false;
 		}
 	}
 	
@@ -222,6 +190,7 @@ public class PortPropertyDialog extends AbstractPropertyDialog {
 		createDecorator(protocol, "no protocol selected");
 		createDecorator(multi, "multiplicity must be greater 1");
 		
+		name.selectAll();
 		name.setFocus();
 	}
 

@@ -184,9 +184,10 @@ public class TransitionSupport {
 						trans.setName("init");
 					}
 					else {
-						String name = RoomNameProvider.getUniqueTransitionName(sg);
-						trans.setName(name);
+						trans.setName(RoomNameProvider.getUniqueTransitionName(sg));
 					}
+
+					sg.getTransitions().add(trans);
 					
 		        	Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 		        	TransitionPropertyDialog dlg = new TransitionPropertyDialog(shell, sg, trans);
@@ -194,8 +195,6 @@ public class TransitionSupport {
 						// find a method to abort creation
 						//throw new RuntimeException();
 						return null;
-
-					sg.getTransitions().add(trans);
 					
 					AddConnectionContext addContext = new AddConnectionContext(context.getSourceAnchor(), context.getTargetAnchor());
 					addContext.setNewObject(trans);

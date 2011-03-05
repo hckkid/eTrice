@@ -53,6 +53,7 @@ import org.eclipse.jface.window.Window;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
 
+import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.room.ActorContainerClass;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.RoomFactory;
@@ -77,11 +78,13 @@ public class SPPSupport extends InterfaceItemSupport {
 	
 			@Override
 			public Object[] create(ICreateContext context) {
-		        // create SPP
+				ActorContainerClass acc = (ActorContainerClass) context.getTargetContainer().getLink().getBusinessObjects().get(0);
+
+				// create SPP
 		        SPPRef spp = RoomFactory.eINSTANCE.createSPPRef();
-		        spp.setName("");
-		    	
-		        ActorContainerClass acc = (ActorContainerClass) context.getTargetContainer().getLink().getBusinessObjects().get(0);
+		        spp.setName(RoomNameProvider.getUniqueInterfaceItemName("spp", acc));
+				
+				acc.getIfSPPs().add(spp);
 		        
 		        Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 		        SPPPropertyDialog dlg = new SPPPropertyDialog(shell, spp, acc, true, false);
@@ -91,8 +94,6 @@ public class SPPSupport extends InterfaceItemSupport {
 					return EMPTY;
 				
 				doneChanges = true;
-				
-				acc.getIfSPPs().add(spp);
 		        
 		        // do the add
 		        addGraphicalRepresentation(context, spp);

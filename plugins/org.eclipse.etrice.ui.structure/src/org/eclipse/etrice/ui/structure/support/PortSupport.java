@@ -49,6 +49,7 @@ import org.eclipse.jface.window.Window;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
 
+import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorContainerClass;
 import org.eclipse.etrice.core.room.InterfaceItem;
@@ -76,20 +77,11 @@ public class PortSupport extends InterfaceItemSupport {
 	
 			@Override
 			public Object[] create(ICreateContext context) {
-		        // create Port
+				ActorContainerClass acc = (ActorContainerClass) context.getTargetContainer().getLink().getBusinessObjects().get(0);
+
+				// create Port
 		        Port port = RoomFactory.eINSTANCE.createPort();
-		        port.setName("");
-		    	
-		        ActorContainerClass acc = (ActorContainerClass) context.getTargetContainer().getLink().getBusinessObjects().get(0);
-		        
-		        Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-		        PortPropertyDialog dlg = new PortPropertyDialog(shell, port, acc, true, false, internal);
-				if (dlg.open()!=Window.OK)
-					// find a method to abort creation
-					//throw new RuntimeException();
-					return EMPTY;
-				
-				doneChanges = true;
+		        port.setName(RoomNameProvider.getUniqueInterfaceItemName("p", acc));
 				
 		        if (acc instanceof ActorClass) {
 		        	ActorClass ac = (ActorClass) acc;
@@ -105,6 +97,15 @@ public class PortSupport extends InterfaceItemSupport {
 		        else {
 		        	assert(false): "ActorClass or SubSystemClass expected";
 		        }
+		        
+		        Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+		        PortPropertyDialog dlg = new PortPropertyDialog(shell, port, acc, true, false, internal);
+				if (dlg.open()!=Window.OK)
+					// find a method to abort creation
+					//throw new RuntimeException();
+					return EMPTY;
+				
+				doneChanges = true;
 		        
 		        // do the add
 		        addGraphicalRepresentation(context, port);

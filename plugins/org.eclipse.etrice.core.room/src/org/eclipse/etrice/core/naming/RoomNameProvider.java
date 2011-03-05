@@ -16,6 +16,8 @@ package org.eclipse.etrice.core.naming;
 import java.util.HashSet;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.etrice.core.room.ActorClass;
+import org.eclipse.etrice.core.room.ActorContainerClass;
 import org.eclipse.etrice.core.room.ActorContainerRef;
 import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.BaseState;
@@ -24,16 +26,22 @@ import org.eclipse.etrice.core.room.ChoicePoint;
 import org.eclipse.etrice.core.room.ChoicepointTerminal;
 import org.eclipse.etrice.core.room.ContinuationTransition;
 import org.eclipse.etrice.core.room.InitialTransition;
+import org.eclipse.etrice.core.room.LogicalSystem;
 import org.eclipse.etrice.core.room.MessageFromIf;
 import org.eclipse.etrice.core.room.NonInitialTransition;
+import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.RefinedState;
 import org.eclipse.etrice.core.room.RoomClass;
 import org.eclipse.etrice.core.room.RoomModel;
+import org.eclipse.etrice.core.room.SAPRef;
+import org.eclipse.etrice.core.room.SPPRef;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.StateGraphItem;
 import org.eclipse.etrice.core.room.StateTerminal;
+import org.eclipse.etrice.core.room.StructureClass;
 import org.eclipse.etrice.core.room.SubStateTrPointTerminal;
+import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.core.room.SubSystemRef;
 import org.eclipse.etrice.core.room.TrPoint;
 import org.eclipse.etrice.core.room.TrPointTerminal;
@@ -214,9 +222,7 @@ public class RoomNameProvider {
 
 	public static String getUniqueTransitionName(StateGraph sg) {
 		HashSet<String> names = new HashSet<String>();
-		for (Transition t : sg.getTransitions()) {
-			names.add(t.getName());
-		}
+		collectTransitionNames(sg, null, names);
 		
 		for (int i = 0; i < 1000; i++) {
 			String name = "tr"+i;
@@ -229,9 +235,7 @@ public class RoomNameProvider {
 
 	public static String getUniqueChoicePointName(StateGraph sg) {
 		HashSet<String> names = new HashSet<String>();
-		for (ChoicePoint t : sg.getChPoints()) {
-			names.add(t.getName());
-		}
+		collectChoicepointNames(sg, null, names);
 		
 		for (int i = 0; i < 1000; i++) {
 			String name = "cp"+i;
@@ -244,9 +248,7 @@ public class RoomNameProvider {
 
 	public static String getUniqueTrPointName(StateGraph sg) {
 		HashSet<String> names = new HashSet<String>();
-		for (TrPoint tp : sg.getTrPoints()) {
-			names.add(tp.getName());
-		}
+		collectTrPointNames(sg, null, names);
 		
 		for (int i = 0; i < 1000; i++) {
 			String name = "tp"+i;
@@ -259,10 +261,8 @@ public class RoomNameProvider {
 
 	public static String getUniqueStateName(StateGraph sg) {
 		HashSet<String> names = new HashSet<String>();
-		for (State s : sg.getStates()) {
-			if (s instanceof BaseState)
-				names.add(s.getName());
-		}
+		
+		collectStateNames(sg, null, names);
 		
 		for (int i = 0; i < 1000; i++) {
 			String name = "state"+i;
@@ -271,6 +271,82 @@ public class RoomNameProvider {
 		}
 		
 		return "not_unique";
+	}
+
+	/**
+	 * @param sg
+	 * @param skip
+	 * @param names
+	 */
+	public static void collectStateNames(StateGraph sg, State skip, HashSet<String> names) {
+		for (State s : sg.getStates()) {
+			if (s!=skip)
+				names.add(s.getName());
+		}
+		
+		// add base state context
+		if (sg.eContainer() instanceof RefinedState) {
+			RefinedState rs = (RefinedState) sg.eContainer();
+			if (rs.getBase().getSubgraph()!=null)
+				collectStateNames(rs.getBase().getSubgraph(), skip, names);
+		}
+	}
+
+	/**
+	 * @param sg
+	 * @param skip
+	 * @param names
+	 */
+	public static void collectTransitionNames(StateGraph sg, Transition skip, HashSet<String> names) {
+		for (Transition s : sg.getTransitions()) {
+			if (s!=skip)
+				names.add(s.getName());
+		}
+		
+		// add base state context
+		if (sg.eContainer() instanceof RefinedState) {
+			RefinedState rs = (RefinedState) sg.eContainer();
+			if (rs.getBase().getSubgraph()!=null)
+				collectTransitionNames(rs.getBase().getSubgraph(), skip, names);
+		}
+	}
+
+	/**
+	 * @param sg
+	 * @param skip
+	 * @param names
+	 */
+	public static void collectChoicepointNames(StateGraph sg, ChoicePoint skip, HashSet<String> names) {
+		for (ChoicePoint cp : sg.getChPoints()) {
+			if (cp!=skip)
+				names.add(cp.getName());
+		}
+		
+		// add base state context
+		if (sg.eContainer() instanceof RefinedState) {
+			RefinedState rs = (RefinedState) sg.eContainer();
+			if (rs.getBase().getSubgraph()!=null)
+				collectChoicepointNames(rs.getBase().getSubgraph(), skip, names);
+		}
+	}
+
+	/**
+	 * @param sg
+	 * @param skip
+	 * @param names
+	 */
+	public static void collectTrPointNames(StateGraph sg, TrPoint skip, HashSet<String> names) {
+		for (TrPoint tp : sg.getTrPoints()) {
+			if (tp!=skip)
+				names.add(tp.getName());
+		}
+		
+		// add base state context
+		if (sg.eContainer() instanceof RefinedState) {
+			RefinedState rs = (RefinedState) sg.eContainer();
+			if (rs.getBase().getSubgraph()!=null)
+				collectTrPointNames(rs.getBase().getSubgraph(), skip, names);
+		}
 	}
 
 	public static String getRefLabelName(ActorContainerRef acr) {
@@ -360,5 +436,75 @@ public class RoomNameProvider {
 		}
 		else
 			return "/"+s.getName();
+	}
+
+	/**
+	 * @param sc
+	 * @return
+	 */
+	public static String getUniqueActorContainerRefName(StructureClass sc) {
+		HashSet<String> names = new HashSet<String>();
+		if (sc instanceof ActorContainerClass) {
+			for (ActorRef ar : ((ActorContainerClass) sc).getActorRefs()) {
+				names.add(ar.getName());
+			}
+		}
+		else if (sc instanceof LogicalSystem) {
+			for (SubSystemRef ar : ((LogicalSystem) sc).getSubSystems()) {
+				names.add(ar.getName());
+			}
+		}
+		
+		for (int i = 0; i < 1000; i++) {
+			String name = "ref"+i;
+			if (!names.contains(name))
+				return name;
+		}
+		
+		return "not_unique";
+	}
+
+	/**
+	 * @param acc
+	 * @return
+	 */
+	public static String getUniqueInterfaceItemName(String prefix, ActorContainerClass acc) {
+		HashSet<String> names = new HashSet<String>();
+		if (acc instanceof ActorClass) {
+			ActorClass ac = (ActorClass) acc;
+			do {
+				for (Port p : ac.getIfPorts()) {
+					names.add(p.getName());
+				}
+				for (Port p : ac.getIntPorts()) {
+					names.add(p.getName());
+				}
+				for (SAPRef sap : ac.getStrSAPs()) {
+					names.add(sap.getName());
+				}
+				for (SPPRef spp : ac.getIfSPPs()) {
+					names.add(spp.getName());
+				}
+				
+				ac = ac.getBase();
+			}
+			while (ac!=null);
+		}
+		else if (acc instanceof SubSystemClass) {
+			for (Port p : ((SubSystemClass) acc).getRelayPorts()) {
+				names.add(p.getName());
+			}
+			for (SPPRef spp : ((SubSystemClass) acc).getIfSPPs()) {
+				names.add(spp.getName());
+			}
+		}
+		
+		for (int i = 0; i < 1000; i++) {
+			String name = prefix+i;
+			if (!names.contains(name))
+				return name;
+		}
+		
+		return "not_unique";
 	}
 }

@@ -20,22 +20,21 @@ import org.eclipse.core.databinding.validation.ValidationStatus;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.etrice.core.room.ActorContainerClass;
+import org.eclipse.etrice.core.room.ProtocolClass;
+import org.eclipse.etrice.core.room.RoomModel;
+import org.eclipse.etrice.core.room.RoomPackage;
+import org.eclipse.etrice.core.room.SPPRef;
 import org.eclipse.etrice.core.validation.ValidationUtil;
+import org.eclipse.etrice.core.validation.ValidationUtil.Result;
+import org.eclipse.etrice.ui.common.dialogs.AbstractPropertyDialog;
+import org.eclipse.etrice.ui.structure.Activator;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.forms.IManagedForm;
-
-import org.eclipse.etrice.core.room.ActorClass;
-import org.eclipse.etrice.core.room.ActorContainerClass;
-import org.eclipse.etrice.core.room.ProtocolClass;
-import org.eclipse.etrice.core.room.RoomModel;
-import org.eclipse.etrice.core.room.RoomPackage;
-import org.eclipse.etrice.core.room.SPPRef;
-import org.eclipse.etrice.ui.common.dialogs.AbstractPropertyDialog;
-import org.eclipse.etrice.ui.structure.Activator;
 
 public class SPPPropertyDialog extends AbstractPropertyDialog {
 
@@ -46,31 +45,13 @@ public class SPPPropertyDialog extends AbstractPropertyDialog {
 			if (value instanceof String) {
 				String name = (String) value;
 				
-				if (name.isEmpty())
-					return ValidationStatus.error("name must not be empty");
-				
-				// TODOHRR: check valid identifier
-				// TODOHRR: use ValidationUtil
-				
-				if (nameExists(acc, name))
-					return ValidationStatus.error("name already exists");
+				Result result = ValidationUtil.isUniqueName(spp, name);
+				if (!result.isOk())
+					return ValidationStatus.error(result.getMsg());
 
 				return Status.OK_STATUS;
 			}
 			return Status.OK_STATUS;
-		}
-
-		private boolean nameExists(ActorContainerClass ac, String name) {
-			for (SPPRef s : ac.getIfSPPs()) {
-				if (s!=spp && s.getName().equals(name))
-					return true;
-			}
-
-			if (ac instanceof ActorClass)
-				if (((ActorClass)ac).getBase()!=null)
-					return nameExists(((ActorClass)ac).getBase(), name);
-			
-			return false;
 		}
 	}
 	
@@ -137,6 +118,7 @@ public class SPPPropertyDialog extends AbstractPropertyDialog {
 		createDecorator(name, "invalid name");
 		createDecorator(protocol, "no protocol selected");
 		
+		name.selectAll();
 		name.setFocus();
 	}
 

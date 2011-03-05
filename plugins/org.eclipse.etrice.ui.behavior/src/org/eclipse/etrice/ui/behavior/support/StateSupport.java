@@ -145,15 +145,15 @@ public class StateSupport {
 				// create new State
 	        	BaseState s = RoomFactory.eINSTANCE.createBaseState();
 	        	s.setName(RoomNameProvider.getUniqueStateName(sg));
+
+		        sg.getStates().add(s);
 		        
 	        	Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-				StatePropertyDialog dlg = new StatePropertyDialog(shell, s, sg);
+				StatePropertyDialog dlg = new StatePropertyDialog(shell, s);
 				if (dlg.open()!=Window.OK)
 					// find a method to abort creation
 					//throw new RuntimeException();
 					return EMPTY;
-
-		        sg.getStates().add(s);
 		        
 		        addGraphicalRepresentation(context, s);
 		        
@@ -324,10 +324,9 @@ public class StateSupport {
 			@Override
 			public void execute(ICustomContext context) {
 				State s = (State) getBusinessObjectForPictogramElement(context.getPictogramElements()[0]);
+
 				Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-				StateGraph sg = (StateGraph)s.eContainer();
-				
-				StatePropertyDialog dlg = new StatePropertyDialog(shell, s, sg);
+				StatePropertyDialog dlg = new StatePropertyDialog(shell, s);
 				if (dlg.open()!=Window.OK)
 					// TODOHRR: introduce a method to revert changes
 					//throw new RuntimeException();

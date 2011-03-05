@@ -8,7 +8,8 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.etrice.core.room.BaseState;
 import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.etrice.core.room.State;
-import org.eclipse.etrice.core.room.StateGraph;
+import org.eclipse.etrice.core.validation.ValidationUtil;
+import org.eclipse.etrice.core.validation.ValidationUtil.Result;
 import org.eclipse.etrice.ui.behavior.Activator;
 import org.eclipse.etrice.ui.common.dialogs.AbstractPropertyDialog;
 import org.eclipse.swt.SWT;
@@ -28,25 +29,19 @@ public class StatePropertyDialog extends AbstractPropertyDialog {
 			if (value instanceof String) {
 				String name = (String) value;
 				
-				if (name.isEmpty())
-					return ValidationStatus.error("name must not be empty");
-
-				for (State s : sg.getStates()) {
-					if (s!=state && s.getName()!=null && s.getName().equals(name))
-						return ValidationStatus.error("name already used");
-				}
+				Result result = ValidationUtil.isUniqueName(state, name);
+				if (!result.isOk())
+					return ValidationStatus.error(result.getMsg());
 			}
 			return Status.OK_STATUS;
 		}
 	}
 
 	private State state;
-	private StateGraph sg;
 
-	public StatePropertyDialog(Shell shell, State s, StateGraph sg) {
+	public StatePropertyDialog(Shell shell, State s) {
 		super(shell, "Edit State");
 		this.state = s;
-		this.sg = sg;
 	}
 
 	@Override

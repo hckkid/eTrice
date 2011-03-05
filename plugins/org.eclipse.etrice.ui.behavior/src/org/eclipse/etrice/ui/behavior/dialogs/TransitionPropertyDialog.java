@@ -29,6 +29,8 @@ import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.Transition;
 import org.eclipse.etrice.core.room.Trigger;
 import org.eclipse.etrice.core.room.TriggeredTransition;
+import org.eclipse.etrice.core.validation.ValidationUtil;
+import org.eclipse.etrice.core.validation.ValidationUtil.Result;
 import org.eclipse.etrice.ui.behavior.Activator;
 import org.eclipse.etrice.ui.common.dialogs.AbstractPropertyDialog;
 import org.eclipse.jface.dialogs.IDialogConstants;
@@ -137,13 +139,9 @@ public class TransitionPropertyDialog extends AbstractPropertyDialog {
 			if (value instanceof String) {
 				String name = (String) value;
 				
-				if (name.isEmpty())
-					return ValidationStatus.error("name must not be empty");
-
-				for (Transition t : sg.getTransitions()) {
-					if (t!=trans && t.getName()!=null && t.getName().equals(name))
-						return ValidationStatus.error("name already used");
-				}
+				Result result = ValidationUtil.isUniqueName(trans, name);
+				if (!result.isOk())
+					return ValidationStatus.error(result.getMsg());
 			}
 			return Status.OK_STATUS;
 		}
@@ -214,6 +212,7 @@ public class TransitionPropertyDialog extends AbstractPropertyDialog {
 			
 			createDecorator(name, "invalid name");
 			
+			name.selectAll();
 			name.setFocus();
 		}
 		

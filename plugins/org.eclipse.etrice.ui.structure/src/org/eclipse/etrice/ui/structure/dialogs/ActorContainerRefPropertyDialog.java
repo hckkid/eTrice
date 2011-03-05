@@ -151,6 +151,7 @@ public class ActorContainerRefPropertyDialog extends AbstractPropertyDialog {
 			refClass.setEnabled(false);
 		}
 
+		name.selectAll();
 		name.setFocus();
 	}
 
