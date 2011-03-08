@@ -14,9 +14,6 @@
 
 package org.eclipse.etrice.core;
 
-import org.eclipse.etrice.core.RoomStandaloneSetupGenerated;
-
-import com.google.inject.Injector;
 
 /**
  * Initialization support for running Xtext languages 
@@ -24,8 +21,8 @@ import com.google.inject.Injector;
  */
 public class RoomStandaloneSetup extends RoomStandaloneSetupGenerated{
 
-	public static Injector doSetup() {
-		return new RoomStandaloneSetup().createInjectorAndDoEMFRegistration();
+	public static void doSetup() {
+		new RoomStandaloneSetup().createInjectorAndDoEMFRegistration();
 	}
 }
 
