@@ -8,6 +8,12 @@
 
 package org.eclipse.etrice.ui.common.editor;
 
+import java.util.Collection;
+import java.util.Map;
+
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature.Setting;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.graphiti.ui.editor.DiagramEditor;
 
 /**
@@ -25,6 +31,10 @@ public class RoomDiagramEditor extends DiagramEditor {
 	protected void initializeGraphicalViewer() {
 		super.initializeGraphicalViewer();
 		
+		Map<EObject, Collection<Setting>> result = EcoreUtil.UnresolvedProxyCrossReferencer.find(getEditingDomain().getResourceSet());
+		if (!result.isEmpty())
+			System.err.println("ERROR in diagram viewer: could not resolve all proxies!");
+
 		mte.setTarget(getEditingDomain());
 	}
 	
