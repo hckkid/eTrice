@@ -163,20 +163,20 @@ public class InterfaceItemSupport {
 				String kind = getItemKind(port);
 				Graphiti.getPeService().setPropertyValue(containerShape, PROP_KIND, kind);
 				
-				// we have relative coordinates here
-				int x = context.getX()-size;
-				int y = context.getY()-size;
+				// the context point is the midpoint relative to the invisible rectangle
+				int x = context.getX();
+				int y = context.getY();
 				int width = acShape.getGraphicsAlgorithm().getWidth();
 				int height = acShape.getGraphicsAlgorithm().getHeight();
 				if (internal) {
 					if (x<2*margin)
 						x = 2*margin;
-					else if (x>width-3*margin)
-						x = width-3*margin;
+					else if (x>width-2*margin)
+						x = width-2*margin;
 					if (y<2*margin)
 						y = 2*margin;
-					else if (y>height-3*margin)
-						y = height-3*margin;
+					else if (y>height-2*margin)
+						y = height-2*margin;
 				}
 				else {
 					int dx = (x<=width/2)? x:width-x;
@@ -184,18 +184,31 @@ public class InterfaceItemSupport {
 					if (dx>dy) {
 						// keep x, project y
 						if (y<=height/2)
-							y = 0;
+							y = margin;
 						else
-							y = height-2*margin;
+							y = height-margin;
+						
+						if (x<margin)
+							x = margin;
+						else if (x>width-margin)
+							x = width-margin;
 					}
 					else {
 						// keep y, project x
 						if (x<=width/2)
-							x = 0;
+							x = margin;
 						else
-							x = width-2*margin;
+							x = width-margin;
+						
+						if (y<margin)
+							y = margin;
+						else if (y>height-margin)
+							y = height-margin;
 					}
 				}
+				// finally we subtract the midpoint to get coordinates of the upper left corner
+				x -= margin;
+				y -= margin;
 				
 				Color dark = manageColor(inherited? INHERITED_COLOR:DARK_COLOR);
 				IGaService gaService = Graphiti.getGaService();
@@ -735,8 +748,8 @@ public class InterfaceItemSupport {
 		AddContext addContext = new AddContext();
 		addContext.setNewObject(ownObject);
 		addContext.setTargetContainer(refShape);
-		addContext.setX(x + ITEM_SIZE_SMALL);
-		addContext.setY(y + ITEM_SIZE_SMALL);
+		addContext.setX(x + ITEM_SIZE_SMALL/2);
+		addContext.setY(y + ITEM_SIZE_SMALL/2);
 		ContainerShape pe = (ContainerShape) featureProvider.addIfPossible(addContext);
 		assert(!pe.getAnchors().isEmpty()): "port must have an anchor";
 	}

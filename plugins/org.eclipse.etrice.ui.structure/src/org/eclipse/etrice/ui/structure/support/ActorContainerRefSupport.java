@@ -91,8 +91,8 @@ import org.eclipse.etrice.core.room.SubSystemRef;
 public class ActorContainerRefSupport {
 	
 	private static final int LINE_WIDTH = 1;
-	public static final int DEFAULT_SIZE_X = 200;
-	public static final int DEFAULT_SIZE_Y = 120;
+	public static final int DEFAULT_SIZE_X = 180;
+	public static final int DEFAULT_SIZE_Y = 80;
 	public static final int MIN_SIZE_X = 100;
 	public static final int MIN_SIZE_Y = 60;
 	public static final int MARGIN = 20;
@@ -215,7 +215,7 @@ public class ActorContainerRefSupport {
 				{
 					final Rectangle invisibleRectangle = gaService.createInvisibleRectangle(containerShape);
 					gaService.setLocationAndSize(invisibleRectangle,
-							context.getX(), context.getY(), width + 2*MARGIN, height + 2*MARGIN);
+							context.getX()-(width/2+MARGIN), context.getY()-(height/2+MARGIN), width + 2*MARGIN, height + 2*MARGIN);
 	
 					Rectangle rect = gaService.createRectangle(invisibleRectangle);
 					rect.setForeground(lineColor);

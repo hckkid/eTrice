@@ -135,11 +135,11 @@ public class PopulateDiagramCommand extends RecordingCommand {
 			int delta = width/(n+1);
 			int pos = delta;
 			for (SPPRef spp : ac.getIfSPPs()) {
-				addInterfaceItem(spp, acShape, pos, featureProvider, port2anchor);
+				addInterfaceItem(spp, acShape, pos+StructureClassSupport.MARGIN, featureProvider, port2anchor);
 				pos += delta;
 			}
 			for (Port port : ac.getIfPorts()) {
-				addInterfaceItem(port, acShape, pos, featureProvider, port2anchor);
+				addInterfaceItem(port, acShape, pos+StructureClassSupport.MARGIN, featureProvider, port2anchor);
 				pos += delta;
 			}
 			
@@ -157,11 +157,11 @@ public class PopulateDiagramCommand extends RecordingCommand {
 			int delta = width/(n+1);
 			int pos = delta;
 			for (SPPRef spp : ssc.getIfSPPs()) {
-				addInterfaceItem(spp, acShape, pos, featureProvider, port2anchor);
+				addInterfaceItem(spp, acShape, pos+StructureClassSupport.MARGIN, featureProvider, port2anchor);
 				pos += delta;
 			}
 			for (Port port : ssc.getRelayPorts()) {
-				addInterfaceItem(port, acShape, pos, featureProvider, port2anchor);
+				addInterfaceItem(port, acShape, pos+StructureClassSupport.MARGIN, featureProvider, port2anchor);
 				pos += delta;
 			}
 		}
@@ -170,12 +170,19 @@ public class PopulateDiagramCommand extends RecordingCommand {
 	protected void addRefItems(EList<? extends ActorContainerRef> actorRefs,
 			ContainerShape acShape, int width,
 			IFeatureProvider featureProvider, final HashMap<String, Anchor> port2anchor) {
-		int n = actorRefs.size();
-		int delta = width/(n+1);
-		int pos = delta;
+		int maxPerRow = width/ActorContainerRefSupport.DEFAULT_SIZE_X;
+		int gap = (width-(maxPerRow*ActorContainerRefSupport.DEFAULT_SIZE_X))/(maxPerRow+1);
+		int delta = gap+ActorContainerRefSupport.DEFAULT_SIZE_X;
+		int x0 = gap+ActorContainerRefSupport.DEFAULT_SIZE_X/2;
+		int y0 = ActorContainerRefSupport.DEFAULT_SIZE_Y*3/2;
+		int i = 0;
 		for (ActorContainerRef ar : actorRefs) {
-			addRefItem(ar, acShape, pos, featureProvider, port2anchor);
-			pos += delta;
+			int row = i/maxPerRow;
+			int col = i%maxPerRow;
+			int x = x0+delta*col;
+			int y = y0+(ActorContainerRefSupport.MARGIN+ActorContainerRefSupport.DEFAULT_SIZE_Y)*row;
+			addRefItem(ar, acShape, x+StructureClassSupport.MARGIN, y+StructureClassSupport.MARGIN, featureProvider, port2anchor);
+			++i;
 		}
 	}
 
@@ -185,17 +192,17 @@ public class PopulateDiagramCommand extends RecordingCommand {
 		int delta = width/(n+1);
 		int pos = delta;
 		for (Port port : ifPorts) {
-			addInterfaceItem(port, acShape, pos, featureProvider, port2anchor);
+			addInterfaceItem(port, acShape, pos+StructureClassSupport.MARGIN, featureProvider, port2anchor);
 			pos += delta;
 		}
 	}
 
-	protected void addRefItem(ActorContainerRef obj, ContainerShape acShape, int pos, IFeatureProvider featureProvider, final HashMap<String, Anchor> port2anchor) {
+	protected void addRefItem(ActorContainerRef obj, ContainerShape acShape, int x, int y, IFeatureProvider featureProvider, final HashMap<String, Anchor> port2anchor) {
 		AddContext addContext = new AddContext();
 		addContext.setNewObject(obj);
 		addContext.setTargetContainer(acShape);
-		addContext.setX(pos+StructureClassSupport.MARGIN-(ActorContainerRefSupport.DEFAULT_SIZE_X/2+ActorContainerRefSupport.MARGIN));
-		addContext.setY(4*StructureClassSupport.MARGIN);
+		addContext.setX(x);
+		addContext.setY(y);
 		
 		ContainerShape refShape = (ContainerShape) featureProvider.addIfPossible(addContext);
 		
@@ -206,8 +213,8 @@ public class PopulateDiagramCommand extends RecordingCommand {
 		AddContext addContext = new AddContext();
 		addContext.setNewObject(item);
 		addContext.setTargetContainer(acShape);
-		addContext.setX(pos+StructureClassSupport.MARGIN);
-		addContext.setY(StructureClassSupport.MARGIN);
+		addContext.setX(pos);
+		addContext.setY(2*StructureClassSupport.MARGIN);
 		
 		ContainerShape pe = (ContainerShape) featureProvider.addIfPossible(addContext);
 		assert(!pe.getAnchors().isEmpty()): "interface item should have an anchor";
