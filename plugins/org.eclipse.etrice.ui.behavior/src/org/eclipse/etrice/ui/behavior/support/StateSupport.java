@@ -29,6 +29,7 @@ import org.eclipse.etrice.ui.behavior.ImageProvider;
 import org.eclipse.etrice.ui.behavior.dialogs.StatePropertyDialog;
 import org.eclipse.graphiti.dt.IDiagramTypeProvider;
 import org.eclipse.graphiti.features.IAddFeature;
+import org.eclipse.graphiti.features.ICreateConnectionFeature;
 import org.eclipse.graphiti.features.ICreateFeature;
 import org.eclipse.graphiti.features.IFeatureProvider;
 import org.eclipse.graphiti.features.ILayoutFeature;
@@ -43,10 +44,12 @@ import org.eclipse.graphiti.features.context.ICustomContext;
 import org.eclipse.graphiti.features.context.IDoubleClickContext;
 import org.eclipse.graphiti.features.context.ILayoutContext;
 import org.eclipse.graphiti.features.context.IMoveShapeContext;
+import org.eclipse.graphiti.features.context.IPictogramElementContext;
 import org.eclipse.graphiti.features.context.IRemoveContext;
 import org.eclipse.graphiti.features.context.IResizeShapeContext;
 import org.eclipse.graphiti.features.context.IUpdateContext;
 import org.eclipse.graphiti.features.context.impl.AddContext;
+import org.eclipse.graphiti.features.context.impl.CreateConnectionContext;
 import org.eclipse.graphiti.features.context.impl.RemoveContext;
 import org.eclipse.graphiti.features.custom.AbstractCustomFeature;
 import org.eclipse.graphiti.features.custom.ICustomFeature;
@@ -63,6 +66,8 @@ import org.eclipse.graphiti.mm.algorithms.RoundedRectangle;
 import org.eclipse.graphiti.mm.algorithms.Text;
 import org.eclipse.graphiti.mm.algorithms.styles.Color;
 import org.eclipse.graphiti.mm.algorithms.styles.Orientation;
+import org.eclipse.graphiti.mm.pictograms.Anchor;
+import org.eclipse.graphiti.mm.pictograms.AnchorContainer;
 import org.eclipse.graphiti.mm.pictograms.ChopboxAnchor;
 import org.eclipse.graphiti.mm.pictograms.ContainerShape;
 import org.eclipse.graphiti.mm.pictograms.Diagram;
@@ -71,7 +76,9 @@ import org.eclipse.graphiti.mm.pictograms.Shape;
 import org.eclipse.graphiti.services.Graphiti;
 import org.eclipse.graphiti.services.IGaService;
 import org.eclipse.graphiti.services.IPeCreateService;
+import org.eclipse.graphiti.tb.ContextButtonEntry;
 import org.eclipse.graphiti.tb.DefaultToolBehaviorProvider;
+import org.eclipse.graphiti.tb.IContextButtonPadData;
 import org.eclipse.graphiti.tb.IToolBehaviorProvider;
 import org.eclipse.graphiti.ui.features.DefaultFeatureProvider;
 import org.eclipse.graphiti.util.ColorConstant;
@@ -783,6 +790,38 @@ public class StateSupport {
 		@Override
 		public ICustomFeature getDoubleClickFeature(IDoubleClickContext context) {
 			return new FeatureProvider.GoDownFeature(getDiagramTypeProvider().getFeatureProvider());
+		}
+		
+		@Override
+		public IContextButtonPadData getContextButtonPad(
+				IPictogramElementContext context) {
+			
+			IContextButtonPadData data = super.getContextButtonPad(context);
+			PictogramElement pe = context.getPictogramElement();
+
+			CreateConnectionContext ccc = new CreateConnectionContext();
+			ccc.setSourcePictogramElement(pe);
+			Anchor anchor = null;
+			if (pe instanceof AnchorContainer) {
+				// our transition point has four fixed point anchor - we choose the first one
+				anchor = ((ContainerShape)pe).getAnchors().get(0);
+			}
+			ccc.setSourceAnchor(anchor);
+			
+			ContextButtonEntry button = new ContextButtonEntry(null, context);
+			button.setText("Create Transition");
+			button.setIconId(ImageProvider.IMG_TRANSITION);
+			ICreateConnectionFeature[] features = getFeatureProvider().getCreateConnectionFeatures();
+			for (ICreateConnectionFeature feature : features) {
+				if (feature.isAvailable(ccc) && feature.canStartConnection(ccc))
+					button.addDragAndDropFeature(feature);
+			}
+
+			if (button.getDragAndDropFeatures().size() > 0) {
+				data.getDomainSpecificContextButtons().add(button);
+			}
+
+			return data;
 		}
 	}
 	
