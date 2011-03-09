@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.etrice.core.room.DetailCode;
+import org.eclipse.etrice.core.room.Documentation;
 import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.etrice.core.room.Transition;
 import org.eclipse.etrice.core.room.TransitionTerminal;
@@ -28,6 +29,7 @@ import org.eclipse.etrice.core.room.TransitionTerminal;
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.room.impl.TransitionImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.TransitionImpl#getTo <em>To</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.impl.TransitionImpl#getDocu <em>Docu</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.TransitionImpl#getAction <em>Action</em>}</li>
  * </ul>
  * </p>
@@ -65,6 +67,16 @@ public class TransitionImpl extends StateGraphItemImpl implements Transition
    * @ordered
    */
   protected TransitionTerminal to;
+
+  /**
+   * The cached value of the '{@link #getDocu() <em>Docu</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getDocu()
+   * @generated
+   * @ordered
+   */
+  protected Documentation docu;
 
   /**
    * The cached value of the '{@link #getAction() <em>Action</em>}' containment reference.
@@ -173,6 +185,54 @@ public class TransitionImpl extends StateGraphItemImpl implements Transition
    * <!-- end-user-doc -->
    * @generated
    */
+  public Documentation getDocu()
+  {
+    return docu;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetDocu(Documentation newDocu, NotificationChain msgs)
+  {
+    Documentation oldDocu = docu;
+    docu = newDocu;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RoomPackage.TRANSITION__DOCU, oldDocu, newDocu);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setDocu(Documentation newDocu)
+  {
+    if (newDocu != docu)
+    {
+      NotificationChain msgs = null;
+      if (docu != null)
+        msgs = ((InternalEObject)docu).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RoomPackage.TRANSITION__DOCU, null, msgs);
+      if (newDocu != null)
+        msgs = ((InternalEObject)newDocu).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RoomPackage.TRANSITION__DOCU, null, msgs);
+      msgs = basicSetDocu(newDocu, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.TRANSITION__DOCU, newDocu, newDocu));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public DetailCode getAction()
   {
     return action;
@@ -228,6 +288,8 @@ public class TransitionImpl extends StateGraphItemImpl implements Transition
     {
       case RoomPackage.TRANSITION__TO:
         return basicSetTo(null, msgs);
+      case RoomPackage.TRANSITION__DOCU:
+        return basicSetDocu(null, msgs);
       case RoomPackage.TRANSITION__ACTION:
         return basicSetAction(null, msgs);
     }
@@ -248,6 +310,8 @@ public class TransitionImpl extends StateGraphItemImpl implements Transition
         return getName();
       case RoomPackage.TRANSITION__TO:
         return getTo();
+      case RoomPackage.TRANSITION__DOCU:
+        return getDocu();
       case RoomPackage.TRANSITION__ACTION:
         return getAction();
     }
@@ -269,6 +333,9 @@ public class TransitionImpl extends StateGraphItemImpl implements Transition
         return;
       case RoomPackage.TRANSITION__TO:
         setTo((TransitionTerminal)newValue);
+        return;
+      case RoomPackage.TRANSITION__DOCU:
+        setDocu((Documentation)newValue);
         return;
       case RoomPackage.TRANSITION__ACTION:
         setAction((DetailCode)newValue);
@@ -293,6 +360,9 @@ public class TransitionImpl extends StateGraphItemImpl implements Transition
       case RoomPackage.TRANSITION__TO:
         setTo((TransitionTerminal)null);
         return;
+      case RoomPackage.TRANSITION__DOCU:
+        setDocu((Documentation)null);
+        return;
       case RoomPackage.TRANSITION__ACTION:
         setAction((DetailCode)null);
         return;
@@ -314,6 +384,8 @@ public class TransitionImpl extends StateGraphItemImpl implements Transition
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
       case RoomPackage.TRANSITION__TO:
         return to != null;
+      case RoomPackage.TRANSITION__DOCU:
+        return docu != null;
       case RoomPackage.TRANSITION__ACTION:
         return action != null;
     }

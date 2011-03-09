@@ -23,7 +23,7 @@ grammar org.eclipse.etrice.core.Room with org.eclipse.xtext.common.Terminals
 generate room "http://www.eclipse.org/etrice/Room"
 
 RoomModel :
-'RoomModel' name=FQN '{'
+'RoomModel' name=FQN (docu=Documentation)? '{'
 	(imports+=Import)*
 	(
 		dataClasses+=DataClass	|
@@ -69,18 +69,19 @@ FreeType: prim=PrimitiveType | type=ID;
 
 // TODOHRR: define detail level language?
 DataClass:
-	'DataClass' name=ID ('extends' base=[DataClass|FQN])? '{'
+	'DataClass' name=ID (docu=Documentation)? ('extends' base=[DataClass|FQN])? '{'
 		(imports+=Import)*
 		attributes+=Attribute+
 		operations+=Operation*
 	'}';
 
 Attribute:
-	'Attribute' name=ID ('[' size=INT ']')? ':' type=Type;
+	'Attribute' name=ID ('[' size=INT ']')? ':' type=Type (docu=Documentation)?;
 
 // TODOHRR: pass arguments and return value by value/reference
 Operation:
-	'Operation' name=ID '(' (arguments+=FreeTypedID (',' arguments+=FreeTypedID)*)? ')' (':' returntype=FreeType)? 
+	'Operation' name=ID '(' (arguments+=FreeTypedID (',' arguments+=FreeTypedID)*)? ')' (':' returntype=FreeType)?
+		(docu=Documentation)?
 		detailCode=DetailCode
 	;
 
@@ -88,7 +89,7 @@ Operation:
 // protocol class
 
 ProtocolClass:
-	'ProtocolClass' name=ID ('extends' base=[ProtocolClass|FQN])? '{'
+	'ProtocolClass' name=ID (docu=Documentation)? ('extends' base=[ProtocolClass|FQN])? '{'
 		('usercode1' userCode1=DetailCode)?
 		('usercode2' userCode2=DetailCode)?
 		'incoming' '{' incomingMessages+=Message* '}'
@@ -99,7 +100,8 @@ ProtocolClass:
 	'}';
 	
 Message:
-	'Message' name=ID '(' (arguments+=TypedID (',' arguments+=TypedID)*)? ')';
+	'Message' name=ID '(' (arguments+=TypedID (',' arguments+=TypedID)*)? ')'
+	(docu=Documentation)?;
 
 PortClass:
 	'{'
@@ -140,12 +142,12 @@ SemanticsOutRule: 'out' msg=[Message|ID] '->' '{'
 // p in i and p in s ==> external end port
 // since double containment is not supported we decided to define external ports as reference to interface ports
 ActorClass:
-	(abstract?='abstract')? 'ActorClass' name=ID ('extends' base=[ActorClass|FQN])? '{'
+	(abstract?='abstract')? 'ActorClass' name=ID (docu=Documentation)? ('extends' base=[ActorClass|FQN])? '{'
 		('Interface' '{'
 			ifPorts+=Port*
 			ifSPPs+=SPPRef*
 		'}')?
-		('Structure' '{'
+		('Structure' (structureDocu=Documentation)? '{'
 			('usercode1' userCode1=DetailCode)?
 			('usercode2' userCode2=DetailCode)?
 			(intPorts+=Port |
@@ -157,7 +159,7 @@ ActorClass:
 			bindings+=Binding*
 			connections+=LayerConnection*
 		'}')?
-		('Behavior' '{'
+		('Behavior' (behaviorDocu=Documentation)? '{'
 			operations+=Operation*
 			(stateMachine=StateMachine)?
 		'}')?
@@ -166,7 +168,7 @@ ActorClass:
 InterfaceItem: Port | SAPRef | SPPRef;
 
 Port:
-	(conjugated?='conjugated')? 'Port' name=ID ('[' multiplicity=INT ']')? ':' protocol=[ProtocolClass|FQN] ;
+	(conjugated?='conjugated')? 'Port' name=ID ('[' multiplicity=INT ']')? ':' protocol=[ProtocolClass|FQN] (docu=Documentation)?;
 ExternalPort:
 	'external' 'Port' ifport=[Port|ID] ;
 
@@ -180,7 +182,7 @@ ServiceImplementation:
 	'ServiceImplementation' 'of' spp=[SPPRef|ID];
 
 LogicalSystem:
-	'LogicalSystem' name=ID '{'
+	'LogicalSystem' name=ID (docu=Documentation)? '{'
 		subSystems+=SubSystemRef+
 		bindings+=Binding*
 		connections+=LayerConnection*
@@ -189,10 +191,10 @@ LogicalSystem:
 ActorContainerRef: SubSystemRef | ActorRef;
 
 SubSystemRef:
-	'SubSystemRef' name=ID ':' type=[SubSystemClass|FQN];
+	'SubSystemRef' name=ID ':' type=[SubSystemClass|FQN] (docu=Documentation)?;
 
 SubSystemClass:
-	'SubSystemClass' name=ID '{'
+	'SubSystemClass' name=ID (docu=Documentation)? '{'
 		relayPorts+=Port*
 		ifSPPs+=SPPRef*
 		actorRefs+=ActorRef+
@@ -237,7 +239,7 @@ SPPoint:
 
 // TODOHRR: support replicated actors
 ActorRef:
-	'ActorRef' name=ID ':' type=[ActorClass|FQN];
+	'ActorRef' name=ID ':' type=[ActorClass|FQN] (docu=Documentation)?;
 
 
 // **************************************************************
@@ -271,14 +273,14 @@ StateMachine returns StateGraph:
 // entry and exit code have multiplicity many: in BaseState to be able to add derived class codes here,
 // in RefinedState to still have both features in the common base class State
 BaseState:
-	'State' name=ID ('{'
+	'State' name=ID (docu=Documentation)? ('{'
 		('entry' entryCode=DetailCode)?
 		('exit' exitCode=DetailCode)?
 		('subgraph' subgraph=StateGraph)?
 	'}')?;
 
 RefinedState:
-	'RefinedState' base=[BaseState|FQN] '{'
+	'RefinedState' base=[BaseState|FQN] (docu=Documentation)? '{'
 		('entry' entryCode=DetailCode)?
 		('exit' exitCode=DetailCode)?
 		('subgraph' subgraph=StateGraph)?
@@ -303,23 +305,29 @@ ExitPoint:
 	'ExitPoint' name=ID;
 
 ChoicePoint:
-	'ChoicePoint' name=ID;
+	'ChoicePoint' name=ID (docu=Documentation)?;
 
 Transition: InitialTransition | NonInitialTransition;
 NonInitialTransition: TriggeredTransition | ContinuationTransition | CPBranchTransition;
 
 InitialTransition:
-	'Transition' (name=ID)? ':' 'initial' '->' to=TransitionTerminal '{'
+	'Transition' (name=ID)? ':' 'initial' '->' to=TransitionTerminal 
+	(docu=Documentation)?
+	'{'
 		('action' action=DetailCode)? 
 	'}';
 
 ContinuationTransition:
-	'Transition' (name=ID)? ':' from=TransitionTerminal '->' to=TransitionTerminal ('{'
+	'Transition' (name=ID)? ':' from=TransitionTerminal '->' to=TransitionTerminal
+	(docu=Documentation)?
+	('{'
 		('action' action=DetailCode)? 
 	'}')?;
 
 TriggeredTransition:
-	'Transition' (name=ID)? ':' from=TransitionTerminal '->' to=TransitionTerminal '{'
+	'Transition' (name=ID)? ':' from=TransitionTerminal '->' to=TransitionTerminal
+	(docu=Documentation)?
+	'{'
 		'triggers' '{'
 			triggers+=Trigger ('or' triggers+=Trigger)*
 		'}'
@@ -327,7 +335,9 @@ TriggeredTransition:
 	'}';
 
 CPBranchTransition:
-	'Transition' (name=ID)? ':' from=TransitionTerminal '->' to=TransitionTerminal '{'
+	'Transition' (name=ID)? ':' from=TransitionTerminal '->' to=TransitionTerminal
+	(docu=Documentation)?
+	'{'
 		'cond' condition=DetailCode
 		('action' action=DetailCode)? 
 	'}';
@@ -365,6 +375,10 @@ Guard:
 
 // **************************************************************
 // general
+
+Documentation: '['
+		text+=STRING+
+	']';
 
 Import :
 	'import' importedNamespace=ImportedFQN;

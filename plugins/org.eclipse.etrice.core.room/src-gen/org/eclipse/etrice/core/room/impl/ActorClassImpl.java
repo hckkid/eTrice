@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.DetailCode;
+import org.eclipse.etrice.core.room.Documentation;
 import org.eclipse.etrice.core.room.ExternalPort;
 import org.eclipse.etrice.core.room.Operation;
 import org.eclipse.etrice.core.room.Port;
@@ -42,6 +43,7 @@ import org.eclipse.etrice.core.room.StateGraph;
  *   <li>{@link org.eclipse.etrice.core.room.impl.ActorClassImpl#isAbstract <em>Abstract</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ActorClassImpl#getBase <em>Base</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ActorClassImpl#getIfPorts <em>If Ports</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.impl.ActorClassImpl#getStructureDocu <em>Structure Docu</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ActorClassImpl#getUserCode1 <em>User Code1</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ActorClassImpl#getUserCode2 <em>User Code2</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ActorClassImpl#getIntPorts <em>Int Ports</em>}</li>
@@ -49,6 +51,7 @@ import org.eclipse.etrice.core.room.StateGraph;
  *   <li>{@link org.eclipse.etrice.core.room.impl.ActorClassImpl#getServiceImplementations <em>Service Implementations</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ActorClassImpl#getStrSAPs <em>Str SA Ps</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ActorClassImpl#getAttributes <em>Attributes</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.impl.ActorClassImpl#getBehaviorDocu <em>Behavior Docu</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ActorClassImpl#getOperations <em>Operations</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ActorClassImpl#getStateMachine <em>State Machine</em>}</li>
  * </ul>
@@ -97,6 +100,16 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
    * @ordered
    */
   protected EList<Port> ifPorts;
+
+  /**
+   * The cached value of the '{@link #getStructureDocu() <em>Structure Docu</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getStructureDocu()
+   * @generated
+   * @ordered
+   */
+  protected Documentation structureDocu;
 
   /**
    * The cached value of the '{@link #getUserCode1() <em>User Code1</em>}' containment reference.
@@ -167,6 +180,16 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
    * @ordered
    */
   protected EList<Attribute> attributes;
+
+  /**
+   * The cached value of the '{@link #getBehaviorDocu() <em>Behavior Docu</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getBehaviorDocu()
+   * @generated
+   * @ordered
+   */
+  protected Documentation behaviorDocu;
 
   /**
    * The cached value of the '{@link #getOperations() <em>Operations</em>}' containment reference list.
@@ -287,6 +310,54 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
       ifPorts = new EObjectContainmentEList<Port>(Port.class, this, RoomPackage.ACTOR_CLASS__IF_PORTS);
     }
     return ifPorts;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Documentation getStructureDocu()
+  {
+    return structureDocu;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetStructureDocu(Documentation newStructureDocu, NotificationChain msgs)
+  {
+    Documentation oldStructureDocu = structureDocu;
+    structureDocu = newStructureDocu;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RoomPackage.ACTOR_CLASS__STRUCTURE_DOCU, oldStructureDocu, newStructureDocu);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setStructureDocu(Documentation newStructureDocu)
+  {
+    if (newStructureDocu != structureDocu)
+    {
+      NotificationChain msgs = null;
+      if (structureDocu != null)
+        msgs = ((InternalEObject)structureDocu).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RoomPackage.ACTOR_CLASS__STRUCTURE_DOCU, null, msgs);
+      if (newStructureDocu != null)
+        msgs = ((InternalEObject)newStructureDocu).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RoomPackage.ACTOR_CLASS__STRUCTURE_DOCU, null, msgs);
+      msgs = basicSetStructureDocu(newStructureDocu, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.ACTOR_CLASS__STRUCTURE_DOCU, newStructureDocu, newStructureDocu));
   }
 
   /**
@@ -460,6 +531,54 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
    * <!-- end-user-doc -->
    * @generated
    */
+  public Documentation getBehaviorDocu()
+  {
+    return behaviorDocu;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetBehaviorDocu(Documentation newBehaviorDocu, NotificationChain msgs)
+  {
+    Documentation oldBehaviorDocu = behaviorDocu;
+    behaviorDocu = newBehaviorDocu;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RoomPackage.ACTOR_CLASS__BEHAVIOR_DOCU, oldBehaviorDocu, newBehaviorDocu);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setBehaviorDocu(Documentation newBehaviorDocu)
+  {
+    if (newBehaviorDocu != behaviorDocu)
+    {
+      NotificationChain msgs = null;
+      if (behaviorDocu != null)
+        msgs = ((InternalEObject)behaviorDocu).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RoomPackage.ACTOR_CLASS__BEHAVIOR_DOCU, null, msgs);
+      if (newBehaviorDocu != null)
+        msgs = ((InternalEObject)newBehaviorDocu).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RoomPackage.ACTOR_CLASS__BEHAVIOR_DOCU, null, msgs);
+      msgs = basicSetBehaviorDocu(newBehaviorDocu, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.ACTOR_CLASS__BEHAVIOR_DOCU, newBehaviorDocu, newBehaviorDocu));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EList<Operation> getOperations()
   {
     if (operations == null)
@@ -529,6 +648,8 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
     {
       case RoomPackage.ACTOR_CLASS__IF_PORTS:
         return ((InternalEList<?>)getIfPorts()).basicRemove(otherEnd, msgs);
+      case RoomPackage.ACTOR_CLASS__STRUCTURE_DOCU:
+        return basicSetStructureDocu(null, msgs);
       case RoomPackage.ACTOR_CLASS__USER_CODE1:
         return basicSetUserCode1(null, msgs);
       case RoomPackage.ACTOR_CLASS__USER_CODE2:
@@ -543,6 +664,8 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
         return ((InternalEList<?>)getStrSAPs()).basicRemove(otherEnd, msgs);
       case RoomPackage.ACTOR_CLASS__ATTRIBUTES:
         return ((InternalEList<?>)getAttributes()).basicRemove(otherEnd, msgs);
+      case RoomPackage.ACTOR_CLASS__BEHAVIOR_DOCU:
+        return basicSetBehaviorDocu(null, msgs);
       case RoomPackage.ACTOR_CLASS__OPERATIONS:
         return ((InternalEList<?>)getOperations()).basicRemove(otherEnd, msgs);
       case RoomPackage.ACTOR_CLASS__STATE_MACHINE:
@@ -568,6 +691,8 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
         return basicGetBase();
       case RoomPackage.ACTOR_CLASS__IF_PORTS:
         return getIfPorts();
+      case RoomPackage.ACTOR_CLASS__STRUCTURE_DOCU:
+        return getStructureDocu();
       case RoomPackage.ACTOR_CLASS__USER_CODE1:
         return getUserCode1();
       case RoomPackage.ACTOR_CLASS__USER_CODE2:
@@ -582,6 +707,8 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
         return getStrSAPs();
       case RoomPackage.ACTOR_CLASS__ATTRIBUTES:
         return getAttributes();
+      case RoomPackage.ACTOR_CLASS__BEHAVIOR_DOCU:
+        return getBehaviorDocu();
       case RoomPackage.ACTOR_CLASS__OPERATIONS:
         return getOperations();
       case RoomPackage.ACTOR_CLASS__STATE_MACHINE:
@@ -611,6 +738,9 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
         getIfPorts().clear();
         getIfPorts().addAll((Collection<? extends Port>)newValue);
         return;
+      case RoomPackage.ACTOR_CLASS__STRUCTURE_DOCU:
+        setStructureDocu((Documentation)newValue);
+        return;
       case RoomPackage.ACTOR_CLASS__USER_CODE1:
         setUserCode1((DetailCode)newValue);
         return;
@@ -636,6 +766,9 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
       case RoomPackage.ACTOR_CLASS__ATTRIBUTES:
         getAttributes().clear();
         getAttributes().addAll((Collection<? extends Attribute>)newValue);
+        return;
+      case RoomPackage.ACTOR_CLASS__BEHAVIOR_DOCU:
+        setBehaviorDocu((Documentation)newValue);
         return;
       case RoomPackage.ACTOR_CLASS__OPERATIONS:
         getOperations().clear();
@@ -667,6 +800,9 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
       case RoomPackage.ACTOR_CLASS__IF_PORTS:
         getIfPorts().clear();
         return;
+      case RoomPackage.ACTOR_CLASS__STRUCTURE_DOCU:
+        setStructureDocu((Documentation)null);
+        return;
       case RoomPackage.ACTOR_CLASS__USER_CODE1:
         setUserCode1((DetailCode)null);
         return;
@@ -687,6 +823,9 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
         return;
       case RoomPackage.ACTOR_CLASS__ATTRIBUTES:
         getAttributes().clear();
+        return;
+      case RoomPackage.ACTOR_CLASS__BEHAVIOR_DOCU:
+        setBehaviorDocu((Documentation)null);
         return;
       case RoomPackage.ACTOR_CLASS__OPERATIONS:
         getOperations().clear();
@@ -714,6 +853,8 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
         return base != null;
       case RoomPackage.ACTOR_CLASS__IF_PORTS:
         return ifPorts != null && !ifPorts.isEmpty();
+      case RoomPackage.ACTOR_CLASS__STRUCTURE_DOCU:
+        return structureDocu != null;
       case RoomPackage.ACTOR_CLASS__USER_CODE1:
         return userCode1 != null;
       case RoomPackage.ACTOR_CLASS__USER_CODE2:
@@ -728,6 +869,8 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
         return strSAPs != null && !strSAPs.isEmpty();
       case RoomPackage.ACTOR_CLASS__ATTRIBUTES:
         return attributes != null && !attributes.isEmpty();
+      case RoomPackage.ACTOR_CLASS__BEHAVIOR_DOCU:
+        return behaviorDocu != null;
       case RoomPackage.ACTOR_CLASS__OPERATIONS:
         return operations != null && !operations.isEmpty();
       case RoomPackage.ACTOR_CLASS__STATE_MACHINE:

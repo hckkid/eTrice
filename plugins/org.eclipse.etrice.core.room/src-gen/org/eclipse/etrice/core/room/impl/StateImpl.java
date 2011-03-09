@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.etrice.core.room.DetailCode;
+import org.eclipse.etrice.core.room.Documentation;
 import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraph;
@@ -26,6 +27,7 @@ import org.eclipse.etrice.core.room.StateGraph;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link org.eclipse.etrice.core.room.impl.StateImpl#getDocu <em>Docu</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.StateImpl#getEntryCode <em>Entry Code</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.StateImpl#getExitCode <em>Exit Code</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.StateImpl#getSubgraph <em>Subgraph</em>}</li>
@@ -36,6 +38,16 @@ import org.eclipse.etrice.core.room.StateGraph;
  */
 public class StateImpl extends StateGraphNodeImpl implements State
 {
+  /**
+   * The cached value of the '{@link #getDocu() <em>Docu</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getDocu()
+   * @generated
+   * @ordered
+   */
+  protected Documentation docu;
+
   /**
    * The cached value of the '{@link #getEntryCode() <em>Entry Code</em>}' containment reference.
    * <!-- begin-user-doc -->
@@ -85,6 +97,54 @@ public class StateImpl extends StateGraphNodeImpl implements State
   protected EClass eStaticClass()
   {
     return RoomPackage.Literals.STATE;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Documentation getDocu()
+  {
+    return docu;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetDocu(Documentation newDocu, NotificationChain msgs)
+  {
+    Documentation oldDocu = docu;
+    docu = newDocu;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RoomPackage.STATE__DOCU, oldDocu, newDocu);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setDocu(Documentation newDocu)
+  {
+    if (newDocu != docu)
+    {
+      NotificationChain msgs = null;
+      if (docu != null)
+        msgs = ((InternalEObject)docu).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RoomPackage.STATE__DOCU, null, msgs);
+      if (newDocu != null)
+        msgs = ((InternalEObject)newDocu).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RoomPackage.STATE__DOCU, null, msgs);
+      msgs = basicSetDocu(newDocu, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.STATE__DOCU, newDocu, newDocu));
   }
 
   /**
@@ -251,6 +311,8 @@ public class StateImpl extends StateGraphNodeImpl implements State
   {
     switch (featureID)
     {
+      case RoomPackage.STATE__DOCU:
+        return basicSetDocu(null, msgs);
       case RoomPackage.STATE__ENTRY_CODE:
         return basicSetEntryCode(null, msgs);
       case RoomPackage.STATE__EXIT_CODE:
@@ -271,6 +333,8 @@ public class StateImpl extends StateGraphNodeImpl implements State
   {
     switch (featureID)
     {
+      case RoomPackage.STATE__DOCU:
+        return getDocu();
       case RoomPackage.STATE__ENTRY_CODE:
         return getEntryCode();
       case RoomPackage.STATE__EXIT_CODE:
@@ -291,6 +355,9 @@ public class StateImpl extends StateGraphNodeImpl implements State
   {
     switch (featureID)
     {
+      case RoomPackage.STATE__DOCU:
+        setDocu((Documentation)newValue);
+        return;
       case RoomPackage.STATE__ENTRY_CODE:
         setEntryCode((DetailCode)newValue);
         return;
@@ -314,6 +381,9 @@ public class StateImpl extends StateGraphNodeImpl implements State
   {
     switch (featureID)
     {
+      case RoomPackage.STATE__DOCU:
+        setDocu((Documentation)null);
+        return;
       case RoomPackage.STATE__ENTRY_CODE:
         setEntryCode((DetailCode)null);
         return;
@@ -337,6 +407,8 @@ public class StateImpl extends StateGraphNodeImpl implements State
   {
     switch (featureID)
     {
+      case RoomPackage.STATE__DOCU:
+        return docu != null;
       case RoomPackage.STATE__ENTRY_CODE:
         return entryCode != null;
       case RoomPackage.STATE__EXIT_CODE:
