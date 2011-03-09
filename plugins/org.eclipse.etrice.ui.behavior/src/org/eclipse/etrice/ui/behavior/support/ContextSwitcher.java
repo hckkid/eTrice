@@ -6,6 +6,7 @@ import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.RefinedState;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraph;
+import org.eclipse.graphiti.mm.algorithms.GraphicsAlgorithm;
 import org.eclipse.graphiti.mm.pictograms.Connection;
 import org.eclipse.graphiti.mm.pictograms.ConnectionDecorator;
 import org.eclipse.graphiti.mm.pictograms.ContainerShape;
@@ -50,6 +51,19 @@ public class ContextSwitcher {
 		activateTransitions(diagram);
 	}
 
+	public static StateGraph getCurrentStateGraph(Diagram diagram) {
+		for (Shape ctxShape : diagram.getChildren()) {
+			if (ctxShape instanceof ContainerShape && ctxShape.isVisible()) {
+				EObject bo = Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(ctxShape);
+				assert(bo instanceof StateGraph): "expected state graph";
+				
+				if (bo instanceof StateGraph)
+					return (StateGraph) bo;
+			}
+		}
+		return null;
+	}
+	
 	public static ContainerShape getContext(Diagram diagram, StateGraph sg) {
 		for (Shape ctxShape : diagram.getChildren()) {
 			EObject bo = Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(ctxShape);
@@ -78,6 +92,11 @@ public class ContextSwitcher {
 			EObject obj = it.next();
 			if (obj instanceof Shape) {
 				((Shape) obj).setVisible(activate);
+				EObject eobj = Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement((Shape)obj);
+				if (eobj instanceof State) {
+					GraphicsAlgorithm border = ((Shape)obj).getGraphicsAlgorithm().getGraphicsAlgorithmChildren().get(0);
+					StateSupport.updateSubStructureHint((State)eobj, border);
+				}
 			}
 		}
 	}

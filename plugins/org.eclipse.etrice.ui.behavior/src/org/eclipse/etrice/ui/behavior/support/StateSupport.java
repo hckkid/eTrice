@@ -270,20 +270,20 @@ public class StateSupport {
 	
 				if (containerGa.getGraphicsAlgorithmChildren().size()>=1) {
 					// the visible border
-					GraphicsAlgorithm ga = containerGa.getGraphicsAlgorithmChildren().get(0);
+					GraphicsAlgorithm borderGA = containerGa.getGraphicsAlgorithmChildren().get(0);
 					
 					int nw = w-2*MARGIN;
 					int nh = h-2*MARGIN;
 					
-					ga.setWidth(nw);
-					ga.setHeight(nh);
+					borderGA.setWidth(nw);
+					borderGA.setHeight(nh);
 					
 					Object bo = getBusinessObjectForPictogramElement(containerShape);
 					if (bo instanceof State) {
 						State s = (State) bo;
-						ga.getGraphicsAlgorithmChildren().clear();
+						borderGA.getGraphicsAlgorithmChildren().clear();
 						Color lineColor = manageColor(isInherited(getDiagram(), s)?INHERITED_COLOR:LINE_COLOR);
-						addSubStructureHint(s, (RoundedRectangle) ga, lineColor);
+						addSubStructureHint(s, (RoundedRectangle) borderGA, lineColor);
 					}
 
 					if (!containerShape.getChildren().isEmpty()) {
@@ -451,9 +451,7 @@ public class StateSupport {
 					PictogramElement subGraphShape = getFeatureProvider().addIfPossible(addContext);
 					if (subGraphShape!=null) {
 						RoundedRectangle borderRect = (RoundedRectangle) container.getGraphicsAlgorithm().getGraphicsAlgorithmChildren().get(0);
-						boolean inherited = isInherited(getDiagram(), s);
-						Color lineColor = manageColor(inherited?INHERITED_COLOR:LINE_COLOR);
-						addSubStructureHint(s, borderRect, lineColor);
+						updateSubStructureHint(s, borderRect);
 					}
 					
 					ContextSwitcher.switchTo(getDiagram(), s.getSubgraph());
@@ -507,10 +505,13 @@ public class StateSupport {
 					GraphicsAlgorithm invisibleRect = containerShape.getGraphicsAlgorithm();
 					if (!invisibleRect.getGraphicsAlgorithmChildren().isEmpty()) {
 						GraphicsAlgorithm borderRect = invisibleRect.getGraphicsAlgorithmChildren().get(0);
-						if (hasSubStruct && borderRect.getGraphicsAlgorithmChildren().isEmpty())
-							return Reason.createTrueReason("Ref has sub structure now");
-						if (!hasSubStruct && !borderRect.getGraphicsAlgorithmChildren().isEmpty())
-							return Reason.createTrueReason("Ref has no sub structure anymore");
+						if (!borderRect.getGraphicsAlgorithmChildren().isEmpty()) {
+							GraphicsAlgorithm hint = borderRect.getGraphicsAlgorithmChildren().get(0);
+							if (hasSubStruct && !hint.getLineVisible())
+								return Reason.createTrueReason("state has sub structure now");
+							if (!hasSubStruct && hint.getLineVisible())
+								return Reason.createTrueReason("state has no sub structure anymore");
+						}
 					}
 				}
 				
@@ -549,18 +550,10 @@ public class StateSupport {
 				
 				State s = (State) bo;
 				{
-					boolean hasSubStruct = hasSubStructure(s);
-
 					GraphicsAlgorithm invisibleRect = containerShape.getGraphicsAlgorithm();
 					if (!invisibleRect.getGraphicsAlgorithmChildren().isEmpty()) {
 						GraphicsAlgorithm borderRect = invisibleRect.getGraphicsAlgorithmChildren().get(0);
-						if (hasSubStruct && borderRect.getGraphicsAlgorithmChildren().isEmpty()) {
-							Color lineColor = manageColor(isInherited(getDiagram(), s)?INHERITED_COLOR:LINE_COLOR);
-							addSubStructureHint(s, (RoundedRectangle) borderRect, lineColor);
-						}
-						else if (!hasSubStruct && !borderRect.getGraphicsAlgorithmChildren().isEmpty()) {
-							containerShape.getGraphicsAlgorithm().getGraphicsAlgorithmChildren().clear();
-						}
+						updateSubStructureHint(s, (RoundedRectangle) borderRect);
 					}
 				}
 				
@@ -743,25 +736,6 @@ public class StateSupport {
 			assert(false): "no parent actor class found";
 			return false;
 		}
-
-		private static boolean hasSubStructure(State acr) {
-			return (acr.getSubgraph()!=null);
-		}
-		
-		private static void addSubStructureHint(State s,
-				RoundedRectangle rect, Color lineColor) {
-			
-			if (hasSubStructure(s)) {
-				int x = rect.getWidth()-25;
-				int y = 3;
-				IGaService gaService = Graphiti.getGaService();
-				RoundedRectangle hint1 = gaService.createRoundedRectangle(rect, HINT_CORNER_WIDTH, HINT_CORNER_WIDTH);
-				hint1.setForeground(lineColor);
-				hint1.setFilled(false);
-				hint1.setLineWidth(LINE_WIDTH);
-				gaService.setLocationAndSize(hint1, x, y, 15, 8);
-			}
-		}
 	}
 	
 	private class BehaviorProvider extends DefaultToolBehaviorProvider {
@@ -839,5 +813,45 @@ public class StateSupport {
 	
 	public IToolBehaviorProvider getToolBehaviorProvider() {
 		return tbp;
+	}
+
+	public static boolean hasSubStructure(State s) {
+		if (s.getSubgraph()==null)
+			return false;
+		
+		StateGraph sg = s.getSubgraph();
+		if (!sg.getStates().isEmpty())
+			return true;
+		if (!sg.getTransitions().isEmpty())
+			return true;
+		if (!sg.getTrPoints().isEmpty())
+			return true;
+		if (!sg.getChPoints().isEmpty())
+			return true;
+		
+		return false;
+	}
+	
+	private static void addSubStructureHint(State s,
+			RoundedRectangle border, Color lineColor) {
+		
+		int x = border.getWidth()-25;
+		int y = 3;
+		IGaService gaService = Graphiti.getGaService();
+		RoundedRectangle hint = gaService.createRoundedRectangle(border, HINT_CORNER_WIDTH, HINT_CORNER_WIDTH);
+		hint.setForeground(lineColor);
+		hint.setFilled(false);
+		hint.setLineWidth(LINE_WIDTH);
+		gaService.setLocationAndSize(hint, x, y, 15, 8);
+		
+		if (!hasSubStructure(s)) {
+			hint.setLineVisible(false);
+		}
+	}
+	
+	protected static void updateSubStructureHint(State s, GraphicsAlgorithm border) {
+		
+		GraphicsAlgorithm hint = border.getGraphicsAlgorithmChildren().get(0);
+		hint.setLineVisible(hasSubStructure(s));
 	}
 }
