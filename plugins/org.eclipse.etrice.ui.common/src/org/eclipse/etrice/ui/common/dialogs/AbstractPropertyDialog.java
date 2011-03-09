@@ -95,6 +95,9 @@ public abstract class AbstractPropertyDialog extends FormDialog {
 	private FormToolkit toolkit;
 	private DataBindingContext bindingContext;
 	private HashMap<Control, ControlDecoration> decoratorMap = new HashMap<Control, ControlDecoration>();
+	private Label validationLabel;
+	private Label validationText;
+	private AggregateValidationStatus aggregateValidationStatus;
 
 	public AbstractPropertyDialog(Shell shell, String title) {
 		super(shell);
@@ -118,20 +121,26 @@ public abstract class AbstractPropertyDialog extends FormDialog {
 		body.setLayout(new GridLayout(2, false));
 		body.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
-        toolkit.createLabel(body, "", SWT.NONE)
-                .setText("Validation Status:");
+        validationLabel = toolkit.createLabel(body, "", SWT.NONE);
+        validationLabel.setText("ERROR:");
+        validationLabel.setForeground(getShell().getDisplay().getSystemColor(SWT.COLOR_RED));
 
-        Label validationErrorLabel = toolkit.createLabel(
+        validationText = toolkit.createLabel(
                 body, "", SWT.NONE);
-        validationErrorLabel
+        validationText
                 .setLayoutData(new GridData(
                         GridData.FILL_HORIZONTAL));
 
 		createContent(mform, body, bindingContext);
 		
-        AggregateValidationStatus aggregateValidationStatus = new AggregateValidationStatus(
+        aggregateValidationStatus = new AggregateValidationStatus(
         		bindingContext.getBindings(),
                 AggregateValidationStatus.MAX_SEVERITY);
+
+        bindingContext.bindValue(SWTObservables
+                .observeText(validationText),
+                aggregateValidationStatus, null,
+                null);
 
 		aggregateValidationStatus.addChangeListener(new IChangeListener() {
 			public void handleChange(ChangeEvent event) {
@@ -158,19 +167,37 @@ public abstract class AbstractPropertyDialog extends FormDialog {
 						}
 					}
 				}
+				validationLabel.setVisible(!ok);
+				validationText.setVisible(!ok);
 				Button okButton = getButton(IDialogConstants.OK_ID);
 				if (okButton!=null)
 					okButton.setEnabled(ok);
 			}
 		});
-
-        bindingContext.bindValue(SWTObservables
-                .observeText(validationErrorLabel),
-                aggregateValidationStatus, null,
-                null);
-
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.ui.forms.FormDialog#createButtonBar(org.eclipse.swt.widgets.Composite)
+	 */
+	@Override
+	protected Control createButtonBar(Composite parent) {
+		Control bar = super.createButtonBar(parent);
+
+		Object value = aggregateValidationStatus.getValue();
+		if (value instanceof IStatus) {
+			boolean visible = !((IStatus) value).isOK();
+			validationLabel.setVisible(visible);
+			validationText.setVisible(visible);
+		}
+
+		// initially disable ok button, validation is running after each change
+		Button okButton = getButton(IDialogConstants.OK_ID);
+		if (okButton!=null)
+			okButton.setEnabled(false);
+
+		return bar;
+	}
+	
 	protected abstract void createContent(IManagedForm mform, Composite body,
 			DataBindingContext bindingContext);
 	
