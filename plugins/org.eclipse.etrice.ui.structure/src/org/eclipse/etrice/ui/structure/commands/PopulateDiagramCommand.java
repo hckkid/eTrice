@@ -170,15 +170,22 @@ public class PopulateDiagramCommand extends RecordingCommand {
 	protected void addRefItems(EList<? extends ActorContainerRef> actorRefs,
 			ContainerShape acShape, int width,
 			IFeatureProvider featureProvider, final HashMap<String, Anchor> port2anchor) {
-		int maxPerRow = width/ActorContainerRefSupport.DEFAULT_SIZE_X;
-		int gap = (width-(maxPerRow*ActorContainerRefSupport.DEFAULT_SIZE_X))/(maxPerRow+1);
+		int ncols = width/ActorContainerRefSupport.DEFAULT_SIZE_X;
+		int nrows = actorRefs.size()/ncols;
+		int gap = (width-(ncols*ActorContainerRefSupport.DEFAULT_SIZE_X))/(ncols+1);
 		int delta = gap+ActorContainerRefSupport.DEFAULT_SIZE_X;
 		int x0 = gap+ActorContainerRefSupport.DEFAULT_SIZE_X/2;
 		int y0 = ActorContainerRefSupport.DEFAULT_SIZE_Y*3/2;
 		int i = 0;
 		for (ActorContainerRef ar : actorRefs) {
-			int row = i/maxPerRow;
-			int col = i%maxPerRow;
+			int row = i/ncols;
+			int col = i%ncols;
+			if (row>=nrows) {
+				int nc = actorRefs.size()%ncols;
+				gap = (width-(nc*ActorContainerRefSupport.DEFAULT_SIZE_X))/(nc+1);
+				delta = gap+ActorContainerRefSupport.DEFAULT_SIZE_X;
+				x0 = gap+ActorContainerRefSupport.DEFAULT_SIZE_X/2;
+			}
 			int x = x0+delta*col;
 			int y = y0+(ActorContainerRefSupport.MARGIN+ActorContainerRefSupport.DEFAULT_SIZE_Y)*row;
 			addRefItem(ar, acShape, x+StructureClassSupport.MARGIN, y+StructureClassSupport.MARGIN, featureProvider, port2anchor);
