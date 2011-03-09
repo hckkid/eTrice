@@ -332,8 +332,8 @@ public class SPPSupport extends InterfaceItemSupport {
 			ccc.setSourceAnchor(anchor);
 			
 			ContextButtonEntry button = new ContextButtonEntry(null, context);
-			button.setText("Create Binding");
-			button.setIconId(ImageProvider.IMG_BINDING);
+			button.setText("Create Layer Connection");
+			button.setIconId(ImageProvider.IMG_LAYER_CONNECTION);
 			ICreateConnectionFeature[] features = getFeatureProvider().getCreateConnectionFeatures();
 			for (ICreateConnectionFeature feature : features) {
 				if (feature.isAvailable(ccc) && feature.canStartConnection(ccc))
