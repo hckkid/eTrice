@@ -188,12 +188,11 @@ public abstract class AbstractPropertyDialog extends FormDialog {
 			boolean visible = !((IStatus) value).isOK();
 			validationLabel.setVisible(visible);
 			validationText.setVisible(visible);
+			
+			Button okButton = getButton(IDialogConstants.OK_ID);
+			if (okButton!=null)
+				okButton.setEnabled(((IStatus) value).isOK());
 		}
-
-		// initially disable ok button, validation is running after each change
-		Button okButton = getButton(IDialogConstants.OK_ID);
-		if (okButton!=null)
-			okButton.setEnabled(false);
 
 		return bar;
 	}
