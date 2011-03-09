@@ -1018,26 +1018,28 @@
         <elements xsi:type="xtext:Assignment" feature="name" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
         </elements>
-        <elements xsi:type="xtext:Keyword" value="{"/>
         <elements xsi:type="xtext:Group" cardinality="?">
-          <elements xsi:type="xtext:Keyword" value="entry"/>
-          <elements xsi:type="xtext:Assignment" feature="entryCode" operator="=">
-            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.48"/>
+          <elements xsi:type="xtext:Keyword" value="{"/>
+          <elements xsi:type="xtext:Group" cardinality="?">
+            <elements xsi:type="xtext:Keyword" value="entry"/>
+            <elements xsi:type="xtext:Assignment" feature="entryCode" operator="=">
+              <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.48"/>
+            </elements>
           </elements>
-        </elements>
-        <elements xsi:type="xtext:Group" cardinality="?">
-          <elements xsi:type="xtext:Keyword" value="exit"/>
-          <elements xsi:type="xtext:Assignment" feature="exitCode" operator="=">
-            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.48"/>
+          <elements xsi:type="xtext:Group" cardinality="?">
+            <elements xsi:type="xtext:Keyword" value="exit"/>
+            <elements xsi:type="xtext:Assignment" feature="exitCode" operator="=">
+              <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.48"/>
+            </elements>
           </elements>
-        </elements>
-        <elements xsi:type="xtext:Group" cardinality="?">
-          <elements xsi:type="xtext:Keyword" value="subgraph"/>
-          <elements xsi:type="xtext:Assignment" feature="subgraph" operator="=">
-            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.44"/>
+          <elements xsi:type="xtext:Group" cardinality="?">
+            <elements xsi:type="xtext:Keyword" value="subgraph"/>
+            <elements xsi:type="xtext:Assignment" feature="subgraph" operator="=">
+              <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.44"/>
+            </elements>
           </elements>
+          <elements xsi:type="xtext:Keyword" value="}"/>
         </elements>
-        <elements xsi:type="xtext:Keyword" value="}"/>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="RefinedState">
@@ -1206,14 +1208,16 @@
         <elements xsi:type="xtext:Assignment" feature="to" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.60"/>
         </elements>
-        <elements xsi:type="xtext:Keyword" value="{"/>
         <elements xsi:type="xtext:Group" cardinality="?">
-          <elements xsi:type="xtext:Keyword" value="action"/>
-          <elements xsi:type="xtext:Assignment" feature="action" operator="=">
-            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.48"/>
+          <elements xsi:type="xtext:Keyword" value="{"/>
+          <elements xsi:type="xtext:Group" cardinality="?">
+            <elements xsi:type="xtext:Keyword" value="action"/>
+            <elements xsi:type="xtext:Assignment" feature="action" operator="=">
+              <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.48"/>
+            </elements>
           </elements>
+          <elements xsi:type="xtext:Keyword" value="}"/>
         </elements>
-        <elements xsi:type="xtext:Keyword" value="}"/>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="TriggeredTransition">

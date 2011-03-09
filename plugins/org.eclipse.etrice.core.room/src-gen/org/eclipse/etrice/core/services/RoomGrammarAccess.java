@@ -2286,31 +2286,33 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cStateKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
-		private final Keyword cLeftCurlyBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
-		private final Keyword cEntryKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
-		private final Assignment cEntryCodeAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
-		private final RuleCall cEntryCodeDetailCodeParserRuleCall_3_1_0 = (RuleCall)cEntryCodeAssignment_3_1.eContents().get(0);
-		private final Group cGroup_4 = (Group)cGroup.eContents().get(4);
-		private final Keyword cExitKeyword_4_0 = (Keyword)cGroup_4.eContents().get(0);
-		private final Assignment cExitCodeAssignment_4_1 = (Assignment)cGroup_4.eContents().get(1);
-		private final RuleCall cExitCodeDetailCodeParserRuleCall_4_1_0 = (RuleCall)cExitCodeAssignment_4_1.eContents().get(0);
-		private final Group cGroup_5 = (Group)cGroup.eContents().get(5);
-		private final Keyword cSubgraphKeyword_5_0 = (Keyword)cGroup_5.eContents().get(0);
-		private final Assignment cSubgraphAssignment_5_1 = (Assignment)cGroup_5.eContents().get(1);
-		private final RuleCall cSubgraphStateGraphParserRuleCall_5_1_0 = (RuleCall)cSubgraphAssignment_5_1.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_6 = (Keyword)cGroup.eContents().get(6);
+		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
+		private final Keyword cLeftCurlyBracketKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
+		private final Group cGroup_2_1 = (Group)cGroup_2.eContents().get(1);
+		private final Keyword cEntryKeyword_2_1_0 = (Keyword)cGroup_2_1.eContents().get(0);
+		private final Assignment cEntryCodeAssignment_2_1_1 = (Assignment)cGroup_2_1.eContents().get(1);
+		private final RuleCall cEntryCodeDetailCodeParserRuleCall_2_1_1_0 = (RuleCall)cEntryCodeAssignment_2_1_1.eContents().get(0);
+		private final Group cGroup_2_2 = (Group)cGroup_2.eContents().get(2);
+		private final Keyword cExitKeyword_2_2_0 = (Keyword)cGroup_2_2.eContents().get(0);
+		private final Assignment cExitCodeAssignment_2_2_1 = (Assignment)cGroup_2_2.eContents().get(1);
+		private final RuleCall cExitCodeDetailCodeParserRuleCall_2_2_1_0 = (RuleCall)cExitCodeAssignment_2_2_1.eContents().get(0);
+		private final Group cGroup_2_3 = (Group)cGroup_2.eContents().get(3);
+		private final Keyword cSubgraphKeyword_2_3_0 = (Keyword)cGroup_2_3.eContents().get(0);
+		private final Assignment cSubgraphAssignment_2_3_1 = (Assignment)cGroup_2_3.eContents().get(1);
+		private final RuleCall cSubgraphStateGraphParserRuleCall_2_3_1_0 = (RuleCall)cSubgraphAssignment_2_3_1.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_2_4 = (Keyword)cGroup_2.eContents().get(4);
 		
 		//// entry and exit code have multiplicity many: in BaseState to be able to add derived class codes here,
 		//
 		//// in RefinedState to still have both features in the common base class State
 		//
 		//BaseState:
-		//	"State" name=ID "{" ("entry" entryCode=DetailCode)? ("exit" exitCode=DetailCode)? ("subgraph" subgraph=StateGraph)?
-		//	"}";
+		//	"State" name=ID ("{" ("entry" entryCode=DetailCode)? ("exit" exitCode=DetailCode)? ("subgraph" subgraph=StateGraph)?
+		//	"}")?;
 		public ParserRule getRule() { return rule; }
 
-		//"State" name=ID "{" ("entry" entryCode=DetailCode)? ("exit" exitCode=DetailCode)? ("subgraph" subgraph=StateGraph)? "}"
+		//"State" name=ID ("{" ("entry" entryCode=DetailCode)? ("exit" exitCode=DetailCode)? ("subgraph" subgraph=StateGraph)?
+		//"}")?
 		public Group getGroup() { return cGroup; }
 
 		//"State"
@@ -2322,47 +2324,50 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 
+		//("{" ("entry" entryCode=DetailCode)? ("exit" exitCode=DetailCode)? ("subgraph" subgraph=StateGraph)? "}")?
+		public Group getGroup_2() { return cGroup_2; }
+
 		//"{"
-		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
+		public Keyword getLeftCurlyBracketKeyword_2_0() { return cLeftCurlyBracketKeyword_2_0; }
 
 		//("entry" entryCode=DetailCode)?
-		public Group getGroup_3() { return cGroup_3; }
+		public Group getGroup_2_1() { return cGroup_2_1; }
 
 		//"entry"
-		public Keyword getEntryKeyword_3_0() { return cEntryKeyword_3_0; }
+		public Keyword getEntryKeyword_2_1_0() { return cEntryKeyword_2_1_0; }
 
 		//entryCode=DetailCode
-		public Assignment getEntryCodeAssignment_3_1() { return cEntryCodeAssignment_3_1; }
+		public Assignment getEntryCodeAssignment_2_1_1() { return cEntryCodeAssignment_2_1_1; }
 
 		//DetailCode
-		public RuleCall getEntryCodeDetailCodeParserRuleCall_3_1_0() { return cEntryCodeDetailCodeParserRuleCall_3_1_0; }
+		public RuleCall getEntryCodeDetailCodeParserRuleCall_2_1_1_0() { return cEntryCodeDetailCodeParserRuleCall_2_1_1_0; }
 
 		//("exit" exitCode=DetailCode)?
-		public Group getGroup_4() { return cGroup_4; }
+		public Group getGroup_2_2() { return cGroup_2_2; }
 
 		//"exit"
-		public Keyword getExitKeyword_4_0() { return cExitKeyword_4_0; }
+		public Keyword getExitKeyword_2_2_0() { return cExitKeyword_2_2_0; }
 
 		//exitCode=DetailCode
-		public Assignment getExitCodeAssignment_4_1() { return cExitCodeAssignment_4_1; }
+		public Assignment getExitCodeAssignment_2_2_1() { return cExitCodeAssignment_2_2_1; }
 
 		//DetailCode
-		public RuleCall getExitCodeDetailCodeParserRuleCall_4_1_0() { return cExitCodeDetailCodeParserRuleCall_4_1_0; }
+		public RuleCall getExitCodeDetailCodeParserRuleCall_2_2_1_0() { return cExitCodeDetailCodeParserRuleCall_2_2_1_0; }
 
 		//("subgraph" subgraph=StateGraph)?
-		public Group getGroup_5() { return cGroup_5; }
+		public Group getGroup_2_3() { return cGroup_2_3; }
 
 		//"subgraph"
-		public Keyword getSubgraphKeyword_5_0() { return cSubgraphKeyword_5_0; }
+		public Keyword getSubgraphKeyword_2_3_0() { return cSubgraphKeyword_2_3_0; }
 
 		//subgraph=StateGraph
-		public Assignment getSubgraphAssignment_5_1() { return cSubgraphAssignment_5_1; }
+		public Assignment getSubgraphAssignment_2_3_1() { return cSubgraphAssignment_2_3_1; }
 
 		//StateGraph
-		public RuleCall getSubgraphStateGraphParserRuleCall_5_1_0() { return cSubgraphStateGraphParserRuleCall_5_1_0; }
+		public RuleCall getSubgraphStateGraphParserRuleCall_2_3_1_0() { return cSubgraphStateGraphParserRuleCall_2_3_1_0; }
 
 		//"}"
-		public Keyword getRightCurlyBracketKeyword_6() { return cRightCurlyBracketKeyword_6; }
+		public Keyword getRightCurlyBracketKeyword_2_4() { return cRightCurlyBracketKeyword_2_4; }
 	}
 
 	public class RefinedStateElements extends AbstractParserRuleElementFinder {
@@ -2735,18 +2740,19 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cHyphenMinusGreaterThanSignKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		private final Assignment cToAssignment_5 = (Assignment)cGroup.eContents().get(5);
 		private final RuleCall cToTransitionTerminalParserRuleCall_5_0 = (RuleCall)cToAssignment_5.eContents().get(0);
-		private final Keyword cLeftCurlyBracketKeyword_6 = (Keyword)cGroup.eContents().get(6);
-		private final Group cGroup_7 = (Group)cGroup.eContents().get(7);
-		private final Keyword cActionKeyword_7_0 = (Keyword)cGroup_7.eContents().get(0);
-		private final Assignment cActionAssignment_7_1 = (Assignment)cGroup_7.eContents().get(1);
-		private final RuleCall cActionDetailCodeParserRuleCall_7_1_0 = (RuleCall)cActionAssignment_7_1.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_8 = (Keyword)cGroup.eContents().get(8);
+		private final Group cGroup_6 = (Group)cGroup.eContents().get(6);
+		private final Keyword cLeftCurlyBracketKeyword_6_0 = (Keyword)cGroup_6.eContents().get(0);
+		private final Group cGroup_6_1 = (Group)cGroup_6.eContents().get(1);
+		private final Keyword cActionKeyword_6_1_0 = (Keyword)cGroup_6_1.eContents().get(0);
+		private final Assignment cActionAssignment_6_1_1 = (Assignment)cGroup_6_1.eContents().get(1);
+		private final RuleCall cActionDetailCodeParserRuleCall_6_1_1_0 = (RuleCall)cActionAssignment_6_1_1.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_6_2 = (Keyword)cGroup_6.eContents().get(2);
 		
 		//ContinuationTransition:
-		//	"Transition" name=ID? ":" from=TransitionTerminal "->" to=TransitionTerminal "{" ("action" action=DetailCode)? "}";
+		//	"Transition" name=ID? ":" from=TransitionTerminal "->" to=TransitionTerminal ("{" ("action" action=DetailCode)? "}")?;
 		public ParserRule getRule() { return rule; }
 
-		//"Transition" name=ID? ":" from=TransitionTerminal "->" to=TransitionTerminal "{" ("action" action=DetailCode)? "}"
+		//"Transition" name=ID? ":" from=TransitionTerminal "->" to=TransitionTerminal ("{" ("action" action=DetailCode)? "}")?
 		public Group getGroup() { return cGroup; }
 
 		//"Transition"
@@ -2776,23 +2782,26 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		//TransitionTerminal
 		public RuleCall getToTransitionTerminalParserRuleCall_5_0() { return cToTransitionTerminalParserRuleCall_5_0; }
 
+		//("{" ("action" action=DetailCode)? "}")?
+		public Group getGroup_6() { return cGroup_6; }
+
 		//"{"
-		public Keyword getLeftCurlyBracketKeyword_6() { return cLeftCurlyBracketKeyword_6; }
+		public Keyword getLeftCurlyBracketKeyword_6_0() { return cLeftCurlyBracketKeyword_6_0; }
 
 		//("action" action=DetailCode)?
-		public Group getGroup_7() { return cGroup_7; }
+		public Group getGroup_6_1() { return cGroup_6_1; }
 
 		//"action"
-		public Keyword getActionKeyword_7_0() { return cActionKeyword_7_0; }
+		public Keyword getActionKeyword_6_1_0() { return cActionKeyword_6_1_0; }
 
 		//action=DetailCode
-		public Assignment getActionAssignment_7_1() { return cActionAssignment_7_1; }
+		public Assignment getActionAssignment_6_1_1() { return cActionAssignment_6_1_1; }
 
 		//DetailCode
-		public RuleCall getActionDetailCodeParserRuleCall_7_1_0() { return cActionDetailCodeParserRuleCall_7_1_0; }
+		public RuleCall getActionDetailCodeParserRuleCall_6_1_1_0() { return cActionDetailCodeParserRuleCall_6_1_1_0; }
 
 		//"}"
-		public Keyword getRightCurlyBracketKeyword_8() { return cRightCurlyBracketKeyword_8; }
+		public Keyword getRightCurlyBracketKeyword_6_2() { return cRightCurlyBracketKeyword_6_2; }
 	}
 
 	public class TriggeredTransitionElements extends AbstractParserRuleElementFinder {
@@ -4083,8 +4092,8 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//// in RefinedState to still have both features in the common base class State
 	//
 	//BaseState:
-	//	"State" name=ID "{" ("entry" entryCode=DetailCode)? ("exit" exitCode=DetailCode)? ("subgraph" subgraph=StateGraph)?
-	//	"}";
+	//	"State" name=ID ("{" ("entry" entryCode=DetailCode)? ("exit" exitCode=DetailCode)? ("subgraph" subgraph=StateGraph)?
+	//	"}")?;
 	public BaseStateElements getBaseStateAccess() {
 		return (pBaseState != null) ? pBaseState : (pBaseState = new BaseStateElements());
 	}
@@ -4199,7 +4208,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//ContinuationTransition:
-	//	"Transition" name=ID? ":" from=TransitionTerminal "->" to=TransitionTerminal "{" ("action" action=DetailCode)? "}";
+	//	"Transition" name=ID? ":" from=TransitionTerminal "->" to=TransitionTerminal ("{" ("action" action=DetailCode)? "}")?;
 	public ContinuationTransitionElements getContinuationTransitionAccess() {
 		return (pContinuationTransition != null) ? pContinuationTransition : (pContinuationTransition = new ContinuationTransitionElements());
 	}

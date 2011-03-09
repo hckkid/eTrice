@@ -4236,18 +4236,18 @@ ruleBaseState returns [EObject current=null]
 	    }
 
 )
-)	'{' 
+)(	'{' 
     {
-        createLeafNode(grammarAccess.getBaseStateAccess().getLeftCurlyBracketKeyword_2(), null); 
+        createLeafNode(grammarAccess.getBaseStateAccess().getLeftCurlyBracketKeyword_2_0(), null); 
     }
 (	'entry' 
     {
-        createLeafNode(grammarAccess.getBaseStateAccess().getEntryKeyword_3_0(), null); 
+        createLeafNode(grammarAccess.getBaseStateAccess().getEntryKeyword_2_1_0(), null); 
     }
 (
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getBaseStateAccess().getEntryCodeDetailCodeParserRuleCall_3_1_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getBaseStateAccess().getEntryCodeDetailCodeParserRuleCall_2_1_1_0(), currentNode); 
 	    }
 		lv_entryCode_4_0=ruleDetailCode		{
 	        if ($current==null) {
@@ -4270,12 +4270,12 @@ ruleBaseState returns [EObject current=null]
 )
 ))?(	'exit' 
     {
-        createLeafNode(grammarAccess.getBaseStateAccess().getExitKeyword_4_0(), null); 
+        createLeafNode(grammarAccess.getBaseStateAccess().getExitKeyword_2_2_0(), null); 
     }
 (
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getBaseStateAccess().getExitCodeDetailCodeParserRuleCall_4_1_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getBaseStateAccess().getExitCodeDetailCodeParserRuleCall_2_2_1_0(), currentNode); 
 	    }
 		lv_exitCode_6_0=ruleDetailCode		{
 	        if ($current==null) {
@@ -4298,12 +4298,12 @@ ruleBaseState returns [EObject current=null]
 )
 ))?(	'subgraph' 
     {
-        createLeafNode(grammarAccess.getBaseStateAccess().getSubgraphKeyword_5_0(), null); 
+        createLeafNode(grammarAccess.getBaseStateAccess().getSubgraphKeyword_2_3_0(), null); 
     }
 (
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getBaseStateAccess().getSubgraphStateGraphParserRuleCall_5_1_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getBaseStateAccess().getSubgraphStateGraphParserRuleCall_2_3_1_0(), currentNode); 
 	    }
 		lv_subgraph_8_0=ruleStateGraph		{
 	        if ($current==null) {
@@ -4326,9 +4326,9 @@ ruleBaseState returns [EObject current=null]
 )
 ))?	'}' 
     {
-        createLeafNode(grammarAccess.getBaseStateAccess().getRightCurlyBracketKeyword_6(), null); 
+        createLeafNode(grammarAccess.getBaseStateAccess().getRightCurlyBracketKeyword_2_4(), null); 
     }
-)
+)?)
 ;
 
 
@@ -5119,18 +5119,18 @@ ruleContinuationTransition returns [EObject current=null]
 	    }
 
 )
-)	'{' 
+)(	'{' 
     {
-        createLeafNode(grammarAccess.getContinuationTransitionAccess().getLeftCurlyBracketKeyword_6(), null); 
+        createLeafNode(grammarAccess.getContinuationTransitionAccess().getLeftCurlyBracketKeyword_6_0(), null); 
     }
 (	'action' 
     {
-        createLeafNode(grammarAccess.getContinuationTransitionAccess().getActionKeyword_7_0(), null); 
+        createLeafNode(grammarAccess.getContinuationTransitionAccess().getActionKeyword_6_1_0(), null); 
     }
 (
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getContinuationTransitionAccess().getActionDetailCodeParserRuleCall_7_1_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getContinuationTransitionAccess().getActionDetailCodeParserRuleCall_6_1_1_0(), currentNode); 
 	    }
 		lv_action_8_0=ruleDetailCode		{
 	        if ($current==null) {
@@ -5153,9 +5153,9 @@ ruleContinuationTransition returns [EObject current=null]
 )
 ))?	'}' 
     {
-        createLeafNode(grammarAccess.getContinuationTransitionAccess().getRightCurlyBracketKeyword_8(), null); 
+        createLeafNode(grammarAccess.getContinuationTransitionAccess().getRightCurlyBracketKeyword_6_2(), null); 
     }
-)
+)?)
 ;
 
 

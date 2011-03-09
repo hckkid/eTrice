@@ -9196,7 +9196,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start ruleBaseState
-    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4205:1: ruleBaseState returns [EObject current=null] : ( 'State' ( (lv_name_1_0= RULE_ID ) ) '{' ( 'entry' ( (lv_entryCode_4_0= ruleDetailCode ) ) )? ( 'exit' ( (lv_exitCode_6_0= ruleDetailCode ) ) )? ( 'subgraph' ( (lv_subgraph_8_0= ruleStateGraph ) ) )? '}' ) ;
+    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4205:1: ruleBaseState returns [EObject current=null] : ( 'State' ( (lv_name_1_0= RULE_ID ) ) ( '{' ( 'entry' ( (lv_entryCode_4_0= ruleDetailCode ) ) )? ( 'exit' ( (lv_exitCode_6_0= ruleDetailCode ) ) )? ( 'subgraph' ( (lv_subgraph_8_0= ruleStateGraph ) ) )? '}' )? ) ;
     public final EObject ruleBaseState() throws RecognitionException {
         EObject current = null;
 
@@ -9211,11 +9211,11 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4210:6: ( ( 'State' ( (lv_name_1_0= RULE_ID ) ) '{' ( 'entry' ( (lv_entryCode_4_0= ruleDetailCode ) ) )? ( 'exit' ( (lv_exitCode_6_0= ruleDetailCode ) ) )? ( 'subgraph' ( (lv_subgraph_8_0= ruleStateGraph ) ) )? '}' ) )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4211:1: ( 'State' ( (lv_name_1_0= RULE_ID ) ) '{' ( 'entry' ( (lv_entryCode_4_0= ruleDetailCode ) ) )? ( 'exit' ( (lv_exitCode_6_0= ruleDetailCode ) ) )? ( 'subgraph' ( (lv_subgraph_8_0= ruleStateGraph ) ) )? '}' )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4210:6: ( ( 'State' ( (lv_name_1_0= RULE_ID ) ) ( '{' ( 'entry' ( (lv_entryCode_4_0= ruleDetailCode ) ) )? ( 'exit' ( (lv_exitCode_6_0= ruleDetailCode ) ) )? ( 'subgraph' ( (lv_subgraph_8_0= ruleStateGraph ) ) )? '}' )? ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4211:1: ( 'State' ( (lv_name_1_0= RULE_ID ) ) ( '{' ( 'entry' ( (lv_entryCode_4_0= ruleDetailCode ) ) )? ( 'exit' ( (lv_exitCode_6_0= ruleDetailCode ) ) )? ( 'subgraph' ( (lv_subgraph_8_0= ruleStateGraph ) ) )? '}' )? )
             {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4211:1: ( 'State' ( (lv_name_1_0= RULE_ID ) ) '{' ( 'entry' ( (lv_entryCode_4_0= ruleDetailCode ) ) )? ( 'exit' ( (lv_exitCode_6_0= ruleDetailCode ) ) )? ( 'subgraph' ( (lv_subgraph_8_0= ruleStateGraph ) ) )? '}' )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4211:3: 'State' ( (lv_name_1_0= RULE_ID ) ) '{' ( 'entry' ( (lv_entryCode_4_0= ruleDetailCode ) ) )? ( 'exit' ( (lv_exitCode_6_0= ruleDetailCode ) ) )? ( 'subgraph' ( (lv_subgraph_8_0= ruleStateGraph ) ) )? '}'
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4211:1: ( 'State' ( (lv_name_1_0= RULE_ID ) ) ( '{' ( 'entry' ( (lv_entryCode_4_0= ruleDetailCode ) ) )? ( 'exit' ( (lv_exitCode_6_0= ruleDetailCode ) ) )? ( 'subgraph' ( (lv_subgraph_8_0= ruleStateGraph ) ) )? '}' )? )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4211:3: 'State' ( (lv_name_1_0= RULE_ID ) ) ( '{' ( 'entry' ( (lv_entryCode_4_0= ruleDetailCode ) ) )? ( 'exit' ( (lv_exitCode_6_0= ruleDetailCode ) ) )? ( 'subgraph' ( (lv_subgraph_8_0= ruleStateGraph ) ) )? '}' )?
             {
             match(input,64,FOLLOW_64_in_ruleBaseState7101); 
 
@@ -9254,185 +9254,202 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            match(input,12,FOLLOW_12_in_ruleBaseState7133); 
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4239:2: ( '{' ( 'entry' ( (lv_entryCode_4_0= ruleDetailCode ) ) )? ( 'exit' ( (lv_exitCode_6_0= ruleDetailCode ) ) )? ( 'subgraph' ( (lv_subgraph_8_0= ruleStateGraph ) ) )? '}' )?
+            int alt71=2;
+            int LA71_0 = input.LA(1);
 
-                    createLeafNode(grammarAccess.getBaseStateAccess().getLeftCurlyBracketKeyword_2(), null); 
-                
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4243:1: ( 'entry' ( (lv_entryCode_4_0= ruleDetailCode ) ) )?
-            int alt68=2;
-            int LA68_0 = input.LA(1);
-
-            if ( (LA68_0==65) ) {
-                alt68=1;
+            if ( (LA71_0==12) ) {
+                alt71=1;
             }
-            switch (alt68) {
+            switch (alt71) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4243:3: 'entry' ( (lv_entryCode_4_0= ruleDetailCode ) )
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4239:4: '{' ( 'entry' ( (lv_entryCode_4_0= ruleDetailCode ) ) )? ( 'exit' ( (lv_exitCode_6_0= ruleDetailCode ) ) )? ( 'subgraph' ( (lv_subgraph_8_0= ruleStateGraph ) ) )? '}'
                     {
-                    match(input,65,FOLLOW_65_in_ruleBaseState7144); 
+                    match(input,12,FOLLOW_12_in_ruleBaseState7134); 
 
-                            createLeafNode(grammarAccess.getBaseStateAccess().getEntryKeyword_3_0(), null); 
+                            createLeafNode(grammarAccess.getBaseStateAccess().getLeftCurlyBracketKeyword_2_0(), null); 
                         
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4247:1: ( (lv_entryCode_4_0= ruleDetailCode ) )
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4248:1: (lv_entryCode_4_0= ruleDetailCode )
-                    {
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4248:1: (lv_entryCode_4_0= ruleDetailCode )
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4249:3: lv_entryCode_4_0= ruleDetailCode
-                    {
-                     
-                    	        currentNode=createCompositeNode(grammarAccess.getBaseStateAccess().getEntryCodeDetailCodeParserRuleCall_3_1_0(), currentNode); 
-                    	    
-                    pushFollow(FOLLOW_ruleDetailCode_in_ruleBaseState7165);
-                    lv_entryCode_4_0=ruleDetailCode();
-                    _fsp--;
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4243:1: ( 'entry' ( (lv_entryCode_4_0= ruleDetailCode ) ) )?
+                    int alt68=2;
+                    int LA68_0 = input.LA(1);
+
+                    if ( (LA68_0==65) ) {
+                        alt68=1;
+                    }
+                    switch (alt68) {
+                        case 1 :
+                            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4243:3: 'entry' ( (lv_entryCode_4_0= ruleDetailCode ) )
+                            {
+                            match(input,65,FOLLOW_65_in_ruleBaseState7145); 
+
+                                    createLeafNode(grammarAccess.getBaseStateAccess().getEntryKeyword_2_1_0(), null); 
+                                
+                            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4247:1: ( (lv_entryCode_4_0= ruleDetailCode ) )
+                            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4248:1: (lv_entryCode_4_0= ruleDetailCode )
+                            {
+                            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4248:1: (lv_entryCode_4_0= ruleDetailCode )
+                            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4249:3: lv_entryCode_4_0= ruleDetailCode
+                            {
+                             
+                            	        currentNode=createCompositeNode(grammarAccess.getBaseStateAccess().getEntryCodeDetailCodeParserRuleCall_2_1_1_0(), currentNode); 
+                            	    
+                            pushFollow(FOLLOW_ruleDetailCode_in_ruleBaseState7166);
+                            lv_entryCode_4_0=ruleDetailCode();
+                            _fsp--;
 
 
-                    	        if (current==null) {
-                    	            current = factory.create(grammarAccess.getBaseStateRule().getType().getClassifier());
-                    	            associateNodeWithAstElement(currentNode.getParent(), current);
-                    	        }
-                    	        try {
-                    	       		set(
-                    	       			current, 
-                    	       			"entryCode",
-                    	        		lv_entryCode_4_0, 
-                    	        		"DetailCode", 
-                    	        		currentNode);
-                    	        } catch (ValueConverterException vce) {
-                    				handleValueConverterException(vce);
-                    	        }
-                    	        currentNode = currentNode.getParent();
-                    	    
+                            	        if (current==null) {
+                            	            current = factory.create(grammarAccess.getBaseStateRule().getType().getClassifier());
+                            	            associateNodeWithAstElement(currentNode.getParent(), current);
+                            	        }
+                            	        try {
+                            	       		set(
+                            	       			current, 
+                            	       			"entryCode",
+                            	        		lv_entryCode_4_0, 
+                            	        		"DetailCode", 
+                            	        		currentNode);
+                            	        } catch (ValueConverterException vce) {
+                            				handleValueConverterException(vce);
+                            	        }
+                            	        currentNode = currentNode.getParent();
+                            	    
+
+                            }
+
+
+                            }
+
+
+                            }
+                            break;
 
                     }
 
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4271:4: ( 'exit' ( (lv_exitCode_6_0= ruleDetailCode ) ) )?
+                    int alt69=2;
+                    int LA69_0 = input.LA(1);
+
+                    if ( (LA69_0==66) ) {
+                        alt69=1;
+                    }
+                    switch (alt69) {
+                        case 1 :
+                            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4271:6: 'exit' ( (lv_exitCode_6_0= ruleDetailCode ) )
+                            {
+                            match(input,66,FOLLOW_66_in_ruleBaseState7179); 
+
+                                    createLeafNode(grammarAccess.getBaseStateAccess().getExitKeyword_2_2_0(), null); 
+                                
+                            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4275:1: ( (lv_exitCode_6_0= ruleDetailCode ) )
+                            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4276:1: (lv_exitCode_6_0= ruleDetailCode )
+                            {
+                            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4276:1: (lv_exitCode_6_0= ruleDetailCode )
+                            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4277:3: lv_exitCode_6_0= ruleDetailCode
+                            {
+                             
+                            	        currentNode=createCompositeNode(grammarAccess.getBaseStateAccess().getExitCodeDetailCodeParserRuleCall_2_2_1_0(), currentNode); 
+                            	    
+                            pushFollow(FOLLOW_ruleDetailCode_in_ruleBaseState7200);
+                            lv_exitCode_6_0=ruleDetailCode();
+                            _fsp--;
+
+
+                            	        if (current==null) {
+                            	            current = factory.create(grammarAccess.getBaseStateRule().getType().getClassifier());
+                            	            associateNodeWithAstElement(currentNode.getParent(), current);
+                            	        }
+                            	        try {
+                            	       		set(
+                            	       			current, 
+                            	       			"exitCode",
+                            	        		lv_exitCode_6_0, 
+                            	        		"DetailCode", 
+                            	        		currentNode);
+                            	        } catch (ValueConverterException vce) {
+                            				handleValueConverterException(vce);
+                            	        }
+                            	        currentNode = currentNode.getParent();
+                            	    
+
+                            }
+
+
+                            }
+
+
+                            }
+                            break;
 
                     }
 
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4299:4: ( 'subgraph' ( (lv_subgraph_8_0= ruleStateGraph ) ) )?
+                    int alt70=2;
+                    int LA70_0 = input.LA(1);
+
+                    if ( (LA70_0==67) ) {
+                        alt70=1;
+                    }
+                    switch (alt70) {
+                        case 1 :
+                            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4299:6: 'subgraph' ( (lv_subgraph_8_0= ruleStateGraph ) )
+                            {
+                            match(input,67,FOLLOW_67_in_ruleBaseState7213); 
+
+                                    createLeafNode(grammarAccess.getBaseStateAccess().getSubgraphKeyword_2_3_0(), null); 
+                                
+                            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4303:1: ( (lv_subgraph_8_0= ruleStateGraph ) )
+                            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4304:1: (lv_subgraph_8_0= ruleStateGraph )
+                            {
+                            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4304:1: (lv_subgraph_8_0= ruleStateGraph )
+                            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4305:3: lv_subgraph_8_0= ruleStateGraph
+                            {
+                             
+                            	        currentNode=createCompositeNode(grammarAccess.getBaseStateAccess().getSubgraphStateGraphParserRuleCall_2_3_1_0(), currentNode); 
+                            	    
+                            pushFollow(FOLLOW_ruleStateGraph_in_ruleBaseState7234);
+                            lv_subgraph_8_0=ruleStateGraph();
+                            _fsp--;
+
+
+                            	        if (current==null) {
+                            	            current = factory.create(grammarAccess.getBaseStateRule().getType().getClassifier());
+                            	            associateNodeWithAstElement(currentNode.getParent(), current);
+                            	        }
+                            	        try {
+                            	       		set(
+                            	       			current, 
+                            	       			"subgraph",
+                            	        		lv_subgraph_8_0, 
+                            	        		"StateGraph", 
+                            	        		currentNode);
+                            	        } catch (ValueConverterException vce) {
+                            				handleValueConverterException(vce);
+                            	        }
+                            	        currentNode = currentNode.getParent();
+                            	    
+
+                            }
+
+
+                            }
+
+
+                            }
+                            break;
+
+                    }
+
+                    match(input,13,FOLLOW_13_in_ruleBaseState7246); 
+
+                            createLeafNode(grammarAccess.getBaseStateAccess().getRightCurlyBracketKeyword_2_4(), null); 
+                        
 
                     }
                     break;
 
             }
 
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4271:4: ( 'exit' ( (lv_exitCode_6_0= ruleDetailCode ) ) )?
-            int alt69=2;
-            int LA69_0 = input.LA(1);
-
-            if ( (LA69_0==66) ) {
-                alt69=1;
-            }
-            switch (alt69) {
-                case 1 :
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4271:6: 'exit' ( (lv_exitCode_6_0= ruleDetailCode ) )
-                    {
-                    match(input,66,FOLLOW_66_in_ruleBaseState7178); 
-
-                            createLeafNode(grammarAccess.getBaseStateAccess().getExitKeyword_4_0(), null); 
-                        
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4275:1: ( (lv_exitCode_6_0= ruleDetailCode ) )
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4276:1: (lv_exitCode_6_0= ruleDetailCode )
-                    {
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4276:1: (lv_exitCode_6_0= ruleDetailCode )
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4277:3: lv_exitCode_6_0= ruleDetailCode
-                    {
-                     
-                    	        currentNode=createCompositeNode(grammarAccess.getBaseStateAccess().getExitCodeDetailCodeParserRuleCall_4_1_0(), currentNode); 
-                    	    
-                    pushFollow(FOLLOW_ruleDetailCode_in_ruleBaseState7199);
-                    lv_exitCode_6_0=ruleDetailCode();
-                    _fsp--;
-
-
-                    	        if (current==null) {
-                    	            current = factory.create(grammarAccess.getBaseStateRule().getType().getClassifier());
-                    	            associateNodeWithAstElement(currentNode.getParent(), current);
-                    	        }
-                    	        try {
-                    	       		set(
-                    	       			current, 
-                    	       			"exitCode",
-                    	        		lv_exitCode_6_0, 
-                    	        		"DetailCode", 
-                    	        		currentNode);
-                    	        } catch (ValueConverterException vce) {
-                    				handleValueConverterException(vce);
-                    	        }
-                    	        currentNode = currentNode.getParent();
-                    	    
-
-                    }
-
-
-                    }
-
-
-                    }
-                    break;
-
-            }
-
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4299:4: ( 'subgraph' ( (lv_subgraph_8_0= ruleStateGraph ) ) )?
-            int alt70=2;
-            int LA70_0 = input.LA(1);
-
-            if ( (LA70_0==67) ) {
-                alt70=1;
-            }
-            switch (alt70) {
-                case 1 :
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4299:6: 'subgraph' ( (lv_subgraph_8_0= ruleStateGraph ) )
-                    {
-                    match(input,67,FOLLOW_67_in_ruleBaseState7212); 
-
-                            createLeafNode(grammarAccess.getBaseStateAccess().getSubgraphKeyword_5_0(), null); 
-                        
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4303:1: ( (lv_subgraph_8_0= ruleStateGraph ) )
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4304:1: (lv_subgraph_8_0= ruleStateGraph )
-                    {
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4304:1: (lv_subgraph_8_0= ruleStateGraph )
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4305:3: lv_subgraph_8_0= ruleStateGraph
-                    {
-                     
-                    	        currentNode=createCompositeNode(grammarAccess.getBaseStateAccess().getSubgraphStateGraphParserRuleCall_5_1_0(), currentNode); 
-                    	    
-                    pushFollow(FOLLOW_ruleStateGraph_in_ruleBaseState7233);
-                    lv_subgraph_8_0=ruleStateGraph();
-                    _fsp--;
-
-
-                    	        if (current==null) {
-                    	            current = factory.create(grammarAccess.getBaseStateRule().getType().getClassifier());
-                    	            associateNodeWithAstElement(currentNode.getParent(), current);
-                    	        }
-                    	        try {
-                    	       		set(
-                    	       			current, 
-                    	       			"subgraph",
-                    	        		lv_subgraph_8_0, 
-                    	        		"StateGraph", 
-                    	        		currentNode);
-                    	        } catch (ValueConverterException vce) {
-                    				handleValueConverterException(vce);
-                    	        }
-                    	        currentNode = currentNode.getParent();
-                    	    
-
-                    }
-
-
-                    }
-
-
-                    }
-                    break;
-
-            }
-
-            match(input,13,FOLLOW_13_in_ruleBaseState7245); 
-
-                    createLeafNode(grammarAccess.getBaseStateAccess().getRightCurlyBracketKeyword_6(), null); 
-                
 
             }
 
@@ -9468,12 +9485,12 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4341:2: iv_ruleRefinedState= ruleRefinedState EOF
             {
              currentNode = createCompositeNode(grammarAccess.getRefinedStateRule(), currentNode); 
-            pushFollow(FOLLOW_ruleRefinedState_in_entryRuleRefinedState7281);
+            pushFollow(FOLLOW_ruleRefinedState_in_entryRuleRefinedState7284);
             iv_ruleRefinedState=ruleRefinedState();
             _fsp--;
 
              current =iv_ruleRefinedState; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleRefinedState7291); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleRefinedState7294); 
 
             }
 
@@ -9511,7 +9528,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4354:1: ( 'RefinedState' ( ( ruleFQN ) ) '{' ( 'entry' ( (lv_entryCode_4_0= ruleDetailCode ) ) )? ( 'exit' ( (lv_exitCode_6_0= ruleDetailCode ) ) )? ( 'subgraph' ( (lv_subgraph_8_0= ruleStateGraph ) ) )? '}' )
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4354:3: 'RefinedState' ( ( ruleFQN ) ) '{' ( 'entry' ( (lv_entryCode_4_0= ruleDetailCode ) ) )? ( 'exit' ( (lv_exitCode_6_0= ruleDetailCode ) ) )? ( 'subgraph' ( (lv_subgraph_8_0= ruleStateGraph ) ) )? '}'
             {
-            match(input,68,FOLLOW_68_in_ruleRefinedState7326); 
+            match(input,68,FOLLOW_68_in_ruleRefinedState7329); 
 
                     createLeafNode(grammarAccess.getRefinedStateAccess().getRefinedStateKeyword_0(), null); 
                 
@@ -9530,7 +9547,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
              
             	        currentNode=createCompositeNode(grammarAccess.getRefinedStateAccess().getBaseBaseStateCrossReference_1_0(), currentNode); 
             	    
-            pushFollow(FOLLOW_ruleFQN_in_ruleRefinedState7349);
+            pushFollow(FOLLOW_ruleFQN_in_ruleRefinedState7352);
             ruleFQN();
             _fsp--;
 
@@ -9543,22 +9560,22 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            match(input,12,FOLLOW_12_in_ruleRefinedState7359); 
+            match(input,12,FOLLOW_12_in_ruleRefinedState7362); 
 
                     createLeafNode(grammarAccess.getRefinedStateAccess().getLeftCurlyBracketKeyword_2(), null); 
                 
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4378:1: ( 'entry' ( (lv_entryCode_4_0= ruleDetailCode ) ) )?
-            int alt71=2;
-            int LA71_0 = input.LA(1);
+            int alt72=2;
+            int LA72_0 = input.LA(1);
 
-            if ( (LA71_0==65) ) {
-                alt71=1;
+            if ( (LA72_0==65) ) {
+                alt72=1;
             }
-            switch (alt71) {
+            switch (alt72) {
                 case 1 :
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4378:3: 'entry' ( (lv_entryCode_4_0= ruleDetailCode ) )
                     {
-                    match(input,65,FOLLOW_65_in_ruleRefinedState7370); 
+                    match(input,65,FOLLOW_65_in_ruleRefinedState7373); 
 
                             createLeafNode(grammarAccess.getRefinedStateAccess().getEntryKeyword_3_0(), null); 
                         
@@ -9571,7 +9588,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                     	        currentNode=createCompositeNode(grammarAccess.getRefinedStateAccess().getEntryCodeDetailCodeParserRuleCall_3_1_0(), currentNode); 
                     	    
-                    pushFollow(FOLLOW_ruleDetailCode_in_ruleRefinedState7391);
+                    pushFollow(FOLLOW_ruleDetailCode_in_ruleRefinedState7394);
                     lv_entryCode_4_0=ruleDetailCode();
                     _fsp--;
 
@@ -9605,17 +9622,17 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             }
 
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4406:4: ( 'exit' ( (lv_exitCode_6_0= ruleDetailCode ) ) )?
-            int alt72=2;
-            int LA72_0 = input.LA(1);
+            int alt73=2;
+            int LA73_0 = input.LA(1);
 
-            if ( (LA72_0==66) ) {
-                alt72=1;
+            if ( (LA73_0==66) ) {
+                alt73=1;
             }
-            switch (alt72) {
+            switch (alt73) {
                 case 1 :
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4406:6: 'exit' ( (lv_exitCode_6_0= ruleDetailCode ) )
                     {
-                    match(input,66,FOLLOW_66_in_ruleRefinedState7404); 
+                    match(input,66,FOLLOW_66_in_ruleRefinedState7407); 
 
                             createLeafNode(grammarAccess.getRefinedStateAccess().getExitKeyword_4_0(), null); 
                         
@@ -9628,7 +9645,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                     	        currentNode=createCompositeNode(grammarAccess.getRefinedStateAccess().getExitCodeDetailCodeParserRuleCall_4_1_0(), currentNode); 
                     	    
-                    pushFollow(FOLLOW_ruleDetailCode_in_ruleRefinedState7425);
+                    pushFollow(FOLLOW_ruleDetailCode_in_ruleRefinedState7428);
                     lv_exitCode_6_0=ruleDetailCode();
                     _fsp--;
 
@@ -9662,17 +9679,17 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             }
 
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4434:4: ( 'subgraph' ( (lv_subgraph_8_0= ruleStateGraph ) ) )?
-            int alt73=2;
-            int LA73_0 = input.LA(1);
+            int alt74=2;
+            int LA74_0 = input.LA(1);
 
-            if ( (LA73_0==67) ) {
-                alt73=1;
+            if ( (LA74_0==67) ) {
+                alt74=1;
             }
-            switch (alt73) {
+            switch (alt74) {
                 case 1 :
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4434:6: 'subgraph' ( (lv_subgraph_8_0= ruleStateGraph ) )
                     {
-                    match(input,67,FOLLOW_67_in_ruleRefinedState7438); 
+                    match(input,67,FOLLOW_67_in_ruleRefinedState7441); 
 
                             createLeafNode(grammarAccess.getRefinedStateAccess().getSubgraphKeyword_5_0(), null); 
                         
@@ -9685,7 +9702,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                     	        currentNode=createCompositeNode(grammarAccess.getRefinedStateAccess().getSubgraphStateGraphParserRuleCall_5_1_0(), currentNode); 
                     	    
-                    pushFollow(FOLLOW_ruleStateGraph_in_ruleRefinedState7459);
+                    pushFollow(FOLLOW_ruleStateGraph_in_ruleRefinedState7462);
                     lv_subgraph_8_0=ruleStateGraph();
                     _fsp--;
 
@@ -9718,7 +9735,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            match(input,13,FOLLOW_13_in_ruleRefinedState7471); 
+            match(input,13,FOLLOW_13_in_ruleRefinedState7474); 
 
                     createLeafNode(grammarAccess.getRefinedStateAccess().getRightCurlyBracketKeyword_6(), null); 
                 
@@ -9757,12 +9774,12 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4476:2: iv_ruleDetailCode= ruleDetailCode EOF
             {
              currentNode = createCompositeNode(grammarAccess.getDetailCodeRule(), currentNode); 
-            pushFollow(FOLLOW_ruleDetailCode_in_entryRuleDetailCode7507);
+            pushFollow(FOLLOW_ruleDetailCode_in_entryRuleDetailCode7510);
             iv_ruleDetailCode=ruleDetailCode();
             _fsp--;
 
              current =iv_ruleDetailCode; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleDetailCode7517); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleDetailCode7520); 
 
             }
 
@@ -9795,23 +9812,23 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4489:1: ( '{' ( (lv_commands_1_0= RULE_STRING ) )+ '}' )
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4489:3: '{' ( (lv_commands_1_0= RULE_STRING ) )+ '}'
             {
-            match(input,12,FOLLOW_12_in_ruleDetailCode7552); 
+            match(input,12,FOLLOW_12_in_ruleDetailCode7555); 
 
                     createLeafNode(grammarAccess.getDetailCodeAccess().getLeftCurlyBracketKeyword_0(), null); 
                 
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4493:1: ( (lv_commands_1_0= RULE_STRING ) )+
-            int cnt74=0;
-            loop74:
+            int cnt75=0;
+            loop75:
             do {
-                int alt74=2;
-                int LA74_0 = input.LA(1);
+                int alt75=2;
+                int LA75_0 = input.LA(1);
 
-                if ( (LA74_0==RULE_STRING) ) {
-                    alt74=1;
+                if ( (LA75_0==RULE_STRING) ) {
+                    alt75=1;
                 }
 
 
-                switch (alt74) {
+                switch (alt75) {
             	case 1 :
             	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4494:1: (lv_commands_1_0= RULE_STRING )
             	    {
@@ -9819,7 +9836,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4495:3: lv_commands_1_0= RULE_STRING
             	    {
             	    lv_commands_1_0=(Token)input.LT(1);
-            	    match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleDetailCode7569); 
+            	    match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleDetailCode7572); 
 
             	    			createLeafNode(grammarAccess.getDetailCodeAccess().getCommandsSTRINGTerminalRuleCall_1_0(), "commands"); 
             	    		
@@ -9847,15 +9864,15 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    if ( cnt74 >= 1 ) break loop74;
+            	    if ( cnt75 >= 1 ) break loop75;
                         EarlyExitException eee =
-                            new EarlyExitException(74, input);
+                            new EarlyExitException(75, input);
                         throw eee;
                 }
-                cnt74++;
+                cnt75++;
             } while (true);
 
-            match(input,13,FOLLOW_13_in_ruleDetailCode7585); 
+            match(input,13,FOLLOW_13_in_ruleDetailCode7588); 
 
                     createLeafNode(grammarAccess.getDetailCodeAccess().getRightCurlyBracketKeyword_2(), null); 
                 
@@ -9894,12 +9911,12 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4531:2: iv_ruleTrPoint= ruleTrPoint EOF
             {
              currentNode = createCompositeNode(grammarAccess.getTrPointRule(), currentNode); 
-            pushFollow(FOLLOW_ruleTrPoint_in_entryRuleTrPoint7621);
+            pushFollow(FOLLOW_ruleTrPoint_in_entryRuleTrPoint7624);
             iv_ruleTrPoint=ruleTrPoint();
             _fsp--;
 
              current =iv_ruleTrPoint; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleTrPoint7631); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleTrPoint7634); 
 
             }
 
@@ -9935,39 +9952,39 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4544:1: (this_TransitionPoint_0= ruleTransitionPoint | this_EntryPoint_1= ruleEntryPoint | this_ExitPoint_2= ruleExitPoint )
             {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4544:1: (this_TransitionPoint_0= ruleTransitionPoint | this_EntryPoint_1= ruleEntryPoint | this_ExitPoint_2= ruleExitPoint )
-            int alt75=3;
+            int alt76=3;
             switch ( input.LA(1) ) {
             case 69:
             case 70:
                 {
-                alt75=1;
+                alt76=1;
                 }
                 break;
             case 71:
                 {
-                alt75=2;
+                alt76=2;
                 }
                 break;
             case 72:
                 {
-                alt75=3;
+                alt76=3;
                 }
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("4544:1: (this_TransitionPoint_0= ruleTransitionPoint | this_EntryPoint_1= ruleEntryPoint | this_ExitPoint_2= ruleExitPoint )", 75, 0, input);
+                    new NoViableAltException("4544:1: (this_TransitionPoint_0= ruleTransitionPoint | this_EntryPoint_1= ruleEntryPoint | this_ExitPoint_2= ruleExitPoint )", 76, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt75) {
+            switch (alt76) {
                 case 1 :
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4545:5: this_TransitionPoint_0= ruleTransitionPoint
                     {
                      
                             currentNode=createCompositeNode(grammarAccess.getTrPointAccess().getTransitionPointParserRuleCall_0(), currentNode); 
                         
-                    pushFollow(FOLLOW_ruleTransitionPoint_in_ruleTrPoint7678);
+                    pushFollow(FOLLOW_ruleTransitionPoint_in_ruleTrPoint7681);
                     this_TransitionPoint_0=ruleTransitionPoint();
                     _fsp--;
 
@@ -9984,7 +10001,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                             currentNode=createCompositeNode(grammarAccess.getTrPointAccess().getEntryPointParserRuleCall_1(), currentNode); 
                         
-                    pushFollow(FOLLOW_ruleEntryPoint_in_ruleTrPoint7705);
+                    pushFollow(FOLLOW_ruleEntryPoint_in_ruleTrPoint7708);
                     this_EntryPoint_1=ruleEntryPoint();
                     _fsp--;
 
@@ -10001,7 +10018,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                             currentNode=createCompositeNode(grammarAccess.getTrPointAccess().getExitPointParserRuleCall_2(), currentNode); 
                         
-                    pushFollow(FOLLOW_ruleExitPoint_in_ruleTrPoint7732);
+                    pushFollow(FOLLOW_ruleExitPoint_in_ruleTrPoint7735);
                     this_ExitPoint_2=ruleExitPoint();
                     _fsp--;
 
@@ -10047,12 +10064,12 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4583:2: iv_ruleTransitionPoint= ruleTransitionPoint EOF
             {
              currentNode = createCompositeNode(grammarAccess.getTransitionPointRule(), currentNode); 
-            pushFollow(FOLLOW_ruleTransitionPoint_in_entryRuleTransitionPoint7767);
+            pushFollow(FOLLOW_ruleTransitionPoint_in_entryRuleTransitionPoint7770);
             iv_ruleTransitionPoint=ruleTransitionPoint();
             _fsp--;
 
              current =iv_ruleTransitionPoint; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleTransitionPoint7777); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleTransitionPoint7780); 
 
             }
 
@@ -10087,13 +10104,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4596:2: ( (lv_handler_0_0= 'handler' ) )? 'TransitionPoint' ( (lv_name_2_0= RULE_ID ) )
             {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4596:2: ( (lv_handler_0_0= 'handler' ) )?
-            int alt76=2;
-            int LA76_0 = input.LA(1);
+            int alt77=2;
+            int LA77_0 = input.LA(1);
 
-            if ( (LA76_0==69) ) {
-                alt76=1;
+            if ( (LA77_0==69) ) {
+                alt77=1;
             }
-            switch (alt76) {
+            switch (alt77) {
                 case 1 :
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4597:1: (lv_handler_0_0= 'handler' )
                     {
@@ -10101,7 +10118,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4598:3: lv_handler_0_0= 'handler'
                     {
                     lv_handler_0_0=(Token)input.LT(1);
-                    match(input,69,FOLLOW_69_in_ruleTransitionPoint7820); 
+                    match(input,69,FOLLOW_69_in_ruleTransitionPoint7823); 
 
                             createLeafNode(grammarAccess.getTransitionPointAccess().getHandlerHandlerKeyword_0_0(), "handler"); 
                         
@@ -10126,7 +10143,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            match(input,70,FOLLOW_70_in_ruleTransitionPoint7844); 
+            match(input,70,FOLLOW_70_in_ruleTransitionPoint7847); 
 
                     createLeafNode(grammarAccess.getTransitionPointAccess().getTransitionPointKeyword_1(), null); 
                 
@@ -10137,7 +10154,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4623:3: lv_name_2_0= RULE_ID
             {
             lv_name_2_0=(Token)input.LT(1);
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleTransitionPoint7861); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleTransitionPoint7864); 
 
             			createLeafNode(grammarAccess.getTransitionPointAccess().getNameIDTerminalRuleCall_2_0(), "name"); 
             		
@@ -10198,12 +10215,12 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4655:2: iv_ruleEntryPoint= ruleEntryPoint EOF
             {
              currentNode = createCompositeNode(grammarAccess.getEntryPointRule(), currentNode); 
-            pushFollow(FOLLOW_ruleEntryPoint_in_entryRuleEntryPoint7902);
+            pushFollow(FOLLOW_ruleEntryPoint_in_entryRuleEntryPoint7905);
             iv_ruleEntryPoint=ruleEntryPoint();
             _fsp--;
 
              current =iv_ruleEntryPoint; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleEntryPoint7912); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleEntryPoint7915); 
 
             }
 
@@ -10236,7 +10253,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4668:1: ( 'EntryPoint' ( (lv_name_1_0= RULE_ID ) ) )
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4668:3: 'EntryPoint' ( (lv_name_1_0= RULE_ID ) )
             {
-            match(input,71,FOLLOW_71_in_ruleEntryPoint7947); 
+            match(input,71,FOLLOW_71_in_ruleEntryPoint7950); 
 
                     createLeafNode(grammarAccess.getEntryPointAccess().getEntryPointKeyword_0(), null); 
                 
@@ -10247,7 +10264,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4674:3: lv_name_1_0= RULE_ID
             {
             lv_name_1_0=(Token)input.LT(1);
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEntryPoint7964); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEntryPoint7967); 
 
             			createLeafNode(grammarAccess.getEntryPointAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
             		
@@ -10308,12 +10325,12 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4706:2: iv_ruleExitPoint= ruleExitPoint EOF
             {
              currentNode = createCompositeNode(grammarAccess.getExitPointRule(), currentNode); 
-            pushFollow(FOLLOW_ruleExitPoint_in_entryRuleExitPoint8005);
+            pushFollow(FOLLOW_ruleExitPoint_in_entryRuleExitPoint8008);
             iv_ruleExitPoint=ruleExitPoint();
             _fsp--;
 
              current =iv_ruleExitPoint; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleExitPoint8015); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleExitPoint8018); 
 
             }
 
@@ -10346,7 +10363,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4719:1: ( 'ExitPoint' ( (lv_name_1_0= RULE_ID ) ) )
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4719:3: 'ExitPoint' ( (lv_name_1_0= RULE_ID ) )
             {
-            match(input,72,FOLLOW_72_in_ruleExitPoint8050); 
+            match(input,72,FOLLOW_72_in_ruleExitPoint8053); 
 
                     createLeafNode(grammarAccess.getExitPointAccess().getExitPointKeyword_0(), null); 
                 
@@ -10357,7 +10374,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4725:3: lv_name_1_0= RULE_ID
             {
             lv_name_1_0=(Token)input.LT(1);
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleExitPoint8067); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleExitPoint8070); 
 
             			createLeafNode(grammarAccess.getExitPointAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
             		
@@ -10418,12 +10435,12 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4757:2: iv_ruleChoicePoint= ruleChoicePoint EOF
             {
              currentNode = createCompositeNode(grammarAccess.getChoicePointRule(), currentNode); 
-            pushFollow(FOLLOW_ruleChoicePoint_in_entryRuleChoicePoint8108);
+            pushFollow(FOLLOW_ruleChoicePoint_in_entryRuleChoicePoint8111);
             iv_ruleChoicePoint=ruleChoicePoint();
             _fsp--;
 
              current =iv_ruleChoicePoint; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleChoicePoint8118); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleChoicePoint8121); 
 
             }
 
@@ -10456,7 +10473,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4770:1: ( 'ChoicePoint' ( (lv_name_1_0= RULE_ID ) ) )
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4770:3: 'ChoicePoint' ( (lv_name_1_0= RULE_ID ) )
             {
-            match(input,73,FOLLOW_73_in_ruleChoicePoint8153); 
+            match(input,73,FOLLOW_73_in_ruleChoicePoint8156); 
 
                     createLeafNode(grammarAccess.getChoicePointAccess().getChoicePointKeyword_0(), null); 
                 
@@ -10467,7 +10484,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4776:3: lv_name_1_0= RULE_ID
             {
             lv_name_1_0=(Token)input.LT(1);
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleChoicePoint8170); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleChoicePoint8173); 
 
             			createLeafNode(grammarAccess.getChoicePointAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
             		
@@ -10528,12 +10545,12 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4808:2: iv_ruleTransition= ruleTransition EOF
             {
              currentNode = createCompositeNode(grammarAccess.getTransitionRule(), currentNode); 
-            pushFollow(FOLLOW_ruleTransition_in_entryRuleTransition8211);
+            pushFollow(FOLLOW_ruleTransition_in_entryRuleTransition8214);
             iv_ruleTransition=ruleTransition();
             _fsp--;
 
              current =iv_ruleTransition; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleTransition8221); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleTransition8224); 
 
             }
 
@@ -10567,75 +10584,75 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4821:1: (this_InitialTransition_0= ruleInitialTransition | this_NonInitialTransition_1= ruleNonInitialTransition )
             {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4821:1: (this_InitialTransition_0= ruleInitialTransition | this_NonInitialTransition_1= ruleNonInitialTransition )
-            int alt77=2;
-            int LA77_0 = input.LA(1);
+            int alt78=2;
+            int LA78_0 = input.LA(1);
 
-            if ( (LA77_0==74) ) {
-                int LA77_1 = input.LA(2);
+            if ( (LA78_0==74) ) {
+                int LA78_1 = input.LA(2);
 
-                if ( (LA77_1==RULE_ID) ) {
-                    int LA77_2 = input.LA(3);
+                if ( (LA78_1==RULE_ID) ) {
+                    int LA78_2 = input.LA(3);
 
-                    if ( (LA77_2==14) ) {
-                        int LA77_3 = input.LA(4);
+                    if ( (LA78_2==14) ) {
+                        int LA78_3 = input.LA(4);
 
-                        if ( (LA77_3==75) ) {
-                            alt77=1;
+                        if ( (LA78_3==75) ) {
+                            alt78=1;
                         }
-                        else if ( (LA77_3==RULE_ID||(LA77_3>=80 && LA77_3<=81)) ) {
-                            alt77=2;
+                        else if ( (LA78_3==RULE_ID||(LA78_3>=80 && LA78_3<=81)) ) {
+                            alt78=2;
                         }
                         else {
                             NoViableAltException nvae =
-                                new NoViableAltException("4821:1: (this_InitialTransition_0= ruleInitialTransition | this_NonInitialTransition_1= ruleNonInitialTransition )", 77, 3, input);
+                                new NoViableAltException("4821:1: (this_InitialTransition_0= ruleInitialTransition | this_NonInitialTransition_1= ruleNonInitialTransition )", 78, 3, input);
 
                             throw nvae;
                         }
                     }
                     else {
                         NoViableAltException nvae =
-                            new NoViableAltException("4821:1: (this_InitialTransition_0= ruleInitialTransition | this_NonInitialTransition_1= ruleNonInitialTransition )", 77, 2, input);
+                            new NoViableAltException("4821:1: (this_InitialTransition_0= ruleInitialTransition | this_NonInitialTransition_1= ruleNonInitialTransition )", 78, 2, input);
 
                         throw nvae;
                     }
                 }
-                else if ( (LA77_1==14) ) {
-                    int LA77_3 = input.LA(3);
+                else if ( (LA78_1==14) ) {
+                    int LA78_3 = input.LA(3);
 
-                    if ( (LA77_3==75) ) {
-                        alt77=1;
+                    if ( (LA78_3==75) ) {
+                        alt78=1;
                     }
-                    else if ( (LA77_3==RULE_ID||(LA77_3>=80 && LA77_3<=81)) ) {
-                        alt77=2;
+                    else if ( (LA78_3==RULE_ID||(LA78_3>=80 && LA78_3<=81)) ) {
+                        alt78=2;
                     }
                     else {
                         NoViableAltException nvae =
-                            new NoViableAltException("4821:1: (this_InitialTransition_0= ruleInitialTransition | this_NonInitialTransition_1= ruleNonInitialTransition )", 77, 3, input);
+                            new NoViableAltException("4821:1: (this_InitialTransition_0= ruleInitialTransition | this_NonInitialTransition_1= ruleNonInitialTransition )", 78, 3, input);
 
                         throw nvae;
                     }
                 }
                 else {
                     NoViableAltException nvae =
-                        new NoViableAltException("4821:1: (this_InitialTransition_0= ruleInitialTransition | this_NonInitialTransition_1= ruleNonInitialTransition )", 77, 1, input);
+                        new NoViableAltException("4821:1: (this_InitialTransition_0= ruleInitialTransition | this_NonInitialTransition_1= ruleNonInitialTransition )", 78, 1, input);
 
                     throw nvae;
                 }
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("4821:1: (this_InitialTransition_0= ruleInitialTransition | this_NonInitialTransition_1= ruleNonInitialTransition )", 77, 0, input);
+                    new NoViableAltException("4821:1: (this_InitialTransition_0= ruleInitialTransition | this_NonInitialTransition_1= ruleNonInitialTransition )", 78, 0, input);
 
                 throw nvae;
             }
-            switch (alt77) {
+            switch (alt78) {
                 case 1 :
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4822:5: this_InitialTransition_0= ruleInitialTransition
                     {
                      
                             currentNode=createCompositeNode(grammarAccess.getTransitionAccess().getInitialTransitionParserRuleCall_0(), currentNode); 
                         
-                    pushFollow(FOLLOW_ruleInitialTransition_in_ruleTransition8268);
+                    pushFollow(FOLLOW_ruleInitialTransition_in_ruleTransition8271);
                     this_InitialTransition_0=ruleInitialTransition();
                     _fsp--;
 
@@ -10652,7 +10669,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                             currentNode=createCompositeNode(grammarAccess.getTransitionAccess().getNonInitialTransitionParserRuleCall_1(), currentNode); 
                         
-                    pushFollow(FOLLOW_ruleNonInitialTransition_in_ruleTransition8295);
+                    pushFollow(FOLLOW_ruleNonInitialTransition_in_ruleTransition8298);
                     this_NonInitialTransition_1=ruleNonInitialTransition();
                     _fsp--;
 
@@ -10698,12 +10715,12 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4850:2: iv_ruleNonInitialTransition= ruleNonInitialTransition EOF
             {
              currentNode = createCompositeNode(grammarAccess.getNonInitialTransitionRule(), currentNode); 
-            pushFollow(FOLLOW_ruleNonInitialTransition_in_entryRuleNonInitialTransition8330);
+            pushFollow(FOLLOW_ruleNonInitialTransition_in_entryRuleNonInitialTransition8333);
             iv_ruleNonInitialTransition=ruleNonInitialTransition();
             _fsp--;
 
              current =iv_ruleNonInitialTransition; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleNonInitialTransition8340); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleNonInitialTransition8343); 
 
             }
 
@@ -10739,156 +10756,180 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )
             {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )
-            int alt78=3;
-            int LA78_0 = input.LA(1);
+            int alt79=3;
+            int LA79_0 = input.LA(1);
 
-            if ( (LA78_0==74) ) {
-                int LA78_1 = input.LA(2);
+            if ( (LA79_0==74) ) {
+                int LA79_1 = input.LA(2);
 
-                if ( (LA78_1==RULE_ID) ) {
-                    int LA78_2 = input.LA(3);
+                if ( (LA79_1==RULE_ID) ) {
+                    int LA79_2 = input.LA(3);
 
-                    if ( (LA78_2==14) ) {
+                    if ( (LA79_2==14) ) {
                         switch ( input.LA(4) ) {
                         case RULE_ID:
                             {
-                            int LA78_4 = input.LA(5);
+                            int LA79_4 = input.LA(5);
 
-                            if ( (LA78_4==50) ) {
-                                int LA78_7 = input.LA(6);
+                            if ( (LA79_4==50) ) {
+                                int LA79_7 = input.LA(6);
 
-                                if ( (LA78_7==RULE_ID) ) {
-                                    int LA78_11 = input.LA(7);
+                                if ( (LA79_7==RULE_ID) ) {
+                                    int LA79_11 = input.LA(7);
 
-                                    if ( (LA78_11==37) ) {
+                                    if ( (LA79_11==37) ) {
                                         switch ( input.LA(8) ) {
                                         case RULE_ID:
                                             {
-                                            int LA78_12 = input.LA(9);
+                                            switch ( input.LA(9) ) {
+                                            case 50:
+                                                {
+                                                int LA79_15 = input.LA(10);
 
-                                            if ( (LA78_12==50) ) {
-                                                int LA78_15 = input.LA(10);
+                                                if ( (LA79_15==RULE_ID) ) {
+                                                    int LA79_20 = input.LA(11);
 
-                                                if ( (LA78_15==RULE_ID) ) {
-                                                    int LA78_19 = input.LA(11);
-
-                                                    if ( (LA78_19==12) ) {
+                                                    if ( (LA79_20==12) ) {
                                                         switch ( input.LA(12) ) {
-                                                        case 77:
-                                                            {
-                                                            alt78=1;
-                                                            }
-                                                            break;
                                                         case 79:
                                                             {
-                                                            alt78=3;
+                                                            alt79=3;
+                                                            }
+                                                            break;
+                                                        case 77:
+                                                            {
+                                                            alt79=1;
                                                             }
                                                             break;
                                                         case 13:
                                                         case 76:
                                                             {
-                                                            alt78=2;
+                                                            alt79=2;
                                                             }
                                                             break;
                                                         default:
                                                             NoViableAltException nvae =
-                                                                new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 16, input);
+                                                                new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 16, input);
 
                                                             throw nvae;
                                                         }
 
                                                     }
+                                                    else if ( (LA79_20==EOF||LA79_20==13||LA79_20==64||(LA79_20>=68 && LA79_20<=74)) ) {
+                                                        alt79=2;
+                                                    }
                                                     else {
                                                         NoViableAltException nvae =
-                                                            new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 19, input);
+                                                            new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 20, input);
 
                                                         throw nvae;
                                                     }
                                                 }
                                                 else {
                                                     NoViableAltException nvae =
-                                                        new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 15, input);
+                                                        new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 15, input);
 
                                                     throw nvae;
                                                 }
-                                            }
-                                            else if ( (LA78_12==12) ) {
+                                                }
+                                                break;
+                                            case 12:
+                                                {
                                                 switch ( input.LA(10) ) {
-                                                case 77:
-                                                    {
-                                                    alt78=1;
-                                                    }
-                                                    break;
                                                 case 79:
                                                     {
-                                                    alt78=3;
+                                                    alt79=3;
+                                                    }
+                                                    break;
+                                                case 77:
+                                                    {
+                                                    alt79=1;
                                                     }
                                                     break;
                                                 case 13:
                                                 case 76:
                                                     {
-                                                    alt78=2;
+                                                    alt79=2;
                                                     }
                                                     break;
                                                 default:
                                                     NoViableAltException nvae =
-                                                        new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 16, input);
+                                                        new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 16, input);
 
                                                     throw nvae;
                                                 }
 
-                                            }
-                                            else {
+                                                }
+                                                break;
+                                            case EOF:
+                                            case 13:
+                                            case 64:
+                                            case 68:
+                                            case 69:
+                                            case 70:
+                                            case 71:
+                                            case 72:
+                                            case 73:
+                                            case 74:
+                                                {
+                                                alt79=2;
+                                                }
+                                                break;
+                                            default:
                                                 NoViableAltException nvae =
-                                                    new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 12, input);
+                                                    new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 12, input);
 
                                                 throw nvae;
                                             }
+
                                             }
                                             break;
                                         case 80:
                                             {
-                                            int LA78_13 = input.LA(9);
+                                            int LA79_13 = input.LA(9);
 
-                                            if ( (LA78_13==RULE_ID) ) {
-                                                int LA78_17 = input.LA(10);
+                                            if ( (LA79_13==RULE_ID) ) {
+                                                int LA79_18 = input.LA(10);
 
-                                                if ( (LA78_17==12) ) {
+                                                if ( (LA79_18==12) ) {
                                                     switch ( input.LA(11) ) {
-                                                    case 77:
-                                                        {
-                                                        alt78=1;
-                                                        }
-                                                        break;
                                                     case 79:
                                                         {
-                                                        alt78=3;
+                                                        alt79=3;
+                                                        }
+                                                        break;
+                                                    case 77:
+                                                        {
+                                                        alt79=1;
                                                         }
                                                         break;
                                                     case 13:
                                                     case 76:
                                                         {
-                                                        alt78=2;
+                                                        alt79=2;
                                                         }
                                                         break;
                                                     default:
                                                         NoViableAltException nvae =
-                                                            new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 16, input);
+                                                            new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 16, input);
 
                                                         throw nvae;
                                                     }
 
                                                 }
+                                                else if ( (LA79_18==EOF||LA79_18==13||LA79_18==64||(LA79_18>=68 && LA79_18<=74)) ) {
+                                                    alt79=2;
+                                                }
                                                 else {
                                                     NoViableAltException nvae =
-                                                        new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 17, input);
+                                                        new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 18, input);
 
                                                     throw nvae;
                                                 }
                                             }
                                             else {
                                                 NoViableAltException nvae =
-                                                    new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 13, input);
+                                                    new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 13, input);
 
                                                 throw nvae;
                                             }
@@ -10896,47 +10937,50 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                                             break;
                                         case 81:
                                             {
-                                            int LA78_14 = input.LA(9);
+                                            int LA79_14 = input.LA(9);
 
-                                            if ( (LA78_14==RULE_ID) ) {
-                                                int LA78_18 = input.LA(10);
+                                            if ( (LA79_14==RULE_ID) ) {
+                                                int LA79_19 = input.LA(10);
 
-                                                if ( (LA78_18==12) ) {
+                                                if ( (LA79_19==12) ) {
                                                     switch ( input.LA(11) ) {
-                                                    case 77:
-                                                        {
-                                                        alt78=1;
-                                                        }
-                                                        break;
                                                     case 79:
                                                         {
-                                                        alt78=3;
+                                                        alt79=3;
+                                                        }
+                                                        break;
+                                                    case 77:
+                                                        {
+                                                        alt79=1;
                                                         }
                                                         break;
                                                     case 13:
                                                     case 76:
                                                         {
-                                                        alt78=2;
+                                                        alt79=2;
                                                         }
                                                         break;
                                                     default:
                                                         NoViableAltException nvae =
-                                                            new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 16, input);
+                                                            new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 16, input);
 
                                                         throw nvae;
                                                     }
 
                                                 }
+                                                else if ( (LA79_19==EOF||LA79_19==13||LA79_19==64||(LA79_19>=68 && LA79_19<=74)) ) {
+                                                    alt79=2;
+                                                }
                                                 else {
                                                     NoViableAltException nvae =
-                                                        new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 18, input);
+                                                        new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 19, input);
 
                                                     throw nvae;
                                                 }
                                             }
                                             else {
                                                 NoViableAltException nvae =
-                                                    new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 14, input);
+                                                    new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 14, input);
 
                                                 throw nvae;
                                             }
@@ -10944,7 +10988,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                                             break;
                                         default:
                                             NoViableAltException nvae =
-                                                new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 8, input);
+                                                new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 8, input);
 
                                             throw nvae;
                                         }
@@ -10952,147 +10996,171 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                                     }
                                     else {
                                         NoViableAltException nvae =
-                                            new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 11, input);
+                                            new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 11, input);
 
                                         throw nvae;
                                     }
                                 }
                                 else {
                                     NoViableAltException nvae =
-                                        new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 7, input);
+                                        new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 7, input);
 
                                     throw nvae;
                                 }
                             }
-                            else if ( (LA78_4==37) ) {
+                            else if ( (LA79_4==37) ) {
                                 switch ( input.LA(6) ) {
                                 case RULE_ID:
                                     {
-                                    int LA78_12 = input.LA(7);
+                                    switch ( input.LA(7) ) {
+                                    case 50:
+                                        {
+                                        int LA79_15 = input.LA(8);
 
-                                    if ( (LA78_12==50) ) {
-                                        int LA78_15 = input.LA(8);
+                                        if ( (LA79_15==RULE_ID) ) {
+                                            int LA79_20 = input.LA(9);
 
-                                        if ( (LA78_15==RULE_ID) ) {
-                                            int LA78_19 = input.LA(9);
-
-                                            if ( (LA78_19==12) ) {
+                                            if ( (LA79_20==12) ) {
                                                 switch ( input.LA(10) ) {
-                                                case 77:
-                                                    {
-                                                    alt78=1;
-                                                    }
-                                                    break;
                                                 case 79:
                                                     {
-                                                    alt78=3;
+                                                    alt79=3;
+                                                    }
+                                                    break;
+                                                case 77:
+                                                    {
+                                                    alt79=1;
                                                     }
                                                     break;
                                                 case 13:
                                                 case 76:
                                                     {
-                                                    alt78=2;
+                                                    alt79=2;
                                                     }
                                                     break;
                                                 default:
                                                     NoViableAltException nvae =
-                                                        new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 16, input);
+                                                        new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 16, input);
 
                                                     throw nvae;
                                                 }
 
                                             }
+                                            else if ( (LA79_20==EOF||LA79_20==13||LA79_20==64||(LA79_20>=68 && LA79_20<=74)) ) {
+                                                alt79=2;
+                                            }
                                             else {
                                                 NoViableAltException nvae =
-                                                    new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 19, input);
+                                                    new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 20, input);
 
                                                 throw nvae;
                                             }
                                         }
                                         else {
                                             NoViableAltException nvae =
-                                                new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 15, input);
+                                                new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 15, input);
 
                                             throw nvae;
                                         }
-                                    }
-                                    else if ( (LA78_12==12) ) {
+                                        }
+                                        break;
+                                    case 12:
+                                        {
                                         switch ( input.LA(8) ) {
-                                        case 77:
-                                            {
-                                            alt78=1;
-                                            }
-                                            break;
                                         case 79:
                                             {
-                                            alt78=3;
+                                            alt79=3;
+                                            }
+                                            break;
+                                        case 77:
+                                            {
+                                            alt79=1;
                                             }
                                             break;
                                         case 13:
                                         case 76:
                                             {
-                                            alt78=2;
+                                            alt79=2;
                                             }
                                             break;
                                         default:
                                             NoViableAltException nvae =
-                                                new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 16, input);
+                                                new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 16, input);
 
                                             throw nvae;
                                         }
 
-                                    }
-                                    else {
+                                        }
+                                        break;
+                                    case EOF:
+                                    case 13:
+                                    case 64:
+                                    case 68:
+                                    case 69:
+                                    case 70:
+                                    case 71:
+                                    case 72:
+                                    case 73:
+                                    case 74:
+                                        {
+                                        alt79=2;
+                                        }
+                                        break;
+                                    default:
                                         NoViableAltException nvae =
-                                            new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 12, input);
+                                            new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 12, input);
 
                                         throw nvae;
                                     }
+
                                     }
                                     break;
                                 case 80:
                                     {
-                                    int LA78_13 = input.LA(7);
+                                    int LA79_13 = input.LA(7);
 
-                                    if ( (LA78_13==RULE_ID) ) {
-                                        int LA78_17 = input.LA(8);
+                                    if ( (LA79_13==RULE_ID) ) {
+                                        int LA79_18 = input.LA(8);
 
-                                        if ( (LA78_17==12) ) {
+                                        if ( (LA79_18==12) ) {
                                             switch ( input.LA(9) ) {
-                                            case 77:
-                                                {
-                                                alt78=1;
-                                                }
-                                                break;
                                             case 79:
                                                 {
-                                                alt78=3;
+                                                alt79=3;
+                                                }
+                                                break;
+                                            case 77:
+                                                {
+                                                alt79=1;
                                                 }
                                                 break;
                                             case 13:
                                             case 76:
                                                 {
-                                                alt78=2;
+                                                alt79=2;
                                                 }
                                                 break;
                                             default:
                                                 NoViableAltException nvae =
-                                                    new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 16, input);
+                                                    new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 16, input);
 
                                                 throw nvae;
                                             }
 
                                         }
+                                        else if ( (LA79_18==EOF||LA79_18==13||LA79_18==64||(LA79_18>=68 && LA79_18<=74)) ) {
+                                            alt79=2;
+                                        }
                                         else {
                                             NoViableAltException nvae =
-                                                new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 17, input);
+                                                new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 18, input);
 
                                             throw nvae;
                                         }
                                     }
                                     else {
                                         NoViableAltException nvae =
-                                            new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 13, input);
+                                            new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 13, input);
 
                                         throw nvae;
                                     }
@@ -11100,47 +11168,50 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                                     break;
                                 case 81:
                                     {
-                                    int LA78_14 = input.LA(7);
+                                    int LA79_14 = input.LA(7);
 
-                                    if ( (LA78_14==RULE_ID) ) {
-                                        int LA78_18 = input.LA(8);
+                                    if ( (LA79_14==RULE_ID) ) {
+                                        int LA79_19 = input.LA(8);
 
-                                        if ( (LA78_18==12) ) {
+                                        if ( (LA79_19==12) ) {
                                             switch ( input.LA(9) ) {
-                                            case 77:
-                                                {
-                                                alt78=1;
-                                                }
-                                                break;
                                             case 79:
                                                 {
-                                                alt78=3;
+                                                alt79=3;
+                                                }
+                                                break;
+                                            case 77:
+                                                {
+                                                alt79=1;
                                                 }
                                                 break;
                                             case 13:
                                             case 76:
                                                 {
-                                                alt78=2;
+                                                alt79=2;
                                                 }
                                                 break;
                                             default:
                                                 NoViableAltException nvae =
-                                                    new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 16, input);
+                                                    new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 16, input);
 
                                                 throw nvae;
                                             }
 
                                         }
+                                        else if ( (LA79_19==EOF||LA79_19==13||LA79_19==64||(LA79_19>=68 && LA79_19<=74)) ) {
+                                            alt79=2;
+                                        }
                                         else {
                                             NoViableAltException nvae =
-                                                new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 18, input);
+                                                new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 19, input);
 
                                             throw nvae;
                                         }
                                     }
                                     else {
                                         NoViableAltException nvae =
-                                            new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 14, input);
+                                            new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 14, input);
 
                                         throw nvae;
                                     }
@@ -11148,7 +11219,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                                     break;
                                 default:
                                     NoViableAltException nvae =
-                                        new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 8, input);
+                                        new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 8, input);
 
                                     throw nvae;
                                 }
@@ -11156,7 +11227,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                             }
                             else {
                                 NoViableAltException nvae =
-                                    new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 4, input);
+                                    new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 4, input);
 
                                 throw nvae;
                             }
@@ -11164,140 +11235,164 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                             break;
                         case 80:
                             {
-                            int LA78_5 = input.LA(5);
+                            int LA79_5 = input.LA(5);
 
-                            if ( (LA78_5==RULE_ID) ) {
-                                int LA78_9 = input.LA(6);
+                            if ( (LA79_5==RULE_ID) ) {
+                                int LA79_9 = input.LA(6);
 
-                                if ( (LA78_9==37) ) {
+                                if ( (LA79_9==37) ) {
                                     switch ( input.LA(7) ) {
                                     case RULE_ID:
                                         {
-                                        int LA78_12 = input.LA(8);
+                                        switch ( input.LA(8) ) {
+                                        case 50:
+                                            {
+                                            int LA79_15 = input.LA(9);
 
-                                        if ( (LA78_12==50) ) {
-                                            int LA78_15 = input.LA(9);
+                                            if ( (LA79_15==RULE_ID) ) {
+                                                int LA79_20 = input.LA(10);
 
-                                            if ( (LA78_15==RULE_ID) ) {
-                                                int LA78_19 = input.LA(10);
-
-                                                if ( (LA78_19==12) ) {
+                                                if ( (LA79_20==12) ) {
                                                     switch ( input.LA(11) ) {
-                                                    case 77:
-                                                        {
-                                                        alt78=1;
-                                                        }
-                                                        break;
                                                     case 79:
                                                         {
-                                                        alt78=3;
+                                                        alt79=3;
+                                                        }
+                                                        break;
+                                                    case 77:
+                                                        {
+                                                        alt79=1;
                                                         }
                                                         break;
                                                     case 13:
                                                     case 76:
                                                         {
-                                                        alt78=2;
+                                                        alt79=2;
                                                         }
                                                         break;
                                                     default:
                                                         NoViableAltException nvae =
-                                                            new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 16, input);
+                                                            new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 16, input);
 
                                                         throw nvae;
                                                     }
 
                                                 }
+                                                else if ( (LA79_20==EOF||LA79_20==13||LA79_20==64||(LA79_20>=68 && LA79_20<=74)) ) {
+                                                    alt79=2;
+                                                }
                                                 else {
                                                     NoViableAltException nvae =
-                                                        new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 19, input);
+                                                        new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 20, input);
 
                                                     throw nvae;
                                                 }
                                             }
                                             else {
                                                 NoViableAltException nvae =
-                                                    new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 15, input);
+                                                    new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 15, input);
 
                                                 throw nvae;
                                             }
-                                        }
-                                        else if ( (LA78_12==12) ) {
+                                            }
+                                            break;
+                                        case 12:
+                                            {
                                             switch ( input.LA(9) ) {
-                                            case 77:
-                                                {
-                                                alt78=1;
-                                                }
-                                                break;
                                             case 79:
                                                 {
-                                                alt78=3;
+                                                alt79=3;
+                                                }
+                                                break;
+                                            case 77:
+                                                {
+                                                alt79=1;
                                                 }
                                                 break;
                                             case 13:
                                             case 76:
                                                 {
-                                                alt78=2;
+                                                alt79=2;
                                                 }
                                                 break;
                                             default:
                                                 NoViableAltException nvae =
-                                                    new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 16, input);
+                                                    new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 16, input);
 
                                                 throw nvae;
                                             }
 
-                                        }
-                                        else {
+                                            }
+                                            break;
+                                        case EOF:
+                                        case 13:
+                                        case 64:
+                                        case 68:
+                                        case 69:
+                                        case 70:
+                                        case 71:
+                                        case 72:
+                                        case 73:
+                                        case 74:
+                                            {
+                                            alt79=2;
+                                            }
+                                            break;
+                                        default:
                                             NoViableAltException nvae =
-                                                new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 12, input);
+                                                new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 12, input);
 
                                             throw nvae;
                                         }
+
                                         }
                                         break;
                                     case 80:
                                         {
-                                        int LA78_13 = input.LA(8);
+                                        int LA79_13 = input.LA(8);
 
-                                        if ( (LA78_13==RULE_ID) ) {
-                                            int LA78_17 = input.LA(9);
+                                        if ( (LA79_13==RULE_ID) ) {
+                                            int LA79_18 = input.LA(9);
 
-                                            if ( (LA78_17==12) ) {
+                                            if ( (LA79_18==12) ) {
                                                 switch ( input.LA(10) ) {
-                                                case 77:
-                                                    {
-                                                    alt78=1;
-                                                    }
-                                                    break;
                                                 case 79:
                                                     {
-                                                    alt78=3;
+                                                    alt79=3;
+                                                    }
+                                                    break;
+                                                case 77:
+                                                    {
+                                                    alt79=1;
                                                     }
                                                     break;
                                                 case 13:
                                                 case 76:
                                                     {
-                                                    alt78=2;
+                                                    alt79=2;
                                                     }
                                                     break;
                                                 default:
                                                     NoViableAltException nvae =
-                                                        new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 16, input);
+                                                        new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 16, input);
 
                                                     throw nvae;
                                                 }
 
                                             }
+                                            else if ( (LA79_18==EOF||LA79_18==13||LA79_18==64||(LA79_18>=68 && LA79_18<=74)) ) {
+                                                alt79=2;
+                                            }
                                             else {
                                                 NoViableAltException nvae =
-                                                    new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 17, input);
+                                                    new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 18, input);
 
                                                 throw nvae;
                                             }
                                         }
                                         else {
                                             NoViableAltException nvae =
-                                                new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 13, input);
+                                                new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 13, input);
 
                                             throw nvae;
                                         }
@@ -11305,47 +11400,50 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                                         break;
                                     case 81:
                                         {
-                                        int LA78_14 = input.LA(8);
+                                        int LA79_14 = input.LA(8);
 
-                                        if ( (LA78_14==RULE_ID) ) {
-                                            int LA78_18 = input.LA(9);
+                                        if ( (LA79_14==RULE_ID) ) {
+                                            int LA79_19 = input.LA(9);
 
-                                            if ( (LA78_18==12) ) {
+                                            if ( (LA79_19==12) ) {
                                                 switch ( input.LA(10) ) {
-                                                case 77:
-                                                    {
-                                                    alt78=1;
-                                                    }
-                                                    break;
                                                 case 79:
                                                     {
-                                                    alt78=3;
+                                                    alt79=3;
+                                                    }
+                                                    break;
+                                                case 77:
+                                                    {
+                                                    alt79=1;
                                                     }
                                                     break;
                                                 case 13:
                                                 case 76:
                                                     {
-                                                    alt78=2;
+                                                    alt79=2;
                                                     }
                                                     break;
                                                 default:
                                                     NoViableAltException nvae =
-                                                        new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 16, input);
+                                                        new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 16, input);
 
                                                     throw nvae;
                                                 }
 
                                             }
+                                            else if ( (LA79_19==EOF||LA79_19==13||LA79_19==64||(LA79_19>=68 && LA79_19<=74)) ) {
+                                                alt79=2;
+                                            }
                                             else {
                                                 NoViableAltException nvae =
-                                                    new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 18, input);
+                                                    new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 19, input);
 
                                                 throw nvae;
                                             }
                                         }
                                         else {
                                             NoViableAltException nvae =
-                                                new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 14, input);
+                                                new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 14, input);
 
                                             throw nvae;
                                         }
@@ -11353,7 +11451,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                                         break;
                                     default:
                                         NoViableAltException nvae =
-                                            new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 8, input);
+                                            new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 8, input);
 
                                         throw nvae;
                                     }
@@ -11361,14 +11459,14 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                                 }
                                 else {
                                     NoViableAltException nvae =
-                                        new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 9, input);
+                                        new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 9, input);
 
                                     throw nvae;
                                 }
                             }
                             else {
                                 NoViableAltException nvae =
-                                    new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 5, input);
+                                    new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 5, input);
 
                                 throw nvae;
                             }
@@ -11376,140 +11474,164 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                             break;
                         case 81:
                             {
-                            int LA78_6 = input.LA(5);
+                            int LA79_6 = input.LA(5);
 
-                            if ( (LA78_6==RULE_ID) ) {
-                                int LA78_10 = input.LA(6);
+                            if ( (LA79_6==RULE_ID) ) {
+                                int LA79_10 = input.LA(6);
 
-                                if ( (LA78_10==37) ) {
+                                if ( (LA79_10==37) ) {
                                     switch ( input.LA(7) ) {
                                     case RULE_ID:
                                         {
-                                        int LA78_12 = input.LA(8);
+                                        switch ( input.LA(8) ) {
+                                        case 50:
+                                            {
+                                            int LA79_15 = input.LA(9);
 
-                                        if ( (LA78_12==50) ) {
-                                            int LA78_15 = input.LA(9);
+                                            if ( (LA79_15==RULE_ID) ) {
+                                                int LA79_20 = input.LA(10);
 
-                                            if ( (LA78_15==RULE_ID) ) {
-                                                int LA78_19 = input.LA(10);
-
-                                                if ( (LA78_19==12) ) {
+                                                if ( (LA79_20==12) ) {
                                                     switch ( input.LA(11) ) {
-                                                    case 77:
-                                                        {
-                                                        alt78=1;
-                                                        }
-                                                        break;
                                                     case 79:
                                                         {
-                                                        alt78=3;
+                                                        alt79=3;
+                                                        }
+                                                        break;
+                                                    case 77:
+                                                        {
+                                                        alt79=1;
                                                         }
                                                         break;
                                                     case 13:
                                                     case 76:
                                                         {
-                                                        alt78=2;
+                                                        alt79=2;
                                                         }
                                                         break;
                                                     default:
                                                         NoViableAltException nvae =
-                                                            new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 16, input);
+                                                            new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 16, input);
 
                                                         throw nvae;
                                                     }
 
                                                 }
+                                                else if ( (LA79_20==EOF||LA79_20==13||LA79_20==64||(LA79_20>=68 && LA79_20<=74)) ) {
+                                                    alt79=2;
+                                                }
                                                 else {
                                                     NoViableAltException nvae =
-                                                        new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 19, input);
+                                                        new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 20, input);
 
                                                     throw nvae;
                                                 }
                                             }
                                             else {
                                                 NoViableAltException nvae =
-                                                    new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 15, input);
+                                                    new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 15, input);
 
                                                 throw nvae;
                                             }
-                                        }
-                                        else if ( (LA78_12==12) ) {
+                                            }
+                                            break;
+                                        case 12:
+                                            {
                                             switch ( input.LA(9) ) {
-                                            case 77:
-                                                {
-                                                alt78=1;
-                                                }
-                                                break;
                                             case 79:
                                                 {
-                                                alt78=3;
+                                                alt79=3;
+                                                }
+                                                break;
+                                            case 77:
+                                                {
+                                                alt79=1;
                                                 }
                                                 break;
                                             case 13:
                                             case 76:
                                                 {
-                                                alt78=2;
+                                                alt79=2;
                                                 }
                                                 break;
                                             default:
                                                 NoViableAltException nvae =
-                                                    new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 16, input);
+                                                    new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 16, input);
 
                                                 throw nvae;
                                             }
 
-                                        }
-                                        else {
+                                            }
+                                            break;
+                                        case EOF:
+                                        case 13:
+                                        case 64:
+                                        case 68:
+                                        case 69:
+                                        case 70:
+                                        case 71:
+                                        case 72:
+                                        case 73:
+                                        case 74:
+                                            {
+                                            alt79=2;
+                                            }
+                                            break;
+                                        default:
                                             NoViableAltException nvae =
-                                                new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 12, input);
+                                                new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 12, input);
 
                                             throw nvae;
                                         }
+
                                         }
                                         break;
                                     case 80:
                                         {
-                                        int LA78_13 = input.LA(8);
+                                        int LA79_13 = input.LA(8);
 
-                                        if ( (LA78_13==RULE_ID) ) {
-                                            int LA78_17 = input.LA(9);
+                                        if ( (LA79_13==RULE_ID) ) {
+                                            int LA79_18 = input.LA(9);
 
-                                            if ( (LA78_17==12) ) {
+                                            if ( (LA79_18==12) ) {
                                                 switch ( input.LA(10) ) {
-                                                case 77:
-                                                    {
-                                                    alt78=1;
-                                                    }
-                                                    break;
                                                 case 79:
                                                     {
-                                                    alt78=3;
+                                                    alt79=3;
+                                                    }
+                                                    break;
+                                                case 77:
+                                                    {
+                                                    alt79=1;
                                                     }
                                                     break;
                                                 case 13:
                                                 case 76:
                                                     {
-                                                    alt78=2;
+                                                    alt79=2;
                                                     }
                                                     break;
                                                 default:
                                                     NoViableAltException nvae =
-                                                        new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 16, input);
+                                                        new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 16, input);
 
                                                     throw nvae;
                                                 }
 
                                             }
+                                            else if ( (LA79_18==EOF||LA79_18==13||LA79_18==64||(LA79_18>=68 && LA79_18<=74)) ) {
+                                                alt79=2;
+                                            }
                                             else {
                                                 NoViableAltException nvae =
-                                                    new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 17, input);
+                                                    new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 18, input);
 
                                                 throw nvae;
                                             }
                                         }
                                         else {
                                             NoViableAltException nvae =
-                                                new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 13, input);
+                                                new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 13, input);
 
                                             throw nvae;
                                         }
@@ -11517,47 +11639,50 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                                         break;
                                     case 81:
                                         {
-                                        int LA78_14 = input.LA(8);
+                                        int LA79_14 = input.LA(8);
 
-                                        if ( (LA78_14==RULE_ID) ) {
-                                            int LA78_18 = input.LA(9);
+                                        if ( (LA79_14==RULE_ID) ) {
+                                            int LA79_19 = input.LA(9);
 
-                                            if ( (LA78_18==12) ) {
+                                            if ( (LA79_19==12) ) {
                                                 switch ( input.LA(10) ) {
-                                                case 77:
-                                                    {
-                                                    alt78=1;
-                                                    }
-                                                    break;
                                                 case 79:
                                                     {
-                                                    alt78=3;
+                                                    alt79=3;
+                                                    }
+                                                    break;
+                                                case 77:
+                                                    {
+                                                    alt79=1;
                                                     }
                                                     break;
                                                 case 13:
                                                 case 76:
                                                     {
-                                                    alt78=2;
+                                                    alt79=2;
                                                     }
                                                     break;
                                                 default:
                                                     NoViableAltException nvae =
-                                                        new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 16, input);
+                                                        new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 16, input);
 
                                                     throw nvae;
                                                 }
 
                                             }
+                                            else if ( (LA79_19==EOF||LA79_19==13||LA79_19==64||(LA79_19>=68 && LA79_19<=74)) ) {
+                                                alt79=2;
+                                            }
                                             else {
                                                 NoViableAltException nvae =
-                                                    new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 18, input);
+                                                    new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 19, input);
 
                                                 throw nvae;
                                             }
                                         }
                                         else {
                                             NoViableAltException nvae =
-                                                new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 14, input);
+                                                new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 14, input);
 
                                             throw nvae;
                                         }
@@ -11565,7 +11690,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                                         break;
                                     default:
                                         NoViableAltException nvae =
-                                            new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 8, input);
+                                            new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 8, input);
 
                                         throw nvae;
                                     }
@@ -11573,14 +11698,14 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                                 }
                                 else {
                                     NoViableAltException nvae =
-                                        new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 10, input);
+                                        new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 10, input);
 
                                     throw nvae;
                                 }
                             }
                             else {
                                 NoViableAltException nvae =
-                                    new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 6, input);
+                                    new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 6, input);
 
                                 throw nvae;
                             }
@@ -11588,7 +11713,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                             break;
                         default:
                             NoViableAltException nvae =
-                                new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 3, input);
+                                new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 3, input);
 
                             throw nvae;
                         }
@@ -11596,152 +11721,176 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     }
                     else {
                         NoViableAltException nvae =
-                            new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 2, input);
+                            new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 2, input);
 
                         throw nvae;
                     }
                 }
-                else if ( (LA78_1==14) ) {
+                else if ( (LA79_1==14) ) {
                     switch ( input.LA(3) ) {
                     case RULE_ID:
                         {
-                        int LA78_4 = input.LA(4);
+                        int LA79_4 = input.LA(4);
 
-                        if ( (LA78_4==50) ) {
-                            int LA78_7 = input.LA(5);
+                        if ( (LA79_4==50) ) {
+                            int LA79_7 = input.LA(5);
 
-                            if ( (LA78_7==RULE_ID) ) {
-                                int LA78_11 = input.LA(6);
+                            if ( (LA79_7==RULE_ID) ) {
+                                int LA79_11 = input.LA(6);
 
-                                if ( (LA78_11==37) ) {
+                                if ( (LA79_11==37) ) {
                                     switch ( input.LA(7) ) {
                                     case RULE_ID:
                                         {
-                                        int LA78_12 = input.LA(8);
+                                        switch ( input.LA(8) ) {
+                                        case 50:
+                                            {
+                                            int LA79_15 = input.LA(9);
 
-                                        if ( (LA78_12==50) ) {
-                                            int LA78_15 = input.LA(9);
+                                            if ( (LA79_15==RULE_ID) ) {
+                                                int LA79_20 = input.LA(10);
 
-                                            if ( (LA78_15==RULE_ID) ) {
-                                                int LA78_19 = input.LA(10);
-
-                                                if ( (LA78_19==12) ) {
+                                                if ( (LA79_20==12) ) {
                                                     switch ( input.LA(11) ) {
-                                                    case 77:
-                                                        {
-                                                        alt78=1;
-                                                        }
-                                                        break;
                                                     case 79:
                                                         {
-                                                        alt78=3;
+                                                        alt79=3;
+                                                        }
+                                                        break;
+                                                    case 77:
+                                                        {
+                                                        alt79=1;
                                                         }
                                                         break;
                                                     case 13:
                                                     case 76:
                                                         {
-                                                        alt78=2;
+                                                        alt79=2;
                                                         }
                                                         break;
                                                     default:
                                                         NoViableAltException nvae =
-                                                            new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 16, input);
+                                                            new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 16, input);
 
                                                         throw nvae;
                                                     }
 
                                                 }
+                                                else if ( (LA79_20==EOF||LA79_20==13||LA79_20==64||(LA79_20>=68 && LA79_20<=74)) ) {
+                                                    alt79=2;
+                                                }
                                                 else {
                                                     NoViableAltException nvae =
-                                                        new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 19, input);
+                                                        new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 20, input);
 
                                                     throw nvae;
                                                 }
                                             }
                                             else {
                                                 NoViableAltException nvae =
-                                                    new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 15, input);
+                                                    new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 15, input);
 
                                                 throw nvae;
                                             }
-                                        }
-                                        else if ( (LA78_12==12) ) {
+                                            }
+                                            break;
+                                        case 12:
+                                            {
                                             switch ( input.LA(9) ) {
-                                            case 77:
-                                                {
-                                                alt78=1;
-                                                }
-                                                break;
                                             case 79:
                                                 {
-                                                alt78=3;
+                                                alt79=3;
+                                                }
+                                                break;
+                                            case 77:
+                                                {
+                                                alt79=1;
                                                 }
                                                 break;
                                             case 13:
                                             case 76:
                                                 {
-                                                alt78=2;
+                                                alt79=2;
                                                 }
                                                 break;
                                             default:
                                                 NoViableAltException nvae =
-                                                    new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 16, input);
+                                                    new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 16, input);
 
                                                 throw nvae;
                                             }
 
-                                        }
-                                        else {
+                                            }
+                                            break;
+                                        case EOF:
+                                        case 13:
+                                        case 64:
+                                        case 68:
+                                        case 69:
+                                        case 70:
+                                        case 71:
+                                        case 72:
+                                        case 73:
+                                        case 74:
+                                            {
+                                            alt79=2;
+                                            }
+                                            break;
+                                        default:
                                             NoViableAltException nvae =
-                                                new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 12, input);
+                                                new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 12, input);
 
                                             throw nvae;
                                         }
+
                                         }
                                         break;
                                     case 80:
                                         {
-                                        int LA78_13 = input.LA(8);
+                                        int LA79_13 = input.LA(8);
 
-                                        if ( (LA78_13==RULE_ID) ) {
-                                            int LA78_17 = input.LA(9);
+                                        if ( (LA79_13==RULE_ID) ) {
+                                            int LA79_18 = input.LA(9);
 
-                                            if ( (LA78_17==12) ) {
+                                            if ( (LA79_18==12) ) {
                                                 switch ( input.LA(10) ) {
-                                                case 77:
-                                                    {
-                                                    alt78=1;
-                                                    }
-                                                    break;
                                                 case 79:
                                                     {
-                                                    alt78=3;
+                                                    alt79=3;
+                                                    }
+                                                    break;
+                                                case 77:
+                                                    {
+                                                    alt79=1;
                                                     }
                                                     break;
                                                 case 13:
                                                 case 76:
                                                     {
-                                                    alt78=2;
+                                                    alt79=2;
                                                     }
                                                     break;
                                                 default:
                                                     NoViableAltException nvae =
-                                                        new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 16, input);
+                                                        new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 16, input);
 
                                                     throw nvae;
                                                 }
 
                                             }
+                                            else if ( (LA79_18==EOF||LA79_18==13||LA79_18==64||(LA79_18>=68 && LA79_18<=74)) ) {
+                                                alt79=2;
+                                            }
                                             else {
                                                 NoViableAltException nvae =
-                                                    new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 17, input);
+                                                    new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 18, input);
 
                                                 throw nvae;
                                             }
                                         }
                                         else {
                                             NoViableAltException nvae =
-                                                new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 13, input);
+                                                new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 13, input);
 
                                             throw nvae;
                                         }
@@ -11749,47 +11898,50 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                                         break;
                                     case 81:
                                         {
-                                        int LA78_14 = input.LA(8);
+                                        int LA79_14 = input.LA(8);
 
-                                        if ( (LA78_14==RULE_ID) ) {
-                                            int LA78_18 = input.LA(9);
+                                        if ( (LA79_14==RULE_ID) ) {
+                                            int LA79_19 = input.LA(9);
 
-                                            if ( (LA78_18==12) ) {
+                                            if ( (LA79_19==12) ) {
                                                 switch ( input.LA(10) ) {
-                                                case 77:
-                                                    {
-                                                    alt78=1;
-                                                    }
-                                                    break;
                                                 case 79:
                                                     {
-                                                    alt78=3;
+                                                    alt79=3;
+                                                    }
+                                                    break;
+                                                case 77:
+                                                    {
+                                                    alt79=1;
                                                     }
                                                     break;
                                                 case 13:
                                                 case 76:
                                                     {
-                                                    alt78=2;
+                                                    alt79=2;
                                                     }
                                                     break;
                                                 default:
                                                     NoViableAltException nvae =
-                                                        new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 16, input);
+                                                        new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 16, input);
 
                                                     throw nvae;
                                                 }
 
                                             }
+                                            else if ( (LA79_19==EOF||LA79_19==13||LA79_19==64||(LA79_19>=68 && LA79_19<=74)) ) {
+                                                alt79=2;
+                                            }
                                             else {
                                                 NoViableAltException nvae =
-                                                    new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 18, input);
+                                                    new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 19, input);
 
                                                 throw nvae;
                                             }
                                         }
                                         else {
                                             NoViableAltException nvae =
-                                                new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 14, input);
+                                                new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 14, input);
 
                                             throw nvae;
                                         }
@@ -11797,7 +11949,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                                         break;
                                     default:
                                         NoViableAltException nvae =
-                                            new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 8, input);
+                                            new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 8, input);
 
                                         throw nvae;
                                     }
@@ -11805,147 +11957,171 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                                 }
                                 else {
                                     NoViableAltException nvae =
-                                        new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 11, input);
+                                        new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 11, input);
 
                                     throw nvae;
                                 }
                             }
                             else {
                                 NoViableAltException nvae =
-                                    new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 7, input);
+                                    new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 7, input);
 
                                 throw nvae;
                             }
                         }
-                        else if ( (LA78_4==37) ) {
+                        else if ( (LA79_4==37) ) {
                             switch ( input.LA(5) ) {
                             case RULE_ID:
                                 {
-                                int LA78_12 = input.LA(6);
+                                switch ( input.LA(6) ) {
+                                case 50:
+                                    {
+                                    int LA79_15 = input.LA(7);
 
-                                if ( (LA78_12==50) ) {
-                                    int LA78_15 = input.LA(7);
+                                    if ( (LA79_15==RULE_ID) ) {
+                                        int LA79_20 = input.LA(8);
 
-                                    if ( (LA78_15==RULE_ID) ) {
-                                        int LA78_19 = input.LA(8);
-
-                                        if ( (LA78_19==12) ) {
+                                        if ( (LA79_20==12) ) {
                                             switch ( input.LA(9) ) {
-                                            case 77:
-                                                {
-                                                alt78=1;
-                                                }
-                                                break;
                                             case 79:
                                                 {
-                                                alt78=3;
+                                                alt79=3;
+                                                }
+                                                break;
+                                            case 77:
+                                                {
+                                                alt79=1;
                                                 }
                                                 break;
                                             case 13:
                                             case 76:
                                                 {
-                                                alt78=2;
+                                                alt79=2;
                                                 }
                                                 break;
                                             default:
                                                 NoViableAltException nvae =
-                                                    new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 16, input);
+                                                    new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 16, input);
 
                                                 throw nvae;
                                             }
 
                                         }
+                                        else if ( (LA79_20==EOF||LA79_20==13||LA79_20==64||(LA79_20>=68 && LA79_20<=74)) ) {
+                                            alt79=2;
+                                        }
                                         else {
                                             NoViableAltException nvae =
-                                                new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 19, input);
+                                                new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 20, input);
 
                                             throw nvae;
                                         }
                                     }
                                     else {
                                         NoViableAltException nvae =
-                                            new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 15, input);
+                                            new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 15, input);
 
                                         throw nvae;
                                     }
-                                }
-                                else if ( (LA78_12==12) ) {
+                                    }
+                                    break;
+                                case 12:
+                                    {
                                     switch ( input.LA(7) ) {
-                                    case 77:
-                                        {
-                                        alt78=1;
-                                        }
-                                        break;
                                     case 79:
                                         {
-                                        alt78=3;
+                                        alt79=3;
+                                        }
+                                        break;
+                                    case 77:
+                                        {
+                                        alt79=1;
                                         }
                                         break;
                                     case 13:
                                     case 76:
                                         {
-                                        alt78=2;
+                                        alt79=2;
                                         }
                                         break;
                                     default:
                                         NoViableAltException nvae =
-                                            new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 16, input);
+                                            new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 16, input);
 
                                         throw nvae;
                                     }
 
-                                }
-                                else {
+                                    }
+                                    break;
+                                case EOF:
+                                case 13:
+                                case 64:
+                                case 68:
+                                case 69:
+                                case 70:
+                                case 71:
+                                case 72:
+                                case 73:
+                                case 74:
+                                    {
+                                    alt79=2;
+                                    }
+                                    break;
+                                default:
                                     NoViableAltException nvae =
-                                        new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 12, input);
+                                        new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 12, input);
 
                                     throw nvae;
                                 }
+
                                 }
                                 break;
                             case 80:
                                 {
-                                int LA78_13 = input.LA(6);
+                                int LA79_13 = input.LA(6);
 
-                                if ( (LA78_13==RULE_ID) ) {
-                                    int LA78_17 = input.LA(7);
+                                if ( (LA79_13==RULE_ID) ) {
+                                    int LA79_18 = input.LA(7);
 
-                                    if ( (LA78_17==12) ) {
+                                    if ( (LA79_18==12) ) {
                                         switch ( input.LA(8) ) {
-                                        case 77:
-                                            {
-                                            alt78=1;
-                                            }
-                                            break;
                                         case 79:
                                             {
-                                            alt78=3;
+                                            alt79=3;
+                                            }
+                                            break;
+                                        case 77:
+                                            {
+                                            alt79=1;
                                             }
                                             break;
                                         case 13:
                                         case 76:
                                             {
-                                            alt78=2;
+                                            alt79=2;
                                             }
                                             break;
                                         default:
                                             NoViableAltException nvae =
-                                                new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 16, input);
+                                                new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 16, input);
 
                                             throw nvae;
                                         }
 
                                     }
+                                    else if ( (LA79_18==EOF||LA79_18==13||LA79_18==64||(LA79_18>=68 && LA79_18<=74)) ) {
+                                        alt79=2;
+                                    }
                                     else {
                                         NoViableAltException nvae =
-                                            new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 17, input);
+                                            new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 18, input);
 
                                         throw nvae;
                                     }
                                 }
                                 else {
                                     NoViableAltException nvae =
-                                        new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 13, input);
+                                        new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 13, input);
 
                                     throw nvae;
                                 }
@@ -11953,47 +12129,50 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                                 break;
                             case 81:
                                 {
-                                int LA78_14 = input.LA(6);
+                                int LA79_14 = input.LA(6);
 
-                                if ( (LA78_14==RULE_ID) ) {
-                                    int LA78_18 = input.LA(7);
+                                if ( (LA79_14==RULE_ID) ) {
+                                    int LA79_19 = input.LA(7);
 
-                                    if ( (LA78_18==12) ) {
+                                    if ( (LA79_19==12) ) {
                                         switch ( input.LA(8) ) {
-                                        case 77:
-                                            {
-                                            alt78=1;
-                                            }
-                                            break;
                                         case 79:
                                             {
-                                            alt78=3;
+                                            alt79=3;
+                                            }
+                                            break;
+                                        case 77:
+                                            {
+                                            alt79=1;
                                             }
                                             break;
                                         case 13:
                                         case 76:
                                             {
-                                            alt78=2;
+                                            alt79=2;
                                             }
                                             break;
                                         default:
                                             NoViableAltException nvae =
-                                                new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 16, input);
+                                                new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 16, input);
 
                                             throw nvae;
                                         }
 
                                     }
+                                    else if ( (LA79_19==EOF||LA79_19==13||LA79_19==64||(LA79_19>=68 && LA79_19<=74)) ) {
+                                        alt79=2;
+                                    }
                                     else {
                                         NoViableAltException nvae =
-                                            new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 18, input);
+                                            new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 19, input);
 
                                         throw nvae;
                                     }
                                 }
                                 else {
                                     NoViableAltException nvae =
-                                        new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 14, input);
+                                        new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 14, input);
 
                                     throw nvae;
                                 }
@@ -12001,7 +12180,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                                 break;
                             default:
                                 NoViableAltException nvae =
-                                    new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 8, input);
+                                    new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 8, input);
 
                                 throw nvae;
                             }
@@ -12009,7 +12188,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                         }
                         else {
                             NoViableAltException nvae =
-                                new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 4, input);
+                                new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 4, input);
 
                             throw nvae;
                         }
@@ -12017,140 +12196,164 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                         break;
                     case 80:
                         {
-                        int LA78_5 = input.LA(4);
+                        int LA79_5 = input.LA(4);
 
-                        if ( (LA78_5==RULE_ID) ) {
-                            int LA78_9 = input.LA(5);
+                        if ( (LA79_5==RULE_ID) ) {
+                            int LA79_9 = input.LA(5);
 
-                            if ( (LA78_9==37) ) {
+                            if ( (LA79_9==37) ) {
                                 switch ( input.LA(6) ) {
                                 case RULE_ID:
                                     {
-                                    int LA78_12 = input.LA(7);
+                                    switch ( input.LA(7) ) {
+                                    case 50:
+                                        {
+                                        int LA79_15 = input.LA(8);
 
-                                    if ( (LA78_12==50) ) {
-                                        int LA78_15 = input.LA(8);
+                                        if ( (LA79_15==RULE_ID) ) {
+                                            int LA79_20 = input.LA(9);
 
-                                        if ( (LA78_15==RULE_ID) ) {
-                                            int LA78_19 = input.LA(9);
-
-                                            if ( (LA78_19==12) ) {
+                                            if ( (LA79_20==12) ) {
                                                 switch ( input.LA(10) ) {
-                                                case 77:
-                                                    {
-                                                    alt78=1;
-                                                    }
-                                                    break;
                                                 case 79:
                                                     {
-                                                    alt78=3;
+                                                    alt79=3;
+                                                    }
+                                                    break;
+                                                case 77:
+                                                    {
+                                                    alt79=1;
                                                     }
                                                     break;
                                                 case 13:
                                                 case 76:
                                                     {
-                                                    alt78=2;
+                                                    alt79=2;
                                                     }
                                                     break;
                                                 default:
                                                     NoViableAltException nvae =
-                                                        new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 16, input);
+                                                        new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 16, input);
 
                                                     throw nvae;
                                                 }
 
                                             }
+                                            else if ( (LA79_20==EOF||LA79_20==13||LA79_20==64||(LA79_20>=68 && LA79_20<=74)) ) {
+                                                alt79=2;
+                                            }
                                             else {
                                                 NoViableAltException nvae =
-                                                    new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 19, input);
+                                                    new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 20, input);
 
                                                 throw nvae;
                                             }
                                         }
                                         else {
                                             NoViableAltException nvae =
-                                                new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 15, input);
+                                                new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 15, input);
 
                                             throw nvae;
                                         }
-                                    }
-                                    else if ( (LA78_12==12) ) {
+                                        }
+                                        break;
+                                    case 12:
+                                        {
                                         switch ( input.LA(8) ) {
-                                        case 77:
-                                            {
-                                            alt78=1;
-                                            }
-                                            break;
                                         case 79:
                                             {
-                                            alt78=3;
+                                            alt79=3;
+                                            }
+                                            break;
+                                        case 77:
+                                            {
+                                            alt79=1;
                                             }
                                             break;
                                         case 13:
                                         case 76:
                                             {
-                                            alt78=2;
+                                            alt79=2;
                                             }
                                             break;
                                         default:
                                             NoViableAltException nvae =
-                                                new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 16, input);
+                                                new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 16, input);
 
                                             throw nvae;
                                         }
 
-                                    }
-                                    else {
+                                        }
+                                        break;
+                                    case EOF:
+                                    case 13:
+                                    case 64:
+                                    case 68:
+                                    case 69:
+                                    case 70:
+                                    case 71:
+                                    case 72:
+                                    case 73:
+                                    case 74:
+                                        {
+                                        alt79=2;
+                                        }
+                                        break;
+                                    default:
                                         NoViableAltException nvae =
-                                            new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 12, input);
+                                            new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 12, input);
 
                                         throw nvae;
                                     }
+
                                     }
                                     break;
                                 case 80:
                                     {
-                                    int LA78_13 = input.LA(7);
+                                    int LA79_13 = input.LA(7);
 
-                                    if ( (LA78_13==RULE_ID) ) {
-                                        int LA78_17 = input.LA(8);
+                                    if ( (LA79_13==RULE_ID) ) {
+                                        int LA79_18 = input.LA(8);
 
-                                        if ( (LA78_17==12) ) {
+                                        if ( (LA79_18==12) ) {
                                             switch ( input.LA(9) ) {
-                                            case 77:
-                                                {
-                                                alt78=1;
-                                                }
-                                                break;
                                             case 79:
                                                 {
-                                                alt78=3;
+                                                alt79=3;
+                                                }
+                                                break;
+                                            case 77:
+                                                {
+                                                alt79=1;
                                                 }
                                                 break;
                                             case 13:
                                             case 76:
                                                 {
-                                                alt78=2;
+                                                alt79=2;
                                                 }
                                                 break;
                                             default:
                                                 NoViableAltException nvae =
-                                                    new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 16, input);
+                                                    new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 16, input);
 
                                                 throw nvae;
                                             }
 
                                         }
+                                        else if ( (LA79_18==EOF||LA79_18==13||LA79_18==64||(LA79_18>=68 && LA79_18<=74)) ) {
+                                            alt79=2;
+                                        }
                                         else {
                                             NoViableAltException nvae =
-                                                new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 17, input);
+                                                new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 18, input);
 
                                             throw nvae;
                                         }
                                     }
                                     else {
                                         NoViableAltException nvae =
-                                            new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 13, input);
+                                            new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 13, input);
 
                                         throw nvae;
                                     }
@@ -12158,47 +12361,50 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                                     break;
                                 case 81:
                                     {
-                                    int LA78_14 = input.LA(7);
+                                    int LA79_14 = input.LA(7);
 
-                                    if ( (LA78_14==RULE_ID) ) {
-                                        int LA78_18 = input.LA(8);
+                                    if ( (LA79_14==RULE_ID) ) {
+                                        int LA79_19 = input.LA(8);
 
-                                        if ( (LA78_18==12) ) {
+                                        if ( (LA79_19==12) ) {
                                             switch ( input.LA(9) ) {
-                                            case 77:
-                                                {
-                                                alt78=1;
-                                                }
-                                                break;
                                             case 79:
                                                 {
-                                                alt78=3;
+                                                alt79=3;
+                                                }
+                                                break;
+                                            case 77:
+                                                {
+                                                alt79=1;
                                                 }
                                                 break;
                                             case 13:
                                             case 76:
                                                 {
-                                                alt78=2;
+                                                alt79=2;
                                                 }
                                                 break;
                                             default:
                                                 NoViableAltException nvae =
-                                                    new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 16, input);
+                                                    new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 16, input);
 
                                                 throw nvae;
                                             }
 
                                         }
+                                        else if ( (LA79_19==EOF||LA79_19==13||LA79_19==64||(LA79_19>=68 && LA79_19<=74)) ) {
+                                            alt79=2;
+                                        }
                                         else {
                                             NoViableAltException nvae =
-                                                new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 18, input);
+                                                new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 19, input);
 
                                             throw nvae;
                                         }
                                     }
                                     else {
                                         NoViableAltException nvae =
-                                            new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 14, input);
+                                            new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 14, input);
 
                                         throw nvae;
                                     }
@@ -12206,7 +12412,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                                     break;
                                 default:
                                     NoViableAltException nvae =
-                                        new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 8, input);
+                                        new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 8, input);
 
                                     throw nvae;
                                 }
@@ -12214,14 +12420,14 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                             }
                             else {
                                 NoViableAltException nvae =
-                                    new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 9, input);
+                                    new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 9, input);
 
                                 throw nvae;
                             }
                         }
                         else {
                             NoViableAltException nvae =
-                                new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 5, input);
+                                new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 5, input);
 
                             throw nvae;
                         }
@@ -12229,140 +12435,164 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                         break;
                     case 81:
                         {
-                        int LA78_6 = input.LA(4);
+                        int LA79_6 = input.LA(4);
 
-                        if ( (LA78_6==RULE_ID) ) {
-                            int LA78_10 = input.LA(5);
+                        if ( (LA79_6==RULE_ID) ) {
+                            int LA79_10 = input.LA(5);
 
-                            if ( (LA78_10==37) ) {
+                            if ( (LA79_10==37) ) {
                                 switch ( input.LA(6) ) {
                                 case RULE_ID:
                                     {
-                                    int LA78_12 = input.LA(7);
+                                    switch ( input.LA(7) ) {
+                                    case 50:
+                                        {
+                                        int LA79_15 = input.LA(8);
 
-                                    if ( (LA78_12==50) ) {
-                                        int LA78_15 = input.LA(8);
+                                        if ( (LA79_15==RULE_ID) ) {
+                                            int LA79_20 = input.LA(9);
 
-                                        if ( (LA78_15==RULE_ID) ) {
-                                            int LA78_19 = input.LA(9);
-
-                                            if ( (LA78_19==12) ) {
+                                            if ( (LA79_20==12) ) {
                                                 switch ( input.LA(10) ) {
-                                                case 77:
-                                                    {
-                                                    alt78=1;
-                                                    }
-                                                    break;
                                                 case 79:
                                                     {
-                                                    alt78=3;
+                                                    alt79=3;
+                                                    }
+                                                    break;
+                                                case 77:
+                                                    {
+                                                    alt79=1;
                                                     }
                                                     break;
                                                 case 13:
                                                 case 76:
                                                     {
-                                                    alt78=2;
+                                                    alt79=2;
                                                     }
                                                     break;
                                                 default:
                                                     NoViableAltException nvae =
-                                                        new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 16, input);
+                                                        new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 16, input);
 
                                                     throw nvae;
                                                 }
 
                                             }
+                                            else if ( (LA79_20==EOF||LA79_20==13||LA79_20==64||(LA79_20>=68 && LA79_20<=74)) ) {
+                                                alt79=2;
+                                            }
                                             else {
                                                 NoViableAltException nvae =
-                                                    new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 19, input);
+                                                    new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 20, input);
 
                                                 throw nvae;
                                             }
                                         }
                                         else {
                                             NoViableAltException nvae =
-                                                new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 15, input);
+                                                new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 15, input);
 
                                             throw nvae;
                                         }
-                                    }
-                                    else if ( (LA78_12==12) ) {
+                                        }
+                                        break;
+                                    case 12:
+                                        {
                                         switch ( input.LA(8) ) {
-                                        case 77:
-                                            {
-                                            alt78=1;
-                                            }
-                                            break;
                                         case 79:
                                             {
-                                            alt78=3;
+                                            alt79=3;
+                                            }
+                                            break;
+                                        case 77:
+                                            {
+                                            alt79=1;
                                             }
                                             break;
                                         case 13:
                                         case 76:
                                             {
-                                            alt78=2;
+                                            alt79=2;
                                             }
                                             break;
                                         default:
                                             NoViableAltException nvae =
-                                                new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 16, input);
+                                                new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 16, input);
 
                                             throw nvae;
                                         }
 
-                                    }
-                                    else {
+                                        }
+                                        break;
+                                    case EOF:
+                                    case 13:
+                                    case 64:
+                                    case 68:
+                                    case 69:
+                                    case 70:
+                                    case 71:
+                                    case 72:
+                                    case 73:
+                                    case 74:
+                                        {
+                                        alt79=2;
+                                        }
+                                        break;
+                                    default:
                                         NoViableAltException nvae =
-                                            new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 12, input);
+                                            new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 12, input);
 
                                         throw nvae;
                                     }
+
                                     }
                                     break;
                                 case 80:
                                     {
-                                    int LA78_13 = input.LA(7);
+                                    int LA79_13 = input.LA(7);
 
-                                    if ( (LA78_13==RULE_ID) ) {
-                                        int LA78_17 = input.LA(8);
+                                    if ( (LA79_13==RULE_ID) ) {
+                                        int LA79_18 = input.LA(8);
 
-                                        if ( (LA78_17==12) ) {
+                                        if ( (LA79_18==12) ) {
                                             switch ( input.LA(9) ) {
-                                            case 77:
-                                                {
-                                                alt78=1;
-                                                }
-                                                break;
                                             case 79:
                                                 {
-                                                alt78=3;
+                                                alt79=3;
+                                                }
+                                                break;
+                                            case 77:
+                                                {
+                                                alt79=1;
                                                 }
                                                 break;
                                             case 13:
                                             case 76:
                                                 {
-                                                alt78=2;
+                                                alt79=2;
                                                 }
                                                 break;
                                             default:
                                                 NoViableAltException nvae =
-                                                    new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 16, input);
+                                                    new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 16, input);
 
                                                 throw nvae;
                                             }
 
                                         }
+                                        else if ( (LA79_18==EOF||LA79_18==13||LA79_18==64||(LA79_18>=68 && LA79_18<=74)) ) {
+                                            alt79=2;
+                                        }
                                         else {
                                             NoViableAltException nvae =
-                                                new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 17, input);
+                                                new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 18, input);
 
                                             throw nvae;
                                         }
                                     }
                                     else {
                                         NoViableAltException nvae =
-                                            new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 13, input);
+                                            new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 13, input);
 
                                         throw nvae;
                                     }
@@ -12370,47 +12600,50 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                                     break;
                                 case 81:
                                     {
-                                    int LA78_14 = input.LA(7);
+                                    int LA79_14 = input.LA(7);
 
-                                    if ( (LA78_14==RULE_ID) ) {
-                                        int LA78_18 = input.LA(8);
+                                    if ( (LA79_14==RULE_ID) ) {
+                                        int LA79_19 = input.LA(8);
 
-                                        if ( (LA78_18==12) ) {
+                                        if ( (LA79_19==12) ) {
                                             switch ( input.LA(9) ) {
-                                            case 77:
-                                                {
-                                                alt78=1;
-                                                }
-                                                break;
                                             case 79:
                                                 {
-                                                alt78=3;
+                                                alt79=3;
+                                                }
+                                                break;
+                                            case 77:
+                                                {
+                                                alt79=1;
                                                 }
                                                 break;
                                             case 13:
                                             case 76:
                                                 {
-                                                alt78=2;
+                                                alt79=2;
                                                 }
                                                 break;
                                             default:
                                                 NoViableAltException nvae =
-                                                    new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 16, input);
+                                                    new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 16, input);
 
                                                 throw nvae;
                                             }
 
                                         }
+                                        else if ( (LA79_19==EOF||LA79_19==13||LA79_19==64||(LA79_19>=68 && LA79_19<=74)) ) {
+                                            alt79=2;
+                                        }
                                         else {
                                             NoViableAltException nvae =
-                                                new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 18, input);
+                                                new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 19, input);
 
                                             throw nvae;
                                         }
                                     }
                                     else {
                                         NoViableAltException nvae =
-                                            new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 14, input);
+                                            new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 14, input);
 
                                         throw nvae;
                                     }
@@ -12418,7 +12651,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                                     break;
                                 default:
                                     NoViableAltException nvae =
-                                        new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 8, input);
+                                        new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 8, input);
 
                                     throw nvae;
                                 }
@@ -12426,14 +12659,14 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                             }
                             else {
                                 NoViableAltException nvae =
-                                    new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 10, input);
+                                    new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 10, input);
 
                                 throw nvae;
                             }
                         }
                         else {
                             NoViableAltException nvae =
-                                new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 6, input);
+                                new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 6, input);
 
                             throw nvae;
                         }
@@ -12441,7 +12674,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                         break;
                     default:
                         NoViableAltException nvae =
-                            new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 3, input);
+                            new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 3, input);
 
                         throw nvae;
                     }
@@ -12449,25 +12682,25 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 }
                 else {
                     NoViableAltException nvae =
-                        new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 1, input);
+                        new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 1, input);
 
                     throw nvae;
                 }
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 78, 0, input);
+                    new NoViableAltException("4863:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )", 79, 0, input);
 
                 throw nvae;
             }
-            switch (alt78) {
+            switch (alt79) {
                 case 1 :
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4864:5: this_TriggeredTransition_0= ruleTriggeredTransition
                     {
                      
                             currentNode=createCompositeNode(grammarAccess.getNonInitialTransitionAccess().getTriggeredTransitionParserRuleCall_0(), currentNode); 
                         
-                    pushFollow(FOLLOW_ruleTriggeredTransition_in_ruleNonInitialTransition8387);
+                    pushFollow(FOLLOW_ruleTriggeredTransition_in_ruleNonInitialTransition8390);
                     this_TriggeredTransition_0=ruleTriggeredTransition();
                     _fsp--;
 
@@ -12484,7 +12717,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                             currentNode=createCompositeNode(grammarAccess.getNonInitialTransitionAccess().getContinuationTransitionParserRuleCall_1(), currentNode); 
                         
-                    pushFollow(FOLLOW_ruleContinuationTransition_in_ruleNonInitialTransition8414);
+                    pushFollow(FOLLOW_ruleContinuationTransition_in_ruleNonInitialTransition8417);
                     this_ContinuationTransition_1=ruleContinuationTransition();
                     _fsp--;
 
@@ -12501,7 +12734,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                             currentNode=createCompositeNode(grammarAccess.getNonInitialTransitionAccess().getCPBranchTransitionParserRuleCall_2(), currentNode); 
                         
-                    pushFollow(FOLLOW_ruleCPBranchTransition_in_ruleNonInitialTransition8441);
+                    pushFollow(FOLLOW_ruleCPBranchTransition_in_ruleNonInitialTransition8444);
                     this_CPBranchTransition_2=ruleCPBranchTransition();
                     _fsp--;
 
@@ -12547,12 +12780,12 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4902:2: iv_ruleInitialTransition= ruleInitialTransition EOF
             {
              currentNode = createCompositeNode(grammarAccess.getInitialTransitionRule(), currentNode); 
-            pushFollow(FOLLOW_ruleInitialTransition_in_entryRuleInitialTransition8476);
+            pushFollow(FOLLOW_ruleInitialTransition_in_entryRuleInitialTransition8479);
             iv_ruleInitialTransition=ruleInitialTransition();
             _fsp--;
 
              current =iv_ruleInitialTransition; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleInitialTransition8486); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleInitialTransition8489); 
 
             }
 
@@ -12589,18 +12822,18 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4915:1: ( 'Transition' ( (lv_name_1_0= RULE_ID ) )? ':' 'initial' '->' ( (lv_to_5_0= ruleTransitionTerminal ) ) '{' ( 'action' ( (lv_action_8_0= ruleDetailCode ) ) )? '}' )
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4915:3: 'Transition' ( (lv_name_1_0= RULE_ID ) )? ':' 'initial' '->' ( (lv_to_5_0= ruleTransitionTerminal ) ) '{' ( 'action' ( (lv_action_8_0= ruleDetailCode ) ) )? '}'
             {
-            match(input,74,FOLLOW_74_in_ruleInitialTransition8521); 
+            match(input,74,FOLLOW_74_in_ruleInitialTransition8524); 
 
                     createLeafNode(grammarAccess.getInitialTransitionAccess().getTransitionKeyword_0(), null); 
                 
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4919:1: ( (lv_name_1_0= RULE_ID ) )?
-            int alt79=2;
-            int LA79_0 = input.LA(1);
+            int alt80=2;
+            int LA80_0 = input.LA(1);
 
-            if ( (LA79_0==RULE_ID) ) {
-                alt79=1;
+            if ( (LA80_0==RULE_ID) ) {
+                alt80=1;
             }
-            switch (alt79) {
+            switch (alt80) {
                 case 1 :
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4920:1: (lv_name_1_0= RULE_ID )
                     {
@@ -12608,7 +12841,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4921:3: lv_name_1_0= RULE_ID
                     {
                     lv_name_1_0=(Token)input.LT(1);
-                    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleInitialTransition8538); 
+                    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleInitialTransition8541); 
 
                     			createLeafNode(grammarAccess.getInitialTransitionAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
                     		
@@ -12637,15 +12870,15 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            match(input,14,FOLLOW_14_in_ruleInitialTransition8554); 
+            match(input,14,FOLLOW_14_in_ruleInitialTransition8557); 
 
                     createLeafNode(grammarAccess.getInitialTransitionAccess().getColonKeyword_2(), null); 
                 
-            match(input,75,FOLLOW_75_in_ruleInitialTransition8564); 
+            match(input,75,FOLLOW_75_in_ruleInitialTransition8567); 
 
                     createLeafNode(grammarAccess.getInitialTransitionAccess().getInitialKeyword_3(), null); 
                 
-            match(input,37,FOLLOW_37_in_ruleInitialTransition8574); 
+            match(input,37,FOLLOW_37_in_ruleInitialTransition8577); 
 
                     createLeafNode(grammarAccess.getInitialTransitionAccess().getHyphenMinusGreaterThanSignKeyword_4(), null); 
                 
@@ -12658,7 +12891,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
              
             	        currentNode=createCompositeNode(grammarAccess.getInitialTransitionAccess().getToTransitionTerminalParserRuleCall_5_0(), currentNode); 
             	    
-            pushFollow(FOLLOW_ruleTransitionTerminal_in_ruleInitialTransition8595);
+            pushFollow(FOLLOW_ruleTransitionTerminal_in_ruleInitialTransition8598);
             lv_to_5_0=ruleTransitionTerminal();
             _fsp--;
 
@@ -12685,22 +12918,22 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            match(input,12,FOLLOW_12_in_ruleInitialTransition8605); 
+            match(input,12,FOLLOW_12_in_ruleInitialTransition8608); 
 
                     createLeafNode(grammarAccess.getInitialTransitionAccess().getLeftCurlyBracketKeyword_6(), null); 
                 
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4983:1: ( 'action' ( (lv_action_8_0= ruleDetailCode ) ) )?
-            int alt80=2;
-            int LA80_0 = input.LA(1);
+            int alt81=2;
+            int LA81_0 = input.LA(1);
 
-            if ( (LA80_0==76) ) {
-                alt80=1;
+            if ( (LA81_0==76) ) {
+                alt81=1;
             }
-            switch (alt80) {
+            switch (alt81) {
                 case 1 :
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4983:3: 'action' ( (lv_action_8_0= ruleDetailCode ) )
                     {
-                    match(input,76,FOLLOW_76_in_ruleInitialTransition8616); 
+                    match(input,76,FOLLOW_76_in_ruleInitialTransition8619); 
 
                             createLeafNode(grammarAccess.getInitialTransitionAccess().getActionKeyword_7_0(), null); 
                         
@@ -12713,7 +12946,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                     	        currentNode=createCompositeNode(grammarAccess.getInitialTransitionAccess().getActionDetailCodeParserRuleCall_7_1_0(), currentNode); 
                     	    
-                    pushFollow(FOLLOW_ruleDetailCode_in_ruleInitialTransition8637);
+                    pushFollow(FOLLOW_ruleDetailCode_in_ruleInitialTransition8640);
                     lv_action_8_0=ruleDetailCode();
                     _fsp--;
 
@@ -12746,7 +12979,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            match(input,13,FOLLOW_13_in_ruleInitialTransition8649); 
+            match(input,13,FOLLOW_13_in_ruleInitialTransition8652); 
 
                     createLeafNode(grammarAccess.getInitialTransitionAccess().getRightCurlyBracketKeyword_8(), null); 
                 
@@ -12785,12 +13018,12 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5025:2: iv_ruleContinuationTransition= ruleContinuationTransition EOF
             {
              currentNode = createCompositeNode(grammarAccess.getContinuationTransitionRule(), currentNode); 
-            pushFollow(FOLLOW_ruleContinuationTransition_in_entryRuleContinuationTransition8685);
+            pushFollow(FOLLOW_ruleContinuationTransition_in_entryRuleContinuationTransition8688);
             iv_ruleContinuationTransition=ruleContinuationTransition();
             _fsp--;
 
              current =iv_ruleContinuationTransition; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleContinuationTransition8695); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleContinuationTransition8698); 
 
             }
 
@@ -12808,7 +13041,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start ruleContinuationTransition
-    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5032:1: ruleContinuationTransition returns [EObject current=null] : ( 'Transition' ( (lv_name_1_0= RULE_ID ) )? ':' ( (lv_from_3_0= ruleTransitionTerminal ) ) '->' ( (lv_to_5_0= ruleTransitionTerminal ) ) '{' ( 'action' ( (lv_action_8_0= ruleDetailCode ) ) )? '}' ) ;
+    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5032:1: ruleContinuationTransition returns [EObject current=null] : ( 'Transition' ( (lv_name_1_0= RULE_ID ) )? ':' ( (lv_from_3_0= ruleTransitionTerminal ) ) '->' ( (lv_to_5_0= ruleTransitionTerminal ) ) ( '{' ( 'action' ( (lv_action_8_0= ruleDetailCode ) ) )? '}' )? ) ;
     public final EObject ruleContinuationTransition() throws RecognitionException {
         EObject current = null;
 
@@ -12823,24 +13056,24 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5037:6: ( ( 'Transition' ( (lv_name_1_0= RULE_ID ) )? ':' ( (lv_from_3_0= ruleTransitionTerminal ) ) '->' ( (lv_to_5_0= ruleTransitionTerminal ) ) '{' ( 'action' ( (lv_action_8_0= ruleDetailCode ) ) )? '}' ) )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5038:1: ( 'Transition' ( (lv_name_1_0= RULE_ID ) )? ':' ( (lv_from_3_0= ruleTransitionTerminal ) ) '->' ( (lv_to_5_0= ruleTransitionTerminal ) ) '{' ( 'action' ( (lv_action_8_0= ruleDetailCode ) ) )? '}' )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5037:6: ( ( 'Transition' ( (lv_name_1_0= RULE_ID ) )? ':' ( (lv_from_3_0= ruleTransitionTerminal ) ) '->' ( (lv_to_5_0= ruleTransitionTerminal ) ) ( '{' ( 'action' ( (lv_action_8_0= ruleDetailCode ) ) )? '}' )? ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5038:1: ( 'Transition' ( (lv_name_1_0= RULE_ID ) )? ':' ( (lv_from_3_0= ruleTransitionTerminal ) ) '->' ( (lv_to_5_0= ruleTransitionTerminal ) ) ( '{' ( 'action' ( (lv_action_8_0= ruleDetailCode ) ) )? '}' )? )
             {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5038:1: ( 'Transition' ( (lv_name_1_0= RULE_ID ) )? ':' ( (lv_from_3_0= ruleTransitionTerminal ) ) '->' ( (lv_to_5_0= ruleTransitionTerminal ) ) '{' ( 'action' ( (lv_action_8_0= ruleDetailCode ) ) )? '}' )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5038:3: 'Transition' ( (lv_name_1_0= RULE_ID ) )? ':' ( (lv_from_3_0= ruleTransitionTerminal ) ) '->' ( (lv_to_5_0= ruleTransitionTerminal ) ) '{' ( 'action' ( (lv_action_8_0= ruleDetailCode ) ) )? '}'
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5038:1: ( 'Transition' ( (lv_name_1_0= RULE_ID ) )? ':' ( (lv_from_3_0= ruleTransitionTerminal ) ) '->' ( (lv_to_5_0= ruleTransitionTerminal ) ) ( '{' ( 'action' ( (lv_action_8_0= ruleDetailCode ) ) )? '}' )? )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5038:3: 'Transition' ( (lv_name_1_0= RULE_ID ) )? ':' ( (lv_from_3_0= ruleTransitionTerminal ) ) '->' ( (lv_to_5_0= ruleTransitionTerminal ) ) ( '{' ( 'action' ( (lv_action_8_0= ruleDetailCode ) ) )? '}' )?
             {
-            match(input,74,FOLLOW_74_in_ruleContinuationTransition8730); 
+            match(input,74,FOLLOW_74_in_ruleContinuationTransition8733); 
 
                     createLeafNode(grammarAccess.getContinuationTransitionAccess().getTransitionKeyword_0(), null); 
                 
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5042:1: ( (lv_name_1_0= RULE_ID ) )?
-            int alt81=2;
-            int LA81_0 = input.LA(1);
+            int alt82=2;
+            int LA82_0 = input.LA(1);
 
-            if ( (LA81_0==RULE_ID) ) {
-                alt81=1;
+            if ( (LA82_0==RULE_ID) ) {
+                alt82=1;
             }
-            switch (alt81) {
+            switch (alt82) {
                 case 1 :
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5043:1: (lv_name_1_0= RULE_ID )
                     {
@@ -12848,7 +13081,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5044:3: lv_name_1_0= RULE_ID
                     {
                     lv_name_1_0=(Token)input.LT(1);
-                    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleContinuationTransition8747); 
+                    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleContinuationTransition8750); 
 
                     			createLeafNode(grammarAccess.getContinuationTransitionAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
                     		
@@ -12877,7 +13110,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            match(input,14,FOLLOW_14_in_ruleContinuationTransition8763); 
+            match(input,14,FOLLOW_14_in_ruleContinuationTransition8766); 
 
                     createLeafNode(grammarAccess.getContinuationTransitionAccess().getColonKeyword_2(), null); 
                 
@@ -12890,7 +13123,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
              
             	        currentNode=createCompositeNode(grammarAccess.getContinuationTransitionAccess().getFromTransitionTerminalParserRuleCall_3_0(), currentNode); 
             	    
-            pushFollow(FOLLOW_ruleTransitionTerminal_in_ruleContinuationTransition8784);
+            pushFollow(FOLLOW_ruleTransitionTerminal_in_ruleContinuationTransition8787);
             lv_from_3_0=ruleTransitionTerminal();
             _fsp--;
 
@@ -12917,7 +13150,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            match(input,37,FOLLOW_37_in_ruleContinuationTransition8794); 
+            match(input,37,FOLLOW_37_in_ruleContinuationTransition8797); 
 
                     createLeafNode(grammarAccess.getContinuationTransitionAccess().getHyphenMinusGreaterThanSignKeyword_4(), null); 
                 
@@ -12930,7 +13163,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
              
             	        currentNode=createCompositeNode(grammarAccess.getContinuationTransitionAccess().getToTransitionTerminalParserRuleCall_5_0(), currentNode); 
             	    
-            pushFollow(FOLLOW_ruleTransitionTerminal_in_ruleContinuationTransition8815);
+            pushFollow(FOLLOW_ruleTransitionTerminal_in_ruleContinuationTransition8818);
             lv_to_5_0=ruleTransitionTerminal();
             _fsp--;
 
@@ -12957,71 +13190,88 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            match(input,12,FOLLOW_12_in_ruleContinuationTransition8825); 
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5122:2: ( '{' ( 'action' ( (lv_action_8_0= ruleDetailCode ) ) )? '}' )?
+            int alt84=2;
+            int LA84_0 = input.LA(1);
 
-                    createLeafNode(grammarAccess.getContinuationTransitionAccess().getLeftCurlyBracketKeyword_6(), null); 
-                
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5126:1: ( 'action' ( (lv_action_8_0= ruleDetailCode ) ) )?
-            int alt82=2;
-            int LA82_0 = input.LA(1);
-
-            if ( (LA82_0==76) ) {
-                alt82=1;
+            if ( (LA84_0==12) ) {
+                alt84=1;
             }
-            switch (alt82) {
+            switch (alt84) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5126:3: 'action' ( (lv_action_8_0= ruleDetailCode ) )
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5122:4: '{' ( 'action' ( (lv_action_8_0= ruleDetailCode ) ) )? '}'
                     {
-                    match(input,76,FOLLOW_76_in_ruleContinuationTransition8836); 
+                    match(input,12,FOLLOW_12_in_ruleContinuationTransition8829); 
 
-                            createLeafNode(grammarAccess.getContinuationTransitionAccess().getActionKeyword_7_0(), null); 
+                            createLeafNode(grammarAccess.getContinuationTransitionAccess().getLeftCurlyBracketKeyword_6_0(), null); 
                         
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5130:1: ( (lv_action_8_0= ruleDetailCode ) )
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5131:1: (lv_action_8_0= ruleDetailCode )
-                    {
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5131:1: (lv_action_8_0= ruleDetailCode )
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5132:3: lv_action_8_0= ruleDetailCode
-                    {
-                     
-                    	        currentNode=createCompositeNode(grammarAccess.getContinuationTransitionAccess().getActionDetailCodeParserRuleCall_7_1_0(), currentNode); 
-                    	    
-                    pushFollow(FOLLOW_ruleDetailCode_in_ruleContinuationTransition8857);
-                    lv_action_8_0=ruleDetailCode();
-                    _fsp--;
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5126:1: ( 'action' ( (lv_action_8_0= ruleDetailCode ) ) )?
+                    int alt83=2;
+                    int LA83_0 = input.LA(1);
+
+                    if ( (LA83_0==76) ) {
+                        alt83=1;
+                    }
+                    switch (alt83) {
+                        case 1 :
+                            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5126:3: 'action' ( (lv_action_8_0= ruleDetailCode ) )
+                            {
+                            match(input,76,FOLLOW_76_in_ruleContinuationTransition8840); 
+
+                                    createLeafNode(grammarAccess.getContinuationTransitionAccess().getActionKeyword_6_1_0(), null); 
+                                
+                            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5130:1: ( (lv_action_8_0= ruleDetailCode ) )
+                            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5131:1: (lv_action_8_0= ruleDetailCode )
+                            {
+                            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5131:1: (lv_action_8_0= ruleDetailCode )
+                            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5132:3: lv_action_8_0= ruleDetailCode
+                            {
+                             
+                            	        currentNode=createCompositeNode(grammarAccess.getContinuationTransitionAccess().getActionDetailCodeParserRuleCall_6_1_1_0(), currentNode); 
+                            	    
+                            pushFollow(FOLLOW_ruleDetailCode_in_ruleContinuationTransition8861);
+                            lv_action_8_0=ruleDetailCode();
+                            _fsp--;
 
 
-                    	        if (current==null) {
-                    	            current = factory.create(grammarAccess.getContinuationTransitionRule().getType().getClassifier());
-                    	            associateNodeWithAstElement(currentNode.getParent(), current);
-                    	        }
-                    	        try {
-                    	       		set(
-                    	       			current, 
-                    	       			"action",
-                    	        		lv_action_8_0, 
-                    	        		"DetailCode", 
-                    	        		currentNode);
-                    	        } catch (ValueConverterException vce) {
-                    				handleValueConverterException(vce);
-                    	        }
-                    	        currentNode = currentNode.getParent();
-                    	    
+                            	        if (current==null) {
+                            	            current = factory.create(grammarAccess.getContinuationTransitionRule().getType().getClassifier());
+                            	            associateNodeWithAstElement(currentNode.getParent(), current);
+                            	        }
+                            	        try {
+                            	       		set(
+                            	       			current, 
+                            	       			"action",
+                            	        		lv_action_8_0, 
+                            	        		"DetailCode", 
+                            	        		currentNode);
+                            	        } catch (ValueConverterException vce) {
+                            				handleValueConverterException(vce);
+                            	        }
+                            	        currentNode = currentNode.getParent();
+                            	    
+
+                            }
+
+
+                            }
+
+
+                            }
+                            break;
 
                     }
 
+                    match(input,13,FOLLOW_13_in_ruleContinuationTransition8873); 
 
-                    }
-
+                            createLeafNode(grammarAccess.getContinuationTransitionAccess().getRightCurlyBracketKeyword_6_2(), null); 
+                        
 
                     }
                     break;
 
             }
 
-            match(input,13,FOLLOW_13_in_ruleContinuationTransition8869); 
-
-                    createLeafNode(grammarAccess.getContinuationTransitionAccess().getRightCurlyBracketKeyword_8(), null); 
-                
 
             }
 
@@ -13057,12 +13307,12 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5168:2: iv_ruleTriggeredTransition= ruleTriggeredTransition EOF
             {
              currentNode = createCompositeNode(grammarAccess.getTriggeredTransitionRule(), currentNode); 
-            pushFollow(FOLLOW_ruleTriggeredTransition_in_entryRuleTriggeredTransition8905);
+            pushFollow(FOLLOW_ruleTriggeredTransition_in_entryRuleTriggeredTransition8911);
             iv_ruleTriggeredTransition=ruleTriggeredTransition();
             _fsp--;
 
              current =iv_ruleTriggeredTransition; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleTriggeredTransition8915); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleTriggeredTransition8921); 
 
             }
 
@@ -13105,18 +13355,18 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5181:1: ( 'Transition' ( (lv_name_1_0= RULE_ID ) )? ':' ( (lv_from_3_0= ruleTransitionTerminal ) ) '->' ( (lv_to_5_0= ruleTransitionTerminal ) ) '{' 'triggers' '{' ( (lv_triggers_9_0= ruleTrigger ) ) ( 'or' ( (lv_triggers_11_0= ruleTrigger ) ) )* '}' ( 'action' ( (lv_action_14_0= ruleDetailCode ) ) )? '}' )
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5181:3: 'Transition' ( (lv_name_1_0= RULE_ID ) )? ':' ( (lv_from_3_0= ruleTransitionTerminal ) ) '->' ( (lv_to_5_0= ruleTransitionTerminal ) ) '{' 'triggers' '{' ( (lv_triggers_9_0= ruleTrigger ) ) ( 'or' ( (lv_triggers_11_0= ruleTrigger ) ) )* '}' ( 'action' ( (lv_action_14_0= ruleDetailCode ) ) )? '}'
             {
-            match(input,74,FOLLOW_74_in_ruleTriggeredTransition8950); 
+            match(input,74,FOLLOW_74_in_ruleTriggeredTransition8956); 
 
                     createLeafNode(grammarAccess.getTriggeredTransitionAccess().getTransitionKeyword_0(), null); 
                 
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5185:1: ( (lv_name_1_0= RULE_ID ) )?
-            int alt83=2;
-            int LA83_0 = input.LA(1);
+            int alt85=2;
+            int LA85_0 = input.LA(1);
 
-            if ( (LA83_0==RULE_ID) ) {
-                alt83=1;
+            if ( (LA85_0==RULE_ID) ) {
+                alt85=1;
             }
-            switch (alt83) {
+            switch (alt85) {
                 case 1 :
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5186:1: (lv_name_1_0= RULE_ID )
                     {
@@ -13124,7 +13374,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5187:3: lv_name_1_0= RULE_ID
                     {
                     lv_name_1_0=(Token)input.LT(1);
-                    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleTriggeredTransition8967); 
+                    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleTriggeredTransition8973); 
 
                     			createLeafNode(grammarAccess.getTriggeredTransitionAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
                     		
@@ -13153,7 +13403,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            match(input,14,FOLLOW_14_in_ruleTriggeredTransition8983); 
+            match(input,14,FOLLOW_14_in_ruleTriggeredTransition8989); 
 
                     createLeafNode(grammarAccess.getTriggeredTransitionAccess().getColonKeyword_2(), null); 
                 
@@ -13166,7 +13416,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
              
             	        currentNode=createCompositeNode(grammarAccess.getTriggeredTransitionAccess().getFromTransitionTerminalParserRuleCall_3_0(), currentNode); 
             	    
-            pushFollow(FOLLOW_ruleTransitionTerminal_in_ruleTriggeredTransition9004);
+            pushFollow(FOLLOW_ruleTransitionTerminal_in_ruleTriggeredTransition9010);
             lv_from_3_0=ruleTransitionTerminal();
             _fsp--;
 
@@ -13193,7 +13443,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            match(input,37,FOLLOW_37_in_ruleTriggeredTransition9014); 
+            match(input,37,FOLLOW_37_in_ruleTriggeredTransition9020); 
 
                     createLeafNode(grammarAccess.getTriggeredTransitionAccess().getHyphenMinusGreaterThanSignKeyword_4(), null); 
                 
@@ -13206,7 +13456,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
              
             	        currentNode=createCompositeNode(grammarAccess.getTriggeredTransitionAccess().getToTransitionTerminalParserRuleCall_5_0(), currentNode); 
             	    
-            pushFollow(FOLLOW_ruleTransitionTerminal_in_ruleTriggeredTransition9035);
+            pushFollow(FOLLOW_ruleTransitionTerminal_in_ruleTriggeredTransition9041);
             lv_to_5_0=ruleTransitionTerminal();
             _fsp--;
 
@@ -13233,15 +13483,15 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            match(input,12,FOLLOW_12_in_ruleTriggeredTransition9045); 
+            match(input,12,FOLLOW_12_in_ruleTriggeredTransition9051); 
 
                     createLeafNode(grammarAccess.getTriggeredTransitionAccess().getLeftCurlyBracketKeyword_6(), null); 
                 
-            match(input,77,FOLLOW_77_in_ruleTriggeredTransition9055); 
+            match(input,77,FOLLOW_77_in_ruleTriggeredTransition9061); 
 
                     createLeafNode(grammarAccess.getTriggeredTransitionAccess().getTriggersKeyword_7(), null); 
                 
-            match(input,12,FOLLOW_12_in_ruleTriggeredTransition9065); 
+            match(input,12,FOLLOW_12_in_ruleTriggeredTransition9071); 
 
                     createLeafNode(grammarAccess.getTriggeredTransitionAccess().getLeftCurlyBracketKeyword_8(), null); 
                 
@@ -13254,7 +13504,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
              
             	        currentNode=createCompositeNode(grammarAccess.getTriggeredTransitionAccess().getTriggersTriggerParserRuleCall_9_0(), currentNode); 
             	    
-            pushFollow(FOLLOW_ruleTrigger_in_ruleTriggeredTransition9086);
+            pushFollow(FOLLOW_ruleTrigger_in_ruleTriggeredTransition9092);
             lv_triggers_9_0=ruleTrigger();
             _fsp--;
 
@@ -13282,21 +13532,21 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             }
 
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5301:2: ( 'or' ( (lv_triggers_11_0= ruleTrigger ) ) )*
-            loop84:
+            loop86:
             do {
-                int alt84=2;
-                int LA84_0 = input.LA(1);
+                int alt86=2;
+                int LA86_0 = input.LA(1);
 
-                if ( (LA84_0==78) ) {
-                    alt84=1;
+                if ( (LA86_0==78) ) {
+                    alt86=1;
                 }
 
 
-                switch (alt84) {
+                switch (alt86) {
             	case 1 :
             	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5301:4: 'or' ( (lv_triggers_11_0= ruleTrigger ) )
             	    {
-            	    match(input,78,FOLLOW_78_in_ruleTriggeredTransition9097); 
+            	    match(input,78,FOLLOW_78_in_ruleTriggeredTransition9103); 
 
             	            createLeafNode(grammarAccess.getTriggeredTransitionAccess().getOrKeyword_10_0(), null); 
             	        
@@ -13309,7 +13559,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	     
             	    	        currentNode=createCompositeNode(grammarAccess.getTriggeredTransitionAccess().getTriggersTriggerParserRuleCall_10_1_0(), currentNode); 
             	    	    
-            	    pushFollow(FOLLOW_ruleTrigger_in_ruleTriggeredTransition9118);
+            	    pushFollow(FOLLOW_ruleTrigger_in_ruleTriggeredTransition9124);
             	    lv_triggers_11_0=ruleTrigger();
             	    _fsp--;
 
@@ -13341,26 +13591,26 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    break loop84;
+            	    break loop86;
                 }
             } while (true);
 
-            match(input,13,FOLLOW_13_in_ruleTriggeredTransition9130); 
+            match(input,13,FOLLOW_13_in_ruleTriggeredTransition9136); 
 
                     createLeafNode(grammarAccess.getTriggeredTransitionAccess().getRightCurlyBracketKeyword_11(), null); 
                 
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5333:1: ( 'action' ( (lv_action_14_0= ruleDetailCode ) ) )?
-            int alt85=2;
-            int LA85_0 = input.LA(1);
+            int alt87=2;
+            int LA87_0 = input.LA(1);
 
-            if ( (LA85_0==76) ) {
-                alt85=1;
+            if ( (LA87_0==76) ) {
+                alt87=1;
             }
-            switch (alt85) {
+            switch (alt87) {
                 case 1 :
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5333:3: 'action' ( (lv_action_14_0= ruleDetailCode ) )
                     {
-                    match(input,76,FOLLOW_76_in_ruleTriggeredTransition9141); 
+                    match(input,76,FOLLOW_76_in_ruleTriggeredTransition9147); 
 
                             createLeafNode(grammarAccess.getTriggeredTransitionAccess().getActionKeyword_12_0(), null); 
                         
@@ -13373,7 +13623,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                     	        currentNode=createCompositeNode(grammarAccess.getTriggeredTransitionAccess().getActionDetailCodeParserRuleCall_12_1_0(), currentNode); 
                     	    
-                    pushFollow(FOLLOW_ruleDetailCode_in_ruleTriggeredTransition9162);
+                    pushFollow(FOLLOW_ruleDetailCode_in_ruleTriggeredTransition9168);
                     lv_action_14_0=ruleDetailCode();
                     _fsp--;
 
@@ -13406,7 +13656,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            match(input,13,FOLLOW_13_in_ruleTriggeredTransition9174); 
+            match(input,13,FOLLOW_13_in_ruleTriggeredTransition9180); 
 
                     createLeafNode(grammarAccess.getTriggeredTransitionAccess().getRightCurlyBracketKeyword_13(), null); 
                 
@@ -13445,12 +13695,12 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5375:2: iv_ruleCPBranchTransition= ruleCPBranchTransition EOF
             {
              currentNode = createCompositeNode(grammarAccess.getCPBranchTransitionRule(), currentNode); 
-            pushFollow(FOLLOW_ruleCPBranchTransition_in_entryRuleCPBranchTransition9210);
+            pushFollow(FOLLOW_ruleCPBranchTransition_in_entryRuleCPBranchTransition9216);
             iv_ruleCPBranchTransition=ruleCPBranchTransition();
             _fsp--;
 
              current =iv_ruleCPBranchTransition; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleCPBranchTransition9220); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleCPBranchTransition9226); 
 
             }
 
@@ -13491,18 +13741,18 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5388:1: ( 'Transition' ( (lv_name_1_0= RULE_ID ) )? ':' ( (lv_from_3_0= ruleTransitionTerminal ) ) '->' ( (lv_to_5_0= ruleTransitionTerminal ) ) '{' 'cond' ( (lv_condition_8_0= ruleDetailCode ) ) ( 'action' ( (lv_action_10_0= ruleDetailCode ) ) )? '}' )
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5388:3: 'Transition' ( (lv_name_1_0= RULE_ID ) )? ':' ( (lv_from_3_0= ruleTransitionTerminal ) ) '->' ( (lv_to_5_0= ruleTransitionTerminal ) ) '{' 'cond' ( (lv_condition_8_0= ruleDetailCode ) ) ( 'action' ( (lv_action_10_0= ruleDetailCode ) ) )? '}'
             {
-            match(input,74,FOLLOW_74_in_ruleCPBranchTransition9255); 
+            match(input,74,FOLLOW_74_in_ruleCPBranchTransition9261); 
 
                     createLeafNode(grammarAccess.getCPBranchTransitionAccess().getTransitionKeyword_0(), null); 
                 
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5392:1: ( (lv_name_1_0= RULE_ID ) )?
-            int alt86=2;
-            int LA86_0 = input.LA(1);
+            int alt88=2;
+            int LA88_0 = input.LA(1);
 
-            if ( (LA86_0==RULE_ID) ) {
-                alt86=1;
+            if ( (LA88_0==RULE_ID) ) {
+                alt88=1;
             }
-            switch (alt86) {
+            switch (alt88) {
                 case 1 :
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5393:1: (lv_name_1_0= RULE_ID )
                     {
@@ -13510,7 +13760,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5394:3: lv_name_1_0= RULE_ID
                     {
                     lv_name_1_0=(Token)input.LT(1);
-                    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleCPBranchTransition9272); 
+                    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleCPBranchTransition9278); 
 
                     			createLeafNode(grammarAccess.getCPBranchTransitionAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
                     		
@@ -13539,7 +13789,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            match(input,14,FOLLOW_14_in_ruleCPBranchTransition9288); 
+            match(input,14,FOLLOW_14_in_ruleCPBranchTransition9294); 
 
                     createLeafNode(grammarAccess.getCPBranchTransitionAccess().getColonKeyword_2(), null); 
                 
@@ -13552,7 +13802,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
              
             	        currentNode=createCompositeNode(grammarAccess.getCPBranchTransitionAccess().getFromTransitionTerminalParserRuleCall_3_0(), currentNode); 
             	    
-            pushFollow(FOLLOW_ruleTransitionTerminal_in_ruleCPBranchTransition9309);
+            pushFollow(FOLLOW_ruleTransitionTerminal_in_ruleCPBranchTransition9315);
             lv_from_3_0=ruleTransitionTerminal();
             _fsp--;
 
@@ -13579,7 +13829,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            match(input,37,FOLLOW_37_in_ruleCPBranchTransition9319); 
+            match(input,37,FOLLOW_37_in_ruleCPBranchTransition9325); 
 
                     createLeafNode(grammarAccess.getCPBranchTransitionAccess().getHyphenMinusGreaterThanSignKeyword_4(), null); 
                 
@@ -13592,7 +13842,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
              
             	        currentNode=createCompositeNode(grammarAccess.getCPBranchTransitionAccess().getToTransitionTerminalParserRuleCall_5_0(), currentNode); 
             	    
-            pushFollow(FOLLOW_ruleTransitionTerminal_in_ruleCPBranchTransition9340);
+            pushFollow(FOLLOW_ruleTransitionTerminal_in_ruleCPBranchTransition9346);
             lv_to_5_0=ruleTransitionTerminal();
             _fsp--;
 
@@ -13619,11 +13869,11 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            match(input,12,FOLLOW_12_in_ruleCPBranchTransition9350); 
+            match(input,12,FOLLOW_12_in_ruleCPBranchTransition9356); 
 
                     createLeafNode(grammarAccess.getCPBranchTransitionAccess().getLeftCurlyBracketKeyword_6(), null); 
                 
-            match(input,79,FOLLOW_79_in_ruleCPBranchTransition9360); 
+            match(input,79,FOLLOW_79_in_ruleCPBranchTransition9366); 
 
                     createLeafNode(grammarAccess.getCPBranchTransitionAccess().getCondKeyword_7(), null); 
                 
@@ -13636,7 +13886,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
              
             	        currentNode=createCompositeNode(grammarAccess.getCPBranchTransitionAccess().getConditionDetailCodeParserRuleCall_8_0(), currentNode); 
             	    
-            pushFollow(FOLLOW_ruleDetailCode_in_ruleCPBranchTransition9381);
+            pushFollow(FOLLOW_ruleDetailCode_in_ruleCPBranchTransition9387);
             lv_condition_8_0=ruleDetailCode();
             _fsp--;
 
@@ -13664,17 +13914,17 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             }
 
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5504:2: ( 'action' ( (lv_action_10_0= ruleDetailCode ) ) )?
-            int alt87=2;
-            int LA87_0 = input.LA(1);
+            int alt89=2;
+            int LA89_0 = input.LA(1);
 
-            if ( (LA87_0==76) ) {
-                alt87=1;
+            if ( (LA89_0==76) ) {
+                alt89=1;
             }
-            switch (alt87) {
+            switch (alt89) {
                 case 1 :
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5504:4: 'action' ( (lv_action_10_0= ruleDetailCode ) )
                     {
-                    match(input,76,FOLLOW_76_in_ruleCPBranchTransition9392); 
+                    match(input,76,FOLLOW_76_in_ruleCPBranchTransition9398); 
 
                             createLeafNode(grammarAccess.getCPBranchTransitionAccess().getActionKeyword_9_0(), null); 
                         
@@ -13687,7 +13937,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                     	        currentNode=createCompositeNode(grammarAccess.getCPBranchTransitionAccess().getActionDetailCodeParserRuleCall_9_1_0(), currentNode); 
                     	    
-                    pushFollow(FOLLOW_ruleDetailCode_in_ruleCPBranchTransition9413);
+                    pushFollow(FOLLOW_ruleDetailCode_in_ruleCPBranchTransition9419);
                     lv_action_10_0=ruleDetailCode();
                     _fsp--;
 
@@ -13720,7 +13970,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            match(input,13,FOLLOW_13_in_ruleCPBranchTransition9425); 
+            match(input,13,FOLLOW_13_in_ruleCPBranchTransition9431); 
 
                     createLeafNode(grammarAccess.getCPBranchTransitionAccess().getRightCurlyBracketKeyword_10(), null); 
                 
@@ -13759,12 +14009,12 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5546:2: iv_ruleTransitionTerminal= ruleTransitionTerminal EOF
             {
              currentNode = createCompositeNode(grammarAccess.getTransitionTerminalRule(), currentNode); 
-            pushFollow(FOLLOW_ruleTransitionTerminal_in_entryRuleTransitionTerminal9461);
+            pushFollow(FOLLOW_ruleTransitionTerminal_in_entryRuleTransitionTerminal9467);
             iv_ruleTransitionTerminal=ruleTransitionTerminal();
             _fsp--;
 
              current =iv_ruleTransitionTerminal; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleTransitionTerminal9471); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleTransitionTerminal9477); 
 
             }
 
@@ -13802,21 +14052,21 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5559:1: (this_StateTerminal_0= ruleStateTerminal | this_TrPointTerminal_1= ruleTrPointTerminal | this_SubStateTrPointTerminal_2= ruleSubStateTrPointTerminal | this_ChoicepointTerminal_3= ruleChoicepointTerminal )
             {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5559:1: (this_StateTerminal_0= ruleStateTerminal | this_TrPointTerminal_1= ruleTrPointTerminal | this_SubStateTrPointTerminal_2= ruleSubStateTrPointTerminal | this_ChoicepointTerminal_3= ruleChoicepointTerminal )
-            int alt88=4;
+            int alt90=4;
             switch ( input.LA(1) ) {
             case RULE_ID:
                 {
-                int LA88_1 = input.LA(2);
+                int LA90_1 = input.LA(2);
 
-                if ( (LA88_1==50) ) {
-                    alt88=3;
+                if ( (LA90_1==50) ) {
+                    alt90=3;
                 }
-                else if ( (LA88_1==EOF||LA88_1==12||LA88_1==37) ) {
-                    alt88=1;
+                else if ( (LA90_1==EOF||(LA90_1>=12 && LA90_1<=13)||LA90_1==37||LA90_1==64||(LA90_1>=68 && LA90_1<=74)) ) {
+                    alt90=1;
                 }
                 else {
                     NoViableAltException nvae =
-                        new NoViableAltException("5559:1: (this_StateTerminal_0= ruleStateTerminal | this_TrPointTerminal_1= ruleTrPointTerminal | this_SubStateTrPointTerminal_2= ruleSubStateTrPointTerminal | this_ChoicepointTerminal_3= ruleChoicepointTerminal )", 88, 1, input);
+                        new NoViableAltException("5559:1: (this_StateTerminal_0= ruleStateTerminal | this_TrPointTerminal_1= ruleTrPointTerminal | this_SubStateTrPointTerminal_2= ruleSubStateTrPointTerminal | this_ChoicepointTerminal_3= ruleChoicepointTerminal )", 90, 1, input);
 
                     throw nvae;
                 }
@@ -13824,29 +14074,29 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 break;
             case 80:
                 {
-                alt88=2;
+                alt90=2;
                 }
                 break;
             case 81:
                 {
-                alt88=4;
+                alt90=4;
                 }
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("5559:1: (this_StateTerminal_0= ruleStateTerminal | this_TrPointTerminal_1= ruleTrPointTerminal | this_SubStateTrPointTerminal_2= ruleSubStateTrPointTerminal | this_ChoicepointTerminal_3= ruleChoicepointTerminal )", 88, 0, input);
+                    new NoViableAltException("5559:1: (this_StateTerminal_0= ruleStateTerminal | this_TrPointTerminal_1= ruleTrPointTerminal | this_SubStateTrPointTerminal_2= ruleSubStateTrPointTerminal | this_ChoicepointTerminal_3= ruleChoicepointTerminal )", 90, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt88) {
+            switch (alt90) {
                 case 1 :
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5560:5: this_StateTerminal_0= ruleStateTerminal
                     {
                      
                             currentNode=createCompositeNode(grammarAccess.getTransitionTerminalAccess().getStateTerminalParserRuleCall_0(), currentNode); 
                         
-                    pushFollow(FOLLOW_ruleStateTerminal_in_ruleTransitionTerminal9518);
+                    pushFollow(FOLLOW_ruleStateTerminal_in_ruleTransitionTerminal9524);
                     this_StateTerminal_0=ruleStateTerminal();
                     _fsp--;
 
@@ -13863,7 +14113,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                             currentNode=createCompositeNode(grammarAccess.getTransitionTerminalAccess().getTrPointTerminalParserRuleCall_1(), currentNode); 
                         
-                    pushFollow(FOLLOW_ruleTrPointTerminal_in_ruleTransitionTerminal9545);
+                    pushFollow(FOLLOW_ruleTrPointTerminal_in_ruleTransitionTerminal9551);
                     this_TrPointTerminal_1=ruleTrPointTerminal();
                     _fsp--;
 
@@ -13880,7 +14130,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                             currentNode=createCompositeNode(grammarAccess.getTransitionTerminalAccess().getSubStateTrPointTerminalParserRuleCall_2(), currentNode); 
                         
-                    pushFollow(FOLLOW_ruleSubStateTrPointTerminal_in_ruleTransitionTerminal9572);
+                    pushFollow(FOLLOW_ruleSubStateTrPointTerminal_in_ruleTransitionTerminal9578);
                     this_SubStateTrPointTerminal_2=ruleSubStateTrPointTerminal();
                     _fsp--;
 
@@ -13897,7 +14147,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                             currentNode=createCompositeNode(grammarAccess.getTransitionTerminalAccess().getChoicepointTerminalParserRuleCall_3(), currentNode); 
                         
-                    pushFollow(FOLLOW_ruleChoicepointTerminal_in_ruleTransitionTerminal9599);
+                    pushFollow(FOLLOW_ruleChoicepointTerminal_in_ruleTransitionTerminal9605);
                     this_ChoicepointTerminal_3=ruleChoicepointTerminal();
                     _fsp--;
 
@@ -13943,12 +14193,12 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5608:2: iv_ruleStateTerminal= ruleStateTerminal EOF
             {
              currentNode = createCompositeNode(grammarAccess.getStateTerminalRule(), currentNode); 
-            pushFollow(FOLLOW_ruleStateTerminal_in_entryRuleStateTerminal9634);
+            pushFollow(FOLLOW_ruleStateTerminal_in_entryRuleStateTerminal9640);
             iv_ruleStateTerminal=ruleStateTerminal();
             _fsp--;
 
              current =iv_ruleStateTerminal; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleStateTerminal9644); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleStateTerminal9650); 
 
             }
 
@@ -13988,7 +14238,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	            associateNodeWithAstElement(currentNode, current);
             	        }
                     
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleStateTerminal9686); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleStateTerminal9692); 
 
             		createLeafNode(grammarAccess.getStateTerminalAccess().getStateBaseStateCrossReference_0(), "state"); 
             	
@@ -14030,12 +14280,12 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5645:2: iv_ruleTrPointTerminal= ruleTrPointTerminal EOF
             {
              currentNode = createCompositeNode(grammarAccess.getTrPointTerminalRule(), currentNode); 
-            pushFollow(FOLLOW_ruleTrPointTerminal_in_entryRuleTrPointTerminal9721);
+            pushFollow(FOLLOW_ruleTrPointTerminal_in_entryRuleTrPointTerminal9727);
             iv_ruleTrPointTerminal=ruleTrPointTerminal();
             _fsp--;
 
              current =iv_ruleTrPointTerminal; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleTrPointTerminal9731); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleTrPointTerminal9737); 
 
             }
 
@@ -14066,7 +14316,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5658:1: ( 'my' ( ( RULE_ID ) ) )
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5658:3: 'my' ( ( RULE_ID ) )
             {
-            match(input,80,FOLLOW_80_in_ruleTrPointTerminal9766); 
+            match(input,80,FOLLOW_80_in_ruleTrPointTerminal9772); 
 
                     createLeafNode(grammarAccess.getTrPointTerminalAccess().getMyKeyword_0(), null); 
                 
@@ -14082,7 +14332,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	            associateNodeWithAstElement(currentNode, current);
             	        }
                     
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleTrPointTerminal9784); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleTrPointTerminal9790); 
 
             		createLeafNode(grammarAccess.getTrPointTerminalAccess().getTrPointTrPointCrossReference_1_0(), "trPoint"); 
             	
@@ -14127,12 +14377,12 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5686:2: iv_ruleSubStateTrPointTerminal= ruleSubStateTrPointTerminal EOF
             {
              currentNode = createCompositeNode(grammarAccess.getSubStateTrPointTerminalRule(), currentNode); 
-            pushFollow(FOLLOW_ruleSubStateTrPointTerminal_in_entryRuleSubStateTrPointTerminal9820);
+            pushFollow(FOLLOW_ruleSubStateTrPointTerminal_in_entryRuleSubStateTrPointTerminal9826);
             iv_ruleSubStateTrPointTerminal=ruleSubStateTrPointTerminal();
             _fsp--;
 
              current =iv_ruleSubStateTrPointTerminal; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleSubStateTrPointTerminal9830); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleSubStateTrPointTerminal9836); 
 
             }
 
@@ -14175,7 +14425,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	            associateNodeWithAstElement(currentNode, current);
             	        }
                     
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleSubStateTrPointTerminal9873); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleSubStateTrPointTerminal9879); 
 
             		createLeafNode(grammarAccess.getSubStateTrPointTerminalAccess().getTrPointTrPointCrossReference_0_0(), "trPoint"); 
             	
@@ -14185,7 +14435,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            match(input,50,FOLLOW_50_in_ruleSubStateTrPointTerminal9883); 
+            match(input,50,FOLLOW_50_in_ruleSubStateTrPointTerminal9889); 
 
                     createLeafNode(grammarAccess.getSubStateTrPointTerminalAccess().getOfKeyword_1(), null); 
                 
@@ -14201,7 +14451,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	            associateNodeWithAstElement(currentNode, current);
             	        }
                     
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleSubStateTrPointTerminal9901); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleSubStateTrPointTerminal9907); 
 
             		createLeafNode(grammarAccess.getSubStateTrPointTerminalAccess().getStateBaseStateCrossReference_2_0(), "state"); 
             	
@@ -14246,12 +14496,12 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5741:2: iv_ruleChoicepointTerminal= ruleChoicepointTerminal EOF
             {
              currentNode = createCompositeNode(grammarAccess.getChoicepointTerminalRule(), currentNode); 
-            pushFollow(FOLLOW_ruleChoicepointTerminal_in_entryRuleChoicepointTerminal9937);
+            pushFollow(FOLLOW_ruleChoicepointTerminal_in_entryRuleChoicepointTerminal9943);
             iv_ruleChoicepointTerminal=ruleChoicepointTerminal();
             _fsp--;
 
              current =iv_ruleChoicepointTerminal; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleChoicepointTerminal9947); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleChoicepointTerminal9953); 
 
             }
 
@@ -14282,7 +14532,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5754:1: ( 'cp' ( ( RULE_ID ) ) )
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5754:3: 'cp' ( ( RULE_ID ) )
             {
-            match(input,81,FOLLOW_81_in_ruleChoicepointTerminal9982); 
+            match(input,81,FOLLOW_81_in_ruleChoicepointTerminal9988); 
 
                     createLeafNode(grammarAccess.getChoicepointTerminalAccess().getCpKeyword_0(), null); 
                 
@@ -14298,7 +14548,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	            associateNodeWithAstElement(currentNode, current);
             	        }
                     
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleChoicepointTerminal10000); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleChoicepointTerminal10006); 
 
             		createLeafNode(grammarAccess.getChoicepointTerminalAccess().getCpChoicePointCrossReference_1_0(), "cp"); 
             	
@@ -14343,12 +14593,12 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5782:2: iv_ruleTrigger= ruleTrigger EOF
             {
              currentNode = createCompositeNode(grammarAccess.getTriggerRule(), currentNode); 
-            pushFollow(FOLLOW_ruleTrigger_in_entryRuleTrigger10036);
+            pushFollow(FOLLOW_ruleTrigger_in_entryRuleTrigger10042);
             iv_ruleTrigger=ruleTrigger();
             _fsp--;
 
              current =iv_ruleTrigger; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleTrigger10046); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleTrigger10052); 
 
             }
 
@@ -14386,7 +14636,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5795:1: ( '<' ( (lv_msgFromIfPairs_1_0= ruleMessageFromIf ) ) ( '|' ( (lv_msgFromIfPairs_3_0= ruleMessageFromIf ) ) )* ( (lv_guard_4_0= ruleGuard ) )? '>' )
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5795:3: '<' ( (lv_msgFromIfPairs_1_0= ruleMessageFromIf ) ) ( '|' ( (lv_msgFromIfPairs_3_0= ruleMessageFromIf ) ) )* ( (lv_guard_4_0= ruleGuard ) )? '>'
             {
-            match(input,82,FOLLOW_82_in_ruleTrigger10081); 
+            match(input,82,FOLLOW_82_in_ruleTrigger10087); 
 
                     createLeafNode(grammarAccess.getTriggerAccess().getLessThanSignKeyword_0(), null); 
                 
@@ -14399,7 +14649,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
              
             	        currentNode=createCompositeNode(grammarAccess.getTriggerAccess().getMsgFromIfPairsMessageFromIfParserRuleCall_1_0(), currentNode); 
             	    
-            pushFollow(FOLLOW_ruleMessageFromIf_in_ruleTrigger10102);
+            pushFollow(FOLLOW_ruleMessageFromIf_in_ruleTrigger10108);
             lv_msgFromIfPairs_1_0=ruleMessageFromIf();
             _fsp--;
 
@@ -14427,21 +14677,21 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             }
 
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5823:2: ( '|' ( (lv_msgFromIfPairs_3_0= ruleMessageFromIf ) ) )*
-            loop89:
+            loop91:
             do {
-                int alt89=2;
-                int LA89_0 = input.LA(1);
+                int alt91=2;
+                int LA91_0 = input.LA(1);
 
-                if ( (LA89_0==83) ) {
-                    alt89=1;
+                if ( (LA91_0==83) ) {
+                    alt91=1;
                 }
 
 
-                switch (alt89) {
+                switch (alt91) {
             	case 1 :
             	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5823:4: '|' ( (lv_msgFromIfPairs_3_0= ruleMessageFromIf ) )
             	    {
-            	    match(input,83,FOLLOW_83_in_ruleTrigger10113); 
+            	    match(input,83,FOLLOW_83_in_ruleTrigger10119); 
 
             	            createLeafNode(grammarAccess.getTriggerAccess().getVerticalLineKeyword_2_0(), null); 
             	        
@@ -14454,7 +14704,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	     
             	    	        currentNode=createCompositeNode(grammarAccess.getTriggerAccess().getMsgFromIfPairsMessageFromIfParserRuleCall_2_1_0(), currentNode); 
             	    	    
-            	    pushFollow(FOLLOW_ruleMessageFromIf_in_ruleTrigger10134);
+            	    pushFollow(FOLLOW_ruleMessageFromIf_in_ruleTrigger10140);
             	    lv_msgFromIfPairs_3_0=ruleMessageFromIf();
             	    _fsp--;
 
@@ -14486,18 +14736,18 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    break loop89;
+            	    break loop91;
                 }
             } while (true);
 
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5851:4: ( (lv_guard_4_0= ruleGuard ) )?
-            int alt90=2;
-            int LA90_0 = input.LA(1);
+            int alt92=2;
+            int LA92_0 = input.LA(1);
 
-            if ( (LA90_0==85) ) {
-                alt90=1;
+            if ( (LA92_0==85) ) {
+                alt92=1;
             }
-            switch (alt90) {
+            switch (alt92) {
                 case 1 :
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5852:1: (lv_guard_4_0= ruleGuard )
                     {
@@ -14507,7 +14757,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                     	        currentNode=createCompositeNode(grammarAccess.getTriggerAccess().getGuardGuardParserRuleCall_3_0(), currentNode); 
                     	    
-                    pushFollow(FOLLOW_ruleGuard_in_ruleTrigger10157);
+                    pushFollow(FOLLOW_ruleGuard_in_ruleTrigger10163);
                     lv_guard_4_0=ruleGuard();
                     _fsp--;
 
@@ -14537,7 +14787,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            match(input,84,FOLLOW_84_in_ruleTrigger10168); 
+            match(input,84,FOLLOW_84_in_ruleTrigger10174); 
 
                     createLeafNode(grammarAccess.getTriggerAccess().getGreaterThanSignKeyword_4(), null); 
                 
@@ -14576,12 +14826,12 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5889:2: iv_ruleMessageFromIf= ruleMessageFromIf EOF
             {
              currentNode = createCompositeNode(grammarAccess.getMessageFromIfRule(), currentNode); 
-            pushFollow(FOLLOW_ruleMessageFromIf_in_entryRuleMessageFromIf10204);
+            pushFollow(FOLLOW_ruleMessageFromIf_in_entryRuleMessageFromIf10210);
             iv_ruleMessageFromIf=ruleMessageFromIf();
             _fsp--;
 
              current =iv_ruleMessageFromIf; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleMessageFromIf10214); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleMessageFromIf10220); 
 
             }
 
@@ -14624,7 +14874,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	            associateNodeWithAstElement(currentNode, current);
             	        }
                     
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleMessageFromIf10257); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleMessageFromIf10263); 
 
             		createLeafNode(grammarAccess.getMessageFromIfAccess().getMessageMessageCrossReference_0_0(), "message"); 
             	
@@ -14634,7 +14884,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            match(input,14,FOLLOW_14_in_ruleMessageFromIf10267); 
+            match(input,14,FOLLOW_14_in_ruleMessageFromIf10273); 
 
                     createLeafNode(grammarAccess.getMessageFromIfAccess().getColonKeyword_1(), null); 
                 
@@ -14650,7 +14900,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	            associateNodeWithAstElement(currentNode, current);
             	        }
                     
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleMessageFromIf10285); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleMessageFromIf10291); 
 
             		createLeafNode(grammarAccess.getMessageFromIfAccess().getFromInterfaceItemCrossReference_2_0(), "from"); 
             	
@@ -14695,12 +14945,12 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5944:2: iv_ruleGuard= ruleGuard EOF
             {
              currentNode = createCompositeNode(grammarAccess.getGuardRule(), currentNode); 
-            pushFollow(FOLLOW_ruleGuard_in_entryRuleGuard10321);
+            pushFollow(FOLLOW_ruleGuard_in_entryRuleGuard10327);
             iv_ruleGuard=ruleGuard();
             _fsp--;
 
              current =iv_ruleGuard; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleGuard10331); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleGuard10337); 
 
             }
 
@@ -14734,7 +14984,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5957:1: ( 'guard' ( (lv_guard_1_0= ruleDetailCode ) ) )
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5957:3: 'guard' ( (lv_guard_1_0= ruleDetailCode ) )
             {
-            match(input,85,FOLLOW_85_in_ruleGuard10366); 
+            match(input,85,FOLLOW_85_in_ruleGuard10372); 
 
                     createLeafNode(grammarAccess.getGuardAccess().getGuardKeyword_0(), null); 
                 
@@ -14747,7 +14997,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
              
             	        currentNode=createCompositeNode(grammarAccess.getGuardAccess().getGuardDetailCodeParserRuleCall_1_0(), currentNode); 
             	    
-            pushFollow(FOLLOW_ruleDetailCode_in_ruleGuard10387);
+            pushFollow(FOLLOW_ruleDetailCode_in_ruleGuard10393);
             lv_guard_1_0=ruleDetailCode();
             _fsp--;
 
@@ -14809,12 +15059,12 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5995:2: iv_ruleImport= ruleImport EOF
             {
              currentNode = createCompositeNode(grammarAccess.getImportRule(), currentNode); 
-            pushFollow(FOLLOW_ruleImport_in_entryRuleImport10423);
+            pushFollow(FOLLOW_ruleImport_in_entryRuleImport10429);
             iv_ruleImport=ruleImport();
             _fsp--;
 
              current =iv_ruleImport; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleImport10433); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleImport10439); 
 
             }
 
@@ -14848,7 +15098,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6008:1: ( 'import' ( (lv_importedNamespace_1_0= ruleImportedFQN ) ) )
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6008:3: 'import' ( (lv_importedNamespace_1_0= ruleImportedFQN ) )
             {
-            match(input,86,FOLLOW_86_in_ruleImport10468); 
+            match(input,86,FOLLOW_86_in_ruleImport10474); 
 
                     createLeafNode(grammarAccess.getImportAccess().getImportKeyword_0(), null); 
                 
@@ -14861,7 +15111,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
              
             	        currentNode=createCompositeNode(grammarAccess.getImportAccess().getImportedNamespaceImportedFQNParserRuleCall_1_0(), currentNode); 
             	    
-            pushFollow(FOLLOW_ruleImportedFQN_in_ruleImport10489);
+            pushFollow(FOLLOW_ruleImportedFQN_in_ruleImport10495);
             lv_importedNamespace_1_0=ruleImportedFQN();
             _fsp--;
 
@@ -14923,12 +15173,12 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6046:2: iv_ruleImportedFQN= ruleImportedFQN EOF
             {
              currentNode = createCompositeNode(grammarAccess.getImportedFQNRule(), currentNode); 
-            pushFollow(FOLLOW_ruleImportedFQN_in_entryRuleImportedFQN10526);
+            pushFollow(FOLLOW_ruleImportedFQN_in_entryRuleImportedFQN10532);
             iv_ruleImportedFQN=ruleImportedFQN();
             _fsp--;
 
              current =iv_ruleImportedFQN.getText(); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleImportedFQN10537); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleImportedFQN10543); 
 
             }
 
@@ -14966,7 +15216,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
              
                     currentNode=createCompositeNode(grammarAccess.getImportedFQNAccess().getFQNParserRuleCall_0(), currentNode); 
                 
-            pushFollow(FOLLOW_ruleFQN_in_ruleImportedFQN10584);
+            pushFollow(FOLLOW_ruleFQN_in_ruleImportedFQN10590);
             this_FQN_0=ruleFQN();
             _fsp--;
 
@@ -14977,24 +15227,24 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     currentNode = currentNode.getParent();
                 
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6070:1: (kw= '.' kw= '*' )?
-            int alt91=2;
-            int LA91_0 = input.LA(1);
+            int alt93=2;
+            int LA93_0 = input.LA(1);
 
-            if ( (LA91_0==55) ) {
-                alt91=1;
+            if ( (LA93_0==55) ) {
+                alt93=1;
             }
-            switch (alt91) {
+            switch (alt93) {
                 case 1 :
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6071:2: kw= '.' kw= '*'
                     {
                     kw=(Token)input.LT(1);
-                    match(input,55,FOLLOW_55_in_ruleImportedFQN10603); 
+                    match(input,55,FOLLOW_55_in_ruleImportedFQN10609); 
 
                             current.merge(kw);
                             createLeafNode(grammarAccess.getImportedFQNAccess().getFullStopKeyword_1_0(), null); 
                         
                     kw=(Token)input.LT(1);
-                    match(input,87,FOLLOW_87_in_ruleImportedFQN10616); 
+                    match(input,87,FOLLOW_87_in_ruleImportedFQN10622); 
 
                             current.merge(kw);
                             createLeafNode(grammarAccess.getImportedFQNAccess().getAsteriskKeyword_1_1(), null); 
@@ -15040,12 +15290,12 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6092:2: iv_ruleFQN= ruleFQN EOF
             {
              currentNode = createCompositeNode(grammarAccess.getFQNRule(), currentNode); 
-            pushFollow(FOLLOW_ruleFQN_in_entryRuleFQN10659);
+            pushFollow(FOLLOW_ruleFQN_in_entryRuleFQN10665);
             iv_ruleFQN=ruleFQN();
             _fsp--;
 
              current =iv_ruleFQN.getText(); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleFQN10670); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleFQN10676); 
 
             }
 
@@ -15081,7 +15331,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6105:6: this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )*
             {
             this_ID_0=(Token)input.LT(1);
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleFQN10710); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleFQN10716); 
 
             		current.merge(this_ID_0);
                 
@@ -15089,34 +15339,34 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 createLeafNode(grammarAccess.getFQNAccess().getIDTerminalRuleCall_0(), null); 
                 
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6112:1: (kw= '.' this_ID_2= RULE_ID )*
-            loop92:
+            loop94:
             do {
-                int alt92=2;
-                int LA92_0 = input.LA(1);
+                int alt94=2;
+                int LA94_0 = input.LA(1);
 
-                if ( (LA92_0==55) ) {
-                    int LA92_2 = input.LA(2);
+                if ( (LA94_0==55) ) {
+                    int LA94_2 = input.LA(2);
 
-                    if ( (LA92_2==RULE_ID) ) {
-                        alt92=1;
+                    if ( (LA94_2==RULE_ID) ) {
+                        alt94=1;
                     }
 
 
                 }
 
 
-                switch (alt92) {
+                switch (alt94) {
             	case 1 :
             	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6113:2: kw= '.' this_ID_2= RULE_ID
             	    {
             	    kw=(Token)input.LT(1);
-            	    match(input,55,FOLLOW_55_in_ruleFQN10729); 
+            	    match(input,55,FOLLOW_55_in_ruleFQN10735); 
 
             	            current.merge(kw);
             	            createLeafNode(grammarAccess.getFQNAccess().getFullStopKeyword_1_0(), null); 
             	        
             	    this_ID_2=(Token)input.LT(1);
-            	    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleFQN10744); 
+            	    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleFQN10750); 
 
             	    		current.merge(this_ID_2);
             	        
@@ -15128,7 +15378,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    break loop92;
+            	    break loop94;
                 }
             } while (true);
 
@@ -15165,83 +15415,83 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6138:1: ( ( 'void' ) | ( 'int8' ) | ( 'int16' ) | ( 'int32' ) | ( 'uint8' ) | ( 'uint16' ) | ( 'uint32' ) | ( 'float32' ) | ( 'float64' ) | ( 'boolean' ) | ( 'string' ) | ( 'char' ) )
             {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6138:1: ( ( 'void' ) | ( 'int8' ) | ( 'int16' ) | ( 'int32' ) | ( 'uint8' ) | ( 'uint16' ) | ( 'uint32' ) | ( 'float32' ) | ( 'float64' ) | ( 'boolean' ) | ( 'string' ) | ( 'char' ) )
-            int alt93=12;
+            int alt95=12;
             switch ( input.LA(1) ) {
             case 88:
                 {
-                alt93=1;
+                alt95=1;
                 }
                 break;
             case 89:
                 {
-                alt93=2;
+                alt95=2;
                 }
                 break;
             case 90:
                 {
-                alt93=3;
+                alt95=3;
                 }
                 break;
             case 91:
                 {
-                alt93=4;
+                alt95=4;
                 }
                 break;
             case 92:
                 {
-                alt93=5;
+                alt95=5;
                 }
                 break;
             case 93:
                 {
-                alt93=6;
+                alt95=6;
                 }
                 break;
             case 94:
                 {
-                alt93=7;
+                alt95=7;
                 }
                 break;
             case 95:
                 {
-                alt93=8;
+                alt95=8;
                 }
                 break;
             case 96:
                 {
-                alt93=9;
+                alt95=9;
                 }
                 break;
             case 97:
                 {
-                alt93=10;
+                alt95=10;
                 }
                 break;
             case 98:
                 {
-                alt93=11;
+                alt95=11;
                 }
                 break;
             case 99:
                 {
-                alt93=12;
+                alt95=12;
                 }
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("6138:1: ( ( 'void' ) | ( 'int8' ) | ( 'int16' ) | ( 'int32' ) | ( 'uint8' ) | ( 'uint16' ) | ( 'uint32' ) | ( 'float32' ) | ( 'float64' ) | ( 'boolean' ) | ( 'string' ) | ( 'char' ) )", 93, 0, input);
+                    new NoViableAltException("6138:1: ( ( 'void' ) | ( 'int8' ) | ( 'int16' ) | ( 'int32' ) | ( 'uint8' ) | ( 'uint16' ) | ( 'uint32' ) | ( 'float32' ) | ( 'float64' ) | ( 'boolean' ) | ( 'string' ) | ( 'char' ) )", 95, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt93) {
+            switch (alt95) {
                 case 1 :
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6138:2: ( 'void' )
                     {
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6138:2: ( 'void' )
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6138:4: 'void'
                     {
-                    match(input,88,FOLLOW_88_in_rulePrimitiveType10803); 
+                    match(input,88,FOLLOW_88_in_rulePrimitiveType10809); 
 
                             current = grammarAccess.getPrimitiveTypeAccess().getVoidEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
                             createLeafNode(grammarAccess.getPrimitiveTypeAccess().getVoidEnumLiteralDeclaration_0(), null); 
@@ -15258,7 +15508,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6144:6: ( 'int8' )
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6144:8: 'int8'
                     {
-                    match(input,89,FOLLOW_89_in_rulePrimitiveType10818); 
+                    match(input,89,FOLLOW_89_in_rulePrimitiveType10824); 
 
                             current = grammarAccess.getPrimitiveTypeAccess().getInt8EnumLiteralDeclaration_1().getEnumLiteral().getInstance();
                             createLeafNode(grammarAccess.getPrimitiveTypeAccess().getInt8EnumLiteralDeclaration_1(), null); 
@@ -15275,7 +15525,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6150:6: ( 'int16' )
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6150:8: 'int16'
                     {
-                    match(input,90,FOLLOW_90_in_rulePrimitiveType10833); 
+                    match(input,90,FOLLOW_90_in_rulePrimitiveType10839); 
 
                             current = grammarAccess.getPrimitiveTypeAccess().getInt16EnumLiteralDeclaration_2().getEnumLiteral().getInstance();
                             createLeafNode(grammarAccess.getPrimitiveTypeAccess().getInt16EnumLiteralDeclaration_2(), null); 
@@ -15292,7 +15542,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6156:6: ( 'int32' )
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6156:8: 'int32'
                     {
-                    match(input,91,FOLLOW_91_in_rulePrimitiveType10848); 
+                    match(input,91,FOLLOW_91_in_rulePrimitiveType10854); 
 
                             current = grammarAccess.getPrimitiveTypeAccess().getInt32EnumLiteralDeclaration_3().getEnumLiteral().getInstance();
                             createLeafNode(grammarAccess.getPrimitiveTypeAccess().getInt32EnumLiteralDeclaration_3(), null); 
@@ -15309,7 +15559,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6162:6: ( 'uint8' )
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6162:8: 'uint8'
                     {
-                    match(input,92,FOLLOW_92_in_rulePrimitiveType10863); 
+                    match(input,92,FOLLOW_92_in_rulePrimitiveType10869); 
 
                             current = grammarAccess.getPrimitiveTypeAccess().getUint8EnumLiteralDeclaration_4().getEnumLiteral().getInstance();
                             createLeafNode(grammarAccess.getPrimitiveTypeAccess().getUint8EnumLiteralDeclaration_4(), null); 
@@ -15326,7 +15576,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6168:6: ( 'uint16' )
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6168:8: 'uint16'
                     {
-                    match(input,93,FOLLOW_93_in_rulePrimitiveType10878); 
+                    match(input,93,FOLLOW_93_in_rulePrimitiveType10884); 
 
                             current = grammarAccess.getPrimitiveTypeAccess().getUint16EnumLiteralDeclaration_5().getEnumLiteral().getInstance();
                             createLeafNode(grammarAccess.getPrimitiveTypeAccess().getUint16EnumLiteralDeclaration_5(), null); 
@@ -15343,7 +15593,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6174:6: ( 'uint32' )
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6174:8: 'uint32'
                     {
-                    match(input,94,FOLLOW_94_in_rulePrimitiveType10893); 
+                    match(input,94,FOLLOW_94_in_rulePrimitiveType10899); 
 
                             current = grammarAccess.getPrimitiveTypeAccess().getUint32EnumLiteralDeclaration_6().getEnumLiteral().getInstance();
                             createLeafNode(grammarAccess.getPrimitiveTypeAccess().getUint32EnumLiteralDeclaration_6(), null); 
@@ -15360,7 +15610,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6180:6: ( 'float32' )
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6180:8: 'float32'
                     {
-                    match(input,95,FOLLOW_95_in_rulePrimitiveType10908); 
+                    match(input,95,FOLLOW_95_in_rulePrimitiveType10914); 
 
                             current = grammarAccess.getPrimitiveTypeAccess().getFloat32EnumLiteralDeclaration_7().getEnumLiteral().getInstance();
                             createLeafNode(grammarAccess.getPrimitiveTypeAccess().getFloat32EnumLiteralDeclaration_7(), null); 
@@ -15377,7 +15627,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6186:6: ( 'float64' )
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6186:8: 'float64'
                     {
-                    match(input,96,FOLLOW_96_in_rulePrimitiveType10923); 
+                    match(input,96,FOLLOW_96_in_rulePrimitiveType10929); 
 
                             current = grammarAccess.getPrimitiveTypeAccess().getFloat64EnumLiteralDeclaration_8().getEnumLiteral().getInstance();
                             createLeafNode(grammarAccess.getPrimitiveTypeAccess().getFloat64EnumLiteralDeclaration_8(), null); 
@@ -15394,7 +15644,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6192:6: ( 'boolean' )
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6192:8: 'boolean'
                     {
-                    match(input,97,FOLLOW_97_in_rulePrimitiveType10938); 
+                    match(input,97,FOLLOW_97_in_rulePrimitiveType10944); 
 
                             current = grammarAccess.getPrimitiveTypeAccess().getBooleanEnumLiteralDeclaration_9().getEnumLiteral().getInstance();
                             createLeafNode(grammarAccess.getPrimitiveTypeAccess().getBooleanEnumLiteralDeclaration_9(), null); 
@@ -15411,7 +15661,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6198:6: ( 'string' )
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6198:8: 'string'
                     {
-                    match(input,98,FOLLOW_98_in_rulePrimitiveType10953); 
+                    match(input,98,FOLLOW_98_in_rulePrimitiveType10959); 
 
                             current = grammarAccess.getPrimitiveTypeAccess().getStringEnumLiteralDeclaration_10().getEnumLiteral().getInstance();
                             createLeafNode(grammarAccess.getPrimitiveTypeAccess().getStringEnumLiteralDeclaration_10(), null); 
@@ -15428,7 +15678,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6204:6: ( 'char' )
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6204:8: 'char'
                     {
-                    match(input,99,FOLLOW_99_in_rulePrimitiveType10968); 
+                    match(input,99,FOLLOW_99_in_rulePrimitiveType10974); 
 
                             current = grammarAccess.getPrimitiveTypeAccess().getCharEnumLiteralDeclaration_11().getEnumLiteral().getInstance();
                             createLeafNode(grammarAccess.getPrimitiveTypeAccess().getCharEnumLiteralDeclaration_11(), null); 
@@ -15785,183 +16035,183 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_ruleBaseState_in_entryRuleBaseState7056 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleBaseState7066 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_64_in_ruleBaseState7101 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleBaseState7118 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_ruleBaseState7133 = new BitSet(new long[]{0x0000000000002000L,0x000000000000000EL});
-    public static final BitSet FOLLOW_65_in_ruleBaseState7144 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_ruleDetailCode_in_ruleBaseState7165 = new BitSet(new long[]{0x0000000000002000L,0x000000000000000CL});
-    public static final BitSet FOLLOW_66_in_ruleBaseState7178 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_ruleDetailCode_in_ruleBaseState7199 = new BitSet(new long[]{0x0000000000002000L,0x0000000000000008L});
-    public static final BitSet FOLLOW_67_in_ruleBaseState7212 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_ruleStateGraph_in_ruleBaseState7233 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_13_in_ruleBaseState7245 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleRefinedState_in_entryRuleRefinedState7281 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleRefinedState7291 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_68_in_ruleRefinedState7326 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_ruleFQN_in_ruleRefinedState7349 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_ruleRefinedState7359 = new BitSet(new long[]{0x0000000000002000L,0x000000000000000EL});
-    public static final BitSet FOLLOW_65_in_ruleRefinedState7370 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_ruleDetailCode_in_ruleRefinedState7391 = new BitSet(new long[]{0x0000000000002000L,0x000000000000000CL});
-    public static final BitSet FOLLOW_66_in_ruleRefinedState7404 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_ruleDetailCode_in_ruleRefinedState7425 = new BitSet(new long[]{0x0000000000002000L,0x0000000000000008L});
-    public static final BitSet FOLLOW_67_in_ruleRefinedState7438 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_ruleStateGraph_in_ruleRefinedState7459 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_13_in_ruleRefinedState7471 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDetailCode_in_entryRuleDetailCode7507 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleDetailCode7517 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_12_in_ruleDetailCode7552 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_RULE_STRING_in_ruleDetailCode7569 = new BitSet(new long[]{0x0000000000002040L});
-    public static final BitSet FOLLOW_13_in_ruleDetailCode7585 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTrPoint_in_entryRuleTrPoint7621 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleTrPoint7631 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTransitionPoint_in_ruleTrPoint7678 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEntryPoint_in_ruleTrPoint7705 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExitPoint_in_ruleTrPoint7732 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTransitionPoint_in_entryRuleTransitionPoint7767 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleTransitionPoint7777 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_69_in_ruleTransitionPoint7820 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000040L});
-    public static final BitSet FOLLOW_70_in_ruleTransitionPoint7844 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleTransitionPoint7861 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEntryPoint_in_entryRuleEntryPoint7902 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleEntryPoint7912 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_71_in_ruleEntryPoint7947 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleEntryPoint7964 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExitPoint_in_entryRuleExitPoint8005 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleExitPoint8015 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_72_in_ruleExitPoint8050 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleExitPoint8067 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleChoicePoint_in_entryRuleChoicePoint8108 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleChoicePoint8118 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_73_in_ruleChoicePoint8153 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleChoicePoint8170 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTransition_in_entryRuleTransition8211 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleTransition8221 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleInitialTransition_in_ruleTransition8268 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleNonInitialTransition_in_ruleTransition8295 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleNonInitialTransition_in_entryRuleNonInitialTransition8330 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleNonInitialTransition8340 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTriggeredTransition_in_ruleNonInitialTransition8387 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleContinuationTransition_in_ruleNonInitialTransition8414 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleCPBranchTransition_in_ruleNonInitialTransition8441 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleInitialTransition_in_entryRuleInitialTransition8476 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleInitialTransition8486 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_74_in_ruleInitialTransition8521 = new BitSet(new long[]{0x0000000000004010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleInitialTransition8538 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_14_in_ruleInitialTransition8554 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000800L});
-    public static final BitSet FOLLOW_75_in_ruleInitialTransition8564 = new BitSet(new long[]{0x0000002000000000L});
-    public static final BitSet FOLLOW_37_in_ruleInitialTransition8574 = new BitSet(new long[]{0x0000000000000010L,0x0000000000030000L});
-    public static final BitSet FOLLOW_ruleTransitionTerminal_in_ruleInitialTransition8595 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_ruleInitialTransition8605 = new BitSet(new long[]{0x0000000000002000L,0x0000000000001000L});
-    public static final BitSet FOLLOW_76_in_ruleInitialTransition8616 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_ruleDetailCode_in_ruleInitialTransition8637 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_13_in_ruleInitialTransition8649 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleContinuationTransition_in_entryRuleContinuationTransition8685 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleContinuationTransition8695 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_74_in_ruleContinuationTransition8730 = new BitSet(new long[]{0x0000000000004010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleContinuationTransition8747 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_14_in_ruleContinuationTransition8763 = new BitSet(new long[]{0x0000000000000010L,0x0000000000030000L});
-    public static final BitSet FOLLOW_ruleTransitionTerminal_in_ruleContinuationTransition8784 = new BitSet(new long[]{0x0000002000000000L});
-    public static final BitSet FOLLOW_37_in_ruleContinuationTransition8794 = new BitSet(new long[]{0x0000000000000010L,0x0000000000030000L});
-    public static final BitSet FOLLOW_ruleTransitionTerminal_in_ruleContinuationTransition8815 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_ruleContinuationTransition8825 = new BitSet(new long[]{0x0000000000002000L,0x0000000000001000L});
-    public static final BitSet FOLLOW_76_in_ruleContinuationTransition8836 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_ruleDetailCode_in_ruleContinuationTransition8857 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_13_in_ruleContinuationTransition8869 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTriggeredTransition_in_entryRuleTriggeredTransition8905 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleTriggeredTransition8915 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_74_in_ruleTriggeredTransition8950 = new BitSet(new long[]{0x0000000000004010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleTriggeredTransition8967 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_14_in_ruleTriggeredTransition8983 = new BitSet(new long[]{0x0000000000000010L,0x0000000000030000L});
-    public static final BitSet FOLLOW_ruleTransitionTerminal_in_ruleTriggeredTransition9004 = new BitSet(new long[]{0x0000002000000000L});
-    public static final BitSet FOLLOW_37_in_ruleTriggeredTransition9014 = new BitSet(new long[]{0x0000000000000010L,0x0000000000030000L});
-    public static final BitSet FOLLOW_ruleTransitionTerminal_in_ruleTriggeredTransition9035 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_ruleTriggeredTransition9045 = new BitSet(new long[]{0x0000000000000000L,0x0000000000002000L});
-    public static final BitSet FOLLOW_77_in_ruleTriggeredTransition9055 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_ruleTriggeredTransition9065 = new BitSet(new long[]{0x0000000000000000L,0x0000000000040000L});
-    public static final BitSet FOLLOW_ruleTrigger_in_ruleTriggeredTransition9086 = new BitSet(new long[]{0x0000000000002000L,0x0000000000004000L});
-    public static final BitSet FOLLOW_78_in_ruleTriggeredTransition9097 = new BitSet(new long[]{0x0000000000000000L,0x0000000000040000L});
-    public static final BitSet FOLLOW_ruleTrigger_in_ruleTriggeredTransition9118 = new BitSet(new long[]{0x0000000000002000L,0x0000000000004000L});
-    public static final BitSet FOLLOW_13_in_ruleTriggeredTransition9130 = new BitSet(new long[]{0x0000000000002000L,0x0000000000001000L});
-    public static final BitSet FOLLOW_76_in_ruleTriggeredTransition9141 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_ruleDetailCode_in_ruleTriggeredTransition9162 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_13_in_ruleTriggeredTransition9174 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleCPBranchTransition_in_entryRuleCPBranchTransition9210 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleCPBranchTransition9220 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_74_in_ruleCPBranchTransition9255 = new BitSet(new long[]{0x0000000000004010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleCPBranchTransition9272 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_14_in_ruleCPBranchTransition9288 = new BitSet(new long[]{0x0000000000000010L,0x0000000000030000L});
-    public static final BitSet FOLLOW_ruleTransitionTerminal_in_ruleCPBranchTransition9309 = new BitSet(new long[]{0x0000002000000000L});
-    public static final BitSet FOLLOW_37_in_ruleCPBranchTransition9319 = new BitSet(new long[]{0x0000000000000010L,0x0000000000030000L});
-    public static final BitSet FOLLOW_ruleTransitionTerminal_in_ruleCPBranchTransition9340 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_ruleCPBranchTransition9350 = new BitSet(new long[]{0x0000000000000000L,0x0000000000008000L});
-    public static final BitSet FOLLOW_79_in_ruleCPBranchTransition9360 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_ruleDetailCode_in_ruleCPBranchTransition9381 = new BitSet(new long[]{0x0000000000002000L,0x0000000000001000L});
-    public static final BitSet FOLLOW_76_in_ruleCPBranchTransition9392 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_ruleDetailCode_in_ruleCPBranchTransition9413 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_13_in_ruleCPBranchTransition9425 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTransitionTerminal_in_entryRuleTransitionTerminal9461 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleTransitionTerminal9471 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleStateTerminal_in_ruleTransitionTerminal9518 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTrPointTerminal_in_ruleTransitionTerminal9545 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleSubStateTrPointTerminal_in_ruleTransitionTerminal9572 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleChoicepointTerminal_in_ruleTransitionTerminal9599 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleStateTerminal_in_entryRuleStateTerminal9634 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleStateTerminal9644 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleStateTerminal9686 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTrPointTerminal_in_entryRuleTrPointTerminal9721 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleTrPointTerminal9731 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_80_in_ruleTrPointTerminal9766 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleTrPointTerminal9784 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleSubStateTrPointTerminal_in_entryRuleSubStateTrPointTerminal9820 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleSubStateTrPointTerminal9830 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleSubStateTrPointTerminal9873 = new BitSet(new long[]{0x0004000000000000L});
-    public static final BitSet FOLLOW_50_in_ruleSubStateTrPointTerminal9883 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleSubStateTrPointTerminal9901 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleChoicepointTerminal_in_entryRuleChoicepointTerminal9937 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleChoicepointTerminal9947 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_81_in_ruleChoicepointTerminal9982 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleChoicepointTerminal10000 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTrigger_in_entryRuleTrigger10036 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleTrigger10046 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_82_in_ruleTrigger10081 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_ruleMessageFromIf_in_ruleTrigger10102 = new BitSet(new long[]{0x0000000000000000L,0x0000000000380000L});
-    public static final BitSet FOLLOW_83_in_ruleTrigger10113 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_ruleMessageFromIf_in_ruleTrigger10134 = new BitSet(new long[]{0x0000000000000000L,0x0000000000380000L});
-    public static final BitSet FOLLOW_ruleGuard_in_ruleTrigger10157 = new BitSet(new long[]{0x0000000000000000L,0x0000000000100000L});
-    public static final BitSet FOLLOW_84_in_ruleTrigger10168 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleMessageFromIf_in_entryRuleMessageFromIf10204 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleMessageFromIf10214 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleMessageFromIf10257 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_14_in_ruleMessageFromIf10267 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleMessageFromIf10285 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleGuard_in_entryRuleGuard10321 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleGuard10331 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_85_in_ruleGuard10366 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_ruleDetailCode_in_ruleGuard10387 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleImport_in_entryRuleImport10423 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleImport10433 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_86_in_ruleImport10468 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_ruleImportedFQN_in_ruleImport10489 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleImportedFQN_in_entryRuleImportedFQN10526 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleImportedFQN10537 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleFQN_in_ruleImportedFQN10584 = new BitSet(new long[]{0x0080000000000002L});
-    public static final BitSet FOLLOW_55_in_ruleImportedFQN10603 = new BitSet(new long[]{0x0000000000000000L,0x0000000000800000L});
-    public static final BitSet FOLLOW_87_in_ruleImportedFQN10616 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleFQN_in_entryRuleFQN10659 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleFQN10670 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleFQN10710 = new BitSet(new long[]{0x0080000000000002L});
-    public static final BitSet FOLLOW_55_in_ruleFQN10729 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleFQN10744 = new BitSet(new long[]{0x0080000000000002L});
-    public static final BitSet FOLLOW_88_in_rulePrimitiveType10803 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_89_in_rulePrimitiveType10818 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_90_in_rulePrimitiveType10833 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_91_in_rulePrimitiveType10848 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_92_in_rulePrimitiveType10863 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_93_in_rulePrimitiveType10878 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_94_in_rulePrimitiveType10893 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_95_in_rulePrimitiveType10908 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_96_in_rulePrimitiveType10923 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_97_in_rulePrimitiveType10938 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_98_in_rulePrimitiveType10953 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_99_in_rulePrimitiveType10968 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleBaseState7118 = new BitSet(new long[]{0x0000000000001002L});
+    public static final BitSet FOLLOW_12_in_ruleBaseState7134 = new BitSet(new long[]{0x0000000000002000L,0x000000000000000EL});
+    public static final BitSet FOLLOW_65_in_ruleBaseState7145 = new BitSet(new long[]{0x0000000000001000L});
+    public static final BitSet FOLLOW_ruleDetailCode_in_ruleBaseState7166 = new BitSet(new long[]{0x0000000000002000L,0x000000000000000CL});
+    public static final BitSet FOLLOW_66_in_ruleBaseState7179 = new BitSet(new long[]{0x0000000000001000L});
+    public static final BitSet FOLLOW_ruleDetailCode_in_ruleBaseState7200 = new BitSet(new long[]{0x0000000000002000L,0x0000000000000008L});
+    public static final BitSet FOLLOW_67_in_ruleBaseState7213 = new BitSet(new long[]{0x0000000000001000L});
+    public static final BitSet FOLLOW_ruleStateGraph_in_ruleBaseState7234 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_ruleBaseState7246 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleRefinedState_in_entryRuleRefinedState7284 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleRefinedState7294 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_68_in_ruleRefinedState7329 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_ruleFQN_in_ruleRefinedState7352 = new BitSet(new long[]{0x0000000000001000L});
+    public static final BitSet FOLLOW_12_in_ruleRefinedState7362 = new BitSet(new long[]{0x0000000000002000L,0x000000000000000EL});
+    public static final BitSet FOLLOW_65_in_ruleRefinedState7373 = new BitSet(new long[]{0x0000000000001000L});
+    public static final BitSet FOLLOW_ruleDetailCode_in_ruleRefinedState7394 = new BitSet(new long[]{0x0000000000002000L,0x000000000000000CL});
+    public static final BitSet FOLLOW_66_in_ruleRefinedState7407 = new BitSet(new long[]{0x0000000000001000L});
+    public static final BitSet FOLLOW_ruleDetailCode_in_ruleRefinedState7428 = new BitSet(new long[]{0x0000000000002000L,0x0000000000000008L});
+    public static final BitSet FOLLOW_67_in_ruleRefinedState7441 = new BitSet(new long[]{0x0000000000001000L});
+    public static final BitSet FOLLOW_ruleStateGraph_in_ruleRefinedState7462 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_ruleRefinedState7474 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleDetailCode_in_entryRuleDetailCode7510 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleDetailCode7520 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_12_in_ruleDetailCode7555 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_RULE_STRING_in_ruleDetailCode7572 = new BitSet(new long[]{0x0000000000002040L});
+    public static final BitSet FOLLOW_13_in_ruleDetailCode7588 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTrPoint_in_entryRuleTrPoint7624 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleTrPoint7634 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTransitionPoint_in_ruleTrPoint7681 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleEntryPoint_in_ruleTrPoint7708 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExitPoint_in_ruleTrPoint7735 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTransitionPoint_in_entryRuleTransitionPoint7770 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleTransitionPoint7780 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_69_in_ruleTransitionPoint7823 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000040L});
+    public static final BitSet FOLLOW_70_in_ruleTransitionPoint7847 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleTransitionPoint7864 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleEntryPoint_in_entryRuleEntryPoint7905 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleEntryPoint7915 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_71_in_ruleEntryPoint7950 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleEntryPoint7967 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExitPoint_in_entryRuleExitPoint8008 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleExitPoint8018 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_72_in_ruleExitPoint8053 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleExitPoint8070 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleChoicePoint_in_entryRuleChoicePoint8111 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleChoicePoint8121 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_73_in_ruleChoicePoint8156 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleChoicePoint8173 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTransition_in_entryRuleTransition8214 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleTransition8224 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleInitialTransition_in_ruleTransition8271 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleNonInitialTransition_in_ruleTransition8298 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleNonInitialTransition_in_entryRuleNonInitialTransition8333 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleNonInitialTransition8343 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTriggeredTransition_in_ruleNonInitialTransition8390 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleContinuationTransition_in_ruleNonInitialTransition8417 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleCPBranchTransition_in_ruleNonInitialTransition8444 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleInitialTransition_in_entryRuleInitialTransition8479 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleInitialTransition8489 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_74_in_ruleInitialTransition8524 = new BitSet(new long[]{0x0000000000004010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleInitialTransition8541 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_14_in_ruleInitialTransition8557 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000800L});
+    public static final BitSet FOLLOW_75_in_ruleInitialTransition8567 = new BitSet(new long[]{0x0000002000000000L});
+    public static final BitSet FOLLOW_37_in_ruleInitialTransition8577 = new BitSet(new long[]{0x0000000000000010L,0x0000000000030000L});
+    public static final BitSet FOLLOW_ruleTransitionTerminal_in_ruleInitialTransition8598 = new BitSet(new long[]{0x0000000000001000L});
+    public static final BitSet FOLLOW_12_in_ruleInitialTransition8608 = new BitSet(new long[]{0x0000000000002000L,0x0000000000001000L});
+    public static final BitSet FOLLOW_76_in_ruleInitialTransition8619 = new BitSet(new long[]{0x0000000000001000L});
+    public static final BitSet FOLLOW_ruleDetailCode_in_ruleInitialTransition8640 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_ruleInitialTransition8652 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleContinuationTransition_in_entryRuleContinuationTransition8688 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleContinuationTransition8698 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_74_in_ruleContinuationTransition8733 = new BitSet(new long[]{0x0000000000004010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleContinuationTransition8750 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_14_in_ruleContinuationTransition8766 = new BitSet(new long[]{0x0000000000000010L,0x0000000000030000L});
+    public static final BitSet FOLLOW_ruleTransitionTerminal_in_ruleContinuationTransition8787 = new BitSet(new long[]{0x0000002000000000L});
+    public static final BitSet FOLLOW_37_in_ruleContinuationTransition8797 = new BitSet(new long[]{0x0000000000000010L,0x0000000000030000L});
+    public static final BitSet FOLLOW_ruleTransitionTerminal_in_ruleContinuationTransition8818 = new BitSet(new long[]{0x0000000000001002L});
+    public static final BitSet FOLLOW_12_in_ruleContinuationTransition8829 = new BitSet(new long[]{0x0000000000002000L,0x0000000000001000L});
+    public static final BitSet FOLLOW_76_in_ruleContinuationTransition8840 = new BitSet(new long[]{0x0000000000001000L});
+    public static final BitSet FOLLOW_ruleDetailCode_in_ruleContinuationTransition8861 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_ruleContinuationTransition8873 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTriggeredTransition_in_entryRuleTriggeredTransition8911 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleTriggeredTransition8921 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_74_in_ruleTriggeredTransition8956 = new BitSet(new long[]{0x0000000000004010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleTriggeredTransition8973 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_14_in_ruleTriggeredTransition8989 = new BitSet(new long[]{0x0000000000000010L,0x0000000000030000L});
+    public static final BitSet FOLLOW_ruleTransitionTerminal_in_ruleTriggeredTransition9010 = new BitSet(new long[]{0x0000002000000000L});
+    public static final BitSet FOLLOW_37_in_ruleTriggeredTransition9020 = new BitSet(new long[]{0x0000000000000010L,0x0000000000030000L});
+    public static final BitSet FOLLOW_ruleTransitionTerminal_in_ruleTriggeredTransition9041 = new BitSet(new long[]{0x0000000000001000L});
+    public static final BitSet FOLLOW_12_in_ruleTriggeredTransition9051 = new BitSet(new long[]{0x0000000000000000L,0x0000000000002000L});
+    public static final BitSet FOLLOW_77_in_ruleTriggeredTransition9061 = new BitSet(new long[]{0x0000000000001000L});
+    public static final BitSet FOLLOW_12_in_ruleTriggeredTransition9071 = new BitSet(new long[]{0x0000000000000000L,0x0000000000040000L});
+    public static final BitSet FOLLOW_ruleTrigger_in_ruleTriggeredTransition9092 = new BitSet(new long[]{0x0000000000002000L,0x0000000000004000L});
+    public static final BitSet FOLLOW_78_in_ruleTriggeredTransition9103 = new BitSet(new long[]{0x0000000000000000L,0x0000000000040000L});
+    public static final BitSet FOLLOW_ruleTrigger_in_ruleTriggeredTransition9124 = new BitSet(new long[]{0x0000000000002000L,0x0000000000004000L});
+    public static final BitSet FOLLOW_13_in_ruleTriggeredTransition9136 = new BitSet(new long[]{0x0000000000002000L,0x0000000000001000L});
+    public static final BitSet FOLLOW_76_in_ruleTriggeredTransition9147 = new BitSet(new long[]{0x0000000000001000L});
+    public static final BitSet FOLLOW_ruleDetailCode_in_ruleTriggeredTransition9168 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_ruleTriggeredTransition9180 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleCPBranchTransition_in_entryRuleCPBranchTransition9216 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleCPBranchTransition9226 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_74_in_ruleCPBranchTransition9261 = new BitSet(new long[]{0x0000000000004010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleCPBranchTransition9278 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_14_in_ruleCPBranchTransition9294 = new BitSet(new long[]{0x0000000000000010L,0x0000000000030000L});
+    public static final BitSet FOLLOW_ruleTransitionTerminal_in_ruleCPBranchTransition9315 = new BitSet(new long[]{0x0000002000000000L});
+    public static final BitSet FOLLOW_37_in_ruleCPBranchTransition9325 = new BitSet(new long[]{0x0000000000000010L,0x0000000000030000L});
+    public static final BitSet FOLLOW_ruleTransitionTerminal_in_ruleCPBranchTransition9346 = new BitSet(new long[]{0x0000000000001000L});
+    public static final BitSet FOLLOW_12_in_ruleCPBranchTransition9356 = new BitSet(new long[]{0x0000000000000000L,0x0000000000008000L});
+    public static final BitSet FOLLOW_79_in_ruleCPBranchTransition9366 = new BitSet(new long[]{0x0000000000001000L});
+    public static final BitSet FOLLOW_ruleDetailCode_in_ruleCPBranchTransition9387 = new BitSet(new long[]{0x0000000000002000L,0x0000000000001000L});
+    public static final BitSet FOLLOW_76_in_ruleCPBranchTransition9398 = new BitSet(new long[]{0x0000000000001000L});
+    public static final BitSet FOLLOW_ruleDetailCode_in_ruleCPBranchTransition9419 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_ruleCPBranchTransition9431 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTransitionTerminal_in_entryRuleTransitionTerminal9467 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleTransitionTerminal9477 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleStateTerminal_in_ruleTransitionTerminal9524 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTrPointTerminal_in_ruleTransitionTerminal9551 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleSubStateTrPointTerminal_in_ruleTransitionTerminal9578 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleChoicepointTerminal_in_ruleTransitionTerminal9605 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleStateTerminal_in_entryRuleStateTerminal9640 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleStateTerminal9650 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleStateTerminal9692 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTrPointTerminal_in_entryRuleTrPointTerminal9727 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleTrPointTerminal9737 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_80_in_ruleTrPointTerminal9772 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleTrPointTerminal9790 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleSubStateTrPointTerminal_in_entryRuleSubStateTrPointTerminal9826 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleSubStateTrPointTerminal9836 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleSubStateTrPointTerminal9879 = new BitSet(new long[]{0x0004000000000000L});
+    public static final BitSet FOLLOW_50_in_ruleSubStateTrPointTerminal9889 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleSubStateTrPointTerminal9907 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleChoicepointTerminal_in_entryRuleChoicepointTerminal9943 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleChoicepointTerminal9953 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_81_in_ruleChoicepointTerminal9988 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleChoicepointTerminal10006 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTrigger_in_entryRuleTrigger10042 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleTrigger10052 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_82_in_ruleTrigger10087 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_ruleMessageFromIf_in_ruleTrigger10108 = new BitSet(new long[]{0x0000000000000000L,0x0000000000380000L});
+    public static final BitSet FOLLOW_83_in_ruleTrigger10119 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_ruleMessageFromIf_in_ruleTrigger10140 = new BitSet(new long[]{0x0000000000000000L,0x0000000000380000L});
+    public static final BitSet FOLLOW_ruleGuard_in_ruleTrigger10163 = new BitSet(new long[]{0x0000000000000000L,0x0000000000100000L});
+    public static final BitSet FOLLOW_84_in_ruleTrigger10174 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleMessageFromIf_in_entryRuleMessageFromIf10210 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleMessageFromIf10220 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleMessageFromIf10263 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_14_in_ruleMessageFromIf10273 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleMessageFromIf10291 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleGuard_in_entryRuleGuard10327 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleGuard10337 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_85_in_ruleGuard10372 = new BitSet(new long[]{0x0000000000001000L});
+    public static final BitSet FOLLOW_ruleDetailCode_in_ruleGuard10393 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleImport_in_entryRuleImport10429 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleImport10439 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_86_in_ruleImport10474 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_ruleImportedFQN_in_ruleImport10495 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleImportedFQN_in_entryRuleImportedFQN10532 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleImportedFQN10543 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleFQN_in_ruleImportedFQN10590 = new BitSet(new long[]{0x0080000000000002L});
+    public static final BitSet FOLLOW_55_in_ruleImportedFQN10609 = new BitSet(new long[]{0x0000000000000000L,0x0000000000800000L});
+    public static final BitSet FOLLOW_87_in_ruleImportedFQN10622 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleFQN_in_entryRuleFQN10665 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleFQN10676 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleFQN10716 = new BitSet(new long[]{0x0080000000000002L});
+    public static final BitSet FOLLOW_55_in_ruleFQN10735 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleFQN10750 = new BitSet(new long[]{0x0080000000000002L});
+    public static final BitSet FOLLOW_88_in_rulePrimitiveType10809 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_89_in_rulePrimitiveType10824 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_90_in_rulePrimitiveType10839 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_91_in_rulePrimitiveType10854 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_92_in_rulePrimitiveType10869 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_93_in_rulePrimitiveType10884 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_94_in_rulePrimitiveType10899 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_95_in_rulePrimitiveType10914 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_96_in_rulePrimitiveType10929 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_97_in_rulePrimitiveType10944 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_98_in_rulePrimitiveType10959 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_99_in_rulePrimitiveType10974 = new BitSet(new long[]{0x0000000000000002L});
 
 }

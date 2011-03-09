@@ -271,11 +271,11 @@ StateMachine returns StateGraph:
 // entry and exit code have multiplicity many: in BaseState to be able to add derived class codes here,
 // in RefinedState to still have both features in the common base class State
 BaseState:
-	'State' name=ID '{'
+	'State' name=ID ('{'
 		('entry' entryCode=DetailCode)?
 		('exit' exitCode=DetailCode)?
 		('subgraph' subgraph=StateGraph)?
-	'}';
+	'}')?;
 
 RefinedState:
 	'RefinedState' base=[BaseState|FQN] '{'
@@ -314,9 +314,9 @@ InitialTransition:
 	'}';
 
 ContinuationTransition:
-	'Transition' (name=ID)? ':' from=TransitionTerminal '->' to=TransitionTerminal '{'
+	'Transition' (name=ID)? ':' from=TransitionTerminal '->' to=TransitionTerminal ('{'
 		('action' action=DetailCode)? 
-	'}';
+	'}')?;
 
 TriggeredTransition:
 	'Transition' (name=ID)? ':' from=TransitionTerminal '->' to=TransitionTerminal '{'
