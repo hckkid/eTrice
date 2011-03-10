@@ -31,7 +31,7 @@ public abstract class InterfaceItemBase extends AbstractMessageReceiver {
 	public InterfaceItemBase (IEventReceiver actor, String name, int localId, int idx, Address ownAddress, Address peerAddress){
 		super(actor, ownAddress, name);
 		this.ownMsgReceiver = RTServices.getInstance().getMsgSvcCtrl().getMsgSvc(ownAddress.threadID);
-		this.peerMsgReceiver = RTServices.getInstance().getMsgSvcCtrl().getMsgSvc(peerAddress.threadID);
+		this.peerMsgReceiver = peerAddress==null? null: RTServices.getInstance().getMsgSvcCtrl().getMsgSvc(peerAddress.threadID);
 		this.localId = localId;
 		this.idx = idx;
 		this.peerAddress = peerAddress;
