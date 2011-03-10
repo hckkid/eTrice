@@ -12,23 +12,10 @@
 
 package org.eclipse.etrice.core.ui.outline;
 
-import org.eclipse.core.commands.AbstractHandler;
-import org.eclipse.core.commands.ExecutionEvent;
-import org.eclipse.core.commands.ExecutionException;
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jface.dialogs.MessageDialog;
-import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.jface.viewers.IStructuredSelection;
-import org.eclipse.ui.handlers.HandlerUtil;
-import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.ui.editor.XtextEditor;
-import org.eclipse.xtext.ui.editor.outline.ContentOutlineNode;
-import org.eclipse.xtext.ui.editor.utils.EditorUtils;
-import org.eclipse.xtext.util.concurrent.IUnitOfWork;
-
 import org.eclipse.etrice.core.room.StructureClass;
 import org.eclipse.etrice.ui.structure.DiagramAccess;
+import org.eclipse.xtext.ui.editor.XtextEditor;
 
 /**
  * Handler for outline menu item to open structure editor.
@@ -37,37 +24,25 @@ import org.eclipse.etrice.ui.structure.DiagramAccess;
  * @author Henrik Rentz-Reichert initial contribution and API
  *
  */
-public class EditStructureHandler extends AbstractHandler {
+public class EditStructureHandler extends AbstractEditHandler {
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.etrice.core.ui.outline.AbstractEditHandler#prepare(org.eclipse.xtext.ui.editor.XtextEditor, java.lang.String)
+	 */
 	@Override
-	public Object execute(ExecutionEvent event) throws ExecutionException {
-		ISelection selection = HandlerUtil.getCurrentSelection(event);
-		if (selection instanceof IStructuredSelection) {
-			IStructuredSelection ss = (IStructuredSelection) selection;
-			Object sel = ss.getFirstElement();
-			if (sel instanceof ContentOutlineNode) {
-				final ContentOutlineNode node = (ContentOutlineNode) sel;
-				XtextEditor xtextEditor = EditorUtils.getActiveXtextEditor(event);
-				if (xtextEditor.isDirty()) {
-					if (!MessageDialog.openQuestion(xtextEditor.getSite().getShell(), "Save model file", "The editor will be saved before opening the diagram editor.\nProceed?"))
-						return null;
-					xtextEditor.doSave(new NullProgressMonitor());
-				}
-				xtextEditor.getDocument().readOnly(new IUnitOfWork.Void<XtextResource>() {
-					@Override
-					public void process(XtextResource resource) throws Exception {
-						if (resource != null) {
-							EObject object = resource.getEObject(node.getURI().fragment());
-							if (object instanceof StructureClass) {
-								DiagramAccess diagramAccess = new DiagramAccess();
-								diagramAccess.openDiagramEditor((StructureClass) object);
-							}
-						}
-					}
-				});
-			}
+	protected boolean prepare(XtextEditor xtextEditor, String fragment) {
+		return true;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.eclipse.etrice.core.ui.outline.AbstractEditHandler#openEditor(org.eclipse.emf.ecore.EObject)
+	 */
+	@Override
+	protected void openEditor(EObject object) {
+		if (object instanceof StructureClass) {
+			DiagramAccess diagramAccess = new DiagramAccess();
+			diagramAccess.openDiagramEditor((StructureClass) object);
 		}
-		return null;
 	}
 
 }

@@ -12,9 +12,6 @@
 
 package org.eclipse.etrice.core.ui.outline;
 
-import org.eclipse.core.commands.AbstractHandler;
-import org.eclipse.core.commands.ExecutionEvent;
-import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.naming.RoomNameProvider;
@@ -25,15 +22,10 @@ import org.eclipse.etrice.core.room.Transition;
 import org.eclipse.etrice.core.ui.internal.RoomActivator;
 import org.eclipse.etrice.ui.behavior.DiagramAccess;
 import org.eclipse.jface.dialogs.MessageDialog;
-import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.jface.viewers.IStructuredSelection;
-import org.eclipse.ui.handlers.HandlerUtil;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.edit.DefaultDocumentEditor;
-import org.eclipse.xtext.ui.editor.outline.ContentOutlineNode;
-import org.eclipse.xtext.ui.editor.utils.EditorUtils;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 import com.google.inject.Injector;
@@ -47,46 +39,16 @@ import com.google.inject.Injector;
  * @author Henrik Rentz-Reichert initial contribution and API
  *
  */
-public class EditBehaviorHandler extends AbstractHandler {
+public class EditBehaviorHandler extends AbstractEditHandler {
 
-	@Override
-	public Object execute(ExecutionEvent event) throws ExecutionException {
-		ISelection selection = HandlerUtil.getCurrentSelection(event);
-		if (selection instanceof IStructuredSelection) {
-			IStructuredSelection ss = (IStructuredSelection) selection;
-			Object sel = ss.getFirstElement();
-			if (sel instanceof ContentOutlineNode) {
-				final ContentOutlineNode node = (ContentOutlineNode) sel;
-				XtextEditor xtextEditor = EditorUtils.getActiveXtextEditor(event);
-				if (xtextEditor.isDirty()) {
-					if (!MessageDialog.openQuestion(xtextEditor.getSite().getShell(), "Save model file", "The editor will be saved before opening the diagram editor.\nProceed?"))
-						return null;
-					// postpone save to avoid doing it twice
-				}
-				if (hasUnnamedTransitions(xtextEditor.getDocument(), node.getURI().fragment())) {
-					if (!MessageDialog.openQuestion(xtextEditor.getSite().getShell(), "Create transition names", "Transition names will be created where missing.\nProceed?"))
-						return null;
-					createTransitionNames(xtextEditor.getDocument(), node.getURI().fragment());
-					xtextEditor.doSave(new NullProgressMonitor());
-				}
-				if (xtextEditor.isDirty()) {
-					xtextEditor.doSave(new NullProgressMonitor());
-				}
-				xtextEditor.getDocument().readOnly(new IUnitOfWork.Void<XtextResource>() {
-					@Override
-					public void process(XtextResource resource) throws Exception {
-						if (resource != null) {
-							EObject object = resource.getEObject(node.getURI().fragment());
-							if (object instanceof ActorClass) {
-								DiagramAccess diagramAccess = new DiagramAccess();
-								diagramAccess.openDiagramEditor((ActorClass) object);
-							}
-						}
-					}
-				});
-			}
+	protected boolean prepare(XtextEditor xtextEditor, final String fragment) {
+		if (hasUnnamedTransitions(xtextEditor.getDocument(), fragment)) {
+			if (!MessageDialog.openQuestion(xtextEditor.getSite().getShell(), "Create transition names", "Transition names will be created where missing.\nProceed?"))
+				return false;
+			createTransitionNames(xtextEditor.getDocument(), fragment);
+			xtextEditor.doSave(new NullProgressMonitor());
 		}
-		return null;
+		return true;
 	}
 
 	/**
@@ -161,6 +123,13 @@ public class EditBehaviorHandler extends AbstractHandler {
 				return false;
 			}
 		});
+	}
+
+	protected void openEditor(EObject object) {
+		if (object instanceof ActorClass) {
+			DiagramAccess diagramAccess = new DiagramAccess();
+			diagramAccess.openDiagramEditor((ActorClass) object);
+		}
 	}
 
 }
