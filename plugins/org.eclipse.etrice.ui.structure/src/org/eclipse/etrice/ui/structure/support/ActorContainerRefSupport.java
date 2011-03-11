@@ -12,12 +12,19 @@
 
 package org.eclipse.etrice.ui.structure.support;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.etrice.core.naming.RoomNameProvider;
+import org.eclipse.etrice.core.room.ActorClass;
+import org.eclipse.etrice.core.room.ActorContainerClass;
+import org.eclipse.etrice.core.room.ActorContainerRef;
+import org.eclipse.etrice.core.room.ActorRef;
+import org.eclipse.etrice.core.room.InterfaceItem;
+import org.eclipse.etrice.core.room.LogicalSystem;
+import org.eclipse.etrice.core.room.RoomFactory;
+import org.eclipse.etrice.core.room.StructureClass;
+import org.eclipse.etrice.core.room.SubSystemRef;
 import org.eclipse.etrice.ui.structure.DiagramAccess;
 import org.eclipse.etrice.ui.structure.ImageProvider;
 import org.eclipse.etrice.ui.structure.dialogs.ActorContainerRefPropertyDialog;
@@ -65,7 +72,6 @@ import org.eclipse.graphiti.mm.pictograms.Anchor;
 import org.eclipse.graphiti.mm.pictograms.AnchorContainer;
 import org.eclipse.graphiti.mm.pictograms.ChopboxAnchor;
 import org.eclipse.graphiti.mm.pictograms.ContainerShape;
-import org.eclipse.graphiti.mm.pictograms.Diagram;
 import org.eclipse.graphiti.mm.pictograms.PictogramElement;
 import org.eclipse.graphiti.mm.pictograms.Shape;
 import org.eclipse.graphiti.services.Graphiti;
@@ -75,7 +81,6 @@ import org.eclipse.graphiti.tb.ContextButtonEntry;
 import org.eclipse.graphiti.tb.DefaultToolBehaviorProvider;
 import org.eclipse.graphiti.tb.IContextButtonPadData;
 import org.eclipse.graphiti.tb.IToolBehaviorProvider;
-import org.eclipse.graphiti.ui.features.AbstractDrillDownFeature;
 import org.eclipse.graphiti.ui.features.DefaultDeleteFeature;
 import org.eclipse.graphiti.ui.features.DefaultFeatureProvider;
 import org.eclipse.graphiti.util.ColorConstant;
@@ -83,17 +88,6 @@ import org.eclipse.graphiti.util.IColorConstant;
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
-
-import org.eclipse.etrice.core.naming.RoomNameProvider;
-import org.eclipse.etrice.core.room.ActorClass;
-import org.eclipse.etrice.core.room.ActorContainerClass;
-import org.eclipse.etrice.core.room.ActorContainerRef;
-import org.eclipse.etrice.core.room.ActorRef;
-import org.eclipse.etrice.core.room.InterfaceItem;
-import org.eclipse.etrice.core.room.LogicalSystem;
-import org.eclipse.etrice.core.room.RoomFactory;
-import org.eclipse.etrice.core.room.StructureClass;
-import org.eclipse.etrice.core.room.SubSystemRef;
 
 public class ActorContainerRefSupport {
 	
@@ -392,9 +386,7 @@ public class ActorContainerRefSupport {
 			
 		}
 		
-		private static class DrillDownFeature extends AbstractDrillDownFeature {
-
-			private ActorContainerRef ref = null;
+		private static class DrillDownFeature extends AbstractCustomFeature {
 
 			public DrillDownFeature(IFeatureProvider fp) {
 				super(fp);
@@ -411,32 +403,31 @@ public class ActorContainerRefSupport {
 				if (pes != null && pes.length == 1) {
 					Object bo = getBusinessObjectForPictogramElement(pes[0]);
 					if (bo instanceof ActorContainerRef) {
-						ref  = (ActorContainerRef) bo;
 						return true;
 					}
 				}
 				return false;
 			}
-			
+
+			/* (non-Javadoc)
+			 * @see org.eclipse.graphiti.features.custom.ICustomFeature#execute(org.eclipse.graphiti.features.context.ICustomContext)
+			 */
 			@Override
-			protected Collection<Diagram> getDiagrams() {
-				ArrayList<Diagram> result = new ArrayList<Diagram>();
-				if (ref!=null) {
-					DiagramAccess diagramAccess = new DiagramAccess();
-					if (ref instanceof ActorRef) {
-						Diagram diagram = diagramAccess.getDiagram(((ActorRef) ref).getType());
-						result.add(diagram);
-					}
-					else if (ref instanceof SubSystemRef) {
-						Diagram diagram = diagramAccess.getDiagram(((SubSystemRef) ref).getType());
-						result.add(diagram);
+			public void execute(ICustomContext context) {
+				PictogramElement[] pes = context.getPictogramElements();
+				if (pes != null && pes.length == 1) {
+					Object bo = getBusinessObjectForPictogramElement(pes[0]);
+					if (bo instanceof ActorContainerRef) {
+						ActorContainerRef ref = (ActorContainerRef) bo;
+						DiagramAccess diagramAccess = new DiagramAccess();
+						if (ref instanceof ActorRef) {
+							diagramAccess.openDiagramEditor(((ActorRef) ref).getType());
+						}
+						else if (ref instanceof SubSystemRef) {
+							diagramAccess.openDiagramEditor(((SubSystemRef) ref).getType());
+						}
 					}
 				}
-				return result;
-			}
-			@Override
-			protected Collection<Diagram> getLinkedDiagrams(PictogramElement pe) {
-				return getDiagrams();
 			}
 		}
 		
