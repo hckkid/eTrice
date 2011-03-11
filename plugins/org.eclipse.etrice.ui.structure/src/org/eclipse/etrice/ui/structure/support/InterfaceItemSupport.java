@@ -267,10 +267,13 @@ public class InterfaceItemSupport {
 						
 						ContainerShape acShape = context.getTargetContainer();
 						Object parentBO = getBusinessObjectForPictogramElement(acShape);
+						boolean refport = (parentBO instanceof ActorContainerRef);
+						if (refport)
+							return true;
+						
 						if (isInherited(item, parentBO, acShape))
 							return false;
 						
-						boolean refport = (parentBO instanceof ActorContainerRef);
 						int margin = refport?ActorContainerRefSupport.MARGIN:StructureClassSupport.MARGIN;
 						return isValidPosition(context, context, isInternal(item), margin);
 					}
@@ -302,14 +305,44 @@ public class InterfaceItemSupport {
 				}
 				else {
 					// project onto boundary
-					if (x<=margin)
-						x = 0;
-					if (y<=margin)
-						y = 0;
-					if ((width-margin)<=x)
-						x = width;
-					if ((height-margin)<=y)
-						y = height;
+					if (refport) {
+						int dx = (x<=width/2)? x:width-x;
+						int dy = (y<=height/2)? y:height-y;
+						if (dx>dy) {
+							// keep x, project y
+							if (y<=height/2)
+								y = 0;
+							else
+								y = height-0;
+							
+							if (x<0)
+								x = 0;
+							else if (x>width-0)
+								x = width-0;
+						}
+						else {
+							// keep y, project x
+							if (x<=width/2)
+								x = 0;
+							else
+								x = width-0;
+							
+							if (y<0)
+								y = 0;
+							else if (y>height-0)
+								y = height-0;
+						}
+					}
+					else {
+						if (x<=margin)
+							x = 0;
+						if (y<=margin)
+							y = 0;
+						if ((width-margin)<=x)
+							x = width;
+						if ((height-margin)<=y)
+							y = height;
+					}
 				}
 	
 				Graphiti.getGaService().setLocation(shapeToMove.getGraphicsAlgorithm(), x, y, avoidNegativeCoordinates());
