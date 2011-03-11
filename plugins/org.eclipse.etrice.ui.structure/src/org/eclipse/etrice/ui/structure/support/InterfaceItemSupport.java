@@ -179,6 +179,7 @@ public class InterfaceItemSupport {
 						y = height-2*margin;
 				}
 				else {
+					// TODOHRR: remove duplicate code
 					int dx = (x<=width/2)? x:width-x;
 					int dy = (y<=height/2)? y:height-y;
 					if (dx>dy) {
@@ -377,6 +378,8 @@ public class InterfaceItemSupport {
 				}
 				InterfaceItem port = (InterfaceItem) bo;
 				
+				String reason = "";
+				
 				// check if port still owned/inherited
 				ContainerShape containerShape = (ContainerShape)context.getPictogramElement();
 				bo = getBusinessObjectForPictogramElement(containerShape);
@@ -391,18 +394,22 @@ public class InterfaceItemSupport {
 					while (!found && ac!=null);
 					
 					if (!found)
-						return Reason.createTrueReason("InterfaceItem not inherited anymore");
+						reason += "InterfaceItem not inherited anymore\n";
 				}
 				
 				GraphicsAlgorithm ga = containerShape.getChildren().get(0).getGraphicsAlgorithm();
 				if (ga instanceof Text) {
 					if (!port.getName().equals(((Text)ga).getValue()))
-						return Reason.createTrueReason("Name is out of date");
+						reason += "Name is out of date\n";
 
 					String kind = getItemKind(port);
 					if (!kind.equals(Graphiti.getPeService().getPropertyValue(context.getPictogramElement(), PROP_KIND)))
-						return Reason.createTrueReason("Figure is out of date");
+						reason += "Figure is out of date\n";
 				}
+				
+				if (!reason.isEmpty())
+					return Reason.createTrueReason(reason.substring(0, reason.length()-1));
+				
 				return Reason.createFalseReason();
 			}
 
@@ -674,15 +681,21 @@ public class InterfaceItemSupport {
 		}
 	}
 	
-	private static List<InterfaceItem> getInterfaceItems(ActorContainerClass acc) {
+	public static List<InterfaceItem> getInterfaceItems(ActorContainerClass acc) {
 		ArrayList<InterfaceItem> result = new ArrayList<InterfaceItem>();
 		
-		result.addAll(acc.getIfSPPs());
 		
 		if (acc instanceof ActorClass) {
-			result.addAll(((ActorClass) acc).getIfPorts());
+			ActorClass ac = (ActorClass) acc;
+			do {
+				result.addAll(acc.getIfSPPs());
+				result.addAll(ac.getIfPorts());
+				ac = ac.getBase();
+			}
+			while (ac!=null);
 		}
 		else if (acc instanceof SubSystemClass) {
+			result.addAll(acc.getIfSPPs());
 			result.addAll(((SubSystemClass) acc).getRelayPorts());
 		}
 		else {
@@ -711,7 +724,13 @@ public class InterfaceItemSupport {
 					ActorContainerClass extRefClass = (ActorContainerClass) bo;
 					assert(extRefClass.getName().equals(refClass.getName())): "structure class names must match";
 
-					List<? extends InterfaceItem> extRefItems = getInterfaceItems(extRefClass);
+					List<InterfaceItem> extRefItems = getInterfaceItems(extRefClass);
+					List<InterfaceItem> intRefItems = new ArrayList<InterfaceItem>();
+					for (Shape ch : refShape.getChildren()) {
+						bo = featureProvider.getBusinessObjectForPictogramElement(ch);
+						if (bo instanceof InterfaceItem)
+							intRefItems.add((InterfaceItem)bo);
+					}
 					
 					int scaleX = refAcShape.getGraphicsAlgorithm().getWidth()/ActorContainerRefSupport.DEFAULT_SIZE_X;
 					int scaleY = refAcShape.getGraphicsAlgorithm().getHeight()/ActorContainerRefSupport.DEFAULT_SIZE_Y;
@@ -722,9 +741,11 @@ public class InterfaceItemSupport {
 								// this is an interface item, insert it
 
 								EObject ownObject = getOwnObject((InterfaceItem)bo, rs);
-								int x = childShape.getGraphicsAlgorithm().getX()/scaleX;
-								int y = childShape.getGraphicsAlgorithm().getY()/scaleY;
-								addItem(ownObject, x, y, (ContainerShape)refShape, featureProvider);
+								if (!intRefItems.contains(ownObject)) {
+									int x = childShape.getGraphicsAlgorithm().getX()/scaleX;
+									int y = childShape.getGraphicsAlgorithm().getY()/scaleY;
+									addItem(ownObject, x, y, refShape, featureProvider);
+								}
 							}
 						}
 					}

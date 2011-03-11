@@ -12,6 +12,9 @@
 
 package org.eclipse.etrice.ui.structure.support;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -218,17 +221,17 @@ public class ActorContainerRefSupport {
 					gaService.setLocationAndSize(invisibleRectangle,
 							context.getX()-(width/2+MARGIN), context.getY()-(height/2+MARGIN), width + 2*MARGIN, height + 2*MARGIN);
 	
-					Rectangle rect = gaService.createRectangle(invisibleRectangle);
-					rect.setForeground(lineColor);
-					rect.setBackground(manageColor(BACKGROUND));
-					rect.setLineWidth(LINE_WIDTH);
-					gaService.setLocationAndSize(rect, MARGIN, MARGIN, width, height);
+					Rectangle borderRect = gaService.createRectangle(invisibleRectangle);
+					borderRect.setForeground(lineColor);
+					borderRect.setBackground(manageColor(BACKGROUND));
+					borderRect.setLineWidth(LINE_WIDTH);
+					gaService.setLocationAndSize(borderRect, MARGIN, MARGIN, width, height);
 
-					addSubStructureHint(ar, rect, lineColor);
+					addSubStructureHint(ar, borderRect, lineColor);
 					
 					// anchor for layer connections
 					ChopboxAnchor anchor = peCreateService.createChopboxAnchor(containerShape);
-					anchor.setReferencedGraphicsAlgorithm(rect);
+					anchor.setReferencedGraphicsAlgorithm(borderRect);
 					
 					// create link and wire it
 					link(containerShape, ar);
@@ -454,6 +457,8 @@ public class ActorContainerRefSupport {
 				}
 				ActorContainerRef acr = (ActorContainerRef) bo;
 				
+				String reason = "";
+				
 				// check if ref still owned/inherited anymore
 				ContainerShape containerShape = (ContainerShape)context.getPictogramElement();
 				bo = getBusinessObjectForPictogramElement(containerShape);
@@ -468,7 +473,7 @@ public class ActorContainerRefSupport {
 					while (!found && ac!=null);
 					
 					if (!found)
-						return Reason.createTrueReason("Ref not inherited anymore");
+						reason += "Ref not inherited anymore\n";
 				}
 				
 				// check sub structure hint
@@ -476,12 +481,14 @@ public class ActorContainerRefSupport {
 					boolean hasSubStruct = hasSubStructure(acr);
 					GraphicsAlgorithm invisibleRect = containerShape.getGraphicsAlgorithm();
 					if (!invisibleRect.getGraphicsAlgorithmChildren().isEmpty()) {
-						
 						GraphicsAlgorithm borderRect = invisibleRect.getGraphicsAlgorithmChildren().get(0);
-						if (hasSubStruct && borderRect.getGraphicsAlgorithmChildren().isEmpty())
-							return Reason.createTrueReason("Ref has sub structure now");
-						if (!hasSubStruct && !borderRect.getGraphicsAlgorithmChildren().isEmpty())
-							return Reason.createTrueReason("Ref has no sub structure anymore");
+						if (!borderRect.getGraphicsAlgorithmChildren().isEmpty()) {
+							GraphicsAlgorithm hint = borderRect.getGraphicsAlgorithmChildren().get(0);
+							if (hasSubStruct && !hint.getLineVisible())
+								reason += "state has sub structure now\n";
+							if (!hasSubStruct && hint.getLineVisible())
+								reason += "state has no sub structure anymore\n";
+						}
 					}
 				}
 				
@@ -492,12 +499,33 @@ public class ActorContainerRefSupport {
 						if (bo instanceof ActorContainerRef) {
 							String label = RoomNameProvider.getRefLabelName((ActorContainerRef) bo);
 							if (!((Text)ga).getValue().equals(label))
-								return Reason.createTrueReason("Class name is out of date");
+								reason += "Class name is out of date\n";
 						}
 					}
 				}
 				
-				// TODOHRR: check interface ports and spps added to model not present in diagram
+				// check interface ports and spps added to model not present in diagram
+				{
+					ActorContainerClass acc = (acr instanceof ActorRef)?((ActorRef)acr).getType():((SubSystemRef)acr).getType();
+					List<InterfaceItem> interfaceItems = InterfaceItemSupport.getInterfaceItems(acc);
+					List<InterfaceItem> presentItems = new ArrayList<InterfaceItem>();
+					for (Shape child : containerShape.getChildren()) {
+						bo = getBusinessObjectForPictogramElement(child);
+						if (bo instanceof InterfaceItem) {
+							presentItems.add((InterfaceItem) bo);
+						}
+					}
+					int missing = 0;
+					for (InterfaceItem interfaceItem : interfaceItems) {
+						if (!presentItems.contains(interfaceItem))
+							++missing;
+					}
+					if (missing>0)
+						reason += missing+" interface item(s) missing\n";
+				}
+				
+				if (!reason.isEmpty())
+					return Reason.createTrueReason(reason.substring(0, reason.length()-1));
 				
 				return Reason.createFalseReason();
 			}
@@ -517,28 +545,16 @@ public class ActorContainerRefSupport {
 					return true;
 				}
 				
+				ActorContainerRef acr = (ActorContainerRef) bo;
 				{
-					ActorContainerRef acr = (ActorContainerRef) bo;
-					boolean hasSubStruct = hasSubStructure(acr);
-					if (hasSubStruct && containerShape.getGraphicsAlgorithm().getGraphicsAlgorithmChildren().isEmpty()) {
-						EObject parent = containerShape.getContainer().getLink().getBusinessObjects().get(0);
-						Color lineColor = manageColor(isInherited(acr, parent)?INHERITED_COLOR:LINE_COLOR);
-						addSubStructureHint(acr, (Rectangle) containerShape.getGraphicsAlgorithm(), lineColor);
-					}
-					else if (!hasSubStruct && !containerShape.getGraphicsAlgorithm().getGraphicsAlgorithmChildren().isEmpty())
-						containerShape.getGraphicsAlgorithm().getGraphicsAlgorithmChildren().clear();
-				}
-				
-				if (!containerShape.getChildren().isEmpty()) {
-					GraphicsAlgorithm ga = containerShape.getChildren().get(0).getGraphicsAlgorithm();
-					if (ga instanceof Text) {
-						if (bo instanceof ActorContainerRef) {
-							((Text)ga).setValue(RoomNameProvider.getRefLabelName((ActorContainerRef) bo));
-						}
+					GraphicsAlgorithm invisibleRect = containerShape.getGraphicsAlgorithm();
+					if (!invisibleRect.getGraphicsAlgorithmChildren().isEmpty()) {
+						GraphicsAlgorithm borderRect = invisibleRect.getGraphicsAlgorithmChildren().get(0);
+						updateSubStructureHint(acr, (Rectangle) borderRect);
 					}
 				}
 
-				// TODOHRR: add interface ports and spps added to model not present in diagram
+				InterfaceItemSupport.createRefItems(acr, containerShape, fp);
 				
 				return true;
 			}
@@ -724,23 +740,35 @@ public class ActorContainerRefSupport {
 		}
 		
 		private static void addSubStructureHint(ActorContainerRef acr,
-				Rectangle rect, Color lineColor) {
+				Rectangle borderRect, Color lineColor) {
 			
-			if (hasSubStructure(acr)) {
-				int x = rect.getWidth()-35;
-				int y = rect.getHeight()-30;
-				IGaService gaService = Graphiti.getGaService();
-				Rectangle hint1 = gaService.createRectangle(rect);
-				hint1.setForeground(lineColor);
-				hint1.setFilled(false);
-				hint1.setLineWidth(LINE_WIDTH);
-				gaService.setLocationAndSize(hint1, x+5, y, 20, 10);
-				Rectangle hint2 = gaService.createRectangle(rect);
-				hint2.setForeground(lineColor);
-				hint2.setFilled(false);
-				hint2.setLineWidth(LINE_WIDTH);
-				gaService.setLocationAndSize(hint2, x, y+15, 20, 10);
+			int x = borderRect.getWidth()-35;
+			int y = borderRect.getHeight()-30;
+			IGaService gaService = Graphiti.getGaService();
+			Rectangle hint1 = gaService.createRectangle(borderRect);
+			hint1.setForeground(lineColor);
+			hint1.setFilled(false);
+			hint1.setLineWidth(LINE_WIDTH);
+			gaService.setLocationAndSize(hint1, x+5, y, 20, 10);
+			Rectangle hint2 = gaService.createRectangle(borderRect);
+			hint2.setForeground(lineColor);
+			hint2.setFilled(false);
+			hint2.setLineWidth(LINE_WIDTH);
+			gaService.setLocationAndSize(hint2, x, y+15, 20, 10);
+
+			if (!hasSubStructure(acr)) {
+				hint1.setLineVisible(false);
+				hint2.setLineVisible(false);
 			}
+		}
+		
+		protected static void updateSubStructureHint(ActorContainerRef acr, GraphicsAlgorithm borderRect) {
+			
+			boolean hasSubStructure = hasSubStructure(acr);
+			GraphicsAlgorithm hint = borderRect.getGraphicsAlgorithmChildren().get(0);
+			hint.setLineVisible(hasSubStructure);
+			hint = borderRect.getGraphicsAlgorithmChildren().get(1);
+			hint.setLineVisible(hasSubStructure);
 		}
 	}
 	
