@@ -167,11 +167,7 @@ public abstract class AbstractPropertyDialog extends FormDialog {
 						}
 					}
 				}
-				validationLabel.setVisible(!ok);
-				validationText.setVisible(!ok);
-				Button okButton = getButton(IDialogConstants.OK_ID);
-				if (okButton!=null)
-					okButton.setEnabled(ok);
+				updateValidationFeedback(ok);
 			}
 		});
 	}
@@ -185,16 +181,24 @@ public abstract class AbstractPropertyDialog extends FormDialog {
 
 		Object value = aggregateValidationStatus.getValue();
 		if (value instanceof IStatus) {
-			boolean visible = !((IStatus) value).isOK();
-			validationLabel.setVisible(visible);
-			validationText.setVisible(visible);
-			
-			Button okButton = getButton(IDialogConstants.OK_ID);
-			if (okButton!=null)
-				okButton.setEnabled(((IStatus) value).isOK());
+			boolean ok = ((IStatus) value).isOK();
+			updateValidationFeedback(ok);
 		}
 
 		return bar;
+	}
+
+	protected void updateValidationFeedback(boolean ok) {
+		validationLabel.setVisible(!ok);
+		validationText.setVisible(!ok);
+		
+		Button okButton = getButton(IDialogConstants.OK_ID);
+		if (okButton!=null)
+			okButton.setEnabled(ok);
+	}
+	
+	protected void setValidationText (String text) {
+		validationText.setText(text);
 	}
 	
 	protected abstract void createContent(IManagedForm mform, Composite body,

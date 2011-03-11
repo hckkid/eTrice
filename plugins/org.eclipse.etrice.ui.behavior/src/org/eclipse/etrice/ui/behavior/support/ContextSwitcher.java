@@ -77,10 +77,15 @@ public class ContextSwitcher {
 	
 	private static void activateTransitions(Diagram diagram) {
 		for (Connection conn : diagram.getConnections()) {
-			boolean visible = conn.getStart().getParent().isVisible();
-			conn.setVisible(visible);
-			for (ConnectionDecorator dec : conn.getConnectionDecorators()) {
-				dec.setVisible(visible);
+			if (conn.getStart()!=null) {
+				boolean visible = conn.getStart().getParent().isVisible();
+				conn.setVisible(visible);
+				for (ConnectionDecorator dec : conn.getConnectionDecorators()) {
+					dec.setVisible(visible);
+				}
+			}
+			else {
+				assert(false): "internal error";
 			}
 		}
 	}
