@@ -20,7 +20,6 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorContainerRef;
-import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.Binding;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.Port;
@@ -454,14 +453,14 @@ public class StructureClassSupport {
 				
 				for (Shape childShape : refAcShape.getChildren()) {
 					bo = featureProvider.getBusinessObjectForPictogramElement(childShape);
-					if (bo instanceof Port) {
-						Port ownObject = (Port) SupportUtil.getOwnObject((Port)bo, rs);
+					if (bo instanceof InterfaceItem) {
+						InterfaceItem ownObject = (InterfaceItem) SupportUtil.getOwnObject((InterfaceItem)bo, rs);
 						int x = childShape.getGraphicsAlgorithm().getX()/scaleX;
 						int y = childShape.getGraphicsAlgorithm().getY()/scaleY;
 						SupportUtil.addItem(ownObject, x/scaleX, y/scaleY, acShape, ifitem2anchor, featureProvider);
 					}
-					else if (bo instanceof ActorRef) {
-						ActorContainerRef ownObject = (ActorContainerRef) SupportUtil.getOwnObject((ActorRef)bo, rs);
+					else if (bo instanceof ActorContainerRef) {
+						ActorContainerRef ownObject = (ActorContainerRef) SupportUtil.getOwnObject((ActorContainerRef)bo, rs);
 						int x = childShape.getGraphicsAlgorithm().getX()/scaleX;
 						int y = childShape.getGraphicsAlgorithm().getY()/scaleY;
 						SupportUtil.addItem(ownObject, x/scaleX, y/scaleY, acShape, ifitem2anchor, featureProvider);
