@@ -11,6 +11,7 @@ package org.eclipse.etrice.core.room.util;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorContainerRef;
 import org.eclipse.etrice.core.room.Binding;
@@ -28,7 +29,7 @@ import org.eclipse.etrice.core.room.SubSystemClass;
  */
 public class RoomHelpers {
 	
-	public static List<InterfaceItem> getInterfaceItems(StructureClass sc) {
+	public static List<InterfaceItem> getInterfaceItems(StructureClass sc, boolean includeInherited) {
 		ArrayList<InterfaceItem> result = new ArrayList<InterfaceItem>();
 		
 		if (sc instanceof ActorClass) {
@@ -38,7 +39,7 @@ public class RoomHelpers {
 				result.addAll(ac.getIfPorts());
 				ac = ac.getBase();
 			}
-			while (ac!=null);
+			while (includeInherited && ac!=null);
 		}
 		else if (sc instanceof SubSystemClass) {
 			result.addAll(((SubSystemClass) sc).getIfSPPs());
@@ -54,7 +55,7 @@ public class RoomHelpers {
 		return result;
 	}
 
-	public static List<ActorContainerRef> getRefs(StructureClass sc) {
+	public static List<ActorContainerRef> getRefs(StructureClass sc, boolean includeInherited) {
 		ArrayList<ActorContainerRef> result = new ArrayList<ActorContainerRef>();
 
 		if (sc instanceof ActorClass) {
@@ -63,7 +64,7 @@ public class RoomHelpers {
 				result.addAll(ac.getActorRefs());
 				ac = ac.getBase();
 			}
-			while (ac!=null);
+			while (includeInherited && ac!=null);
 		}
 		else if (sc instanceof SubSystemClass) {
 			result.addAll(((SubSystemClass) sc).getActorRefs());
@@ -78,7 +79,7 @@ public class RoomHelpers {
 		return result;
 	}
 	
-	public static List<Binding> getBindings(StructureClass sc) {
+	public static List<Binding> getBindings(StructureClass sc, boolean includeInherited) {
 		ArrayList<Binding> result = new ArrayList<Binding>();
 
 		if (sc instanceof ActorClass) {
@@ -87,7 +88,7 @@ public class RoomHelpers {
 				result.addAll(ac.getBindings());
 				ac = ac.getBase();
 			}
-			while (ac!=null);
+			while (includeInherited && ac!=null);
 		}
 		else if (sc instanceof SubSystemClass) {
 			result.addAll(((SubSystemClass) sc).getBindings());
@@ -102,7 +103,7 @@ public class RoomHelpers {
 		return result;
 	}
 	
-	public static List<LayerConnection> getConnections(StructureClass sc) {
+	public static List<LayerConnection> getConnections(StructureClass sc, boolean includeInherited) {
 		ArrayList<LayerConnection> result = new ArrayList<LayerConnection>();
 
 		if (sc instanceof ActorClass) {
@@ -111,7 +112,7 @@ public class RoomHelpers {
 				result.addAll(ac.getConnections());
 				ac = ac.getBase();
 			}
-			while (ac!=null);
+			while (includeInherited && ac!=null);
 		}
 		else if (sc instanceof SubSystemClass) {
 			result.addAll(((SubSystemClass) sc).getConnections());
@@ -123,6 +124,17 @@ public class RoomHelpers {
 			assert(false): "unexpected sub type";
 		}
 
+		return result;
+	}
+	
+	public static List<EObject> getContainedObjects(StructureClass sc) {
+		ArrayList<EObject> result = new ArrayList<EObject>();
+		
+		result.addAll(getInterfaceItems(sc, true));
+		result.addAll(getRefs(sc, true));
+		result.addAll(getBindings(sc, true));
+		result.addAll(getConnections(sc, true));
+		
 		return result;
 	}
 }
