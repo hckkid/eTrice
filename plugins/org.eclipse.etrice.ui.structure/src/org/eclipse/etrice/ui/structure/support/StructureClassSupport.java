@@ -23,6 +23,7 @@ import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorContainerRef;
 import org.eclipse.etrice.core.room.Binding;
 import org.eclipse.etrice.core.room.InterfaceItem;
+import org.eclipse.etrice.core.room.LayerConnection;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.StructureClass;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
@@ -223,11 +224,64 @@ public class StructureClassSupport {
 				}
 				
 				StructureClass sc = (StructureClass) bo;
+				ContainerShape shape = (ContainerShape) context.getPictogramElement();
 				
-				List<InterfaceItem> interfaceItems = RoomHelpers.getInterfaceItems(sc);
+				String reason = "";
+				int missing = 0;
 				
-				// TODOHRR: check for refs added in model not present in diagram
-				// also inherited
+				// check for interface items added in model not present in diagram (including inherited)
+				{
+					List<InterfaceItem> expectedItems = RoomHelpers.getInterfaceItems(sc);
+					List<InterfaceItem> presentItems = SupportUtil.getInterfaceItems(shape, fp);
+					for (InterfaceItem interfaceItem : expectedItems) {
+						if (!presentItems.contains(interfaceItem))
+							++missing;
+					}
+					if (missing>0)
+						reason += missing+" missing interface items\n";
+				}
+				
+				// check for refs added in model not present in diagram (including inherited)
+				{
+					missing = 0;
+					List<ActorContainerRef> expectedRefs = RoomHelpers.getRefs(sc);
+					List<ActorContainerRef> presentRefs = SupportUtil.getRefs(shape, fp);
+					for (ActorContainerRef actorContainerRef : expectedRefs) {
+						if (!presentRefs.contains(actorContainerRef))
+							++missing;
+					}
+					if (missing>0)
+						reason += missing+" missing refs\n";
+				}
+
+				// check for bindings added in model not present in diagram (including inherited)
+				{
+					missing = 0;
+					List<Binding> expectedBindings = RoomHelpers.getBindings(sc);
+					List<Binding> presentBindings = SupportUtil.getBindings(getDiagram(), fp);
+					for (Binding binding : expectedBindings) {
+						if (!presentBindings.contains(binding))
+							++missing;
+					}
+					if (missing>0)
+						reason += missing+" missing bindings\n";
+				}
+
+				// check for layer connections added in model not present in diagram (including inherited)
+				{
+					missing = 0;
+					List<LayerConnection> expectedBindings = RoomHelpers.getConnections(sc);
+					List<LayerConnection> presentBindings = SupportUtil.getConnections(getDiagram(), fp);
+					for (LayerConnection binding : expectedBindings) {
+						if (!presentBindings.contains(binding))
+							++missing;
+					}
+					if (missing>0)
+						reason += missing+" missing layer connections\n";
+				}
+				
+				if (!reason.isEmpty())
+					return Reason.createTrueReason(reason.substring(0, reason.length()-1));
 				
 				return Reason.createFalseReason();
 			}

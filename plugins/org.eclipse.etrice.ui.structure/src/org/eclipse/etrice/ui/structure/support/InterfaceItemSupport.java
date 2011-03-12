@@ -12,7 +12,6 @@
 
 package org.eclipse.etrice.ui.structure.support;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
@@ -699,12 +698,7 @@ public class InterfaceItemSupport {
 					assert(extRefClass.getName().equals(refClass.getName())): "structure class names must match";
 
 					List<InterfaceItem> extRefItems = RoomHelpers.getInterfaceItems(extRefClass);
-					List<InterfaceItem> intRefItems = new ArrayList<InterfaceItem>();
-					for (Shape ch : refShape.getChildren()) {
-						bo = featureProvider.getBusinessObjectForPictogramElement(ch);
-						if (bo instanceof InterfaceItem)
-							intRefItems.add((InterfaceItem)bo);
-					}
+					List<InterfaceItem> intRefItems = SupportUtil.getInterfaceItems(refShape, featureProvider);
 					
 					int scaleX = refAcShape.getGraphicsAlgorithm().getWidth()/ActorContainerRefSupport.DEFAULT_SIZE_X;
 					int scaleY = refAcShape.getGraphicsAlgorithm().getHeight()/ActorContainerRefSupport.DEFAULT_SIZE_Y;

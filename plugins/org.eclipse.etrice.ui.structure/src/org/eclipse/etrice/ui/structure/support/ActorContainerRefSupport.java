@@ -12,7 +12,6 @@
 
 package org.eclipse.etrice.ui.structure.support;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
@@ -457,7 +456,7 @@ public class ActorContainerRefSupport {
 					return Reason.createTrueReason("Ref deleted from model");
 				}
 				ActorContainerRef acr = (ActorContainerRef) bo;
-				
+
 				String reason = "";
 				
 				// check if ref still owned/inherited anymore
@@ -509,13 +508,7 @@ public class ActorContainerRefSupport {
 				{
 					ActorContainerClass acc = (acr instanceof ActorRef)?((ActorRef)acr).getType():((SubSystemRef)acr).getType();
 					List<InterfaceItem> interfaceItems = RoomHelpers.getInterfaceItems(acc);
-					List<InterfaceItem> presentItems = new ArrayList<InterfaceItem>();
-					for (Shape child : containerShape.getChildren()) {
-						bo = getBusinessObjectForPictogramElement(child);
-						if (bo instanceof InterfaceItem) {
-							presentItems.add((InterfaceItem) bo);
-						}
-					}
+					List<InterfaceItem> presentItems = SupportUtil.getInterfaceItems(containerShape, fp);
 					int missing = 0;
 					for (InterfaceItem interfaceItem : interfaceItems) {
 						if (!presentItems.contains(interfaceItem))

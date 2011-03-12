@@ -8,6 +8,8 @@
 
 package org.eclipse.etrice.ui.structure.support;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
@@ -29,7 +31,9 @@ import org.eclipse.graphiti.features.IFeatureProvider;
 import org.eclipse.graphiti.features.context.impl.AddConnectionContext;
 import org.eclipse.graphiti.features.context.impl.AddContext;
 import org.eclipse.graphiti.mm.pictograms.Anchor;
+import org.eclipse.graphiti.mm.pictograms.Connection;
 import org.eclipse.graphiti.mm.pictograms.ContainerShape;
+import org.eclipse.graphiti.mm.pictograms.Diagram;
 import org.eclipse.graphiti.mm.pictograms.PictogramElement;
 import org.eclipse.graphiti.mm.pictograms.Shape;
 
@@ -51,7 +55,7 @@ public class SupportUtil {
 	}
 	
 	public static ContainerShape addItem(EObject obj, int x, int y, ContainerShape container, IFeatureProvider fp) {
-		return addItem(obj, x, y, container, fp);
+		return addItem(obj, x, y, container, null, fp);
 	}
 	
 	public static ContainerShape addItem(EObject obj, int x, int y, ContainerShape container, Map<String,Anchor> ifitem2anchor, IFeatureProvider fp) {
@@ -172,4 +176,45 @@ public class SupportUtil {
 		return sppt.getRef().getName()+SEP+sppt.getService().getName();
 	}
 
+	public static List<InterfaceItem> getInterfaceItems(ContainerShape shape, IFeatureProvider fp) {
+		List<InterfaceItem> items = new ArrayList<InterfaceItem>();
+		for (Shape ch : shape.getChildren()) {
+			Object bo = fp.getBusinessObjectForPictogramElement(ch);
+			if (bo instanceof InterfaceItem)
+				items.add((InterfaceItem)bo);
+		}
+		return items;
+	}
+
+	public static List<ActorContainerRef> getRefs(ContainerShape shape, IFeatureProvider fp) {
+		List<ActorContainerRef> refs = new ArrayList<ActorContainerRef>();
+		for (Shape ch : shape.getChildren()) {
+			Object bo = fp.getBusinessObjectForPictogramElement(ch);
+			if (bo instanceof ActorContainerRef)
+				refs.add((ActorContainerRef)bo);
+		}
+		return refs;
+	}
+
+	public static List<Binding> getBindings(Diagram diag, IFeatureProvider fp) {
+		List<Binding> bindings = new ArrayList<Binding>();
+		
+		for (Connection conn : diag.getConnections()) {
+			Object bo = fp.getBusinessObjectForPictogramElement(conn);
+			if (bo instanceof Binding)
+				bindings.add((Binding)bo);
+		}
+		return bindings;
+	}
+
+	public static List<LayerConnection> getConnections(Diagram diag, IFeatureProvider fp) {
+		List<LayerConnection> bindings = new ArrayList<LayerConnection>();
+		
+		for (Connection conn : diag.getConnections()) {
+			Object bo = fp.getBusinessObjectForPictogramElement(conn);
+			if (bo instanceof LayerConnection)
+				bindings.add((LayerConnection)bo);
+		}
+		return bindings;
+	}
 }
