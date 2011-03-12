@@ -70,7 +70,7 @@ public class SupportUtil {
 		
 		if (ifitem2anchor!=null) {
 			if (obj instanceof ActorContainerRef)
-				getAnchors((ActorContainerRef)obj, container, ifitem2anchor);
+				getAnchors((ActorContainerRef)obj, newShape, ifitem2anchor);
 			else if (obj instanceof InterfaceItem) {
 				assert(!newShape.getAnchors().isEmpty()): "interface item must have an anchor";
 				ifitem2anchor.put(SEP+((InterfaceItem)obj).getName(), newShape.getAnchors().get(0));

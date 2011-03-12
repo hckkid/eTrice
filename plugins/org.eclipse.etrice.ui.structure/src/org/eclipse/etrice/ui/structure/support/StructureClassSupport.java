@@ -508,22 +508,23 @@ public class StructureClassSupport {
 				StructureClass extRefClass = (StructureClass) bo;
 				assert(extRefClass.getName().equals(ac.getName())): "actor class names must match";
 				
-				int scaleX = refAcShape.getGraphicsAlgorithm().getWidth()/StructureClassSupport.DEFAULT_SIZE_X;
-				int scaleY = refAcShape.getGraphicsAlgorithm().getHeight()/StructureClassSupport.DEFAULT_SIZE_Y;
+				int scaleX = refAcShape.getGraphicsAlgorithm().getWidth()/acShape.getGraphicsAlgorithm().getWidth();
+				int scaleY = refAcShape.getGraphicsAlgorithm().getHeight()/acShape.getGraphicsAlgorithm().getHeight();
 				
 				for (Shape childShape : refAcShape.getChildren()) {
 					bo = featureProvider.getBusinessObjectForPictogramElement(childShape);
+					GraphicsAlgorithm ga = childShape.getGraphicsAlgorithm();
 					if (bo instanceof InterfaceItem) {
 						InterfaceItem ownObject = (InterfaceItem) SupportUtil.getOwnObject((InterfaceItem)bo, rs);
-						int x = childShape.getGraphicsAlgorithm().getX()/scaleX;
-						int y = childShape.getGraphicsAlgorithm().getY()/scaleY;
-						SupportUtil.addItem(ownObject, x/scaleX, y/scaleY, acShape, ifitem2anchor, featureProvider);
+						int x = (ga.getX()+ga.getWidth()/2)/scaleX;
+						int y = (ga.getY()+ga.getHeight()/2)/scaleY;
+						SupportUtil.addItem(ownObject, x, y, acShape, ifitem2anchor, featureProvider);
 					}
 					else if (bo instanceof ActorContainerRef) {
 						ActorContainerRef ownObject = (ActorContainerRef) SupportUtil.getOwnObject((ActorContainerRef)bo, rs);
-						int x = childShape.getGraphicsAlgorithm().getX()/scaleX;
-						int y = childShape.getGraphicsAlgorithm().getY()/scaleY;
-						SupportUtil.addItem(ownObject, x/scaleX, y/scaleY, acShape, ifitem2anchor, featureProvider);
+						int x = (ga.getX()+ga.getWidth()/2)/scaleX;
+						int y = (ga.getY()+ga.getHeight()/2)/scaleY;
+						SupportUtil.addItem(ownObject, x, y, acShape, ifitem2anchor, featureProvider);
 					}
 				}
 				for (Connection conn : refDiag.getConnections()) {
