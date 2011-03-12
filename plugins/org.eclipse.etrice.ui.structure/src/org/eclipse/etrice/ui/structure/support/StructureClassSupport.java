@@ -12,6 +12,8 @@
 
 package org.eclipse.etrice.ui.structure.support;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -209,6 +211,9 @@ public class StructureClassSupport {
 
 			@Override
 			public boolean canUpdate(IUpdateContext context) {
+				if (context.getPictogramElement() instanceof Diagram)
+					return false;
+				
 				Object bo = getBusinessObjectForPictogramElement(context.getPictogramElement());
 				if (bo instanceof EObject && ((EObject)bo).eIsProxy())
 					return true;
@@ -231,7 +236,7 @@ public class StructureClassSupport {
 				
 				// check for interface items added in model not present in diagram (including inherited)
 				{
-					List<InterfaceItem> expectedItems = RoomHelpers.getInterfaceItems(sc);
+					List<InterfaceItem> expectedItems = RoomHelpers.getInterfaceItems(sc, true);
 					List<InterfaceItem> presentItems = SupportUtil.getInterfaceItems(shape, fp);
 					for (InterfaceItem interfaceItem : expectedItems) {
 						if (!presentItems.contains(interfaceItem))
@@ -244,7 +249,7 @@ public class StructureClassSupport {
 				// check for refs added in model not present in diagram (including inherited)
 				{
 					missing = 0;
-					List<ActorContainerRef> expectedRefs = RoomHelpers.getRefs(sc);
+					List<ActorContainerRef> expectedRefs = RoomHelpers.getRefs(sc, true);
 					List<ActorContainerRef> presentRefs = SupportUtil.getRefs(shape, fp);
 					for (ActorContainerRef actorContainerRef : expectedRefs) {
 						if (!presentRefs.contains(actorContainerRef))
@@ -257,7 +262,7 @@ public class StructureClassSupport {
 				// check for bindings added in model not present in diagram (including inherited)
 				{
 					missing = 0;
-					List<Binding> expectedBindings = RoomHelpers.getBindings(sc);
+					List<Binding> expectedBindings = RoomHelpers.getBindings(sc, true);
 					List<Binding> presentBindings = SupportUtil.getBindings(getDiagram(), fp);
 					for (Binding binding : expectedBindings) {
 						if (!presentBindings.contains(binding))
@@ -270,7 +275,7 @@ public class StructureClassSupport {
 				// check for layer connections added in model not present in diagram (including inherited)
 				{
 					missing = 0;
-					List<LayerConnection> expectedBindings = RoomHelpers.getConnections(sc);
+					List<LayerConnection> expectedBindings = RoomHelpers.getConnections(sc, true);
 					List<LayerConnection> presentBindings = SupportUtil.getConnections(getDiagram(), fp);
 					for (LayerConnection binding : expectedBindings) {
 						if (!presentBindings.contains(binding))
@@ -301,8 +306,9 @@ public class StructureClassSupport {
 					return true;
 				}
 
-				// TODOHRR: check for refs added in model not present in diagram
-				// also add bindings and layer connections
+				StructureClass sc = (StructureClass) bo;
+				HashMap<String, Anchor> ifitem2anchor = new HashMap<String, Anchor>();
+				addMissingItems(sc, containerShape, ifitem2anchor, fp);
 				
 				return true;
 			}
@@ -493,17 +499,20 @@ public class StructureClassSupport {
 		return tbp;
 	}
 
-	public static void addInheritedItems(ActorClass ac, ContainerShape acShape, Map<String,Anchor> ifitem2anchor, IFeatureProvider featureProvider) {
+	public static void addInheritedItems(ActorClass ac, ContainerShape acShape, Map<String,Anchor> ifitem2anchor, IFeatureProvider fp) {
 		
 		// we don't have to recurse since the base class diagram already contains all inherited items
+		Diagram diag = (Diagram) acShape.eContainer();
+		ResourceSet rs = ac.eResource().getResourceSet();
+		List<InterfaceItem> presentIfItems = SupportUtil.getInterfaceItems(acShape, fp);
+		List<ActorContainerRef> presentRefs = SupportUtil.getRefs(acShape, fp);
+		List<Binding> presentBindings = SupportUtil.getBindings(diag, fp);
+		List<LayerConnection> presentConnections = SupportUtil.getConnections(diag, fp);
 		
 		Diagram refDiag = new DiagramAccess().getDiagram(ac);
-
-		ResourceSet rs = ac.eResource().getResourceSet();
-		
 		if (!refDiag.getChildren().isEmpty()) {
 			ContainerShape refAcShape = (ContainerShape) refDiag.getChildren().get(0);
-			Object bo = featureProvider.getBusinessObjectForPictogramElement(refAcShape);
+			Object bo = fp.getBusinessObjectForPictogramElement(refAcShape);
 			if (bo instanceof StructureClass) {
 				StructureClass extRefClass = (StructureClass) bo;
 				assert(extRefClass.getName().equals(ac.getName())): "actor class names must match";
@@ -512,28 +521,101 @@ public class StructureClassSupport {
 				int scaleY = refAcShape.getGraphicsAlgorithm().getHeight()/acShape.getGraphicsAlgorithm().getHeight();
 				
 				for (Shape childShape : refAcShape.getChildren()) {
-					bo = featureProvider.getBusinessObjectForPictogramElement(childShape);
+					bo = fp.getBusinessObjectForPictogramElement(childShape);
 					GraphicsAlgorithm ga = childShape.getGraphicsAlgorithm();
-					if (bo instanceof InterfaceItem) {
-						InterfaceItem ownObject = (InterfaceItem) SupportUtil.getOwnObject((InterfaceItem)bo, rs);
-						int x = (ga.getX()+ga.getWidth()/2)/scaleX;
-						int y = (ga.getY()+ga.getHeight()/2)/scaleY;
-						SupportUtil.addItem(ownObject, x, y, acShape, ifitem2anchor, featureProvider);
-					}
-					else if (bo instanceof ActorContainerRef) {
-						ActorContainerRef ownObject = (ActorContainerRef) SupportUtil.getOwnObject((ActorContainerRef)bo, rs);
-						int x = (ga.getX()+ga.getWidth()/2)/scaleX;
-						int y = (ga.getY()+ga.getHeight()/2)/scaleY;
-						SupportUtil.addItem(ownObject, x, y, acShape, ifitem2anchor, featureProvider);
+					if (bo instanceof InterfaceItem || bo instanceof ActorContainerRef) {
+						EObject ownObject = SupportUtil.getOwnObject((EObject)bo, rs);
+						if (!presentIfItems.contains(ownObject) && !presentRefs.contains(ownObject)) {
+							int x = (ga.getX()+ga.getWidth()/2)/scaleX;
+							int y = (ga.getY()+ga.getHeight()/2)/scaleY;
+							SupportUtil.addItem(ownObject, x, y, acShape, ifitem2anchor, fp);
+						}
 					}
 				}
 				for (Connection conn : refDiag.getConnections()) {
-					bo = featureProvider.getBusinessObjectForPictogramElement(conn);
+					bo = fp.getBusinessObjectForPictogramElement(conn);
 					if (bo instanceof Binding) {
 						Binding bind = (Binding) SupportUtil.getOwnObject((Binding)bo, rs);
-						SupportUtil.addBinding(bind, featureProvider, ifitem2anchor);
+						if (!presentBindings.contains(bind))
+							SupportUtil.addBinding(bind, fp, ifitem2anchor);
+					}
+					else if (bo instanceof LayerConnection) {
+						LayerConnection lc = (LayerConnection) SupportUtil.getOwnObject((LayerConnection)bo, rs);
+						if (!presentConnections.contains(lc))
+							SupportUtil.addLayerConnection(lc, fp, ifitem2anchor);
 					}
 				}
+			}
+		}
+	}
+	
+	public static void addMissingItems(StructureClass sc, ContainerShape acShape, Map<String,Anchor> ifitem2anchor, IFeatureProvider fp) {
+
+		int width = acShape.getGraphicsAlgorithm().getGraphicsAlgorithmChildren().get(0).getWidth();
+
+		// interface items
+		{
+			List<InterfaceItem> present = SupportUtil.getInterfaceItems(acShape, fp);
+			{
+				List<InterfaceItem> expected = RoomHelpers.getInterfaceItems(sc, false);
+				List<InterfaceItem> items = new ArrayList<InterfaceItem>();
+				for (InterfaceItem item : expected) {
+					if (!present.contains(item))
+						items.add(item);
+				}
+				SupportUtil.addInterfaceItems(items, acShape, width, fp, ifitem2anchor);
+			}
+			if (sc instanceof ActorClass) {
+				
+				List<Port> ports = new ArrayList<Port>();
+				for (Port port : ((ActorClass) sc).getIntPorts()) {
+					if (!present.contains(port))
+						ports.add(port);
+				}
+				SupportUtil.addPorts(ports, acShape, width, fp, ifitem2anchor);
+			}
+		}
+		
+		// actor container references
+		{
+			List<ActorContainerRef> present = SupportUtil.getRefs(acShape, fp);
+			List<ActorContainerRef> expected = RoomHelpers.getRefs(sc, false);
+			List<ActorContainerRef> items = new ArrayList<ActorContainerRef>();
+			for (ActorContainerRef item : expected) {
+				if (!present.contains(item))
+					items.add(item);
+			}
+        	SupportUtil.addRefItems(items, acShape, width, fp, ifitem2anchor);
+		}
+		
+		// base class items
+		if (sc instanceof ActorClass) {
+			ActorClass base = ((ActorClass) sc).getBase();
+			
+			// add inherited ports and refs and bindings (and preserve layout)
+			if (base!=null)
+				StructureClassSupport.addInheritedItems(base, acShape, ifitem2anchor, fp);
+		}
+		
+		Diagram diag = (Diagram) acShape.eContainer();
+		
+		// bindings
+		{
+			List<Binding> present = SupportUtil.getBindings(diag, fp);
+			List<Binding> expected = RoomHelpers.getBindings(sc, false);
+			for (Binding bind : expected) {
+				if (!present.contains(bind))
+					SupportUtil.addBinding(bind, fp, ifitem2anchor);
+			}
+		}
+		
+		// layer connections
+		{
+			List<LayerConnection> present = SupportUtil.getConnections(diag, fp);
+			List<LayerConnection> expected = RoomHelpers.getConnections(sc, false);
+			for (LayerConnection lc : expected) {
+				if (!present.contains(lc))
+					SupportUtil.addLayerConnection(lc, fp, ifitem2anchor);
 			}
 		}
 	}

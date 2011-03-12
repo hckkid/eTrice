@@ -389,9 +389,9 @@ public class ActorContainerRefSupport {
 			
 		}
 		
-		private static class DrillDownFeature extends AbstractCustomFeature {
+		private static class OpenRefStructureDiagram extends AbstractCustomFeature {
 
-			public DrillDownFeature(IFeatureProvider fp) {
+			public OpenRefStructureDiagram(IFeatureProvider fp) {
 				super(fp);
 			}
 
@@ -507,7 +507,7 @@ public class ActorContainerRefSupport {
 				// check interface ports and spps added to model not present in diagram
 				{
 					ActorContainerClass acc = (acr instanceof ActorRef)?((ActorRef)acr).getType():((SubSystemRef)acr).getType();
-					List<InterfaceItem> interfaceItems = RoomHelpers.getInterfaceItems(acc);
+					List<InterfaceItem> interfaceItems = RoomHelpers.getInterfaceItems(acc, true);
 					List<InterfaceItem> presentItems = SupportUtil.getInterfaceItems(containerShape, fp);
 					int missing = 0;
 					for (InterfaceItem interfaceItem : interfaceItems) {
@@ -714,7 +714,7 @@ public class ActorContainerRefSupport {
 		
 		@Override
 		public ICustomFeature[] getCustomFeatures(ICustomContext context) {
-			return new ICustomFeature[] { new PropertyFeature(fp), new DrillDownFeature(fp) };
+			return new ICustomFeature[] { new PropertyFeature(fp), new OpenRefStructureDiagram(fp) };
 		}
 		
 		protected static boolean isInherited(ActorContainerRef ar, EObject parent) {
@@ -791,7 +791,7 @@ public class ActorContainerRefSupport {
 		
 		@Override
 		public ICustomFeature getDoubleClickFeature(IDoubleClickContext context) {
-			return new FeatureProvider.DrillDownFeature(getDiagramTypeProvider().getFeatureProvider());
+			return new FeatureProvider.OpenRefStructureDiagram(getDiagramTypeProvider().getFeatureProvider());
 		}
 		
 		@Override

@@ -680,7 +680,7 @@ public class InterfaceItemSupport {
 	public static void createRefItems(ActorContainerRef acr, ContainerShape refShape, IFeatureProvider featureProvider) {
 		
 		ActorContainerClass refClass = (acr instanceof ActorRef)?((ActorRef)acr).getType():((SubSystemRef)acr).getType();
-		List<? extends InterfaceItem> refItems = RoomHelpers.getInterfaceItems(refClass);
+		List<? extends InterfaceItem> refItems = RoomHelpers.getInterfaceItems(refClass, true);
 		
 		if (refShape!=null && refClass!=null &&!refItems.isEmpty()) {
 			
@@ -697,7 +697,7 @@ public class InterfaceItemSupport {
 					ActorContainerClass extRefClass = (ActorContainerClass) bo;
 					assert(extRefClass.getName().equals(refClass.getName())): "structure class names must match";
 
-					List<InterfaceItem> extRefItems = RoomHelpers.getInterfaceItems(extRefClass);
+					List<InterfaceItem> extRefItems = RoomHelpers.getInterfaceItems(extRefClass, true);
 					List<InterfaceItem> intRefItems = SupportUtil.getInterfaceItems(refShape, featureProvider);
 					
 					int scaleX = refAcShape.getGraphicsAlgorithm().getWidth()/ActorContainerRefSupport.DEFAULT_SIZE_X;
@@ -725,22 +725,22 @@ public class InterfaceItemSupport {
 		}
 	}
 
-	public static void createInheritedRefItems(ActorContainerRef acr, ContainerShape arShape, IFeatureProvider featureProvider) {
+	protected static void createInheritedRefItems(ActorContainerRef acr, ContainerShape arShape, IFeatureProvider fp) {
 		
 		ActorClass ac = (ActorClass) acr.eContainer();
-		Diagram refDiag = new DiagramAccess().getDiagram(ac);
-
 		ResourceSet rs = ac.eResource().getResourceSet();
-		
+		List<InterfaceItem> presentObjects = SupportUtil.getInterfaceItems(arShape, fp);
+
+		Diagram refDiag = new DiagramAccess().getDiagram(ac);
 		if (!refDiag.getChildren().isEmpty()) {
 			ContainerShape refAcShape = (ContainerShape) refDiag.getChildren().get(0);
-			Object bo = featureProvider.getBusinessObjectForPictogramElement(refAcShape);
+			Object bo = fp.getBusinessObjectForPictogramElement(refAcShape);
 			if (bo instanceof ActorClass) {
 				ActorClass extRefClass = (ActorClass) bo;
 				assert(extRefClass.getName().equals(ac.getName())): "actor class names must match";
 				
 				for (Shape childShape : refAcShape.getChildren()) {
-					bo = featureProvider.getBusinessObjectForPictogramElement(childShape);
+					bo = fp.getBusinessObjectForPictogramElement(childShape);
 					if (bo instanceof ActorRef) {
 						EObject ownObject = SupportUtil.getOwnObject((ActorRef)bo, rs);
 						if (ownObject==acr) {
@@ -749,12 +749,14 @@ public class InterfaceItemSupport {
 							
 							// add items of actor ref
 							for (Shape grandChildShape : ((ContainerShape)childShape).getChildren()) {
-								bo = featureProvider.getBusinessObjectForPictogramElement(grandChildShape);
+								bo = fp.getBusinessObjectForPictogramElement(grandChildShape);
 								if (bo instanceof InterfaceItem) {
 									ownObject = SupportUtil.getOwnObject((Port)bo, rs);
-									int x = ITEM_SIZE_SMALL/2 + grandChildShape.getGraphicsAlgorithm().getX()/subScaleX;
-									int y = ITEM_SIZE_SMALL/2 + grandChildShape.getGraphicsAlgorithm().getY()/subScaleY;
-									SupportUtil.addItem(ownObject, x, y, arShape, featureProvider);
+									if (!presentObjects.contains(ownObject)) {
+										int x = ITEM_SIZE_SMALL/2 + grandChildShape.getGraphicsAlgorithm().getX()/subScaleX;
+										int y = ITEM_SIZE_SMALL/2 + grandChildShape.getGraphicsAlgorithm().getY()/subScaleY;
+										SupportUtil.addItem(ownObject, x, y, arShape, fp);
+									}
 								}
 							}
 							break;

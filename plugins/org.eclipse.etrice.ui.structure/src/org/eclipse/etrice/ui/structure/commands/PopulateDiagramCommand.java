@@ -12,22 +12,21 @@
 
 package org.eclipse.etrice.ui.structure.commands;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.transaction.RecordingCommand;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorContainerClass;
 import org.eclipse.etrice.core.room.ActorContainerRef;
 import org.eclipse.etrice.core.room.Binding;
+import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.LayerConnection;
 import org.eclipse.etrice.core.room.LogicalSystem;
-import org.eclipse.etrice.core.room.Port;
-import org.eclipse.etrice.core.room.SPPRef;
 import org.eclipse.etrice.core.room.StructureClass;
 import org.eclipse.etrice.core.room.SubSystemClass;
-import org.eclipse.etrice.ui.structure.support.ActorContainerRefSupport;
 import org.eclipse.etrice.ui.structure.support.StructureClassSupport;
 import org.eclipse.etrice.ui.structure.support.SupportUtil;
 import org.eclipse.graphiti.dt.IDiagramTypeProvider;
@@ -61,7 +60,7 @@ public class PopulateDiagramCommand extends RecordingCommand {
 		addContext.setX(StructureClassSupport.MARGIN);
 		addContext.setY(StructureClassSupport.MARGIN);
 
-		final HashMap<String, Anchor> ifitem2anchor = new HashMap<String, Anchor>();
+		HashMap<String, Anchor> ifitem2anchor = new HashMap<String, Anchor>();
 		
 		IAddFeature addFeature = featureProvider.getAddFeature(addContext);
 		if (addFeature!=null && addFeature.canAdd(addContext)) {
@@ -69,25 +68,33 @@ public class PopulateDiagramCommand extends RecordingCommand {
 
 			int width = acShape.getGraphicsAlgorithm().getGraphicsAlgorithmChildren().get(0).getWidth();
 			
-			addInterfaceItems(acShape, width, featureProvider, ifitem2anchor);
+			if (sc instanceof ActorClass) {
+				List<InterfaceItem> items = new ArrayList<InterfaceItem>();
+				items.addAll(((ActorClass) sc).getIfPorts());
+				items.addAll(((ActorClass) sc).getIfSPPs());
+				SupportUtil.addInterfaceItems(items, acShape, width, featureProvider, ifitem2anchor);
+
+				SupportUtil.addPorts(((ActorClass)sc).getIntPorts(), acShape, width, featureProvider, ifitem2anchor);
+			}
+			else if (sc instanceof SubSystemClass) {
+				List<InterfaceItem> items = new ArrayList<InterfaceItem>();
+				items.addAll(((SubSystemClass) sc).getRelayPorts());
+				items.addAll(((SubSystemClass) sc).getIfSPPs());
+				SupportUtil.addInterfaceItems(items, acShape, width, featureProvider, ifitem2anchor);
+			}
 			
 			// actor container references
 			if (sc instanceof ActorContainerClass) {
 				ActorContainerClass acc = (ActorContainerClass) sc;
 				
-	        	EList<? extends ActorContainerRef> actorRefs = acc.getActorRefs();
-				addRefItems(actorRefs, acShape, width, featureProvider, ifitem2anchor);
+	        	List<? extends ActorContainerRef> actorRefs = acc.getActorRefs();
+	        	SupportUtil.addRefItems(actorRefs, acShape, width, featureProvider, ifitem2anchor);
 			}
 			else if (sc instanceof LogicalSystem) {
 				LogicalSystem sys = (LogicalSystem) sc;
 				
-	        	EList<? extends ActorContainerRef> subSystems = sys.getSubSystems();
-				addRefItems(subSystems, acShape, width, featureProvider, ifitem2anchor);
-			}
-
-			// layer connections
-			for (LayerConnection lc : sc.getConnections()) {
-				SupportUtil.addLayerConnection(lc, featureProvider, ifitem2anchor);
+	        	List<? extends ActorContainerRef> subSystems = sys.getSubSystems();
+	        	SupportUtil.addRefItems(subSystems, acShape, width, featureProvider, ifitem2anchor);
 			}
 			
 			// base class items
@@ -99,92 +106,17 @@ public class PopulateDiagramCommand extends RecordingCommand {
 					StructureClassSupport.addInheritedItems(base, acShape, ifitem2anchor, featureProvider);
 			}
 			
+			// layer connections
+			for (LayerConnection lc : sc.getConnections()) {
+				SupportUtil.addLayerConnection(lc, featureProvider, ifitem2anchor);
+			}
+			
 			// bindings
 			for (Binding bind : sc.getBindings()) {
 				SupportUtil.addBinding(bind, featureProvider, ifitem2anchor);
 			}
 		}
 		
-	}
-
-	protected void addInterfaceItems(ContainerShape acShape, int width,
-			IFeatureProvider featureProvider,
-			final HashMap<String, Anchor> port2anchor) {
-		if (sc instanceof ActorClass) {
-			ActorClass ac = (ActorClass) sc;
-			
-			// interface spps and ports
-			int n = ac.getIfPorts().size() + ac.getIfSPPs().size();
-			int delta = width/(n+1);
-			int pos = delta;
-			for (SPPRef spp : ac.getIfSPPs()) {
-				SupportUtil.addInterfaceItem(spp, acShape, pos+StructureClassSupport.MARGIN, featureProvider, port2anchor);
-				pos += delta;
-			}
-			for (Port port : ac.getIfPorts()) {
-				SupportUtil.addInterfaceItem(port, acShape, pos+StructureClassSupport.MARGIN, featureProvider, port2anchor);
-				pos += delta;
-			}
-			
-			// internal ports
-			n = ac.getIntPorts().size();
-			delta = width/(n+1);
-			pos = delta;
-			addPorts(ac.getIntPorts(), acShape, width, featureProvider, port2anchor);
-		}
-		else if (sc instanceof SubSystemClass) {
-			SubSystemClass ssc = (SubSystemClass) sc;
-			
-			// interface spps and ports
-			int n = ssc.getRelayPorts().size() + ssc.getIfSPPs().size();
-			int delta = width/(n+1);
-			int pos = delta;
-			for (SPPRef spp : ssc.getIfSPPs()) {
-				SupportUtil.addInterfaceItem(spp, acShape, pos+StructureClassSupport.MARGIN, featureProvider, port2anchor);
-				pos += delta;
-			}
-			for (Port port : ssc.getRelayPorts()) {
-				SupportUtil.addInterfaceItem(port, acShape, pos+StructureClassSupport.MARGIN, featureProvider, port2anchor);
-				pos += delta;
-			}
-		}
-	}
-
-	protected void addRefItems(EList<? extends ActorContainerRef> actorRefs,
-			ContainerShape acShape, int width,
-			IFeatureProvider featureProvider, final HashMap<String, Anchor> port2anchor) {
-		int ncols = width/ActorContainerRefSupport.DEFAULT_SIZE_X;
-		int nrows = actorRefs.size()/ncols;
-		int gap = (width-(ncols*ActorContainerRefSupport.DEFAULT_SIZE_X))/(ncols+1);
-		int delta = gap+ActorContainerRefSupport.DEFAULT_SIZE_X;
-		int x0 = gap+ActorContainerRefSupport.DEFAULT_SIZE_X/2;
-		int y0 = ActorContainerRefSupport.DEFAULT_SIZE_Y*3/2;
-		int i = 0;
-		for (ActorContainerRef ar : actorRefs) {
-			int row = i/ncols;
-			int col = i%ncols;
-			if (row>=nrows) {
-				int nc = actorRefs.size()%ncols;
-				gap = (width-(nc*ActorContainerRefSupport.DEFAULT_SIZE_X))/(nc+1);
-				delta = gap+ActorContainerRefSupport.DEFAULT_SIZE_X;
-				x0 = gap+ActorContainerRefSupport.DEFAULT_SIZE_X/2;
-			}
-			int x = x0+delta*col;
-			int y = y0+(ActorContainerRefSupport.MARGIN+ActorContainerRefSupport.DEFAULT_SIZE_Y)*row;
-			SupportUtil.addRefItem(ar, acShape, x+StructureClassSupport.MARGIN, y+StructureClassSupport.MARGIN, featureProvider, port2anchor);
-			++i;
-		}
-	}
-
-	protected void addPorts(EList<Port> ifPorts, ContainerShape acShape,
-			int width, IFeatureProvider featureProvider, final HashMap<String, Anchor> port2anchor) {
-		int n = ifPorts.size();
-		int delta = width/(n+1);
-		int pos = delta;
-		for (Port port : ifPorts) {
-			SupportUtil.addInterfaceItem(port, acShape, pos+StructureClassSupport.MARGIN, featureProvider, port2anchor);
-			pos += delta;
-		}
 	}
 	
 }

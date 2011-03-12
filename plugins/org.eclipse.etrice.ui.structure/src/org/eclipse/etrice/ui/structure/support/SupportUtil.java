@@ -154,6 +154,56 @@ public class SupportUtil {
 		featureProvider.addIfPossible(context);
 	}
 
+	public static void addInterfaceItems(List<InterfaceItem> items, ContainerShape acShape, int width,
+			IFeatureProvider fp,
+			final Map<String, Anchor> ifitem2anchor) {
+		
+		int n = items.size();
+		int delta = width/(n+1);
+		int pos = delta;
+		for (InterfaceItem item : items) {
+			SupportUtil.addInterfaceItem(item, acShape, pos+StructureClassSupport.MARGIN, fp, ifitem2anchor);
+			pos += delta;
+		}
+	}
+	
+	public static void addRefItems(List<? extends ActorContainerRef> actorRefs,
+			ContainerShape acShape, int width,
+			IFeatureProvider fp, final Map<String, Anchor> ifitem2anchor) {
+		int ncols = width/ActorContainerRefSupport.DEFAULT_SIZE_X;
+		int nrows = actorRefs.size()/ncols;
+		int gap = (width-(ncols*ActorContainerRefSupport.DEFAULT_SIZE_X))/(ncols+1);
+		int delta = gap+ActorContainerRefSupport.DEFAULT_SIZE_X;
+		int x0 = gap+ActorContainerRefSupport.DEFAULT_SIZE_X/2;
+		int y0 = ActorContainerRefSupport.DEFAULT_SIZE_Y*3/2;
+		int i = 0;
+		for (ActorContainerRef ar : actorRefs) {
+			int row = i/ncols;
+			int col = i%ncols;
+			if (row>=nrows) {
+				int nc = actorRefs.size()%ncols;
+				gap = (width-(nc*ActorContainerRefSupport.DEFAULT_SIZE_X))/(nc+1);
+				delta = gap+ActorContainerRefSupport.DEFAULT_SIZE_X;
+				x0 = gap+ActorContainerRefSupport.DEFAULT_SIZE_X/2;
+			}
+			int x = x0+delta*col;
+			int y = y0+(ActorContainerRefSupport.MARGIN+ActorContainerRefSupport.DEFAULT_SIZE_Y)*row;
+			SupportUtil.addRefItem(ar, acShape, x+StructureClassSupport.MARGIN, y+StructureClassSupport.MARGIN, fp, ifitem2anchor);
+			++i;
+		}
+	}
+
+	public static void addPorts(List<Port> ifPorts, ContainerShape acShape,
+			int width, IFeatureProvider featureProvider, final Map<String, Anchor> port2anchor) {
+		int n = ifPorts.size();
+		int delta = width/(n+1);
+		int pos = delta;
+		for (Port port : ifPorts) {
+			SupportUtil.addInterfaceItem(port, acShape, pos+StructureClassSupport.MARGIN, featureProvider, port2anchor);
+			pos += delta;
+		}
+	}
+
 	public static String getName(BindingEndPoint ep) {
 		String ar = ep.getActorRef()==null? "":ep.getActorRef().getName();
 		String p = ep.getPort().getName();
