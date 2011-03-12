@@ -28,6 +28,7 @@ import org.eclipse.etrice.core.room.LogicalSystem;
 import org.eclipse.etrice.core.room.RoomFactory;
 import org.eclipse.etrice.core.room.StructureClass;
 import org.eclipse.etrice.core.room.SubSystemRef;
+import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.ui.structure.DiagramAccess;
 import org.eclipse.etrice.ui.structure.ImageProvider;
 import org.eclipse.etrice.ui.structure.dialogs.ActorContainerRefPropertyDialog;
@@ -507,7 +508,7 @@ public class ActorContainerRefSupport {
 				// check interface ports and spps added to model not present in diagram
 				{
 					ActorContainerClass acc = (acr instanceof ActorRef)?((ActorRef)acr).getType():((SubSystemRef)acr).getType();
-					List<InterfaceItem> interfaceItems = InterfaceItemSupport.getInterfaceItems(acc);
+					List<InterfaceItem> interfaceItems = RoomHelpers.getInterfaceItems(acc);
 					List<InterfaceItem> presentItems = new ArrayList<InterfaceItem>();
 					for (Shape child : containerShape.getChildren()) {
 						bo = getBusinessObjectForPictogramElement(child);

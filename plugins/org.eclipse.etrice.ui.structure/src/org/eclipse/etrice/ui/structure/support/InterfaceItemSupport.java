@@ -25,8 +25,8 @@ import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.SPPRef;
-import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.core.room.SubSystemRef;
+import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.ui.common.support.NoResizeFeature;
 import org.eclipse.etrice.ui.structure.DiagramAccess;
 import org.eclipse.graphiti.dt.IDiagramTypeProvider;
@@ -678,33 +678,10 @@ public class InterfaceItemSupport {
 		}
 	}
 	
-	public static List<InterfaceItem> getInterfaceItems(ActorContainerClass acc) {
-		ArrayList<InterfaceItem> result = new ArrayList<InterfaceItem>();
-		
-		
-		if (acc instanceof ActorClass) {
-			ActorClass ac = (ActorClass) acc;
-			do {
-				result.addAll(acc.getIfSPPs());
-				result.addAll(ac.getIfPorts());
-				ac = ac.getBase();
-			}
-			while (ac!=null);
-		}
-		else if (acc instanceof SubSystemClass) {
-			result.addAll(acc.getIfSPPs());
-			result.addAll(((SubSystemClass) acc).getRelayPorts());
-		}
-		else {
-			assert(false): "unexpected sub type";
-		}
-		return result;
-	}
-	
 	public static void createRefItems(ActorContainerRef acr, ContainerShape refShape, IFeatureProvider featureProvider) {
 		
 		ActorContainerClass refClass = (acr instanceof ActorRef)?((ActorRef)acr).getType():((SubSystemRef)acr).getType();
-		List<? extends InterfaceItem> refItems = getInterfaceItems(refClass);
+		List<? extends InterfaceItem> refItems = RoomHelpers.getInterfaceItems(refClass);
 		
 		if (refShape!=null && refClass!=null &&!refItems.isEmpty()) {
 			
@@ -721,7 +698,7 @@ public class InterfaceItemSupport {
 					ActorContainerClass extRefClass = (ActorContainerClass) bo;
 					assert(extRefClass.getName().equals(refClass.getName())): "structure class names must match";
 
-					List<InterfaceItem> extRefItems = getInterfaceItems(extRefClass);
+					List<InterfaceItem> extRefItems = RoomHelpers.getInterfaceItems(extRefClass);
 					List<InterfaceItem> intRefItems = new ArrayList<InterfaceItem>();
 					for (Shape ch : refShape.getChildren()) {
 						bo = featureProvider.getBusinessObjectForPictogramElement(ch);

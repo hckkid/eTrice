@@ -12,6 +12,7 @@
 
 package org.eclipse.etrice.ui.structure.support;
 
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.EList;
@@ -24,6 +25,7 @@ import org.eclipse.etrice.core.room.Binding;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.StructureClass;
+import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.ui.structure.DiagramAccess;
 import org.eclipse.graphiti.dt.IDiagramTypeProvider;
 import org.eclipse.graphiti.features.IAddFeature;
@@ -219,6 +221,10 @@ public class StructureClassSupport {
 				if (bo instanceof EObject && ((EObject)bo).eIsProxy()) {
 					return Reason.createTrueReason("Structure class deleted from model");
 				}
+				
+				StructureClass sc = (StructureClass) bo;
+				
+				List<InterfaceItem> interfaceItems = RoomHelpers.getInterfaceItems(sc);
 				
 				// TODOHRR: check for refs added in model not present in diagram
 				// also inherited
