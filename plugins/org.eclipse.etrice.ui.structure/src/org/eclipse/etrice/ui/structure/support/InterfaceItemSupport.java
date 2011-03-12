@@ -15,10 +15,18 @@ package org.eclipse.etrice.ui.structure.support;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.etrice.core.room.ActorClass;
+import org.eclipse.etrice.core.room.ActorContainerClass;
+import org.eclipse.etrice.core.room.ActorContainerRef;
+import org.eclipse.etrice.core.room.ActorRef;
+import org.eclipse.etrice.core.room.InterfaceItem;
+import org.eclipse.etrice.core.room.Port;
+import org.eclipse.etrice.core.room.SPPRef;
+import org.eclipse.etrice.core.room.SubSystemClass;
+import org.eclipse.etrice.core.room.SubSystemRef;
 import org.eclipse.etrice.ui.common.support.NoResizeFeature;
 import org.eclipse.etrice.ui.structure.DiagramAccess;
 import org.eclipse.graphiti.dt.IDiagramTypeProvider;
@@ -38,7 +46,6 @@ import org.eclipse.graphiti.features.context.IRemoveContext;
 import org.eclipse.graphiti.features.context.IResizeShapeContext;
 import org.eclipse.graphiti.features.context.ITargetContext;
 import org.eclipse.graphiti.features.context.IUpdateContext;
-import org.eclipse.graphiti.features.context.impl.AddContext;
 import org.eclipse.graphiti.features.context.impl.RemoveContext;
 import org.eclipse.graphiti.features.custom.AbstractCustomFeature;
 import org.eclipse.graphiti.features.impl.AbstractAddFeature;
@@ -64,16 +71,6 @@ import org.eclipse.graphiti.ui.features.DefaultDeleteFeature;
 import org.eclipse.graphiti.ui.features.DefaultFeatureProvider;
 import org.eclipse.graphiti.util.ColorConstant;
 import org.eclipse.graphiti.util.IColorConstant;
-
-import org.eclipse.etrice.core.room.ActorClass;
-import org.eclipse.etrice.core.room.ActorContainerClass;
-import org.eclipse.etrice.core.room.ActorContainerRef;
-import org.eclipse.etrice.core.room.ActorRef;
-import org.eclipse.etrice.core.room.InterfaceItem;
-import org.eclipse.etrice.core.room.Port;
-import org.eclipse.etrice.core.room.SPPRef;
-import org.eclipse.etrice.core.room.SubSystemClass;
-import org.eclipse.etrice.core.room.SubSystemRef;
 
 public class InterfaceItemSupport {
 	
@@ -740,11 +737,11 @@ public class InterfaceItemSupport {
 							if (extRefItems.contains(bo)) {
 								// this is an interface item, insert it
 
-								EObject ownObject = getOwnObject((InterfaceItem)bo, rs);
+								EObject ownObject = SupportUtil.getOwnObject((InterfaceItem)bo, rs);
 								if (!intRefItems.contains(ownObject)) {
-									int x = childShape.getGraphicsAlgorithm().getX()/scaleX;
-									int y = childShape.getGraphicsAlgorithm().getY()/scaleY;
-									addItem(ownObject, x, y, refShape, featureProvider);
+									int x = ITEM_SIZE_SMALL/2 + childShape.getGraphicsAlgorithm().getX()/scaleX;
+									int y = ITEM_SIZE_SMALL/2 + childShape.getGraphicsAlgorithm().getY()/scaleY;
+									SupportUtil.addItem(ownObject, x, y, refShape, featureProvider);
 								}
 							}
 						}
@@ -774,7 +771,7 @@ public class InterfaceItemSupport {
 				for (Shape childShape : refAcShape.getChildren()) {
 					bo = featureProvider.getBusinessObjectForPictogramElement(childShape);
 					if (bo instanceof ActorRef) {
-						EObject ownObject = getOwnObject((ActorRef)bo, rs);
+						EObject ownObject = SupportUtil.getOwnObject((ActorRef)bo, rs);
 						if (ownObject==acr) {
 							int subScaleX = arShape.getGraphicsAlgorithm().getWidth()/ActorContainerRefSupport.DEFAULT_SIZE_X;
 							int subScaleY = arShape.getGraphicsAlgorithm().getHeight()/ActorContainerRefSupport.DEFAULT_SIZE_Y;
@@ -783,10 +780,10 @@ public class InterfaceItemSupport {
 							for (Shape grandChildShape : ((ContainerShape)childShape).getChildren()) {
 								bo = featureProvider.getBusinessObjectForPictogramElement(grandChildShape);
 								if (bo instanceof InterfaceItem) {
-									ownObject = getOwnObject((Port)bo, rs);
-									int x = grandChildShape.getGraphicsAlgorithm().getX()/subScaleX;
-									int y = grandChildShape.getGraphicsAlgorithm().getY()/subScaleY;
-									addItem(ownObject, x, y, arShape, featureProvider);
+									ownObject = SupportUtil.getOwnObject((Port)bo, rs);
+									int x = ITEM_SIZE_SMALL/2 + grandChildShape.getGraphicsAlgorithm().getX()/subScaleX;
+									int y = ITEM_SIZE_SMALL/2 + grandChildShape.getGraphicsAlgorithm().getY()/subScaleY;
+									SupportUtil.addItem(ownObject, x, y, arShape, featureProvider);
 								}
 							}
 							break;
@@ -795,23 +792,5 @@ public class InterfaceItemSupport {
 				}
 			}
 		}
-	}
-
-	private static void addItem(EObject ownObject, int x, int y,
-			ContainerShape refShape, IFeatureProvider featureProvider) {
-		AddContext addContext = new AddContext();
-		addContext.setNewObject(ownObject);
-		addContext.setTargetContainer(refShape);
-		addContext.setX(x + ITEM_SIZE_SMALL/2);
-		addContext.setY(y + ITEM_SIZE_SMALL/2);
-		ContainerShape pe = (ContainerShape) featureProvider.addIfPossible(addContext);
-		assert(!pe.getAnchors().isEmpty()): "port must have an anchor";
-	}
-	
-	private static EObject getOwnObject(EObject obj, ResourceSet rs) {
-		URI uri = EcoreUtil.getURI(obj);
-		EObject own = rs.getEObject(uri, true);
-		assert(own!=null): "own object must exist";
-		return own;
 	}
 }

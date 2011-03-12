@@ -12,13 +12,20 @@
 
 package org.eclipse.etrice.ui.structure.support;
 
+import java.util.Map;
+
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.etrice.core.room.ActorClass;
+import org.eclipse.etrice.core.room.ActorContainerRef;
+import org.eclipse.etrice.core.room.ActorRef;
+import org.eclipse.etrice.core.room.Binding;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.StructureClass;
+import org.eclipse.etrice.ui.structure.DiagramAccess;
 import org.eclipse.graphiti.dt.IDiagramTypeProvider;
 import org.eclipse.graphiti.features.IAddFeature;
 import org.eclipse.graphiti.features.IDeleteFeature;
@@ -43,6 +50,8 @@ import org.eclipse.graphiti.features.impl.DefaultResizeShapeFeature;
 import org.eclipse.graphiti.features.impl.Reason;
 import org.eclipse.graphiti.mm.algorithms.GraphicsAlgorithm;
 import org.eclipse.graphiti.mm.algorithms.Rectangle;
+import org.eclipse.graphiti.mm.pictograms.Anchor;
+import org.eclipse.graphiti.mm.pictograms.Connection;
 import org.eclipse.graphiti.mm.pictograms.ContainerShape;
 import org.eclipse.graphiti.mm.pictograms.Diagram;
 import org.eclipse.graphiti.mm.pictograms.PictogramElement;
@@ -423,5 +432,49 @@ public class StructureClassSupport {
 	
 	public IToolBehaviorProvider getToolBehaviorProvider() {
 		return tbp;
+	}
+
+	public static void addInheritedItems(ActorClass ac, ContainerShape acShape, Map<String,Anchor> ifitem2anchor, IFeatureProvider featureProvider) {
+		
+		// we don't have to recurse since the base class diagram already contains all inherited items
+		
+		Diagram refDiag = new DiagramAccess().getDiagram(ac);
+
+		ResourceSet rs = ac.eResource().getResourceSet();
+		
+		if (!refDiag.getChildren().isEmpty()) {
+			ContainerShape refAcShape = (ContainerShape) refDiag.getChildren().get(0);
+			Object bo = featureProvider.getBusinessObjectForPictogramElement(refAcShape);
+			if (bo instanceof StructureClass) {
+				StructureClass extRefClass = (StructureClass) bo;
+				assert(extRefClass.getName().equals(ac.getName())): "actor class names must match";
+				
+				int scaleX = refAcShape.getGraphicsAlgorithm().getWidth()/StructureClassSupport.DEFAULT_SIZE_X;
+				int scaleY = refAcShape.getGraphicsAlgorithm().getHeight()/StructureClassSupport.DEFAULT_SIZE_Y;
+				
+				for (Shape childShape : refAcShape.getChildren()) {
+					bo = featureProvider.getBusinessObjectForPictogramElement(childShape);
+					if (bo instanceof Port) {
+						Port ownObject = (Port) SupportUtil.getOwnObject((Port)bo, rs);
+						int x = childShape.getGraphicsAlgorithm().getX()/scaleX;
+						int y = childShape.getGraphicsAlgorithm().getY()/scaleY;
+						SupportUtil.addItem(ownObject, x/scaleX, y/scaleY, acShape, ifitem2anchor, featureProvider);
+					}
+					else if (bo instanceof ActorRef) {
+						ActorContainerRef ownObject = (ActorContainerRef) SupportUtil.getOwnObject((ActorRef)bo, rs);
+						int x = childShape.getGraphicsAlgorithm().getX()/scaleX;
+						int y = childShape.getGraphicsAlgorithm().getY()/scaleY;
+						SupportUtil.addItem(ownObject, x/scaleX, y/scaleY, acShape, ifitem2anchor, featureProvider);
+					}
+				}
+				for (Connection conn : refDiag.getConnections()) {
+					bo = featureProvider.getBusinessObjectForPictogramElement(conn);
+					if (bo instanceof Binding) {
+						Binding bind = (Binding) SupportUtil.getOwnObject((Binding)bo, rs);
+						SupportUtil.addBinding(bind, featureProvider, ifitem2anchor);
+					}
+				}
+			}
+		}
 	}
 }
