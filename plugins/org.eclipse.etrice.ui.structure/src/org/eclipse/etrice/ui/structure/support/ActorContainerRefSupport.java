@@ -397,7 +397,7 @@ public class ActorContainerRefSupport {
 
 			@Override
 			public String getName() {
-				return "Open associated diagram";
+				return "Open Structure";
 			}
 			
 			@Override
@@ -428,6 +428,48 @@ public class ActorContainerRefSupport {
 						}
 						else if (ref instanceof SubSystemRef) {
 							diagramAccess.openDiagramEditor(((SubSystemRef) ref).getType());
+						}
+					}
+				}
+			}
+		}
+		
+		private static class OpenRefBehaviorDiagram extends AbstractCustomFeature {
+
+			public OpenRefBehaviorDiagram(IFeatureProvider fp) {
+				super(fp);
+			}
+
+			@Override
+			public String getName() {
+				return "Open Behavior";
+			}
+			
+			@Override
+			public boolean canExecute(ICustomContext context) {
+				PictogramElement[] pes = context.getPictogramElements();
+				if (pes != null && pes.length == 1) {
+					Object bo = getBusinessObjectForPictogramElement(pes[0]);
+					if (bo instanceof ActorRef) {
+						return true;
+					}
+				}
+				return false;
+			}
+
+			/* (non-Javadoc)
+			 * @see org.eclipse.graphiti.features.custom.ICustomFeature#execute(org.eclipse.graphiti.features.context.ICustomContext)
+			 */
+			@Override
+			public void execute(ICustomContext context) {
+				PictogramElement[] pes = context.getPictogramElements();
+				if (pes != null && pes.length == 1) {
+					Object bo = getBusinessObjectForPictogramElement(pes[0]);
+					if (bo instanceof ActorContainerRef) {
+						ActorContainerRef ref = (ActorContainerRef) bo;
+						org.eclipse.etrice.ui.behavior.DiagramAccess diagramAccess = new org.eclipse.etrice.ui.behavior.DiagramAccess();
+						if (ref instanceof ActorRef) {
+							diagramAccess.openDiagramEditor(((ActorRef) ref).getType());
 						}
 					}
 				}
@@ -714,7 +756,10 @@ public class ActorContainerRefSupport {
 		
 		@Override
 		public ICustomFeature[] getCustomFeatures(ICustomContext context) {
-			return new ICustomFeature[] { new PropertyFeature(fp), new OpenRefStructureDiagram(fp) };
+			return new ICustomFeature[] {
+					new PropertyFeature(fp),
+					new OpenRefStructureDiagram(fp),
+					new OpenRefBehaviorDiagram(fp)};
 		}
 		
 		protected static boolean isInherited(ActorContainerRef ar, EObject parent) {
