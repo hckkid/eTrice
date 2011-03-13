@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.ui.commands">
+      <category
+            name="eTrice Commands"
+            id="org.eclipse.etrice.ui.commands.category">
+      </category>
+      <command
+            name="Open Behavior"
+            categoryId="org.eclipse.etrice.ui.commands.category"
+            id="org.eclipse.etrice.ui.commands.commands.openBehavior">
+      </command>
+      <command
+            name="Open Structure"
+            categoryId="org.eclipse.etrice.ui.commands.category"
+            id="org.eclipse.etrice.ui.commands.commands.openStructure">
+      </command>
+      <command
+            name="Open Model"
+            categoryId="org.eclipse.etrice.ui.commands.category"
+            id="org.eclipse.etrice.ui.commands.commands.openModel">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            commandId="org.eclipse.etrice.ui.commands.commands.openBehavior"
+            class="org.eclipse.etrice.ui.commands.handlers.OpenBehaviorHandler">
+         <activeWhen>
+            <with
+                  variable="activeEditorId">
+               <equals
+                     value="org.eclipse.etrice.ui.structure.editor.StructureEditor">
+               </equals>
+            </with>
+         </activeWhen>
+      </handler>
+      <handler
+            commandId="org.eclipse.etrice.ui.commands.commands.openStructure"
+            class="org.eclipse.etrice.ui.commands.handlers.OpenStructureHandler">
+         <activeWhen>
+            <with
+                  variable="activeEditorId">
+               <equals
+                     value="org.eclipse.etrice.ui.behavior.editor.BehaviorEditor">
+               </equals>
+            </with>
+         </activeWhen>
+      </handler>
+      <handler
+            commandId="org.eclipse.etrice.ui.commands.commands.openModel"
+            class="org.eclipse.etrice.ui.commands.handlers.OpenModelHandler">
+         <activeWhen>
+            <or>
+	            <with
+	                  variable="activeEditorId">
+	               <equals
+	                     value="org.eclipse.etrice.ui.behavior.editor.BehaviorEditor">
+	               </equals>
+	            </with>
+	            <with
+	                  variable="activeEditorId">
+	               <equals
+	                     value="org.eclipse.etrice.ui.structure.editor.StructureEditor">
+	               </equals>
+	            </with>
+            </or>
+         </activeWhen>
+      </handler>
+   </extension>
+   <extension
+         point="org.eclipse.ui.bindings">
+      <key
+            commandId="org.eclipse.etrice.ui.commands.commands.openBehavior"
+            contextId="org.eclipse.ui.contexts.window"
+            sequence="M3+B"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration">
+      </key>
+      <key
+            commandId="org.eclipse.etrice.ui.commands.commands.openStructure"
+            contextId="org.eclipse.ui.contexts.window"
+            sequence="M3+S"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration">
+      </key>
+      <key
+            commandId="org.eclipse.etrice.ui.commands.commands.openModel"
+            contextId="org.eclipse.ui.contexts.window"
+            sequence="M3+M"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration">
+      </key>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            locationURI="menu:org.eclipse.ui.main.menu?after=additions">
+         <menu
+               label="eTrice"
+               mnemonic="T"
+               id="org.eclipse.etrice.ui.commands.menus.eTrice">
+            <command
+                  commandId="org.eclipse.etrice.ui.commands.commands.openBehavior"
+                  icon="icons/Behavior.gif"
+                  id="org.eclipse.etrice.ui.commands.menus.openBehavior"
+                  label="Open Behavior"
+                  mnemonic="B">
+            </command>
+            <command
+                  commandId="org.eclipse.etrice.ui.commands.commands.openStructure"
+                  icon="icons/Structure.gif"
+                  id="org.eclipse.etrice.ui.commands.menus.openStructure"
+                  label="Open Structure"
+                  mnemonic="S">
+            </command>
+            <command
+                  commandId="org.eclipse.etrice.ui.commands.commands.openModel"
+                  icon="icons/RoomModel.gif"
+                  id="org.eclipse.etrice.ui.commands.menus.openModel"
+                  label="Open Model"
+                  mnemonic="M">
+            </command>
+         </menu>
+      </menuContribution>
+      <!--
+      <menuContribution
+            locationURI="toolbar:org.eclipse.ui.main.toolbar?after=additions">
+         <toolbar
+               id="org.eclipse.etrice.ui.commands.toolbars.eTriceToolbar">
+            <command
+                  commandId="org.eclipse.etrice.ui.commands.commands.openBehavior"
+                  icon="icons/Behavior.gif"
+                  tooltip="Open Behavior Editor"
+                  id="org.eclipse.etrice.ui.commands.toolbars.openBehavior">
+            </command>
+            <command
+                  commandId="org.eclipse.etrice.ui.commands.commands.openStructure"
+                  icon="icons/Structure.gif"
+                  tooltip="Open Structure Editor"
+                  id="org.eclipse.etrice.ui.commands.toolbars.openStructure">
+            </command>
+         </toolbar>
+      </menuContribution>
+      -->
+   </extension>
+
+</plugin>

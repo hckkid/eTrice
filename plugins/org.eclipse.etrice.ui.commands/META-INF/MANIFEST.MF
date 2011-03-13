@@ -1,0 +1,21 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: eTrice Commands
+Bundle-SymbolicName: org.eclipse.etrice.ui.commands; singleton:=true
+Bundle-Version: 0.1.0
+Bundle-Activator: org.eclipse.etrice.ui.commands.Activator
+Bundle-Vendor: eTrice (Incubation)
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.etrice.core.room;bundle-version="0.1.0",
+ org.eclipse.etrice.ui.structure;bundle-version="0.1.0",
+ org.eclipse.etrice.ui.behavior;bundle-version="0.1.0",
+ org.eclipse.etrice.ui.common;bundle-version="0.1.0",
+ org.eclipse.graphiti;bundle-version="0.7.0",
+ org.eclipse.graphiti.ui;bundle-version="0.7.0",
+ org.eclipse.emf.edit;bundle-version="2.6.0",
+ org.eclipse.emf.edit.ui;bundle-version="2.6.0",
+ org.eclipse.ui.views.properties.tabbed;bundle-version="3.5.100",
+ org.eclipse.gef;bundle-version="3.6.1"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
