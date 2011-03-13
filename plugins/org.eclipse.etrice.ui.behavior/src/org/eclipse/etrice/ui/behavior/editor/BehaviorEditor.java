@@ -15,6 +15,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.transaction.RecordingCommand;
+import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.ui.behavior.Activator;
@@ -24,6 +25,7 @@ import org.eclipse.etrice.ui.common.editor.RoomDiagramEditor;
 import org.eclipse.graphiti.mm.pictograms.Diagram;
 import org.eclipse.graphiti.mm.pictograms.Shape;
 import org.eclipse.graphiti.services.Graphiti;
+import org.eclipse.graphiti.ui.editor.DiagramEditorInput;
 import org.eclipse.swt.graphics.Image;
 
 
@@ -38,6 +40,18 @@ public class BehaviorEditor extends RoomDiagramEditor {
 	@Override
 	public Image getDefaultImage() {
 		return Activator.getImage("icons/Behavior.gif");
+	}
+
+	/**
+	 * @return the actor class of this editor
+	 */
+	public ActorClass getActorClass() {
+		Diagram diagram = ((DiagramEditorInput)getEditorInput()).getDiagram();
+		EObject bo = Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(diagram);
+		if (bo instanceof ActorClass)
+			return (ActorClass) bo;
+		
+		return null;
 	}
 	
 	/* (non-Javadoc)
