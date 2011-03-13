@@ -5,12 +5,19 @@ import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.emf.edit.ui.util.EditUIUtil;
 import org.eclipse.etrice.core.room.StructureClass;
+import org.eclipse.etrice.core.ui.internal.RoomActivator;
 import org.eclipse.etrice.ui.behavior.editor.BehaviorEditor;
 import org.eclipse.etrice.ui.structure.editor.StructureEditor;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.handlers.HandlerUtil;
+import org.eclipse.xtext.resource.ILocationInFileProvider;
+import org.eclipse.xtext.ui.editor.XtextEditor;
+import org.eclipse.xtext.util.TextLocation;
+
+import com.google.inject.Inject;
+import com.google.inject.Injector;
 
 /**
  * Our sample handler extends AbstractHandler, an IHandler base class.
@@ -18,10 +25,16 @@ import org.eclipse.ui.handlers.HandlerUtil;
  * @see org.eclipse.core.commands.AbstractHandler
  */
 public class OpenModelHandler extends AbstractHandler {
+	
+	@Inject
+	ILocationInFileProvider locationProvider;
+	
 	/**
 	 * The constructor.
 	 */
 	public OpenModelHandler() {
+		Injector injector = RoomActivator.getInstance().getInjector("org.eclipse.etrice.core.Room");
+		injector.injectMembers(this);
 	}
 
 	/**
@@ -40,7 +53,14 @@ public class OpenModelHandler extends AbstractHandler {
 		}
 		if (sc!=null) {
 			try {
-				EditUIUtil.openEditor(sc);
+				if (EditUIUtil.openEditor(sc)) {
+					editor = window.getActivePage().getActiveEditor();
+					if (editor instanceof XtextEditor) {
+						XtextEditor xed = (XtextEditor) editor;
+						TextLocation location = locationProvider.getLocation(sc);
+						xed.selectAndReveal(location.getOffset(), location.getLength());
+					}
+				}
 			} catch (PartInitException e) {
 				e.printStackTrace();
 			}

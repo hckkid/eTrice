@@ -8,6 +8,7 @@ Bundle-Vendor: eTrice (Incubation)
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.eclipse.etrice.core.room;bundle-version="0.1.0",
+ org.eclipse.etrice.core.room.ui;bundle-version="0.1.0",
  org.eclipse.etrice.ui.structure;bundle-version="0.1.0",
  org.eclipse.etrice.ui.behavior;bundle-version="0.1.0",
  org.eclipse.etrice.ui.common;bundle-version="0.1.0",
@@ -16,6 +17,7 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.emf.edit;bundle-version="2.6.0",
  org.eclipse.emf.edit.ui;bundle-version="2.6.0",
  org.eclipse.ui.views.properties.tabbed;bundle-version="3.5.100",
- org.eclipse.gef;bundle-version="3.6.1"
+ org.eclipse.gef;bundle-version="3.6.1",
+ org.eclipse.xtext.ui;bundle-version="1.0.1"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
