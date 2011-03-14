@@ -13,7 +13,7 @@
 package org.eclipse.etrice.core;
 import org.eclipse.core.runtime.Plugin;
 import org.eclipse.emf.ecore.util.Diagnostician;
-import org.eclipse.etrice.core.ui.internal.RoomActivator;
+import org.eclipse.etrice.core.ui.RoomUiModule;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 
@@ -38,7 +38,7 @@ public class CoreTestsActivator extends Plugin implements BundleActivator {
 		
 		instance = this;
         
-		Injector injector = RoomActivator.getInstance().getInjector("org.eclipse.etrice.core.Room");
+		Injector injector = RoomUiModule.getInjector();
         injector.injectMembers(this);
 	}
 

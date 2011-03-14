@@ -19,7 +19,7 @@ import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.Transition;
-import org.eclipse.etrice.core.ui.internal.RoomActivator;
+import org.eclipse.etrice.core.ui.RoomUiModule;
 import org.eclipse.etrice.ui.behavior.DiagramAccess;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.xtext.resource.XtextResource;
@@ -57,7 +57,7 @@ public class EditBehaviorHandler extends AbstractEditHandler {
 	 */
 	private void createTransitionNames(IXtextDocument document, final String fragment) {
 		DefaultDocumentEditor edit = new DefaultDocumentEditor();
-		Injector injector = RoomActivator.getInstance().getInjector("org.eclipse.etrice.core.Room");
+		Injector injector = RoomUiModule.getInjector();
 		injector.injectMembers(edit);
 		edit.process(new IUnitOfWork.Void<XtextResource>() {
 			@Override

@@ -12,7 +12,10 @@
 
 package org.eclipse.etrice.core.ui;
 
+import org.eclipse.etrice.core.ui.internal.RoomActivator;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+
+import com.google.inject.Injector;
 
 /**
  * Use this class to register components to be used within the IDE.
@@ -25,5 +28,9 @@ public class RoomUiModule extends org.eclipse.etrice.core.ui.AbstractRoomUiModul
 	// contributed by org.eclipse.xtext.generator.validation.JavaValidatorFragment
 	@org.eclipse.xtext.service.SingletonBinding(eager=true)	public Class<? extends org.eclipse.etrice.core.validation.RoomJavaValidator> bindRoomJavaValidator() {
 		return org.eclipse.etrice.core.ui.RoomModelValidator.class;
+	}
+
+	public static Injector getInjector() {
+		return RoomActivator.getInstance().getInjector("org.eclipse.etrice.core.Room");
 	}
 }

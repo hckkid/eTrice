@@ -5,7 +5,7 @@ import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.emf.edit.ui.util.EditUIUtil;
 import org.eclipse.etrice.core.room.StructureClass;
-import org.eclipse.etrice.core.ui.internal.RoomActivator;
+import org.eclipse.etrice.core.ui.RoomUiModule;
 import org.eclipse.etrice.ui.behavior.editor.BehaviorEditor;
 import org.eclipse.etrice.ui.structure.editor.StructureEditor;
 import org.eclipse.ui.IEditorPart;
@@ -33,7 +33,7 @@ public class OpenModelHandler extends AbstractHandler {
 	 * The constructor.
 	 */
 	public OpenModelHandler() {
-		Injector injector = RoomActivator.getInstance().getInjector("org.eclipse.etrice.core.Room");
+		Injector injector = RoomUiModule.getInjector();
 		injector.injectMembers(this);
 	}
 

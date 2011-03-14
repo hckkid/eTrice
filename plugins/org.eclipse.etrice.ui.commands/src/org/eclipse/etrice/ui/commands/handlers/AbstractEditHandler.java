@@ -14,7 +14,7 @@ import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.etrice.core.ui.internal.RoomActivator;
+import org.eclipse.etrice.core.ui.RoomUiModule;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -46,7 +46,7 @@ public abstract class AbstractEditHandler extends AbstractHandler {
 	public AbstractEditHandler() {
 		super();
 		
-		Injector injector = RoomActivator.getInstance().getInjector("org.eclipse.etrice.core.Room");
+		Injector injector = RoomUiModule.getInjector();
 		injector.injectMembers(this);
 	}
 
