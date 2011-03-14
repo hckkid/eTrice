@@ -16,6 +16,7 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.room.ActorClass;
@@ -25,10 +26,12 @@ import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.LogicalSystem;
 import org.eclipse.etrice.core.room.RoomFactory;
+import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.etrice.core.room.StructureClass;
 import org.eclipse.etrice.core.room.SubSystemRef;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.ui.structure.DiagramAccess;
+import org.eclipse.etrice.ui.structure.DiagramTypeProvider;
 import org.eclipse.etrice.ui.structure.ImageProvider;
 import org.eclipse.etrice.ui.structure.dialogs.ActorContainerRefPropertyDialog;
 import org.eclipse.graphiti.dt.IDiagramTypeProvider;
@@ -91,6 +94,8 @@ import org.eclipse.graphiti.util.IColorConstant;
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.scoping.IScopeProvider;
 
 public class ActorContainerRefSupport {
 	
@@ -164,8 +169,11 @@ public class ActorContainerRefSupport {
 		        
 		        newRef.setName(RoomNameProvider.getUniqueActorContainerRefName(sc));
 
+		        IScopeProvider scopeProvider = ((DiagramTypeProvider)getFeatureProvider().getDiagramTypeProvider()).getScopeProvider();
+		        EReference reference = (newRef instanceof ActorRef)?RoomPackage.eINSTANCE.getActorRef_Type():RoomPackage.eINSTANCE.getSubSystemRef_Type();
+				IScope scope = scopeProvider.getScope(newRef.eContainer().eContainer(), reference);
 		        Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-		        ActorContainerRefPropertyDialog dlg = new ActorContainerRefPropertyDialog(shell, newRef, sc, true);
+		        ActorContainerRefPropertyDialog dlg = new ActorContainerRefPropertyDialog(shell, newRef, scope, sc, true);
 				if (dlg.open()!=Window.OK)
 					// find a method to abort creation
 					//throw new RuntimeException();
@@ -359,10 +367,13 @@ public class ActorContainerRefSupport {
 			@Override
 			public void execute(ICustomContext context) {
 				ActorContainerRef acr = (ActorContainerRef) getBusinessObjectForPictogramElement(context.getPictogramElements()[0]);
-				Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 				StructureClass sc = (StructureClass)acr.eContainer();
 				
-				ActorContainerRefPropertyDialog dlg = new ActorContainerRefPropertyDialog(shell, acr, sc, false);
+		        IScopeProvider scopeProvider = ((DiagramTypeProvider)getFeatureProvider().getDiagramTypeProvider()).getScopeProvider();
+		        EReference reference = (acr instanceof ActorRef)?RoomPackage.eINSTANCE.getActorRef_Type():RoomPackage.eINSTANCE.getSubSystemRef_Type();
+				IScope scope = scopeProvider.getScope(acr.eContainer().eContainer(), reference);
+		        Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+				ActorContainerRefPropertyDialog dlg = new ActorContainerRefPropertyDialog(shell, acr, scope, sc, false);
 				if (dlg.open()!=Window.OK)
 					// TODOHRR: introduce a method to revert changes
 					throw new RuntimeException();

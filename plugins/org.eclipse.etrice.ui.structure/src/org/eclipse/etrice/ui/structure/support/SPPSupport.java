@@ -14,6 +14,7 @@ package org.eclipse.etrice.ui.structure.support;
 
 import org.eclipse.etrice.core.validation.ValidationUtil;
 import org.eclipse.etrice.ui.common.support.NoResizeFeature;
+import org.eclipse.etrice.ui.structure.DiagramTypeProvider;
 import org.eclipse.etrice.ui.structure.ImageProvider;
 import org.eclipse.etrice.ui.structure.dialogs.SPPPropertyDialog;
 import org.eclipse.graphiti.dt.IDiagramTypeProvider;
@@ -52,11 +53,14 @@ import org.eclipse.graphiti.tb.IToolBehaviorProvider;
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.scoping.IScopeProvider;
 
 import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.room.ActorContainerClass;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.RoomFactory;
+import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.etrice.core.room.SPPRef;
 
 public class SPPSupport extends InterfaceItemSupport {
@@ -86,8 +90,10 @@ public class SPPSupport extends InterfaceItemSupport {
 				
 				acc.getIfSPPs().add(spp);
 		        
+		        IScopeProvider scopeProvider = ((DiagramTypeProvider)getFeatureProvider().getDiagramTypeProvider()).getScopeProvider();
+		        IScope scope = scopeProvider.getScope(spp.eContainer().eContainer(), RoomPackage.eINSTANCE.getInterfaceItem_Protocol());
 		        Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-		        SPPPropertyDialog dlg = new SPPPropertyDialog(shell, spp, acc, true, false);
+		        SPPPropertyDialog dlg = new SPPPropertyDialog(shell, spp, scope, acc, true, false);
 				if (dlg.open()!=Window.OK)
 					// find a method to abort creation
 					//throw new RuntimeException();
@@ -156,11 +162,13 @@ public class SPPSupport extends InterfaceItemSupport {
 			@Override
 			public void execute(ICustomContext context) {
 				SPPRef spp = (SPPRef) getBusinessObjectForPictogramElement(context.getPictogramElements()[0]);
-				Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 				ActorContainerClass acc = (ActorContainerClass)spp.eContainer();
 				boolean refport = isRefItem(context.getPictogramElements()[0]);
 				
-				SPPPropertyDialog dlg = new SPPPropertyDialog(shell, spp, acc, false, refport);
+		        IScopeProvider scopeProvider = ((DiagramTypeProvider)getFeatureProvider().getDiagramTypeProvider()).getScopeProvider();
+		        IScope scope = scopeProvider.getScope(spp.eContainer().eContainer(), RoomPackage.eINSTANCE.getInterfaceItem_Protocol());
+		        Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+				SPPPropertyDialog dlg = new SPPPropertyDialog(shell, spp, scope, acc, false, refport);
 				if (dlg.open()!=Window.OK)
 					// TODOHRR: introduce a method to revert changes, does hasDoneChanges=false roll back changes?
 					//throw new RuntimeException();

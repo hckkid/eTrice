@@ -13,16 +13,16 @@
 package org.eclipse.etrice.ui.structure.dialogs;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import org.eclipse.core.databinding.DataBindingContext;
 import org.eclipse.core.databinding.validation.IValidator;
 import org.eclipse.core.databinding.validation.ValidationStatus;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.room.ActorContainerClass;
 import org.eclipse.etrice.core.room.ProtocolClass;
-import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.etrice.core.room.SPPRef;
 import org.eclipse.etrice.core.validation.ValidationUtil;
@@ -35,6 +35,8 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.forms.IManagedForm;
+import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.scoping.IScope;
 
 public class SPPPropertyDialog extends AbstractPropertyDialog {
 
@@ -67,13 +69,15 @@ public class SPPPropertyDialog extends AbstractPropertyDialog {
 	}
 	
 	private SPPRef spp;
+	private IScope scope;
 	private ActorContainerClass acc;
 	private boolean newSPP;
 	private boolean refitem;
 
-	public SPPPropertyDialog(Shell shell, SPPRef spp, ActorContainerClass acc, boolean newSPP, boolean refitem) {
+	public SPPPropertyDialog(Shell shell, SPPRef spp, IScope scope, ActorContainerClass acc, boolean newSPP, boolean refitem) {
 		super(shell, "Edit SPP");
 		this.spp = spp;
+		this.scope = scope;
 		this.acc = acc;
 		this.newSPP = newSPP;
 		this.refitem = refitem;
@@ -81,7 +85,7 @@ public class SPPPropertyDialog extends AbstractPropertyDialog {
 
 	@Override
 	protected void initializeBounds() {
-		getShell().setSize(300, 300);
+		getShell().setSize(500, 300);
 	}
 	
 	@Override
@@ -90,19 +94,17 @@ public class SPPPropertyDialog extends AbstractPropertyDialog {
 		NameValidator nv = new NameValidator();
 		ProtocolValidator pv = new ProtocolValidator();
 
-		ArrayList<ProtocolClass> protocols = new ArrayList<ProtocolClass>();
-		if (acc.eResource()!=null) {
-			for (Resource r: acc.eResource().getResourceSet().getResources()) {
-				if (!r.getContents().isEmpty()) {
-					if (r.getContents().get(0) instanceof RoomModel) {
-						protocols.addAll(((RoomModel)r.getContents().get(0)).getProtocolClasses());
-					}
-				}
-			}
+		ArrayList<IEObjectDescription> protocols = new ArrayList<IEObjectDescription>();
+        Iterator<IEObjectDescription> it = scope.getAllContents().iterator();
+        while (it.hasNext()) {
+        	IEObjectDescription desc = it.next();
+        	EObject obj = desc.getEObjectOrProxy();
+        	if (obj instanceof ProtocolClass)
+        		protocols.add(desc);
 		}
 		
 		Text name = createText(body, "Name:", spp, RoomPackage.eINSTANCE.getInterfaceItem_Name(), nv);
-		Combo protocol = createCombo(body, "Protocol:", spp, ProtocolClass.class, RoomPackage.eINSTANCE.getInterfaceItem_Protocol(), protocols, RoomPackage.eINSTANCE.getRoomClass_Name(), pv);
+		Combo protocol = createComboUsingDesc(body, "Protocol:", spp, ProtocolClass.class, RoomPackage.eINSTANCE.getInterfaceItem_Protocol(), protocols, RoomPackage.eINSTANCE.getRoomClass_Name(), pv);
 		
 		if (!newSPP) {
 			// TODOHRR: check whether spp is used externally?

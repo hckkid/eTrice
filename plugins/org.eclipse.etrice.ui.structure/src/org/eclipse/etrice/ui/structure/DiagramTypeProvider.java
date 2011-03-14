@@ -12,11 +12,13 @@
 
 package org.eclipse.etrice.ui.structure;
 
+import org.eclipse.etrice.core.ui.internal.RoomActivator;
 import org.eclipse.graphiti.dt.AbstractDiagramTypeProvider;
 import org.eclipse.graphiti.tb.IToolBehaviorProvider;
 import org.eclipse.xtext.scoping.IScopeProvider;
 
 import com.google.inject.Inject;
+import com.google.inject.Injector;
 
 public class DiagramTypeProvider extends AbstractDiagramTypeProvider {
 
@@ -29,8 +31,8 @@ public class DiagramTypeProvider extends AbstractDiagramTypeProvider {
 	public DiagramTypeProvider() {
 		super();
         
-//		Injector injector = RoomStandaloneSetup.doSetup();
-//        injector.injectMembers(this);
+		Injector injector = RoomActivator.getInstance().getInjector("org.eclipse.etrice.core.Room");
+        injector.injectMembers(this);
 
         dispatcher = new ProviderDispatcher(this);
 		setFeatureProvider(dispatcher.getFeatureProvider());
