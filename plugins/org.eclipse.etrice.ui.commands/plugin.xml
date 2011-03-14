@@ -23,6 +23,16 @@
             categoryId="org.eclipse.etrice.ui.commands.category"
             id="org.eclipse.etrice.ui.commands.commands.openModel">
       </command>
+      <command
+            description="open this ActorClass&apos;s structure as diagram"
+            id="org.eclipse.etrice.core.room.ui.editStructure"
+            name="Edit Structure">
+      </command>
+      <command
+            description="open this ActorClass&apos;s state machine as diagram"
+            id="org.eclipse.etrice.core.room.ui.editBehavior"
+            name="Edit Behavior">
+      </command>
    </extension>
    <extension
          point="org.eclipse.ui.handlers">
@@ -70,6 +80,14 @@
             </or>
          </activeWhen>
       </handler>
+	  <handler
+	        class="org.eclipse.etrice.ui.commands.handlers.EditBehaviorHandler"
+	        commandId="org.eclipse.etrice.core.room.ui.editBehavior">
+	  </handler>
+	  <handler
+	        class="org.eclipse.etrice.ui.commands.handlers.EditStructureHandler"
+	        commandId="org.eclipse.etrice.core.room.ui.editStructure">
+	  </handler>
    </extension>
    <extension
          point="org.eclipse.ui.bindings">
@@ -123,6 +141,47 @@
             </command>
          </menu>
       </menuContribution>
+  <menuContribution
+        allPopups="false"
+        locationURI="popup:org.eclipse.xtext.ui.outline?after=additions">
+     <command
+           commandId="org.eclipse.etrice.core.room.ui.editBehavior"
+           label="Edit Behavior"
+           style="push">
+        <visibleWhen
+              checkEnabled="false">
+           <iterate>
+              <adapt
+                    type="org.eclipse.etrice.core.room.ActorClass">
+              </adapt>
+           </iterate>
+        </visibleWhen>
+     </command>
+  </menuContribution>
+  <menuContribution
+        allPopups="false"
+        locationURI="popup:org.eclipse.xtext.ui.outline?after=additions">
+     <command
+           commandId="org.eclipse.etrice.core.room.ui.editStructure"
+           label="Edit Structure"
+           style="push">
+        <visibleWhen>
+           <iterate operator="and" ifEmpty="false">
+           <or>
+              <adapt
+                    type="org.eclipse.etrice.core.room.ActorClass">
+              </adapt>
+              <adapt
+                    type="org.eclipse.etrice.core.room.SubSystemClass">
+              </adapt>
+              <adapt
+                    type="org.eclipse.etrice.core.room.LogicalSystem">
+              </adapt>
+              </or>
+           </iterate>
+        </visibleWhen>
+     </command>
+  </menuContribution>
       <!--
       <menuContribution
             locationURI="toolbar:org.eclipse.ui.main.toolbar?after=additions">

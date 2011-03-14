@@ -84,16 +84,6 @@
             id="org.eclipse.etrice.core.Room.validate"
             name="Validate">
       </command>
-      <command
-            description="open this ActorClass&apos;s structure as diagram"
-            id="org.eclipse.etrice.core.room.ui.editStructure"
-            name="Edit Structure">
-      </command>
-      <command
-            description="open this ActorClass&apos;s state machine as diagram"
-            id="org.eclipse.etrice.core.room.ui.editBehavior"
-            name="Edit Behavior">
-      </command>
     </extension>
     <extension point="org.eclipse.ui.menus">
         <menuContribution
@@ -163,14 +153,6 @@
 				</reference>
 			</activeWhen>
 		</handler>
-  <handler
-        class="org.eclipse.etrice.core.ui.outline.EditBehaviorHandler"
-        commandId="org.eclipse.etrice.core.room.ui.editBehavior">
-  </handler>
-  <handler
-        class="org.eclipse.etrice.core.ui.outline.EditStructureHandler"
-        commandId="org.eclipse.etrice.core.room.ui.editStructure">
-  </handler>
 	</extension>
 	<extension
 		point="org.eclipse.ui.commands">
@@ -191,47 +173,6 @@
 				</visibleWhen>
 			</command>
 		</menuContribution>
-  <menuContribution
-        allPopups="false"
-        locationURI="popup:org.eclipse.xtext.ui.outline?after=additions">
-     <command
-           commandId="org.eclipse.etrice.core.room.ui.editBehavior"
-           label="Edit Behavior"
-           style="push">
-        <visibleWhen
-              checkEnabled="false">
-           <iterate>
-              <adapt
-                    type="org.eclipse.etrice.core.room.ActorClass">
-              </adapt>
-           </iterate>
-        </visibleWhen>
-     </command>
-  </menuContribution>
-  <menuContribution
-        allPopups="false"
-        locationURI="popup:org.eclipse.xtext.ui.outline?after=additions">
-     <command
-           commandId="org.eclipse.etrice.core.room.ui.editStructure"
-           label="Edit Structure"
-           style="push">
-        <visibleWhen>
-           <iterate operator="and" ifEmpty="false">
-           <or>
-              <adapt
-                    type="org.eclipse.etrice.core.room.ActorClass">
-              </adapt>
-              <adapt
-                    type="org.eclipse.etrice.core.room.SubSystemClass">
-              </adapt>
-              <adapt
-                    type="org.eclipse.etrice.core.room.LogicalSystem">
-              </adapt>
-              </or>
-           </iterate>
-        </visibleWhen>
-     </command>
-  </menuContribution>
 	</extension>
    <!-- quickfix marker resolution generator -->
    <extension

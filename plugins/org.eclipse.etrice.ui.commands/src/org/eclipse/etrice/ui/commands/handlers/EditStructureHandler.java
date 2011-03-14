@@ -10,7 +10,7 @@
  * 
  *******************************************************************************/
 
-package org.eclipse.etrice.core.ui.outline;
+package org.eclipse.etrice.ui.commands.handlers;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.room.StructureClass;
