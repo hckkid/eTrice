@@ -243,7 +243,7 @@ public class RootImpl extends EObjectImpl implements Root {
 		else if (cls instanceof SubSystemClass) {
 			SubSystemClass cc = (SubSystemClass) cls;
 			for (ActorRef ar : cc.getActorRefs()) {
-				actorClasses.add(ar.getType());
+				recursivelyAddReferencedClasses(ar.getType(), actorClasses);
 			}
 		}
 
@@ -259,6 +259,14 @@ public class RootImpl extends EObjectImpl implements Root {
 		return result;
 	}
 
+	private void recursivelyAddReferencedClasses(ActorClass ac, HashSet<ActorClass> actorClasses) {
+		actorClasses.add(ac);
+		
+		for (ActorRef ar : ac.getActorRefs()) {
+			recursivelyAddReferencedClasses(ar.getType(), actorClasses);
+		}
+	}
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
