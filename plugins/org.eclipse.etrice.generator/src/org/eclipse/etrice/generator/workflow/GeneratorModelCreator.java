@@ -22,15 +22,15 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.mwe2.runtime.workflow.IWorkflowContext;
 
 import org.eclipse.etrice.core.room.RoomModel;
-import org.eclipse.etrice.generator.builder.InstanceModelBuilder;
+import org.eclipse.etrice.generator.builder.GeneratorModelBuilder;
 import org.eclipse.etrice.generator.builder.ValidationException;
 import org.eclipse.etrice.generator.etricegen.Root;
 import org.eclipse.etrice.generator.etricegen.util.ETriceGenResourceImpl;
 
-public class InstanceModelCreator extends WorkflowComponentWithTwoSlots {
+public class GeneratorModelCreator extends WorkflowComponentWithTwoSlots {
 
 	private XtendStdlibLogger logger;
-	private InstanceModelBuilder builder;
+	private GeneratorModelBuilder builder;
 	private boolean debug = false;
 	private boolean save = false;
 	private String uri = "tmp.rim";
@@ -66,7 +66,7 @@ public class InstanceModelCreator extends WorkflowComponentWithTwoSlots {
 		diagnostician = new WorkflowDiagnostician(logger);
 		if (debug)
 			logger.setVerbose(true);
-		builder = new InstanceModelBuilder(logger, diagnostician);
+		builder = new GeneratorModelBuilder(logger, diagnostician);
 		
 		List<RoomModel> models = getRoomModels(ctx);
 	    
@@ -81,7 +81,7 @@ public class InstanceModelCreator extends WorkflowComponentWithTwoSlots {
     			saveResult(root);
 	    }
 	    else {
-	    	logger.logError("InstanceModelCreator: Could not find a RoomModel in input slot "+getInSlot()+".", null);
+	    	logger.logError("GeneratorModelCreator: Could not find a RoomModel in input slot "+getInSlot()+".", null);
 	    }
 	    
 	    if (logger.getErrorCount()>0)

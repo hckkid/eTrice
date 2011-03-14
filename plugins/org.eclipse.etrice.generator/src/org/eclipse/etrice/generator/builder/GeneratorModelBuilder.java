@@ -63,7 +63,7 @@ import org.eclipse.etrice.generator.etricegen.impl.StructureInstanceImpl;
  * @author Henrik Rentz-Reichert
  *
  */
-public class InstanceModelBuilder {
+public class GeneratorModelBuilder {
 
 	/**
 	 * the first object id used for the {@link org.eclipse.etrice.core.etrice.runtime.messaging.Address Address}es s of runtime instances
@@ -90,7 +90,7 @@ public class InstanceModelBuilder {
 	 * @param logger
 	 * @param diagnostician
 	 */
-	public InstanceModelBuilder(ILogger logger, IDiagnostician diagnostician) {
+	public GeneratorModelBuilder(ILogger logger, IDiagnostician diagnostician) {
 		this.logger = logger;
 		this.diagnostician = diagnostician;
 	}
@@ -360,7 +360,7 @@ public class InstanceModelBuilder {
 	 * @return the newly created hierarchy of instances
 	 */
 	private SubSystemInstance createSubSystemInstance(SubSystemClass comp) {
-		logger.logInfo("InstanceModelBuilder: creating component instance from "+comp.getName());
+		logger.logInfo("GeneratorModelBuilder: creating component instance from "+comp.getName());
 
 		SubSystemInstance instance = ETriceGenFactory.eINSTANCE.createSubSystemInstance();
 		
@@ -391,7 +391,7 @@ public class InstanceModelBuilder {
 	 * @return the newly created actor instance
 	 */
 	private ActorInstance recursivelyCreateActorInstances(Counter objCounter, ActorRef aref) {
-		logger.logInfo("InstanceModelBuilder: creating actor instance "+aref.getName()+" from "+aref.getType().getName());
+		logger.logInfo("GeneratorModelBuilder: creating actor instance "+aref.getName()+" from "+aref.getType().getName());
 
 		ActorInstance ai = ETriceGenFactory.eINSTANCE.createActorInstance();
 		
@@ -749,7 +749,7 @@ public class InstanceModelBuilder {
 	 * @return - the newly created expanded actor class
 	 */
 	private ExpandedActorClass createExpandedActorClass(ActorClass ac) {
-		logger.logInfo("InstanceModelBuilder: creating expanded actor class from "+ac.getName()
+		logger.logInfo("GeneratorModelBuilder: creating expanded actor class from "+ac.getName()
 			+" of "+((RoomModel)ac.eContainer()).getName());
 
 		ExpandedActorClass xpac = ETriceGenFactory.eINSTANCE.createExpandedActorClass();
