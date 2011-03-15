@@ -14,11 +14,20 @@ import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.etrice.core.room.ActorClass;
+import org.eclipse.etrice.core.room.StructureClass;
 import org.eclipse.etrice.core.ui.RoomUiModule;
+import org.eclipse.etrice.ui.behavior.editor.BehaviorEditor;
+import org.eclipse.etrice.ui.structure.editor.StructureEditor;
 import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.text.ITextSelection;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.handlers.HandlerUtil;
+import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
+import org.eclipse.xtext.resource.IFragmentProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
@@ -43,6 +52,8 @@ public abstract class AbstractEditHandler extends AbstractHandler {
 	@Inject
 	protected IResourceValidator resourceValidator;
 	
+	@Inject IFragmentProvider fragmentProvider;
+	
 	public AbstractEditHandler() {
 		super();
 		
@@ -55,40 +66,88 @@ public abstract class AbstractEditHandler extends AbstractHandler {
 
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
-		ISelection selection = HandlerUtil.getCurrentSelection(event);
-		if (selection instanceof IStructuredSelection) {
-			IStructuredSelection ss = (IStructuredSelection) selection;
-			Object sel = ss.getFirstElement();
-			if (sel instanceof ContentOutlineNode) {
-				XtextEditor xtextEditor = EditorUtils.getActiveXtextEditor(event);
-				IXtextDocument document = xtextEditor.getDocument();
-				if (hasIssues(document, new NullProgressMonitor())) {
-					MessageDialog.openError(xtextEditor.getSite().getShell(), "Validation Errors", "The editor has validation errors.\nCannot open diagram!");
-					return null;
+		IWorkbenchWindow window = HandlerUtil.getActiveWorkbenchWindowChecked(event);
+		IEditorPart editor = window.getActivePage().getActiveEditor();
+		if (editor instanceof XtextEditor) {
+			ISelection selection = HandlerUtil.getCurrentSelection(event);
+			if (selection instanceof IStructuredSelection) {
+				// event from the xtext editor's outline view
+				IStructuredSelection ss = (IStructuredSelection) selection;
+				Object sel = ss.getFirstElement();
+				if (sel instanceof ContentOutlineNode) {
+					XtextEditor xtextEditor = EditorUtils.getActiveXtextEditor(event);
+					IXtextDocument document = xtextEditor.getDocument();
+					final String fragment = ((ContentOutlineNode) sel).getURI().fragment();
+					if (checkPrerequisites(xtextEditor, document, fragment)) {
+						openEditor(document, fragment);
+					}
 				}
-				if (xtextEditor.isDirty()) {
-					if (!MessageDialog.openQuestion(xtextEditor.getSite().getShell(), "Save model file", "The editor will be saved before opening the diagram editor.\nProceed?"))
-						return null;
-					// postpone save to avoid doing it twice
-				}
-				final String fragment = ((ContentOutlineNode) sel).getURI().fragment();
-				if (!prepare(xtextEditor, fragment))
-					return null;
-				if (xtextEditor.isDirty()) {
-					xtextEditor.doSave(new NullProgressMonitor());
-				}
-				document.readOnly(new IUnitOfWork.Void<XtextResource>() {
+			}
+			else if (selection instanceof ITextSelection) {
+				// event from the xtext editor itself
+				final ITextSelection ss = (ITextSelection) selection;
+				XtextEditor xed = (XtextEditor) editor;
+				IXtextDocument document = xed.getDocument();
+				String fragment = document.readOnly(new IUnitOfWork<String, XtextResource>() {
 					@Override
-					public void process(XtextResource resource) throws Exception {
-						if (resource != null) {
-							EObject object = resource.getEObject(fragment);
-							openEditor(object);
+					public String exec(XtextResource resource) throws Exception {
+						EObject obj = EObjectAtOffsetHelper.resolveElementAt(resource, ss.getOffset(), null);
+						while (obj!=null) {
+							if (obj instanceof ActorClass) {
+								return fragmentProvider.getFragment(obj, null);
+							}
+							obj = obj.eContainer();
 						}
+						return "";
 					}
 				});
+				if (checkPrerequisites(xed, document, fragment)) {
+					openEditor(document, fragment);
+				}
 			}
 		}
+		else if (editor instanceof StructureEditor) {
+			StructureClass sc = ((StructureEditor)editor).getStructureClass();
+			if (sc instanceof ActorClass) {
+				openEditor(sc);
+			}
+		}
+		else if (editor instanceof BehaviorEditor) {
+			ActorClass ac = ((BehaviorEditor)editor).getActorClass();
+			openEditor(ac);
+		}
 		return null;
+	}
+
+	protected void openEditor(IXtextDocument document, final String fragment) {
+		document.readOnly(new IUnitOfWork.Void<XtextResource>() {
+			@Override
+			public void process(XtextResource resource) throws Exception {
+				if (resource != null) {
+					EObject object = resource.getEObject(fragment);
+					openEditor(object);
+				}
+			}
+		});
+	}
+
+	protected boolean checkPrerequisites(XtextEditor xtextEditor,
+			IXtextDocument document, final String fragment) {
+		if (hasIssues(document, new NullProgressMonitor())) {
+			MessageDialog.openError(xtextEditor.getSite().getShell(), "Validation Errors", "The editor has validation errors.\nCannot open diagram!");
+			return false;
+		}
+		if (xtextEditor.isDirty()) {
+			if (!MessageDialog.openQuestion(xtextEditor.getSite().getShell(), "Save model file", "The editor will be saved before opening the diagram editor.\nProceed?"))
+				return false;
+			// postpone save to avoid doing it twice
+		}
+		if (!prepare(xtextEditor, fragment))
+			return false;
+		if (xtextEditor.isDirty()) {
+			xtextEditor.doSave(new NullProgressMonitor());
+		}
+		return true;
 	}
 
 	public boolean hasIssues(IXtextDocument xtextDocument, final IProgressMonitor monitor) {

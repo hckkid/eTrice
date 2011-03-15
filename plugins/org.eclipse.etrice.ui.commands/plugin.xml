@@ -9,19 +9,9 @@
             id="org.eclipse.etrice.ui.commands.category">
       </category>
       <command
-            name="Open Behavior"
+            name="open associated textual model"
             categoryId="org.eclipse.etrice.ui.commands.category"
-            id="org.eclipse.etrice.ui.commands.commands.openBehavior">
-      </command>
-      <command
-            name="Open Structure"
-            categoryId="org.eclipse.etrice.ui.commands.category"
-            id="org.eclipse.etrice.ui.commands.commands.openStructure">
-      </command>
-      <command
-            name="Open Model"
-            categoryId="org.eclipse.etrice.ui.commands.category"
-            id="org.eclipse.etrice.ui.commands.commands.openModel">
+            id="org.eclipse.etrice.ui.commands.commands.editModel">
       </command>
       <command
             description="open this ActorClass&apos;s structure as diagram"
@@ -37,8 +27,8 @@
    <extension
          point="org.eclipse.ui.handlers">
       <handler
-            commandId="org.eclipse.etrice.ui.commands.commands.openBehavior"
-            class="org.eclipse.etrice.ui.commands.handlers.OpenBehaviorHandler">
+            commandId="org.eclipse.etrice.core.room.ui.editBehavior"
+            class="org.eclipse.etrice.ui.commands.handlers.EditBehaviorHandler">
          <activeWhen>
             <with variable="activeEditorId">
 	     		<or>
@@ -53,8 +43,8 @@
          </activeWhen>
       </handler>
       <handler
-            commandId="org.eclipse.etrice.ui.commands.commands.openStructure"
-            class="org.eclipse.etrice.ui.commands.handlers.OpenStructureHandler">
+            commandId="org.eclipse.etrice.core.room.ui.editStructure"
+            class="org.eclipse.etrice.ui.commands.handlers.EditStructureHandler">
          <activeWhen>
             <with
                   variable="activeEditorId">
@@ -70,8 +60,8 @@
          </activeWhen>
       </handler>
       <handler
-            commandId="org.eclipse.etrice.ui.commands.commands.openModel"
-            class="org.eclipse.etrice.ui.commands.handlers.OpenModelHandler">
+            commandId="org.eclipse.etrice.ui.commands.commands.editModel"
+            class="org.eclipse.etrice.ui.commands.handlers.EditModelHandler">
          <activeWhen>
             <or>
 	            <with
@@ -89,31 +79,23 @@
             </or>
          </activeWhen>
       </handler>
-	  <handler
-	        class="org.eclipse.etrice.ui.commands.handlers.EditBehaviorHandler"
-	        commandId="org.eclipse.etrice.core.room.ui.editBehavior">
-	  </handler>
-	  <handler
-	        class="org.eclipse.etrice.ui.commands.handlers.EditStructureHandler"
-	        commandId="org.eclipse.etrice.core.room.ui.editStructure">
-	  </handler>
    </extension>
    <extension
          point="org.eclipse.ui.bindings">
       <key
-            commandId="org.eclipse.etrice.ui.commands.commands.openBehavior"
+            commandId="org.eclipse.etrice.core.room.ui.editBehavior"
             contextId="org.eclipse.ui.contexts.window"
             sequence="M3+B"
             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration">
       </key>
       <key
-            commandId="org.eclipse.etrice.ui.commands.commands.openStructure"
+            commandId="org.eclipse.etrice.core.room.ui.editStructure"
             contextId="org.eclipse.ui.contexts.window"
             sequence="M3+S"
             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration">
       </key>
       <key
-            commandId="org.eclipse.etrice.ui.commands.commands.openModel"
+            commandId="org.eclipse.etrice.ui.commands.commands.editModel"
             contextId="org.eclipse.ui.contexts.window"
             sequence="M3+M"
             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration">
@@ -128,21 +110,21 @@
                mnemonic="T"
                id="org.eclipse.etrice.ui.commands.menus.eTrice">
             <command
-                  commandId="org.eclipse.etrice.ui.commands.commands.openBehavior"
+                  commandId="org.eclipse.etrice.core.room.ui.editBehavior"
                   icon="icons/Behavior.gif"
-                  id="org.eclipse.etrice.ui.commands.menus.openBehavior"
+                  id="org.eclipse.etrice.ui.commands.menus.editBehavior"
                   label="Open Behavior"
                   mnemonic="B">
             </command>
             <command
-                  commandId="org.eclipse.etrice.ui.commands.commands.openStructure"
+                  commandId="org.eclipse.etrice.core.room.ui.editStructure"
                   icon="icons/Structure.gif"
-                  id="org.eclipse.etrice.ui.commands.menus.openStructure"
+                  id="org.eclipse.etrice.ui.commands.menus.editStructure"
                   label="Open Structure"
                   mnemonic="S">
             </command>
             <command
-                  commandId="org.eclipse.etrice.ui.commands.commands.openModel"
+                  commandId="org.eclipse.etrice.ui.commands.commands.editModel"
                   icon="icons/RoomModel.gif"
                   id="org.eclipse.etrice.ui.commands.menus.openModel"
                   label="Open Model"
@@ -191,26 +173,6 @@
         </visibleWhen>
      </command>
   </menuContribution>
-      <!--
-      <menuContribution
-            locationURI="toolbar:org.eclipse.ui.main.toolbar?after=additions">
-         <toolbar
-               id="org.eclipse.etrice.ui.commands.toolbars.eTriceToolbar">
-            <command
-                  commandId="org.eclipse.etrice.ui.commands.commands.openBehavior"
-                  icon="icons/Behavior.gif"
-                  tooltip="Open Behavior Editor"
-                  id="org.eclipse.etrice.ui.commands.toolbars.openBehavior">
-            </command>
-            <command
-                  commandId="org.eclipse.etrice.ui.commands.commands.openStructure"
-                  icon="icons/Structure.gif"
-                  tooltip="Open Structure Editor"
-                  id="org.eclipse.etrice.ui.commands.toolbars.openStructure">
-            </command>
-         </toolbar>
-      </menuContribution>
-      -->
    </extension>
 
 </plugin>

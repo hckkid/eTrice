@@ -24,7 +24,7 @@ import com.google.inject.Injector;
  * @see org.eclipse.core.commands.IHandler
  * @see org.eclipse.core.commands.AbstractHandler
  */
-public class OpenModelHandler extends AbstractHandler {
+public class EditModelHandler extends AbstractHandler {
 	
 	@Inject
 	ILocationInFileProvider locationProvider;
@@ -32,7 +32,7 @@ public class OpenModelHandler extends AbstractHandler {
 	/**
 	 * The constructor.
 	 */
-	public OpenModelHandler() {
+	public EditModelHandler() {
 		Injector injector = RoomUiModule.getInjector();
 		injector.injectMembers(this);
 	}
