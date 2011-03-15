@@ -40,11 +40,15 @@
             commandId="org.eclipse.etrice.ui.commands.commands.openBehavior"
             class="org.eclipse.etrice.ui.commands.handlers.OpenBehaviorHandler">
          <activeWhen>
-            <with
-                  variable="activeEditorId">
-               <equals
-                     value="org.eclipse.etrice.ui.structure.editor.StructureEditor">
-               </equals>
+            <with variable="activeEditorId">
+	     		<or>
+	               <equals
+	                     value="org.eclipse.etrice.ui.structure.editor.StructureEditor">
+	               </equals>
+	               <equals
+	                     value="org.eclipse.etrice.core.Room">
+	               </equals>
+	         	</or>
             </with>
          </activeWhen>
       </handler>
@@ -54,9 +58,14 @@
          <activeWhen>
             <with
                   variable="activeEditorId">
-               <equals
-                     value="org.eclipse.etrice.ui.behavior.editor.BehaviorEditor">
-               </equals>
+               <or>
+	               <equals
+	                     value="org.eclipse.etrice.ui.behavior.editor.BehaviorEditor">
+	               </equals>
+	               <equals
+	                     value="org.eclipse.etrice.core.Room">
+	               </equals>
+               </or>
             </with>
          </activeWhen>
       </handler>
