@@ -9,6 +9,7 @@
 package org.eclipse.etrice.core.room.util;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
@@ -165,5 +166,24 @@ public class RoomHelpers {
 			return false;
 		
 		return true;
+	}
+
+	/**
+	 * @param action
+	 * @return
+	 */
+	public static String getDetailCode(DetailCode dc) {
+		if (dc==null)
+			return "";
+		if (dc.getCommands().isEmpty())
+			return "";
+		
+		Iterator<String> it = dc.getCommands().iterator();
+		StringBuilder result = new StringBuilder(it.next());
+		while (it.hasNext()) {
+			result.append("\n").append(it.next());
+		}
+		
+		return result.toString();
 	}
 }
