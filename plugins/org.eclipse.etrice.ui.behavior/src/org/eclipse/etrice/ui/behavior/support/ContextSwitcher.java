@@ -100,7 +100,7 @@ public class ContextSwitcher {
 				EObject eobj = Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement((Shape)obj);
 				if (eobj instanceof State) {
 					GraphicsAlgorithm border = ((Shape)obj).getGraphicsAlgorithm().getGraphicsAlgorithmChildren().get(0);
-					StateSupport.updateSubStructureHint((State)eobj, border);
+					StateSupport.updateHints((State)eobj, border);
 				}
 			}
 		}

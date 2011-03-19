@@ -25,6 +25,7 @@ import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.SubSystemRef;
 import org.eclipse.etrice.core.room.TrPoint;
+import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.ui.behavior.ImageProvider;
 import org.eclipse.etrice.ui.behavior.dialogs.StatePropertyDialog;
 import org.eclipse.graphiti.dt.IDiagramTypeProvider;
@@ -61,6 +62,7 @@ import org.eclipse.graphiti.features.impl.DefaultMoveShapeFeature;
 import org.eclipse.graphiti.features.impl.DefaultResizeShapeFeature;
 import org.eclipse.graphiti.features.impl.Reason;
 import org.eclipse.graphiti.mm.algorithms.GraphicsAlgorithm;
+import org.eclipse.graphiti.mm.algorithms.Polygon;
 import org.eclipse.graphiti.mm.algorithms.Rectangle;
 import org.eclipse.graphiti.mm.algorithms.RoundedRectangle;
 import org.eclipse.graphiti.mm.algorithms.Text;
@@ -283,7 +285,7 @@ public class StateSupport {
 						State s = (State) bo;
 						borderGA.getGraphicsAlgorithmChildren().clear();
 						Color lineColor = manageColor(isInherited(getDiagram(), s)?INHERITED_COLOR:LINE_COLOR);
-						addSubStructureHint(s, (RoundedRectangle) borderGA, lineColor);
+						addHints(s, (RoundedRectangle) borderGA, lineColor);
 					}
 
 					if (!containerShape.getChildren().isEmpty()) {
@@ -451,7 +453,7 @@ public class StateSupport {
 					PictogramElement subGraphShape = getFeatureProvider().addIfPossible(addContext);
 					if (subGraphShape!=null) {
 						RoundedRectangle borderRect = (RoundedRectangle) container.getGraphicsAlgorithm().getGraphicsAlgorithmChildren().get(0);
-						updateSubStructureHint(s, borderRect);
+						updateHints(s, borderRect);
 					}
 					
 					ContextSwitcher.switchTo(getDiagram(), s.getSubgraph());
@@ -501,7 +503,7 @@ public class StateSupport {
 				
 				// check sub structure hint
 				{
-					boolean hasSubStruct = hasSubStructure(s);
+					boolean hasSubStruct = RoomHelpers.hasSubStructure(s);
 					GraphicsAlgorithm invisibleRect = containerShape.getGraphicsAlgorithm();
 					if (!invisibleRect.getGraphicsAlgorithmChildren().isEmpty()) {
 						GraphicsAlgorithm borderRect = invisibleRect.getGraphicsAlgorithmChildren().get(0);
@@ -553,7 +555,7 @@ public class StateSupport {
 					GraphicsAlgorithm invisibleRect = containerShape.getGraphicsAlgorithm();
 					if (!invisibleRect.getGraphicsAlgorithmChildren().isEmpty()) {
 						GraphicsAlgorithm borderRect = invisibleRect.getGraphicsAlgorithmChildren().get(0);
-						updateSubStructureHint(s, (RoundedRectangle) borderRect);
+						updateHints(s, (RoundedRectangle) borderRect);
 					}
 				}
 				
@@ -664,7 +666,7 @@ public class StateSupport {
 			rect.setLineWidth(LINE_WIDTH);
 			gaService.setLocationAndSize(rect, MARGIN, MARGIN, invisibleRect.getWidth()-2*MARGIN, invisibleRect.getHeight()-2*MARGIN);
 
-			addSubStructureHint(s, rect, darkColor);
+			addHints(s, rect, darkColor);
 			
 			return rect;
 		}
@@ -814,44 +816,64 @@ public class StateSupport {
 	public IToolBehaviorProvider getToolBehaviorProvider() {
 		return tbp;
 	}
-
-	public static boolean hasSubStructure(State s) {
-		if (s.getSubgraph()==null)
-			return false;
-		
-		StateGraph sg = s.getSubgraph();
-		if (!sg.getStates().isEmpty())
-			return true;
-		if (!sg.getTransitions().isEmpty())
-			return true;
-		if (!sg.getTrPoints().isEmpty())
-			return true;
-		if (!sg.getChPoints().isEmpty())
-			return true;
-		
-		return false;
-	}
 	
-	private static void addSubStructureHint(State s,
+	private static void addHints(State s,
 			RoundedRectangle border, Color lineColor) {
 		
-		int x = border.getWidth()-25;
-		int y = 3;
-		IGaService gaService = Graphiti.getGaService();
-		RoundedRectangle hint = gaService.createRoundedRectangle(border, HINT_CORNER_WIDTH, HINT_CORNER_WIDTH);
-		hint.setForeground(lineColor);
-		hint.setFilled(false);
-		hint.setLineWidth(LINE_WIDTH);
-		gaService.setLocationAndSize(hint, x, y, 15, 8);
+		// sub structure
+		{
+			int x = border.getWidth()-25;
+			int y = 3;
+			IGaService gaService = Graphiti.getGaService();
+			RoundedRectangle hint = gaService.createRoundedRectangle(border, HINT_CORNER_WIDTH, HINT_CORNER_WIDTH);
+			hint.setForeground(lineColor);
+			hint.setFilled(false);
+			hint.setLineWidth(LINE_WIDTH);
+			gaService.setLocationAndSize(hint, x, y, 15, 8);
+			
+			if (!RoomHelpers.hasSubStructure(s)) {
+				hint.setLineVisible(false);
+			}
+		}
 		
-		if (!hasSubStructure(s)) {
-			hint.setLineVisible(false);
+		// entry and exit code
+		{
+			int x = border.getWidth()/2;
+			int y = border.getHeight()-6;
+			IGaService gaService = Graphiti.getGaService();
+			int xy1[] = new int[] { -1, -3, -1, 3, -8,  3};
+			Polygon entryHint = gaService.createPolygon(border, xy1);
+			entryHint.setForeground(lineColor);
+			entryHint.setFilled(false);
+			entryHint.setLineWidth(LINE_WIDTH);
+			gaService.setLocation(entryHint, x, y);
+			int xy2[] = new int[] {  1, -3,  1, 3,  8,  3};
+			Polygon exitHint = gaService.createPolygon(border, xy2);
+			exitHint.setForeground(lineColor);
+			exitHint.setFilled(false);
+			exitHint.setLineWidth(LINE_WIDTH);
+			gaService.setLocation(exitHint, x, y);
+			
+			if (!RoomHelpers.hasDetailCode(s.getEntryCode())) {
+				entryHint.setLineVisible(false);
+			}
+			
+			if (!RoomHelpers.hasDetailCode(s.getExitCode())) {
+				exitHint.setLineVisible(false);
+			}
 		}
 	}
 	
-	protected static void updateSubStructureHint(State s, GraphicsAlgorithm border) {
+	protected static void updateHints(State s, GraphicsAlgorithm border) {
 		
+		// sub structure
 		GraphicsAlgorithm hint = border.getGraphicsAlgorithmChildren().get(0);
-		hint.setLineVisible(hasSubStructure(s));
+		hint.setLineVisible(RoomHelpers.hasSubStructure(s));
+		
+		// entry and exit code
+		hint = border.getGraphicsAlgorithmChildren().get(1);
+		hint.setLineVisible(RoomHelpers.hasDetailCode(s.getEntryCode()));
+		hint = border.getGraphicsAlgorithmChildren().get(2);
+		hint.setLineVisible(RoomHelpers.hasDetailCode(s.getExitCode()));
 	}
 }
