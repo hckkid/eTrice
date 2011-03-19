@@ -15,9 +15,12 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorContainerRef;
 import org.eclipse.etrice.core.room.Binding;
+import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.LayerConnection;
 import org.eclipse.etrice.core.room.LogicalSystem;
+import org.eclipse.etrice.core.room.State;
+import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.StructureClass;
 import org.eclipse.etrice.core.room.SubSystemClass;
 
@@ -136,5 +139,31 @@ public class RoomHelpers {
 		result.addAll(getConnections(sc, true));
 		
 		return result;
+	}
+
+	public static boolean hasSubStructure(State s) {
+		if (s.getSubgraph()==null)
+			return false;
+		
+		StateGraph sg = s.getSubgraph();
+		if (!sg.getStates().isEmpty())
+			return true;
+		if (!sg.getTransitions().isEmpty())
+			return true;
+		if (!sg.getTrPoints().isEmpty())
+			return true;
+		if (!sg.getChPoints().isEmpty())
+			return true;
+		
+		return false;
+	}
+	
+	public static boolean hasDetailCode(DetailCode dc) {
+		if (dc==null)
+			return false;
+		if (dc.getCommands().isEmpty())
+			return false;
+		
+		return true;
 	}
 }
