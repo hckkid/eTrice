@@ -71,6 +71,7 @@ import org.eclipse.graphiti.mm.algorithms.styles.Orientation;
 import org.eclipse.graphiti.mm.pictograms.Anchor;
 import org.eclipse.graphiti.mm.pictograms.AnchorContainer;
 import org.eclipse.graphiti.mm.pictograms.ChopboxAnchor;
+import org.eclipse.graphiti.mm.pictograms.ConnectionDecorator;
 import org.eclipse.graphiti.mm.pictograms.ContainerShape;
 import org.eclipse.graphiti.mm.pictograms.Diagram;
 import org.eclipse.graphiti.mm.pictograms.PictogramElement;
@@ -766,6 +767,31 @@ public class StateSupport {
 		@Override
 		public ICustomFeature getDoubleClickFeature(IDoubleClickContext context) {
 			return new FeatureProvider.GoDownFeature(getDiagramTypeProvider().getFeatureProvider());
+		}
+		
+		@Override
+		public String getToolTip(GraphicsAlgorithm ga) {
+			// if this is called we know there is a business object!=null
+			PictogramElement pe = ga.getPictogramElement();
+			if (pe instanceof ConnectionDecorator)
+				pe = (PictogramElement) pe.eContainer();
+			
+			EObject bo = Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(pe);
+			if (bo instanceof State) {
+				String label = "";
+				State s = (State) bo;
+				if (RoomHelpers.hasDetailCode(s.getEntryCode()))
+					label = "entry:\n"+RoomHelpers.getDetailCode(s.getEntryCode());
+				if (RoomHelpers.hasDetailCode(s.getExitCode())) {
+					if (label.length()>0)
+						label += "\n";
+					label += "exit:\n"+RoomHelpers.getDetailCode(s.getExitCode());
+				}
+				if (label.length()>0)
+					return label;
+			}
+			
+			return super.getToolTip(ga);
 		}
 		
 		@Override

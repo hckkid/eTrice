@@ -33,6 +33,7 @@ import org.eclipse.etrice.core.room.TrPointTerminal;
 import org.eclipse.etrice.core.room.Transition;
 import org.eclipse.etrice.core.room.TransitionTerminal;
 import org.eclipse.etrice.core.room.TriggeredTransition;
+import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.core.validation.ValidationUtil;
 import org.eclipse.etrice.ui.behavior.ImageProvider;
 import org.eclipse.etrice.ui.behavior.dialogs.TransitionPropertyDialog;
@@ -546,8 +547,16 @@ public class TransitionSupport {
 				pe = (PictogramElement) pe.eContainer();
 			
 			EObject bo = Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(pe);
-			if (bo instanceof Transition)
-				return RoomNameProvider.getTransitionLabelName((Transition) bo);
+			if (bo instanceof Transition) {
+				Transition tr = (Transition) bo;
+				String label = RoomNameProvider.getTransitionLabelName(tr);
+				if (RoomHelpers.hasDetailCode(tr.getAction())) {
+					if (label.length()>0)
+						label += "\n";
+					label += "action:\n"+RoomHelpers.getDetailCode(tr.getAction());
+				}
+				return label;
+			}
 			
 			return super.getToolTip(ga);
 		}
