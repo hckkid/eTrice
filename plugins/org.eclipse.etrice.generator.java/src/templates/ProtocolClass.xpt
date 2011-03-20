@@ -82,9 +82,8 @@ public class «pc.name» {
 
 // port class
 static public class «name» extends PortBase {
-	«IF pclass!=null»«EXPAND ProcedureHelpers::UserCode FOR pclass.userCode»
-	«ENDIF»
-	
+	«IF pclass!=null»«EXPAND ProcedureHelpers::UserCode FOR pclass.userCode-»
+	«ENDIF-»
 	// constructors
 	public «name»(IEventReceiver actor, String name, int localId, Address addr, Address peerAddress) {
 		super(actor, name, localId, 0, addr, peerAddress);
@@ -128,11 +127,11 @@ static public class «name» extends PortBase {
 			}
 	}
 
-	«EXPAND ProcedureHelpers::Attributes FOR pclass.attributes»
-	«EXPAND ProcedureHelpers::Operations FOR pclass.operations»
+	«EXPAND ProcedureHelpers::Attributes FOR pclass.attributes-»
+	«EXPAND ProcedureHelpers::Operations FOR pclass.operations-»
 	
 	// sent messages
-	«FOREACH this.getOutgoing(conj) AS m»«EXPAND sendMessage(conj) FOR m»«ENDFOREACH»
+	«FOREACH this.getOutgoing(conj) AS m»«EXPAND sendMessage(conj) FOR m»«ENDFOREACH-»
 }
 
 // replicated port class
@@ -160,36 +159,36 @@ static public class «name»Repl {
 	
 	«IF conj»
 	// incoming messages
-	«FOREACH this.getAllIncomingMessages() AS m»
+	«FOREACH this.getAllIncomingMessages() AS m-»
 	«EXPAND messageSignature FOR m»{
 		for (int i=0; i<replication; ++i) {
 			ports.get(i).«EXPAND messageCall FOR m»;
 		}
 	}
-	«ENDFOREACH»
-	«ELSE»
+	«ENDFOREACH-»
+	«ELSE-»
 	// outgoing messages
-	«FOREACH this.getAllOutgoingMessages() AS m»
+	«FOREACH this.getAllOutgoingMessages() AS m-»
 	«EXPAND messageSignature FOR m»{
 		for (int i=0; i<replication; ++i) {
 			ports.get(i).«EXPAND messageCall FOR m»;
 		}
 	}
-	«ENDFOREACH»
-	«ENDIF»
+	«ENDFOREACH-»
+	«ENDIF-»
 }
 
 // interface for port class
 public interface I«name»{
-	«IF conj»
+	«IF conj-»
 	// outgoing messages
 	«FOREACH this.getAllOutgoingMessages() AS m» «EXPAND messageSignature FOR m»;
-	«ENDFOREACH»
-	«ELSE»
+	«ENDFOREACH-»
+	«ELSE-»
 	// incoming messages
 	«FOREACH this.getAllIncomingMessages() AS m» «EXPAND messageSignature FOR m»;
-	«ENDFOREACH»
-	«ENDIF»
+	«ENDFOREACH-»
+	«ENDIF-»
 }
 
 «ENDLET»
@@ -198,14 +197,14 @@ public interface I«name»{
 
 «DEFINE messageSignature FOR Message»public void «this.name» («FOREACH this.arguments AS a SEPARATOR "," »«a.type.typeName()» «a.name»«ENDFOREACH»)«ENDDEFINE»
 «DEFINE messageCall FOR Message»«this.name»(«FOREACH this.arguments AS a SEPARATOR ","» «a.name»«ENDFOREACH»)«ENDDEFINE»
-«DEFINE sendMessage(boolean conj) FOR Message»
-«LET conj?"IN":"OUT" AS dir»
-«LET this.getSendHandler(conj) AS hdlr»
+«DEFINE sendMessage(boolean conj) FOR Message-»
+«LET conj?"IN":"OUT" AS dir-»
+«LET this.getSendHandler(conj) AS hdlr-»
 	«EXPAND messageSignature FOR this»{
-		«IF hdlr!=null»
+		«IF hdlr!=null-»
 			«FOREACH hdlr.detailCode.commands AS command»	«command»
-			«ENDFOREACH»
-		«ELSE»
+			«ENDFOREACH-»
+		«ELSE-»
 			if (messageStrings[ «dir»_«this.name»] != "timerTick"){
 				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[«dir»_«this.name»]);
@@ -213,9 +212,9 @@ public interface I«name»{
 			if (getPeerAddress()!=null)
 			«IF this.arguments.isEmpty»getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), «dir»_«this.name»));
 			«ELSE» getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), «dir»_«this.name», new Object[]{«FOREACH this.arguments AS a SEPARATOR ","» «a.name»«ENDFOREACH»}));
-			«ENDIF»
-		«ENDIF»
+			«ENDIF-»
+		«ENDIF-»
 	}
-«ENDLET»
-«ENDLET»
+«ENDLET-»
+«ENDLET-»
 «ENDDEFINE»
