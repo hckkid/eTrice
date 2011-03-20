@@ -32,6 +32,10 @@
         eType="#//LayerConnection" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ActorContainerClass" eSuperTypes="#//StructureClass">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="userCode1" eType="#//DetailCode"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="userCode2" eType="#//DetailCode"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ifSPPs" upperBound="-1"
         eType="#//SPPRef" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="actorRefs" upperBound="-1"
@@ -151,10 +155,6 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="ifPorts" upperBound="-1"
         eType="#//Port" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="structureDocu" eType="#//Documentation"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="userCode1" eType="#//DetailCode"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="userCode2" eType="#//DetailCode"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="intPorts" upperBound="-1"
         eType="#//Port" containment="true"/>

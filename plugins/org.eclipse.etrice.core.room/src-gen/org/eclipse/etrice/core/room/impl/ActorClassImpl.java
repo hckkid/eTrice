@@ -23,7 +23,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.Attribute;
-import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.Documentation;
 import org.eclipse.etrice.core.room.ExternalPort;
 import org.eclipse.etrice.core.room.Operation;
@@ -44,8 +43,6 @@ import org.eclipse.etrice.core.room.StateGraph;
  *   <li>{@link org.eclipse.etrice.core.room.impl.ActorClassImpl#getBase <em>Base</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ActorClassImpl#getIfPorts <em>If Ports</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ActorClassImpl#getStructureDocu <em>Structure Docu</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.room.impl.ActorClassImpl#getUserCode1 <em>User Code1</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.room.impl.ActorClassImpl#getUserCode2 <em>User Code2</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ActorClassImpl#getIntPorts <em>Int Ports</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ActorClassImpl#getExtPorts <em>Ext Ports</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ActorClassImpl#getServiceImplementations <em>Service Implementations</em>}</li>
@@ -110,26 +107,6 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
    * @ordered
    */
   protected Documentation structureDocu;
-
-  /**
-   * The cached value of the '{@link #getUserCode1() <em>User Code1</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getUserCode1()
-   * @generated
-   * @ordered
-   */
-  protected DetailCode userCode1;
-
-  /**
-   * The cached value of the '{@link #getUserCode2() <em>User Code2</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getUserCode2()
-   * @generated
-   * @ordered
-   */
-  protected DetailCode userCode2;
 
   /**
    * The cached value of the '{@link #getIntPorts() <em>Int Ports</em>}' containment reference list.
@@ -365,102 +342,6 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
    * <!-- end-user-doc -->
    * @generated
    */
-  public DetailCode getUserCode1()
-  {
-    return userCode1;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetUserCode1(DetailCode newUserCode1, NotificationChain msgs)
-  {
-    DetailCode oldUserCode1 = userCode1;
-    userCode1 = newUserCode1;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RoomPackage.ACTOR_CLASS__USER_CODE1, oldUserCode1, newUserCode1);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setUserCode1(DetailCode newUserCode1)
-  {
-    if (newUserCode1 != userCode1)
-    {
-      NotificationChain msgs = null;
-      if (userCode1 != null)
-        msgs = ((InternalEObject)userCode1).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RoomPackage.ACTOR_CLASS__USER_CODE1, null, msgs);
-      if (newUserCode1 != null)
-        msgs = ((InternalEObject)newUserCode1).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RoomPackage.ACTOR_CLASS__USER_CODE1, null, msgs);
-      msgs = basicSetUserCode1(newUserCode1, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.ACTOR_CLASS__USER_CODE1, newUserCode1, newUserCode1));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public DetailCode getUserCode2()
-  {
-    return userCode2;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetUserCode2(DetailCode newUserCode2, NotificationChain msgs)
-  {
-    DetailCode oldUserCode2 = userCode2;
-    userCode2 = newUserCode2;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RoomPackage.ACTOR_CLASS__USER_CODE2, oldUserCode2, newUserCode2);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setUserCode2(DetailCode newUserCode2)
-  {
-    if (newUserCode2 != userCode2)
-    {
-      NotificationChain msgs = null;
-      if (userCode2 != null)
-        msgs = ((InternalEObject)userCode2).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RoomPackage.ACTOR_CLASS__USER_CODE2, null, msgs);
-      if (newUserCode2 != null)
-        msgs = ((InternalEObject)newUserCode2).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RoomPackage.ACTOR_CLASS__USER_CODE2, null, msgs);
-      msgs = basicSetUserCode2(newUserCode2, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.ACTOR_CLASS__USER_CODE2, newUserCode2, newUserCode2));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EList<Port> getIntPorts()
   {
     if (intPorts == null)
@@ -650,10 +531,6 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
         return ((InternalEList<?>)getIfPorts()).basicRemove(otherEnd, msgs);
       case RoomPackage.ACTOR_CLASS__STRUCTURE_DOCU:
         return basicSetStructureDocu(null, msgs);
-      case RoomPackage.ACTOR_CLASS__USER_CODE1:
-        return basicSetUserCode1(null, msgs);
-      case RoomPackage.ACTOR_CLASS__USER_CODE2:
-        return basicSetUserCode2(null, msgs);
       case RoomPackage.ACTOR_CLASS__INT_PORTS:
         return ((InternalEList<?>)getIntPorts()).basicRemove(otherEnd, msgs);
       case RoomPackage.ACTOR_CLASS__EXT_PORTS:
@@ -693,10 +570,6 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
         return getIfPorts();
       case RoomPackage.ACTOR_CLASS__STRUCTURE_DOCU:
         return getStructureDocu();
-      case RoomPackage.ACTOR_CLASS__USER_CODE1:
-        return getUserCode1();
-      case RoomPackage.ACTOR_CLASS__USER_CODE2:
-        return getUserCode2();
       case RoomPackage.ACTOR_CLASS__INT_PORTS:
         return getIntPorts();
       case RoomPackage.ACTOR_CLASS__EXT_PORTS:
@@ -740,12 +613,6 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
         return;
       case RoomPackage.ACTOR_CLASS__STRUCTURE_DOCU:
         setStructureDocu((Documentation)newValue);
-        return;
-      case RoomPackage.ACTOR_CLASS__USER_CODE1:
-        setUserCode1((DetailCode)newValue);
-        return;
-      case RoomPackage.ACTOR_CLASS__USER_CODE2:
-        setUserCode2((DetailCode)newValue);
         return;
       case RoomPackage.ACTOR_CLASS__INT_PORTS:
         getIntPorts().clear();
@@ -803,12 +670,6 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
       case RoomPackage.ACTOR_CLASS__STRUCTURE_DOCU:
         setStructureDocu((Documentation)null);
         return;
-      case RoomPackage.ACTOR_CLASS__USER_CODE1:
-        setUserCode1((DetailCode)null);
-        return;
-      case RoomPackage.ACTOR_CLASS__USER_CODE2:
-        setUserCode2((DetailCode)null);
-        return;
       case RoomPackage.ACTOR_CLASS__INT_PORTS:
         getIntPorts().clear();
         return;
@@ -855,10 +716,6 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
         return ifPorts != null && !ifPorts.isEmpty();
       case RoomPackage.ACTOR_CLASS__STRUCTURE_DOCU:
         return structureDocu != null;
-      case RoomPackage.ACTOR_CLASS__USER_CODE1:
-        return userCode1 != null;
-      case RoomPackage.ACTOR_CLASS__USER_CODE2:
-        return userCode2 != null;
       case RoomPackage.ACTOR_CLASS__INT_PORTS:
         return intPorts != null && !intPorts.isEmpty();
       case RoomPackage.ACTOR_CLASS__EXT_PORTS:

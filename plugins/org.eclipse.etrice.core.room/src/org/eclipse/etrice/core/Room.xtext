@@ -195,6 +195,8 @@ SubSystemRef:
 
 SubSystemClass:
 	'SubSystemClass' name=ID (docu=Documentation)? '{'
+		('usercode1' userCode1=DetailCode)?
+		('usercode2' userCode2=DetailCode)?
 		relayPorts+=Port*
 		ifSPPs+=SPPRef*
 		actorRefs+=ActorRef+

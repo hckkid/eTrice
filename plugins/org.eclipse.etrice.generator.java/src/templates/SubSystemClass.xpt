@@ -39,7 +39,11 @@ import org.eclipse.etrice.runtime.java.modelbase.SubSystemClassBase;
 «ENDLET»
 
 
+«EXPAND ProcedureHelpers::UserCode FOR cc.userCode1»
+
 public class «comp.name» extends SubSystemClassBase {
+
+	«EXPAND ProcedureHelpers::UserCode FOR cc.userCode2»
 	
 	public «comp.name»(IRTObject parent, String name) {
 		super(parent, name);
