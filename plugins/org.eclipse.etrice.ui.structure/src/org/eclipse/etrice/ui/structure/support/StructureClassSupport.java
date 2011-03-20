@@ -563,16 +563,16 @@ public class StructureClassSupport {
 					if (!present.contains(item))
 						items.add(item);
 				}
-				SupportUtil.addInterfaceItems(items, acShape, width, fp, ifitem2anchor);
+				SupportUtil.addInterfaceItems(items, 0, acShape, width, fp, ifitem2anchor);
 			}
 			if (sc instanceof ActorClass) {
 				
-				List<Port> ports = new ArrayList<Port>();
+				List<InterfaceItem> ports = new ArrayList<InterfaceItem>();
 				for (Port port : ((ActorClass) sc).getIntPorts()) {
 					if (!present.contains(port))
 						ports.add(port);
 				}
-				SupportUtil.addPorts(ports, acShape, width, fp, ifitem2anchor);
+				SupportUtil.addInterfaceItems(ports, 3*StructureClassSupport.MARGIN, acShape, width, fp, ifitem2anchor);
 			}
 		}
 		
