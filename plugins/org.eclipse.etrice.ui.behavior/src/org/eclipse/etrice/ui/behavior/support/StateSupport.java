@@ -203,8 +203,16 @@ public class StateSupport {
 				
 				Graphiti.getPeService().setPropertyValue(containerShape, Constants.TYPE_KEY, Constants.STATE_TYPE);
 	
-				int width = context.getWidth() <= 0 ? DEFAULT_SIZE_X : context.getWidth();
-				int height = context.getHeight() <= 0 ? DEFAULT_SIZE_Y : context.getHeight();
+				int width = context.getWidth();
+				int height = context.getHeight();
+				if (width<=0) {
+					width = DEFAULT_SIZE_X;
+					int textSize = s.getName().length()*6;
+					if (width<textSize)
+						width = textSize;
+				}
+				if (height<=0)
+					height = DEFAULT_SIZE_Y;
 			
 				boolean inherited = isInherited(getDiagram(), s);
 				Color lineColor = manageColor(inherited?INHERITED_COLOR:LINE_COLOR);
