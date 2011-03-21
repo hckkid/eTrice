@@ -1618,11 +1618,11 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_7 = (Keyword)cGroup.eContents().get(7);
 		
 		//LogicalSystem:
-		//	"LogicalSystem" name=ID docu=Documentation? "{" subSystems+=SubSystemRef+ bindings+=Binding*
+		//	"LogicalSystem" name=ID docu=Documentation? "{" subSystems+=SubSystemRef* bindings+=Binding*
 		//	connections+=LayerConnection* "}";
 		public ParserRule getRule() { return rule; }
 
-		//"LogicalSystem" name=ID docu=Documentation? "{" subSystems+=SubSystemRef+ bindings+=Binding*
+		//"LogicalSystem" name=ID docu=Documentation? "{" subSystems+=SubSystemRef* bindings+=Binding*
 		//connections+=LayerConnection* "}"
 		public Group getGroup() { return cGroup; }
 
@@ -1644,7 +1644,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		//"{"
 		public Keyword getLeftCurlyBracketKeyword_3() { return cLeftCurlyBracketKeyword_3; }
 
-		//subSystems+=SubSystemRef+
+		//subSystems+=SubSystemRef*
 		public Assignment getSubSystemsAssignment_4() { return cSubSystemsAssignment_4; }
 
 		//SubSystemRef
@@ -1767,12 +1767,12 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//SubSystemClass:
 		//	"SubSystemClass" name=ID docu=Documentation? "{" ("usercode1" userCode1=DetailCode)? ("usercode2"
-		//	userCode2=DetailCode)? relayPorts+=Port* ifSPPs+=SPPRef* actorRefs+=ActorRef+ bindings+=Binding*
+		//	userCode2=DetailCode)? relayPorts+=Port* ifSPPs+=SPPRef* actorRefs+=ActorRef* bindings+=Binding*
 		//	connections+=LayerConnection* threads+=LogicalThread* "}";
 		public ParserRule getRule() { return rule; }
 
 		//"SubSystemClass" name=ID docu=Documentation? "{" ("usercode1" userCode1=DetailCode)? ("usercode2" userCode2=DetailCode)?
-		//relayPorts+=Port* ifSPPs+=SPPRef* actorRefs+=ActorRef+ bindings+=Binding* connections+=LayerConnection*
+		//relayPorts+=Port* ifSPPs+=SPPRef* actorRefs+=ActorRef* bindings+=Binding* connections+=LayerConnection*
 		//threads+=LogicalThread* "}"
 		public Group getGroup() { return cGroup; }
 
@@ -1830,7 +1830,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		//SPPRef
 		public RuleCall getIfSPPsSPPRefParserRuleCall_7_0() { return cIfSPPsSPPRefParserRuleCall_7_0; }
 
-		//actorRefs+=ActorRef+
+		//actorRefs+=ActorRef*
 		public Assignment getActorRefsAssignment_8() { return cActorRefsAssignment_8; }
 
 		//ActorRef
@@ -4125,7 +4125,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//LogicalSystem:
-	//	"LogicalSystem" name=ID docu=Documentation? "{" subSystems+=SubSystemRef+ bindings+=Binding*
+	//	"LogicalSystem" name=ID docu=Documentation? "{" subSystems+=SubSystemRef* bindings+=Binding*
 	//	connections+=LayerConnection* "}";
 	public LogicalSystemElements getLogicalSystemAccess() {
 		return (pLogicalSystem != null) ? pLogicalSystem : (pLogicalSystem = new LogicalSystemElements());
@@ -4157,7 +4157,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 
 	//SubSystemClass:
 	//	"SubSystemClass" name=ID docu=Documentation? "{" ("usercode1" userCode1=DetailCode)? ("usercode2"
-	//	userCode2=DetailCode)? relayPorts+=Port* ifSPPs+=SPPRef* actorRefs+=ActorRef+ bindings+=Binding*
+	//	userCode2=DetailCode)? relayPorts+=Port* ifSPPs+=SPPRef* actorRefs+=ActorRef* bindings+=Binding*
 	//	connections+=LayerConnection* threads+=LogicalThread* "}";
 	public SubSystemClassElements getSubSystemClassAccess() {
 		return (pSubSystemClass != null) ? pSubSystemClass : (pSubSystemClass = new SubSystemClassElements());

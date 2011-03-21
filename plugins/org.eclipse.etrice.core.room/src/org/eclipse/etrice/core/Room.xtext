@@ -183,7 +183,7 @@ ServiceImplementation:
 
 LogicalSystem:
 	'LogicalSystem' name=ID (docu=Documentation)? '{'
-		subSystems+=SubSystemRef+
+		subSystems+=SubSystemRef*
 		bindings+=Binding*
 		connections+=LayerConnection*
 	'}';
@@ -199,7 +199,7 @@ SubSystemClass:
 		('usercode2' userCode2=DetailCode)?
 		relayPorts+=Port*
 		ifSPPs+=SPPRef*
-		actorRefs+=ActorRef+
+		actorRefs+=ActorRef*
 		bindings+=Binding*
 		connections+=LayerConnection*
 		threads+=LogicalThread*
