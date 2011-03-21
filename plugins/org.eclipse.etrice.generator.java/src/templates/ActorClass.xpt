@@ -100,22 +100,17 @@ public «IF ac.abstract»abstract «ENDIF»class «ac.name» extends «IF ac.base!=null
 	}
 
 	public void start(){
-		//System.out.println(toString()+"::start()");
-		
-		//TODO: execution of initial transition should also be triggered by message
-		«IF xpac.hasStateMachine()»
+		«IF xpac.hasStateMachine()-»
 		executeInitTransition();
-		«ENDIF»
+		«ENDIF-»
 	}
 
 	«IF !ac.overridesStop()»
 	public void stop(){
-		//System.out.println(toString()+"::stop()");
 	}
 	«ENDIF»
 	
 	public void destroy(){
-		//System.out.println(toString()+"::destroy()");
 	}	
 
 	«IF ac.stateMachine != null»
@@ -125,7 +120,6 @@ public «IF ac.abstract»abstract «ENDIF»class «ac.name» extends «IF ac.base!=null
 		@Override
 		public void receiveEvent(InterfaceItemBase ifitem, int evt, Object... data) {
 		}
-
 	«ENDIF»
 };
 «ENDFILE»

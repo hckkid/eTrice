@@ -31,30 +31,41 @@ public class MSCLogger {
 	public void setMSC(String msc_name, String path){
 		this.msc_name = msc_name;
 		this.path = path;
+		filter = new MSCFilter();
 	}
 
 	public synchronized void open(){
 		is_open = true;
 	}
 	
+	
 	public void addMessageAsyncOut(String source, String target, String message){
-		getCommandList().add( new String ("\t"+source+" >-- "+target+ " "  +message) );
+		createLine(source, " >-- ", target, message);
 	}
 
 	public void addMessageAsyncIn(String source, String target, String message){
-		getCommandList().add( new String ("\t"+source+" --> "+target+ " "  +message) );
+		createLine(source, " --> ", target, message);
 	}
 
+
 	public void addMessageSyncCall(String source, String target, String message){
-		getCommandList().add( new String ("\t"+source+" ==> "+target+ " "  +message) );
+		createLine(source, " ==> ", target, message);
 	}
 
 	public void addMessageSyncReturn(String source, String target, String message){
-		getCommandList().add( new String ("\t"+source+" <== "+target+ " "  +message) );
+		createLine(source, " <== ", target, message);
 	}
 
+	
 	public void addActorState(String actor, String state){
-		getCommandList().add( new String ("\t"+actor+" >>> "+state) );
+		if (filter.applyTo(actor))
+			getCommandList().add( new String ("\t"+filter.reduceString(actor)+" >>> "+state) );
+	}
+
+	private void createLine(String source, String mid, String target, String message) {
+		if (filter.applyTo(source) && filter.applyTo(target)) {
+			getCommandList().add( new String ("\t"+filter.reduceString(source)+mid+filter.reduceString(target)+ " "  +message) );
+		}
 	}
 	
 	public synchronized void close(){
@@ -91,8 +102,13 @@ public class MSCLogger {
 		return commandList;
 	}
 
+	public MSCFilter getMSCFilter(){
+		return filter;
+	}
+	
 	private List<String> commandList = new ArrayList<String>();
 	
+	private MSCFilter filter = null;
 	
 	private String path = null;
 	private String msc_name = null;
