@@ -116,12 +116,12 @@ public class SupportUtil {
 		SupportUtil.getAnchors(obj, refShape, ifitem2anchor);
 	}
 
-	public static void addInterfaceItem(InterfaceItem item, ContainerShape acShape, int pos, IFeatureProvider featureProvider, final Map<String, Anchor> ifitem2anchor) {
+	public static void addInterfaceItem(InterfaceItem item, ContainerShape acShape, int x, int y, IFeatureProvider featureProvider, final Map<String, Anchor> ifitem2anchor) {
 		AddContext addContext = new AddContext();
 		addContext.setNewObject(item);
 		addContext.setTargetContainer(acShape);
-		addContext.setX(pos);
-		addContext.setY(2*StructureClassSupport.MARGIN);
+		addContext.setX(x);
+		addContext.setY(y);
 		
 		ContainerShape pe = (ContainerShape) featureProvider.addIfPossible(addContext);
 		assert(!pe.getAnchors().isEmpty()): "interface item should have an anchor";
@@ -154,7 +154,7 @@ public class SupportUtil {
 		featureProvider.addIfPossible(context);
 	}
 
-	public static void addInterfaceItems(List<InterfaceItem> items, ContainerShape acShape, int width,
+	public static void addInterfaceItems(List<? extends InterfaceItem> items, int y, ContainerShape acShape, int width,
 			IFeatureProvider fp,
 			final Map<String, Anchor> ifitem2anchor) {
 		
@@ -162,7 +162,7 @@ public class SupportUtil {
 		int delta = width/(n+1);
 		int pos = delta;
 		for (InterfaceItem item : items) {
-			SupportUtil.addInterfaceItem(item, acShape, pos+StructureClassSupport.MARGIN, fp, ifitem2anchor);
+			SupportUtil.addInterfaceItem(item, acShape, pos+StructureClassSupport.MARGIN, y, fp, ifitem2anchor);
 			pos += delta;
 		}
 	}
@@ -175,7 +175,7 @@ public class SupportUtil {
 		int gap = (width-(ncols*ActorContainerRefSupport.DEFAULT_SIZE_X))/(ncols+1);
 		int delta = gap+ActorContainerRefSupport.DEFAULT_SIZE_X;
 		int x0 = gap+ActorContainerRefSupport.DEFAULT_SIZE_X/2;
-		int y0 = ActorContainerRefSupport.DEFAULT_SIZE_Y*3/2;
+		int y0 = ActorContainerRefSupport.DEFAULT_SIZE_Y*5/2;
 		int i = 0;
 		for (ActorContainerRef ar : actorRefs) {
 			int row = i/ncols;
@@ -190,17 +190,6 @@ public class SupportUtil {
 			int y = y0+(ActorContainerRefSupport.MARGIN+ActorContainerRefSupport.DEFAULT_SIZE_Y)*row;
 			SupportUtil.addRefItem(ar, acShape, x+StructureClassSupport.MARGIN, y+StructureClassSupport.MARGIN, fp, ifitem2anchor);
 			++i;
-		}
-	}
-
-	public static void addPorts(List<Port> ifPorts, ContainerShape acShape,
-			int width, IFeatureProvider featureProvider, final Map<String, Anchor> port2anchor) {
-		int n = ifPorts.size();
-		int delta = width/(n+1);
-		int pos = delta;
-		for (Port port : ifPorts) {
-			SupportUtil.addInterfaceItem(port, acShape, pos+StructureClassSupport.MARGIN, featureProvider, port2anchor);
-			pos += delta;
 		}
 	}
 

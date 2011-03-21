@@ -20,7 +20,6 @@ import org.eclipse.emf.transaction.RecordingCommand;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorContainerClass;
-import org.eclipse.etrice.core.room.ActorContainerRef;
 import org.eclipse.etrice.core.room.Binding;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.LayerConnection;
@@ -72,29 +71,25 @@ public class PopulateDiagramCommand extends RecordingCommand {
 				List<InterfaceItem> items = new ArrayList<InterfaceItem>();
 				items.addAll(((ActorClass) sc).getIfPorts());
 				items.addAll(((ActorClass) sc).getIfSPPs());
-				SupportUtil.addInterfaceItems(items, acShape, width, featureProvider, ifitem2anchor);
+				SupportUtil.addInterfaceItems(items, 0, acShape, width, featureProvider, ifitem2anchor);
 
-				SupportUtil.addPorts(((ActorClass)sc).getIntPorts(), acShape, width, featureProvider, ifitem2anchor);
+				SupportUtil.addInterfaceItems(((ActorClass)sc).getIntPorts(), 3*StructureClassSupport.MARGIN, acShape, width, featureProvider, ifitem2anchor);
 			}
 			else if (sc instanceof SubSystemClass) {
 				List<InterfaceItem> items = new ArrayList<InterfaceItem>();
 				items.addAll(((SubSystemClass) sc).getRelayPorts());
 				items.addAll(((SubSystemClass) sc).getIfSPPs());
-				SupportUtil.addInterfaceItems(items, acShape, width, featureProvider, ifitem2anchor);
+				SupportUtil.addInterfaceItems(items, 0, acShape, width, featureProvider, ifitem2anchor);
 			}
 			
 			// actor container references
 			if (sc instanceof ActorContainerClass) {
 				ActorContainerClass acc = (ActorContainerClass) sc;
-				
-	        	List<? extends ActorContainerRef> actorRefs = acc.getActorRefs();
-	        	SupportUtil.addRefItems(actorRefs, acShape, width, featureProvider, ifitem2anchor);
+	        	SupportUtil.addRefItems(acc.getActorRefs(), acShape, width, featureProvider, ifitem2anchor);
 			}
 			else if (sc instanceof LogicalSystem) {
 				LogicalSystem sys = (LogicalSystem) sc;
-				
-	        	List<? extends ActorContainerRef> subSystems = sys.getSubSystems();
-	        	SupportUtil.addRefItems(subSystems, acShape, width, featureProvider, ifitem2anchor);
+	        	SupportUtil.addRefItems(sys.getSubSystems(), acShape, width, featureProvider, ifitem2anchor);
 			}
 			
 			// base class items

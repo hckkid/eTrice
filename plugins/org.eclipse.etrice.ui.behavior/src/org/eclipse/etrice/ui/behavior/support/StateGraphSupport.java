@@ -246,6 +246,7 @@ public class StateGraphSupport {
 				Object bo = getBusinessObjectForPictogramElement(container);
 				if (bo instanceof StateGraph) {
 					StateGraph sg = (StateGraph) bo;
+					getDiagramEditor().selectPictogramElements(new PictogramElement[] {});
 					ContextSwitcher.goUp(getDiagram(), sg);
 				}
 			}
