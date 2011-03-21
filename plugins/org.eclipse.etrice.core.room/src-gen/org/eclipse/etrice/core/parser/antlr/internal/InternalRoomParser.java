@@ -6489,7 +6489,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start ruleLogicalSystem
-    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3029:1: ruleLogicalSystem returns [EObject current=null] : ( 'LogicalSystem' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? '{' ( (lv_subSystems_4_0= ruleSubSystemRef ) )+ ( (lv_bindings_5_0= ruleBinding ) )* ( (lv_connections_6_0= ruleLayerConnection ) )* '}' ) ;
+    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3029:1: ruleLogicalSystem returns [EObject current=null] : ( 'LogicalSystem' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? '{' ( (lv_subSystems_4_0= ruleSubSystemRef ) )* ( (lv_bindings_5_0= ruleBinding ) )* ( (lv_connections_6_0= ruleLayerConnection ) )* '}' ) ;
     public final EObject ruleLogicalSystem() throws RecognitionException {
         EObject current = null;
 
@@ -6506,11 +6506,11 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3034:6: ( ( 'LogicalSystem' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? '{' ( (lv_subSystems_4_0= ruleSubSystemRef ) )+ ( (lv_bindings_5_0= ruleBinding ) )* ( (lv_connections_6_0= ruleLayerConnection ) )* '}' ) )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3035:1: ( 'LogicalSystem' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? '{' ( (lv_subSystems_4_0= ruleSubSystemRef ) )+ ( (lv_bindings_5_0= ruleBinding ) )* ( (lv_connections_6_0= ruleLayerConnection ) )* '}' )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3034:6: ( ( 'LogicalSystem' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? '{' ( (lv_subSystems_4_0= ruleSubSystemRef ) )* ( (lv_bindings_5_0= ruleBinding ) )* ( (lv_connections_6_0= ruleLayerConnection ) )* '}' ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3035:1: ( 'LogicalSystem' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? '{' ( (lv_subSystems_4_0= ruleSubSystemRef ) )* ( (lv_bindings_5_0= ruleBinding ) )* ( (lv_connections_6_0= ruleLayerConnection ) )* '}' )
             {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3035:1: ( 'LogicalSystem' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? '{' ( (lv_subSystems_4_0= ruleSubSystemRef ) )+ ( (lv_bindings_5_0= ruleBinding ) )* ( (lv_connections_6_0= ruleLayerConnection ) )* '}' )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3035:3: 'LogicalSystem' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? '{' ( (lv_subSystems_4_0= ruleSubSystemRef ) )+ ( (lv_bindings_5_0= ruleBinding ) )* ( (lv_connections_6_0= ruleLayerConnection ) )* '}'
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3035:1: ( 'LogicalSystem' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? '{' ( (lv_subSystems_4_0= ruleSubSystemRef ) )* ( (lv_bindings_5_0= ruleBinding ) )* ( (lv_connections_6_0= ruleLayerConnection ) )* '}' )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3035:3: 'LogicalSystem' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? '{' ( (lv_subSystems_4_0= ruleSubSystemRef ) )* ( (lv_bindings_5_0= ruleBinding ) )* ( (lv_connections_6_0= ruleLayerConnection ) )* '}'
             {
             match(input,51,FOLLOW_51_in_ruleLogicalSystem4808); 
 
@@ -6600,8 +6600,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
                     createLeafNode(grammarAccess.getLogicalSystemAccess().getLeftCurlyBracketKeyword_3(), null); 
                 
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3091:1: ( (lv_subSystems_4_0= ruleSubSystemRef ) )+
-            int cnt62=0;
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3091:1: ( (lv_subSystems_4_0= ruleSubSystemRef ) )*
             loop62:
             do {
                 int alt62=2;
@@ -6651,12 +6650,8 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    if ( cnt62 >= 1 ) break loop62;
-                        EarlyExitException eee =
-                            new EarlyExitException(62, input);
-                        throw eee;
+            	    break loop62;
                 }
-                cnt62++;
             } while (true);
 
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3115:3: ( (lv_bindings_5_0= ruleBinding ) )*
@@ -7020,7 +7015,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start ruleSubSystemClass
-    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3281:1: ruleSubSystemClass returns [EObject current=null] : ( 'SubSystemClass' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? '{' ( 'usercode1' ( (lv_userCode1_5_0= ruleDetailCode ) ) )? ( 'usercode2' ( (lv_userCode2_7_0= ruleDetailCode ) ) )? ( (lv_relayPorts_8_0= rulePort ) )* ( (lv_ifSPPs_9_0= ruleSPPRef ) )* ( (lv_actorRefs_10_0= ruleActorRef ) )+ ( (lv_bindings_11_0= ruleBinding ) )* ( (lv_connections_12_0= ruleLayerConnection ) )* ( (lv_threads_13_0= ruleLogicalThread ) )* '}' ) ;
+    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3281:1: ruleSubSystemClass returns [EObject current=null] : ( 'SubSystemClass' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? '{' ( 'usercode1' ( (lv_userCode1_5_0= ruleDetailCode ) ) )? ( 'usercode2' ( (lv_userCode2_7_0= ruleDetailCode ) ) )? ( (lv_relayPorts_8_0= rulePort ) )* ( (lv_ifSPPs_9_0= ruleSPPRef ) )* ( (lv_actorRefs_10_0= ruleActorRef ) )* ( (lv_bindings_11_0= ruleBinding ) )* ( (lv_connections_12_0= ruleLayerConnection ) )* ( (lv_threads_13_0= ruleLogicalThread ) )* '}' ) ;
     public final EObject ruleSubSystemClass() throws RecognitionException {
         EObject current = null;
 
@@ -7047,11 +7042,11 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3286:6: ( ( 'SubSystemClass' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? '{' ( 'usercode1' ( (lv_userCode1_5_0= ruleDetailCode ) ) )? ( 'usercode2' ( (lv_userCode2_7_0= ruleDetailCode ) ) )? ( (lv_relayPorts_8_0= rulePort ) )* ( (lv_ifSPPs_9_0= ruleSPPRef ) )* ( (lv_actorRefs_10_0= ruleActorRef ) )+ ( (lv_bindings_11_0= ruleBinding ) )* ( (lv_connections_12_0= ruleLayerConnection ) )* ( (lv_threads_13_0= ruleLogicalThread ) )* '}' ) )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3287:1: ( 'SubSystemClass' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? '{' ( 'usercode1' ( (lv_userCode1_5_0= ruleDetailCode ) ) )? ( 'usercode2' ( (lv_userCode2_7_0= ruleDetailCode ) ) )? ( (lv_relayPorts_8_0= rulePort ) )* ( (lv_ifSPPs_9_0= ruleSPPRef ) )* ( (lv_actorRefs_10_0= ruleActorRef ) )+ ( (lv_bindings_11_0= ruleBinding ) )* ( (lv_connections_12_0= ruleLayerConnection ) )* ( (lv_threads_13_0= ruleLogicalThread ) )* '}' )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3286:6: ( ( 'SubSystemClass' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? '{' ( 'usercode1' ( (lv_userCode1_5_0= ruleDetailCode ) ) )? ( 'usercode2' ( (lv_userCode2_7_0= ruleDetailCode ) ) )? ( (lv_relayPorts_8_0= rulePort ) )* ( (lv_ifSPPs_9_0= ruleSPPRef ) )* ( (lv_actorRefs_10_0= ruleActorRef ) )* ( (lv_bindings_11_0= ruleBinding ) )* ( (lv_connections_12_0= ruleLayerConnection ) )* ( (lv_threads_13_0= ruleLogicalThread ) )* '}' ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3287:1: ( 'SubSystemClass' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? '{' ( 'usercode1' ( (lv_userCode1_5_0= ruleDetailCode ) ) )? ( 'usercode2' ( (lv_userCode2_7_0= ruleDetailCode ) ) )? ( (lv_relayPorts_8_0= rulePort ) )* ( (lv_ifSPPs_9_0= ruleSPPRef ) )* ( (lv_actorRefs_10_0= ruleActorRef ) )* ( (lv_bindings_11_0= ruleBinding ) )* ( (lv_connections_12_0= ruleLayerConnection ) )* ( (lv_threads_13_0= ruleLogicalThread ) )* '}' )
             {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3287:1: ( 'SubSystemClass' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? '{' ( 'usercode1' ( (lv_userCode1_5_0= ruleDetailCode ) ) )? ( 'usercode2' ( (lv_userCode2_7_0= ruleDetailCode ) ) )? ( (lv_relayPorts_8_0= rulePort ) )* ( (lv_ifSPPs_9_0= ruleSPPRef ) )* ( (lv_actorRefs_10_0= ruleActorRef ) )+ ( (lv_bindings_11_0= ruleBinding ) )* ( (lv_connections_12_0= ruleLayerConnection ) )* ( (lv_threads_13_0= ruleLogicalThread ) )* '}' )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3287:3: 'SubSystemClass' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? '{' ( 'usercode1' ( (lv_userCode1_5_0= ruleDetailCode ) ) )? ( 'usercode2' ( (lv_userCode2_7_0= ruleDetailCode ) ) )? ( (lv_relayPorts_8_0= rulePort ) )* ( (lv_ifSPPs_9_0= ruleSPPRef ) )* ( (lv_actorRefs_10_0= ruleActorRef ) )+ ( (lv_bindings_11_0= ruleBinding ) )* ( (lv_connections_12_0= ruleLayerConnection ) )* ( (lv_threads_13_0= ruleLogicalThread ) )* '}'
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3287:1: ( 'SubSystemClass' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? '{' ( 'usercode1' ( (lv_userCode1_5_0= ruleDetailCode ) ) )? ( 'usercode2' ( (lv_userCode2_7_0= ruleDetailCode ) ) )? ( (lv_relayPorts_8_0= rulePort ) )* ( (lv_ifSPPs_9_0= ruleSPPRef ) )* ( (lv_actorRefs_10_0= ruleActorRef ) )* ( (lv_bindings_11_0= ruleBinding ) )* ( (lv_connections_12_0= ruleLayerConnection ) )* ( (lv_threads_13_0= ruleLogicalThread ) )* '}' )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3287:3: 'SubSystemClass' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? '{' ( 'usercode1' ( (lv_userCode1_5_0= ruleDetailCode ) ) )? ( 'usercode2' ( (lv_userCode2_7_0= ruleDetailCode ) ) )? ( (lv_relayPorts_8_0= rulePort ) )* ( (lv_ifSPPs_9_0= ruleSPPRef ) )* ( (lv_actorRefs_10_0= ruleActorRef ) )* ( (lv_bindings_11_0= ruleBinding ) )* ( (lv_connections_12_0= ruleLayerConnection ) )* ( (lv_threads_13_0= ruleLogicalThread ) )* '}'
             {
             match(input,53,FOLLOW_53_in_ruleSubSystemClass5179); 
 
@@ -7363,8 +7358,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 }
             } while (true);
 
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3447:3: ( (lv_actorRefs_10_0= ruleActorRef ) )+
-            int cnt71=0;
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3447:3: ( (lv_actorRefs_10_0= ruleActorRef ) )*
             loop71:
             do {
                 int alt71=2;
@@ -7414,12 +7408,8 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    if ( cnt71 >= 1 ) break loop71;
-                        EarlyExitException eee =
-                            new EarlyExitException(71, input);
-                        throw eee;
+            	    break loop71;
                 }
-                cnt71++;
             } while (true);
 
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3471:3: ( (lv_bindings_11_0= ruleBinding ) )*
@@ -15367,7 +15357,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_51_in_ruleLogicalSystem4808 = new BitSet(new long[]{0x0000000000000010L});
     public static final BitSet FOLLOW_RULE_ID_in_ruleLogicalSystem4825 = new BitSet(new long[]{0x0000000000041000L});
     public static final BitSet FOLLOW_ruleDocumentation_in_ruleLogicalSystem4851 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_ruleLogicalSystem4862 = new BitSet(new long[]{0x0010000000000000L});
+    public static final BitSet FOLLOW_12_in_ruleLogicalSystem4862 = new BitSet(new long[]{0x0510000000002000L});
     public static final BitSet FOLLOW_ruleSubSystemRef_in_ruleLogicalSystem4883 = new BitSet(new long[]{0x0510000000002000L});
     public static final BitSet FOLLOW_ruleBinding_in_ruleLogicalSystem4905 = new BitSet(new long[]{0x0500000000002000L});
     public static final BitSet FOLLOW_ruleLayerConnection_in_ruleLogicalSystem4927 = new BitSet(new long[]{0x0400000000002000L});
@@ -15384,13 +15374,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_53_in_ruleSubSystemClass5179 = new BitSet(new long[]{0x0000000000000010L});
     public static final BitSet FOLLOW_RULE_ID_in_ruleSubSystemClass5196 = new BitSet(new long[]{0x0000000000041000L});
     public static final BitSet FOLLOW_ruleDocumentation_in_ruleSubSystemClass5222 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_ruleSubSystemClass5233 = new BitSet(new long[]{0x4001300006000000L});
+    public static final BitSet FOLLOW_12_in_ruleSubSystemClass5233 = new BitSet(new long[]{0x4541300006002000L});
     public static final BitSet FOLLOW_25_in_ruleSubSystemClass5244 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_ruleDetailCode_in_ruleSubSystemClass5265 = new BitSet(new long[]{0x4001300004000000L});
+    public static final BitSet FOLLOW_ruleDetailCode_in_ruleSubSystemClass5265 = new BitSet(new long[]{0x4541300004002000L});
     public static final BitSet FOLLOW_26_in_ruleSubSystemClass5278 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_ruleDetailCode_in_ruleSubSystemClass5299 = new BitSet(new long[]{0x4001300000000000L});
-    public static final BitSet FOLLOW_rulePort_in_ruleSubSystemClass5322 = new BitSet(new long[]{0x4001300000000000L});
-    public static final BitSet FOLLOW_ruleSPPRef_in_ruleSubSystemClass5344 = new BitSet(new long[]{0x4001000000000000L});
+    public static final BitSet FOLLOW_ruleDetailCode_in_ruleSubSystemClass5299 = new BitSet(new long[]{0x4541300000002000L});
+    public static final BitSet FOLLOW_rulePort_in_ruleSubSystemClass5322 = new BitSet(new long[]{0x4541300000002000L});
+    public static final BitSet FOLLOW_ruleSPPRef_in_ruleSubSystemClass5344 = new BitSet(new long[]{0x4541000000002000L});
     public static final BitSet FOLLOW_ruleActorRef_in_ruleSubSystemClass5366 = new BitSet(new long[]{0x4540000000002000L});
     public static final BitSet FOLLOW_ruleBinding_in_ruleSubSystemClass5388 = new BitSet(new long[]{0x0540000000002000L});
     public static final BitSet FOLLOW_ruleLayerConnection_in_ruleSubSystemClass5410 = new BitSet(new long[]{0x0440000000002000L});

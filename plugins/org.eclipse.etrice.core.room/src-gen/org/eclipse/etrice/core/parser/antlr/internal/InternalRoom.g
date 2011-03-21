@@ -3112,7 +3112,7 @@ ruleLogicalSystem returns [EObject current=null]
 	    }
 
 )
-)+(
+)*(
 (
 		{ 
 	        currentNode=createCompositeNode(grammarAccess.getLogicalSystemAccess().getBindingsBindingParserRuleCall_5_0(), currentNode); 
@@ -3468,7 +3468,7 @@ ruleSubSystemClass returns [EObject current=null]
 	    }
 
 )
-)+(
+)*(
 (
 		{ 
 	        currentNode=createCompositeNode(grammarAccess.getSubSystemClassAccess().getBindingsBindingParserRuleCall_9_0(), currentNode); 
