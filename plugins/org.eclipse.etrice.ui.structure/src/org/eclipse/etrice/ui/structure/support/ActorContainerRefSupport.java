@@ -378,24 +378,7 @@ public class ActorContainerRefSupport {
 					// TODOHRR: introduce a method to revert changes
 					throw new RuntimeException();
 				
-				updateFigure(acr, context);
-			}
-
-			private void updateFigure(ActorContainerRef acr, ICustomContext context) {
-				PictogramElement pe = context.getPictogramElements()[0];
-				ContainerShape container = (ContainerShape)pe;
-				
-				// we clear the figure and rebuild it
-//				GraphicsAlgorithm invisibleRect = pe.getGraphicsAlgorithm();
-//				invisibleRect.getGraphicsAlgorithmChildren().clear();
-				
-//				createPortFigure(acr, false, container, invisibleRect, manageColor(DARK_COLOR), manageColor(BRIGHT_COLOR));
-				
-				GraphicsAlgorithm ga = container.getChildren().get(1).getGraphicsAlgorithm();
-				if (ga instanceof Text) {
-					((Text)ga).setValue(acr.getName());
-				}
-
+				updateLabel(acr, context.getPictogramElements()[0]);
 			}
 			
 		}
@@ -601,6 +584,8 @@ public class ActorContainerRefSupport {
 					}
 				}
 
+				updateLabel(acr, context.getPictogramElement());
+				
 				InterfaceItemSupport.createRefItems(acr, containerShape, fp);
 				
 				return true;
@@ -819,6 +804,15 @@ public class ActorContainerRefSupport {
 			hint.setLineVisible(hasSubStructure);
 			hint = borderRect.getGraphicsAlgorithmChildren().get(1);
 			hint.setLineVisible(hasSubStructure);
+		}
+
+		private static void updateLabel(ActorContainerRef acr, PictogramElement pe) {
+			ContainerShape container = (ContainerShape)pe;
+			
+			GraphicsAlgorithm ga = container.getChildren().get(0).getGraphicsAlgorithm();
+			if (ga instanceof Text) {
+				((Text)ga).setValue(RoomNameProvider.getRefLabelName(acr));
+			}
 		}
 	}
 	
