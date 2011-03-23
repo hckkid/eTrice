@@ -20,4 +20,7 @@
   «EXPAND ActorClass::actorClass FOR this»
   «EXPAND SubSystemClass::subSystemClass FOR this»
   «EXPAND SubSystemRunner::subSystemRunner FOR this»
+
+  «EXPAND DocGraphviz::docGraphviz FOR this»
+
 «ENDDEFINE»
