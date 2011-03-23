@@ -675,6 +675,24 @@ public class InterfaceItemSupport {
                 invisible.getGraphicsAlgorithmChildren().get(0);
             return rectangle;
 		}
+		
+		@Override
+		public String getToolTip(GraphicsAlgorithm ga) {
+			// if this is called we know there is a business object!=null
+			PictogramElement pe = ga.getPictogramElement();
+			
+			EObject bo = Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(pe);
+			if (bo instanceof InterfaceItem) {
+				String name = ((InterfaceItem) bo).getName();
+				String protocol = ((InterfaceItem) bo).getProtocol().getName();
+				if (bo instanceof Port)
+					if (((Port) bo).isConjugated())
+						protocol = "conj "+protocol;
+				
+				return name+"\n("+protocol+")";
+			}
+			return super.getToolTip(ga);
+		}
 	}
 	
 	public static void createRefItems(ActorContainerRef acr, ContainerShape refShape, IFeatureProvider featureProvider) {

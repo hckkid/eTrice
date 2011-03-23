@@ -8287,16 +8287,9 @@ rule__LogicalSystem__Group__4__Impl
     }
 :
 (
-(
-{ before(grammarAccess.getLogicalSystemAccess().getSubSystemsAssignment_4()); }
-(rule__LogicalSystem__SubSystemsAssignment_4)
-{ after(grammarAccess.getLogicalSystemAccess().getSubSystemsAssignment_4()); }
-)
-(
 { before(grammarAccess.getLogicalSystemAccess().getSubSystemsAssignment_4()); }
 (rule__LogicalSystem__SubSystemsAssignment_4)*
 { after(grammarAccess.getLogicalSystemAccess().getSubSystemsAssignment_4()); }
-)
 )
 
 ;
@@ -8821,16 +8814,9 @@ rule__SubSystemClass__Group__8__Impl
     }
 :
 (
-(
-{ before(grammarAccess.getSubSystemClassAccess().getActorRefsAssignment_8()); }
-(rule__SubSystemClass__ActorRefsAssignment_8)
-{ after(grammarAccess.getSubSystemClassAccess().getActorRefsAssignment_8()); }
-)
-(
 { before(grammarAccess.getSubSystemClassAccess().getActorRefsAssignment_8()); }
 (rule__SubSystemClass__ActorRefsAssignment_8)*
 { after(grammarAccess.getSubSystemClassAccess().getActorRefsAssignment_8()); }
-)
 )
 
 ;

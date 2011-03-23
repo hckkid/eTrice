@@ -716,7 +716,7 @@
           <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.68"/>
         </elements>
         <elements xsi:type="xtext:Keyword" value="{"/>
-        <elements xsi:type="xtext:Assignment" cardinality="+" feature="subSystems" operator="+=">
+        <elements xsi:type="xtext:Assignment" cardinality="*" feature="subSystems" operator="+=">
           <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.29"/>
         </elements>
         <elements xsi:type="xtext:Assignment" cardinality="*" feature="bindings" operator="+=">
@@ -791,7 +791,7 @@
         <elements xsi:type="xtext:Assignment" cardinality="*" feature="ifSPPs" operator="+=">
           <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.25"/>
         </elements>
-        <elements xsi:type="xtext:Assignment" cardinality="+" feature="actorRefs" operator="+=">
+        <elements xsi:type="xtext:Assignment" cardinality="*" feature="actorRefs" operator="+=">
           <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.40"/>
         </elements>
         <elements xsi:type="xtext:Assignment" cardinality="*" feature="bindings" operator="+=">

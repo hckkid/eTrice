@@ -7782,12 +7782,12 @@ protected class ServiceImplementation_SppAssignment_2 extends AssignmentToken  {
 /************ begin Rule LogicalSystem ****************
  *
  * LogicalSystem:
- * 	"LogicalSystem" name=ID docu=Documentation? "{" subSystems+=SubSystemRef+ bindings+=Binding*
+ * 	"LogicalSystem" name=ID docu=Documentation? "{" subSystems+=SubSystemRef* bindings+=Binding*
  * 	connections+=LayerConnection* "}";
  *
  **/
 
-// "LogicalSystem" name=ID docu=Documentation? "{" subSystems+=SubSystemRef+ bindings+=Binding*
+// "LogicalSystem" name=ID docu=Documentation? "{" subSystems+=SubSystemRef* bindings+=Binding*
 // connections+=LayerConnection* "}"
 protected class LogicalSystem_Group extends GroupToken {
 	
@@ -7941,7 +7941,7 @@ protected class LogicalSystem_LeftCurlyBracketKeyword_3 extends KeywordToken  {
 
 }
 
-// subSystems+=SubSystemRef+
+// subSystems+=SubSystemRef*
 protected class LogicalSystem_SubSystemsAssignment_4 extends AssignmentToken  {
 	
 	public LogicalSystem_SubSystemsAssignment_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -7963,7 +7963,7 @@ protected class LogicalSystem_SubSystemsAssignment_4 extends AssignmentToken  {
 
     @Override	
 	public IEObjectConsumer tryConsume() {
-		if((value = eObjectConsumer.getConsumable("subSystems",true)) == null) return null;
+		if((value = eObjectConsumer.getConsumable("subSystems",false)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("subSystems");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
@@ -8030,6 +8030,7 @@ protected class LogicalSystem_BindingsAssignment_5 extends AssignmentToken  {
 		switch(index) {
 			case 0: return new LogicalSystem_BindingsAssignment_5(lastRuleCallOrigin, next, actIndex, consumed);
 			case 1: return new LogicalSystem_SubSystemsAssignment_4(lastRuleCallOrigin, next, actIndex, consumed);
+			case 2: return new LogicalSystem_LeftCurlyBracketKeyword_3(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -8078,6 +8079,7 @@ protected class LogicalSystem_ConnectionsAssignment_6 extends AssignmentToken  {
 			case 0: return new LogicalSystem_ConnectionsAssignment_6(lastRuleCallOrigin, next, actIndex, consumed);
 			case 1: return new LogicalSystem_BindingsAssignment_5(lastRuleCallOrigin, next, actIndex, consumed);
 			case 2: return new LogicalSystem_SubSystemsAssignment_4(lastRuleCallOrigin, next, actIndex, consumed);
+			case 3: return new LogicalSystem_LeftCurlyBracketKeyword_3(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -8101,6 +8103,7 @@ protected class LogicalSystem_RightCurlyBracketKeyword_7 extends KeywordToken  {
 			case 0: return new LogicalSystem_ConnectionsAssignment_6(lastRuleCallOrigin, this, 0, inst);
 			case 1: return new LogicalSystem_BindingsAssignment_5(lastRuleCallOrigin, this, 1, inst);
 			case 2: return new LogicalSystem_SubSystemsAssignment_4(lastRuleCallOrigin, this, 2, inst);
+			case 3: return new LogicalSystem_LeftCurlyBracketKeyword_3(lastRuleCallOrigin, this, 3, inst);
 			default: return null;
 		}	
 	}
@@ -8430,13 +8433,13 @@ protected class SubSystemRef_DocuAssignment_4 extends AssignmentToken  {
  *
  * SubSystemClass:
  * 	"SubSystemClass" name=ID docu=Documentation? "{" ("usercode1" userCode1=DetailCode)? ("usercode2"
- * 	userCode2=DetailCode)? relayPorts+=Port* ifSPPs+=SPPRef* actorRefs+=ActorRef+ bindings+=Binding*
+ * 	userCode2=DetailCode)? relayPorts+=Port* ifSPPs+=SPPRef* actorRefs+=ActorRef* bindings+=Binding*
  * 	connections+=LayerConnection* threads+=LogicalThread* "}";
  *
  **/
 
 // "SubSystemClass" name=ID docu=Documentation? "{" ("usercode1" userCode1=DetailCode)? ("usercode2" userCode2=DetailCode)?
-// relayPorts+=Port* ifSPPs+=SPPRef* actorRefs+=ActorRef+ bindings+=Binding* connections+=LayerConnection*
+// relayPorts+=Port* ifSPPs+=SPPRef* actorRefs+=ActorRef* bindings+=Binding* connections+=LayerConnection*
 // threads+=LogicalThread* "}"
 protected class SubSystemClass_Group extends GroupToken {
 	
@@ -8872,7 +8875,7 @@ protected class SubSystemClass_IfSPPsAssignment_7 extends AssignmentToken  {
 	}	
 }
 
-// actorRefs+=ActorRef+
+// actorRefs+=ActorRef*
 protected class SubSystemClass_ActorRefsAssignment_8 extends AssignmentToken  {
 	
 	public SubSystemClass_ActorRefsAssignment_8(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -8894,7 +8897,7 @@ protected class SubSystemClass_ActorRefsAssignment_8 extends AssignmentToken  {
 
     @Override	
 	public IEObjectConsumer tryConsume() {
-		if((value = eObjectConsumer.getConsumable("actorRefs",true)) == null) return null;
+		if((value = eObjectConsumer.getConsumable("actorRefs",false)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("actorRefs");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
@@ -8965,6 +8968,11 @@ protected class SubSystemClass_BindingsAssignment_9 extends AssignmentToken  {
 		switch(index) {
 			case 0: return new SubSystemClass_BindingsAssignment_9(lastRuleCallOrigin, next, actIndex, consumed);
 			case 1: return new SubSystemClass_ActorRefsAssignment_8(lastRuleCallOrigin, next, actIndex, consumed);
+			case 2: return new SubSystemClass_IfSPPsAssignment_7(lastRuleCallOrigin, next, actIndex, consumed);
+			case 3: return new SubSystemClass_RelayPortsAssignment_6(lastRuleCallOrigin, next, actIndex, consumed);
+			case 4: return new SubSystemClass_Group_5(lastRuleCallOrigin, next, actIndex, consumed);
+			case 5: return new SubSystemClass_Group_4(lastRuleCallOrigin, next, actIndex, consumed);
+			case 6: return new SubSystemClass_LeftCurlyBracketKeyword_3(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -9013,6 +9021,11 @@ protected class SubSystemClass_ConnectionsAssignment_10 extends AssignmentToken 
 			case 0: return new SubSystemClass_ConnectionsAssignment_10(lastRuleCallOrigin, next, actIndex, consumed);
 			case 1: return new SubSystemClass_BindingsAssignment_9(lastRuleCallOrigin, next, actIndex, consumed);
 			case 2: return new SubSystemClass_ActorRefsAssignment_8(lastRuleCallOrigin, next, actIndex, consumed);
+			case 3: return new SubSystemClass_IfSPPsAssignment_7(lastRuleCallOrigin, next, actIndex, consumed);
+			case 4: return new SubSystemClass_RelayPortsAssignment_6(lastRuleCallOrigin, next, actIndex, consumed);
+			case 5: return new SubSystemClass_Group_5(lastRuleCallOrigin, next, actIndex, consumed);
+			case 6: return new SubSystemClass_Group_4(lastRuleCallOrigin, next, actIndex, consumed);
+			case 7: return new SubSystemClass_LeftCurlyBracketKeyword_3(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -9062,6 +9075,11 @@ protected class SubSystemClass_ThreadsAssignment_11 extends AssignmentToken  {
 			case 1: return new SubSystemClass_ConnectionsAssignment_10(lastRuleCallOrigin, next, actIndex, consumed);
 			case 2: return new SubSystemClass_BindingsAssignment_9(lastRuleCallOrigin, next, actIndex, consumed);
 			case 3: return new SubSystemClass_ActorRefsAssignment_8(lastRuleCallOrigin, next, actIndex, consumed);
+			case 4: return new SubSystemClass_IfSPPsAssignment_7(lastRuleCallOrigin, next, actIndex, consumed);
+			case 5: return new SubSystemClass_RelayPortsAssignment_6(lastRuleCallOrigin, next, actIndex, consumed);
+			case 6: return new SubSystemClass_Group_5(lastRuleCallOrigin, next, actIndex, consumed);
+			case 7: return new SubSystemClass_Group_4(lastRuleCallOrigin, next, actIndex, consumed);
+			case 8: return new SubSystemClass_LeftCurlyBracketKeyword_3(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -9086,6 +9104,11 @@ protected class SubSystemClass_RightCurlyBracketKeyword_12 extends KeywordToken 
 			case 1: return new SubSystemClass_ConnectionsAssignment_10(lastRuleCallOrigin, this, 1, inst);
 			case 2: return new SubSystemClass_BindingsAssignment_9(lastRuleCallOrigin, this, 2, inst);
 			case 3: return new SubSystemClass_ActorRefsAssignment_8(lastRuleCallOrigin, this, 3, inst);
+			case 4: return new SubSystemClass_IfSPPsAssignment_7(lastRuleCallOrigin, this, 4, inst);
+			case 5: return new SubSystemClass_RelayPortsAssignment_6(lastRuleCallOrigin, this, 5, inst);
+			case 6: return new SubSystemClass_Group_5(lastRuleCallOrigin, this, 6, inst);
+			case 7: return new SubSystemClass_Group_4(lastRuleCallOrigin, this, 7, inst);
+			case 8: return new SubSystemClass_LeftCurlyBracketKeyword_3(lastRuleCallOrigin, this, 8, inst);
 			default: return null;
 		}	
 	}

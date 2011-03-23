@@ -353,6 +353,15 @@ public class ProviderDispatcher {
 	        else
 	        	return bp.getContextButtonPad(context);
 		}
+		
+		@Override
+		public String getToolTip(GraphicsAlgorithm context) {
+	        IToolBehaviorProvider bp = getToolBehaviorProvider(context.getPictogramElement());
+	        if (bp==null)
+	        	return super.getToolTip(context);
+	        else
+	        	return bp.getToolTip(context);
+		}
 
 		public ISelectionInfo getSelectionInfoForShape(Shape shape) {
 			ISelectionInfo si = new SelectionInfoImpl(IColorConstant.SHAPE_SELECTION_FG, IColorConstant.HANDLE_FG, IColorConstant.HANDLE_BG,
