@@ -69,8 +69,6 @@ public class SPPSupport extends InterfaceItemSupport {
 		
 		private static class CreateFeature extends InterfaceItemSupport.FeatureProvider.CreateFeature {
 	
-			private boolean doneChanges = false;
-	
 			public CreateFeature(IFeatureProvider fp) {
 				super(fp, false, "SPP", "create SPP");
 			}
@@ -94,23 +92,18 @@ public class SPPSupport extends InterfaceItemSupport {
 		        IScope scope = scopeProvider.getScope(spp.eContainer().eContainer(), RoomPackage.eINSTANCE.getInterfaceItem_Protocol());
 		        Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 		        SPPPropertyDialog dlg = new SPPPropertyDialog(shell, spp, scope, acc, true, false);
-				if (dlg.open()!=Window.OK)
-					// find a method to abort creation
-					//throw new RuntimeException();
+				if (dlg.open()!=Window.OK) {
+					acc.getIfSPPs().remove(spp);
 					return EMPTY;
-				
-				doneChanges = true;
+				}
 		        
+				doneChanges = true;
+				
 		        // do the add
 		        addGraphicalRepresentation(context, spp);
 	
 		        // return newly created business object(s)
 		        return new Object[] { spp };
-			}
-			
-			@Override
-			public boolean hasDoneChanges() {
-				return doneChanges;
 			}
 		}
 		
@@ -171,8 +164,8 @@ public class SPPSupport extends InterfaceItemSupport {
 				SPPPropertyDialog dlg = new SPPPropertyDialog(shell, spp, scope, acc, false, refport);
 				if (dlg.open()!=Window.OK)
 					// TODOHRR: introduce a method to revert changes, does hasDoneChanges=false roll back changes?
-					//throw new RuntimeException();
-					return;
+					throw new RuntimeException();
+					//return;
 				
 				updateSPPFigure(spp, context.getPictogramElements()[0], manageColor(DARK_COLOR), manageColor(BRIGHT_COLOR));
 			}

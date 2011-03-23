@@ -137,7 +137,7 @@ public class StateGraphSupport {
 				
 				{
 					Shape labelShape = peCreateService.createShape(containerShape, false);
-					Text label = gaService.createDefaultText(labelShape, RoomNameProvider.getStateGraphLabel(sg));
+					Text label = gaService.createDefaultText(getDiagram(), labelShape, RoomNameProvider.getStateGraphLabel(sg));
 					label.setForeground(manageColor(LINE_COLOR));
 					label.setBackground(manageColor(LINE_COLOR));
 					label.setHorizontalAlignment(Orientation.ALIGNMENT_RIGHT);

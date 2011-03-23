@@ -115,6 +115,7 @@ public class ActorContainerRefSupport {
 		private class CreateFeature extends AbstractCreateFeature {
 	
 			private boolean actorRef;
+			private boolean doneChanges = false;
 
 			public CreateFeature(IFeatureProvider fp, boolean actorRef) {
 				super(fp, actorRef?"ActorRef":"SubSystemRef", "create "+(actorRef?"ActorRef":"SubSystemRef"));
@@ -174,15 +175,24 @@ public class ActorContainerRefSupport {
 				IScope scope = scopeProvider.getScope(newRef.eContainer().eContainer(), reference);
 		        Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 		        ActorContainerRefPropertyDialog dlg = new ActorContainerRefPropertyDialog(shell, newRef, scope, sc, true);
-				if (dlg.open()!=Window.OK)
-					// find a method to abort creation
-					//throw new RuntimeException();
+				if (dlg.open()!=Window.OK) {
+			        if (sc instanceof ActorContainerClass)
+			        	((ActorContainerClass)sc).getActorRefs().remove(newRef);
+			        else if (sc instanceof LogicalSystem)
+			        	((LogicalSystem) sc).getSubSystems().remove(newRef);
 					return EMPTY;
+				}
 		        
 		        addGraphicalRepresentation(context, newRef);
+		        doneChanges = true;
 		        
 		        // return newly created business object(s)
 		        return new Object[] { newRef };
+			}
+			
+			@Override
+			public boolean hasDoneChanges() {
+				return doneChanges;
 			}
 		}
 	
@@ -248,7 +258,7 @@ public class ActorContainerRefSupport {
 				// the first child shape is the label
 				{
 					Shape labelShape = peCreateService.createShape(containerShape, false);
-					Text label = gaService.createDefaultText(labelShape, RoomNameProvider.getRefLabelName(ar));
+					Text label = gaService.createDefaultText(getDiagram(), labelShape, RoomNameProvider.getRefLabelName(ar));
 					label.setForeground(lineColor);
 					label.setBackground(lineColor);
 					label.setHorizontalAlignment(Orientation.ALIGNMENT_CENTER);
@@ -375,7 +385,6 @@ public class ActorContainerRefSupport {
 		        Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 				ActorContainerRefPropertyDialog dlg = new ActorContainerRefPropertyDialog(shell, acr, scope, sc, false);
 				if (dlg.open()!=Window.OK)
-					// TODOHRR: introduce a method to revert changes
 					throw new RuntimeException();
 				
 				updateFigure(acr, context);
@@ -443,6 +452,11 @@ public class ActorContainerRefSupport {
 					}
 				}
 			}
+			
+			@Override
+			public boolean hasDoneChanges() {
+				return false;
+			}
 		}
 		
 		private static class OpenRefBehaviorDiagram extends AbstractCustomFeature {
@@ -484,6 +498,11 @@ public class ActorContainerRefSupport {
 						}
 					}
 				}
+			}
+			
+			@Override
+			public boolean hasDoneChanges() {
+				return false;
 			}
 		}
 		

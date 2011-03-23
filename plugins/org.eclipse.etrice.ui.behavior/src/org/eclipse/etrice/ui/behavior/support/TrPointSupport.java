@@ -150,13 +150,12 @@ public class TrPointSupport {
 				
 				sg.getTrPoints().add(tp);
 		        
-		        // TODOHRR-B add property dialog
 		        Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 				TrPointPropertyDialog dlg = new TrPointPropertyDialog(shell, tp, false);
-				if (dlg.open()!=Window.OK)
-					// find a method to abort creation
-					//throw new RuntimeException();
+				if (dlg.open()!=Window.OK) {
+					sg.getTrPoints().remove(tp);
 					return EMPTY;
+				}
 				
 				doneChanges = true;
 		        
@@ -287,7 +286,7 @@ public class TrPointSupport {
 				
 				{
 					Shape labelShape = peCreateService.createShape(containerShape, false);
-					Text label = gaService.createDefaultText(labelShape, tp.getName());
+					Text label = gaService.createDefaultText(getDiagram(), labelShape, tp.getName());
 					label.setForeground(dark);
 					label.setBackground(dark);
 					label.setHorizontalAlignment(Orientation.ALIGNMENT_CENTER);
@@ -493,8 +492,8 @@ public class TrPointSupport {
 				TrPointPropertyDialog dlg = new TrPointPropertyDialog(shell, tp, subtp);
 				if (dlg.open()!=Window.OK)
 					// TODOHRR: introduce a method to revert changes, does hasDoneChanges=false roll back changes?
-					//throw new RuntimeException();
-					return;
+					throw new RuntimeException();
+//					return;
 				
 				String kind = getItemKind(tp);
 				Graphiti.getPeService().setPropertyValue(pe, PROP_KIND, kind);
