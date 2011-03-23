@@ -96,10 +96,11 @@ public «IF ac.abstract»abstract «ENDIF»class «ac.name» extends «IF ac.base!=null
 
 	//--------------------- lifecycle functions
 	public void init(){
-		//System.out.println(toString()+"::init()");
+		initUser();
 	}
 
 	public void start(){
+		startUser();
 		«IF xpac.hasStateMachine()-»
 		executeInitTransition();
 		«ENDIF-»
@@ -107,10 +108,12 @@ public «IF ac.abstract»abstract «ENDIF»class «ac.name» extends «IF ac.base!=null
 
 	«IF !ac.overridesStop()»
 	public void stop(){
+		stopUser();
 	}
 	«ENDIF»
 	
 	public void destroy(){
+		destroyUser();
 	}	
 
 	«IF ac.stateMachine != null»
