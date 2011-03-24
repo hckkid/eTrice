@@ -109,6 +109,8 @@ public class StateSupport {
 
 		private class CreateFeature extends AbstractCreateFeature {
 	
+			private boolean doneChanges = false;
+			
 			public CreateFeature(IFeatureProvider fp) {
 				super(fp, "State", "create State");
 			}
@@ -160,15 +162,21 @@ public class StateSupport {
 		        
 	        	Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 				StatePropertyDialog dlg = new StatePropertyDialog(shell, s);
-				if (dlg.open()!=Window.OK)
-					// find a method to abort creation
-					//throw new RuntimeException();
+				if (dlg.open()!=Window.OK) {
+			        sg.getStates().remove(s);
 					return EMPTY;
+				}
 		        
 		        addGraphicalRepresentation(context, s);
+		        doneChanges = true;
 		        
 		        // return newly created business object(s)
 		        return new Object[] { s };
+			}
+			
+			@Override
+			public boolean hasDoneChanges() {
+				return doneChanges;
 			}
 		}
 	
@@ -234,7 +242,7 @@ public class StateSupport {
 				
 				{
 					Shape labelShape = peCreateService.createShape(containerShape, false);
-					Text label = gaService.createDefaultText(labelShape, s.getName());
+					Text label = gaService.createDefaultText(getDiagram(), labelShape, s.getName());
 					label.setForeground(lineColor);
 					label.setBackground(lineColor);
 					label.setHorizontalAlignment(Orientation.ALIGNMENT_CENTER);
@@ -347,8 +355,8 @@ public class StateSupport {
 				StatePropertyDialog dlg = new StatePropertyDialog(shell, s);
 				if (dlg.open()!=Window.OK)
 					// TODOHRR: introduce a method to revert changes
-					//throw new RuntimeException();
-					return;
+					throw new RuntimeException();
+//					return;
 				
 				updateFigure(s, context);
 			}

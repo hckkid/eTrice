@@ -94,6 +94,8 @@ public class TransitionSupport {
 		
 		private class CreateFeature extends AbstractCreateConnectionFeature {
 			
+			private boolean doneChanges = false;
+
 			public CreateFeature(IFeatureProvider fp) {
 				super(fp, "Transition", "create Transition");
 			}
@@ -192,17 +194,23 @@ public class TransitionSupport {
 					
 		        	Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 		        	TransitionPropertyDialog dlg = new TransitionPropertyDialog(shell, sg, trans);
-					if (dlg.open()!=Window.OK)
-						// find a method to abort creation
-						//throw new RuntimeException();
+					if (dlg.open()!=Window.OK) {
+						sg.getTransitions().remove(trans);
 						return null;
+					}
 					
 					AddConnectionContext addContext = new AddConnectionContext(context.getSourceAnchor(), context.getTargetAnchor());
 					addContext.setNewObject(trans);
 					newConnection = (Connection) getFeatureProvider().addIfPossible(addContext);
+					doneChanges = true;
 				}
 				
 				return newConnection;
+			}
+			
+			@Override
+			public boolean hasDoneChanges() {
+				return doneChanges ;
 			}
 
 			private boolean isInitialPoint(Anchor anchor) {
@@ -308,10 +316,9 @@ public class TransitionSupport {
 		        ConnectionDecorator textDecorator =
 		            peCreateService.createConnectionDecorator(connection, true,
 		            0.5, true);
-		        Text text = gaService.createDefaultText(textDecorator);
+		        Text text = gaService.createDefaultText(getDiagram(), textDecorator, getLabel(trans));
 		        text.setForeground(manageColor(IColorConstant.BLACK));
 		        gaService.setLocation(text, 10, 0);
-		        text.setValue(getLabel(trans));
 
 
 				// create link and wire it
@@ -474,8 +481,8 @@ public class TransitionSupport {
 				TransitionPropertyDialog dlg = new TransitionPropertyDialog(shell, sg, trans);
 				if (dlg.open()!=Window.OK)
 					// TODOHRR: introduce a method to revert changes, does hasDoneChanges=false roll back changes?
-					//throw new RuntimeException();
-					return;
+					throw new RuntimeException();
+//					return;
 				
 				updateLabel(trans, (Connection) pe);
 			}

@@ -225,7 +225,7 @@ public class InterfaceItemSupport {
 				
 				{
 					Shape labelShape = peCreateService.createShape(containerShape, false);
-					Text label = gaService.createDefaultText(labelShape, port.getName());
+					Text label = gaService.createDefaultText(getDiagram(), labelShape, port.getName());
 					label.setForeground(dark);
 					label.setBackground(dark);
 					label.setHorizontalAlignment(Orientation.ALIGNMENT_CENTER);

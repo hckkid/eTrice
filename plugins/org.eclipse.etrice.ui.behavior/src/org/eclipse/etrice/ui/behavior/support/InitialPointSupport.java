@@ -174,7 +174,7 @@ public class InitialPointSupport {
 				
 				{
 					Shape labelShape = peCreateService.createShape(containerShape, false);
-					Text label = gaService.createDefaultText(labelShape, "I");
+					Text label = gaService.createDefaultText(getDiagram(), labelShape, "I");
 					label.setForeground(dark);
 					label.setBackground(dark);
 					label.setHorizontalAlignment(Orientation.ALIGNMENT_CENTER);

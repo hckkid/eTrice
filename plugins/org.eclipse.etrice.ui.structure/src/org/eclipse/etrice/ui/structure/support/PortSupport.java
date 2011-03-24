@@ -106,10 +106,20 @@ public class PortSupport extends InterfaceItemSupport {
 		        IScope scope = scopeProvider.getScope(port, RoomPackage.eINSTANCE.getInterfaceItem_Protocol());
 		        Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 		        PortPropertyDialog dlg = new PortPropertyDialog(shell, port, scope, acc, true, false, internal);
-				if (dlg.open()!=Window.OK)
-					// find a method to abort creation
-					//throw new RuntimeException();
+				if (dlg.open()!=Window.OK) {
+			        if (acc instanceof ActorClass) {
+			        	ActorClass ac = (ActorClass) acc;
+			        	if (internal)
+			        		ac.getIntPorts().remove(port);
+			        	else
+			        		ac.getIfPorts().remove(port);
+			        }
+			        else if (acc instanceof SubSystemClass) {
+			        	SubSystemClass ssc = (SubSystemClass) acc;
+			        	ssc.getRelayPorts().remove(port);
+			        }
 					return EMPTY;
+				}
 				
 				doneChanges = true;
 		        
@@ -181,8 +191,8 @@ public class PortSupport extends InterfaceItemSupport {
 			        PortPropertyDialog dlg = new PortPropertyDialog(shell, port, scope, acc, false, refport, internal);
 					if (dlg.open()!=Window.OK)
 						// TODOHRR: introduce a method to revert changes
-						//throw new RuntimeException();
-						return;
+						throw new RuntimeException();
+						//return;
 					
 					updatePortFigure(port, context.getPictogramElements()[0], manageColor(DARK_COLOR), manageColor(BRIGHT_COLOR));
 				}

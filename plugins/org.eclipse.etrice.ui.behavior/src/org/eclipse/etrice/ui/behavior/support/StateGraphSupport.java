@@ -137,7 +137,7 @@ public class StateGraphSupport {
 				
 				{
 					Shape labelShape = peCreateService.createShape(containerShape, false);
-					Text label = gaService.createDefaultText(labelShape, RoomNameProvider.getStateGraphLabel(sg));
+					Text label = gaService.createDefaultText(getDiagram(), labelShape, RoomNameProvider.getStateGraphLabel(sg));
 					label.setForeground(manageColor(LINE_COLOR));
 					label.setBackground(manageColor(LINE_COLOR));
 					label.setHorizontalAlignment(Orientation.ALIGNMENT_RIGHT);
@@ -200,11 +200,16 @@ public class StateGraphSupport {
 				int w = containerGa.getWidth();
 				int h = containerGa.getHeight();
 	
-				if (containerGa.getGraphicsAlgorithmChildren().size()==1) {
+				if (containerGa.getGraphicsAlgorithmChildren().size()>=1) {
 					GraphicsAlgorithm ga = containerGa.getGraphicsAlgorithmChildren().get(0);
 					ga.setWidth(w-2*MARGIN);
 					ga.setHeight(h-2*MARGIN);
 					anythingChanged = true;
+				}
+				
+				if (containerShape.getChildren().size()>=1) {
+					GraphicsAlgorithm ga = containerShape.getChildren().get(0).getGraphicsAlgorithm();
+					ga.setWidth(w-2*MARGIN);
 				}
 	
 				return anythingChanged;

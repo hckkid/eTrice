@@ -29,16 +29,16 @@ public class NoResizeFeature extends DefaultResizeShapeFeature {
 	}
 	
 	@Override
-	public IResizeConfiguration getResizeConfiguration() {
+	public IResizeConfiguration getResizeConfiguration(IResizeShapeContext context) {
 		return new IResizeConfiguration() {
 			
 			@Override
 			public boolean isVerticalResizeAllowed() {
 				return false;
 			}
-			
+
 			@Override
-			public boolean isHorizantalResizeAllowed() {
+			public boolean isHorizontalResizeAllowed() {
 				return false;
 			}
 		};
