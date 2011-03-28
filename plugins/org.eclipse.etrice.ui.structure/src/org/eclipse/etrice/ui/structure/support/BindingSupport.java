@@ -340,7 +340,7 @@ public class BindingSupport {
 		}
 
 		private boolean isInherited(Diagram diag, Binding b) {
-			ActorClass ac = (ActorClass) Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(diag.getChildren().get(0));
+			ActorContainerClass ac = (ActorContainerClass) Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(diag.getChildren().get(0));
 			return (b.eContainer()!=ac);
 		}
 		

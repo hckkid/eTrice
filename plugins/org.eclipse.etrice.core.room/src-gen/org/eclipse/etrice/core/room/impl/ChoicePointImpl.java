@@ -7,12 +7,15 @@
 package org.eclipse.etrice.core.room.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.etrice.core.room.ChoicePoint;
+import org.eclipse.etrice.core.room.Documentation;
 import org.eclipse.etrice.core.room.RoomPackage;
 
 /**
@@ -23,6 +26,7 @@ import org.eclipse.etrice.core.room.RoomPackage;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ChoicePointImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.impl.ChoicePointImpl#getDocu <em>Docu</em>}</li>
  * </ul>
  * </p>
  *
@@ -49,6 +53,16 @@ public class ChoicePointImpl extends StateGraphNodeImpl implements ChoicePoint
    * @ordered
    */
   protected String name = NAME_EDEFAULT;
+
+  /**
+   * The cached value of the '{@link #getDocu() <em>Docu</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getDocu()
+   * @generated
+   * @ordered
+   */
+  protected Documentation docu;
 
   /**
    * <!-- begin-user-doc -->
@@ -99,6 +113,70 @@ public class ChoicePointImpl extends StateGraphNodeImpl implements ChoicePoint
    * <!-- end-user-doc -->
    * @generated
    */
+  public Documentation getDocu()
+  {
+    return docu;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetDocu(Documentation newDocu, NotificationChain msgs)
+  {
+    Documentation oldDocu = docu;
+    docu = newDocu;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RoomPackage.CHOICE_POINT__DOCU, oldDocu, newDocu);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setDocu(Documentation newDocu)
+  {
+    if (newDocu != docu)
+    {
+      NotificationChain msgs = null;
+      if (docu != null)
+        msgs = ((InternalEObject)docu).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RoomPackage.CHOICE_POINT__DOCU, null, msgs);
+      if (newDocu != null)
+        msgs = ((InternalEObject)newDocu).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RoomPackage.CHOICE_POINT__DOCU, null, msgs);
+      msgs = basicSetDocu(newDocu, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.CHOICE_POINT__DOCU, newDocu, newDocu));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+  {
+    switch (featureID)
+    {
+      case RoomPackage.CHOICE_POINT__DOCU:
+        return basicSetDocu(null, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
@@ -106,6 +184,8 @@ public class ChoicePointImpl extends StateGraphNodeImpl implements ChoicePoint
     {
       case RoomPackage.CHOICE_POINT__NAME:
         return getName();
+      case RoomPackage.CHOICE_POINT__DOCU:
+        return getDocu();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -122,6 +202,9 @@ public class ChoicePointImpl extends StateGraphNodeImpl implements ChoicePoint
     {
       case RoomPackage.CHOICE_POINT__NAME:
         setName((String)newValue);
+        return;
+      case RoomPackage.CHOICE_POINT__DOCU:
+        setDocu((Documentation)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -140,6 +223,9 @@ public class ChoicePointImpl extends StateGraphNodeImpl implements ChoicePoint
       case RoomPackage.CHOICE_POINT__NAME:
         setName(NAME_EDEFAULT);
         return;
+      case RoomPackage.CHOICE_POINT__DOCU:
+        setDocu((Documentation)null);
+        return;
     }
     super.eUnset(featureID);
   }
@@ -156,6 +242,8 @@ public class ChoicePointImpl extends StateGraphNodeImpl implements ChoicePoint
     {
       case RoomPackage.CHOICE_POINT__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+      case RoomPackage.CHOICE_POINT__DOCU:
+        return docu != null;
     }
     return super.eIsSet(featureID);
   }

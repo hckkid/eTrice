@@ -25,10 +25,12 @@ import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.SubSystemRef;
 import org.eclipse.etrice.core.room.TrPoint;
+import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.ui.behavior.ImageProvider;
 import org.eclipse.etrice.ui.behavior.dialogs.StatePropertyDialog;
 import org.eclipse.graphiti.dt.IDiagramTypeProvider;
 import org.eclipse.graphiti.features.IAddFeature;
+import org.eclipse.graphiti.features.ICreateConnectionFeature;
 import org.eclipse.graphiti.features.ICreateFeature;
 import org.eclipse.graphiti.features.IFeatureProvider;
 import org.eclipse.graphiti.features.ILayoutFeature;
@@ -43,10 +45,12 @@ import org.eclipse.graphiti.features.context.ICustomContext;
 import org.eclipse.graphiti.features.context.IDoubleClickContext;
 import org.eclipse.graphiti.features.context.ILayoutContext;
 import org.eclipse.graphiti.features.context.IMoveShapeContext;
+import org.eclipse.graphiti.features.context.IPictogramElementContext;
 import org.eclipse.graphiti.features.context.IRemoveContext;
 import org.eclipse.graphiti.features.context.IResizeShapeContext;
 import org.eclipse.graphiti.features.context.IUpdateContext;
 import org.eclipse.graphiti.features.context.impl.AddContext;
+import org.eclipse.graphiti.features.context.impl.CreateConnectionContext;
 import org.eclipse.graphiti.features.context.impl.RemoveContext;
 import org.eclipse.graphiti.features.custom.AbstractCustomFeature;
 import org.eclipse.graphiti.features.custom.ICustomFeature;
@@ -58,12 +62,16 @@ import org.eclipse.graphiti.features.impl.DefaultMoveShapeFeature;
 import org.eclipse.graphiti.features.impl.DefaultResizeShapeFeature;
 import org.eclipse.graphiti.features.impl.Reason;
 import org.eclipse.graphiti.mm.algorithms.GraphicsAlgorithm;
+import org.eclipse.graphiti.mm.algorithms.Polygon;
 import org.eclipse.graphiti.mm.algorithms.Rectangle;
 import org.eclipse.graphiti.mm.algorithms.RoundedRectangle;
 import org.eclipse.graphiti.mm.algorithms.Text;
 import org.eclipse.graphiti.mm.algorithms.styles.Color;
 import org.eclipse.graphiti.mm.algorithms.styles.Orientation;
+import org.eclipse.graphiti.mm.pictograms.Anchor;
+import org.eclipse.graphiti.mm.pictograms.AnchorContainer;
 import org.eclipse.graphiti.mm.pictograms.ChopboxAnchor;
+import org.eclipse.graphiti.mm.pictograms.ConnectionDecorator;
 import org.eclipse.graphiti.mm.pictograms.ContainerShape;
 import org.eclipse.graphiti.mm.pictograms.Diagram;
 import org.eclipse.graphiti.mm.pictograms.PictogramElement;
@@ -71,7 +79,9 @@ import org.eclipse.graphiti.mm.pictograms.Shape;
 import org.eclipse.graphiti.services.Graphiti;
 import org.eclipse.graphiti.services.IGaService;
 import org.eclipse.graphiti.services.IPeCreateService;
+import org.eclipse.graphiti.tb.ContextButtonEntry;
 import org.eclipse.graphiti.tb.DefaultToolBehaviorProvider;
+import org.eclipse.graphiti.tb.IContextButtonPadData;
 import org.eclipse.graphiti.tb.IToolBehaviorProvider;
 import org.eclipse.graphiti.ui.features.DefaultFeatureProvider;
 import org.eclipse.graphiti.util.ColorConstant;
@@ -99,6 +109,8 @@ public class StateSupport {
 
 		private class CreateFeature extends AbstractCreateFeature {
 	
+			private boolean doneChanges = false;
+			
 			public CreateFeature(IFeatureProvider fp) {
 				super(fp, "State", "create State");
 			}
@@ -145,20 +157,26 @@ public class StateSupport {
 				// create new State
 	        	BaseState s = RoomFactory.eINSTANCE.createBaseState();
 	        	s.setName(RoomNameProvider.getUniqueStateName(sg));
-		        
-	        	Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-				StatePropertyDialog dlg = new StatePropertyDialog(shell, s, sg);
-				if (dlg.open()!=Window.OK)
-					// find a method to abort creation
-					//throw new RuntimeException();
-					return EMPTY;
 
 		        sg.getStates().add(s);
 		        
+	        	Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+				StatePropertyDialog dlg = new StatePropertyDialog(shell, s);
+				if (dlg.open()!=Window.OK) {
+			        sg.getStates().remove(s);
+					return EMPTY;
+				}
+		        
 		        addGraphicalRepresentation(context, s);
+		        doneChanges = true;
 		        
 		        // return newly created business object(s)
 		        return new Object[] { s };
+			}
+			
+			@Override
+			public boolean hasDoneChanges() {
+				return doneChanges;
 			}
 		}
 	
@@ -193,8 +211,16 @@ public class StateSupport {
 				
 				Graphiti.getPeService().setPropertyValue(containerShape, Constants.TYPE_KEY, Constants.STATE_TYPE);
 	
-				int width = context.getWidth() <= 0 ? DEFAULT_SIZE_X : context.getWidth();
-				int height = context.getHeight() <= 0 ? DEFAULT_SIZE_Y : context.getHeight();
+				int width = context.getWidth();
+				int height = context.getHeight();
+				if (width<=0) {
+					width = DEFAULT_SIZE_X;
+					int textSize = s.getName().length()*6;
+					if (width<textSize)
+						width = textSize;
+				}
+				if (height<=0)
+					height = DEFAULT_SIZE_Y;
 			
 				boolean inherited = isInherited(getDiagram(), s);
 				Color lineColor = manageColor(inherited?INHERITED_COLOR:LINE_COLOR);
@@ -216,7 +242,7 @@ public class StateSupport {
 				
 				{
 					Shape labelShape = peCreateService.createShape(containerShape, false);
-					Text label = gaService.createDefaultText(labelShape, s.getName());
+					Text label = gaService.createDefaultText(getDiagram(), labelShape, s.getName());
 					label.setForeground(lineColor);
 					label.setBackground(lineColor);
 					label.setHorizontalAlignment(Orientation.ALIGNMENT_CENTER);
@@ -263,20 +289,20 @@ public class StateSupport {
 	
 				if (containerGa.getGraphicsAlgorithmChildren().size()>=1) {
 					// the visible border
-					GraphicsAlgorithm ga = containerGa.getGraphicsAlgorithmChildren().get(0);
+					GraphicsAlgorithm borderGA = containerGa.getGraphicsAlgorithmChildren().get(0);
 					
 					int nw = w-2*MARGIN;
 					int nh = h-2*MARGIN;
 					
-					ga.setWidth(nw);
-					ga.setHeight(nh);
+					borderGA.setWidth(nw);
+					borderGA.setHeight(nh);
 					
 					Object bo = getBusinessObjectForPictogramElement(containerShape);
 					if (bo instanceof State) {
 						State s = (State) bo;
-						ga.getGraphicsAlgorithmChildren().clear();
+						borderGA.getGraphicsAlgorithmChildren().clear();
 						Color lineColor = manageColor(isInherited(getDiagram(), s)?INHERITED_COLOR:LINE_COLOR);
-						addSubStructureHint(s, (RoundedRectangle) ga, lineColor);
+						addHints(s, (RoundedRectangle) borderGA, lineColor);
 					}
 
 					if (!containerShape.getChildren().isEmpty()) {
@@ -324,14 +350,13 @@ public class StateSupport {
 			@Override
 			public void execute(ICustomContext context) {
 				State s = (State) getBusinessObjectForPictogramElement(context.getPictogramElements()[0]);
+
 				Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-				StateGraph sg = (StateGraph)s.eContainer();
-				
-				StatePropertyDialog dlg = new StatePropertyDialog(shell, s, sg);
+				StatePropertyDialog dlg = new StatePropertyDialog(shell, s);
 				if (dlg.open()!=Window.OK)
 					// TODOHRR: introduce a method to revert changes
-					//throw new RuntimeException();
-					return;
+					throw new RuntimeException();
+//					return;
 				
 				updateFigure(s, context);
 			}
@@ -445,9 +470,7 @@ public class StateSupport {
 					PictogramElement subGraphShape = getFeatureProvider().addIfPossible(addContext);
 					if (subGraphShape!=null) {
 						RoundedRectangle borderRect = (RoundedRectangle) container.getGraphicsAlgorithm().getGraphicsAlgorithmChildren().get(0);
-						boolean inherited = isInherited(getDiagram(), s);
-						Color lineColor = manageColor(inherited?INHERITED_COLOR:LINE_COLOR);
-						addSubStructureHint(s, borderRect, lineColor);
+						updateHints(s, borderRect);
 					}
 					
 					ContextSwitcher.switchTo(getDiagram(), s.getSubgraph());
@@ -497,14 +520,17 @@ public class StateSupport {
 				
 				// check sub structure hint
 				{
-					boolean hasSubStruct = hasSubStructure(s);
+					boolean hasSubStruct = RoomHelpers.hasSubStructure(s);
 					GraphicsAlgorithm invisibleRect = containerShape.getGraphicsAlgorithm();
 					if (!invisibleRect.getGraphicsAlgorithmChildren().isEmpty()) {
 						GraphicsAlgorithm borderRect = invisibleRect.getGraphicsAlgorithmChildren().get(0);
-						if (hasSubStruct && borderRect.getGraphicsAlgorithmChildren().isEmpty())
-							return Reason.createTrueReason("Ref has sub structure now");
-						if (!hasSubStruct && !borderRect.getGraphicsAlgorithmChildren().isEmpty())
-							return Reason.createTrueReason("Ref has no sub structure anymore");
+						if (!borderRect.getGraphicsAlgorithmChildren().isEmpty()) {
+							GraphicsAlgorithm hint = borderRect.getGraphicsAlgorithmChildren().get(0);
+							if (hasSubStruct && !hint.getLineVisible())
+								return Reason.createTrueReason("state has sub structure now");
+							if (!hasSubStruct && hint.getLineVisible())
+								return Reason.createTrueReason("state has no sub structure anymore");
+						}
 					}
 				}
 				
@@ -543,18 +569,10 @@ public class StateSupport {
 				
 				State s = (State) bo;
 				{
-					boolean hasSubStruct = hasSubStructure(s);
-
 					GraphicsAlgorithm invisibleRect = containerShape.getGraphicsAlgorithm();
 					if (!invisibleRect.getGraphicsAlgorithmChildren().isEmpty()) {
 						GraphicsAlgorithm borderRect = invisibleRect.getGraphicsAlgorithmChildren().get(0);
-						if (hasSubStruct && borderRect.getGraphicsAlgorithmChildren().isEmpty()) {
-							Color lineColor = manageColor(isInherited(getDiagram(), s)?INHERITED_COLOR:LINE_COLOR);
-							addSubStructureHint(s, (RoundedRectangle) borderRect, lineColor);
-						}
-						else if (!hasSubStruct && !borderRect.getGraphicsAlgorithmChildren().isEmpty()) {
-							containerShape.getGraphicsAlgorithm().getGraphicsAlgorithmChildren().clear();
-						}
+						updateHints(s, (RoundedRectangle) borderRect);
 					}
 				}
 				
@@ -665,7 +683,7 @@ public class StateSupport {
 			rect.setLineWidth(LINE_WIDTH);
 			gaService.setLocationAndSize(rect, MARGIN, MARGIN, invisibleRect.getWidth()-2*MARGIN, invisibleRect.getHeight()-2*MARGIN);
 
-			addSubStructureHint(s, rect, darkColor);
+			addHints(s, rect, darkColor);
 			
 			return rect;
 		}
@@ -737,25 +755,6 @@ public class StateSupport {
 			assert(false): "no parent actor class found";
 			return false;
 		}
-
-		private static boolean hasSubStructure(State acr) {
-			return (acr.getSubgraph()!=null);
-		}
-		
-		private static void addSubStructureHint(State s,
-				RoundedRectangle rect, Color lineColor) {
-			
-			if (hasSubStructure(s)) {
-				int x = rect.getWidth()-25;
-				int y = 3;
-				IGaService gaService = Graphiti.getGaService();
-				RoundedRectangle hint1 = gaService.createRoundedRectangle(rect, HINT_CORNER_WIDTH, HINT_CORNER_WIDTH);
-				hint1.setForeground(lineColor);
-				hint1.setFilled(false);
-				hint1.setLineWidth(LINE_WIDTH);
-				gaService.setLocationAndSize(hint1, x, y, 15, 8);
-			}
-		}
 	}
 	
 	private class BehaviorProvider extends DefaultToolBehaviorProvider {
@@ -785,6 +784,63 @@ public class StateSupport {
 		public ICustomFeature getDoubleClickFeature(IDoubleClickContext context) {
 			return new FeatureProvider.GoDownFeature(getDiagramTypeProvider().getFeatureProvider());
 		}
+		
+		@Override
+		public String getToolTip(GraphicsAlgorithm ga) {
+			// if this is called we know there is a business object!=null
+			PictogramElement pe = ga.getPictogramElement();
+			if (pe instanceof ConnectionDecorator)
+				pe = (PictogramElement) pe.eContainer();
+			
+			EObject bo = Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(pe);
+			if (bo instanceof State) {
+				String label = "";
+				State s = (State) bo;
+				if (RoomHelpers.hasDetailCode(s.getEntryCode()))
+					label = "entry:\n"+RoomHelpers.getDetailCode(s.getEntryCode());
+				if (RoomHelpers.hasDetailCode(s.getExitCode())) {
+					if (label.length()>0)
+						label += "\n";
+					label += "exit:\n"+RoomHelpers.getDetailCode(s.getExitCode());
+				}
+				if (label.length()>0)
+					return label;
+			}
+			
+			return super.getToolTip(ga);
+		}
+		
+		@Override
+		public IContextButtonPadData getContextButtonPad(
+				IPictogramElementContext context) {
+			
+			IContextButtonPadData data = super.getContextButtonPad(context);
+			PictogramElement pe = context.getPictogramElement();
+
+			CreateConnectionContext ccc = new CreateConnectionContext();
+			ccc.setSourcePictogramElement(pe);
+			Anchor anchor = null;
+			if (pe instanceof AnchorContainer) {
+				// our transition point has four fixed point anchor - we choose the first one
+				anchor = ((ContainerShape)pe).getAnchors().get(0);
+			}
+			ccc.setSourceAnchor(anchor);
+			
+			ContextButtonEntry button = new ContextButtonEntry(null, context);
+			button.setText("Create Transition");
+			button.setIconId(ImageProvider.IMG_TRANSITION);
+			ICreateConnectionFeature[] features = getFeatureProvider().getCreateConnectionFeatures();
+			for (ICreateConnectionFeature feature : features) {
+				if (feature.isAvailable(ccc) && feature.canStartConnection(ccc))
+					button.addDragAndDropFeature(feature);
+			}
+
+			if (button.getDragAndDropFeatures().size() > 0) {
+				data.getDomainSpecificContextButtons().add(button);
+			}
+
+			return data;
+		}
 	}
 	
 	private FeatureProvider pfp;
@@ -801,5 +857,65 @@ public class StateSupport {
 	
 	public IToolBehaviorProvider getToolBehaviorProvider() {
 		return tbp;
+	}
+	
+	private static void addHints(State s,
+			RoundedRectangle border, Color lineColor) {
+		
+		// sub structure
+		{
+			int x = border.getWidth()-25;
+			int y = 3;
+			IGaService gaService = Graphiti.getGaService();
+			RoundedRectangle hint = gaService.createRoundedRectangle(border, HINT_CORNER_WIDTH, HINT_CORNER_WIDTH);
+			hint.setForeground(lineColor);
+			hint.setFilled(false);
+			hint.setLineWidth(LINE_WIDTH);
+			gaService.setLocationAndSize(hint, x, y, 15, 8);
+			
+			if (!RoomHelpers.hasSubStructure(s)) {
+				hint.setLineVisible(false);
+			}
+		}
+		
+		// entry and exit code
+		{
+			int x = border.getWidth()/2;
+			int y = border.getHeight()-6;
+			IGaService gaService = Graphiti.getGaService();
+			int xy1[] = new int[] { -1, -3, -1, 3, -8,  3};
+			Polygon entryHint = gaService.createPolygon(border, xy1);
+			entryHint.setForeground(lineColor);
+			entryHint.setFilled(false);
+			entryHint.setLineWidth(LINE_WIDTH);
+			gaService.setLocation(entryHint, x, y);
+			int xy2[] = new int[] {  1, -3,  1, 3,  8,  3};
+			Polygon exitHint = gaService.createPolygon(border, xy2);
+			exitHint.setForeground(lineColor);
+			exitHint.setFilled(false);
+			exitHint.setLineWidth(LINE_WIDTH);
+			gaService.setLocation(exitHint, x, y);
+			
+			if (!RoomHelpers.hasDetailCode(s.getEntryCode())) {
+				entryHint.setLineVisible(false);
+			}
+			
+			if (!RoomHelpers.hasDetailCode(s.getExitCode())) {
+				exitHint.setLineVisible(false);
+			}
+		}
+	}
+	
+	protected static void updateHints(State s, GraphicsAlgorithm border) {
+		
+		// sub structure
+		GraphicsAlgorithm hint = border.getGraphicsAlgorithmChildren().get(0);
+		hint.setLineVisible(RoomHelpers.hasSubStructure(s));
+		
+		// entry and exit code
+		hint = border.getGraphicsAlgorithmChildren().get(1);
+		hint.setLineVisible(RoomHelpers.hasDetailCode(s.getEntryCode()));
+		hint = border.getGraphicsAlgorithmChildren().get(2);
+		hint.setLineVisible(RoomHelpers.hasDetailCode(s.getExitCode()));
 	}
 }

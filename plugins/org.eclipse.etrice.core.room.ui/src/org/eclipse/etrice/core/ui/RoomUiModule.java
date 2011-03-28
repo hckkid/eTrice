@@ -12,10 +12,13 @@
 
 package org.eclipse.etrice.core.ui;
 
+import org.eclipse.etrice.core.ui.internal.RoomActivator;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 
 import org.eclipse.etrice.core.ui.outline.RoomOutlinePage;
+
+import com.google.inject.Injector;
 
 /**
  * Use this class to register components to be used within the IDE.
@@ -37,5 +40,9 @@ public class RoomUiModule extends org.eclipse.etrice.core.ui.AbstractRoomUiModul
 	@Override
 	public Class<? extends IContentOutlinePage> bindIContentOutlinePage() {
 		return RoomOutlinePage.class;
+	}
+	
+	public static Injector getInjector() {
+		return RoomActivator.getInstance().getInjector("org.eclipse.etrice.core.Room");
 	}
 }

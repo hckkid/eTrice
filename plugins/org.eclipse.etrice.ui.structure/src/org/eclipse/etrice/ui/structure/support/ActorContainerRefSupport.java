@@ -12,17 +12,31 @@
 
 package org.eclipse.etrice.ui.structure.support;
 
-import java.util.ArrayList;
-import java.util.Collection;
+import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.etrice.core.naming.RoomNameProvider;
+import org.eclipse.etrice.core.room.ActorClass;
+import org.eclipse.etrice.core.room.ActorContainerClass;
+import org.eclipse.etrice.core.room.ActorContainerRef;
+import org.eclipse.etrice.core.room.ActorRef;
+import org.eclipse.etrice.core.room.InterfaceItem;
+import org.eclipse.etrice.core.room.LogicalSystem;
+import org.eclipse.etrice.core.room.RoomFactory;
+import org.eclipse.etrice.core.room.RoomPackage;
+import org.eclipse.etrice.core.room.StructureClass;
+import org.eclipse.etrice.core.room.SubSystemRef;
+import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.ui.structure.DiagramAccess;
+import org.eclipse.etrice.ui.structure.DiagramTypeProvider;
 import org.eclipse.etrice.ui.structure.ImageProvider;
 import org.eclipse.etrice.ui.structure.dialogs.ActorContainerRefPropertyDialog;
 import org.eclipse.graphiti.dt.IDiagramTypeProvider;
 import org.eclipse.graphiti.features.IAddFeature;
+import org.eclipse.graphiti.features.ICreateConnectionFeature;
 import org.eclipse.graphiti.features.ICreateFeature;
 import org.eclipse.graphiti.features.IDeleteFeature;
 import org.eclipse.graphiti.features.IFeatureProvider;
@@ -39,9 +53,11 @@ import org.eclipse.graphiti.features.context.IDeleteContext;
 import org.eclipse.graphiti.features.context.IDoubleClickContext;
 import org.eclipse.graphiti.features.context.ILayoutContext;
 import org.eclipse.graphiti.features.context.IMoveShapeContext;
+import org.eclipse.graphiti.features.context.IPictogramElementContext;
 import org.eclipse.graphiti.features.context.IRemoveContext;
 import org.eclipse.graphiti.features.context.IResizeShapeContext;
 import org.eclipse.graphiti.features.context.IUpdateContext;
+import org.eclipse.graphiti.features.context.impl.CreateConnectionContext;
 import org.eclipse.graphiti.features.context.impl.RemoveContext;
 import org.eclipse.graphiti.features.custom.AbstractCustomFeature;
 import org.eclipse.graphiti.features.custom.ICustomFeature;
@@ -58,17 +74,19 @@ import org.eclipse.graphiti.mm.algorithms.Rectangle;
 import org.eclipse.graphiti.mm.algorithms.Text;
 import org.eclipse.graphiti.mm.algorithms.styles.Color;
 import org.eclipse.graphiti.mm.algorithms.styles.Orientation;
+import org.eclipse.graphiti.mm.pictograms.Anchor;
+import org.eclipse.graphiti.mm.pictograms.AnchorContainer;
 import org.eclipse.graphiti.mm.pictograms.ChopboxAnchor;
 import org.eclipse.graphiti.mm.pictograms.ContainerShape;
-import org.eclipse.graphiti.mm.pictograms.Diagram;
 import org.eclipse.graphiti.mm.pictograms.PictogramElement;
 import org.eclipse.graphiti.mm.pictograms.Shape;
 import org.eclipse.graphiti.services.Graphiti;
 import org.eclipse.graphiti.services.IGaService;
 import org.eclipse.graphiti.services.IPeCreateService;
+import org.eclipse.graphiti.tb.ContextButtonEntry;
 import org.eclipse.graphiti.tb.DefaultToolBehaviorProvider;
+import org.eclipse.graphiti.tb.IContextButtonPadData;
 import org.eclipse.graphiti.tb.IToolBehaviorProvider;
-import org.eclipse.graphiti.ui.features.AbstractDrillDownFeature;
 import org.eclipse.graphiti.ui.features.DefaultDeleteFeature;
 import org.eclipse.graphiti.ui.features.DefaultFeatureProvider;
 import org.eclipse.graphiti.util.ColorConstant;
@@ -76,23 +94,14 @@ import org.eclipse.graphiti.util.IColorConstant;
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
-
-import org.eclipse.etrice.core.naming.RoomNameProvider;
-import org.eclipse.etrice.core.room.ActorClass;
-import org.eclipse.etrice.core.room.ActorContainerClass;
-import org.eclipse.etrice.core.room.ActorContainerRef;
-import org.eclipse.etrice.core.room.ActorRef;
-import org.eclipse.etrice.core.room.InterfaceItem;
-import org.eclipse.etrice.core.room.LogicalSystem;
-import org.eclipse.etrice.core.room.RoomFactory;
-import org.eclipse.etrice.core.room.StructureClass;
-import org.eclipse.etrice.core.room.SubSystemRef;
+import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.scoping.IScopeProvider;
 
 public class ActorContainerRefSupport {
 	
 	private static final int LINE_WIDTH = 1;
-	public static final int DEFAULT_SIZE_X = 200;
-	public static final int DEFAULT_SIZE_Y = 120;
+	public static final int DEFAULT_SIZE_X = 180;
+	public static final int DEFAULT_SIZE_Y = 80;
 	public static final int MIN_SIZE_X = 100;
 	public static final int MIN_SIZE_Y = 60;
 	public static final int MARGIN = 20;
@@ -106,6 +115,7 @@ public class ActorContainerRefSupport {
 		private class CreateFeature extends AbstractCreateFeature {
 	
 			private boolean actorRef;
+			private boolean doneChanges = false;
 
 			public CreateFeature(IFeatureProvider fp, boolean actorRef) {
 				super(fp, actorRef?"ActorRef":"SubSystemRef", "create "+(actorRef?"ActorRef":"SubSystemRef"));
@@ -143,14 +153,6 @@ public class ActorContainerRefSupport {
 		        	
 		        	// create ActorRef
 		        	ActorRef ar = RoomFactory.eINSTANCE.createActorRef();
-		        	ar.setName("");
-			        
-		        	Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-					ActorContainerRefPropertyDialog dlg = new ActorContainerRefPropertyDialog(shell, ar, sc, true);
-					if (dlg.open()!=Window.OK)
-						// find a method to abort creation
-						//throw new RuntimeException();
-						return EMPTY;
 
 			        acc.getActorRefs().add(ar);
 		        	newRef = ar;
@@ -161,23 +163,36 @@ public class ActorContainerRefSupport {
 		        	
 		        	// create ActorRef
 		        	SubSystemRef ssr = RoomFactory.eINSTANCE.createSubSystemRef();
-		        	ssr.setName("");
-			        
-		        	Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-					ActorContainerRefPropertyDialog dlg = new ActorContainerRefPropertyDialog(shell, ssr, sc, true);
-					if (dlg.open()!=Window.OK)
-						// find a method to abort creation
-						//throw new RuntimeException();
-						return EMPTY;
 		        	
 		        	sys.getSubSystems().add(ssr);
 		        	newRef = ssr;
 		        }
 		        
+		        newRef.setName(RoomNameProvider.getUniqueActorContainerRefName(sc));
+
+		        IScopeProvider scopeProvider = ((DiagramTypeProvider)getFeatureProvider().getDiagramTypeProvider()).getScopeProvider();
+		        EReference reference = (newRef instanceof ActorRef)?RoomPackage.eINSTANCE.getActorRef_Type():RoomPackage.eINSTANCE.getSubSystemRef_Type();
+				IScope scope = scopeProvider.getScope(newRef.eContainer().eContainer(), reference);
+		        Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+		        ActorContainerRefPropertyDialog dlg = new ActorContainerRefPropertyDialog(shell, newRef, scope, sc, true);
+				if (dlg.open()!=Window.OK) {
+			        if (sc instanceof ActorContainerClass)
+			        	((ActorContainerClass)sc).getActorRefs().remove(newRef);
+			        else if (sc instanceof LogicalSystem)
+			        	((LogicalSystem) sc).getSubSystems().remove(newRef);
+					return EMPTY;
+				}
+		        
 		        addGraphicalRepresentation(context, newRef);
+		        doneChanges = true;
 		        
 		        // return newly created business object(s)
 		        return new Object[] { newRef };
+			}
+			
+			@Override
+			public boolean hasDoneChanges() {
+				return doneChanges;
 			}
 		}
 	
@@ -222,19 +237,19 @@ public class ActorContainerRefSupport {
 				{
 					final Rectangle invisibleRectangle = gaService.createInvisibleRectangle(containerShape);
 					gaService.setLocationAndSize(invisibleRectangle,
-							context.getX(), context.getY(), width + 2*MARGIN, height + 2*MARGIN);
+							context.getX()-(width/2+MARGIN), context.getY()-(height/2+MARGIN), width + 2*MARGIN, height + 2*MARGIN);
 	
-					Rectangle rect = gaService.createRectangle(invisibleRectangle);
-					rect.setForeground(lineColor);
-					rect.setBackground(manageColor(BACKGROUND));
-					rect.setLineWidth(LINE_WIDTH);
-					gaService.setLocationAndSize(rect, MARGIN, MARGIN, width, height);
+					Rectangle borderRect = gaService.createRectangle(invisibleRectangle);
+					borderRect.setForeground(lineColor);
+					borderRect.setBackground(manageColor(BACKGROUND));
+					borderRect.setLineWidth(LINE_WIDTH);
+					gaService.setLocationAndSize(borderRect, MARGIN, MARGIN, width, height);
 
-					addSubStructureHint(ar, rect, lineColor);
+					addSubStructureHint(ar, borderRect, lineColor);
 					
 					// anchor for layer connections
 					ChopboxAnchor anchor = peCreateService.createChopboxAnchor(containerShape);
-					anchor.setReferencedGraphicsAlgorithm(rect);
+					anchor.setReferencedGraphicsAlgorithm(borderRect);
 					
 					// create link and wire it
 					link(containerShape, ar);
@@ -243,7 +258,7 @@ public class ActorContainerRefSupport {
 				// the first child shape is the label
 				{
 					Shape labelShape = peCreateService.createShape(containerShape, false);
-					Text label = gaService.createDefaultText(labelShape, RoomNameProvider.getRefLabelName(ar));
+					Text label = gaService.createDefaultText(getDiagram(), labelShape, RoomNameProvider.getRefLabelName(ar));
 					label.setForeground(lineColor);
 					label.setBackground(lineColor);
 					label.setHorizontalAlignment(Orientation.ALIGNMENT_CENTER);
@@ -362,47 +377,30 @@ public class ActorContainerRefSupport {
 			@Override
 			public void execute(ICustomContext context) {
 				ActorContainerRef acr = (ActorContainerRef) getBusinessObjectForPictogramElement(context.getPictogramElements()[0]);
-				Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 				StructureClass sc = (StructureClass)acr.eContainer();
 				
-				ActorContainerRefPropertyDialog dlg = new ActorContainerRefPropertyDialog(shell, acr, sc, false);
+		        IScopeProvider scopeProvider = ((DiagramTypeProvider)getFeatureProvider().getDiagramTypeProvider()).getScopeProvider();
+		        EReference reference = (acr instanceof ActorRef)?RoomPackage.eINSTANCE.getActorRef_Type():RoomPackage.eINSTANCE.getSubSystemRef_Type();
+				IScope scope = scopeProvider.getScope(acr.eContainer().eContainer(), reference);
+		        Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+				ActorContainerRefPropertyDialog dlg = new ActorContainerRefPropertyDialog(shell, acr, scope, sc, false);
 				if (dlg.open()!=Window.OK)
-					// TODOHRR: introduce a method to revert changes
 					throw new RuntimeException();
 				
-				updateFigure(acr, context);
-			}
-
-			private void updateFigure(ActorContainerRef acr, ICustomContext context) {
-				PictogramElement pe = context.getPictogramElements()[0];
-				ContainerShape container = (ContainerShape)pe;
-				
-				// we clear the figure and rebuild it
-//				GraphicsAlgorithm invisibleRect = pe.getGraphicsAlgorithm();
-//				invisibleRect.getGraphicsAlgorithmChildren().clear();
-				
-//				createPortFigure(acr, false, container, invisibleRect, manageColor(DARK_COLOR), manageColor(BRIGHT_COLOR));
-				
-				GraphicsAlgorithm ga = container.getChildren().get(1).getGraphicsAlgorithm();
-				if (ga instanceof Text) {
-					((Text)ga).setValue(acr.getName());
-				}
-
+				updateLabel(acr, context.getPictogramElements()[0]);
 			}
 			
 		}
 		
-		private static class DrillDownFeature extends AbstractDrillDownFeature {
+		private static class OpenRefStructureDiagram extends AbstractCustomFeature {
 
-			private ActorContainerRef ref = null;
-
-			public DrillDownFeature(IFeatureProvider fp) {
+			public OpenRefStructureDiagram(IFeatureProvider fp) {
 				super(fp);
 			}
 
 			@Override
 			public String getName() {
-				return "Open associated diagram";
+				return "Open Structure";
 			}
 			
 			@Override
@@ -411,32 +409,83 @@ public class ActorContainerRefSupport {
 				if (pes != null && pes.length == 1) {
 					Object bo = getBusinessObjectForPictogramElement(pes[0]);
 					if (bo instanceof ActorContainerRef) {
-						ref  = (ActorContainerRef) bo;
 						return true;
 					}
 				}
 				return false;
 			}
-			
+
+			/* (non-Javadoc)
+			 * @see org.eclipse.graphiti.features.custom.ICustomFeature#execute(org.eclipse.graphiti.features.context.ICustomContext)
+			 */
 			@Override
-			protected Collection<Diagram> getDiagrams() {
-				ArrayList<Diagram> result = new ArrayList<Diagram>();
-				if (ref!=null) {
-					DiagramAccess diagramAccess = new DiagramAccess();
-					if (ref instanceof ActorRef) {
-						Diagram diagram = diagramAccess.getDiagram(((ActorRef) ref).getType());
-						result.add(diagram);
-					}
-					else if (ref instanceof SubSystemRef) {
-						Diagram diagram = diagramAccess.getDiagram(((SubSystemRef) ref).getType());
-						result.add(diagram);
+			public void execute(ICustomContext context) {
+				PictogramElement[] pes = context.getPictogramElements();
+				if (pes != null && pes.length == 1) {
+					Object bo = getBusinessObjectForPictogramElement(pes[0]);
+					if (bo instanceof ActorContainerRef) {
+						ActorContainerRef ref = (ActorContainerRef) bo;
+						DiagramAccess diagramAccess = new DiagramAccess();
+						if (ref instanceof ActorRef) {
+							diagramAccess.openDiagramEditor(((ActorRef) ref).getType());
+						}
+						else if (ref instanceof SubSystemRef) {
+							diagramAccess.openDiagramEditor(((SubSystemRef) ref).getType());
+						}
 					}
 				}
-				return result;
 			}
+			
 			@Override
-			protected Collection<Diagram> getLinkedDiagrams(PictogramElement pe) {
-				return getDiagrams();
+			public boolean hasDoneChanges() {
+				return false;
+			}
+		}
+		
+		private static class OpenRefBehaviorDiagram extends AbstractCustomFeature {
+
+			public OpenRefBehaviorDiagram(IFeatureProvider fp) {
+				super(fp);
+			}
+
+			@Override
+			public String getName() {
+				return "Open Behavior";
+			}
+			
+			@Override
+			public boolean canExecute(ICustomContext context) {
+				PictogramElement[] pes = context.getPictogramElements();
+				if (pes != null && pes.length == 1) {
+					Object bo = getBusinessObjectForPictogramElement(pes[0]);
+					if (bo instanceof ActorRef) {
+						return true;
+					}
+				}
+				return false;
+			}
+
+			/* (non-Javadoc)
+			 * @see org.eclipse.graphiti.features.custom.ICustomFeature#execute(org.eclipse.graphiti.features.context.ICustomContext)
+			 */
+			@Override
+			public void execute(ICustomContext context) {
+				PictogramElement[] pes = context.getPictogramElements();
+				if (pes != null && pes.length == 1) {
+					Object bo = getBusinessObjectForPictogramElement(pes[0]);
+					if (bo instanceof ActorContainerRef) {
+						ActorContainerRef ref = (ActorContainerRef) bo;
+						org.eclipse.etrice.ui.behavior.DiagramAccess diagramAccess = new org.eclipse.etrice.ui.behavior.DiagramAccess();
+						if (ref instanceof ActorRef) {
+							diagramAccess.openDiagramEditor(((ActorRef) ref).getType());
+						}
+					}
+				}
+			}
+			
+			@Override
+			public boolean hasDoneChanges() {
+				return false;
 			}
 		}
 		
@@ -462,6 +511,8 @@ public class ActorContainerRefSupport {
 					return Reason.createTrueReason("Ref deleted from model");
 				}
 				ActorContainerRef acr = (ActorContainerRef) bo;
+
+				String reason = "";
 				
 				// check if ref still owned/inherited anymore
 				ContainerShape containerShape = (ContainerShape)context.getPictogramElement();
@@ -477,7 +528,7 @@ public class ActorContainerRefSupport {
 					while (!found && ac!=null);
 					
 					if (!found)
-						return Reason.createTrueReason("Ref not inherited anymore");
+						reason += "Ref not inherited anymore\n";
 				}
 				
 				// check sub structure hint
@@ -485,12 +536,14 @@ public class ActorContainerRefSupport {
 					boolean hasSubStruct = hasSubStructure(acr);
 					GraphicsAlgorithm invisibleRect = containerShape.getGraphicsAlgorithm();
 					if (!invisibleRect.getGraphicsAlgorithmChildren().isEmpty()) {
-						
 						GraphicsAlgorithm borderRect = invisibleRect.getGraphicsAlgorithmChildren().get(0);
-						if (hasSubStruct && borderRect.getGraphicsAlgorithmChildren().isEmpty())
-							return Reason.createTrueReason("Ref has sub structure now");
-						if (!hasSubStruct && !borderRect.getGraphicsAlgorithmChildren().isEmpty())
-							return Reason.createTrueReason("Ref has no sub structure anymore");
+						if (!borderRect.getGraphicsAlgorithmChildren().isEmpty()) {
+							GraphicsAlgorithm hint = borderRect.getGraphicsAlgorithmChildren().get(0);
+							if (hasSubStruct && !hint.getLineVisible())
+								reason += "state has sub structure now\n";
+							if (!hasSubStruct && hint.getLineVisible())
+								reason += "state has no sub structure anymore\n";
+						}
 					}
 				}
 				
@@ -501,12 +554,27 @@ public class ActorContainerRefSupport {
 						if (bo instanceof ActorContainerRef) {
 							String label = RoomNameProvider.getRefLabelName((ActorContainerRef) bo);
 							if (!((Text)ga).getValue().equals(label))
-								return Reason.createTrueReason("Class name is out of date");
+								reason += "Class name is out of date\n";
 						}
 					}
 				}
 				
-				// TODOHRR: check interface ports and spps added to model not present in diagram
+				// check interface ports and spps added to model not present in diagram
+				{
+					ActorContainerClass acc = (acr instanceof ActorRef)?((ActorRef)acr).getType():((SubSystemRef)acr).getType();
+					List<InterfaceItem> interfaceItems = RoomHelpers.getInterfaceItems(acc, true);
+					List<InterfaceItem> presentItems = SupportUtil.getInterfaceItems(containerShape, fp);
+					int missing = 0;
+					for (InterfaceItem interfaceItem : interfaceItems) {
+						if (!presentItems.contains(interfaceItem))
+							++missing;
+					}
+					if (missing>0)
+						reason += missing+" interface item(s) missing\n";
+				}
+				
+				if (!reason.isEmpty())
+					return Reason.createTrueReason(reason.substring(0, reason.length()-1));
 				
 				return Reason.createFalseReason();
 			}
@@ -526,28 +594,18 @@ public class ActorContainerRefSupport {
 					return true;
 				}
 				
+				ActorContainerRef acr = (ActorContainerRef) bo;
 				{
-					ActorContainerRef acr = (ActorContainerRef) bo;
-					boolean hasSubStruct = hasSubStructure(acr);
-					if (hasSubStruct && containerShape.getGraphicsAlgorithm().getGraphicsAlgorithmChildren().isEmpty()) {
-						EObject parent = containerShape.getContainer().getLink().getBusinessObjects().get(0);
-						Color lineColor = manageColor(isInherited(acr, parent)?INHERITED_COLOR:LINE_COLOR);
-						addSubStructureHint(acr, (Rectangle) containerShape.getGraphicsAlgorithm(), lineColor);
-					}
-					else if (!hasSubStruct && !containerShape.getGraphicsAlgorithm().getGraphicsAlgorithmChildren().isEmpty())
-						containerShape.getGraphicsAlgorithm().getGraphicsAlgorithmChildren().clear();
-				}
-				
-				if (!containerShape.getChildren().isEmpty()) {
-					GraphicsAlgorithm ga = containerShape.getChildren().get(0).getGraphicsAlgorithm();
-					if (ga instanceof Text) {
-						if (bo instanceof ActorContainerRef) {
-							((Text)ga).setValue(RoomNameProvider.getRefLabelName((ActorContainerRef) bo));
-						}
+					GraphicsAlgorithm invisibleRect = containerShape.getGraphicsAlgorithm();
+					if (!invisibleRect.getGraphicsAlgorithmChildren().isEmpty()) {
+						GraphicsAlgorithm borderRect = invisibleRect.getGraphicsAlgorithmChildren().get(0);
+						updateSubStructureHint(acr, (Rectangle) borderRect);
 					}
 				}
 
-				// TODOHRR: add interface ports and spps added to model not present in diagram
+				updateLabel(acr, context.getPictogramElement());
+				
+				InterfaceItemSupport.createRefItems(acr, containerShape, fp);
 				
 				return true;
 			}
@@ -713,7 +771,10 @@ public class ActorContainerRefSupport {
 		
 		@Override
 		public ICustomFeature[] getCustomFeatures(ICustomContext context) {
-			return new ICustomFeature[] { new PropertyFeature(fp), new DrillDownFeature(fp) };
+			return new ICustomFeature[] {
+					new PropertyFeature(fp),
+					new OpenRefStructureDiagram(fp),
+					new OpenRefBehaviorDiagram(fp)};
 		}
 		
 		protected static boolean isInherited(ActorContainerRef ar, EObject parent) {
@@ -733,22 +794,43 @@ public class ActorContainerRefSupport {
 		}
 		
 		private static void addSubStructureHint(ActorContainerRef acr,
-				Rectangle rect, Color lineColor) {
+				Rectangle borderRect, Color lineColor) {
 			
-			if (hasSubStructure(acr)) {
-				int x = rect.getWidth()-35;
-				int y = rect.getHeight()-30;
-				IGaService gaService = Graphiti.getGaService();
-				Rectangle hint1 = gaService.createRectangle(rect);
-				hint1.setForeground(lineColor);
-				hint1.setFilled(false);
-				hint1.setLineWidth(LINE_WIDTH);
-				gaService.setLocationAndSize(hint1, x+5, y, 20, 10);
-				Rectangle hint2 = gaService.createRectangle(rect);
-				hint2.setForeground(lineColor);
-				hint2.setFilled(false);
-				hint2.setLineWidth(LINE_WIDTH);
-				gaService.setLocationAndSize(hint2, x, y+15, 20, 10);
+			int x = borderRect.getWidth()-35;
+			int y = borderRect.getHeight()-30;
+			IGaService gaService = Graphiti.getGaService();
+			Rectangle hint1 = gaService.createRectangle(borderRect);
+			hint1.setForeground(lineColor);
+			hint1.setFilled(false);
+			hint1.setLineWidth(LINE_WIDTH);
+			gaService.setLocationAndSize(hint1, x+5, y, 20, 10);
+			Rectangle hint2 = gaService.createRectangle(borderRect);
+			hint2.setForeground(lineColor);
+			hint2.setFilled(false);
+			hint2.setLineWidth(LINE_WIDTH);
+			gaService.setLocationAndSize(hint2, x, y+15, 20, 10);
+
+			if (!hasSubStructure(acr)) {
+				hint1.setLineVisible(false);
+				hint2.setLineVisible(false);
+			}
+		}
+		
+		protected static void updateSubStructureHint(ActorContainerRef acr, GraphicsAlgorithm borderRect) {
+			
+			boolean hasSubStructure = hasSubStructure(acr);
+			GraphicsAlgorithm hint = borderRect.getGraphicsAlgorithmChildren().get(0);
+			hint.setLineVisible(hasSubStructure);
+			hint = borderRect.getGraphicsAlgorithmChildren().get(1);
+			hint.setLineVisible(hasSubStructure);
+		}
+
+		private static void updateLabel(ActorContainerRef acr, PictogramElement pe) {
+			ContainerShape container = (ContainerShape)pe;
+			
+			GraphicsAlgorithm ga = container.getChildren().get(0).getGraphicsAlgorithm();
+			if (ga instanceof Text) {
+				((Text)ga).setValue(RoomNameProvider.getRefLabelName(acr));
 			}
 		}
 	}
@@ -778,7 +860,39 @@ public class ActorContainerRefSupport {
 		
 		@Override
 		public ICustomFeature getDoubleClickFeature(IDoubleClickContext context) {
-			return new FeatureProvider.DrillDownFeature(getDiagramTypeProvider().getFeatureProvider());
+			return new FeatureProvider.OpenRefStructureDiagram(getDiagramTypeProvider().getFeatureProvider());
+		}
+		
+		@Override
+		public IContextButtonPadData getContextButtonPad(
+				IPictogramElementContext context) {
+			
+			IContextButtonPadData data = super.getContextButtonPad(context);
+			PictogramElement pe = context.getPictogramElement();
+
+			CreateConnectionContext ccc = new CreateConnectionContext();
+			ccc.setSourcePictogramElement(pe);
+			Anchor anchor = null;
+			if (pe instanceof AnchorContainer) {
+				// our spp has four fixed point anchor - we choose the first one
+				anchor = ((ContainerShape)pe).getAnchors().get(0);
+			}
+			ccc.setSourceAnchor(anchor);
+			
+			ContextButtonEntry button = new ContextButtonEntry(null, context);
+			button.setText("Create Layer Connection");
+			button.setIconId(ImageProvider.IMG_LAYER_CONNECTION);
+			ICreateConnectionFeature[] features = getFeatureProvider().getCreateConnectionFeatures();
+			for (ICreateConnectionFeature feature : features) {
+				if (feature.isAvailable(ccc) && feature.canStartConnection(ccc))
+					button.addDragAndDropFeature(feature);
+			}
+
+			if (button.getDragAndDropFeatures().size() > 0) {
+				data.getDomainSpecificContextButtons().add(button);
+			}
+
+			return data;
 		}
 	}
 	

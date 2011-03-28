@@ -54,14 +54,18 @@ public class DebuggingService {
 	}
 	
 	public void addMessageAsyncOut(Address source, Address target, String msg){
-		asyncLogger.addMessageAsyncOut(portInstances.get(source).getActor().getInstancePath(), portInstances.get(target).getActor().getInstancePath(), msg);
+		if (source!=null && target!=null)
+			asyncLogger.addMessageAsyncOut(portInstances.get(source).getActor().getInstancePath(), portInstances.get(target).getActor().getInstancePath(), msg);
 	}
 	public void addMessageAsyncIn(Address source, Address target, String msg){
-		// TODO: this wa only a quickfix to trace unconnected ports
-		if (source==null)
-			asyncLogger.addMessageAsyncIn("~", portInstances.get(target).getActor().getInstancePath(), msg);
-		else
+		if (source!=null && target!=null)
 			asyncLogger.addMessageAsyncIn(portInstances.get(source).getActor().getInstancePath(), portInstances.get(target).getActor().getInstancePath(), msg);
+		
+		// TODO: this was only a quickfix to trace unconnected ports
+//		if (source==null)
+//			asyncLogger.addMessageAsyncIn("~", portInstances.get(target).getActor().getInstancePath(), msg);
+//		else
+//			asyncLogger.addMessageAsyncIn(portInstances.get(source).getActor().getInstancePath(), portInstances.get(target).getActor().getInstancePath(), msg);
 			
 	}
 	public void addMessageSyncCall(Address source, Address target, String msg){

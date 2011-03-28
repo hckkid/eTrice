@@ -42,7 +42,7 @@ Workflow {
 	}
 
 	// HOWTO: call a custom workflow component
-	component = org.eclipse.etrice.generator.workflow.InstanceModelCreator {
+	component = org.eclipse.etrice.generator.workflow.GeneratorModelCreator {
 		inSlot = "model"
 		outSlot = "instance_model"
 		debug = true			// debug flag for verbose output

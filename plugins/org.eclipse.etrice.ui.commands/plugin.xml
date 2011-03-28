@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.ui.commands">
+      <category
+            name="eTrice Commands"
+            id="org.eclipse.etrice.ui.commands.category">
+      </category>
+      <command
+            name="open associated textual model"
+            categoryId="org.eclipse.etrice.ui.commands.category"
+            id="org.eclipse.etrice.ui.commands.commands.editModel">
+      </command>
+      <command
+            description="open this ActorClass&apos;s structure as diagram"
+            id="org.eclipse.etrice.core.room.ui.editStructure"
+            name="Edit Structure">
+      </command>
+      <command
+            description="open this ActorClass&apos;s state machine as diagram"
+            id="org.eclipse.etrice.core.room.ui.editBehavior"
+            name="Edit Behavior">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            commandId="org.eclipse.etrice.core.room.ui.editBehavior"
+            class="org.eclipse.etrice.ui.commands.handlers.EditBehaviorHandler">
+         <activeWhen>
+            <with variable="activeEditorId">
+	     		<or>
+	               <equals
+	                     value="org.eclipse.etrice.ui.structure.editor.StructureEditor">
+	               </equals>
+	               <equals
+	                     value="org.eclipse.etrice.core.Room">
+	               </equals>
+	         	</or>
+            </with>
+         </activeWhen>
+      </handler>
+      <handler
+            commandId="org.eclipse.etrice.core.room.ui.editStructure"
+            class="org.eclipse.etrice.ui.commands.handlers.EditStructureHandler">
+         <activeWhen>
+            <with
+                  variable="activeEditorId">
+               <or>
+	               <equals
+	                     value="org.eclipse.etrice.ui.behavior.editor.BehaviorEditor">
+	               </equals>
+	               <equals
+	                     value="org.eclipse.etrice.core.Room">
+	               </equals>
+               </or>
+            </with>
+         </activeWhen>
+      </handler>
+      <handler
+            commandId="org.eclipse.etrice.ui.commands.commands.editModel"
+            class="org.eclipse.etrice.ui.commands.handlers.EditModelHandler">
+         <activeWhen>
+            <or>
+	            <with
+	                  variable="activeEditorId">
+	               <equals
+	                     value="org.eclipse.etrice.ui.behavior.editor.BehaviorEditor">
+	               </equals>
+	            </with>
+	            <with
+	                  variable="activeEditorId">
+	               <equals
+	                     value="org.eclipse.etrice.ui.structure.editor.StructureEditor">
+	               </equals>
+	            </with>
+            </or>
+         </activeWhen>
+      </handler>
+   </extension>
+   <extension
+         point="org.eclipse.ui.bindings">
+      <key
+            commandId="org.eclipse.etrice.core.room.ui.editBehavior"
+            contextId="org.eclipse.ui.contexts.window"
+            sequence="M3+B"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration">
+      </key>
+      <key
+            commandId="org.eclipse.etrice.core.room.ui.editStructure"
+            contextId="org.eclipse.ui.contexts.window"
+            sequence="M3+S"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration">
+      </key>
+      <key
+            commandId="org.eclipse.etrice.ui.commands.commands.editModel"
+            contextId="org.eclipse.ui.contexts.window"
+            sequence="M3+M"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration">
+      </key>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            locationURI="menu:org.eclipse.ui.main.menu?after=additions">
+         <menu
+               label="eTrice"
+               mnemonic="T"
+               id="org.eclipse.etrice.ui.commands.menus.eTrice">
+            <command
+                  commandId="org.eclipse.etrice.core.room.ui.editBehavior"
+                  icon="icons/Behavior.gif"
+                  id="org.eclipse.etrice.ui.commands.menus.editBehavior"
+                  label="Open Behavior"
+                  mnemonic="B">
+            </command>
+            <command
+                  commandId="org.eclipse.etrice.core.room.ui.editStructure"
+                  icon="icons/Structure.gif"
+                  id="org.eclipse.etrice.ui.commands.menus.editStructure"
+                  label="Open Structure"
+                  mnemonic="S">
+            </command>
+            <command
+                  commandId="org.eclipse.etrice.ui.commands.commands.editModel"
+                  icon="icons/RoomModel.gif"
+                  id="org.eclipse.etrice.ui.commands.menus.openModel"
+                  label="Open Model"
+                  mnemonic="M">
+            </command>
+         </menu>
+      </menuContribution>
+  <menuContribution
+        allPopups="false"
+        locationURI="popup:org.eclipse.xtext.ui.outline?after=additions">
+     <command
+           commandId="org.eclipse.etrice.core.room.ui.editBehavior"
+           label="Edit Behavior"
+           style="push">
+        <visibleWhen
+              checkEnabled="false">
+           <iterate>
+              <adapt
+                    type="org.eclipse.etrice.core.room.ActorClass">
+              </adapt>
+           </iterate>
+        </visibleWhen>
+     </command>
+  </menuContribution>
+  <menuContribution
+        allPopups="false"
+        locationURI="popup:org.eclipse.xtext.ui.outline?after=additions">
+     <command
+           commandId="org.eclipse.etrice.core.room.ui.editStructure"
+           label="Edit Structure"
+           style="push">
+        <visibleWhen>
+           <iterate operator="and" ifEmpty="false">
+           <or>
+              <adapt
+                    type="org.eclipse.etrice.core.room.ActorClass">
+              </adapt>
+              <adapt
+                    type="org.eclipse.etrice.core.room.SubSystemClass">
+              </adapt>
+              <adapt
+                    type="org.eclipse.etrice.core.room.LogicalSystem">
+              </adapt>
+              </or>
+           </iterate>
+        </visibleWhen>
+     </command>
+  </menuContribution>
+   </extension>
+
+</plugin>

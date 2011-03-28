@@ -23,6 +23,7 @@ import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.InitialTransition;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.LayerConnection;
+import org.eclipse.etrice.core.room.LogicalSystem;
 import org.eclipse.etrice.core.room.NonInitialTransition;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RoomClass;
@@ -95,6 +96,19 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 		
 		return null;
 	}
+
+	@Check
+	public void checkSubSystem(SubSystemClass ssc){
+		if (ssc.getActorRefs().isEmpty())
+			error("SubSystemClass must contain at least one ActorRef", RoomPackage.eINSTANCE.getActorContainerClass_ActorRefs());
+	}
+
+	@Check
+	public void checkLogicalSystem(LogicalSystem ls){
+		if (ls.getSubSystems().isEmpty())
+			error("LogicalSystem must contain at least one SubSystemRef", RoomPackage.eINSTANCE.getLogicalSystem_SubSystems());
+	}
+
 	
 	@Check
 	public void checkInstancePath(ActorInstancePath ai) {

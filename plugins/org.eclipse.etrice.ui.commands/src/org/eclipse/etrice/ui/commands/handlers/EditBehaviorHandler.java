@@ -10,11 +10,8 @@
  * 
  *******************************************************************************/
 
-package org.eclipse.etrice.core.ui.outline;
+package org.eclipse.etrice.ui.commands.handlers;
 
-import org.eclipse.core.commands.AbstractHandler;
-import org.eclipse.core.commands.ExecutionEvent;
-import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.naming.RoomFragmentProvider;
@@ -23,9 +20,10 @@ import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.Transition;
-import org.eclipse.etrice.core.ui.internal.RoomActivator;
+import org.eclipse.etrice.core.ui.RoomUiModule;
 import org.eclipse.etrice.ui.behavior.DiagramAccess;
 import org.eclipse.jface.dialogs.MessageDialog;
+<<<<<<< HEAD:plugins/org.eclipse.etrice.core.room.ui/src/org/eclipse/etrice/core/ui/outline/EditBehaviorHandler.java
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.IWorkbench;
@@ -35,11 +33,17 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.handlers.HandlerUtil;
 import org.eclipse.ui.views.contentoutline.ContentOutline;
+=======
+>>>>>>> FETCH_HEAD:plugins/org.eclipse.etrice.ui.commands/src/org/eclipse/etrice/ui/commands/handlers/EditBehaviorHandler.java
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.outline.impl.EObjectNode;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
+<<<<<<< HEAD:plugins/org.eclipse.etrice.core.room.ui/src/org/eclipse/etrice/core/ui/outline/EditBehaviorHandler.java
 import org.eclipse.xtext.ui.editor.utils.EditorUtils;
+=======
+import org.eclipse.xtext.ui.editor.model.edit.DefaultDocumentEditor;
+>>>>>>> FETCH_HEAD:plugins/org.eclipse.etrice.ui.commands/src/org/eclipse/etrice/ui/commands/handlers/EditBehaviorHandler.java
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 import com.google.inject.Injector;
@@ -53,8 +57,9 @@ import com.google.inject.Injector;
  * @author Henrik Rentz-Reichert initial contribution and API
  *
  */
-public class EditBehaviorHandler extends AbstractHandler {
+public class EditBehaviorHandler extends AbstractEditHandler {
 
+<<<<<<< HEAD:plugins/org.eclipse.etrice.core.room.ui/src/org/eclipse/etrice/core/ui/outline/EditBehaviorHandler.java
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		ISelection selection = HandlerUtil.getCurrentSelection(event);
@@ -91,8 +96,16 @@ public class EditBehaviorHandler extends AbstractHandler {
 					}
 				});
 			}
+=======
+	protected boolean prepare(XtextEditor xtextEditor, final String fragment) {
+		if (hasUnnamedTransitions(xtextEditor.getDocument(), fragment)) {
+			if (!MessageDialog.openQuestion(xtextEditor.getSite().getShell(), "Create transition names", "Transition names will be created where missing.\nProceed?"))
+				return false;
+			createTransitionNames(xtextEditor.getDocument(), fragment);
+			xtextEditor.doSave(new NullProgressMonitor());
+>>>>>>> FETCH_HEAD:plugins/org.eclipse.etrice.ui.commands/src/org/eclipse/etrice/ui/commands/handlers/EditBehaviorHandler.java
 		}
-		return null;
+		return true;
 	}
 
 	/**
@@ -102,7 +115,7 @@ public class EditBehaviorHandler extends AbstractHandler {
 	private void createTransitionNames(IXtextDocument document, final String fragment) {
 		/* TODOHRR: make this work again
 		DefaultDocumentEditor edit = new DefaultDocumentEditor();
-		Injector injector = RoomActivator.getInstance().getInjector("org.eclipse.etrice.core.Room");
+		Injector injector = RoomUiModule.getInjector();
 		injector.injectMembers(edit);
 		edit.process(new IUnitOfWork.Void<XtextResource>() {
 			@Override
@@ -171,6 +184,7 @@ public class EditBehaviorHandler extends AbstractHandler {
 		});
 	}
 
+<<<<<<< HEAD:plugins/org.eclipse.etrice.core.room.ui/src/org/eclipse/etrice/core/ui/outline/EditBehaviorHandler.java
 	/* (non-Javadoc)
 	 * @see org.eclipse.core.commands.AbstractHandler#isEnabled()
 	 */
@@ -195,4 +209,13 @@ public class EditBehaviorHandler extends AbstractHandler {
 
 		return false;
 	}
+=======
+	protected void openEditor(EObject object) {
+		if (object instanceof ActorClass) {
+			DiagramAccess diagramAccess = new DiagramAccess();
+			diagramAccess.openDiagramEditor((ActorClass) object);
+		}
+	}
+
+>>>>>>> FETCH_HEAD:plugins/org.eclipse.etrice.ui.commands/src/org/eclipse/etrice/ui/commands/handlers/EditBehaviorHandler.java
 }

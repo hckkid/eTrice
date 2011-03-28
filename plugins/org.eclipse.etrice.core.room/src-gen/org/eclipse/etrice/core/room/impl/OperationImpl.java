@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipse.etrice.core.room.DetailCode;
+import org.eclipse.etrice.core.room.Documentation;
 import org.eclipse.etrice.core.room.FreeType;
 import org.eclipse.etrice.core.room.FreeTypedID;
 import org.eclipse.etrice.core.room.Operation;
@@ -38,6 +39,7 @@ import org.eclipse.etrice.core.room.RoomPackage;
  *   <li>{@link org.eclipse.etrice.core.room.impl.OperationImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.OperationImpl#getArguments <em>Arguments</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.OperationImpl#getReturntype <em>Returntype</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.impl.OperationImpl#getDocu <em>Docu</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.OperationImpl#getDetailCode <em>Detail Code</em>}</li>
  * </ul>
  * </p>
@@ -85,6 +87,16 @@ public class OperationImpl extends MinimalEObjectImpl.Container implements Opera
    * @ordered
    */
   protected FreeType returntype;
+
+  /**
+   * The cached value of the '{@link #getDocu() <em>Docu</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getDocu()
+   * @generated
+   * @ordered
+   */
+  protected Documentation docu;
 
   /**
    * The cached value of the '{@link #getDetailCode() <em>Detail Code</em>}' containment reference.
@@ -207,6 +219,54 @@ public class OperationImpl extends MinimalEObjectImpl.Container implements Opera
    * <!-- end-user-doc -->
    * @generated
    */
+  public Documentation getDocu()
+  {
+    return docu;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetDocu(Documentation newDocu, NotificationChain msgs)
+  {
+    Documentation oldDocu = docu;
+    docu = newDocu;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RoomPackage.OPERATION__DOCU, oldDocu, newDocu);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setDocu(Documentation newDocu)
+  {
+    if (newDocu != docu)
+    {
+      NotificationChain msgs = null;
+      if (docu != null)
+        msgs = ((InternalEObject)docu).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RoomPackage.OPERATION__DOCU, null, msgs);
+      if (newDocu != null)
+        msgs = ((InternalEObject)newDocu).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RoomPackage.OPERATION__DOCU, null, msgs);
+      msgs = basicSetDocu(newDocu, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.OPERATION__DOCU, newDocu, newDocu));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public DetailCode getDetailCode()
   {
     return detailCode;
@@ -264,6 +324,8 @@ public class OperationImpl extends MinimalEObjectImpl.Container implements Opera
         return ((InternalEList<?>)getArguments()).basicRemove(otherEnd, msgs);
       case RoomPackage.OPERATION__RETURNTYPE:
         return basicSetReturntype(null, msgs);
+      case RoomPackage.OPERATION__DOCU:
+        return basicSetDocu(null, msgs);
       case RoomPackage.OPERATION__DETAIL_CODE:
         return basicSetDetailCode(null, msgs);
     }
@@ -286,6 +348,8 @@ public class OperationImpl extends MinimalEObjectImpl.Container implements Opera
         return getArguments();
       case RoomPackage.OPERATION__RETURNTYPE:
         return getReturntype();
+      case RoomPackage.OPERATION__DOCU:
+        return getDocu();
       case RoomPackage.OPERATION__DETAIL_CODE:
         return getDetailCode();
     }
@@ -313,6 +377,9 @@ public class OperationImpl extends MinimalEObjectImpl.Container implements Opera
       case RoomPackage.OPERATION__RETURNTYPE:
         setReturntype((FreeType)newValue);
         return;
+      case RoomPackage.OPERATION__DOCU:
+        setDocu((Documentation)newValue);
+        return;
       case RoomPackage.OPERATION__DETAIL_CODE:
         setDetailCode((DetailCode)newValue);
         return;
@@ -339,6 +406,9 @@ public class OperationImpl extends MinimalEObjectImpl.Container implements Opera
       case RoomPackage.OPERATION__RETURNTYPE:
         setReturntype((FreeType)null);
         return;
+      case RoomPackage.OPERATION__DOCU:
+        setDocu((Documentation)null);
+        return;
       case RoomPackage.OPERATION__DETAIL_CODE:
         setDetailCode((DetailCode)null);
         return;
@@ -362,6 +432,8 @@ public class OperationImpl extends MinimalEObjectImpl.Container implements Opera
         return arguments != null && !arguments.isEmpty();
       case RoomPackage.OPERATION__RETURNTYPE:
         return returntype != null;
+      case RoomPackage.OPERATION__DOCU:
+        return docu != null;
       case RoomPackage.OPERATION__DETAIL_CODE:
         return detailCode != null;
     }

@@ -33,6 +33,7 @@ import org.eclipse.etrice.core.room.TrPointTerminal;
 import org.eclipse.etrice.core.room.Transition;
 import org.eclipse.etrice.core.room.TransitionTerminal;
 import org.eclipse.etrice.core.room.TriggeredTransition;
+import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.core.validation.ValidationUtil;
 import org.eclipse.etrice.ui.behavior.ImageProvider;
 import org.eclipse.etrice.ui.behavior.dialogs.TransitionPropertyDialog;
@@ -93,6 +94,8 @@ public class TransitionSupport {
 		
 		private class CreateFeature extends AbstractCreateConnectionFeature {
 			
+			private boolean doneChanges = false;
+
 			public CreateFeature(IFeatureProvider fp) {
 				super(fp, "Transition", "create Transition");
 			}
@@ -184,25 +187,30 @@ public class TransitionSupport {
 						trans.setName("init");
 					}
 					else {
-						String name = RoomNameProvider.getUniqueTransitionName(sg);
-						trans.setName(name);
+						trans.setName(RoomNameProvider.getUniqueTransitionName(sg));
 					}
+
+					sg.getTransitions().add(trans);
 					
 		        	Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 		        	TransitionPropertyDialog dlg = new TransitionPropertyDialog(shell, sg, trans);
-					if (dlg.open()!=Window.OK)
-						// find a method to abort creation
-						//throw new RuntimeException();
+					if (dlg.open()!=Window.OK) {
+						sg.getTransitions().remove(trans);
 						return null;
-
-					sg.getTransitions().add(trans);
+					}
 					
 					AddConnectionContext addContext = new AddConnectionContext(context.getSourceAnchor(), context.getTargetAnchor());
 					addContext.setNewObject(trans);
 					newConnection = (Connection) getFeatureProvider().addIfPossible(addContext);
+					doneChanges = true;
 				}
 				
 				return newConnection;
+			}
+			
+			@Override
+			public boolean hasDoneChanges() {
+				return doneChanges ;
 			}
 
 			private boolean isInitialPoint(Anchor anchor) {
@@ -308,10 +316,9 @@ public class TransitionSupport {
 		        ConnectionDecorator textDecorator =
 		            peCreateService.createConnectionDecorator(connection, true,
 		            0.5, true);
-		        Text text = gaService.createDefaultText(textDecorator);
+		        Text text = gaService.createDefaultText(getDiagram(), textDecorator, getLabel(trans));
 		        text.setForeground(manageColor(IColorConstant.BLACK));
 		        gaService.setLocation(text, 10, 0);
-		        text.setValue(getLabel(trans));
 
 
 				// create link and wire it
@@ -474,8 +481,8 @@ public class TransitionSupport {
 				TransitionPropertyDialog dlg = new TransitionPropertyDialog(shell, sg, trans);
 				if (dlg.open()!=Window.OK)
 					// TODOHRR: introduce a method to revert changes, does hasDoneChanges=false roll back changes?
-					//throw new RuntimeException();
-					return;
+					throw new RuntimeException();
+//					return;
 				
 				updateLabel(trans, (Connection) pe);
 			}
@@ -547,8 +554,16 @@ public class TransitionSupport {
 				pe = (PictogramElement) pe.eContainer();
 			
 			EObject bo = Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(pe);
-			if (bo instanceof Transition)
-				return RoomNameProvider.getTransitionLabelName((Transition) bo);
+			if (bo instanceof Transition) {
+				Transition tr = (Transition) bo;
+				String label = RoomNameProvider.getTransitionLabelName(tr);
+				if (RoomHelpers.hasDetailCode(tr.getAction())) {
+					if (label.length()>0)
+						label += "\n";
+					label += "action:\n"+RoomHelpers.getDetailCode(tr.getAction());
+				}
+				return label;
+			}
 			
 			return super.getToolTip(ga);
 		}

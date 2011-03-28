@@ -134,7 +134,7 @@ public class PopulateDiagramCommand extends RecordingCommand {
 			Anchor src = node2anchor.get(from);
 			Anchor dst = node2anchor.get(to);
 
-			assert(src!=null && dst!=null): "transition enpoints must be present";
+			assert(src!=null && dst!=null): "transition endpoints must be present";
 			
 			AddConnectionContext context = new AddConnectionContext(src, dst);
 			context.setNewObject(trans);

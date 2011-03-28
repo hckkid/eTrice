@@ -6,9 +6,10 @@ import org.eclipse.core.databinding.validation.ValidationStatus;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.etrice.core.room.RoomPackage;
-import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.TrPoint;
 import org.eclipse.etrice.core.room.TransitionPoint;
+import org.eclipse.etrice.core.validation.ValidationUtil;
+import org.eclipse.etrice.core.validation.ValidationUtil.Result;
 import org.eclipse.etrice.ui.behavior.Activator;
 import org.eclipse.etrice.ui.common.dialogs.AbstractPropertyDialog;
 import org.eclipse.swt.graphics.Image;
@@ -26,25 +27,18 @@ public class TrPointPropertyDialog extends AbstractPropertyDialog {
 			if (value instanceof String) {
 				String name = (String) value;
 				
-				if (name.isEmpty())
-					return ValidationStatus.error("name must not be empty");
-
-				for (TrPoint t : sg.getTrPoints()) {
-					if (t!=tp && t.getName()!=null && t.getName().equals(name))
-						return ValidationStatus.error("name already used");
-				}
+				Result result = ValidationUtil.isUniqueName(tp, name);
+				if (!result.isOk())
+					return ValidationStatus.error(result.getMsg());
 			}
 			return Status.OK_STATUS;
 		}
 	}
 
-	private StateGraph sg;
 	private TrPoint tp;
 
-	public TrPointPropertyDialog(Shell shell, TrPoint tp, StateGraph sg,
-			boolean subtp) {
+	public TrPointPropertyDialog(Shell shell, TrPoint tp, boolean subtp) {
 		super(shell, "Edit Transition Point");
-		this.sg = sg;
 		this.tp = tp;
 	}
 

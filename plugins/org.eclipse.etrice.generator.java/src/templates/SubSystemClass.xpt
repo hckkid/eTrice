@@ -39,7 +39,11 @@ import org.eclipse.etrice.runtime.java.modelbase.SubSystemClassBase;
 «ENDLET»
 
 
+«EXPAND ProcedureHelpers::UserCode FOR cc.userCode1»
+
 public class «comp.name» extends SubSystemClassBase {
+
+	«EXPAND ProcedureHelpers::UserCode FOR cc.userCode2»
 	
 	public «comp.name»(IRTObject parent, String name) {
 		super(parent, name);
@@ -61,9 +65,9 @@ public class «comp.name» extends SubSystemClassBase {
 		// actor instance «ai.path» itself
 		Address addr«ai.path.getPathName()»= new Address(0,«ai.threadId»,«ai.objId»);
 			// interface items of «ai.path»«FOREACH ai.orderedIfItemInstances AS pi»
-				«IF ServiceImplInstance.isInstance(pi) || pi.peers.size>1»«FOREACH pi.peers AS peer ITERATOR i»Address addr«pi.path.getPathName()»_«i.counter0» = new Address(0,«pi.threadId»,«pi.objId»+«i.counter0»);
+				«IF ServiceImplInstance.isInstance(pi) || pi.peers.size>1»«FOREACH pi.peers AS peer ITERATOR i»Address addr_item_«pi.path.getPathName()»_«i.counter0» = new Address(0,«pi.threadId»,«pi.objId»+«i.counter0»);
 					«ENDFOREACH»
-				«ELSE»Address addr«pi.path.getPathName()» = new Address(0,«ai.threadId»,«pi.objId»);
+				«ELSE»Address addr_item_«pi.path.getPathName()» = new Address(0,«ai.threadId»,«pi.objId»);
 				«ENDIF»
 			«ENDFOREACH»
 		«ENDFOREACH»
@@ -75,13 +79,13 @@ public class «comp.name» extends SubSystemClassBase {
 				"«ai.name»",
 				addr«ai.path.getPathName()»,
 				// own interface item addresses
-				new Address[][] {«FOREACH ai.orderedIfItemInstances AS pi SEPARATOR ","»{«IF ServiceImplInstance.isInstance(pi) || pi.peers.size>1»«FOREACH pi.peers AS peer ITERATOR i SEPARATOR ","»addr«pi.path.getPathName()»_«i.counter0»«ENDFOREACH»
-					«ELSE»addr«pi.path.getPathName()»
+				new Address[][] {«FOREACH ai.orderedIfItemInstances AS pi SEPARATOR ","»{«IF ServiceImplInstance.isInstance(pi) || pi.peers.size>1»«FOREACH pi.peers AS peer ITERATOR i SEPARATOR ","»addr_item_«pi.path.getPathName()»_«i.counter0»«ENDFOREACH»
+					«ELSE»addr_item_«pi.path.getPathName()»
 					«ENDIF»}
 				«ENDFOREACH»},
 				// peer interface item addresses
-				new Address[][] {«FOREACH ai.orderedIfItemInstances AS pi SEPARATOR ","»{«IF !ServiceImplInstance.isInstance(pi) && pi.peers.isEmpty»null«ELSE»«FOREACH pi.peers AS pp SEPARATOR ","»«IF ServiceImplInstance.isInstance(pp) || pp.peers.size>1»addr«pp.path.getPathName()»_«pp.peers.indexOf(pi)»
-					«ELSE»addr«pp.path.getPathName()»
+				new Address[][] {«FOREACH ai.orderedIfItemInstances AS pi SEPARATOR ","»{«IF !ServiceImplInstance.isInstance(pi) && pi.peers.isEmpty»null«ELSE»«FOREACH pi.peers AS pp SEPARATOR ","»«IF ServiceImplInstance.isInstance(pp) || pp.peers.size>1»addr_item_«pp.path.getPathName()»_«pp.peers.indexOf(pi)»
+					«ELSE»addr_item_«pp.path.getPathName()»
 					«ENDIF»
 					«ENDFOREACH»«ENDIF»}
 				«ENDFOREACH»}

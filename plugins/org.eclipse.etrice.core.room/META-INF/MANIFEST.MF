@@ -13,12 +13,12 @@ Require-Bundle: org.eclipse.xtext;bundle-version="1.0.1",
  org.eclipse.emf.mwe.utils;bundle-version="1.0.0";resolution:=optional,
  org.eclipse.emf.mwe2.launch;bundle-version="1.0.1";resolution:=optional,
  com.ibm.icu;bundle-version="4.2.1";resolution:=optional,
- org.eclipse.xtext.xtend;bundle-version="1.0.1";resolution:=optional,
  org.eclipse.xtext.util;bundle-version="1.0.1",
  org.eclipse.emf.ecore;bundle-version="2.6.0",
  org.eclipse.emf.common;bundle-version="2.6.0",
  org.antlr.runtime;bundle-version="3.0.0"
-Import-Package: org.apache.log4j
+Import-Package: org.apache.log4j,
+ org.eclipse.etrice.core.room
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.eclipse.etrice.core,
  org.eclipse.etrice.core.naming,

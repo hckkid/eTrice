@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.DataClass;
+import org.eclipse.etrice.core.room.Documentation;
 import org.eclipse.etrice.core.room.Import;
 import org.eclipse.etrice.core.room.LogicalSystem;
 import org.eclipse.etrice.core.room.ProtocolClass;
@@ -39,6 +40,7 @@ import org.eclipse.etrice.core.room.SubSystemClass;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.room.impl.RoomModelImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.impl.RoomModelImpl#getDocu <em>Docu</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.RoomModelImpl#getImports <em>Imports</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.RoomModelImpl#getDataClasses <em>Data Classes</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.RoomModelImpl#getProtocolClasses <em>Protocol Classes</em>}</li>
@@ -71,6 +73,16 @@ public class RoomModelImpl extends MinimalEObjectImpl.Container implements RoomM
    * @ordered
    */
   protected String name = NAME_EDEFAULT;
+
+  /**
+   * The cached value of the '{@link #getDocu() <em>Docu</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getDocu()
+   * @generated
+   * @ordered
+   */
+  protected Documentation docu;
 
   /**
    * The cached value of the '{@link #getImports() <em>Imports</em>}' containment reference list.
@@ -181,6 +193,54 @@ public class RoomModelImpl extends MinimalEObjectImpl.Container implements RoomM
    * <!-- end-user-doc -->
    * @generated
    */
+  public Documentation getDocu()
+  {
+    return docu;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetDocu(Documentation newDocu, NotificationChain msgs)
+  {
+    Documentation oldDocu = docu;
+    docu = newDocu;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RoomPackage.ROOM_MODEL__DOCU, oldDocu, newDocu);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setDocu(Documentation newDocu)
+  {
+    if (newDocu != docu)
+    {
+      NotificationChain msgs = null;
+      if (docu != null)
+        msgs = ((InternalEObject)docu).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RoomPackage.ROOM_MODEL__DOCU, null, msgs);
+      if (newDocu != null)
+        msgs = ((InternalEObject)newDocu).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RoomPackage.ROOM_MODEL__DOCU, null, msgs);
+      msgs = basicSetDocu(newDocu, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.ROOM_MODEL__DOCU, newDocu, newDocu));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EList<Import> getImports()
   {
     if (imports == null)
@@ -270,6 +330,8 @@ public class RoomModelImpl extends MinimalEObjectImpl.Container implements RoomM
   {
     switch (featureID)
     {
+      case RoomPackage.ROOM_MODEL__DOCU:
+        return basicSetDocu(null, msgs);
       case RoomPackage.ROOM_MODEL__IMPORTS:
         return ((InternalEList<?>)getImports()).basicRemove(otherEnd, msgs);
       case RoomPackage.ROOM_MODEL__DATA_CLASSES:
@@ -298,6 +360,8 @@ public class RoomModelImpl extends MinimalEObjectImpl.Container implements RoomM
     {
       case RoomPackage.ROOM_MODEL__NAME:
         return getName();
+      case RoomPackage.ROOM_MODEL__DOCU:
+        return getDocu();
       case RoomPackage.ROOM_MODEL__IMPORTS:
         return getImports();
       case RoomPackage.ROOM_MODEL__DATA_CLASSES:
@@ -327,6 +391,9 @@ public class RoomModelImpl extends MinimalEObjectImpl.Container implements RoomM
     {
       case RoomPackage.ROOM_MODEL__NAME:
         setName((String)newValue);
+        return;
+      case RoomPackage.ROOM_MODEL__DOCU:
+        setDocu((Documentation)newValue);
         return;
       case RoomPackage.ROOM_MODEL__IMPORTS:
         getImports().clear();
@@ -369,6 +436,9 @@ public class RoomModelImpl extends MinimalEObjectImpl.Container implements RoomM
       case RoomPackage.ROOM_MODEL__NAME:
         setName(NAME_EDEFAULT);
         return;
+      case RoomPackage.ROOM_MODEL__DOCU:
+        setDocu((Documentation)null);
+        return;
       case RoomPackage.ROOM_MODEL__IMPORTS:
         getImports().clear();
         return;
@@ -403,6 +473,8 @@ public class RoomModelImpl extends MinimalEObjectImpl.Container implements RoomM
     {
       case RoomPackage.ROOM_MODEL__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+      case RoomPackage.ROOM_MODEL__DOCU:
+        return docu != null;
       case RoomPackage.ROOM_MODEL__IMPORTS:
         return imports != null && !imports.isEmpty();
       case RoomPackage.ROOM_MODEL__DATA_CLASSES:

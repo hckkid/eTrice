@@ -23,6 +23,7 @@ import org.eclipse.etrice.core.room.StructureClass;
 import org.eclipse.etrice.core.room.TrPoint;
 import org.eclipse.graphiti.dt.IDiagramTypeProvider;
 import org.eclipse.graphiti.features.IAddFeature;
+import org.eclipse.graphiti.features.IDeleteFeature;
 import org.eclipse.graphiti.features.IFeatureProvider;
 import org.eclipse.graphiti.features.ILayoutFeature;
 import org.eclipse.graphiti.features.IReason;
@@ -31,6 +32,7 @@ import org.eclipse.graphiti.features.IResizeShapeFeature;
 import org.eclipse.graphiti.features.IUpdateFeature;
 import org.eclipse.graphiti.features.context.IAddContext;
 import org.eclipse.graphiti.features.context.ICustomContext;
+import org.eclipse.graphiti.features.context.IDeleteContext;
 import org.eclipse.graphiti.features.context.IDoubleClickContext;
 import org.eclipse.graphiti.features.context.ILayoutContext;
 import org.eclipse.graphiti.features.context.IRemoveContext;
@@ -42,6 +44,7 @@ import org.eclipse.graphiti.features.custom.ICustomFeature;
 import org.eclipse.graphiti.features.impl.AbstractAddFeature;
 import org.eclipse.graphiti.features.impl.AbstractLayoutFeature;
 import org.eclipse.graphiti.features.impl.AbstractUpdateFeature;
+import org.eclipse.graphiti.features.impl.DefaultRemoveFeature;
 import org.eclipse.graphiti.features.impl.DefaultResizeShapeFeature;
 import org.eclipse.graphiti.features.impl.Reason;
 import org.eclipse.graphiti.mm.algorithms.GraphicsAlgorithm;
@@ -59,6 +62,7 @@ import org.eclipse.graphiti.services.IGaService;
 import org.eclipse.graphiti.services.IPeCreateService;
 import org.eclipse.graphiti.tb.DefaultToolBehaviorProvider;
 import org.eclipse.graphiti.tb.IToolBehaviorProvider;
+import org.eclipse.graphiti.ui.features.DefaultDeleteFeature;
 import org.eclipse.graphiti.ui.features.DefaultFeatureProvider;
 import org.eclipse.graphiti.util.ColorConstant;
 import org.eclipse.graphiti.util.IColorConstant;
@@ -133,7 +137,7 @@ public class StateGraphSupport {
 				
 				{
 					Shape labelShape = peCreateService.createShape(containerShape, false);
-					Text label = gaService.createDefaultText(labelShape, RoomNameProvider.getStateGraphLabel(sg));
+					Text label = gaService.createDefaultText(getDiagram(), labelShape, RoomNameProvider.getStateGraphLabel(sg));
 					label.setForeground(manageColor(LINE_COLOR));
 					label.setBackground(manageColor(LINE_COLOR));
 					label.setHorizontalAlignment(Orientation.ALIGNMENT_RIGHT);
@@ -196,11 +200,16 @@ public class StateGraphSupport {
 				int w = containerGa.getWidth();
 				int h = containerGa.getHeight();
 	
-				if (containerGa.getGraphicsAlgorithmChildren().size()==1) {
+				if (containerGa.getGraphicsAlgorithmChildren().size()>=1) {
 					GraphicsAlgorithm ga = containerGa.getGraphicsAlgorithmChildren().get(0);
 					ga.setWidth(w-2*MARGIN);
 					ga.setHeight(h-2*MARGIN);
 					anythingChanged = true;
+				}
+				
+				if (containerShape.getChildren().size()>=1) {
+					GraphicsAlgorithm ga = containerShape.getChildren().get(0).getGraphicsAlgorithm();
+					ga.setWidth(w-2*MARGIN);
 				}
 	
 				return anythingChanged;
@@ -242,6 +251,7 @@ public class StateGraphSupport {
 				Object bo = getBusinessObjectForPictogramElement(container);
 				if (bo instanceof StateGraph) {
 					StateGraph sg = (StateGraph) bo;
+					getDiagramEditor().selectPictogramElements(new PictogramElement[] {});
 					ContextSwitcher.goUp(getDiagram(), sg);
 				}
 			}
@@ -385,6 +395,30 @@ public class StateGraphSupport {
 			}
 		}
 		
+		private class RemoveFeature extends DefaultRemoveFeature {
+
+			public RemoveFeature(IFeatureProvider fp) {
+				super(fp);
+			}
+			
+			@Override
+			public boolean canRemove(IRemoveContext context) {
+				return false;
+			}
+		}
+		
+		private class DeleteFeature extends DefaultDeleteFeature {
+
+			public DeleteFeature(IFeatureProvider fp) {
+				super(fp);
+			}
+			
+			@Override
+			public boolean canDelete(IDeleteContext context) {
+				return false;
+			}
+		}
+		
 		private IFeatureProvider fp;
 	
 		public FeatureProvider(IDiagramTypeProvider dtp, IFeatureProvider fp) {
@@ -411,6 +445,16 @@ public class StateGraphSupport {
 		public IResizeShapeFeature getResizeShapeFeature(
 				IResizeShapeContext context) {
 			return new ResizeFeature(fp);
+		}
+		
+		@Override
+		public IRemoveFeature getRemoveFeature(IRemoveContext context) {
+			return new RemoveFeature(fp);
+		}
+		
+		@Override
+		public IDeleteFeature getDeleteFeature(IDeleteContext context) {
+			return new DeleteFeature(fp);
 		}
 		
 		@Override

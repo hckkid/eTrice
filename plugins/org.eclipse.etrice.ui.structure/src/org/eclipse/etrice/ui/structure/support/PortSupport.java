@@ -13,6 +13,7 @@
 package org.eclipse.etrice.ui.structure.support;
 
 import org.eclipse.etrice.core.validation.ValidationUtil;
+import org.eclipse.etrice.ui.structure.DiagramTypeProvider;
 import org.eclipse.etrice.ui.structure.ImageProvider;
 import org.eclipse.etrice.ui.structure.dialogs.PortPropertyDialog;
 import org.eclipse.graphiti.dt.IDiagramTypeProvider;
@@ -48,12 +49,16 @@ import org.eclipse.graphiti.tb.IToolBehaviorProvider;
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.scoping.IScopeProvider;
 
+import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorContainerClass;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.RoomFactory;
+import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.etrice.core.room.SubSystemClass;
 
 public class PortSupport extends InterfaceItemSupport {
@@ -76,20 +81,11 @@ public class PortSupport extends InterfaceItemSupport {
 	
 			@Override
 			public Object[] create(ICreateContext context) {
-		        // create Port
+				ActorContainerClass acc = (ActorContainerClass) context.getTargetContainer().getLink().getBusinessObjects().get(0);
+
+				// create Port
 		        Port port = RoomFactory.eINSTANCE.createPort();
-		        port.setName("");
-		    	
-		        ActorContainerClass acc = (ActorContainerClass) context.getTargetContainer().getLink().getBusinessObjects().get(0);
-		        
-		        Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-		        PortPropertyDialog dlg = new PortPropertyDialog(shell, port, acc, true, false, internal);
-				if (dlg.open()!=Window.OK)
-					// find a method to abort creation
-					//throw new RuntimeException();
-					return EMPTY;
-				
-				doneChanges = true;
+		        port.setName(RoomNameProvider.getUniqueInterfaceItemName("p", acc));
 				
 		        if (acc instanceof ActorClass) {
 		        	ActorClass ac = (ActorClass) acc;
@@ -105,6 +101,27 @@ public class PortSupport extends InterfaceItemSupport {
 		        else {
 		        	assert(false): "ActorClass or SubSystemClass expected";
 		        }
+		        
+		        IScopeProvider scopeProvider = ((DiagramTypeProvider)getFeatureProvider().getDiagramTypeProvider()).getScopeProvider();
+		        IScope scope = scopeProvider.getScope(port, RoomPackage.eINSTANCE.getInterfaceItem_Protocol());
+		        Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+		        PortPropertyDialog dlg = new PortPropertyDialog(shell, port, scope, acc, true, false, internal);
+				if (dlg.open()!=Window.OK) {
+			        if (acc instanceof ActorClass) {
+			        	ActorClass ac = (ActorClass) acc;
+			        	if (internal)
+			        		ac.getIntPorts().remove(port);
+			        	else
+			        		ac.getIfPorts().remove(port);
+			        }
+			        else if (acc instanceof SubSystemClass) {
+			        	SubSystemClass ssc = (SubSystemClass) acc;
+			        	ssc.getRelayPorts().remove(port);
+			        }
+					return EMPTY;
+				}
+				
+				doneChanges = true;
 		        
 		        // do the add
 		        addGraphicalRepresentation(context, port);
@@ -164,16 +181,18 @@ public class PortSupport extends InterfaceItemSupport {
 				Object bo = getBusinessObjectForPictogramElement(context.getPictogramElements()[0]);
 				if (bo instanceof Port) {
 					Port port = (Port) bo;
-					Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 					ActorContainerClass acc = (ActorContainerClass)port.eContainer();
 					boolean internal = isInternal(port);
 					boolean refport = isRefItem(context.getPictogramElements()[0]);
 					
-					PortPropertyDialog dlg = new PortPropertyDialog(shell, port, acc, false, refport, internal);
+			        IScopeProvider scopeProvider = ((DiagramTypeProvider)getFeatureProvider().getDiagramTypeProvider()).getScopeProvider();
+			        IScope scope = scopeProvider.getScope(port.eContainer().eContainer(), RoomPackage.eINSTANCE.getInterfaceItem_Protocol());
+			        Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+			        PortPropertyDialog dlg = new PortPropertyDialog(shell, port, scope, acc, false, refport, internal);
 					if (dlg.open()!=Window.OK)
 						// TODOHRR: introduce a method to revert changes
-						//throw new RuntimeException();
-						return;
+						throw new RuntimeException();
+						//return;
 					
 					updatePortFigure(port, context.getPictogramElements()[0], manageColor(DARK_COLOR), manageColor(BRIGHT_COLOR));
 				}

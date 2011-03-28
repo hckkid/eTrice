@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.etrice.core.room.Attribute;
+import org.eclipse.etrice.core.room.Documentation;
 import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.etrice.core.room.Type;
 
@@ -29,6 +30,7 @@ import org.eclipse.etrice.core.room.Type;
  *   <li>{@link org.eclipse.etrice.core.room.impl.AttributeImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.AttributeImpl#getSize <em>Size</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.AttributeImpl#getType <em>Type</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.impl.AttributeImpl#getDocu <em>Docu</em>}</li>
  * </ul>
  * </p>
  *
@@ -85,6 +87,16 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
    * @ordered
    */
   protected Type type;
+
+  /**
+   * The cached value of the '{@link #getDocu() <em>Docu</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getDocu()
+   * @generated
+   * @ordered
+   */
+  protected Documentation docu;
 
   /**
    * <!-- begin-user-doc -->
@@ -206,6 +218,54 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
    * <!-- end-user-doc -->
    * @generated
    */
+  public Documentation getDocu()
+  {
+    return docu;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetDocu(Documentation newDocu, NotificationChain msgs)
+  {
+    Documentation oldDocu = docu;
+    docu = newDocu;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RoomPackage.ATTRIBUTE__DOCU, oldDocu, newDocu);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setDocu(Documentation newDocu)
+  {
+    if (newDocu != docu)
+    {
+      NotificationChain msgs = null;
+      if (docu != null)
+        msgs = ((InternalEObject)docu).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RoomPackage.ATTRIBUTE__DOCU, null, msgs);
+      if (newDocu != null)
+        msgs = ((InternalEObject)newDocu).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RoomPackage.ATTRIBUTE__DOCU, null, msgs);
+      msgs = basicSetDocu(newDocu, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.ATTRIBUTE__DOCU, newDocu, newDocu));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
@@ -213,6 +273,8 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
     {
       case RoomPackage.ATTRIBUTE__TYPE:
         return basicSetType(null, msgs);
+      case RoomPackage.ATTRIBUTE__DOCU:
+        return basicSetDocu(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -233,6 +295,8 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
         return getSize();
       case RoomPackage.ATTRIBUTE__TYPE:
         return getType();
+      case RoomPackage.ATTRIBUTE__DOCU:
+        return getDocu();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -255,6 +319,9 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
         return;
       case RoomPackage.ATTRIBUTE__TYPE:
         setType((Type)newValue);
+        return;
+      case RoomPackage.ATTRIBUTE__DOCU:
+        setDocu((Documentation)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -279,6 +346,9 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
       case RoomPackage.ATTRIBUTE__TYPE:
         setType((Type)null);
         return;
+      case RoomPackage.ATTRIBUTE__DOCU:
+        setDocu((Documentation)null);
+        return;
     }
     super.eUnset(featureID);
   }
@@ -299,6 +369,8 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
         return size != SIZE_EDEFAULT;
       case RoomPackage.ATTRIBUTE__TYPE:
         return type != null;
+      case RoomPackage.ATTRIBUTE__DOCU:
+        return docu != null;
     }
     return super.eIsSet(featureID);
   }

@@ -43,8 +43,8 @@ import org.eclipse.ui.part.FileEditorInput;
  */
 public abstract class DiagramAccessBase {
 
-	private static final String DIAGRAMS_FOLDER_NAME = ".diagrams";
-
+	private static final String DIAGRAMS_FOLDER_NAME = "diagrams";
+	
 	/**
 	 * 
 	 */
@@ -113,7 +113,20 @@ public abstract class DiagramAccessBase {
 	}
 
 	private void populatediagram(StructureClass ac, Diagram diagram) {
-		ResourceSet rs = diagram.eResource().getResourceSet();
+		// CAUTION: if the IResourceSetProvider should be used it has to contain the diagram resource!
+//		IProject project = null;
+//		Resource resource = ac.eResource();
+//		if (resource!=null) {
+//			URI uri = resource.getURI();
+//			if (uri.isPlatformResource()) {
+//				uri = uri.trimSegments(1);
+//				IFolder parentFolder = ResourcesPlugin.getWorkspace().getRoot().getFolder(new Path(uri.toPlatformString(true)));
+//				project = parentFolder.getProject();
+//			}
+//		}
+//		
+//		IResourceSetProvider rsp = new XtextResourceSetProvider();
+		ResourceSet rs = diagram.eResource().getResourceSet();//rsp.get(project);
 		TransactionalEditingDomain editingDomain = TransactionUtil.getEditingDomain(rs);
 		if (editingDomain == null) {
 			// Not yet existing, create one

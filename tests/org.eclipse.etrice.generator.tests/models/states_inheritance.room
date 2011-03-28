@@ -186,8 +186,6 @@ RoomModel states_inheritance.t {
 		}
 		Structure {
 			external Port port
-			SAP timer: PTimer
-			SAP timeout: PTimeout
 		}
 		Behavior {
 			StateMachine {
@@ -202,12 +200,12 @@ RoomModel states_inheritance.t {
 								<z:sub>
 							}
 						}
-						Transition tr10: State2 -> State4 {
+						Transition tr10a: State2 -> State4 {
 							triggers {
 								<y:sub>
 							}
 						}
-						Transition tr11: State4 -> my tp3 {
+						Transition tr11a: State4 -> my tp3 {
 							triggers {
 								<z:sub>
 							}

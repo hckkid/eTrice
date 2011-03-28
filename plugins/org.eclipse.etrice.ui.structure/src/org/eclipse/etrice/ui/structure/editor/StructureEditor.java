@@ -12,13 +12,17 @@
 
 package org.eclipse.etrice.ui.structure.editor;
 
-import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.etrice.core.room.StructureClass;
+import org.eclipse.etrice.ui.common.editor.RoomDiagramEditor;
 import org.eclipse.etrice.ui.structure.Activator;
-import org.eclipse.graphiti.ui.editor.DiagramEditor;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.graphiti.mm.pictograms.Diagram;
+import org.eclipse.graphiti.services.Graphiti;
+import org.eclipse.graphiti.ui.editor.DiagramEditorInput;
 
 
-public class StructureEditor extends DiagramEditor {
+public class StructureEditor extends RoomDiagramEditor {
 
 	public static final String STRUCTURE_EDITOR_ID = "org.eclipse.etrice.ui.structure.editor.StructureEditor";
 	
@@ -31,13 +35,15 @@ public class StructureEditor extends DiagramEditor {
 		return Activator.getImage("icons/Structure.gif");
 	}
 
-	@SuppressWarnings("restriction")
-	@Override
-	protected void initializeGraphicalViewer() {
-		super.initializeGraphicalViewer();
+	/**
+	 * @return the actor class of this editor
+	 */
+	public StructureClass getStructureClass() {
+		Diagram diagram = ((DiagramEditorInput)getEditorInput()).getDiagram();
+		EObject bo = Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(diagram);
+		if (bo instanceof StructureClass)
+			return (StructureClass) bo;
 		
-		ResourceSet rs = getEditingDomain().getResourceSet();
-		if (rs.getResources().size()>1)
-			rs.getResources().get(1).setTrackingModification(true);
+		return null;
 	}
 }

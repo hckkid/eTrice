@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <templates>
 	<template autoinsert="true" context="org.eclipse.etrice.core.Room.ActorClass"
-		id="actor_class"
 		deleted="false" description="actor class skeleton" enabled="true"
-		name="ActorClass">ActorClass ${cursor} {&#13;
+		id="actor_class" name="ActorClass">ActorClass ${cursor} {&#13;
 		Interface {&#13;
 		}&#13;
 		Structure {&#13;
@@ -12,35 +11,46 @@
 		}&#13;
 		}&#13;</template>
 	<template autoinsert="true" context="org.eclipse.etrice.core.Room.kw_State"
-		id="state"
 		deleted="false" description="State with entry code, exit code and sub graph"
-		enabled="true" name="complete State">State ${cursor} {&#13;
+		enabled="true" id="state" name="complete State">State ${cursor} {&#13;
 		entry {&#13;
-			""&#13;
+		""&#13;
 		}&#13;
 		exit {&#13;
-			""&#13;
+		""&#13;
 		}&#13;
 		subgraph {&#13;
 		}</template>
-	<template autoinsert="true" context="org.eclipse.etrice.core.Room.kw_RefinedState"
-		id="refined_state"
-		deleted="false" description="RefinedState"
-		enabled="true" name="RefinedState">RefinedState ${base:CrossReference('RefinedState.base')} {&#13;
-	${cursor}&#13;
-}</template>
 	<template autoinsert="true" context="org.eclipse.etrice.core.Room.DetailCode"
-		id="detail_code"
-		deleted="false" description="detail code" enabled="true" name="detail code">{&#13;
+		deleted="false" description="detail code" enabled="true" id="detail_code"
+		name="detail code">{&#13;
 		""&#13;
 		}</template>
 	<template autoinsert="true" context="org.eclipse.etrice.core.Room.kw_Port"
-		id="port"
-		deleted="false" description="insert port" enabled="true" name="Port">Port ${cursor} : ${protocol:CrossReference('Port.protocol')}</template>
+		deleted="false" description="insert port" enabled="true" id="port"
+		name="Port">Port ${cursor} : ${protocol:CrossReference('Port.protocol')}
+	</template>
+	<template autoinsert="true"
+		context="org.eclipse.etrice.core.Room.ProtocolClass" deleted="false"
+		description="ProtocolClass skeleton" enabled="true" name="ProtocolClass">ProtocolClass
+		${cursor} {&#13;
+		incoming {&#13;
+		}&#13;
+		outgoing {&#13;
+		}&#13;
+		}</template>
+	<template autoinsert="true"
+		context="org.eclipse.etrice.core.Room.kw_RefinedState" deleted="false"
+		description="RefinedState" enabled="true" id="refined_state" name="RefinedState">RefinedState
+		${base:CrossReference('RefinedState.base')} {&#13;
+		${cursor}&#13;
+		}</template>
 	<template autoinsert="true" context="org.eclipse.etrice.core.Room.kw_SAP"
-		id="sap"
-		deleted="false" description="insert SAP" enabled="true" name="SAP">SAP ${cursor} : ${protocol:CrossReference('SAPRef.protocol')}</template>
+		deleted="false" description="insert SAP" enabled="true" id="sap" name="SAP">
+		SAP ${cursor} : ${protocol:CrossReference('SAPRef.protocol')}
+	</template>
 	<template autoinsert="true" context="org.eclipse.etrice.core.Room.kw_SPP"
-		id="spp"
-		deleted="false" description="insert SPP" enabled="true" name="SPP">SPP ${cursor} : ${protocol:CrossReference('SPPRef.protocol')}</template>
+		deleted="false" description="insert SPP" enabled="true" id="spp" name="SPP">
+		SPP ${cursor} : ${protocol:CrossReference('SPPRef.protocol')}
+	</template>
 </templates>

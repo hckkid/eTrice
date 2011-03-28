@@ -65,10 +65,18 @@ public abstract class ActorClassBase extends EventReceiver implements IMessageRe
 	}
 	
 	//--------------------- lifecycle functions
+	// automatically generated lifecycle functions
 	public abstract void init();
 	public abstract void start();
 	public abstract void stop();
 	public abstract void destroy();
+
+	// not automatically generated lifecycle functions
+	// are called, but with empty implementation -> can be overridden by user
+	public void initUser(){}
+	public void startUser(){}
+	public void stopUser(){}
+	public void destroyUser(){}
 
 	@Override
 	public void receive(Message msg) {

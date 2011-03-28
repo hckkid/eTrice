@@ -22,7 +22,7 @@ import org.eclipse.xtext.validation.CheckMode;
 
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.generator.builder.ILogger;
-import org.eclipse.etrice.generator.builder.InstanceModelBuilder;
+import org.eclipse.etrice.generator.builder.GeneratorModelBuilder;
 import org.eclipse.etrice.generator.etricegen.IDiagnostician;
 
 public class RoomModelValidator extends RoomJavaValidator implements ILogger {
@@ -63,7 +63,7 @@ public class RoomModelValidator extends RoomJavaValidator implements ILogger {
 			System.out.println("checking model "+model.getName());
 			
 			Diag diagnostician = new Diag();
-			InstanceModelBuilder builder = new InstanceModelBuilder(this, diagnostician);
+			GeneratorModelBuilder builder = new GeneratorModelBuilder(this, diagnostician);
 			
 			LinkedList<RoomModel> models = new LinkedList<RoomModel>();
 			models.add(model);

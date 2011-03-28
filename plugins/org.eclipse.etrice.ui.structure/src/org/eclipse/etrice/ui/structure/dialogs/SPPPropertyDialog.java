@@ -13,29 +13,30 @@
 package org.eclipse.etrice.ui.structure.dialogs;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import org.eclipse.core.databinding.DataBindingContext;
 import org.eclipse.core.databinding.validation.IValidator;
 import org.eclipse.core.databinding.validation.ValidationStatus;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.etrice.core.room.ActorContainerClass;
+import org.eclipse.etrice.core.room.ProtocolClass;
+import org.eclipse.etrice.core.room.RoomPackage;
+import org.eclipse.etrice.core.room.SPPRef;
 import org.eclipse.etrice.core.validation.ValidationUtil;
+import org.eclipse.etrice.core.validation.ValidationUtil.Result;
+import org.eclipse.etrice.ui.common.dialogs.AbstractPropertyDialog;
+import org.eclipse.etrice.ui.structure.Activator;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.forms.IManagedForm;
-
-import org.eclipse.etrice.core.room.ActorClass;
-import org.eclipse.etrice.core.room.ActorContainerClass;
-import org.eclipse.etrice.core.room.ProtocolClass;
-import org.eclipse.etrice.core.room.RoomModel;
-import org.eclipse.etrice.core.room.RoomPackage;
-import org.eclipse.etrice.core.room.SPPRef;
-import org.eclipse.etrice.ui.common.dialogs.AbstractPropertyDialog;
-import org.eclipse.etrice.ui.structure.Activator;
+import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.scoping.IScope;
 
 public class SPPPropertyDialog extends AbstractPropertyDialog {
 
@@ -46,31 +47,13 @@ public class SPPPropertyDialog extends AbstractPropertyDialog {
 			if (value instanceof String) {
 				String name = (String) value;
 				
-				if (name.isEmpty())
-					return ValidationStatus.error("name must not be empty");
-				
-				// TODOHRR: check valid identifier
-				// TODOHRR: use ValidationUtil
-				
-				if (nameExists(acc, name))
-					return ValidationStatus.error("name already exists");
+				Result result = ValidationUtil.isUniqueName(spp, name);
+				if (!result.isOk())
+					return ValidationStatus.error(result.getMsg());
 
 				return Status.OK_STATUS;
 			}
 			return Status.OK_STATUS;
-		}
-
-		private boolean nameExists(ActorContainerClass ac, String name) {
-			for (SPPRef s : ac.getIfSPPs()) {
-				if (s!=spp && s.getName().equals(name))
-					return true;
-			}
-
-			if (ac instanceof ActorClass)
-				if (((ActorClass)ac).getBase()!=null)
-					return nameExists(((ActorClass)ac).getBase(), name);
-			
-			return false;
 		}
 	}
 	
@@ -86,13 +69,15 @@ public class SPPPropertyDialog extends AbstractPropertyDialog {
 	}
 	
 	private SPPRef spp;
+	private IScope scope;
 	private ActorContainerClass acc;
 	private boolean newSPP;
 	private boolean refitem;
 
-	public SPPPropertyDialog(Shell shell, SPPRef spp, ActorContainerClass acc, boolean newSPP, boolean refitem) {
+	public SPPPropertyDialog(Shell shell, SPPRef spp, IScope scope, ActorContainerClass acc, boolean newSPP, boolean refitem) {
 		super(shell, "Edit SPP");
 		this.spp = spp;
+		this.scope = scope;
 		this.acc = acc;
 		this.newSPP = newSPP;
 		this.refitem = refitem;
@@ -100,7 +85,7 @@ public class SPPPropertyDialog extends AbstractPropertyDialog {
 
 	@Override
 	protected void initializeBounds() {
-		getShell().setSize(300, 300);
+		getShell().setSize(500, 300);
 	}
 	
 	@Override
@@ -109,19 +94,17 @@ public class SPPPropertyDialog extends AbstractPropertyDialog {
 		NameValidator nv = new NameValidator();
 		ProtocolValidator pv = new ProtocolValidator();
 
-		ArrayList<ProtocolClass> protocols = new ArrayList<ProtocolClass>();
-		if (acc.eResource()!=null) {
-			for (Resource r: acc.eResource().getResourceSet().getResources()) {
-				if (!r.getContents().isEmpty()) {
-					if (r.getContents().get(0) instanceof RoomModel) {
-						protocols.addAll(((RoomModel)r.getContents().get(0)).getProtocolClasses());
-					}
-				}
-			}
+		ArrayList<IEObjectDescription> protocols = new ArrayList<IEObjectDescription>();
+        Iterator<IEObjectDescription> it = scope.getAllElements().iterator();
+        while (it.hasNext()) {
+        	IEObjectDescription desc = it.next();
+        	EObject obj = desc.getEObjectOrProxy();
+        	if (obj instanceof ProtocolClass)
+        		protocols.add(desc);
 		}
 		
 		Text name = createText(body, "Name:", spp, RoomPackage.eINSTANCE.getInterfaceItem_Name(), nv);
-		Combo protocol = createCombo(body, "Protocol:", spp, ProtocolClass.class, RoomPackage.eINSTANCE.getInterfaceItem_Protocol(), protocols, RoomPackage.eINSTANCE.getRoomClass_Name(), pv);
+		Combo protocol = createComboUsingDesc(body, "Protocol:", spp, ProtocolClass.class, RoomPackage.eINSTANCE.getInterfaceItem_Protocol(), protocols, RoomPackage.eINSTANCE.getRoomClass_Name(), pv);
 		
 		if (!newSPP) {
 			// TODOHRR: check whether spp is used externally?
@@ -137,6 +120,7 @@ public class SPPPropertyDialog extends AbstractPropertyDialog {
 		createDecorator(name, "invalid name");
 		createDecorator(protocol, "no protocol selected");
 		
+		name.selectAll();
 		name.setFocus();
 	}
 

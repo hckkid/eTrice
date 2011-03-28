@@ -135,6 +135,7 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
       case RoomPackage.TRIGGER: return createTrigger();
       case RoomPackage.MESSAGE_FROM_IF: return createMessageFromIf();
       case RoomPackage.GUARD: return createGuard();
+      case RoomPackage.DOCUMENTATION: return createDocumentation();
       case RoomPackage.IMPORT: return createImport();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
@@ -899,6 +900,17 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
   {
     GuardImpl guard = new GuardImpl();
     return guard;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Documentation createDocumentation()
+  {
+    DocumentationImpl documentation = new DocumentationImpl();
+    return documentation;
   }
 
   /**

@@ -19,13 +19,13 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.eclipse.etrice.core.room.ActorClass#isAbstract <em>Abstract</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.ActorClass#getBase <em>Base</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.ActorClass#getIfPorts <em>If Ports</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.room.ActorClass#getUserCode1 <em>User Code1</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.room.ActorClass#getUserCode2 <em>User Code2</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.ActorClass#getStructureDocu <em>Structure Docu</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.ActorClass#getIntPorts <em>Int Ports</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.ActorClass#getExtPorts <em>Ext Ports</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.ActorClass#getServiceImplementations <em>Service Implementations</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.ActorClass#getStrSAPs <em>Str SA Ps</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.ActorClass#getAttributes <em>Attributes</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.ActorClass#getBehaviorDocu <em>Behavior Docu</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.ActorClass#getOperations <em>Operations</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.ActorClass#getStateMachine <em>State Machine</em>}</li>
  * </ul>
@@ -106,56 +106,30 @@ public interface ActorClass extends ActorContainerClass
   EList<Port> getIfPorts();
 
   /**
-   * Returns the value of the '<em><b>User Code1</b></em>' containment reference.
+   * Returns the value of the '<em><b>Structure Docu</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>User Code1</em>' containment reference isn't clear,
+   * If the meaning of the '<em>Structure Docu</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>User Code1</em>' containment reference.
-   * @see #setUserCode1(DetailCode)
-   * @see org.eclipse.etrice.core.room.RoomPackage#getActorClass_UserCode1()
+   * @return the value of the '<em>Structure Docu</em>' containment reference.
+   * @see #setStructureDocu(Documentation)
+   * @see org.eclipse.etrice.core.room.RoomPackage#getActorClass_StructureDocu()
    * @model containment="true"
    * @generated
    */
-  DetailCode getUserCode1();
+  Documentation getStructureDocu();
 
   /**
-   * Sets the value of the '{@link org.eclipse.etrice.core.room.ActorClass#getUserCode1 <em>User Code1</em>}' containment reference.
+   * Sets the value of the '{@link org.eclipse.etrice.core.room.ActorClass#getStructureDocu <em>Structure Docu</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>User Code1</em>' containment reference.
-   * @see #getUserCode1()
+   * @param value the new value of the '<em>Structure Docu</em>' containment reference.
+   * @see #getStructureDocu()
    * @generated
    */
-  void setUserCode1(DetailCode value);
-
-  /**
-   * Returns the value of the '<em><b>User Code2</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>User Code2</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>User Code2</em>' containment reference.
-   * @see #setUserCode2(DetailCode)
-   * @see org.eclipse.etrice.core.room.RoomPackage#getActorClass_UserCode2()
-   * @model containment="true"
-   * @generated
-   */
-  DetailCode getUserCode2();
-
-  /**
-   * Sets the value of the '{@link org.eclipse.etrice.core.room.ActorClass#getUserCode2 <em>User Code2</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>User Code2</em>' containment reference.
-   * @see #getUserCode2()
-   * @generated
-   */
-  void setUserCode2(DetailCode value);
+  void setStructureDocu(Documentation value);
 
   /**
    * Returns the value of the '<em><b>Int Ports</b></em>' containment reference list.
@@ -236,6 +210,32 @@ public interface ActorClass extends ActorContainerClass
    * @generated
    */
   EList<Attribute> getAttributes();
+
+  /**
+   * Returns the value of the '<em><b>Behavior Docu</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Behavior Docu</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Behavior Docu</em>' containment reference.
+   * @see #setBehaviorDocu(Documentation)
+   * @see org.eclipse.etrice.core.room.RoomPackage#getActorClass_BehaviorDocu()
+   * @model containment="true"
+   * @generated
+   */
+  Documentation getBehaviorDocu();
+
+  /**
+   * Sets the value of the '{@link org.eclipse.etrice.core.room.ActorClass#getBehaviorDocu <em>Behavior Docu</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Behavior Docu</em>' containment reference.
+   * @see #getBehaviorDocu()
+   * @generated
+   */
+  void setBehaviorDocu(Documentation value);
 
   /**
    * Returns the value of the '<em><b>Operations</b></em>' containment reference list.

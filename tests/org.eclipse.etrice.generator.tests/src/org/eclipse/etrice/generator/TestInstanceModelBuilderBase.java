@@ -35,7 +35,7 @@ import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.StateGraphItem;
 import org.eclipse.etrice.generator.builder.ILogger;
-import org.eclipse.etrice.generator.builder.InstanceModelBuilder;
+import org.eclipse.etrice.generator.builder.GeneratorModelBuilder;
 import org.eclipse.etrice.generator.etricegen.IDiagnostician;
 import org.eclipse.etrice.generator.etricegen.InstanceBase;
 import org.eclipse.etrice.generator.etricegen.Root;
@@ -110,7 +110,7 @@ public class TestInstanceModelBuilderBase {
 	}
 
 	protected Root buildInstanceModel(String modelName) {
-		InstanceModelBuilder builder = new InstanceModelBuilder(new Logger(), new Diagnostician());
+		GeneratorModelBuilder builder = new GeneratorModelBuilder(new Logger(), new Diagnostician());
 		LinkedList<RoomModel> models = getModels(modelName);
 		Root root = builder.createInstanceModel(models);
 		return root;

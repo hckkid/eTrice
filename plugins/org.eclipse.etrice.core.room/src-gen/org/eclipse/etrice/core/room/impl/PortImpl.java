@@ -7,11 +7,14 @@
 package org.eclipse.etrice.core.room.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+import org.eclipse.etrice.core.room.Documentation;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.RoomPackage;
 
@@ -24,6 +27,7 @@ import org.eclipse.etrice.core.room.RoomPackage;
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.room.impl.PortImpl#isConjugated <em>Conjugated</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.PortImpl#getMultiplicity <em>Multiplicity</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.impl.PortImpl#getDocu <em>Docu</em>}</li>
  * </ul>
  * </p>
  *
@@ -70,6 +74,16 @@ public class PortImpl extends InterfaceItemImpl implements Port
    * @ordered
    */
   protected int multiplicity = MULTIPLICITY_EDEFAULT;
+
+  /**
+   * The cached value of the '{@link #getDocu() <em>Docu</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getDocu()
+   * @generated
+   * @ordered
+   */
+  protected Documentation docu;
 
   /**
    * <!-- begin-user-doc -->
@@ -143,6 +157,70 @@ public class PortImpl extends InterfaceItemImpl implements Port
    * <!-- end-user-doc -->
    * @generated
    */
+  public Documentation getDocu()
+  {
+    return docu;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetDocu(Documentation newDocu, NotificationChain msgs)
+  {
+    Documentation oldDocu = docu;
+    docu = newDocu;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RoomPackage.PORT__DOCU, oldDocu, newDocu);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setDocu(Documentation newDocu)
+  {
+    if (newDocu != docu)
+    {
+      NotificationChain msgs = null;
+      if (docu != null)
+        msgs = ((InternalEObject)docu).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RoomPackage.PORT__DOCU, null, msgs);
+      if (newDocu != null)
+        msgs = ((InternalEObject)newDocu).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RoomPackage.PORT__DOCU, null, msgs);
+      msgs = basicSetDocu(newDocu, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.PORT__DOCU, newDocu, newDocu));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+  {
+    switch (featureID)
+    {
+      case RoomPackage.PORT__DOCU:
+        return basicSetDocu(null, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
@@ -152,6 +230,8 @@ public class PortImpl extends InterfaceItemImpl implements Port
         return isConjugated();
       case RoomPackage.PORT__MULTIPLICITY:
         return getMultiplicity();
+      case RoomPackage.PORT__DOCU:
+        return getDocu();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -171,6 +251,9 @@ public class PortImpl extends InterfaceItemImpl implements Port
         return;
       case RoomPackage.PORT__MULTIPLICITY:
         setMultiplicity((Integer)newValue);
+        return;
+      case RoomPackage.PORT__DOCU:
+        setDocu((Documentation)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -192,6 +275,9 @@ public class PortImpl extends InterfaceItemImpl implements Port
       case RoomPackage.PORT__MULTIPLICITY:
         setMultiplicity(MULTIPLICITY_EDEFAULT);
         return;
+      case RoomPackage.PORT__DOCU:
+        setDocu((Documentation)null);
+        return;
     }
     super.eUnset(featureID);
   }
@@ -210,6 +296,8 @@ public class PortImpl extends InterfaceItemImpl implements Port
         return conjugated != CONJUGATED_EDEFAULT;
       case RoomPackage.PORT__MULTIPLICITY:
         return multiplicity != MULTIPLICITY_EDEFAULT;
+      case RoomPackage.PORT__DOCU:
+        return docu != null;
     }
     return super.eIsSet(featureID);
   }

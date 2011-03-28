@@ -30,9 +30,7 @@ package «getPackage(ac)»;
 
 import org.eclipse.etrice.runtime.java.messaging.Address;
 import org.eclipse.etrice.runtime.java.messaging.IRTObject;
-import org.eclipse.etrice.runtime.java.messaging.IMessageReceiver;
 import org.eclipse.etrice.runtime.java.modelbase.ActorClassBase;
-import org.eclipse.etrice.runtime.java.modelbase.SubSystemClassBase;
 import org.eclipse.etrice.runtime.java.modelbase.InterfaceItemBase;
 import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
 
@@ -98,26 +96,24 @@ public «IF ac.abstract»abstract «ENDIF»class «ac.name» extends «IF ac.base!=null
 
 	//--------------------- lifecycle functions
 	public void init(){
-		//System.out.println(toString()+"::init()");
+		initUser();
 	}
 
 	public void start(){
-		//System.out.println(toString()+"::start()");
-		
-		//TODO: execution of initial transition should also be triggered by message
-		«IF xpac.hasStateMachine()»
+		startUser();
+		«IF xpac.hasStateMachine()-»
 		executeInitTransition();
-		«ENDIF»
+		«ENDIF-»
 	}
 
 	«IF !ac.overridesStop()»
 	public void stop(){
-		//System.out.println(toString()+"::stop()");
+		stopUser();
 	}
 	«ENDIF»
 	
 	public void destroy(){
-		//System.out.println(toString()+"::destroy()");
+		destroyUser();
 	}	
 
 	«IF ac.stateMachine != null»
@@ -127,7 +123,6 @@ public «IF ac.abstract»abstract «ENDIF»class «ac.name» extends «IF ac.base!=null
 		@Override
 		public void receiveEvent(InterfaceItemBase ifitem, int evt, Object... data) {
 		}
-
 	«ENDIF»
 };
 «ENDFILE»

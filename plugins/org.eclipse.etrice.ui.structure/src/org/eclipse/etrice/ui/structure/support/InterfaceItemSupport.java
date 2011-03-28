@@ -12,13 +12,20 @@
 
 package org.eclipse.etrice.ui.structure.support;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.etrice.core.room.ActorClass;
+import org.eclipse.etrice.core.room.ActorContainerClass;
+import org.eclipse.etrice.core.room.ActorContainerRef;
+import org.eclipse.etrice.core.room.ActorRef;
+import org.eclipse.etrice.core.room.InterfaceItem;
+import org.eclipse.etrice.core.room.Port;
+import org.eclipse.etrice.core.room.SPPRef;
+import org.eclipse.etrice.core.room.SubSystemRef;
+import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.ui.common.support.NoResizeFeature;
 import org.eclipse.etrice.ui.structure.DiagramAccess;
 import org.eclipse.graphiti.dt.IDiagramTypeProvider;
@@ -38,7 +45,6 @@ import org.eclipse.graphiti.features.context.IRemoveContext;
 import org.eclipse.graphiti.features.context.IResizeShapeContext;
 import org.eclipse.graphiti.features.context.ITargetContext;
 import org.eclipse.graphiti.features.context.IUpdateContext;
-import org.eclipse.graphiti.features.context.impl.AddContext;
 import org.eclipse.graphiti.features.context.impl.RemoveContext;
 import org.eclipse.graphiti.features.custom.AbstractCustomFeature;
 import org.eclipse.graphiti.features.impl.AbstractAddFeature;
@@ -64,16 +70,6 @@ import org.eclipse.graphiti.ui.features.DefaultDeleteFeature;
 import org.eclipse.graphiti.ui.features.DefaultFeatureProvider;
 import org.eclipse.graphiti.util.ColorConstant;
 import org.eclipse.graphiti.util.IColorConstant;
-
-import org.eclipse.etrice.core.room.ActorClass;
-import org.eclipse.etrice.core.room.ActorContainerClass;
-import org.eclipse.etrice.core.room.ActorContainerRef;
-import org.eclipse.etrice.core.room.ActorRef;
-import org.eclipse.etrice.core.room.InterfaceItem;
-import org.eclipse.etrice.core.room.Port;
-import org.eclipse.etrice.core.room.SPPRef;
-import org.eclipse.etrice.core.room.SubSystemClass;
-import org.eclipse.etrice.core.room.SubSystemRef;
 
 public class InterfaceItemSupport {
 	
@@ -163,39 +159,53 @@ public class InterfaceItemSupport {
 				String kind = getItemKind(port);
 				Graphiti.getPeService().setPropertyValue(containerShape, PROP_KIND, kind);
 				
-				// we have relative coordinates here
-				int x = context.getX()-size;
-				int y = context.getY()-size;
+				// the context point is the midpoint relative to the invisible rectangle
+				int x = context.getX();
+				int y = context.getY();
 				int width = acShape.getGraphicsAlgorithm().getWidth();
 				int height = acShape.getGraphicsAlgorithm().getHeight();
 				if (internal) {
 					if (x<2*margin)
 						x = 2*margin;
-					else if (x>width-3*margin)
-						x = width-3*margin;
+					else if (x>width-2*margin)
+						x = width-2*margin;
 					if (y<2*margin)
 						y = 2*margin;
-					else if (y>height-3*margin)
-						y = height-3*margin;
+					else if (y>height-2*margin)
+						y = height-2*margin;
 				}
 				else {
+					// TODOHRR: remove duplicate code
 					int dx = (x<=width/2)? x:width-x;
 					int dy = (y<=height/2)? y:height-y;
 					if (dx>dy) {
 						// keep x, project y
 						if (y<=height/2)
-							y = 0;
+							y = margin;
 						else
-							y = height-2*margin;
+							y = height-margin;
+						
+						if (x<margin)
+							x = margin;
+						else if (x>width-margin)
+							x = width-margin;
 					}
 					else {
 						// keep y, project x
 						if (x<=width/2)
-							x = 0;
+							x = margin;
 						else
-							x = width-2*margin;
+							x = width-margin;
+						
+						if (y<margin)
+							y = margin;
+						else if (y>height-margin)
+							y = height-margin;
 					}
 				}
+				// finally we subtract the midpoint to get coordinates of the upper left corner
+				x -= margin;
+				y -= margin;
 				
 				Color dark = manageColor(inherited? INHERITED_COLOR:DARK_COLOR);
 				IGaService gaService = Graphiti.getGaService();
@@ -215,7 +225,7 @@ public class InterfaceItemSupport {
 				
 				{
 					Shape labelShape = peCreateService.createShape(containerShape, false);
-					Text label = gaService.createDefaultText(labelShape, port.getName());
+					Text label = gaService.createDefaultText(getDiagram(), labelShape, port.getName());
 					label.setForeground(dark);
 					label.setBackground(dark);
 					label.setHorizontalAlignment(Orientation.ALIGNMENT_CENTER);
@@ -254,10 +264,13 @@ public class InterfaceItemSupport {
 						
 						ContainerShape acShape = context.getTargetContainer();
 						Object parentBO = getBusinessObjectForPictogramElement(acShape);
+						boolean refport = (parentBO instanceof ActorContainerRef);
+						if (refport)
+							return true;
+						
 						if (isInherited(item, parentBO, acShape))
 							return false;
 						
-						boolean refport = (parentBO instanceof ActorContainerRef);
 						int margin = refport?ActorContainerRefSupport.MARGIN:StructureClassSupport.MARGIN;
 						return isValidPosition(context, context, isInternal(item), margin);
 					}
@@ -289,14 +302,44 @@ public class InterfaceItemSupport {
 				}
 				else {
 					// project onto boundary
-					if (x<=margin)
-						x = 0;
-					if (y<=margin)
-						y = 0;
-					if ((width-margin)<=x)
-						x = width;
-					if ((height-margin)<=y)
-						y = height;
+					if (refport) {
+						int dx = (x<=width/2)? x:width-x;
+						int dy = (y<=height/2)? y:height-y;
+						if (dx>dy) {
+							// keep x, project y
+							if (y<=height/2)
+								y = 0;
+							else
+								y = height-0;
+							
+							if (x<0)
+								x = 0;
+							else if (x>width-0)
+								x = width-0;
+						}
+						else {
+							// keep y, project x
+							if (x<=width/2)
+								x = 0;
+							else
+								x = width-0;
+							
+							if (y<0)
+								y = 0;
+							else if (y>height-0)
+								y = height-0;
+						}
+					}
+					else {
+						if (x<=margin)
+							x = 0;
+						if (y<=margin)
+							y = 0;
+						if ((width-margin)<=x)
+							x = width;
+						if ((height-margin)<=y)
+							y = height;
+					}
 				}
 	
 				Graphiti.getGaService().setLocation(shapeToMove.getGraphicsAlgorithm(), x, y, avoidNegativeCoordinates());
@@ -331,6 +374,8 @@ public class InterfaceItemSupport {
 				}
 				InterfaceItem port = (InterfaceItem) bo;
 				
+				String reason = "";
+				
 				// check if port still owned/inherited
 				ContainerShape containerShape = (ContainerShape)context.getPictogramElement();
 				bo = getBusinessObjectForPictogramElement(containerShape);
@@ -345,18 +390,22 @@ public class InterfaceItemSupport {
 					while (!found && ac!=null);
 					
 					if (!found)
-						return Reason.createTrueReason("InterfaceItem not inherited anymore");
+						reason += "InterfaceItem not inherited anymore\n";
 				}
 				
 				GraphicsAlgorithm ga = containerShape.getChildren().get(0).getGraphicsAlgorithm();
 				if (ga instanceof Text) {
 					if (!port.getName().equals(((Text)ga).getValue()))
-						return Reason.createTrueReason("Name is out of date");
+						reason += "Name is out of date\n";
 
 					String kind = getItemKind(port);
 					if (!kind.equals(Graphiti.getPeService().getPropertyValue(context.getPictogramElement(), PROP_KIND)))
-						return Reason.createTrueReason("Figure is out of date");
+						reason += "Figure is out of date\n";
 				}
+				
+				if (!reason.isEmpty())
+					return Reason.createTrueReason(reason.substring(0, reason.length()-1));
+				
 				return Reason.createFalseReason();
 			}
 
@@ -626,29 +675,30 @@ public class InterfaceItemSupport {
                 invisible.getGraphicsAlgorithmChildren().get(0);
             return rectangle;
 		}
-	}
-	
-	private static List<InterfaceItem> getInterfaceItems(ActorContainerClass acc) {
-		ArrayList<InterfaceItem> result = new ArrayList<InterfaceItem>();
 		
-		result.addAll(acc.getIfSPPs());
-		
-		if (acc instanceof ActorClass) {
-			result.addAll(((ActorClass) acc).getIfPorts());
+		@Override
+		public String getToolTip(GraphicsAlgorithm ga) {
+			// if this is called we know there is a business object!=null
+			PictogramElement pe = ga.getPictogramElement();
+			
+			EObject bo = Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(pe);
+			if (bo instanceof InterfaceItem) {
+				String name = ((InterfaceItem) bo).getName();
+				String protocol = ((InterfaceItem) bo).getProtocol().getName();
+				if (bo instanceof Port)
+					if (((Port) bo).isConjugated())
+						protocol = "conj "+protocol;
+				
+				return name+"\n("+protocol+")";
+			}
+			return super.getToolTip(ga);
 		}
-		else if (acc instanceof SubSystemClass) {
-			result.addAll(((SubSystemClass) acc).getRelayPorts());
-		}
-		else {
-			assert(false): "unexpected sub type";
-		}
-		return result;
 	}
 	
 	public static void createRefItems(ActorContainerRef acr, ContainerShape refShape, IFeatureProvider featureProvider) {
 		
 		ActorContainerClass refClass = (acr instanceof ActorRef)?((ActorRef)acr).getType():((SubSystemRef)acr).getType();
-		List<? extends InterfaceItem> refItems = getInterfaceItems(refClass);
+		List<? extends InterfaceItem> refItems = RoomHelpers.getInterfaceItems(refClass, true);
 		
 		if (refShape!=null && refClass!=null &&!refItems.isEmpty()) {
 			
@@ -665,7 +715,8 @@ public class InterfaceItemSupport {
 					ActorContainerClass extRefClass = (ActorContainerClass) bo;
 					assert(extRefClass.getName().equals(refClass.getName())): "structure class names must match";
 
-					List<? extends InterfaceItem> extRefItems = getInterfaceItems(extRefClass);
+					List<InterfaceItem> extRefItems = RoomHelpers.getInterfaceItems(extRefClass, true);
+					List<InterfaceItem> intRefItems = SupportUtil.getInterfaceItems(refShape, featureProvider);
 					
 					int scaleX = refAcShape.getGraphicsAlgorithm().getWidth()/ActorContainerRefSupport.DEFAULT_SIZE_X;
 					int scaleY = refAcShape.getGraphicsAlgorithm().getHeight()/ActorContainerRefSupport.DEFAULT_SIZE_Y;
@@ -675,10 +726,12 @@ public class InterfaceItemSupport {
 							if (extRefItems.contains(bo)) {
 								// this is an interface item, insert it
 
-								EObject ownObject = getOwnObject((InterfaceItem)bo, rs);
-								int x = childShape.getGraphicsAlgorithm().getX()/scaleX;
-								int y = childShape.getGraphicsAlgorithm().getY()/scaleY;
-								addItem(ownObject, x, y, (ContainerShape)refShape, featureProvider);
+								EObject ownObject = SupportUtil.getOwnObject((InterfaceItem)bo, rs);
+								if (!intRefItems.contains(ownObject)) {
+									int x = ITEM_SIZE_SMALL/2 + childShape.getGraphicsAlgorithm().getX()/scaleX;
+									int y = ITEM_SIZE_SMALL/2 + childShape.getGraphicsAlgorithm().getY()/scaleY;
+									SupportUtil.addItem(ownObject, x, y, refShape, featureProvider);
+								}
 							}
 						}
 					}
@@ -690,36 +743,38 @@ public class InterfaceItemSupport {
 		}
 	}
 
-	public static void createInheritedRefItems(ActorContainerRef acr, ContainerShape arShape, IFeatureProvider featureProvider) {
+	protected static void createInheritedRefItems(ActorContainerRef acr, ContainerShape arShape, IFeatureProvider fp) {
 		
 		ActorClass ac = (ActorClass) acr.eContainer();
-		Diagram refDiag = new DiagramAccess().getDiagram(ac);
-
 		ResourceSet rs = ac.eResource().getResourceSet();
-		
+		List<InterfaceItem> presentObjects = SupportUtil.getInterfaceItems(arShape, fp);
+
+		Diagram refDiag = new DiagramAccess().getDiagram(ac);
 		if (!refDiag.getChildren().isEmpty()) {
 			ContainerShape refAcShape = (ContainerShape) refDiag.getChildren().get(0);
-			Object bo = featureProvider.getBusinessObjectForPictogramElement(refAcShape);
+			Object bo = fp.getBusinessObjectForPictogramElement(refAcShape);
 			if (bo instanceof ActorClass) {
 				ActorClass extRefClass = (ActorClass) bo;
 				assert(extRefClass.getName().equals(ac.getName())): "actor class names must match";
 				
 				for (Shape childShape : refAcShape.getChildren()) {
-					bo = featureProvider.getBusinessObjectForPictogramElement(childShape);
+					bo = fp.getBusinessObjectForPictogramElement(childShape);
 					if (bo instanceof ActorRef) {
-						EObject ownObject = getOwnObject((ActorRef)bo, rs);
+						EObject ownObject = SupportUtil.getOwnObject((ActorRef)bo, rs);
 						if (ownObject==acr) {
 							int subScaleX = arShape.getGraphicsAlgorithm().getWidth()/ActorContainerRefSupport.DEFAULT_SIZE_X;
 							int subScaleY = arShape.getGraphicsAlgorithm().getHeight()/ActorContainerRefSupport.DEFAULT_SIZE_Y;
 							
 							// add items of actor ref
 							for (Shape grandChildShape : ((ContainerShape)childShape).getChildren()) {
-								bo = featureProvider.getBusinessObjectForPictogramElement(grandChildShape);
+								bo = fp.getBusinessObjectForPictogramElement(grandChildShape);
 								if (bo instanceof InterfaceItem) {
-									ownObject = getOwnObject((Port)bo, rs);
-									int x = grandChildShape.getGraphicsAlgorithm().getX()/subScaleX;
-									int y = grandChildShape.getGraphicsAlgorithm().getY()/subScaleY;
-									addItem(ownObject, x, y, arShape, featureProvider);
+									ownObject = SupportUtil.getOwnObject((Port)bo, rs);
+									if (!presentObjects.contains(ownObject)) {
+										int x = ITEM_SIZE_SMALL/2 + grandChildShape.getGraphicsAlgorithm().getX()/subScaleX;
+										int y = ITEM_SIZE_SMALL/2 + grandChildShape.getGraphicsAlgorithm().getY()/subScaleY;
+										SupportUtil.addItem(ownObject, x, y, arShape, fp);
+									}
 								}
 							}
 							break;
@@ -728,23 +783,5 @@ public class InterfaceItemSupport {
 				}
 			}
 		}
-	}
-
-	private static void addItem(EObject ownObject, int x, int y,
-			ContainerShape refShape, IFeatureProvider featureProvider) {
-		AddContext addContext = new AddContext();
-		addContext.setNewObject(ownObject);
-		addContext.setTargetContainer(refShape);
-		addContext.setX(x + ITEM_SIZE_SMALL);
-		addContext.setY(y + ITEM_SIZE_SMALL);
-		ContainerShape pe = (ContainerShape) featureProvider.addIfPossible(addContext);
-		assert(!pe.getAnchors().isEmpty()): "port must have an anchor";
-	}
-	
-	private static EObject getOwnObject(EObject obj, ResourceSet rs) {
-		URI uri = EcoreUtil.getURI(obj);
-		EObject own = rs.getEObject(uri, true);
-		assert(own!=null): "own object must exist";
-		return own;
 	}
 }

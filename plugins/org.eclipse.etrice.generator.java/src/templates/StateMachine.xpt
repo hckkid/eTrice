@@ -59,33 +59,33 @@ public void receiveEvent(InterfaceItemBase ifitem, int evt, Object... generic_da
 	boolean is_handler = false;
 	
 	switch (state) {
-		«FOREACH this.stateMachine.getLeafStateList() AS state»
+		«FOREACH this.stateMachine.getLeafStateList() AS state-»
 		case «state.getStateId()»:
-			«LET this.getActiveTriggers(state) AS atlist»
-			«IF !atlist.isEmpty»
+			«LET this.getActiveTriggers(state) AS atlist-»
+			«IF !atlist.isEmpty-»
 				switch(trigger) {
-				«FOREACH atlist AS at»
+				«FOREACH atlist AS at-»
 					case «this.getTriggerCodeName(at.trigger)»:
-						«LET this.hasGuard(at) AS needData»
-						«IF needData»{ «at.msg.getTypedDataDefinition()»«ENDIF»
-						«FOREACH at.transitions AS tt SEPARATOR " else "»
-							«LET this.getChain(tt) AS chain»
-							«EXPAND guard(at.trigger, this) FOR chain.transition»
+						«LET this.hasGuard(at) AS needData-»
+						«IF needData»{ «at.msg.getTypedDataDefinition()»«ENDIF-»
+						«FOREACH at.transitions AS tt SEPARATOR " else "-»
+							«LET this.getChain(tt) AS chain-»
+							«EXPAND guard(at.trigger, this) FOR chain.transition-»
 							{
 								chain = «chain.getChainId()»;
 								catching_state = «chain.getContextId()»;
-								«IF chain.isHandler()»is_handler = true;«ENDIF»
+								«IF chain.isHandler()»is_handler = true;«ENDIF-»
 							}
-							«ENDLET»
-						«ENDFOREACH»
-						«IF needData»}«ENDIF»
-						«ENDLET»
+							«ENDLET-»
+						«ENDFOREACH-»
+						«IF needData»}«ENDIF-»
+						«ENDLET-»
 					break;
-				«ENDFOREACH»
+				«ENDFOREACH-»
 				}
-			«ENDIF»«ENDLET»
+			«ENDIF»«ENDLET-»
 			break;
-		«ENDFOREACH»
+		«ENDFOREACH-»
 	}
 	if (chain != NOT_CAUGHT) {
 		exitTo(state, catching_state, is_handler);
@@ -105,12 +105,12 @@ private void setState(int new_state) {
 }
 
 protected void executeInitTransition() {
-	«LET this.stateMachine.getInitTransition() AS initt»
+	«LET this.stateMachine.getInitTransition() AS initt-»
 		int chain = «this.getChain(initt).getChainId()»;
 		int next = executeTransitionChain(chain, null, null);
 		next = enterHistory(next, false);
 		setState(next);
-	«ENDLET»
+	«ENDLET-»
 }
 
 /**
@@ -123,13 +123,13 @@ protected void executeInitTransition() {
 private void exitTo(int current, int to, boolean handler) {
 	while (current!=to) {
 		switch (current) {
-			«FOREACH this.stateMachine.getBaseStateList() AS state»
+			«FOREACH this.stateMachine.getBaseStateList() AS state-»
 				case «state.getStateId()»:
-					«IF state.hasExitCode()»if (!handler) «state.getExitCodeOperationName()»();«ENDIF»
+					«IF state.hasExitCode()»if (!handler) «state.getExitCodeOperationName()»();«ENDIF-»
 					history[«state.getParentStateId()»] = «state.getStateId()»;
 					current = «state.getParentStateId()»;
 					break;
-			«ENDFOREACH»
+			«ENDFOREACH-»
 		}
 	}
 }
@@ -142,13 +142,13 @@ private void exitTo(int current, int to, boolean handler) {
  */
 private int executeTransitionChain(int chain, InterfaceItemBase ifitem, Object[] generic_data) {
 	switch (chain) {
-		«LET this.getTransitionChains() AS chains»
-		«FOREACH chains AS tc»
+		«LET this.getTransitionChains() AS chains-»
+		«FOREACH chains AS tc-»
 			case «tc.getChainId()»:
 			{
-				«this.getExecuteChainCode(tc)»
+				«this.getExecuteChainCode(tc)-»
 			}
-		«ENDFOREACH»«ENDLET»
+		«ENDFOREACH»«ENDLET-»
 	}
 	return NO_STATE;
 }
@@ -161,28 +161,28 @@ private int executeTransitionChain(int chain, InterfaceItemBase ifitem, Object[]
 private int enterHistory(int state, boolean handler) {
 	while (true) {
 		switch (state) {
-			«FOREACH this.stateMachine.getBaseStateList() AS state»
+			«FOREACH this.stateMachine.getBaseStateList() AS state-»
 			case «state.getStateId()»:
-				«IF state.hasEntryCode()»if (!handler) «state.getEntryCodeOperationName()»();«ENDIF»
-				«IF state.isLeaf()»
+				«IF state.hasEntryCode()»if (!handler) «state.getEntryCodeOperationName()»();«ENDIF-»
+				«IF state.isLeaf()-»
 				return state;
-				«ELSE»
+				«ELSE-»
 				if (history[state]==NO_STATE) {
-					«LET state.subgraph.getInitTransition() AS initt»
-					«IF initt!=null»
-						int chain = «this.getChain(initt).getChainId()»;
+					«LET state.subgraph.getInitTransition() AS initt-»
+					«IF initt!=null-»
+						int chain = «this.getChain(initt).getChainId()-»;
 						int next = executeTransitionChain(chain, null, null);
 						state = enterHistory(next, false);
-					«ENDIF»
-					«ENDLET»
+					«ENDIF-»
+					«ENDLET-»
 					state = «state.subgraph.getInitState().getStateId()»;
 				}
 				else {
 					state = history[state];
 				}
 				break;
-				«ENDIF»
-			«ENDFOREACH»
+				«ENDIF-»
+			«ENDFOREACH-»
 		}
 	}
 }
@@ -215,12 +215,12 @@ private int enterHistory(int state, boolean handler) {
 «ENDLET»
 «ENDDEFINE»
 
-«DEFINE guard(String trigger, ExpandedActorClass ac) FOR TriggeredTransition»
-	«LET this.triggers.selectFirst(e|ac.isMatching(e, trigger)) AS tr»
-		«IF tr.hasGuard()»
+«DEFINE guard(String trigger, ExpandedActorClass ac) FOR TriggeredTransition-»
+	«LET this.triggers.selectFirst(e|ac.isMatching(e, trigger)) AS tr-»
+		«IF tr.hasGuard()-»
 			if («ac.getCode(tr.guard.guard)»)
-		«ENDIF»
-	«ENDLET»
+		«ENDIF-»
+	«ENDLET-»
 «ENDDEFINE»
 
 «DEFINE guard(String trigger, ExpandedActorClass ac) FOR Transition»

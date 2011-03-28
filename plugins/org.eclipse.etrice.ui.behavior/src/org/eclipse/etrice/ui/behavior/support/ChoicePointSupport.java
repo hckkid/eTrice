@@ -179,7 +179,7 @@ public class ChoicePointSupport {
 				
 				{
 					Shape labelShape = peCreateService.createShape(containerShape, false);
-					Text label = gaService.createDefaultText(labelShape, "C");
+					Text label = gaService.createDefaultText(getDiagram(), labelShape, "C");
 					label.setForeground(dark);
 					label.setBackground(dark);
 					label.setHorizontalAlignment(Orientation.ALIGNMENT_CENTER);

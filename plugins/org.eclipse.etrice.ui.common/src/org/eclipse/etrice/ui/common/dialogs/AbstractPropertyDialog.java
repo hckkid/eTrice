@@ -30,6 +30,7 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.databinding.swt.ISWTObservable;
 import org.eclipse.jface.databinding.swt.SWTObservables;
 import org.eclipse.jface.dialogs.IDialogConstants;
@@ -51,9 +52,56 @@ import org.eclipse.ui.forms.FormDialog;
 import org.eclipse.ui.forms.IManagedForm;
 import org.eclipse.ui.forms.widgets.Form;
 import org.eclipse.ui.forms.widgets.FormToolkit;
+import org.eclipse.xtext.resource.IEObjectDescription;
 
 
 public abstract class AbstractPropertyDialog extends FormDialog {
+
+	static class DescriptionBased_Reference2StringConverter extends Converter {
+
+		private EAttribute nameAttr;
+
+		DescriptionBased_Reference2StringConverter(Object type, EAttribute nameAttr) {
+			super(type, String.class);
+			this.nameAttr = nameAttr;
+		}
+		
+		@Override
+		public Object convert(Object fromObject) {
+			if (fromObject instanceof IEObjectDescription)
+				return ((IEObjectDescription)fromObject).getName();
+			else if (fromObject instanceof EObject) {
+				return ((EObject)fromObject).eGet(nameAttr);
+			}
+			
+			return null;
+		}
+		
+	}
+	
+	static class DescriptionBased_String2ReferenceConverter extends Converter {
+		private EObject obj;
+		private List<IEObjectDescription> candidates;
+
+		DescriptionBased_String2ReferenceConverter(Object type, EObject obj, List<IEObjectDescription> candidates) {
+			super(String.class, type);
+			this.obj = obj;
+			this.candidates = candidates;
+		}
+
+		@Override
+		public Object convert(Object fromObject) {
+			for (IEObjectDescription desc : candidates) {
+				if (desc.getName().equals(fromObject)) {
+					EObject refObj = desc.getEObjectOrProxy();
+					if (refObj.eIsProxy())
+						refObj = EcoreUtil.resolve(refObj, obj);
+					return refObj;
+				}
+			}
+			return null;
+		}
+	}
 
 	static class Reference2StringConverter extends Converter {
 
@@ -95,6 +143,9 @@ public abstract class AbstractPropertyDialog extends FormDialog {
 	private FormToolkit toolkit;
 	private DataBindingContext bindingContext;
 	private HashMap<Control, ControlDecoration> decoratorMap = new HashMap<Control, ControlDecoration>();
+	private Label validationLabel;
+	private Label validationText;
+	private AggregateValidationStatus aggregateValidationStatus;
 
 	public AbstractPropertyDialog(Shell shell, String title) {
 		super(shell);
@@ -118,20 +169,26 @@ public abstract class AbstractPropertyDialog extends FormDialog {
 		body.setLayout(new GridLayout(2, false));
 		body.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
-        toolkit.createLabel(body, "", SWT.NONE)
-                .setText("Validation Status:");
+        validationLabel = toolkit.createLabel(body, "", SWT.NONE);
+        validationLabel.setText("ERROR:");
+        validationLabel.setForeground(getShell().getDisplay().getSystemColor(SWT.COLOR_RED));
 
-        Label validationErrorLabel = toolkit.createLabel(
+        validationText = toolkit.createLabel(
                 body, "", SWT.NONE);
-        validationErrorLabel
+        validationText
                 .setLayoutData(new GridData(
                         GridData.FILL_HORIZONTAL));
 
 		createContent(mform, body, bindingContext);
 		
-        AggregateValidationStatus aggregateValidationStatus = new AggregateValidationStatus(
+        aggregateValidationStatus = new AggregateValidationStatus(
         		bindingContext.getBindings(),
                 AggregateValidationStatus.MAX_SEVERITY);
+
+        bindingContext.bindValue(SWTObservables
+                .observeText(validationText),
+                aggregateValidationStatus, null,
+                null);
 
 		aggregateValidationStatus.addChangeListener(new IChangeListener() {
 			public void handleChange(ChangeEvent event) {
@@ -158,19 +215,40 @@ public abstract class AbstractPropertyDialog extends FormDialog {
 						}
 					}
 				}
-				Button okButton = getButton(IDialogConstants.OK_ID);
-				if (okButton!=null)
-					okButton.setEnabled(ok);
+				updateValidationFeedback(ok);
 			}
 		});
-
-        bindingContext.bindValue(SWTObservables
-                .observeText(validationErrorLabel),
-                aggregateValidationStatus, null,
-                null);
-
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.ui.forms.FormDialog#createButtonBar(org.eclipse.swt.widgets.Composite)
+	 */
+	@Override
+	protected Control createButtonBar(Composite parent) {
+		Control bar = super.createButtonBar(parent);
+
+		Object value = aggregateValidationStatus.getValue();
+		if (value instanceof IStatus) {
+			boolean ok = ((IStatus) value).isOK();
+			updateValidationFeedback(ok);
+		}
+
+		return bar;
+	}
+
+	protected void updateValidationFeedback(boolean ok) {
+		validationLabel.setVisible(!ok);
+		validationText.setVisible(!ok);
+		
+		Button okButton = getButton(IDialogConstants.OK_ID);
+		if (okButton!=null)
+			okButton.setEnabled(ok);
+	}
+	
+	protected void setValidationText (String text) {
+		validationText.setText(text);
+	}
+	
 	protected abstract void createContent(IManagedForm mform, Composite body,
 			DataBindingContext bindingContext);
 	
@@ -266,6 +344,34 @@ public abstract class AbstractPropertyDialog extends FormDialog {
 		}
 		
 		String2ReferenceConverter s2r = new String2ReferenceConverter(type, candidates, nameAttr);
+		UpdateValueStrategy t2m = new UpdateValueStrategy().setConverter(s2r);
+		UpdateValueStrategy m2t = new UpdateValueStrategy().setConverter(r2s);
+		if (validator!=null) {
+			t2m.setAfterConvertValidator(validator);
+			t2m.setBeforeSetValidator(validator);
+			m2t.setAfterConvertValidator(validator);
+			m2t.setBeforeSetValidator(validator);
+		}
+		bindingContext.bindValue(SWTObservables.observeText(combo), PojoObservables.observeValue(obj, ref.getName()), t2m, m2t);
+		
+		return combo;
+	}
+	
+	protected Combo createComboUsingDesc(Composite parent, String label, EObject obj, Object type, EReference ref, List<IEObjectDescription> candidates, EAttribute nameAttr, IValidator validator) {
+		Label l = toolkit.createLabel(parent, label, SWT.NONE);
+		l.setLayoutData(new GridData(SWT.NONE));
+
+		Combo combo = new Combo(parent, SWT.READ_ONLY);
+		combo.setLayoutData(new GridData(SWT.HORIZONTAL));
+		combo.setVisibleItemCount(10);
+		toolkit.adapt(combo, true, true);
+		
+		DescriptionBased_Reference2StringConverter r2s = new DescriptionBased_Reference2StringConverter(type, nameAttr);
+		for (IEObjectDescription desc : candidates) {
+			combo.add((String) r2s.convert(desc));
+		}
+		
+		DescriptionBased_String2ReferenceConverter s2r = new DescriptionBased_String2ReferenceConverter(type, obj, candidates);
 		UpdateValueStrategy t2m = new UpdateValueStrategy().setConverter(s2r);
 		UpdateValueStrategy m2t = new UpdateValueStrategy().setConverter(r2s);
 		if (validator!=null) {

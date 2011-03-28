@@ -36,7 +36,7 @@ public class NoResizeFeature extends DefaultResizeShapeFeature {
 			public boolean isVerticalResizeAllowed() {
 				return false;
 			}
-			
+
 			@Override
 			public boolean isHorizontalResizeAllowed() {
 				return false;

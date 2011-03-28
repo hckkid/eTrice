@@ -29,6 +29,8 @@ import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.Transition;
 import org.eclipse.etrice.core.room.Trigger;
 import org.eclipse.etrice.core.room.TriggeredTransition;
+import org.eclipse.etrice.core.validation.ValidationUtil;
+import org.eclipse.etrice.core.validation.ValidationUtil.Result;
 import org.eclipse.etrice.ui.behavior.Activator;
 import org.eclipse.etrice.ui.common.dialogs.AbstractPropertyDialog;
 import org.eclipse.jface.dialogs.IDialogConstants;
@@ -137,13 +139,9 @@ public class TransitionPropertyDialog extends AbstractPropertyDialog {
 			if (value instanceof String) {
 				String name = (String) value;
 				
-				if (name.isEmpty())
-					return ValidationStatus.error("name must not be empty");
-
-				for (Transition t : sg.getTransitions()) {
-					if (t!=trans && t.getName()!=null && t.getName().equals(name))
-						return ValidationStatus.error("name already used");
-				}
+				Result result = ValidationUtil.isUniqueName(trans, name);
+				if (!result.isOk())
+					return ValidationStatus.error(result.getMsg());
 			}
 			return Status.OK_STATUS;
 		}
@@ -162,6 +160,7 @@ public class TransitionPropertyDialog extends AbstractPropertyDialog {
 	private StringToDetailCode s2m;
 	private Text guardText;
 	private Button removeMifButton;
+	private boolean triggerError = false;
 
 	public TransitionPropertyDialog(Shell shell, StateGraph sg, Transition trans) {
 		super(shell, "Edit Transition");
@@ -214,6 +213,7 @@ public class TransitionPropertyDialog extends AbstractPropertyDialog {
 			
 			createDecorator(name, "invalid name");
 			
+			name.selectAll();
 			name.setFocus();
 		}
 		
@@ -235,6 +235,7 @@ public class TransitionPropertyDialog extends AbstractPropertyDialog {
 				gd = new GridData(GridData.FILL_HORIZONTAL);
 				gd.horizontalSpan = 2;
 				error.setLayoutData(gd);
+				triggerError  = true;
 			}
 		}
 
@@ -264,6 +265,18 @@ public class TransitionPropertyDialog extends AbstractPropertyDialog {
 		return false;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.etrice.ui.common.dialogs.AbstractPropertyDialog#updateValidationFeedback(boolean)
+	 */
+	@Override
+	protected void updateValidationFeedback(boolean ok) {
+		if (ok && triggerError) {
+			ok = false;
+			setValidationText("no triggers available");
+		}
+		super.updateValidationFeedback(ok);
+	}
+	
 	private void createTriggerCompartment(Composite body, FormToolkit toolkit) {
 		Composite triggerCompartment = toolkit.createComposite(body);
 		triggerCompartment.setLayout(new GridLayout(3, false));

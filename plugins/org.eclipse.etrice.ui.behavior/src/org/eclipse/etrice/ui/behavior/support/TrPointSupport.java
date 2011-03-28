@@ -147,18 +147,17 @@ public class TrPointSupport {
 				}
 				StateGraph sg = (StateGraph) context.getTargetContainer().getLink().getBusinessObjects().get(0);
 		        tp.setName(RoomNameProvider.getUniqueTrPointName(sg));
-		        
-		        // TODOHRR-B add property dialog
-		        Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-				TrPointPropertyDialog dlg = new TrPointPropertyDialog(shell, tp, sg, false);
-				if (dlg.open()!=Window.OK)
-					// find a method to abort creation
-					//throw new RuntimeException();
-					return EMPTY;
-				
-				doneChanges = true;
 				
 				sg.getTrPoints().add(tp);
+		        
+		        Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+				TrPointPropertyDialog dlg = new TrPointPropertyDialog(shell, tp, false);
+				if (dlg.open()!=Window.OK) {
+					sg.getTrPoints().remove(tp);
+					return EMPTY;
+				}
+				
+				doneChanges = true;
 		        
 		        // do the add
 		        addGraphicalRepresentation(context, tp);
@@ -287,7 +286,7 @@ public class TrPointSupport {
 				
 				{
 					Shape labelShape = peCreateService.createShape(containerShape, false);
-					Text label = gaService.createDefaultText(labelShape, tp.getName());
+					Text label = gaService.createDefaultText(getDiagram(), labelShape, tp.getName());
 					label.setForeground(dark);
 					label.setBackground(dark);
 					label.setHorizontalAlignment(Orientation.ALIGNMENT_CENTER);
@@ -487,15 +486,14 @@ public class TrPointSupport {
 			public void execute(ICustomContext context) {
 				PictogramElement pe = context.getPictogramElements()[0];
 				TrPoint tp = (TrPoint) getBusinessObjectForPictogramElement(pe);
-				StateGraph sg = (StateGraph)tp.eContainer();
 				boolean subtp = isSubTP(pe);
 				
 				Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-				TrPointPropertyDialog dlg = new TrPointPropertyDialog(shell, tp, sg, subtp);
+				TrPointPropertyDialog dlg = new TrPointPropertyDialog(shell, tp, subtp);
 				if (dlg.open()!=Window.OK)
 					// TODOHRR: introduce a method to revert changes, does hasDoneChanges=false roll back changes?
-					//throw new RuntimeException();
-					return;
+					throw new RuntimeException();
+//					return;
 				
 				String kind = getItemKind(tp);
 				Graphiti.getPeService().setPropertyValue(pe, PROP_KIND, kind);

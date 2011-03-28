@@ -8,6 +8,7 @@ package org.eclipse.etrice.core.room.impl;
 
 import java.util.Collection;
 
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
@@ -15,11 +16,14 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipse.etrice.core.room.ActorContainerClass;
 import org.eclipse.etrice.core.room.ActorRef;
+import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.etrice.core.room.SPPRef;
 
@@ -31,6 +35,8 @@ import org.eclipse.etrice.core.room.SPPRef;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ActorContainerClassImpl#getIfSPPs <em>If SP Ps</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.impl.ActorContainerClassImpl#getUserCode1 <em>User Code1</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.impl.ActorContainerClassImpl#getUserCode2 <em>User Code2</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ActorContainerClassImpl#getActorRefs <em>Actor Refs</em>}</li>
  * </ul>
  * </p>
@@ -48,6 +54,26 @@ public class ActorContainerClassImpl extends StructureClassImpl implements Actor
    * @ordered
    */
   protected EList<SPPRef> ifSPPs;
+
+  /**
+   * The cached value of the '{@link #getUserCode1() <em>User Code1</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getUserCode1()
+   * @generated
+   * @ordered
+   */
+  protected DetailCode userCode1;
+
+  /**
+   * The cached value of the '{@link #getUserCode2() <em>User Code2</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getUserCode2()
+   * @generated
+   * @ordered
+   */
+  protected DetailCode userCode2;
 
   /**
    * The cached value of the '{@link #getActorRefs() <em>Actor Refs</em>}' containment reference list.
@@ -99,6 +125,102 @@ public class ActorContainerClassImpl extends StructureClassImpl implements Actor
    * <!-- end-user-doc -->
    * @generated
    */
+  public DetailCode getUserCode1()
+  {
+    return userCode1;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetUserCode1(DetailCode newUserCode1, NotificationChain msgs)
+  {
+    DetailCode oldUserCode1 = userCode1;
+    userCode1 = newUserCode1;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RoomPackage.ACTOR_CONTAINER_CLASS__USER_CODE1, oldUserCode1, newUserCode1);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setUserCode1(DetailCode newUserCode1)
+  {
+    if (newUserCode1 != userCode1)
+    {
+      NotificationChain msgs = null;
+      if (userCode1 != null)
+        msgs = ((InternalEObject)userCode1).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RoomPackage.ACTOR_CONTAINER_CLASS__USER_CODE1, null, msgs);
+      if (newUserCode1 != null)
+        msgs = ((InternalEObject)newUserCode1).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RoomPackage.ACTOR_CONTAINER_CLASS__USER_CODE1, null, msgs);
+      msgs = basicSetUserCode1(newUserCode1, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.ACTOR_CONTAINER_CLASS__USER_CODE1, newUserCode1, newUserCode1));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public DetailCode getUserCode2()
+  {
+    return userCode2;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetUserCode2(DetailCode newUserCode2, NotificationChain msgs)
+  {
+    DetailCode oldUserCode2 = userCode2;
+    userCode2 = newUserCode2;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RoomPackage.ACTOR_CONTAINER_CLASS__USER_CODE2, oldUserCode2, newUserCode2);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setUserCode2(DetailCode newUserCode2)
+  {
+    if (newUserCode2 != userCode2)
+    {
+      NotificationChain msgs = null;
+      if (userCode2 != null)
+        msgs = ((InternalEObject)userCode2).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RoomPackage.ACTOR_CONTAINER_CLASS__USER_CODE2, null, msgs);
+      if (newUserCode2 != null)
+        msgs = ((InternalEObject)newUserCode2).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RoomPackage.ACTOR_CONTAINER_CLASS__USER_CODE2, null, msgs);
+      msgs = basicSetUserCode2(newUserCode2, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.ACTOR_CONTAINER_CLASS__USER_CODE2, newUserCode2, newUserCode2));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EList<ActorRef> getActorRefs()
   {
     if (actorRefs == null)
@@ -120,6 +242,10 @@ public class ActorContainerClassImpl extends StructureClassImpl implements Actor
     {
       case RoomPackage.ACTOR_CONTAINER_CLASS__IF_SP_PS:
         return ((InternalEList<?>)getIfSPPs()).basicRemove(otherEnd, msgs);
+      case RoomPackage.ACTOR_CONTAINER_CLASS__USER_CODE1:
+        return basicSetUserCode1(null, msgs);
+      case RoomPackage.ACTOR_CONTAINER_CLASS__USER_CODE2:
+        return basicSetUserCode2(null, msgs);
       case RoomPackage.ACTOR_CONTAINER_CLASS__ACTOR_REFS:
         return ((InternalEList<?>)getActorRefs()).basicRemove(otherEnd, msgs);
     }
@@ -138,6 +264,10 @@ public class ActorContainerClassImpl extends StructureClassImpl implements Actor
     {
       case RoomPackage.ACTOR_CONTAINER_CLASS__IF_SP_PS:
         return getIfSPPs();
+      case RoomPackage.ACTOR_CONTAINER_CLASS__USER_CODE1:
+        return getUserCode1();
+      case RoomPackage.ACTOR_CONTAINER_CLASS__USER_CODE2:
+        return getUserCode2();
       case RoomPackage.ACTOR_CONTAINER_CLASS__ACTOR_REFS:
         return getActorRefs();
     }
@@ -158,6 +288,12 @@ public class ActorContainerClassImpl extends StructureClassImpl implements Actor
       case RoomPackage.ACTOR_CONTAINER_CLASS__IF_SP_PS:
         getIfSPPs().clear();
         getIfSPPs().addAll((Collection<? extends SPPRef>)newValue);
+        return;
+      case RoomPackage.ACTOR_CONTAINER_CLASS__USER_CODE1:
+        setUserCode1((DetailCode)newValue);
+        return;
+      case RoomPackage.ACTOR_CONTAINER_CLASS__USER_CODE2:
+        setUserCode2((DetailCode)newValue);
         return;
       case RoomPackage.ACTOR_CONTAINER_CLASS__ACTOR_REFS:
         getActorRefs().clear();
@@ -180,6 +316,12 @@ public class ActorContainerClassImpl extends StructureClassImpl implements Actor
       case RoomPackage.ACTOR_CONTAINER_CLASS__IF_SP_PS:
         getIfSPPs().clear();
         return;
+      case RoomPackage.ACTOR_CONTAINER_CLASS__USER_CODE1:
+        setUserCode1((DetailCode)null);
+        return;
+      case RoomPackage.ACTOR_CONTAINER_CLASS__USER_CODE2:
+        setUserCode2((DetailCode)null);
+        return;
       case RoomPackage.ACTOR_CONTAINER_CLASS__ACTOR_REFS:
         getActorRefs().clear();
         return;
@@ -199,6 +341,10 @@ public class ActorContainerClassImpl extends StructureClassImpl implements Actor
     {
       case RoomPackage.ACTOR_CONTAINER_CLASS__IF_SP_PS:
         return ifSPPs != null && !ifSPPs.isEmpty();
+      case RoomPackage.ACTOR_CONTAINER_CLASS__USER_CODE1:
+        return userCode1 != null;
+      case RoomPackage.ACTOR_CONTAINER_CLASS__USER_CODE2:
+        return userCode2 != null;
       case RoomPackage.ACTOR_CONTAINER_CLASS__ACTOR_REFS:
         return actorRefs != null && !actorRefs.isEmpty();
     }

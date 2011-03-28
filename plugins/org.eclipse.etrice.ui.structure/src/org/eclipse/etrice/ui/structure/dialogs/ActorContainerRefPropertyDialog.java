@@ -12,31 +12,34 @@
 
 package org.eclipse.etrice.ui.structure.dialogs;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
 import org.eclipse.core.databinding.DataBindingContext;
 import org.eclipse.core.databinding.validation.IValidator;
 import org.eclipse.core.databinding.validation.ValidationStatus;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.etrice.core.room.ActorClass;
+import org.eclipse.etrice.core.room.ActorContainerClass;
+import org.eclipse.etrice.core.room.ActorContainerRef;
+import org.eclipse.etrice.core.room.ActorRef;
+import org.eclipse.etrice.core.room.LogicalSystem;
+import org.eclipse.etrice.core.room.RoomPackage;
+import org.eclipse.etrice.core.room.StructureClass;
+import org.eclipse.etrice.core.room.SubSystemClass;
+import org.eclipse.etrice.core.room.SubSystemRef;
+import org.eclipse.etrice.ui.common.dialogs.AbstractPropertyDialog;
+import org.eclipse.etrice.ui.structure.Activator;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.forms.IManagedForm;
-
-import org.eclipse.etrice.core.room.ActorClass;
-import org.eclipse.etrice.core.room.ActorContainerClass;
-import org.eclipse.etrice.core.room.ActorContainerRef;
-import org.eclipse.etrice.core.room.ActorRef;
-import org.eclipse.etrice.core.room.RoomModel;
-import org.eclipse.etrice.core.room.RoomPackage;
-import org.eclipse.etrice.core.room.StructureClass;
-import org.eclipse.etrice.core.room.SubSystemClass;
-import org.eclipse.etrice.core.room.SubSystemRef;
-import org.eclipse.etrice.core.room.LogicalSystem;
-import org.eclipse.etrice.ui.common.dialogs.AbstractPropertyDialog;
-import org.eclipse.etrice.ui.structure.Activator;
+import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.scoping.IScope;
 
 public class ActorContainerRefPropertyDialog extends AbstractPropertyDialog {
 	
@@ -103,46 +106,47 @@ public class ActorContainerRefPropertyDialog extends AbstractPropertyDialog {
 	}
 
 	private ActorContainerRef ref;
+	private IScope scope;
 	private StructureClass sc;
 	private boolean newRef;
 
-	public ActorContainerRefPropertyDialog(Shell shell, ActorContainerRef ref, StructureClass sc, boolean newRef) {
+	public ActorContainerRefPropertyDialog(Shell shell, ActorContainerRef ref, IScope scope, StructureClass sc, boolean newRef) {
 		super(shell, "Edit Reference");
 		this.ref = ref;
+		this.scope = scope;
 		this.sc = sc;
 		this.newRef = newRef;
 	}
 
 	@Override
 	protected void initializeBounds() {
-		getShell().setSize(300, 300);
-	}
-	
-	private RoomModel getRoomModel() {
-		EObject obj = sc;
-		while (obj!=null) {
-			if (obj instanceof RoomModel)
-				return (RoomModel) obj;
-			obj = obj.eContainer();
-		}
-		return null;
+		getShell().setSize(500, 300);
 	}
 
 	@Override
 	protected void createContent(IManagedForm mform, Composite body,
 			DataBindingContext bindingContext) {
 
-		RoomModel model = getRoomModel();
-
 		NameValidator nv = new NameValidator();
 		ProtocolValidator pv = new ProtocolValidator();
 
 		boolean isActor = sc instanceof ActorContainerClass;
+
+		ArrayList<IEObjectDescription> actors = new ArrayList<IEObjectDescription>();
+        Iterator<IEObjectDescription> it = scope.getAllElements().iterator();
+        while (it.hasNext()) {
+        	IEObjectDescription desc = it.next();
+        	EObject obj = desc.getEObjectOrProxy();
+        	if (isActor && obj instanceof ActorClass)
+        		actors.add(desc);
+        	if (!isActor && obj instanceof SubSystemClass)
+        		actors.add(desc);
+		}
 		
 		Text name = createText(body, "Name:", ref, RoomPackage.eINSTANCE.getActorContainerRef_Name(), nv);
 		Combo refClass = isActor?
-				createCombo(body, "Actor Class:", ref, ActorClass.class, RoomPackage.eINSTANCE.getActorRef_Type(), model.getActorClasses(), RoomPackage.eINSTANCE.getRoomClass_Name(), pv)
-			:	createCombo(body, "SubSystem Class:", ref, SubSystemClass.class, RoomPackage.eINSTANCE.getSubSystemRef_Type(), model.getSubSystemClasses(), RoomPackage.eINSTANCE.getRoomClass_Name(), pv);
+				createComboUsingDesc(body, "Actor Class:", ref, ActorClass.class, RoomPackage.eINSTANCE.getActorRef_Type(), actors, RoomPackage.eINSTANCE.getRoomClass_Name(), pv)
+			:	createComboUsingDesc(body, "SubSystem Class:", ref, SubSystemClass.class, RoomPackage.eINSTANCE.getSubSystemRef_Type(), actors, RoomPackage.eINSTANCE.getRoomClass_Name(), pv);
 
 		createDecorator(name, "invalid name");
 		createDecorator(refClass, "no class selected");
@@ -151,6 +155,7 @@ public class ActorContainerRefPropertyDialog extends AbstractPropertyDialog {
 			refClass.setEnabled(false);
 		}
 
+		name.selectAll();
 		name.setFocus();
 	}
 

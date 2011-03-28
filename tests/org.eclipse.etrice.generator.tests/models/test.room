@@ -1,0 +1,30 @@
+RoomModel test {
+	ProtocolClass MyProtocol {
+		incoming {
+			Message in1()
+		}
+		outgoing {
+		}
+	}
+	
+	ActorClass Base {
+		Interface {
+			Port p: MyProtocol
+		}
+		Behavior {
+			StateMachine {
+				State sBase {}
+			}
+		}
+	}
+	
+	ActorClass Derived extends Base {
+		Behavior {
+			StateMachine {
+				State s {}
+				State y {}
+				RefinedState sBase {}
+			}
+		}
+	}
+}

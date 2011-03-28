@@ -14,6 +14,16 @@ package org.eclipse.etrice.ui.structure.support;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.etrice.core.room.ActorContainerClass;
+import org.eclipse.etrice.core.room.ActorContainerRef;
+import org.eclipse.etrice.core.room.LayerConnection;
+import org.eclipse.etrice.core.room.RefSAPoint;
+import org.eclipse.etrice.core.room.RelaySAPoint;
+import org.eclipse.etrice.core.room.RoomFactory;
+import org.eclipse.etrice.core.room.SAPoint;
+import org.eclipse.etrice.core.room.SPPRef;
+import org.eclipse.etrice.core.room.SPPoint;
+import org.eclipse.etrice.core.room.StructureClass;
 import org.eclipse.etrice.core.validation.ValidationUtil;
 import org.eclipse.etrice.ui.structure.ImageProvider;
 import org.eclipse.graphiti.dt.IDiagramTypeProvider;
@@ -56,17 +66,6 @@ import org.eclipse.graphiti.ui.features.DefaultDeleteFeature;
 import org.eclipse.graphiti.ui.features.DefaultFeatureProvider;
 import org.eclipse.graphiti.util.ColorConstant;
 import org.eclipse.graphiti.util.IColorConstant;
-
-import org.eclipse.etrice.core.room.ActorClass;
-import org.eclipse.etrice.core.room.ActorContainerRef;
-import org.eclipse.etrice.core.room.LayerConnection;
-import org.eclipse.etrice.core.room.RefSAPoint;
-import org.eclipse.etrice.core.room.RelaySAPoint;
-import org.eclipse.etrice.core.room.RoomFactory;
-import org.eclipse.etrice.core.room.SAPoint;
-import org.eclipse.etrice.core.room.SPPRef;
-import org.eclipse.etrice.core.room.SPPoint;
-import org.eclipse.etrice.core.room.StructureClass;
 
 public class LayerConnectionSupport {
 
@@ -120,6 +119,10 @@ public class LayerConnectionSupport {
 					Object bo = getBusinessObjectForPictogramElement(shape);
 					if (bo instanceof ActorContainerRef)
 						return (ActorContainerRef) bo;
+					shape = (ContainerShape) anchor.getParent();
+					bo = getBusinessObjectForPictogramElement(shape);
+					if (bo instanceof ActorContainerRef)
+						return (ActorContainerRef) bo;
 				}				
 				return null;
 			}
@@ -144,6 +147,7 @@ public class LayerConnectionSupport {
 				ActorContainerRef srcRef = getRef(context.getSourceAnchor());
 				SPPRef dst = getSPPRef(context.getTargetAnchor());
 				ActorContainerRef dstRef = getRef(context.getTargetAnchor());
+				StructureClass sc = getParent(context);
 				
 				LayerConnection lc = RoomFactory.eINSTANCE.createLayerConnection();
 				SAPoint sapt = null;
@@ -161,6 +165,8 @@ public class LayerConnectionSupport {
 				sppt.setRef(dstRef);
 				sppt.setService(dst);
 				lc.setTo(sppt);
+				
+				sc.getConnections().add(lc);
 				
 				AddConnectionContext addContext = new AddConnectionContext(context.getSourceAnchor(), context.getTargetAnchor());
 				addContext.setNewObject(lc);
@@ -185,7 +191,7 @@ public class LayerConnectionSupport {
 			@Override
 			public PictogramElement add(IAddContext context) {
 				IAddConnectionContext addConContext = (IAddConnectionContext) context;
-				LayerConnection addedEReference = (LayerConnection) context.getNewObject();
+				LayerConnection lc = (LayerConnection) context.getNewObject();
 
 				IPeCreateService peCreateService = Graphiti.getPeCreateService();
 
@@ -204,9 +210,8 @@ public class LayerConnectionSupport {
 		              .createConnectionDecorator(connection, false, 1.0, true);
 		        createArrow(cd);
 
-				
 				// create link and wire it
-				link(connection, addedEReference);
+				link(connection, lc);
 
 				return connection;
 			}
@@ -318,8 +323,8 @@ public class LayerConnectionSupport {
 		}
 
 		private boolean isInherited(Diagram diag, LayerConnection lc) {
-			ActorClass ac = (ActorClass) Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(diag.getChildren().get(0));
-			return (lc.eContainer()!=ac);
+			ActorContainerClass acc = (ActorContainerClass) Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(diag.getChildren().get(0));
+			return (lc.eContainer()!=acc);
 		}
 
 		@Override

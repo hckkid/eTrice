@@ -13,15 +13,18 @@
 package org.eclipse.etrice.core.validation;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorContainerClass;
 import org.eclipse.etrice.core.room.ActorContainerRef;
 import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.Binding;
 import org.eclipse.etrice.core.room.BindingEndPoint;
+import org.eclipse.etrice.core.room.ChoicePoint;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.EntryPoint;
 import org.eclipse.etrice.core.room.ExitPoint;
@@ -41,6 +44,7 @@ import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.StructureClass;
 import org.eclipse.etrice.core.room.SubStateTrPointTerminal;
+import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.core.room.TrPoint;
 import org.eclipse.etrice.core.room.TrPointTerminal;
 import org.eclipse.etrice.core.room.Transition;
@@ -590,24 +594,103 @@ public class ValidationUtil {
 	}
 
 	public static Result isUniqueName(InterfaceItem item) {
+		return isUniqueName(item, item.getName());
+	}
+	
+	public static Result isUniqueName(InterfaceItem item, String name) {
+		if (name.isEmpty())
+			return Result.error("name must not be empty");
+		
 		if (item.eContainer() instanceof ActorClass) {
 			ArrayList<InterfaceItem> all = new ArrayList<InterfaceItem>();
 			ActorClass ac = (ActorClass) item.eContainer();
-			while (ac.getBase()!=null) {
-				ac = ac.getBase();
+			do {
 				all.addAll(ac.getIfPorts());
 				all.addAll(ac.getIntPorts());
 				all.addAll(ac.getIfSPPs());
 				all.addAll(ac.getStrSAPs());
+				
+				ac = ac.getBase();
 			}
+			while (ac!=null);
+			
 			for (InterfaceItem ii : all) {
-				if (ii!=item && ii.getName().equals(item.getName())) {
-					return Result.error("name already used in base class "+((ActorClass)ii.eContainer()).getName());
+				if (ii!=item && ii.getName().equals(name)) {
+					if (ii.eContainer()!=item.eContainer())
+						return Result.error("name already used in base class "+((ActorClass)ii.eContainer()).getName());
+					else
+						return Result.error("name already used");
 				}
 			}
 		}
-		// else
-		// we don't have to check SubSystemClasses since this is done by xtext (standard namespace)
+		else if (item.eContainer() instanceof SubSystemClass) {
+			SubSystemClass ssc = (SubSystemClass) item.eContainer();
+			ArrayList<InterfaceItem> all = new ArrayList<InterfaceItem>();
+			all.addAll(ssc.getIfSPPs());
+			all.addAll(ssc.getRelayPorts());
+			
+			for (InterfaceItem ii : all) {
+				if (ii!=item && ii.getName().equals(name)) {
+					return Result.error("name already used");
+				}
+			}
+		}
+		
+		return Result.ok();
+	}
+	
+	public static Result isUniqueName(State s, String name) {
+		if (name.isEmpty())
+			return Result.error("name must not be empty");
+		
+		StateGraph sg = (StateGraph) s.eContainer();
+		HashSet<String> names = new HashSet<String>();
+		RoomNameProvider.collectStateNames(sg, s, names);
+		
+		if (names.contains(name))
+			return Result.error("name already used");
+		
+		return Result.ok();
+	}
+	
+	public static Result isUniqueName(Transition t, String name) {
+		if (name.isEmpty())
+			return Result.error("name must not be empty");
+		
+		StateGraph sg = (StateGraph) t.eContainer();
+		HashSet<String> names = new HashSet<String>();
+		RoomNameProvider.collectTransitionNames(sg, t, names);
+		
+		if (names.contains(name))
+			return Result.error("name already used");
+		
+		return Result.ok();
+	}
+	
+	public static Result isUniqueName(TrPoint t, String name) {
+		if (name.isEmpty())
+			return Result.error("name must not be empty");
+		
+		StateGraph sg = (StateGraph) t.eContainer();
+		HashSet<String> names = new HashSet<String>();
+		RoomNameProvider.collectTrPointNames(sg, t, names);
+		
+		if (names.contains(name))
+			return Result.error("name already used");
+		
+		return Result.ok();
+	}
+	
+	public static Result isUniqueName(ChoicePoint t, String name) {
+		if (name.isEmpty())
+			return Result.error("name must not be empty");
+		
+		StateGraph sg = (StateGraph) t.eContainer();
+		HashSet<String> names = new HashSet<String>();
+		RoomNameProvider.collectChoicepointNames(sg, t, names);
+		
+		if (names.contains(name))
+			return Result.error("name already used");
 		
 		return Result.ok();
 	}

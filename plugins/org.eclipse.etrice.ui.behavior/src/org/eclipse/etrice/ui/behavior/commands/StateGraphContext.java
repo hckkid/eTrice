@@ -11,6 +11,7 @@ import org.eclipse.etrice.core.room.RefinedState;
 import org.eclipse.etrice.core.room.RoomFactory;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraph;
+import org.eclipse.etrice.core.room.StateGraphItem;
 import org.eclipse.etrice.core.room.TrPoint;
 import org.eclipse.etrice.core.room.Transition;
 
@@ -53,7 +54,7 @@ class StateGraphContext {
 		
 		return tree;
 	}
-
+	
 	private StateGraphContext(StateGraph sg) {
 		this.stateGraph = sg;
 		
@@ -198,5 +199,56 @@ class StateGraphContext {
 
 	public ArrayList<Transition> getTransitions() {
 		return transitions;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return dump("");
+	}
+	
+	/**
+	 * @param indent
+	 * @return context tree in human readable form
+	 */
+	private String dump(String indent) {
+		StringBuilder result = new StringBuilder();
+		result.append(indent+">>> "+getText(stateGraph)+"\n");
+		indent += "  ";
+		for (State s : stateGraph.getStates()) {
+			result.append(indent+getText(s)+"\n");
+		}
+		
+		for (StateGraphContext child : children) {
+			result.append(child.dump(indent));
+		}
+		return result.toString();
+	}
+
+	private String getText(StateGraph sg) {
+		ActorClass parent = getActorClass(sg);
+		return "state graph of "+(parent==null? "?":parent.getName());
+	}
+
+	private String getText(StateGraphItem sg) {
+		ActorClass parent = getActorClass(sg);
+		String name = "?";
+		if (sg instanceof State)
+			name = "st "+((State) sg).getName();
+		else if (sg instanceof TrPoint)
+			name = "tp "+((TrPoint) sg).getName();
+		return name+" of "+(parent==null? "?":parent.getName());
+	}
+
+	private ActorClass getActorClass(EObject obj) {
+		EObject parent = obj.eContainer();
+		while (parent!=null) {
+			if (parent instanceof ActorClass)
+				return (ActorClass) parent;
+			parent = parent.eContainer();
+		}
+		return null;
 	}
 }
