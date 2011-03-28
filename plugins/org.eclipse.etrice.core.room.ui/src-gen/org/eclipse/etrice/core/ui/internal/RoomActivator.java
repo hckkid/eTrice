@@ -8,17 +8,12 @@ import static com.google.inject.Guice.createInjector;
 
 import org.apache.log4j.Logger;
 
-import org.eclipse.core.runtime.FileLocator;
-import org.eclipse.core.runtime.Path;
-import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
-import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 
 import com.google.inject.Injector;
 import com.google.inject.Module;
 
-import java.net.URL;
 import java.util.Map;
 import java.util.HashMap;
 
@@ -38,9 +33,6 @@ public class RoomActivator extends AbstractUIPlugin {
 	@Override
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
-		
-		declareRegistryImage("defaultoutlinenode.gif", "icons/defaultoutlinenode.gif");
-
 		INSTANCE = this;
 		try {
 			registerInjectorFor("org.eclipse.etrice.core.Room");
@@ -59,7 +51,6 @@ public class RoomActivator extends AbstractUIPlugin {
 	@Override
 	public void stop(BundleContext context) throws Exception {
 		injectors.clear();
-		getImageRegistry().dispose();
 		INSTANCE = null;
 		super.stop(context);
 	}
@@ -86,17 +77,6 @@ public class RoomActivator extends AbstractUIPlugin {
 	
 	protected Module getSharedStateModule() {
 		return new org.eclipse.xtext.ui.shared.SharedStateModule();
-	}
-	
-	private void declareRegistryImage(String key, String path) {
-		ImageDescriptor desc= ImageDescriptor.getMissingImageDescriptor();
-		Bundle bundle= getBundle();
-		URL url= null;
-		if (bundle != null) {
-			url= FileLocator.find(bundle, new Path(path), null);
-			desc= ImageDescriptor.createFromURL(url);
-		}
-		getImageRegistry().put(key, desc);
 	}
 	
 }

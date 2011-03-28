@@ -28,7 +28,7 @@ public class RoomQualifiedNameProvider extends
     public QualifiedName qualifiedName(RefinedState rs) {
     	QualifiedName fqn = QualifiedName.create();
 		BaseState base = rs.getBase();
-		if (base!=null)
+		if (base!=null && !base.eIsProxy())
 		{
 			fqn = QualifiedName.create(base.getName());
 			EObject parent = base.eContainer();
