@@ -22,21 +22,8 @@ import org.eclipse.xtext.naming.QualifiedName;
 public class RoomQualifiedNameProvider extends
 		DefaultDeclarativeQualifiedNameProvider {
 
-//    public QualifiedName qualifiedName(RefinedState rs) {
-//    	QualifiedName fqn = QualifiedName.create();
-//		BaseState base = rs.getBase();
-//		if (base!=null && !base.eIsProxy())
-//		{
-//			fqn = QualifiedName.create(base.getName());
-//			EObject parent = base.eContainer();
-//			while (parent instanceof BaseState) {
-//				fqn = QualifiedName.create(((BaseState)parent).getName()).append(fqn);
-//				parent = parent.eContainer();
-//			}
-//		}
-//		return fqn;
-//    }
-
+	// important: don't rely on cross reference resolution here
+	
     public QualifiedName qualifiedName(Message m) {
     	ProtocolClass pc = (ProtocolClass) m.eContainer();
     	String list;
