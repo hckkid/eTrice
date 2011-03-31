@@ -170,10 +170,6 @@ public abstract class AbstractEditHandler extends AbstractHandler {
 						return "";
 					}
 				});
-				if (!fragment.isEmpty())
-					System.out.println(fragment);
-				else
-					System.out.println("empty fragement");
 				return isEnabled(fragment);
 			}
 		}
