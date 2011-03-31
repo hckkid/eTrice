@@ -1,4 +1,4 @@
-module workflow.etrice.example
+module workflow.etrice.example_CPP
 
 import org.eclipse.emf.mwe.utils.*
 
@@ -10,7 +10,7 @@ Workflow {
 		directory = destDir
 	}
 
-	component = @workflow.RoomGenerator {
+	component = @workflow.RoomGenerator_CPP {
 		sourceDir = "models"
 		targetDir = destDir
 	}

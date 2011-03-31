@@ -1,0 +1,220 @@
+«REM»
+/*******************************************************************************
+ * Copyright (c) 2010 protos software gmbh (http://www.protos.de).
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * CONTRIBUTORS:
+ * 		Thomas Schuetz and Henrik Rentz-Reichert (initial contribution)
+ * 
+ *******************************************************************************/
+«ENDREM»
+«IMPORT room»;
+«IMPORT etricegen»;
+
+«EXTENSION extensions::Extensions»
+«EXTENSION org::eclipse::xtend::util::stdlib::io»
+
+«DEFINE protocolClass FOR Root»
+
+«FOREACH this.usedProtocolClasses AS pc»
+
+«("generating "+getPath(pc)+pc.name+".java").info()»
+
+«FILE getPath(pc)+pc.name+".java"»
+package «getPackage(pc)»;
+
+import java.util.ArrayList;
+
+import org.eclipse.etrice.runtime.java.messaging.Address;
+import org.eclipse.etrice.runtime.java.messaging.Message;
+import org.eclipse.etrice.runtime.java.modelbase.*;
+import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
+
+«EXPAND ProcedureHelpers::UserCode FOR pc.userCode1»
+
+«LET this.getReferencedModels(pc) AS models»
+«FOREACH models AS model»import «model.name».*;
+«ENDFOREACH»
+«ENDLET»
+
+public class «pc.name» {
+	// message IDs
+	// TODO: separate class for message IDs: class MSG{public static volatile int MSG_MIN = 0; ...} -> better structure
+	// error if msgID <= MSG_MIN
+	public static final int MSG_MIN = 0;   
+	//IDs for outgoing messages
+	«FOREACH pc.getAllOutgoingMessages() AS message ITERATOR iter»public static final int OUT_«message.name» = «iter.counter1»;
+	«ENDFOREACH»
+	//IDs for incoming messages
+	«FOREACH pc.getAllIncomingMessages() AS message ITERATOR iter»public static final int IN_«message.name» = «iter.counter1+pc.getAllOutgoingMessages().size»;
+	«ENDFOREACH»
+	//error if msgID >= MSG_MAX
+	public static final int MSG_MAX = «pc.getAllOutgoingMessages().size + pc.getAllIncomingMessages().size+1»;  
+
+	«EXPAND ProcedureHelpers::UserCode FOR pc.userCode2»
+
+	private static String messageStrings[] = {"MIN", «FOREACH pc.getAllOutgoingMessages() AS m»"«m.name»",«ENDFOREACH» «FOREACH pc.getAllIncomingMessages() AS m»"«m.name»",«ENDFOREACH»"MAX"};
+
+	public String getMessageString(int msg_id) {
+		if (msg_id<0 || msg_id>MSG_MAX+1){
+			// id out of range
+			return "Message ID out of range";
+		}
+		else{
+			return messageStrings[msg_id];
+		}
+	}
+
+	«EXPAND portClass(false) FOR pc»
+	«EXPAND portClass(true) FOR pc»
+}
+«ENDFILE»
+«ENDFOREACH»
+«ENDDEFINE»
+
+«DEFINE portClass(Boolean conj) FOR ProtocolClass»
+
+«LET getPortClassName(this, conj) AS name»
+«LET this.getPortClass(conj) AS pclass»
+
+// port class
+static public class «name» extends PortBase {
+	«IF pclass!=null»«EXPAND ProcedureHelpers::UserCode FOR pclass.userCode-»
+	«ENDIF-»
+	// constructors
+	public «name»(IEventReceiver actor, String name, int localId, Address addr, Address peerAddress) {
+		super(actor, name, localId, 0, addr, peerAddress);
+		DebuggingService.getInstance().addPortInstance(this);
+	}
+	public «name»(IEventReceiver actor, String name, int localId, int idx, Address addr, Address peerAddress) {
+		super(actor, name, localId, idx, addr, peerAddress);
+		DebuggingService.getInstance().addPortInstance(this);
+	}
+
+	@Override
+	public void receive(Message m) {
+			if (!(m instanceof EventMessage))
+				return;
+			EventMessage msg = (EventMessage) m;
+			if (msg.getEvtId() <= 0 || msg.getEvtId() >= MSG_MAX)
+				System.out.println("unknown");
+			else {
+				if (messageStrings[msg.getEvtId()] != "timerTick"){
+					// TODOTS: model switch for activation
+					DebuggingService.getInstance().addMessageAsyncIn(getPeerAddress(), getAddress(), messageStrings[msg.getEvtId()]);
+				}
+				«IF this.handlesReceive(conj)»
+				switch (msg.getEvtId()) {
+				«FOREACH this.getReceiveHandlers(conj) AS hdlr»
+				case «hdlr.msg.getCodeName()»:
+				{
+					«FOREACH hdlr.detailCode.commands AS command»	«command»
+					«ENDFOREACH»
+				}
+				break;
+				«ENDFOREACH»
+				default:
+				«ENDIF»
+					if (msg instanceof EventWithDataMessage)
+						getActor().receiveEvent(this, msg.getEvtId(), ((EventWithDataMessage)msg).getData());
+					else
+						getActor().receiveEvent(this, msg.getEvtId());
+				«IF this.handlesReceive(conj)»
+				}«ENDIF»
+			}
+	}
+
+	«EXPAND ProcedureHelpers::Attributes FOR pclass.attributes-»
+	«EXPAND ProcedureHelpers::Operations FOR pclass.operations-»
+	
+	// sent messages
+	«FOREACH this.getOutgoing(conj) AS m»«EXPAND sendMessage(conj) FOR m»«ENDFOREACH-»
+}
+
+// replicated port class
+static public class «name»Repl {
+	private ArrayList<«name»> ports;
+	private int replication;
+
+	public «name»Repl(IEventReceiver actor, String name, int localId, Address[] addr,
+			Address[] peerAddress) {
+		replication = addr.length;
+		ports = new ArrayList<«this.name».«name»>(replication);
+		for (int i=0; i<replication; ++i) {
+			ports.add(new «name»(
+					actor, name+i, localId, i, addr[i], peerAddress[i]));
+		}
+	}
+	
+	public int getReplication() {
+		return replication;
+	}
+	
+	public «name» get(int i) {
+		return ports.get(i);
+	}
+	
+	«IF conj»
+	// incoming messages
+	«FOREACH this.getAllIncomingMessages() AS m-»
+	«EXPAND messageSignature FOR m»{
+		for (int i=0; i<replication; ++i) {
+			ports.get(i).«EXPAND messageCall FOR m»;
+		}
+	}
+	«ENDFOREACH-»
+	«ELSE-»
+	// outgoing messages
+	«FOREACH this.getAllOutgoingMessages() AS m-»
+	«EXPAND messageSignature FOR m»{
+		for (int i=0; i<replication; ++i) {
+			ports.get(i).«EXPAND messageCall FOR m»;
+		}
+	}
+	«ENDFOREACH-»
+	«ENDIF-»
+}
+
+// interface for port class
+public interface I«name»{
+	«IF conj-»
+	// outgoing messages
+	«FOREACH this.getAllOutgoingMessages() AS m» «EXPAND messageSignature FOR m»;
+	«ENDFOREACH-»
+	«ELSE-»
+	// incoming messages
+	«FOREACH this.getAllIncomingMessages() AS m» «EXPAND messageSignature FOR m»;
+	«ENDFOREACH-»
+	«ENDIF-»
+}
+
+«ENDLET»
+«ENDLET»
+«ENDDEFINE»
+
+«DEFINE messageSignature FOR Message»public void «this.name» («FOREACH this.arguments AS a SEPARATOR "," »«a.type.typeName()» «a.name»«ENDFOREACH»)«ENDDEFINE»
+«DEFINE messageCall FOR Message»«this.name»(«FOREACH this.arguments AS a SEPARATOR ","» «a.name»«ENDFOREACH»)«ENDDEFINE»
+«DEFINE sendMessage(boolean conj) FOR Message-»
+«LET conj?"IN":"OUT" AS dir-»
+«LET this.getSendHandler(conj) AS hdlr-»
+	«EXPAND messageSignature FOR this»{
+		«IF hdlr!=null-»
+			«FOREACH hdlr.detailCode.commands AS command»	«command»
+			«ENDFOREACH-»
+		«ELSE-»
+			if (messageStrings[ «dir»_«this.name»] != "timerTick"){
+				// TODOTS: model switch for activation
+			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[«dir»_«this.name»]);
+			}
+			if (getPeerAddress()!=null)
+			«IF this.arguments.isEmpty»getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), «dir»_«this.name»));
+			«ELSE» getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), «dir»_«this.name», new Object[]{«FOREACH this.arguments AS a SEPARATOR ","» «a.name»«ENDFOREACH»}));
+			«ENDIF-»
+		«ENDIF-»
+	}
+«ENDLET-»
+«ENDLET-»
+«ENDDEFINE»
