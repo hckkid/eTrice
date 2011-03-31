@@ -31,7 +31,7 @@ import org.eclipse.xtext.resource.IFragmentProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
-import org.eclipse.xtext.ui.editor.outline.ContentOutlineNode;
+import org.eclipse.xtext.ui.editor.outline.impl.EObjectNode;
 import org.eclipse.xtext.ui.editor.utils.EditorUtils;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
@@ -52,7 +52,10 @@ public abstract class AbstractEditHandler extends AbstractHandler {
 	@Inject
 	protected IResourceValidator resourceValidator;
 	
-	@Inject IFragmentProvider fragmentProvider;
+	@Inject
+	IFragmentProvider fragmentProvider;
+	
+	private EObjectAtOffsetHelper helper = new EObjectAtOffsetHelper();
 	
 	public AbstractEditHandler() {
 		super();
@@ -74,10 +77,10 @@ public abstract class AbstractEditHandler extends AbstractHandler {
 				// event from the xtext editor's outline view
 				IStructuredSelection ss = (IStructuredSelection) selection;
 				Object sel = ss.getFirstElement();
-				if (sel instanceof ContentOutlineNode) {
+				if (sel instanceof EObjectNode) {
 					XtextEditor xtextEditor = EditorUtils.getActiveXtextEditor(event);
 					IXtextDocument document = xtextEditor.getDocument();
-					final String fragment = ((ContentOutlineNode) sel).getURI().fragment();
+					final String fragment = ((EObjectNode) sel).getEObjectURI().fragment();
 					if (checkPrerequisites(xtextEditor, document, fragment)) {
 						openEditor(document, fragment);
 					}
@@ -91,7 +94,7 @@ public abstract class AbstractEditHandler extends AbstractHandler {
 				String fragment = document.readOnly(new IUnitOfWork<String, XtextResource>() {
 					@Override
 					public String exec(XtextResource resource) throws Exception {
-						EObject obj = EObjectAtOffsetHelper.resolveElementAt(resource, ss.getOffset(), null);
+						EObject obj = helper.resolveElementAt(resource, ss.getOffset());
 						while (obj!=null) {
 							if (obj instanceof ActorClass) {
 								return fragmentProvider.getFragment(obj, null);

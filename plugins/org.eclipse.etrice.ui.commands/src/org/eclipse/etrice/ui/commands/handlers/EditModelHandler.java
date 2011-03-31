@@ -14,7 +14,7 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.handlers.HandlerUtil;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.ui.editor.XtextEditor;
-import org.eclipse.xtext.util.TextLocation;
+import org.eclipse.xtext.util.ITextRegion;
 
 import com.google.inject.Inject;
 import com.google.inject.Injector;
@@ -57,7 +57,7 @@ public class EditModelHandler extends AbstractHandler {
 					editor = window.getActivePage().getActiveEditor();
 					if (editor instanceof XtextEditor) {
 						XtextEditor xed = (XtextEditor) editor;
-						TextLocation location = locationProvider.getLocation(sc);
+						ITextRegion location = locationProvider.getFullTextRegion(sc);
 						xed.selectAndReveal(location.getOffset(), location.getLength());
 					}
 				}
