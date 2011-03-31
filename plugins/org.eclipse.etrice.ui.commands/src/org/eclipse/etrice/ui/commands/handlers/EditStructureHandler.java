@@ -13,6 +13,7 @@
 package org.eclipse.etrice.ui.commands.handlers;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.etrice.core.naming.RoomFragmentProvider;
 import org.eclipse.etrice.core.room.StructureClass;
 import org.eclipse.etrice.ui.structure.DiagramAccess;
 import org.eclipse.xtext.ui.editor.XtextEditor;
@@ -43,6 +44,11 @@ public class EditStructureHandler extends AbstractEditHandler {
 			DiagramAccess diagramAccess = new DiagramAccess();
 			diagramAccess.openDiagramEditor((StructureClass) object);
 		}
+	}
+
+	@Override
+	protected boolean isEnabled(String fragment) {
+		return RoomFragmentProvider.isStructureClass(fragment);
 	}
 
 }

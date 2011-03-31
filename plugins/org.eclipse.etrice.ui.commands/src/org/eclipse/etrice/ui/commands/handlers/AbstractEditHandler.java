@@ -24,8 +24,13 @@ import org.eclipse.jface.text.ITextSelection;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.IWorkbench;
+import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.IWorkbenchWindow;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.handlers.HandlerUtil;
+import org.eclipse.ui.views.contentoutline.ContentOutline;
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.IFragmentProvider;
 import org.eclipse.xtext.resource.XtextResource;
@@ -66,6 +71,7 @@ public abstract class AbstractEditHandler extends AbstractHandler {
 
 	abstract protected boolean prepare(XtextEditor xtextEditor, final String fragment);
 	abstract protected void openEditor(EObject object);
+	abstract protected boolean isEnabled(String fragment);
 
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
@@ -96,7 +102,7 @@ public abstract class AbstractEditHandler extends AbstractHandler {
 					public String exec(XtextResource resource) throws Exception {
 						EObject obj = helper.resolveElementAt(resource, ss.getOffset());
 						while (obj!=null) {
-							if (obj instanceof ActorClass) {
+							if (obj instanceof StructureClass) {
 								return fragmentProvider.getFragment(obj, null);
 							}
 							obj = obj.eContainer();
@@ -120,6 +126,58 @@ public abstract class AbstractEditHandler extends AbstractHandler {
 			openEditor(ac);
 		}
 		return null;
+	}
+	
+	/* (non-Javadoc)
+	 * @see org.eclipse.core.commands.AbstractHandler#isEnabled()
+	 */
+	@Override
+	public boolean isEnabled() {
+		IWorkbench wb = PlatformUI.getWorkbench();
+		IWorkbenchWindow win = wb.getActiveWorkbenchWindow();
+		IWorkbenchPage page = win.getActivePage();
+		IWorkbenchPart part = page.getActivePart();
+		if (part instanceof ContentOutline) {
+			ISelection selection = ((ContentOutline)part).getSelection();
+			if (selection instanceof IStructuredSelection) {
+				IStructuredSelection ss = (IStructuredSelection) selection;
+				Object sel = ss.getFirstElement();
+				if (sel instanceof EObjectNode) {
+					EObjectNode node = (EObjectNode) sel;
+					String fragment = node.getEObjectURI().fragment();
+					return isEnabled(fragment);
+				}
+			}
+		}
+		IEditorPart editor = page.getActiveEditor();
+		if (editor instanceof XtextEditor) {
+			ISelection selection = ((XtextEditor) editor).getSelectionProvider().getSelection();
+			if (selection instanceof ITextSelection) {
+				// event from the xtext editor itself
+				final ITextSelection ss = (ITextSelection) selection;
+				XtextEditor xed = (XtextEditor) editor;
+				IXtextDocument document = xed.getDocument();
+				String fragment = document.readOnly(new IUnitOfWork<String, XtextResource>() {
+					@Override
+					public String exec(XtextResource resource) throws Exception {
+						EObject obj = helper.resolveElementAt(resource, ss.getOffset());
+						while (obj!=null) {
+							if (obj instanceof StructureClass) {
+								return fragmentProvider.getFragment(obj, null);
+							}
+							obj = obj.eContainer();
+						}
+						return "";
+					}
+				});
+				if (!fragment.isEmpty())
+					System.out.println(fragment);
+				else
+					System.out.println("empty fragement");
+				return isEnabled(fragment);
+			}
+		}
+		return false;
 	}
 
 	protected void openEditor(IXtextDocument document, final String fragment) {

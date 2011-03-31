@@ -15,21 +15,16 @@ package org.eclipse.etrice.ui.commands.handlers;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.naming.RoomFragmentProvider;
-import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.Transition;
-import org.eclipse.etrice.core.ui.RoomUiModule;
 import org.eclipse.etrice.ui.behavior.DiagramAccess;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
-import org.eclipse.xtext.ui.editor.outline.impl.EObjectNode;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
-
-import com.google.inject.Injector;
 
 /**
  * Handler for outline menu item to open behavior editor.
@@ -133,6 +128,11 @@ public class EditBehaviorHandler extends AbstractEditHandler {
 			DiagramAccess diagramAccess = new DiagramAccess();
 			diagramAccess.openDiagramEditor((ActorClass) object);
 		}
+	}
+
+	@Override
+	protected boolean isEnabled(String fragment) {
+		return RoomFragmentProvider.isActorClass(fragment);
 	}
 
 }

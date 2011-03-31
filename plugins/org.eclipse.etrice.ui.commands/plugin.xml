@@ -134,16 +134,16 @@
       </menuContribution>
   <menuContribution
         allPopups="false"
-        locationURI="popup:org.eclipse.xtext.ui.outline?after=additions">
+        locationURI="popup:org.eclipse.etrice.core.room.outline?after=additions">
      <command
            commandId="org.eclipse.etrice.core.room.ui.editBehavior"
            label="Edit Behavior"
            style="push">
         <visibleWhen
-              checkEnabled="false">
+              checkEnabled="true">
            <iterate>
               <adapt
-                    type="org.eclipse.etrice.core.room.ActorClass">
+                    type="org.eclipse.xtext.ui.editor.outline.IOutlineNode">
               </adapt>
            </iterate>
         </visibleWhen>
@@ -151,24 +151,17 @@
   </menuContribution>
   <menuContribution
         allPopups="false"
-        locationURI="popup:org.eclipse.xtext.ui.outline?after=additions">
+        locationURI="popup:org.eclipse.etrice.core.room.outline?after=additions">
      <command
            commandId="org.eclipse.etrice.core.room.ui.editStructure"
            label="Edit Structure"
            style="push">
-        <visibleWhen>
-           <iterate operator="and" ifEmpty="false">
-           <or>
+        <visibleWhen
+              checkEnabled="true">
+           <iterate>
               <adapt
-                    type="org.eclipse.etrice.core.room.ActorClass">
+                    type="org.eclipse.xtext.ui.editor.outline.IOutlineNode">
               </adapt>
-              <adapt
-                    type="org.eclipse.etrice.core.room.SubSystemClass">
-              </adapt>
-              <adapt
-                    type="org.eclipse.etrice.core.room.LogicalSystem">
-              </adapt>
-              </or>
            </iterate>
         </visibleWhen>
      </command>
