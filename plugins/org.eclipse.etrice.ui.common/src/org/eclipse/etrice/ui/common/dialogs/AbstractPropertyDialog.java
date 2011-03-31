@@ -92,7 +92,7 @@ public abstract class AbstractPropertyDialog extends FormDialog {
 		@Override
 		public Object convert(Object fromObject) {
 			for (IEObjectDescription desc : candidates) {
-				if (desc.getName().equals(fromObject)) {
+				if (desc.getName().toString().equals(fromObject)) {
 					EObject refObj = desc.getEObjectOrProxy();
 					if (refObj.eIsProxy())
 						refObj = EcoreUtil.resolve(refObj, obj);
@@ -368,7 +368,7 @@ public abstract class AbstractPropertyDialog extends FormDialog {
 		
 		DescriptionBased_Reference2StringConverter r2s = new DescriptionBased_Reference2StringConverter(type, nameAttr);
 		for (IEObjectDescription desc : candidates) {
-			combo.add((String) r2s.convert(desc));
+			combo.add(r2s.convert(desc).toString());
 		}
 		
 		DescriptionBased_String2ReferenceConverter s2r = new DescriptionBased_String2ReferenceConverter(type, obj, candidates);

@@ -159,6 +159,8 @@ public class PortSupport extends InterfaceItemSupport {
 		
 		private static class PropertyFeature extends InterfaceItemSupport.FeatureProvider.PropertyFeature {
 
+			private boolean doneChanges = false;
+
 			public PropertyFeature(IFeatureProvider fp) {
 				super(fp, "Edit Port...", "Edit Port Properties");
 			}
@@ -190,12 +192,18 @@ public class PortSupport extends InterfaceItemSupport {
 			        Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 			        PortPropertyDialog dlg = new PortPropertyDialog(shell, port, scope, acc, false, refport, internal);
 					if (dlg.open()!=Window.OK)
-						// TODOHRR: introduce a method to revert changes
-						throw new RuntimeException();
-						//return;
-					
+						return;
+
+					doneChanges  = true;
 					updatePortFigure(port, context.getPictogramElements()[0], manageColor(DARK_COLOR), manageColor(BRIGHT_COLOR));
+					String kind = getPortKind(port);
+					Graphiti.getPeService().setPropertyValue(context.getPictogramElements()[0], PROP_KIND, kind);
 				}
+			}
+			
+			@Override
+			public boolean hasDoneChanges() {
+				return doneChanges;
 			}
 			
 		}
