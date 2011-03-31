@@ -174,10 +174,12 @@ public class RoomFragmentProvider implements IFragmentProvider {
 	public EObject getEObject(Resource resource, String fragment,
 			Fallback fallback) {
 
-		RoomModel model = (RoomModel) resource.getContents().get(0);
-		EObject result = getEObject(model, fragment);
-		if (result!=null)
-			return result;
+		if (!resource.getContents().isEmpty()) {
+			RoomModel model = (RoomModel) resource.getContents().get(0);
+			EObject result = getEObject(model, fragment);
+			if (result!=null)
+				return result;
+		}
 		
 		return fallback.getEObject(fragment);
 	}
