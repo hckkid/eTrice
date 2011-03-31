@@ -62,7 +62,7 @@ public class TestBase {
 	public Diagnostic getDiag(EObject ele) {
 		Map<Object, Object> options = Maps.newHashMap();
 		options.put(CheckMode.KEY, CheckMode.ALL);
-		options.put(CancelableDiagnostician.CANCEL_INDICATOR, new CancelIndicator.NullImpl());
+		options.put(CancelableDiagnostician.CANCEL_INDICATOR, CancelIndicator.NullImpl);
 		// disable concrete syntax validation, since a semantic model that has been parsed 
 		// from the concrete syntax always complies with it - otherwise there are parse errors.
 		options.put(ConcreteSyntaxEValidator.DISABLE_CONCRETE_SYNTAX_EVALIDATOR, Boolean.TRUE);
