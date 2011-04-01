@@ -60,6 +60,7 @@ public class BehaviorEditor extends RoomDiagramEditor {
 			}
 		};
 		getEditingDomain().getCommandStack().execute(cmd);
+		getEditingDomain().getCommandStack().flush();
 	}
 
 	/**
