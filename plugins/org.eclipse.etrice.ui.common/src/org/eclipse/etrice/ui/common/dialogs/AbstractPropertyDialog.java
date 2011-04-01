@@ -237,6 +237,9 @@ public abstract class AbstractPropertyDialog extends FormDialog {
 	}
 
 	protected void updateValidationFeedback(boolean ok) {
+		if (validationLabel.isDisposed())
+			return;
+		
 		validationLabel.setVisible(!ok);
 		validationText.setVisible(!ok);
 		
