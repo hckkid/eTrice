@@ -497,7 +497,11 @@ public class InterfaceItemSupport {
 			@Override
 			public boolean canDelete(IDeleteContext context) {
 				ContainerShape shape = (ContainerShape) context.getPictogramElement();
-				InterfaceItem item = (InterfaceItem) getBusinessObjectForPictogramElement(shape);
+				Object bo = getBusinessObjectForPictogramElement(shape);
+				if (bo instanceof EObject && ((EObject)bo).eIsProxy())
+					return true;
+				
+				InterfaceItem item = (InterfaceItem) bo;
 				Object parentBO = getBusinessObjectForPictogramElement(shape.getContainer());
 				
 				return !isRefItem(shape) && !isInherited(item, parentBO, shape);
