@@ -15,6 +15,7 @@ package org.eclipse.etrice.ui.commands.handlers;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.naming.RoomFragmentProvider;
+import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraph;
@@ -52,11 +53,7 @@ public class EditBehaviorHandler extends AbstractEditHandler {
 	 * @param fragment
 	 */
 	private void createTransitionNames(IXtextDocument document, final String fragment) {
-		/* TODOHRR: make this work again
-		DefaultDocumentEditor edit = new DefaultDocumentEditor();
-		Injector injector = RoomUiModule.getInjector();
-		injector.injectMembers(edit);
-		edit.process(new IUnitOfWork.Void<XtextResource>() {
+		document.modify(new IUnitOfWork.Void<XtextResource>() {
 			@Override
 			public void process(XtextResource resource) throws Exception {
 				if (resource != null) {
@@ -82,8 +79,7 @@ public class EditBehaviorHandler extends AbstractEditHandler {
 				}
 			}
 			
-		}, document);
-		*/
+		});
 	}
 
 	/**
