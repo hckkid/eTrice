@@ -32,6 +32,7 @@ class StateGraphContext {
 		if (ac.getStateMachine()==null)
 			ac.setStateMachine(RoomFactory.eINSTANCE.createStateGraph());
 
+		// base classes in reverse order
 		ArrayList<ActorClass> classes = new ArrayList<ActorClass>();
 		{
 			ActorClass a = ac;
@@ -41,6 +42,7 @@ class StateGraphContext {
 			}
 		}
 		
+		// build and merge contexts from base classes to derived classes
 		obj2ctx.clear();
 		StateGraphContext tree = null;
 		for (ActorClass cls : classes) {
@@ -106,6 +108,8 @@ class StateGraphContext {
 	}
 
 	private void merge(StateGraph other) {
+		stateGraph = other;
+		
 		// add other contents up to refined states
 		for (State s : other.getStates()) {
 			if (s instanceof BaseState) {
@@ -217,7 +221,7 @@ class StateGraphContext {
 		StringBuilder result = new StringBuilder();
 		result.append(indent+">>> "+getText(stateGraph)+"\n");
 		indent += "  ";
-		for (State s : stateGraph.getStates()) {
+		for (State s : states) {
 			result.append(indent+getText(s)+"\n");
 		}
 		

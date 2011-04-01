@@ -17,7 +17,6 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.room.ChoicePoint;
 import org.eclipse.etrice.core.room.RoomFactory;
-import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.ui.behavior.ImageProvider;
 import org.eclipse.etrice.ui.common.support.NoResizeFeature;
@@ -148,8 +147,7 @@ public class ChoicePointSupport {
 			public PictogramElement add(IAddContext context) {
 				ChoicePoint cp = (ChoicePoint) context.getNewObject();
 				ContainerShape sgShape = context.getTargetContainer();
-				Object bo = getBusinessObjectForPictogramElement(sgShape);
-				boolean inherited = isInherited(cp, bo, sgShape);
+				boolean inherited = SupportUtil.isInherited(cp, sgShape);
 	
 				// CONTAINER SHAPE WITH RECTANGLE
 				IPeCreateService peCreateService = Graphiti.getPeCreateService();
@@ -212,8 +210,7 @@ public class ChoicePointSupport {
 						ChoicePoint cp = (ChoicePoint) bo;
 						
 						ContainerShape acShape = context.getTargetContainer();
-						Object parentBO = getBusinessObjectForPictogramElement(acShape);
-						if (isInherited(cp, parentBO, acShape))
+						if (SupportUtil.isInherited(cp, acShape))
 							return false;
 						
 						return true;
@@ -285,7 +282,7 @@ public class ChoicePointSupport {
 				}
 				ChoicePoint cp = (ChoicePoint) bo;
 				
-				boolean inherited = isInherited(cp, bo, containerShape);
+				boolean inherited = SupportUtil.isInherited(cp, containerShape);
 				
 				Color dark = manageColor(inherited? INHERITED_COLOR:DARK_COLOR);
 				updateFigure(cp, containerShape, dark, manageColor(BRIGHT_COLOR));
@@ -301,14 +298,6 @@ public class ChoicePointSupport {
 			}
 
 			public boolean canRemove(IRemoveContext context) {
-				Object bo = getBusinessObjectForPictogramElement(context.getPictogramElement());
-				if (bo instanceof ChoicePoint) {
-					ChoicePoint cp = (ChoicePoint) bo;
-					
-					ContainerShape containerShape = (ContainerShape) context.getPictogramElement().eContainer();
-					Object parentBO = getBusinessObjectForPictogramElement(containerShape);
-					return !isInherited(cp, parentBO, containerShape);
-				}
 				return false;
 			}
 		}
@@ -326,8 +315,7 @@ public class ChoicePointSupport {
 					ChoicePoint cp = (ChoicePoint) bo;
 					
 					ContainerShape containerShape = (ContainerShape) context.getPictogramElement().eContainer();
-					Object parentBO = getBusinessObjectForPictogramElement(containerShape);
-					return !isInherited(cp, parentBO, containerShape);
+					return !SupportUtil.isInherited(cp, containerShape);
 				}
 				return false;
 			}
@@ -411,22 +399,6 @@ public class ChoicePointSupport {
 			invisibleRect.getGraphicsAlgorithmChildren().clear();
 			
 			createFigure(cp, container, invisibleRect, dark, bright);
-		}
-		
-		protected static boolean isInherited(ChoicePoint cp, Object container, ContainerShape cs) {
-			if (container instanceof StateGraph) {
-				StateGraph sg = (StateGraph) container;
-				return cp.eContainer()!=sg;
-			}
-			else if (container instanceof State) {
-				// have to check whether the State is inherited
-				State s = (State) container;
-				ContainerShape sCont = cs.getContainer();
-				EObject cls = sCont.getLink().getBusinessObjects().get(0);
-				return s.eContainer()!=cls;
-			}
-
-			return false;
 		}
 		
 	}

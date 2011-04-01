@@ -215,7 +215,7 @@ public class TrPointSupport {
 				TrPoint tp = (TrPoint) context.getNewObject();
 				ContainerShape parentShape = context.getTargetContainer();
 				Object bo = getBusinessObjectForPictogramElement(parentShape);
-				boolean inherited = isInherited(tp, bo, parentShape);
+				boolean inherited = SupportUtil.isInherited(tp, parentShape);
 				boolean subtp = (bo instanceof State);
 	
 				int margin = subtp?StateSupport.MARGIN:StateGraphSupport.MARGIN;
@@ -355,9 +355,8 @@ public class TrPointSupport {
 					if (bo instanceof TrPoint) {
 						TrPoint tp = (TrPoint) bo;
 						
-						ContainerShape acShape = context.getTargetContainer();
-						Object parentBO = getBusinessObjectForPictogramElement(acShape);
-						if (isInherited(tp, parentBO, acShape))
+						ContainerShape containerShape = context.getTargetContainer();
+						if (SupportUtil.isInherited(tp, containerShape))
 							return false;
 						
 						if (isSubTP(context.getPictogramElement()))
@@ -575,7 +574,7 @@ public class TrPointSupport {
 				}
 				TrPoint tp = (TrPoint) bo;
 				
-				boolean inherited = isInherited(tp, bo, containerShape);
+				boolean inherited = SupportUtil.isInherited(tp, containerShape);
 				
 				Color dark = manageColor(inherited? INHERITED_COLOR:DARK_COLOR);
 				updateTrPointFigure(tp, containerShape, dark, manageColor(BRIGHT_COLOR));
@@ -763,22 +762,6 @@ public class TrPointSupport {
 			EObject parent = Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(parentShape);
 			
 			return (parent instanceof State);
-		}
-		
-		protected static boolean isInherited(TrPoint tp, Object container, ContainerShape cs) {
-			if (container instanceof StateGraph) {
-				StateGraph sg = (StateGraph) container;
-				return tp.eContainer()!=sg;
-			}
-			else if (container instanceof State) {
-				// have to check whether the State is inherited
-				State s = (State) container;
-				ContainerShape sCont = cs.getContainer();
-				EObject cls = sCont.getLink().getBusinessObjects().get(0);
-				return s.eContainer()!=cls;
-			}
-
-			return false;
 		}
 		
 		protected static boolean isValidPosition(ILocationContext loc, ITargetContext tgt, int margin) {

@@ -32,6 +32,7 @@ import org.eclipse.graphiti.dt.IDiagramTypeProvider;
 import org.eclipse.graphiti.features.IAddFeature;
 import org.eclipse.graphiti.features.ICreateConnectionFeature;
 import org.eclipse.graphiti.features.ICreateFeature;
+import org.eclipse.graphiti.features.IDeleteFeature;
 import org.eclipse.graphiti.features.IFeatureProvider;
 import org.eclipse.graphiti.features.ILayoutFeature;
 import org.eclipse.graphiti.features.IMoveShapeFeature;
@@ -42,6 +43,7 @@ import org.eclipse.graphiti.features.IUpdateFeature;
 import org.eclipse.graphiti.features.context.IAddContext;
 import org.eclipse.graphiti.features.context.ICreateContext;
 import org.eclipse.graphiti.features.context.ICustomContext;
+import org.eclipse.graphiti.features.context.IDeleteContext;
 import org.eclipse.graphiti.features.context.IDoubleClickContext;
 import org.eclipse.graphiti.features.context.ILayoutContext;
 import org.eclipse.graphiti.features.context.IMoveShapeContext;
@@ -59,6 +61,7 @@ import org.eclipse.graphiti.features.impl.AbstractCreateFeature;
 import org.eclipse.graphiti.features.impl.AbstractLayoutFeature;
 import org.eclipse.graphiti.features.impl.AbstractUpdateFeature;
 import org.eclipse.graphiti.features.impl.DefaultMoveShapeFeature;
+import org.eclipse.graphiti.features.impl.DefaultRemoveFeature;
 import org.eclipse.graphiti.features.impl.DefaultResizeShapeFeature;
 import org.eclipse.graphiti.features.impl.Reason;
 import org.eclipse.graphiti.mm.algorithms.GraphicsAlgorithm;
@@ -73,7 +76,6 @@ import org.eclipse.graphiti.mm.pictograms.AnchorContainer;
 import org.eclipse.graphiti.mm.pictograms.ChopboxAnchor;
 import org.eclipse.graphiti.mm.pictograms.ConnectionDecorator;
 import org.eclipse.graphiti.mm.pictograms.ContainerShape;
-import org.eclipse.graphiti.mm.pictograms.Diagram;
 import org.eclipse.graphiti.mm.pictograms.PictogramElement;
 import org.eclipse.graphiti.mm.pictograms.Shape;
 import org.eclipse.graphiti.services.Graphiti;
@@ -83,6 +85,7 @@ import org.eclipse.graphiti.tb.ContextButtonEntry;
 import org.eclipse.graphiti.tb.DefaultToolBehaviorProvider;
 import org.eclipse.graphiti.tb.IContextButtonPadData;
 import org.eclipse.graphiti.tb.IToolBehaviorProvider;
+import org.eclipse.graphiti.ui.features.DefaultDeleteFeature;
 import org.eclipse.graphiti.ui.features.DefaultFeatureProvider;
 import org.eclipse.graphiti.util.ColorConstant;
 import org.eclipse.graphiti.util.IColorConstant;
@@ -137,7 +140,7 @@ public class StateSupport {
 		        
 		        StateGraph sg = (StateGraph) context.getTargetContainer().getLink().getBusinessObjects().get(0);
 		        
-				boolean inherited = isInherited(getDiagram(), sg);
+				boolean inherited = SupportUtil.isInherited(getDiagram(), sg);
 
 				if (inherited) {
 					// TODOHRR: handling of refined state - also consider refining action codes
@@ -145,7 +148,7 @@ public class StateSupport {
 					// we have to insert a refined state first
 					RefinedState rs = RoomFactory.eINSTANCE.createRefinedState();
 					rs.setBase((BaseState) sg.eContainer());
-					ActorClass ac = getActorClass(getDiagram());
+					ActorClass ac = SupportUtil.getActorClass(getDiagram());
 					ac.getStateMachine().getStates().add(rs);
 					
 					// now we change the context
@@ -222,7 +225,7 @@ public class StateSupport {
 				if (height<=0)
 					height = DEFAULT_SIZE_Y;
 			
-				boolean inherited = isInherited(getDiagram(), s);
+				boolean inherited = SupportUtil.isInherited(getDiagram(), s);
 				Color lineColor = manageColor(inherited?INHERITED_COLOR:LINE_COLOR);
 				IGaService gaService = Graphiti.getGaService();
 				{
@@ -301,7 +304,7 @@ public class StateSupport {
 					if (bo instanceof State) {
 						State s = (State) bo;
 						borderGA.getGraphicsAlgorithmChildren().clear();
-						Color lineColor = manageColor(isInherited(getDiagram(), s)?INHERITED_COLOR:LINE_COLOR);
+						Color lineColor = manageColor(SupportUtil.isInherited(getDiagram(), s)?INHERITED_COLOR:LINE_COLOR);
 						addHints(s, (RoundedRectangle) borderGA, lineColor);
 					}
 
@@ -612,7 +615,7 @@ public class StateSupport {
 						
 						// TODOHRR: also check coordinates (no overlap with state graph boundaries)
 						
-						return !isInherited(getDiagram(), s);
+						return !SupportUtil.isInherited(getDiagram(), s);
 					}
 				}
 				
@@ -666,6 +669,34 @@ public class StateSupport {
 					}
 				}
 				super.resizeShape(context);
+			}
+		}
+		
+		protected static class RemoveFeature extends DefaultRemoveFeature {
+
+			public RemoveFeature(IFeatureProvider fp) {
+				super(fp);
+			}
+
+			public boolean canRemove(IRemoveContext context) {
+				return false;
+			}
+		}
+		
+		protected static class DeleteFeature extends DefaultDeleteFeature {
+
+			public DeleteFeature(IFeatureProvider fp) {
+				super(fp);
+			}
+			
+			@Override
+			public boolean canDelete(IDeleteContext context) {
+				Object bo = getBusinessObjectForPictogramElement(context.getPictogramElement());
+				if (bo instanceof State) {
+					State state = (State) bo;
+					return !SupportUtil.isInherited(getDiagram(), state);
+				}
+				return false;
 			}
 		}
 		
@@ -723,17 +754,20 @@ public class StateSupport {
 				IResizeShapeContext context) {
 			return new ResizeFeature(fp);
 		}
+
+		@Override
+		public IRemoveFeature getRemoveFeature(IRemoveContext context) {
+			return new RemoveFeature(fp);
+		}
+
+		@Override
+		public IDeleteFeature getDeleteFeature(IDeleteContext context) {
+			return new DeleteFeature(fp);
+		}
 		
 		@Override
 		public ICustomFeature[] getCustomFeatures(ICustomContext context) {
 			return new ICustomFeature[] { new PropertyFeature(fp), new GoDownFeature(fp), new CreateSubGraphFeature(fp) };
-		}
-
-		private static ActorClass getActorClass(Diagram diag) {
-			EObject bo = Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(diag);
-			if (bo instanceof ActorClass)
-				return (ActorClass) bo;
-			return null;
 		}
 
 		protected static String getLabel(ActorContainerRef acr) {
@@ -747,18 +781,6 @@ public class StateSupport {
 					className = ((SubSystemRef)acr).getType().getName();
 			}
 			return acr.getName()+"\n("+className+")";
-		}
-		
-		protected static boolean isInherited(Diagram diag, EObject obj) {
-			ActorClass parent = getActorClass(diag);
-			while (obj!=null) {
-				if (obj instanceof ActorClass)
-					return obj!=parent;
-				
-				obj = obj.eContainer();
-			}
-			assert(false): "no parent actor class found";
-			return false;
 		}
 	}
 	

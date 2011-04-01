@@ -145,8 +145,15 @@ public class InitialPointSupport {
 			@Override
 			public PictogramElement add(IAddContext context) {
 				ContainerShape sgShape = context.getTargetContainer();
-				StateGraph sg = (StateGraph) getBusinessObjectForPictogramElement(sgShape);
+				StateGraph sg = (StateGraph) context.getNewObject();
 	
+				boolean inherited = false;
+				for (Transition tr : sg.getTransitions()) {
+					if (tr instanceof InitialTransition) {
+						inherited = SupportUtil.isInherited(tr, sgShape);
+					}
+				}
+				
 				// CONTAINER SHAPE WITH RECTANGLE
 				IPeCreateService peCreateService = Graphiti.getPeCreateService();
 				ContainerShape containerShape =
@@ -157,7 +164,8 @@ public class InitialPointSupport {
 				int x = context.getX()-ITEM_SIZE;
 				int y = context.getY()-ITEM_SIZE;
 				
-				Color dark = manageColor(DARK_COLOR);
+				
+				Color dark = manageColor(inherited? INHERITED_COLOR:DARK_COLOR);
 				IGaService gaService = Graphiti.getGaService();
 				{
 					final Rectangle invisibleRectangle = gaService.createInvisibleRectangle(containerShape);

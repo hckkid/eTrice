@@ -41,6 +41,7 @@ import org.eclipse.graphiti.datatypes.ILocation;
 import org.eclipse.graphiti.dt.IDiagramTypeProvider;
 import org.eclipse.graphiti.features.IAddFeature;
 import org.eclipse.graphiti.features.ICreateConnectionFeature;
+import org.eclipse.graphiti.features.IDeleteFeature;
 import org.eclipse.graphiti.features.IFeatureProvider;
 import org.eclipse.graphiti.features.IReason;
 import org.eclipse.graphiti.features.IRemoveFeature;
@@ -49,6 +50,7 @@ import org.eclipse.graphiti.features.context.IAddConnectionContext;
 import org.eclipse.graphiti.features.context.IAddContext;
 import org.eclipse.graphiti.features.context.ICreateConnectionContext;
 import org.eclipse.graphiti.features.context.ICustomContext;
+import org.eclipse.graphiti.features.context.IDeleteContext;
 import org.eclipse.graphiti.features.context.IDoubleClickContext;
 import org.eclipse.graphiti.features.context.IRemoveContext;
 import org.eclipse.graphiti.features.context.IUpdateContext;
@@ -59,12 +61,14 @@ import org.eclipse.graphiti.features.custom.ICustomFeature;
 import org.eclipse.graphiti.features.impl.AbstractAddFeature;
 import org.eclipse.graphiti.features.impl.AbstractCreateConnectionFeature;
 import org.eclipse.graphiti.features.impl.AbstractUpdateFeature;
+import org.eclipse.graphiti.features.impl.DefaultRemoveFeature;
 import org.eclipse.graphiti.features.impl.Reason;
 import org.eclipse.graphiti.mm.GraphicsAlgorithmContainer;
 import org.eclipse.graphiti.mm.algorithms.GraphicsAlgorithm;
 import org.eclipse.graphiti.mm.algorithms.Polygon;
 import org.eclipse.graphiti.mm.algorithms.Polyline;
 import org.eclipse.graphiti.mm.algorithms.Text;
+import org.eclipse.graphiti.mm.algorithms.styles.Color;
 import org.eclipse.graphiti.mm.algorithms.styles.Point;
 import org.eclipse.graphiti.mm.pictograms.Anchor;
 import org.eclipse.graphiti.mm.pictograms.Connection;
@@ -77,6 +81,7 @@ import org.eclipse.graphiti.services.IGaService;
 import org.eclipse.graphiti.services.IPeCreateService;
 import org.eclipse.graphiti.tb.DefaultToolBehaviorProvider;
 import org.eclipse.graphiti.tb.IToolBehaviorProvider;
+import org.eclipse.graphiti.ui.features.DefaultDeleteFeature;
 import org.eclipse.graphiti.ui.features.DefaultFeatureProvider;
 import org.eclipse.graphiti.util.ColorConstant;
 import org.eclipse.graphiti.util.IColorConstant;
@@ -87,6 +92,7 @@ import org.eclipse.ui.PlatformUI;
 public class TransitionSupport {
 
 	private static final IColorConstant LINE_COLOR = new ColorConstant(0, 0, 0);
+	private static final IColorConstant INHERITED_COLOR = new ColorConstant(100, 100, 100);
 	private static final int LINE_WIDTH = 1;
 	private static final int MAX_LABEL_LENGTH = 20;
 
@@ -161,7 +167,7 @@ public class TransitionSupport {
 					}
 					else if (src instanceof ChoicepointTerminal) {
 						boolean dfltBranch = true;
-						for (Transition tr : sg.getTransitions()) {
+						for (Transition tr : RoomHelpers.getAllTransitions(sg)) {
 							if (tr instanceof ContinuationTransition) {
 								TransitionTerminal from = ((ContinuationTransition) tr).getFrom();
 								if (from instanceof ChoicepointTerminal) {
@@ -291,7 +297,15 @@ public class TransitionSupport {
 			public PictogramElement add(IAddContext context) {
 				IAddConnectionContext addConContext = (IAddConnectionContext) context;
 				Transition trans = (Transition) context.getNewObject();
-
+				
+				// a transition target can not be the initial point (which has a StateGraph associated)
+				// so we use the target anchor to determine the StateGraph container
+				ContainerShape container = ((ContainerShape) addConContext.getTargetAnchor().getParent()).getContainer();
+				Object bo = getBusinessObjectForPictogramElement(container);
+				if (!(bo instanceof StateGraph))
+					container = container.getContainer();
+				boolean inherited = SupportUtil.isInherited(trans, container);
+				
 				IPeCreateService peCreateService = Graphiti.getPeCreateService();
 				FreeFormConnection connection = peCreateService.createFreeFormConnection(getDiagram());
 				connection.setStart(addConContext.getSourceAnchor());
@@ -306,18 +320,19 @@ public class TransitionSupport {
 
 				IGaService gaService = Graphiti.getGaService();
 				Polyline polyline = gaService.createPolyline(connection);
-				polyline.setForeground(manageColor(LINE_COLOR));
+				Color color = manageColor(inherited?INHERITED_COLOR:LINE_COLOR);
+				polyline.setForeground(color);
 				polyline.setLineWidth(LINE_WIDTH);
 
 		        ConnectionDecorator cd = peCreateService
 		              .createConnectionDecorator(connection, false, 1.0, true);
-		        createArrow(cd);
+		        createArrow(cd, color);
 		        
 		        ConnectionDecorator textDecorator =
 		            peCreateService.createConnectionDecorator(connection, true,
 		            0.5, true);
 		        Text text = gaService.createDefaultText(getDiagram(), textDecorator, getLabel(trans));
-		        text.setForeground(manageColor(IColorConstant.BLACK));
+		        text.setForeground(color);
 		        gaService.setLocation(text, 10, 0);
 
 
@@ -337,14 +352,14 @@ public class TransitionSupport {
 				return Graphiti.getGaService().createPoint(begin.getX()+deltaX, begin.getY()+deltaY);
 			}
 			
-			private Polyline createArrow(GraphicsAlgorithmContainer gaContainer) {
+			private Polyline createArrow(GraphicsAlgorithmContainer gaContainer, Color color) {
 
 				IGaService gaService = Graphiti.getGaService();
 				Polygon polygon =
 					gaService.createPolygon(gaContainer, new int[] { -15, 5, 0, 0, -15, -5 });
 
-				polygon.setForeground(manageColor(LINE_COLOR));
-				polygon.setBackground(manageColor(LINE_COLOR));
+				polygon.setForeground(color);
+				polygon.setBackground(color);
 				polygon.setLineWidth(LINE_WIDTH);
 
 				return polygon;
@@ -493,6 +508,39 @@ public class TransitionSupport {
 			}
 		}
 		
+		protected static class RemoveFeature extends DefaultRemoveFeature {
+
+			public RemoveFeature(IFeatureProvider fp) {
+				super(fp);
+			}
+
+			public boolean canRemove(IRemoveContext context) {
+				return false;
+			}
+		}
+		
+		protected static class DeleteFeature extends DefaultDeleteFeature {
+
+			public DeleteFeature(IFeatureProvider fp) {
+				super(fp);
+			}
+			
+			@Override
+			public boolean canDelete(IDeleteContext context) {
+				PictogramElement pe = context.getPictogramElement();
+				if (pe instanceof ConnectionDecorator)
+					pe = (PictogramElement) pe.eContainer();
+				if (!(pe instanceof Connection))
+					return false;
+				
+				Object bo = getBusinessObjectForPictogramElement(pe);
+				if (bo instanceof Transition) {
+					return true;
+				}
+				return false;
+			}
+		}
+		
 		private IFeatureProvider fp;
 		
 		public FeatureProvider(IDiagramTypeProvider dtp, IFeatureProvider fp) {
@@ -513,6 +561,16 @@ public class TransitionSupport {
 		@Override
 		public IUpdateFeature getUpdateFeature(IUpdateContext context) {
 			return new UpdateFeature(fp);
+		}
+
+		@Override
+		public IRemoveFeature getRemoveFeature(IRemoveContext context) {
+			return new RemoveFeature(fp);
+		}
+
+		@Override
+		public IDeleteFeature getDeleteFeature(IDeleteContext context) {
+			return new DeleteFeature(fp);
 		}
 		
 		@Override
