@@ -22,7 +22,6 @@ import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.ui.behavior.Activator;
-import org.eclipse.etrice.ui.behavior.commands.AddMssingTransitionNamesCommand;
 import org.eclipse.etrice.ui.behavior.support.ContextSwitcher;
 import org.eclipse.etrice.ui.common.editor.RoomDiagramEditor;
 import org.eclipse.graphiti.mm.pictograms.Diagram;
@@ -60,9 +59,6 @@ public class BehaviorEditor extends RoomDiagramEditor {
 				ContextSwitcher.switchTop(getDiagramTypeProvider().getDiagram());
 			}
 		};
-		getEditingDomain().getCommandStack().execute(cmd);
-
-		cmd = new AddMssingTransitionNamesCommand(getDiagramTypeProvider().getDiagram(), getEditingDomain());
 		getEditingDomain().getCommandStack().execute(cmd);
 	}
 
