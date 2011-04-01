@@ -14,6 +14,7 @@
 package org.eclipse.etrice.core.naming;
 
 import java.util.HashSet;
+import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.room.ActorClass;
@@ -49,6 +50,7 @@ import org.eclipse.etrice.core.room.Transition;
 import org.eclipse.etrice.core.room.TransitionTerminal;
 import org.eclipse.etrice.core.room.Trigger;
 import org.eclipse.etrice.core.room.TriggeredTransition;
+import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.core.room.util.RoomSwitch;
 
 
@@ -221,8 +223,7 @@ public class RoomNameProvider {
 	}
 
 	public static String getUniqueTransitionName(StateGraph sg) {
-		HashSet<String> names = new HashSet<String>();
-		collectTransitionNames(sg, null, names);
+		Set<String> names = RoomHelpers.getAllTransitionNames(sg);
 		
 		for (int i = 0; i < 1000; i++) {
 			String name = "tr"+i;
@@ -234,8 +235,7 @@ public class RoomNameProvider {
 	}
 
 	public static String getUniqueChoicePointName(StateGraph sg) {
-		HashSet<String> names = new HashSet<String>();
-		collectChoicepointNames(sg, null, names);
+		Set<String> names = RoomHelpers.getAllChoicePointNames(sg);
 		
 		for (int i = 0; i < 1000; i++) {
 			String name = "cp"+i;
@@ -247,8 +247,7 @@ public class RoomNameProvider {
 	}
 
 	public static String getUniqueTrPointName(StateGraph sg) {
-		HashSet<String> names = new HashSet<String>();
-		collectTrPointNames(sg, null, names);
+		Set<String> names = RoomHelpers.getAllTrPointNames(sg);
 		
 		for (int i = 0; i < 1000; i++) {
 			String name = "tp"+i;
@@ -260,9 +259,7 @@ public class RoomNameProvider {
 	}
 
 	public static String getUniqueStateName(StateGraph sg) {
-		HashSet<String> names = new HashSet<String>();
-		
-		collectStateNames(sg, null, names);
+		Set<String> names = RoomHelpers.getAllStateNames(sg);
 		
 		for (int i = 0; i < 1000; i++) {
 			String name = "state"+i;
@@ -271,82 +268,6 @@ public class RoomNameProvider {
 		}
 		
 		return "not_unique";
-	}
-
-	/**
-	 * @param sg
-	 * @param skip
-	 * @param names
-	 */
-	public static void collectStateNames(StateGraph sg, State skip, HashSet<String> names) {
-		for (State s : sg.getStates()) {
-			if (s!=skip)
-				names.add(s.getName());
-		}
-		
-		// add base state context
-		if (sg.eContainer() instanceof RefinedState) {
-			RefinedState rs = (RefinedState) sg.eContainer();
-			if (rs.getBase().getSubgraph()!=null)
-				collectStateNames(rs.getBase().getSubgraph(), skip, names);
-		}
-	}
-
-	/**
-	 * @param sg
-	 * @param skip
-	 * @param names
-	 */
-	public static void collectTransitionNames(StateGraph sg, Transition skip, HashSet<String> names) {
-		for (Transition s : sg.getTransitions()) {
-			if (s!=skip)
-				names.add(s.getName());
-		}
-		
-		// add base state context
-		if (sg.eContainer() instanceof RefinedState) {
-			RefinedState rs = (RefinedState) sg.eContainer();
-			if (rs.getBase().getSubgraph()!=null)
-				collectTransitionNames(rs.getBase().getSubgraph(), skip, names);
-		}
-	}
-
-	/**
-	 * @param sg
-	 * @param skip
-	 * @param names
-	 */
-	public static void collectChoicepointNames(StateGraph sg, ChoicePoint skip, HashSet<String> names) {
-		for (ChoicePoint cp : sg.getChPoints()) {
-			if (cp!=skip)
-				names.add(cp.getName());
-		}
-		
-		// add base state context
-		if (sg.eContainer() instanceof RefinedState) {
-			RefinedState rs = (RefinedState) sg.eContainer();
-			if (rs.getBase().getSubgraph()!=null)
-				collectChoicepointNames(rs.getBase().getSubgraph(), skip, names);
-		}
-	}
-
-	/**
-	 * @param sg
-	 * @param skip
-	 * @param names
-	 */
-	public static void collectTrPointNames(StateGraph sg, TrPoint skip, HashSet<String> names) {
-		for (TrPoint tp : sg.getTrPoints()) {
-			if (tp!=skip)
-				names.add(tp.getName());
-		}
-		
-		// add base state context
-		if (sg.eContainer() instanceof RefinedState) {
-			RefinedState rs = (RefinedState) sg.eContainer();
-			if (rs.getBase().getSubgraph()!=null)
-				collectTrPointNames(rs.getBase().getSubgraph(), skip, names);
-		}
 	}
 
 	public static String getRefLabelName(ActorContainerRef acr) {

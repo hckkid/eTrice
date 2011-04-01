@@ -9,21 +9,31 @@
 package org.eclipse.etrice.core.room.util;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorContainerRef;
 import org.eclipse.etrice.core.room.Binding;
+import org.eclipse.etrice.core.room.ChoicePoint;
 import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.LayerConnection;
 import org.eclipse.etrice.core.room.LogicalSystem;
+import org.eclipse.etrice.core.room.RefinedState;
+import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraph;
+import org.eclipse.etrice.core.room.StateGraphItem;
 import org.eclipse.etrice.core.room.StructureClass;
 import org.eclipse.etrice.core.room.SubSystemClass;
+import org.eclipse.etrice.core.room.TrPoint;
+import org.eclipse.etrice.core.room.Transition;
 
 /**
  * description
@@ -185,5 +195,103 @@ public class RoomHelpers {
 		}
 		
 		return result.toString();
+	}
+
+	public static List<State> getAllStates(StateGraph sg) {
+		return getAllStateGraphItems(sg, RoomPackage.eINSTANCE.getStateGraph_States());
+	}
+
+	public static List<TrPoint> getAllTrPoints(StateGraph sg) {
+		return getAllStateGraphItems(sg, RoomPackage.eINSTANCE.getStateGraph_TrPoints());
+	}
+
+	public static List<ChoicePoint> getAllChoicePoints(StateGraph sg) {
+		return getAllStateGraphItems(sg, RoomPackage.eINSTANCE.getStateGraph_ChPoints());
+	}
+
+	public static List<Transition> getAllTransitions(StateGraph sg) {
+		return getAllStateGraphItems(sg, RoomPackage.eINSTANCE.getStateGraph_Transitions());
+	}
+	
+	@SuppressWarnings("unchecked")
+	private static <T extends StateGraphItem> List<T> getAllStateGraphItems(StateGraph sg, EReference feature) {
+		ArrayList<T> result = new ArrayList<T>();
+		
+		do {
+			Object items = sg.eGet(feature);
+			if (items instanceof List<?>)
+				result.addAll((List<? extends T>) items);
+			
+			if (sg.eContainer() instanceof RefinedState) {
+				sg = ((RefinedState)sg.eContainer()).getBase().getSubgraph();
+			}
+			else if (sg.eContainer() instanceof ActorClass) {
+				ActorClass base = ((ActorClass)sg.eContainer()).getBase();
+				sg = base!=null? base.getStateMachine():null;
+			}
+			else {
+				break;
+			}
+		}
+		while (sg!=null);
+		
+		return result;
+	}
+	
+	public static Set<String> getAllStateNames(StateGraph sg) {
+		return getAllNames(sg, null, RoomPackage.eINSTANCE.getStateGraph_States());
+	}
+
+	public static Set<String> getAllStateNames(StateGraph sg, State skip) {
+		return getAllNames(sg, skip, RoomPackage.eINSTANCE.getStateGraph_States());
+	}
+	
+	public static Set<String> getAllTrPointNames(StateGraph sg) {
+		return getAllNames(sg, null, RoomPackage.eINSTANCE.getStateGraph_TrPoints());
+	}
+	
+	public static Set<String> getAllTrPointNames(StateGraph sg, TrPoint skip) {
+		return getAllNames(sg, skip, RoomPackage.eINSTANCE.getStateGraph_TrPoints());
+	}
+	
+	public static Set<String> getAllChoicePointNames(StateGraph sg) {
+		return getAllNames(sg, null, RoomPackage.eINSTANCE.getStateGraph_ChPoints());
+	}
+	
+	public static Set<String> getAllChoicePointNames(StateGraph sg, ChoicePoint skip) {
+		return getAllNames(sg, skip, RoomPackage.eINSTANCE.getStateGraph_ChPoints());
+	}
+	
+	public static Set<String> getAllTransitionNames(StateGraph sg) {
+		return getAllNames(sg, null, RoomPackage.eINSTANCE.getStateGraph_Transitions());
+	}
+	
+	public static Set<String> getAllTransitionNames(StateGraph sg, Transition skip) {
+		return getAllNames(sg, skip, RoomPackage.eINSTANCE.getStateGraph_Transitions());
+	}
+	
+	public static Set<String> getAllNames(StateGraph sg, StateGraphItem skip) {
+		if (skip instanceof Transition)
+			return getAllNames(sg, skip, RoomPackage.eINSTANCE.getStateGraph_Transitions());
+		else if (skip instanceof State)
+			return getAllNames(sg, skip, RoomPackage.eINSTANCE.getStateGraph_States());
+		else if (skip instanceof ChoicePoint)
+			return getAllNames(sg, skip, RoomPackage.eINSTANCE.getStateGraph_ChPoints());
+		else if (skip instanceof TrPoint)
+			return getAllNames(sg, skip, RoomPackage.eINSTANCE.getStateGraph_TrPoints());
+		
+		return Collections.emptySet();
+	}
+	
+	private static <T extends StateGraphItem> Set<String> getAllNames(StateGraph sg, T skip, EReference feature) {
+		List<T> states = RoomHelpers.getAllStateGraphItems(sg, feature);
+		
+		HashSet<String> names = new HashSet<String>();
+		for (T s : states) {
+			if (s!=skip)
+				names.add(s.getName());
+		}
+		
+		return names;
 	}
 }

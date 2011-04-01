@@ -45,4 +45,18 @@ public class StateGraphItemImpl extends MinimalEObjectImpl.Container implements 
     return RoomPackage.Literals.STATE_GRAPH_ITEM;
   }
 
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public String getName()
+  {
+    if (this instanceof org.eclipse.etrice.core.room.State) return ((org.eclipse.etrice.core.room.State)this).getName();
+    else if (this instanceof org.eclipse.etrice.core.room.TrPoint) return ((org.eclipse.etrice.core.room.TrPoint)this).getName();
+    else if (this instanceof org.eclipse.etrice.core.room.ChoicePoint) return ((org.eclipse.etrice.core.room.ChoicePoint)this).getName();
+    else if (this instanceof org.eclipse.etrice.core.room.Transition) return ((org.eclipse.etrice.core.room.Transition)this).getName();
+    return "";
+  }
+
 } //StateGraphItemImpl
