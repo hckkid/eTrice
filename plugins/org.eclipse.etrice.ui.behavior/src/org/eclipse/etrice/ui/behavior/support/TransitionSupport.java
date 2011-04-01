@@ -434,6 +434,7 @@ public class TransitionSupport {
 
 			private String name;
 			private String description;
+			private boolean doneChanges = false;
 
 			public PropertyFeature(IFeatureProvider fp) {
 				super(fp);
@@ -480,13 +481,16 @@ public class TransitionSupport {
 				Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 				TransitionPropertyDialog dlg = new TransitionPropertyDialog(shell, sg, trans);
 				if (dlg.open()!=Window.OK)
-					// TODOHRR: introduce a method to revert changes, does hasDoneChanges=false roll back changes?
-					throw new RuntimeException();
-//					return;
-				
+					return;
+
+				doneChanges = true;
 				updateLabel(trans, (Connection) pe);
 			}
 			
+			@Override
+			public boolean hasDoneChanges() {
+				return doneChanges;
+			}
 		}
 		
 		private IFeatureProvider fp;

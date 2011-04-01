@@ -321,6 +321,8 @@ public class StateSupport {
 
 		private static class PropertyFeature extends AbstractCustomFeature {
 
+			private boolean doneChanges = false;
+			
 			public PropertyFeature(IFeatureProvider fp) {
 				super(fp);
 			}
@@ -354,10 +356,9 @@ public class StateSupport {
 				Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 				StatePropertyDialog dlg = new StatePropertyDialog(shell, s);
 				if (dlg.open()!=Window.OK)
-					// TODOHRR: introduce a method to revert changes
-					throw new RuntimeException();
-//					return;
-				
+					return;
+
+				doneChanges = true;
 				updateFigure(s, context);
 			}
 
@@ -377,6 +378,10 @@ public class StateSupport {
 
 			}
 			
+			@Override
+			public boolean hasDoneChanges() {
+				return doneChanges;
+			}
 		}
 		
 		private static class GoDownFeature extends AbstractCustomFeature implements

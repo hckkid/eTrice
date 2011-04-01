@@ -453,6 +453,7 @@ public class TrPointSupport {
 
 			private String name;
 			private String description;
+			private boolean doneChanges = false;
 
 			public PropertyFeature(IFeatureProvider fp) {
 				super(fp);
@@ -491,15 +492,18 @@ public class TrPointSupport {
 				Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 				TrPointPropertyDialog dlg = new TrPointPropertyDialog(shell, tp, subtp);
 				if (dlg.open()!=Window.OK)
-					// TODOHRR: introduce a method to revert changes, does hasDoneChanges=false roll back changes?
-					throw new RuntimeException();
-//					return;
-				
+					return;
+
+				doneChanges = true;
 				String kind = getItemKind(tp);
 				Graphiti.getPeService().setPropertyValue(pe, PROP_KIND, kind);
 				updateTrPointFigure(tp, pe, manageColor(DARK_COLOR), manageColor(BRIGHT_COLOR));
 			}
 			
+			@Override
+			public boolean hasDoneChanges() {
+				return doneChanges;
+			}
 		}
 		
 		private class UpdateFeature extends AbstractUpdateFeature {
