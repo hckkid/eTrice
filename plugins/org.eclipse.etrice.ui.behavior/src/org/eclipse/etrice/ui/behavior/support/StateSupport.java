@@ -471,10 +471,23 @@ public class StateSupport {
 					boolean inherited = SupportUtil.isInherited(getDiagram(), s);
 					if (inherited) {
 						ActorClass ac = SupportUtil.getActorClass(getDiagram());
-						RefinedState rs = RoomFactory.eINSTANCE.createRefinedState();
-						rs.setBase((BaseState) s);
-						ac.getStateMachine().getStates().add(rs);
+						RefinedState rs = null;
 						
+						// do we already have a RefinedState pointing to s?
+						for (State st : ac.getStateMachine().getStates()) {
+							if (st instanceof RefinedState)
+								if (((RefinedState) st).getBase()==s) {
+									rs = (RefinedState) st;
+									break;
+								}
+						}
+						
+						// if not so create one
+						if (rs==null) {
+							rs = RoomFactory.eINSTANCE.createRefinedState();
+							rs.setBase((BaseState) s);
+							ac.getStateMachine().getStates().add(rs);
+						}
 						s = rs;
 					}
 

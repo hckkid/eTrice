@@ -18,11 +18,13 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.transaction.RecordingCommand;
 import org.eclipse.etrice.core.room.ActorClass;
+import org.eclipse.etrice.core.room.RefinedState;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.ui.behavior.Activator;
 import org.eclipse.etrice.ui.behavior.support.ContextSwitcher;
+import org.eclipse.etrice.ui.behavior.support.SupportUtil;
 import org.eclipse.etrice.ui.common.editor.RoomDiagramEditor;
 import org.eclipse.graphiti.mm.pictograms.Diagram;
 import org.eclipse.graphiti.mm.pictograms.Shape;
@@ -84,14 +86,49 @@ public class BehaviorEditor extends RoomDiagramEditor {
 		getEditingDomain().getCommandStack().execute(new RecordingCommand(getEditingDomain()) {
 			protected void doExecute() {
 				removeEmptySubgraphs();
+				removeUnusedRefinedStates();
 			}
 		});
 		
 		super.doSave(monitor);
 	}
 
-	@SuppressWarnings("restriction")
+	/**
+	 * 
+	 */
+	protected void removeUnusedRefinedStates() {
+		@SuppressWarnings("restriction")
+		Diagram diagram = getDiagramTypeProvider().getDiagram();
+		ActorClass ac = SupportUtil.getActorClass(diagram);
+		
+		ArrayList<RefinedState> toBeRemoved = new ArrayList<RefinedState>();
+		for (State s : ac.getStateMachine().getStates()) {
+			if (s instanceof RefinedState) {
+				if (isUnused((RefinedState)s))
+					toBeRemoved.add((RefinedState) s);
+			}
+		}
+		
+		ac.getStateMachine().getStates().removeAll(toBeRemoved);
+	}
+
+	/**
+	 * @param s
+	 * @return
+	 */
+	private boolean isUnused(RefinedState s) {
+		if (RoomHelpers.hasDirectSubStructure(s))
+			return false;
+		if (RoomHelpers.hasDetailCode(s.getEntryCode()))
+			return false;
+		if (RoomHelpers.hasDetailCode(s.getExitCode()))
+			return false;
+		
+		return true;
+	}
+
 	protected void removeEmptySubgraphs() {
+		@SuppressWarnings("restriction")
 		Diagram diagram = getDiagramTypeProvider().getDiagram();
 
 		// if our current context is an empty state graph we go one level up
