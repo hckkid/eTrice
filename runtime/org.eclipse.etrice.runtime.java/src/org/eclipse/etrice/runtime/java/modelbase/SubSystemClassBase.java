@@ -14,6 +14,8 @@ import org.eclipse.etrice.runtime.java.messaging.IRTObject;
 import org.eclipse.etrice.runtime.java.messaging.MessageService;
 import org.eclipse.etrice.runtime.java.messaging.RTObject;
 import org.eclipse.etrice.runtime.java.messaging.RTServices;
+import org.eclipse.etrice.runtime.java.messaging.RTSystemServicesProtocol.*;
+import java.util.concurrent.Semaphore;
 
 /**
  * The base class for all SubSystems.
@@ -22,13 +24,18 @@ import org.eclipse.etrice.runtime.java.messaging.RTServices;
  * @author Henrik Rentz-Reichert
  *
  */
-public abstract class SubSystemClassBase extends RTObject {
+public abstract class SubSystemClassBase extends RTObject implements IEventReceiver{
 
 	private static SubSystemClassBase instance = null;
-	
+	//--------------------- ports
+	protected RTSystemServicesProtocolConjPortRepl RTSystemPort = null;
+	//--------------------- interface item IDs
+	protected static final int IFITEM_RTSystemPort = 0;
 	private boolean running = false;
 	protected ActorClassBase[] instances = null;
-
+	private Semaphore testSem=null;
+	private int testErrorCode;
+	
 	public static SubSystemClassBase getInstance() {
 		return instance;
 	}
@@ -47,6 +54,7 @@ public abstract class SubSystemClassBase extends RTObject {
 		DebuggingService.getInstance().getSyncLogger()
 				.setMSC(name + "_Sync", "");
 		DebuggingService.getInstance().getSyncLogger().open();
+		
 	}
 
 	public void init() {
@@ -75,12 +83,9 @@ public abstract class SubSystemClassBase extends RTObject {
 	
 	
 	public void start() {
-		// start all actor instances
-		if (instances!=null)
-			for (int i = 0; i < instances.length; i++) {
-				instances[i].start();
-			}
-
+		// start all actors instances
+		RTSystemPort.executeInitialTransition();
+		
 		// start all message services
 		RTServices.getInstance().getMsgSvcCtrl().start();
 		
@@ -128,5 +133,22 @@ public abstract class SubSystemClassBase extends RTObject {
 			}
 		
 		return null;
+	}
+	
+	// this is to run integration tests
+	public synchronized void setTestSemaphore(Semaphore sem){
+		testErrorCode = -1;
+		testSem=sem;
+	}
+	
+	public synchronized int getTestErrorCode(){
+		return testErrorCode;
+	}
+	
+	public synchronized void testFinished(int errorCode){
+		if (testSem != null) {
+			testErrorCode = errorCode;
+			testSem.release(1);
+			}
 	}
 }

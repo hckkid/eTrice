@@ -1,0 +1,123 @@
+RoomModel org.eclipse.etrice.integration.PingPongThreadTestReplPort {
+
+	import room.basic.service.timing.*
+
+
+	LogicalSystem System_PingPong {
+		SubSystemRef subsystem: SubSystem_PingPong
+	}
+
+	SubSystemClass SubSystem_PingPong {
+		ActorRef application: PingPongTop
+		ActorRef services: ATimingService
+		LayerConnection ref application satisfied_by services.timer
+		LayerConnection ref application satisfied_by services.timeout
+		LogicalThread mrPingThread {application.MrPing}
+		LogicalThread mrPong1Thread {application.MrPong1}
+		LogicalThread mrPong2Thread {application.MrPong2}
+		LogicalThread mrPong3Thread {application.MrPong3}
+	}
+
+	ActorClass PingPongTop {
+		Structure {
+			ActorRef MrPing: MrPingActor
+			ActorRef MrPong1: MrPongActor1
+			ActorRef MrPong2: MrPongActor1
+			ActorRef MrPong3: MrPongActor1
+			Binding MrPing.PingPongPort and MrPong1.PingPongPort
+			Binding MrPing.PingPongPort and MrPong2.PingPongPort
+			Binding MrPing.PingPongPort and MrPong3.PingPongPort
+		}
+	}
+
+	ActorClass MrPingActor {
+		Interface {
+			conjugated Port PingPongPort [3]  : PingPongProtocol
+		}
+		Structure {
+			external Port PingPongPort 
+			SAP timer: PTimeout
+			Attribute count : int32
+			Attribute pongCount : int32
+		}
+		Behavior {
+			StateMachine {
+				Transition tr0: initial -> waitForTimer {
+					action {
+						"count = 0;"
+						"timer.Start(1000);"
+					}
+				}
+				Transition tr1: waitForTimer -> waitForPong {
+					triggers {
+						<timeoutTick: timer>
+					}
+					action {
+						"PingPongPort.get(0).ping();"
+						"PingPongPort.get(1).ping();"
+						"PingPongPort.get(2).ping();"
+						"pongCount = 0;"
+					}
+				}
+				Transition tr3: waitForPong -> cp cp0 {
+					triggers {
+						<pong: PingPongPort>					
+					}
+					action {
+						"pongCount++;"
+					}
+				}
+				Transition tr5: cp cp0 -> waitForTimer {
+					action {
+						"if (count++ > 1000) {"
+						"SubSystemClassBase.getInstance().testFinished(0);"	
+						"} else {"
+						"System.out.println(count);"
+						"timer.Start(5);}"
+					}
+				}
+				Transition tr6: cp cp0 -> waitForPong {
+					cond {
+						"pongCount < 3"
+					}
+				}
+				ChoicePoint cp0
+				State waitForTimer { }
+				State waitForPong { }
+			}
+		}
+	}
+
+	ActorClass MrPongActor1 {
+		Interface {
+			Port PingPongPort: PingPongProtocol
+		}
+		Structure {
+			external Port PingPongPort
+		}
+		Behavior {
+			StateMachine {
+				Transition tr0: initial -> waitForPing { }
+				Transition myTrigger: waitForPing -> waitForPing {
+					triggers {
+						<ping: PingPongPort>
+					}
+					action {
+						"PingPongPort.pong();"
+					}
+				}
+				State waitForPing { }
+			}
+		}
+	}
+	
+	ProtocolClass PingPongProtocol {
+		incoming {
+			Message ping()
+		}
+		outgoing {
+			Message pong()
+		}
+	}
+
+}

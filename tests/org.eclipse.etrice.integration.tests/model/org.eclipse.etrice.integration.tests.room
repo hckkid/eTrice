@@ -2,72 +2,23 @@ RoomModel org.eclipse.etrice.integration.tests {
 
 	import room.basic.service.timing.*
 
-	DataClass d_Packet {
-			Attribute data : int32
+	LogicalSystem SystemHFSMTest {
+		SubSystemRef subsystem : SubSystemHFSMTest
 	}
 
-	ProtocolClass p_SimpleProtocol {
-		incoming {
-			Message data ()
-		}
-		outgoing {
-			Message ack ()
-			Message nak ()
-			Message poll ()
-		}
-	}
+	SubSystemClass SubSystemHFSMTest {
+		ActorRef application : App_SubSystemHFSMTest
+		ActorRef services : ATimingService
 
-	ProtocolClass p_HFSM {
-		incoming {
-			Message m1 ()
-			Message m2 ()
-			Message m3 ()
-			Message m4 ()
-			Message m5 ()
-			Message m6 ()
-			Message reset ()
-			Message m7 ()
-			Message m8 ()
-			Message m9 ()
-		}
-		outgoing {
-			Message init_action ()
-			Message s1_entry ()
-			Message s1_exit ()
-			Message s2_entry ()
-			Message s2_exit ()
-			Message s3_entry ()
-			Message s3_exit ()
-			Message s4_entry ()
-			Message s4_exit ()
-			Message s2s1_entry ()
-			Message s2s1_exit ()
-			Message s2s2_entry ()
-			Message s2s2_exit ()
-			Message s1_m1_s2_action ()
-			Message s2_m1_s2s1_action ()
-			Message s2s1_m2_s2s2_action ()
-			Message s2s2_m3_action ()
-			Message s2_m4_s4_action ()
-			Message s2_m5_s2_action ()
-			Message s2_m6_s2_action ()
-			Message s2__s3_action ()
-			Message s2_m7_s2_action ()
-			Message top_s8_top_action ()
-			Message top_s9_top_action ()
-			Message top_reset_s2_action ()
-		}
+		LayerConnection ref application satisfied_by services.timer
+		LayerConnection ref application satisfied_by services.timeout
 	}
 
 	ActorClass a_HFSM_Tests {
-		Interface {
-		}
 		Structure {
 			ActorRef HFSM : a_HFSM
 			ActorRef Tester : a_HFSM_Tester
 			Binding Tester.testee and HFSM.fct
-		}
-		Behavior {
 		}
 	}
 
@@ -80,100 +31,6 @@ RoomModel org.eclipse.etrice.integration.tests {
 		}
 		Behavior {
 			StateMachine {
-				State State1 {
-					entry {
-						"fct.s1_entry();"
-					}
-					exit {
-						"fct.s1_exit();"
-					}
-				}
-				State State2 {
-					entry {
-						"fct.s2_entry();"
-					}
-					exit {
-						"fct.s2_exit();"
-					}
-				subgraph {
-						State State1 {
-							entry {
-								"fct.s2s1_entry();"
-							}
-							exit {
-								"fct.s2s1_exit();"
-							}
-						}
-						State State2 {
-							entry {
-								"fct.s2s2_entry();"
-							}
-							exit {
-								"fct.s2s2_exit();"
-							}
-						}
-						EntryPoint tp0
-						ExitPoint tp1
-						TransitionPoint tp3
-						handler TransitionPoint tp4
-						Transition tr0: my tp0 -> State1 {
-							action {
-								"fct.s2_m1_s2s1_action();"
-							}
-						}
-						Transition tr1: State1 -> State2 {
-							triggers {
-								<m2:fct>
-							}
-							action {
-								"fct.s2s1_m2_s2s2_action();"
-							}
-						}
-						Transition tr2: State2 -> my tp1 {
-							triggers {
-								<m3:fct>
-							}
-							action {
-								"fct.s2s2_m3_action();"
-							}
-						}
-						Transition tr3: my tp3 -> my tp3 {
-							triggers {
-								<m5:fct>
-							}
-							action {
-								"fct.s2_m5_s2_action();"
-							}
-						}
-						Transition tr4: my tp4 -> my tp4 {
-							triggers {
-								<m6:fct>
-							}
-							action {
-								"fct.s2_m6_s2_action();"
-							}
-						}
-					}
-				}
-				State State3 {
-					entry {
-						"fct.s3_entry();"
-					}
-					exit {
-						"fct.s3_exit();"
-					}
-				}
-				State State4 {
-					entry {
-						"fct.s4_entry();"
-					}
-					exit {
-						"fct.s4_exit();"
-					}
-				}
-				TransitionPoint tp0
-				TransitionPoint tp1
-				handler TransitionPoint tp2
 				Transition tr0: initial -> State1 {
 					action {
 						"fct.init_action();"
@@ -232,6 +89,100 @@ RoomModel org.eclipse.etrice.integration.tests {
 						"fct.top_s9_top_action();"
 					}
 				}
+				TransitionPoint tp0
+				TransitionPoint tp1
+				handler TransitionPoint tp2
+				State State1 {
+					entry {
+						"fct.s1_entry();"
+					}
+					exit {
+						"fct.s1_exit();"
+					}
+				}
+				State State2 {
+					entry {
+						"fct.s2_entry();"
+					}
+					exit {
+						"fct.s2_exit();"
+					}
+				subgraph {
+						Transition tr0: my tp0 -> State1 {
+							action {
+								"fct.s2_m1_s2s1_action();"
+							}
+						}
+						Transition tr1: State1 -> State2 {
+							triggers {
+								<m2:fct>
+							}
+							action {
+								"fct.s2s1_m2_s2s2_action();"
+							}
+						}
+						Transition tr2: State2 -> my tp1 {
+							triggers {
+								<m3:fct>
+							}
+							action {
+								"fct.s2s2_m3_action();"
+							}
+						}
+						Transition tr3: my tp3 -> my tp3 {
+							triggers {
+								<m5:fct>
+							}
+							action {
+								"fct.s2_m5_s2_action();"
+							}
+						}
+						Transition tr4: my tp4 -> my tp4 {
+							triggers {
+								<m6:fct>
+							}
+							action {
+								"fct.s2_m6_s2_action();"
+							}
+						}
+						EntryPoint tp0
+						ExitPoint tp1
+						TransitionPoint tp3
+						handler TransitionPoint tp4
+						State State1 {
+							entry {
+								"fct.s2s1_entry();"
+							}
+							exit {
+								"fct.s2s1_exit();"
+							}
+						}
+						State State2 {
+							entry {
+								"fct.s2s2_entry();"
+							}
+							exit {
+								"fct.s2s2_exit();"
+							}
+						}
+					}
+				}
+				State State3 {
+					entry {
+						"fct.s3_entry();"
+					}
+					exit {
+						"fct.s3_exit();"
+					}
+				}
+				State State4 {
+					entry {
+						"fct.s4_entry();"
+					}
+					exit {
+						"fct.s4_exit();"
+					}
+				}
 			}
 		}
 	}
@@ -245,18 +196,6 @@ RoomModel org.eclipse.etrice.integration.tests {
 		}
 		Behavior {
 			StateMachine {
-				State State1 {}
-				State State2 {}
-				State State3 {}
-				State State4 {}
-				State State5 {}
-				State State6 {}
-				State State7 {}
-				State TestPass {
-					entry {
-						"getMsgsvc().terminate();"
-					}
-				}
 				Transition tr0: initial -> State1 {}
 				Transition tr1: State1 -> State2 {
 					triggers {
@@ -296,27 +235,84 @@ RoomModel org.eclipse.etrice.integration.tests {
 						<s2s1_entry:testee>
 					}
 				}
+				State State1 {}
+				State State2 {}
+				State State3 {}
+				State State4 {}
+				State State5 {}
+				State State6 {}
+				State State7 {}
+				State TestPass {
+					entry {
+						"SubSystemClassBase.getInstance().testFinished(0);"	
+					}
+				}
 			}
 		}
 	}
 
-	LogicalSystem SystemHFSMTest {
-		SubSystemRef subsystem : SubSystemHFSMTest
-	}
-
-	SubSystemClass SubSystemHFSMTest {
-		ActorRef application : App_SubSystemHFSMTest
-		ActorRef services : ATimingService
-
-		LayerConnection ref application satisfied_by services.timer
-		LayerConnection ref application satisfied_by services.timeout
-	}
-
-	// automatically inserted App_SubSystemHFSMTest
+// automatically inserted App_SubSystemHFSMTest
 	ActorClass App_SubSystemHFSMTest {
 		Structure {
 			ActorRef HFSM_Tests : a_HFSM_Tests
 		}
+	}
+
+	ProtocolClass p_SimpleProtocol {
+		incoming {
+			Message data ()
+		}
+		outgoing {
+			Message ack ()
+			Message nak ()
+			Message poll ()
+		}
+	}
+
+	ProtocolClass p_HFSM {
+		incoming {
+			Message m1 ()
+			Message m2 ()
+			Message m3 ()
+			Message m4 ()
+			Message m5 ()
+			Message m6 ()
+			Message reset ()
+			Message m7 ()
+			Message m8 ()
+			Message m9 ()
+		}
+		outgoing {
+			Message init_action ()
+			Message s1_entry ()
+			Message s1_exit ()
+			Message s2_entry ()
+			Message s2_exit ()
+			Message s3_entry ()
+			Message s3_exit ()
+			Message s4_entry ()
+			Message s4_exit ()
+			Message s2s1_entry ()
+			Message s2s1_exit ()
+			Message s2s2_entry ()
+			Message s2s2_exit ()
+			Message s1_m1_s2_action ()
+			Message s2_m1_s2s1_action ()
+			Message s2s1_m2_s2s2_action ()
+			Message s2s2_m3_action ()
+			Message s2_m4_s4_action ()
+			Message s2_m5_s2_action ()
+			Message s2_m6_s2_action ()
+			Message s2__s3_action ()
+			Message s2_m7_s2_action ()
+			Message top_s8_top_action ()
+			Message top_s9_top_action ()
+			Message top_reset_s2_action ()
+		}
+	}
+
+	DataClass d_Packet {
+			Attribute data : int32
 	}
 
 }

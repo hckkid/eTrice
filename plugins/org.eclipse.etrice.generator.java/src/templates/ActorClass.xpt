@@ -62,11 +62,11 @@ public «IF ac.abstract»abstract «ENDIF»class «ac.name» extends «IF ac.base!=null
 	«ENDFOREACH»
 
 	//--------------------- interface item IDs
-	«FOREACH ac.getEndPorts() AS ep»protected static final int IFITEM_«ep.name» = «xpac.getInterfaceItemLocalId(ep)»;
+	«FOREACH ac.getEndPorts() AS ep»protected static final int IFITEM_«ep.name» = «xpac.getInterfaceItemLocalId(ep)+1»;
 	«ENDFOREACH»
-	«FOREACH ac.strSAPs AS sap»protected static final int IFITEM_«sap.name» = «xpac.getInterfaceItemLocalId(sap)»;
+	«FOREACH ac.strSAPs AS sap»protected static final int IFITEM_«sap.name» = «xpac.getInterfaceItemLocalId(sap)+1»;
 	«ENDFOREACH»
-	«FOREACH ac.serviceImplementations AS svc»protected static final int IFITEM_«svc.spp.name» = «xpac.getInterfaceItemLocalId(svc.spp)»;
+	«FOREACH ac.serviceImplementations AS svc»protected static final int IFITEM_«svc.spp.name» = «xpac.getInterfaceItemLocalId(svc.spp)+1»;
 	«ENDFOREACH»
 	
 	«EXPAND ProcedureHelpers::Attributes FOR ac.attributes»
@@ -74,11 +74,11 @@ public «IF ac.abstract»abstract «ENDIF»class «ac.name» extends «IF ac.base!=null
 	«EXPAND ProcedureHelpers::Operations FOR ac.operations»
 
 	//--------------------- construction
-	public «ac.name»(IRTObject parent, String name, Address ownAddr, Address[][] port_addr, Address[][] peer_addr){
+	public «ac.name»(IRTObject parent, String name, Address[][] port_addr, Address[][] peer_addr){
 		«IF ac.base==null»
-		super(parent, name, ownAddr);
+		super(parent, name, port_addr[0][0], peer_addr[0][0]);
 		«ELSE»
-		super(parent, name, ownAddr, port_addr, peer_addr);
+		super(parent, name, port_addr, peer_addr);
 		«ENDIF»
 		setClassName("«ac.name»");
 		
