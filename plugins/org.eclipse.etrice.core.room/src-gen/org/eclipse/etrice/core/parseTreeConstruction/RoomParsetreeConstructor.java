@@ -11132,11 +11132,11 @@ protected class State_RefinedStateParserRuleCall_1 extends RuleCallToken {
 /************ begin Rule StateGraph ****************
  *
  * StateGraph:
- * 	"{" (states+=State | trPoints+=TrPoint | chPoints+=ChoicePoint | transitions+=Transition)+ "}";
+ * 	{StateGraph} "{" (states+=State | trPoints+=TrPoint | chPoints+=ChoicePoint | transitions+=Transition)* "}";
  *
  **/
 
-// "{" (states+=State | trPoints+=TrPoint | chPoints+=ChoicePoint | transitions+=Transition)+ "}"
+// {StateGraph} "{" (states+=State | trPoints+=TrPoint | chPoints+=ChoicePoint | transitions+=Transition)* "}"
 protected class StateGraph_Group extends GroupToken {
 	
 	public StateGraph_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -11151,30 +11151,30 @@ protected class StateGraph_Group extends GroupToken {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new StateGraph_RightCurlyBracketKeyword_2(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new StateGraph_RightCurlyBracketKeyword_3(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override
 	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getStateGraphRule().getType().getClassifier())
+		if(getEObject().eClass() != grammarAccess.getStateGraphAccess().getStateGraphAction_0().getType().getClassifier())
 			return null;
 		return eObjectConsumer;
 	}
 
 }
 
-// "{"
-protected class StateGraph_LeftCurlyBracketKeyword_0 extends KeywordToken  {
-	
-	public StateGraph_LeftCurlyBracketKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+// {StateGraph}
+protected class StateGraph_StateGraphAction_0 extends ActionToken  {
+
+	public StateGraph_StateGraphAction_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
-	public Keyword getGrammarElement() {
-		return grammarAccess.getStateGraphAccess().getLeftCurlyBracketKeyword_0();
+	public Action getGrammarElement() {
+		return grammarAccess.getStateGraphAccess().getStateGraphAction_0();
 	}
 
     @Override
@@ -11184,27 +11184,54 @@ protected class StateGraph_LeftCurlyBracketKeyword_0 extends KeywordToken  {
 		}	
 	}
 
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(!eObjectConsumer.isConsumed()) return null;
+		return eObjectConsumer;
+	}
 }
 
-// (states+=State | trPoints+=TrPoint | chPoints+=ChoicePoint | transitions+=Transition)+
-protected class StateGraph_Alternatives_1 extends AlternativesToken {
-
-	public StateGraph_Alternatives_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+// "{"
+protected class StateGraph_LeftCurlyBracketKeyword_1 extends KeywordToken  {
+	
+	public StateGraph_LeftCurlyBracketKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
-	public Alternatives getGrammarElement() {
-		return grammarAccess.getStateGraphAccess().getAlternatives_1();
+	public Keyword getGrammarElement() {
+		return grammarAccess.getStateGraphAccess().getLeftCurlyBracketKeyword_1();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new StateGraph_StatesAssignment_1_0(lastRuleCallOrigin, this, 0, inst);
-			case 1: return new StateGraph_TrPointsAssignment_1_1(lastRuleCallOrigin, this, 1, inst);
-			case 2: return new StateGraph_ChPointsAssignment_1_2(lastRuleCallOrigin, this, 2, inst);
-			case 3: return new StateGraph_TransitionsAssignment_1_3(lastRuleCallOrigin, this, 3, inst);
+			case 0: return new StateGraph_StateGraphAction_0(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// (states+=State | trPoints+=TrPoint | chPoints+=ChoicePoint | transitions+=Transition)*
+protected class StateGraph_Alternatives_2 extends AlternativesToken {
+
+	public StateGraph_Alternatives_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Alternatives getGrammarElement() {
+		return grammarAccess.getStateGraphAccess().getAlternatives_2();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new StateGraph_StatesAssignment_2_0(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new StateGraph_TrPointsAssignment_2_1(lastRuleCallOrigin, this, 1, inst);
+			case 2: return new StateGraph_ChPointsAssignment_2_2(lastRuleCallOrigin, this, 2, inst);
+			case 3: return new StateGraph_TransitionsAssignment_2_3(lastRuleCallOrigin, this, 3, inst);
 			default: return null;
 		}	
 	}
@@ -11212,15 +11239,15 @@ protected class StateGraph_Alternatives_1 extends AlternativesToken {
 }
 
 // states+=State
-protected class StateGraph_StatesAssignment_1_0 extends AssignmentToken  {
+protected class StateGraph_StatesAssignment_2_0 extends AssignmentToken  {
 	
-	public StateGraph_StatesAssignment_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public StateGraph_StatesAssignment_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getStateGraphAccess().getStatesAssignment_1_0();
+		return grammarAccess.getStateGraphAccess().getStatesAssignment_2_0();
 	}
 
     @Override
@@ -11239,7 +11266,7 @@ protected class StateGraph_StatesAssignment_1_0 extends AssignmentToken  {
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getStateRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getStateGraphAccess().getStatesStateParserRuleCall_1_0_0(); 
+				element = grammarAccess.getStateGraphAccess().getStatesStateParserRuleCall_2_0_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -11251,23 +11278,23 @@ protected class StateGraph_StatesAssignment_1_0 extends AssignmentToken  {
 	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new StateGraph_Alternatives_1(lastRuleCallOrigin, next, actIndex, consumed);
-			case 1: return new StateGraph_LeftCurlyBracketKeyword_0(lastRuleCallOrigin, next, actIndex, consumed);
+			case 0: return new StateGraph_Alternatives_2(lastRuleCallOrigin, next, actIndex, consumed);
+			case 1: return new StateGraph_LeftCurlyBracketKeyword_1(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
 }
 
 // trPoints+=TrPoint
-protected class StateGraph_TrPointsAssignment_1_1 extends AssignmentToken  {
+protected class StateGraph_TrPointsAssignment_2_1 extends AssignmentToken  {
 	
-	public StateGraph_TrPointsAssignment_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public StateGraph_TrPointsAssignment_2_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getStateGraphAccess().getTrPointsAssignment_1_1();
+		return grammarAccess.getStateGraphAccess().getTrPointsAssignment_2_1();
 	}
 
     @Override
@@ -11286,7 +11313,7 @@ protected class StateGraph_TrPointsAssignment_1_1 extends AssignmentToken  {
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getTrPointRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getStateGraphAccess().getTrPointsTrPointParserRuleCall_1_1_0(); 
+				element = grammarAccess.getStateGraphAccess().getTrPointsTrPointParserRuleCall_2_1_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -11298,23 +11325,23 @@ protected class StateGraph_TrPointsAssignment_1_1 extends AssignmentToken  {
 	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new StateGraph_Alternatives_1(lastRuleCallOrigin, next, actIndex, consumed);
-			case 1: return new StateGraph_LeftCurlyBracketKeyword_0(lastRuleCallOrigin, next, actIndex, consumed);
+			case 0: return new StateGraph_Alternatives_2(lastRuleCallOrigin, next, actIndex, consumed);
+			case 1: return new StateGraph_LeftCurlyBracketKeyword_1(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
 }
 
 // chPoints+=ChoicePoint
-protected class StateGraph_ChPointsAssignment_1_2 extends AssignmentToken  {
+protected class StateGraph_ChPointsAssignment_2_2 extends AssignmentToken  {
 	
-	public StateGraph_ChPointsAssignment_1_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public StateGraph_ChPointsAssignment_2_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getStateGraphAccess().getChPointsAssignment_1_2();
+		return grammarAccess.getStateGraphAccess().getChPointsAssignment_2_2();
 	}
 
     @Override
@@ -11333,7 +11360,7 @@ protected class StateGraph_ChPointsAssignment_1_2 extends AssignmentToken  {
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getChoicePointRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getStateGraphAccess().getChPointsChoicePointParserRuleCall_1_2_0(); 
+				element = grammarAccess.getStateGraphAccess().getChPointsChoicePointParserRuleCall_2_2_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -11345,23 +11372,23 @@ protected class StateGraph_ChPointsAssignment_1_2 extends AssignmentToken  {
 	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new StateGraph_Alternatives_1(lastRuleCallOrigin, next, actIndex, consumed);
-			case 1: return new StateGraph_LeftCurlyBracketKeyword_0(lastRuleCallOrigin, next, actIndex, consumed);
+			case 0: return new StateGraph_Alternatives_2(lastRuleCallOrigin, next, actIndex, consumed);
+			case 1: return new StateGraph_LeftCurlyBracketKeyword_1(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
 }
 
 // transitions+=Transition
-protected class StateGraph_TransitionsAssignment_1_3 extends AssignmentToken  {
+protected class StateGraph_TransitionsAssignment_2_3 extends AssignmentToken  {
 	
-	public StateGraph_TransitionsAssignment_1_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public StateGraph_TransitionsAssignment_2_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getStateGraphAccess().getTransitionsAssignment_1_3();
+		return grammarAccess.getStateGraphAccess().getTransitionsAssignment_2_3();
 	}
 
     @Override
@@ -11380,7 +11407,7 @@ protected class StateGraph_TransitionsAssignment_1_3 extends AssignmentToken  {
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getTransitionRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getStateGraphAccess().getTransitionsTransitionParserRuleCall_1_3_0(); 
+				element = grammarAccess.getStateGraphAccess().getTransitionsTransitionParserRuleCall_2_3_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -11392,8 +11419,8 @@ protected class StateGraph_TransitionsAssignment_1_3 extends AssignmentToken  {
 	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new StateGraph_Alternatives_1(lastRuleCallOrigin, next, actIndex, consumed);
-			case 1: return new StateGraph_LeftCurlyBracketKeyword_0(lastRuleCallOrigin, next, actIndex, consumed);
+			case 0: return new StateGraph_Alternatives_2(lastRuleCallOrigin, next, actIndex, consumed);
+			case 1: return new StateGraph_LeftCurlyBracketKeyword_1(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -11401,21 +11428,22 @@ protected class StateGraph_TransitionsAssignment_1_3 extends AssignmentToken  {
 
 
 // "}"
-protected class StateGraph_RightCurlyBracketKeyword_2 extends KeywordToken  {
+protected class StateGraph_RightCurlyBracketKeyword_3 extends KeywordToken  {
 	
-	public StateGraph_RightCurlyBracketKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public StateGraph_RightCurlyBracketKeyword_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Keyword getGrammarElement() {
-		return grammarAccess.getStateGraphAccess().getRightCurlyBracketKeyword_2();
+		return grammarAccess.getStateGraphAccess().getRightCurlyBracketKeyword_3();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new StateGraph_Alternatives_1(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new StateGraph_Alternatives_2(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new StateGraph_LeftCurlyBracketKeyword_1(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
@@ -11429,11 +11457,13 @@ protected class StateGraph_RightCurlyBracketKeyword_2 extends KeywordToken  {
 /************ begin Rule StateMachine ****************
  *
  * StateMachine returns StateGraph:
- * 	"StateMachine" "{" (states+=State | trPoints+=TrPoint | chPoints+=ChoicePoint | transitions+=Transition)+ "}";
+ * 	{StateGraph} "StateMachine" "{" (states+=State | trPoints+=TrPoint | chPoints+=ChoicePoint | transitions+=Transition)*
+ * 	"}";
  *
  **/
 
-// "StateMachine" "{" (states+=State | trPoints+=TrPoint | chPoints+=ChoicePoint | transitions+=Transition)+ "}"
+// {StateGraph} "StateMachine" "{" (states+=State | trPoints+=TrPoint | chPoints+=ChoicePoint | transitions+=Transition)*
+// "}"
 protected class StateMachine_Group extends GroupToken {
 	
 	public StateMachine_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -11448,30 +11478,30 @@ protected class StateMachine_Group extends GroupToken {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new StateMachine_RightCurlyBracketKeyword_3(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new StateMachine_RightCurlyBracketKeyword_4(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override
 	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getStateMachineRule().getType().getClassifier())
+		if(getEObject().eClass() != grammarAccess.getStateMachineAccess().getStateGraphAction_0().getType().getClassifier())
 			return null;
 		return eObjectConsumer;
 	}
 
 }
 
-// "StateMachine"
-protected class StateMachine_StateMachineKeyword_0 extends KeywordToken  {
-	
-	public StateMachine_StateMachineKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+// {StateGraph}
+protected class StateMachine_StateGraphAction_0 extends ActionToken  {
+
+	public StateMachine_StateGraphAction_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
-	public Keyword getGrammarElement() {
-		return grammarAccess.getStateMachineAccess().getStateMachineKeyword_0();
+	public Action getGrammarElement() {
+		return grammarAccess.getStateMachineAccess().getStateGraphAction_0();
 	}
 
     @Override
@@ -11481,49 +11511,76 @@ protected class StateMachine_StateMachineKeyword_0 extends KeywordToken  {
 		}	
 	}
 
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(!eObjectConsumer.isConsumed()) return null;
+		return eObjectConsumer;
+	}
 }
 
-// "{"
-protected class StateMachine_LeftCurlyBracketKeyword_1 extends KeywordToken  {
+// "StateMachine"
+protected class StateMachine_StateMachineKeyword_1 extends KeywordToken  {
 	
-	public StateMachine_LeftCurlyBracketKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public StateMachine_StateMachineKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Keyword getGrammarElement() {
-		return grammarAccess.getStateMachineAccess().getLeftCurlyBracketKeyword_1();
+		return grammarAccess.getStateMachineAccess().getStateMachineKeyword_1();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new StateMachine_StateMachineKeyword_0(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new StateMachine_StateGraphAction_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
 }
 
-// (states+=State | trPoints+=TrPoint | chPoints+=ChoicePoint | transitions+=Transition)+
-protected class StateMachine_Alternatives_2 extends AlternativesToken {
-
-	public StateMachine_Alternatives_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+// "{"
+protected class StateMachine_LeftCurlyBracketKeyword_2 extends KeywordToken  {
+	
+	public StateMachine_LeftCurlyBracketKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
-	public Alternatives getGrammarElement() {
-		return grammarAccess.getStateMachineAccess().getAlternatives_2();
+	public Keyword getGrammarElement() {
+		return grammarAccess.getStateMachineAccess().getLeftCurlyBracketKeyword_2();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new StateMachine_StatesAssignment_2_0(lastRuleCallOrigin, this, 0, inst);
-			case 1: return new StateMachine_TrPointsAssignment_2_1(lastRuleCallOrigin, this, 1, inst);
-			case 2: return new StateMachine_ChPointsAssignment_2_2(lastRuleCallOrigin, this, 2, inst);
-			case 3: return new StateMachine_TransitionsAssignment_2_3(lastRuleCallOrigin, this, 3, inst);
+			case 0: return new StateMachine_StateMachineKeyword_1(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// (states+=State | trPoints+=TrPoint | chPoints+=ChoicePoint | transitions+=Transition)*
+protected class StateMachine_Alternatives_3 extends AlternativesToken {
+
+	public StateMachine_Alternatives_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Alternatives getGrammarElement() {
+		return grammarAccess.getStateMachineAccess().getAlternatives_3();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new StateMachine_StatesAssignment_3_0(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new StateMachine_TrPointsAssignment_3_1(lastRuleCallOrigin, this, 1, inst);
+			case 2: return new StateMachine_ChPointsAssignment_3_2(lastRuleCallOrigin, this, 2, inst);
+			case 3: return new StateMachine_TransitionsAssignment_3_3(lastRuleCallOrigin, this, 3, inst);
 			default: return null;
 		}	
 	}
@@ -11531,15 +11588,15 @@ protected class StateMachine_Alternatives_2 extends AlternativesToken {
 }
 
 // states+=State
-protected class StateMachine_StatesAssignment_2_0 extends AssignmentToken  {
+protected class StateMachine_StatesAssignment_3_0 extends AssignmentToken  {
 	
-	public StateMachine_StatesAssignment_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public StateMachine_StatesAssignment_3_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getStateMachineAccess().getStatesAssignment_2_0();
+		return grammarAccess.getStateMachineAccess().getStatesAssignment_3_0();
 	}
 
     @Override
@@ -11558,7 +11615,7 @@ protected class StateMachine_StatesAssignment_2_0 extends AssignmentToken  {
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getStateRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getStateMachineAccess().getStatesStateParserRuleCall_2_0_0(); 
+				element = grammarAccess.getStateMachineAccess().getStatesStateParserRuleCall_3_0_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -11570,23 +11627,23 @@ protected class StateMachine_StatesAssignment_2_0 extends AssignmentToken  {
 	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new StateMachine_Alternatives_2(lastRuleCallOrigin, next, actIndex, consumed);
-			case 1: return new StateMachine_LeftCurlyBracketKeyword_1(lastRuleCallOrigin, next, actIndex, consumed);
+			case 0: return new StateMachine_Alternatives_3(lastRuleCallOrigin, next, actIndex, consumed);
+			case 1: return new StateMachine_LeftCurlyBracketKeyword_2(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
 }
 
 // trPoints+=TrPoint
-protected class StateMachine_TrPointsAssignment_2_1 extends AssignmentToken  {
+protected class StateMachine_TrPointsAssignment_3_1 extends AssignmentToken  {
 	
-	public StateMachine_TrPointsAssignment_2_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public StateMachine_TrPointsAssignment_3_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getStateMachineAccess().getTrPointsAssignment_2_1();
+		return grammarAccess.getStateMachineAccess().getTrPointsAssignment_3_1();
 	}
 
     @Override
@@ -11605,7 +11662,7 @@ protected class StateMachine_TrPointsAssignment_2_1 extends AssignmentToken  {
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getTrPointRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getStateMachineAccess().getTrPointsTrPointParserRuleCall_2_1_0(); 
+				element = grammarAccess.getStateMachineAccess().getTrPointsTrPointParserRuleCall_3_1_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -11617,23 +11674,23 @@ protected class StateMachine_TrPointsAssignment_2_1 extends AssignmentToken  {
 	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new StateMachine_Alternatives_2(lastRuleCallOrigin, next, actIndex, consumed);
-			case 1: return new StateMachine_LeftCurlyBracketKeyword_1(lastRuleCallOrigin, next, actIndex, consumed);
+			case 0: return new StateMachine_Alternatives_3(lastRuleCallOrigin, next, actIndex, consumed);
+			case 1: return new StateMachine_LeftCurlyBracketKeyword_2(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
 }
 
 // chPoints+=ChoicePoint
-protected class StateMachine_ChPointsAssignment_2_2 extends AssignmentToken  {
+protected class StateMachine_ChPointsAssignment_3_2 extends AssignmentToken  {
 	
-	public StateMachine_ChPointsAssignment_2_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public StateMachine_ChPointsAssignment_3_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getStateMachineAccess().getChPointsAssignment_2_2();
+		return grammarAccess.getStateMachineAccess().getChPointsAssignment_3_2();
 	}
 
     @Override
@@ -11652,7 +11709,7 @@ protected class StateMachine_ChPointsAssignment_2_2 extends AssignmentToken  {
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getChoicePointRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getStateMachineAccess().getChPointsChoicePointParserRuleCall_2_2_0(); 
+				element = grammarAccess.getStateMachineAccess().getChPointsChoicePointParserRuleCall_3_2_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -11664,23 +11721,23 @@ protected class StateMachine_ChPointsAssignment_2_2 extends AssignmentToken  {
 	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new StateMachine_Alternatives_2(lastRuleCallOrigin, next, actIndex, consumed);
-			case 1: return new StateMachine_LeftCurlyBracketKeyword_1(lastRuleCallOrigin, next, actIndex, consumed);
+			case 0: return new StateMachine_Alternatives_3(lastRuleCallOrigin, next, actIndex, consumed);
+			case 1: return new StateMachine_LeftCurlyBracketKeyword_2(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
 }
 
 // transitions+=Transition
-protected class StateMachine_TransitionsAssignment_2_3 extends AssignmentToken  {
+protected class StateMachine_TransitionsAssignment_3_3 extends AssignmentToken  {
 	
-	public StateMachine_TransitionsAssignment_2_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public StateMachine_TransitionsAssignment_3_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getStateMachineAccess().getTransitionsAssignment_2_3();
+		return grammarAccess.getStateMachineAccess().getTransitionsAssignment_3_3();
 	}
 
     @Override
@@ -11699,7 +11756,7 @@ protected class StateMachine_TransitionsAssignment_2_3 extends AssignmentToken  
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getTransitionRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getStateMachineAccess().getTransitionsTransitionParserRuleCall_2_3_0(); 
+				element = grammarAccess.getStateMachineAccess().getTransitionsTransitionParserRuleCall_3_3_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -11711,8 +11768,8 @@ protected class StateMachine_TransitionsAssignment_2_3 extends AssignmentToken  
 	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new StateMachine_Alternatives_2(lastRuleCallOrigin, next, actIndex, consumed);
-			case 1: return new StateMachine_LeftCurlyBracketKeyword_1(lastRuleCallOrigin, next, actIndex, consumed);
+			case 0: return new StateMachine_Alternatives_3(lastRuleCallOrigin, next, actIndex, consumed);
+			case 1: return new StateMachine_LeftCurlyBracketKeyword_2(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -11720,21 +11777,22 @@ protected class StateMachine_TransitionsAssignment_2_3 extends AssignmentToken  
 
 
 // "}"
-protected class StateMachine_RightCurlyBracketKeyword_3 extends KeywordToken  {
+protected class StateMachine_RightCurlyBracketKeyword_4 extends KeywordToken  {
 	
-	public StateMachine_RightCurlyBracketKeyword_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public StateMachine_RightCurlyBracketKeyword_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Keyword getGrammarElement() {
-		return grammarAccess.getStateMachineAccess().getRightCurlyBracketKeyword_3();
+		return grammarAccess.getStateMachineAccess().getRightCurlyBracketKeyword_4();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new StateMachine_Alternatives_2(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new StateMachine_Alternatives_3(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new StateMachine_LeftCurlyBracketKeyword_2(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}

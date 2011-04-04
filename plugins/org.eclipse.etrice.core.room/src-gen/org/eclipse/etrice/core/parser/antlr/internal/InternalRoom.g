@@ -3602,23 +3602,29 @@ ruleStateGraph returns [EObject current=null]
     @init { enterRule(); 
     }
     @after { leaveRule(); }:
-(	otherlv_0='{' 
+((
     {
-    	newLeafNode(otherlv_0, grammarAccess.getStateGraphAccess().getLeftCurlyBracketKeyword_0());
+        $current = forceCreateModelElement(
+            grammarAccess.getStateGraphAccess().getStateGraphAction_0(),
+            $current);
+    }
+)	otherlv_1='{' 
+    {
+    	newLeafNode(otherlv_1, grammarAccess.getStateGraphAccess().getLeftCurlyBracketKeyword_1());
     }
 ((
 (
 		{ 
-	        newCompositeNode(grammarAccess.getStateGraphAccess().getStatesStateParserRuleCall_1_0_0()); 
+	        newCompositeNode(grammarAccess.getStateGraphAccess().getStatesStateParserRuleCall_2_0_0()); 
 	    }
-		lv_states_1_0=ruleState		{
+		lv_states_2_0=ruleState		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getStateGraphRule());
 	        }
        		add(
        			$current, 
        			"states",
-        		lv_states_1_0, 
+        		lv_states_2_0, 
         		"State");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -3628,16 +3634,16 @@ ruleStateGraph returns [EObject current=null]
     |(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getStateGraphAccess().getTrPointsTrPointParserRuleCall_1_1_0()); 
+	        newCompositeNode(grammarAccess.getStateGraphAccess().getTrPointsTrPointParserRuleCall_2_1_0()); 
 	    }
-		lv_trPoints_2_0=ruleTrPoint		{
+		lv_trPoints_3_0=ruleTrPoint		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getStateGraphRule());
 	        }
        		add(
        			$current, 
        			"trPoints",
-        		lv_trPoints_2_0, 
+        		lv_trPoints_3_0, 
         		"TrPoint");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -3647,16 +3653,16 @@ ruleStateGraph returns [EObject current=null]
     |(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getStateGraphAccess().getChPointsChoicePointParserRuleCall_1_2_0()); 
+	        newCompositeNode(grammarAccess.getStateGraphAccess().getChPointsChoicePointParserRuleCall_2_2_0()); 
 	    }
-		lv_chPoints_3_0=ruleChoicePoint		{
+		lv_chPoints_4_0=ruleChoicePoint		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getStateGraphRule());
 	        }
        		add(
        			$current, 
        			"chPoints",
-        		lv_chPoints_3_0, 
+        		lv_chPoints_4_0, 
         		"ChoicePoint");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -3666,24 +3672,24 @@ ruleStateGraph returns [EObject current=null]
     |(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getStateGraphAccess().getTransitionsTransitionParserRuleCall_1_3_0()); 
+	        newCompositeNode(grammarAccess.getStateGraphAccess().getTransitionsTransitionParserRuleCall_2_3_0()); 
 	    }
-		lv_transitions_4_0=ruleTransition		{
+		lv_transitions_5_0=ruleTransition		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getStateGraphRule());
 	        }
        		add(
        			$current, 
        			"transitions",
-        		lv_transitions_4_0, 
+        		lv_transitions_5_0, 
         		"Transition");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-))+	otherlv_5='}' 
+))*	otherlv_6='}' 
     {
-    	newLeafNode(otherlv_5, grammarAccess.getStateGraphAccess().getRightCurlyBracketKeyword_2());
+    	newLeafNode(otherlv_6, grammarAccess.getStateGraphAccess().getRightCurlyBracketKeyword_3());
     }
 )
 ;
@@ -3706,27 +3712,33 @@ ruleStateMachine returns [EObject current=null]
     @init { enterRule(); 
     }
     @after { leaveRule(); }:
-(	otherlv_0='StateMachine' 
+((
     {
-    	newLeafNode(otherlv_0, grammarAccess.getStateMachineAccess().getStateMachineKeyword_0());
+        $current = forceCreateModelElement(
+            grammarAccess.getStateMachineAccess().getStateGraphAction_0(),
+            $current);
     }
-	otherlv_1='{' 
+)	otherlv_1='StateMachine' 
     {
-    	newLeafNode(otherlv_1, grammarAccess.getStateMachineAccess().getLeftCurlyBracketKeyword_1());
+    	newLeafNode(otherlv_1, grammarAccess.getStateMachineAccess().getStateMachineKeyword_1());
+    }
+	otherlv_2='{' 
+    {
+    	newLeafNode(otherlv_2, grammarAccess.getStateMachineAccess().getLeftCurlyBracketKeyword_2());
     }
 ((
 (
 		{ 
-	        newCompositeNode(grammarAccess.getStateMachineAccess().getStatesStateParserRuleCall_2_0_0()); 
+	        newCompositeNode(grammarAccess.getStateMachineAccess().getStatesStateParserRuleCall_3_0_0()); 
 	    }
-		lv_states_2_0=ruleState		{
+		lv_states_3_0=ruleState		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getStateMachineRule());
 	        }
        		add(
        			$current, 
        			"states",
-        		lv_states_2_0, 
+        		lv_states_3_0, 
         		"State");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -3736,16 +3748,16 @@ ruleStateMachine returns [EObject current=null]
     |(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getStateMachineAccess().getTrPointsTrPointParserRuleCall_2_1_0()); 
+	        newCompositeNode(grammarAccess.getStateMachineAccess().getTrPointsTrPointParserRuleCall_3_1_0()); 
 	    }
-		lv_trPoints_3_0=ruleTrPoint		{
+		lv_trPoints_4_0=ruleTrPoint		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getStateMachineRule());
 	        }
        		add(
        			$current, 
        			"trPoints",
-        		lv_trPoints_3_0, 
+        		lv_trPoints_4_0, 
         		"TrPoint");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -3755,16 +3767,16 @@ ruleStateMachine returns [EObject current=null]
     |(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getStateMachineAccess().getChPointsChoicePointParserRuleCall_2_2_0()); 
+	        newCompositeNode(grammarAccess.getStateMachineAccess().getChPointsChoicePointParserRuleCall_3_2_0()); 
 	    }
-		lv_chPoints_4_0=ruleChoicePoint		{
+		lv_chPoints_5_0=ruleChoicePoint		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getStateMachineRule());
 	        }
        		add(
        			$current, 
        			"chPoints",
-        		lv_chPoints_4_0, 
+        		lv_chPoints_5_0, 
         		"ChoicePoint");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -3774,24 +3786,24 @@ ruleStateMachine returns [EObject current=null]
     |(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getStateMachineAccess().getTransitionsTransitionParserRuleCall_2_3_0()); 
+	        newCompositeNode(grammarAccess.getStateMachineAccess().getTransitionsTransitionParserRuleCall_3_3_0()); 
 	    }
-		lv_transitions_5_0=ruleTransition		{
+		lv_transitions_6_0=ruleTransition		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getStateMachineRule());
 	        }
        		add(
        			$current, 
        			"transitions",
-        		lv_transitions_5_0, 
+        		lv_transitions_6_0, 
         		"Transition");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-))+	otherlv_6='}' 
+))*	otherlv_7='}' 
     {
-    	newLeafNode(otherlv_6, grammarAccess.getStateMachineAccess().getRightCurlyBracketKeyword_3());
+    	newLeafNode(otherlv_7, grammarAccess.getStateMachineAccess().getRightCurlyBracketKeyword_4());
     }
 )
 ;
