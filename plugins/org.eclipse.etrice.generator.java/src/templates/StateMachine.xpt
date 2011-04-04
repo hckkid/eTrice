@@ -58,6 +58,8 @@ public void receiveEvent(InterfaceItemBase ifitem, int evt, Object... generic_da
 	int catching_state = NO_STATE;
 	boolean is_handler = false;
 	
+	if (handleSystemEvent(ifitem, evt, generic_data)){}else{
+	
 	switch (state) {
 		«FOREACH this.stateMachine.getLeafStateList() AS state-»
 		case «state.getStateId()»:
@@ -86,7 +88,7 @@ public void receiveEvent(InterfaceItemBase ifitem, int evt, Object... generic_da
 			«ENDIF»«ENDLET-»
 			break;
 		«ENDFOREACH-»
-	}
+	}}
 	if (chain != NOT_CAUGHT) {
 		exitTo(state, catching_state, is_handler);
 		int next = executeTransitionChain(chain, ifitem, generic_data);
@@ -104,7 +106,8 @@ private void setState(int new_state) {
 	this.state = new_state;
 }
 
-protected void executeInitTransition() {
+@Override
+public void executeInitTransition() {
 	«LET this.stateMachine.getInitTransition() AS initt-»
 		int chain = «this.getChain(initt).getChainId()»;
 		int next = executeTransitionChain(chain, null, null);
