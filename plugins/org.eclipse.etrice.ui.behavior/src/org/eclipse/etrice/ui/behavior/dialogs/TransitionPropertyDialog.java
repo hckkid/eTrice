@@ -14,7 +14,6 @@ import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.CPBranchTransition;
 import org.eclipse.etrice.core.room.DetailCode;
-import org.eclipse.etrice.core.room.ExternalPort;
 import org.eclipse.etrice.core.room.Guard;
 import org.eclipse.etrice.core.room.InitialTransition;
 import org.eclipse.etrice.core.room.InterfaceItem;
@@ -24,11 +23,11 @@ import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.RoomFactory;
 import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.etrice.core.room.SPPRef;
-import org.eclipse.etrice.core.room.ServiceImplementation;
 import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.Transition;
 import org.eclipse.etrice.core.room.Trigger;
 import org.eclipse.etrice.core.room.TriggeredTransition;
+import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.core.validation.ValidationUtil;
 import org.eclipse.etrice.core.validation.ValidationUtil.Result;
 import org.eclipse.etrice.ui.behavior.Activator;
@@ -171,18 +170,7 @@ public class TransitionPropertyDialog extends AbstractPropertyDialog {
 		m2s = new DetailCodeToString();
 		s2m = new StringToDetailCode();
 		
-		collectInterfaceItems();
-	}
-
-	private void collectInterfaceItems() {
-		interfaceItems.addAll(ac.getIntPorts());
-		for (ExternalPort p : ac.getExtPorts()) {
-			interfaceItems.add(p.getIfport());
-		}
-		interfaceItems.addAll(ac.getStrSAPs());
-		for (ServiceImplementation svc : ac.getServiceImplementations()) {
-			interfaceItems.add(svc.getSpp());
-		}
+		interfaceItems = RoomHelpers.getAllInterfaceItems(ac);
 	}
 
 	private ActorClass getActorClass(StateGraph sg2) {

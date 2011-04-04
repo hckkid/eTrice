@@ -15,6 +15,7 @@ package org.eclipse.etrice.ui.behavior.support;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.etrice.core.naming.RoomNameProvider;
+import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.BaseState;
 import org.eclipse.etrice.core.room.ChoicePoint;
 import org.eclipse.etrice.core.room.ChoicepointTerminal;
@@ -74,6 +75,7 @@ import org.eclipse.graphiti.mm.pictograms.Anchor;
 import org.eclipse.graphiti.mm.pictograms.Connection;
 import org.eclipse.graphiti.mm.pictograms.ConnectionDecorator;
 import org.eclipse.graphiti.mm.pictograms.ContainerShape;
+import org.eclipse.graphiti.mm.pictograms.Diagram;
 import org.eclipse.graphiti.mm.pictograms.FreeFormConnection;
 import org.eclipse.graphiti.mm.pictograms.PictogramElement;
 import org.eclipse.graphiti.services.Graphiti;
@@ -196,12 +198,24 @@ public class TransitionSupport {
 						trans.setName(RoomNameProvider.getUniqueTransitionName(sg));
 					}
 
+					ActorClass ac = SupportUtil.getActorClass(getDiagram());
+					ContainerShape targetContainer = getStateGraphContainer((ContainerShape) context.getSourcePictogramElement().eContainer());
+					boolean inherited = SupportUtil.isInherited(getDiagram(), sg);
+					if (inherited) {
+						sg = SupportUtil.insertRefinedState(sg, ac, targetContainer, getFeatureProvider());
+					}
+
 					sg.getTransitions().add(trans);
 					
 		        	Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 		        	TransitionPropertyDialog dlg = new TransitionPropertyDialog(shell, sg, trans);
 					if (dlg.open()!=Window.OK) {
-						sg.getTransitions().remove(trans);
+						if (inherited) {
+							SupportUtil.undoInsertRefinedState(sg, ac, targetContainer, getFeatureProvider());
+						}
+						else {
+							sg.getTransitions().remove(trans);
+						}
 						return null;
 					}
 					
@@ -264,17 +278,30 @@ public class TransitionSupport {
 				return null;
 			}
 			
+			/**
+			 * This method exploits the fact that the immediate children of the diagram are
+			 * associated with the state graphs.
+			 * 
+			 * @param shape
+			 * @return the container shape that is associated with the state graph of the diagram
+			 */
+			public ContainerShape getStateGraphContainer(ContainerShape shape) {
+				while (shape!=null) {
+					ContainerShape parent = shape.getContainer();
+					if (parent instanceof Diagram)
+						return shape;
+				}
+				return null;
+			}
+			
 			public StateGraph getStateGraph(ICreateConnectionContext context) {
-				ContainerShape shape = (ContainerShape) context.getSourcePictogramElement().eContainer();
+				ContainerShape shape = getStateGraphContainer((ContainerShape) context.getSourcePictogramElement().eContainer());
 				Object bo = getBusinessObjectForPictogramElement(shape);
 				if (bo instanceof StateGraph)
 					return (StateGraph) bo;
-				
-				shape = (ContainerShape) shape.eContainer();
-				bo = getBusinessObjectForPictogramElement(shape);
-				if (bo instanceof StateGraph)
-					return (StateGraph) bo;
-				
+				else
+					assert(false): "state graph expected";
+					
 				return null;
 			}
 		}

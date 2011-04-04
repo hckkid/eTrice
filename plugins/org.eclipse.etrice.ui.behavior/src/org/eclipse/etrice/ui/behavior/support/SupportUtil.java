@@ -10,13 +10,20 @@ package org.eclipse.etrice.ui.behavior.support;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.room.ActorClass;
+import org.eclipse.etrice.core.room.BaseState;
 import org.eclipse.etrice.core.room.EntryPoint;
 import org.eclipse.etrice.core.room.ExitPoint;
+import org.eclipse.etrice.core.room.RefinedState;
+import org.eclipse.etrice.core.room.RoomFactory;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.StateGraphItem;
+import org.eclipse.etrice.core.room.util.RoomHelpers;
+import org.eclipse.graphiti.features.IFeatureProvider;
+import org.eclipse.graphiti.mm.algorithms.GraphicsAlgorithm;
 import org.eclipse.graphiti.mm.pictograms.ContainerShape;
 import org.eclipse.graphiti.mm.pictograms.Diagram;
+import org.eclipse.graphiti.mm.pictograms.PictogramElement;
 import org.eclipse.graphiti.services.Graphiti;
 
 /**
@@ -56,11 +63,73 @@ public class SupportUtil {
 		return false;
 	}
 
+	public static Diagram getDiagram(GraphicsAlgorithm ga) {
+		if (ga.eContainer() instanceof GraphicsAlgorithm)
+			return getDiagram((GraphicsAlgorithm)ga.eContainer());
+		return getDiagram(ga.getPictogramElement());
+	}
+	
+	/**
+	 * @param pictogramElement
+	 * @return
+	 */
+	public static Diagram getDiagram(PictogramElement pe) {
+		while (pe.eContainer()!=null) {
+			if (pe.eContainer() instanceof Diagram)
+				return (Diagram) pe.eContainer();
+			pe = (PictogramElement) pe.eContainer();
+		}
+		return null;
+	}
+
 	public static ActorClass getActorClass(Diagram diag) {
 		EObject bo = Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(diag);
 		if (bo instanceof ActorClass)
 			return (ActorClass) bo;
 		return null;
+	}
+
+	/**
+	 * @param sg
+	 * @param ac
+	 * @param targetContainer
+	 * @param fp
+	 * @return
+	 */
+	public static StateGraph insertRefinedState(StateGraph sg, ActorClass ac,
+			ContainerShape targetContainer, IFeatureProvider fp) {
+		// we have to insert a refined state first
+		RefinedState rs = RoomFactory.eINSTANCE.createRefinedState();
+		rs.setBase((BaseState) sg.eContainer());
+		ac.getStateMachine().getStates().add(rs);
+		
+		// now we change the context
+		sg = RoomFactory.eINSTANCE.createStateGraph();
+		rs.setSubgraph(sg);
+		fp.link(targetContainer, sg);
+		return sg;
+	}
+	
+	/**
+	 * @param sg
+	 * @param ac
+	 * @param targetContainer
+	 */
+	public static void undoInsertRefinedState(StateGraph sg, ActorClass ac,
+			ContainerShape targetContainer, IFeatureProvider fp) {
+		RefinedState rs = (RefinedState) sg.eContainer();
+		fp.link(targetContainer, rs.getBase().getSubgraph());
+		ac.getStateMachine().getStates().remove(rs);
+	}
+
+	/**
+	 * @param state
+	 * @param diagram
+	 * @return
+	 */
+	public static State getTargettingState(State state, Diagram diagram) {
+		ActorClass ac = SupportUtil.getActorClass(diagram);
+		return RoomHelpers.getTargettingState(state, ac);
 	}
 
 }

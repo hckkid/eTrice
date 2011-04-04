@@ -15,6 +15,7 @@ package org.eclipse.etrice.ui.behavior.support;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.etrice.core.naming.RoomNameProvider;
+import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ChoicePoint;
 import org.eclipse.etrice.core.room.RoomFactory;
 import org.eclipse.etrice.core.room.StateGraph;
@@ -96,9 +97,16 @@ public class ChoicePointSupport {
 	
 			@Override
 			public Object[] create(ICreateContext context) {
-				StateGraph sg = (StateGraph) context.getTargetContainer().getLink().getBusinessObjects().get(0);
+				ContainerShape targetContainer = context.getTargetContainer();
+				StateGraph sg = (StateGraph) targetContainer.getLink().getBusinessObjects().get(0);
 
-				// create choice point
+				boolean inherited = SupportUtil.isInherited(getDiagram(), sg);
+				if (inherited) {
+					ActorClass ac = SupportUtil.getActorClass(getDiagram());
+					sg = SupportUtil.insertRefinedState(sg, ac, targetContainer, getFeatureProvider());
+				}
+
+				// create choice point and add it
 		    	ChoicePoint cp = RoomFactory.eINSTANCE.createChoicePoint();
 				String name = RoomNameProvider.getUniqueChoicePointName(sg);
 				cp.setName(name);

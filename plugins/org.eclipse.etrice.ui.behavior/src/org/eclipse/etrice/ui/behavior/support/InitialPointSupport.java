@@ -13,6 +13,7 @@
 package org.eclipse.etrice.ui.behavior.support;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.InitialTransition;
 import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.Transition;
@@ -89,7 +90,14 @@ public class InitialPointSupport {
 	
 			@Override
 			public Object[] create(ICreateContext context) {
-				StateGraph sg = (StateGraph) context.getTargetContainer().getLink().getBusinessObjects().get(0);
+				ContainerShape targetContainer = context.getTargetContainer();
+				StateGraph sg = (StateGraph) targetContainer.getLink().getBusinessObjects().get(0);
+
+				boolean inherited = SupportUtil.isInherited(getDiagram(), sg);
+				if (inherited) {
+					ActorClass ac = SupportUtil.getActorClass(getDiagram());
+					sg = SupportUtil.insertRefinedState(sg, ac, targetContainer, getFeatureProvider());
+				}
 		        
 				// We don't create anything here since in the model the initial point is
 				// implicit only. We use the state graph itself as model element.

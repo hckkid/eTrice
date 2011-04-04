@@ -138,35 +138,31 @@ public class StateSupport {
 			@Override
 			public Object[] create(ICreateContext context) {
 		        
-		        StateGraph sg = (StateGraph) context.getTargetContainer().getLink().getBusinessObjects().get(0);
+		        ContainerShape targetContainer = context.getTargetContainer();
+		        ActorClass ac = SupportUtil.getActorClass(getDiagram());
+				StateGraph sg = (StateGraph) targetContainer.getLink().getBusinessObjects().get(0);
 		        
 				boolean inherited = SupportUtil.isInherited(getDiagram(), sg);
-
 				if (inherited) {
 					// TODOHRR: handling of refined state - also consider refining action codes
 					
-					// we have to insert a refined state first
-					RefinedState rs = RoomFactory.eINSTANCE.createRefinedState();
-					rs.setBase((BaseState) sg.eContainer());
-					ActorClass ac = SupportUtil.getActorClass(getDiagram());
-					ac.getStateMachine().getStates().add(rs);
-					
-					// now we change the context
-					sg = RoomFactory.eINSTANCE.createStateGraph();
-					rs.setSubgraph(sg);
-					link(context.getTargetContainer(), sg);
+					sg = SupportUtil.insertRefinedState(sg, ac, targetContainer, getFeatureProvider());
 				}
 				
-				// create new State
-	        	BaseState s = RoomFactory.eINSTANCE.createBaseState();
-	        	s.setName(RoomNameProvider.getUniqueStateName(sg));
-
-		        sg.getStates().add(s);
+				// create new State and add it
+				BaseState s = RoomFactory.eINSTANCE.createBaseState();
+				s.setName(RoomNameProvider.getUniqueStateName(sg));
+				sg.getStates().add(s);
 		        
 	        	Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 				StatePropertyDialog dlg = new StatePropertyDialog(shell, s);
 				if (dlg.open()!=Window.OK) {
-			        sg.getStates().remove(s);
+					if (inherited) {
+						SupportUtil.undoInsertRefinedState(sg, ac, targetContainer, getFeatureProvider());
+					}
+					else {
+						sg.getStates().remove(s);
+					}
 					return EMPTY;
 				}
 		        
@@ -409,7 +405,8 @@ public class StateSupport {
 				ContainerShape container = (ContainerShape)context.getPictogramElements()[0];
 				Object bo = getBusinessObjectForPictogramElement(container);
 				if (bo instanceof State) {
-					if (((State) bo).getSubgraph()!=null)
+					State targetting = SupportUtil.getTargettingState((State) bo, getDiagram());
+					if (targetting.getSubgraph()!=null)
 						return true;
 				}
 				return false;
@@ -421,8 +418,10 @@ public class StateSupport {
 				ContainerShape container = (ContainerShape)context.getPictogramElements()[0];
 				Object bo = getBusinessObjectForPictogramElement(container);
 				if (bo instanceof State) {
-					if (((State) bo).getSubgraph()!=null)
-						ContextSwitcher.switchTo(getDiagram(), ((State) bo).getSubgraph());
+					State targetting = SupportUtil.getTargettingState((State) bo, getDiagram());
+					if (targetting.getSubgraph()!=null) {
+						ContextSwitcher.switchTo(getDiagram(), targetting.getSubgraph());
+					}
 				}
 			}
 			
@@ -468,6 +467,17 @@ public class StateSupport {
 				Object bo = getBusinessObjectForPictogramElement(container);
 				if (bo instanceof State) {
 					State s = (State) bo;
+					
+					boolean inherited = SupportUtil.isInherited(getDiagram(), s);
+					if (inherited) {
+						ActorClass ac = SupportUtil.getActorClass(getDiagram());
+						RefinedState rs = RoomFactory.eINSTANCE.createRefinedState();
+						rs.setBase((BaseState) s);
+						ac.getStateMachine().getStates().add(rs);
+						
+						s = rs;
+					}
+
 					s.setSubgraph(RoomFactory.eINSTANCE.createStateGraph());
 
 					AddContext addContext = new AddContext();
@@ -503,24 +513,25 @@ public class StateSupport {
 
 			@Override
 			public IReason updateNeeded(IUpdateContext context) {
-				Object bo = getBusinessObjectForPictogramElement(context.getPictogramElement());
+				ContainerShape containerShape = (ContainerShape)context.getPictogramElement();
+				Object bo = getBusinessObjectForPictogramElement(containerShape);
 				if (bo instanceof EObject && ((EObject)bo).eIsProxy()) {
 					return Reason.createTrueReason("State deleted from model");
 				}
 				State s = (State) bo;
+				ActorClass mainAc = SupportUtil.getActorClass(getDiagram());
 				
 				// check if ref still owned/inherited anymore
-				ContainerShape containerShape = (ContainerShape)context.getPictogramElement();
-				bo = getBusinessObjectForPictogramElement(containerShape);
-				if (bo instanceof ActorClass) {
-					ActorClass ac = (ActorClass) bo;
+				{
+					ActorClass ac = RoomHelpers.getActorClass(s);
+					ActorClass tmp = mainAc;
 					boolean found = false;
 					do {
-						if (ac==s.eContainer())
+						if (tmp==ac)
 							found = true;
-						ac = ac.getBase();
+						tmp = tmp.getBase();
 					}
-					while (!found && ac!=null);
+					while (!found && tmp!=null);
 					
 					if (!found)
 						return Reason.createTrueReason("Ref not inherited anymore");
@@ -528,7 +539,7 @@ public class StateSupport {
 				
 				// check sub structure hint
 				{
-					boolean hasSubStruct = RoomHelpers.hasSubStructure(s);
+					boolean hasSubStruct = RoomHelpers.hasSubStructure(s, mainAc);
 					GraphicsAlgorithm invisibleRect = containerShape.getGraphicsAlgorithm();
 					if (!invisibleRect.getGraphicsAlgorithmChildren().isEmpty()) {
 						GraphicsAlgorithm borderRect = invisibleRect.getGraphicsAlgorithmChildren().get(0);
@@ -900,7 +911,8 @@ public class StateSupport {
 			hint.setLineWidth(LINE_WIDTH);
 			gaService.setLocationAndSize(hint, x, y, 15, 8);
 			
-			if (!RoomHelpers.hasSubStructure(s)) {
+			ActorClass ac = SupportUtil.getActorClass(SupportUtil.getDiagram(border));
+			if (!RoomHelpers.hasSubStructure(s, ac)) {
 				hint.setLineVisible(false);
 			}
 		}
@@ -934,10 +946,11 @@ public class StateSupport {
 	}
 	
 	protected static void updateHints(State s, GraphicsAlgorithm border) {
+		ActorClass ac = SupportUtil.getActorClass(SupportUtil.getDiagram(border));
 		
 		// sub structure
 		GraphicsAlgorithm hint = border.getGraphicsAlgorithmChildren().get(0);
-		hint.setLineVisible(RoomHelpers.hasSubStructure(s));
+		hint.setLineVisible(RoomHelpers.hasSubStructure(s, ac));
 		
 		// entry and exit code
 		hint = border.getGraphicsAlgorithmChildren().get(1);

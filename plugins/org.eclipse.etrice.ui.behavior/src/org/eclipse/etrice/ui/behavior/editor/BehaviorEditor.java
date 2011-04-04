@@ -98,7 +98,7 @@ public class BehaviorEditor extends RoomDiagramEditor {
 		StateGraph current = ContextSwitcher.getCurrentStateGraph(diagram);
 		if (current.eContainer() instanceof State) {
 			State s = (State) current.eContainer();
-			if (!RoomHelpers.hasSubStructure(s)) {
+			if (!RoomHelpers.hasDirectSubStructure(s)) {
 				ContextSwitcher.goUp(diagram, current);
 			}
 		}
@@ -111,7 +111,7 @@ public class BehaviorEditor extends RoomDiagramEditor {
 			StateGraph sg = (StateGraph) bo;
 			if (sg.eContainer() instanceof State) {
 				State s = (State) sg.eContainer();
-				if (!RoomHelpers.hasSubStructure(s)) {
+				if (!RoomHelpers.hasDirectSubStructure(s)) {
 					EcoreUtil.delete(sg);
 					toBeRemoved.add(ctxShape);
 				}
