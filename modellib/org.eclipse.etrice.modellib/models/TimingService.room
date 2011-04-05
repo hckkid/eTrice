@@ -1,4 +1,77 @@
 RoomModel room.basic.service.timing {
+
+	ActorClass ATimingService {
+		Interface {
+			SPP timer: PTimer
+			SPP timeout: PTimeout
+		}
+		Structure {
+			usercode1 {
+				"import java.util.Timer;"
+			}
+			usercode2 {
+				"private Timer timerService = null;"
+				"private int taskCount = 0;"
+				"private static final int PURGE_LIMIT = 1000;"
+			}
+			ServiceImplementation of timer
+			ServiceImplementation of timeout
+		}
+		Behavior {
+			Operation stop() {
+				"System.out.println(toString() + \"::stop()\");"
+				"timerService.cancel();"
+				"timerService = null;"
+			}
+			StateMachine {
+				Transition tr0: initial -> Operational {
+					action {
+						"timerService = new Timer();"
+					}
+				}
+				Transition tr1: Operational -> Operational {
+					triggers {
+						<Start:timeout>
+					}
+					action {
+						"// start timeout"
+						"taskCount++;"
+						"if (taskCount>PURGE_LIMIT) timerService.purge();"
+						"timerService.schedule(((PTimeoutPort)ifitem).getTask(), time_ms);"
+					}
+				}
+				Transition tr2: Operational -> Operational {
+					triggers {
+						<Kill:timeout>
+					}
+					// nothing to do to kill timeout (handled by timerService)
+				}
+				Transition tr3: Operational -> Operational {
+					triggers {
+						<Start:timer>
+					}
+					action {
+						"// start timer"
+						"taskCount++;"
+						"if (taskCount>PURGE_LIMIT) timerService.purge();"
+						"timerService.scheduleAtFixedRate(((PTimerPort)ifitem).getTask(), time_ms, time_ms);"
+					}
+				}
+				Transition tr4: Operational -> Operational {
+					triggers {
+						<Kill:timer>
+					}
+					// nothing to do to kill timer (handled by timer)
+				}
+				State Operational {
+					entry {
+						"// prepare"
+					}
+				}
+			}
+		}
+	}
+
 	ProtocolClass PTimer {
 		usercode1 {
 			"import java.util.TimerTask;"
@@ -237,76 +310,5 @@ RoomModel room.basic.service.timing {
 			}
 		}
 	}
-	
-	ActorClass ATimingService {
-		Interface {
-			SPP timer: PTimer
-			SPP timeout: PTimeout
-		}
-		Structure {
-			usercode1 {
-				"import java.util.Timer;"
-			}
-			usercode2 {
-				"private Timer timerService = null;"
-				"private int taskCount = 0;"
-				"private static final int PURGE_LIMIT = 1000;"
-			}
-			ServiceImplementation of timer
-			ServiceImplementation of timeout
-		}
-		Behavior {
-			Operation stop() {
-				"System.out.println(toString() + \"::stop()\");"
-				"timerService.cancel();"
-				"timerService = null;"
-			}
-			StateMachine {
-				State Operational {
-					entry {
-						"// prepare"
-					}
-				}
-				Transition tr0: initial -> Operational {
-					action {
-						"timerService = new Timer();"
-					}
-				}
-				Transition tr1: Operational -> Operational {
-					triggers {
-						<Start:timeout>
-					}
-					action {
-						"// start timeout"
-						"taskCount++;"
-						"if (taskCount>PURGE_LIMIT) timerService.purge();"
-						"timerService.schedule(((PTimeoutPort)ifitem).getTask(), time_ms);"
-					}
-				}
-				Transition tr2: Operational -> Operational {
-					triggers {
-						<Kill:timeout>
-					}
-					// nothing to do to kill timeout (handled by timerService)
-				}
-				Transition tr3: Operational -> Operational {
-					triggers {
-						<Start:timer>
-					}
-					action {
-						"// start timer"
-						"taskCount++;"
-						"if (taskCount>PURGE_LIMIT) timerService.purge();"
-						"timerService.scheduleAtFixedRate(((PTimerPort)ifitem).getTask(), time_ms, time_ms);"
-					}
-				}
-				Transition tr4: Operational -> Operational {
-					triggers {
-						<Kill:timer>
-					}
-					// nothing to do to kill timer (handled by timer)
-				}
-			}
-		}
-	}
+
 }

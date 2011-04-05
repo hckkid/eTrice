@@ -30,7 +30,9 @@ package «getPackage(ac)»;
 
 import org.eclipse.etrice.runtime.java.messaging.Address;
 import org.eclipse.etrice.runtime.java.messaging.IRTObject;
+import org.eclipse.etrice.runtime.java.messaging.IMessageReceiver;
 import org.eclipse.etrice.runtime.java.modelbase.ActorClassBase;
+import org.eclipse.etrice.runtime.java.modelbase.SubSystemClassBase;
 import org.eclipse.etrice.runtime.java.modelbase.InterfaceItemBase;
 import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
 
@@ -62,11 +64,11 @@ public «IF ac.abstract»abstract «ENDIF»class «ac.name» extends «IF ac.base!=null
 	«ENDFOREACH»
 
 	//--------------------- interface item IDs
-	«FOREACH ac.getEndPorts() AS ep»protected static final int IFITEM_«ep.name» = «xpac.getInterfaceItemLocalId(ep)»;
+	«FOREACH ac.getEndPorts() AS ep»protected static final int IFITEM_«ep.name» = «xpac.getInterfaceItemLocalId(ep)+1»;
 	«ENDFOREACH»
-	«FOREACH ac.strSAPs AS sap»protected static final int IFITEM_«sap.name» = «xpac.getInterfaceItemLocalId(sap)»;
+	«FOREACH ac.strSAPs AS sap»protected static final int IFITEM_«sap.name» = «xpac.getInterfaceItemLocalId(sap)+1»;
 	«ENDFOREACH»
-	«FOREACH ac.serviceImplementations AS svc»protected static final int IFITEM_«svc.spp.name» = «xpac.getInterfaceItemLocalId(svc.spp)»;
+	«FOREACH ac.serviceImplementations AS svc»protected static final int IFITEM_«svc.spp.name» = «xpac.getInterfaceItemLocalId(svc.spp)+1»;
 	«ENDFOREACH»
 	
 	«EXPAND ProcedureHelpers::Attributes FOR ac.attributes»
@@ -74,11 +76,11 @@ public «IF ac.abstract»abstract «ENDIF»class «ac.name» extends «IF ac.base!=null
 	«EXPAND ProcedureHelpers::Operations FOR ac.operations»
 
 	//--------------------- construction
-	public «ac.name»(IRTObject parent, String name, Address ownAddr, Address[][] port_addr, Address[][] peer_addr){
+	public «ac.name»(IRTObject parent, String name, Address[][] port_addr, Address[][] peer_addr){
 		«IF ac.base==null»
-		super(parent, name, ownAddr);
+		super(parent, name, port_addr[0][0], peer_addr[0][0]);
 		«ELSE»
-		super(parent, name, ownAddr, port_addr, peer_addr);
+		super(parent, name, port_addr, peer_addr);
 		«ENDIF»
 		setClassName("«ac.name»");
 		
@@ -101,9 +103,6 @@ public «IF ac.abstract»abstract «ENDIF»class «ac.name» extends «IF ac.base!=null
 
 	public void start(){
 		startUser();
-		«IF xpac.hasStateMachine()-»
-		executeInitTransition();
-		«ENDIF-»
 	}
 
 	«IF !ac.overridesStop()»
@@ -122,7 +121,13 @@ public «IF ac.abstract»abstract «ENDIF»class «ac.name» extends «IF ac.base!=null
 		//--------------------- no state machine
 		@Override
 		public void receiveEvent(InterfaceItemBase ifitem, int evt, Object... data) {
+		handleSystemEvent(ifitem, evt, data);
 		}
+		
+		@Override
+		public void executeInitTransition(){
+		}
+
 	«ENDIF»
 };
 «ENDFILE»

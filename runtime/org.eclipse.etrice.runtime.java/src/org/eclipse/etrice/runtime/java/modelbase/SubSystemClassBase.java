@@ -8,12 +8,14 @@
 
 package org.eclipse.etrice.runtime.java.modelbase;
 
+import java.util.concurrent.Semaphore;
+
 import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
-import org.eclipse.etrice.runtime.java.messaging.Address;
 import org.eclipse.etrice.runtime.java.messaging.IRTObject;
 import org.eclipse.etrice.runtime.java.messaging.MessageService;
 import org.eclipse.etrice.runtime.java.messaging.RTObject;
 import org.eclipse.etrice.runtime.java.messaging.RTServices;
+import org.eclipse.etrice.runtime.java.messaging.RTSystemServicesProtocol.RTSystemServicesProtocolConjPortRepl;
 
 /**
  * The base class for all SubSystems.
@@ -22,31 +24,28 @@ import org.eclipse.etrice.runtime.java.messaging.RTServices;
  * @author Henrik Rentz-Reichert
  *
  */
-public abstract class SubSystemClassBase extends RTObject {
+public abstract class SubSystemClassBase extends RTObject implements IEventReceiver{
 
-	private static SubSystemClassBase instance = null;
-	
-	private boolean running = false;
+	//--------------------- ports
+	protected RTSystemServicesProtocolConjPortRepl RTSystemPort = null;
+	//--------------------- interface item IDs
+	protected static final int IFITEM_RTSystemPort = 0;
 	protected ActorClassBase[] instances = null;
-
-	public static SubSystemClassBase getInstance() {
-		return instance;
-	}
+	private Semaphore testSem=null;
+	private int testErrorCode;
 	
 	public SubSystemClassBase(IRTObject parent, String name) {
 		super(parent, name);
 
-		if (instance!=null)
-			throw new RuntimeException("ComponentClassBase is a singleton!");
-		
-		instance = this;
-		
 		DebuggingService.getInstance().getAsyncLogger()
 				.setMSC(name + "_Async", "");
 		DebuggingService.getInstance().getAsyncLogger().open();
 		DebuggingService.getInstance().getSyncLogger()
 				.setMSC(name + "_Sync", "");
 		DebuggingService.getInstance().getSyncLogger().open();
+		
+		RTServices.getInstance().setSubSystem(this);
+		
 	}
 
 	public void init() {
@@ -75,16 +74,12 @@ public abstract class SubSystemClassBase extends RTObject {
 	
 	
 	public void start() {
-		// start all actor instances
-		if (instances!=null)
-			for (int i = 0; i < instances.length; i++) {
-				instances[i].start();
-			}
-
+		// start all actors instances
+		RTSystemPort.executeInitialTransition();
+		
 		// start all message services
 		RTServices.getInstance().getMsgSvcCtrl().start();
 		
-		running = true;
 	}
 	
 	public void stop() {
@@ -106,6 +101,7 @@ public abstract class SubSystemClassBase extends RTObject {
 		DebuggingService.getInstance().getAsyncLogger().close();
 		DebuggingService.getInstance().getSyncLogger().close();
 
+		RTServices.getInstance().destroy();
 		System.out.println("*** MainComponent "+getInstancePath()+"::destroy ***");
 	}
 	
@@ -128,5 +124,22 @@ public abstract class SubSystemClassBase extends RTObject {
 			}
 		
 		return null;
+	}
+	
+	// this is to run integration tests
+	public synchronized void setTestSemaphore(Semaphore sem){
+		testErrorCode = -1;
+		testSem=sem;
+	}
+	
+	public synchronized int getTestErrorCode(){
+		return testErrorCode;
+	}
+	
+	public synchronized void testFinished(int errorCode){
+		if (testSem != null) {
+			testErrorCode = errorCode;
+			testSem.release(1);
+			}
 	}
 }
