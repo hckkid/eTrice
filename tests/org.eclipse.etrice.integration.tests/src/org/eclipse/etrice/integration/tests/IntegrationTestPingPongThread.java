@@ -37,7 +37,7 @@ public class IntegrationTestPingPongThread extends IntegrationTestBase {
 		*/
 	}
 	
-	@Test (timeout=25000)
+	@Test (timeout=10000)
 	public void testHFSM(){
 		SubSystem_PingPong main_component = new SubSystem_PingPong(null,"MainComponent");
 		

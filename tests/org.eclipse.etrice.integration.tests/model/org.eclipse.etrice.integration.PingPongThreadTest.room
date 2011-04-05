@@ -53,7 +53,7 @@ RoomModel org.eclipse.etrice.integration.PingPongThreadTest {
 				Transition tr0: initial -> waitForTimer {
 					action {
 						"count = 0;"
-						"timer.Start(1000);"
+						"timer.Start(10);"
 					}
 				}
 				Transition tr1: waitForTimer -> waitForPong {
@@ -78,7 +78,7 @@ RoomModel org.eclipse.etrice.integration.PingPongThreadTest {
 				}
 				Transition tr5: cp cp0 -> waitForTimer {
 					action {
-						"if (count++ > 1000) {"
+						"if (count++ > 100) {"
 						"RTServices.getInstance().getSubSystem().testFinished(0);"
 						"} else {"
 						"System.out.println(count);"
@@ -133,7 +133,7 @@ RoomModel org.eclipse.etrice.integration.PingPongThreadTest {
 					action {
 						"// simulate blocking call e.g. Queue"
 						"try{"
-						"Thread.sleep(10000);"
+						"Thread.sleep(5000);"
 						"}catch (InterruptedException e){}"
 					}
 				}
