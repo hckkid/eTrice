@@ -32,6 +32,7 @@ public class MSCFilter {
 	}
 
 	public boolean applyTo(String text){
+		if (filterList.size() == 0) return true; // no filters -> all messages will be logged
 		for (FilterItem item : filterList){
 			if (text.startsWith(item.filter)) return true;
 		}
