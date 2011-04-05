@@ -37,6 +37,10 @@ RoomModel org.eclipse.etrice.integration.PingPongThreadTest {
 			conjugated Port PingPongPort3 : PingPongProtocol 
 		}
 		Structure {
+			usercode1 {
+				"import org.eclipse.etrice.runtime.java.messaging.RTServices;"
+			}
+
 			external Port PingPongPort 
 			external Port PingPongPort2
 			external Port PingPongPort3
@@ -75,7 +79,7 @@ RoomModel org.eclipse.etrice.integration.PingPongThreadTest {
 				Transition tr5: cp cp0 -> waitForTimer {
 					action {
 						"if (count++ > 1000) {"
-						"SubSystemClassBase.getInstance().testFinished(0);"	
+						"RTServices.getInstance().getSubSystem().testFinished(0);"
 						"} else {"
 						"System.out.println(count);"
 						"timer.Start(5);}"

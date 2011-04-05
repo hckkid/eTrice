@@ -8,14 +8,14 @@
 
 package org.eclipse.etrice.runtime.java.modelbase;
 
+import java.util.concurrent.Semaphore;
+
 import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
-import org.eclipse.etrice.runtime.java.messaging.Address;
 import org.eclipse.etrice.runtime.java.messaging.IRTObject;
 import org.eclipse.etrice.runtime.java.messaging.MessageService;
 import org.eclipse.etrice.runtime.java.messaging.RTObject;
 import org.eclipse.etrice.runtime.java.messaging.RTServices;
-import org.eclipse.etrice.runtime.java.messaging.RTSystemServicesProtocol.*;
-import java.util.concurrent.Semaphore;
+import org.eclipse.etrice.runtime.java.messaging.RTSystemServicesProtocol.RTSystemServicesProtocolConjPortRepl;
 
 /**
  * The base class for all SubSystems.
@@ -26,34 +26,25 @@ import java.util.concurrent.Semaphore;
  */
 public abstract class SubSystemClassBase extends RTObject implements IEventReceiver{
 
-	private static SubSystemClassBase instance = null;
 	//--------------------- ports
 	protected RTSystemServicesProtocolConjPortRepl RTSystemPort = null;
 	//--------------------- interface item IDs
 	protected static final int IFITEM_RTSystemPort = 0;
-	private boolean running = false;
 	protected ActorClassBase[] instances = null;
 	private Semaphore testSem=null;
 	private int testErrorCode;
 	
-	public static SubSystemClassBase getInstance() {
-		return instance;
-	}
-	
 	public SubSystemClassBase(IRTObject parent, String name) {
 		super(parent, name);
 
-		if (instance!=null)
-			throw new RuntimeException("ComponentClassBase is a singleton!");
-		
-		instance = this;
-		
 		DebuggingService.getInstance().getAsyncLogger()
 				.setMSC(name + "_Async", "");
 		DebuggingService.getInstance().getAsyncLogger().open();
 		DebuggingService.getInstance().getSyncLogger()
 				.setMSC(name + "_Sync", "");
 		DebuggingService.getInstance().getSyncLogger().open();
+		
+		RTServices.getInstance().setSubSystem(this);
 		
 	}
 
@@ -89,7 +80,6 @@ public abstract class SubSystemClassBase extends RTObject implements IEventRecei
 		// start all message services
 		RTServices.getInstance().getMsgSvcCtrl().start();
 		
-		running = true;
 	}
 	
 	public void stop() {
@@ -111,6 +101,7 @@ public abstract class SubSystemClassBase extends RTObject implements IEventRecei
 		DebuggingService.getInstance().getAsyncLogger().close();
 		DebuggingService.getInstance().getSyncLogger().close();
 
+		RTServices.getInstance().destroy();
 		System.out.println("*** MainComponent "+getInstancePath()+"::destroy ***");
 	}
 	

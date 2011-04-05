@@ -12,6 +12,8 @@
 
 package org.eclipse.etrice.runtime.java.messaging;
 
+import org.eclipse.etrice.runtime.java.modelbase.SubSystemClassBase;
+
 /**
  * RTServices is the single point of access to all runtime services in one SubSystem
  * e.g. MessageServices, DebuggingService, ...
@@ -32,11 +34,25 @@ public class RTServices {
 		return instance;
 	}
 	
+	public void destroy(){
+		// TODO: also clean up all sub elements
+		subSystem = null;
+		messageServiceController = null;
+		instance = null;
+	}
+
 	public MessageServiceController getMsgSvcCtrl(){
 		assert(messageServiceController != null);
 		return messageServiceController;
 	}
 	
+	public SubSystemClassBase getSubSystem() {
+		return subSystem;
+	}
+	public void setSubSystem(SubSystemClassBase subSystem) {
+		this.subSystem = subSystem;
+	}
 	private static RTServices instance = null;
 	private MessageServiceController messageServiceController = null;
+	private SubSystemClassBase subSystem = null;
 }

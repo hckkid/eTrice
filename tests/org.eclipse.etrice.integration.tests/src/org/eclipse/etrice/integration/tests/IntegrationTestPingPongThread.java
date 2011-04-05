@@ -16,24 +16,15 @@ package org.eclipse.etrice.integration.tests;
 import static org.junit.Assert.assertEquals;
 
 import org.eclipse.etrice.integration.PingPongThreadTest.SubSystem_PingPong;
+import org.eclipse.etrice.integration.tests.base.IntegrationTestBase;
 import org.eclipse.etrice.runtime.java.modelbase.SubSystemClassBase;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.concurrent.Semaphore;
 
 
-public class IntegrationTestPingPongThread {
-	private Semaphore testSem = new Semaphore(0);
-	
-	private synchronized void waitForTestcase(){
-		try{
-			this.testSem.acquire(1);
-		}catch(InterruptedException e){
-			System.out.println("Semaphore fault !");
-		}
-	}
+public class IntegrationTestPingPongThread extends IntegrationTestBase {
 	@Before
 	public void setUp() throws Exception {
 		// we have to launch a JUnit Plugin test since for the build we need an Eclipse environment
@@ -51,7 +42,7 @@ public class IntegrationTestPingPongThread {
 		SubSystem_PingPong main_component = new SubSystem_PingPong(null,"MainComponent");
 		
 		// hand over the semaphore to the subsystem
-		SubSystemClassBase.getInstance().setTestSemaphore(this.testSem);
+		main_component.setTestSemaphore(this.testSem);
 
 		main_component.init(); // lifecycle init
 		main_component.start(); // lifecycle start

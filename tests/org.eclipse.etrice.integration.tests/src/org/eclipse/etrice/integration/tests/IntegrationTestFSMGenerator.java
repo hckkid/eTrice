@@ -18,6 +18,7 @@ import static org.junit.Assert.assertEquals;
 import org.eclipse.emf.mwe2.launch.runtime.Mwe2Launcher;
 import org.eclipse.etrice.integration.tests.SubSystemHFSMTest;
 import org.eclipse.etrice.integration.tests.a_HFSM_Tester;
+import org.eclipse.etrice.integration.tests.base.IntegrationTestBase;
 import org.eclipse.etrice.runtime.java.messaging.RTServices;
 import org.eclipse.etrice.runtime.java.modelbase.SubSystemClassBase;
 import org.junit.After;
@@ -27,19 +28,9 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.resources.ResourcesPlugin;
-import java.util.concurrent.Semaphore;
 
 
-public class IntegrationTestFSMGenerator {
-	private Semaphore testSem = new Semaphore(0);
-	
-	private synchronized void waitForTestcase(){
-		try{
-			this.testSem.acquire(1);
-		}catch(InterruptedException e){
-			System.out.println("Semaphore fault !");
-		}
-	}
+public class IntegrationTestFSMGenerator extends IntegrationTestBase {
 	@Before
 	public void setUp() throws Exception {
 		// we have to launch a JUnit Plugin test since for the build we need an Eclipse environment
@@ -57,7 +48,7 @@ public class IntegrationTestFSMGenerator {
 		SubSystemHFSMTest main_component = new SubSystemHFSMTest(null,"MainComponent");
 		
 		// hand over the semaphore to the subsystem
-		SubSystemClassBase.getInstance().setTestSemaphore(this.testSem);
+		main_component.setTestSemaphore(this.testSem);
 
 		main_component.init(); // lifecycle init
 		main_component.start(); // lifecycle start

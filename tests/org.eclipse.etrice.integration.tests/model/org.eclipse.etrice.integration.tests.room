@@ -192,6 +192,9 @@ RoomModel org.eclipse.etrice.integration.tests {
 			conjugated Port testee : p_HFSM
 		}
 		Structure {
+			usercode1 {
+				"import org.eclipse.etrice.runtime.java.messaging.RTServices;"
+			}
 			external Port testee
 		}
 		Behavior {
@@ -244,7 +247,7 @@ RoomModel org.eclipse.etrice.integration.tests {
 				State State7 {}
 				State TestPass {
 					entry {
-						"SubSystemClassBase.getInstance().testFinished(0);"	
+						"RTServices.getInstance().getSubSystem().testFinished(0);"
 					}
 				}
 			}

@@ -35,6 +35,9 @@ RoomModel org.eclipse.etrice.integration.PingPongThreadTestReplPort {
 			conjugated Port PingPongPort [3]  : PingPongProtocol
 		}
 		Structure {
+			usercode1 {
+				"import org.eclipse.etrice.runtime.java.messaging.RTServices;"
+			}
 			external Port PingPongPort 
 			SAP timer: PTimeout
 			Attribute count : int32
@@ -70,7 +73,7 @@ RoomModel org.eclipse.etrice.integration.PingPongThreadTestReplPort {
 				Transition tr5: cp cp0 -> waitForTimer {
 					action {
 						"if (count++ > 1000) {"
-						"SubSystemClassBase.getInstance().testFinished(0);"	
+						"RTServices.getInstance().getSubSystem().testFinished(0);"
 						"} else {"
 						"System.out.println(count);"
 						"timer.Start(5);}"
