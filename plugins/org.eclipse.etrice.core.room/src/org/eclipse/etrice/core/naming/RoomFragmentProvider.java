@@ -77,12 +77,11 @@ public class RoomFragmentProvider implements IFragmentProvider {
 		@Override
 		public String caseBinding(Binding bi) {
 			return doSwitch(bi.eContainer())+SEP
-			+caseBindingEndPoint(bi.getEndpoint1())+BIND_SEP
-			+caseBindingEndPoint(bi.getEndpoint2());
+			+caseBindingEndPointShort(bi.getEndpoint1())+BIND_SEP
+			+caseBindingEndPointShort(bi.getEndpoint2());
 		}
 		
-		@Override
-		public String caseBindingEndPoint(BindingEndPoint ep) {
+		private String caseBindingEndPointShort(BindingEndPoint ep) {
 			String loc = ep.getActorRef()==null? LOCAL:ep.getActorRef().getName();
 			return ep.getPort().getName()+EP_SEP+loc;
 		}
@@ -90,12 +89,11 @@ public class RoomFragmentProvider implements IFragmentProvider {
 		@Override
 		public String caseLayerConnection(LayerConnection bi) {
 			return doSwitch(bi.eContainer())+SEP
-			+caseSAPoint(bi.getFrom())+CONN_SEP
-			+caseSPPoint(bi.getTo());
+			+caseSAPointShort(bi.getFrom())+CONN_SEP
+			+caseSPPointShort(bi.getTo());
 		}
 		
-		@Override
-		public String caseSAPoint(SAPoint sapt) {
+		private String caseSAPointShort(SAPoint sapt) {
 			if (sapt instanceof RefSAPoint)
 				return ((RefSAPoint) sapt).getRef().getName();
 			else if (sapt instanceof RelaySAPoint)
@@ -105,8 +103,7 @@ public class RoomFragmentProvider implements IFragmentProvider {
 			return null;
 		}
 		
-		@Override
-		public String caseSPPoint(SPPoint sppt) {
+		private String caseSPPointShort(SPPoint sppt) {
 			return sppt.getRef().getName()+EP_SEP+sppt.getService().getName();
 		}
 		
