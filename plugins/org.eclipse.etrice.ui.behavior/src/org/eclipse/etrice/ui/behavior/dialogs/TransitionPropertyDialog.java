@@ -22,7 +22,7 @@ import org.eclipse.etrice.core.room.MessageFromIf;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.RoomFactory;
 import org.eclipse.etrice.core.room.RoomPackage;
-import org.eclipse.etrice.core.room.SPPRef;
+import org.eclipse.etrice.core.room.SAPRef;
 import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.Transition;
 import org.eclipse.etrice.core.room.Trigger;
@@ -565,7 +565,7 @@ public class TransitionPropertyDialog extends AbstractPropertyDialog {
 			if (((Port)item).isConjugated())
 				regular = false;
 		}
-		else if (item instanceof SPPRef)
+		else if (item instanceof SAPRef)
 			regular = false;
 		
 		return regular? item.getProtocol().getIncomingMessages()
