@@ -290,6 +290,7 @@ public class TransitionSupport {
 					ContainerShape parent = shape.getContainer();
 					if (parent instanceof Diagram)
 						return shape;
+					shape = parent;
 				}
 				return null;
 			}
