@@ -13,8 +13,11 @@
 
 package org.eclipse.etrice.core.naming;
 
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.etrice.core.room.BaseState;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.ProtocolClass;
+import org.eclipse.etrice.core.room.RefinedState;
 import org.eclipse.xtext.naming.DefaultDeclarativeQualifiedNameProvider;
 import org.eclipse.xtext.naming.QualifiedName;
 
@@ -23,6 +26,21 @@ public class RoomQualifiedNameProvider extends
 		DefaultDeclarativeQualifiedNameProvider {
 
 	// important: don't rely on cross reference resolution here
+
+//    public QualifiedName qualifiedName(RefinedState rs) {
+//    	QualifiedName fqn = QualifiedName.create();
+//		BaseState base = rs.getBase();
+//		if (base!=null)
+//		{
+//			fqn = QualifiedName.create(base.getName());
+//			EObject parent = base.eContainer().eContainer();
+//			while (parent instanceof BaseState) {
+//				fqn = QualifiedName.create(((BaseState)parent).getName()).append(fqn);
+//				parent = parent.eContainer().eContainer();
+//			}
+//		}
+//		return fqn;
+//    }
 	
     public QualifiedName qualifiedName(Message m) {
     	ProtocolClass pc = (ProtocolClass) m.eContainer();
