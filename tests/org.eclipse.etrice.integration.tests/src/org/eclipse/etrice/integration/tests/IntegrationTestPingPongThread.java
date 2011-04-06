@@ -15,22 +15,16 @@ package org.eclipse.etrice.integration.tests;
 
 import static org.junit.Assert.assertEquals;
 
-import org.eclipse.emf.mwe2.launch.runtime.Mwe2Launcher;
-import org.eclipse.etrice.integration.tests.SubSystemHFSMTest;
-import org.eclipse.etrice.integration.tests.a_HFSM_Tester;
+import org.eclipse.etrice.integration.PingPongThreadTest.SubSystem_PingPong;
 import org.eclipse.etrice.integration.tests.base.IntegrationTestBase;
-import org.eclipse.etrice.runtime.java.messaging.RTServices;
 import org.eclipse.etrice.runtime.java.modelbase.SubSystemClassBase;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.IWorkspace;
-import org.eclipse.core.resources.IncrementalProjectBuilder;
-import org.eclipse.core.resources.ResourcesPlugin;
 
 
-public class IntegrationTestFSMGenerator extends IntegrationTestBase {
+
+public class IntegrationTestPingPongThread extends IntegrationTestBase {
 	@Before
 	public void setUp() throws Exception {
 		// we have to launch a JUnit Plugin test since for the build we need an Eclipse environment
@@ -43,9 +37,9 @@ public class IntegrationTestFSMGenerator extends IntegrationTestBase {
 		*/
 	}
 	
-	@Test (timeout=5000)
+	@Test (timeout=10000)
 	public void testHFSM(){
-		SubSystemHFSMTest main_component = new SubSystemHFSMTest(null,"MainComponent");
+		SubSystem_PingPong main_component = new SubSystem_PingPong(null,"MainComponent");
 		
 		// hand over the semaphore to the subsystem
 		main_component.setTestSemaphore(this.testSem);

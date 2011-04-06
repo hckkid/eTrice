@@ -153,6 +153,10 @@ static public class «name»Repl {
 		return replication;
 	}
 	
+	public int getIndexOf(InterfaceItemBase ifitem){
+			return ifitem.getIdx();
+		}
+	
 	public «name» get(int i) {
 		return ports.get(i);
 	}

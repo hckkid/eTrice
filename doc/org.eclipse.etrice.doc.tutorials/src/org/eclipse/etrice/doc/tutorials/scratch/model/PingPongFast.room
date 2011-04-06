@@ -1,0 +1,85 @@
+RoomModel PingPongFast {
+
+
+	LogicalSystem System_PingPong {
+		SubSystemRef subsystem : SubSystem_PingPong
+	}
+
+	SubSystemClass SubSystem_PingPong {
+		ActorRef application : PingPongTop
+		//LogicalThread mrPingThread {application.MrPing}
+		//LogicalThread mrPongThread {application.MrPong}
+	}
+
+	// automatically inserted App_SubSystem_PedLightController
+	ActorClass PingPongTop {
+		Structure {
+			ActorRef MrPing : MrPingActor
+			ActorRef MrPong : MrPongActor
+			Binding MrPing.PingPongPort and MrPong.PingPongPort
+		}
+	}
+
+	ActorClass MrPingActor {
+		Interface {
+			conjugated Port PingPongPort : PingPongProtocol
+		}
+		Structure {
+			usercode2 {
+				"private int msgCounter = 0;"
+			}
+			external Port PingPongPort
+		}
+
+		Behavior {
+			StateMachine {
+				Transition tr0: initial -> waitForPong {
+					action{
+						"PingPongPort.ping();"
+						}
+					}
+				Transition tr2: waitForPong -> waitForPong {
+					triggers {
+						<pong:PingPongPort>
+					}
+					action {
+						"if (msgCounter++ < 1000){PingPongPort.ping();}"
+					}
+				}
+				State waitForPong {}
+			}
+		}
+	}
+
+	ActorClass MrPongActor {
+		Interface {
+			Port PingPongPort : PingPongProtocol
+		}
+		Structure {
+			external Port PingPongPort
+		}
+		Behavior {
+			StateMachine {
+				Transition tr0: initial -> waitForPing {}
+				Transition myTrigger: waitForPing -> waitForPing {
+					triggers {
+						<ping:PingPongPort>
+					}
+					action {
+						"PingPongPort.pong();"
+					}
+				}
+				State waitForPing {}
+			}
+		}
+	}
+
+	ProtocolClass PingPongProtocol {
+		incoming {
+			Message ping ()
+		}
+		outgoing {
+			Message pong ()
+		}
+	}
+}

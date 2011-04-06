@@ -14,6 +14,9 @@ import org.eclipse.etrice.runtime.java.messaging.IRTObject;
 import org.eclipse.etrice.runtime.java.messaging.Message;
 import org.eclipse.etrice.runtime.java.messaging.MessageService;
 import org.eclipse.etrice.runtime.java.messaging.RTServices;
+import org.eclipse.etrice.runtime.java.messaging.RTSystemServicesProtocol;
+import org.eclipse.etrice.runtime.java.messaging.RTSystemServicesProtocol.*;
+
 
 /**
  * The base class for model actor classes.
@@ -39,12 +42,18 @@ public abstract class ActorClassBase extends EventReceiver implements IMessageRe
 
 	private MessageService ownMsgsvc = null;
 	private Address ownAddr = null;
+	// the System Port
+	private RTSystemServicesProtocolPort RTSystemPort = null;
 	
-	public ActorClassBase(IRTObject parent, String name, Address ownAddr) {
+	public ActorClassBase(IRTObject parent, String name, Address ownAddr, Address systemPortPeerAddr) {
 		super(parent, name);
 		
 		this.ownAddr = ownAddr;
 		ownMsgsvc = RTServices.getInstance().getMsgSvcCtrl().getMsgSvc(this.ownAddr.threadID);
+		// own ports
+		RTSystemPort = new RTSystemServicesProtocolPort(this, "RTSystemPort",
+				0, 0, ownAddr,
+				systemPortPeerAddr);
 	}
 
 	public String toString(){
@@ -70,6 +79,7 @@ public abstract class ActorClassBase extends EventReceiver implements IMessageRe
 	public abstract void start();
 	public abstract void stop();
 	public abstract void destroy();
+	public abstract void executeInitTransition();
 
 	// not automatically generated lifecycle functions
 	// are called, but with empty implementation -> can be overridden by user
@@ -88,5 +98,22 @@ public abstract class ActorClassBase extends EventReceiver implements IMessageRe
 
 	public MessageService getMsgsvc() {
 		return ownMsgsvc;
+	}
+	
+	protected boolean handleSystemEvent(InterfaceItemBase ifitem, int evt, Object... generic_data){
+		if (ifitem.getLocalId()!=0){
+			return false;
+		}
+		
+		switch (evt){
+		case RTSystemServicesProtocol.IN_executeInitialTransition :
+			executeInitTransition();
+			break;
+		case RTSystemServicesProtocol.IN_startDebugging :
+			break;
+		case RTSystemServicesProtocol.IN_stopDebugging :
+			break;		
+		}
+		return true;
 	}
 }

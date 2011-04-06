@@ -13,40 +13,55 @@ import org.eclipse.etrice.runtime.java.messaging.IMessageReceiver;
 import org.eclipse.etrice.runtime.java.messaging.IRTObject;
 import org.eclipse.etrice.runtime.java.messaging.Message;
 import org.eclipse.etrice.runtime.java.messaging.MessageService;
+import org.eclipse.etrice.runtime.java.messaging.RTServices;
 import org.eclipse.etrice.runtime.java.modelbase.ActorClassBase;
 import org.eclipse.etrice.runtime.java.modelbase.IEventReceiver;
 import org.eclipse.etrice.runtime.java.modelbase.InterfaceItemBase;
 import org.eclipse.etrice.runtime.java.modelbase.PortBase;
+import org.eclipse.etrice.runtime.java.modelbase.ActorClassBaseTest.MockRTObject;
 
 import junit.framework.TestCase;
 
 public class PortBaseTest extends TestCase {
+	// TODO: pull out all Mock Objects 
+	public class MockEventReceiver implements IEventReceiver {
 
-	public class TestActor extends ActorClassBase {
-		public TestActor(IRTObject parent, String name) {
-			super(parent, name, null);
+		@Override
+		public String getInstancePath() {
+			return "TOP_Path";
 		}
-		public void receive(Message msg) {
+
+		@Override
+		public String getInstancePathName() {
+			return "TOP_PathName";
+		}
+
+		@Override
+		public void receiveEvent(InterfaceItemBase ifitem, int evt,
+				Object... data) {
+			// TODO Auto-generated method stub
 			
 		}
-		public Address getAddress() {
-			return null;
-		}
-		public void receiveEvent(InterfaceItemBase ifitem, int evt, Object... data) {
-		}
-		@Override
-		public void init() {}
-		@Override
-		public void start() {}
-		@Override
-		public void stop() {}
-		@Override
-		public void destroy() {}
-	}
 	
-	class MyPortBase extends PortBase {
-		public MyPortBase(IEventReceiver parent, String name, int localId, int idx, Address address,
-				Address peerAddress, IMessageReceiver msgReceiver) {
+	}
+	public class MockRTObject implements IRTObject {
+
+		@Override
+		public String getInstancePath() {
+			return "TOP_Path";
+		}
+
+		@Override
+		public String getInstancePathName() {
+			return "TOP_PathName";
+		}
+		
+	}
+
+	
+	class MockPort extends PortBase {
+		public MockPort(IEventReceiver parent, String name, int localId, int idx, Address address,
+				Address peerAddress) {
 			super(parent, name, localId, idx, address, peerAddress);
 		}
 
@@ -63,48 +78,41 @@ public class PortBaseTest extends TestCase {
 	}
 
 	public void testPortBase() {
-		MessageService msgService = new MessageService(null, new Address(4, 5, 6), "MessageService1");
-		Address portAddress = new Address(1, 2, 3);
-		Address peerAddress = new Address(3, 2, 1);
-		PortBase port = new MyPortBase(null, "Port1", 0, 0, portAddress, peerAddress, msgService);
-		assertEquals(msgService, port.getMsgReceiver());
-		assertEquals(portAddress, port.getAddress());
-		assertEquals(peerAddress, port.getPeerAddress());
-	}
+		MockRTObject topRTObject = new MockRTObject();
+		RTServices.getInstance().getMsgSvcCtrl().addMsgSvc(
+				new MessageService(topRTObject, new Address(0, 0, 0),"MessageService_0"));
+		RTServices.getInstance().getMsgSvcCtrl().addMsgSvc(
+				new MessageService(topRTObject, new Address(0, 1, 0),"MessageService_1"));
 
-	public void testSetGetPeerAddress() {
-		Address peerAddress = new Address(3, 2, 1);
-		PortBase port = new MyPortBase(null, "", 0, 0, null, peerAddress, null);
-		assertEquals(peerAddress, port.getPeerAddress());
-	}
+		MockEventReceiver eventRcv = new MockEventReceiver();
+		Address portAddress = new Address(0, 0, 5);
+		Address peerAddress = new Address(0, 1, 10);
 
-	public void testSetGetMsgService() {
-		MessageService msgService = new MessageService(null, new Address(4, 5, 6), "MessageService1");
-		Address portAddress = new Address(1, 2, 3);
-		PortBase port = new MyPortBase(null, "", 0, 0, portAddress, null, msgService);
-		assertEquals(msgService, port.getMsgReceiver());
-	}
-	
-	public void testSetInstanceId() {
-		PortBase port = new MyPortBase(null, "Port1", 0, 0, null, null, null);
-		assertEquals("/Port1", port.getInstancePath());
-	}
-	
-	public void testGetLocalId() {
-		PortBase port = new MyPortBase(null, "Port1", 123, 0, null, null, null);
-		assertEquals(123, port.getLocalId());
-	}
-	
-	public void testGetIdx() {
-		PortBase port = new MyPortBase(null, "Port1", 0, 456, null, null, null);
-		assertEquals(456, port.getIdx());
-	}
+		PortBase port0 = new MockPort(eventRcv, "Port0", 33, 0, portAddress, peerAddress);
+		PortBase port1 = new MockPort(eventRcv, "Port1", 44, 5, peerAddress, portAddress);
+		assertEquals(RTServices.getInstance().getMsgSvcCtrl().getMsgSvc(0), port0.getMsgReceiver());
+		assertEquals(RTServices.getInstance().getMsgSvcCtrl().getMsgSvc(1), port1.getMsgReceiver());
 
-	public void testSetGetParentObject(){
-		ActorClassBase actor = new TestActor(null, "Actor1");
-		PortBase port = new MyPortBase(actor, "Port1", 0, 0, null, null, null);
 		
-		assertEquals("/Actor1/Port1", port.getInstancePath());
-		assertEquals(actor, port.getActor());
+		assertEquals(portAddress, port0.getAddress());
+		assertEquals(peerAddress, port0.getPeerAddress());
+		assertEquals(peerAddress, port1.getAddress());
+		assertEquals(portAddress, port1.getPeerAddress());
+		
+		assertEquals("TOP_Path/Port0", port0.getInstancePath());
+		assertEquals("TOP_PathName_Port0", port0.getInstancePathName());
+		assertEquals("TOP_Path/Port1", port1.getInstancePath());
+		assertEquals("TOP_PathName_Port1", port1.getInstancePathName());
+		
+		assertEquals(33, port0.getLocalId());
+		assertEquals(44, port1.getLocalId());
+		
+		assertEquals(0, port0.getIdx());
+		assertEquals(5, port1.getIdx());
+
+		assertEquals(eventRcv, port0.getActor());
+		assertEquals(eventRcv, port1.getActor());
 	}
+
+
 }
