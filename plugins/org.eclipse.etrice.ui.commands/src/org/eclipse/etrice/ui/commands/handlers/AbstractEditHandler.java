@@ -173,6 +173,14 @@ public abstract class AbstractEditHandler extends AbstractHandler {
 				return isEnabled(fragment);
 			}
 		}
+		else if (editor instanceof StructureEditor) {
+			StructureClass sc = ((StructureEditor)editor).getStructureClass();
+			return isEnabled(fragmentProvider.getFragment(sc, null));
+		}
+		else if (editor instanceof BehaviorEditor) {
+			ActorClass ac = ((BehaviorEditor)editor).getActorClass();
+			return isEnabled(fragmentProvider.getFragment(ac, null));
+		}
 		return false;
 	}
 
