@@ -22,11 +22,14 @@ import org.eclipse.etrice.core.room.ActorContainerRef;
 import org.eclipse.etrice.core.room.Binding;
 import org.eclipse.etrice.core.room.ChoicePoint;
 import org.eclipse.etrice.core.room.DetailCode;
+import org.eclipse.etrice.core.room.ExternalPort;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.LayerConnection;
 import org.eclipse.etrice.core.room.LogicalSystem;
+import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.RefinedState;
 import org.eclipse.etrice.core.room.RoomPackage;
+import org.eclipse.etrice.core.room.ServiceImplementation;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.StateGraphItem;
@@ -152,7 +155,35 @@ public class RoomHelpers {
 		return result;
 	}
 
-	public static boolean hasSubStructure(State s) {
+	public static boolean hasSubStructure(State state, ActorClass ac) {
+		if (hasDirectSubStructure(state))
+			return true;
+		
+		if (ac.getStateMachine()!=null) {
+			for (State s : ac.getStateMachine().getStates()) {
+				State predecessor = s;
+				while (predecessor instanceof RefinedState) {
+					predecessor = ((RefinedState) s).getBase();
+					if (predecessor==state) {
+						// we have a chain form s -> state
+						// check this chain
+						predecessor = s;
+						while (predecessor instanceof RefinedState) {
+							if (hasDirectSubStructure(predecessor))
+								return true;
+							predecessor = ((RefinedState) s).getBase();
+							if (predecessor==state)
+								break;
+						}
+						break;
+					}
+				}
+			}
+		}
+		return false;
+	}
+	
+	public static boolean hasDirectSubStructure(State s) {
 		if (s.getSubgraph()==null)
 			return false;
 		
@@ -167,6 +198,24 @@ public class RoomHelpers {
 			return true;
 		
 		return false;
+	}
+
+	/**
+	 * @param state
+	 * @param ac
+	 * @return
+	 */
+	public static State getTargettingState(State state, ActorClass ac) {
+		State targetting = state;
+		for (State s : ac.getStateMachine().getStates()) {
+			State predecessor = s;
+			while (predecessor instanceof RefinedState) {
+				predecessor = ((RefinedState) s).getBase();
+				if (predecessor==state)
+					targetting = s;
+			}
+		}
+		return targetting;
 	}
 	
 	public static boolean hasDetailCode(DetailCode dc) {
@@ -293,5 +342,50 @@ public class RoomHelpers {
 		}
 		
 		return names;
+	}
+	
+	public static List<Port> getAllEndPorts(ActorClass ac) {
+		ArrayList<Port> result = new ArrayList<Port>();
+		
+		while (ac!=null) {
+			result.addAll(ac.getIntPorts());
+			for (ExternalPort p : ac.getExtPorts()) {
+				result.add(p.getIfport());
+			}
+			
+			ac = ac.getBase();
+		}
+		
+		return result;
+	}
+	
+	public static List<InterfaceItem> getAllInterfaceItems(ActorClass ac) {
+		ArrayList<InterfaceItem> result = new ArrayList<InterfaceItem>();
+		
+		while (ac!=null) {
+			result.addAll(ac.getIntPorts());
+			for (ExternalPort p : ac.getExtPorts()) {
+				result.add(p.getIfport());
+			}
+			result.addAll(ac.getStrSAPs());
+			for (ServiceImplementation svc : ac.getServiceImplementations()) {
+				result.add(svc.getSpp());
+			}
+			
+			ac = ac.getBase();
+		}
+		
+		return result;
+	}
+	
+	public static ActorClass getActorClass(StateGraphItem item) {
+		EObject parent = item;
+		while (parent!=null) {
+			parent = parent.eContainer();
+			if (parent instanceof ActorClass)
+				return (ActorClass) parent;
+		}
+		assert(false): "data structure broken";
+		return null;
 	}
 }

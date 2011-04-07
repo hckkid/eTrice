@@ -132,6 +132,14 @@ public class TrPointSupport {
 	
 			@Override
 			public Object[] create(ICreateContext context) {
+				ContainerShape targetContainer = context.getTargetContainer();
+		        ActorClass ac = SupportUtil.getActorClass(getDiagram());
+				StateGraph sg = (StateGraph) targetContainer.getLink().getBusinessObjects().get(0);
+				boolean inherited = SupportUtil.isInherited(getDiagram(), sg);
+				if (inherited) {
+					sg = SupportUtil.insertRefinedState(sg, ac, targetContainer, getFeatureProvider());
+				}
+				
 		        // create transition point
 				TrPoint tp = null;
 				switch (type) {
@@ -145,15 +153,18 @@ public class TrPointSupport {
 					tp = RoomFactory.eINSTANCE.createTransitionPoint();
 					break;
 				}
-				StateGraph sg = (StateGraph) context.getTargetContainer().getLink().getBusinessObjects().get(0);
 		        tp.setName(RoomNameProvider.getUniqueTrPointName(sg));
-				
 				sg.getTrPoints().add(tp);
 		        
 		        Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 				TrPointPropertyDialog dlg = new TrPointPropertyDialog(shell, tp, false);
 				if (dlg.open()!=Window.OK) {
-					sg.getTrPoints().remove(tp);
+					if (inherited) {
+						SupportUtil.undoInsertRefinedState(sg, ac, targetContainer, getFeatureProvider());
+					}
+					else {
+						sg.getTrPoints().remove(tp);
+					}
 					return EMPTY;
 				}
 				

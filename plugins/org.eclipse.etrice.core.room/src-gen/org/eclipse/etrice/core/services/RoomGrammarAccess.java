@@ -2319,63 +2319,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	public class StateGraphElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "StateGraph");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cLeftCurlyBracketKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
-		private final Assignment cStatesAssignment_1_0 = (Assignment)cAlternatives_1.eContents().get(0);
-		private final RuleCall cStatesStateParserRuleCall_1_0_0 = (RuleCall)cStatesAssignment_1_0.eContents().get(0);
-		private final Assignment cTrPointsAssignment_1_1 = (Assignment)cAlternatives_1.eContents().get(1);
-		private final RuleCall cTrPointsTrPointParserRuleCall_1_1_0 = (RuleCall)cTrPointsAssignment_1_1.eContents().get(0);
-		private final Assignment cChPointsAssignment_1_2 = (Assignment)cAlternatives_1.eContents().get(2);
-		private final RuleCall cChPointsChoicePointParserRuleCall_1_2_0 = (RuleCall)cChPointsAssignment_1_2.eContents().get(0);
-		private final Assignment cTransitionsAssignment_1_3 = (Assignment)cAlternatives_1.eContents().get(3);
-		private final RuleCall cTransitionsTransitionParserRuleCall_1_3_0 = (RuleCall)cTransitionsAssignment_1_3.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		
-		//StateGraph:
-		//	"{" (states+=State | trPoints+=TrPoint | chPoints+=ChoicePoint | transitions+=Transition)+ "}";
-		public ParserRule getRule() { return rule; }
-
-		//"{" (states+=State | trPoints+=TrPoint | chPoints+=ChoicePoint | transitions+=Transition)+ "}"
-		public Group getGroup() { return cGroup; }
-
-		//"{"
-		public Keyword getLeftCurlyBracketKeyword_0() { return cLeftCurlyBracketKeyword_0; }
-
-		//(states+=State | trPoints+=TrPoint | chPoints+=ChoicePoint | transitions+=Transition)+
-		public Alternatives getAlternatives_1() { return cAlternatives_1; }
-
-		//states+=State
-		public Assignment getStatesAssignment_1_0() { return cStatesAssignment_1_0; }
-
-		//State
-		public RuleCall getStatesStateParserRuleCall_1_0_0() { return cStatesStateParserRuleCall_1_0_0; }
-
-		//trPoints+=TrPoint
-		public Assignment getTrPointsAssignment_1_1() { return cTrPointsAssignment_1_1; }
-
-		//TrPoint
-		public RuleCall getTrPointsTrPointParserRuleCall_1_1_0() { return cTrPointsTrPointParserRuleCall_1_1_0; }
-
-		//chPoints+=ChoicePoint
-		public Assignment getChPointsAssignment_1_2() { return cChPointsAssignment_1_2; }
-
-		//ChoicePoint
-		public RuleCall getChPointsChoicePointParserRuleCall_1_2_0() { return cChPointsChoicePointParserRuleCall_1_2_0; }
-
-		//transitions+=Transition
-		public Assignment getTransitionsAssignment_1_3() { return cTransitionsAssignment_1_3; }
-
-		//Transition
-		public RuleCall getTransitionsTransitionParserRuleCall_1_3_0() { return cTransitionsTransitionParserRuleCall_1_3_0; }
-
-		//"}"
-		public Keyword getRightCurlyBracketKeyword_2() { return cRightCurlyBracketKeyword_2; }
-	}
-
-	public class StateMachineElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "StateMachine");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cStateMachineKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Action cStateGraphAction_0 = (Action)cGroup.eContents().get(0);
 		private final Keyword cLeftCurlyBracketKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Alternatives cAlternatives_2 = (Alternatives)cGroup.eContents().get(2);
 		private final Assignment cStatesAssignment_2_0 = (Assignment)cAlternatives_2.eContents().get(0);
@@ -2388,20 +2332,20 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cTransitionsTransitionParserRuleCall_2_3_0 = (RuleCall)cTransitionsAssignment_2_3.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
-		//StateMachine returns StateGraph:
-		//	"StateMachine" "{" (states+=State | trPoints+=TrPoint | chPoints+=ChoicePoint | transitions+=Transition)+ "}";
+		//StateGraph:
+		//	{StateGraph} "{" (states+=State | trPoints+=TrPoint | chPoints+=ChoicePoint | transitions+=Transition)* "}";
 		public ParserRule getRule() { return rule; }
 
-		//"StateMachine" "{" (states+=State | trPoints+=TrPoint | chPoints+=ChoicePoint | transitions+=Transition)+ "}"
+		//{StateGraph} "{" (states+=State | trPoints+=TrPoint | chPoints+=ChoicePoint | transitions+=Transition)* "}"
 		public Group getGroup() { return cGroup; }
 
-		//"StateMachine"
-		public Keyword getStateMachineKeyword_0() { return cStateMachineKeyword_0; }
+		//{StateGraph}
+		public Action getStateGraphAction_0() { return cStateGraphAction_0; }
 
 		//"{"
 		public Keyword getLeftCurlyBracketKeyword_1() { return cLeftCurlyBracketKeyword_1; }
 
-		//(states+=State | trPoints+=TrPoint | chPoints+=ChoicePoint | transitions+=Transition)+
+		//(states+=State | trPoints+=TrPoint | chPoints+=ChoicePoint | transitions+=Transition)*
 		public Alternatives getAlternatives_2() { return cAlternatives_2; }
 
 		//states+=State
@@ -2430,6 +2374,72 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 
 		//"}"
 		public Keyword getRightCurlyBracketKeyword_3() { return cRightCurlyBracketKeyword_3; }
+	}
+
+	public class StateMachineElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "StateMachine");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cStateGraphAction_0 = (Action)cGroup.eContents().get(0);
+		private final Keyword cStateMachineKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Keyword cLeftCurlyBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Alternatives cAlternatives_3 = (Alternatives)cGroup.eContents().get(3);
+		private final Assignment cStatesAssignment_3_0 = (Assignment)cAlternatives_3.eContents().get(0);
+		private final RuleCall cStatesStateParserRuleCall_3_0_0 = (RuleCall)cStatesAssignment_3_0.eContents().get(0);
+		private final Assignment cTrPointsAssignment_3_1 = (Assignment)cAlternatives_3.eContents().get(1);
+		private final RuleCall cTrPointsTrPointParserRuleCall_3_1_0 = (RuleCall)cTrPointsAssignment_3_1.eContents().get(0);
+		private final Assignment cChPointsAssignment_3_2 = (Assignment)cAlternatives_3.eContents().get(2);
+		private final RuleCall cChPointsChoicePointParserRuleCall_3_2_0 = (RuleCall)cChPointsAssignment_3_2.eContents().get(0);
+		private final Assignment cTransitionsAssignment_3_3 = (Assignment)cAlternatives_3.eContents().get(3);
+		private final RuleCall cTransitionsTransitionParserRuleCall_3_3_0 = (RuleCall)cTransitionsAssignment_3_3.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		
+		//StateMachine returns StateGraph:
+		//	{StateGraph} "StateMachine" "{" (states+=State | trPoints+=TrPoint | chPoints+=ChoicePoint | transitions+=Transition)*
+		//	"}";
+		public ParserRule getRule() { return rule; }
+
+		//{StateGraph} "StateMachine" "{" (states+=State | trPoints+=TrPoint | chPoints+=ChoicePoint | transitions+=Transition)*
+		//"}"
+		public Group getGroup() { return cGroup; }
+
+		//{StateGraph}
+		public Action getStateGraphAction_0() { return cStateGraphAction_0; }
+
+		//"StateMachine"
+		public Keyword getStateMachineKeyword_1() { return cStateMachineKeyword_1; }
+
+		//"{"
+		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
+
+		//(states+=State | trPoints+=TrPoint | chPoints+=ChoicePoint | transitions+=Transition)*
+		public Alternatives getAlternatives_3() { return cAlternatives_3; }
+
+		//states+=State
+		public Assignment getStatesAssignment_3_0() { return cStatesAssignment_3_0; }
+
+		//State
+		public RuleCall getStatesStateParserRuleCall_3_0_0() { return cStatesStateParserRuleCall_3_0_0; }
+
+		//trPoints+=TrPoint
+		public Assignment getTrPointsAssignment_3_1() { return cTrPointsAssignment_3_1; }
+
+		//TrPoint
+		public RuleCall getTrPointsTrPointParserRuleCall_3_1_0() { return cTrPointsTrPointParserRuleCall_3_1_0; }
+
+		//chPoints+=ChoicePoint
+		public Assignment getChPointsAssignment_3_2() { return cChPointsAssignment_3_2; }
+
+		//ChoicePoint
+		public RuleCall getChPointsChoicePointParserRuleCall_3_2_0() { return cChPointsChoicePointParserRuleCall_3_2_0; }
+
+		//transitions+=Transition
+		public Assignment getTransitionsAssignment_3_3() { return cTransitionsAssignment_3_3; }
+
+		//Transition
+		public RuleCall getTransitionsTransitionParserRuleCall_3_3_0() { return cTransitionsTransitionParserRuleCall_3_3_0; }
+
+		//"}"
+		public Keyword getRightCurlyBracketKeyword_4() { return cRightCurlyBracketKeyword_4; }
 	}
 
 	public class BaseStateElements extends AbstractParserRuleElementFinder {
@@ -4312,7 +4322,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//StateGraph:
-	//	"{" (states+=State | trPoints+=TrPoint | chPoints+=ChoicePoint | transitions+=Transition)+ "}";
+	//	{StateGraph} "{" (states+=State | trPoints+=TrPoint | chPoints+=ChoicePoint | transitions+=Transition)* "}";
 	public StateGraphElements getStateGraphAccess() {
 		return (pStateGraph != null) ? pStateGraph : (pStateGraph = new StateGraphElements());
 	}
@@ -4322,7 +4332,8 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//StateMachine returns StateGraph:
-	//	"StateMachine" "{" (states+=State | trPoints+=TrPoint | chPoints+=ChoicePoint | transitions+=Transition)+ "}";
+	//	{StateGraph} "StateMachine" "{" (states+=State | trPoints+=TrPoint | chPoints+=ChoicePoint | transitions+=Transition)*
+	//	"}";
 	public StateMachineElements getStateMachineAccess() {
 		return (pStateMachine != null) ? pStateMachine : (pStateMachine = new StateMachineElements());
 	}

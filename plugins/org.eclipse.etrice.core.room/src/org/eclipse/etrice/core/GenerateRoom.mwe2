@@ -111,6 +111,9 @@ Workflow {
 			// java-based API for content assistance 
 			fragment = contentAssist.JavaBasedContentAssistFragment {}
 			
+			// rename refactoring  
+			fragment = refactoring.RefactorElementNameFragment {}
+			
 			// generates a more lightweight Antlr parser and lexer tailored for content assist  
 			fragment = parser.antlr.XtextAntlrUiGeneratorFragment {}
 

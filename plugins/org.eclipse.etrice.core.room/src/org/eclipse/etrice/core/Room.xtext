@@ -253,23 +253,25 @@ StateGraphItem: StateGraphNode | Transition;
 State: BaseState | RefinedState;
 
 StateGraph:
+	{StateGraph}
 	'{'
 		(
 			states+=State |
 			trPoints+=TrPoint |
 			chPoints+=ChoicePoint |
 			transitions+=Transition
-		)+
+		)*
 	'}';
 
 StateMachine returns StateGraph:
+	{StateGraph}
 	'StateMachine' '{'
 		(
 			states+=State |
 			trPoints+=TrPoint |
 			chPoints+=ChoicePoint |
 			transitions+=Transition
-		)+
+		)*
 	'}';
 
 // entry and exit code have multiplicity many: in BaseState to be able to add derived class codes here,

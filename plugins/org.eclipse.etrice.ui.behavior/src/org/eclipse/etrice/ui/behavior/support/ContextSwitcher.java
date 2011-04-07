@@ -26,7 +26,11 @@ public class ContextSwitcher {
 			
 			// and finally go up
 			StateGraph superSG = (StateGraph) s.eContainer();
-			ContextSwitcher.switchTo(diagram, superSG);
+			
+			if (superSG.eContainer() instanceof ActorClass)
+				ContextSwitcher.switchTop(diagram);
+			else
+				ContextSwitcher.switchTo(diagram, superSG);
 		}
 	}
 
