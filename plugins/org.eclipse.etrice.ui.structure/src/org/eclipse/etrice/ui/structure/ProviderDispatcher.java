@@ -144,6 +144,7 @@ public class ProviderDispatcher {
 			return concatAll(
 					portSupport.getFeatureProvider().getCustomFeatures(context),
 					sppSupport.getFeatureProvider().getCustomFeatures(context),
+					structureClassSupport.getFeatureProvider().getCustomFeatures(context),
 					actorContainerRefSupport.getFeatureProvider().getCustomFeatures(context)
 				);
 		}

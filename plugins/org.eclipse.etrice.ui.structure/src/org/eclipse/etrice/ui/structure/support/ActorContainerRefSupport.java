@@ -400,7 +400,7 @@ public class ActorContainerRefSupport {
 
 			@Override
 			public String getName() {
-				return "Open Structure";
+				return "Open Ref Structure";
 			}
 			
 			@Override
@@ -450,7 +450,7 @@ public class ActorContainerRefSupport {
 
 			@Override
 			public String getName() {
-				return "Open Behavior";
+				return "Open Ref Behavior";
 			}
 			
 			@Override

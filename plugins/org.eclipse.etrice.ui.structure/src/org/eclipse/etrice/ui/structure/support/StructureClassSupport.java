@@ -40,12 +40,15 @@ import org.eclipse.graphiti.features.IRemoveFeature;
 import org.eclipse.graphiti.features.IResizeShapeFeature;
 import org.eclipse.graphiti.features.IUpdateFeature;
 import org.eclipse.graphiti.features.context.IAddContext;
+import org.eclipse.graphiti.features.context.ICustomContext;
 import org.eclipse.graphiti.features.context.IDeleteContext;
 import org.eclipse.graphiti.features.context.ILayoutContext;
 import org.eclipse.graphiti.features.context.IRemoveContext;
 import org.eclipse.graphiti.features.context.IResizeShapeContext;
 import org.eclipse.graphiti.features.context.IUpdateContext;
 import org.eclipse.graphiti.features.context.impl.RemoveContext;
+import org.eclipse.graphiti.features.custom.AbstractCustomFeature;
+import org.eclipse.graphiti.features.custom.ICustomFeature;
 import org.eclipse.graphiti.features.impl.AbstractAddFeature;
 import org.eclipse.graphiti.features.impl.AbstractLayoutFeature;
 import org.eclipse.graphiti.features.impl.AbstractUpdateFeature;
@@ -314,6 +317,50 @@ public class StructureClassSupport {
 			}
 		}
 		
+		private class OpenBehaviorDiagram extends AbstractCustomFeature {
+
+			public OpenBehaviorDiagram(IFeatureProvider fp) {
+				super(fp);
+			}
+
+			@Override
+			public String getName() {
+				return "Open Class Behavior";
+			}
+			
+			@Override
+			public boolean canExecute(ICustomContext context) {
+				PictogramElement[] pes = context.getPictogramElements();
+				if (pes != null && pes.length == 1) {
+					Object bo = getBusinessObjectForPictogramElement(pes[0]);
+					if (bo instanceof ActorClass) {
+						return true;
+					}
+				}
+				return false;
+			}
+
+			/* (non-Javadoc)
+			 * @see org.eclipse.graphiti.features.custom.ICustomFeature#execute(org.eclipse.graphiti.features.context.ICustomContext)
+			 */
+			@Override
+			public void execute(ICustomContext context) {
+				PictogramElement[] pes = context.getPictogramElements();
+				if (pes != null && pes.length == 1) {
+					Object bo = getBusinessObjectForPictogramElement(pes[0]);
+					if (bo instanceof ActorClass) {
+						org.eclipse.etrice.ui.behavior.DiagramAccess diagramAccess = new org.eclipse.etrice.ui.behavior.DiagramAccess();
+						diagramAccess.openDiagramEditor((ActorClass)bo);
+					}
+				}
+			}
+			
+			@Override
+			public boolean hasDoneChanges() {
+				return false;
+			}
+		}
+		
 		private class ResizeFeature extends DefaultResizeShapeFeature {
 
 			public ResizeFeature(IFeatureProvider fp) {
@@ -440,6 +487,12 @@ public class StructureClassSupport {
 		@Override
 		public IUpdateFeature getUpdateFeature(IUpdateContext context) {
 			return new UpdateFeature(fp);
+		}
+		
+		@Override
+		public ICustomFeature[] getCustomFeatures(ICustomContext context) {
+			return new ICustomFeature[] {
+					new OpenBehaviorDiagram(fp)};
 		}
 		
 		@Override
