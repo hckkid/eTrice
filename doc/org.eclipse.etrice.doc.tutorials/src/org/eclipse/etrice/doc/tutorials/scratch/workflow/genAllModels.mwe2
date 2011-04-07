@@ -1,4 +1,4 @@
-module workflow.Bandsteuerung
+module workflow.tutorials
 
 import org.eclipse.emf.mwe.utils.*
 import workflow.ExecuteCommand.*
