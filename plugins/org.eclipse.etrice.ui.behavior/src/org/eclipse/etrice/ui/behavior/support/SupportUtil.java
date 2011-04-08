@@ -32,14 +32,14 @@ import org.eclipse.graphiti.services.Graphiti;
  */
 public class SupportUtil {
 	
-	public static boolean isInherited(StateGraphItem cp, ContainerShape cs) {
+	public static boolean isInherited(StateGraphItem item, ContainerShape cs) {
 		EObject container = Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(cs);
 		if (container instanceof StateGraph) {
 			StateGraph sg = (StateGraph) container;
-			return cp.eContainer()!=sg;
+			return item.eContainer()!=sg;
 		}
 		else if (container instanceof State) {
-			assert(cp instanceof EntryPoint || cp instanceof ExitPoint): "this MUST be an entry or exit point";
+			assert(item instanceof EntryPoint || item instanceof ExitPoint): "this MUST be an entry or exit point";
 			
 			// have to check whether the State is inherited
 			State s = (State) container;
@@ -52,6 +52,9 @@ public class SupportUtil {
 	}
 	
 	public static boolean isInherited(Diagram diag, EObject obj) {
+		if (obj instanceof RefinedState)
+			return true;
+
 		ActorClass parent = getActorClass(diag);
 		while (obj!=null) {
 			if (obj instanceof ActorClass)
@@ -98,12 +101,25 @@ public class SupportUtil {
 	 */
 	public static StateGraph insertRefinedState(StateGraph sg, ActorClass ac,
 			ContainerShape targetContainer, IFeatureProvider fp) {
-		// we have to insert a refined state first
-		RefinedState rs = RoomFactory.eINSTANCE.createRefinedState();
-		rs.setBase((BaseState) sg.eContainer());
-		ac.getStateMachine().getStates().add(rs);
+
+		BaseState base = (BaseState) sg.eContainer();
 		
-		// now we change the context
+		RefinedState rs = null;
+		for (State s : ac.getStateMachine().getStates()) {
+			if (s instanceof RefinedState)
+				if (((RefinedState) s).getBase()==base) {
+					rs = (RefinedState) s;
+					break;
+				}
+		}
+		if (rs==null) {
+			// we have to insert a refined state first
+			rs = RoomFactory.eINSTANCE.createRefinedState();
+			rs.setBase(base);
+			ac.getStateMachine().getStates().add(rs);
+		}
+		
+		// now we create a state graph and change the context
 		sg = RoomFactory.eINSTANCE.createStateGraph();
 		rs.setSubgraph(sg);
 		fp.link(targetContainer, sg);
@@ -119,7 +135,10 @@ public class SupportUtil {
 			ContainerShape targetContainer, IFeatureProvider fp) {
 		RefinedState rs = (RefinedState) sg.eContainer();
 		fp.link(targetContainer, rs.getBase().getSubgraph());
-		ac.getStateMachine().getStates().remove(rs);
+		
+		if (!(RoomHelpers.hasDetailCode(rs.getEntryCode()) || RoomHelpers.hasDetailCode(rs.getExitCode()))) {
+			ac.getStateMachine().getStates().remove(rs);
+		}
 	}
 
 	/**

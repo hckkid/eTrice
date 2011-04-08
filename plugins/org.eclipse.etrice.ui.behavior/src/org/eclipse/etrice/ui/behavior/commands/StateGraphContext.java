@@ -14,6 +14,7 @@ import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.StateGraphItem;
 import org.eclipse.etrice.core.room.TrPoint;
 import org.eclipse.etrice.core.room.Transition;
+import org.eclipse.etrice.core.room.util.RoomHelpers;
 
 class StateGraphContext {
 	private ArrayList<StateGraphContext> children = new ArrayList<StateGraphContext>();
@@ -88,73 +89,73 @@ class StateGraphContext {
 		}
 	}
 
-	private void merge(StateGraphContext other) {
-		for (State s : other.getStates()) {
+	private void merge(StateGraphContext derived) {
+		for (State s : derived.getStates()) {
 			states.add(s);
 			obj2ctx.put(s, this);
 		}
-		for (ChoicePoint cp : other.getChPoints()) {
+		for (ChoicePoint cp : derived.getChPoints()) {
 			chPoints.add(cp);
 			obj2ctx.put(cp, this);
 		}
-		for (TrPoint tp : other.getTrPoints()) {
+		for (TrPoint tp : derived.getTrPoints()) {
 			trPoints.add(tp);
 			obj2ctx.put(tp, this);
 		}
-		for (Transition t : other.getTransitions()) {
+		for (Transition t : derived.getTransitions()) {
 			transitions.add(t);
 			obj2ctx.put(t, this);
 		}
 	}
 
-	private void merge(StateGraph other) {
-		stateGraph = other;
+	private void merge(StateGraph derived) {
+		stateGraph = derived;
 		
-		// add other contents up to refined states
-		for (State s : other.getStates()) {
+		// add derived contents up to refined states
+		for (State s : derived.getStates()) {
 			if (s instanceof BaseState) {
 				states.add(s);
 				obj2ctx.put(s, this);
 			}
 		}
-		for (ChoicePoint cp : other.getChPoints()) {
+		for (ChoicePoint cp : derived.getChPoints()) {
 			chPoints.add(cp);
 			obj2ctx.put(cp, this);
 		}
-		for (TrPoint tp : other.getTrPoints()) {
+		for (TrPoint tp : derived.getTrPoints()) {
 			trPoints.add(tp);
 			obj2ctx.put(tp, this);
 		}
-		for (Transition t : other.getTransitions()) {
+		for (Transition t : derived.getTransitions()) {
 			transitions.add(t);
 			obj2ctx.put(t, this);
 		}
 
-		// recurse
-		for (State s : other.getStates()) {
+		// recurse for non-refined states
+		for (State s : derived.getStates()) {
 			if (s instanceof BaseState)
 				if (s.getSubgraph()!=null)
 					children.add(new StateGraphContext(s.getSubgraph()));
 		}
 		
 		// refined states (need no recursion since refined states can only occur on the top level)
-		for (State s : other.getStates()) {
-			if (s instanceof RefinedState) {
-				State base = ((RefinedState) s).getBase();
+		for (State refined : derived.getStates()) {
+			if (refined instanceof RefinedState) {
+				State base = ((RefinedState) refined).getBase();
 				StateGraphContext ctx = obj2ctx.get(base);
 				assert(ctx!=null): "should have visited base state already";
 				
 				// remove base and put refined in place
 				ctx.getStates().remove(base);
-				ctx.getStates().add(s);
+				ctx.getStates().add(refined);
 				
-				// merge contexts
+				// merge sub contexts
 				StateGraphContext sub = null;
-				if (base.getSubgraph()!=null || s.getSubgraph()!=null) {
-					sub = new StateGraphContext(s.getSubgraph());
+				if (RoomHelpers.hasDirectSubStructure(refined)) {
+					sub = new StateGraphContext(refined.getSubgraph());
 					ctx.getChildren().add(sub);
 				}
-				if (base.getSubgraph()!=null) {
+				if (RoomHelpers.hasDirectSubStructure(base)) {
 					StateGraphContext basesub = null;
 					for (StateGraphContext bs : ctx.getChildren()) {
 						if (bs.getParentState()==base) {
@@ -163,8 +164,10 @@ class StateGraphContext {
 						}
 					}
 					if (basesub!=null) {
-						ctx.getChildren().remove(basesub);
-						sub.merge(basesub);
+						if (sub!=null) {
+							ctx.getChildren().remove(basesub);
+							sub.merge(basesub);
+						}
 					}
 					else {
 						assert(false): "context not found";
@@ -175,8 +178,8 @@ class StateGraphContext {
 	}
 
 	public State getParentState() {
-		if (stateGraph.eContainer().eContainer() instanceof State)
-			return (State) stateGraph.eContainer().eContainer();
+		if (stateGraph.eContainer() instanceof State)
+			return (State) stateGraph.eContainer();
 		
 		return null;
 	}

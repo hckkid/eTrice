@@ -226,8 +226,8 @@ public class TrPointSupport {
 				TrPoint tp = (TrPoint) context.getNewObject();
 				ContainerShape parentShape = context.getTargetContainer();
 				Object bo = getBusinessObjectForPictogramElement(parentShape);
-				boolean inherited = SupportUtil.isInherited(tp, parentShape);
 				boolean subtp = (bo instanceof State);
+				boolean inherited = subtp?SupportUtil.isInherited(getDiagram(), (State)bo):SupportUtil.isInherited(tp, parentShape);
 	
 				int margin = subtp?StateSupport.MARGIN:StateGraphSupport.MARGIN;
 				int size = subtp?ITEM_SIZE_SMALL:ITEM_SIZE;
@@ -330,6 +330,13 @@ public class TrPointSupport {
 				
 				State s = (State) tp.eContainer().eContainer();
 				List<PictogramElement> elements = Graphiti.getLinkService().getPictogramElements(getDiagram(), s);
+				if (elements.isEmpty()) {
+					Object bo = getBusinessObjectForPictogramElement(subGraphShape);
+					assert(bo instanceof StateGraph): "expected state graph";
+					assert(((StateGraph)bo).eContainer() instanceof State): "expected state";
+					s = (State) ((StateGraph)bo).eContainer();
+					elements = Graphiti.getLinkService().getPictogramElements(getDiagram(), s);
+				}
 				assert(elements.size()==1): "expected unique pe";
 				assert(elements.get(0) instanceof ContainerShape): "expected state shape";
 				ContainerShape stateShape = (ContainerShape) elements.get(0);
@@ -754,7 +761,9 @@ public class TrPointSupport {
 			
 			// we clear the figure and rebuild it
 			GraphicsAlgorithm invisibleRect = pe.getGraphicsAlgorithm();
-			invisibleRect.getGraphicsAlgorithmChildren().clear();
+			while (!invisibleRect.getGraphicsAlgorithmChildren().isEmpty()) {
+				EcoreUtil.delete(invisibleRect.getGraphicsAlgorithmChildren().get(0), true);
+			}
 			
 			createFigure(tp, false, container, invisibleRect, dark, bright);
 			
