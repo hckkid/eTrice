@@ -125,8 +125,6 @@ public class PortPropertyDialog extends AbstractPropertyDialog {
 	}
 
 	private boolean isPortRelay() {
-		if (newPort)
-			return false;
 		if (internal)
 			return false;
 		
