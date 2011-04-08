@@ -28,6 +28,7 @@ import org.eclipse.etrice.core.room.TrPoint;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.ui.behavior.ImageProvider;
 import org.eclipse.etrice.ui.behavior.dialogs.StatePropertyDialog;
+import org.eclipse.graphiti.datatypes.IDimension;
 import org.eclipse.graphiti.dt.IDiagramTypeProvider;
 import org.eclipse.graphiti.features.IAddFeature;
 import org.eclipse.graphiti.features.ICreateConnectionFeature;
@@ -87,6 +88,7 @@ import org.eclipse.graphiti.tb.IContextButtonPadData;
 import org.eclipse.graphiti.tb.IToolBehaviorProvider;
 import org.eclipse.graphiti.ui.features.DefaultDeleteFeature;
 import org.eclipse.graphiti.ui.features.DefaultFeatureProvider;
+import org.eclipse.graphiti.ui.services.GraphitiUi;
 import org.eclipse.graphiti.util.ColorConstant;
 import org.eclipse.graphiti.util.IColorConstant;
 import org.eclipse.jface.window.Window;
@@ -103,6 +105,7 @@ public class StateSupport {
 	public static final int MARGIN = 20;
 	public static final int CORNER_WIDTH = 20;
 	public static final int HINT_CORNER_WIDTH = 5;
+	private static final int TEXT_MARGIN = 10;
 	
 	public static final IColorConstant LINE_COLOR = new ColorConstant(0, 0, 0);
 	public static final IColorConstant INHERITED_COLOR = new ColorConstant(100, 100, 100);
@@ -144,8 +147,6 @@ public class StateSupport {
 		        
 				boolean inherited = SupportUtil.isInherited(getDiagram(), sg);
 				if (inherited) {
-					// TODOHRR: handling of refined state - also consider refining action codes
-					
 					sg = SupportUtil.insertRefinedState(sg, ac, targetContainer, getFeatureProvider());
 				}
 				
@@ -181,6 +182,7 @@ public class StateSupport {
 	
 		private class AddFeature extends AbstractAddFeature {
 	
+
 			public AddFeature(IFeatureProvider fp) {
 				super(fp);
 			}
@@ -214,9 +216,9 @@ public class StateSupport {
 				int height = context.getHeight();
 				if (width<=0) {
 					width = DEFAULT_SIZE_X;
-					int textSize = s.getName().length()*6;
-					if (width<textSize)
-						width = textSize;
+					IDimension sz = GraphitiUi.getUiLayoutService().calculateTextSize(s.getName(), getDiagram().getFonts().get(0));
+					if (width<sz.getWidth()+TEXT_MARGIN)
+						width = sz.getWidth()+TEXT_MARGIN;
 				}
 				if (height<=0)
 					height = DEFAULT_SIZE_Y;
@@ -299,7 +301,9 @@ public class StateSupport {
 					Object bo = getBusinessObjectForPictogramElement(containerShape);
 					if (bo instanceof State) {
 						State s = (State) bo;
-						borderGA.getGraphicsAlgorithmChildren().clear();
+						while (!borderGA.getGraphicsAlgorithmChildren().isEmpty()) {
+							EcoreUtil.delete(borderGA.getGraphicsAlgorithmChildren().get(0), true);
+						}
 						Color lineColor = manageColor(SupportUtil.isInherited(getDiagram(), s)?INHERITED_COLOR:LINE_COLOR);
 						addHints(s, (RoundedRectangle) borderGA, lineColor);
 					}
@@ -366,9 +370,13 @@ public class StateSupport {
 				
 				// we clear the figure and rebuild it
 				GraphicsAlgorithm invisibleRect = context.getPictogramElements()[0].getGraphicsAlgorithm();
-				invisibleRect.getGraphicsAlgorithmChildren().clear();
+				while (!invisibleRect.getGraphicsAlgorithmChildren().isEmpty()) {
+					EcoreUtil.delete(invisibleRect.getGraphicsAlgorithmChildren().get(0), true);
+				}
 				
-				createFigure(s, invisibleRect, manageColor(LINE_COLOR), manageColor(BACKGROUND));
+				boolean inherited = SupportUtil.isInherited(getDiagram(), s);
+				Color lineColor = manageColor(inherited?INHERITED_COLOR:LINE_COLOR);
+				createFigure(s, invisibleRect, lineColor, manageColor(BACKGROUND));
 				
 				GraphicsAlgorithm ga = container.getChildren().get(0).getGraphicsAlgorithm();
 				if (ga instanceof Text) {
@@ -402,8 +410,8 @@ public class StateSupport {
 
 			@Override
 			public boolean canExecute(ICustomContext context) {
-				ContainerShape container = (ContainerShape)context.getPictogramElements()[0];
-				Object bo = getBusinessObjectForPictogramElement(container);
+				PictogramElement pe = context.getPictogramElements()[0];
+				Object bo = getBusinessObjectForPictogramElement(pe);
 				if (bo instanceof State) {
 					State targetting = SupportUtil.getTargettingState((State) bo, getDiagram());
 					if (targetting.getSubgraph()!=null)
@@ -450,8 +458,8 @@ public class StateSupport {
 
 			@Override
 			public boolean canExecute(ICustomContext context) {
-				ContainerShape container = (ContainerShape)context.getPictogramElements()[0];
-				Object bo = getBusinessObjectForPictogramElement(container);
+				PictogramElement pe = context.getPictogramElements()[0];
+				Object bo = getBusinessObjectForPictogramElement(pe);
 				if (bo instanceof State) {
 					if (((State) bo).getSubgraph()==null)
 						return true;

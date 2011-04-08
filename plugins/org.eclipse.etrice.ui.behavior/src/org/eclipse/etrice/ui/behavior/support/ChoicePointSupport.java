@@ -403,10 +403,12 @@ public class ChoicePointSupport {
 			ContainerShape container = (ContainerShape)pe;
 			
 			// we clear the figure and rebuild it
-			GraphicsAlgorithm invisibleRect = pe.getGraphicsAlgorithm();
-			invisibleRect.getGraphicsAlgorithmChildren().clear();
+			GraphicsAlgorithm borderRect = pe.getGraphicsAlgorithm();
+			while (!borderRect.getGraphicsAlgorithmChildren().isEmpty()) {
+				EcoreUtil.delete(borderRect.getGraphicsAlgorithmChildren().get(0), true);
+			}
 			
-			createFigure(cp, container, invisibleRect, dark, bright);
+			createFigure(cp, container, borderRect, dark, bright);
 		}
 		
 	}
