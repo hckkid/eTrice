@@ -314,21 +314,23 @@ public class ActorContainerRefSupport {
 	
 				if (containerGa.getGraphicsAlgorithmChildren().size()==1) {
 					// the visible outer frame
-					GraphicsAlgorithm ga = containerGa.getGraphicsAlgorithmChildren().get(0);
+					GraphicsAlgorithm borderRect = containerGa.getGraphicsAlgorithmChildren().get(0);
 					
 					int nw = w-2*MARGIN;
 					int nh = h-2*MARGIN;
 					
-					ga.setWidth(nw);
-					ga.setHeight(nh);
+					borderRect.setWidth(nw);
+					borderRect.setHeight(nh);
 					
 					Object bo = getBusinessObjectForPictogramElement(containerShape);
 					if (bo instanceof ActorContainerRef) {
 						ActorContainerRef acr = (ActorContainerRef) bo;
-						ga.getGraphicsAlgorithmChildren().clear();
+						while (!borderRect.getGraphicsAlgorithmChildren().isEmpty()) {
+							EcoreUtil.delete(borderRect.getGraphicsAlgorithmChildren().get(0), true);
+						}
 						EObject parent = containerShape.getContainer().getLink().getBusinessObjects().get(0);
 						Color lineColor = manageColor(isInherited(acr, parent)?INHERITED_COLOR:LINE_COLOR);
-						addSubStructureHint(acr, (Rectangle) ga, lineColor);
+						addSubStructureHint(acr, (Rectangle) borderRect, lineColor);
 					}
 
 					if (!containerShape.getChildren().isEmpty()) {
