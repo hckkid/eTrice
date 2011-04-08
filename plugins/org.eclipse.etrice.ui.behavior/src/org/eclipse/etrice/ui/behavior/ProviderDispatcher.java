@@ -139,14 +139,6 @@ public class ProviderDispatcher {
 			return transitionSupport.getFeatureProvider().getCreateConnectionFeatures();
 		}
 
-		public ICustomFeature[] getCustomFeatures(ICustomContext context) {
-			return concatAll(
-					trPointSupport.getFeatureProvider().getCustomFeatures(context),
-					stateSupport.getFeatureProvider().getCustomFeatures(context),
-					transitionSupport.getFeatureProvider().getCustomFeatures(context)
-				);
-		}
-
 		public void setParentContainer(ContainerShape parent) {
 			this.parent  = parent;
 		}
@@ -300,13 +292,26 @@ public class ProviderDispatcher {
 		
 		@Override
 		public ICustomFeature[] getCustomFeatures(ICustomContext context) {
-			return getAllCustomFeatures(context);
+	        IFeatureProvider fp = featureSwitch.doSwitch(getBusinessObject(context));
+			if (fp!=null)
+				return fp.getCustomFeatures(context);
+			else
+				return super.getCustomFeatures(context);
 		}
 		
 		private EObject getBusinessObject(IPictogramElementContext context) {
 			PictogramElement pictogramElement = context.getPictogramElement();
 			EObject bo = (EObject) getBusinessObjectForPictogramElement(pictogramElement);
 			return bo;
+		}
+		
+		private EObject getBusinessObject(ICustomContext context) {
+			PictogramElement[] pes = context.getPictogramElements();
+			if (pes.length>0) {
+				EObject bo = (EObject) getBusinessObjectForPictogramElement(pes[0]);
+				return bo;
+			}
+			return null;
 		}
 		
 		private IFeatureProvider getFeatureProvider(IPictogramElementContext context) {
@@ -445,10 +450,6 @@ public class ProviderDispatcher {
 
 	private ICreateConnectionFeature[] getAllCreateConnectionFeatures() {
 		return featureSwitch.getCreateConnectionFeatures();
-	}
-	
-	private ICustomFeature[] getAllCustomFeatures(ICustomContext context) {
-		return featureSwitch.getCustomFeatures(context);
 	}
 	
 	private static <T> T[] concatAll(T[] first, T[]... rest) {
