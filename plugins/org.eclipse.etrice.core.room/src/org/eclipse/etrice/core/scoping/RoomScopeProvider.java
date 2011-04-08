@@ -320,7 +320,8 @@ public class RoomScopeProvider extends AbstractDeclarativeScopeProvider {
 			}
 		}
 		
-		getTrPointScopes(scopes, targetStateGraph);
+		if (targetStateGraph!=null)
+			getTrPointScopes(scopes, targetStateGraph);
 		
 		return new SimpleScope(IScope.NULLSCOPE, scopes);
 	}
