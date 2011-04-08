@@ -30,6 +30,7 @@ import org.eclipse.etrice.core.validation.ValidationUtil.Result;
 import org.eclipse.etrice.ui.common.dialogs.AbstractPropertyDialog;
 import org.eclipse.etrice.ui.structure.Activator;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Shell;
@@ -85,7 +86,9 @@ public class SPPPropertyDialog extends AbstractPropertyDialog {
 
 	@Override
 	protected void initializeBounds() {
-		getShell().setSize(500, 300);
+		super.initializeBounds();
+		Point size = getShell().getSize();
+		getShell().setSize((int)(size.x*1.2), size.y);
 	}
 	
 	@Override

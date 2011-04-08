@@ -25,6 +25,7 @@ import org.eclipse.etrice.core.validation.ValidationUtil;
 import org.eclipse.etrice.core.validation.ValidationUtil.Result;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
@@ -143,7 +144,9 @@ public class PortPropertyDialog extends AbstractPropertyDialog {
 
 	@Override
 	protected void initializeBounds() {
-		getShell().setSize(500, 300);
+		super.initializeBounds();
+		Point size = getShell().getSize();
+		getShell().setSize((int)(size.x*1.2), size.y);
 	}
 	
 	@Override
