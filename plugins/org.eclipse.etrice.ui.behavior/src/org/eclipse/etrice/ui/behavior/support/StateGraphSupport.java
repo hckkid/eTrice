@@ -142,9 +142,12 @@ public class StateGraphSupport {
 					label.setBackground(manageColor(LINE_COLOR));
 					label.setHorizontalAlignment(Orientation.ALIGNMENT_RIGHT);
 					label.setVerticalAlignment(Orientation.ALIGNMENT_TOP);
-					Font font = label.getFont();
-					font.setSize((int) (label.getFont().getSize()*1.2));
-					font.setBold(true);
+					Font font = Graphiti.getGaService().manageFont(
+							getDiagram(),
+							label.getFont().getName(),
+							(int)(label.getFont().getSize()*1.2),
+							label.getFont().isItalic(),
+							true);
 					label.setFont(font);
 					gaService.setLocationAndSize(label, 0, MARGIN, width, 2*MARGIN);
 				}
