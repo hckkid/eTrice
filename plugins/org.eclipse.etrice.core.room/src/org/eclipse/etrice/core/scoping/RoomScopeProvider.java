@@ -41,7 +41,6 @@ import org.eclipse.etrice.core.room.SPPRef;
 import org.eclipse.etrice.core.room.SPPoint;
 import org.eclipse.etrice.core.room.SemanticsInRule;
 import org.eclipse.etrice.core.room.SemanticsOutRule;
-import org.eclipse.etrice.core.room.ServiceImplementation;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.StateTerminal;
@@ -50,6 +49,8 @@ import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.core.room.SubSystemRef;
 import org.eclipse.etrice.core.room.TrPoint;
 import org.eclipse.etrice.core.room.TrPointTerminal;
+import org.eclipse.etrice.core.room.util.RoomHelpers;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
@@ -175,16 +176,16 @@ public class RoomScopeProvider extends AbstractDeclarativeScopeProvider {
 	 * @param bs
 	 * @return the path
 	 */
-	private String getStatePath(BaseState bs) {
+	private QualifiedName getStatePath(BaseState bs) {
 		EObject parent = bs.eContainer().eContainer();
 		if (parent instanceof BaseState)
-			return getStatePath((BaseState) parent)+STATE_PATH_DELIMITER+bs.getName();
+			return getStatePath((BaseState) parent).append(bs.getName());
 		else if (parent instanceof RefinedState) {
 			BaseState base = ((RefinedState) parent).getBase();
 			if (base!=null)
-				return getStatePath(base)+STATE_PATH_DELIMITER+bs.getName();
+				return getStatePath(base).append(bs.getName());
 		}
-		return bs.getName();
+		return QualifiedName.create(bs.getName());
 	}
 	
 	/**
@@ -447,25 +448,7 @@ public class RoomScopeProvider extends AbstractDeclarativeScopeProvider {
 		final List<IEObjectDescription> scopes = new ArrayList<IEObjectDescription>();
 		
 		ActorClass ac = getActorClass(mfi);
-		LinkedList<ActorClass> classes = getBaseClasses(ac);
-		LinkedList<InterfaceItem> items = new LinkedList<InterfaceItem>();
-		
-		// for all base classes
-		for (ActorClass a : classes) {
-			// add internal ports
-			items.addAll(a.getIntPorts());
-			
-			// add service implementations and saps
-			for (ServiceImplementation ispp : a.getServiceImplementations()) {
-				items.add(ispp.getSpp());
-			}
-			items.addAll(a.getStrSAPs());
-			
-			// add external end ports
-			for (ExternalPort p : a.getExtPorts()) {
-				items.add(p.getIfport());
-			}
-		}
+		List<InterfaceItem> items = RoomHelpers.getAllInterfaceItems(ac);
 		
 		for (InterfaceItem item : items) {
 			scopes.add(EObjectDescription.create(item.getName(), item));
