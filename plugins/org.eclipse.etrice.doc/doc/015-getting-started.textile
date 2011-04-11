@@ -1,0 +1,94 @@
+h1. Tutorial HelloWorld
+
+h2. Scope
+
+In this tutorial you will build your first very simple etrice model. The goal is to learn the work flow of eTrice and to understand a few basic features of ROOM. You will perform the following steps:
+
+# create a new model from scratch
+# add a very simple state machine to an actor
+# generate the source code
+# run the model
+# open the message sequence chart
+
+h2. Create a new model from scratch
+
+The goal of eTrice is to describe distributed systems on a logical level. In the current version not all elements will be supported. But as prerequisite for further versions the following elements are mandatory for an eTrice model:
+* the __LogicalSystem__ 
+* at least one __SubSystemClass__
+* at least one __ActorClass__
+
+The __LogicalSystem__ represents the complete distributed system and contains at least one __SubSystemRef__. The __SubSystemClass__ represents an address space and contains at least one __ActorRef__. The __ActorClass__ is the building block of which an application will be build of. It is a good idea to define a top level actor that can be used as reference within the subsystem.
+
+The resulting model code looks like this:
+
+bc.. 
+RoomModel HelloWorld {
+
+	LogicalSystem System_Blinky {
+		SubSystemRef subsystem : SubSystem_HelloWorld
+	}
+
+	SubSystemClass SubSystem_HelloWorld {
+		ActorRef application : HelloWorldTop
+	}
+
+	ActorClass HelloWorldTop {
+	}
+} 
+bc. 
+
+
+h3. Create a new model file 
+
+Create a new file in your org.eclipse.etrice.doc.tutorials.scratch.model directory and name it __HelloWorld.room__ and select finish.
+
+!images/OpenFile2.PNG!
+
+The file ending must be __.room__ for selecting the correct editor. Open the file and copy the above code into the editor window. You should see something like this:
+
+!images/HelloWorld1.PNG!
+
+
+h3. Create a state machine
+
+We will implement the Hello World code on the initial transition of the __HelloWorldTop__ actor. Therefore open the state machine editor by right clicking the __HelloWorldTop__ actor in the outline view and select __Edit Behavior__.
+
+!images/HelloWorld2.PNG!
+
+The state machine editor will be opened. Create the state machine as follow. Put the action code to the initial transition.
+
+!images/HelloWorld3.PNG!
+
+Save the diagram and inspect the model file. Note that the textual representation was created after saving the diagram.
+
+!images/HelloWorld4.PNG!
+
+
+h3. Build and run the model
+
+Now the model is finshed and source code can be generated. 
+From org.eclipse.etrice.doc.tutorials.scratch.workflow select genAllModells.mwe2 and run it as MWE2Workflow. Currently all models in the directory will be generated.
+
+!images/HelloWorld6.PNG!
+
+The code will be generated to the src-gen directory. The main class will be contained in __SubSystem_HelloWorldRunner.java__. Select this file and run it as Java application.
+
+!images/HelloWorld7.PNG!
+
+
+The Hello World application starts and the string will be printed on the console window. To stop the application the user must type __quit__ in the console window.
+
+!images/HelloWorld8.PNG!
+
+h3. Open the Message Sequence Chart
+
+During runtime the application produces a MSC and wrote it to a file. Open /org.eclipse.etrice.doc.tutorials/tmp/log/SubSystem_HelloWorld_Async.seq. You should see something like this:
+
+!images/HelloWorld9.PNG!
+
+
+h2. Summary
+
+Know you have generated your first eTrice model from scratch. You can switch between diagram editor and model (.room file) and you can see what will be generated during editing and saving the diagram files. 
+You should take a look at the generated source files to understand how the state machine is generated and the life cycle of the application. The next tutorials deals with more complex state machines hierarchies in structure and behavior.
+ 

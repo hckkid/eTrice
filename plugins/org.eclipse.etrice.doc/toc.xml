@@ -1,0 +1,20 @@
+<toc topic="help/index.html" label="eTrice User Guide">
+<topic href="help/Overview.html" label="Overview">
+<topic href="help/Overview.html#WhatisXtext" label="What is Xtext?"></topic>
+<topic href="help/HowDoesItWork.html" label="How Does It Work?"></topic>
+<topic href="help/XtextisHighlyConfigurable.html" label="Xtext is Highly Configurable"></topic>
+<topic href="help/WhoUsesXtext.html" label="Who Uses Xtext?"></topic>
+<topic href="help/WhoisBehindXtext.html" label="Who is Behind Xtext?"></topic>
+<topic href="help/DSL.html" label="What is a Domain-Specific Language"></topic>
+</topic>
+<topic href="help/TutorialHelloWorld.html" label="Tutorial HelloWorld">
+<topic href="help/TutorialHelloWorld.html#Scope" label="Scope"></topic>
+<topic href="help/Createanewmodelfromscratch.html" label="Create a new model from scratch">
+<topic href="help/Createanewmodelfromscratch.html#Createanewmodelfile" label="Create a new model file"></topic>
+<topic href="help/Createanewmodelfromscratch.html#Createastatemachine" label="Create a state machine"></topic>
+<topic href="help/Createanewmodelfromscratch.html#Buildandrunthemodel" label="Build and run the model"></topic>
+<topic href="help/Createanewmodelfromscratch.html#OpentheMessageSequenceChart" label="Open the Message Sequence Chart"></topic>
+</topic>
+<topic href="help/Summary.html" label="Summary"></topic>
+</topic>
+</toc>

@@ -1,0 +1,459 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>eTrice User Guide</title>
+<link href="book.css" rel="stylesheet" type="text/css">
+<meta content="DocBook XSL Stylesheets V1.75.1" name="generator">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="book" title="eTrice User Guide">
+<div class="titlepage">
+<div>
+<div>
+<h1 class="title">
+<a name="N10001"></a>eTrice User Guide</h1>
+</div>
+</div>
+<hr>
+</div>
+<div class="toc">
+<p>
+<b>Table of Contents</b>
+</p>
+<dl>
+<dt>
+<span class="chapter"><a href="#Overview">1. Overview</a></span>
+</dt>
+<dd>
+<dl>
+<dt>
+<span class="section"><a href="#WhatisXtext">What is Xtext?</a></span>
+</dt>
+<dt>
+<span class="section"><a href="#HowDoesItWork">How Does It Work?</a></span>
+</dt>
+<dt>
+<span class="section"><a href="#XtextisHighlyConfigurable">Xtext is Highly Configurable</a></span>
+</dt>
+<dt>
+<span class="section"><a href="#WhoUsesXtext">Who Uses Xtext?</a></span>
+</dt>
+<dt>
+<span class="section"><a href="#WhoisBehindXtext">Who is Behind Xtext?</a></span>
+</dt>
+<dt>
+<span class="section"><a href="#DSL">What is a Domain-Specific Language</a></span>
+</dt>
+</dl>
+</dd>
+<dt>
+<span class="chapter"><a href="#TutorialHelloWorld">2. Tutorial HelloWorld</a></span>
+</dt>
+<dd>
+<dl>
+<dt>
+<span class="section"><a href="#Scope">Scope</a></span>
+</dt>
+<dt>
+<span class="section"><a href="#Createanewmodelfromscratch">Create a new model from scratch</a></span>
+</dt>
+<dt>
+<span class="section"><a href="#Summary">Summary</a></span>
+</dt>
+</dl>
+</dd>
+</dl>
+</div>
+<div class="chapter" title="Chapter&nbsp;1.&nbsp;Overview">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title">
+<a name="Overview"></a>Chapter&nbsp;1.&nbsp;Overview</h2>
+</div>
+</div>
+</div>
+<div class="section" title="What is Xtext?">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both">
+<a name="WhatisXtext"></a>What is Xtext?</h2>
+</div>
+</div>
+</div>
+<p>No matter if you want to create a small textual domain-specific language (DSL) or you want to implement 
+				a full-blown general purpose programming language. 
+				With Xtext you can create your very own languages in a snap. Also if you already have an existing 
+				language but it lacks decent tool support, you can use Xtext to create 
+				a sophisticated Eclipse-based development environment providing editing experience known from modern 
+				Java IDEs in a surprisingly short amount of time. We call Xtext a language development framework.  </p>
+</div>
+<div class="section" title="How Does It Work?">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both">
+<a name="HowDoesItWork"></a>How Does It Work?</h2>
+</div>
+</div>
+</div>
+<p>Xtext provides you with a set of domain-specific languages and modern APIs to describe the different 
+				aspects of your programming language. 
+				Based on that information it gives you a full implementation of that language running on the JVM. 
+				The compiler components of your language are independent of Eclipse or OSGi and can be used in any Java environment.
+				They include such things as the parser, the type-safe abstract syntax tree (AST), the serializer and 
+				code formatter, the scoping framework and the linking, compiler checks and static analysis aka validation 
+				and last but not least a code generator or interpreter. These runtime components integrate with and 
+				are based on the Eclipse Modeling Framework (EMF), which effectively allows you to 
+				use Xtext together with other EMF frameworks like for instance the Graphical Modeling Project GMF.</p>
+<p>In addition to this nice runtime architecture, you will get a full blown Eclipse-IDE specifically tailored 
+				for your language. It already provides great default functionality for 
+				all aspects and again comes with DSLs and APIs that allow to configure or change the most common things 
+				very easily. And if that&rsquo;s not flexible enough there is Guice to replace the default behaviour with
+				your own implementations.</p>
+</div>
+<div class="section" title="Xtext is Highly Configurable">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both">
+<a name="XtextisHighlyConfigurable"></a>Xtext is Highly Configurable</h2>
+</div>
+</div>
+</div>
+<p>Xtext uses the lightweight dependency injection (DI) framework Google Guice to wire up the whole language 
+				as well as the IDE infrastructure. A central, external module is used to configure the DI container. 
+				As already mentioned, Xtext comes with decent default implementations and DSLs and APIs for the aspect that 
+				are common sweet spots for customization. But if you need something completely different, 
+				Google Guice gives you the power to exchange every little class in a non-invasive way.</p>
+</div>
+<div class="section" title="Who Uses Xtext?">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both">
+<a name="WhoUsesXtext"></a>Who Uses Xtext?</h2>
+</div>
+</div>
+</div>
+<p>Xtext is used in many different industries. It is used in the field of mobile devices, automotive development, 
+				embedded systems or Java enterprise software projects and game development. 
+				People use Xtext-based languages to drive code generators that target Java, C, C++, C#, Objective C, Python, or Ruby code. 
+				Although the language infrastructure itself runs on the JVM, you can compile Xtext languages to any 
+				existing platform.
+				Xtext-based languages are developed for well known Open-Source projects such as Maven, Eclipse B3, 
+				the Eclipse Webtools platform or Google&rsquo;s Protocol Buffers and the framework is also widely used in research projects.  </p>
+</div>
+<div class="section" title="Who is Behind Xtext?">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both">
+<a name="WhoisBehindXtext"></a>Who is Behind Xtext?</h2>
+</div>
+</div>
+</div>
+<p>Xtext is a professional Open-Source project. We, the main developers and the project lead, work for 
+				itemis, 
+				which is a well known consulting company specialized on model-based development.
+				Therefore we are able to work almost full-time on the project. Xtext is an Eclipse.org project. 
+				Besides many other advantages this means that you don&rsquo;t have to fear any IP issues, because the Eclipse Foundation 
+				has their own lawyers who take care that no intellectual property is violated. </p>
+<p>You may ask: Where does the money for Open-Source development come from? Well, we provide professional 
+				services around Xtext. Be it training or on-site consulting, be it development of prototypes or 
+				implementation of full-blown IDEs for programming languages. We do not only know the framework very well 
+				but we are also experts in programming and domain-specific language design. Don&rsquo;t hesitate to get in 
+				contact with us (
+				<a class="ulink" href="http://xtext.itemis.com" target="_new">www.itemis.com</a>).
+			</p>
+</div>
+<div class="section" title="What is a Domain-Specific Language">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both">
+<a name="DSL"></a>What is a Domain-Specific Language</h2>
+</div>
+</div>
+</div>
+<p>A 
+				<span class="emphasis"><em>Domain-Specific Language (DSL)</em></span> is a small programming language, which focuses on a particular domain.
+				Such a domain can be more or less anything. The idea is that its concepts and notation is as close as possible to
+				what you have in mind when you think about a solution in that domain. Of course we are talking about problems which can
+				be solved or processed by computers somehow.
+			</p>
+<p>The opposite of a DSL is a so called 
+				<span class="emphasis"><em>GPL</em></span>, a 
+				<span class="emphasis"><em>General Purpose Language</em></span> such as Java or any other common programming language.
+				With a GPL you can solve every computer problem, but it might not always be the best way to solve it.
+			</p>
+<p>Imagine you want to remove the core from an apple. You could of course use a Swiss army knife to cut it out, 
+				and this is reasonable if you have to do it just once or twice. But if you need to do that on a regular 
+				basis it might be more efficient to use an apple corer.</p>
+<p>There are a couple of well-known examples of DSLs. For instance SQL is actually a DSL which focuses on 
+				querying relational databases. Other DSLs are regular expressions or even languages provided by tools 
+				like MathLab. Also most XML languages are actually domain-specific languages. The whole purpose of XML is 
+				to allow for easy creation of new languages. Unfortunately, XML uses a fixed concrete syntax, which is 
+				very verbose and yet not adapted to be read by humans. Into the bargain, a generic syntax for everything is a compromise.</p>
+<p>Xtext is a sophisticated framework that helps to implement your very own DSL with appropriate IDE support. 
+				There is no such limitation as with XML, you are free to define your concrete syntax as you like. It may 
+				be as concise and suggestive as possible being a best match for your particular domain. The hard task of 
+				reading your model, working with it and writing it back to your syntax is greatly simplified by Xtext.</p>
+</div>
+</div>
+<div class="chapter" title="Chapter&nbsp;2.&nbsp;Tutorial HelloWorld">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title">
+<a name="TutorialHelloWorld"></a>Chapter&nbsp;2.&nbsp;Tutorial HelloWorld</h2>
+</div>
+</div>
+</div>
+<div class="section" title="Scope">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both">
+<a name="Scope"></a>Scope</h2>
+</div>
+</div>
+</div>
+<p>In this tutorial you will build your first very simple etrice model. The goal is to learn the work flow of eTrice and to understand a few basic features of ROOM. You will perform the following steps:</p>
+<div class="orderedlist">
+<ol class="orderedlist" type="1">
+<li class="listitem">
+<p>create a new model from scratch</p>
+</li>
+<li class="listitem">
+<p>add a very simple state machine to an actor</p>
+</li>
+<li class="listitem">
+<p>generate the source code</p>
+</li>
+<li class="listitem">
+<p>run the model</p>
+</li>
+<li class="listitem">
+<p>open the message sequence chart</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="section" title="Create a new model from scratch">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both">
+<a name="Createanewmodelfromscratch"></a>Create a new model from scratch</h2>
+</div>
+</div>
+</div>
+<p>The goal of eTrice is to describe distributed systems on a logical level. In the current version not all elements will be supported. But as prerequisite for further versions the following elements are mandatory for an eTrice model:</p>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="disc">
+<li class="listitem">
+<p>the 
+						<span class="italic">LogicalSystem</span> 
+					
+</p>
+</li>
+<li class="listitem">
+<p>at least one 
+						<span class="italic">SubSystemClass</span>
+					
+</p>
+</li>
+<li class="listitem">
+<p>at least one 
+						<span class="italic">ActorClass</span>
+					
+</p>
+</li>
+</ul>
+</div>
+<p>The 
+				<span class="italic">LogicalSystem</span> represents the complete distributed system and contains at least one 
+				<span class="italic">SubSystemRef</span>. The 
+				<span class="italic">SubSystemClass</span> represents an address space and contains at least one 
+				<span class="italic">ActorRef</span>. The 
+				<span class="italic">ActorClass</span> is the building block of which an application will be build of. It is a good idea to define a top level actor that can be used as reference within the subsystem.
+			</p>
+<p>The resulting model code looks like this:</p>
+<div class="literallayout">
+<p>
+<code class="code">RoomModel&nbsp;HelloWorld&nbsp;{<br>
+
+<br>
+	LogicalSystem&nbsp;System_Blinky&nbsp;{<br>
+		SubSystemRef&nbsp;subsystem&nbsp;:&nbsp;SubSystem_HelloWorld<br>
+	}<br>
+
+<br>
+	SubSystemClass&nbsp;SubSystem_HelloWorld&nbsp;{<br>
+		ActorRef&nbsp;application&nbsp;:&nbsp;HelloWorldTop<br>
+	}<br>
+
+<br>
+	ActorClass&nbsp;HelloWorldTop&nbsp;{<br>
+	}<br>
+}&nbsp;<br>
+
+</code>
+</p>
+</div>
+<div class="literallayout">
+<p>
+<code class="code"></code>
+</p>
+</div>
+<div class="section" title="Create a new model file">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="Createanewmodelfile"></a>Create a new model file </h3>
+</div>
+</div>
+</div>
+<p>Create a new file in your org.eclipse.etrice.doc.tutorials.scratch.model directory and name it 
+					<span class="italic">HelloWorld.room</span> and select finish.
+				</p>
+<p>
+					
+</p>
+<div class="mediaobject">
+<img src="images/OpenFile2.PNG"></div>
+<p>
+				
+</p>
+<p>The file ending must be 
+					<span class="italic">.room</span> for selecting the correct editor. Open the file and copy the above code into the editor window. You should see something like this:
+				</p>
+<p>
+					
+</p>
+<div class="mediaobject">
+<img src="images/HelloWorld1.PNG"></div>
+<p>
+				
+</p>
+</div>
+<div class="section" title="Create a state machine">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="Createastatemachine"></a>Create a state machine</h3>
+</div>
+</div>
+</div>
+<p>We will implement the Hello World code on the initial transition of the 
+					<span class="italic">HelloWorldTop</span> actor. Therefore open the state machine editor by right clicking the 
+					<span class="italic">HelloWorldTop</span> actor in the outline view and select 
+					<span class="italic">Edit Behavior</span>.
+				</p>
+<p>
+					
+</p>
+<div class="mediaobject">
+<img src="images/HelloWorld2.PNG"></div>
+<p>
+				
+</p>
+<p>The state machine editor will be opened. Create the state machine as follow. Put the action code to the initial transition.</p>
+<p>
+					
+</p>
+<div class="mediaobject">
+<img src="images/HelloWorld3.PNG"></div>
+<p>
+				
+</p>
+<p>Save the diagram and inspect the model file. Note that the textual representation was created after saving the diagram.</p>
+<p>
+					
+</p>
+<div class="mediaobject">
+<img src="images/HelloWorld4.PNG"></div>
+<p>
+				
+</p>
+</div>
+<div class="section" title="Build and run the model">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="Buildandrunthemodel"></a>Build and run the model</h3>
+</div>
+</div>
+</div>
+<p>Now the model is finshed and source code can be generated. 
+					From org.eclipse.etrice.doc.tutorials.scratch.workflow select genAllModells.mwe2 and run it as MWE2Workflow. Currently all models in the directory will be generated.</p>
+<p>
+					
+</p>
+<div class="mediaobject">
+<img src="images/HelloWorld6.PNG"></div>
+<p>
+				
+</p>
+<p>The code will be generated to the src-gen directory. The main class will be contained in __SubSystem_HelloWorldRunner.java__. Select this file and run it as Java application.</p>
+<p>
+					
+</p>
+<div class="mediaobject">
+<img src="images/HelloWorld7.PNG"></div>
+<p>
+				
+</p>
+<p>The Hello World application starts and the string will be printed on the console window. To stop the application the user must type 
+					<span class="italic">quit</span> in the console window.
+				</p>
+<p>
+					
+</p>
+<div class="mediaobject">
+<img src="images/HelloWorld8.PNG"></div>
+<p>
+				
+</p>
+</div>
+<div class="section" title="Open the Message Sequence Chart">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="OpentheMessageSequenceChart"></a>Open the Message Sequence Chart</h3>
+</div>
+</div>
+</div>
+<p>During runtime the application produces a MSC and wrote it to a file. Open /org.eclipse.etrice.doc.tutorials/tmp/log/SubSystem_HelloWorld_Async.seq. You should see something like this:</p>
+<p>
+					
+</p>
+<div class="mediaobject">
+<img src="images/HelloWorld9.PNG"></div>
+<p>
+				
+</p>
+</div>
+</div>
+<div class="section" title="Summary">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both">
+<a name="Summary"></a>Summary</h2>
+</div>
+</div>
+</div>
+<p>Know you have generated your first eTrice model from scratch. You can switch between diagram editor and model (.room file) and you can see what will be generated during editing and saving the diagram files. 
+				You should take a look at the generated source files to understand how the state machine is generated and the life cycle of the application. The next tutorials deals with more complex state machines hierarchies in structure and behavior.</p>
+</div>
+</div>
+</div>
+</body>
+</html>
