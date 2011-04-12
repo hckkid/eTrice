@@ -4,6 +4,12 @@
     (c) Lawrence Mandel <lmandel@ca.ibm.com>
     (c) Peter Friese <peter.friese@itemis.com>
 -->
+<!--
+	Henrik Rentz-Reichert:
+	- copied from the xtext project
+	- updated remote sites
+	- fixed class path usage (requires ant 1.8.2)
+-->
 <project name="org.eclipse.etrice.doc" default="build-doc" basedir=".">
 	
 	<!--
@@ -274,7 +280,5 @@
 		</xslt>
 		<delete file="${basedir}/etrice.html" />
 	</target>
-
-	
 	
 </project>
