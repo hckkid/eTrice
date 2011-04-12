@@ -19,6 +19,14 @@
 	
 	<property name="build.dir" value="build" />
 	<property name="download.dir" value="${java.io.tmpdir}${file.separator}downloads"/>
+
+	<path id="xslt.class.path">
+		<pathelement location="${fop.dir}${file.separator}build${file.separator}fop.jar" />
+		<pathelement location="${fop.dir}${file.separator}lib${file.separator}xalan-2.7.0.jar" />
+		<fileset dir="${fop.dir}${file.separator}lib">
+			<include name="**/*.jar"/>
+		</fileset>
+	</path>
 	
 	<!--  
 		WikiText Toolchain 
@@ -48,9 +56,6 @@
 	<target name="install-wikitext" depends="get-wikitext">
 		<taskdef resource="org/eclipse/mylyn/wikitext/core/util/anttask/tasks.properties">
 			<classpath>
-				<fileset dir="${basedir}/lib/plugins">
-					<include name="org.eclipse.xtext.wikitext.core*.jar"/>
-				</fileset>
 				<fileset dir="${wikitext.dir}">
 					<include name="org.eclipse.mylyn.wikitext.*core*.jar"/>
 				</fileset>
@@ -72,7 +77,7 @@
 	</target>
 	
 	<target name="wikitext2docbook" depends="assemble" description="Generate DocBook from Textile">
-		<wikitext-to-docbook markupLanguage="org.eclipse.xtext.wikitext.XtextTextileDialect"
+		<wikitext-to-docbook markupLanguage="Textile"
 			booktitle="eTrice User Guide"
 			validate="true"
 			sourceencoding="ISO-8859-1">
@@ -98,16 +103,7 @@
     	<attribute name="target"/>
         <sequential>
         	<taskdef name="fop" classname="org.apache.fop.tools.anttasks.Fop">
-        		<classpath>
-        			<pathelement location="${fop.dir}${file.separator}build${file.separator}fop.jar" />
-        			<pathelement location="${fop.dir}${file.separator}lib${file.separator}avalon-framework-4.2.0.jar" />
-        			<pathelement location="${fop.dir}${file.separator}lib${file.separator}commons-logging-1.0.4.jar" />
-        			<pathelement location="${fop.dir}${file.separator}lib${file.separator}commons-io-1.3.1.jar" />
-        			<pathelement location="${fop.dir}${file.separator}lib${file.separator}batik-all-1.7.jar" />
-        			<pathelement location="${fop.dir}${file.separator}lib${file.separator}xmlgraphics-commons-1.4.jar" />
-        			<pathelement location="${jai.dir}${file.separator}lib${file.separator}jai_core.jar" />
-        			<pathelement location="${jai.dir}${file.separator}lib${file.separator}jai_codec.jar" />
-        		</classpath>
+    			<classpath refid="xslt.class.path" />
         	</taskdef>
         	<fop 
         		format="application/pdf" 
@@ -151,7 +147,7 @@
 		</condition>
 	</target>
 		
-	<target name="get-docbook-xsl" description="Downloads docbook xsl" ><!--depends="check-docbook" unless="hasDocbook"-->
+	<target name="get-docbook-xsl" description="Downloads docbook xsl" depends="check-docbook" unless="hasDocbook">
 		<echo>Downloading DocBook XSL...</echo>
 		<get dest="${download.dir}${file.separator}docbook.zip" src="${docbookxsl.url}"/>
 		<unzip src="${download.dir}${file.separator}docbook.zip" dest="${download.dir}"/>
@@ -177,7 +173,7 @@
 		</copy>
 		<copy file="${html-css.file}" todir="${basedir}/html" />
 		
-		<xslt in="${build.dir}${file.separator}${document.name}.xml" extension="xml" out="${basedir}/html${file.separator}${document.name}.html" style="${document.stylesheet}">
+		<xslt in="${build.dir}${file.separator}${document.name}.xml" classpathref="xslt.class.path" extension="xml" out="${basedir}/html${file.separator}${document.name}.html" style="${document.stylesheet}">
 			<factory name="org.apache.xalan.processor.TransformerFactoryImpl">
 				<attribute name="http://xml.apache.org/xalan/features/optimize" value="true"/>
 			</factory>
@@ -195,7 +191,7 @@
 	</target>
 	
 	<target name="docbook2pdf">
-		<echo>Converting article to PDF...</echo>
+		<echo>Converting article to PDF... </echo>
 		<delete file="manual${file.separator}${document.name}.pdf" failonerror="false"/>
 		<delete file="${build.dir}${file.separator}${document.name}.fo"/>
 		<mkdir dir="manual"/>
@@ -208,7 +204,7 @@
 		</copy>
 
 		
-		<xslt in="${build.dir}${file.separator}${document.name}.xml" extension="xml" out="${build.dir}${file.separator}${document.name}.fo" style="${document.pdf.stylesheet}">
+		<xslt in="${build.dir}${file.separator}${document.name}.xml" classpathref="xslt.class.path" extension="xml" out="${build.dir}${file.separator}${document.name}.fo" style="${document.pdf.stylesheet}">
 			<factory name="org.apache.xalan.processor.TransformerFactoryImpl">
 				<attribute name="http://xml.apache.org/xalan/features/optimize" value="true"/>
 			</factory>
@@ -236,7 +232,7 @@
 	</target>
 	
 	<target name="wikitext2eclipsehelp" depends="assemble" description="Generate Eclipse Help from textile">
-		<wikitext-to-eclipse-help markupLanguage="org.eclipse.xtext.wikitext.XtextTextileDialect"
+		<wikitext-to-eclipse-help markupLanguage="Textile"
 			multipleOutputFiles="true"
 			navigationImages="false"
 			formatoutput="true"
@@ -262,7 +258,7 @@
 		</copy>
 		<copy file="${eclipsehelp-css.file}" todir="${basedir}/help" />
 		
-		<xslt basedir="${build.dir}" destdir="${basedir}" style="${document.eclipse.stylesheet}">
+		<xslt basedir="${build.dir}" classpathref="xslt.class.path" destdir="${basedir}" style="${document.eclipse.stylesheet}">
 			<param name="chunk.quietly" expression="1"/>
 			<include name="etrice.xml"/>
 			<factory name="org.apache.xalan.processor.TransformerFactoryImpl">
