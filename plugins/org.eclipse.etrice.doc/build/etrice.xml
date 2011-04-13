@@ -119,31 +119,31 @@
 			<itemizedlist>
 				<listitem>
 					<para>the 
-						<emphasis role="italic">LogicalSystem</emphasis> 
+						<citation>LogicalSystem</citation> 
 					</para>
 				</listitem>
 				<listitem>
 					<para>at least one 
-						<emphasis role="italic">SubSystemClass</emphasis>
+						<citation>SubSystemClass</citation>
 					</para>
 				</listitem>
 				<listitem>
 					<para>at least one 
-						<emphasis role="italic">ActorClass</emphasis>
+						<citation>ActorClass</citation>
 					</para>
 				</listitem>
 			</itemizedlist>
 			<para>The 
-				<emphasis role="italic">LogicalSystem</emphasis> represents the complete distributed system and contains at least one 
-				<emphasis role="italic">SubSystemRef</emphasis>. The 
-				<emphasis role="italic">SubSystemClass</emphasis> represents an address space and contains at least one 
-				<emphasis role="italic">ActorRef</emphasis>. The 
-				<emphasis role="italic">ActorClass</emphasis> is the building block of which an application will be build of. It is a good idea to define a top level actor that can be used as reference within the subsystem.
+				<citation>LogicalSystem</citation> represents the complete distributed system and contains at least one 
+				<citation>SubSystemRef</citation>. The 
+				<citation>SubSystemClass</citation> represents an address space and contains at least one 
+				<citation>ActorRef</citation>. The 
+				<citation>ActorClass</citation> is the building block of which an application will be build of. It is a good idea to define a top level actor that can be used as reference within the subsystem.
 			</para>
 			<para>The resulting model code looks like this:</para>
 			<literallayout><code>RoomModel HelloWorld {
 
-	LogicalSystem System_Blinky {
+	LogicalSystem System_HelloWorld {
 		SubSystemRef subsystem : SubSystem_HelloWorld
 	}
 
@@ -154,27 +154,27 @@
 	ActorClass HelloWorldTop {
 	}
 } 
+
 </code></literallayout>
-			<literallayout><code></code></literallayout>
 			<section id="Createanewmodelfile">
 				<title>Create a new model file </title>
-				<para>Create a new file in your org.eclipse.etrice.doc.tutorials.scratch.model directory and name it 
-					<emphasis role="italic">HelloWorld.room</emphasis> and select finish.
+				<para>Create a new file in your model directory and name it 
+					<citation>HelloWorld.room</citation> and select finish.
 				</para>
 				<para>
 					<mediaobject>
 						<imageobject>
-							<imagedata fileref="images/OpenFile2.PNG"/>
+							<imagedata fileref="images/015-HelloWorld01.PNG"/>
 						</imageobject>
 					</mediaobject>
 				</para>
 				<para>The file ending must be 
-					<emphasis role="italic">.room</emphasis> for selecting the correct editor. Open the file and copy the above code into the editor window. You should see something like this:
+					<citation>.room</citation> for selecting the correct editor. Open the file and copy the above code into the editor window. You should see something like this:
 				</para>
 				<para>
 					<mediaobject>
 						<imageobject>
-							<imagedata fileref="images/HelloWorld1.PNG"/>
+							<imagedata fileref="images/015-HelloWorld02.PNG"/>
 						</imageobject>
 					</mediaobject>
 				</para>
@@ -182,22 +182,31 @@
 			<section id="Createastatemachine">
 				<title>Create a state machine</title>
 				<para>We will implement the Hello World code on the initial transition of the 
-					<emphasis role="italic">HelloWorldTop</emphasis> actor. Therefore open the state machine editor by right clicking the 
-					<emphasis role="italic">HelloWorldTop</emphasis> actor in the outline view and select 
-					<emphasis role="italic">Edit Behavior</emphasis>.
+					<citation>HelloWorldTop</citation> actor. Therefore open the state machine editor by right clicking the 
+					<citation>HelloWorldTop</citation> actor in the outline view and select 
+					<citation>Edit Behavior</citation>.
 				</para>
 				<para>
 					<mediaobject>
 						<imageobject>
-							<imagedata fileref="images/HelloWorld2.PNG"/>
+							<imagedata fileref="images/015-HelloWorld03.PNG"/>
 						</imageobject>
 					</mediaobject>
 				</para>
-				<para>The state machine editor will be opened. Create the state machine as follow. Put the action code to the initial transition.</para>
+				<para>The state machine editor will be opened. Drag and drop an 
+					<citation>Initial Point</citation> from the tool box to the diagram into the top level state. Drag and drop a 
+					<citation>State</citation> from the tool box to the diagram. Confirm the dialogue with 
+					<citation>ok</citation>. Select the 
+					<citation>Transition</citation> in the tool box and draw the transition from the 
+					<citation>Initial Point</citation> to the State. Open the transition dialogue by double clicking the caption of the transition and fill in the action code.
+				</para>
+				<literallayout><code>System.out.println("Hello World !");
+</code></literallayout>
+				<para>The result should look like this:</para>
 				<para>
 					<mediaobject>
 						<imageobject>
-							<imagedata fileref="images/HelloWorld3.PNG"/>
+							<imagedata fileref="images/015-HelloWorld04.PNG"/>
 						</imageobject>
 					</mediaobject>
 				</para>
@@ -205,37 +214,39 @@
 				<para>
 					<mediaobject>
 						<imageobject>
-							<imagedata fileref="images/HelloWorld4.PNG"/>
+							<imagedata fileref="images/015-HelloWorld05.PNG"/>
 						</imageobject>
 					</mediaobject>
 				</para>
 			</section>
 			<section id="Buildandrunthemodel">
 				<title>Build and run the model</title>
-				<para>Now the model is finshed and source code can be generated. 
+				<para>Now the model is finished and source code can be generated. 
 					From org.eclipse.etrice.doc.tutorials.scratch.workflow select genAllModells.mwe2 and run it as MWE2Workflow. Currently all models in the directory will be generated.</para>
 				<para>
 					<mediaobject>
 						<imageobject>
-							<imagedata fileref="images/HelloWorld6.PNG"/>
+							<imagedata fileref="images/015-HelloWorld06.PNG"/>
 						</imageobject>
 					</mediaobject>
 				</para>
-				<para>The code will be generated to the src-gen directory. The main class will be contained in __SubSystem_HelloWorldRunner.java__. Select this file and run it as Java application.</para>
+				<para>The code will be generated to the src-gen directory. The main class will be contained in 
+					<citation>SubSystem_HelloWorldRunner.java</citation>. Select this file and run it as Java application.
+				</para>
 				<para>
 					<mediaobject>
 						<imageobject>
-							<imagedata fileref="images/HelloWorld7.PNG"/>
+							<imagedata fileref="images/015-HelloWorld07.PNG"/>
 						</imageobject>
 					</mediaobject>
 				</para>
 				<para>The Hello World application starts and the string will be printed on the console window. To stop the application the user must type 
-					<emphasis role="italic">quit</emphasis> in the console window.
+					<citation>quit</citation> in the console window.
 				</para>
 				<para>
 					<mediaobject>
 						<imageobject>
-							<imagedata fileref="images/HelloWorld8.PNG"/>
+							<imagedata fileref="images/015-HelloWorld08.PNG"/>
 						</imageobject>
 					</mediaobject>
 				</para>
@@ -246,7 +257,7 @@
 				<para>
 					<mediaobject>
 						<imageobject>
-							<imagedata fileref="images/HelloWorld9.PNG"/>
+							<imagedata fileref="images/015-HelloWorld09.PNG"/>
 						</imageobject>
 					</mediaobject>
 				</para>
@@ -254,7 +265,7 @@
 		</section>
 		<section id="Summary">
 			<title>Summary</title>
-			<para>Know you have generated your first eTrice model from scratch. You can switch between diagram editor and model (.room file) and you can see what will be generated during editing and saving the diagram files. 
+			<para>Now you have generated your first eTrice model from scratch. You can switch between diagram editor and model (.room file) and you can see what will be generated during editing and saving the diagram files. 
 				You should take a look at the generated source files to understand how the state machine is generated and the life cycle of the application. The next tutorials deals with more complex state machines hierarchies in structure and behavior.</para>
 		</section>
 	</chapter>
