@@ -10,6 +10,7 @@ public class IntegrationTestBase {
 		super();
 	}
 
+	// TODO: is this the right place here? -> the functionality is scattered between IntegrationTestBase and SubSystemClassBase
 	protected synchronized void waitForTestcase() {
 		try{
 			this.testSem.acquire(1);

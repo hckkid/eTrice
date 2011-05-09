@@ -11,7 +11,6 @@ RoomModel PingPongFast {
 		//LogicalThread mrPongThread {application.MrPong}
 	}
 
-	// automatically inserted App_SubSystem_PedLightController
 	ActorClass PingPongTop {
 		Structure {
 			ActorRef MrPing : MrPingActor
