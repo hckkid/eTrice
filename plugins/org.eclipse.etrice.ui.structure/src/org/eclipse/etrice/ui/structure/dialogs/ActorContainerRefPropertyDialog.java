@@ -30,6 +30,7 @@ import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.etrice.core.room.StructureClass;
 import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.core.room.SubSystemRef;
+import org.eclipse.etrice.core.validation.ValidationUtil;
 import org.eclipse.etrice.ui.common.dialogs.AbstractPropertyDialog;
 import org.eclipse.etrice.ui.structure.Activator;
 import org.eclipse.swt.graphics.Image;
@@ -133,21 +134,30 @@ public class ActorContainerRefPropertyDialog extends AbstractPropertyDialog {
 		NameValidator nv = new NameValidator();
 		ProtocolValidator pv = new ProtocolValidator();
 
-		boolean isActor = sc instanceof ActorContainerClass;
+		boolean refIsActor = sc instanceof ActorContainerClass;
+		boolean containerIsActor = sc instanceof ActorClass;
 
 		ArrayList<IEObjectDescription> actors = new ArrayList<IEObjectDescription>();
         Iterator<IEObjectDescription> it = scope.getAllElements().iterator();
         while (it.hasNext()) {
         	IEObjectDescription desc = it.next();
         	EObject obj = desc.getEObjectOrProxy();
-        	if (isActor && obj instanceof ActorClass)
-        		actors.add(desc);
-        	if (!isActor && obj instanceof SubSystemClass)
-        		actors.add(desc);
+        	if (refIsActor && obj instanceof ActorClass) {
+        		if (containerIsActor) {
+        			if (!ValidationUtil.isReferencing((ActorClass)obj, (ActorClass)sc))
+        				actors.add(desc);
+        		}
+        		else
+        			actors.add(desc);
+        	}
+        	else if (!refIsActor && obj instanceof SubSystemClass) {
+        		if (obj!=sc)
+        			actors.add(desc);
+        	}
 		}
 		
 		Text name = createText(body, "Name:", ref, RoomPackage.eINSTANCE.getActorContainerRef_Name(), nv);
-		Combo refClass = isActor?
+		Combo refClass = refIsActor?
 				createComboUsingDesc(body, "Actor Class:", ref, ActorClass.class, RoomPackage.eINSTANCE.getActorRef_Type(), actors, RoomPackage.eINSTANCE.getRoomClass_Name(), pv)
 			:	createComboUsingDesc(body, "SubSystem Class:", ref, SubSystemClass.class, RoomPackage.eINSTANCE.getSubSystemRef_Type(), actors, RoomPackage.eINSTANCE.getRoomClass_Name(), pv);
 
