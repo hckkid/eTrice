@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rm:rmap xmlns:bc="http://www.eclipse.org/buckminster/Common-1.0" xmlns:rm="http://www.eclipse.org/buckminster/RMap-1.0">
+  <rm:property key="etrice.git.repo" value="git://git.eclipse.org/gitroot/etrice/org.eclipse.etrice.git"/>
+  <rm:locator pattern="org\.eclipse\.graphiti.*" searchPathRef="graphiti"/>
+  <rm:locator pattern="^org.eclipse.etrice.releng.feature$" searchPathRef="etrice.releng"/>
+  <rm:locator pattern="^org.eclipse.etrice.example$" searchPathRef="etrice.examples"/>
+  <rm:locator pattern="^org.eclipse.etrice.doc$" searchPathRef="etrice.doc"/>
+  <rm:locator pattern="^org.eclipse.etrice.doc.tutorials$" searchPathRef="etrice.docs"/>
+  <rm:locator pattern="^org.eclipse.etrice.modellib$" searchPathRef="etrice.modellib"/>
+  <rm:locator pattern="^org.eclipse.etrice\.runtime\.java\.tests$" searchPathRef="etrice.tests"/>
+  <rm:locator pattern="^org.eclipse.etrice.runtime\..*$" searchPathRef="etrice.runtime"/>
+  <rm:locator pattern="^org.eclipse.etrice\..*\.tests$" searchPathRef="etrice.tests"/>
+  <rm:locator pattern="^org.eclipse.etrice\.ui\.tests\.base$" searchPathRef="etrice.tests"/>
+  <rm:locator pattern="^org.eclipse.etrice\..*$" searchPathRef="etrice.plugins"/>
+  <rm:locator pattern="^org.antlr.runtime$" searchPathRef="orbit"/>
+  <rm:locator pattern="^.*\.antlr.*$" searchPathRef="itemis"/>
+  <rm:locator searchPathRef="Eclipse"/>
+  <rm:searchPath name="graphiti">
+    <rm:provider componentTypes="osgi.bundle,eclipse.feature" readerType="p2" mutable="false">
+      <rm:property key="buckminster.mutable" value="false"/>
+      <rm:uri format="http://download.eclipse.org/graphiti/updates/milestones"/>
+    </rm:provider>
+  </rm:searchPath>
+  <rm:searchPath name="itemis">
+    <rm:provider componentTypes="osgi.bundle,eclipse.feature" readerType="p2" mutable="false">
+      <rm:property key="buckminster.mutable" value="false"/>
+      <rm:uri format="http://download.itemis.com/updates/milestones/"/>
+    </rm:provider>
+  </rm:searchPath>
+  <rm:searchPath name="orbit">
+    <rm:provider componentTypes="osgi.bundle,eclipse.feature" readerType="p2" mutable="false">
+      <rm:property key="buckminster.mutable" value="false"/>
+      <rm:uri format="http://download.eclipse.org/tools/orbit/downloads/drops/R20100519200754/repository"/>
+    </rm:provider>
+  </rm:searchPath>
+  <rm:searchPath name="Eclipse">
+    <rm:provider componentTypes="osgi.bundle,eclipse.feature" readerType="p2" source="false" mutable="false">
+      <rm:property key="buckminster.source" value="false"/>
+      <rm:property key="buckminster.mutable" value="false"/>
+      <rm:uri format="http://download.eclipse.org/eclipse/updates/3.7milestones"/>
+    </rm:provider>
+  </rm:searchPath>
+  <rm:searchPath name="etrice.examples">
+    <rm:provider componentTypes="buckminster,osgi.bundle,eclipse.feature" readerType="git">
+      <rm:property key="git.remote.uri" value="${etrice.git.repo}"/>
+      <rm:uri format="{0}/org.eclipse.etrice,examples/{1}">
+        <bc:propertyRef key="workspace.root"/>
+        <bc:propertyRef key="buckminster.component"/>
+      </rm:uri>
+    </rm:provider>
+  </rm:searchPath>
+  <rm:searchPath name="etrice.doc">
+    <rm:provider componentTypes="buckminster,osgi.bundle,eclipse.feature" readerType="git">
+      <rm:property key="git.remote.uri" value="${etrice.git.repo}"/>
+      <rm:uri format="{0}/org.eclipse.etrice,plugins/{1}">
+        <bc:propertyRef key="workspace.root"/>
+        <bc:propertyRef key="buckminster.component"/>
+      </rm:uri>
+    </rm:provider>
+  </rm:searchPath>
+  <rm:searchPath name="etrice.docs">
+    <rm:provider componentTypes="buckminster,osgi.bundle,eclipse.feature" readerType="git">
+      <rm:property key="git.remote.uri" value="${etrice.git.repo}"/>
+      <rm:uri format="{0}/org.eclipse.etrice,doc/{1}">
+        <bc:propertyRef key="workspace.root"/>
+        <bc:propertyRef key="buckminster.component"/>
+      </rm:uri>
+    </rm:provider>
+  </rm:searchPath>
+  <rm:searchPath name="etrice.modellib">
+    <rm:provider componentTypes="buckminster,osgi.bundle,eclipse.feature" readerType="git">
+      <rm:property key="git.remote.uri" value="${etrice.git.repo}"/>
+      <rm:uri format="{0}/org.eclipse.etrice,modellib/{1}">
+        <bc:propertyRef key="workspace.root"/>
+        <bc:propertyRef key="buckminster.component"/>
+      </rm:uri>
+    </rm:provider>
+  </rm:searchPath>
+  <rm:searchPath name="etrice.plugins">
+    <rm:provider componentTypes="buckminster,osgi.bundle,eclipse.feature" readerType="git">
+      <rm:property key="git.remote.uri" value="${etrice.git.repo}"/>
+      <rm:uri format="{0}/org.eclipse.etrice,plugins/{1}">
+        <bc:propertyRef key="workspace.root"/>
+        <bc:propertyRef key="buckminster.component"/>
+      </rm:uri>
+    </rm:provider>
+  </rm:searchPath>
+  <rm:searchPath name="etrice.runtime">
+    <rm:provider componentTypes="buckminster,osgi.bundle,eclipse.feature" readerType="git">
+      <rm:property key="git.remote.uri" value="${etrice.git.repo}"/>
+      <rm:uri format="{0}/org.eclipse.etrice,runtime/{1}">
+        <bc:propertyRef key="workspace.root"/>
+        <bc:propertyRef key="buckminster.component"/>
+      </rm:uri>
+    </rm:provider>
+  </rm:searchPath>
+  <rm:searchPath name="etrice.tests">
+    <rm:provider componentTypes="buckminster,osgi.bundle,eclipse.feature" readerType="git">
+      <rm:property key="git.remote.uri" value="${etrice.git.repo}"/>
+      <rm:uri format="{0}/org.eclipse.etrice,tests/{1}">
+        <bc:propertyRef key="workspace.root"/>
+        <bc:propertyRef key="buckminster.component"/>
+      </rm:uri>
+    </rm:provider>
+  </rm:searchPath>
+  <rm:searchPath name="etrice.releng">
+    <rm:provider componentTypes="osgi.bundle,eclipse.feature" readerType="local">
+      <rm:uri format="file:///{0}/{1}/">
+        <bc:propertyRef key="workspace.root"/>
+        <bc:propertyRef key="buckminster.component"/>
+      </rm:uri>
+    </rm:provider>
+  </rm:searchPath>
+  <rm:searchPath name="etrice-all-in-one">
+    <rm:provider componentTypes="buckminster,osgi.bundle,eclipse.feature" readerType="git">
+      <rm:property key="git.remote.uri" value="${etrice.git.repo}"/>
+      <rm:uri format="{0}/org.eclipse.etrice,examples/{1}">
+        <bc:propertyRef key="workspace.root"/>
+        <bc:propertyRef key="buckminster.component"/>
+      </rm:uri>
+    </rm:provider>
+    <rm:provider componentTypes="buckminster,osgi.bundle,eclipse.feature" readerType="git">
+      <rm:property key="git.remote.uri" value="${etrice.git.repo}"/>
+      <rm:uri format="{0}/org.eclipse.etrice,modellib/{1}">
+        <bc:propertyRef key="workspace.root"/>
+        <bc:propertyRef key="buckminster.component"/>
+      </rm:uri>
+    </rm:provider>
+    <rm:provider componentTypes="buckminster,osgi.bundle,eclipse.feature" readerType="git">
+      <rm:property key="git.remote.uri" value="${etrice.git.repo}"/>
+      <rm:uri format="{0}/org.eclipse.etrice,plugins/{1}">
+        <bc:propertyRef key="workspace.root"/>
+        <bc:propertyRef key="buckminster.component"/>
+      </rm:uri>
+    </rm:provider>
+    <rm:provider componentTypes="buckminster,osgi.bundle,eclipse.feature" readerType="git">
+      <rm:property key="git.remote.uri" value="${etrice.git.repo}"/>
+      <rm:uri format="{0}/org.eclipse.etrice,runtime/{1}">
+        <bc:propertyRef key="workspace.root"/>
+        <bc:propertyRef key="buckminster.component"/>
+      </rm:uri>
+    </rm:provider>
+    <rm:provider componentTypes="buckminster,osgi.bundle,eclipse.feature" readerType="git">
+      <rm:property key="git.remote.uri" value="${etrice.git.repo}"/>
+      <rm:uri format="{0}/org.eclipse.etrice,tests/{1}">
+        <bc:propertyRef key="workspace.root"/>
+        <bc:propertyRef key="buckminster.component"/>
+      </rm:uri>
+    </rm:provider>
+  </rm:searchPath>
+</rm:rmap>
