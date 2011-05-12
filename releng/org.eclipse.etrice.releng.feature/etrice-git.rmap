@@ -14,6 +14,7 @@
   <rm:locator pattern="^org.eclipse.etrice\..*$" searchPathRef="etrice.plugins"/>
   <rm:locator pattern="^org.antlr.runtime$" searchPathRef="orbit"/>
   <rm:locator pattern="^.*\.antlr.*$" searchPathRef="itemis"/>
+  <rm:locator pattern="^org.eclipse.xtext\..*$" searchPathRef="Xtext"/>
   <rm:locator searchPathRef="Eclipse"/>
   <rm:searchPath name="graphiti">
     <rm:provider componentTypes="osgi.bundle,eclipse.feature" readerType="p2" mutable="false">
@@ -104,8 +105,9 @@
     </rm:provider>
   </rm:searchPath>
   <rm:searchPath name="etrice.releng">
-    <rm:provider componentTypes="osgi.bundle,eclipse.feature" readerType="local">
-      <rm:uri format="file:///{0}/{1}/">
+    <rm:provider componentTypes="buckminster,osgi.bundle,eclipse.feature" readerType="git">
+      <rm:property key="git.remote.uri" value="${etrice.git.repo}"/>
+      <rm:uri format="{0}/org.eclipse.etrice,releng/{1}">
         <bc:propertyRef key="workspace.root"/>
         <bc:propertyRef key="buckminster.component"/>
       </rm:uri>
@@ -146,6 +148,12 @@
         <bc:propertyRef key="workspace.root"/>
         <bc:propertyRef key="buckminster.component"/>
       </rm:uri>
+    </rm:provider>
+  </rm:searchPath>
+  <rm:searchPath name="Xtext">
+    <rm:provider componentTypes="osgi.bundle,eclipse.feature" readerType="p2" mutable="false">
+      <rm:property key="buckminster.mutable" value="false"/>
+      <rm:uri format="http://download.eclipse.org/modeling/tmf/updates/milestones/"/>
     </rm:provider>
   </rm:searchPath>
 </rm:rmap>
