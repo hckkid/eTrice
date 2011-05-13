@@ -12,7 +12,7 @@ Workflow {
 	}
 
 	component = @workflow.RoomGenerator {
-		sourceDir = "src/org/eclipse/etrice/doc/tutorials/scratch/model"
+		sourceDir = "model/scratch"
 		targetDir = destDir
 	}
  
