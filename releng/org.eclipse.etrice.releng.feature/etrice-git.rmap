@@ -14,7 +14,7 @@
   <rm:locator pattern="^org.eclipse.etrice\..*$" searchPathRef="etrice.plugins"/>
   <rm:locator pattern="^org.antlr.runtime$" searchPathRef="orbit"/>
   <rm:locator pattern="^.*\.antlr.*$" searchPathRef="itemis"/>
-  <rm:locator pattern="^org.eclipse.xtext\..*$" searchPathRef="Xtext"/>
+  <rm:locator pattern="^org.eclipse.xtext" searchPathRef="Xtext"/>
   <rm:locator searchPathRef="Eclipse"/>
   <rm:searchPath name="graphiti">
     <rm:provider componentTypes="osgi.bundle,eclipse.feature" readerType="p2" mutable="false">
