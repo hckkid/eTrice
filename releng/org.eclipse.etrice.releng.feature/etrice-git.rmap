@@ -153,7 +153,7 @@
   <rm:searchPath name="Xtext">
     <rm:provider componentTypes="osgi.bundle,eclipse.feature" readerType="p2" mutable="false">
       <rm:property key="buckminster.mutable" value="false"/>
-      <rm:uri format="http://download.eclipse.org/modeling/tmf/updates/milestones/"/>
+      <rm:uri format="http://download.itemis.com/updates/milestones"/>
     </rm:provider>
   </rm:searchPath>
 </rm:rmap>
