@@ -35,8 +35,9 @@ RoomModel HelloWorld {
 	ActorClass HelloWorldTop {
 	}
 } 
+bc. 
 
-h3. Create a new model file 
+h2. Create a new model file 
 
 Create a new file in your model directory and name it ??HelloWorld.room?? and select finish.
 
@@ -48,7 +49,7 @@ The file ending must be ??.room?? for selecting the correct editor. Open the fil
 !images/015-HelloWorld02.PNG!
 
 
-h3. Create a state machine
+h2. Create a state machine
 
 We will implement the Hello World code on the initial transition of the ??HelloWorldTop?? actor. Therefore open the state machine editor by right clicking the ??HelloWorldTop?? actor in the outline view and select ??Edit Behavior??.
 
@@ -67,7 +68,7 @@ Save the diagram and inspect the model file. Note that the textual representatio
 !images/015-HelloWorld05.PNG!
 
 
-h3. Build and run the model
+h2. Build and run the model
 
 Now the model is finished and source code can be generated. 
 From org.eclipse.etrice.doc.tutorials.scratch.workflow select genAllModells.mwe2 and run it as MWE2Workflow. Currently all models in the directory will be generated.
@@ -83,7 +84,7 @@ The Hello World application starts and the string will be printed on the console
 
 !images/015-HelloWorld08.PNG!
 
-h3. Open the Message Sequence Chart
+h2. Open the Message Sequence Chart
 
 During runtime the application produces a MSC and wrote it to a file. Open /org.eclipse.etrice.doc.tutorials/tmp/log/SubSystem_HelloWorld_Async.seq. You should see something like this:
 
