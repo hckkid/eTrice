@@ -790,7 +790,8 @@ public class ExpandedActorClassImpl extends ActorClassImpl implements ExpandedAc
 		findOutgoingTransitions(getStateMachine());
 
 		doChecks(getStateMachine());
-		assert(!validator.isFailed()): "Checks failed!";
+		if (validator.isFailed())
+			return;
 		
 		findLeafStateTriggers(getStateMachine());
 		fillTriggerStringMap();
