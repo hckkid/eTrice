@@ -36,6 +36,7 @@ import org.eclipse.graphiti.features.IDeleteFeature;
 import org.eclipse.graphiti.features.IFeatureProvider;
 import org.eclipse.graphiti.features.ILayoutFeature;
 import org.eclipse.graphiti.features.IMoveShapeFeature;
+import org.eclipse.graphiti.features.IReconnectionFeature;
 import org.eclipse.graphiti.features.IRemoveFeature;
 import org.eclipse.graphiti.features.IResizeShapeFeature;
 import org.eclipse.graphiti.features.IUpdateFeature;
@@ -46,6 +47,7 @@ import org.eclipse.graphiti.features.context.IDoubleClickContext;
 import org.eclipse.graphiti.features.context.ILayoutContext;
 import org.eclipse.graphiti.features.context.IMoveShapeContext;
 import org.eclipse.graphiti.features.context.IPictogramElementContext;
+import org.eclipse.graphiti.features.context.IReconnectionContext;
 import org.eclipse.graphiti.features.context.IRemoveContext;
 import org.eclipse.graphiti.features.context.IResizeShapeContext;
 import org.eclipse.graphiti.features.context.IUpdateContext;
@@ -291,6 +293,15 @@ public class ProviderDispatcher {
 		}
 		
 		@Override
+		public IReconnectionFeature getReconnectionFeature(IReconnectionContext context) {
+			IFeatureProvider fp = getFeatureProvider(context);
+			if (fp!=null)
+				return fp.getReconnectionFeature(context);
+			else
+				return super.getReconnectionFeature(context);
+		}
+		
+		@Override
 		public ICustomFeature[] getCustomFeatures(ICustomContext context) {
 	        IFeatureProvider fp = featureSwitch.doSwitch(getBusinessObject(context));
 			if (fp!=null)
@@ -323,6 +334,10 @@ public class ProviderDispatcher {
 					return fp;
 			}
 			return null;
+		}
+		
+		private IFeatureProvider getFeatureProvider(IReconnectionContext context) {
+			return featureSwitch.doSwitch((EObject) getBusinessObjectForPictogramElement(context.getConnection()));
 		}
 	}
 	

@@ -16,20 +16,14 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.room.ActorClass;
-import org.eclipse.etrice.core.room.BaseState;
-import org.eclipse.etrice.core.room.ChoicePoint;
 import org.eclipse.etrice.core.room.ChoicepointTerminal;
 import org.eclipse.etrice.core.room.ContinuationTransition;
 import org.eclipse.etrice.core.room.EntryPoint;
 import org.eclipse.etrice.core.room.InitialTransition;
 import org.eclipse.etrice.core.room.NonInitialTransition;
-import org.eclipse.etrice.core.room.RefinedState;
 import org.eclipse.etrice.core.room.RoomFactory;
-import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraph;
-import org.eclipse.etrice.core.room.StateTerminal;
 import org.eclipse.etrice.core.room.SubStateTrPointTerminal;
-import org.eclipse.etrice.core.room.TrPoint;
 import org.eclipse.etrice.core.room.TrPointTerminal;
 import org.eclipse.etrice.core.room.Transition;
 import org.eclipse.etrice.core.room.TransitionTerminal;
@@ -45,6 +39,7 @@ import org.eclipse.graphiti.features.ICreateConnectionFeature;
 import org.eclipse.graphiti.features.IDeleteFeature;
 import org.eclipse.graphiti.features.IFeatureProvider;
 import org.eclipse.graphiti.features.IReason;
+import org.eclipse.graphiti.features.IReconnectionFeature;
 import org.eclipse.graphiti.features.IRemoveFeature;
 import org.eclipse.graphiti.features.IUpdateFeature;
 import org.eclipse.graphiti.features.context.IAddConnectionContext;
@@ -53,15 +48,18 @@ import org.eclipse.graphiti.features.context.ICreateConnectionContext;
 import org.eclipse.graphiti.features.context.ICustomContext;
 import org.eclipse.graphiti.features.context.IDeleteContext;
 import org.eclipse.graphiti.features.context.IDoubleClickContext;
+import org.eclipse.graphiti.features.context.IReconnectionContext;
 import org.eclipse.graphiti.features.context.IRemoveContext;
 import org.eclipse.graphiti.features.context.IUpdateContext;
 import org.eclipse.graphiti.features.context.impl.AddConnectionContext;
+import org.eclipse.graphiti.features.context.impl.ReconnectionContext;
 import org.eclipse.graphiti.features.context.impl.RemoveContext;
 import org.eclipse.graphiti.features.custom.AbstractCustomFeature;
 import org.eclipse.graphiti.features.custom.ICustomFeature;
 import org.eclipse.graphiti.features.impl.AbstractAddFeature;
 import org.eclipse.graphiti.features.impl.AbstractCreateConnectionFeature;
 import org.eclipse.graphiti.features.impl.AbstractUpdateFeature;
+import org.eclipse.graphiti.features.impl.DefaultReconnectionFeature;
 import org.eclipse.graphiti.features.impl.DefaultRemoveFeature;
 import org.eclipse.graphiti.features.impl.Reason;
 import org.eclipse.graphiti.mm.GraphicsAlgorithmContainer;
@@ -75,7 +73,6 @@ import org.eclipse.graphiti.mm.pictograms.Anchor;
 import org.eclipse.graphiti.mm.pictograms.Connection;
 import org.eclipse.graphiti.mm.pictograms.ConnectionDecorator;
 import org.eclipse.graphiti.mm.pictograms.ContainerShape;
-import org.eclipse.graphiti.mm.pictograms.Diagram;
 import org.eclipse.graphiti.mm.pictograms.FreeFormConnection;
 import org.eclipse.graphiti.mm.pictograms.PictogramElement;
 import org.eclipse.graphiti.services.Graphiti;
@@ -115,27 +112,18 @@ public class TransitionSupport {
 	
 			@Override
 			public boolean canCreate(ICreateConnectionContext context) {
-				TransitionTerminal src = getTransitionTerminal(context.getSourceAnchor());
-				TransitionTerminal tgt = getTransitionTerminal(context.getTargetAnchor());
-				
-				if (src==null && !isInitialPoint(context.getSourceAnchor()))
-					return false;
-				if (tgt==null)
-					return false;
-				
-				StateGraph sg = getStateGraph(context);
-				if (sg==null)
-					return false;
-				
-				return ValidationUtil.isConnectable(src, tgt, sg).isOk();
+				return SupportUtil.canConnect(
+						context.getSourceAnchor(),
+						context.getTargetAnchor(),
+						(ContainerShape)context.getSourcePictogramElement().eContainer(), fp);
 			}
 			
 			public boolean canStartConnection(ICreateConnectionContext context) {
-				TransitionTerminal src = getTransitionTerminal(context.getSourceAnchor());
-				if (src==null && !isInitialPoint(context.getSourceAnchor()))
+				TransitionTerminal src = SupportUtil.getTransitionTerminal(context.getSourceAnchor(), fp);
+				if (src==null && !SupportUtil.isInitialPoint(context.getSourceAnchor(), fp))
 					return false;
 				
-				StateGraph sg = getStateGraph(context);
+				StateGraph sg = SupportUtil.getStateGraph((ContainerShape) context.getSourcePictogramElement().eContainer(), fp);
 				if (sg==null)
 					return false;
 				
@@ -146,9 +134,9 @@ public class TransitionSupport {
 			public Connection create(ICreateConnectionContext context) {
 				Connection newConnection = null;
 				
-				TransitionTerminal src = getTransitionTerminal(context.getSourceAnchor());
-				TransitionTerminal dst = getTransitionTerminal(context.getTargetAnchor());
-				StateGraph sg = getStateGraph(context);
+				TransitionTerminal src = SupportUtil.getTransitionTerminal(context.getSourceAnchor(), fp);
+				TransitionTerminal dst = SupportUtil.getTransitionTerminal(context.getTargetAnchor(), fp);
+				StateGraph sg = SupportUtil.getStateGraph((ContainerShape) context.getSourcePictogramElement().eContainer(), fp);
 				if (dst!=null && sg!=null) {
 
 					// TODOHRR-B transition dialog
@@ -199,7 +187,7 @@ public class TransitionSupport {
 					}
 
 					ActorClass ac = SupportUtil.getActorClass(getDiagram());
-					ContainerShape targetContainer = getStateGraphContainer((ContainerShape) context.getSourcePictogramElement().eContainer());
+					ContainerShape targetContainer = SupportUtil.getStateGraphContainer((ContainerShape) context.getSourcePictogramElement().eContainer());
 					boolean inherited = SupportUtil.isInherited(getDiagram(), sg);
 					if (inherited) {
 						sg = SupportUtil.insertRefinedState(sg, ac, targetContainer, getFeatureProvider());
@@ -231,79 +219,6 @@ public class TransitionSupport {
 			@Override
 			public boolean hasDoneChanges() {
 				return doneChanges ;
-			}
-
-			private boolean isInitialPoint(Anchor anchor) {
-				if (anchor!=null) {
-					Object obj = getBusinessObjectForPictogramElement(anchor.getParent());
-					if (obj instanceof StateGraph) {
-						Object parent = getBusinessObjectForPictogramElement((ContainerShape) anchor.getParent().eContainer());
-						if (parent instanceof StateGraph)
-							return true;
-					}
-				}
-				return false;
-			}
-			
-			private TransitionTerminal getTransitionTerminal(Anchor anchor) {
-				if (anchor != null) {
-					Object obj = getBusinessObjectForPictogramElement(anchor.getParent());
-					if (obj instanceof TrPoint) {
-						Object parent = getBusinessObjectForPictogramElement((ContainerShape) anchor.getParent().eContainer());
-						if (parent instanceof State) {
-							BaseState state = (parent instanceof RefinedState)? ((RefinedState)parent).getBase() : (BaseState)parent;
-							SubStateTrPointTerminal sstpt = RoomFactory.eINSTANCE.createSubStateTrPointTerminal();
-							sstpt.setState(state);
-							sstpt.setTrPoint((TrPoint) obj);
-							return sstpt;
-						}
-						else {
-							TrPointTerminal tpt = RoomFactory.eINSTANCE.createTrPointTerminal();
-							tpt.setTrPoint((TrPoint) obj);
-							return tpt;
-						}
-					}
-					else if (obj instanceof State) {
-						BaseState state = (obj instanceof RefinedState)? ((RefinedState)obj).getBase() : (BaseState)obj;
-						StateTerminal st = RoomFactory.eINSTANCE.createStateTerminal();
-						st.setState(state);
-						return st;
-					}
-					else if (obj instanceof ChoicePoint) {
-						ChoicepointTerminal ct = RoomFactory.eINSTANCE.createChoicepointTerminal();
-						ct.setCp((ChoicePoint) obj);
-						return ct;
-					}
-				}
-				return null;
-			}
-			
-			/**
-			 * This method exploits the fact that the immediate children of the diagram are
-			 * associated with the state graphs.
-			 * 
-			 * @param shape
-			 * @return the container shape that is associated with the state graph of the diagram
-			 */
-			public ContainerShape getStateGraphContainer(ContainerShape shape) {
-				while (shape!=null) {
-					ContainerShape parent = shape.getContainer();
-					if (parent instanceof Diagram)
-						return shape;
-					shape = parent;
-				}
-				return null;
-			}
-			
-			public StateGraph getStateGraph(ICreateConnectionContext context) {
-				ContainerShape shape = getStateGraphContainer((ContainerShape) context.getSourcePictogramElement().eContainer());
-				Object bo = getBusinessObjectForPictogramElement(shape);
-				if (bo instanceof StateGraph)
-					return (StateGraph) bo;
-				else
-					assert(false): "state graph expected";
-					
-				return null;
 			}
 		}
 		
@@ -393,6 +308,125 @@ public class TransitionSupport {
 				return polygon;
 			}
 			
+		}
+		
+		private class ReconnectionFeature extends DefaultReconnectionFeature {
+
+			private boolean doneChanges = false;
+
+			public ReconnectionFeature(IFeatureProvider fp) {
+				super(fp);
+			}
+			
+			@Override
+			public boolean canReconnect(IReconnectionContext context) {
+				if (!super.canReconnect(context))
+					return false;
+				
+				StateGraph sg = SupportUtil.getStateGraph((ContainerShape) context.getTargetPictogramElement().eContainer(), fp);
+				boolean inherited = SupportUtil.isInherited(getDiagram(), sg);
+				if (inherited)
+					return false;
+
+				Anchor src = context.getConnection().getStart();
+				Anchor tgt = context.getConnection().getEnd();
+				if (context.getReconnectType().equals(ReconnectionContext.RECONNECT_SOURCE))
+					src = context.getNewAnchor();
+				else
+					tgt = context.getNewAnchor();
+				
+				Transition trans = (Transition) getBusinessObjectForPictogramElement(context.getConnection());
+				return SupportUtil.canConnect(src, tgt, trans, (ContainerShape) context.getTargetPictogramElement().eContainer(), fp);
+			}
+			
+			@Override
+			public void postReconnect(IReconnectionContext context) {
+				super.postReconnect(context);
+
+				TransitionTerminal src = SupportUtil.getTransitionTerminal(context.getConnection().getStart(), fp);
+				TransitionTerminal dst = SupportUtil.getTransitionTerminal(context.getConnection().getEnd(), fp);
+				StateGraph sg = SupportUtil.getStateGraph((ContainerShape) context.getTargetPictogramElement().eContainer(), fp);
+
+				// in the following we set source and target of the connection regardless of whether they have changed
+				// if the type of the transition changed we create a new one and open the property dialog
+				
+				Transition orig = (Transition) getBusinessObjectForPictogramElement(context.getConnection());
+				Transition trans = null;
+				if (src==null) {
+					InitialTransition t = (orig instanceof InitialTransition)?
+							(InitialTransition)orig : RoomFactory.eINSTANCE.createInitialTransition();
+					t.setTo(dst);
+					trans = t;
+				}
+				else if (src instanceof SubStateTrPointTerminal
+						|| (src instanceof TrPointTerminal && ((TrPointTerminal)src).getTrPoint() instanceof EntryPoint)) {
+					ContinuationTransition t = (orig instanceof ContinuationTransition)?
+							(ContinuationTransition)orig : RoomFactory.eINSTANCE.createContinuationTransition();
+					t.setFrom(src);
+					t.setTo(dst);
+					trans = t;
+				}
+				else if (src instanceof ChoicepointTerminal) {
+					NonInitialTransition t = null;
+					if (context.getReconnectType().equals(ReconnectionContext.RECONNECT_SOURCE)) {
+						boolean dfltBranch = true;
+						for (Transition tr : RoomHelpers.getAllTransitions(sg)) {
+							if (tr instanceof ContinuationTransition) {
+								TransitionTerminal from = ((ContinuationTransition) tr).getFrom();
+								if (from instanceof ChoicepointTerminal) {
+									if (((ChoicepointTerminal) from).getCp()==((ChoicepointTerminal)src).getCp())
+										dfltBranch = false;
+								}
+							}
+						}
+						t = dfltBranch? RoomFactory.eINSTANCE.createContinuationTransition()
+								: RoomFactory.eINSTANCE.createCPBranchTransition();
+					}
+					else
+						t = (NonInitialTransition) orig;
+					
+					t.setFrom(src);
+					t.setTo(dst);
+					trans = t;
+				}
+				else {
+					TriggeredTransition t = (orig instanceof TriggeredTransition)?
+							(TriggeredTransition)orig : RoomFactory.eINSTANCE.createTriggeredTransition();
+					t.setFrom(src);
+					t.setTo(dst);
+					trans = t;
+				}
+
+				if (trans instanceof InitialTransition) {
+					trans.setName("init");
+				}
+				else {
+					trans.setName(RoomNameProvider.getUniqueTransitionName(sg));
+				}
+				
+				if (orig!=trans) {
+					trans.setAction(orig.getAction());
+					trans.setName(orig.getName());
+					
+					sg.getTransitions().remove(orig);
+					sg.getTransitions().add(trans);
+					
+					Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+					TransitionPropertyDialog dlg = new TransitionPropertyDialog(shell, sg, trans);
+					if (dlg.open()!=Window.OK)
+						return;
+
+					link(context.getConnection(), trans);
+				}
+				
+				doneChanges = true;
+				updateLabel(trans, context.getConnection());
+			}
+			
+			@Override
+			public boolean hasDoneChanges() {
+				return doneChanges ;
+			}
 		}
 		
 		private class UpdateFeature extends AbstractUpdateFeature {
@@ -563,6 +597,12 @@ public class TransitionSupport {
 				
 				Object bo = getBusinessObjectForPictogramElement(pe);
 				if (bo instanceof Transition) {
+					Connection conn = (Connection) context.getPictogramElement();
+					StateGraph sg = SupportUtil.getStateGraph((ContainerShape) conn.getStart().eContainer(), getFeatureProvider());
+					boolean inherited = SupportUtil.isInherited(getDiagram(), sg);
+					if (inherited)
+						return false;
+
 					return true;
 				}
 				return false;
@@ -591,6 +631,11 @@ public class TransitionSupport {
 			return new UpdateFeature(fp);
 		}
 
+		@Override
+		public IReconnectionFeature getReconnectionFeature(IReconnectionContext context) {
+			return new ReconnectionFeature(fp);
+		}
+		
 		@Override
 		public IRemoveFeature getRemoveFeature(IRemoveContext context) {
 			return new RemoveFeature(fp);
