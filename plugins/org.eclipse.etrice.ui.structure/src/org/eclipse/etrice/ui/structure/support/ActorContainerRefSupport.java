@@ -353,6 +353,8 @@ public class ActorContainerRefSupport {
 
 		private static class PropertyFeature extends AbstractCustomFeature {
 
+			private boolean doneChanges = false;
+
 			public PropertyFeature(IFeatureProvider fp) {
 				super(fp);
 			}
@@ -391,9 +393,15 @@ public class ActorContainerRefSupport {
 		        Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 				ActorContainerRefPropertyDialog dlg = new ActorContainerRefPropertyDialog(shell, acr, scope, sc, false);
 				if (dlg.open()!=Window.OK)
-					throw new RuntimeException();
+					return;
 				
+				doneChanges   = true;
 				updateLabel(acr, context.getPictogramElements()[0]);
+			}
+			
+			@Override
+			public boolean hasDoneChanges() {
+				return doneChanges;
 			}
 			
 		}

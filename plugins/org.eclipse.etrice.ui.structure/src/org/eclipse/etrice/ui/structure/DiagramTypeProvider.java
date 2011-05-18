@@ -12,8 +12,12 @@
 
 package org.eclipse.etrice.ui.structure;
 
+import org.eclipse.core.runtime.preferences.DefaultScope;
+import org.eclipse.core.runtime.preferences.IEclipsePreferences;
 import org.eclipse.etrice.core.ui.RoomUiModule;
 import org.eclipse.graphiti.dt.AbstractDiagramTypeProvider;
+import org.eclipse.graphiti.internal.GraphitiPlugin;
+import org.eclipse.graphiti.internal.pref.GFPreferences;
 import org.eclipse.graphiti.tb.IToolBehaviorProvider;
 import org.eclipse.xtext.scoping.IScopeProvider;
 
@@ -28,6 +32,7 @@ public class DiagramTypeProvider extends AbstractDiagramTypeProvider {
 	@Inject
 	private IScopeProvider scopeProvider;
 
+	@SuppressWarnings("restriction")
 	public DiagramTypeProvider() {
 		super();
         
@@ -36,6 +41,10 @@ public class DiagramTypeProvider extends AbstractDiagramTypeProvider {
 
         dispatcher = new ProviderDispatcher(this);
 		setFeatureProvider(dispatcher.getFeatureProvider());
+		
+		IEclipsePreferences node = new DefaultScope().getNode(GraphitiPlugin.PLUGIN_ID);
+		if (node!=null)
+			node.putBoolean(GFPreferences.RECURSIVE_CHECK_FOR_UPDATE_ACTIVE, true);
 	}
 
 	@Override
@@ -48,6 +57,30 @@ public class DiagramTypeProvider extends AbstractDiagramTypeProvider {
         return toolBehaviorProviders;
     }
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.graphiti.dt.AbstractDiagramTypeProvider#isAutoUpdateAtStartup()
+	 */
+	@Override
+	public boolean isAutoUpdateAtStartup() {
+		return true;
+	}
+	
+	/* (non-Javadoc)
+	 * @see org.eclipse.graphiti.dt.AbstractDiagramTypeProvider#isAutoUpdateAtReset()
+	 */
+	@Override
+	public boolean isAutoUpdateAtReset() {
+		return true;
+	}
+	
+	/* (non-Javadoc)
+	 * @see org.eclipse.graphiti.dt.AbstractDiagramTypeProvider#isAutoUpdateAtRuntime()
+	 */
+	@Override
+	public boolean isAutoUpdateAtRuntime() {
+		return true;
+	}
+	
 	public IScopeProvider getScopeProvider() {
 		return scopeProvider;
 	}
