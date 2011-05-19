@@ -20,6 +20,7 @@ import org.eclipse.etrice.core.room.ChoicePoint;
 import org.eclipse.etrice.core.room.RoomFactory;
 import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.ui.behavior.ImageProvider;
+import org.eclipse.etrice.ui.common.support.CommonSupportUtil;
 import org.eclipse.etrice.ui.common.support.NoResizeFeature;
 import org.eclipse.graphiti.dt.IDiagramTypeProvider;
 import org.eclipse.graphiti.features.IAddFeature;
@@ -326,6 +327,13 @@ public class ChoicePointSupport {
 					return !SupportUtil.isInherited(cp, containerShape);
 				}
 				return false;
+			}
+			
+			public void preDelete(IDeleteContext context) {
+				super.preDelete(context);
+
+				ContainerShape container = (ContainerShape) context.getPictogramElement();
+				CommonSupportUtil.deleteConnectionsRecursive(container, getFeatureProvider());
 			}
 		}
 		

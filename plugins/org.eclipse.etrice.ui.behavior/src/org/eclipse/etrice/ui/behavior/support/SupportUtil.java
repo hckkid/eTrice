@@ -9,6 +9,7 @@
 package org.eclipse.etrice.ui.behavior.support;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.BaseState;
 import org.eclipse.etrice.core.room.ChoicePoint;
@@ -28,6 +29,7 @@ import org.eclipse.etrice.core.room.Transition;
 import org.eclipse.etrice.core.room.TransitionTerminal;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.core.validation.ValidationUtil;
+import org.eclipse.etrice.ui.common.support.CommonSupportUtil;
 import org.eclipse.graphiti.features.IFeatureProvider;
 import org.eclipse.graphiti.mm.algorithms.GraphicsAlgorithm;
 import org.eclipse.graphiti.mm.pictograms.Anchor;
@@ -252,6 +254,27 @@ public class SupportUtil {
 			return false;
 		
 		return ValidationUtil.isConnectable(src, tgt, trans, sg).isOk();
+	}
+
+	/**
+	 * @param s the state whose sub structure should be deleted
+	 * @param ac the ActorClass
+	 * @param diagram the current diagram
+	 * @param fp the feature provider
+	 */
+	public static void deleteSubStructureRecursive(State s, ActorClass ac, Diagram diagram, IFeatureProvider fp) {
+		if (RoomHelpers.hasSubStructure(s, ac)) {
+			StateGraph subgraph = s.getSubgraph();
+			
+			// depth first
+			for (State st : subgraph.getStates()) {
+				deleteSubStructureRecursive(st, ac, diagram, fp);
+			}
+			
+			ContainerShape subShape = ContextSwitcher.getContext(diagram, subgraph);
+			CommonSupportUtil.deleteConnectionsRecursive(subShape, fp);
+			EcoreUtil.delete(subShape, true);
+		}
 	}
 
 }

@@ -12,8 +12,9 @@
 
 package org.eclipse.etrice.ui.common.concurrency;
 
+import org.eclipse.emf.edit.domain.EditingDomain;
+import org.eclipse.emf.edit.domain.IEditingDomainProvider;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
-import org.eclipse.etrice.ui.common.editor.RoomDiagramEditor;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IEditorReference;
@@ -46,23 +47,23 @@ public class ConcurrentModificationObserver implements IPartListener {
 	}
 
 	public void partOpened(IWorkbenchPart part) {
-		if (part instanceof RoomDiagramEditor) {
-			@SuppressWarnings("restriction")
-			TransactionalEditingDomain editingDomain = ((RoomDiagramEditor) part).getEditingDomain();
-			factory.adapt(editingDomain, EditingDomainAdapter.class);
+		Object adapter = part.getAdapter(IEditingDomainProvider.class);
+		if (adapter instanceof IEditingDomainProvider) {
+			EditingDomain editingDomain = ((IEditingDomainProvider) adapter).getEditingDomain();
+			if (editingDomain instanceof TransactionalEditingDomain)
+				factory.adapt(editingDomain, EditingDomainAdapter.class);
 		}
 	}
 
 	public void partClosed(IWorkbenchPart part) {
-		if (part instanceof RoomDiagramEditor) {
-			// as long as bug 299920 is not fixed, we have to dispose the adapter manually
-			@SuppressWarnings("restriction")
-			TransactionalEditingDomain editingDomain = ((RoomDiagramEditor) part).getEditingDomain();
-			if (editingDomain != null) {
-				EditingDomainAdapter adapter = (EditingDomainAdapter) factory.adapt(editingDomain,
+		Object adapter = part.getAdapter(IEditingDomainProvider.class);
+		if (adapter instanceof IEditingDomainProvider) {
+			EditingDomain editingDomain = ((IEditingDomainProvider) adapter).getEditingDomain();
+			if (editingDomain instanceof TransactionalEditingDomain) {
+				EditingDomainAdapter editingDomainAdapter = (EditingDomainAdapter) factory.adapt(editingDomain,
 						EditingDomainAdapter.class);
-				if (adapter != null) {
-					adapter.dispose();
+				if (editingDomainAdapter != null) {
+					editingDomainAdapter.dispose();
 				}
 			}
 		}
