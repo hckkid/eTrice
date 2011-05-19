@@ -223,7 +223,7 @@ public class RoomNameProvider {
 	}
 
 	public static String getUniqueTransitionName(StateGraph sg) {
-		Set<String> names = RoomHelpers.getAllTransitionNames(sg);
+		Set<String> names = RoomHelpers.getAllNames(sg);
 		
 		for (int i = 0; i < 1000; i++) {
 			String name = "tr"+i;
@@ -234,8 +234,23 @@ public class RoomNameProvider {
 		return "not_unique";
 	}
 
+	public static String getUniqueInitialTransitionName(StateGraph sg) {
+		Set<String> names = RoomHelpers.getAllNames(sg);
+		
+		if (!names.contains("init"))
+			return "init";
+		
+		for (int i = 0; i < 1000; i++) {
+			String name = "init"+i;
+			if (!names.contains(name))
+				return name;
+		}
+		
+		return "not_unique";
+	}
+
 	public static String getUniqueChoicePointName(StateGraph sg) {
-		Set<String> names = RoomHelpers.getAllChoicePointNames(sg);
+		Set<String> names = RoomHelpers.getAllNames(sg);
 		
 		for (int i = 0; i < 1000; i++) {
 			String name = "cp"+i;
@@ -247,7 +262,7 @@ public class RoomNameProvider {
 	}
 
 	public static String getUniqueTrPointName(StateGraph sg) {
-		Set<String> names = RoomHelpers.getAllTrPointNames(sg);
+		Set<String> names = RoomHelpers.getAllNames(sg);
 		
 		for (int i = 0; i < 1000; i++) {
 			String name = "tp"+i;
@@ -259,7 +274,7 @@ public class RoomNameProvider {
 	}
 
 	public static String getUniqueStateName(StateGraph sg) {
-		Set<String> names = RoomHelpers.getAllStateNames(sg);
+		Set<String> names = RoomHelpers.getAllNames(sg);
 		
 		for (int i = 0; i < 1000; i++) {
 			String name = "state"+i;
