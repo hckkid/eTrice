@@ -12,7 +12,6 @@
 
 package org.eclipse.etrice.ui.structure.support;
 
-import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
@@ -31,6 +30,7 @@ import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.etrice.core.room.StructureClass;
 import org.eclipse.etrice.core.room.SubSystemRef;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
+import org.eclipse.etrice.ui.common.support.CommonSupportUtil;
 import org.eclipse.etrice.ui.structure.DiagramAccess;
 import org.eclipse.etrice.ui.structure.DiagramTypeProvider;
 import org.eclipse.etrice.ui.structure.ImageProvider;
@@ -59,8 +59,6 @@ import org.eclipse.graphiti.features.context.IRemoveContext;
 import org.eclipse.graphiti.features.context.IResizeShapeContext;
 import org.eclipse.graphiti.features.context.IUpdateContext;
 import org.eclipse.graphiti.features.context.impl.CreateConnectionContext;
-import org.eclipse.graphiti.features.context.impl.DeleteContext;
-import org.eclipse.graphiti.features.context.impl.MultiDeleteInfo;
 import org.eclipse.graphiti.features.context.impl.RemoveContext;
 import org.eclipse.graphiti.features.custom.AbstractCustomFeature;
 import org.eclipse.graphiti.features.custom.ICustomFeature;
@@ -80,7 +78,6 @@ import org.eclipse.graphiti.mm.algorithms.styles.Orientation;
 import org.eclipse.graphiti.mm.pictograms.Anchor;
 import org.eclipse.graphiti.mm.pictograms.AnchorContainer;
 import org.eclipse.graphiti.mm.pictograms.ChopboxAnchor;
-import org.eclipse.graphiti.mm.pictograms.Connection;
 import org.eclipse.graphiti.mm.pictograms.ContainerShape;
 import org.eclipse.graphiti.mm.pictograms.PictogramElement;
 import org.eclipse.graphiti.mm.pictograms.Shape;
@@ -668,19 +665,7 @@ public class ActorContainerRefSupport {
 					return;
 					
 				ContainerShape container = (ContainerShape) context.getPictogramElement();
-				for (Shape child : container.getChildren()) {
-					for (Iterator<Anchor> iter = child.getAnchors().iterator(); iter.hasNext();) {
-						Anchor anchor = iter.next();
-						for (Iterator<Connection> iterator = Graphiti.getPeService().getAllConnections(anchor).iterator(); iterator.hasNext();) {
-							Connection connection = iterator.next();
-							DeleteContext ctx = new DeleteContext(connection);
-							ctx.setMultiDeleteInfo(new MultiDeleteInfo(false, false, 1));
-							IDeleteFeature deleteFeature = getFeatureProvider().getDeleteFeature(ctx);
-							if (deleteFeature!=null)
-								deleteFeature.delete(ctx);
-						}
-					}
-				}
+				CommonSupportUtil.deleteConnectionsRecursive(container, getFeatureProvider());
 			}
 		}
 		
