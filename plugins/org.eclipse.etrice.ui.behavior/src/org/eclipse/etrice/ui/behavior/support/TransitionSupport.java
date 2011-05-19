@@ -180,7 +180,7 @@ public class TransitionSupport {
 					}
 
 					if (trans instanceof InitialTransition) {
-						trans.setName("init");
+						trans.setName(RoomNameProvider.getUniqueInitialTransitionName(sg));
 					}
 					else {
 						trans.setName(RoomNameProvider.getUniqueTransitionName(sg));
