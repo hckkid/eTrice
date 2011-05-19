@@ -15,6 +15,7 @@ package org.eclipse.etrice.core.ui.outline;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.Attribute;
+import org.eclipse.etrice.core.room.ExternalPort;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.Operation;
 import org.eclipse.etrice.core.room.Port;
@@ -59,7 +60,7 @@ public class RoomOutlineTreeProvider extends DefaultOutlineTreeProvider {
 		if (ac.getIfPorts().size()>0 || ac.getIfSPPs().size()>0) {
 			new ExtraOutlineNode(ac, parentNode, INTERFACE_LABEL);
 		}
-		if (ac.getIntPorts().size()>0 || ac.getServiceImplementations().size()>0 ||
+		if (ac.getIntPorts().size()>0 || ac.getExtPorts().size()>0 || ac.getServiceImplementations().size()>0 ||
 				ac.getStrSAPs().size()>0 || ac.getAttributes().size()>0 ||
 				ac.getActorRefs().size()>0) {
 			new ExtraOutlineNode(ac, parentNode, STRUCTURE_LABEL);
@@ -79,6 +80,8 @@ public class RoomOutlineTreeProvider extends DefaultOutlineTreeProvider {
 		else if (parentNode.getText().equals(STRUCTURE_LABEL)) {
 			for (Port port : ac.getIntPorts())
 				createNode(parentNode, port);
+			for (ExternalPort port : ac.getExtPorts())
+				createNode(parentNode, port.getIfport());
 			for (ServiceImplementation svc : ac.getServiceImplementations())
 				createNode(parentNode, svc);
 			for (SAPRef sap : ac.getStrSAPs())
