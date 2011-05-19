@@ -168,24 +168,31 @@ private int enterHistory(int state, boolean handler) {
 			case «state.getStateId()»:
 				«IF state.hasEntryCode()»if (!handler) «state.getEntryCodeOperationName()»();«ENDIF-»
 				«IF state.isLeaf()-»
-				return state;
+				return «state.getStateId()»;
 				«ELSE-»
-				if (history[state]==NO_STATE) {
-					«LET state.subgraph.getInitTransition() AS initt-»
-					«IF initt!=null-»
-						int chain = «this.getChain(initt).getChainId()-»;
-						int next = executeTransitionChain(chain, null, null);
-						state = enterHistory(next, false);
+					«IF !state.subgraph.hasInitTransition()-»
+						state = history[«state.getStateId()»];
+					«ELSE-»
+					if (history[«state.getStateId()»]==NO_STATE) {
+						«LET state.subgraph.getInitTransition() AS initt-»
+						«IF initt!=null-»
+							int chain = «this.getChain(initt).getChainId()-»;
+							int next = executeTransitionChain(chain, null, null);
+							state = enterHistory(next, false);
+						«ENDIF-»
+						«ENDLET-»
+						state = «state.subgraph.getInitState().getStateId()»;
+					}
+					else {
+						state = history[«state.getStateId()»];
+					}
+					break;
 					«ENDIF-»
-					«ENDLET-»
-					state = «state.subgraph.getInitState().getStateId()»;
-				}
-				else {
-					state = history[state];
-				}
-				break;
 				«ENDIF-»
 			«ENDFOREACH-»
+			case STATE_TOP:
+				state = history[STATE_TOP];
+				break;
 		}
 	}
 }

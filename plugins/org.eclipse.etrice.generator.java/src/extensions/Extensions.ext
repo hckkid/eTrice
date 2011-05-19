@@ -125,6 +125,7 @@ List[Port] getEndPorts(ActorClass ac): ac.intPorts.union(ac.extPorts.ifport);
 //private String getStateName(RefinedState state): state.base.name;
 
 // Init Transition
+boolean hasInitTransition(StateGraph sg): sg.transitions.typeSelect(InitialTransition).size==1;
 Transition getInitTransition(StateGraph sg): sg.transitions.typeSelect(InitialTransition).first(); 
 private getTerminalFromToTransition(Transition trans): trans.to;
 getStateFromTerminal(TransitionTerminal tt): null;
