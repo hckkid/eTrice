@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.eclipse.etrice.tests"
+      label="%featureName"
+      version="0.1.0"
+      provider-name="%providerName">
+
+   <description>
+      %description
+   </description>
+
+   <copyright>
+      Copyright (c) 2009 itemis AG (http://www.itemis.eu) and others.
+
+All rights reserved. This program and the accompanying materials
+are made available under the terms of the Eclipse Public License
+v1.0 which accompanies this distribution, and is available at
+http://www.eclipse.org/legal/epl-v10.html Description here.
+   </copyright>
+
+   <license url="http://www.eclipse.org/legal/epl-v10.html">
+      %license
+   </license>
+
+   <requires>
+      <import plugin="org.eclipse.xtext" version="2.0.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.xtext.util" version="2.0.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.ecore" version="2.6.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.common" version="2.6.0" match="greaterOrEqual"/>
+      <import plugin="org.antlr.runtime" version="3.0.0" match="greaterOrEqual"/>
+      <import plugin="org.apache.log4j"/>
+      <import plugin="org.eclipse.etrice.core.room" version="0.1.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.etrice.generator" version="0.1.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.ui" version="3.6.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.ui.editors" version="3.5.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.ui.ide" version="3.5.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.xtext.ui" version="2.0.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.xtext.ui.shared" version="2.0.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.xtext.builder" version="2.0.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="org.eclipse.core.runtime" version="3.6.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.mwe2.runtime" version="1.0.1" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.ecore.xmi" version="2.5.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.xtend.util.stdlib" version="1.0.1" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.mwe.core" version="1.1.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.xpand" version="1.0.1" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.xtend" version="1.0.1" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.mwe.utils" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.xtend.typesystem.emf" version="1.0.1" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.jdt.core" version="3.6.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.core.resources" version="3.6.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.etrice.ui.common" version="0.1.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.graphiti" version="0.8.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.graphiti.ui" version="0.8.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.ui.ide" version="3.6.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.ui.forms" version="3.5.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.ui.views.properties.tabbed" version="3.5.100" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.jface.databinding" version="1.4.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.core.databinding" version="1.3.100" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.core.databinding.property" version="1.3.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.core.databinding.beans" version="1.2.100" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.gef" version="3.6.1" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.transaction" version="1.4.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.etrice.core.room.ui" version="0.1.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.etrice.ui.structure" version="0.1.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.etrice.ui.behavior" version="0.1.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.edit" version="2.6.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.edit.ui" version="2.6.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.jface" version="3.6.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.ui" version="3.6.1" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.graphiti.ui" version="0.7.0" match="greaterOrEqual"/>
+   </requires>
+
+   <plugin
+         id="org.eclipse.etrice.core.room"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.etrice.core.room.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.etrice.doc"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.etrice.generator"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.etrice.generator.java"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.etrice.ui.behavior"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.etrice.ui.commands"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.etrice.ui.common"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.etrice.ui.structure"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+</feature>
