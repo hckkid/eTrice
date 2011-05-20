@@ -27,7 +27,9 @@ import org.eclipse.etrice.core.room.RelaySAPoint;
 import org.eclipse.etrice.core.room.SAPoint;
 import org.eclipse.etrice.core.room.SPPRef;
 import org.eclipse.etrice.core.room.SPPoint;
+import org.eclipse.etrice.core.room.StructureClass;
 import org.eclipse.graphiti.features.IFeatureProvider;
+import org.eclipse.graphiti.features.context.ICreateConnectionContext;
 import org.eclipse.graphiti.features.context.impl.AddConnectionContext;
 import org.eclipse.graphiti.features.context.impl.AddContext;
 import org.eclipse.graphiti.mm.pictograms.Anchor;
@@ -255,5 +257,57 @@ public class SupportUtil {
 				bindings.add((LayerConnection)bo);
 		}
 		return bindings;
+	}
+	
+	public static StructureClass getParent(ICreateConnectionContext context, IFeatureProvider fp) {
+		ContainerShape shape = (ContainerShape) context.getSourcePictogramElement().eContainer();
+		return getParent(shape, fp);
+	}
+	
+	public static StructureClass getParent(ContainerShape shape, IFeatureProvider fp) {
+		Object bo = fp.getBusinessObjectForPictogramElement(shape);
+		if (bo instanceof StructureClass)
+			return (StructureClass) bo;
+		
+		shape = (ContainerShape) shape.eContainer();
+		bo = fp.getBusinessObjectForPictogramElement(shape);
+		if (bo instanceof StructureClass)
+			return (StructureClass) bo;
+		
+		return null;
+	}
+
+	public static Port getPort(Anchor anchor, IFeatureProvider fp) {
+		if (anchor != null) {
+			Object obj = fp.getBusinessObjectForPictogramElement(anchor.getParent());
+			if (obj instanceof Port) {
+				return (Port) obj;
+			}
+		}
+		return null;
+	}
+
+	public static SPPRef getSPPRef(Anchor anchor, IFeatureProvider fp) {
+		if (anchor != null) {
+			Object obj = fp.getBusinessObjectForPictogramElement(anchor.getParent());
+			if (obj instanceof SPPRef) {
+				return (SPPRef) obj;
+			}
+		}
+		return null;
+	}
+	
+	public static ActorContainerRef getRef(Anchor anchor, IFeatureProvider fp) {
+		if (anchor != null) {
+			ContainerShape shape = (ContainerShape) anchor.getParent().eContainer();
+			Object bo = fp.getBusinessObjectForPictogramElement(shape);
+			if (bo instanceof ActorContainerRef)
+				return (ActorContainerRef) bo;
+			shape = (ContainerShape) anchor.getParent();
+			bo = fp.getBusinessObjectForPictogramElement(shape);
+			if (bo instanceof ActorContainerRef)
+				return (ActorContainerRef) bo;
+		}				
+		return null;
 	}
 }
