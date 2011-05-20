@@ -72,7 +72,6 @@ public «IF ac.abstract»abstract «ENDIF»class «ac.name» extends «IF ac.base!=null
 	«ENDFOREACH»
 	
 	«EXPAND ProcedureHelpers::Attributes FOR ac.attributes»
-	«EXPAND ProcedureHelpers::AttributeSettersGetters FOR ac.attributes»
 	«EXPAND ProcedureHelpers::Operations FOR ac.operations»
 
 	//--------------------- construction
