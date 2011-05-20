@@ -9,7 +9,6 @@
 package org.eclipse.etrice.core.room.util;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -287,6 +286,46 @@ public class RoomHelpers {
 		return result;
 	}
 	
+	public static Set<String> getAllNames(StateGraph sg) {
+		return getAllNames(sg, null);
+	}
+	
+	public static Set<String> getAllNames(StateGraph sg, StateGraphItem skip) {
+		HashSet<String> result = new HashSet<String>();
+		do {
+			for (State st : sg.getStates()) {
+				if (st!=skip)
+					result.add(st.getName());
+			}
+			for (TrPoint tp : sg.getTrPoints()) {
+				if (tp!=skip)
+					result.add(tp.getName());
+			}
+			for (ChoicePoint cp : sg.getChPoints()) {
+				if (cp!=skip)
+					result.add(cp.getName());
+			}
+			for (Transition tr : sg.getTransitions()) {
+				if (tr!=skip)
+					result.add(tr.getName());
+			}
+			
+			if (sg.eContainer() instanceof RefinedState) {
+				sg = ((RefinedState)sg.eContainer()).getBase().getSubgraph();
+			}
+			else if (sg.eContainer() instanceof ActorClass) {
+				ActorClass base = ((ActorClass)sg.eContainer()).getBase();
+				sg = base!=null? base.getStateMachine():null;
+			}
+			else {
+				break;
+			}
+		}
+		while (sg!=null);
+		
+		return result;
+	}
+	
 	public static Set<String> getAllStateNames(StateGraph sg) {
 		return getAllNames(sg, null, RoomPackage.eINSTANCE.getStateGraph_States());
 	}
@@ -318,7 +357,8 @@ public class RoomHelpers {
 	public static Set<String> getAllTransitionNames(StateGraph sg, Transition skip) {
 		return getAllNames(sg, skip, RoomPackage.eINSTANCE.getStateGraph_Transitions());
 	}
-	
+
+	/*
 	public static Set<String> getAllNames(StateGraph sg, StateGraphItem skip) {
 		if (skip instanceof Transition)
 			return getAllNames(sg, skip, RoomPackage.eINSTANCE.getStateGraph_Transitions());
@@ -331,6 +371,7 @@ public class RoomHelpers {
 		
 		return Collections.emptySet();
 	}
+	*/
 	
 	private static <T extends StateGraphItem> Set<String> getAllNames(StateGraph sg, T skip, EReference feature) {
 		List<T> states = RoomHelpers.getAllStateGraphItems(sg, feature);

@@ -297,6 +297,8 @@ public class StructureClassSupport {
 			@Override
 			public boolean update(IUpdateContext context) {
 				ContainerShape containerShape = (ContainerShape)context.getPictogramElement();
+				if (containerShape instanceof Diagram)
+					containerShape = (ContainerShape) containerShape.getChildren().get(0);
 				Object bo = getBusinessObjectForPictogramElement(containerShape);
 				if (bo instanceof EObject && ((EObject)bo).eIsProxy()) {
 					IRemoveContext rc = new RemoveContext(containerShape);

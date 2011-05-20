@@ -28,6 +28,7 @@ import org.eclipse.etrice.core.room.TrPoint;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.ui.behavior.ImageProvider;
 import org.eclipse.etrice.ui.behavior.dialogs.StatePropertyDialog;
+import org.eclipse.etrice.ui.common.support.CommonSupportUtil;
 import org.eclipse.graphiti.datatypes.IDimension;
 import org.eclipse.graphiti.dt.IDiagramTypeProvider;
 import org.eclipse.graphiti.features.IAddFeature;
@@ -77,6 +78,7 @@ import org.eclipse.graphiti.mm.pictograms.AnchorContainer;
 import org.eclipse.graphiti.mm.pictograms.ChopboxAnchor;
 import org.eclipse.graphiti.mm.pictograms.ConnectionDecorator;
 import org.eclipse.graphiti.mm.pictograms.ContainerShape;
+import org.eclipse.graphiti.mm.pictograms.Diagram;
 import org.eclipse.graphiti.mm.pictograms.PictogramElement;
 import org.eclipse.graphiti.mm.pictograms.Shape;
 import org.eclipse.graphiti.services.Graphiti;
@@ -729,6 +731,26 @@ public class StateSupport {
 					return !SupportUtil.isInherited(getDiagram(), state);
 				}
 				return false;
+			}
+			
+			/* (non-Javadoc)
+			 * @see org.eclipse.graphiti.ui.features.DefaultDeleteFeature#preDelete(org.eclipse.graphiti.features.context.IDeleteContext)
+			 */
+			@Override
+			public void preDelete(IDeleteContext context) {
+				super.preDelete(context);
+				
+				if (!(context.getPictogramElement() instanceof ContainerShape))
+					return;
+
+				State s = (State) getBusinessObjectForPictogramElement(context.getPictogramElement());
+				IFeatureProvider fp = getFeatureProvider();
+				Diagram diagram = getDiagram();
+				ActorClass ac = RoomHelpers.getActorClass(s);
+				SupportUtil.deleteSubStructureRecursive(s, ac, diagram, fp);
+				
+				ContainerShape container = (ContainerShape) context.getPictogramElement();
+				CommonSupportUtil.deleteConnectionsRecursive(container, fp);
 			}
 		}
 		

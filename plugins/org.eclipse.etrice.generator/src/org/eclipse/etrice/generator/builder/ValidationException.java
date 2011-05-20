@@ -12,7 +12,9 @@
 
 package org.eclipse.etrice.generator.builder;
 
-public class ValidationException extends RuntimeException {
+import org.eclipse.emf.mwe.core.WorkflowInterruptedException;
+
+public class ValidationException extends WorkflowInterruptedException  {
 	
 	/**
 	 * 

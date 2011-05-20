@@ -135,6 +135,8 @@ public class SPPSupport extends InterfaceItemSupport {
 	
 		private static class PropertyFeature extends InterfaceItemSupport.FeatureProvider.PropertyFeature {
 
+			private boolean doneChanges = false;
+
 			public PropertyFeature(IFeatureProvider fp) {
 				super(fp, "Edit SPP...", "Edit SPP Properties");
 			}
@@ -163,11 +165,15 @@ public class SPPSupport extends InterfaceItemSupport {
 		        Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 				SPPPropertyDialog dlg = new SPPPropertyDialog(shell, spp, scope, acc, false, refport);
 				if (dlg.open()!=Window.OK)
-					// TODOHRR: introduce a method to revert changes, does hasDoneChanges=false roll back changes?
-					throw new RuntimeException();
-					//return;
+					return;
 				
+				doneChanges = true;
 				updateSPPFigure(spp, context.getPictogramElements()[0], manageColor(DARK_COLOR), manageColor(BRIGHT_COLOR));
+			}
+			
+			@Override
+			public boolean hasDoneChanges() {
+				return doneChanges;
 			}
 			
 		}

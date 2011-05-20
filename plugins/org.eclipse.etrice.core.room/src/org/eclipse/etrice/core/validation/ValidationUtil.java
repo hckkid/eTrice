@@ -597,6 +597,29 @@ public class ValidationUtil {
 		return isUniqueName(item, item.getName());
 	}
 	
+	public static boolean isConnectedOutside(TrPoint tp) {
+		if (tp instanceof TransitionPoint)
+			return false;
+		
+		StateGraph parentSG = (StateGraph) tp.eContainer().eContainer().eContainer();
+		for (Transition t : parentSG.getTransitions()) {
+			if (t.getTo() instanceof SubStateTrPointTerminal) {
+				SubStateTrPointTerminal term = (SubStateTrPointTerminal) t.getTo();
+				if (term.getTrPoint()==tp)
+					return true;
+			}
+			if (t instanceof NonInitialTransition) {
+				if (((NonInitialTransition) t).getFrom() instanceof SubStateTrPointTerminal) {
+					SubStateTrPointTerminal term = (SubStateTrPointTerminal) ((NonInitialTransition) t).getFrom();
+					if (term.getTrPoint()==tp)
+						return true;
+				}
+			}
+		}
+		
+		return false;
+	}
+	
 	public static Result isUniqueName(InterfaceItem item, String name) {
 		if (name.isEmpty())
 			return Result.error("name must not be empty");

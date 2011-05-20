@@ -32,19 +32,23 @@ import org.eclipse.graphiti.features.ICreateConnectionFeature;
 import org.eclipse.graphiti.features.IDeleteFeature;
 import org.eclipse.graphiti.features.IFeatureProvider;
 import org.eclipse.graphiti.features.IReason;
+import org.eclipse.graphiti.features.IReconnectionFeature;
 import org.eclipse.graphiti.features.IRemoveFeature;
 import org.eclipse.graphiti.features.IUpdateFeature;
 import org.eclipse.graphiti.features.context.IAddConnectionContext;
 import org.eclipse.graphiti.features.context.IAddContext;
 import org.eclipse.graphiti.features.context.ICreateConnectionContext;
 import org.eclipse.graphiti.features.context.IDeleteContext;
+import org.eclipse.graphiti.features.context.IReconnectionContext;
 import org.eclipse.graphiti.features.context.IRemoveContext;
 import org.eclipse.graphiti.features.context.IUpdateContext;
 import org.eclipse.graphiti.features.context.impl.AddConnectionContext;
+import org.eclipse.graphiti.features.context.impl.ReconnectionContext;
 import org.eclipse.graphiti.features.context.impl.RemoveContext;
 import org.eclipse.graphiti.features.impl.AbstractAddFeature;
 import org.eclipse.graphiti.features.impl.AbstractCreateConnectionFeature;
 import org.eclipse.graphiti.features.impl.AbstractUpdateFeature;
+import org.eclipse.graphiti.features.impl.DefaultReconnectionFeature;
 import org.eclipse.graphiti.features.impl.DefaultRemoveFeature;
 import org.eclipse.graphiti.features.impl.Reason;
 import org.eclipse.graphiti.mm.GraphicsAlgorithmContainer;
@@ -87,67 +91,32 @@ public class LayerConnectionSupport {
 	
 			@Override
 			public boolean canCreate(ICreateConnectionContext context) {
-				SPPRef src = getSPPRef(context.getSourceAnchor());
-				ActorContainerRef srcRef = getRef(context.getSourceAnchor());
-				SPPRef tgt = getSPPRef(context.getTargetAnchor());
-				ActorContainerRef tgtRef = getRef(context.getTargetAnchor());
-				StructureClass sc = getParent(context);
+				IFeatureProvider featureProvider = getFeatureProvider();
+				SPPRef src = SupportUtil.getSPPRef(context.getSourceAnchor(), featureProvider);
+				ActorContainerRef srcRef = SupportUtil.getRef(context.getSourceAnchor(), featureProvider);
+				SPPRef tgt = SupportUtil.getSPPRef(context.getTargetAnchor(), featureProvider);
+				ActorContainerRef tgtRef = SupportUtil.getRef(context.getTargetAnchor(), featureProvider);
+				StructureClass sc = SupportUtil.getParent(context, featureProvider);
 				
 				return ValidationUtil.isConnectable(src, srcRef, tgt, tgtRef, sc).isOk();
 			}
 			
 			public boolean canStartConnection(ICreateConnectionContext context) {
-				SPPRef src = getSPPRef(context.getSourceAnchor());
-				ActorContainerRef ref = getRef(context.getSourceAnchor());
-				StructureClass sc = getParent(context);
+				IFeatureProvider featureProvider = getFeatureProvider();
+				SPPRef src = SupportUtil.getSPPRef(context.getSourceAnchor(), featureProvider);
+				ActorContainerRef ref = SupportUtil.getRef(context.getSourceAnchor(), featureProvider);
+				StructureClass sc = SupportUtil.getParent(context, featureProvider);
 				return ValidationUtil.isConnectableSrc(src, ref, sc);
-			}
-
-			private SPPRef getSPPRef(Anchor anchor) {
-				if (anchor != null) {
-					Object obj = getBusinessObjectForPictogramElement(anchor.getParent());
-					if (obj instanceof SPPRef) {
-						return (SPPRef) obj;
-					}
-				}
-				return null;
-			}
-			
-			public ActorContainerRef getRef(Anchor anchor) {
-				if (anchor != null) {
-					ContainerShape shape = (ContainerShape) anchor.getParent().eContainer();
-					Object bo = getBusinessObjectForPictogramElement(shape);
-					if (bo instanceof ActorContainerRef)
-						return (ActorContainerRef) bo;
-					shape = (ContainerShape) anchor.getParent();
-					bo = getBusinessObjectForPictogramElement(shape);
-					if (bo instanceof ActorContainerRef)
-						return (ActorContainerRef) bo;
-				}				
-				return null;
-			}
-			
-			public StructureClass getParent(ICreateConnectionContext context) {
-				ContainerShape shape = (ContainerShape) context.getSourcePictogramElement().eContainer();
-				Object bo = getBusinessObjectForPictogramElement(shape);
-				if (bo instanceof StructureClass)
-					return (StructureClass) bo;
-				
-				shape = (ContainerShape) shape.eContainer();
-				bo = getBusinessObjectForPictogramElement(shape);
-				if (bo instanceof StructureClass)
-					return (StructureClass) bo;
-				
-				return null;
 			}
 			
 			@Override
 			public Connection create(ICreateConnectionContext context) {
-				SPPRef src = getSPPRef(context.getSourceAnchor());
-				ActorContainerRef srcRef = getRef(context.getSourceAnchor());
-				SPPRef dst = getSPPRef(context.getTargetAnchor());
-				ActorContainerRef dstRef = getRef(context.getTargetAnchor());
-				StructureClass sc = getParent(context);
+				IFeatureProvider featureProvider = getFeatureProvider();
+				SPPRef src = SupportUtil.getSPPRef(context.getSourceAnchor(), featureProvider);
+				ActorContainerRef srcRef = SupportUtil.getRef(context.getSourceAnchor(), featureProvider);
+				SPPRef dst = SupportUtil.getSPPRef(context.getTargetAnchor(), featureProvider);
+				ActorContainerRef dstRef = SupportUtil.getRef(context.getTargetAnchor(), featureProvider);
+				StructureClass sc = SupportUtil.getParent(context, featureProvider);
 				
 				LayerConnection lc = RoomFactory.eINSTANCE.createLayerConnection();
 				SAPoint sapt = null;
@@ -273,6 +242,76 @@ public class LayerConnectionSupport {
 			}
 		}
 		
+		private class ReconnectionFeature extends DefaultReconnectionFeature {
+
+			private boolean doneChanges = false;
+
+			public ReconnectionFeature(IFeatureProvider fp) {
+				super(fp);
+			}
+			
+			@Override
+			public boolean canReconnect(IReconnectionContext context) {
+				if (!super.canReconnect(context))
+					return false;
+
+				LayerConnection lc = (LayerConnection) getBusinessObjectForPictogramElement(context.getConnection());
+				if (isInherited(getDiagram(), lc))
+					return false;
+				
+				Anchor asrc = context.getConnection().getStart();
+				Anchor atgt = context.getConnection().getEnd();
+				if (context.getReconnectType().equals(ReconnectionContext.RECONNECT_SOURCE))
+					asrc = context.getNewAnchor();
+				else
+					atgt = context.getNewAnchor();
+
+				IFeatureProvider featureProvider = getFeatureProvider();
+				SPPRef src = SupportUtil.getSPPRef(asrc, featureProvider);
+				ActorContainerRef srcRef = SupportUtil.getRef(asrc, featureProvider);
+				SPPRef tgt = SupportUtil.getSPPRef(atgt, featureProvider);
+				ActorContainerRef tgtRef = SupportUtil.getRef(atgt, featureProvider);
+				StructureClass sc = SupportUtil.getParent(getDiagram(), featureProvider);
+
+				return ValidationUtil.isConnectable(src, srcRef, tgt, tgtRef, sc).isOk();
+			}
+			
+			@Override
+			public void postReconnect(IReconnectionContext context) {
+				super.postReconnect(context);
+
+				IFeatureProvider featureProvider = getFeatureProvider();
+				SPPRef src = SupportUtil.getSPPRef(context.getConnection().getStart(), featureProvider);
+				ActorContainerRef srcRef = SupportUtil.getRef(context.getConnection().getStart(), featureProvider);
+				SPPRef dst = SupportUtil.getSPPRef(context.getConnection().getEnd(), featureProvider);
+				ActorContainerRef dstRef = SupportUtil.getRef(context.getConnection().getEnd(), featureProvider);
+				
+				doneChanges = true;
+				
+				LayerConnection lc = (LayerConnection) getBusinessObjectForPictogramElement(context.getConnection());
+				SAPoint sapt = null;
+				if (src!=null) {
+					sapt = RoomFactory.eINSTANCE.createRelaySAPoint();
+					((RelaySAPoint)sapt).setRelay(src);
+				}
+				else if (srcRef!=null) {
+					sapt = RoomFactory.eINSTANCE.createRefSAPoint();
+					((RefSAPoint)sapt).setRef(srcRef);
+				}
+				lc.setFrom(sapt);
+				
+				SPPoint sppt = RoomFactory.eINSTANCE.createSPPoint();
+				sppt.setRef(dstRef);
+				sppt.setService(dst);
+				lc.setTo(sppt);
+			}
+			
+			@Override
+			public boolean hasDoneChanges() {
+				return doneChanges ;
+			}
+		}
+		
 		private class UpdateFeature extends AbstractUpdateFeature {
 
 			public UpdateFeature(IFeatureProvider fp) {
@@ -350,6 +389,11 @@ public class LayerConnectionSupport {
 		@Override
 		public IUpdateFeature getUpdateFeature(IUpdateContext context) {
 			return new UpdateFeature(fp);
+		}
+
+		@Override
+		public IReconnectionFeature getReconnectionFeature(IReconnectionContext context) {
+			return new ReconnectionFeature(fp);
 		}
 	}
 	

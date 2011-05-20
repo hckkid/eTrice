@@ -22,19 +22,23 @@ import org.eclipse.graphiti.features.ICreateConnectionFeature;
 import org.eclipse.graphiti.features.IDeleteFeature;
 import org.eclipse.graphiti.features.IFeatureProvider;
 import org.eclipse.graphiti.features.IReason;
+import org.eclipse.graphiti.features.IReconnectionFeature;
 import org.eclipse.graphiti.features.IRemoveFeature;
 import org.eclipse.graphiti.features.IUpdateFeature;
 import org.eclipse.graphiti.features.context.IAddConnectionContext;
 import org.eclipse.graphiti.features.context.IAddContext;
 import org.eclipse.graphiti.features.context.ICreateConnectionContext;
 import org.eclipse.graphiti.features.context.IDeleteContext;
+import org.eclipse.graphiti.features.context.IReconnectionContext;
 import org.eclipse.graphiti.features.context.IRemoveContext;
 import org.eclipse.graphiti.features.context.IUpdateContext;
 import org.eclipse.graphiti.features.context.impl.AddConnectionContext;
+import org.eclipse.graphiti.features.context.impl.ReconnectionContext;
 import org.eclipse.graphiti.features.context.impl.RemoveContext;
 import org.eclipse.graphiti.features.impl.AbstractAddFeature;
 import org.eclipse.graphiti.features.impl.AbstractCreateConnectionFeature;
 import org.eclipse.graphiti.features.impl.AbstractUpdateFeature;
+import org.eclipse.graphiti.features.impl.DefaultReconnectionFeature;
 import org.eclipse.graphiti.features.impl.DefaultRemoveFeature;
 import org.eclipse.graphiti.features.impl.Reason;
 import org.eclipse.graphiti.mm.algorithms.Polyline;
@@ -86,9 +90,10 @@ public class BindingSupport {
 	
 			@Override
 			public boolean canCreate(ICreateConnectionContext context) {
-				Port src = getPort(context.getSourceAnchor());
-				Port tgt = getPort(context.getTargetAnchor());
-				ActorContainerRef srcRef = getRef(context.getSourceAnchor());
+				IFeatureProvider featureProvider = getFeatureProvider();
+				Port src = SupportUtil.getPort(context.getSourceAnchor(), featureProvider);
+				Port tgt = SupportUtil.getPort(context.getTargetAnchor(), featureProvider);
+				ActorContainerRef srcRef = SupportUtil.getRef(context.getSourceAnchor(), featureProvider);
 				
 				if (justStarted) {
 					justStarted = false;
@@ -99,21 +104,21 @@ public class BindingSupport {
 					return false;
 				}
 				
-				StructureClass ac = getParent(context);
+				StructureClass ac = SupportUtil.getParent(context, featureProvider);
 				if (ac==null) {
 					return false;
 				}
 				
-				ActorContainerRef tgtRef = getRef(context.getTargetAnchor());
+				ActorContainerRef tgtRef = SupportUtil.getRef(context.getTargetAnchor(), featureProvider);
 				
 				return ValidationUtil.isConnectable(src, srcRef, tgt, tgtRef, ac).isOk();
 			}
 			
 			public boolean canStartConnection(ICreateConnectionContext context) {
-				Port src = getPort(context.getSourceAnchor());
+				Port src = SupportUtil.getPort(context.getSourceAnchor(), getFeatureProvider());
 				boolean canStart = src!=null;
 				if (canStart) {
-					ActorContainerRef ref = getRef(context.getSourceAnchor());
+					ActorContainerRef ref = SupportUtil.getRef(context.getSourceAnchor(), getFeatureProvider());
 					if (ref==null) {
 						// this port is local, i.e. owned by the parent itself
 						ActorContainerClass acc = (ActorContainerClass) src.eContainer();
@@ -130,39 +135,6 @@ public class BindingSupport {
 					justStarted = true;
 				return canStart;
 			}
-
-			private Port getPort(Anchor anchor) {
-				if (anchor != null) {
-					Object obj = getBusinessObjectForPictogramElement(anchor.getParent());
-					if (obj instanceof Port) {
-						return (Port) obj;
-					}
-				}
-				return null;
-			}
-			
-			public StructureClass getParent(ICreateConnectionContext context) {
-				ContainerShape shape = (ContainerShape) context.getSourcePictogramElement().eContainer();
-				Object bo = getBusinessObjectForPictogramElement(shape);
-				if (bo instanceof StructureClass)
-					return (StructureClass) bo;
-				
-				shape = (ContainerShape) shape.eContainer();
-				bo = getBusinessObjectForPictogramElement(shape);
-				if (bo instanceof StructureClass)
-					return (StructureClass) bo;
-				
-				return null;
-			}
-			
-			public ActorContainerRef getRef(Anchor anchor) {
-				ContainerShape shape = (ContainerShape) anchor.getParent().eContainer();
-				Object bo = getBusinessObjectForPictogramElement(shape);
-				if (bo instanceof ActorContainerRef)
-					return (ActorContainerRef) bo;
-
-				return null;
-			}
 			
 			@Override
 			public Connection create(ICreateConnectionContext context) {
@@ -170,17 +142,18 @@ public class BindingSupport {
 				
 				endHighLightMatches();
 				
-				Port src = getPort(context.getSourceAnchor());
-				Port dst = getPort(context.getTargetAnchor());
-				StructureClass ac = getParent(context);
+				IFeatureProvider featureProvider = getFeatureProvider();
+				Port src = SupportUtil.getPort(context.getSourceAnchor(), featureProvider);
+				Port dst = SupportUtil.getPort(context.getTargetAnchor(), featureProvider);
+				StructureClass ac = SupportUtil.getParent(context, featureProvider);
 				if (src!=null && dst!=null && ac!=null) {
 					Binding bind = RoomFactory.eINSTANCE.createBinding();
 					BindingEndPoint ep1 = RoomFactory.eINSTANCE.createBindingEndPoint();
-					ActorContainerRef ar1 = getRef(context.getSourceAnchor());
+					ActorContainerRef ar1 = SupportUtil.getRef(context.getSourceAnchor(), featureProvider);
 					ep1.setPort(src);
 					ep1.setActorRef(ar1);
 					BindingEndPoint ep2 = RoomFactory.eINSTANCE.createBindingEndPoint();
-					ActorContainerRef ar2 = getRef(context.getTargetAnchor());
+					ActorContainerRef ar2 = SupportUtil.getRef(context.getTargetAnchor(), featureProvider);
 					ep2.setPort(dst);
 					ep2.setActorRef(ar2);
 					bind.setEndpoint1(ep1);
@@ -189,7 +162,7 @@ public class BindingSupport {
 					
 					AddConnectionContext addContext = new AddConnectionContext(context.getSourceAnchor(), context.getTargetAnchor());
 					addContext.setNewObject(bind);
-					newConnection = (Connection) getFeatureProvider().addIfPossible(addContext);
+					newConnection = (Connection) featureProvider.addIfPossible(addContext);
 				}
 				
 				return newConnection;
@@ -235,9 +208,9 @@ public class BindingSupport {
 			@Override
 			public PictogramElement add(IAddContext context) {
 				IAddConnectionContext addConContext = (IAddConnectionContext) context;
-				Binding addedEReference = (Binding) context.getNewObject();
+				Binding bind = (Binding) context.getNewObject();
 
-				boolean inherited = isInherited(getDiagram(), addedEReference);
+				boolean inherited = isInherited(getDiagram(), bind);
 				
 				IPeCreateService peCreateService = Graphiti.getPeCreateService();
 				// CONNECTION WITH POLYLINE
@@ -252,11 +225,85 @@ public class BindingSupport {
 				polyline.setForeground(manageColor(inherited?INHERITED_COLOR:LINE_COLOR));
 
 				// create link and wire it
-				link(connection, addedEReference);
+				link(connection, bind);
 
 				return connection;
 			}
 			
+		}
+		
+		private class ReconnectionFeature extends DefaultReconnectionFeature {
+
+			private boolean doneChanges = false;
+
+			public ReconnectionFeature(IFeatureProvider fp) {
+				super(fp);
+			}
+			
+			@Override
+			public boolean canReconnect(IReconnectionContext context) {
+				if (!super.canReconnect(context))
+					return false;
+				
+				Binding bind = (Binding) getBusinessObjectForPictogramElement(context.getConnection());
+				if (isInherited(getDiagram(), bind))
+					return false;
+				
+				Anchor asrc = context.getConnection().getStart();
+				Anchor atgt = context.getConnection().getEnd();
+				if (context.getReconnectType().equals(ReconnectionContext.RECONNECT_SOURCE))
+					asrc = context.getNewAnchor();
+				else
+					atgt = context.getNewAnchor();
+				
+				IFeatureProvider featureProvider = getFeatureProvider();
+				Port src = SupportUtil.getPort(asrc, featureProvider);
+				Port tgt = SupportUtil.getPort(atgt, featureProvider);
+				ActorContainerRef srcRef = SupportUtil.getRef(asrc, featureProvider);
+				
+				if (src==null || tgt==null) {
+					return false;
+				}
+				
+				StructureClass ac = SupportUtil.getParent(getDiagram(), featureProvider);
+				if (ac==null) {
+					return false;
+				}
+				
+				ActorContainerRef tgtRef = SupportUtil.getRef(atgt, featureProvider);
+				
+				return ValidationUtil.isConnectable(src, srcRef, tgt, tgtRef, ac, bind).isOk();
+			}
+			
+			@Override
+			public void postReconnect(IReconnectionContext context) {
+				super.postReconnect(context);
+
+				IFeatureProvider featureProvider = getFeatureProvider();
+				Port src = SupportUtil.getPort(context.getConnection().getStart(), featureProvider);
+				Port dst = SupportUtil.getPort(context.getConnection().getEnd(), featureProvider);
+				StructureClass ac = SupportUtil.getParent(getDiagram(), featureProvider);
+				if (src!=null && dst!=null && ac!=null) {
+					doneChanges = true;
+
+					Binding bind = (Binding) getBusinessObjectForPictogramElement(context.getConnection());
+					BindingEndPoint ep1 = RoomFactory.eINSTANCE.createBindingEndPoint();
+					ActorContainerRef ar1 = SupportUtil.getRef(context.getConnection().getStart(), featureProvider);
+					ep1.setPort(src);
+					ep1.setActorRef(ar1);
+					BindingEndPoint ep2 = RoomFactory.eINSTANCE.createBindingEndPoint();
+					ActorContainerRef ar2 = SupportUtil.getRef(context.getConnection().getEnd(), featureProvider);
+					ep2.setPort(dst);
+					ep2.setActorRef(ar2);
+					bind.setEndpoint1(ep1);
+					bind.setEndpoint2(ep2);
+				}
+			}
+			
+			@Override
+			public boolean hasDoneChanges() {
+				return doneChanges ;
+			}
 		}
 		
 		private class UpdateFeature extends AbstractUpdateFeature {
@@ -357,6 +404,11 @@ public class BindingSupport {
 		@Override
 		public IUpdateFeature getUpdateFeature(IUpdateContext context) {
 			return new UpdateFeature(fp);
+		}
+
+		@Override
+		public IReconnectionFeature getReconnectionFeature(IReconnectionContext context) {
+			return new ReconnectionFeature(fp);
 		}
 		
 		@Override

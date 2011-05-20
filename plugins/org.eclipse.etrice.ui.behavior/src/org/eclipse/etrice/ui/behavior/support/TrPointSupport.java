@@ -25,8 +25,10 @@ import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.TrPoint;
 import org.eclipse.etrice.core.room.TransitionPoint;
+import org.eclipse.etrice.core.validation.ValidationUtil;
 import org.eclipse.etrice.ui.behavior.ImageProvider;
 import org.eclipse.etrice.ui.behavior.dialogs.TrPointPropertyDialog;
+import org.eclipse.etrice.ui.common.support.CommonSupportUtil;
 import org.eclipse.etrice.ui.common.support.NoResizeFeature;
 import org.eclipse.graphiti.dt.IDiagramTypeProvider;
 import org.eclipse.graphiti.features.IAddFeature;
@@ -622,7 +624,18 @@ public class TrPointSupport {
 			
 			@Override
 			public boolean canDelete(IDeleteContext context) {
-				return !isSubTP(context.getPictogramElement());
+				if (isSubTP(context.getPictogramElement()))
+					return false;
+
+				ContainerShape containerShape = (ContainerShape) context.getPictogramElement();
+				TrPoint tp = (TrPoint) getBusinessObjectForPictogramElement(containerShape);
+				if (SupportUtil.isInherited(tp, containerShape))
+					return false;
+				
+				if (ValidationUtil.isConnectedOutside(tp))
+					return false;
+				
+				return true;
 			}
 			
 			/* (non-Javadoc)
@@ -646,6 +659,10 @@ public class TrPointSupport {
 						removeFeature.remove(rc);
 					}
 				}
+
+				// delete connections (inside this state machine since isn't connected outside)
+				ContainerShape container = (ContainerShape) context.getPictogramElement();
+				CommonSupportUtil.deleteConnectionsRecursive(container, getFeatureProvider());
 			}
 		}
 		
