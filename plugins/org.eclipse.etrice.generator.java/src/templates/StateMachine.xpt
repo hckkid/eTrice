@@ -186,8 +186,8 @@ private int enterHistory(int state, boolean handler) {
 					else {
 						state = history[«state.getStateId()»];
 					}
-					break;
 					«ENDIF-»
+					break;
 				«ENDIF-»
 			«ENDFOREACH-»
 			case STATE_TOP:
