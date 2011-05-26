@@ -67,7 +67,7 @@ public class ActorClassBaseTest extends TestCase {
 	public void testActorClassBase() {
 		MockRTObject topRTObject = new MockRTObject();
 		RTServices.getInstance().getMsgSvcCtrl().addMsgSvc(
-				new MessageService(topRTObject, new Address(0, 0, 0),"MessageService_Main"));
+				new MessageService(topRTObject, new Address(0, 0, 0),"MessageService_Main", Thread.NORM_PRIORITY));
 
 		Address peer_system_port_addr = new Address(0, 0, 0);
 		Address system_port_addr = new Address(0, 0, 1);

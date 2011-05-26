@@ -2952,53 +2952,79 @@ ruleLogicalThread returns [EObject current=null]
 	    }
 
 )
-)	otherlv_2='{' 
+)	otherlv_2='prio' 
     {
-    	newLeafNode(otherlv_2, grammarAccess.getLogicalThreadAccess().getLeftCurlyBracketKeyword_2());
+    	newLeafNode(otherlv_2, grammarAccess.getLogicalThreadAccess().getPrioKeyword_2());
+    }
+	otherlv_3='=' 
+    {
+    	newLeafNode(otherlv_3, grammarAccess.getLogicalThreadAccess().getEqualsSignKeyword_3());
+    }
+(
+(
+		lv_prio_4_0=RULE_INT
+		{
+			newLeafNode(lv_prio_4_0, grammarAccess.getLogicalThreadAccess().getPrioINTTerminalRuleCall_4_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getLogicalThreadRule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"prio",
+        		lv_prio_4_0, 
+        		"INT");
+	    }
+
+)
+)	otherlv_5='{' 
+    {
+    	newLeafNode(otherlv_5, grammarAccess.getLogicalThreadAccess().getLeftCurlyBracketKeyword_5());
     }
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getLogicalThreadAccess().getInstancesActorInstancePathParserRuleCall_3_0()); 
+	        newCompositeNode(grammarAccess.getLogicalThreadAccess().getInstancesActorInstancePathParserRuleCall_6_0()); 
 	    }
-		lv_instances_3_0=ruleActorInstancePath		{
+		lv_instances_6_0=ruleActorInstancePath		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getLogicalThreadRule());
 	        }
        		add(
        			$current, 
        			"instances",
-        		lv_instances_3_0, 
+        		lv_instances_6_0, 
         		"ActorInstancePath");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-)(	otherlv_4=',' 
+)(	otherlv_7=',' 
     {
-    	newLeafNode(otherlv_4, grammarAccess.getLogicalThreadAccess().getCommaKeyword_4_0());
+    	newLeafNode(otherlv_7, grammarAccess.getLogicalThreadAccess().getCommaKeyword_7_0());
     }
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getLogicalThreadAccess().getInstancesActorInstancePathParserRuleCall_4_1_0()); 
+	        newCompositeNode(grammarAccess.getLogicalThreadAccess().getInstancesActorInstancePathParserRuleCall_7_1_0()); 
 	    }
-		lv_instances_5_0=ruleActorInstancePath		{
+		lv_instances_8_0=ruleActorInstancePath		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getLogicalThreadRule());
 	        }
        		add(
        			$current, 
        			"instances",
-        		lv_instances_5_0, 
+        		lv_instances_8_0, 
         		"ActorInstancePath");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-))*	otherlv_6='}' 
+))*	otherlv_9='}' 
     {
-    	newLeafNode(otherlv_6, grammarAccess.getLogicalThreadAccess().getRightCurlyBracketKeyword_5());
+    	newLeafNode(otherlv_9, grammarAccess.getLogicalThreadAccess().getRightCurlyBracketKeyword_8());
     }
 )
 ;

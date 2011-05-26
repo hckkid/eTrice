@@ -35,9 +35,21 @@ public class MessageService extends Thread implements IMessageReceiver,
 	private long lastMessageTimestamp;
 
 	public MessageService(IRTObject parent, Address addr, String name) {
+		this(parent, addr, name, Thread.NORM_PRIORITY);
+	}
+	
+	
+	public MessageService(IRTObject parent, Address addr, String name, int priority) {
 		this.parent = parent;
 		address = addr;
 		this.name = name;
+
+		// check and set priority 
+		assert priority >= Thread.MIN_PRIORITY : ("priority smaller than Thread.MIN_PRIORITY (1)"); 
+		assert priority <= Thread.MAX_PRIORITY : ("priority bigger than Thread.MAX_PRIORITY (10)"); 
+		this.setPriority(priority);
+
+		// instantiate dispatcher and queue
 		messageDispatcher = new MessageDispatcher(this, new Address(addr.nodeID,addr.threadID, addr.objectID + 1), "Dispatcher");
 		messageQueue = new MessageSeQueue(this, "Queue");
 	}

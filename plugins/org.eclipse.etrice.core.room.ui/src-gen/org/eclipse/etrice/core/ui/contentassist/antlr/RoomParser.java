@@ -104,7 +104,7 @@ public class RoomParser extends AbstractContentAssistParser {
 					put(grammarAccess.getSubSystemClassAccess().getGroup_4(), "rule__SubSystemClass__Group_4__0");
 					put(grammarAccess.getSubSystemClassAccess().getGroup_5(), "rule__SubSystemClass__Group_5__0");
 					put(grammarAccess.getLogicalThreadAccess().getGroup(), "rule__LogicalThread__Group__0");
-					put(grammarAccess.getLogicalThreadAccess().getGroup_4(), "rule__LogicalThread__Group_4__0");
+					put(grammarAccess.getLogicalThreadAccess().getGroup_7(), "rule__LogicalThread__Group_7__0");
 					put(grammarAccess.getActorInstancePathAccess().getGroup(), "rule__ActorInstancePath__Group__0");
 					put(grammarAccess.getActorInstancePathAccess().getGroup_1(), "rule__ActorInstancePath__Group_1__0");
 					put(grammarAccess.getBindingAccess().getGroup(), "rule__Binding__Group__0");
@@ -261,8 +261,9 @@ public class RoomParser extends AbstractContentAssistParser {
 					put(grammarAccess.getSubSystemClassAccess().getConnectionsAssignment_10(), "rule__SubSystemClass__ConnectionsAssignment_10");
 					put(grammarAccess.getSubSystemClassAccess().getThreadsAssignment_11(), "rule__SubSystemClass__ThreadsAssignment_11");
 					put(grammarAccess.getLogicalThreadAccess().getNameAssignment_1(), "rule__LogicalThread__NameAssignment_1");
-					put(grammarAccess.getLogicalThreadAccess().getInstancesAssignment_3(), "rule__LogicalThread__InstancesAssignment_3");
-					put(grammarAccess.getLogicalThreadAccess().getInstancesAssignment_4_1(), "rule__LogicalThread__InstancesAssignment_4_1");
+					put(grammarAccess.getLogicalThreadAccess().getPrioAssignment_4(), "rule__LogicalThread__PrioAssignment_4");
+					put(grammarAccess.getLogicalThreadAccess().getInstancesAssignment_6(), "rule__LogicalThread__InstancesAssignment_6");
+					put(grammarAccess.getLogicalThreadAccess().getInstancesAssignment_7_1(), "rule__LogicalThread__InstancesAssignment_7_1");
 					put(grammarAccess.getActorInstancePathAccess().getSegmentsAssignment_0(), "rule__ActorInstancePath__SegmentsAssignment_0");
 					put(grammarAccess.getActorInstancePathAccess().getSegmentsAssignment_1_1(), "rule__ActorInstancePath__SegmentsAssignment_1_1");
 					put(grammarAccess.getBindingAccess().getEndpoint1Assignment_1(), "rule__Binding__Endpoint1Assignment_1");

@@ -21,11 +21,11 @@ public class MessageDispatcherTest extends TestCase {
 
 		// Create Receivers to check if the messages are delivered
 		DummyMessageReceiver receiver1 = new DummyMessageReceiver(new Address(0,0,1)); 
-		DummyMessageReceiver receiver2 = new DummyMessageReceiver(new Address(0,1,1)); 
-		DummyMessageReceiver receiver3 = new DummyMessageReceiver(new Address(1,1,1));
-		DummyMessageReceiver receiver4 = new DummyMessageReceiver(new Address(0,0,2)); 
-		DummyMessageReceiver receiver5 = new DummyMessageReceiver(new Address(0,1,2)); 
-		DummyMessageReceiver receiver6 = new DummyMessageReceiver(new Address(1,1,2));
+		DummyMessageReceiver receiver2 = new DummyMessageReceiver(new Address(0,0,2)); 
+		DummyMessageReceiver receiver3 = new DummyMessageReceiver(new Address(0,0,3));
+		DummyMessageReceiver receiver4 = new DummyMessageReceiver(new Address(0,0,4)); 
+		DummyMessageReceiver receiver5 = new DummyMessageReceiver(new Address(0,0,5)); 
+		DummyMessageReceiver receiver6 = new DummyMessageReceiver(new Address(0,0,6));
 		
 		
 		// Add all Receivers to the Dispatcher
@@ -36,26 +36,28 @@ public class MessageDispatcherTest extends TestCase {
 		dispatcher.addMessageReceiver(receiver4);
 		dispatcher.addMessageReceiver(receiver5);
 		dispatcher.addMessageReceiver(receiver6);
-		
 
 		Message msg1 = new Message(new Address(0,0,1));
-		Message msg2 = new Message(new Address(0,1,1));
-		Message msg3 = new Message(new Address(1,1,1));
-		Message msg4 = new Message(new Address(0,0,2));
-		Message msg5 = new Message(new Address(0,1,2));
-		Message msg6 = new Message(new Address(1,1,2));
-
+		Message msg2 = new Message(new Address(0,0,2));
+		Message msg3 = new Message(new Address(0,0,3));
+		Message msg4 = new Message(new Address(0,0,4));
+		Message msg5 = new Message(new Address(0,0,5));
+		Message msg6 = new Message(new Address(0,0,6));
+		
+		
 		dispatcher.receive(msg1);
-		assertEquals(msg1, receiver1.getLastReceivedMessage());
 		dispatcher.receive(msg2);
-		assertEquals(msg2, receiver2.getLastReceivedMessage());
 		dispatcher.receive(msg3);
-		assertEquals(msg3, receiver3.getLastReceivedMessage());
 		dispatcher.receive(msg4);
-		assertEquals(msg4, receiver4.getLastReceivedMessage());
 		dispatcher.receive(msg5);
-		assertEquals(msg5, receiver5.getLastReceivedMessage());
 		dispatcher.receive(msg6);
+		
+
+		assertEquals(msg1, receiver1.getLastReceivedMessage());
+		assertEquals(msg2, receiver2.getLastReceivedMessage());
+		assertEquals(msg3, receiver3.getLastReceivedMessage());
+		assertEquals(msg4, receiver4.getLastReceivedMessage());
+		assertEquals(msg5, receiver5.getLastReceivedMessage());
 		assertEquals(msg6, receiver6.getLastReceivedMessage());
 		
 	}

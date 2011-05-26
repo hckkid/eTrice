@@ -7,8 +7,8 @@ RoomModel PingPongFast {
 
 	SubSystemClass SubSystem_PingPong {
 		ActorRef application : PingPongTop
-		//LogicalThread mrPingThread {application.MrPing}
-		//LogicalThread mrPongThread {application.MrPong}
+		//LogicalThread mrPingThread prio=5{application.MrPing}
+		//LogicalThread mrPongThread prio=5 {application.MrPong}
 	}
 
 	ActorClass PingPongTop {

@@ -15,6 +15,11 @@ Workflow {
 		sourceDir = "model/scratch"
 		targetDir = destDir
 	}
+
+	component = @workflow.RoomGenerator {
+		sourceDir = "model/fast"
+		targetDir = destDir
+	}
  
 	component = org.eclipse.etrice.generator.workflow.ExecuteCommand {
 		commandString = "dot -osrc-gen/PingPong/SubSystem_PingPong.jpg -Tjpg src-gen/PingPong/SubSystem_PingPong.dot"

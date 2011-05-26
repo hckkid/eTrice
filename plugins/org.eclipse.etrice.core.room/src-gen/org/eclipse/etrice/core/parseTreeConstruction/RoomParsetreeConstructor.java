@@ -9122,11 +9122,11 @@ protected class SubSystemClass_RightCurlyBracketKeyword_12 extends KeywordToken 
 /************ begin Rule LogicalThread ****************
  *
  * LogicalThread:
- * 	"LogicalThread" name=ID "{" instances+=ActorInstancePath ("," instances+=ActorInstancePath)* "}";
+ * 	"LogicalThread" name=ID "prio" "=" prio=INT "{" instances+=ActorInstancePath ("," instances+=ActorInstancePath)* "}";
  *
  **/
 
-// "LogicalThread" name=ID "{" instances+=ActorInstancePath ("," instances+=ActorInstancePath)* "}"
+// "LogicalThread" name=ID "prio" "=" prio=INT "{" instances+=ActorInstancePath ("," instances+=ActorInstancePath)* "}"
 protected class LogicalThread_Group extends GroupToken {
 	
 	public LogicalThread_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -9141,7 +9141,7 @@ protected class LogicalThread_Group extends GroupToken {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new LogicalThread_RightCurlyBracketKeyword_5(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new LogicalThread_RightCurlyBracketKeyword_8(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -9210,16 +9210,16 @@ protected class LogicalThread_NameAssignment_1 extends AssignmentToken  {
 
 }
 
-// "{"
-protected class LogicalThread_LeftCurlyBracketKeyword_2 extends KeywordToken  {
+// "prio"
+protected class LogicalThread_PrioKeyword_2 extends KeywordToken  {
 	
-	public LogicalThread_LeftCurlyBracketKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public LogicalThread_PrioKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Keyword getGrammarElement() {
-		return grammarAccess.getLogicalThreadAccess().getLeftCurlyBracketKeyword_2();
+		return grammarAccess.getLogicalThreadAccess().getPrioKeyword_2();
 	}
 
     @Override
@@ -9232,16 +9232,94 @@ protected class LogicalThread_LeftCurlyBracketKeyword_2 extends KeywordToken  {
 
 }
 
-// instances+=ActorInstancePath
-protected class LogicalThread_InstancesAssignment_3 extends AssignmentToken  {
+// "="
+protected class LogicalThread_EqualsSignKeyword_3 extends KeywordToken  {
 	
-	public LogicalThread_InstancesAssignment_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public LogicalThread_EqualsSignKeyword_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getLogicalThreadAccess().getEqualsSignKeyword_3();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new LogicalThread_PrioKeyword_2(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// prio=INT
+protected class LogicalThread_PrioAssignment_4 extends AssignmentToken  {
+	
+	public LogicalThread_PrioAssignment_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getLogicalThreadAccess().getInstancesAssignment_3();
+		return grammarAccess.getLogicalThreadAccess().getPrioAssignment_4();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new LogicalThread_EqualsSignKeyword_3(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("prio",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("prio");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getLogicalThreadAccess().getPrioINTTerminalRuleCall_4_0(), value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
+			element = grammarAccess.getLogicalThreadAccess().getPrioINTTerminalRuleCall_4_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// "{"
+protected class LogicalThread_LeftCurlyBracketKeyword_5 extends KeywordToken  {
+	
+	public LogicalThread_LeftCurlyBracketKeyword_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getLogicalThreadAccess().getLeftCurlyBracketKeyword_5();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new LogicalThread_PrioAssignment_4(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// instances+=ActorInstancePath
+protected class LogicalThread_InstancesAssignment_6 extends AssignmentToken  {
+	
+	public LogicalThread_InstancesAssignment_6(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getLogicalThreadAccess().getInstancesAssignment_6();
 	}
 
     @Override
@@ -9260,7 +9338,7 @@ protected class LogicalThread_InstancesAssignment_3 extends AssignmentToken  {
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getActorInstancePathRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getLogicalThreadAccess().getInstancesActorInstancePathParserRuleCall_3_0(); 
+				element = grammarAccess.getLogicalThreadAccess().getInstancesActorInstancePathParserRuleCall_6_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -9272,28 +9350,28 @@ protected class LogicalThread_InstancesAssignment_3 extends AssignmentToken  {
 	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new LogicalThread_LeftCurlyBracketKeyword_2(lastRuleCallOrigin, next, actIndex, consumed);
+			case 0: return new LogicalThread_LeftCurlyBracketKeyword_5(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
 }
 
 // ("," instances+=ActorInstancePath)*
-protected class LogicalThread_Group_4 extends GroupToken {
+protected class LogicalThread_Group_7 extends GroupToken {
 	
-	public LogicalThread_Group_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public LogicalThread_Group_7(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Group getGrammarElement() {
-		return grammarAccess.getLogicalThreadAccess().getGroup_4();
+		return grammarAccess.getLogicalThreadAccess().getGroup_7();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new LogicalThread_InstancesAssignment_4_1(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new LogicalThread_InstancesAssignment_7_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -9301,22 +9379,22 @@ protected class LogicalThread_Group_4 extends GroupToken {
 }
 
 // ","
-protected class LogicalThread_CommaKeyword_4_0 extends KeywordToken  {
+protected class LogicalThread_CommaKeyword_7_0 extends KeywordToken  {
 	
-	public LogicalThread_CommaKeyword_4_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public LogicalThread_CommaKeyword_7_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Keyword getGrammarElement() {
-		return grammarAccess.getLogicalThreadAccess().getCommaKeyword_4_0();
+		return grammarAccess.getLogicalThreadAccess().getCommaKeyword_7_0();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new LogicalThread_Group_4(lastRuleCallOrigin, this, 0, inst);
-			case 1: return new LogicalThread_InstancesAssignment_3(lastRuleCallOrigin, this, 1, inst);
+			case 0: return new LogicalThread_Group_7(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new LogicalThread_InstancesAssignment_6(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
@@ -9324,15 +9402,15 @@ protected class LogicalThread_CommaKeyword_4_0 extends KeywordToken  {
 }
 
 // instances+=ActorInstancePath
-protected class LogicalThread_InstancesAssignment_4_1 extends AssignmentToken  {
+protected class LogicalThread_InstancesAssignment_7_1 extends AssignmentToken  {
 	
-	public LogicalThread_InstancesAssignment_4_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public LogicalThread_InstancesAssignment_7_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getLogicalThreadAccess().getInstancesAssignment_4_1();
+		return grammarAccess.getLogicalThreadAccess().getInstancesAssignment_7_1();
 	}
 
     @Override
@@ -9351,7 +9429,7 @@ protected class LogicalThread_InstancesAssignment_4_1 extends AssignmentToken  {
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getActorInstancePathRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getLogicalThreadAccess().getInstancesActorInstancePathParserRuleCall_4_1_0(); 
+				element = grammarAccess.getLogicalThreadAccess().getInstancesActorInstancePathParserRuleCall_7_1_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -9363,7 +9441,7 @@ protected class LogicalThread_InstancesAssignment_4_1 extends AssignmentToken  {
 	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new LogicalThread_CommaKeyword_4_0(lastRuleCallOrigin, next, actIndex, consumed);
+			case 0: return new LogicalThread_CommaKeyword_7_0(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -9371,22 +9449,22 @@ protected class LogicalThread_InstancesAssignment_4_1 extends AssignmentToken  {
 
 
 // "}"
-protected class LogicalThread_RightCurlyBracketKeyword_5 extends KeywordToken  {
+protected class LogicalThread_RightCurlyBracketKeyword_8 extends KeywordToken  {
 	
-	public LogicalThread_RightCurlyBracketKeyword_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public LogicalThread_RightCurlyBracketKeyword_8(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Keyword getGrammarElement() {
-		return grammarAccess.getLogicalThreadAccess().getRightCurlyBracketKeyword_5();
+		return grammarAccess.getLogicalThreadAccess().getRightCurlyBracketKeyword_8();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new LogicalThread_Group_4(lastRuleCallOrigin, this, 0, inst);
-			case 1: return new LogicalThread_InstancesAssignment_3(lastRuleCallOrigin, this, 1, inst);
+			case 0: return new LogicalThread_Group_7(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new LogicalThread_InstancesAssignment_6(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
