@@ -1864,20 +1864,26 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cLogicalThreadKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
-		private final Keyword cLeftCurlyBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Assignment cInstancesAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cInstancesActorInstancePathParserRuleCall_3_0 = (RuleCall)cInstancesAssignment_3.eContents().get(0);
-		private final Group cGroup_4 = (Group)cGroup.eContents().get(4);
-		private final Keyword cCommaKeyword_4_0 = (Keyword)cGroup_4.eContents().get(0);
-		private final Assignment cInstancesAssignment_4_1 = (Assignment)cGroup_4.eContents().get(1);
-		private final RuleCall cInstancesActorInstancePathParserRuleCall_4_1_0 = (RuleCall)cInstancesAssignment_4_1.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
+		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
+		private final Keyword cPrioKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
+		private final Keyword cEqualsSignKeyword_2_1 = (Keyword)cGroup_2.eContents().get(1);
+		private final Assignment cPrioAssignment_2_2 = (Assignment)cGroup_2.eContents().get(2);
+		private final RuleCall cPrioINTTerminalRuleCall_2_2_0 = (RuleCall)cPrioAssignment_2_2.eContents().get(0);
+		private final Keyword cLeftCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Assignment cInstancesAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cInstancesActorInstancePathParserRuleCall_4_0 = (RuleCall)cInstancesAssignment_4.eContents().get(0);
+		private final Group cGroup_5 = (Group)cGroup.eContents().get(5);
+		private final Keyword cCommaKeyword_5_0 = (Keyword)cGroup_5.eContents().get(0);
+		private final Assignment cInstancesAssignment_5_1 = (Assignment)cGroup_5.eContents().get(1);
+		private final RuleCall cInstancesActorInstancePathParserRuleCall_5_1_0 = (RuleCall)cInstancesAssignment_5_1.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_6 = (Keyword)cGroup.eContents().get(6);
 		
 		//LogicalThread:
-		//	"LogicalThread" name=ID "{" instances+=ActorInstancePath ("," instances+=ActorInstancePath)* "}";
+		//	"LogicalThread" name=ID ("prio" "=" prio=INT)? "{" instances+=ActorInstancePath ("," instances+=ActorInstancePath)*
+		//	"}";
 		public ParserRule getRule() { return rule; }
 
-		//"LogicalThread" name=ID "{" instances+=ActorInstancePath ("," instances+=ActorInstancePath)* "}"
+		//"LogicalThread" name=ID ("prio" "=" prio=INT)? "{" instances+=ActorInstancePath ("," instances+=ActorInstancePath)* "}"
 		public Group getGroup() { return cGroup; }
 
 		//"LogicalThread"
@@ -1889,29 +1895,44 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 
+		//("prio" "=" prio=INT)?
+		public Group getGroup_2() { return cGroup_2; }
+
+		//"prio"
+		public Keyword getPrioKeyword_2_0() { return cPrioKeyword_2_0; }
+
+		//"="
+		public Keyword getEqualsSignKeyword_2_1() { return cEqualsSignKeyword_2_1; }
+
+		//prio=INT
+		public Assignment getPrioAssignment_2_2() { return cPrioAssignment_2_2; }
+
+		//INT
+		public RuleCall getPrioINTTerminalRuleCall_2_2_0() { return cPrioINTTerminalRuleCall_2_2_0; }
+
 		//"{"
-		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
+		public Keyword getLeftCurlyBracketKeyword_3() { return cLeftCurlyBracketKeyword_3; }
 
 		//instances+=ActorInstancePath
-		public Assignment getInstancesAssignment_3() { return cInstancesAssignment_3; }
+		public Assignment getInstancesAssignment_4() { return cInstancesAssignment_4; }
 
 		//ActorInstancePath
-		public RuleCall getInstancesActorInstancePathParserRuleCall_3_0() { return cInstancesActorInstancePathParserRuleCall_3_0; }
+		public RuleCall getInstancesActorInstancePathParserRuleCall_4_0() { return cInstancesActorInstancePathParserRuleCall_4_0; }
 
 		//("," instances+=ActorInstancePath)*
-		public Group getGroup_4() { return cGroup_4; }
+		public Group getGroup_5() { return cGroup_5; }
 
 		//","
-		public Keyword getCommaKeyword_4_0() { return cCommaKeyword_4_0; }
+		public Keyword getCommaKeyword_5_0() { return cCommaKeyword_5_0; }
 
 		//instances+=ActorInstancePath
-		public Assignment getInstancesAssignment_4_1() { return cInstancesAssignment_4_1; }
+		public Assignment getInstancesAssignment_5_1() { return cInstancesAssignment_5_1; }
 
 		//ActorInstancePath
-		public RuleCall getInstancesActorInstancePathParserRuleCall_4_1_0() { return cInstancesActorInstancePathParserRuleCall_4_1_0; }
+		public RuleCall getInstancesActorInstancePathParserRuleCall_5_1_0() { return cInstancesActorInstancePathParserRuleCall_5_1_0; }
 
 		//"}"
-		public Keyword getRightCurlyBracketKeyword_5() { return cRightCurlyBracketKeyword_5; }
+		public Keyword getRightCurlyBracketKeyword_6() { return cRightCurlyBracketKeyword_6; }
 	}
 
 	public class ActorInstancePathElements extends AbstractParserRuleElementFinder {
@@ -4178,7 +4199,8 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//LogicalThread:
-	//	"LogicalThread" name=ID "{" instances+=ActorInstancePath ("," instances+=ActorInstancePath)* "}";
+	//	"LogicalThread" name=ID ("prio" "=" prio=INT)? "{" instances+=ActorInstancePath ("," instances+=ActorInstancePath)*
+	//	"}";
 	public LogicalThreadElements getLogicalThreadAccess() {
 		return (pLogicalThread != null) ? pLogicalThread : (pLogicalThread = new LogicalThreadElements());
 	}

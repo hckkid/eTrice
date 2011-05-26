@@ -60,7 +60,7 @@ public class «comp.name» extends SubSystemClassBase{
 	
 		RTServices.getInstance().getMsgSvcCtrl().addMsgSvc(new MessageService(this, new Address(0, 0, 0),"MessageService_Main"));
 		«FOREACH comp.subSystemClass.threads AS thread ITERATOR tid»
-			RTServices.getInstance().getMsgSvcCtrl().addMsgSvc(new MessageService(this, new Address(0, «tid.counter1», 0),"MessageService_«thread.name»"));
+			RTServices.getInstance().getMsgSvcCtrl().addMsgSvc(new MessageService(this, new Address(0, «tid.counter1», 0),"MessageService_«thread.name»", «thread.prio»));
 		«ENDFOREACH»
 		}
 

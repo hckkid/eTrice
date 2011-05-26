@@ -163,6 +163,7 @@
     </genClasses>
     <genClasses ecoreClass="platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//LogicalThread">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//LogicalThread/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//LogicalThread/prio"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//LogicalThread/instances"/>
     </genClasses>
     <genClasses ecoreClass="platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//ActorInstancePath">

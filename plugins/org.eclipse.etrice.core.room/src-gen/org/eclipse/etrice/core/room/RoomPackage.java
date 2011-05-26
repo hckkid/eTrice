@@ -1767,13 +1767,22 @@ public interface RoomPackage extends EPackage
   int LOGICAL_THREAD__NAME = 0;
 
   /**
+   * The feature id for the '<em><b>Prio</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LOGICAL_THREAD__PRIO = 1;
+
+  /**
    * The feature id for the '<em><b>Instances</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int LOGICAL_THREAD__INSTANCES = 1;
+  int LOGICAL_THREAD__INSTANCES = 2;
 
   /**
    * The number of structural features of the '<em>Logical Thread</em>' class.
@@ -1782,7 +1791,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int LOGICAL_THREAD_FEATURE_COUNT = 2;
+  int LOGICAL_THREAD_FEATURE_COUNT = 3;
 
   /**
    * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.ActorInstancePathImpl <em>Actor Instance Path</em>}' class.
@@ -4460,6 +4469,17 @@ public interface RoomPackage extends EPackage
   EAttribute getLogicalThread_Name();
 
   /**
+   * Returns the meta object for the attribute '{@link org.eclipse.etrice.core.room.LogicalThread#getPrio <em>Prio</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Prio</em>'.
+   * @see org.eclipse.etrice.core.room.LogicalThread#getPrio()
+   * @see #getLogicalThread()
+   * @generated
+   */
+  EAttribute getLogicalThread_Prio();
+
+  /**
    * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.room.LogicalThread#getInstances <em>Instances</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -6352,6 +6372,14 @@ public interface RoomPackage extends EPackage
      * @generated
      */
     EAttribute LOGICAL_THREAD__NAME = eINSTANCE.getLogicalThread_Name();
+
+    /**
+     * The meta object literal for the '<em><b>Prio</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute LOGICAL_THREAD__PRIO = eINSTANCE.getLogicalThread_Prio();
 
     /**
      * The meta object literal for the '<em><b>Instances</b></em>' containment reference list feature.

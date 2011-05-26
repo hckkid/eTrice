@@ -206,9 +206,10 @@ SubSystemClass:
 	'}';
 
 LogicalThread:
-	'LogicalThread' name=ID '{'
+	'LogicalThread' name=ID ('prio' '=' prio=INT)? '{'
 		instances+=ActorInstancePath (',' instances+=ActorInstancePath)*
 	'}';
+	
 
 ActorInstancePath:
 	segments+=ID ('.' segments+=ID)*;

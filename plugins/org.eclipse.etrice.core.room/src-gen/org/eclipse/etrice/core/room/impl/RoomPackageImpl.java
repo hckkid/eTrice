@@ -1785,9 +1785,19 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EAttribute getLogicalThread_Prio()
+  {
+    return (EAttribute)logicalThreadEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EReference getLogicalThread_Instances()
   {
-    return (EReference)logicalThreadEClass.getEStructuralFeatures().get(1);
+    return (EReference)logicalThreadEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -2804,6 +2814,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
 
     logicalThreadEClass = createEClass(LOGICAL_THREAD);
     createEAttribute(logicalThreadEClass, LOGICAL_THREAD__NAME);
+    createEAttribute(logicalThreadEClass, LOGICAL_THREAD__PRIO);
     createEReference(logicalThreadEClass, LOGICAL_THREAD__INSTANCES);
 
     actorInstancePathEClass = createEClass(ACTOR_INSTANCE_PATH);
@@ -3140,6 +3151,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
 
     initEClass(logicalThreadEClass, LogicalThread.class, "LogicalThread", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getLogicalThread_Name(), ecorePackage.getEString(), "name", null, 0, 1, LogicalThread.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getLogicalThread_Prio(), ecorePackage.getEInt(), "prio", null, 0, 1, LogicalThread.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getLogicalThread_Instances(), this.getActorInstancePath(), null, "instances", null, 0, -1, LogicalThread.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(actorInstancePathEClass, ActorInstancePath.class, "ActorInstancePath", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
