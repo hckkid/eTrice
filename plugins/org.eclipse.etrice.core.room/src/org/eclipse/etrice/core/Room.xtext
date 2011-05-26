@@ -206,7 +206,7 @@ SubSystemClass:
 	'}';
 
 LogicalThread:
-	'LogicalThread' name=ID ('prio' '=' prio=INT)? '{'
+	'LogicalThread' name=ID 'prio' '=' prio=INT '{'
 		instances+=ActorInstancePath (',' instances+=ActorInstancePath)*
 	'}';
 	

@@ -80,9 +80,9 @@ public class PortBaseTest extends TestCase {
 	public void testPortBase() {
 		MockRTObject topRTObject = new MockRTObject();
 		RTServices.getInstance().getMsgSvcCtrl().addMsgSvc(
-				new MessageService(topRTObject, new Address(0, 0, 0),"MessageService_0"));
+				new MessageService(topRTObject, new Address(0, 0, 0),"MessageService_0", Thread.NORM_PRIORITY));
 		RTServices.getInstance().getMsgSvcCtrl().addMsgSvc(
-				new MessageService(topRTObject, new Address(0, 1, 0),"MessageService_1"));
+				new MessageService(topRTObject, new Address(0, 1, 0),"MessageService_1", Thread.NORM_PRIORITY));
 
 		MockEventReceiver eventRcv = new MockEventReceiver();
 		Address portAddress = new Address(0, 0, 5);

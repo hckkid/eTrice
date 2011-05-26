@@ -11,9 +11,9 @@ RoomModel PingPong {
 		ActorRef services: ATimingService
 		LayerConnection ref application satisfied_by services.timer
 		LayerConnection ref application satisfied_by services.timeout
-		LogicalThread mrPingThread {application.MrPing}
-		LogicalThread mrPong1Thread {application.MrPong1}
-//		LogicalThread mrPong2Thread {application.MrPong2}
+		LogicalThread mrPingThread prio=5 {application.MrPing}
+		LogicalThread mrPong1Thread prio=5  {application.MrPong1}
+//		LogicalThread mrPong2Thread prio=5 {application.MrPong2}
 	}
 
 	// automatically inserted App_SubSystem_PedLightController

@@ -21,39 +21,48 @@ public class MessageServiceTest extends TestCase {
 		
 		// testing basic functionality of MessageService and Dispatcher
 		Address addr = new Address(0,0,0);
-		MessageService msg_service = new MessageService(null, addr, "MessageService1");
+		MessageService msg_service1 = new MessageService(null, addr, "MessageService1", Thread.NORM_PRIORITY);
+		MessageService msg_service2 = new MessageService(null, addr, "MessageService2", Thread.NORM_PRIORITY);
+		MessageService msg_service3 = new MessageService(null, addr, "MessageService3", Thread.NORM_PRIORITY);
+		MessageService msg_service4 = new MessageService(null, addr, "MessageService4", Thread.NORM_PRIORITY);
+		MessageService msg_service5 = new MessageService(null, addr, "MessageService5", Thread.NORM_PRIORITY);
+		MessageService msg_service6 = new MessageService(null, addr, "MessageService6", Thread.NORM_PRIORITY);
 
 		DummyMessageReceiver receiver1 = new DummyMessageReceiver(new Address(0,0,1)); 
-		DummyMessageReceiver receiver2 = new DummyMessageReceiver(new Address(0,1,1)); 
-		DummyMessageReceiver receiver3 = new DummyMessageReceiver(new Address(1,1,1));
-		DummyMessageReceiver receiver4 = new DummyMessageReceiver(new Address(0,0,2)); 
-		DummyMessageReceiver receiver5 = new DummyMessageReceiver(new Address(0,1,2)); 
-		DummyMessageReceiver receiver6 = new DummyMessageReceiver(new Address(1,1,2));
+		DummyMessageReceiver receiver2 = new DummyMessageReceiver(new Address(0,1,2)); 
+		DummyMessageReceiver receiver3 = new DummyMessageReceiver(new Address(0,2,5));
+		DummyMessageReceiver receiver4 = new DummyMessageReceiver(new Address(0,3,18)); 
+		DummyMessageReceiver receiver5 = new DummyMessageReceiver(new Address(0,4,39)); 
+		DummyMessageReceiver receiver6 = new DummyMessageReceiver(new Address(0,5,111));
 		
 		
-		msg_service.getMessageDispatcher().addMessageReceiver(receiver1);
-		msg_service.getMessageDispatcher().addMessageReceiver(receiver2);
-		msg_service.getMessageDispatcher().addMessageReceiver(receiver3);
-		msg_service.getMessageDispatcher().addMessageReceiver(receiver4);
-		msg_service.getMessageDispatcher().addMessageReceiver(receiver5);
-		msg_service.getMessageDispatcher().addMessageReceiver(receiver6);
+		msg_service1.getMessageDispatcher().addMessageReceiver(receiver1);
+		msg_service2.getMessageDispatcher().addMessageReceiver(receiver2);
+		msg_service3.getMessageDispatcher().addMessageReceiver(receiver3);
+		msg_service4.getMessageDispatcher().addMessageReceiver(receiver4);
+		msg_service5.getMessageDispatcher().addMessageReceiver(receiver5);
+		msg_service6.getMessageDispatcher().addMessageReceiver(receiver6);
 		
 		Message msg1 = new Message(new Address(0,0,1));
-		Message msg2 = new Message(new Address(0,1,1));
-		Message msg3 = new Message(new Address(1,1,1));
-		Message msg4 = new Message(new Address(0,0,2));
-		Message msg5 = new Message(new Address(0,1,2));
-		Message msg6 = new Message(new Address(1,1,2));
+		Message msg2 = new Message(new Address(0,1,2));
+		Message msg3 = new Message(new Address(0,2,5));
+		Message msg4 = new Message(new Address(0,3,18));
+		Message msg5 = new Message(new Address(0,4,39));
+		Message msg6 = new Message(new Address(0,5,111));
 
-		msg_service.start();
+		msg_service1.start();
+		msg_service2.start();
+		msg_service3.start();
+		msg_service4.start();
+		msg_service5.start();
+		msg_service6.start();
 
-		msg_service.receive(msg1);
-		msg_service.receive(msg2);
-		msg_service.receive(msg3);
-		msg_service.receive(msg4);
-		msg_service.receive(msg5);
-		msg_service.receive(msg6);
-		
+		msg_service1.receive(msg1);
+		msg_service2.receive(msg2);
+		msg_service3.receive(msg3);
+		msg_service4.receive(msg4);
+		msg_service5.receive(msg5);
+		msg_service6.receive(msg6);
 
 		try {
 			// give the other thread in MessageService a bit time to compute the queue

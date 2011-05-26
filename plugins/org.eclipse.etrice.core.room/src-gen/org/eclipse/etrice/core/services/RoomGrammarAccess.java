@@ -1864,26 +1864,24 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cLogicalThreadKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
-		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
-		private final Keyword cPrioKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
-		private final Keyword cEqualsSignKeyword_2_1 = (Keyword)cGroup_2.eContents().get(1);
-		private final Assignment cPrioAssignment_2_2 = (Assignment)cGroup_2.eContents().get(2);
-		private final RuleCall cPrioINTTerminalRuleCall_2_2_0 = (RuleCall)cPrioAssignment_2_2.eContents().get(0);
-		private final Keyword cLeftCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
-		private final Assignment cInstancesAssignment_4 = (Assignment)cGroup.eContents().get(4);
-		private final RuleCall cInstancesActorInstancePathParserRuleCall_4_0 = (RuleCall)cInstancesAssignment_4.eContents().get(0);
-		private final Group cGroup_5 = (Group)cGroup.eContents().get(5);
-		private final Keyword cCommaKeyword_5_0 = (Keyword)cGroup_5.eContents().get(0);
-		private final Assignment cInstancesAssignment_5_1 = (Assignment)cGroup_5.eContents().get(1);
-		private final RuleCall cInstancesActorInstancePathParserRuleCall_5_1_0 = (RuleCall)cInstancesAssignment_5_1.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_6 = (Keyword)cGroup.eContents().get(6);
+		private final Keyword cPrioKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Keyword cEqualsSignKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Assignment cPrioAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cPrioINTTerminalRuleCall_4_0 = (RuleCall)cPrioAssignment_4.eContents().get(0);
+		private final Keyword cLeftCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
+		private final Assignment cInstancesAssignment_6 = (Assignment)cGroup.eContents().get(6);
+		private final RuleCall cInstancesActorInstancePathParserRuleCall_6_0 = (RuleCall)cInstancesAssignment_6.eContents().get(0);
+		private final Group cGroup_7 = (Group)cGroup.eContents().get(7);
+		private final Keyword cCommaKeyword_7_0 = (Keyword)cGroup_7.eContents().get(0);
+		private final Assignment cInstancesAssignment_7_1 = (Assignment)cGroup_7.eContents().get(1);
+		private final RuleCall cInstancesActorInstancePathParserRuleCall_7_1_0 = (RuleCall)cInstancesAssignment_7_1.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_8 = (Keyword)cGroup.eContents().get(8);
 		
 		//LogicalThread:
-		//	"LogicalThread" name=ID ("prio" "=" prio=INT)? "{" instances+=ActorInstancePath ("," instances+=ActorInstancePath)*
-		//	"}";
+		//	"LogicalThread" name=ID "prio" "=" prio=INT "{" instances+=ActorInstancePath ("," instances+=ActorInstancePath)* "}";
 		public ParserRule getRule() { return rule; }
 
-		//"LogicalThread" name=ID ("prio" "=" prio=INT)? "{" instances+=ActorInstancePath ("," instances+=ActorInstancePath)* "}"
+		//"LogicalThread" name=ID "prio" "=" prio=INT "{" instances+=ActorInstancePath ("," instances+=ActorInstancePath)* "}"
 		public Group getGroup() { return cGroup; }
 
 		//"LogicalThread"
@@ -1895,44 +1893,41 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 
-		//("prio" "=" prio=INT)?
-		public Group getGroup_2() { return cGroup_2; }
-
 		//"prio"
-		public Keyword getPrioKeyword_2_0() { return cPrioKeyword_2_0; }
+		public Keyword getPrioKeyword_2() { return cPrioKeyword_2; }
 
 		//"="
-		public Keyword getEqualsSignKeyword_2_1() { return cEqualsSignKeyword_2_1; }
+		public Keyword getEqualsSignKeyword_3() { return cEqualsSignKeyword_3; }
 
 		//prio=INT
-		public Assignment getPrioAssignment_2_2() { return cPrioAssignment_2_2; }
+		public Assignment getPrioAssignment_4() { return cPrioAssignment_4; }
 
 		//INT
-		public RuleCall getPrioINTTerminalRuleCall_2_2_0() { return cPrioINTTerminalRuleCall_2_2_0; }
+		public RuleCall getPrioINTTerminalRuleCall_4_0() { return cPrioINTTerminalRuleCall_4_0; }
 
 		//"{"
-		public Keyword getLeftCurlyBracketKeyword_3() { return cLeftCurlyBracketKeyword_3; }
+		public Keyword getLeftCurlyBracketKeyword_5() { return cLeftCurlyBracketKeyword_5; }
 
 		//instances+=ActorInstancePath
-		public Assignment getInstancesAssignment_4() { return cInstancesAssignment_4; }
+		public Assignment getInstancesAssignment_6() { return cInstancesAssignment_6; }
 
 		//ActorInstancePath
-		public RuleCall getInstancesActorInstancePathParserRuleCall_4_0() { return cInstancesActorInstancePathParserRuleCall_4_0; }
+		public RuleCall getInstancesActorInstancePathParserRuleCall_6_0() { return cInstancesActorInstancePathParserRuleCall_6_0; }
 
 		//("," instances+=ActorInstancePath)*
-		public Group getGroup_5() { return cGroup_5; }
+		public Group getGroup_7() { return cGroup_7; }
 
 		//","
-		public Keyword getCommaKeyword_5_0() { return cCommaKeyword_5_0; }
+		public Keyword getCommaKeyword_7_0() { return cCommaKeyword_7_0; }
 
 		//instances+=ActorInstancePath
-		public Assignment getInstancesAssignment_5_1() { return cInstancesAssignment_5_1; }
+		public Assignment getInstancesAssignment_7_1() { return cInstancesAssignment_7_1; }
 
 		//ActorInstancePath
-		public RuleCall getInstancesActorInstancePathParserRuleCall_5_1_0() { return cInstancesActorInstancePathParserRuleCall_5_1_0; }
+		public RuleCall getInstancesActorInstancePathParserRuleCall_7_1_0() { return cInstancesActorInstancePathParserRuleCall_7_1_0; }
 
 		//"}"
-		public Keyword getRightCurlyBracketKeyword_6() { return cRightCurlyBracketKeyword_6; }
+		public Keyword getRightCurlyBracketKeyword_8() { return cRightCurlyBracketKeyword_8; }
 	}
 
 	public class ActorInstancePathElements extends AbstractParserRuleElementFinder {
@@ -4199,8 +4194,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//LogicalThread:
-	//	"LogicalThread" name=ID ("prio" "=" prio=INT)? "{" instances+=ActorInstancePath ("," instances+=ActorInstancePath)*
-	//	"}";
+	//	"LogicalThread" name=ID "prio" "=" prio=INT "{" instances+=ActorInstancePath ("," instances+=ActorInstancePath)* "}";
 	public LogicalThreadElements getLogicalThreadAccess() {
 		return (pLogicalThread != null) ? pLogicalThread : (pLogicalThread = new LogicalThreadElements());
 	}
