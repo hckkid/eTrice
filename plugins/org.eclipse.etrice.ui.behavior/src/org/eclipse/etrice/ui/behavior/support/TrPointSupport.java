@@ -737,7 +737,7 @@ public class TrPointSupport {
 			gaService.setLocationAndSize(circle, offset, offset, size, size);
 
 			if (tp instanceof TransitionPoint) {
-				if (((TransitionPoint) tp).isHandler())
+				if (!((TransitionPoint) tp).isHandler())
 					circle.setBackground(darkColor);
 			}
 			else if (tp instanceof ExitPoint) {
