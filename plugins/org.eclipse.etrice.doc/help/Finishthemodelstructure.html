@@ -1,0 +1,76 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Finish the model structure</title>
+<link href="book.css" rel="stylesheet" type="text/css">
+<meta content="DocBook XSL Stylesheets V1.75.1" name="generator">
+<link rel="home" href="index.html" title="eTrice User Guide">
+<link rel="up" href="TutorialBlinky.html" title="Tutorial Blinky">
+<link rel="prev" href="ImporttheTimingService.html" title="Import the Timing Service">
+<link rel="next" href="ImplementtheBehavior.html" title="Implement the Behavior">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Finish the model structure</h1>
+<div class="section" title="Finish the model structure">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both">
+<a name="Finishthemodelstructure"></a>Finish the model structure</h2>
+</div>
+</div>
+</div>
+<p>From the outline view right click to 
+				[<span class="citation">Blinky</span>] and select 
+				[<span class="citation">Edit Structure</span>]. Drag and Drop an 
+				[<span class="citation">Interface Port</span>] to the boarder of the 
+				[<span class="citation">Blinky</span>] actor. Note that an interface port is not possible inside the the actor. Name the port 
+				[<span class="citation">ControlPort</span>] and select 
+				[<span class="citation">BlinkyControlProtocol</span>] from the drop down list. Uncheck 
+				[<span class="citation">Conjugated</span>] and 
+				[<span class="citation">Is Relay Port</span>]. Klick 
+				[<span class="citation">ok</span>]. The resulting structure should look like this:
+			</p>
+<p>
+				
+</p>
+<div class="mediaobject">
+<img src="images/020-Blinky04.PNG"></div>
+<p>
+			
+</p>
+<p>Repeat the above steps for the 
+				[<span class="citation">BlinkyController</span>]. Make the port 
+				[<span class="citation">Conjugated</span>]
+			</p>
+<p>Keep in mind that the protocol defines 
+				[<span class="citation">start</span>] and 
+				[<span class="citation">stop</span>] as incoming messages. 
+				[<span class="citation">Blinky</span>] receives this messages and therefore 
+				[<span class="citation">Blinky</span>]'s 
+				[<span class="citation">ControlPort</span>] must be a base port and 
+				[<span class="citation">BlinkyController</span>]'s 
+				[<span class="citation">ControlPort</span>] must be a conjugated port.
+			</p>
+<p>From the outline view right click 
+				[<span class="citation">BlinkyTop</span>] and select 
+				[<span class="citation">Edit Structure</span>].
+			</p>
+<p>Drag and Drop an 
+				[<span class="citation">ActorRef</span>] inside the 
+				[<span class="citation">BlinkyTop</span>] actor. Name it 
+				[<span class="citation">blinky</span>]. From the actor class drop down list select 
+				[<span class="citation">Blinky</span>]. Do the same for 
+				[<span class="citation">controller</span>]. Connect the ports via the binding tool. The resulting structure should look like this:
+			</p>
+<p>
+				
+</p>
+<div class="mediaobject">
+<img src="images/020-Blinky05.PNG"></div>
+<p>
+			
+</p>
+</div>
+</body>
+</html>

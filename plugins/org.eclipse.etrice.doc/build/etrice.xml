@@ -3,91 +3,17 @@
 	<title>eTrice User Guide</title>
 	<chapter id="Overview">
 		<title>Overview</title>
-		<section id="WhatisXtext">
-			<title>What is Xtext?</title>
-			<para>No matter if you want to create a small textual domain-specific language (DSL) or you want to implement 
-				a full-blown general purpose programming language. 
-				With Xtext you can create your very own languages in a snap. Also if you already have an existing 
-				language but it lacks decent tool support, you can use Xtext to create 
-				a sophisticated Eclipse-based development environment providing editing experience known from modern 
-				Java IDEs in a surprisingly short amount of time. We call Xtext a language development framework.  </para>
+		<section id="WhatiseTrice">
+			<title>What is eTrice?</title>
+			<para>TODO  </para>
 		</section>
 		<section id="HowDoesItWork">
 			<title>How Does It Work?</title>
-			<para>Xtext provides you with a set of domain-specific languages and modern APIs to describe the different 
-				aspects of your programming language. 
-				Based on that information it gives you a full implementation of that language running on the JVM. 
-				The compiler components of your language are independent of Eclipse or OSGi and can be used in any Java environment.
-				They include such things as the parser, the type-safe abstract syntax tree (AST), the serializer and 
-				code formatter, the scoping framework and the linking, compiler checks and static analysis aka validation 
-				and last but not least a code generator or interpreter. These runtime components integrate with and 
-				are based on the Eclipse Modeling Framework (EMF), which effectively allows you to 
-				use Xtext together with other EMF frameworks like for instance the Graphical Modeling Project GMF.</para>
-			<para>In addition to this nice runtime architecture, you will get a full blown Eclipse-IDE specifically tailored 
-				for your language. It already provides great default functionality for 
-				all aspects and again comes with DSLs and APIs that allow to configure or change the most common things 
-				very easily. And if that’s not flexible enough there is Guice to replace the default behaviour with
-				your own implementations.</para>
+			<para>TODO</para>
 		</section>
-		<section id="XtextisHighlyConfigurable">
-			<title>Xtext is Highly Configurable</title>
-			<para>Xtext uses the lightweight dependency injection (DI) framework Google Guice to wire up the whole language 
-				as well as the IDE infrastructure. A central, external module is used to configure the DI container. 
-				As already mentioned, Xtext comes with decent default implementations and DSLs and APIs for the aspect that 
-				are common sweet spots for customization. But if you need something completely different, 
-				Google Guice gives you the power to exchange every little class in a non-invasive way.</para>
-		</section>
-		<section id="WhoUsesXtext">
-			<title>Who Uses Xtext?</title>
-			<para>Xtext is used in many different industries. It is used in the field of mobile devices, automotive development, 
-				embedded systems or Java enterprise software projects and game development. 
-				People use Xtext-based languages to drive code generators that target Java, C, C++, C#, Objective C, Python, or Ruby code. 
-				Although the language infrastructure itself runs on the JVM, you can compile Xtext languages to any 
-				existing platform.
-				Xtext-based languages are developed for well known Open-Source projects such as Maven, Eclipse B3, 
-				the Eclipse Webtools platform or Google’s Protocol Buffers and the framework is also widely used in research projects.  </para>
-		</section>
-		<section id="WhoisBehindXtext">
-			<title>Who is Behind Xtext?</title>
-			<para>Xtext is a professional Open-Source project. We, the main developers and the project lead, work for 
-				itemis, 
-				which is a well known consulting company specialized on model-based development.
-				Therefore we are able to work almost full-time on the project. Xtext is an Eclipse.org project. 
-				Besides many other advantages this means that you don’t have to fear any IP issues, because the Eclipse Foundation 
-				has their own lawyers who take care that no intellectual property is violated. </para>
-			<para>You may ask: Where does the money for Open-Source development come from? Well, we provide professional 
-				services around Xtext. Be it training or on-site consulting, be it development of prototypes or 
-				implementation of full-blown IDEs for programming languages. We do not only know the framework very well 
-				but we are also experts in programming and domain-specific language design. Don’t hesitate to get in 
-				contact with us (
-				<ulink url="http://xtext.itemis.com">www.itemis.com</ulink>).
-			</para>
-		</section>
-		<section id="DSL">
-			<title>What is a Domain-Specific Language</title>
-			<para>A 
-				<emphasis>Domain-Specific Language (DSL)</emphasis> is a small programming language, which focuses on a particular domain.
-				Such a domain can be more or less anything. The idea is that its concepts and notation is as close as possible to
-				what you have in mind when you think about a solution in that domain. Of course we are talking about problems which can
-				be solved or processed by computers somehow.
-			</para>
-			<para>The opposite of a DSL is a so called 
-				<emphasis>GPL</emphasis>, a 
-				<emphasis>General Purpose Language</emphasis> such as Java or any other common programming language.
-				With a GPL you can solve every computer problem, but it might not always be the best way to solve it.
-			</para>
-			<para>Imagine you want to remove the core from an apple. You could of course use a Swiss army knife to cut it out, 
-				and this is reasonable if you have to do it just once or twice. But if you need to do that on a regular 
-				basis it might be more efficient to use an apple corer.</para>
-			<para>There are a couple of well-known examples of DSLs. For instance SQL is actually a DSL which focuses on 
-				querying relational databases. Other DSLs are regular expressions or even languages provided by tools 
-				like MathLab. Also most XML languages are actually domain-specific languages. The whole purpose of XML is 
-				to allow for easy creation of new languages. Unfortunately, XML uses a fixed concrete syntax, which is 
-				very verbose and yet not adapted to be read by humans. Into the bargain, a generic syntax for everything is a compromise.</para>
-			<para>Xtext is a sophisticated framework that helps to implement your very own DSL with appropriate IDE support. 
-				There is no such limitation as with XML, you are free to define your concrete syntax as you like. It may 
-				be as concise and suggestive as possible being a best match for your particular domain. The hard task of 
-				reading your model, working with it and writing it back to your syntax is greatly simplified by Xtext.</para>
+		<section id="WhoisBehindeTrice">
+			<title>Who is Behind eTrice?</title>
+			<para>TODO</para>
 		</section>
 	</chapter>
 	<chapter id="TutorialHelloWorld">
@@ -154,119 +80,674 @@
 	ActorClass HelloWorldTop {
 	}
 } 
-
 </code></literallayout>
-			<section id="Createanewmodelfile">
-				<title>Create a new model file </title>
-				<para>Create a new file in your model directory and name it 
-					<citation>HelloWorld.room</citation> and select finish.
-				</para>
-				<para>
-					<mediaobject>
-						<imageobject>
-							<imagedata fileref="images/015-HelloWorld01.PNG"/>
-						</imageobject>
-					</mediaobject>
-				</para>
-				<para>The file ending must be 
-					<citation>.room</citation> for selecting the correct editor. Open the file and copy the above code into the editor window. You should see something like this:
-				</para>
-				<para>
-					<mediaobject>
-						<imageobject>
-							<imagedata fileref="images/015-HelloWorld02.PNG"/>
-						</imageobject>
-					</mediaobject>
-				</para>
-			</section>
-			<section id="Createastatemachine">
-				<title>Create a state machine</title>
-				<para>We will implement the Hello World code on the initial transition of the 
-					<citation>HelloWorldTop</citation> actor. Therefore open the state machine editor by right clicking the 
-					<citation>HelloWorldTop</citation> actor in the outline view and select 
-					<citation>Edit Behavior</citation>.
-				</para>
-				<para>
-					<mediaobject>
-						<imageobject>
-							<imagedata fileref="images/015-HelloWorld03.PNG"/>
-						</imageobject>
-					</mediaobject>
-				</para>
-				<para>The state machine editor will be opened. Drag and drop an 
-					<citation>Initial Point</citation> from the tool box to the diagram into the top level state. Drag and drop a 
-					<citation>State</citation> from the tool box to the diagram. Confirm the dialogue with 
-					<citation>ok</citation>. Select the 
-					<citation>Transition</citation> in the tool box and draw the transition from the 
-					<citation>Initial Point</citation> to the State. Open the transition dialogue by double clicking the caption of the transition and fill in the action code.
-				</para>
-				<literallayout><code>System.out.println("Hello World !");
+			<literallayout><code></code></literallayout>
+		</section>
+		<section id="Createanewmodelfile">
+			<title>Create a new model file </title>
+			<para>Create a new file in your model directory and name it 
+				<citation>HelloWorld.room</citation> and select finish.
+			</para>
+			<para>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/015-HelloWorld01.PNG"/>
+					</imageobject>
+				</mediaobject>
+			</para>
+			<para>The file ending must be 
+				<citation>.room</citation> for selecting the correct editor. Open the file and copy the above code into the editor window. You should see something like this:
+			</para>
+			<para>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/015-HelloWorld02.PNG"/>
+					</imageobject>
+				</mediaobject>
+			</para>
+		</section>
+		<section id="Createastatemachine">
+			<title>Create a state machine</title>
+			<para>We will implement the Hello World code on the initial transition of the 
+				<citation>HelloWorldTop</citation> actor. Therefore open the state machine editor by right clicking the 
+				<citation>HelloWorldTop</citation> actor in the outline view and select 
+				<citation>Edit Behavior</citation>.
+			</para>
+			<para>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/015-HelloWorld03.PNG"/>
+					</imageobject>
+				</mediaobject>
+			</para>
+			<para>The state machine editor will be opened. Drag and drop an 
+				<citation>Initial Point</citation> from the tool box to the diagram into the top level state. Drag and drop a 
+				<citation>State</citation> from the tool box to the diagram. Confirm the dialogue with 
+				<citation>ok</citation>. Select the 
+				<citation>Transition</citation> in the tool box and draw the transition from the 
+				<citation>Initial Point</citation> to the State. Open the transition dialogue by double clicking the caption of the transition and fill in the action code.
+			</para>
+			<literallayout><code>System.out.println("Hello World !");
 </code></literallayout>
-				<para>The result should look like this:</para>
-				<para>
-					<mediaobject>
-						<imageobject>
-							<imagedata fileref="images/015-HelloWorld04.PNG"/>
-						</imageobject>
-					</mediaobject>
-				</para>
-				<para>Save the diagram and inspect the model file. Note that the textual representation was created after saving the diagram.</para>
-				<para>
-					<mediaobject>
-						<imageobject>
-							<imagedata fileref="images/015-HelloWorld05.PNG"/>
-						</imageobject>
-					</mediaobject>
-				</para>
-			</section>
-			<section id="Buildandrunthemodel">
-				<title>Build and run the model</title>
-				<para>Now the model is finished and source code can be generated. 
-					From org.eclipse.etrice.doc.tutorials.scratch.workflow select genAllModells.mwe2 and run it as MWE2Workflow. Currently all models in the directory will be generated.</para>
-				<para>
-					<mediaobject>
-						<imageobject>
-							<imagedata fileref="images/015-HelloWorld06.PNG"/>
-						</imageobject>
-					</mediaobject>
-				</para>
-				<para>The code will be generated to the src-gen directory. The main class will be contained in 
-					<citation>SubSystem_HelloWorldRunner.java</citation>. Select this file and run it as Java application.
-				</para>
-				<para>
-					<mediaobject>
-						<imageobject>
-							<imagedata fileref="images/015-HelloWorld07.PNG"/>
-						</imageobject>
-					</mediaobject>
-				</para>
-				<para>The Hello World application starts and the string will be printed on the console window. To stop the application the user must type 
-					<citation>quit</citation> in the console window.
-				</para>
-				<para>
-					<mediaobject>
-						<imageobject>
-							<imagedata fileref="images/015-HelloWorld08.PNG"/>
-						</imageobject>
-					</mediaobject>
-				</para>
-			</section>
-			<section id="OpentheMessageSequenceChart">
-				<title>Open the Message Sequence Chart</title>
-				<para>During runtime the application produces a MSC and wrote it to a file. Open /org.eclipse.etrice.doc.tutorials/tmp/log/SubSystem_HelloWorld_Async.seq. You should see something like this:</para>
-				<para>
-					<mediaobject>
-						<imageobject>
-							<imagedata fileref="images/015-HelloWorld09.PNG"/>
-						</imageobject>
-					</mediaobject>
-				</para>
-			</section>
+			<para>The result should look like this:</para>
+			<para>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/015-HelloWorld04.PNG"/>
+					</imageobject>
+				</mediaobject>
+			</para>
+			<para>Save the diagram and inspect the model file. Note that the textual representation was created after saving the diagram.</para>
+			<para>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/015-HelloWorld05.PNG"/>
+					</imageobject>
+				</mediaobject>
+			</para>
+		</section>
+		<section id="Buildandrunthemodel">
+			<title>Build and run the model</title>
+			<para>Now the model is finished and source code can be generated. 
+				From org.eclipse.etrice.doc.tutorials.scratch.workflow select genAllModells.mwe2 and run it as MWE2Workflow. Currently all models in the directory will be generated.</para>
+			<para>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/015-HelloWorld06.PNG"/>
+					</imageobject>
+				</mediaobject>
+			</para>
+			<para>The code will be generated to the src-gen directory. The main class will be contained in 
+				<citation>SubSystem_HelloWorldRunner.java</citation>. Select this file and run it as Java application.
+			</para>
+			<para>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/015-HelloWorld07.PNG"/>
+					</imageobject>
+				</mediaobject>
+			</para>
+			<para>The Hello World application starts and the string will be printed on the console window. To stop the application the user must type 
+				<citation>quit</citation> in the console window.
+			</para>
+			<para>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/015-HelloWorld08.PNG"/>
+					</imageobject>
+				</mediaobject>
+			</para>
+		</section>
+		<section id="OpentheMessageSequenceChart">
+			<title>Open the Message Sequence Chart</title>
+			<para>During runtime the application produces a MSC and wrote it to a file. Open /org.eclipse.etrice.doc.tutorials/tmp/log/SubSystem_HelloWorld_Async.seq. You should see something like this:</para>
+			<para>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/015-HelloWorld09.PNG"/>
+					</imageobject>
+				</mediaobject>
+			</para>
 		</section>
 		<section id="Summary">
 			<title>Summary</title>
 			<para>Now you have generated your first eTrice model from scratch. You can switch between diagram editor and model (.room file) and you can see what will be generated during editing and saving the diagram files. 
 				You should take a look at the generated source files to understand how the state machine is generated and the life cycle of the application. The next tutorials deals with more complex state machines hierarchies in structure and behavior.</para>
+		</section>
+	</chapter>
+	<chapter id="TutorialBlinky">
+		<title>Tutorial Blinky</title>
+		<section id="Scope2">
+			<title>Scope</title>
+			<para>This tutorial describes how to use the 
+				<citation>TimingService</citation>, combine a generated model with manual code and how to modeling a hierarchical state machine. The idea of the tutorial is, to switch a LED on and off. The behavior of the LED should be: blinking in a one second interval for 5 seconds, stop blinking for 5 seconds, blinking, stop,...  
+				For this exercise we will use a little GUI class that will be used in more sophisticated tutorials too. The GUI simulates a pedestrian traffic crossing. For now, just a simple LED simulation will be used from the GUI. 
+			</para>
+			<para>To use the GUI please copy the package 
+				<citation>de.protos.PedLightGUI</citation> to your 
+				<citation>src</citation> directory. The package contains four java classes which implements a little window with a 3-light traffic light which simulates the signals for the car traffic and a 2-light traffic light which simulates the pedestrian signals.
+			</para>
+			<para>The GUI looks like this:</para>
+			<para>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/020-Blinky08.PNG"/>
+					</imageobject>
+				</mediaobject>
+			</para>
+			<para>Within this tutorial we just will switching on and off the yellow light.</para>
+			<para>You will perform the following steps:</para>
+			<orderedlist>
+				<listitem>
+					<para>create a new model from scratch</para>
+				</listitem>
+				<listitem>
+					<para>define a protocol</para>
+				</listitem>
+				<listitem>
+					<para>create an actor structure</para>
+				</listitem>
+				<listitem>
+					<para>create a hierarchical state machine</para>
+				</listitem>
+				<listitem>
+					<para>use the predefined 
+						<citation>TimingService</citation>
+					</para>
+				</listitem>
+				<listitem>
+					<para>combine manual code with generated code</para>
+				</listitem>
+				<listitem>
+					<para>build and run the model</para>
+				</listitem>
+				<listitem>
+					<para>open the message sequence chart</para>
+				</listitem>
+			</orderedlist>
+		</section>
+		<section id="Createanewmodelfromscratch2">
+			<title>Create a new model from scratch</title>
+			<para>Remember exercise 
+				<citation>HelloWorld</citation>.
+				Create a new file in your model folder and name it 
+				<citation>Blinky.room</citation>
+				Open the file and copy the following code into the file.
+			</para>
+			<literallayout><code>RoomModel Blinky {
+
+	LogicalSystem System_Blinky {
+		SubSystemRef subsystem : SubSystem_Blinky
+	}
+
+	SubSystemClass SubSystem_Blinky {
+		ActorRef application : BlinkyTop
+	}
+
+	ActorClass BlinkyTop {
+	}
+}
+</code></literallayout>
+			<blockquote>
+				<para></para>
+			</blockquote>
+		</section>
+		<section id="Addtwoadditionalactorclasses">
+			<title>Add two additional actor classes</title>
+			<para>Position the cursor outside any class definition and right click the mouse within the editor window. From the context menu select 
+				<citation>Content Assist</citation>  
+			</para>
+			<para>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/020-Blinky02.png"/>
+					</imageobject>
+				</mediaobject>
+			</para>
+			<para>Select 
+				<citation>ActorClass – actor class skeleton</citation> and name it 
+				<citation>Blinky</citation>.
+			</para>
+			<para>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/020-Blinky01.PNG"/>
+					</imageobject>
+				</mediaobject> 
+			</para>
+			<para>Repeat the described procedure and name the new actor 
+				<citation>BlinkyController</citation>.
+			</para>
+			<para>Save the model and visit the outline view.</para>
+		</section>
+		<section id="Createanewprotocol">
+			<title>Create a new protocol</title>
+			<para>With the help of 
+				<citation>Content Assist</citation> create a 
+				<citation>ProtocolClass</citation> and name it 
+				<citation>BlinkyControlProtocol</citation>.
+				Inside the brackets use the 
+				<citation>Content Assist</citation> (CTRL+Space) to create two incomming messages called 
+				<citation>start</citation> and 
+				<citation>stop</citation>.
+			</para>
+			<para>The resulting code should look like this:</para>
+			<para>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/020-Blinky03.PNG"/>
+					</imageobject>
+				</mediaobject> 
+			</para>
+			<para>With Ctrl-Shift+F or selecting 
+				<citation>Format</citation> from the context menu you can format the text. Mention that all elements are displayed in the outline view.
+			</para>
+		</section>
+		<section id="ImporttheTimingService">
+			<title>Import the Timing Service</title>
+			<para>Switching on and off the LED is timing controlled. Therefore a timing service is needed. To import the timing service in the outline view right click to 
+				<citation>SubSystem_Blinky</citation>. Select 
+				<citation>Edit Structure</citation>. Drag and Drop an 
+				<citation>ActorRef</citation> to the 
+				<citation>SubSystem_Blinky</citation> and name it 
+				<citation>application</citation>. From the actor class drop down list select 
+				<citation>BlinkyTop</citation>. Do the same clicks for the timing service. Name it 
+				<citation>timingService</citation> and from the drop down list select 
+				<citation>room.basic.service.timing.ATimingService</citation>. Draw a 
+				<citation>LayerConnection</citation> from 
+				<citation>application</citation> to each service provision point (SPP) of the 
+				<citation>timingService</citation>. The resulting structure should look like this:
+			</para>
+			<para>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/020-Blinky06.PNG"/>
+					</imageobject>
+				</mediaobject> 
+			</para>
+			<para>The current version of eTrice does not provide a graphical element for a service access point (SAP). Therefore the SAPs to access the timing service must be added in the .room file. Open the 
+				<citation>Blinky.room</citation> file and navigate to the 
+				<citation>Blinky</citation> actor. Add the following line to the structure of the actor:
+			</para>
+			<literallayout><code>SAP timer: room.basic.service.timing.PTimeout
+</code></literallayout>
+			<para>Do the same thing for 
+				<citation>BlinkyController</citation>.
+			</para>
+			<para>The resulting code should look like this:</para>
+			<para>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/020-Blinky07.PNG"/>
+					</imageobject>
+				</mediaobject>
+			</para>
+		</section>
+		<section id="Finishthemodelstructure">
+			<title>Finish the model structure</title>
+			<para>From the outline view right click to 
+				<citation>Blinky</citation> and select 
+				<citation>Edit Structure</citation>. Drag and Drop an 
+				<citation>Interface Port</citation> to the boarder of the 
+				<citation>Blinky</citation> actor. Note that an interface port is not possible inside the the actor. Name the port 
+				<citation>ControlPort</citation> and select 
+				<citation>BlinkyControlProtocol</citation> from the drop down list. Uncheck 
+				<citation>Conjugated</citation> and 
+				<citation>Is Relay Port</citation>. Klick 
+				<citation>ok</citation>. The resulting structure should look like this:
+			</para>
+			<para>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/020-Blinky04.PNG"/>
+					</imageobject>
+				</mediaobject>
+			</para>
+			<para>Repeat the above steps for the 
+				<citation>BlinkyController</citation>. Make the port 
+				<citation>Conjugated</citation>
+			</para>
+			<para>Keep in mind that the protocol defines 
+				<citation>start</citation> and 
+				<citation>stop</citation> as incoming messages. 
+				<citation>Blinky</citation> receives this messages and therefore 
+				<citation>Blinky</citation>'s 
+				<citation>ControlPort</citation> must be a base port and 
+				<citation>BlinkyController</citation>'s 
+				<citation>ControlPort</citation> must be a conjugated port.
+			</para>
+			<para>From the outline view right click 
+				<citation>BlinkyTop</citation> and select 
+				<citation>Edit Structure</citation>.
+			</para>
+			<para>Drag and Drop an 
+				<citation>ActorRef</citation> inside the 
+				<citation>BlinkyTop</citation> actor. Name it 
+				<citation>blinky</citation>. From the actor class drop down list select 
+				<citation>Blinky</citation>. Do the same for 
+				<citation>controller</citation>. Connect the ports via the binding tool. The resulting structure should look like this:
+			</para>
+			<para>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/020-Blinky05.PNG"/>
+					</imageobject>
+				</mediaobject>
+			</para>
+		</section>
+		<section id="ImplementtheBehavior">
+			<title>Implement the Behavior</title>
+			<para>The application should switch on and off the LED for 5 seconds in a 1 second interval, than stop blinking for 5 seconds and start again. To implement this behavior we will implement two FSMs. One for the 1 second interval and one for the 5 second interval. The 1 second blinking should be implemented in 
+				<citation>Blinky</citation>. The 5 second interval should be implemented in 
+				<citation>BlinkyController</citation>. First implement the Controller.
+			</para>
+			<para>Right click to 
+				<citation>BlinkyController</citation> and select 
+				<citation>Edit Behavior</citation>.
+				Drag and Drop the 
+				<citation>Initial Point</citation> and two <cite>State</cite>s into the top state. Name the states 
+				<citation>on</citation> and 
+				<citation>off</citation>. 
+				Use the 
+				<citation>Transition</citation> tool to draw transitions from 
+				<citation>init</citation> to 
+				<citation>off</citation> from 
+				<citation>on</citation> to 
+				<citation>off</citation> and from 
+				<citation>off</citation> to 
+				<citation>on</citation>.
+			</para>
+			<para>Open the transition dialog by double click the arrow to specify the trigger event and the action code of each transition. Note that the initial transition does not have a trigger event.</para>
+			<para>The dialog should look like this:</para>
+			<para>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/020-Blinky09.PNG"/>
+					</imageobject>
+				</mediaobject> 
+			</para>
+			<para>The defined ports will be generated as a member attribute of the actor class from type of the attached protocol. So, to send e message you must state 
+				<citation>port.message(p1,p2);</citation>. In this example 
+				<citation>ControlPort.start()</citation> sends the 
+				<citation>start</citation> message via the 
+				<citation>ControlPort</citation> to the outside world. Assuming that 
+				<citation>Blinky</citation> is connected to this port, the message will start the one second blinking FSM. It is the same thing with the 
+				<citation>timer</citation>. The SAP is also a port and follows the same rules. So it is clear that 
+				<citation>timer.Start(5000);</citation> will send the 
+				<citation>Start</citation> message to the timing service. The timing service will send a 
+				<citation>timeoutTick</citation> message back after 5000ms.
+			</para>
+			<para>Within each transition the timer will be restarted and the appropriate message will be sent via the 
+				<citation>ControlPort</citation>. 
+			</para>
+			<para>The resulting state machine should look like this:</para>
+			<para>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/020-Blinky10.PNG"/>
+					</imageobject>
+				</mediaobject>
+			</para>
+			<para>Save the diagram and inspect the 
+				<citation>Blinky.room</citation> file. The 
+				<citation>BlinkyController</citation> should look like this:
+			</para>
+			<para>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/020-Blinky11.PNG"/>
+					</imageobject>
+				</mediaobject> 
+			</para>
+			<para>Now we will implement 
+				<citation>Blinky</citation>. Due to the fact that 
+				<citation>Blinky</citation> interacts with the GUI class a view things must to be done in the model file.
+			</para>
+			<para>Double click 
+				<citation>Blinky</citation> in the outline view to navigate to 
+				<citation>Blinky</citation> within the model file.
+				Add the following code:
+			</para>
+			<para>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/020-Blinky12.PNG"/>
+					</imageobject>
+				</mediaobject> 
+			</para>
+			<para>
+				<citation>usercode1</citation> will be generated at the beginning of the file, outside the class definition. 
+				<citation>usercode2</citation> will be generated within the class definition. The code imports the GUI class and instantiates the window class. Attributes for the carLights and pedLights will be declared to easily access the lights in the state machine.
+				The Operation 
+				<citation>destroyUser()</citation> is a predefined operation that will be called during shutdown of the application. Within this operation, cleanup of manual coded classes can be done.
+			</para>
+			<para>Now design the FSM of 
+				<citation>Blinky</citation>. Open the behavior diagram of 
+				<citation>Blinky</citation> by right clicking the 
+				<citation>Blinky</citation> actor in the outline view. Create two states named 
+				<citation>blinking</citation> and 
+				<citation>off</citation>. Right click to 
+				<citation>blinking</citation> and create a subgraph.
+			</para>
+			<para>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/020-Blinky13.PNG"/>
+					</imageobject>
+				</mediaobject>
+			</para>
+			<para>Create the following state machine. The trigger events between 
+				<citation>on</citation> and 
+				<citation>off</citation> are the 
+				<citation>timeoutTick</citation> from the 
+				<citation>timer</citation> port. 
+			</para>
+			<para>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/020-Blinky14.PNG"/>
+					</imageobject>
+				</mediaobject>
+			</para>
+			<para>Create entry code for both states by right clicking the state and select 
+				<citation>Edit State...</citation>
+			</para>
+			<para>Entry code of 
+				<citation>on</citation> is:
+			</para>
+			<literallayout><code>timer.Start(1000);
+carLights.setState(TrafficLight3.YELLOW); 
+</code></literallayout>
+			<blockquote>
+				<para></para>
+			</blockquote>
+			<para>Entry code  of 
+				<citation>off</citation> is:
+			</para>
+			<literallayout><code>timer.Start(1000);
+carLights.setState(TrafficLight3.OFF);
+</code></literallayout>
+			<blockquote>
+				<para></para>
+			</blockquote>
+			<para>Navigate to the Top level state by double clicking the 
+				<citation>/blinking</citation> state. Create the following state machine:
+			</para>
+			<para>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/020-Blinky15.PNG"/>
+					</imageobject>
+				</mediaobject>
+			</para>
+			<para>The trigger event from 
+				<citation>off</citation> to 
+				<citation>blinking</citation> is the 
+				<citation>start</citation> event from the 
+				<citation>ControlPort</citation>.The trigger event from 
+				<citation>blinking</citation> to 
+				<citation>off</citation> is the 
+				<citation>stop</citation> event from the 
+				<citation>ControlPort</citation>.
+			</para>
+			<para>Action code of the init transition is:</para>
+			<literallayout><code>carLights = light.getCarLights();
+pedLights = light.getPedLights();
+carLights.setState(TrafficLight3.OFF);
+pedLights.setState(TrafficLight2.OFF);
+</code></literallayout>
+			<blockquote>
+				<para></para>
+			</blockquote>
+			<para>Action code from 
+				<citation>blinking</citation> to 
+				<citation>off</citation> is:
+			</para>
+			<literallayout><code>timer.Kill();
+carLights.setState(TrafficLight3.OFF); 
+</code></literallayout>
+			<blockquote>
+				<para></para>
+			</blockquote>
+			<para>The complete resulting model looks like this:</para>
+			<literallayout><code>RoomModel Blinky {
+
+	LogicalSystem System_Blinky {
+		SubSystemRef subsystem: SubSystem_Blinky
+	}
+
+	SubSystemClass SubSystem_Blinky {
+		ActorRef application: BlinkyTop
+		ActorRef timingService: room.basic.service.timing.ATimingService
+		LayerConnection ref application satisfied_by timingService.timer
+		LayerConnection ref application satisfied_by timingService.timeout
+	}
+
+	ActorClass BlinkyTop {
+		Structure {
+			ActorRef blinky: Blinky
+			ActorRef controller: BlinkyController
+			Binding blinky.ControlPort and controller.ControlPort
+		}
+		Behavior { }
+	}
+
+	ActorClass Blinky {
+		Interface {
+			Port ControlPort: BlinkyControlProtocoll
+		}
+		Structure {
+			usercode1{
+				"import de.protos.PedLightGUI.*;"
+			}
+			usercode2 {
+				"private PedestrianLightWndNoTcp light = new PedestrianLightWndNoTcp();"
+				"private TrafficLight3 carLights;"
+				"private TrafficLight2 pedLights;"
+				
+			}
+			external Port ControlPort
+			SAP timer: room.basic.service.timing.PTimeout
+		}
+		Behavior {
+			Operation destroyUser(){
+				"light.closeWindow();"
+			}
+			StateMachine {
+				Transition init: initial -&gt; off {
+					action {
+						"carLights = light.getCarLights();"
+						"pedLights = light.getPedLights();"
+						"carLights.setState(TrafficLight3.OFF);"
+						"pedLights.setState(TrafficLight2.OFF);"
+					}
+				}
+				Transition tr0: off -&gt; tp0 of blinking {
+					triggers {
+						&lt;start: ControlPort&gt;
+					}
+				}
+				Transition tr1: blinking -&gt; off {
+					triggers {
+						&lt;stop: ControlPort&gt;
+					}
+					action {
+						"timer.Kill();"
+						"carLights.setState(TrafficLight3.OFF);"
+					}
+				}
+				State off
+				State blinking {
+					subgraph {
+						Transition tr0: my tp0 -&gt; on
+						Transition tr1: on -&gt; off {
+							triggers {
+								&lt;timeoutTick: timer&gt;
+							}
+						}
+						Transition tr2: off -&gt; on {
+							triggers {
+								&lt;timeoutTick: timer&gt;
+							}
+						}
+						Transition init: initial -&gt; on { }
+						EntryPoint tp0
+						State on {
+							entry {
+								"timer.Start(1000);"
+								"carLights.setState(TrafficLight3.YELLOW);"
+							}
+						}
+						State off {
+							entry {
+								"timer.Start(1000);"
+								"carLights.setState(TrafficLight3.OFF);"
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	ActorClass BlinkyController {
+		Interface {
+			conjugated Port ControlPort: BlinkyControlProtocoll
+		}
+		Structure {
+			external Port ControlPort
+			SAP timer: room.basic.service.timing.PTimeout
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -&gt; on {
+					action {
+						"timer.Start(5000);"
+						"ControlPort.start();"
+					}
+				}
+				Transition goOff: on -&gt; off {
+					triggers {
+						&lt;timeoutTick: timer&gt;
+					}
+					action {
+						"ControlPort.stop();"
+						"timer.Start(5000);"
+					}
+				}
+				Transition goOn: off -&gt; on {
+					triggers {
+						&lt;timeoutTick: timer|timeoutTick: timer&gt;
+					}
+					action {
+						"ControlPort.start();"
+						"timer.Start(5000);"
+					}
+				}
+				State on
+				State off
+			}
+		}
+	}
+
+	ProtocolClass BlinkyControlProtocoll {
+		incoming {
+			Message start()
+			Message stop()
+		}
+		outgoing { }
+	}
+
+}
+</code></literallayout>
+			<blockquote>
+				<para></para>
+			</blockquote>
+			<para>The model is complete now. You can run and debug the model as described in getting started. Have fun.</para>
+		</section>
+		<section id="Summary2">
+			<title>Summary</title>
+			<para>Run the model and take look at the generated MSCs. Inspect the generated code to understand the runtime model of eTrice. Within this tutorial you have learned how to create a hierarchical FSM with group transitions and history transitions and you have used entry code. You are now familiar with the basic features of eTrice. The further tutorials will take this knowledge as a precondition.</para>
 		</section>
 	</chapter>
 </book>
