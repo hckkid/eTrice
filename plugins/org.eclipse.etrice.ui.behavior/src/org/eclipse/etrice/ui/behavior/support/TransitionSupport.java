@@ -561,7 +561,14 @@ public class TransitionSupport {
 					return;
 
 				doneChanges = true;
-				updateLabel(trans, (Connection) pe);
+				
+				Connection conn = (Connection) pe;
+				updateLabel(trans, conn);
+
+				if (conn.getConnectionDecorators().size()>=2) {
+					ConnectionDecorator cd = conn.getConnectionDecorators().get(1);
+					//bug 342216: getDiagramEditor().refresh(cd);
+				}
 			}
 			
 			@Override
