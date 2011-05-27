@@ -57,7 +57,6 @@ public class ProjectCreator {
 		"org.eclipse.etrice.generator.java;bundle-version=\"0.1.0\"",
 		 "org.eclipse.etrice.generator;bundle-version=\"0.1.0\"",
 		 "org.eclipse.etrice.modellib;bundle-version=\"0.1.0\"",
-		 "de.protos.automation.io;bundle-version=\"0.1.0\"",
 		 "org.eclipse.emf.mwe2.launch;bundle-version=\"1.0.1\";resolution:=optional",
 		 "org.eclipse.emf.mwe.utils;bundle-version=\"1.0.0\";visibility:=reexport",
 		 "org.apache.log4j;bundle-version=\"1.2.15\"",
