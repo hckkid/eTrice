@@ -1,8 +1,16 @@
-h1(#Overview). Overview
+h1. eTrice Overview
 
 h2. What is eTrice?
 
-TODO  
+eTrice provides an implementation of the ROOM modeling language (Real Time Object Oriented Modeling) together with editors, code generators for Java, C++ and C code and exemplary target middleware.
+
+The model is defined in textual form (Xtext) with graphical editors (Graphiti) for the structural and behavioral (i.e. state machine) parts.  
+
+h2. Who should use eTrice?
+
+Basically everyone who develops eventdriven realtime or embedded systems. 
+
+If you have other ideas how to use it, tell us!
 
 h2. How Does It Work?
 
@@ -11,6 +19,8 @@ TODO
 h2. Who is Behind eTrice?
 
 TODO
+
+h1. Introduction to the ROOM Language
 
 
 h1. Tutorial HelloWorld
@@ -465,4 +475,6 @@ h2. Summary
 
 Run the model and take look at the generated MSCs. Inspect the generated code to understand the runtime model of eTrice. Within this tutorial you have learned how to create a hierarchical FSM with group transitions and history transitions and you have used entry code. You are now familiar with the basic features of eTrice. The further tutorials will take this knowledge as a precondition.
 
+
+h1. ROOM Concepts
 

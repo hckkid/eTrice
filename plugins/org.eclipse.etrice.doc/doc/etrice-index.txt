@@ -1,5 +1,7 @@
-000-introduction.textile
-010-concepts.textile
+000-etrice-introduction.textile
+010-room-introduction.textile
 
 015-getting-started.textile
 020-tutorial-blinky.textile
+
+040-room-concepts.textile
