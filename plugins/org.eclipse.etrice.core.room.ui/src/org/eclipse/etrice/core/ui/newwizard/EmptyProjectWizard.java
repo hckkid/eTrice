@@ -156,6 +156,10 @@ public class EmptyProjectWizard extends Wizard implements INewWizard {
 					ProjectCreator.createBuildProperties(URI.createPlatformResourceURI("/"
 							+baseName+"/build.properties", true),
 							baseName);
+
+					ProjectCreator.createLaunchConfig(URI.createPlatformResourceURI("/"
+							+baseName+"/"+baseName+".launch", true),
+							baseName);
 					
 				} catch (Exception e) {
 					Logger.getLogger(getClass()).error(e.getMessage(), e);

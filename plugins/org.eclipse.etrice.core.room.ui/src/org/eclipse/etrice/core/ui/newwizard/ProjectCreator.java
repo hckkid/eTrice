@@ -490,4 +490,41 @@ public class ProjectCreator {
 			Logger.getLogger(ProjectCreator.class).error(e.getMessage(), e);
 		}
 	}
+
+	public static void createLaunchConfig(URI uri, String baseName) {
+		try {
+			PrintStream launch = new PrintStream(
+					URIConverter.INSTANCE.createOutputStream(uri, null),
+					false,
+					"UTF-8");
+			launch.println("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>");
+			launch.println("<launchConfiguration type=\"org.eclipse.emf.mwe2.launch.Mwe2LaunchConfigurationType\">");
+			launch.println("<stringAttribute key=\"org.eclipse.debug.core.ATTR_REFRESH_SCOPE\" value=\"${workspace}\"/>");
+			launch.println("<listAttribute key=\"org.eclipse.debug.core.MAPPED_RESOURCE_PATHS\">");
+			launch.println("<listEntry value=\"/"+baseName+"\"/>");
+			launch.println("</listAttribute>");
+			launch.println("<listAttribute key=\"org.eclipse.debug.core.MAPPED_RESOURCE_TYPES\">");
+			launch.println("<listEntry value=\"4\"/>");
+			launch.println("</listAttribute>");
+			launch.println("<listAttribute key=\"org.eclipse.debug.ui.favoriteGroups\">");
+			launch.println("<listEntry value=\"org.eclipse.debug.ui.launchGroup.run\"/>");
+			launch.println("</listAttribute>");
+			launch.println("<listAttribute key=\"org.eclipse.jdt.launching.CLASSPATH\">");
+			launch.println("<listEntry value=\"&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?&gt;&#13;&#10;&lt;runtimeClasspathEntry containerPath=&quot;org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6&quot; javaProject=&quot;"+baseName+"&quot; path=&quot;1&quot; type=&quot;4&quot;/&gt;&#13;&#10;\"/>");
+			launch.println("<listEntry value=\"&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?&gt;&#13;&#10;&lt;runtimeClasspathEntry id=&quot;org.eclipse.jdt.launching.classpathentry.defaultClasspath&quot;&gt;&#13;&#10;&lt;memento exportedEntriesOnly=&quot;false&quot; project=&quot;"+baseName+"&quot;/&gt;&#13;&#10;&lt;/runtimeClasspathEntry&gt;&#13;&#10;\"/>");
+			launch.println("<listEntry value=\"&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?&gt;&#13;&#10;&lt;runtimeClasspathEntry internalArchive=&quot;/org.eclipse.etrice.modellib/models&quot; path=&quot;3&quot; type=&quot;2&quot;/&gt;&#13;&#10;\"/>");
+			launch.println("</listAttribute>");
+			launch.println("<booleanAttribute key=\"org.eclipse.jdt.launching.DEFAULT_CLASSPATH\" value=\"false\"/>");
+			launch.println("<stringAttribute key=\"org.eclipse.jdt.launching.MAIN_TYPE\" value=\"org.eclipse.emf.mwe2.launch.runtime.Mwe2Launcher\"/>");
+			launch.println("<stringAttribute key=\"org.eclipse.jdt.launching.PROGRAM_ARGUMENTS\" value=\"src/workflow/"+baseName+".mwe2\"/>");
+			launch.println("<stringAttribute key=\"org.eclipse.jdt.launching.PROJECT_ATTR\" value=\""+baseName+"\"/>");
+			launch.println("<stringAttribute key=\"org.eclipse.jdt.launching.VM_ARGUMENTS\" value=\"-ea\"/>");
+			launch.println("</launchConfiguration>");
+			launch.close();
+		} catch (UnsupportedEncodingException e) {
+			Logger.getLogger(ProjectCreator.class).error(e.getMessage(), e);
+		} catch (IOException e) {
+			Logger.getLogger(ProjectCreator.class).error(e.getMessage(), e);
+		}
+	}
 }
