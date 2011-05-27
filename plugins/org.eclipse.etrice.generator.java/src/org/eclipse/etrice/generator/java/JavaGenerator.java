@@ -86,6 +86,9 @@ public class JavaGenerator {
 			return "";
 		
 		TransitionChain chain = xpac.getChain(t);
+		if (!(chain.getTransition() instanceof TriggeredTransition))
+			return "";
+		
 		Trigger trigger = ((TriggeredTransition)chain.getTransition()).getTriggers().get(0);
 		MessageFromIf mif = trigger.getMsgFromIfPairs().get(0);
 		
