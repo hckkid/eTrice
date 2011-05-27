@@ -1,11 +1,17 @@
 <?xml version='1.0' ?><!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
 <book>
 	<title>eTrice User Guide</title>
-	<chapter id="Overview">
-		<title>Overview</title>
+	<chapter id="eTriceOverview">
+		<title>eTrice Overview</title>
 		<section id="WhatiseTrice">
 			<title>What is eTrice?</title>
-			<para>TODO  </para>
+			<para>eTrice provides an implementation of the ROOM modeling language (Real Time Object Oriented Modeling) together with editors, code generators for Java, C++ and C code and exemplary target middleware.</para>
+			<para>The model is defined in textual form (Xtext) with graphical editors (Graphiti) for the structural and behavioral (i.e. state machine) parts.  </para>
+		</section>
+		<section id="WhoshoulduseeTrice">
+			<title>Who should use eTrice?</title>
+			<para>Basically everyone who develops eventdriven realtime or embedded systems. </para>
+			<para>If you have other ideas how to use it, tell us!</para>
 		</section>
 		<section id="HowDoesItWork">
 			<title>How Does It Work?</title>
@@ -15,6 +21,9 @@
 			<title>Who is Behind eTrice?</title>
 			<para>TODO</para>
 		</section>
+	</chapter>
+	<chapter id="IntroductiontotheROOMLanguage">
+		<title>Introduction to the ROOM Language</title>
 	</chapter>
 	<chapter id="TutorialHelloWorld">
 		<title>Tutorial HelloWorld</title>
@@ -749,5 +758,8 @@ carLights.setState(TrafficLight3.OFF);
 			<title>Summary</title>
 			<para>Run the model and take look at the generated MSCs. Inspect the generated code to understand the runtime model of eTrice. Within this tutorial you have learned how to create a hierarchical FSM with group transitions and history transitions and you have used entry code. You are now familiar with the basic features of eTrice. The further tutorials will take this knowledge as a precondition.</para>
 		</section>
+	</chapter>
+	<chapter id="ROOMConcepts">
+		<title>ROOM Concepts</title>
 	</chapter>
 </book>
