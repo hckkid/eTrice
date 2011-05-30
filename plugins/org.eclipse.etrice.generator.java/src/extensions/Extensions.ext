@@ -175,7 +175,7 @@ String getContextId(TransitionChain tc): tc.getStateContext().getStateId();
 String getExecuteChainCode(ExpandedActorClass ac, TransitionChain tc): JAVA org.eclipse.etrice.generator.java.JavaGenerator.getExecuteChain(org.eclipse.etrice.generator.etricegen.ExpandedActorClass, org.eclipse.etrice.generator.etricegen.TransitionChain);
 
 // getTransitionList
-List[Transition] getTransitionList(State s): s.isLeaf()? {} : s.subgraph.transitions;
+List[Transition] getTransitionList(State s): s.isLeaf()? {} : s.subgraph.getTransitionList();
 List[Transition] getTransitionList(StateGraph sg): sg.transitions.union(sg.states.getTransitionList());
 
 // transition data
