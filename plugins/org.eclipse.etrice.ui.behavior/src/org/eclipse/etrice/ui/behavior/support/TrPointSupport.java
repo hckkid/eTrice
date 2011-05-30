@@ -380,7 +380,7 @@ public class TrPointSupport {
 							return false;
 						
 						if (isSubTP(context.getPictogramElement()))
-							return false;
+							return true;
 						
 						return isValidPosition(context, context, StateGraphSupport.MARGIN);
 					}
@@ -393,9 +393,10 @@ public class TrPointSupport {
 			@Override
 			protected void postMoveShape(IMoveShapeContext context) {
 				ContainerShape shapeToMove = (ContainerShape) context.getShape();
-	
-				int margin = StateGraphSupport.MARGIN;
-				int size = ITEM_SIZE;
+				boolean subtp = isSubTP(context.getPictogramElement());
+				
+				int margin = subtp?StateSupport.MARGIN:StateGraphSupport.MARGIN;
+				int size = subtp?ITEM_SIZE_SMALL:ITEM_SIZE;
 	
 				int x = context.getX();
 				int y = context.getY();
@@ -403,14 +404,34 @@ public class TrPointSupport {
 				int height = context.getTargetContainer().getGraphicsAlgorithm().getGraphicsAlgorithmChildren().get(0).getHeight();
 				
 				// project onto boundary
-				if (x<=margin)
-					x = 0;
-				if (y<=margin)
-					y = 0;
-				if ((width-margin)<=x)
-					x = width;
-				if ((height-margin)<=y)
-					y = height;
+				{
+					int dx = (x<=width/2)? x:width-x;
+					int dy = (y<=height/2)? y:height-y;
+					if (dx>dy) {
+						// keep x, project y
+						if (y<=height/2)
+							y = 0;
+						else
+							y = height-0;
+						
+						if (x<0)
+							x = 0;
+						else if (x>width-0)
+							x = width-0;
+					}
+					else {
+						// keep y, project x
+						if (x<=width/2)
+							x = 0;
+						else
+							x = width-0;
+						
+						if (y<0)
+							y = 0;
+						else if (y>height-0)
+							y = height-0;
+					}
+				}
 	
 				Graphiti.getGaService().setLocation(shapeToMove.getGraphicsAlgorithm(), x, y, avoidNegativeCoordinates());
 				
@@ -419,7 +440,8 @@ public class TrPointSupport {
 					adjustLabel((Text) ga, x, y, width, margin, size);
 				}
 				
-				adjustSubTPs(shapeToMove);
+				if (!subtp)
+					adjustSubTPs(shapeToMove);
 			}
 
 			/**
