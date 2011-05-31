@@ -365,6 +365,18 @@ public class StateSupport {
 
 				doneChanges = true;
 				updateFigure(s, context);
+				
+		        ActorClass ac = SupportUtil.getActorClass(getDiagram());
+				if (RoomHelpers.hasSubStructure(s, ac)) {
+					// update the path text in the sub graph
+					ContainerShape subShape = ContextSwitcher.getContext(getDiagram(), s.getSubgraph());
+					if (subShape!=null && !subShape.getChildren().isEmpty()) {
+						Shape labelShape = subShape.getChildren().get(0);
+						GraphicsAlgorithm ga = labelShape.getGraphicsAlgorithm();
+						if (ga instanceof Text)
+							((Text)ga).setValue(RoomNameProvider.getStateGraphLabel(s.getSubgraph()));
+					}
+				}
 			}
 
 			private void updateFigure(State s, ICustomContext context) {
