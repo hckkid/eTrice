@@ -166,26 +166,27 @@ private int enterHistory(int state, boolean handler) {
 		switch (state) {
 			«FOREACH this.stateMachine.getBaseStateList() AS state-»
 			case «state.getStateId()»:
-				«IF state.hasEntryCode()»if (!handler) «state.getEntryCodeOperationName()»();«ENDIF-»
+				«IF state.hasEntryCode()»if (!handler) «state.getEntryCodeOperationName()»();«ENDIF»
 				«IF state.isLeaf()-»
-				return «state.getStateId()»;
+					// in leaf state: return state id
+					return «state.getStateId()»;
 				«ELSE-»
-					«IF !state.subgraph.hasInitTransition()-»
-						state = history[«state.getStateId()»];
+					// state has a sub graph
+					«IF state.subgraph.hasInitTransition()-»
+						// with init transition
+						if (history[«state.getStateId()»]==NO_STATE) {
+							«LET state.subgraph.getInitTransition() AS initt-»
+								int chain = «this.getChain(initt).getChainId()-»;
+								int next = executeTransitionChain(chain, null, null);
+								state = enterHistory(next, false);
+							«ENDLET-»
+						}
+						else {
+							state = history[«state.getStateId()»];
+						}
 					«ELSE-»
-					if (history[«state.getStateId()»]==NO_STATE) {
-						«LET state.subgraph.getInitTransition() AS initt-»
-						«IF initt!=null-»
-							int chain = «this.getChain(initt).getChainId()-»;
-							int next = executeTransitionChain(chain, null, null);
-							state = enterHistory(next, false);
-						«ENDIF-»
-						«ENDLET-»
-						state = «state.subgraph.getInitState().getStateId()»;
-					}
-					else {
+						// without init transition
 						state = history[«state.getStateId()»];
-					}
 					«ENDIF-»
 					break;
 				«ENDIF-»
