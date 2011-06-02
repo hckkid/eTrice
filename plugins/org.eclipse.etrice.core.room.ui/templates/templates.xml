@@ -1,8 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <templates>
+	
+	<template autoinsert="true" context="org.eclipse.etrice.core.Room.RoomModel"
+		deleted="false" description="model skeleton" enabled="true" 
+		id="model" name="RoomModel">RoomModel ${cursor}&#60;name&#62; {&#13;
+		LogicalSystem &#60;name&#62; {&#13;
+		SubSystemRef &#60;name&#62;:&#60;type&#62; &#13;
+		}&#13;
+		SubSystemClass &#60;name&#62; {&#13;
+		ActorRef &#60;name&#62;:&#60;type&#62; &#13;
+		}&#13;
+		ActorClass &#60;name&#62; {&#13;
+		}&#13;}
+		</template>
+	
 	<template autoinsert="true" context="org.eclipse.etrice.core.Room.ActorClass"
 		deleted="false" description="actor class skeleton" enabled="true"
-		id="actor_class" name="ActorClass">ActorClass ${cursor} {&#13;
+		id="actor_class" name="ActorClass">ActorClass ${cursor}&#60;name&#62; {&#13;
 		Interface {&#13;
 		}&#13;
 		Structure {&#13;
@@ -10,9 +24,32 @@
 		Behavior {&#13;
 		}&#13;
 		}&#13;</template>
+		
+	<template autoinsert="true" context="org.eclipse.etrice.core.Room.ProtocolClass" 
+		deleted="false" description="protocol class skeleton" enabled="true"
+		id="protocol_class" name="ProtocolClass">ProtocolClass ${cursor}&#60;name&#62; {&#13;
+		incoming {&#13;
+		Message &#60;msg&#62;(&#60;p1&#62;:&#60;type&#62;)
+		}&#13;
+		outgoing {&#13;
+		Message &#60;msg&#62;(&#60;p1&#62;:&#60;type&#62;)
+		}&#13;
+		}</template>		
+								
+	<template autoinsert="true" context="org.eclipse.etrice.core.Room.DataClass" 
+		deleted="false" description="data class skeleton" enabled="true"
+		id="data_class" name="DataClass">DataClass ${cursor}&#60;name&#62; {&#13;
+		Attribute &#60;name&#62;:&#60;type&#62;
+		Operation &#60;name&#62;(&#60;p1&#62;:&#60;type&#62;):&#60;return_type&#62;{&#13;
+		"&#60;user code&#62;"&#13;
+		"&#60;user code&#62;"&#13;
+		}&#13;
+		}&#13;
+		</template>				
+								
 	<template autoinsert="true" context="org.eclipse.etrice.core.Room.kw_State"
 		deleted="false" description="State with entry code, exit code and sub graph"
-		enabled="true" id="state" name="complete State">State ${cursor} {&#13;
+		enabled="true" id="state" name="State">State ${cursor} {&#13;
 		entry {&#13;
 		""&#13;
 		}&#13;
@@ -21,36 +58,30 @@
 		}&#13;
 		subgraph {&#13;
 		}</template>
+		
 	<template autoinsert="true" context="org.eclipse.etrice.core.Room.DetailCode"
 		deleted="false" description="detail code" enabled="true" id="detail_code"
 		name="detail code">{&#13;
 		""&#13;
 		}</template>
+		
 	<template autoinsert="true" context="org.eclipse.etrice.core.Room.kw_Port"
 		deleted="false" description="insert port" enabled="true" id="port"
-		name="Port">Port ${cursor} : ${protocol:CrossReference('Port.protocol')}
-	</template>
-	<template autoinsert="true"
-		context="org.eclipse.etrice.core.Room.ProtocolClass" deleted="false"
-		description="ProtocolClass skeleton" enabled="true" name="ProtocolClass">ProtocolClass
-		${cursor} {&#13;
-		incoming {&#13;
-		}&#13;
-		outgoing {&#13;
-		}&#13;
-		}</template>
+		name="Port">Port ${cursor} : ${protocol:CrossReference('Port.protocol')}</template>
+		
 	<template autoinsert="true"
 		context="org.eclipse.etrice.core.Room.kw_RefinedState" deleted="false"
-		description="RefinedState" enabled="true" id="refined_state" name="RefinedState">RefinedState
-		${base:CrossReference('RefinedState.base')} {&#13;
+		description="RefinedState" enabled="true" id="refined_state"
+		name="RefinedState">RefinedState ${base:CrossReference('RefinedState.base')} {&#13;
 		${cursor}&#13;
 		}</template>
+		
 	<template autoinsert="true" context="org.eclipse.etrice.core.Room.kw_SAP"
-		deleted="false" description="insert SAP" enabled="true" id="sap" name="SAP">
-		SAP ${cursor} : ${protocol:CrossReference('SAPRef.protocol')}
-	</template>
+		deleted="false" description="insert SAP" enabled="true" id="sap"
+		name="SAP">SAP ${cursor} : ${protocol:CrossReference('SAPRef.protocol')}</template>
+	
 	<template autoinsert="true" context="org.eclipse.etrice.core.Room.kw_SPP"
-		deleted="false" description="insert SPP" enabled="true" id="spp" name="SPP">
-		SPP ${cursor} : ${protocol:CrossReference('SPPRef.protocol')}
-	</template>
+		deleted="false" description="insert SPP" enabled="true" id="spp"
+		name="SPP">SPP ${cursor} : ${protocol:CrossReference('SPPRef.protocol')}</template>
+	
 </templates>
