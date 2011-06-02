@@ -304,24 +304,24 @@ public class RoomNameProvider {
 			return "init";
 		}
 		else {
-			NonInitialTransition nit = (NonInitialTransition) t;
-			if (nit.getFrom() instanceof ChoicepointTerminal) {
-				if (nit instanceof ContinuationTransition)
-					return "[else]";
-				
-				if (nit instanceof CPBranchTransition) {
-					CPBranchTransition cpt = (CPBranchTransition) nit;
-					if (cpt.getCondition()!=null && !cpt.getCondition().getCommands().isEmpty())
-						return "["+cpt.getCondition().getCommands().get(0)+"]";
-				}
-
-				return "[?]";
-			}
-			
 			if (t.getName()!=null)
 				name = t.getName()+": ";
 			else
 				name ="";
+			
+			NonInitialTransition nit = (NonInitialTransition) t;
+			if (nit.getFrom() instanceof ChoicepointTerminal) {
+				if (nit instanceof ContinuationTransition)
+					return name+"[else]";
+				
+				if (nit instanceof CPBranchTransition) {
+					CPBranchTransition cpt = (CPBranchTransition) nit;
+					if (cpt.getCondition()!=null && !cpt.getCondition().getCommands().isEmpty())
+						return name+"["+cpt.getCondition().getCommands().get(0)+"]";
+				}
+
+				return name+"[?]";
+			}
 			
 			if (t instanceof TriggeredTransition) {
 				boolean first = true;
