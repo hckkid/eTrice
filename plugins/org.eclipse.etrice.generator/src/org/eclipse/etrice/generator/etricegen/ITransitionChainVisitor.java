@@ -16,7 +16,7 @@ public interface ITransitionChainVisitor {
 	String genActionOperationCall(Transition tr);
 	String genEntryOperationCall(State state);
 	String genExitOperationCall(State state);
-	String genElseIfBranch(CPBranchTransition tr);
+	String genElseIfBranch(CPBranchTransition tr, boolean isFirst);
 	String genElseBranch(ContinuationTransition tr);
 	String genEndIf();
 	String genReturnState(State state);

@@ -28,7 +28,6 @@ import org.eclipse.etrice.generator.etricegen.TransitionChain;
 
 public class JavaTransitionChainVisitor implements ITransitionChainVisitor {
 
-	private boolean firstIf = true;
 	private ExpandedActorClass ac;
 	private String typedData = "";
 	private String dataArg = "";
@@ -66,13 +65,11 @@ public class JavaTransitionChainVisitor implements ITransitionChainVisitor {
 		return JavaGenerator.getExitCodeOperationName(state)+"();\n";
 	}
 
-	public String genElseIfBranch(CPBranchTransition tr) {
+	public String genElseIfBranch(CPBranchTransition tr, boolean isFirst) {
 		String result = "";
 		
-		if (!firstIf )
+		if (!isFirst )
 			result = "}\nelse ";
-		else
-			firstIf = false;
 
 		result += "if ("+ac.getCode(tr.getCondition())+") {\n";
 		
@@ -85,8 +82,6 @@ public class JavaTransitionChainVisitor implements ITransitionChainVisitor {
 	}
 
 	public String genEndIf() {
-		firstIf = true;
-
 		return "}\n";
 	}
 

@@ -176,6 +176,7 @@ public class TransitionChainImpl extends EObjectImpl implements TransitionChain 
 			assert(dflt!=null): "ChoicePoint "+RoomNameProvider.getFullPath(node)+" has no default branch!";
 			
 			// generate if/else
+			boolean isFirst = true;
 			for (Transition cond : out) {
 				if (cond==dflt)
 					continue;
@@ -183,7 +184,8 @@ public class TransitionChainImpl extends EObjectImpl implements TransitionChain 
 				assert(cond instanceof CPBranchTransition): "The non default ChoicePoint branch "
 					+RoomNameProvider.getFullPath(cond)+" must be of type CPBranchTransition!";
 				
-				result.append(tcv.genElseIfBranch((CPBranchTransition)cond));
+				result.append(tcv.genElseIfBranch((CPBranchTransition)cond, isFirst));
+				isFirst = false;
 
 				genChainCode(cond, ac, tcv, result);
 			}
