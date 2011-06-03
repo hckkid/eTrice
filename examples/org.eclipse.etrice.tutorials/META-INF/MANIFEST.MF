@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Tutorials
-Bundle-SymbolicName: org.eclipse.etrice.doc.tutorials
+Bundle-SymbolicName: org.eclipse.etrice.tutorials
 Bundle-Version: 1.0.0
 Export-Package: workflow
 Require-Bundle: org.eclipse.etrice.generator.java;bundle-version="0.1.0",
