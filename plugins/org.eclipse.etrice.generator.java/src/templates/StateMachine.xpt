@@ -176,9 +176,7 @@ private int enterHistory(int state, boolean handler) {
 						// with init transition
 						if (history[«state.getStateId()»]==NO_STATE) {
 							«LET state.subgraph.getInitTransition() AS initt-»
-								int chain = «this.getChain(initt).getChainId()-»;
-								int next = executeTransitionChain(chain, null, null);
-								state = enterHistory(next, false);
+								state = executeTransitionChain(«this.getChain(initt).getChainId()-», null, null);
 							«ENDLET-»
 						}
 						else {
