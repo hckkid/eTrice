@@ -74,14 +74,14 @@ public class StatePropertyDialog extends AbstractPropertyDialog {
 		
 		{
 			Text entry = createText(body, "&Entry Code:", state, RoomPackage.eINSTANCE.getState_EntryCode(), null, s2m, m2s, true);
-			GridData gd = new GridData(GridData.FILL_HORIZONTAL);
+			GridData gd = new GridData(GridData.FILL_BOTH);
 			gd.heightHint = 100;
 			entry.setLayoutData(gd);
 		}
 		
 		{
 			Text exit = createText(body, "E&xit Code:", state, RoomPackage.eINSTANCE.getState_ExitCode(), null, s2m, m2s, true);
-			GridData gd = new GridData(GridData.FILL_HORIZONTAL);
+			GridData gd = new GridData(GridData.FILL_BOTH);
 			gd.heightHint = 100;
 			exit.setLayoutData(gd);
 		}

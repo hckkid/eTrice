@@ -275,7 +275,8 @@ public abstract class AbstractPropertyDialog extends FormDialog {
 		if (multiline)
 			style |= SWT.MULTI;
 		Text text = toolkit.createText(parent, "", style);
-		text.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+		GridData gd = new GridData(multiline?GridData.FILL_BOTH:GridData.FILL_HORIZONTAL);
+		text.setLayoutData(gd);
 
 		UpdateValueStrategy t2m = null;
 		UpdateValueStrategy m2t = null;

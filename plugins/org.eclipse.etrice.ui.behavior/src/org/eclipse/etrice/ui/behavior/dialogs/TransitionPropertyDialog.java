@@ -229,14 +229,14 @@ public class TransitionPropertyDialog extends AbstractPropertyDialog {
 
 		if (trans instanceof CPBranchTransition) {
 			Text cond = createText(body, "Condition:", trans, RoomPackage.eINSTANCE.getCPBranchTransition_Condition(), null, s2m, m2s, true);
-			GridData gd = new GridData(GridData.FILL_HORIZONTAL);
+			GridData gd = new GridData(GridData.FILL_BOTH);
 			gd.heightHint = 100;
 			cond.setLayoutData(gd);
 		}
 		
 		{
 			Text action = createText(body, "Action Code:", trans, RoomPackage.eINSTANCE.getTransition_Action(), null, s2m, m2s, true);
-			GridData gd = new GridData(GridData.FILL_HORIZONTAL);
+			GridData gd = new GridData(GridData.FILL_BOTH);
 			gd.heightHint = 100;
 			action.setLayoutData(gd);
 		}
