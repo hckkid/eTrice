@@ -37,21 +37,14 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
    </requires>
 
    <plugin
-         id="org.eclipse.etrice.doc.tutorials"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipse.etrice.example"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
          id="org.eclipse.etrice.modellib"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.etrice.tutorials"
          download-size="0"
          install-size="0"
          version="0.0.0"
