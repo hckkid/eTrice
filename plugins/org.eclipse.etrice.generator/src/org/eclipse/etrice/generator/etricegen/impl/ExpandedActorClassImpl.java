@@ -36,6 +36,7 @@ import org.eclipse.etrice.core.room.Transition;
 import org.eclipse.etrice.core.room.TransitionTerminal;
 import org.eclipse.etrice.core.room.Trigger;
 import org.eclipse.etrice.core.room.impl.ActorClassImpl;
+import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
 import org.eclipse.etrice.core.naming.RoomNameProvider;
 
@@ -491,8 +492,16 @@ public class ExpandedActorClassImpl extends ActorClassImpl implements ExpandedAc
 					for (MessageFromIf mifp : trig.getMsgFromIfPairs()) {
 						String tr = getTriggerString(mifp);
 						ActiveTrigger at = caughtTriggers.get(tr);
+						/*
+						 * accept new trigger if
+						 * 
+						 *  - no inner or inner with guard
+						 *  - accept several but only one without guard (count),
+						 *    insert those with guard first in the list of the _same_ level(!)
+						 */
 						if (at==null) {
-							// this is a new trigger (and our unique point of ActiveTrigger creation)
+							// no inner transition with this trigger exists,
+							// so this is a new trigger (and our unique point of ActiveTrigger creation)
 							at = ETriceGenFactory.eINSTANCE.createActiveTrigger();
 							at.setMsg(mifp.getMessage());
 							at.setIfitem(mifp.getFrom());
@@ -502,45 +511,37 @@ public class ExpandedActorClassImpl extends ActorClassImpl implements ExpandedAc
 							triggers.add(at);
 						}
 						else {
-							// check consistency of guards
-							TriggeredTransition lastChecked = null;
-							boolean isNotGuarded = true;
+							// check guards of previous transitions
+							TriggeredTransition unguarded = null;
+							boolean accepted = true;
 							for (TriggeredTransition t2 : at.getTransitions()) {
 								for (Trigger trig2 : t2.getTriggers()) {
 									if (isMatching(trig2, tr)) {
-										if (trig2.getGuard()!=null)
-											if (trig2.getGuard().getGuard()!=null)
-												if (!trig2.getGuard().getGuard().getCommands().isEmpty())
-														isNotGuarded = false;
-										lastChecked = t2;
+										if (!RoomHelpers.isGuarded(trig2)) {
+											unguarded = t2;
+											if (!sameLevelTransitions.contains(t2))
+												accepted = false;
+										}
 									}
 								}
 							}
-							if (lastChecked!=null) {
-								if (!isNotGuarded) {
-									boolean guardRequired = false;
-									if (lastChecked.getFrom() instanceof TrPoint)
-										if (lastChecked.eContainer()==tt.eContainer())
-											// lastChecked and tt originate in TrPoints of the same super state
-											guardRequired = true;
-									if (tt.getFrom()==lastChecked.getFrom())
-										// lastChecked and tt originate in the same State or TrPoint
-										guardRequired = true;
-									if (guardRequired) {
-										if (trig.getGuard()==null)
-											validationError("Transitions with same trigger on same level have to be guarded!", t, RoomPackage.eINSTANCE.getTriggeredTransition_Triggers());
-										if (trig.getGuard().getGuard()==null)
-											validationError("Transitions with same trigger on same level have to be guarded!", t, RoomPackage.eINSTANCE.getTriggeredTransition_Triggers());
-										if (!trig.getGuard().getGuard().getCommands().isEmpty())
-											validationError("Transitions with same trigger on same level have to be guarded!", t, RoomPackage.eINSTANCE.getTriggeredTransition_Triggers());
+							if (accepted) {
+								if (unguarded!=null) {
+									// there already is an unguarded transition: require a quard
+									if (!RoomHelpers.isGuarded(trig)) {
+										validationError("Transitions with same trigger on same level have to be guarded!", t, RoomPackage.eINSTANCE.getTriggeredTransition_Triggers());
 									}
+									else {
+										int idx = at.getTransitions().indexOf(unguarded);
+										at.getTransitions().add(idx, tt);
+									}
+								}
+								else {
+									// just add at the end
 									at.getTransitions().add(tt);
 								}
-								// else this transition is inactive
 							}
-							else {
-								at.getTransitions().add(tt);
-							}
+							// else: this trigger is already satisfied - nevertheless this is a valid situation
 						}
 					}
 				}

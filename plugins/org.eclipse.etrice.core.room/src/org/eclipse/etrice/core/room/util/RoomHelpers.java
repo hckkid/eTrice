@@ -36,6 +36,7 @@ import org.eclipse.etrice.core.room.StructureClass;
 import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.core.room.TrPoint;
 import org.eclipse.etrice.core.room.Transition;
+import org.eclipse.etrice.core.room.Trigger;
 
 /**
  * description
@@ -245,6 +246,9 @@ public class RoomHelpers {
 		return result.toString();
 	}
 
+	public static boolean isGuarded(Trigger trig) {
+		return trig.getGuard()!=null && RoomHelpers.hasDetailCode(trig.getGuard().getGuard());
+	}
 	public static List<State> getAllStates(StateGraph sg) {
 		return getAllStateGraphItems(sg, RoomPackage.eINSTANCE.getStateGraph_States());
 	}
