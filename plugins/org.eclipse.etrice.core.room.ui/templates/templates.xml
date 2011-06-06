@@ -3,85 +3,111 @@
 	
 	<template autoinsert="true" context="org.eclipse.etrice.core.Room.RoomModel"
 		deleted="false" description="model skeleton" enabled="true" 
-		id="model" name="RoomModel">RoomModel ${cursor}&#60;name&#62; {&#13;
-		LogicalSystem &#60;name&#62; {&#13;
-		SubSystemRef &#60;name&#62;:&#60;type&#62; &#13;
+		id="model" name="RoomModel">RoomModel ${ModelName} {&#13;
+		LogicalSystem ${LogSysName} {&#13;
+			SubSystemRef ${SubSysRefName}:${SubSysClassName} &#13;
 		}&#13;
-		SubSystemClass &#60;name&#62; {&#13;
-		ActorRef &#60;name&#62;:&#60;type&#62; &#13;
+		SubSystemClass ${SubSysClassName} {&#13;
+			ActorRef ${ActorRefName}:${ActorClassName} &#13;
 		}&#13;
-		ActorClass &#60;name&#62; {&#13;
-		}&#13;}
-		</template>
+		ActorClass ${ActorClassName} {&#13;
+		}&#13;
+		${cursor}
+	}</template>
 	
 	<template autoinsert="true" context="org.eclipse.etrice.core.Room.ActorClass"
 		deleted="false" description="actor class skeleton" enabled="true"
-		id="actor_class" name="ActorClass">ActorClass ${cursor}&#60;name&#62; {&#13;
+		id="actor_class" name="ActorClass">ActorClass ${ActorClassName} {&#13;
 		Interface {&#13;
+			${cursor}
 		}&#13;
 		Structure {&#13;
 		}&#13;
 		Behavior {&#13;
 		}&#13;
-		}&#13;</template>
+	}&#13;</template>
 		
 	<template autoinsert="true" context="org.eclipse.etrice.core.Room.ProtocolClass" 
 		deleted="false" description="protocol class skeleton" enabled="true"
-		id="protocol_class" name="ProtocolClass">ProtocolClass ${cursor}&#60;name&#62; {&#13;
+		id="protocol_class" name="ProtocolClass">ProtocolClass ${ProtocolClassName} {&#13;
 		incoming {&#13;
-		Message &#60;msg&#62;(&#60;p1&#62;:&#60;type&#62;)
+			Message ${InMsg1}(${InParam1}: ${imtype:Enum('PrimitiveType')})
+			${cursor}
 		}&#13;
 		outgoing {&#13;
-		Message &#60;msg&#62;(&#60;p1&#62;:&#60;type&#62;)
+			Message ${OutMsg1}(${OutParam1}: ${omtype:Enum('PrimitiveType')})
 		}&#13;
-		}</template>		
+	}</template>		
 								
 	<template autoinsert="true" context="org.eclipse.etrice.core.Room.DataClass" 
 		deleted="false" description="data class skeleton" enabled="true"
-		id="data_class" name="DataClass">DataClass ${cursor}&#60;name&#62; {&#13;
-		Attribute &#60;name&#62;:&#60;type&#62;
-		Operation &#60;name&#62;(&#60;p1&#62;:&#60;type&#62;):&#60;return_type&#62;{&#13;
-		"&#60;user code&#62;"&#13;
-		"&#60;user code&#62;"&#13;
+		id="data_class" name="DataClass">DataClass ${DataClassName} {&#13;
+		Attribute ${Attr1}:${atype:Enum('PrimitiveType')}
+		Operation ${Operation1}(${Param1}: ${ptype:Enum('PrimitiveType')}): ${rtype:Enum('PrimitiveType')}{&#13;
+			"${UserCodeLine1}"&#13;
+			"${UserCodeLine2}"&#13;
 		}&#13;
-		}&#13;
-		</template>				
+		${cursor}
+	}</template>				
+								
+	<template autoinsert="true" context="org.eclipse.etrice.core.Room.Message" 
+		deleted="false" description="message skeleton" enabled="true"
+		id="message" name="Message">Message ${name}(${p1}: ${p1type: Enum('PrimitiveType')}, ${p2}: ${p2type:Enum('PrimitiveType')})&#13;
+		${cursor}</template>			
+
+	<template autoinsert="true" context="org.eclipse.etrice.core.Room.Attribute" 
+		deleted="false" description="attribute skeleton" enabled="true"
+		id="attribute" name="Attribute">Attribute ${name}: ${atype:Enum('PrimitiveType')}&#13;
+		${cursor}</template>			
+
+	<template autoinsert="true" context="org.eclipse.etrice.core.Room.Operation" 
+		deleted="false" description="operation skeleton" enabled="true"
+		id="operation" name="Operation">Operation ${name}(${p1}: ${p1type:Enum('PrimitiveType')},${p2}: ${p2type:Enum('PrimitiveType')}): ${rtype:Enum('PrimitiveType')} {&#13;
+			"${UserCodeLine1}"
+			"${UserCodeLine2}"
+		}
+		${cursor}</template>			
 								
 	<template autoinsert="true" context="org.eclipse.etrice.core.Room.kw_State"
 		deleted="false" description="State with entry code, exit code and sub graph"
-		enabled="true" id="state" name="State">State ${cursor} {&#13;
-		entry {&#13;
-		""&#13;
-		}&#13;
-		exit {&#13;
-		""&#13;
-		}&#13;
-		subgraph {&#13;
-		}</template>
+		enabled="true" id="state" name="State">State ${name} {&#13;
+					entry {&#13;
+						""&#13;
+					}&#13;
+					exit {&#13;
+						""&#13;
+					}&#13;
+					subgraph {&#13;
+					}
+				}
+				${cursor}</template>
 		
 	<template autoinsert="true" context="org.eclipse.etrice.core.Room.DetailCode"
 		deleted="false" description="detail code" enabled="true" id="detail_code"
 		name="detail code">{&#13;
-		""&#13;
-		}</template>
+		"${cursor}"&#13;
+	}</template>
 		
 	<template autoinsert="true" context="org.eclipse.etrice.core.Room.kw_Port"
 		deleted="false" description="insert port" enabled="true" id="port"
-		name="Port">Port ${cursor} : ${protocol:CrossReference('Port.protocol')}</template>
+		name="Port">Port ${name}: ${protocol:CrossReference('Port.protocol')}
+			${cursor}</template>
 		
 	<template autoinsert="true"
 		context="org.eclipse.etrice.core.Room.kw_RefinedState" deleted="false"
 		description="RefinedState" enabled="true" id="refined_state"
 		name="RefinedState">RefinedState ${base:CrossReference('RefinedState.base')} {&#13;
 		${cursor}&#13;
-		}</template>
+	}</template>
 		
 	<template autoinsert="true" context="org.eclipse.etrice.core.Room.kw_SAP"
 		deleted="false" description="insert SAP" enabled="true" id="sap"
-		name="SAP">SAP ${cursor} : ${protocol:CrossReference('SAPRef.protocol')}</template>
+		name="SAP">SAP ${name}: ${protocol:CrossReference('SAPRef.protocol')}
+	${cursor}</template>
 	
 	<template autoinsert="true" context="org.eclipse.etrice.core.Room.kw_SPP"
 		deleted="false" description="insert SPP" enabled="true" id="spp"
-		name="SPP">SPP ${cursor} : ${protocol:CrossReference('SPPRef.protocol')}</template>
+		name="SPP">SPP ${name}: ${protocol:CrossReference('SPPRef.protocol')}
+	${cursor}</template>
 	
 </templates>
