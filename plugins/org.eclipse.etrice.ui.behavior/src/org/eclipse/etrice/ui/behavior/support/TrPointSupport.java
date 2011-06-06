@@ -440,13 +440,16 @@ public class TrPointSupport {
 					adjustLabel((Text) ga, x, y, width, margin, size);
 				}
 				
-				if (!subtp)
-					adjustSubTPs(shapeToMove);
+				// as of https://bugs.eclipse.org/bugs/show_bug.cgi?id=347509
+				// the position of the sub tp shall not be adjusted
+//				if (!subtp)
+//					adjustSubTPs(shapeToMove);
 			}
 
 			/**
 			 * @param shapeToMove
 			 */
+			@SuppressWarnings("unused")
 			private void adjustSubTPs(ContainerShape shapeToMove) {
 				EObject bo = Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(shapeToMove);
 				if (!(bo instanceof TrPoint)) {
