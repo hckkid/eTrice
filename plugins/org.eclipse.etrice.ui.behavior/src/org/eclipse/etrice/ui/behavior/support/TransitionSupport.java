@@ -92,6 +92,7 @@ public class TransitionSupport {
 
 	private static final IColorConstant LINE_COLOR = new ColorConstant(0, 0, 0);
 	private static final IColorConstant INHERITED_COLOR = new ColorConstant(100, 100, 100);
+	private static final IColorConstant FILL_COLOR = new ColorConstant(255, 255, 255);
 	private static final int LINE_WIDTH = 1;
 	private static final int MAX_LABEL_LENGTH = 20;
 
@@ -263,19 +264,21 @@ public class TransitionSupport {
 
 				IGaService gaService = Graphiti.getGaService();
 				Polyline polyline = gaService.createPolyline(connection);
-				Color color = manageColor(inherited?INHERITED_COLOR:LINE_COLOR);
-				polyline.setForeground(color);
+				Color lineColor = manageColor(inherited?INHERITED_COLOR:LINE_COLOR);
+				polyline.setForeground(lineColor);
 				polyline.setLineWidth(LINE_WIDTH);
 
 		        ConnectionDecorator cd = peCreateService
 		              .createConnectionDecorator(connection, false, 1.0, true);
-		        createArrow(cd, color);
+		        Color fillColor = RoomHelpers.hasDetailCode(trans.getAction())?
+		        		lineColor:manageColor(FILL_COLOR);
+				createArrow(cd, lineColor, fillColor);
 		        
 		        ConnectionDecorator textDecorator =
 		            peCreateService.createConnectionDecorator(connection, true,
 		            0.5, true);
 		        Text text = gaService.createDefaultText(getDiagram(), textDecorator, getLabel(trans));
-		        text.setForeground(color);
+		        text.setForeground(lineColor);
 		        gaService.setLocation(text, 10, 0);
 
 
@@ -295,14 +298,14 @@ public class TransitionSupport {
 				return Graphiti.getGaService().createPoint(begin.getX()+deltaX, begin.getY()+deltaY);
 			}
 			
-			private Polyline createArrow(GraphicsAlgorithmContainer gaContainer, Color color) {
+			private Polyline createArrow(GraphicsAlgorithmContainer gaContainer, Color lineColor, Color fillColor) {
 
 				IGaService gaService = Graphiti.getGaService();
 				Polygon polygon =
 					gaService.createPolygon(gaContainer, new int[] { -15, 5, 0, 0, -15, -5 });
 
-				polygon.setForeground(color);
-				polygon.setBackground(color);
+				polygon.setForeground(lineColor);
+				polygon.setBackground(fillColor);
 				polygon.setLineWidth(LINE_WIDTH);
 
 				return polygon;
@@ -420,7 +423,9 @@ public class TransitionSupport {
 				}
 				
 				doneChanges = true;
-				updateLabel(trans, context.getConnection());
+		        Color fillColor = RoomHelpers.hasDetailCode(trans.getAction())?
+		        		manageColor(LINE_COLOR):manageColor(FILL_COLOR);
+				updateLabel(trans, context.getConnection(), fillColor);
 			}
 			
 			@Override
@@ -553,7 +558,10 @@ public class TransitionSupport {
 				if (pe instanceof ConnectionDecorator)
 					pe = (PictogramElement) pe.eContainer();
 				Transition trans = (Transition) getBusinessObjectForPictogramElement(pe);
+				Connection conn = (Connection) pe;
 				StateGraph sg = (StateGraph)trans.eContainer();
+				StateGraph currentSG = SupportUtil.getStateGraph((ContainerShape) conn.getStart().eContainer(), getFeatureProvider());
+				boolean inherited = SupportUtil.isInherited(getDiagram(), currentSG);
 				
 				Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 				TransitionPropertyDialog dlg = new TransitionPropertyDialog(shell, sg, trans);
@@ -562,12 +570,14 @@ public class TransitionSupport {
 
 				doneChanges = true;
 				
-				Connection conn = (Connection) pe;
-				updateLabel(trans, conn);
+				Color lineColor = inherited? manageColor(INHERITED_COLOR):manageColor(LINE_COLOR);
+		        Color fillColor = RoomHelpers.hasDetailCode(trans.getAction())?
+		        		lineColor:manageColor(FILL_COLOR);
+				updateLabel(trans, conn, fillColor);
 
 				if (conn.getConnectionDecorators().size()>=2) {
-					ConnectionDecorator cd = conn.getConnectionDecorators().get(1);
-					//bug 342216: getDiagramEditor().refresh(cd);
+					//ConnectionDecorator cd = conn.getConnectionDecorators().get(1);
+					//TODOHRR: bug 342216: getDiagramEditor().refresh(cd);
 				}
 			}
 			
@@ -658,11 +668,17 @@ public class TransitionSupport {
 			return new ICustomFeature[] { new PropertyFeature(fp) };
 		}
 		
-		protected static void updateLabel(Transition trans, Connection conn) {
+		protected static void updateLabel(Transition trans, Connection conn, Color fillColor) {
 			if (conn.getConnectionDecorators().size()<2)
 				return;
 			
-			ConnectionDecorator cd = conn.getConnectionDecorators().get(1);
+			ConnectionDecorator cd = conn.getConnectionDecorators().get(0);
+			if (cd.getGraphicsAlgorithm() instanceof Polygon) {
+				Polygon p = (Polygon) cd.getGraphicsAlgorithm();
+				p.setBackground(fillColor);
+			}
+			
+			cd = conn.getConnectionDecorators().get(1);
 			if (cd.getGraphicsAlgorithm() instanceof Text) {
 				Text label = (Text) cd.getGraphicsAlgorithm();
 				label.setValue(getLabel(trans));

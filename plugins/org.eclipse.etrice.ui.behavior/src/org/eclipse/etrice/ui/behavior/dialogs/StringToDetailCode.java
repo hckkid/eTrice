@@ -16,6 +16,10 @@ public class StringToDetailCode extends Converter {
 			String code = (String) fromObject;
 			if (code.isEmpty())
 				return null;
+
+			String trimmed = code.trim();
+			if (trimmed.isEmpty())
+				return null;
 			
 			// TODOHRR: make work also for UNIX/Mac line endings
 			String[] cmds = code.split("\r\n");
