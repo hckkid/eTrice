@@ -479,16 +479,7 @@ public class TransitionPropertyDialog extends AbstractPropertyDialog {
 		guardText.addFocusListener(new FocusListener() {
 			@Override
 			public void focusLost(FocusEvent e) {
-				Object element = ((IStructuredSelection)triggerViewer.getSelection()).getFirstElement();
-				if (element instanceof Trigger) {
-					DetailCode dc = (DetailCode) s2m.convert(guardText.getText());
-					Guard guard = null;
-					if (dc!=null) {
-						guard = RoomFactory.eINSTANCE.createGuard();
-						guard.setGuard(dc);
-					}
-					((Trigger) element).setGuard(guard);
-				}
+				refreshGuard();
 			}
 			@Override
 			public void focusGained(FocusEvent e) {
@@ -648,5 +639,18 @@ public class TransitionPropertyDialog extends AbstractPropertyDialog {
 		super.createButtonsForButtonBar(parent);
 		if (!triggersAvailable())
 			getButton(IDialogConstants.OK_ID).setEnabled(false);
+	}
+	
+	private void refreshGuard() {
+		Object element = ((IStructuredSelection)triggerViewer.getSelection()).getFirstElement();
+		if (element instanceof Trigger) {
+			DetailCode dc = (DetailCode) s2m.convert(guardText.getText());
+			Guard guard = null;
+			if (dc!=null) {
+				guard = RoomFactory.eINSTANCE.createGuard();
+				guard.setGuard(dc);
+			}
+			((Trigger) element).setGuard(guard);
+		}
 	}
 }
