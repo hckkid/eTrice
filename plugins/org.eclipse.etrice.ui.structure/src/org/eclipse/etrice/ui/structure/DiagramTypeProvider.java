@@ -24,15 +24,17 @@ import org.eclipse.xtext.scoping.IScopeProvider;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 
+@SuppressWarnings("restriction")
 public class DiagramTypeProvider extends AbstractDiagramTypeProvider {
 
+	private static final boolean AUTO_UPDATE = false;
+	
 	private IToolBehaviorProvider[] toolBehaviorProviders;
 	private ProviderDispatcher dispatcher;
 	
 	@Inject
 	private IScopeProvider scopeProvider;
 
-	@SuppressWarnings("restriction")
 	public DiagramTypeProvider() {
 		super();
         
@@ -62,7 +64,7 @@ public class DiagramTypeProvider extends AbstractDiagramTypeProvider {
 	 */
 	@Override
 	public boolean isAutoUpdateAtStartup() {
-		return true;
+		return AUTO_UPDATE;
 	}
 	
 	/* (non-Javadoc)
@@ -70,7 +72,7 @@ public class DiagramTypeProvider extends AbstractDiagramTypeProvider {
 	 */
 	@Override
 	public boolean isAutoUpdateAtReset() {
-		return true;
+		return AUTO_UPDATE;
 	}
 	
 	/* (non-Javadoc)
@@ -78,7 +80,7 @@ public class DiagramTypeProvider extends AbstractDiagramTypeProvider {
 	 */
 	@Override
 	public boolean isAutoUpdateAtRuntime() {
-		return true;
+		return AUTO_UPDATE;
 	}
 	
 	public IScopeProvider getScopeProvider() {
