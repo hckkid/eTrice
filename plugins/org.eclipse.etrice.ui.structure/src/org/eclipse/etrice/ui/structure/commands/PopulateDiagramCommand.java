@@ -26,6 +26,7 @@ import org.eclipse.etrice.core.room.LayerConnection;
 import org.eclipse.etrice.core.room.LogicalSystem;
 import org.eclipse.etrice.core.room.StructureClass;
 import org.eclipse.etrice.core.room.SubSystemClass;
+import org.eclipse.etrice.ui.behavior.DiagramTypeProvider;
 import org.eclipse.etrice.ui.structure.support.StructureClassSupport;
 import org.eclipse.etrice.ui.structure.support.SupportUtil;
 import org.eclipse.graphiti.dt.IDiagramTypeProvider;
@@ -50,7 +51,7 @@ public class PopulateDiagramCommand extends RecordingCommand {
 
 	@Override
 	protected void doExecute() {
-		IDiagramTypeProvider dtp = GraphitiUi.getExtensionManager().createDiagramTypeProvider(diagram, "org.eclipse.etrice.ui.structure.diagramTypeProvider"); //$NON-NLS-1$
+		IDiagramTypeProvider dtp = GraphitiUi.getExtensionManager().createDiagramTypeProvider(diagram, DiagramTypeProvider.PROVIDER_ID); //$NON-NLS-1$
 		IFeatureProvider featureProvider = dtp.getFeatureProvider();
 		
 		AddContext addContext = new AddContext();

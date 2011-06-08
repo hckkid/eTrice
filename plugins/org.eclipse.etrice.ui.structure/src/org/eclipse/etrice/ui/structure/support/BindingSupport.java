@@ -44,7 +44,6 @@ import org.eclipse.graphiti.features.impl.Reason;
 import org.eclipse.graphiti.mm.algorithms.Polyline;
 import org.eclipse.graphiti.mm.pictograms.Anchor;
 import org.eclipse.graphiti.mm.pictograms.Connection;
-import org.eclipse.graphiti.mm.pictograms.ContainerShape;
 import org.eclipse.graphiti.mm.pictograms.Diagram;
 import org.eclipse.graphiti.mm.pictograms.PictogramElement;
 import org.eclipse.graphiti.services.Graphiti;
@@ -332,10 +331,10 @@ public class BindingSupport {
 
 			@Override
 			public boolean update(IUpdateContext context) {
-				ContainerShape containerShape = (ContainerShape)context.getPictogramElement();
-				Object bo = getBusinessObjectForPictogramElement(containerShape);
+				PictogramElement pe = context.getPictogramElement();
+				Object bo = getBusinessObjectForPictogramElement(pe);
 				if (bo instanceof EObject && ((EObject)bo).eIsProxy()) {
-					IRemoveContext rc = new RemoveContext(containerShape);
+					IRemoveContext rc = new RemoveContext(pe);
 					IFeatureProvider featureProvider = getFeatureProvider();
 					IRemoveFeature removeFeature = featureProvider.getRemoveFeature(rc);
 					if (removeFeature != null) {

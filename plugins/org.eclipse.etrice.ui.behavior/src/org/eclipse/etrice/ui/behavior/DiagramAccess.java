@@ -63,4 +63,12 @@ public class DiagramAccess extends DiagramAccessBase {
 			TransactionalEditingDomain editingDomain) {
 		return new PopulateDiagramCommand(diagram, (ActorClass) ac, editingDomain);
 	}
+
+	/* (non-Javadoc)
+	 * @see org.eclipse.etrice.ui.common.DiagramAccessBase#getUpdateCommand(org.eclipse.graphiti.mm.pictograms.Diagram, org.eclipse.emf.transaction.TransactionalEditingDomain)
+	 */
+	@Override
+	protected Command getUpdateCommand(Diagram diagram, TransactionalEditingDomain editingDomain) {
+		return null;
+	}
 }

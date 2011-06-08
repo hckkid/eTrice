@@ -149,7 +149,7 @@ public class SupportUtil {
 		String ep2 = getName(lc.getTo());
 		Anchor a1 = ifitem2anchor.get(ep1);
 		Anchor a2 = ifitem2anchor.get(ep2);
-		assert(a1!=null && a2!=null): "ports for layer connection must be present";
+		assert(a1!=null && a2!=null): "spps for layer connection must be present";
 		
 		AddConnectionContext context = new AddConnectionContext(a1, a2);
 		context.setNewObject(lc);
@@ -218,21 +218,35 @@ public class SupportUtil {
 	}
 
 	public static List<InterfaceItem> getInterfaceItems(ContainerShape shape, IFeatureProvider fp) {
+		return getInterfaceItems(shape, fp, null);
+	}
+	
+	public static List<InterfaceItem> getInterfaceItems(ContainerShape shape, IFeatureProvider fp, Map<String, Anchor> ifitem2anchor) {
 		List<InterfaceItem> items = new ArrayList<InterfaceItem>();
 		for (Shape ch : shape.getChildren()) {
 			Object bo = fp.getBusinessObjectForPictogramElement(ch);
-			if (bo instanceof InterfaceItem)
+			if (bo instanceof InterfaceItem) {
 				items.add((InterfaceItem)bo);
+				if (ifitem2anchor!=null)
+					ifitem2anchor.put(SEP+((InterfaceItem)bo).getName(), ch.getAnchors().get(0));
+			}
 		}
 		return items;
 	}
-
+	
 	public static List<ActorContainerRef> getRefs(ContainerShape shape, IFeatureProvider fp) {
+		return getRefs(shape, fp, null);
+	}
+	
+	public static List<ActorContainerRef> getRefs(ContainerShape shape, IFeatureProvider fp, Map<String, Anchor> ifitem2anchor) {
 		List<ActorContainerRef> refs = new ArrayList<ActorContainerRef>();
 		for (Shape ch : shape.getChildren()) {
 			Object bo = fp.getBusinessObjectForPictogramElement(ch);
-			if (bo instanceof ActorContainerRef)
+			if (bo instanceof ActorContainerRef) {
 				refs.add((ActorContainerRef)bo);
+				if (ifitem2anchor!=null)
+					getAnchors((ActorContainerRef)bo, ch, ifitem2anchor);
+			}
 		}
 		return refs;
 	}

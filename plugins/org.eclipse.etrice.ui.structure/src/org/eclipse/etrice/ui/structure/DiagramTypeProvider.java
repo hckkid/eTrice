@@ -27,7 +27,7 @@ import com.google.inject.Injector;
 @SuppressWarnings("restriction")
 public class DiagramTypeProvider extends AbstractDiagramTypeProvider {
 
-	private static final boolean AUTO_UPDATE = false;
+	private static final boolean USE_AUTO_UPDATE = true;
 	
 	private IToolBehaviorProvider[] toolBehaviorProviders;
 	private ProviderDispatcher dispatcher;
@@ -64,7 +64,7 @@ public class DiagramTypeProvider extends AbstractDiagramTypeProvider {
 	 */
 	@Override
 	public boolean isAutoUpdateAtStartup() {
-		return AUTO_UPDATE;
+		return USE_AUTO_UPDATE;
 	}
 	
 	/* (non-Javadoc)
@@ -72,7 +72,7 @@ public class DiagramTypeProvider extends AbstractDiagramTypeProvider {
 	 */
 	@Override
 	public boolean isAutoUpdateAtReset() {
-		return AUTO_UPDATE;
+		return USE_AUTO_UPDATE;
 	}
 	
 	/* (non-Javadoc)
@@ -80,7 +80,7 @@ public class DiagramTypeProvider extends AbstractDiagramTypeProvider {
 	 */
 	@Override
 	public boolean isAutoUpdateAtRuntime() {
-		return AUTO_UPDATE;
+		return USE_AUTO_UPDATE;
 	}
 	
 	public IScopeProvider getScopeProvider() {

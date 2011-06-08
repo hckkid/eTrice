@@ -17,6 +17,7 @@ import java.util.Arrays;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.naming.RoomFragmentProvider;
 import org.eclipse.etrice.ui.structure.support.ActorContainerRefSupport;
+import org.eclipse.etrice.ui.structure.support.AutoUpdateFeature;
 import org.eclipse.etrice.ui.structure.support.BindingSupport;
 import org.eclipse.etrice.ui.structure.support.LayerConnectionSupport;
 import org.eclipse.etrice.ui.structure.support.PortSupport;
@@ -48,6 +49,7 @@ import org.eclipse.graphiti.features.context.IUpdateContext;
 import org.eclipse.graphiti.features.custom.ICustomFeature;
 import org.eclipse.graphiti.mm.algorithms.GraphicsAlgorithm;
 import org.eclipse.graphiti.mm.algorithms.styles.LineStyle;
+import org.eclipse.graphiti.mm.pictograms.Diagram;
 import org.eclipse.graphiti.mm.pictograms.PictogramElement;
 import org.eclipse.graphiti.mm.pictograms.Shape;
 import org.eclipse.graphiti.tb.DefaultToolBehaviorProvider;
@@ -259,6 +261,9 @@ public class ProviderDispatcher {
 		
 		@Override
 		public IUpdateFeature getUpdateFeature(IUpdateContext context) {
+			if (context.getPictogramElement() instanceof Diagram)
+				return new AutoUpdateFeature(this);
+			
 	        IFeatureProvider fp = featureSwitch.doSwitch(getBusinessObject(context));
 			if (fp!=null)
 				return fp.getUpdateFeature(context);

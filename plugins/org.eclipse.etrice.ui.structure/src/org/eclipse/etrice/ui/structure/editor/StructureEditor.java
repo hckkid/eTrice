@@ -17,6 +17,7 @@ import org.eclipse.etrice.core.room.StructureClass;
 import org.eclipse.etrice.ui.common.editor.RoomDiagramEditor;
 import org.eclipse.etrice.ui.structure.Activator;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.ui.IEditorInput;
 import org.eclipse.graphiti.mm.pictograms.Diagram;
 import org.eclipse.graphiti.services.Graphiti;
 import org.eclipse.graphiti.ui.editor.DiagramEditorInput;
@@ -45,5 +46,16 @@ public class StructureEditor extends RoomDiagramEditor {
 			return (StructureClass) bo;
 		
 		return null;
+	}
+	
+	/* (non-Javadoc)
+	 * @see org.eclipse.graphiti.ui.internal.editor.DiagramEditorInternal#setInput(org.eclipse.ui.IEditorInput)
+	 */
+	@SuppressWarnings("restriction")
+	@Override
+	protected void setInput(IEditorInput input) {
+		super.setInput(input);
+		
+		doSave(null);
 	}
 }

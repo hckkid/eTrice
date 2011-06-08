@@ -312,8 +312,7 @@ public class StructureClassSupport {
 				}
 
 				StructureClass sc = (StructureClass) bo;
-				HashMap<String, Anchor> ifitem2anchor = new HashMap<String, Anchor>();
-				addMissingItems(sc, containerShape, ifitem2anchor, fp);
+				addMissingItems(sc, containerShape, fp);
 				
 				return true;
 			}
@@ -559,8 +558,8 @@ public class StructureClassSupport {
 		// we don't have to recurse since the base class diagram already contains all inherited items
 		Diagram diag = (Diagram) acShape.eContainer();
 		ResourceSet rs = ac.eResource().getResourceSet();
-		List<InterfaceItem> presentIfItems = SupportUtil.getInterfaceItems(acShape, fp);
-		List<ActorContainerRef> presentRefs = SupportUtil.getRefs(acShape, fp);
+		List<InterfaceItem> presentIfItems = SupportUtil.getInterfaceItems(acShape, fp, ifitem2anchor);
+		List<ActorContainerRef> presentRefs = SupportUtil.getRefs(acShape, fp, ifitem2anchor);
 		List<Binding> presentBindings = SupportUtil.getBindings(diag, fp);
 		List<LayerConnection> presentConnections = SupportUtil.getConnections(diag, fp);
 		
@@ -604,13 +603,15 @@ public class StructureClassSupport {
 		}
 	}
 	
-	public static void addMissingItems(StructureClass sc, ContainerShape acShape, Map<String,Anchor> ifitem2anchor, IFeatureProvider fp) {
+	public static void addMissingItems(StructureClass sc, ContainerShape acShape, IFeatureProvider fp) {
 
 		int width = acShape.getGraphicsAlgorithm().getGraphicsAlgorithmChildren().get(0).getWidth();
 
+		HashMap<String, Anchor> ifitem2anchor = new HashMap<String, Anchor>();
+		
 		// interface items
 		{
-			List<InterfaceItem> present = SupportUtil.getInterfaceItems(acShape, fp);
+			List<InterfaceItem> present = SupportUtil.getInterfaceItems(acShape, fp, ifitem2anchor);
 			{
 				List<InterfaceItem> expected = RoomHelpers.getInterfaceItems(sc, false);
 				List<InterfaceItem> items = new ArrayList<InterfaceItem>();
@@ -633,7 +634,7 @@ public class StructureClassSupport {
 		
 		// actor container references
 		{
-			List<ActorContainerRef> present = SupportUtil.getRefs(acShape, fp);
+			List<ActorContainerRef> present = SupportUtil.getRefs(acShape, fp, ifitem2anchor);
 			List<ActorContainerRef> expected = RoomHelpers.getRefs(sc, false);
 			List<ActorContainerRef> items = new ArrayList<ActorContainerRef>();
 			for (ActorContainerRef item : expected) {

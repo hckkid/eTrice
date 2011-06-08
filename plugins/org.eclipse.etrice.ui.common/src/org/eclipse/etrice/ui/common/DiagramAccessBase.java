@@ -59,9 +59,6 @@ public abstract class DiagramAccessBase {
 		
 		URI uri = resource.getURI();
 		
-		// TODOHRR: put common diagram access code into ui.common
-		// make abstract methods get fileEtension() and populateDiagram()
-		
 		String modelName = ((RoomModel) sc.eContainer()).getName();
 		
 		URI diagURI = null;
@@ -90,8 +87,11 @@ public abstract class DiagramAccessBase {
 			Resource diagRes = rs.getResource(diagURI, true);
 			if (diagRes.getContents().isEmpty())
 				return null;
-			if (diagRes.getContents().get(0) instanceof Diagram)
-				return (Diagram) diagRes.getContents().get(0);
+			if (diagRes.getContents().get(0) instanceof Diagram) {
+				Diagram diagram = (Diagram) diagRes.getContents().get(0);
+				updateDiagram(diagram);
+				return diagram;
+			}
 		}
 		else {
 			Resource diagRes = rs.createResource(diagURI);
@@ -99,7 +99,7 @@ public abstract class DiagramAccessBase {
 			Diagram diagram = Graphiti.getPeCreateService().createDiagram(getDiagramTypeId(), getDiagramName(sc), true);
 			diagRes.getContents().add(diagram);
 			
-			populatediagram(sc, diagram);
+			populateDiagram(sc, diagram);
 			
 			try {
 				diagRes.save(Collections.EMPTY_MAP);
@@ -112,21 +112,8 @@ public abstract class DiagramAccessBase {
 		return null;
 	}
 
-	private void populatediagram(StructureClass ac, Diagram diagram) {
-		// CAUTION: if the IResourceSetProvider should be used it has to contain the diagram resource!
-//		IProject project = null;
-//		Resource resource = ac.eResource();
-//		if (resource!=null) {
-//			URI uri = resource.getURI();
-//			if (uri.isPlatformResource()) {
-//				uri = uri.trimSegments(1);
-//				IFolder parentFolder = ResourcesPlugin.getWorkspace().getRoot().getFolder(new Path(uri.toPlatformString(true)));
-//				project = parentFolder.getProject();
-//			}
-//		}
-//		
-//		IResourceSetProvider rsp = new XtextResourceSetProvider();
-		ResourceSet rs = diagram.eResource().getResourceSet();//rsp.get(project);
+	private void populateDiagram(StructureClass ac, Diagram diagram) {
+		ResourceSet rs = diagram.eResource().getResourceSet();
 		TransactionalEditingDomain editingDomain = TransactionUtil.getEditingDomain(rs);
 		if (editingDomain == null) {
 			// Not yet existing, create one
@@ -138,6 +125,31 @@ public abstract class DiagramAccessBase {
 		ac = (StructureClass) editingDomain.getResourceSet().getEObject(boUri, true);
 		
 		editingDomain.getCommandStack().execute(getInitialCommand(ac, diagram, editingDomain));
+		editingDomain.dispose();
+	}
+
+	/**
+	 * @param diagram
+	 */
+	private void updateDiagram(Diagram diagram) {
+		ResourceSet rs = diagram.eResource().getResourceSet();
+		TransactionalEditingDomain editingDomain = TransactionUtil.getEditingDomain(rs);
+		if (editingDomain == null) {
+			// Not yet existing, create one
+			editingDomain = TransactionalEditingDomain.Factory.INSTANCE.createEditingDomain(rs);
+		}
+		
+		Command updateCommand = getUpdateCommand(diagram, editingDomain);
+		if (updateCommand!=null) {
+			editingDomain.getCommandStack().execute(updateCommand);
+			
+			try {
+				diagram.eResource().save(Collections.EMPTY_MAP);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
 		editingDomain.dispose();
 	}
 
@@ -161,5 +173,5 @@ public abstract class DiagramAccessBase {
 	abstract protected String getEditorId();
 	abstract protected String getFileExtension();
 	abstract protected Command getInitialCommand(StructureClass ac, Diagram diagram, TransactionalEditingDomain editingDomain);
-
+	abstract protected Command getUpdateCommand(Diagram diagram, TransactionalEditingDomain editingDomain);
 }

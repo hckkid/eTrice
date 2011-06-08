@@ -17,6 +17,8 @@ import org.eclipse.graphiti.tb.IToolBehaviorProvider;
 
 public class DiagramTypeProvider extends AbstractDiagramTypeProvider {
 
+	public static final String PROVIDER_ID = "org.eclipse.etrice.ui.structure.diagramTypeProvider";
+	
 	private IToolBehaviorProvider[] toolBehaviorProviders;
 	private ProviderDispatcher dispatcher;
 
