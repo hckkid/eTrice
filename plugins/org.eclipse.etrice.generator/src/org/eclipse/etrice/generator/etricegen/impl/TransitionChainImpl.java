@@ -199,29 +199,32 @@ public class TransitionChainImpl extends EObjectImpl implements TransitionChain 
 		}
 		else {
 			if (node instanceof TrPoint) {
-				assert(out.size()<=1): "TrPoint "+RoomNameProvider.getFullPath(node)
+				if (node instanceof TransitionPoint) {
+					if (node==ac.getNode(((NonInitialTransition)tr).getFrom())) {
+						// self transition
+						result.append(tcv.genReturnState(getStateContext()));
+						return;
+					}
+				}
+				else {
+					assert(out.size()<=1): "TrPoint "+RoomNameProvider.getFullPath(node)
 					+" is expected to have at most one outgoing transition!";
-				if (out.size()==1) {
-					State state = (node.eContainer().eContainer() instanceof State)? (State)node.eContainer().eContainer():null;
-					if (node instanceof EntryPoint) {
-						if (state!=null && ac.isOwnObject(state) && state.getEntryCode()!=null && !state.getEntryCode().getCommands().isEmpty())
-							result.append(tcv.genEntryOperationCall(state));
-					}
-					else if (node instanceof ExitPoint) {
-						if (state!=null && ac.isOwnObject(state) && state.getExitCode()!=null && !state.getExitCode().getCommands().isEmpty())
-							result.append(tcv.genExitOperationCall(state));
-					}
-					else if (node instanceof TransitionPoint) {
-						if (node==ac.getNode(((NonInitialTransition)tr).getFrom())) {
-							result.append(tcv.genReturnState(getStateContext()));
-							return;
+					if (out.size()==1) {
+						State state = (node.eContainer().eContainer() instanceof State)? (State)node.eContainer().eContainer():null;
+						if (node instanceof EntryPoint) {
+							if (state!=null && ac.isOwnObject(state) && state.getEntryCode()!=null && !state.getEntryCode().getCommands().isEmpty())
+								result.append(tcv.genEntryOperationCall(state));
+						}
+						else if (node instanceof ExitPoint) {
+							if (state!=null && ac.isOwnObject(state) && state.getExitCode()!=null && !state.getExitCode().getCommands().isEmpty())
+								result.append(tcv.genExitOperationCall(state));
+						}
+						else {
+							assert(false): "unexpected sub type";
 						}
 					}
-					else {
-						assert(false): "unexpected sub type";
-					}
-					genChainCode(out.get(0), ac, tcv, result);
 				}
+				genChainCode(out.get(0), ac, tcv, result);
 			}
 			else {
 				// the following assertion should always hold true
