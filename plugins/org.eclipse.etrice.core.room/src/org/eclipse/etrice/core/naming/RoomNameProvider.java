@@ -136,13 +136,18 @@ public class RoomNameProvider {
 	}
 	
 	public static String getTransitionName(Transition t) {
+		String toName = getTerminalName(t.getTo());
 		if (t instanceof InitialTransition) {
-			return "TRANS_INITIAL_TO__"+getTerminalName(t.getTo());
+			return "TRANS_INITIAL_TO__"+toName;
 		}
 		else {
-			String fromTo = "TRANS_"+getTerminalName(((NonInitialTransition) t).getFrom())+"_TO_"+getTerminalName(t.getTo());
+			String fromName = getTerminalName(((NonInitialTransition) t).getFrom());
+			String fromTo = "TRANS_"+fromName+"_TO_"+toName;
 			if (t instanceof TriggeredTransition) {
-				return fromTo + "_BY_" + getTriggerName((TriggeredTransition) t);
+				if (fromName.equals(toName))
+					return fromTo + "_BY_" + getTriggerName((TriggeredTransition) t) + "_" + t.getName();
+				else
+					return fromTo + "_BY_" + getTriggerName((TriggeredTransition) t);
 			}
 			else if (t instanceof ContinuationTransition) {
 				return fromTo;
