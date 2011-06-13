@@ -20,8 +20,18 @@ import org.eclipse.graphiti.mm.pictograms.Shape;
  */
 public class AutoUpdateFeature extends AbstractUpdateFeature {
 
+	private static boolean lastDoneChanges;
+
+	/**
+	 * @return the lastDoneChanges
+	 */
+	public static boolean isLastDoneChanges() {
+		return lastDoneChanges;
+	}
+
 	public AutoUpdateFeature(IFeatureProvider fp) {
 		super(fp);
+		lastDoneChanges = false;
 	}
 
 	@Override
@@ -31,7 +41,57 @@ public class AutoUpdateFeature extends AbstractUpdateFeature {
 
 	@Override
 	public IReason updateNeeded(IUpdateContext context) {
-		return Reason.createFalseReason();
+		boolean needed = updateConnectionsNeeded(getDiagram());
+		
+		if (updateNeeded(getDiagram()))
+			needed = true;
+
+		return new Reason(needed);
+	}
+
+	/**
+	 * This just removes dangling connections (bindings and layer connections).
+	 * New ones are added by the structure class support.
+	 * 
+	 * @param diagram
+	 * @return
+	 */
+	private boolean updateConnectionsNeeded(Diagram diagram) {
+		boolean needed = false;
+
+		for (Connection conn : new ArrayList<Connection>(diagram.getConnections())) {
+			UpdateContext context = new UpdateContext(conn);
+			IUpdateFeature updateFeature = getFeatureProvider().getUpdateFeature(context);
+			if (updateFeature.canUpdate(context))
+				if (updateFeature.updateNeeded(context).toBoolean())
+					needed = true;
+		}
+		return needed;
+	}
+
+	/**
+	 * @param diagram
+	 * @return
+	 */
+	private boolean updateNeeded(ContainerShape container) {
+		boolean needed = false;
+		
+		for (Shape child : new ArrayList<Shape>(container.getChildren())) {
+			if (child instanceof ContainerShape)
+				if (updateNeeded((ContainerShape) child))
+					needed = true;
+		}
+		
+		// avoid infinite recursion by not entering with diagram again
+		if (!(container instanceof Diagram)) {
+			UpdateContext context = new UpdateContext(container);
+			IUpdateFeature updateFeature = getFeatureProvider().getUpdateFeature(context);
+			if (updateFeature.canUpdate(context))
+				if (updateFeature.updateNeeded(context).toBoolean())
+					needed = true;
+		}
+		
+		return needed;
 	}
 
 	@Override
@@ -41,10 +101,9 @@ public class AutoUpdateFeature extends AbstractUpdateFeature {
 		if (updateIfNeeded(getDiagram()))
 			doneChanges = true;
 		
-		if (doneChanges)
-			return true;
-
-		return false;
+		lastDoneChanges = doneChanges;
+		
+		return doneChanges;
 	}
 
 	/**
@@ -85,12 +144,15 @@ public class AutoUpdateFeature extends AbstractUpdateFeature {
 					doneChanges = true;
 		}
 		
-		UpdateContext context = new UpdateContext(container);
-		IUpdateFeature updateFeature = getFeatureProvider().getUpdateFeature(context);
-		if (updateFeature.canUpdate(context))
-			if (updateFeature.updateNeeded(context).toBoolean())
-				if (updateFeature.update(context))
-					doneChanges = true;
+		// avoid infinite recursion by not entering with diagram again
+		if (!(container instanceof Diagram)) {
+			UpdateContext context = new UpdateContext(container);
+			IUpdateFeature updateFeature = getFeatureProvider().getUpdateFeature(context);
+			if (updateFeature.canUpdate(context))
+				if (updateFeature.updateNeeded(context).toBoolean())
+					if (updateFeature.update(context))
+						doneChanges = true;
+		}
 		
 		return doneChanges;
 	}
