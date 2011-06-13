@@ -31,10 +31,21 @@ public class EventWithDataMessage extends EventMessage {
 	
 	@Override
 	public String toString() {
-		String d = "";
+		return "EventWithDataMessage("+getAddress()+", evt="+getEvtId()+", data="+dataToString()+")";
+	}
+	
+	public String dataToString() {
+		if (data.length==0)
+			return "";
+
+		String res = "(";
 		for (int i = 0; i < data.length; i++) {
-			d += data[i];
+			res += data[i];
+			if (i<data.length-1)
+				res += "; ";
 		}
-		return "EventWithDataMessage("+getAddress()+", evt="+getEvtId()+", data="+d+")";
+		res += ")";
+		
+		return res;
 	}
 }
