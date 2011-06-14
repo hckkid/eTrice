@@ -27,8 +27,8 @@ You will perform the following steps:
 h2. Create a new model from scratch
 
 Remember exercise ??HelloWorld??.
-Create a new file in your model folder and name it ??Blinky.room??
-Open the file and copy the following code into the file.
+Create a new eTrice project and name it ??Blinky??
+Open the ??Blinky.room?? file and copy the following code into the file or use content assist to create the model.
 
 bc.. 
 RoomModel Blinky {
@@ -111,7 +111,7 @@ h2. Implement the Behavior
 The application should switch on and off the LED for 5 seconds in a 1 second interval, than stop blinking for 5 seconds and start again. To implement this behavior we will implement two FSMs. One for the 1 second interval and one for the 5 second interval. The 1 second blinking should be implemented in ??Blinky??. The 5 second interval should be implemented in ??BlinkyController??. First implement the Controller.
 
 Right click to ??BlinkyController?? and select ??Edit Behavior??.
-Drag and Drop the ??Initial Point?? and two <cite>State</cite>s into the top state. Name the states ??on?? and ??off??. 
+Drag and Drop the ??Initial Point?? and two ??States?? into the top state. Name the states ??on?? and ??off??. 
 Use the ??Transition?? tool to draw transitions from ??init?? to ??off?? from ??on?? to ??off?? and from ??off?? to ??on??.
 
 Open the transition dialog by double click the arrow to specify the trigger event and the action code of each transition. Note that the initial transition does not have a trigger event.
