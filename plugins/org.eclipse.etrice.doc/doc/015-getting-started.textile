@@ -12,14 +12,21 @@ In this tutorial you will build your first very simple etrice model. The goal is
 
 h2. Create a new model from scratch
 
-The goal of eTrice is to describe distributed systems on a logical level. In the current version not all elements will be supported. But as prerequisite for further versions the following elements are mandatory for an eTrice model:
-* the ??LogicalSystem?? 
-* at least one ??SubSystemClass??
-* at least one ??ActorClass??
+The easiest way to create a new eTrice Project is to use the eclipse project wizard. From the eclipse file menu select ??File->New->Project?? and create a new eTrice project and name it ??HelloWorld??
 
-The ??LogicalSystem?? represents the complete distributed system and contains at least one ??SubSystemRef??. The ??SubSystemClass?? represents an address space and contains at least one ??ActorRef??. The ??ActorClass?? is the building block of which an application will be build of. It is a good idea to define a top level actor that can be used as reference within the subsystem.
+!images/015-HelloWorld10.PNG!
 
-The resulting model code looks like this:
+The wizard creates everything that is needed to create, build and run a eTrice model. The resulting project should look like this:
+
+!images/015-HelloWorld11.PNG!
+
+Within the model directory the model file ??HelloWorld.room?? was created. Open the ??HelloWorld.room?? file and position the cursor at the very beginning of the file. Open the content assist with Ctrl+Space and select ??model skeleton??.
+
+!images/015-HelloWorld12.PNG!   
+
+Edit the template variables and remove the artefacts from the wizard. 
+
+The resulting model code should look like this:
 
 bc.. 
 RoomModel HelloWorld {
@@ -35,16 +42,17 @@ RoomModel HelloWorld {
 	ActorClass HelloWorldTop {
 	}
 } 
-bc. 
+bq. 
 
-h2. Create a new model file 
+The goal of eTrice is to describe distributed systems on a logical level. In the current version not all elements will be supported. But as prerequisite for further versions the following elements are mandatory for an eTrice model:
+* the ??LogicalSystem?? 
+* at least one ??SubSystemClass??
+* at least one ??ActorClass??
 
-Create a new file in your model directory and name it ??HelloWorld.room?? and select finish.
+The ??LogicalSystem?? represents the complete distributed system and contains at least one ??SubSystemRef??. The ??SubSystemClass?? represents an address space and contains at least one ??ActorRef??. The ??ActorClass?? is the building block of which an application will be build of. It is a good idea to define a top level actor that can be used as reference within the subsystem.
 
+Mention that a outline view was created that represents all currently existing model elements in a graphical way.
 
-!images/015-HelloWorld01.PNG!
-
-The file ending must be ??.room?? for selecting the correct editor. Open the file and copy the above code into the editor window. You should see something like this:
 
 !images/015-HelloWorld02.PNG!
 
@@ -70,8 +78,7 @@ Save the diagram and inspect the model file. Note that the textual representatio
 
 h2. Build and run the model
 
-Now the model is finished and source code can be generated. 
-From org.eclipse.etrice.doc.tutorials.scratch.workflow select genAllModells.mwe2 and run it as MWE2Workflow. Currently all models in the directory will be generated.
+Now the model is finished and source code can be generated. The project wizard has created a workflow that is responsible to generate the source code. From ??HelloWorld/src/workflow?? right click ??HelloWorld.mwe2?? and run it as MWE2Workflow. All model files in the model directory will be generated.
 
 !images/015-HelloWorld06.PNG!
 
