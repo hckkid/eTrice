@@ -89,7 +89,7 @@ public abstract class DiagramAccessBase {
 				return null;
 			if (diagRes.getContents().get(0) instanceof Diagram) {
 				Diagram diagram = (Diagram) diagRes.getContents().get(0);
-				updateDiagram(diagram);
+				updateDiagram(diagram, false);
 				return diagram;
 			}
 		}
@@ -131,7 +131,7 @@ public abstract class DiagramAccessBase {
 	/**
 	 * @param diagram
 	 */
-	private void updateDiagram(Diagram diagram) {
+	private void updateDiagram(Diagram diagram, boolean doSave) {
 		ResourceSet rs = diagram.eResource().getResourceSet();
 		TransactionalEditingDomain editingDomain = TransactionUtil.getEditingDomain(rs);
 		if (editingDomain == null) {
@@ -143,10 +143,12 @@ public abstract class DiagramAccessBase {
 		if (updateCommand!=null) {
 			editingDomain.getCommandStack().execute(updateCommand);
 			
-			try {
-				diagram.eResource().save(Collections.EMPTY_MAP);
-			} catch (IOException e) {
-				e.printStackTrace();
+			if (doSave) {
+				try {
+					diagram.eResource().save(Collections.EMPTY_MAP);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
 		}
 		

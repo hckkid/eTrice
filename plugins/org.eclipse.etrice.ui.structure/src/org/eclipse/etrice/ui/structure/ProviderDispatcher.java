@@ -391,8 +391,8 @@ public class ProviderDispatcher {
 		public ISelectionInfo getSelectionInfoForShape(Shape shape) {
 			ISelectionInfo si = new SelectionInfoImpl(IColorConstant.SHAPE_SELECTION_FG, IColorConstant.HANDLE_FG, IColorConstant.HANDLE_BG,
 					LineStyle.DASH);
-//			si.setPrimarySelectionBackgroundColor(IColorConstant.LIGHT_GRAY);
-//			si.setSecondarySelectionBackgroundColor(IColorConstant.LIGHT_GRAY);
+			si.setPrimarySelectionBackgroundColor(IColorConstant.LIGHT_ORANGE);
+			si.setSecondarySelectionBackgroundColor(IColorConstant.LIGHT_ORANGE);
 			return si;
 		}
 	}

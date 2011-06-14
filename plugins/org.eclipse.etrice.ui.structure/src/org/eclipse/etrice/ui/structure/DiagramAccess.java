@@ -50,6 +50,10 @@ public class DiagramAccess extends DiagramAccessBase {
 	 */
 	@Override
 	protected Command getUpdateCommand(Diagram diagram, TransactionalEditingDomain editingDomain) {
-		return new UpdateCommand(diagram, editingDomain);
+		UpdateCommand cmd = new UpdateCommand(diagram, editingDomain);
+		if (cmd.updateNeeded())
+			return cmd;
+		
+		return null;
 	}
 }

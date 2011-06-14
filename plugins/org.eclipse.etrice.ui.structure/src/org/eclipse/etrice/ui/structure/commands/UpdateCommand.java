@@ -25,22 +25,29 @@ import org.eclipse.graphiti.ui.services.GraphitiUi;
 public class UpdateCommand extends RecordingCommand {
 
 	private Diagram diagram;
+	private AutoUpdateFeature feature;
 
 	public UpdateCommand(Diagram diag, TransactionalEditingDomain domain) {
 		super(domain);
 		this.diagram = diag;
+
+		IDiagramTypeProvider dtp = GraphitiUi.getExtensionManager().createDiagramTypeProvider(diagram, DiagramTypeProvider.PROVIDER_ID); //$NON-NLS-1$
+		IFeatureProvider featureProvider = dtp.getFeatureProvider();
+		
+		feature = new AutoUpdateFeature(featureProvider);
 	}
 
+	public boolean updateNeeded() {
+		UpdateContext context = new UpdateContext(diagram);
+		return feature.updateNeeded(context).toBoolean();
+	}
+	
 	/* (non-Javadoc)
 	 * @see org.eclipse.emf.transaction.RecordingCommand#doExecute()
 	 */
 	@Override
 	protected void doExecute() {
-		IDiagramTypeProvider dtp = GraphitiUi.getExtensionManager().createDiagramTypeProvider(diagram, DiagramTypeProvider.PROVIDER_ID); //$NON-NLS-1$
-		IFeatureProvider featureProvider = dtp.getFeatureProvider();
-		
 		UpdateContext context = new UpdateContext(diagram);
-		AutoUpdateFeature feature = new AutoUpdateFeature(featureProvider);
 		feature.update(context);
 	}
 
