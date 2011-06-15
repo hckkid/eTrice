@@ -76,7 +76,7 @@ public class AutoUpdateFeature extends AbstractUpdateFeature {
 		if (!(container instanceof Diagram)) {
 			UpdateContext context = new UpdateContext(container);
 			IUpdateFeature updateFeature = getFeatureProvider().getUpdateFeature(context);
-			if (updateFeature.canUpdate(context))
+			if (updateFeature!=null && updateFeature.canUpdate(context))
 				if (updateFeature.updateNeeded(context).toBoolean())
 					needed = true;
 		}
@@ -108,7 +108,7 @@ public class AutoUpdateFeature extends AbstractUpdateFeature {
 		for (Connection conn : connections) {
 			UpdateContext context = new UpdateContext(conn);
 			IUpdateFeature updateFeature = getFeatureProvider().getUpdateFeature(context);
-			if (updateFeature.canUpdate(context))
+			if (updateFeature!=null && updateFeature.canUpdate(context))
 				if (updateFeature.updateNeeded(context).toBoolean())
 					if (updateFeature.update(context))
 						doneChanges = true;
@@ -137,7 +137,7 @@ public class AutoUpdateFeature extends AbstractUpdateFeature {
 			UpdateContext context = new UpdateContext(container);
 			IUpdateFeature updateFeature = getFeatureProvider().getUpdateFeature(context);
 			if (updateFeature.canUpdate(context))
-				if (updateFeature.updateNeeded(context).toBoolean())
+				if (updateFeature!=null && updateFeature.updateNeeded(context).toBoolean())
 					if (updateFeature.update(context))
 						doneChanges = true;
 		}
