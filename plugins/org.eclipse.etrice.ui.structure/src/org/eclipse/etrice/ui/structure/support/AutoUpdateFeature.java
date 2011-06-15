@@ -20,18 +20,8 @@ import org.eclipse.graphiti.mm.pictograms.Shape;
  */
 public class AutoUpdateFeature extends AbstractUpdateFeature {
 
-	private static boolean lastDoneChanges;
-
-	/**
-	 * @return the lastDoneChanges
-	 */
-	public static boolean isLastDoneChanges() {
-		return lastDoneChanges;
-	}
-
 	public AutoUpdateFeature(IFeatureProvider fp) {
 		super(fp);
-		lastDoneChanges = false;
 	}
 
 	@Override
@@ -100,8 +90,6 @@ public class AutoUpdateFeature extends AbstractUpdateFeature {
 		
 		if (updateIfNeeded(getDiagram()))
 			doneChanges = true;
-		
-		lastDoneChanges = doneChanges;
 		
 		return doneChanges;
 	}
