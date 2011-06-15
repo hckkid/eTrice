@@ -160,6 +160,10 @@ public class EmptyProjectWizard extends Wizard implements INewWizard {
 					ProjectCreator.createLaunchConfig(URI.createPlatformResourceURI("/"
 							+baseName+"/"+baseName+".launch", true),
 							baseName);
+
+					ProjectCreator.findOrCreateContainer(new Path("/"
+							+ baseName + "/tmp/log"),
+							true, projectLocation, progressMonitor);
 					
 				} catch (Exception e) {
 					Logger.getLogger(getClass()).error(e.getMessage(), e);
