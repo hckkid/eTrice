@@ -19,6 +19,8 @@ import org.eclipse.etrice.core.room.StructureClass;
 import org.eclipse.etrice.ui.behavior.commands.PopulateDiagramCommand;
 import org.eclipse.etrice.ui.behavior.editor.BehaviorEditor;
 import org.eclipse.etrice.ui.common.DiagramAccessBase;
+import org.eclipse.etrice.ui.common.commands.UpdateCommand;
+import org.eclipse.etrice.ui.behavior.DiagramTypeProvider;
 import org.eclipse.graphiti.mm.pictograms.Diagram;
 
 public class DiagramAccess extends DiagramAccessBase {
@@ -69,6 +71,10 @@ public class DiagramAccess extends DiagramAccessBase {
 	 */
 	@Override
 	protected Command getUpdateCommand(Diagram diagram, TransactionalEditingDomain editingDomain) {
+		UpdateCommand cmd = new UpdateCommand(diagram, editingDomain, DiagramTypeProvider.PROVIDER_ID);
+		if (cmd.updateNeeded())
+			return cmd;
+		
 		return null;
 	}
 }

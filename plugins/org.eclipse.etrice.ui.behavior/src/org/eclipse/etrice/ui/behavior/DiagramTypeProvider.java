@@ -17,7 +17,9 @@ import org.eclipse.graphiti.tb.IToolBehaviorProvider;
 
 public class DiagramTypeProvider extends AbstractDiagramTypeProvider {
 
-	public static final String PROVIDER_ID = "org.eclipse.etrice.ui.structure.diagramTypeProvider";
+	public static final String PROVIDER_ID = "org.eclipse.etrice.ui.behavior.diagramTypeProvider";
+
+	private static final boolean USE_AUTO_UPDATE = false;
 	
 	private IToolBehaviorProvider[] toolBehaviorProviders;
 	private ProviderDispatcher dispatcher;
@@ -37,4 +39,28 @@ public class DiagramTypeProvider extends AbstractDiagramTypeProvider {
         }
         return toolBehaviorProviders;
     }
+
+	/* (non-Javadoc)
+	 * @see org.eclipse.graphiti.dt.AbstractDiagramTypeProvider#isAutoUpdateAtStartup()
+	 */
+	@Override
+	public boolean isAutoUpdateAtStartup() {
+		return USE_AUTO_UPDATE;
+	}
+	
+	/* (non-Javadoc)
+	 * @see org.eclipse.graphiti.dt.AbstractDiagramTypeProvider#isAutoUpdateAtReset()
+	 */
+	@Override
+	public boolean isAutoUpdateAtReset() {
+		return USE_AUTO_UPDATE;
+	}
+	
+	/* (non-Javadoc)
+	 * @see org.eclipse.graphiti.dt.AbstractDiagramTypeProvider#isAutoUpdateAtRuntime()
+	 */
+	@Override
+	public boolean isAutoUpdateAtRuntime() {
+		return USE_AUTO_UPDATE;
+	}
 }

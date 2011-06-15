@@ -28,6 +28,7 @@ import org.eclipse.etrice.ui.behavior.support.StateGraphSupport;
 import org.eclipse.etrice.ui.behavior.support.StateSupport;
 import org.eclipse.etrice.ui.behavior.support.TrPointSupport;
 import org.eclipse.etrice.ui.behavior.support.TransitionSupport;
+import org.eclipse.etrice.ui.common.support.AutoUpdateFeature;
 import org.eclipse.graphiti.dt.IDiagramTypeProvider;
 import org.eclipse.graphiti.features.IAddFeature;
 import org.eclipse.graphiti.features.ICreateConnectionFeature;
@@ -56,6 +57,7 @@ import org.eclipse.graphiti.mm.algorithms.GraphicsAlgorithm;
 import org.eclipse.graphiti.mm.algorithms.styles.LineStyle;
 import org.eclipse.graphiti.mm.pictograms.ConnectionDecorator;
 import org.eclipse.graphiti.mm.pictograms.ContainerShape;
+import org.eclipse.graphiti.mm.pictograms.Diagram;
 import org.eclipse.graphiti.mm.pictograms.PictogramElement;
 import org.eclipse.graphiti.mm.pictograms.Shape;
 import org.eclipse.graphiti.tb.DefaultToolBehaviorProvider;
@@ -267,6 +269,9 @@ public class ProviderDispatcher {
 		
 		@Override
 		public IUpdateFeature getUpdateFeature(IUpdateContext context) {
+			if (context.getPictogramElement() instanceof Diagram)
+				return new AutoUpdateFeature(this);
+			
 			IFeatureProvider fp = getFeatureProvider(context);
 			if (fp!=null)
 				return fp.getUpdateFeature(context);
