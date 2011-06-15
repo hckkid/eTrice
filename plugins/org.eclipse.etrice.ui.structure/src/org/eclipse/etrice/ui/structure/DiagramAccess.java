@@ -16,8 +16,8 @@ package org.eclipse.etrice.ui.structure;
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.etrice.ui.common.DiagramAccessBase;
+import org.eclipse.etrice.ui.common.commands.UpdateCommand;
 import org.eclipse.etrice.ui.structure.commands.PopulateDiagramCommand;
-import org.eclipse.etrice.ui.structure.commands.UpdateCommand;
 import org.eclipse.etrice.ui.structure.editor.StructureEditor;
 import org.eclipse.graphiti.mm.pictograms.Diagram;
 
@@ -50,7 +50,7 @@ public class DiagramAccess extends DiagramAccessBase {
 	 */
 	@Override
 	protected Command getUpdateCommand(Diagram diagram, TransactionalEditingDomain editingDomain) {
-		UpdateCommand cmd = new UpdateCommand(diagram, editingDomain);
+		UpdateCommand cmd = new UpdateCommand(diagram, editingDomain, DiagramTypeProvider.PROVIDER_ID);
 		if (cmd.updateNeeded())
 			return cmd;
 		

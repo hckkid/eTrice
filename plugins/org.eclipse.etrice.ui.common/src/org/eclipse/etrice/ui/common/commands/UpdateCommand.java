@@ -6,12 +6,11 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
 
-package org.eclipse.etrice.ui.structure.commands;
+package org.eclipse.etrice.ui.common.commands;
 
 import org.eclipse.emf.transaction.RecordingCommand;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
-import org.eclipse.etrice.ui.behavior.DiagramTypeProvider;
-import org.eclipse.etrice.ui.structure.support.AutoUpdateFeature;
+import org.eclipse.etrice.ui.common.support.AutoUpdateFeature;
 import org.eclipse.graphiti.dt.IDiagramTypeProvider;
 import org.eclipse.graphiti.features.IFeatureProvider;
 import org.eclipse.graphiti.features.context.impl.UpdateContext;
@@ -27,11 +26,11 @@ public class UpdateCommand extends RecordingCommand {
 	private Diagram diagram;
 	private AutoUpdateFeature feature;
 
-	public UpdateCommand(Diagram diag, TransactionalEditingDomain domain) {
+	public UpdateCommand(Diagram diag, TransactionalEditingDomain domain, String providerID) {
 		super(domain);
 		this.diagram = diag;
 
-		IDiagramTypeProvider dtp = GraphitiUi.getExtensionManager().createDiagramTypeProvider(diagram, DiagramTypeProvider.PROVIDER_ID); //$NON-NLS-1$
+		IDiagramTypeProvider dtp = GraphitiUi.getExtensionManager().createDiagramTypeProvider(diagram, providerID); //$NON-NLS-1$
 		IFeatureProvider featureProvider = dtp.getFeatureProvider();
 		
 		feature = new AutoUpdateFeature(featureProvider);

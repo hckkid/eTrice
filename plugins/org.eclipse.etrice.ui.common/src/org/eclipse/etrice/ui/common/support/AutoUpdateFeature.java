@@ -1,4 +1,4 @@
-package org.eclipse.etrice.ui.structure.support;
+package org.eclipse.etrice.ui.common.support;
 
 import java.util.ArrayList;
 

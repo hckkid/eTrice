@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.etrice.core.ui.RoomUiModule;
 import org.eclipse.graphiti.ui.editor.DiagramEditor;
 import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.serializer.ISerializer;
@@ -107,4 +108,20 @@ public class RoomDiagramEditor extends DiagramEditor {
 		}
 		super.doSave(monitor);
 	}
+
+	@SuppressWarnings("restriction")
+	@Override
+	public void createPartControl(Composite parent) {
+			super.createPartControl(parent);
+			
+			/* we have to save here whether changes have been done or not to get rid of the dirty state
+			 * CAUTION: save in
+			 * init(IEditorSite site, IEditorInput input)
+			 * or
+			 * setInput(IEditorInput input)
+			 * did not work correctly
+			 */
+	//		if (AutoUpdateFeature.isLastDoneChanges())
+				doSave(null);
+		}
 }

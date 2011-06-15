@@ -16,8 +16,8 @@ import java.util.Arrays;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.naming.RoomFragmentProvider;
+import org.eclipse.etrice.ui.common.support.AutoUpdateFeature;
 import org.eclipse.etrice.ui.structure.support.ActorContainerRefSupport;
-import org.eclipse.etrice.ui.structure.support.AutoUpdateFeature;
 import org.eclipse.etrice.ui.structure.support.BindingSupport;
 import org.eclipse.etrice.ui.structure.support.LayerConnectionSupport;
 import org.eclipse.etrice.ui.structure.support.PortSupport;

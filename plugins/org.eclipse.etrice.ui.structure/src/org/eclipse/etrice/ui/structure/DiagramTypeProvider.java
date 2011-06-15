@@ -12,22 +12,20 @@
 
 package org.eclipse.etrice.ui.structure;
 
-import org.eclipse.core.runtime.preferences.DefaultScope;
-import org.eclipse.core.runtime.preferences.IEclipsePreferences;
 import org.eclipse.etrice.core.ui.RoomUiModule;
 import org.eclipse.graphiti.dt.AbstractDiagramTypeProvider;
-import org.eclipse.graphiti.internal.GraphitiPlugin;
-import org.eclipse.graphiti.internal.pref.GFPreferences;
 import org.eclipse.graphiti.tb.IToolBehaviorProvider;
 import org.eclipse.xtext.scoping.IScopeProvider;
 
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 
-@SuppressWarnings("restriction")
+//@SuppressWarnings("restriction")
 public class DiagramTypeProvider extends AbstractDiagramTypeProvider {
 
 	private static final boolean USE_AUTO_UPDATE = true;
+
+	public static final String PROVIDER_ID = "org.eclipse.etrice.ui.structure.diagramTypeProvider";
 	
 	private IToolBehaviorProvider[] toolBehaviorProviders;
 	private ProviderDispatcher dispatcher;
@@ -44,9 +42,9 @@ public class DiagramTypeProvider extends AbstractDiagramTypeProvider {
         dispatcher = new ProviderDispatcher(this);
 		setFeatureProvider(dispatcher.getFeatureProvider());
 		
-		IEclipsePreferences node = new DefaultScope().getNode(GraphitiPlugin.PLUGIN_ID);
-		if (node!=null)
-			node.putBoolean(GFPreferences.RECURSIVE_CHECK_FOR_UPDATE_ACTIVE, true);
+//		IEclipsePreferences node = new DefaultScope().getNode(GraphitiPlugin.PLUGIN_ID);
+//		if (node!=null)
+//			node.putBoolean(GFPreferences.RECURSIVE_CHECK_FOR_UPDATE_ACTIVE, true);
 	}
 
 	@Override
