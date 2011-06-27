@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.eclipse.etrice.generator.etricegen.TransitionChain#getTransition <em>Transition</em>}</li>
+ *   <li>{@link org.eclipse.etrice.generator.etricegen.TransitionChain#isSkipEntry <em>Skip Entry</em>}</li>
  * </ul>
  * </p>
  *
@@ -53,6 +54,33 @@ public interface TransitionChain extends EObject {
 	 * @generated
 	 */
 	void setTransition(Transition value);
+
+	/**
+	 * Returns the value of the '<em><b>Skip Entry</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Skip Entry</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Skip Entry</em>' attribute.
+	 * @see #setSkipEntry(boolean)
+	 * @see org.eclipse.etrice.generator.etricegen.ETriceGenPackage#getTransitionChain_SkipEntry()
+	 * @model default="false"
+	 * @generated
+	 */
+	boolean isSkipEntry();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.etrice.generator.etricegen.TransitionChain#isSkipEntry <em>Skip Entry</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Skip Entry</em>' attribute.
+	 * @see #isSkipEntry()
+	 * @generated
+	 */
+	void setSkipEntry(boolean value);
 
 	/**
 	 * <!-- begin-user-doc -->

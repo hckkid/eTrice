@@ -1203,13 +1203,22 @@ public interface ETriceGenPackage extends EPackage {
 	int TRANSITION_CHAIN__TRANSITION = 0;
 
 	/**
+	 * The feature id for the '<em><b>Skip Entry</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSITION_CHAIN__SKIP_ENTRY = 1;
+
+	/**
 	 * The number of structural features of the '<em>Transition Chain</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSITION_CHAIN_FEATURE_COUNT = 1;
+	int TRANSITION_CHAIN_FEATURE_COUNT = 2;
 
 	/**
 	 * The meta object id for the '{@link ITransitionChainVisitor <em>ITransition Chain Visitor</em>}' class.
@@ -1269,6 +1278,15 @@ public interface ETriceGenPackage extends EPackage {
 	int EXPANDED_ACTOR_CLASS__NAME = RoomPackage.ACTOR_CLASS__NAME;
 
 	/**
+	 * The feature id for the '<em><b>Docu</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPANDED_ACTOR_CLASS__DOCU = RoomPackage.ACTOR_CLASS__DOCU;
+
+	/**
 	 * The feature id for the '<em><b>Bindings</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1294,6 +1312,24 @@ public interface ETriceGenPackage extends EPackage {
 	 * @ordered
 	 */
 	int EXPANDED_ACTOR_CLASS__IF_SP_PS = RoomPackage.ACTOR_CLASS__IF_SP_PS;
+
+	/**
+	 * The feature id for the '<em><b>User Code1</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPANDED_ACTOR_CLASS__USER_CODE1 = RoomPackage.ACTOR_CLASS__USER_CODE1;
+
+	/**
+	 * The feature id for the '<em><b>User Code2</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPANDED_ACTOR_CLASS__USER_CODE2 = RoomPackage.ACTOR_CLASS__USER_CODE2;
 
 	/**
 	 * The feature id for the '<em><b>Actor Refs</b></em>' containment reference list.
@@ -1332,22 +1368,13 @@ public interface ETriceGenPackage extends EPackage {
 	int EXPANDED_ACTOR_CLASS__IF_PORTS = RoomPackage.ACTOR_CLASS__IF_PORTS;
 
 	/**
-	 * The feature id for the '<em><b>User Code1</b></em>' containment reference.
+	 * The feature id for the '<em><b>Structure Docu</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXPANDED_ACTOR_CLASS__USER_CODE1 = RoomPackage.ACTOR_CLASS__USER_CODE1;
-
-	/**
-	 * The feature id for the '<em><b>User Code2</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXPANDED_ACTOR_CLASS__USER_CODE2 = RoomPackage.ACTOR_CLASS__USER_CODE2;
+	int EXPANDED_ACTOR_CLASS__STRUCTURE_DOCU = RoomPackage.ACTOR_CLASS__STRUCTURE_DOCU;
 
 	/**
 	 * The feature id for the '<em><b>Int Ports</b></em>' containment reference list.
@@ -1393,6 +1420,15 @@ public interface ETriceGenPackage extends EPackage {
 	 * @ordered
 	 */
 	int EXPANDED_ACTOR_CLASS__ATTRIBUTES = RoomPackage.ACTOR_CLASS__ATTRIBUTES;
+
+	/**
+	 * The feature id for the '<em><b>Behavior Docu</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPANDED_ACTOR_CLASS__BEHAVIOR_DOCU = RoomPackage.ACTOR_CLASS__BEHAVIOR_DOCU;
 
 	/**
 	 * The feature id for the '<em><b>Operations</b></em>' containment reference list.
@@ -2065,6 +2101,17 @@ public interface ETriceGenPackage extends EPackage {
 	EReference getTransitionChain_Transition();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.etrice.generator.etricegen.TransitionChain#isSkipEntry <em>Skip Entry</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Skip Entry</em>'.
+	 * @see org.eclipse.etrice.generator.etricegen.TransitionChain#isSkipEntry()
+	 * @see #getTransitionChain()
+	 * @generated
+	 */
+	EAttribute getTransitionChain_SkipEntry();
+
+	/**
 	 * Returns the meta object for class '{@link ITransitionChainVisitor <em>ITransition Chain Visitor</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2632,6 +2679,14 @@ public interface ETriceGenPackage extends EPackage {
 		 * @generated
 		 */
 		EReference TRANSITION_CHAIN__TRANSITION = eINSTANCE.getTransitionChain_Transition();
+
+		/**
+		 * The meta object literal for the '<em><b>Skip Entry</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TRANSITION_CHAIN__SKIP_ENTRY = eINSTANCE.getTransitionChain_SkipEntry();
 
 		/**
 		 * The meta object literal for the '{@link ITransitionChainVisitor <em>ITransition Chain Visitor</em>}' class.

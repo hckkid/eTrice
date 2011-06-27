@@ -20,5 +20,7 @@ public interface TransitionChainValidator {
 
 	boolean validateTransition(Transition value);
 
+	boolean validateSkipEntry(boolean value);
+
 	boolean validateTransition(TriggeredTransition value);
 }

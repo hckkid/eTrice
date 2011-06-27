@@ -733,8 +733,11 @@ public class ExpandedActorClassImpl extends ActorClassImpl implements ExpandedAc
 			return;
 		
 		// the chain ends if source and destination coincide
-		if (t instanceof NonInitialTransition && node==getNode(((NonInitialTransition)t).getFrom()))
+		if (t instanceof NonInitialTransition && node==getNode(((NonInitialTransition)t).getFrom())) {
+			if (node instanceof TransitionPoint)
+				tc.setSkipEntry(true);
 			return;
+		}
 		
 		for (Transition next : getOutgoingTransitions(node)) {
 			// from the second transition in the chain on we have:

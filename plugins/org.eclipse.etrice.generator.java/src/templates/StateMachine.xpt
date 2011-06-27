@@ -57,42 +57,44 @@ public void receiveEvent(InterfaceItemBase ifitem, int evt, Object... generic_da
 	int chain = NOT_CAUGHT;
 	int catching_state = NO_STATE;
 	boolean is_handler = false;
+	boolean skip_entry = false;
 	
-	if (handleSystemEvent(ifitem, evt, generic_data)){}else{
-	
-	switch (state) {
-		«FOREACH this.stateMachine.getLeafStateList() AS state-»
-		case «state.getStateId()»:
-			«LET this.getActiveTriggers(state) AS atlist-»
-			«IF !atlist.isEmpty-»
-				switch(trigger) {
-				«FOREACH atlist AS at-»
-					case «this.getTriggerCodeName(at.trigger)»:
-						«LET this.hasGuard(at) AS needData-»
-						«IF needData»{ «at.msg.getTypedDataDefinition()»«ENDIF-»
-						«FOREACH at.transitions AS tt SEPARATOR " else "-»
-							«LET this.getChain(tt) AS chain-»
-							«EXPAND guard(at.trigger, this) FOR chain.transition-»
-							{
-								chain = «chain.getChainId()»;
-								catching_state = «chain.getContextId()»;
-								«IF chain.isHandler()»is_handler = true;«ENDIF-»
-							}
+	if (!handleSystemEvent(ifitem, evt, generic_data)) {
+		switch (state) {
+			«FOREACH this.stateMachine.getLeafStateList() AS state-»
+			case «state.getStateId()»:
+				«LET this.getActiveTriggers(state) AS atlist-»
+				«IF !atlist.isEmpty-»
+					switch(trigger) {
+					«FOREACH atlist AS at-»
+						case «this.getTriggerCodeName(at.trigger)»:
+							«LET this.hasGuard(at) AS needData-»
+							«IF needData»{ «at.msg.getTypedDataDefinition()»«ENDIF-»
+							«FOREACH at.transitions AS tt SEPARATOR " else "-»
+								«LET this.getChain(tt) AS chain-»
+								«EXPAND guard(at.trigger, this) FOR chain.transition-»
+								{
+									chain = «chain.getChainId()»;
+									catching_state = «chain.getContextId()»;
+									«IF chain.isHandler()»is_handler = true;«ENDIF-»
+									«IF chain.skipEntry»skip_entry = true;«ENDIF-»
+								}
+								«ENDLET-»
+							«ENDFOREACH-»
+							«IF needData»}«ENDIF-»
 							«ENDLET-»
-						«ENDFOREACH-»
-						«IF needData»}«ENDIF-»
-						«ENDLET-»
-					break;
-				«ENDFOREACH-»
-				}
-			«ENDIF»«ENDLET-»
-			break;
-		«ENDFOREACH-»
-	}}
+						break;
+					«ENDFOREACH-»
+					}
+				«ENDIF»«ENDLET-»
+				break;
+			«ENDFOREACH-»
+		}
+	}
 	if (chain != NOT_CAUGHT) {
 		exitTo(state, catching_state, is_handler);
 		int next = executeTransitionChain(chain, ifitem, generic_data);
-		next = enterHistory(next, is_handler);
+		next = enterHistory(next, is_handler, skip_entry);
 		setState(next);
 	}
 }
@@ -111,7 +113,7 @@ public void executeInitTransition() {
 	«LET this.stateMachine.getInitTransition() AS initt-»
 		int chain = «this.getChain(initt).getChainId()»;
 		int next = executeTransitionChain(chain, null, null);
-		next = enterHistory(next, false);
+		next = enterHistory(next, false, false);
 		setState(next);
 	«ENDLET-»
 }
@@ -161,12 +163,12 @@ private int executeTransitionChain(int chain, InterfaceItemBase ifitem, Object[]
  * @param handler - entry code is executed if not handler
  * @return - the ID of the final leaf state
  */
-private int enterHistory(int state, boolean handler) {
+private int enterHistory(int state, boolean handler, boolean skip_entry) {
 	while (true) {
 		switch (state) {
 			«FOREACH this.stateMachine.getBaseStateList() AS state-»
 			case «state.getStateId()»:
-				«IF state.hasEntryCode()»if (!handler) «state.getEntryCodeOperationName()»();«ENDIF»
+				«IF state.hasEntryCode()»if (!(skip_entry || handler)) «state.getEntryCodeOperationName()»();«ENDIF»
 				«IF state.isLeaf()-»
 					// in leaf state: return state id
 					return «state.getStateId()»;
@@ -193,6 +195,7 @@ private int enterHistory(int state, boolean handler) {
 				state = history[STATE_TOP];
 				break;
 		}
+		skip_entry = false;
 	}
 }
 

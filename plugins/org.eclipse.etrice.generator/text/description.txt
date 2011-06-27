@@ -84,6 +84,7 @@ Package etricegen <http://www.eclipse.org/etrice/generator>
 
   Class TransitionChain
     Reference transition : Transition
+    Attribute skipEntry : EBoolean
     Operation getStateContext() : State
     Operation isHandler() : EBoolean
     Operation genExecuteChain(ITransitionChainVisitor) : EString

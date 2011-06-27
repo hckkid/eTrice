@@ -42,6 +42,7 @@ import org.eclipse.etrice.generator.etricegen.TransitionChain;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.etrice.generator.etricegen.impl.TransitionChainImpl#getTransition <em>Transition</em>}</li>
+ *   <li>{@link org.eclipse.etrice.generator.etricegen.impl.TransitionChainImpl#isSkipEntry <em>Skip Entry</em>}</li>
  * </ul>
  * </p>
  *
@@ -57,6 +58,25 @@ public class TransitionChainImpl extends EObjectImpl implements TransitionChain 
 	 * @ordered
 	 */
 	protected Transition transition;
+
+	/**
+	 * The default value of the '{@link #isSkipEntry() <em>Skip Entry</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isSkipEntry()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean SKIP_ENTRY_EDEFAULT = false;
+	/**
+	 * The cached value of the '{@link #isSkipEntry() <em>Skip Entry</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isSkipEntry()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean skipEntry = SKIP_ENTRY_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -113,6 +133,27 @@ public class TransitionChainImpl extends EObjectImpl implements TransitionChain 
 		transition = newTransition;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ETriceGenPackage.TRANSITION_CHAIN__TRANSITION, oldTransition, transition));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isSkipEntry() {
+		return skipEntry;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setSkipEntry(boolean newSkipEntry) {
+		boolean oldSkipEntry = skipEntry;
+		skipEntry = newSkipEntry;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ETriceGenPackage.TRANSITION_CHAIN__SKIP_ENTRY, oldSkipEntry, skipEntry));
 	}
 
 	/**
@@ -256,6 +297,8 @@ public class TransitionChainImpl extends EObjectImpl implements TransitionChain 
 			case ETriceGenPackage.TRANSITION_CHAIN__TRANSITION:
 				if (resolve) return getTransition();
 				return basicGetTransition();
+			case ETriceGenPackage.TRANSITION_CHAIN__SKIP_ENTRY:
+				return isSkipEntry();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -270,6 +313,9 @@ public class TransitionChainImpl extends EObjectImpl implements TransitionChain 
 		switch (featureID) {
 			case ETriceGenPackage.TRANSITION_CHAIN__TRANSITION:
 				setTransition((Transition)newValue);
+				return;
+			case ETriceGenPackage.TRANSITION_CHAIN__SKIP_ENTRY:
+				setSkipEntry((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -286,6 +332,9 @@ public class TransitionChainImpl extends EObjectImpl implements TransitionChain 
 			case ETriceGenPackage.TRANSITION_CHAIN__TRANSITION:
 				setTransition((Transition)null);
 				return;
+			case ETriceGenPackage.TRANSITION_CHAIN__SKIP_ENTRY:
+				setSkipEntry(SKIP_ENTRY_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -300,8 +349,26 @@ public class TransitionChainImpl extends EObjectImpl implements TransitionChain 
 		switch (featureID) {
 			case ETriceGenPackage.TRANSITION_CHAIN__TRANSITION:
 				return transition != null;
+			case ETriceGenPackage.TRANSITION_CHAIN__SKIP_ENTRY:
+				return skipEntry != SKIP_ENTRY_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (skipEntry: ");
+		result.append(skipEntry);
+		result.append(')');
+		return result.toString();
 	}
 
 } //TransitionChainImpl

@@ -768,6 +768,15 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getTransitionChain_SkipEntry() {
+		return (EAttribute)transitionChainEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getITransitionChainVisitor() {
 		return iTransitionChainVisitorEClass;
 	}
@@ -908,6 +917,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 
 		transitionChainEClass = createEClass(TRANSITION_CHAIN);
 		createEReference(transitionChainEClass, TRANSITION_CHAIN__TRANSITION);
+		createEAttribute(transitionChainEClass, TRANSITION_CHAIN__SKIP_ENTRY);
 
 		iTransitionChainVisitorEClass = createEClass(ITRANSITION_CHAIN_VISITOR);
 
@@ -1048,6 +1058,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 
 		initEClass(transitionChainEClass, TransitionChain.class, "TransitionChain", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTransitionChain_Transition(), theRoomPackage.getTransition(), null, "transition", null, 0, 1, TransitionChain.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTransitionChain_SkipEntry(), ecorePackage.getEBoolean(), "skipEntry", "false", 0, 1, TransitionChain.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		addEOperation(transitionChainEClass, theRoomPackage.getState(), "getStateContext", 0, 1, IS_UNIQUE, IS_ORDERED);
 
