@@ -50,6 +50,56 @@
 		</section>
 		<section id="Createanewmodelfromscratch">
 			<title>Create a new model from scratch</title>
+			<para>The easiest way to create a new eTrice Project is to use the eclipse project wizard. From the eclipse file menu select 
+				<citation>File-&gt;New-&gt;Project</citation> and create a new eTrice project and name it 
+				<citation>HelloWorld</citation>
+			</para>
+			<para>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/015-HelloWorld10.PNG"/>
+					</imageobject>
+				</mediaobject>
+			</para>
+			<para>The wizard creates everything that is needed to create, build and run a eTrice model. The resulting project should look like this:</para>
+			<para>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/015-HelloWorld11.PNG"/>
+					</imageobject>
+				</mediaobject>
+			</para>
+			<para>Within the model directory the model file 
+				<citation>HelloWorld.room</citation> was created. Open the 
+				<citation>HelloWorld.room</citation> file and position the cursor at the very beginning of the file. Open the content assist with Ctrl+Space and select 
+				<citation>model skeleton</citation>.
+			</para>
+			<para>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/015-HelloWorld12.PNG"/>
+					</imageobject>
+				</mediaobject>   
+			</para>
+			<para>Edit the template variables and remove the artefacts from the wizard. </para>
+			<para>The resulting model code should look like this:</para>
+			<literallayout><code>RoomModel HelloWorld {
+
+	LogicalSystem System_HelloWorld {
+		SubSystemRef subsystem : SubSystem_HelloWorld
+	}
+
+	SubSystemClass SubSystem_HelloWorld {
+		ActorRef application : HelloWorldTop
+	}
+
+	ActorClass HelloWorldTop {
+	}
+} 
+</code></literallayout>
+			<blockquote>
+				<para></para>
+			</blockquote>
 			<para>The goal of eTrice is to describe distributed systems on a logical level. In the current version not all elements will be supported. But as prerequisite for further versions the following elements are mandatory for an eTrice model:</para>
 			<itemizedlist>
 				<listitem>
@@ -75,38 +125,7 @@
 				<citation>ActorRef</citation>. The 
 				<citation>ActorClass</citation> is the building block of which an application will be build of. It is a good idea to define a top level actor that can be used as reference within the subsystem.
 			</para>
-			<para>The resulting model code looks like this:</para>
-			<literallayout><code>RoomModel HelloWorld {
-
-	LogicalSystem System_HelloWorld {
-		SubSystemRef subsystem : SubSystem_HelloWorld
-	}
-
-	SubSystemClass SubSystem_HelloWorld {
-		ActorRef application : HelloWorldTop
-	}
-
-	ActorClass HelloWorldTop {
-	}
-} 
-</code></literallayout>
-			<literallayout><code></code></literallayout>
-		</section>
-		<section id="Createanewmodelfile">
-			<title>Create a new model file </title>
-			<para>Create a new file in your model directory and name it 
-				<citation>HelloWorld.room</citation> and select finish.
-			</para>
-			<para>
-				<mediaobject>
-					<imageobject>
-						<imagedata fileref="images/015-HelloWorld01.PNG"/>
-					</imageobject>
-				</mediaobject>
-			</para>
-			<para>The file ending must be 
-				<citation>.room</citation> for selecting the correct editor. Open the file and copy the above code into the editor window. You should see something like this:
-			</para>
+			<para>Mention that a outline view was created that represents all currently existing model elements in a graphical way.</para>
 			<para>
 				<mediaobject>
 					<imageobject>
@@ -157,8 +176,10 @@
 		</section>
 		<section id="Buildandrunthemodel">
 			<title>Build and run the model</title>
-			<para>Now the model is finished and source code can be generated. 
-				From org.eclipse.etrice.doc.tutorials.scratch.workflow select genAllModells.mwe2 and run it as MWE2Workflow. Currently all models in the directory will be generated.</para>
+			<para>Now the model is finished and source code can be generated. The project wizard has created a workflow that is responsible to generate the source code. From 
+				<citation>HelloWorld/src/workflow</citation> right click 
+				<citation>HelloWorld.mwe2</citation> and run it as MWE2Workflow. All model files in the model directory will be generated.
+			</para>
 			<para>
 				<mediaobject>
 					<imageobject>
@@ -259,9 +280,10 @@
 			<title>Create a new model from scratch</title>
 			<para>Remember exercise 
 				<citation>HelloWorld</citation>.
-				Create a new file in your model folder and name it 
-				<citation>Blinky.room</citation>
-				Open the file and copy the following code into the file.
+				Create a new eTrice project and name it 
+				<citation>Blinky</citation>
+				Open the 
+				<citation>Blinky.room</citation> file and copy the following code into the file or use content assist to create the model.
 			</para>
 			<literallayout><code>RoomModel Blinky {
 
@@ -434,7 +456,8 @@
 				<citation>BlinkyController</citation> and select 
 				<citation>Edit Behavior</citation>.
 				Drag and Drop the 
-				<citation>Initial Point</citation> and two <cite>State</cite>s into the top state. Name the states 
+				<citation>Initial Point</citation> and two 
+				<citation>States</citation> into the top state. Name the states 
 				<citation>on</citation> and 
 				<citation>off</citation>. 
 				Use the 
@@ -761,5 +784,8 @@ carLights.setState(TrafficLight3.OFF);
 	</chapter>
 	<chapter id="ROOMConcepts">
 		<title>ROOM Concepts</title>
+		<section id="MainConcepts">
+			<title>Main Concepts</title>
+		</section>
 	</chapter>
 </book>

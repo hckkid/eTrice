@@ -9,7 +9,6 @@
 <topic href="help/TutorialHelloWorld.html" label="Tutorial HelloWorld">
 <topic href="help/TutorialHelloWorld.html#Scope" label="Scope"></topic>
 <topic href="help/Createanewmodelfromscratch.html" label="Create a new model from scratch"></topic>
-<topic href="help/Createanewmodelfile.html" label="Create a new model file"></topic>
 <topic href="help/Createastatemachine.html" label="Create a state machine"></topic>
 <topic href="help/Buildandrunthemodel.html" label="Build and run the model"></topic>
 <topic href="help/OpentheMessageSequenceChart.html" label="Open the Message Sequence Chart"></topic>
@@ -25,5 +24,7 @@
 <topic href="help/ImplementtheBehavior.html" label="Implement the Behavior"></topic>
 <topic href="help/Summary2.html" label="Summary"></topic>
 </topic>
-<topic href="help/ROOMConcepts.html" label="ROOM Concepts"></topic>
+<topic href="help/ROOMConcepts.html" label="ROOM Concepts">
+<topic href="help/ROOMConcepts.html#MainConcepts" label="Main Concepts"></topic>
+</topic>
 </toc>
