@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde version="3.6"?>
 
-<target name="eTrice development">
+<target name="eTrice development" sequenceNumber="6">
 <locations>
-<location path="${eTriceTargetInstallationPath}\eclipse-SDK-3.6.2-xtext-2.0.0-win32\eclipse" type="Profile"/>
-<location path="${eTriceTargetInstallationPath}\Graphiti_0.8.0_2011-05-03" type="Directory"/>
-<location path="${eTriceTargetInstallationPath}\emf_extra" type="Directory"/>
+<location path="${eTriceTargetInstallationPath}\eclipse-modeling-indigo-win32\eclipse" type="Profile"/>
+<location path="${eTriceTargetInstallationPath}\extra" type="Directory"/>
 </locations>
 <environment>
 <os>win32</os>
