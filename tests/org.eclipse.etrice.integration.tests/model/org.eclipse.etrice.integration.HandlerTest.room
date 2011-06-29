@@ -1,0 +1,383 @@
+RoomModel org.eclipse.etrice.integration.HandlerTest {
+	
+	LogicalSystem System_HandlerTest {
+		SubSystemRef SubSystem_HandlerTest: SubSystem_HandlerTest
+	}
+
+	SubSystemClass SubSystem_HandlerTest {
+		ActorRef HandlerTest_Top: HandlerTest_Top
+		ActorRef timerService: room.basic.service.timing.ATimingService
+		LayerConnection ref HandlerTest_Top satisfied_by timerService.timer
+		LayerConnection ref HandlerTest_Top satisfied_by timerService.timeout
+//		LogicalThread t1 prio=5 {HandlerTest_Top.tester}
+//		LogicalThread t2 prio=5 {HandlerTest_Top.handlerUser}
+	}
+
+	ActorClass HandlerTest_Top {
+		Structure {
+			ActorRef tester: Tester
+			ActorRef handlerUser: HandlerUser
+			
+			Binding tester.TestPort1 and handlerUser.TestPort1
+		}
+		Behavior { }
+	}
+
+	ActorClass HandlerUser {
+		Interface {
+			Port TestPort1: TestProtocol
+	
+	
+		}
+		Structure {	
+			usercode1{
+				"import org.eclipse.etrice.integration.tests.helpers.*;"
+				"import org.eclipse.etrice.runtime.java.messaging.RTServices;"
+			}
+			usercode2 {
+				"private CRC16Generator crcGen = new CRC16Generator();"
+			}
+			external Port TestPort1
+			Attribute counter: int32
+		}
+		Behavior {
+			StateMachine {
+				Transition tr0: my tp0 -> my tp0 {
+					triggers {
+						<msg1: TestPort1>
+					}
+					action {
+						"System.out.println(\"top level handler action no guard \");"
+						"crcGen.update(11);"
+					}
+				}
+				Transition tr1: my tp1 -> my tp1 {
+					triggers {
+						<msg1: TestPort1 guard {
+							"p1==3"
+						}>
+					}
+					action {
+						"System.out.println(\"top level self transition action P1=>3\");"
+						"crcGen.update(12);"
+					}
+				}
+				Transition init: initial -> tp2 of state0 {
+					action {
+						"System.out.println(\"top level initial transition\");"
+						"crcGen.update(10);"
+					}
+				}
+				Transition tr2: cp cp0 -> testFalse {
+					action {
+						"System.out.println(\"Test false\");"
+						"RTServices.getInstance().getSubSystem().testFinished(1);"
+					}
+				}
+				Transition tr3: cp cp0 -> testOk {
+					cond {
+						"crcGen.getCrc()==7268"
+					}
+					action {
+						"System.out.println(\"Test ok\");"
+						"RTServices.getInstance().getSubSystem().testFinished(0);"
+					}
+				}
+				Transition tr9: state0 -> cp cp1 {
+					triggers {
+						<msg1: TestPort1 guard {
+							"p1==4"
+						}>
+					}
+					action {
+						"System.out.println(\"tr9 transition action\");"
+						"crcGen.update(114);"
+					}
+				}
+				Transition tr5: my tp1 -> my tp1 {
+					triggers {
+						<msg2: TestPort1 guard {
+							"p1==4"
+						}>
+					}
+					action {
+						"System.out.println(\"top level self transition action P1=>4\");"
+						"crcGen.update(50);"
+					}
+				}
+				Transition tr7: my tp0 -> state0 {
+					triggers {
+						<msg1: TestPort1 guard {
+							"p1==7"
+						}>
+					}
+					action {
+						"System.out.println(\"top level handler action p1=>7 \");"
+						"crcGen.update(70);"
+					}
+				}
+				Transition tr6: my tp0 -> my tp0 {
+					triggers {
+						<msg1: TestPort1 guard {
+							"p1==12"
+						}>
+					}
+					action {
+						"System.out.println(\"top level handler action p1=>12 \");"
+						"crcGen.update(110);"
+					}
+				}
+				Transition tr8: cp cp1 -> state1 {
+					action {
+						"System.out.println(\"tr8 transition action\");"
+						"crcGen.update(113);"
+					}
+				}
+				Transition tr10: cp cp1 -> state0 {
+					cond {
+						"p1!=4"
+					}
+					action {
+						"System.out.println(\"tr4 transition action\");"
+						"crcGen.update(115);"
+					}
+				}
+				Transition tr4: my tp1 -> cp cp0 {
+					triggers {
+						<msg6: TestPort1>
+					}
+					action {
+						"System.out.println(\"tp1 transition to choice action\");"
+						"crcGen.update(117);"
+						"System.out.printf(\"CRC: %d \\n\", crcGen.getCrc());"
+					}
+				}
+				ChoicePoint cp0
+				ChoicePoint cp1
+				handler TransitionPoint tp0
+				TransitionPoint tp1
+				State state0 {
+					entry {
+						"System.out.println(\"state 0 entry action\");"
+						"crcGen.update(13);"
+					}
+					exit {
+						"System.out.println(\"state 0 exit action\");"
+						"crcGen.update(14);"
+					}
+					subgraph {
+						Transition tr0: state1 -> state2 {
+							triggers {
+								<msg5: TestPort1>
+							}
+						}
+						Transition tr1: my tp0 -> my tp0 {
+							triggers {
+								<msg3: TestPort1>
+							}
+							action {
+								"System.out.println(\"state 0 handler action no guard\");"
+								"crcGen.update(20);"
+							}
+						}
+						Transition tr2: my tp1 -> my tp1 {
+							triggers {
+								<msg4: TestPort1>
+							}
+							action {
+								"System.out.println(\"state 0 tp1 self transition action\");"
+								"crcGen.update(21);"
+							}
+						}
+						Transition tr3: state2 -> state2 {
+							triggers {
+								<msg1: TestPort1>
+							}
+							action {
+								"System.out.println(\"state 0/2 self transition action\");"
+								"crcGen.update(25);"
+							}
+						}
+						Transition tr4: my tp2 -> tp0 of state1 {
+							action {
+								"System.out.println(\"state 0 tp2 transition action\");"
+								"crcGen.update(15);"
+							}
+						}
+						Transition tr5: my tp0 -> my tp0 {
+							triggers {
+								<msg1: TestPort1 guard {
+									"p1==5"
+								}>
+							}
+							action {
+								"System.out.println(\"state 0 handler action P1 => 5\");"
+								"crcGen.update(52);"
+							}
+						}
+						Transition init: initial -> state2 {
+							action {
+								"System.out.println(\"state 0 initial transition\");"
+								"crcGen.update(53);"
+							}
+						}
+						Transition tr6: state1 -> state1 {
+							triggers {
+								<msg1: TestPort1 guard {
+									"p1==8"
+								}>
+							}
+							action {
+								"System.out.println(\"state 0/1 self transition\");"
+								"crcGen.update(54);"
+							}
+						}
+						Transition tr7: my tp1 -> state1 {
+							triggers {
+								<msg2: TestPort1 guard {
+									"p1==5"
+								}>
+							}
+							action {
+								"System.out.println(\"state 0 tp1 p1=>5\");"
+								"crcGen.update(120);"
+							}
+						}
+						Transition tr8: my tp1 -> state2 {
+							triggers {
+								<msg2: TestPort1 guard {
+									"p1==6"
+								}>
+							}
+							action {
+								"System.out.println(\"state 0 tp1 action P1 => 6\");"
+								"crcGen.update(121);"
+							}
+						}
+						handler TransitionPoint tp0
+						TransitionPoint tp1
+						EntryPoint tp2
+						State state1 {
+							entry {
+								"System.out.println(\"state 0/1 entry action\");"
+								"crcGen.update(16);"
+							}
+							exit {
+								"System.out.println(\"state 0/1 exit action\");"
+								"crcGen.update(17);"
+							}
+							subgraph {
+								Transition tr0: my tp0 -> state7 {
+									action {
+										"System.out.println(\"state 0/1 transition entry action\");"
+										"crcGen.update(22);"
+									}
+								}
+								Transition init: initial -> state7 {
+									action {
+										"System.out.println(\"state 0/1 initial transition\");"
+										"crcGen.update(121);"
+									}
+								}
+								EntryPoint tp0
+								State state7 {
+									entry {
+										"System.out.println(\"state 0/1/7 entry action\");"
+										"crcGen.update(23);"
+									}
+									exit {
+										"System.out.println(\"state 0/1/7 exit action\");"
+										"crcGen.update(24);"
+									}
+								}
+							}
+						}
+						State state2 {
+							entry {
+								"System.out.println(\"state 0/2 entry action\");"
+								"crcGen.update(18);"
+							}
+							exit {
+								"System.out.println(\"state 0/2 exit action\");"
+								"crcGen.update(19);"
+							}
+						}
+					}
+				}
+				State testOk
+				State testFalse
+				State state1 {
+					entry {
+						"System.out.println(\"state 1 entry action\");"
+						"crcGen.update(111);"
+					}
+					exit {
+						"System.out.println(\"state 1 exit action\");"
+						"crcGen.update(112);"
+					}
+				}
+			}
+		}
+	}
+
+	ActorClass Tester {
+		Interface {
+			conjugated Port TestPort1: TestProtocol
+		}
+		Structure {
+			external Port TestPort1
+			SAP timer: room.basic.service.timing.PTimeout
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> state0 {
+					action {
+						"TestPort1.msg1(2);"
+						"System.out.println(\"msg1(2) sent \");"
+						"TestPort1.msg1(3);"
+						"System.out.println(\"msg1(3) sent \");"
+						"TestPort1.msg1(7);"
+						"System.out.println(\"msg1(7) sent \");"
+						"TestPort1.msg1(4);"
+						"System.out.println(\"msg1(4) sent \");"
+						"TestPort1.msg1(5);"
+						"System.out.println(\"msg1(5) sent \");"
+						"TestPort1.msg1(7);"
+						"System.out.println(\"msg1(7) sent \");"
+						"TestPort1.msg2(5);"
+						"System.out.println(\"msg2(5) sent \");"
+						"TestPort1.msg2(6);"
+						"System.out.println(\"msg2(6) sent \");"
+						""
+						""
+						""
+						"TestPort1.msg1(5);"
+						"System.out.println(\"msg1(5) sent \");"
+						"TestPort1.msg3();"
+						"System.out.println(\"msg3() sent \");"
+						"TestPort1.msg4();"
+						"System.out.println(\"msg4() sent \");"
+						"TestPort1.msg1(8);"
+						"System.out.println(\"msg1(8) sent \");"
+						"TestPort1.msg6(12);"
+						"System.out.println(\"msg6(12) sent \");"
+					}
+				}
+				State state0
+			}
+		}
+	}
+
+	ProtocolClass TestProtocol {
+		incoming {
+			Message msg1(p1:int32)
+			Message msg2(p1:int32)
+			Message msg3()
+			Message msg4()
+			Message msg5(p1:int32)
+			Message msg6(p1:int32)
+		}
+		outgoing{}
+	}
+
+}
