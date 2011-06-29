@@ -26,7 +26,7 @@ import org.eclipse.etrice.core.room.LayerConnection;
 import org.eclipse.etrice.core.room.LogicalSystem;
 import org.eclipse.etrice.core.room.StructureClass;
 import org.eclipse.etrice.core.room.SubSystemClass;
-import org.eclipse.etrice.ui.behavior.DiagramTypeProvider;
+import org.eclipse.etrice.ui.structure.DiagramTypeProvider;
 import org.eclipse.etrice.ui.structure.support.StructureClassSupport;
 import org.eclipse.etrice.ui.structure.support.SupportUtil;
 import org.eclipse.graphiti.dt.IDiagramTypeProvider;
