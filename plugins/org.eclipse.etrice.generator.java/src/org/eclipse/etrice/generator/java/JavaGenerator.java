@@ -117,7 +117,7 @@ public class JavaGenerator {
 			String t;
 			String ct;
 			Type type = tid.getType();
-			if (type.getPrim()!=null) {
+			if (type.getType()==null) {
 				switch (type.getPrim()) {
 				case BOOLEAN: t = "boolean"; ct = "Boolean"; break;
 				case CHAR: t = "char"; ct = "Char"; break;
