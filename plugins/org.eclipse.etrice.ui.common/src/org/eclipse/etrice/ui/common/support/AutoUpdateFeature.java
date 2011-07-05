@@ -136,8 +136,8 @@ public class AutoUpdateFeature extends AbstractUpdateFeature {
 		if (!(container instanceof Diagram)) {
 			UpdateContext context = new UpdateContext(container);
 			IUpdateFeature updateFeature = getFeatureProvider().getUpdateFeature(context);
-			if (updateFeature.canUpdate(context))
-				if (updateFeature!=null && updateFeature.updateNeeded(context).toBoolean())
+			if (updateFeature!=null && updateFeature.canUpdate(context))
+				if (updateFeature.updateNeeded(context).toBoolean())
 					if (updateFeature.update(context))
 						doneChanges = true;
 		}

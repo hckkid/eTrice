@@ -603,7 +603,7 @@ public class StructureClassSupport {
 		}
 	}
 	
-	public static void addMissingItems(StructureClass sc, ContainerShape acShape, IFeatureProvider fp) {
+	private static void addMissingItems(StructureClass sc, ContainerShape acShape, IFeatureProvider fp) {
 
 		int width = acShape.getGraphicsAlgorithm().getGraphicsAlgorithmChildren().get(0).getWidth();
 

@@ -367,6 +367,10 @@ public class StateSupport {
 				updateFigure(s, context);
 				
 		        ActorClass ac = SupportUtil.getActorClass(getDiagram());
+				adjustSubgraphLabels(s, ac);
+			}
+
+			private void adjustSubgraphLabels(State s, ActorClass ac) {
 				if (RoomHelpers.hasSubStructure(s, ac)) {
 					// update the path text in the sub graph
 					ContainerShape subShape = ContextSwitcher.getContext(getDiagram(), s.getSubgraph());
@@ -375,6 +379,9 @@ public class StateSupport {
 						GraphicsAlgorithm ga = labelShape.getGraphicsAlgorithm();
 						if (ga instanceof Text)
 							((Text)ga).setValue(RoomNameProvider.getStateGraphLabel(s.getSubgraph()));
+					}
+					for (State sub : s.getSubgraph().getStates()) {
+						adjustSubgraphLabels(sub, ac);
 					}
 				}
 			}
@@ -600,8 +607,6 @@ public class StateSupport {
 						}
 					}
 				}
-				
-				// TODOHRR: check interface ports and spps added to model not present in diagram
 				
 				return Reason.createFalseReason();
 			}

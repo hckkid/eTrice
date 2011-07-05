@@ -12,6 +12,10 @@
 
 package org.eclipse.etrice.ui.behavior.support;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -19,8 +23,9 @@ import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.room.ChoicePoint;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraph;
-import org.eclipse.etrice.core.room.StructureClass;
 import org.eclipse.etrice.core.room.TrPoint;
+import org.eclipse.etrice.core.room.Transition;
+import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.graphiti.dt.IDiagramTypeProvider;
 import org.eclipse.graphiti.features.IAddFeature;
 import org.eclipse.graphiti.features.IDeleteFeature;
@@ -53,6 +58,7 @@ import org.eclipse.graphiti.mm.algorithms.RoundedRectangle;
 import org.eclipse.graphiti.mm.algorithms.Text;
 import org.eclipse.graphiti.mm.algorithms.styles.Font;
 import org.eclipse.graphiti.mm.algorithms.styles.Orientation;
+import org.eclipse.graphiti.mm.pictograms.Anchor;
 import org.eclipse.graphiti.mm.pictograms.ContainerShape;
 import org.eclipse.graphiti.mm.pictograms.Diagram;
 import org.eclipse.graphiti.mm.pictograms.PictogramElement;
@@ -277,7 +283,7 @@ public class StateGraphSupport {
 				if (bo instanceof EObject && ((EObject)bo).eIsProxy())
 					return true;
 				
-				return bo instanceof StructureClass;
+				return bo instanceof StateGraph;
 			}
 
 			@Override
@@ -287,9 +293,74 @@ public class StateGraphSupport {
 					return Reason.createTrueReason("State Graph deleted from model");
 				}
 				
-				// TODOHRR: update of state graph - check for refs added in model not present in diagram
-				// also inherited
-				// also label
+				StateGraph sg = (StateGraph) bo;
+				ContainerShape shape = (ContainerShape) context.getPictogramElement();
+				
+				String reason = "";
+				int missing = 0;
+				
+				// check for states added in model not present in diagram (including inherited)
+				{
+					List<State> expectedStates = RoomHelpers.getAllStates(sg);
+					List<State> presentStates = SupportUtil.getStates(shape, fp);
+					for (State state : expectedStates) {
+						if (!presentStates.contains(state))
+							++missing;
+					}
+					if (missing>0)
+						reason += missing+" missing states\n";
+				}
+				
+				// check for transition points added in model not present in diagram (including inherited)
+				{
+					missing = 0;
+					List<TrPoint> expectedTrPoints = RoomHelpers.getAllTrPoints(sg);
+					List<TrPoint> presentTrPoints = SupportUtil.getTrPoints(sg, shape, fp);
+					for (TrPoint tp : expectedTrPoints) {
+						if (!presentTrPoints.contains(tp))
+							++missing;
+					}
+					if (missing>0)
+						reason += missing+" missing transition points\n";
+				}
+				
+				// check for choice points added in model not present in diagram (including inherited)
+				{
+					missing = 0;
+					List<ChoicePoint> expectedCPs = RoomHelpers.getAllChoicePoints(sg);
+					List<ChoicePoint> presentCPs = SupportUtil.getChoicePoints(shape, fp);
+					for (ChoicePoint cp : expectedCPs) {
+						if (!presentCPs.contains(cp))
+							++missing;
+					}
+					if (missing>0)
+						reason += missing+" missing choice points\n";
+				}
+
+				// check for bindings added in model not present in diagram (including inherited)
+				{
+					missing = 0;
+					List<Transition> expectedBindings = RoomHelpers.getAllTransitions(sg);
+					List<Transition> presentBindings = SupportUtil.getTransitions(getDiagram(), fp);
+					for (Transition binding : expectedBindings) {
+						if (!presentBindings.contains(binding))
+							++missing;
+					}
+					if (missing>0)
+						reason += missing+" missing transitions\n";
+				}
+
+				// check state path
+				if (!shape.getChildren().isEmpty()) {
+					Shape labelShape = shape.getChildren().get(0);
+					GraphicsAlgorithm ga = labelShape.getGraphicsAlgorithm();
+					if (ga instanceof Text)
+						if (!RoomNameProvider.getStateGraphLabel(sg).equals(((Text)ga).getValue()))
+							reason += "state graph label changed\n";
+				}
+
+				if (!reason.isEmpty())
+					return Reason.createTrueReason(reason.substring(0, reason.length()-1));
 				
 				return Reason.createFalseReason();
 			}
@@ -309,7 +380,16 @@ public class StateGraphSupport {
 					return true;
 				}
 
-				// TODOHRR: check for refs added in model not present in diagram
+				StateGraph sg = (StateGraph) bo;
+				ContainerShape shape = (ContainerShape) context.getPictogramElement();
+				addMissingItems(sg, shape, fp);
+				
+				if (!shape.getChildren().isEmpty()) {
+					Shape labelShape = shape.getChildren().get(0);
+					GraphicsAlgorithm ga = labelShape.getGraphicsAlgorithm();
+					if (ga instanceof Text)
+						((Text)ga).setValue(RoomNameProvider.getStateGraphLabel(sg));
+				}
 				
 				return true;
 			}
@@ -463,6 +543,59 @@ public class StateGraphSupport {
 		@Override
 		public ICustomFeature[] getCustomFeatures(ICustomContext context) {
 			return new ICustomFeature[] { new GoUpFeature(fp) };
+		}
+		
+		private static void addMissingItems(StateGraph sg, ContainerShape shape, IFeatureProvider fp) {
+
+			HashMap<String, Anchor> ifitem2anchor = new HashMap<String, Anchor>();
+			
+			// states
+			{
+				List<State> present = SupportUtil.getStates(shape, fp, ifitem2anchor);
+				List<State> expected = RoomHelpers.getAllStates(sg);
+				List<State> items = new ArrayList<State>();
+				for (State item : expected) {
+					if (!present.contains(item))
+						items.add(item);
+				}
+	        	SupportUtil.addStates(items, shape, fp, ifitem2anchor);
+			}
+			
+			// transition points
+			{
+				List<TrPoint> present = SupportUtil.getTrPoints(sg, shape, fp, ifitem2anchor);
+				List<TrPoint> expected = RoomHelpers.getAllTrPoints(sg);
+				List<TrPoint> items = new ArrayList<TrPoint>();
+				for (TrPoint item : expected) {
+					if (!present.contains(item))
+						items.add(item);
+				}
+	        	SupportUtil.addTransitionPoints(items, shape, fp, ifitem2anchor);
+			}
+			
+			// choice points
+			{
+				List<ChoicePoint> present = SupportUtil.getChoicePoints(shape, fp, ifitem2anchor);
+				List<ChoicePoint> expected = RoomHelpers.getAllChoicePoints(sg);
+				List<ChoicePoint> items = new ArrayList<ChoicePoint>();
+				for (ChoicePoint item : expected) {
+					if (!present.contains(item))
+						items.add(item);
+				}
+	        	SupportUtil.addChoicePoints(items, shape, fp, ifitem2anchor);
+			}
+			
+			// transitions
+			{
+				List<Transition> present = SupportUtil.getTransitions((Diagram) shape.eContainer(), fp);
+				List<Transition> expected = RoomHelpers.getAllTransitions(sg);
+				List<Transition> items = new ArrayList<Transition>();
+				for (Transition trans : expected) {
+					if (!present.contains(trans))
+						items.add(trans);
+				}
+				SupportUtil.addTransitions(items, shape, fp, ifitem2anchor);
+			}
 		}
 	}
 

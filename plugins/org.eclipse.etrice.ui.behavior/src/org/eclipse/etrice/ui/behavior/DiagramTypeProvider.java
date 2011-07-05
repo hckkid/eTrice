@@ -19,7 +19,7 @@ public class DiagramTypeProvider extends AbstractDiagramTypeProvider {
 
 	public static final String PROVIDER_ID = "org.eclipse.etrice.ui.behavior.diagramTypeProvider";
 
-	private static final boolean USE_AUTO_UPDATE = false;
+	private static final boolean USE_AUTO_UPDATE = true;
 	
 	private IToolBehaviorProvider[] toolBehaviorProviders;
 	private ProviderDispatcher dispatcher;

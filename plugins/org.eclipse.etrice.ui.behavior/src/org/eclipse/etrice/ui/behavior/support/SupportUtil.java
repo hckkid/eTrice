@@ -44,6 +44,7 @@ import org.eclipse.graphiti.features.context.impl.AddContext;
 import org.eclipse.graphiti.mm.algorithms.GraphicsAlgorithm;
 import org.eclipse.graphiti.mm.algorithms.styles.Point;
 import org.eclipse.graphiti.mm.pictograms.Anchor;
+import org.eclipse.graphiti.mm.pictograms.Connection;
 import org.eclipse.graphiti.mm.pictograms.ContainerShape;
 import org.eclipse.graphiti.mm.pictograms.Diagram;
 import org.eclipse.graphiti.mm.pictograms.FreeFormConnection;
@@ -296,17 +297,75 @@ public class SupportUtil {
 		}
 	}
 	
-	public static List<State> getStates(ContainerShape shape, IFeatureProvider fp, Map<String, Anchor> ifitem2anchor) {
+	public static List<State> getStates(ContainerShape shape, IFeatureProvider fp) {
+		return getStates(shape, fp, null);
+	}
+	
+	public static List<State> getStates(ContainerShape shape, IFeatureProvider fp, Map<String, Anchor> item2anchor) {
 		List<State> items = new ArrayList<State>();
 		for (Shape ch : shape.getChildren()) {
 			Object bo = fp.getBusinessObjectForPictogramElement(ch);
 			if (bo instanceof State) {
 				items.add((State)bo);
-				if (ifitem2anchor!=null)
-					ifitem2anchor.put(SEP+((State)bo).getName(), ch.getAnchors().get(0));
+				if (item2anchor!=null)
+					item2anchor.put(getKey((State)bo, null), ch.getAnchors().get(0));
 			}
 		}
 		return items;
+	}
+
+	public static List<ChoicePoint> getChoicePoints(ContainerShape shape, IFeatureProvider fp) {
+		return getChoicePoints(shape, fp, null);
+	}
+	
+	/**
+	 * @param shape
+	 * @param fp
+	 * @return
+	 */
+	public static List<ChoicePoint> getChoicePoints(ContainerShape shape, IFeatureProvider fp, Map<String, Anchor> item2anchor) {
+		List<ChoicePoint> items = new ArrayList<ChoicePoint>();
+		for (Shape ch : shape.getChildren()) {
+			Object bo = fp.getBusinessObjectForPictogramElement(ch);
+			if (bo instanceof ChoicePoint) {
+				items.add((ChoicePoint)bo);
+				if (item2anchor!=null)
+					item2anchor.put(getKey((ChoicePoint)bo, null), ch.getAnchors().get(0));
+			}
+		}
+		return items;
+	}
+	
+	public static List<TrPoint> getTrPoints(StateGraph sg, ContainerShape shape, IFeatureProvider fp) {
+		return getTrPoints(sg, shape, fp, null);
+	}
+	
+	public static List<TrPoint> getTrPoints(StateGraph sg, ContainerShape shape, IFeatureProvider fp, Map<String, Anchor> item2anchor) {
+		List<TrPoint> items = new ArrayList<TrPoint>();
+		for (Shape ch : shape.getChildren()) {
+			Object bo = fp.getBusinessObjectForPictogramElement(ch);
+			if (bo instanceof TrPoint) {
+				items.add((TrPoint)bo);
+				if (item2anchor!=null)
+					item2anchor.put(getKey((TrPoint)bo, sg), ch.getAnchors().get(0));
+			}
+		}
+		return items;
+	}
+
+	/**
+	 * @param diagram
+	 * @param fp
+	 * @return
+	 */
+	public static List<Transition> getTransitions(Diagram diagram, IFeatureProvider fp) {
+		List<Transition> transitions = new ArrayList<Transition>();
+		for (Connection conn : diagram.getConnections()) {
+			Object bo = fp.getBusinessObjectForPictogramElement(conn);
+			if (bo instanceof Transition)
+				transitions.add((Transition) bo);
+		}
+		return transitions;
 	}
 
 	/**
@@ -396,6 +455,7 @@ public class SupportUtil {
 		ContainerShape pe = (ContainerShape) fp.addIfPossible(addContext);
 		assert(pe!=null): "state should have been created";
 		assert(!pe.getAnchors().isEmpty()): "state should have an anchor";
+		node2anchor.put(getKey(s, null), pe.getAnchors().get(0));
 	}
 
 	public static void addChoicePoints(List<ChoicePoint> cps, ContainerShape sgShape, IFeatureProvider fp,
