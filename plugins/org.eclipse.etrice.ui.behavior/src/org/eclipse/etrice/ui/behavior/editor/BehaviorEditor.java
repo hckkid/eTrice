@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.transaction.RecordingCommand;
 import org.eclipse.etrice.core.room.ActorClass;
@@ -50,10 +49,6 @@ public class BehaviorEditor extends RoomDiagramEditor {
 	@Override
 	protected void initializeGraphicalViewer() {
 		super.initializeGraphicalViewer();
-		
-		ResourceSet rs = getEditingDomain().getResourceSet();
-		if (rs.getResources().size()>1)
-			rs.getResources().get(1).setTrackingModification(true);
 		
 		Command cmd = new RecordingCommand(getEditingDomain()) {
 			@Override

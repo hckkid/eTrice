@@ -89,7 +89,7 @@ public class RoomDiagramEditor extends DiagramEditor {
 					XtextResource xres = (XtextResource) res;
 					ISerializer serializer = xres.getSerializer();
 					
-					if (!xres.getContents().isEmpty()) {
+					if (xres.getContents().isEmpty()) {
 						MessageDialog.openError(Display.getDefault().getActiveShell(), "ERROR", "Internal error: part of textual model is empty, can't save");
 						return;
 					}
