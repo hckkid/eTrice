@@ -134,6 +134,8 @@ public class JavaGenerator {
 			typedData += t+" "+tid.getName() + " = ("+ct+") generic_data["+i+"];\n";
 			dataArg += ", "+tid.getName();
 			typedArgList += ", "+t+" "+tid.getName();
+			
+			++i;
 		}
 		
 		return new String[]{dataArg, typedData, typedArgList};
