@@ -576,8 +576,8 @@ public class TransitionSupport {
 				updateLabel(trans, conn, fillColor);
 
 				if (conn.getConnectionDecorators().size()>=2) {
-					//ConnectionDecorator cd = conn.getConnectionDecorators().get(1);
-					//TODOHRR: bug 342216: getDiagramEditor().refresh(cd);
+					ConnectionDecorator cd = conn.getConnectionDecorators().get(1);
+					getDiagramEditor().refresh(cd);
 				}
 			}
 			
