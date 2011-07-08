@@ -215,7 +215,7 @@ public interface I«name»{
 			}
 			if (getPeerAddress()!=null)
 			«IF this.data==null»getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), «dir»_«this.name»));
-			«ELSE» getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), «dir»_«this.name», «this.data.name»));
+			«ELSE» getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), «dir»_«this.name», «this.data.name».deepCopy()));
 			«ENDIF-»
 		«ENDIF-»
 	}
