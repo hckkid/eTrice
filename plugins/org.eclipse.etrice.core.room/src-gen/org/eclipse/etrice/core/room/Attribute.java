@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.eclipse.etrice.core.room.Attribute#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.Attribute#getSize <em>Size</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.Attribute#getType <em>Type</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.Attribute#getDefaultValueLiteral <em>Default Value Literal</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.Attribute#getDocu <em>Docu</em>}</li>
  * </ul>
  * </p>
@@ -106,6 +107,32 @@ public interface Attribute extends EObject
    * @generated
    */
   void setType(Type value);
+
+  /**
+   * Returns the value of the '<em><b>Default Value Literal</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Default Value Literal</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Default Value Literal</em>' attribute.
+   * @see #setDefaultValueLiteral(String)
+   * @see org.eclipse.etrice.core.room.RoomPackage#getAttribute_DefaultValueLiteral()
+   * @model
+   * @generated
+   */
+  String getDefaultValueLiteral();
+
+  /**
+   * Sets the value of the '{@link org.eclipse.etrice.core.room.Attribute#getDefaultValueLiteral <em>Default Value Literal</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Default Value Literal</em>' attribute.
+   * @see #getDefaultValueLiteral()
+   * @generated
+   */
+  void setDefaultValueLiteral(String value);
 
   /**
    * Returns the value of the '<em><b>Docu</b></em>' containment reference.

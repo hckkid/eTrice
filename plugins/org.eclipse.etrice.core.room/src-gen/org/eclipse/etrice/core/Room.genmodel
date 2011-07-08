@@ -73,6 +73,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//Attribute/name"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//Attribute/size"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//Attribute/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//Attribute/defaultValueLiteral"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//Attribute/docu"/>
     </genClasses>
     <genClasses ecoreClass="platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//Operation">

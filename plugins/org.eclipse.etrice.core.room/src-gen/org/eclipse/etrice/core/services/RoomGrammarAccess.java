@@ -402,14 +402,18 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cColonKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		private final Assignment cTypeAssignment_4 = (Assignment)cGroup.eContents().get(4);
 		private final RuleCall cTypeTypeParserRuleCall_4_0 = (RuleCall)cTypeAssignment_4.eContents().get(0);
-		private final Assignment cDocuAssignment_5 = (Assignment)cGroup.eContents().get(5);
-		private final RuleCall cDocuDocumentationParserRuleCall_5_0 = (RuleCall)cDocuAssignment_5.eContents().get(0);
+		private final Group cGroup_5 = (Group)cGroup.eContents().get(5);
+		private final Keyword cEqualsSignKeyword_5_0 = (Keyword)cGroup_5.eContents().get(0);
+		private final Assignment cDefaultValueLiteralAssignment_5_1 = (Assignment)cGroup_5.eContents().get(1);
+		private final RuleCall cDefaultValueLiteralSTRINGTerminalRuleCall_5_1_0 = (RuleCall)cDefaultValueLiteralAssignment_5_1.eContents().get(0);
+		private final Assignment cDocuAssignment_6 = (Assignment)cGroup.eContents().get(6);
+		private final RuleCall cDocuDocumentationParserRuleCall_6_0 = (RuleCall)cDocuAssignment_6.eContents().get(0);
 		
 		//Attribute:
-		//	"Attribute" name=ID ("[" size=INT "]")? ":" type=Type docu=Documentation?;
+		//	"Attribute" name=ID ("[" size=INT "]")? ":" type=Type ("=" defaultValueLiteral=STRING)? docu=Documentation?;
 		public ParserRule getRule() { return rule; }
 
-		//"Attribute" name=ID ("[" size=INT "]")? ":" type=Type docu=Documentation?
+		//"Attribute" name=ID ("[" size=INT "]")? ":" type=Type ("=" defaultValueLiteral=STRING)? docu=Documentation?
 		public Group getGroup() { return cGroup; }
 
 		//"Attribute"
@@ -445,11 +449,23 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		//Type
 		public RuleCall getTypeTypeParserRuleCall_4_0() { return cTypeTypeParserRuleCall_4_0; }
 
+		//("=" defaultValueLiteral=STRING)?
+		public Group getGroup_5() { return cGroup_5; }
+
+		//"="
+		public Keyword getEqualsSignKeyword_5_0() { return cEqualsSignKeyword_5_0; }
+
+		//defaultValueLiteral=STRING
+		public Assignment getDefaultValueLiteralAssignment_5_1() { return cDefaultValueLiteralAssignment_5_1; }
+
+		//STRING
+		public RuleCall getDefaultValueLiteralSTRINGTerminalRuleCall_5_1_0() { return cDefaultValueLiteralSTRINGTerminalRuleCall_5_1_0; }
+
 		//docu=Documentation?
-		public Assignment getDocuAssignment_5() { return cDocuAssignment_5; }
+		public Assignment getDocuAssignment_6() { return cDocuAssignment_6; }
 
 		//Documentation
-		public RuleCall getDocuDocumentationParserRuleCall_5_0() { return cDocuDocumentationParserRuleCall_5_0; }
+		public RuleCall getDocuDocumentationParserRuleCall_6_0() { return cDocuDocumentationParserRuleCall_6_0; }
 	}
 
 	public class OperationElements extends AbstractParserRuleElementFinder {
@@ -3925,7 +3941,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Attribute:
-	//	"Attribute" name=ID ("[" size=INT "]")? ":" type=Type docu=Documentation?;
+	//	"Attribute" name=ID ("[" size=INT "]")? ":" type=Type ("=" defaultValueLiteral=STRING)? docu=Documentation?;
 	public AttributeElements getAttributeAccess() {
 		return (pAttribute != null) ? pAttribute : (pAttribute = new AttributeElements());
 	}

@@ -314,11 +314,10 @@ public class InternalRoomLexer extends Lexer {
         try {
             int _type = T__20;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:20:7: ( 'Operation' )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:20:9: 'Operation'
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:20:7: ( '=' )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:20:9: '='
             {
-            match("Operation"); 
-
+            match('='); 
 
             }
 
@@ -335,10 +334,11 @@ public class InternalRoomLexer extends Lexer {
         try {
             int _type = T__21;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:21:7: ( '(' )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:21:9: '('
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:21:7: ( 'Operation' )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:21:9: 'Operation'
             {
-            match('('); 
+            match("Operation"); 
+
 
             }
 
@@ -355,10 +355,10 @@ public class InternalRoomLexer extends Lexer {
         try {
             int _type = T__22;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:22:7: ( ',' )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:22:9: ','
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:22:7: ( '(' )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:22:9: '('
             {
-            match(','); 
+            match('('); 
 
             }
 
@@ -375,10 +375,10 @@ public class InternalRoomLexer extends Lexer {
         try {
             int _type = T__23;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:23:7: ( ')' )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:23:9: ')'
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:23:7: ( ',' )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:23:9: ','
             {
-            match(')'); 
+            match(','); 
 
             }
 
@@ -395,11 +395,10 @@ public class InternalRoomLexer extends Lexer {
         try {
             int _type = T__24;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:24:7: ( 'ProtocolClass' )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:24:9: 'ProtocolClass'
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:24:7: ( ')' )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:24:9: ')'
             {
-            match("ProtocolClass"); 
-
+            match(')'); 
 
             }
 
@@ -416,10 +415,10 @@ public class InternalRoomLexer extends Lexer {
         try {
             int _type = T__25;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:25:7: ( 'usercode1' )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:25:9: 'usercode1'
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:25:7: ( 'ProtocolClass' )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:25:9: 'ProtocolClass'
             {
-            match("usercode1"); 
+            match("ProtocolClass"); 
 
 
             }
@@ -437,10 +436,10 @@ public class InternalRoomLexer extends Lexer {
         try {
             int _type = T__26;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:26:7: ( 'usercode2' )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:26:9: 'usercode2'
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:26:7: ( 'usercode1' )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:26:9: 'usercode1'
             {
-            match("usercode2"); 
+            match("usercode1"); 
 
 
             }
@@ -458,10 +457,10 @@ public class InternalRoomLexer extends Lexer {
         try {
             int _type = T__27;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:27:7: ( 'incoming' )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:27:9: 'incoming'
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:27:7: ( 'usercode2' )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:27:9: 'usercode2'
             {
-            match("incoming"); 
+            match("usercode2"); 
 
 
             }
@@ -479,10 +478,10 @@ public class InternalRoomLexer extends Lexer {
         try {
             int _type = T__28;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:28:7: ( 'outgoing' )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:28:9: 'outgoing'
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:28:7: ( 'incoming' )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:28:9: 'incoming'
             {
-            match("outgoing"); 
+            match("incoming"); 
 
 
             }
@@ -500,10 +499,10 @@ public class InternalRoomLexer extends Lexer {
         try {
             int _type = T__29;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:29:7: ( 'regular' )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:29:9: 'regular'
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:29:7: ( 'outgoing' )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:29:9: 'outgoing'
             {
-            match("regular"); 
+            match("outgoing"); 
 
 
             }
@@ -521,10 +520,10 @@ public class InternalRoomLexer extends Lexer {
         try {
             int _type = T__30;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:30:7: ( 'PortClass' )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:30:9: 'PortClass'
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:30:7: ( 'regular' )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:30:9: 'regular'
             {
-            match("PortClass"); 
+            match("regular"); 
 
 
             }
@@ -542,10 +541,10 @@ public class InternalRoomLexer extends Lexer {
         try {
             int _type = T__31;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:31:7: ( 'conjugate' )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:31:9: 'conjugate'
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:31:7: ( 'PortClass' )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:31:9: 'PortClass'
             {
-            match("conjugate"); 
+            match("PortClass"); 
 
 
             }
@@ -563,10 +562,10 @@ public class InternalRoomLexer extends Lexer {
         try {
             int _type = T__32;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:32:7: ( 'Message' )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:32:9: 'Message'
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:32:7: ( 'conjugate' )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:32:9: 'conjugate'
             {
-            match("Message"); 
+            match("conjugate"); 
 
 
             }
@@ -584,10 +583,10 @@ public class InternalRoomLexer extends Lexer {
         try {
             int _type = T__33;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:33:7: ( 'usercode' )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:33:9: 'usercode'
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:33:7: ( 'Message' )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:33:9: 'Message'
             {
-            match("usercode"); 
+            match("Message"); 
 
 
             }
@@ -605,10 +604,10 @@ public class InternalRoomLexer extends Lexer {
         try {
             int _type = T__34;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:34:7: ( 'handle' )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:34:9: 'handle'
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:34:7: ( 'usercode' )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:34:9: 'usercode'
             {
-            match("handle"); 
+            match("usercode"); 
 
 
             }
@@ -626,10 +625,10 @@ public class InternalRoomLexer extends Lexer {
         try {
             int _type = T__35;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:35:7: ( 'semantics' )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:35:9: 'semantics'
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:35:7: ( 'handle' )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:35:9: 'handle'
             {
-            match("semantics"); 
+            match("handle"); 
 
 
             }
@@ -647,10 +646,10 @@ public class InternalRoomLexer extends Lexer {
         try {
             int _type = T__36;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:36:7: ( 'in' )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:36:9: 'in'
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:36:7: ( 'semantics' )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:36:9: 'semantics'
             {
-            match("in"); 
+            match("semantics"); 
 
 
             }
@@ -668,10 +667,10 @@ public class InternalRoomLexer extends Lexer {
         try {
             int _type = T__37;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:37:7: ( '->' )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:37:9: '->'
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:37:7: ( 'in' )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:37:9: 'in'
             {
-            match("->"); 
+            match("in"); 
 
 
             }
@@ -689,10 +688,10 @@ public class InternalRoomLexer extends Lexer {
         try {
             int _type = T__38;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:38:7: ( 'out' )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:38:9: 'out'
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:38:7: ( '->' )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:38:9: '->'
             {
-            match("out"); 
+            match("->"); 
 
 
             }
@@ -710,10 +709,10 @@ public class InternalRoomLexer extends Lexer {
         try {
             int _type = T__39;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:39:7: ( 'abstract' )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:39:9: 'abstract'
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:39:7: ( 'out' )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:39:9: 'out'
             {
-            match("abstract"); 
+            match("out"); 
 
 
             }
@@ -731,10 +730,10 @@ public class InternalRoomLexer extends Lexer {
         try {
             int _type = T__40;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:40:7: ( 'ActorClass' )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:40:9: 'ActorClass'
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:40:7: ( 'abstract' )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:40:9: 'abstract'
             {
-            match("ActorClass"); 
+            match("abstract"); 
 
 
             }
@@ -752,10 +751,10 @@ public class InternalRoomLexer extends Lexer {
         try {
             int _type = T__41;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:41:7: ( 'Interface' )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:41:9: 'Interface'
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:41:7: ( 'ActorClass' )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:41:9: 'ActorClass'
             {
-            match("Interface"); 
+            match("ActorClass"); 
 
 
             }
@@ -773,10 +772,10 @@ public class InternalRoomLexer extends Lexer {
         try {
             int _type = T__42;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:42:7: ( 'Structure' )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:42:9: 'Structure'
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:42:7: ( 'Interface' )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:42:9: 'Interface'
             {
-            match("Structure"); 
+            match("Interface"); 
 
 
             }
@@ -794,10 +793,10 @@ public class InternalRoomLexer extends Lexer {
         try {
             int _type = T__43;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:43:7: ( 'Behavior' )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:43:9: 'Behavior'
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:43:7: ( 'Structure' )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:43:9: 'Structure'
             {
-            match("Behavior"); 
+            match("Structure"); 
 
 
             }
@@ -815,10 +814,10 @@ public class InternalRoomLexer extends Lexer {
         try {
             int _type = T__44;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:44:7: ( 'conjugated' )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:44:9: 'conjugated'
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:44:7: ( 'Behavior' )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:44:9: 'Behavior'
             {
-            match("conjugated"); 
+            match("Behavior"); 
 
 
             }
@@ -836,10 +835,10 @@ public class InternalRoomLexer extends Lexer {
         try {
             int _type = T__45;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:45:7: ( 'Port' )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:45:9: 'Port'
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:45:7: ( 'conjugated' )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:45:9: 'conjugated'
             {
-            match("Port"); 
+            match("conjugated"); 
 
 
             }
@@ -857,10 +856,10 @@ public class InternalRoomLexer extends Lexer {
         try {
             int _type = T__46;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:46:7: ( 'external' )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:46:9: 'external'
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:46:7: ( 'Port' )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:46:9: 'Port'
             {
-            match("external"); 
+            match("Port"); 
 
 
             }
@@ -878,10 +877,10 @@ public class InternalRoomLexer extends Lexer {
         try {
             int _type = T__47;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:47:7: ( 'SAP' )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:47:9: 'SAP'
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:47:7: ( 'external' )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:47:9: 'external'
             {
-            match("SAP"); 
+            match("external"); 
 
 
             }
@@ -899,10 +898,10 @@ public class InternalRoomLexer extends Lexer {
         try {
             int _type = T__48;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:48:7: ( 'SPP' )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:48:9: 'SPP'
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:48:7: ( 'SAP' )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:48:9: 'SAP'
             {
-            match("SPP"); 
+            match("SAP"); 
 
 
             }
@@ -920,10 +919,10 @@ public class InternalRoomLexer extends Lexer {
         try {
             int _type = T__49;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:49:7: ( 'ServiceImplementation' )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:49:9: 'ServiceImplementation'
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:49:7: ( 'SPP' )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:49:9: 'SPP'
             {
-            match("ServiceImplementation"); 
+            match("SPP"); 
 
 
             }
@@ -941,10 +940,10 @@ public class InternalRoomLexer extends Lexer {
         try {
             int _type = T__50;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:50:7: ( 'of' )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:50:9: 'of'
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:50:7: ( 'ServiceImplementation' )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:50:9: 'ServiceImplementation'
             {
-            match("of"); 
+            match("ServiceImplementation"); 
 
 
             }
@@ -962,10 +961,10 @@ public class InternalRoomLexer extends Lexer {
         try {
             int _type = T__51;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:51:7: ( 'LogicalSystem' )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:51:9: 'LogicalSystem'
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:51:7: ( 'of' )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:51:9: 'of'
             {
-            match("LogicalSystem"); 
+            match("of"); 
 
 
             }
@@ -983,10 +982,10 @@ public class InternalRoomLexer extends Lexer {
         try {
             int _type = T__52;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:52:7: ( 'SubSystemRef' )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:52:9: 'SubSystemRef'
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:52:7: ( 'LogicalSystem' )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:52:9: 'LogicalSystem'
             {
-            match("SubSystemRef"); 
+            match("LogicalSystem"); 
 
 
             }
@@ -1004,10 +1003,10 @@ public class InternalRoomLexer extends Lexer {
         try {
             int _type = T__53;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:53:7: ( 'SubSystemClass' )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:53:9: 'SubSystemClass'
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:53:7: ( 'SubSystemRef' )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:53:9: 'SubSystemRef'
             {
-            match("SubSystemClass"); 
+            match("SubSystemRef"); 
 
 
             }
@@ -1025,10 +1024,10 @@ public class InternalRoomLexer extends Lexer {
         try {
             int _type = T__54;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:54:7: ( 'LogicalThread' )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:54:9: 'LogicalThread'
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:54:7: ( 'SubSystemClass' )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:54:9: 'SubSystemClass'
             {
-            match("LogicalThread"); 
+            match("SubSystemClass"); 
 
 
             }
@@ -1046,10 +1045,10 @@ public class InternalRoomLexer extends Lexer {
         try {
             int _type = T__55;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:55:7: ( 'prio' )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:55:9: 'prio'
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:55:7: ( 'LogicalThread' )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:55:9: 'LogicalThread'
             {
-            match("prio"); 
+            match("LogicalThread"); 
 
 
             }
@@ -1067,10 +1066,11 @@ public class InternalRoomLexer extends Lexer {
         try {
             int _type = T__56;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:56:7: ( '=' )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:56:9: '='
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:56:7: ( 'prio' )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:56:9: 'prio'
             {
-            match('='); 
+            match("prio"); 
+
 
             }
 
@@ -2027,10 +2027,10 @@ public class InternalRoomLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5734:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5734:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5756:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5756:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5734:11: ( '^' )?
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5756:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -2039,7 +2039,7 @@ public class InternalRoomLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5734:11: '^'
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5756:11: '^'
                     {
                     match('^'); 
 
@@ -2057,7 +2057,7 @@ public class InternalRoomLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5734:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5756:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -2106,10 +2106,10 @@ public class InternalRoomLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5736:10: ( ( '0' .. '9' )+ )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5736:12: ( '0' .. '9' )+
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5758:10: ( ( '0' .. '9' )+ )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5758:12: ( '0' .. '9' )+
             {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5736:12: ( '0' .. '9' )+
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5758:12: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -2123,7 +2123,7 @@ public class InternalRoomLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5736:13: '0' .. '9'
+            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5758:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -2155,10 +2155,10 @@ public class InternalRoomLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5738:13: ( ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5738:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5760:13: ( ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5760:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5738:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5760:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -2176,10 +2176,10 @@ public class InternalRoomLexer extends Lexer {
             }
             switch (alt6) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5738:16: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5760:16: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5738:20: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5760:20: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -2195,7 +2195,7 @@ public class InternalRoomLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5738:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
+                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5760:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
                     	    {
                     	    match('\\'); 
                     	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||(input.LA(1)>='t' && input.LA(1)<='u') ) {
@@ -2211,7 +2211,7 @@ public class InternalRoomLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5738:66: ~ ( ( '\\\\' | '\"' ) )
+                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5760:66: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -2236,10 +2236,10 @@ public class InternalRoomLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5738:86: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5760:86: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5738:91: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5760:91: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -2255,7 +2255,7 @@ public class InternalRoomLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5738:92: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
+                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5760:92: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
                     	    {
                     	    match('\\'); 
                     	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||(input.LA(1)>='t' && input.LA(1)<='u') ) {
@@ -2271,7 +2271,7 @@ public class InternalRoomLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5738:137: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5760:137: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -2314,12 +2314,12 @@ public class InternalRoomLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5740:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5740:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5762:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5762:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5740:24: ( options {greedy=false; } : . )*
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5762:24: ( options {greedy=false; } : . )*
             loop7:
             do {
                 int alt7=2;
@@ -2344,7 +2344,7 @@ public class InternalRoomLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5740:52: .
+            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5762:52: .
             	    {
             	    matchAny(); 
 
@@ -2374,12 +2374,12 @@ public class InternalRoomLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5742:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5742:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5764:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5764:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5742:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5764:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop8:
             do {
                 int alt8=2;
@@ -2392,7 +2392,7 @@ public class InternalRoomLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5742:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5764:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -2412,7 +2412,7 @@ public class InternalRoomLexer extends Lexer {
                 }
             } while (true);
 
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5742:40: ( ( '\\r' )? '\\n' )?
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5764:40: ( ( '\\r' )? '\\n' )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -2421,9 +2421,9 @@ public class InternalRoomLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5742:41: ( '\\r' )? '\\n'
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5764:41: ( '\\r' )? '\\n'
                     {
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5742:41: ( '\\r' )?
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5764:41: ( '\\r' )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
@@ -2432,7 +2432,7 @@ public class InternalRoomLexer extends Lexer {
                     }
                     switch (alt9) {
                         case 1 :
-                            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5742:41: '\\r'
+                            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5764:41: '\\r'
                             {
                             match('\r'); 
 
@@ -2464,10 +2464,10 @@ public class InternalRoomLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5744:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5744:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5766:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5766:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5744:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5766:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt11=0;
             loop11:
             do {
@@ -2521,8 +2521,8 @@ public class InternalRoomLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5746:16: ( . )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5746:18: .
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5768:16: ( . )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5768:18: .
             {
             matchAny(); 
 
@@ -3235,10 +3235,10 @@ public class InternalRoomLexer extends Lexer {
 
     protected DFA12 dfa12 = new DFA12(this);
     static final String DFA12_eotS =
-        "\1\uffff\1\67\3\uffff\3\67\2\uffff\1\67\3\uffff\11\67\1\64\6\67"+
-        "\2\uffff\5\67\3\uffff\1\67\1\uffff\3\67\1\64\2\uffff\3\64\2\uffff"+
-        "\2\67\4\uffff\5\67\2\uffff\1\67\3\uffff\4\67\1\u008d\2\67\1\u0090"+
-        "\1\u0091\2\67\1\u0096\7\67\1\uffff\16\67\2\uffff\5\67\1\u00b2\3"+
+        "\1\uffff\1\67\3\uffff\3\67\3\uffff\1\67\3\uffff\11\67\1\64\6\67"+
+        "\1\uffff\5\67\3\uffff\1\67\1\uffff\3\67\1\64\2\uffff\3\64\2\uffff"+
+        "\2\67\4\uffff\5\67\3\uffff\1\67\3\uffff\4\67\1\u008d\2\67\1\u0090"+
+        "\1\u0091\2\67\1\u0096\7\67\1\uffff\16\67\1\uffff\5\67\1\u00b2\3"+
         "\uffff\1\67\1\uffff\3\67\5\uffff\20\67\1\uffff\1\67\1\u00cb\2\uffff"+
         "\1\67\1\u00cd\2\67\1\uffff\10\67\1\u00d9\4\67\1\u00de\1\u00df\14"+
         "\67\1\uffff\10\67\1\u00f5\5\67\1\u00fc\4\67\1\u0103\4\67\1\uffff"+
@@ -3264,14 +3264,14 @@ public class InternalRoomLexer extends Lexer {
     static final String DFA12_eofS =
         "\u022f\uffff";
     static final String DFA12_minS =
-        "\1\0\1\145\3\uffff\1\141\1\156\1\143\2\uffff\1\160\3\uffff\1\157"+
+        "\1\0\1\145\3\uffff\1\141\1\156\1\143\3\uffff\1\160\3\uffff\1\157"+
         "\1\151\1\155\1\146\1\145\1\150\1\145\2\141\1\76\1\142\1\156\1\101"+
-        "\1\145\1\141\1\162\2\uffff\1\162\1\156\1\150\1\162\1\171\3\uffff"+
+        "\1\145\1\141\1\162\1\uffff\1\162\1\156\1\150\1\162\1\171\3\uffff"+
         "\1\165\1\uffff\1\157\1\154\1\157\1\101\2\uffff\2\0\1\52\2\uffff"+
-        "\1\157\1\146\4\uffff\1\164\1\151\3\164\2\uffff\1\145\3\uffff\1\157"+
+        "\1\157\1\146\4\uffff\1\164\1\151\3\164\3\uffff\1\145\3\uffff\1\157"+
         "\1\162\1\145\1\156\1\60\1\160\1\164\2\60\1\146\1\156\1\60\1\141"+
         "\1\163\1\156\1\155\1\164\1\142\1\162\1\uffff\1\163\1\144\2\164\1"+
-        "\141\2\120\1\162\1\142\1\150\1\156\1\147\1\171\1\151\2\uffff\1\141"+
+        "\141\2\120\1\162\1\142\1\150\1\156\1\147\1\171\1\151\1\uffff\1\141"+
         "\1\164\1\151\1\157\1\151\1\60\3\uffff\1\141\1\uffff\1\151\2\157"+
         "\5\uffff\1\155\1\151\1\141\1\145\1\164\2\162\1\157\1\162\2\164\1"+
         "\162\1\164\1\157\1\164\1\61\1\uffff\1\157\1\60\2\uffff\1\165\1\60"+
@@ -3311,14 +3311,14 @@ public class InternalRoomLexer extends Lexer {
         "\1\156\1\60\2\uffff\1\156\2\164\1\uffff\2\60\1\141\2\uffff\1\164"+
         "\1\151\1\157\1\156\1\60\1\uffff";
     static final String DFA12_maxS =
-        "\1\uffff\1\157\3\uffff\1\141\1\170\1\164\2\uffff\1\160\3\uffff"+
+        "\1\uffff\1\157\3\uffff\1\141\1\170\1\164\3\uffff\1\160\3\uffff"+
         "\1\162\1\163\1\156\1\165\1\145\1\160\1\145\1\141\1\165\1\76\2\156"+
-        "\1\165\1\151\1\157\1\162\2\uffff\1\162\1\170\1\150\1\162\1\171\3"+
+        "\1\165\1\151\1\157\1\162\1\uffff\1\162\1\170\1\150\1\162\1\171\3"+
         "\uffff\1\165\1\uffff\1\157\1\154\1\157\1\172\2\uffff\2\uffff\1\57"+
-        "\2\uffff\1\157\1\146\4\uffff\5\164\2\uffff\1\145\3\uffff\1\157\1"+
+        "\2\uffff\1\157\1\146\4\uffff\5\164\3\uffff\1\145\3\uffff\1\157\1"+
         "\162\1\145\1\156\1\172\1\160\1\164\2\172\1\154\1\156\1\172\1\141"+
         "\1\163\1\156\1\155\1\164\1\142\1\162\1\uffff\1\163\1\144\2\164\1"+
-        "\162\2\120\1\162\1\142\1\150\1\156\1\147\1\171\1\151\2\uffff\1\141"+
+        "\162\2\120\1\162\1\142\1\150\1\156\1\147\1\171\1\151\1\uffff\1\141"+
         "\1\164\1\151\1\157\1\151\1\172\3\uffff\1\141\1\uffff\1\151\2\157"+
         "\5\uffff\1\155\1\151\1\141\1\145\1\164\2\162\1\157\1\162\2\164\1"+
         "\162\1\164\1\157\1\164\1\70\1\uffff\1\157\1\172\2\uffff\1\165\1"+
@@ -3358,34 +3358,34 @@ public class InternalRoomLexer extends Lexer {
         "\2\172\1\157\1\156\1\uffff\1\156\1\172\2\uffff\1\156\2\164\1\uffff"+
         "\2\172\1\141\2\uffff\1\164\1\151\1\157\1\156\1\172\1\uffff";
     static final String DFA12_acceptS =
-        "\2\uffff\1\2\1\3\1\4\3\uffff\1\10\1\11\1\uffff\1\13\1\14\1\15\20"+
-        "\uffff\1\56\1\57\5\uffff\1\112\1\113\1\114\1\uffff\1\117\4\uffff"+
+        "\2\uffff\1\2\1\3\1\4\3\uffff\1\10\1\11\1\12\1\uffff\1\14\1\15\1"+
+        "\16\20\uffff\1\57\5\uffff\1\112\1\113\1\114\1\uffff\1\117\4\uffff"+
         "\1\134\1\135\3\uffff\1\141\1\142\2\uffff\1\134\1\2\1\3\1\4\5\uffff"+
-        "\1\10\1\11\1\uffff\1\13\1\14\1\15\23\uffff\1\33\16\uffff\1\56\1"+
+        "\1\10\1\11\1\12\1\uffff\1\14\1\15\1\16\23\uffff\1\34\16\uffff\1"+
         "\57\6\uffff\1\112\1\113\1\114\1\uffff\1\117\3\uffff\1\135\1\136"+
-        "\1\137\1\140\1\141\20\uffff\1\32\2\uffff\1\50\1\106\4\uffff\1\111"+
-        "\33\uffff\1\110\30\uffff\1\34\1\uffff\1\64\13\uffff\1\61\4\uffff"+
-        "\1\45\1\46\25\uffff\1\72\6\uffff\1\43\6\uffff\1\121\7\uffff\1\107"+
-        "\1\133\21\uffff\1\55\6\uffff\1\120\7\uffff\1\71\7\uffff\1\124\4"+
+        "\1\137\1\140\1\141\20\uffff\1\33\2\uffff\1\51\1\106\4\uffff\1\111"+
+        "\33\uffff\1\110\30\uffff\1\35\1\uffff\1\64\13\uffff\1\61\4\uffff"+
+        "\1\46\1\47\25\uffff\1\72\6\uffff\1\44\6\uffff\1\121\7\uffff\1\107"+
+        "\1\133\21\uffff\1\56\6\uffff\1\120\7\uffff\1\71\7\uffff\1\124\4"+
         "\uffff\1\122\1\123\20\uffff\1\70\13\uffff\1\115\17\uffff\1\125\1"+
-        "\126\2\uffff\1\116\6\uffff\1\30\3\uffff\1\132\1\uffff\1\104\24\uffff"+
-        "\1\6\11\uffff\1\103\1\uffff\1\23\2\uffff\1\26\1\75\12\uffff\1\60"+
-        "\10\uffff\1\127\1\130\1\131\3\uffff\1\44\2\uffff\1\66\5\uffff\1"+
-        "\27\1\21\1\22\4\uffff\1\73\1\35\5\uffff\1\41\7\uffff\1\105\1\1\1"+
-        "\uffff\1\5\1\7\1\uffff\1\12\1\uffff\1\24\1\17\1\20\1\65\1\uffff"+
-        "\1\25\1\31\1\uffff\1\37\1\40\11\uffff\1\100\2\uffff\1\36\1\uffff"+
-        "\1\42\11\uffff\1\102\1\77\14\uffff\1\101\1\74\1\uffff\1\63\1\67"+
-        "\1\uffff\1\52\5\uffff\1\16\2\uffff\1\51\1\54\3\uffff\1\53\3\uffff"+
-        "\1\62\1\76\5\uffff\1\47";
+        "\126\2\uffff\1\116\6\uffff\1\31\3\uffff\1\132\1\uffff\1\104\24\uffff"+
+        "\1\6\11\uffff\1\103\1\uffff\1\24\2\uffff\1\27\1\75\12\uffff\1\60"+
+        "\10\uffff\1\127\1\130\1\131\3\uffff\1\45\2\uffff\1\66\5\uffff\1"+
+        "\30\1\22\1\23\4\uffff\1\73\1\36\5\uffff\1\42\7\uffff\1\105\1\1\1"+
+        "\uffff\1\5\1\7\1\uffff\1\13\1\uffff\1\25\1\20\1\21\1\65\1\uffff"+
+        "\1\26\1\32\1\uffff\1\40\1\41\11\uffff\1\100\2\uffff\1\37\1\uffff"+
+        "\1\43\11\uffff\1\102\1\77\14\uffff\1\101\1\74\1\uffff\1\63\1\67"+
+        "\1\uffff\1\53\5\uffff\1\17\2\uffff\1\52\1\55\3\uffff\1\54\3\uffff"+
+        "\1\62\1\76\5\uffff\1\50";
     static final String DFA12_specialS =
         "\1\1\57\uffff\1\0\1\2\u01fd\uffff}>";
     static final String[] DFA12_transitionS = {
-            "\11\64\2\63\2\64\1\63\22\64\1\63\1\64\1\60\4\64\1\61\1\13\1"+
-            "\15\1\51\1\64\1\14\1\27\1\37\1\62\12\57\1\4\1\64\1\45\1\36\1"+
-            "\47\2\64\1\7\1\33\1\42\1\5\1\41\3\56\1\31\2\56\1\34\1\24\1\56"+
-            "\1\12\1\16\1\56\1\1\1\32\1\40\6\56\1\10\1\64\1\11\1\55\1\56"+
-            "\1\64\1\30\1\54\1\23\1\56\1\6\1\53\1\50\1\25\1\20\3\56\1\44"+
-            "\1\56\1\21\1\35\1\56\1\22\1\26\1\43\1\17\1\52\4\56\1\2\1\46"+
+            "\11\64\2\63\2\64\1\63\22\64\1\63\1\64\1\60\4\64\1\61\1\14\1"+
+            "\16\1\51\1\64\1\15\1\30\1\37\1\62\12\57\1\4\1\64\1\45\1\12\1"+
+            "\47\2\64\1\7\1\34\1\42\1\5\1\41\3\56\1\32\2\56\1\35\1\25\1\56"+
+            "\1\13\1\17\1\56\1\1\1\33\1\40\6\56\1\10\1\64\1\11\1\55\1\56"+
+            "\1\64\1\31\1\54\1\24\1\56\1\6\1\53\1\50\1\26\1\21\3\56\1\44"+
+            "\1\56\1\22\1\36\1\56\1\23\1\27\1\43\1\20\1\52\4\56\1\2\1\46"+
             "\1\3\uff82\64",
             "\1\66\11\uffff\1\65",
             "",
@@ -3396,27 +3396,27 @@ public class InternalRoomLexer extends Lexer {
             "\1\77\20\uffff\1\76",
             "",
             "",
-            "\1\102",
+            "",
+            "\1\103",
             "",
             "",
             "",
-            "\1\107\2\uffff\1\106",
-            "\1\111\11\uffff\1\110",
-            "\1\113\1\112",
-            "\1\115\13\uffff\1\116\2\uffff\1\114",
-            "\1\117",
-            "\1\122\6\uffff\1\120\1\121",
-            "\1\123",
+            "\1\110\2\uffff\1\107",
+            "\1\112\11\uffff\1\111",
+            "\1\114\1\113",
+            "\1\116\13\uffff\1\117\2\uffff\1\115",
+            "\1\120",
+            "\1\123\6\uffff\1\121\1\122",
             "\1\124",
-            "\1\126\3\uffff\1\125\16\uffff\1\130\1\127",
-            "\1\131",
-            "\1\132\1\134\12\uffff\1\133",
-            "\1\135",
-            "\1\137\16\uffff\1\140\24\uffff\1\141\16\uffff\1\136\1\142",
-            "\1\143\3\uffff\1\144",
-            "\1\146\15\uffff\1\145",
-            "\1\147",
-            "",
+            "\1\125",
+            "\1\127\3\uffff\1\126\16\uffff\1\131\1\130",
+            "\1\132",
+            "\1\133\1\135\12\uffff\1\134",
+            "\1\136",
+            "\1\140\16\uffff\1\141\24\uffff\1\142\16\uffff\1\137\1\143",
+            "\1\144\3\uffff\1\145",
+            "\1\147\15\uffff\1\146",
+            "\1\150",
             "",
             "\1\152",
             "\1\153\11\uffff\1\154",
@@ -3450,6 +3450,7 @@ public class InternalRoomLexer extends Lexer {
             "\1\u0082",
             "\1\u0083",
             "\1\u0084",
+            "",
             "",
             "",
             "\1\u0085",
@@ -3491,7 +3492,6 @@ public class InternalRoomLexer extends Lexer {
             "\1\u00aa",
             "\1\u00ab",
             "\1\u00ac",
-            "",
             "",
             "\1\u00ad",
             "\1\u00ae",
@@ -4023,47 +4023,47 @@ public class InternalRoomLexer extends Lexer {
 
                         else if ( (LA12_0==']') ) {s = 9;}
 
-                        else if ( (LA12_0=='O') ) {s = 10;}
+                        else if ( (LA12_0=='=') ) {s = 10;}
 
-                        else if ( (LA12_0=='(') ) {s = 11;}
+                        else if ( (LA12_0=='O') ) {s = 11;}
 
-                        else if ( (LA12_0==',') ) {s = 12;}
+                        else if ( (LA12_0=='(') ) {s = 12;}
 
-                        else if ( (LA12_0==')') ) {s = 13;}
+                        else if ( (LA12_0==',') ) {s = 13;}
 
-                        else if ( (LA12_0=='P') ) {s = 14;}
+                        else if ( (LA12_0==')') ) {s = 14;}
 
-                        else if ( (LA12_0=='u') ) {s = 15;}
+                        else if ( (LA12_0=='P') ) {s = 15;}
 
-                        else if ( (LA12_0=='i') ) {s = 16;}
+                        else if ( (LA12_0=='u') ) {s = 16;}
 
-                        else if ( (LA12_0=='o') ) {s = 17;}
+                        else if ( (LA12_0=='i') ) {s = 17;}
 
-                        else if ( (LA12_0=='r') ) {s = 18;}
+                        else if ( (LA12_0=='o') ) {s = 18;}
 
-                        else if ( (LA12_0=='c') ) {s = 19;}
+                        else if ( (LA12_0=='r') ) {s = 19;}
 
-                        else if ( (LA12_0=='M') ) {s = 20;}
+                        else if ( (LA12_0=='c') ) {s = 20;}
 
-                        else if ( (LA12_0=='h') ) {s = 21;}
+                        else if ( (LA12_0=='M') ) {s = 21;}
 
-                        else if ( (LA12_0=='s') ) {s = 22;}
+                        else if ( (LA12_0=='h') ) {s = 22;}
 
-                        else if ( (LA12_0=='-') ) {s = 23;}
+                        else if ( (LA12_0=='s') ) {s = 23;}
 
-                        else if ( (LA12_0=='a') ) {s = 24;}
+                        else if ( (LA12_0=='-') ) {s = 24;}
 
-                        else if ( (LA12_0=='I') ) {s = 25;}
+                        else if ( (LA12_0=='a') ) {s = 25;}
 
-                        else if ( (LA12_0=='S') ) {s = 26;}
+                        else if ( (LA12_0=='I') ) {s = 26;}
 
-                        else if ( (LA12_0=='B') ) {s = 27;}
+                        else if ( (LA12_0=='S') ) {s = 27;}
 
-                        else if ( (LA12_0=='L') ) {s = 28;}
+                        else if ( (LA12_0=='B') ) {s = 28;}
 
-                        else if ( (LA12_0=='p') ) {s = 29;}
+                        else if ( (LA12_0=='L') ) {s = 29;}
 
-                        else if ( (LA12_0=='=') ) {s = 30;}
+                        else if ( (LA12_0=='p') ) {s = 30;}
 
                         else if ( (LA12_0=='.') ) {s = 31;}
 

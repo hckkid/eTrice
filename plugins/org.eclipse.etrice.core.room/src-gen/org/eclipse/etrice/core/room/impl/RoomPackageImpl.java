@@ -1055,9 +1055,19 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EAttribute getAttribute_DefaultValueLiteral()
+  {
+    return (EAttribute)attributeEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EReference getAttribute_Docu()
   {
-    return (EReference)attributeEClass.getEStructuralFeatures().get(3);
+    return (EReference)attributeEClass.getEStructuralFeatures().get(4);
   }
 
   /**
@@ -2720,6 +2730,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
     createEAttribute(attributeEClass, ATTRIBUTE__NAME);
     createEAttribute(attributeEClass, ATTRIBUTE__SIZE);
     createEReference(attributeEClass, ATTRIBUTE__TYPE);
+    createEAttribute(attributeEClass, ATTRIBUTE__DEFAULT_VALUE_LITERAL);
     createEReference(attributeEClass, ATTRIBUTE__DOCU);
 
     operationEClass = createEClass(OPERATION);
@@ -3057,6 +3068,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
     initEAttribute(getAttribute_Name(), ecorePackage.getEString(), "name", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getAttribute_Size(), ecorePackage.getEInt(), "size", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getAttribute_Type(), this.getType(), null, "type", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getAttribute_DefaultValueLiteral(), ecorePackage.getEString(), "defaultValueLiteral", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getAttribute_Docu(), this.getDocumentation(), null, "docu", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(operationEClass, Operation.class, "Operation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

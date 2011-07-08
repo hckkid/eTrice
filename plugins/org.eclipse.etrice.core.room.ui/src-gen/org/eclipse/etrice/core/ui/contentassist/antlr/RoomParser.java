@@ -66,6 +66,7 @@ public class RoomParser extends AbstractContentAssistParser {
 					put(grammarAccess.getDataClassAccess().getGroup_3(), "rule__DataClass__Group_3__0");
 					put(grammarAccess.getAttributeAccess().getGroup(), "rule__Attribute__Group__0");
 					put(grammarAccess.getAttributeAccess().getGroup_2(), "rule__Attribute__Group_2__0");
+					put(grammarAccess.getAttributeAccess().getGroup_5(), "rule__Attribute__Group_5__0");
 					put(grammarAccess.getOperationAccess().getGroup(), "rule__Operation__Group__0");
 					put(grammarAccess.getOperationAccess().getGroup_3(), "rule__Operation__Group_3__0");
 					put(grammarAccess.getOperationAccess().getGroup_3_1(), "rule__Operation__Group_3_1__0");
@@ -177,7 +178,8 @@ public class RoomParser extends AbstractContentAssistParser {
 					put(grammarAccess.getAttributeAccess().getNameAssignment_1(), "rule__Attribute__NameAssignment_1");
 					put(grammarAccess.getAttributeAccess().getSizeAssignment_2_1(), "rule__Attribute__SizeAssignment_2_1");
 					put(grammarAccess.getAttributeAccess().getTypeAssignment_4(), "rule__Attribute__TypeAssignment_4");
-					put(grammarAccess.getAttributeAccess().getDocuAssignment_5(), "rule__Attribute__DocuAssignment_5");
+					put(grammarAccess.getAttributeAccess().getDefaultValueLiteralAssignment_5_1(), "rule__Attribute__DefaultValueLiteralAssignment_5_1");
+					put(grammarAccess.getAttributeAccess().getDocuAssignment_6(), "rule__Attribute__DocuAssignment_6");
 					put(grammarAccess.getOperationAccess().getNameAssignment_1(), "rule__Operation__NameAssignment_1");
 					put(grammarAccess.getOperationAccess().getArgumentsAssignment_3_0(), "rule__Operation__ArgumentsAssignment_3_0");
 					put(grammarAccess.getOperationAccess().getArgumentsAssignment_3_1_1(), "rule__Operation__ArgumentsAssignment_3_1_1");

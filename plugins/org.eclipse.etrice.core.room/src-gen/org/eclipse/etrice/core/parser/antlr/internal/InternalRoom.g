@@ -788,19 +788,41 @@ ruleAttribute returns [EObject current=null]
 	    }
 
 )
-)(
+)(	otherlv_7='=' 
+    {
+    	newLeafNode(otherlv_7, grammarAccess.getAttributeAccess().getEqualsSignKeyword_5_0());
+    }
+(
+(
+		lv_defaultValueLiteral_8_0=RULE_STRING
+		{
+			newLeafNode(lv_defaultValueLiteral_8_0, grammarAccess.getAttributeAccess().getDefaultValueLiteralSTRINGTerminalRuleCall_5_1_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getAttributeRule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"defaultValueLiteral",
+        		lv_defaultValueLiteral_8_0, 
+        		"STRING");
+	    }
+
+)
+))?(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getAttributeAccess().getDocuDocumentationParserRuleCall_5_0()); 
+	        newCompositeNode(grammarAccess.getAttributeAccess().getDocuDocumentationParserRuleCall_6_0()); 
 	    }
-		lv_docu_7_0=ruleDocumentation		{
+		lv_docu_9_0=ruleDocumentation		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getAttributeRule());
 	        }
        		set(
        			$current, 
        			"docu",
-        		lv_docu_7_0, 
+        		lv_docu_9_0, 
         		"Documentation");
 	        afterParserOrEnumRuleCall();
 	    }

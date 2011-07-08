@@ -83,6 +83,13 @@ public «IF ac.abstract»abstract «ENDIF»class «ac.name» extends «IF ac.base!=null
 		«ENDIF»
 		setClassName("«ac.name»");
 		
+		// instantiate data class attributes
+		«FOREACH ac.attributes AS a-»
+			«IF a.type.type!=null-»
+				«a.name» = new «a.type.type.name»();
+			«ENDIF-»
+		«ENDFOREACH-»
+
 		// own ports«FOREACH ac.getEndPorts() AS ep»
 		«ep.name» = new «ep.getPortClassName()»(this, "«ep.name»", IFITEM_«ep.name», «IF ep.multiplicity==1»0, «ENDIF»port_addr[IFITEM_«ep.name»]«IF ep.multiplicity==1»[0]«ENDIF», peer_addr[IFITEM_«ep.name»]«IF ep.multiplicity==1»[0]«ENDIF»); 
 		«ENDFOREACH»

@@ -40,6 +40,30 @@ public class «dc.name»«IF dc.base!=null» extends «dc.base.name»«ENDIF» {
 	«EXPAND ProcedureHelpers::Attributes FOR dc.attributes»
 	«EXPAND ProcedureHelpers::AttributeSettersGetters FOR dc.attributes»
 	«EXPAND ProcedureHelpers::Operations FOR dc.operations»
+	
+	// default constructor
+	public «dc.name»() {
+		«FOREACH dc.attributes AS a-»
+			«IF a.defaultValueLiteral!=null-»
+				«a.name» = «a.defaultValueLiteral»;
+			«ELSEIF a.type.type!=null-»
+				«a.name» = new «a.type.type.name»();
+			«ENDIF-»
+		«ENDFOREACH-»
+	}
+	
+	// deep copy
+	public «dc.name» deepCopy() {
+		«dc.name» copy = new «dc.name»();
+		«FOREACH dc.attributes AS a-»
+			«IF a.type.type!=null-»
+				copy.«a.name» = «a.name».deepCopy();
+			«ELSE-»
+				copy.«a.name» = «a.name»;
+			«ENDIF-»
+		«ENDFOREACH-»
+		return copy;
+	}
 };
 «ENDFILE»
 «ENDFOREACH»

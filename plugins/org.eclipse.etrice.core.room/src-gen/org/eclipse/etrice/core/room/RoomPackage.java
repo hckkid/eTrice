@@ -594,13 +594,22 @@ public interface RoomPackage extends EPackage
   int ATTRIBUTE__TYPE = 2;
 
   /**
+   * The feature id for the '<em><b>Default Value Literal</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATTRIBUTE__DEFAULT_VALUE_LITERAL = 3;
+
+  /**
    * The feature id for the '<em><b>Docu</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ATTRIBUTE__DOCU = 3;
+  int ATTRIBUTE__DOCU = 4;
 
   /**
    * The number of structural features of the '<em>Attribute</em>' class.
@@ -609,7 +618,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ATTRIBUTE_FEATURE_COUNT = 4;
+  int ATTRIBUTE_FEATURE_COUNT = 5;
 
   /**
    * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.OperationImpl <em>Operation</em>}' class.
@@ -3687,6 +3696,17 @@ public interface RoomPackage extends EPackage
   EReference getAttribute_Type();
 
   /**
+   * Returns the meta object for the attribute '{@link org.eclipse.etrice.core.room.Attribute#getDefaultValueLiteral <em>Default Value Literal</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Default Value Literal</em>'.
+   * @see org.eclipse.etrice.core.room.Attribute#getDefaultValueLiteral()
+   * @see #getAttribute()
+   * @generated
+   */
+  EAttribute getAttribute_DefaultValueLiteral();
+
+  /**
    * Returns the meta object for the containment reference '{@link org.eclipse.etrice.core.room.Attribute#getDocu <em>Docu</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -5746,6 +5766,14 @@ public interface RoomPackage extends EPackage
      * @generated
      */
     EReference ATTRIBUTE__TYPE = eINSTANCE.getAttribute_Type();
+
+    /**
+     * The meta object literal for the '<em><b>Default Value Literal</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute ATTRIBUTE__DEFAULT_VALUE_LITERAL = eINSTANCE.getAttribute_DefaultValueLiteral();
 
     /**
      * The meta object literal for the '<em><b>Docu</b></em>' containment reference feature.

@@ -30,6 +30,7 @@ import org.eclipse.etrice.core.room.Type;
  *   <li>{@link org.eclipse.etrice.core.room.impl.AttributeImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.AttributeImpl#getSize <em>Size</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.AttributeImpl#getType <em>Type</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.impl.AttributeImpl#getDefaultValueLiteral <em>Default Value Literal</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.AttributeImpl#getDocu <em>Docu</em>}</li>
  * </ul>
  * </p>
@@ -87,6 +88,26 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
    * @ordered
    */
   protected Type type;
+
+  /**
+   * The default value of the '{@link #getDefaultValueLiteral() <em>Default Value Literal</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getDefaultValueLiteral()
+   * @generated
+   * @ordered
+   */
+  protected static final String DEFAULT_VALUE_LITERAL_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getDefaultValueLiteral() <em>Default Value Literal</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getDefaultValueLiteral()
+   * @generated
+   * @ordered
+   */
+  protected String defaultValueLiteral = DEFAULT_VALUE_LITERAL_EDEFAULT;
 
   /**
    * The cached value of the '{@link #getDocu() <em>Docu</em>}' containment reference.
@@ -218,6 +239,29 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
    * <!-- end-user-doc -->
    * @generated
    */
+  public String getDefaultValueLiteral()
+  {
+    return defaultValueLiteral;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setDefaultValueLiteral(String newDefaultValueLiteral)
+  {
+    String oldDefaultValueLiteral = defaultValueLiteral;
+    defaultValueLiteral = newDefaultValueLiteral;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.ATTRIBUTE__DEFAULT_VALUE_LITERAL, oldDefaultValueLiteral, defaultValueLiteral));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public Documentation getDocu()
   {
     return docu;
@@ -295,6 +339,8 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
         return getSize();
       case RoomPackage.ATTRIBUTE__TYPE:
         return getType();
+      case RoomPackage.ATTRIBUTE__DEFAULT_VALUE_LITERAL:
+        return getDefaultValueLiteral();
       case RoomPackage.ATTRIBUTE__DOCU:
         return getDocu();
     }
@@ -319,6 +365,9 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
         return;
       case RoomPackage.ATTRIBUTE__TYPE:
         setType((Type)newValue);
+        return;
+      case RoomPackage.ATTRIBUTE__DEFAULT_VALUE_LITERAL:
+        setDefaultValueLiteral((String)newValue);
         return;
       case RoomPackage.ATTRIBUTE__DOCU:
         setDocu((Documentation)newValue);
@@ -346,6 +395,9 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
       case RoomPackage.ATTRIBUTE__TYPE:
         setType((Type)null);
         return;
+      case RoomPackage.ATTRIBUTE__DEFAULT_VALUE_LITERAL:
+        setDefaultValueLiteral(DEFAULT_VALUE_LITERAL_EDEFAULT);
+        return;
       case RoomPackage.ATTRIBUTE__DOCU:
         setDocu((Documentation)null);
         return;
@@ -369,6 +421,8 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
         return size != SIZE_EDEFAULT;
       case RoomPackage.ATTRIBUTE__TYPE:
         return type != null;
+      case RoomPackage.ATTRIBUTE__DEFAULT_VALUE_LITERAL:
+        return DEFAULT_VALUE_LITERAL_EDEFAULT == null ? defaultValueLiteral != null : !DEFAULT_VALUE_LITERAL_EDEFAULT.equals(defaultValueLiteral);
       case RoomPackage.ATTRIBUTE__DOCU:
         return docu != null;
     }
@@ -390,6 +444,8 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
     result.append(name);
     result.append(", size: ");
     result.append(size);
+    result.append(", defaultValueLiteral: ");
+    result.append(defaultValueLiteral);
     result.append(')');
     return result.toString();
   }

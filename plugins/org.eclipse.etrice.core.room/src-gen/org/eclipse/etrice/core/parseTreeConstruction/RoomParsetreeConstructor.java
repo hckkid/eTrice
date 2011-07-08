@@ -1916,11 +1916,11 @@ protected class DataClass_RightCurlyBracketKeyword_8 extends KeywordToken  {
 /************ begin Rule Attribute ****************
  *
  * Attribute:
- * 	"Attribute" name=ID ("[" size=INT "]")? ":" type=Type docu=Documentation?;
+ * 	"Attribute" name=ID ("[" size=INT "]")? ":" type=Type ("=" defaultValueLiteral=STRING)? docu=Documentation?;
  *
  **/
 
-// "Attribute" name=ID ("[" size=INT "]")? ":" type=Type docu=Documentation?
+// "Attribute" name=ID ("[" size=INT "]")? ":" type=Type ("=" defaultValueLiteral=STRING)? docu=Documentation?
 protected class Attribute_Group extends GroupToken {
 	
 	public Attribute_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1935,8 +1935,9 @@ protected class Attribute_Group extends GroupToken {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Attribute_DocuAssignment_5(lastRuleCallOrigin, this, 0, inst);
-			case 1: return new Attribute_TypeAssignment_4(lastRuleCallOrigin, this, 1, inst);
+			case 0: return new Attribute_DocuAssignment_6(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new Attribute_Group_5(lastRuleCallOrigin, this, 1, inst);
+			case 2: return new Attribute_TypeAssignment_4(lastRuleCallOrigin, this, 2, inst);
 			default: return null;
 		}	
 	}
@@ -2175,16 +2176,95 @@ protected class Attribute_TypeAssignment_4 extends AssignmentToken  {
 	}	
 }
 
-// docu=Documentation?
-protected class Attribute_DocuAssignment_5 extends AssignmentToken  {
+// ("=" defaultValueLiteral=STRING)?
+protected class Attribute_Group_5 extends GroupToken {
 	
-	public Attribute_DocuAssignment_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public Attribute_Group_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getAttributeAccess().getGroup_5();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new Attribute_DefaultValueLiteralAssignment_5_1(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// "="
+protected class Attribute_EqualsSignKeyword_5_0 extends KeywordToken  {
+	
+	public Attribute_EqualsSignKeyword_5_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getAttributeAccess().getEqualsSignKeyword_5_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new Attribute_TypeAssignment_4(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// defaultValueLiteral=STRING
+protected class Attribute_DefaultValueLiteralAssignment_5_1 extends AssignmentToken  {
+	
+	public Attribute_DefaultValueLiteralAssignment_5_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getAttributeAccess().getDocuAssignment_5();
+		return grammarAccess.getAttributeAccess().getDefaultValueLiteralAssignment_5_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new Attribute_EqualsSignKeyword_5_0(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("defaultValueLiteral",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("defaultValueLiteral");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getAttributeAccess().getDefaultValueLiteralSTRINGTerminalRuleCall_5_1_0(), value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
+			element = grammarAccess.getAttributeAccess().getDefaultValueLiteralSTRINGTerminalRuleCall_5_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+
+// docu=Documentation?
+protected class Attribute_DocuAssignment_6 extends AssignmentToken  {
+	
+	public Attribute_DocuAssignment_6(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getAttributeAccess().getDocuAssignment_6();
 	}
 
     @Override
@@ -2203,7 +2283,7 @@ protected class Attribute_DocuAssignment_5 extends AssignmentToken  {
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getDocumentationRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getAttributeAccess().getDocuDocumentationParserRuleCall_5_0(); 
+				element = grammarAccess.getAttributeAccess().getDocuDocumentationParserRuleCall_6_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -2215,7 +2295,8 @@ protected class Attribute_DocuAssignment_5 extends AssignmentToken  {
 	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new Attribute_TypeAssignment_4(lastRuleCallOrigin, next, actIndex, consumed);
+			case 0: return new Attribute_Group_5(lastRuleCallOrigin, next, actIndex, consumed);
+			case 1: return new Attribute_TypeAssignment_4(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	

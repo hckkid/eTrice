@@ -76,7 +76,7 @@ DataClass:
 	'}';
 
 Attribute:
-	'Attribute' name=ID ('[' size=INT ']')? ':' type=Type (docu=Documentation)?;
+	'Attribute' name=ID ('[' size=INT ']')? ':' type=Type ('=' defaultValueLiteral=STRING)? (docu=Documentation)?;
 
 // TODOHRR: pass arguments and return value by value/reference
 Operation:

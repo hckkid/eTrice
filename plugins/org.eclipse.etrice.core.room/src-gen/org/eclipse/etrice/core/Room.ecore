@@ -100,6 +100,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="size" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//Type"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="defaultValueLiteral" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="docu" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//Documentation"
         containment="true"/>
   </eClassifiers>
