@@ -39,7 +39,6 @@ import org.eclipse.etrice.core.room.SAPRef;
 import org.eclipse.etrice.core.room.SPPRef;
 import org.eclipse.etrice.core.room.ServiceImplementation;
 import org.eclipse.etrice.core.room.Type;
-import org.eclipse.etrice.core.room.TypedID;
 
 /**
  * Provides labels for a EObjects.
@@ -269,12 +268,8 @@ public class RoomLabelProvider extends DefaultEObjectLabelProvider {
 	
 	String text(Message m) {
 		String signature = "";
-		for (TypedID arg : m.getArguments()) {
-			if (signature.isEmpty())
-				signature = arg.getName()+":"+getName(arg.getType());
-			else
-				signature += ","+arg.getName()+":"+getName(arg.getType());
-		}
+		if (m.getData()!=null)
+			signature = m.getData().getName()+":"+getName(m.getData().getType());
 		signature = "("+signature+")";
 		return m.getName()+signature;
 	}

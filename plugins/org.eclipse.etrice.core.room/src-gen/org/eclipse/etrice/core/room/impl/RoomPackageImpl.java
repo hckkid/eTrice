@@ -1235,7 +1235,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getMessage_Arguments()
+  public EReference getMessage_Data()
   {
     return (EReference)messageEClass.getEStructuralFeatures().get(1);
   }
@@ -2741,7 +2741,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
 
     messageEClass = createEClass(MESSAGE);
     createEAttribute(messageEClass, MESSAGE__NAME);
-    createEReference(messageEClass, MESSAGE__ARGUMENTS);
+    createEReference(messageEClass, MESSAGE__DATA);
     createEReference(messageEClass, MESSAGE__DOCU);
 
     portClassEClass = createEClass(PORT_CLASS);
@@ -3078,7 +3078,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
 
     initEClass(messageEClass, Message.class, "Message", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getMessage_Name(), ecorePackage.getEString(), "name", null, 0, 1, Message.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getMessage_Arguments(), this.getTypedID(), null, "arguments", null, 0, -1, Message.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getMessage_Data(), this.getTypedID(), null, "data", null, 0, 1, Message.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getMessage_Docu(), this.getDocumentation(), null, "docu", null, 0, 1, Message.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(portClassEClass, PortClass.class, "PortClass", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

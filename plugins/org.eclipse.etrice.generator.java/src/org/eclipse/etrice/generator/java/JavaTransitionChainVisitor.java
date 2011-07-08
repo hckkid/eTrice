@@ -12,9 +12,6 @@
 
 package org.eclipse.etrice.generator.java;
 
-import java.util.List;
-
-
 import org.eclipse.etrice.core.room.CPBranchTransition;
 import org.eclipse.etrice.core.room.ContinuationTransition;
 import org.eclipse.etrice.core.room.InitialTransition;
@@ -37,9 +34,9 @@ public class JavaTransitionChainVisitor implements ITransitionChainVisitor {
 		
 		if (tc.getTransition() instanceof TriggeredTransition) {
 			// we rely on the previous checking during the generator model creation
-			List<TypedID> args = ((TriggeredTransition)tc.getTransition()).getTriggers().get(0).getMsgFromIfPairs().get(0).getMessage().getArguments();
+			TypedID data = ((TriggeredTransition)tc.getTransition()).getTriggers().get(0).getMsgFromIfPairs().get(0).getMessage().getData();
 			
-			String[] result = JavaGenerator.getArglistAndTypedData(args);
+			String[] result = JavaGenerator.getArglistAndTypedData(data);
 			dataArg = result[0];
 			typedData = result[1];
 		}

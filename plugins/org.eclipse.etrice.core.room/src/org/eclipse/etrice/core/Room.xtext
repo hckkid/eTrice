@@ -31,7 +31,7 @@ RoomModel :
 		actorClasses+=ActorClass  |
 		subSystemClasses+=SubSystemClass |
 		systems+=LogicalSystem
-	)+
+	)*
 	'}'
 ;
 
@@ -100,7 +100,7 @@ ProtocolClass:
 	'}';
 	
 Message:
-	'Message' name=ID '(' (arguments+=TypedID (',' arguments+=TypedID)*)? ')'
+	'Message' name=ID '(' (data=TypedID)? ')'
 	(docu=Documentation)?;
 
 PortClass:

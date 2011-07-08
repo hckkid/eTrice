@@ -25,12 +25,12 @@ public class EventWithDataMessageTest extends TestCase {
 		
 		assertEquals(123, msg1.getEvtId());
 		assertEquals(456, msg2.getEvtId());
-		assertEquals("abc", msg1.getData()[0]);
-		assertEquals("def", msg2.getData()[0]);
+		assertEquals("abc", msg1.getData());
+		assertEquals("def", msg2.getData());
 	}
 	
 	public void testToString() {
 		EventWithDataMessage msg = new EventWithDataMessage(new Address(1,2,3), 789, "eTrice");
-		assertEquals("EventWithDataMessage(Address(nodeID=1,threadID=2,objectID=3), evt=789, data=eTrice)", msg.toString());
+		assertEquals("EventWithDataMessage(Address(nodeID=1,threadID=2,objectID=3), evt=789, data=(eTrice))", msg.toString());
 	}
 }

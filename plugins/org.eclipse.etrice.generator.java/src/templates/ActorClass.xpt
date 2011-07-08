@@ -119,7 +119,7 @@ public «IF ac.abstract»abstract «ENDIF»class «ac.name» extends «IF ac.base!=null
 	«ELSEIF !xpac.hasStateMachine()»
 		//--------------------- no state machine
 		@Override
-		public void receiveEvent(InterfaceItemBase ifitem, int evt, Object... data) {
+		public void receiveEvent(InterfaceItemBase ifitem, int evt, Object data) {
 		handleSystemEvent(ifitem, evt, data);
 		}
 		
@@ -135,5 +135,5 @@ public «IF ac.abstract»abstract «ENDIF»class «ac.name» extends «IF ac.base!=null
 «ENDDEFINE»
 
 «DEFINE msgArgs FOR Message»
-«FOREACH this.arguments AS a SEPARATOR ", "»«a.defaultValue()»«ENDFOREACH»
+«IF this.data!=null»«this.data.defaultValue()»«ENDIF»
 «ENDDEFINE»

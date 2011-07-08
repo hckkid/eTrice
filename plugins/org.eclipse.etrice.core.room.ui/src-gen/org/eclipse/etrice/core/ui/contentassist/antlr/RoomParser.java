@@ -77,8 +77,6 @@ public class RoomParser extends AbstractContentAssistParser {
 					put(grammarAccess.getProtocolClassAccess().getGroup_15(), "rule__ProtocolClass__Group_15__0");
 					put(grammarAccess.getProtocolClassAccess().getGroup_16(), "rule__ProtocolClass__Group_16__0");
 					put(grammarAccess.getMessageAccess().getGroup(), "rule__Message__Group__0");
-					put(grammarAccess.getMessageAccess().getGroup_3(), "rule__Message__Group_3__0");
-					put(grammarAccess.getMessageAccess().getGroup_3_1(), "rule__Message__Group_3_1__0");
 					put(grammarAccess.getPortClassAccess().getGroup(), "rule__PortClass__Group__0");
 					put(grammarAccess.getPortClassAccess().getGroup_1(), "rule__PortClass__Group_1__0");
 					put(grammarAccess.getMessageHandlerAccess().getGroup(), "rule__MessageHandler__Group__0");
@@ -197,8 +195,7 @@ public class RoomParser extends AbstractContentAssistParser {
 					put(grammarAccess.getProtocolClassAccess().getConjugateAssignment_16_2(), "rule__ProtocolClass__ConjugateAssignment_16_2");
 					put(grammarAccess.getProtocolClassAccess().getSemanticsAssignment_17(), "rule__ProtocolClass__SemanticsAssignment_17");
 					put(grammarAccess.getMessageAccess().getNameAssignment_1(), "rule__Message__NameAssignment_1");
-					put(grammarAccess.getMessageAccess().getArgumentsAssignment_3_0(), "rule__Message__ArgumentsAssignment_3_0");
-					put(grammarAccess.getMessageAccess().getArgumentsAssignment_3_1_1(), "rule__Message__ArgumentsAssignment_3_1_1");
+					put(grammarAccess.getMessageAccess().getDataAssignment_3(), "rule__Message__DataAssignment_3");
 					put(grammarAccess.getMessageAccess().getDocuAssignment_5(), "rule__Message__DocuAssignment_5");
 					put(grammarAccess.getPortClassAccess().getUserCodeAssignment_1_1(), "rule__PortClass__UserCodeAssignment_1_1");
 					put(grammarAccess.getPortClassAccess().getAttributesAssignment_2_0(), "rule__PortClass__AttributesAssignment_2_0");

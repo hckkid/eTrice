@@ -6,21 +6,14 @@
  */
 package org.eclipse.etrice.core.room.impl;
 
-import java.util.Collection;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
-import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipse.etrice.core.room.Documentation;
 import org.eclipse.etrice.core.room.Message;
@@ -35,7 +28,7 @@ import org.eclipse.etrice.core.room.TypedID;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.room.impl.MessageImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.room.impl.MessageImpl#getArguments <em>Arguments</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.impl.MessageImpl#getData <em>Data</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.MessageImpl#getDocu <em>Docu</em>}</li>
  * </ul>
  * </p>
@@ -65,14 +58,14 @@ public class MessageImpl extends MinimalEObjectImpl.Container implements Message
   protected String name = NAME_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getArguments() <em>Arguments</em>}' containment reference list.
+   * The cached value of the '{@link #getData() <em>Data</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getArguments()
+   * @see #getData()
    * @generated
    * @ordered
    */
-  protected EList<TypedID> arguments;
+  protected TypedID data;
 
   /**
    * The cached value of the '{@link #getDocu() <em>Docu</em>}' containment reference.
@@ -133,13 +126,47 @@ public class MessageImpl extends MinimalEObjectImpl.Container implements Message
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<TypedID> getArguments()
+  public TypedID getData()
   {
-    if (arguments == null)
+    return data;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetData(TypedID newData, NotificationChain msgs)
+  {
+    TypedID oldData = data;
+    data = newData;
+    if (eNotificationRequired())
     {
-      arguments = new EObjectContainmentEList<TypedID>(TypedID.class, this, RoomPackage.MESSAGE__ARGUMENTS);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RoomPackage.MESSAGE__DATA, oldData, newData);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
     }
-    return arguments;
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setData(TypedID newData)
+  {
+    if (newData != data)
+    {
+      NotificationChain msgs = null;
+      if (data != null)
+        msgs = ((InternalEObject)data).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RoomPackage.MESSAGE__DATA, null, msgs);
+      if (newData != null)
+        msgs = ((InternalEObject)newData).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RoomPackage.MESSAGE__DATA, null, msgs);
+      msgs = basicSetData(newData, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.MESSAGE__DATA, newData, newData));
   }
 
   /**
@@ -200,8 +227,8 @@ public class MessageImpl extends MinimalEObjectImpl.Container implements Message
   {
     switch (featureID)
     {
-      case RoomPackage.MESSAGE__ARGUMENTS:
-        return ((InternalEList<?>)getArguments()).basicRemove(otherEnd, msgs);
+      case RoomPackage.MESSAGE__DATA:
+        return basicSetData(null, msgs);
       case RoomPackage.MESSAGE__DOCU:
         return basicSetDocu(null, msgs);
     }
@@ -220,8 +247,8 @@ public class MessageImpl extends MinimalEObjectImpl.Container implements Message
     {
       case RoomPackage.MESSAGE__NAME:
         return getName();
-      case RoomPackage.MESSAGE__ARGUMENTS:
-        return getArguments();
+      case RoomPackage.MESSAGE__DATA:
+        return getData();
       case RoomPackage.MESSAGE__DOCU:
         return getDocu();
     }
@@ -233,7 +260,6 @@ public class MessageImpl extends MinimalEObjectImpl.Container implements Message
    * <!-- end-user-doc -->
    * @generated
    */
-  @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
@@ -242,9 +268,8 @@ public class MessageImpl extends MinimalEObjectImpl.Container implements Message
       case RoomPackage.MESSAGE__NAME:
         setName((String)newValue);
         return;
-      case RoomPackage.MESSAGE__ARGUMENTS:
-        getArguments().clear();
-        getArguments().addAll((Collection<? extends TypedID>)newValue);
+      case RoomPackage.MESSAGE__DATA:
+        setData((TypedID)newValue);
         return;
       case RoomPackage.MESSAGE__DOCU:
         setDocu((Documentation)newValue);
@@ -266,8 +291,8 @@ public class MessageImpl extends MinimalEObjectImpl.Container implements Message
       case RoomPackage.MESSAGE__NAME:
         setName(NAME_EDEFAULT);
         return;
-      case RoomPackage.MESSAGE__ARGUMENTS:
-        getArguments().clear();
+      case RoomPackage.MESSAGE__DATA:
+        setData((TypedID)null);
         return;
       case RoomPackage.MESSAGE__DOCU:
         setDocu((Documentation)null);
@@ -288,8 +313,8 @@ public class MessageImpl extends MinimalEObjectImpl.Container implements Message
     {
       case RoomPackage.MESSAGE__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-      case RoomPackage.MESSAGE__ARGUMENTS:
-        return arguments != null && !arguments.isEmpty();
+      case RoomPackage.MESSAGE__DATA:
+        return data != null;
       case RoomPackage.MESSAGE__DOCU:
         return docu != null;
     }

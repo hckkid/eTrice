@@ -18,14 +18,14 @@ import org.eclipse.etrice.runtime.java.messaging.Address;
  */
 public class EventWithDataMessage extends EventMessage {
 
-	private Object[] data;
+	private Object data = null;
 
-	public EventWithDataMessage(Address address, int evtId, Object... data) {
+	public EventWithDataMessage(Address address, int evtId, Object data) {
 		super(address, evtId);
 		this.data = data;
 	}
 
-	public Object[] getData() {
+	public Object getData() {
 		return data;
 	}
 	
@@ -35,17 +35,9 @@ public class EventWithDataMessage extends EventMessage {
 	}
 	
 	public String dataToString() {
-		if (data.length==0)
-			return "";
-
-		String res = "(";
-		for (int i = 0; i < data.length; i++) {
-			res += data[i];
-			if (i<data.length-1)
-				res += "; ";
-		}
-		res += ")";
+		if (data==null)
+			return "()";
 		
-		return res;
+		return "("+data+")";
 	}
 }

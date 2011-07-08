@@ -804,13 +804,13 @@ public interface RoomPackage extends EPackage
   int MESSAGE__NAME = 0;
 
   /**
-   * The feature id for the '<em><b>Arguments</b></em>' containment reference list.
+   * The feature id for the '<em><b>Data</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int MESSAGE__ARGUMENTS = 1;
+  int MESSAGE__DATA = 1;
 
   /**
    * The feature id for the '<em><b>Docu</b></em>' containment reference.
@@ -3882,15 +3882,15 @@ public interface RoomPackage extends EPackage
   EAttribute getMessage_Name();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.room.Message#getArguments <em>Arguments</em>}'.
+   * Returns the meta object for the containment reference '{@link org.eclipse.etrice.core.room.Message#getData <em>Data</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Arguments</em>'.
-   * @see org.eclipse.etrice.core.room.Message#getArguments()
+   * @return the meta object for the containment reference '<em>Data</em>'.
+   * @see org.eclipse.etrice.core.room.Message#getData()
    * @see #getMessage()
    * @generated
    */
-  EReference getMessage_Arguments();
+  EReference getMessage_Data();
 
   /**
    * Returns the meta object for the containment reference '{@link org.eclipse.etrice.core.room.Message#getDocu <em>Docu</em>}'.
@@ -5898,12 +5898,12 @@ public interface RoomPackage extends EPackage
     EAttribute MESSAGE__NAME = eINSTANCE.getMessage_Name();
 
     /**
-     * The meta object literal for the '<em><b>Arguments</b></em>' containment reference list feature.
+     * The meta object literal for the '<em><b>Data</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference MESSAGE__ARGUMENTS = eINSTANCE.getMessage_Arguments();
+    EReference MESSAGE__DATA = eINSTANCE.getMessage_Data();
 
     /**
      * The meta object literal for the '<em><b>Docu</b></em>' containment reference feature.

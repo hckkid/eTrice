@@ -143,7 +143,7 @@ public class AbstractRoomProposalProvider extends TerminalsProposalProvider {
 	public void completeMessage_Name(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		completeRuleCall(((RuleCall)assignment.getTerminal()), context, acceptor);
 	}
-	public void completeMessage_Arguments(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+	public void completeMessage_Data(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		completeRuleCall(((RuleCall)assignment.getTerminal()), context, acceptor);
 	}
 	public void completeMessage_Docu(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {

@@ -52,7 +52,7 @@ public class «comp.name» extends SubSystemClassBase{
 	}
 	
 	@Override
-	public void receiveEvent(InterfaceItemBase ifitem, int evt, Object... data){
+	public void receiveEvent(InterfaceItemBase ifitem, int evt, Object data){
 	}
 	
 	@Override	

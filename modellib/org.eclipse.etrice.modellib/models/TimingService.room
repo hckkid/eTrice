@@ -128,14 +128,14 @@ RoomModel room.basic.service.timing {
 			handle Start {
 				"//regular PortClass handle start
 				EventWithDataMessage dataMsg = (EventWithDataMessage) msg;
-				TimerData td = (TimerData)dataMsg.getData()[0];
+				TimerData td = (TimerData)dataMsg.getData();
 				task = new FireTimerTask(td.time, td.id, this);
 				getActor().receiveEvent(this, IN_Start, td.time);"
 			}
 			handle Kill {
 				"//regular PortClass handle kill
 				EventWithDataMessage dataMsg = (EventWithDataMessage) msg;
-				int id = (Integer)dataMsg.getData()[0];
+				int id = (Integer)dataMsg.getData();
 				if (task!=null && task.getId()==id) {
 					task.cancel();
 				}"
@@ -158,9 +158,9 @@ RoomModel room.basic.service.timing {
 			handle timerTick {
 				"//conjugate PortClass handle timer
 				EventWithDataMessage dataMsg = (EventWithDataMessage) msg;
-				int id = (Integer)dataMsg.getData()[0];
+				int id = (Integer)dataMsg.getData();
 				if (active && id==currentId) {
-					getActor().receiveEvent(this, msg.getEvtId());
+					getActor().receiveEvent(this, msg.getEvtId(), null);
 				}"
 			}
 			handle Start {
@@ -247,14 +247,14 @@ RoomModel room.basic.service.timing {
 			handle Start {
 				"//regular PortClass handle start
 				EventWithDataMessage dataMsg = (EventWithDataMessage) msg;
-				TimeoutData td = (TimeoutData)dataMsg.getData()[0];
+				TimeoutData td = (TimeoutData)dataMsg.getData();
 				task = new FireTimeoutTask(td.time, td.id, this);
 				getActor().receiveEvent(this, IN_Start, td.time);"
 			}
 			handle Kill {
 				"//regular PortClass handle kill
 				EventWithDataMessage dataMsg = (EventWithDataMessage) msg;
-				int id = (Integer)dataMsg.getData()[0];
+				int id = (Integer)dataMsg.getData();
 				if (task!=null && task.getId()==id) {
 					task.cancel();
 				}"
@@ -277,10 +277,10 @@ RoomModel room.basic.service.timing {
 			handle timeoutTick {
 				"//conjugate PortClass handle timeout
 				EventWithDataMessage dataMsg = (EventWithDataMessage) msg;
-				int id = (Integer)dataMsg.getData()[0];
+				int id = (Integer)dataMsg.getData();
 				if (active && id==currentId) {
 					active = false;
-					getActor().receiveEvent(this, msg.getEvtId());
+					getActor().receiveEvent(this, msg.getEvtId(), null);
 				}"
 			}
 			handle Start {

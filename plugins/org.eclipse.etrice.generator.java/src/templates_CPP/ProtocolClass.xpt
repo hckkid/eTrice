@@ -153,6 +153,10 @@ static public class «name»Repl {
 		return replication;
 	}
 	
+	public int getIndexOf(InterfaceItemBase ifitem){
+			return ifitem.getIdx();
+		}
+	
 	public «name» get(int i) {
 		return ports.get(i);
 	}
@@ -195,8 +199,8 @@ public interface I«name»{
 «ENDLET»
 «ENDDEFINE»
 
-«DEFINE messageSignature FOR Message»public void «this.name» («FOREACH this.arguments AS a SEPARATOR "," »«a.type.typeName()» «a.name»«ENDFOREACH»)«ENDDEFINE»
-«DEFINE messageCall FOR Message»«this.name»(«FOREACH this.arguments AS a SEPARATOR ","» «a.name»«ENDFOREACH»)«ENDDEFINE»
+«DEFINE messageSignature FOR Message»public void «this.name» («IF this.data!=null»«this.data.type.typeName()» «this.data.name»«ENDIF»)«ENDDEFINE»
+«DEFINE messageCall FOR Message»«this.name»(«IF this.data!=null» «this.data.name»«ENDIF»)«ENDDEFINE»
 «DEFINE sendMessage(boolean conj) FOR Message-»
 «LET conj?"IN":"OUT" AS dir-»
 «LET this.getSendHandler(conj) AS hdlr-»
@@ -210,8 +214,8 @@ public interface I«name»{
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[«dir»_«this.name»]);
 			}
 			if (getPeerAddress()!=null)
-			«IF this.arguments.isEmpty»getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), «dir»_«this.name»));
-			«ELSE» getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), «dir»_«this.name», new Object[]{«FOREACH this.arguments AS a SEPARATOR ","» «a.name»«ENDFOREACH»}));
+			«IF this.data==null»getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), «dir»_«this.name»));
+			«ELSE» getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), «dir»_«this.name», «this.data.name»));
 			«ENDIF-»
 		«ENDIF-»
 	}

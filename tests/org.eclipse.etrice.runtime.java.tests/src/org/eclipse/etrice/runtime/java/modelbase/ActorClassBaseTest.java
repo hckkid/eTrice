@@ -48,7 +48,7 @@ public class ActorClassBaseTest extends TestCase {
 		public Address getAddress() {
 			return null;
 		}
-		public void receiveEvent(InterfaceItemBase ifitem, int evt, Object... data) {
+		public void receiveEvent(InterfaceItemBase ifitem, int evt, Object data) {
 		}
 		
 		@Override

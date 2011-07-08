@@ -71,7 +71,7 @@ public class RTSystemServicesProtocol {
 					getActor().receiveEvent(this, msg.getEvtId(),
 							((EventWithDataMessage) msg).getData());
 				else
-					getActor().receiveEvent(this, msg.getEvtId());
+					getActor().receiveEvent(this, msg.getEvtId(), null);
 
 			}
 		}
@@ -172,7 +172,7 @@ public class RTSystemServicesProtocol {
 					getActor().receiveEvent(this, msg.getEvtId(),
 							((EventWithDataMessage) msg).getData());
 				else
-					getActor().receiveEvent(this, msg.getEvtId());
+					getActor().receiveEvent(this, msg.getEvtId(), null);
 
 			}
 		}

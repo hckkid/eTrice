@@ -20,7 +20,7 @@
         <elements xsi:type="xtext:Assignment" cardinality="*" feature="imports" operator="+=">
           <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.69"/>
         </elements>
-        <elements xsi:type="xtext:Alternatives" cardinality="+">
+        <elements xsi:type="xtext:Alternatives" cardinality="*">
           <elements xsi:type="xtext:Assignment" feature="dataClasses" operator="+=">
             <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.9"/>
           </elements>
@@ -357,16 +357,8 @@
           <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
         </elements>
         <elements xsi:type="xtext:Keyword" value="("/>
-        <elements xsi:type="xtext:Group" cardinality="?">
-          <elements xsi:type="xtext:Assignment" feature="arguments" operator="+=">
-            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.5"/>
-          </elements>
-          <elements xsi:type="xtext:Group" cardinality="*">
-            <elements xsi:type="xtext:Keyword" value=","/>
-            <elements xsi:type="xtext:Assignment" feature="arguments" operator="+=">
-              <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.5"/>
-            </elements>
-          </elements>
+        <elements xsi:type="xtext:Assignment" cardinality="?" feature="data" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.5"/>
         </elements>
         <elements xsi:type="xtext:Keyword" value=")"/>
         <elements xsi:type="xtext:Assignment" cardinality="?" feature="docu" operator="=">

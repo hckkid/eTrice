@@ -234,7 +234,7 @@ ruleRoomModel returns [EObject current=null]
 	    }
 
 )
-))+	otherlv_10='}' 
+))*	otherlv_10='}' 
     {
     	newLeafNode(otherlv_10, grammarAccess.getRoomModelAccess().getRightCurlyBracketKeyword_6());
     }
@@ -1264,63 +1264,41 @@ ruleMessage returns [EObject current=null]
     {
     	newLeafNode(otherlv_2, grammarAccess.getMessageAccess().getLeftParenthesisKeyword_2());
     }
-((
+(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getMessageAccess().getArgumentsTypedIDParserRuleCall_3_0_0()); 
+	        newCompositeNode(grammarAccess.getMessageAccess().getDataTypedIDParserRuleCall_3_0()); 
 	    }
-		lv_arguments_3_0=ruleTypedID		{
+		lv_data_3_0=ruleTypedID		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getMessageRule());
 	        }
-       		add(
+       		set(
        			$current, 
-       			"arguments",
-        		lv_arguments_3_0, 
+       			"data",
+        		lv_data_3_0, 
         		"TypedID");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-)(	otherlv_4=',' 
+)?	otherlv_4=')' 
     {
-    	newLeafNode(otherlv_4, grammarAccess.getMessageAccess().getCommaKeyword_3_1_0());
-    }
-(
-(
-		{ 
-	        newCompositeNode(grammarAccess.getMessageAccess().getArgumentsTypedIDParserRuleCall_3_1_1_0()); 
-	    }
-		lv_arguments_5_0=ruleTypedID		{
-	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getMessageRule());
-	        }
-       		add(
-       			$current, 
-       			"arguments",
-        		lv_arguments_5_0, 
-        		"TypedID");
-	        afterParserOrEnumRuleCall();
-	    }
-
-)
-))*)?	otherlv_6=')' 
-    {
-    	newLeafNode(otherlv_6, grammarAccess.getMessageAccess().getRightParenthesisKeyword_4());
+    	newLeafNode(otherlv_4, grammarAccess.getMessageAccess().getRightParenthesisKeyword_4());
     }
 (
 (
 		{ 
 	        newCompositeNode(grammarAccess.getMessageAccess().getDocuDocumentationParserRuleCall_5_0()); 
 	    }
-		lv_docu_7_0=ruleDocumentation		{
+		lv_docu_5_0=ruleDocumentation		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getMessageRule());
 	        }
        		set(
        			$current, 
        			"docu",
-        		lv_docu_7_0, 
+        		lv_docu_5_0, 
         		"Documentation");
 	        afterParserOrEnumRuleCall();
 	    }

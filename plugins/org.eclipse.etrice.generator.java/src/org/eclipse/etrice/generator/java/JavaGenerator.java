@@ -12,10 +12,7 @@
 
 package org.eclipse.etrice.generator.java;
 
-import java.util.List;
-
 import org.eclipse.etrice.core.naming.RoomNameProvider;
-
 import org.eclipse.etrice.core.room.InitialTransition;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.MessageFromIf;
@@ -96,47 +93,41 @@ public class JavaGenerator {
 	}
 
 	public static String getArgumentList(Message m) {
-		return getArglistAndTypedData(m.getArguments())[0];
+		return getArglistAndTypedData(m.getData())[0];
 	}
 
 	public static String getTypedData(Message m) {
-		return getArglistAndTypedData(m.getArguments())[1];
+		return getArglistAndTypedData(m.getData())[1];
 	}
 
 	public static String getTypedArgumentList(Message m) {
-		return getArglistAndTypedData(m.getArguments())[2];
+		return getArglistAndTypedData(m.getData())[2];
 	}
 	
-	public static String[] getArglistAndTypedData(List<TypedID> args) {
-		String typedData = "";
-		String dataArg = "";
-		String typedArgList = "";
+	public static String[] getArglistAndTypedData(TypedID data) {
+		if (data==null)
+			return new String[] {"", "", ""};
 		
-		int i = 0;
-		for (TypedID tid : args) {
-			String t;
-			String ct;
-			Type type = tid.getType();
-			if (type.getType()==null) {
-				switch (type.getPrim()) {
-				case BOOLEAN: t = "boolean"; ct = "Boolean"; break;
-				case CHAR: t = "char"; ct = "Char"; break;
-				case FLOAT32: t = "float"; ct = "Float"; break;
-				case FLOAT64: t = "double"; ct = "Double"; break;
-				case INT32: t = "int"; ct = "Integer"; break;
-				default: t = "invalid Java data type"; ct = ""; assert(false): "Java doesn't support type "+type.getPrim().name()+"!";
-				}
+		String t;
+		String ct;
+		Type type = data.getType();
+		if (type.getType()==null) {
+			switch (type.getPrim()) {
+			case BOOLEAN: t = "boolean"; ct = "Boolean"; break;
+			case CHAR: t = "char"; ct = "Char"; break;
+			case FLOAT32: t = "float"; ct = "Float"; break;
+			case FLOAT64: t = "double"; ct = "Double"; break;
+			case INT32: t = "int"; ct = "Integer"; break;
+			default: t = "invalid Java data type"; ct = ""; assert(false): "Java doesn't support type "+type.getPrim().name()+"!";
 			}
-			else {
-				t = type.getType().getName();
-				ct = t;
-			}
-			typedData += t+" "+tid.getName() + " = ("+ct+") generic_data["+i+"];\n";
-			dataArg += ", "+tid.getName();
-			typedArgList += ", "+t+" "+tid.getName();
-			
-			++i;
 		}
+		else {
+			t = type.getType().getName();
+			ct = t;
+		}
+		String typedData = t+" "+data.getName() + " = ("+ct+") generic_data;\n";
+		String dataArg = ", "+data.getName();
+		String typedArgList = ", "+t+" "+data.getName();
 		
 		return new String[]{dataArg, typedData, typedArgList};
 	}

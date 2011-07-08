@@ -179,9 +179,9 @@ List[Transition] getTransitionList(State s): s.isLeaf()? {} : s.subgraph.getTran
 List[Transition] getTransitionList(StateGraph sg): sg.transitions.union(sg.states.getTransitionList());
 
 // transition data
-private boolean hasData(TriggeredTransition tt): !tt.triggers.msgFromIfPairs.message.select(e|!e.arguments.isEmpty).isEmpty;
-private String getDataTypeCast(TriggeredTransition tt): tt.triggers.msgFromIfPairs.message.select(e|!e.arguments.isEmpty).first().arguments.first().type.typeObjectName();
-private String getDataType(TriggeredTransition tt): tt.triggers.msgFromIfPairs.message.select(e|!e.arguments.isEmpty).first().arguments.first().type.typeName();
+private boolean hasData(TriggeredTransition tt): !tt.triggers.msgFromIfPairs.message.select(e|e.data!=null).isEmpty;
+private String getDataTypeCast(TriggeredTransition tt): tt.triggers.msgFromIfPairs.message.select(e|e.data!=null).first().data.type.typeObjectName();
+private String getDataType(TriggeredTransition tt): tt.triggers.msgFromIfPairs.message.select(e|e.data!=null).first().data.type.typeName();
 String getArgumentList(ExpandedActorClass xpac, Transition t): JAVA org.eclipse.etrice.generator.java.JavaGenerator.getArgumentList(org.eclipse.etrice.generator.etricegen.ExpandedActorClass, org.eclipse.etrice.core.room.Transition);
 String getTypedDataDefinition(Message m): JAVA org.eclipse.etrice.generator.java.JavaGenerator.getTypedData(org.eclipse.etrice.core.room.Message);
 

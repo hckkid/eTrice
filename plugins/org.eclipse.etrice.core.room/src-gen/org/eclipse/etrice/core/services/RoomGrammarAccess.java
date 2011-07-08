@@ -43,11 +43,11 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//RoomModel:
 		//	"RoomModel" name=FQN docu=Documentation? "{" imports+=Import* (dataClasses+=DataClass | protocolClasses+=ProtocolClass
-		//	| actorClasses+=ActorClass | subSystemClasses+=SubSystemClass | systems+=LogicalSystem)+ "}";
+		//	| actorClasses+=ActorClass | subSystemClasses+=SubSystemClass | systems+=LogicalSystem)* "}";
 		public ParserRule getRule() { return rule; }
 
 		//"RoomModel" name=FQN docu=Documentation? "{" imports+=Import* (dataClasses+=DataClass | protocolClasses+=ProtocolClass |
-		//actorClasses+=ActorClass | subSystemClasses+=SubSystemClass | systems+=LogicalSystem)+ "}"
+		//actorClasses+=ActorClass | subSystemClasses+=SubSystemClass | systems+=LogicalSystem)* "}"
 		public Group getGroup() { return cGroup; }
 
 		//"RoomModel"
@@ -75,7 +75,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		public RuleCall getImportsImportParserRuleCall_4_0() { return cImportsImportParserRuleCall_4_0; }
 
 		//(dataClasses+=DataClass | protocolClasses+=ProtocolClass | actorClasses+=ActorClass | subSystemClasses+=SubSystemClass |
-		//systems+=LogicalSystem)+
+		//systems+=LogicalSystem)*
 		public Alternatives getAlternatives_5() { return cAlternatives_5; }
 
 		//dataClasses+=DataClass
@@ -745,22 +745,17 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		private final Keyword cLeftParenthesisKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
-		private final Assignment cArgumentsAssignment_3_0 = (Assignment)cGroup_3.eContents().get(0);
-		private final RuleCall cArgumentsTypedIDParserRuleCall_3_0_0 = (RuleCall)cArgumentsAssignment_3_0.eContents().get(0);
-		private final Group cGroup_3_1 = (Group)cGroup_3.eContents().get(1);
-		private final Keyword cCommaKeyword_3_1_0 = (Keyword)cGroup_3_1.eContents().get(0);
-		private final Assignment cArgumentsAssignment_3_1_1 = (Assignment)cGroup_3_1.eContents().get(1);
-		private final RuleCall cArgumentsTypedIDParserRuleCall_3_1_1_0 = (RuleCall)cArgumentsAssignment_3_1_1.eContents().get(0);
+		private final Assignment cDataAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cDataTypedIDParserRuleCall_3_0 = (RuleCall)cDataAssignment_3.eContents().get(0);
 		private final Keyword cRightParenthesisKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		private final Assignment cDocuAssignment_5 = (Assignment)cGroup.eContents().get(5);
 		private final RuleCall cDocuDocumentationParserRuleCall_5_0 = (RuleCall)cDocuAssignment_5.eContents().get(0);
 		
 		//Message:
-		//	"Message" name=ID "(" (arguments+=TypedID ("," arguments+=TypedID)*)? ")" docu=Documentation?;
+		//	"Message" name=ID "(" data=TypedID? ")" docu=Documentation?;
 		public ParserRule getRule() { return rule; }
 
-		//"Message" name=ID "(" (arguments+=TypedID ("," arguments+=TypedID)*)? ")" docu=Documentation?
+		//"Message" name=ID "(" data=TypedID? ")" docu=Documentation?
 		public Group getGroup() { return cGroup; }
 
 		//"Message"
@@ -775,26 +770,11 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		//"("
 		public Keyword getLeftParenthesisKeyword_2() { return cLeftParenthesisKeyword_2; }
 
-		//(arguments+=TypedID ("," arguments+=TypedID)*)?
-		public Group getGroup_3() { return cGroup_3; }
-
-		//arguments+=TypedID
-		public Assignment getArgumentsAssignment_3_0() { return cArgumentsAssignment_3_0; }
+		//data=TypedID?
+		public Assignment getDataAssignment_3() { return cDataAssignment_3; }
 
 		//TypedID
-		public RuleCall getArgumentsTypedIDParserRuleCall_3_0_0() { return cArgumentsTypedIDParserRuleCall_3_0_0; }
-
-		//("," arguments+=TypedID)*
-		public Group getGroup_3_1() { return cGroup_3_1; }
-
-		//","
-		public Keyword getCommaKeyword_3_1_0() { return cCommaKeyword_3_1_0; }
-
-		//arguments+=TypedID
-		public Assignment getArgumentsAssignment_3_1_1() { return cArgumentsAssignment_3_1_1; }
-
-		//TypedID
-		public RuleCall getArgumentsTypedIDParserRuleCall_3_1_1_0() { return cArgumentsTypedIDParserRuleCall_3_1_1_0; }
+		public RuleCall getDataTypedIDParserRuleCall_3_0() { return cDataTypedIDParserRuleCall_3_0; }
 
 		//")"
 		public Keyword getRightParenthesisKeyword_4() { return cRightParenthesisKeyword_4; }
@@ -3834,7 +3814,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	
 	//RoomModel:
 	//	"RoomModel" name=FQN docu=Documentation? "{" imports+=Import* (dataClasses+=DataClass | protocolClasses+=ProtocolClass
-	//	| actorClasses+=ActorClass | subSystemClasses+=SubSystemClass | systems+=LogicalSystem)+ "}";
+	//	| actorClasses+=ActorClass | subSystemClasses+=SubSystemClass | systems+=LogicalSystem)* "}";
 	public RoomModelElements getRoomModelAccess() {
 		return (pRoomModel != null) ? pRoomModel : (pRoomModel = new RoomModelElements());
 	}
@@ -3985,7 +3965,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Message:
-	//	"Message" name=ID "(" (arguments+=TypedID ("," arguments+=TypedID)*)? ")" docu=Documentation?;
+	//	"Message" name=ID "(" data=TypedID? ")" docu=Documentation?;
 	public MessageElements getMessageAccess() {
 		return (pMessage != null) ? pMessage : (pMessage = new MessageElements());
 	}

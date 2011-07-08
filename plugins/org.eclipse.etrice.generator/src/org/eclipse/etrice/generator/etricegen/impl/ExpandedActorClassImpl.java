@@ -679,31 +679,29 @@ public class ExpandedActorClassImpl extends ActorClassImpl implements ExpandedAc
 		tc.setTransition(t);
 		
 		if (t instanceof TriggeredTransition) {
-			List<TypedID> args = null;
+			TypedID data = null;
 			boolean first = true;
 			for (Trigger tr : ((TriggeredTransition)t).getTriggers()) {
 				for (MessageFromIf mif : tr.getMsgFromIfPairs()) {
 					if (first) {
 						first = false;
-						args = mif.getMessage().getArguments();
+						data = mif.getMessage().getData();
 					}
 					else {
-						if (args.size()>0) {
-							if (mif.getMessage().getArguments().size()!=args.size()) {
+						if (data!=null) {
+							if (mif.getMessage().getData()==null) {
 								validationError("If one MessageFromIf has data all have to have data for a given transition!", t, RoomPackage.eINSTANCE.getTriggeredTransition_Triggers());
 							}
 							else {
-								for (TypedID arg : args) {
-									TypedID a = mif.getMessage().getArguments().get(0);
-									if (arg.getType().getPrim()!=a.getType().getPrim())
-										validationError("The data types of all MessageFromIf have to be the same!", t, RoomPackage.eINSTANCE.getTriggeredTransition_Triggers());
-									if (arg.getType().getType()!=a.getType().getType())
-										validationError("The data types of all MessageFromIf have to be the same!", t, RoomPackage.eINSTANCE.getTriggeredTransition_Triggers());
-								}
+								TypedID a = mif.getMessage().getData();
+								if (data.getType().getPrim()!=a.getType().getPrim())
+									validationError("The data types of all MessageFromIf have to be the same!", t, RoomPackage.eINSTANCE.getTriggeredTransition_Triggers());
+								if (data.getType().getType()!=a.getType().getType())
+									validationError("The data types of all MessageFromIf have to be the same!", t, RoomPackage.eINSTANCE.getTriggeredTransition_Triggers());
 							}
 						}
 						else {
-							if (mif.getMessage().getArguments().size()!=0)
+							if (mif.getMessage().getData()!=null)
 								validationError("If one MessageFromIf has no data all have to have no data for a given transition!", t, RoomPackage.eINSTANCE.getTriggeredTransition_Triggers());
 						}
 					}

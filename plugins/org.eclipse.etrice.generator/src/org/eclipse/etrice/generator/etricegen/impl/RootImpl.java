@@ -513,10 +513,10 @@ public class RootImpl extends EObjectImpl implements Root {
 		// add data classes used by protocols
 		for (ProtocolClass pc : protocolClasses) {
 			for (Message m : pc.getIncomingMessages()) {
-				getTypedIdDataClasses(dataClasses, m.getArguments());
+				getTypedIdDataClasses(dataClasses, m.getData());
 			}
 			for (Message m : pc.getOutgoingMessages()) {
-				getTypedIdDataClasses(dataClasses, m.getArguments());
+				getTypedIdDataClasses(dataClasses, m.getData());
 			}
 		}
 		
@@ -570,11 +570,10 @@ public class RootImpl extends EObjectImpl implements Root {
 		}
 	}
 
-	private void getTypedIdDataClasses(HashSet<DataClass> dataClasses,
-			EList<TypedID> arguments) {
-		for (TypedID tid : arguments) {
-			if (tid.getType().getType()!=null)
-				dataClasses.add(tid.getType().getType());
+	private void getTypedIdDataClasses(HashSet<DataClass> dataClasses, TypedID data) {
+		if (data!=null) {
+			if (data.getType().getType()!=null)
+				dataClasses.add(data.getType().getType());
 		}
 	}
 

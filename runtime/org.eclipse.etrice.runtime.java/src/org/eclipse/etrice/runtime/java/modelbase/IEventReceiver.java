@@ -18,5 +18,5 @@ import org.eclipse.etrice.runtime.java.messaging.IRTObject;
  */
 public interface IEventReceiver extends IRTObject {
 
-	void receiveEvent(InterfaceItemBase ifitem, int evt, Object... data);
+	void receiveEvent(InterfaceItemBase ifitem, int evt, Object data);
 }
