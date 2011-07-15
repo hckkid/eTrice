@@ -118,6 +118,9 @@ public class JavaGenerator {
 			case FLOAT32: t = "float"; ct = "Float"; break;
 			case FLOAT64: t = "double"; ct = "Double"; break;
 			case INT32: t = "int"; ct = "Integer"; break;
+			case STRING: t="String"; ct="String"; break;
+			case INT8: t="byte"; ct="Byte"; break;
+			case INT16: t="short"; ct="Short"; break;
 			default: t = "invalid Java data type"; ct = ""; assert(false): "Java doesn't support type "+type.getPrim().name()+"!";
 			}
 		}
