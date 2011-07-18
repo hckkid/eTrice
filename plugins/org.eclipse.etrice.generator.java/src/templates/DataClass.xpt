@@ -45,7 +45,7 @@ public class «dc.name»«IF dc.base!=null» extends «dc.base.name»«ENDIF» {
 	public «dc.name»() {
 		«FOREACH dc.attributes AS a-»
 			«IF a.defaultValueLiteral!=null-»
-				«a.name» = «a.defaultValueLiteral»;
+				«IF a.size==0»«a.name» = «a.defaultValueLiteral»;«ENDIF»
 			«ELSEIF a.type.type!=null-»
 				«a.name» = new «a.type.type.name»();
 			«ENDIF-»
@@ -59,7 +59,7 @@ public class «dc.name»«IF dc.base!=null» extends «dc.base.name»«ENDIF» {
 			«IF a.type.type!=null-»
 				copy.«a.name» = «a.name».deepCopy();
 			«ELSE-»
-				copy.«a.name» = «a.name»;
+				«IF a.size==0»copy.«a.name» = «a.name»;«ELSE»for (int i=0;i<«a.size»;i++){copy.«a.name»[i]=«a.name»[i];}«ENDIF»
 			«ENDIF-»
 		«ENDFOREACH-»
 		return copy;

@@ -13,11 +13,11 @@
 
 package org.eclipse.etrice.core.naming;
 
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.etrice.core.room.BaseState;
+import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.ProtocolClass;
-import org.eclipse.etrice.core.room.RefinedState;
+import org.eclipse.etrice.core.room.State;
+import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.xtext.naming.DefaultDeclarativeQualifiedNameProvider;
 import org.eclipse.xtext.naming.QualifiedName;
 
@@ -52,4 +52,15 @@ public class RoomQualifiedNameProvider extends
     	
     	return getFullyQualifiedName(pc).append(list).append(m.getName());
     }
+    
+    public QualifiedName qualifiedName(StateGraph sg) {
+    	if (sg.eContainer() instanceof State)
+    		return getFullyQualifiedName(sg.eContainer()).append("subgraph");
+    	else if (sg.eContainer() instanceof ActorClass)
+    		return getFullyQualifiedName(sg.eContainer()).append("sm");
+    	
+    	assert(false): "unexpected state graph container";
+    	return null;
+    }
+    
 }

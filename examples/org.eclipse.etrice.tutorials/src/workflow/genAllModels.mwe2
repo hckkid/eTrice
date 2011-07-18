@@ -21,11 +21,11 @@ Workflow {
 		targetDir = destDir
 	}
  
-	component = org.eclipse.etrice.generator.workflow.ExecuteCommand {
-		commandString = "dot -osrc-gen/PingPong/SubSystem_PingPong.jpg -Tjpg src-gen/PingPong/SubSystem_PingPong.dot"
-	}
-
-	component = org.eclipse.etrice.generator.workflow.ExecuteCommand {
-		commandString = "dot -osrc-gen/PingPongFast/SubSystem_PingPong.jpg -Tjpg src-gen/PingPongFast/SubSystem_PingPong.dot"
-	}
+//	component = org.eclipse.etrice.generator.workflow.ExecuteCommand {
+//		commandString = "dot -osrc-gen/PingPong/SubSystem_PingPong.jpg -Tjpg src-gen/PingPong/SubSystem_PingPong.dot"
+//	}
+//
+//	component = org.eclipse.etrice.generator.workflow.ExecuteCommand {
+//		commandString = "dot -osrc-gen/PingPongFast/SubSystem_PingPong.jpg -Tjpg src-gen/PingPongFast/SubSystem_PingPong.dot"
+//	}
 }

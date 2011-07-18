@@ -23,9 +23,7 @@
       </link>
       <anchors xsi:type="pi:ChopboxAnchor" referencedGraphicsAlgorithm="//@children.0/@children.0/@graphicsAlgorithm/@graphicsAlgorithmChildren.0"/>
       <children visible="true">
-        <graphicsAlgorithm xsi:type="al:Text" background="//@colors.2" foreground="//@colors.2" width="80" height="20" horizontalAlignment="ALIGNMENT_CENTER" value="timer">
-          <font name="Arial" size="8"/>
-        </graphicsAlgorithm>
+        <graphicsAlgorithm xsi:type="al:Text" background="//@colors.2" foreground="//@colors.2" width="80" height="20" horizontalAlignment="ALIGNMENT_CENTER" value="timer"/>
       </children>
     </children>
     <children xsi:type="pi:ContainerShape" visible="true" active="true">
@@ -39,9 +37,7 @@
       </link>
       <anchors xsi:type="pi:ChopboxAnchor" referencedGraphicsAlgorithm="//@children.0/@children.1/@graphicsAlgorithm/@graphicsAlgorithmChildren.0"/>
       <children visible="true">
-        <graphicsAlgorithm xsi:type="al:Text" background="//@colors.2" foreground="//@colors.2" width="80" height="20" horizontalAlignment="ALIGNMENT_CENTER" value="timeout">
-          <font name="Arial" size="8"/>
-        </graphicsAlgorithm>
+        <graphicsAlgorithm xsi:type="al:Text" background="//@colors.2" foreground="//@colors.2" width="80" height="20" horizontalAlignment="ALIGNMENT_CENTER" value="timeout"/>
       </children>
     </children>
   </children>

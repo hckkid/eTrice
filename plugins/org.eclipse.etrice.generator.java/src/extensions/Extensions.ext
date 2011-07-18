@@ -42,22 +42,24 @@ switch(prim.toString()) {
 	case 'uint8': 'undefined_type'
 	case 'uint16': 'undefined_type'
 	case 'uint32': 'undefined_type'
-	case 'int8': 'undefined_type'
+	case 'int8': 'byte'
 	case 'int16': 'short'
 	case 'int32': 'int'
 	case 'float32': 'float'
 	case 'float64': 'double'
+	case 'string' : 'String'
 	default: prim.toString()};
 String toJavaObjectType(PrimitiveType prim):
 switch(prim.toString()) {
 	case 'uint8': 'undefined_type'
 	case 'uint16': 'undefined_type'
 	case 'uint32': 'undefined_type'
-	case 'int8': 'undefined_type'
+	case 'int8': 'Byte'
 	case 'int16': 'Short'
 	case 'int32': 'Integer'
 	case 'float32': 'Float'
 	case 'float64': 'Double'
+	case 'string': 'String'
 	default: prim.toString()};
 String typeName(Type type): type.type!=null? type.type.name : type.prim.toJavaType();
 String freeTypeName(FreeType type): type.type!=null? type.type : type.prim.toJavaType();
@@ -74,6 +76,7 @@ switch(prim.toString()) {
 	case 'int32': '0'
 	case 'float32': '0.0'
 	case 'float64': '0.0'
+	case 'string': '""'
 	default: prim.toString()};
 String defaultValue(TypedID a): a.type.type!=null? "new "+a.type.type.name+"()" : a.type.prim.defaultValue();
 
