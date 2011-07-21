@@ -3,5 +3,6 @@
 
 015-getting-started.textile
 020-tutorial-blinky.textile
+025-tutorial-sending-data.textile
 
 040-room-concepts.textile

@@ -782,6 +782,524 @@ carLights.setState(TrafficLight3.OFF);
 			<para>Run the model and take look at the generated MSCs. Inspect the generated code to understand the runtime model of eTrice. Within this tutorial you have learned how to create a hierarchical FSM with group transitions and history transitions and you have used entry code. You are now familiar with the basic features of eTrice. The further tutorials will take this knowledge as a precondition.</para>
 		</section>
 	</chapter>
+	<chapter id="TutorialSendingData">
+		<title>Tutorial Sending Data</title>
+		<section id="Scope3">
+			<title>Scope</title>
+			<para>This tutorial shows how data will be sent in a eTrice model. Within the example you will create two actors (MrPing and MrPong). MrPong will simply loop back every data it received.
+				MrPing will sent data and verify the result.   </para>
+			<para>You will perform the following steps:</para>
+			<orderedlist>
+				<listitem>
+					<para>create a new model from scratch</para>
+				</listitem>
+				<listitem>
+					<para>create a data class</para>
+				</listitem>
+				<listitem>
+					<para>define a protocol with attached data</para>
+				</listitem>
+				<listitem>
+					<para>create an actor structure</para>
+				</listitem>
+				<listitem>
+					<para>create two simple state machines</para>
+				</listitem>
+				<listitem>
+					<para>build and run the model</para>
+				</listitem>
+			</orderedlist>
+		</section>
+		<section id="Createanewmodelfromscratch3">
+			<title>Create a new model from scratch</title>
+			<para>Remember exercise 
+				<citation>HelloWorld</citation>.
+				Create a new eTrice project and name it 
+				<citation>SendingData</citation>
+				Open the 
+				<citation>SendingData.room</citation> file and copy the following code into the file or use content assist to create the model.
+			</para>
+			<literallayout><code>RoomModel SendingData {
+		LogicalSystem SendingData_LogSystem {
+			SubSystemRef SendingDataAppl:SendingData_SubSystem 
+		}
+		SubSystemClass SendingData_SubSystem {
+			ActorRef SendigDataTopRef:SendingDataTop 
+		}
+		ActorClass SendingDataTop {
+		}
+	}
+</code></literallayout>
+			<blockquote>
+				<para></para>
+			</blockquote>
+		</section>
+		<section id="Addadataclass">
+			<title>Add a data class</title>
+			<para>Position the cursor outside any class definition and right click the mouse within the editor window. From the context menu select 
+				<citation>Content Assist</citation> (or Ctrl+Space).  
+			</para>
+			<para>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/025-SendingData01.png"/>
+					</imageobject>
+				</mediaobject>
+			</para>
+			<para>Select 
+				<citation>DataClass – data class skeleton</citation> and name it 
+				<citation>DemoData</citation>.
+				Remove the operations and ass the following Attributes:
+			</para>
+			<literallayout><code>	DataClass DemoData {
+		Attribute int32Val: int32 = "4711"
+		Attribute int8Array [ 10 ]: int8 = "{1,2,3,4,5,6,7,8,9,10}"
+		Attribute float64Val: float64 = "0.0"
+		Attribute stringVal: string = "\"empty\""
+	}
+</code></literallayout>
+			<blockquote>
+				<para></para>
+			</blockquote>
+			<para>Save the model and visit the outline view.
+				Note that the outline view contains all data elements as defined in the model. </para>
+		</section>
+		<section id="Createanewprotocol2">
+			<title>Create a new protocol</title>
+			<para>With the help of 
+				<citation>Content Assist</citation> create a 
+				<citation>ProtocolClass</citation> and name it 
+				<citation>PingPongProtocol</citation>. Create the following messages:
+			</para>
+			<literallayout><code>ProtocolClass PingPongProtocol {
+					incoming {
+						Message ping(data: DemoData)
+						Message pingSimple(data:int32)
+					}
+					outgoing {
+						Message pong(data: DemoData)
+						Message pongSimple(data:int32)
+					}
+				}		
+</code></literallayout>
+			<blockquote>
+				<para></para>
+			</blockquote>
+		</section>
+		<section id="CreateMrPingandMrPongActors">
+			<title>Create MrPing and MrPong Actors</title>
+			<para>With the help of 
+				<citation>Content Assist</citation> create two new actor classes and name them 
+				<citation>MrPing</citation> and 
+				<citation>MrPong</citation>. The resulting model should look like this:
+			</para>
+			<literallayout><code>RoomModel SendingData {
+
+	LogicalSystem SendingData_LogSystem {
+		SubSystemRef SendingDataAppl: SendingData_SubSystem
+	}
+
+	SubSystemClass SendingData_SubSystem {
+		ActorRef SendigDataTopRef: SendingDataTop
+	}
+
+	ActorClass SendingDataTop { }
+
+	DataClass DemoData {
+		Attribute int32Val: int32 = "4711"
+		Attribute int8Array [ 10 ]: int8 = "{1,2,3,4,5,6,7,8,9,10}"
+		Attribute float64Val: float64 = "0.0"
+		Attribute stringVal: string = "\"empty\""
+	}
+
+	ProtocolClass PingPongProtocol {
+		incoming {
+			Message ping(data: DemoData)
+			Message pingSimple(data: int32)
+		}
+		outgoing {
+			Message pong(data: DemoData)
+			Message pongSimple(data: int32)
+		}
+	}
+
+	ActorClass MrPing {
+		Interface { }
+		Structure { }
+		Behavior { }
+	}
+
+	ActorClass MrPong {
+		Interface { }
+		Structure { }
+		Behavior { }
+	}
+} 
+
+</code></literallayout>
+			<blockquote>
+				<para></para>
+			</blockquote>
+			<para>The outline view should look like this:</para>
+			<para>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/025-SendingData03.png"/>
+					</imageobject>
+				</mediaobject>
+			</para>
+		</section>
+		<section id="DefinetheActorsStructureandBehavior">
+			<title>Define the Actors Structure and Behavior</title>
+			<para>Save the model and visit the outline view. Within the outline view, right click on the 
+				<citation>MrPong</citation> actor and select 
+				<citation>Edit Structure</citation>. Select an 
+				<citation>Interface Port</citation> from the toolbox and add it to MrPong. Name the Port 
+				<citation>PingPongPort</citation> and select the 
+				<citation>PingPongProtocol</citation>
+			</para>
+			<para>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/025-SendingData02.png"/>
+					</imageobject>
+				</mediaobject>
+			</para>
+			<para>Do the same with MrPing but mark the port as 
+				<citation>conjugated</citation>
+			</para>
+			<section id="DefineMrPongsbehavior">
+				<title>Define MrPongs behavior</title>
+				<para>Within the outline view, right click MrPong and select 
+					<citation>Edit Behavior</citation>. Create the following state machine:
+				</para>
+				<para>
+					<mediaobject>
+						<imageobject>
+							<imagedata fileref="images/025-SendingData04.png"/>
+						</imageobject>
+					</mediaobject>
+				</para>
+				<para>The transition dialogues should look like this:
+					For 
+					<citation>ping</citation>:
+				</para>
+				<para>
+					<mediaobject>
+						<imageobject>
+							<imagedata fileref="images/025-SendingData05.png"/>
+						</imageobject>
+					</mediaobject>
+				</para>
+				<para>For 
+					<citation>pingSimple</citation>:
+				</para>
+				<para>
+					<mediaobject>
+						<imageobject>
+							<imagedata fileref="images/025-SendingData06.png"/>
+						</imageobject>
+					</mediaobject>
+				</para>
+			</section>
+			<section id="DefineMrPingbehavior">
+				<title>Define MrPing behavior</title>
+				<para>Within the outline view double click MrPing. Navigate the cursor to the behavior of MrPing. With the help of content assist create a new operation.</para>
+				<para>
+					<mediaobject>
+						<imageobject>
+							<imagedata fileref="images/025-SendingData07.png"/>
+						</imageobject>
+					</mediaobject>
+				</para>
+				<para>Name the operation 
+					<citation>printData</citation> and define the DemoData as a parameter.
+				</para>
+				<para>Fill in the following code:</para>
+				<literallayout><code>Operation printData(d: DemoData) : void {
+			"System.out.printf(\"d.int32Val: %d\\n\",d.int32Val);"
+			"System.out.printf(\"d.float64Val: %f\\n\",d.float64Val);"
+			"System.out.printf(\"d.int8Array: \");"
+			"for(int i = 0; i&lt;d.int8Array.length; i++) {"
+			"System.out.printf(\"%d \",d.int8Array[i]);}"
+			"System.out.printf(\"\\nd.stringVal: %s\\n\",d.stringVal);"
+		}
+</code></literallayout>
+				<blockquote>
+					<para></para>
+				</blockquote>
+				<para>For MrPing create the following state machine:</para>
+				<para>
+					<mediaobject>
+						<imageobject>
+							<imagedata fileref="images/025-SendingData08.png"/>
+						</imageobject>
+					</mediaobject>
+				</para>
+				<para>The transition dialogues should look like this:</para>
+				<para>For 
+					<citation>init</citation>:
+				</para>
+				<para>
+					<mediaobject>
+						<imageobject>
+							<imagedata fileref="images/025-SendingData09.png"/>
+						</imageobject>
+					</mediaobject>
+				</para>
+				<para>For 
+					<citation>wait1</citation>:
+				</para>
+				<para>
+					<mediaobject>
+						<imageobject>
+							<imagedata fileref="images/025-SendingData10.png"/>
+						</imageobject>
+					</mediaobject>
+				</para>
+				<para>For 
+					<citation>next</citation>:
+				</para>
+				<para>
+					<mediaobject>
+						<imageobject>
+							<imagedata fileref="images/025-SendingData11.png"/>
+						</imageobject>
+					</mediaobject>
+				</para>
+				<para>For 
+					<citation>wait2</citation>:
+				</para>
+				<para>
+					<mediaobject>
+						<imageobject>
+							<imagedata fileref="images/025-SendingData12.png"/>
+						</imageobject>
+					</mediaobject>
+				</para>
+			</section>
+		</section>
+		<section id="Definethetoplevel">
+			<title>Define the top level</title>
+			<para>Open the Structure from SendingDataTop and add MrPing and MrPong as a reference. Connect the ports.</para>
+			<para>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/025-SendingData13.png"/>
+					</imageobject>
+				</mediaobject>
+			</para>
+			<para>The model is finished now and the model file should look like this:</para>
+			<literallayout></literallayout>
+			<literallayout><code>RoomModel SendingData {
+
+	LogicalSystem SendingData_LogSystem {
+		SubSystemRef SendingDataAppl: SendingData_SubSystem
+	}
+
+	SubSystemClass SendingData_SubSystem {
+		ActorRef SendigDataTopRef: SendingDataTop
+	}
+
+	ActorClass SendingDataTop {
+		Structure {
+			ActorRef ref0: MrPing
+			ActorRef ref1: MrPong
+			Binding ref0.PingPongPort and ref1.PingPongPort
+		}
+		Behavior { }
+	}
+
+	ActorClass MrPing {
+		Interface {
+			conjugated Port PingPongPort: PingPongProtocol
+		}
+		Structure {
+			external Port PingPongPort
+		}
+		Behavior {
+						
+			Operation printData(d: DemoData) : void {
+						"System.out.printf(\"d.int32Val: %d\\n\",d.int32Val);"
+						"System.out.printf(\"d.float64Val: %f\\n\",d.float64Val);"
+						"System.out.printf(\"d.int8Array: \");"
+						"for(int i = 0; i&lt;d.int8Array.length; i++) {"
+						"System.out.printf(\"%d \",d.int8Array[i]);}"
+						"System.out.printf(\"\\nd.stringVal: %s\\n\",d.stringVal);"
+					}
+					
+			StateMachine {
+				Transition wait2: waitForPong -&gt; waitForPong {
+					triggers {
+						&lt;pong: PingPongPort&gt;
+					}
+					action {
+						"printData(data);"
+					}
+				}
+				Transition wait1: waitForPongSimple -&gt; waitForPongSimple {
+					triggers {
+						&lt;pongSimple: PingPongPort guard {
+							"data &lt; 10"
+						}&gt;
+					}
+					action {
+						"// keep in mind that MrPong increments"
+						"PingPongPort.pingSimple(data);"
+						"System.out.printf(\"data: %d\\n\",data);"
+					}
+				}
+				Transition next: waitForPongSimple -&gt; waitForPong {
+					triggers {
+						&lt;pongSimple: PingPongPort&gt;
+					}
+					action {
+						"System.out.printf(\"data: %d\\n\",data);"
+						""
+						"DemoData d = new DemoData();"
+						"// send the default values"
+						"PingPongPort.ping(d);"
+						"d.int32Val=815;"
+						"for (int i = 0; i&lt;d.int8Array.length;i++){"
+						"\td.int8Array[i]=(byte)(i+100);"
+						"\t}"
+						"d.stringVal=\"some contents\";"
+						"d.float64Val=3.141234;"
+						"PingPongPort.ping(d);"
+					}
+				}
+				Transition init0: initial -&gt; waitForPongSimple {
+					action {
+						"PingPongPort.pingSimple(0);"
+					}
+				}
+				State waitForPong
+				State waitForPongSimple
+			}
+		}
+	}
+
+	ActorClass MrPong {
+		Interface {
+			Port PingPongPort: PingPongProtocol
+		}
+		Structure {
+			external Port PingPongPort
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -&gt; looping { }
+				Transition tr0: looping -&gt; looping {
+					triggers {
+						&lt;ping: PingPongPort&gt;
+					}
+					action {
+						"PingPongPort.pong(data);"
+					}
+				}
+				Transition tr1: looping -&gt; looping {
+					triggers {
+						&lt;pingSimple: PingPongPort&gt;
+					}
+					action {
+						"PingPongPort.pongSimple(data+1);"
+					}
+				}
+				State looping
+			}
+		}
+	}
+
+	ProtocolClass PingPongProtocol {
+		incoming {
+			Message ping(data: DemoData)
+			Message pingSimple(data: int32)
+		}
+		outgoing {
+			Message pong(data: DemoData)
+			Message pongSimple(data: int32)
+		}
+	}
+
+	DataClass DemoData {
+		Attribute int32Val: int32 = "4711"
+		Attribute int8Array [ 10 ]: int8 = "{1,2,3,4,5,6,7,8,9,10}"
+		Attribute float64Val: float64 = "0.0"
+		Attribute stringVal: string = "\"empty\""
+	}
+}
+</code></literallayout>
+			<blockquote>
+				<para></para>
+			</blockquote>
+		</section>
+		<section id="Generateandrunthemodel">
+			<title>Generate and run the model</title>
+			<para>With the MWe2 workflow generate the code and run the model. 
+				The output should look like this:</para>
+			<para>type &#8218;quit’ to exit
+				/SendingData_SubSystem/SendigDataTopRef/ref0 -&gt; waitForPongSimple
+				/SendingData_SubSystem/SendigDataTopRef/ref1 -&gt; looping
+				/SendingData_SubSystem/SendigDataTopRef/ref1 -&gt; looping
+				data: 1
+				/SendingData_SubSystem/SendigDataTopRef/ref0 -&gt; waitForPongSimple
+				/SendingData_SubSystem/SendigDataTopRef/ref1 -&gt; looping
+				data: 2
+				/SendingData_SubSystem/SendigDataTopRef/ref0 -&gt; waitForPongSimple
+				/SendingData_SubSystem/SendigDataTopRef/ref1 -&gt; looping
+				data: 3
+				/SendingData_SubSystem/SendigDataTopRef/ref0 -&gt; waitForPongSimple
+				/SendingData_SubSystem/SendigDataTopRef/ref1 -&gt; looping
+				data: 4
+				/SendingData_SubSystem/SendigDataTopRef/ref0 -&gt; waitForPongSimple
+				/SendingData_SubSystem/SendigDataTopRef/ref1 -&gt; looping
+				data: 5
+				/SendingData_SubSystem/SendigDataTopRef/ref0 -&gt; waitForPongSimple
+				/SendingData_SubSystem/SendigDataTopRef/ref1 -&gt; looping
+				data: 6
+				/SendingData_SubSystem/SendigDataTopRef/ref0 -&gt; waitForPongSimple
+				/SendingData_SubSystem/SendigDataTopRef/ref1 -&gt; looping
+				data: 7
+				/SendingData_SubSystem/SendigDataTopRef/ref0 -&gt; waitForPongSimple
+				/SendingData_SubSystem/SendigDataTopRef/ref1 -&gt; looping
+				data: 8
+				/SendingData_SubSystem/SendigDataTopRef/ref0 -&gt; waitForPongSimple
+				/SendingData_SubSystem/SendigDataTopRef/ref1 -&gt; looping
+				data: 9
+				/SendingData_SubSystem/SendigDataTopRef/ref0 -&gt; waitForPongSimple
+				/SendingData_SubSystem/SendigDataTopRef/ref1 -&gt; looping
+				data: 10
+				/SendingData_SubSystem/SendigDataTopRef/ref0 -&gt; waitForPong
+				/SendingData_SubSystem/SendigDataTopRef/ref1 -&gt; looping
+				/SendingData_SubSystem/SendigDataTopRef/ref1 -&gt; looping
+				d.int32Val: 4711
+				d.float64Val: 0,000000
+				d.int8Array: 1 2 3 4 5 6 7 8 9 10 
+				d.stringVal: empty
+				/SendingData_SubSystem/SendigDataTopRef/ref0 -&gt; waitForPong
+				d.int32Val: 815
+				d.float64Val: 3,141234
+				d.int8Array: 100 101 102 103 104 105 106 107 108 109 
+				d.stringVal: some contents
+				/SendingData_SubSystem/SendigDataTopRef/ref0 -&gt; waitForPong
+				quit
+				echo: quit</para>
+		</section>
+		<section id="Summary3">
+			<title>Summary</title>
+			<para>Within the first loop a integer value will be incremented from 
+				<citation>MrPong</citation> and sent back to 
+				<citation>MrPing</citation>. Is long as the guard is true 
+				<citation>MrPing</citation> sends back the value.
+			</para>
+			<para>Within the 
+				<citation>next</citation> transition, 
+				<citation>MrPing</citation> creates a data class and sends the default values. Than 
+				<citation>MrPing</citation> changes the values and sends the class again. At this point you should note that during the send operation, a copy of the data class will be created and sent. Otherwise it would not be possible to send the same object two times, even more it would not be possible to send a stack object at all. 
+				In later versions of eTrice a additional mechanism to send references will be implemented. However, keep in mind that sending references takes the responsibility of the life cycle of the sent object to the user. It looks simple but is a very common source of failures.  
+			</para>
+		</section>
+	</chapter>
 	<chapter id="ROOMConcepts">
 		<title>ROOM Concepts</title>
 		<section id="MainConcepts">
