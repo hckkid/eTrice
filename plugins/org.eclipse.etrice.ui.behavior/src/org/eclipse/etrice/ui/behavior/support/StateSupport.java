@@ -16,14 +16,11 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.room.ActorClass;
-import org.eclipse.etrice.core.room.ActorContainerRef;
-import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.BaseState;
 import org.eclipse.etrice.core.room.RefinedState;
 import org.eclipse.etrice.core.room.RoomFactory;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraph;
-import org.eclipse.etrice.core.room.SubSystemRef;
 import org.eclipse.etrice.core.room.TrPoint;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.ui.behavior.ImageProvider;
@@ -595,16 +592,13 @@ public class StateSupport {
 					}
 				}
 				
-				// check class name
+				// check name
 				int last = containerShape.getChildren().size()-1;
 				if (last>=0) {
 					GraphicsAlgorithm ga = containerShape.getChildren().get(last).getGraphicsAlgorithm();
 					if (ga instanceof Text) {
-						if (bo instanceof ActorContainerRef) {
-							String label = getLabel((ActorContainerRef) bo);
-							if (!((Text)ga).getValue().equals(label))
-								return Reason.createTrueReason("Class name is out of date");
-						}
+						if (!((Text)ga).getValue().equals(s.getName()))
+							return Reason.createTrueReason("State name is out of date");
 					}
 				}
 				
@@ -839,19 +833,6 @@ public class StateSupport {
 		@Override
 		public ICustomFeature[] getCustomFeatures(ICustomContext context) {
 			return new ICustomFeature[] { new PropertyFeature(fp), new GoDownFeature(fp), new CreateSubGraphFeature(fp) };
-		}
-
-		protected static String getLabel(ActorContainerRef acr) {
-			String className = "<unknown>";
-			if (acr instanceof ActorRef) {
-				if (((ActorRef)acr).getType()!=null)
-					className = ((ActorRef)acr).getType().getName();
-			}
-			else if (acr instanceof SubSystemRef) {
-				if (((SubSystemRef)acr).getType()!=null)
-					className = ((SubSystemRef)acr).getType().getName();
-			}
-			return acr.getName()+"\n("+className+")";
 		}
 	}
 	
