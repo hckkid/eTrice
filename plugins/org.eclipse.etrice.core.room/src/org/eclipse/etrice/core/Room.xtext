@@ -253,8 +253,10 @@ StateGraphItem: StateGraphNode | Transition;
 
 State: BaseState | RefinedState;
 
-StateGraph:
-	{StateGraph}
+StateGraph: PlainStateGraph | StateMachine;
+
+PlainStateGraph returns StateGraph:
+	{PlainStateGraph}
 	'{'
 		(
 			states+=State |
@@ -264,9 +266,9 @@ StateGraph:
 		)*
 	'}';
 
-StateMachine returns StateGraph:
-	{StateGraph}
-	'StateMachine' '{'
+StateMachine:
+	{StateMachine}
+	(dataDriven?='data_driven')? 'StateMachine' '{'
 		(
 			states+=State |
 			trPoints+=TrPoint |
@@ -313,7 +315,7 @@ ChoicePoint:
 	'ChoicePoint' name=ID (docu=Documentation)?;
 
 Transition: InitialTransition | NonInitialTransition;
-NonInitialTransition: TriggeredTransition | ContinuationTransition | CPBranchTransition;
+NonInitialTransition: TriggeredTransition | GuardedTransition | ContinuationTransition | CPBranchTransition;
 
 InitialTransition:
 	'Transition' (name=ID)? ':' 'initial' '->' to=TransitionTerminal 
@@ -336,6 +338,14 @@ TriggeredTransition:
 		'triggers' '{'
 			triggers+=Trigger ('or' triggers+=Trigger)*
 		'}'
+		('action' action=DetailCode)? 
+	'}';
+
+GuardedTransition:
+	'Transition' (name=ID)? ':' from=TransitionTerminal '->' to=TransitionTerminal
+	(docu=Documentation)?
+	'{'
+		'guard' guard=DetailCode
 		('action' action=DetailCode)? 
 	'}';
 

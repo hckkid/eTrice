@@ -353,10 +353,12 @@ public class RoomFragmentProvider implements IFragmentProvider {
 			}
 			else if (type.equals(RoomPackage.eINSTANCE.getContinuationTransition().getName())
 					|| type.equals(RoomPackage.eINSTANCE.getCPBranchTransition().getName())
-					|| type.equals(RoomPackage.eINSTANCE.getTriggeredTransition().getName())) {
+					|| type.equals(RoomPackage.eINSTANCE.getTriggeredTransition().getName())
+					|| type.equals(RoomPackage.eINSTANCE.getGuardedTransition().getName())) {
 				return getTransition(rc, remainder);
 			}
-			else if (type.equals(RoomPackage.eINSTANCE.getStateGraph().getName())) {
+			else if (type.equals(RoomPackage.eINSTANCE.getStateGraph().getName())
+					|| type.equals(RoomPackage.eINSTANCE.getStateMachine().getName())) {
 				return getStateGraph(rc, remainder);
 			}
 		}
@@ -464,7 +466,7 @@ public class RoomFragmentProvider implements IFragmentProvider {
 		if (rc instanceof ActorClass) {
 			StateGraph sg = ((ActorClass) rc).getStateMachine();
 			if (sg==null)
-				((ActorClass) rc).setStateMachine(RoomFactory.eINSTANCE.createStateGraph());
+				((ActorClass) rc).setStateMachine(RoomFactory.eINSTANCE.createStateMachine());
 			int begin = 0;
 			int end = remainder.indexOf(SEP);
 			while (end>=0) {

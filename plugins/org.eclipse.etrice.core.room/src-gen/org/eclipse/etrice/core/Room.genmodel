@@ -213,6 +213,9 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//StateGraph/chPoints"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//StateGraph/transitions"/>
     </genClasses>
+    <genClasses ecoreClass="platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//StateMachine">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//StateMachine/dataDriven"/>
+    </genClasses>
     <genClasses ecoreClass="platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//BaseState">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//BaseState/name"/>
     </genClasses>
@@ -248,6 +251,9 @@
     <genClasses ecoreClass="platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//TriggeredTransition">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//TriggeredTransition/triggers"/>
     </genClasses>
+    <genClasses ecoreClass="platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//GuardedTransition">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//GuardedTransition/guard"/>
+    </genClasses>
     <genClasses ecoreClass="platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//CPBranchTransition">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//CPBranchTransition/condition"/>
     </genClasses>
@@ -282,5 +288,6 @@
     <genClasses ecoreClass="platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//Import">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//Import/importedNamespace"/>
     </genClasses>
+    <genClasses ecoreClass="platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//PlainStateGraph"/>
   </genPackages>
 </genmodel:GenModel>

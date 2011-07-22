@@ -26,6 +26,7 @@ import org.eclipse.etrice.core.room.CPBranchTransition;
 import org.eclipse.etrice.core.room.ChoicePoint;
 import org.eclipse.etrice.core.room.ChoicepointTerminal;
 import org.eclipse.etrice.core.room.ContinuationTransition;
+import org.eclipse.etrice.core.room.GuardedTransition;
 import org.eclipse.etrice.core.room.InitialTransition;
 import org.eclipse.etrice.core.room.LogicalSystem;
 import org.eclipse.etrice.core.room.MessageFromIf;
@@ -337,6 +338,10 @@ public class RoomNameProvider {
 						name += "or";
 					name += getTriggerLabel(trig);
 				}
+			}
+			
+			if (t instanceof GuardedTransition) {
+				name += " guard {"+((GuardedTransition)t).getGuard().getCommands().get(0)+"}";
 			}
 		}
 		return name;

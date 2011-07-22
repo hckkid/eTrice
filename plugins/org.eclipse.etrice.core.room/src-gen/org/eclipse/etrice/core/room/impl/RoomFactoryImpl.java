@@ -113,6 +113,7 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
       case RoomPackage.STATE_GRAPH_ITEM: return createStateGraphItem();
       case RoomPackage.STATE: return createState();
       case RoomPackage.STATE_GRAPH: return createStateGraph();
+      case RoomPackage.STATE_MACHINE: return createStateMachine();
       case RoomPackage.BASE_STATE: return createBaseState();
       case RoomPackage.REFINED_STATE: return createRefinedState();
       case RoomPackage.DETAIL_CODE: return createDetailCode();
@@ -126,6 +127,7 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
       case RoomPackage.INITIAL_TRANSITION: return createInitialTransition();
       case RoomPackage.CONTINUATION_TRANSITION: return createContinuationTransition();
       case RoomPackage.TRIGGERED_TRANSITION: return createTriggeredTransition();
+      case RoomPackage.GUARDED_TRANSITION: return createGuardedTransition();
       case RoomPackage.CP_BRANCH_TRANSITION: return createCPBranchTransition();
       case RoomPackage.TRANSITION_TERMINAL: return createTransitionTerminal();
       case RoomPackage.STATE_TERMINAL: return createStateTerminal();
@@ -137,6 +139,7 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
       case RoomPackage.GUARD: return createGuard();
       case RoomPackage.DOCUMENTATION: return createDocumentation();
       case RoomPackage.IMPORT: return createImport();
+      case RoomPackage.PLAIN_STATE_GRAPH: return createPlainStateGraph();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -665,6 +668,17 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  public StateMachine createStateMachine()
+  {
+    StateMachineImpl stateMachine = new StateMachineImpl();
+    return stateMachine;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public BaseState createBaseState()
   {
     BaseStateImpl baseState = new BaseStateImpl();
@@ -808,6 +822,17 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  public GuardedTransition createGuardedTransition()
+  {
+    GuardedTransitionImpl guardedTransition = new GuardedTransitionImpl();
+    return guardedTransition;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public CPBranchTransition createCPBranchTransition()
   {
     CPBranchTransitionImpl cpBranchTransition = new CPBranchTransitionImpl();
@@ -922,6 +947,17 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
   {
     ImportImpl import_ = new ImportImpl();
     return import_;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public PlainStateGraph createPlainStateGraph()
+  {
+    PlainStateGraphImpl plainStateGraph = new PlainStateGraphImpl();
+    return plainStateGraph;
   }
 
   /**

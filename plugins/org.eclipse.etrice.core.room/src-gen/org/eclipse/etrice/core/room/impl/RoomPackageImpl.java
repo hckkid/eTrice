@@ -36,6 +36,7 @@ import org.eclipse.etrice.core.room.ExternalPort;
 import org.eclipse.etrice.core.room.FreeType;
 import org.eclipse.etrice.core.room.FreeTypedID;
 import org.eclipse.etrice.core.room.Guard;
+import org.eclipse.etrice.core.room.GuardedTransition;
 import org.eclipse.etrice.core.room.Import;
 import org.eclipse.etrice.core.room.InitialTransition;
 import org.eclipse.etrice.core.room.InterfaceItem;
@@ -47,6 +48,7 @@ import org.eclipse.etrice.core.room.MessageFromIf;
 import org.eclipse.etrice.core.room.MessageHandler;
 import org.eclipse.etrice.core.room.NonInitialTransition;
 import org.eclipse.etrice.core.room.Operation;
+import org.eclipse.etrice.core.room.PlainStateGraph;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.PortClass;
 import org.eclipse.etrice.core.room.PrimitiveType;
@@ -71,6 +73,7 @@ import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.StateGraphItem;
 import org.eclipse.etrice.core.room.StateGraphNode;
+import org.eclipse.etrice.core.room.StateMachine;
 import org.eclipse.etrice.core.room.StateTerminal;
 import org.eclipse.etrice.core.room.StructureClass;
 import org.eclipse.etrice.core.room.SubStateTrPointTerminal;
@@ -407,6 +410,13 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  private EClass stateMachineEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   private EClass baseStateEClass = null;
 
   /**
@@ -498,6 +508,13 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  private EClass guardedTransitionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   private EClass cpBranchTransitionEClass = null;
 
   /**
@@ -569,6 +586,13 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * @generated
    */
   private EClass importEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass plainStateGraphEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -2145,6 +2169,26 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getStateMachine()
+  {
+    return stateMachineEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getStateMachine_DataDriven()
+  {
+    return (EAttribute)stateMachineEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getBaseState()
   {
     return baseStateEClass;
@@ -2405,6 +2449,26 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getGuardedTransition()
+  {
+    return guardedTransitionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getGuardedTransition_Guard()
+  {
+    return (EReference)guardedTransitionEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getCPBranchTransition()
   {
     return cpBranchTransitionEClass;
@@ -2645,6 +2709,16 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getPlainStateGraph()
+  {
+    return plainStateGraphEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EEnum getPrimitiveType()
   {
     return primitiveTypeEEnum;
@@ -2874,6 +2948,9 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
     createEReference(stateGraphEClass, STATE_GRAPH__CH_POINTS);
     createEReference(stateGraphEClass, STATE_GRAPH__TRANSITIONS);
 
+    stateMachineEClass = createEClass(STATE_MACHINE);
+    createEAttribute(stateMachineEClass, STATE_MACHINE__DATA_DRIVEN);
+
     baseStateEClass = createEClass(BASE_STATE);
     createEAttribute(baseStateEClass, BASE_STATE__NAME);
 
@@ -2913,6 +2990,9 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
     triggeredTransitionEClass = createEClass(TRIGGERED_TRANSITION);
     createEReference(triggeredTransitionEClass, TRIGGERED_TRANSITION__TRIGGERS);
 
+    guardedTransitionEClass = createEClass(GUARDED_TRANSITION);
+    createEReference(guardedTransitionEClass, GUARDED_TRANSITION__GUARD);
+
     cpBranchTransitionEClass = createEClass(CP_BRANCH_TRANSITION);
     createEReference(cpBranchTransitionEClass, CP_BRANCH_TRANSITION__CONDITION);
 
@@ -2947,6 +3027,8 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
 
     importEClass = createEClass(IMPORT);
     createEAttribute(importEClass, IMPORT__IMPORTED_NAMESPACE);
+
+    plainStateGraphEClass = createEClass(PLAIN_STATE_GRAPH);
 
     // Create enums
     primitiveTypeEEnum = createEEnum(PRIMITIVE_TYPE);
@@ -2999,6 +3081,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
     actorRefEClass.getESuperTypes().add(this.getActorContainerRef());
     stateGraphNodeEClass.getESuperTypes().add(this.getStateGraphItem());
     stateEClass.getESuperTypes().add(this.getStateGraphNode());
+    stateMachineEClass.getESuperTypes().add(this.getStateGraph());
     baseStateEClass.getESuperTypes().add(this.getState());
     refinedStateEClass.getESuperTypes().add(this.getState());
     trPointEClass.getESuperTypes().add(this.getStateGraphNode());
@@ -3011,11 +3094,13 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
     initialTransitionEClass.getESuperTypes().add(this.getTransition());
     continuationTransitionEClass.getESuperTypes().add(this.getNonInitialTransition());
     triggeredTransitionEClass.getESuperTypes().add(this.getNonInitialTransition());
+    guardedTransitionEClass.getESuperTypes().add(this.getNonInitialTransition());
     cpBranchTransitionEClass.getESuperTypes().add(this.getNonInitialTransition());
     stateTerminalEClass.getESuperTypes().add(this.getTransitionTerminal());
     trPointTerminalEClass.getESuperTypes().add(this.getTransitionTerminal());
     subStateTrPointTerminalEClass.getESuperTypes().add(this.getTransitionTerminal());
     choicepointTerminalEClass.getESuperTypes().add(this.getTransitionTerminal());
+    plainStateGraphEClass.getESuperTypes().add(this.getStateGraph());
 
     // Initialize classes and features; add operations and parameters
     initEClass(roomModelEClass, RoomModel.class, "RoomModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -3126,7 +3211,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
     initEReference(getActorClass_Attributes(), this.getAttribute(), null, "attributes", null, 0, -1, ActorClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getActorClass_BehaviorDocu(), this.getDocumentation(), null, "behaviorDocu", null, 0, 1, ActorClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getActorClass_Operations(), this.getOperation(), null, "operations", null, 0, -1, ActorClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getActorClass_StateMachine(), this.getStateGraph(), null, "stateMachine", null, 0, 1, ActorClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getActorClass_StateMachine(), this.getStateMachine(), null, "stateMachine", null, 0, 1, ActorClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(interfaceItemEClass, InterfaceItem.class, "InterfaceItem", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getInterfaceItem_Name(), ecorePackage.getEString(), "name", null, 0, 1, InterfaceItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3216,6 +3301,9 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
     initEReference(getStateGraph_ChPoints(), this.getChoicePoint(), null, "chPoints", null, 0, -1, StateGraph.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getStateGraph_Transitions(), this.getTransition(), null, "transitions", null, 0, -1, StateGraph.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+    initEClass(stateMachineEClass, StateMachine.class, "StateMachine", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getStateMachine_DataDriven(), ecorePackage.getEBoolean(), "dataDriven", null, 0, 1, StateMachine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
     initEClass(baseStateEClass, BaseState.class, "BaseState", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getBaseState_Name(), ecorePackage.getEString(), "name", null, 0, 1, BaseState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -3255,6 +3343,9 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
     initEClass(triggeredTransitionEClass, TriggeredTransition.class, "TriggeredTransition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getTriggeredTransition_Triggers(), this.getTrigger(), null, "triggers", null, 0, -1, TriggeredTransition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+    initEClass(guardedTransitionEClass, GuardedTransition.class, "GuardedTransition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getGuardedTransition_Guard(), this.getDetailCode(), null, "guard", null, 0, 1, GuardedTransition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
     initEClass(cpBranchTransitionEClass, CPBranchTransition.class, "CPBranchTransition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getCPBranchTransition_Condition(), this.getDetailCode(), null, "condition", null, 0, 1, CPBranchTransition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -3289,6 +3380,8 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
 
     initEClass(importEClass, Import.class, "Import", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getImport_ImportedNamespace(), ecorePackage.getEString(), "importedNamespace", null, 0, 1, Import.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(plainStateGraphEClass, PlainStateGraph.class, "PlainStateGraph", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     // Initialize enums and add enum literals
     initEEnum(primitiveTypeEEnum, PrimitiveType.class, "PrimitiveType");

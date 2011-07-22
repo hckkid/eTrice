@@ -15,6 +15,7 @@ import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.CPBranchTransition;
 import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.Guard;
+import org.eclipse.etrice.core.room.GuardedTransition;
 import org.eclipse.etrice.core.room.InitialTransition;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.Message;
@@ -131,7 +132,7 @@ public class TransitionPropertyDialog extends AbstractPropertyDialog {
 		}
 	}
 
-	class NameValidator implements IValidator {
+	private class NameValidator implements IValidator {
 
 		@Override
 		public IStatus validate(Object value) {
@@ -141,6 +142,22 @@ public class TransitionPropertyDialog extends AbstractPropertyDialog {
 				Result result = ValidationUtil.isUniqueName(trans, name);
 				if (!result.isOk())
 					return ValidationStatus.error(result.getMsg());
+			}
+			return Status.OK_STATUS;
+		}
+	}
+	private class GuardValidator implements IValidator {
+
+		@Override
+		public IStatus validate(Object value) {
+			if (value instanceof String) {
+				String name = (String) value;
+				if (name.isEmpty())
+					return ValidationStatus.error("guard must not be empty");
+			}
+			else if (value instanceof DetailCode) {
+				if (RoomHelpers.getDetailCode((DetailCode)value).isEmpty())
+					return ValidationStatus.error("guard must not be empty");
 			}
 			return Status.OK_STATUS;
 		}
@@ -227,6 +244,15 @@ public class TransitionPropertyDialog extends AbstractPropertyDialog {
 			}
 		}
 
+		if (trans instanceof GuardedTransition) {
+			GuardValidator gv = new GuardValidator();
+			
+			Text cond = createText(body, "Guard:", trans, RoomPackage.eINSTANCE.getGuardedTransition_Guard(), gv, s2m, m2s, true);
+			GridData gd = new GridData(GridData.FILL_BOTH);
+			gd.heightHint = 100;
+			cond.setLayoutData(gd);
+		}
+		
 		if (trans instanceof CPBranchTransition) {
 			Text cond = createText(body, "Condition:", trans, RoomPackage.eINSTANCE.getCPBranchTransition_Condition(), null, s2m, m2s, true);
 			GridData gd = new GridData(GridData.FILL_BOTH);

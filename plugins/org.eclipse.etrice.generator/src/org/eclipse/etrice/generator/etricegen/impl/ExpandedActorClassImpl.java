@@ -46,6 +46,7 @@ import org.eclipse.etrice.core.room.ChoicepointTerminal;
 import org.eclipse.etrice.core.room.EntryPoint;
 import org.eclipse.etrice.core.room.ExitPoint;
 import org.eclipse.etrice.core.room.ExternalPort;
+import org.eclipse.etrice.core.room.GuardedTransition;
 import org.eclipse.etrice.core.room.InitialTransition;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.NonInitialTransition;
@@ -57,6 +58,7 @@ import org.eclipse.etrice.core.room.SAPRef;
 import org.eclipse.etrice.core.room.SPPRef;
 import org.eclipse.etrice.core.room.ServiceImplementation;
 import org.eclipse.etrice.core.room.StateGraph;
+import org.eclipse.etrice.core.room.StateMachine;
 import org.eclipse.etrice.core.room.StateTerminal;
 import org.eclipse.etrice.core.room.SubStateTrPointTerminal;
 import org.eclipse.etrice.core.room.TrPoint;
@@ -245,7 +247,9 @@ public class ExpandedActorClassImpl extends ActorClassImpl implements ExpandedAc
 		all.remove(self);
 		
 		// now we move all base class state machine contents to our state machine
-		StateGraph sm = RoomFactory.eINSTANCE.createStateGraph();
+		StateMachine sm = RoomFactory.eINSTANCE.createStateMachine();
+		if (orig.getStateMachine()!=null)
+			sm.setDataDriven(orig.getStateMachine().isDataDriven());
 		setStateMachine(sm);
 		for (StateGraph sml : all) {
 			sm.getChPoints().addAll(sml.getChPoints());
@@ -717,8 +721,7 @@ public class ExpandedActorClassImpl extends ActorClassImpl implements ExpandedAc
 		trchains.add(tc);
 	}
 
-	private void collectChainTransitions(TransitionChain tc,
-			Transition t) {
+	private void collectChainTransitions(TransitionChain tc, Transition t) {
 		trans2chain.put(t, tc);
 
 		// should always hold true
@@ -748,7 +751,7 @@ public class ExpandedActorClassImpl extends ActorClassImpl implements ExpandedAc
 		}
 	}
 
-	private void findTransitionChains(StateGraph sg) {
+	private void findTriggeredTransitionChains(StateGraph sg) {
 		for (Transition t : sg.getTransitions()) {
 			if (t instanceof TriggeredTransition) {
 				addTransitionChain(t);
@@ -761,7 +764,24 @@ public class ExpandedActorClassImpl extends ActorClassImpl implements ExpandedAc
 		// recurse into sub graphs of states
 		for (State s : sg.getStates()) {
 			if (s.getSubgraph()!=null)
-				findTransitionChains(s.getSubgraph());
+				findTriggeredTransitionChains(s.getSubgraph());
+		}
+	}
+
+	private void findGuardedTransitionChains(StateGraph sg) {
+		for (Transition t : sg.getTransitions()) {
+			if (t instanceof GuardedTransition) {
+				addTransitionChain(t);
+			}
+			else if (t instanceof InitialTransition) {
+				addTransitionChain(t);
+			}
+		}
+		
+		// recurse into sub graphs of states
+		for (State s : sg.getStates()) {
+			if (s.getSubgraph()!=null)
+				findGuardedTransitionChains(s.getSubgraph());
 		}
 	}
 
@@ -795,10 +815,16 @@ public class ExpandedActorClassImpl extends ActorClassImpl implements ExpandedAc
 		if (validator.isFailed())
 			return;
 		
-		findLeafStateTriggers(getStateMachine());
-		fillTriggerStringMap();
-		findTransitionChains(getStateMachine());
-		checkTransitionChains(getStateMachine());
+		if (getStateMachine().isDataDriven()) {
+			findGuardedTransitionChains(getStateMachine());
+		}
+		else {
+			// event driven state machine
+			findLeafStateTriggers(getStateMachine());
+			fillTriggerStringMap();
+			findTriggeredTransitionChains(getStateMachine());
+			checkTransitionChains(getStateMachine());
+		}
 	}
 
 	/**

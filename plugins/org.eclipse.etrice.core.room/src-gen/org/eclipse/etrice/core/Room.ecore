@@ -201,7 +201,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="operations" upperBound="-1"
         eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//Operation"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="stateMachine" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//StateGraph"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="stateMachine" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//StateMachine"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="InterfaceItem">
@@ -322,6 +322,9 @@
         eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//Transition"
         containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StateMachine" eSuperTypes="platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//StateGraph">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dataDriven" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BaseState" eSuperTypes="platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//State">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
@@ -365,6 +368,10 @@
         eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//Trigger"
         containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GuardedTransition" eSuperTypes="platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//NonInitialTransition">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="guard" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//DetailCode"
+        containment="true"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CPBranchTransition" eSuperTypes="platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//NonInitialTransition">
     <eStructuralFeatures xsi:type="ecore:EReference" name="condition" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//DetailCode"
         containment="true"/>
@@ -405,4 +412,5 @@
   <eClassifiers xsi:type="ecore:EClass" name="Import">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="importedNamespace" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PlainStateGraph" eSuperTypes="platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//StateGraph"/>
 </ecore:EPackage>

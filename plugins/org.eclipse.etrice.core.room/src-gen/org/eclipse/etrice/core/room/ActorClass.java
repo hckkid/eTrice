@@ -262,12 +262,12 @@ public interface ActorClass extends ActorContainerClass
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>State Machine</em>' containment reference.
-   * @see #setStateMachine(StateGraph)
+   * @see #setStateMachine(StateMachine)
    * @see org.eclipse.etrice.core.room.RoomPackage#getActorClass_StateMachine()
    * @model containment="true"
    * @generated
    */
-  StateGraph getStateMachine();
+  StateMachine getStateMachine();
 
   /**
    * Sets the value of the '{@link org.eclipse.etrice.core.room.ActorClass#getStateMachine <em>State Machine</em>}' containment reference.
@@ -277,6 +277,6 @@ public interface ActorClass extends ActorContainerClass
    * @see #getStateMachine()
    * @generated
    */
-  void setStateMachine(StateGraph value);
+  void setStateMachine(StateMachine value);
 
 } // ActorClass

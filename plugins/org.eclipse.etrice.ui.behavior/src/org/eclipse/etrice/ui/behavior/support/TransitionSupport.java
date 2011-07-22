@@ -134,6 +134,8 @@ public class TransitionSupport {
 			@Override
 			public Connection create(ICreateConnectionContext context) {
 				Connection newConnection = null;
+
+				ActorClass ac = SupportUtil.getActorClass(getDiagram());
 				
 				TransitionTerminal src = SupportUtil.getTransitionTerminal(context.getSourceAnchor(), fp);
 				TransitionTerminal dst = SupportUtil.getTransitionTerminal(context.getTargetAnchor(), fp);
@@ -174,7 +176,8 @@ public class TransitionSupport {
 						trans = t;
 					}
 					else {
-						TriggeredTransition t = RoomFactory.eINSTANCE.createTriggeredTransition();
+						NonInitialTransition t = ac.getStateMachine().isDataDriven()? 
+								RoomFactory.eINSTANCE.createGuardedTransition() : RoomFactory.eINSTANCE.createTriggeredTransition();
 						t.setFrom(src);
 						t.setTo(dst);
 						trans = t;
@@ -187,7 +190,6 @@ public class TransitionSupport {
 						trans.setName(RoomNameProvider.getUniqueTransitionName(sg));
 					}
 
-					ActorClass ac = SupportUtil.getActorClass(getDiagram());
 					ContainerShape targetContainer = SupportUtil.getStateGraphContainer((ContainerShape) context.getSourcePictogramElement().eContainer());
 					boolean inherited = SupportUtil.isInherited(getDiagram(), sg);
 					if (inherited) {

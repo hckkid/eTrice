@@ -157,13 +157,17 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 	
 	@Check
 	public void checkTransition(Transition trans) {
+		Result result = ValidationUtil.checkTransition(trans);
+		if (!result.isOk())
+			error(result.getMsg(), RoomPackage.eINSTANCE.getGuardedTransition_Guard());
+
 		if (trans instanceof InitialTransition) {
-			Result result = ValidationUtil.isConnectable(null, trans.getTo(), trans, (StateGraph)trans.eContainer());
+			result = ValidationUtil.isConnectable(null, trans.getTo(), trans, (StateGraph)trans.eContainer());
 			if (!result.isOk())
 				error(result.getMsg(), result.getSource(), result.getFeature(), result.getIndex());
 		}
 		else {
-			Result result = ValidationUtil.isConnectable(((NonInitialTransition)trans).getFrom(), trans.getTo(), trans, (StateGraph)trans.eContainer());
+			result = ValidationUtil.isConnectable(((NonInitialTransition)trans).getFrom(), trans.getTo(), trans, (StateGraph)trans.eContainer());
 			if (!result.isOk())
 				error(result.getMsg(), result.getSource(), result.getFeature(), result.getIndex());
 		}

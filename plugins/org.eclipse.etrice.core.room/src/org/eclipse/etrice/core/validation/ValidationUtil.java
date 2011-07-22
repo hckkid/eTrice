@@ -27,6 +27,7 @@ import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.EntryPoint;
 import org.eclipse.etrice.core.room.ExitPoint;
 import org.eclipse.etrice.core.room.ExternalPort;
+import org.eclipse.etrice.core.room.GuardedTransition;
 import org.eclipse.etrice.core.room.InitialTransition;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.LayerConnection;
@@ -49,6 +50,7 @@ import org.eclipse.etrice.core.room.TrPointTerminal;
 import org.eclipse.etrice.core.room.Transition;
 import org.eclipse.etrice.core.room.TransitionPoint;
 import org.eclipse.etrice.core.room.TransitionTerminal;
+import org.eclipse.etrice.core.room.TriggeredTransition;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 
 public class ValidationUtil {
@@ -672,6 +674,26 @@ public class ValidationUtil {
 		if (names.contains(name))
 			return Result.error("name already used");
 		
+		return Result.ok();
+	}
+
+	/**
+	 * @param tr
+	 * @return
+	 */
+	public static Result checkTransition(Transition tr) {
+		ActorClass ac = RoomHelpers.getActorClass(tr);
+		if (ac.getStateMachine().isDataDriven()) {
+			if (tr instanceof TriggeredTransition)
+				return Result.error("data driven state machine must not contain triggered transition");
+			if (tr instanceof GuardedTransition)
+				if (!RoomHelpers.hasDetailCode(((GuardedTransition) tr).getGuard()))
+					return Result.error("guard must not be empty");
+		}
+		else {
+			if (tr instanceof GuardedTransition)
+				return Result.error("event driven state machine must not contain guarded transition");
+		}
 		return Result.ok();
 	}
 }

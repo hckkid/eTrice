@@ -30,7 +30,7 @@ import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.etrice.core.room.SAPRef;
 import org.eclipse.etrice.core.room.ServiceImplementation;
-import org.eclipse.etrice.core.room.StateGraph;
+import org.eclipse.etrice.core.room.StateMachine;
 
 /**
  * <!-- begin-user-doc -->
@@ -186,7 +186,7 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
    * @generated
    * @ordered
    */
-  protected StateGraph stateMachine;
+  protected StateMachine stateMachine;
 
   /**
    * <!-- begin-user-doc -->
@@ -474,7 +474,7 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
    * <!-- end-user-doc -->
    * @generated
    */
-  public StateGraph getStateMachine()
+  public StateMachine getStateMachine()
   {
     return stateMachine;
   }
@@ -484,9 +484,9 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetStateMachine(StateGraph newStateMachine, NotificationChain msgs)
+  public NotificationChain basicSetStateMachine(StateMachine newStateMachine, NotificationChain msgs)
   {
-    StateGraph oldStateMachine = stateMachine;
+    StateMachine oldStateMachine = stateMachine;
     stateMachine = newStateMachine;
     if (eNotificationRequired())
     {
@@ -501,7 +501,7 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setStateMachine(StateGraph newStateMachine)
+  public void setStateMachine(StateMachine newStateMachine)
   {
     if (newStateMachine != stateMachine)
     {
@@ -642,7 +642,7 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
         getOperations().addAll((Collection<? extends Operation>)newValue);
         return;
       case RoomPackage.ACTOR_CLASS__STATE_MACHINE:
-        setStateMachine((StateGraph)newValue);
+        setStateMachine((StateMachine)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -692,7 +692,7 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
         getOperations().clear();
         return;
       case RoomPackage.ACTOR_CLASS__STATE_MACHINE:
-        setStateMachine((StateGraph)null);
+        setStateMachine((StateMachine)null);
         return;
     }
     super.eUnset(featureID);

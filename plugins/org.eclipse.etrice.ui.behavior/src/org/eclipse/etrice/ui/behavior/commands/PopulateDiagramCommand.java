@@ -51,7 +51,7 @@ public class PopulateDiagramCommand extends RecordingCommand {
 		
 		// we use a temporary structure to create the whole tree
 		StateGraphContext tree = StateGraphContext.createContextTree(ac);
-		System.out.println(tree);
+		//System.out.println(tree);
 		
 		addStateGraph(tree, diagram);
 		
