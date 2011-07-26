@@ -6,8 +6,15 @@ import org.eclipse.etrice.core.room.RoomFactory;
 
 public class StringToDetailCode extends Converter {
 
-	public StringToDetailCode() {
+	private boolean emptyIsNull;
+
+	public StringToDetailCode(boolean emptyIsNull) {
 		super(String.class, DetailCode.class);
+		this.emptyIsNull = emptyIsNull;
+	}
+
+	public StringToDetailCode() {
+		this(true);
 	}
 
 	@Override
@@ -15,11 +22,11 @@ public class StringToDetailCode extends Converter {
 		if (fromObject instanceof String) {
 			String code = (String) fromObject;
 			if (code.isEmpty())
-				return null;
+				return emptyIsNull? null:createEmptyDetailCode();
 
 			String trimmed = code.trim();
 			if (trimmed.isEmpty())
-				return null;
+				return emptyIsNull? null:createEmptyDetailCode();
 			
 			// TODOHRR: make work also for UNIX/Mac line endings
 			String[] cmds = code.split("\r\n");
@@ -33,6 +40,15 @@ public class StringToDetailCode extends Converter {
 			return dc;
 		}
 		return null;
+	}
+
+	/**
+	 * @return
+	 */
+	private DetailCode createEmptyDetailCode() {
+		DetailCode dc = RoomFactory.eINSTANCE.createDetailCode();
+		dc.getCommands().add("");
+		return dc;
 	}
 
 }

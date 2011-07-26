@@ -174,6 +174,8 @@ public class TransitionPropertyDialog extends AbstractPropertyDialog {
 	private EList<Message> currentMsgs;
 	private DetailCodeToString m2s;
 	private StringToDetailCode s2m;
+	private StringToDetailCode s2m_not_null;
+	private DetailCodeToString m2s_null_empty;
 	private Text guardText;
 	private Button removeMifButton;
 	private boolean triggerError = false;
@@ -185,7 +187,9 @@ public class TransitionPropertyDialog extends AbstractPropertyDialog {
 		this.ac = getActorClass(sg);
 
 		m2s = new DetailCodeToString();
+		m2s_null_empty = new DetailCodeToString(true);
 		s2m = new StringToDetailCode();
+		s2m_not_null = new StringToDetailCode(false);
 		
 		interfaceItems = RoomHelpers.getAllInterfaceItems(ac);
 	}
@@ -247,10 +251,12 @@ public class TransitionPropertyDialog extends AbstractPropertyDialog {
 		if (trans instanceof GuardedTransition) {
 			GuardValidator gv = new GuardValidator();
 			
-			Text cond = createText(body, "Guard:", trans, RoomPackage.eINSTANCE.getGuardedTransition_Guard(), gv, s2m, m2s, true);
+			Text cond = createText(body, "Guard:", trans, RoomPackage.eINSTANCE.getGuardedTransition_Guard(), gv, s2m_not_null, m2s_null_empty, true);
 			GridData gd = new GridData(GridData.FILL_BOTH);
 			gd.heightHint = 100;
 			cond.setLayoutData(gd);
+			
+			createDecorator(cond, "empty guard");
 		}
 		
 		if (trans instanceof CPBranchTransition) {

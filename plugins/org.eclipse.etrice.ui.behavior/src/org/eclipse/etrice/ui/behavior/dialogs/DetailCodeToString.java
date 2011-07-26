@@ -5,8 +5,15 @@ import org.eclipse.etrice.core.room.DetailCode;
 
 public class DetailCodeToString extends Converter {
 
+	private boolean nullIsEmpty;
+
 	public DetailCodeToString() {
+		this(false);
+	}
+
+	public DetailCodeToString(boolean nullIsEmpty) {
 		super(DetailCode.class, String.class);
+		this.nullIsEmpty = nullIsEmpty;
 	}
 
 	@Override
@@ -18,6 +25,6 @@ public class DetailCodeToString extends Converter {
 			}
 			return result;
 		}
-		return null;
+		return nullIsEmpty? "":null;
 	}
 }
