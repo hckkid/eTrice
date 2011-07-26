@@ -13,7 +13,6 @@
 package org.eclipse.etrice.ui.behavior;
 
 import org.eclipse.jface.resource.ImageDescriptor;
-import org.eclipse.jface.resource.ImageRegistry;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
@@ -29,8 +28,6 @@ public class Activator extends AbstractUIPlugin {
 	// The shared instance
 	private static Activator plugin;
 
-	private ImageRegistry imageRegistry = new ImageRegistry();
-	
 	/**
 	 * The constructor
 	 */
@@ -51,7 +48,6 @@ public class Activator extends AbstractUIPlugin {
 	 * @see org.eclipse.ui.plugin.AbstractUIPlugin#stop(org.osgi.framework.BundleContext)
 	 */
 	public void stop(BundleContext context) throws Exception {
-		plugin.imageRegistry.dispose();
 		plugin = null;
 		super.stop(context);
 	}
@@ -74,14 +70,14 @@ public class Activator extends AbstractUIPlugin {
 	 * @return the image descriptor
 	 */
 	public static Image getImage(String path) {
-		Image img = getDefault().imageRegistry.get(path);
+		Image img = getDefault().getImageRegistry().get(path);
 		if (img==null) {
 			ImageDescriptor desc = imageDescriptorFromPlugin(PLUGIN_ID, path);
 			if (desc==null)
 				System.err.println("image not found: "+path);
 			else {
-				getDefault().imageRegistry.put(path, desc);
-				getDefault().imageRegistry.get(path);
+				getDefault().getImageRegistry().put(path, desc);
+				getDefault().getImageRegistry().get(path);
 			}
 		}
 		return img;
