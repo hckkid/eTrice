@@ -9,6 +9,7 @@
 package org.eclipse.etrice.core.room.util;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -18,11 +19,13 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorContainerRef;
+import org.eclipse.etrice.core.room.Annotation;
 import org.eclipse.etrice.core.room.Binding;
 import org.eclipse.etrice.core.room.ChoicePoint;
 import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.ExternalPort;
 import org.eclipse.etrice.core.room.InterfaceItem;
+import org.eclipse.etrice.core.room.KeyValue;
 import org.eclipse.etrice.core.room.LayerConnection;
 import org.eclipse.etrice.core.room.LogicalSystem;
 import org.eclipse.etrice.core.room.Port;
@@ -432,5 +435,71 @@ public class RoomHelpers {
 		}
 		assert(false): "data structure broken";
 		return null;
+	}
+	
+	public static boolean isAnnotationPresent(ActorClass ac, String name) {
+		return isAnnotationPresent(ac.getAnnotations(), name);
+	}
+	
+	public static boolean isAnnotationPresent(List<Annotation> annotations, String name) {
+		for (Annotation annotation : annotations) {
+			if (annotation.getName().equals(name))
+				return true;
+		}
+		return false;
+	}
+	
+	public static List<KeyValue> getAttributes(ActorClass ac, String name) {
+		return getAttributes(ac.getAnnotations(), name);
+	}
+	
+	public static List<KeyValue> getAttributes(List<Annotation> annotations, String name) {
+		for (Annotation annotation : annotations) {
+			if (annotation.getName().equals(name))
+				return annotation.getAttributes();
+		}
+		return Collections.emptyList();
+	}
+	
+	public static boolean isAttributePresent(ActorClass ac, String name, String key) {
+		return isAttributePresent(ac.getAnnotations(), name, key);
+	}
+	
+	public static boolean isAttributePresent(List<Annotation> annotations, String name, String key) {
+		List<KeyValue> attributes = getAttributes(annotations, name);
+		for (KeyValue attrib : attributes) {
+			if (attrib.getKey().equals(key))
+				return true;
+		}
+		return false;
+	}
+	
+	public static String getAttribute(ActorClass ac, String name, String key) {
+		return getAttribute(ac.getAnnotations(), name, key);
+	}
+	
+	public static String getAttribute(List<Annotation> annotations, String name, String key) {
+		List<KeyValue> attributes = getAttributes(annotations, name);
+		for (KeyValue attrib : attributes) {
+			if (attrib.getKey().equals(key))
+				return attrib.getValue();
+		}
+		return "";
+	}
+	
+	public static boolean isAttributePresent(Annotation annotation, String key) {
+		for (KeyValue attrib : annotation.getAttributes()) {
+			if (attrib.getKey().equals(key))
+				return true;
+		}
+		return false;
+	}
+	
+	public static String getAttribute(Annotation annotation, String key) {
+		for (KeyValue attrib : annotation.getAttributes()) {
+			if (attrib.getKey().equals(key))
+				return attrib.getValue();
+		}
+		return "";
 	}
 }

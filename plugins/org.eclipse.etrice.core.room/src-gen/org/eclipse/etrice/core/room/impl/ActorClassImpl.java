@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipse.etrice.core.room.ActorClass;
+import org.eclipse.etrice.core.room.Annotation;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.Documentation;
 import org.eclipse.etrice.core.room.ExternalPort;
@@ -49,6 +50,7 @@ import org.eclipse.etrice.core.room.StateMachine;
  *   <li>{@link org.eclipse.etrice.core.room.impl.ActorClassImpl#getStrSAPs <em>Str SA Ps</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ActorClassImpl#getAttributes <em>Attributes</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ActorClassImpl#getBehaviorDocu <em>Behavior Docu</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.impl.ActorClassImpl#getAnnotations <em>Annotations</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ActorClassImpl#getOperations <em>Operations</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ActorClassImpl#getStateMachine <em>State Machine</em>}</li>
  * </ul>
@@ -167,6 +169,16 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
    * @ordered
    */
   protected Documentation behaviorDocu;
+
+  /**
+   * The cached value of the '{@link #getAnnotations() <em>Annotations</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getAnnotations()
+   * @generated
+   * @ordered
+   */
+  protected EList<Annotation> annotations;
 
   /**
    * The cached value of the '{@link #getOperations() <em>Operations</em>}' containment reference list.
@@ -460,6 +472,20 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
    * <!-- end-user-doc -->
    * @generated
    */
+  public EList<Annotation> getAnnotations()
+  {
+    if (annotations == null)
+    {
+      annotations = new EObjectContainmentEList<Annotation>(Annotation.class, this, RoomPackage.ACTOR_CLASS__ANNOTATIONS);
+    }
+    return annotations;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EList<Operation> getOperations()
   {
     if (operations == null)
@@ -543,6 +569,8 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
         return ((InternalEList<?>)getAttributes()).basicRemove(otherEnd, msgs);
       case RoomPackage.ACTOR_CLASS__BEHAVIOR_DOCU:
         return basicSetBehaviorDocu(null, msgs);
+      case RoomPackage.ACTOR_CLASS__ANNOTATIONS:
+        return ((InternalEList<?>)getAnnotations()).basicRemove(otherEnd, msgs);
       case RoomPackage.ACTOR_CLASS__OPERATIONS:
         return ((InternalEList<?>)getOperations()).basicRemove(otherEnd, msgs);
       case RoomPackage.ACTOR_CLASS__STATE_MACHINE:
@@ -582,6 +610,8 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
         return getAttributes();
       case RoomPackage.ACTOR_CLASS__BEHAVIOR_DOCU:
         return getBehaviorDocu();
+      case RoomPackage.ACTOR_CLASS__ANNOTATIONS:
+        return getAnnotations();
       case RoomPackage.ACTOR_CLASS__OPERATIONS:
         return getOperations();
       case RoomPackage.ACTOR_CLASS__STATE_MACHINE:
@@ -637,6 +667,10 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
       case RoomPackage.ACTOR_CLASS__BEHAVIOR_DOCU:
         setBehaviorDocu((Documentation)newValue);
         return;
+      case RoomPackage.ACTOR_CLASS__ANNOTATIONS:
+        getAnnotations().clear();
+        getAnnotations().addAll((Collection<? extends Annotation>)newValue);
+        return;
       case RoomPackage.ACTOR_CLASS__OPERATIONS:
         getOperations().clear();
         getOperations().addAll((Collection<? extends Operation>)newValue);
@@ -688,6 +722,9 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
       case RoomPackage.ACTOR_CLASS__BEHAVIOR_DOCU:
         setBehaviorDocu((Documentation)null);
         return;
+      case RoomPackage.ACTOR_CLASS__ANNOTATIONS:
+        getAnnotations().clear();
+        return;
       case RoomPackage.ACTOR_CLASS__OPERATIONS:
         getOperations().clear();
         return;
@@ -728,6 +765,8 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
         return attributes != null && !attributes.isEmpty();
       case RoomPackage.ACTOR_CLASS__BEHAVIOR_DOCU:
         return behaviorDocu != null;
+      case RoomPackage.ACTOR_CLASS__ANNOTATIONS:
+        return annotations != null && !annotations.isEmpty();
       case RoomPackage.ACTOR_CLASS__OPERATIONS:
         return operations != null && !operations.isEmpty();
       case RoomPackage.ACTOR_CLASS__STATE_MACHINE:

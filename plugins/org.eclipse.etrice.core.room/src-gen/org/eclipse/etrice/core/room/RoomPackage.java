@@ -1243,13 +1243,22 @@ public interface RoomPackage extends EPackage
   int ACTOR_CLASS__BEHAVIOR_DOCU = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 9;
 
   /**
+   * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ACTOR_CLASS__ANNOTATIONS = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 10;
+
+  /**
    * The feature id for the '<em><b>Operations</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ACTOR_CLASS__OPERATIONS = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 10;
+  int ACTOR_CLASS__OPERATIONS = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 11;
 
   /**
    * The feature id for the '<em><b>State Machine</b></em>' containment reference.
@@ -1258,7 +1267,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ACTOR_CLASS__STATE_MACHINE = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 11;
+  int ACTOR_CLASS__STATE_MACHINE = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 12;
 
   /**
    * The number of structural features of the '<em>Actor Class</em>' class.
@@ -1267,7 +1276,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ACTOR_CLASS_FEATURE_COUNT = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 12;
+  int ACTOR_CLASS_FEATURE_COUNT = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 13;
 
   /**
    * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.InterfaceItemImpl <em>Interface Item</em>}' class.
@@ -3353,6 +3362,80 @@ public interface RoomPackage extends EPackage
   int DOCUMENTATION_FEATURE_COUNT = 1;
 
   /**
+   * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.AnnotationImpl <em>Annotation</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.etrice.core.room.impl.AnnotationImpl
+   * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getAnnotation()
+   * @generated
+   */
+  int ANNOTATION = 69;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ANNOTATION__NAME = 0;
+
+  /**
+   * The feature id for the '<em><b>Attributes</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ANNOTATION__ATTRIBUTES = 1;
+
+  /**
+   * The number of structural features of the '<em>Annotation</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ANNOTATION_FEATURE_COUNT = 2;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.KeyValueImpl <em>Key Value</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.etrice.core.room.impl.KeyValueImpl
+   * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getKeyValue()
+   * @generated
+   */
+  int KEY_VALUE = 70;
+
+  /**
+   * The feature id for the '<em><b>Key</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int KEY_VALUE__KEY = 0;
+
+  /**
+   * The feature id for the '<em><b>Value</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int KEY_VALUE__VALUE = 1;
+
+  /**
+   * The number of structural features of the '<em>Key Value</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int KEY_VALUE_FEATURE_COUNT = 2;
+
+  /**
    * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.ImportImpl <em>Import</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -3360,7 +3443,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getImport()
    * @generated
    */
-  int IMPORT = 69;
+  int IMPORT = 71;
 
   /**
    * The feature id for the '<em><b>Imported Namespace</b></em>' attribute.
@@ -3388,7 +3471,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getPlainStateGraph()
    * @generated
    */
-  int PLAIN_STATE_GRAPH = 70;
+  int PLAIN_STATE_GRAPH = 72;
 
   /**
    * The feature id for the '<em><b>States</b></em>' containment reference list.
@@ -3443,7 +3526,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getPrimitiveType()
    * @generated
    */
-  int PRIMITIVE_TYPE = 71;
+  int PRIMITIVE_TYPE = 73;
 
 
   /**
@@ -4393,6 +4476,17 @@ public interface RoomPackage extends EPackage
    * @generated
    */
   EReference getActorClass_BehaviorDocu();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.room.ActorClass#getAnnotations <em>Annotations</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Annotations</em>'.
+   * @see org.eclipse.etrice.core.room.ActorClass#getAnnotations()
+   * @see #getActorClass()
+   * @generated
+   */
+  EReference getActorClass_Annotations();
 
   /**
    * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.room.ActorClass#getOperations <em>Operations</em>}'.
@@ -5600,6 +5694,70 @@ public interface RoomPackage extends EPackage
   EAttribute getDocumentation_Text();
 
   /**
+   * Returns the meta object for class '{@link org.eclipse.etrice.core.room.Annotation <em>Annotation</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Annotation</em>'.
+   * @see org.eclipse.etrice.core.room.Annotation
+   * @generated
+   */
+  EClass getAnnotation();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.etrice.core.room.Annotation#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.eclipse.etrice.core.room.Annotation#getName()
+   * @see #getAnnotation()
+   * @generated
+   */
+  EAttribute getAnnotation_Name();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.room.Annotation#getAttributes <em>Attributes</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Attributes</em>'.
+   * @see org.eclipse.etrice.core.room.Annotation#getAttributes()
+   * @see #getAnnotation()
+   * @generated
+   */
+  EReference getAnnotation_Attributes();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.etrice.core.room.KeyValue <em>Key Value</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Key Value</em>'.
+   * @see org.eclipse.etrice.core.room.KeyValue
+   * @generated
+   */
+  EClass getKeyValue();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.etrice.core.room.KeyValue#getKey <em>Key</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Key</em>'.
+   * @see org.eclipse.etrice.core.room.KeyValue#getKey()
+   * @see #getKeyValue()
+   * @generated
+   */
+  EAttribute getKeyValue_Key();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.etrice.core.room.KeyValue#getValue <em>Value</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Value</em>'.
+   * @see org.eclipse.etrice.core.room.KeyValue#getValue()
+   * @see #getKeyValue()
+   * @generated
+   */
+  EAttribute getKeyValue_Value();
+
+  /**
    * Returns the meta object for class '{@link org.eclipse.etrice.core.room.Import <em>Import</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -6406,6 +6564,14 @@ public interface RoomPackage extends EPackage
      * @generated
      */
     EReference ACTOR_CLASS__BEHAVIOR_DOCU = eINSTANCE.getActorClass_BehaviorDocu();
+
+    /**
+     * The meta object literal for the '<em><b>Annotations</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ACTOR_CLASS__ANNOTATIONS = eINSTANCE.getActorClass_Annotations();
 
     /**
      * The meta object literal for the '<em><b>Operations</b></em>' containment reference list feature.
@@ -7416,6 +7582,58 @@ public interface RoomPackage extends EPackage
      * @generated
      */
     EAttribute DOCUMENTATION__TEXT = eINSTANCE.getDocumentation_Text();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.etrice.core.room.impl.AnnotationImpl <em>Annotation</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.etrice.core.room.impl.AnnotationImpl
+     * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getAnnotation()
+     * @generated
+     */
+    EClass ANNOTATION = eINSTANCE.getAnnotation();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute ANNOTATION__NAME = eINSTANCE.getAnnotation_Name();
+
+    /**
+     * The meta object literal for the '<em><b>Attributes</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ANNOTATION__ATTRIBUTES = eINSTANCE.getAnnotation_Attributes();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.etrice.core.room.impl.KeyValueImpl <em>Key Value</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.etrice.core.room.impl.KeyValueImpl
+     * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getKeyValue()
+     * @generated
+     */
+    EClass KEY_VALUE = eINSTANCE.getKeyValue();
+
+    /**
+     * The meta object literal for the '<em><b>Key</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute KEY_VALUE__KEY = eINSTANCE.getKeyValue_Key();
+
+    /**
+     * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute KEY_VALUE__VALUE = eINSTANCE.getKeyValue_Value();
 
     /**
      * The meta object literal for the '{@link org.eclipse.etrice.core.room.impl.ImportImpl <em>Import</em>}' class.

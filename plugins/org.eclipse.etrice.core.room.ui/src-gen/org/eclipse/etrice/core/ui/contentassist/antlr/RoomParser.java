@@ -151,6 +151,10 @@ public class RoomParser extends AbstractContentAssistParser {
 					put(grammarAccess.getMessageFromIfAccess().getGroup(), "rule__MessageFromIf__Group__0");
 					put(grammarAccess.getGuardAccess().getGroup(), "rule__Guard__Group__0");
 					put(grammarAccess.getDocumentationAccess().getGroup(), "rule__Documentation__Group__0");
+					put(grammarAccess.getAnnotationAccess().getGroup(), "rule__Annotation__Group__0");
+					put(grammarAccess.getAnnotationAccess().getGroup_2(), "rule__Annotation__Group_2__0");
+					put(grammarAccess.getAnnotationAccess().getGroup_2_2(), "rule__Annotation__Group_2_2__0");
+					put(grammarAccess.getKeyValueAccess().getGroup(), "rule__KeyValue__Group__0");
 					put(grammarAccess.getImportAccess().getGroup(), "rule__Import__Group__0");
 					put(grammarAccess.getImportedFQNAccess().getGroup(), "rule__ImportedFQN__Group__0");
 					put(grammarAccess.getImportedFQNAccess().getGroup_1(), "rule__ImportedFQN__Group_1__0");
@@ -231,8 +235,9 @@ public class RoomParser extends AbstractContentAssistParser {
 					put(grammarAccess.getActorClassAccess().getBindingsAssignment_7_10(), "rule__ActorClass__BindingsAssignment_7_10");
 					put(grammarAccess.getActorClassAccess().getConnectionsAssignment_7_11(), "rule__ActorClass__ConnectionsAssignment_7_11");
 					put(grammarAccess.getActorClassAccess().getBehaviorDocuAssignment_8_1(), "rule__ActorClass__BehaviorDocuAssignment_8_1");
-					put(grammarAccess.getActorClassAccess().getOperationsAssignment_8_3(), "rule__ActorClass__OperationsAssignment_8_3");
-					put(grammarAccess.getActorClassAccess().getStateMachineAssignment_8_4(), "rule__ActorClass__StateMachineAssignment_8_4");
+					put(grammarAccess.getActorClassAccess().getAnnotationsAssignment_8_3(), "rule__ActorClass__AnnotationsAssignment_8_3");
+					put(grammarAccess.getActorClassAccess().getOperationsAssignment_8_4(), "rule__ActorClass__OperationsAssignment_8_4");
+					put(grammarAccess.getActorClassAccess().getStateMachineAssignment_8_5(), "rule__ActorClass__StateMachineAssignment_8_5");
 					put(grammarAccess.getPortAccess().getConjugatedAssignment_0(), "rule__Port__ConjugatedAssignment_0");
 					put(grammarAccess.getPortAccess().getNameAssignment_2(), "rule__Port__NameAssignment_2");
 					put(grammarAccess.getPortAccess().getMultiplicityAssignment_3_1(), "rule__Port__MultiplicityAssignment_3_1");
@@ -347,6 +352,11 @@ public class RoomParser extends AbstractContentAssistParser {
 					put(grammarAccess.getMessageFromIfAccess().getFromAssignment_2(), "rule__MessageFromIf__FromAssignment_2");
 					put(grammarAccess.getGuardAccess().getGuardAssignment_1(), "rule__Guard__GuardAssignment_1");
 					put(grammarAccess.getDocumentationAccess().getTextAssignment_1(), "rule__Documentation__TextAssignment_1");
+					put(grammarAccess.getAnnotationAccess().getNameAssignment_1(), "rule__Annotation__NameAssignment_1");
+					put(grammarAccess.getAnnotationAccess().getAttributesAssignment_2_1(), "rule__Annotation__AttributesAssignment_2_1");
+					put(grammarAccess.getAnnotationAccess().getAttributesAssignment_2_2_1(), "rule__Annotation__AttributesAssignment_2_2_1");
+					put(grammarAccess.getKeyValueAccess().getKeyAssignment_0(), "rule__KeyValue__KeyAssignment_0");
+					put(grammarAccess.getKeyValueAccess().getValueAssignment_2(), "rule__KeyValue__ValueAssignment_2");
 					put(grammarAccess.getImportAccess().getImportedNamespaceAssignment_1(), "rule__Import__ImportedNamespaceAssignment_1");
 				}
 			};

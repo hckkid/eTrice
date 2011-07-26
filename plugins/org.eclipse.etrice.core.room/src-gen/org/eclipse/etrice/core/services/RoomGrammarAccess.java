@@ -1111,11 +1111,13 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cBehaviorDocuAssignment_8_1 = (Assignment)cGroup_8.eContents().get(1);
 		private final RuleCall cBehaviorDocuDocumentationParserRuleCall_8_1_0 = (RuleCall)cBehaviorDocuAssignment_8_1.eContents().get(0);
 		private final Keyword cLeftCurlyBracketKeyword_8_2 = (Keyword)cGroup_8.eContents().get(2);
-		private final Assignment cOperationsAssignment_8_3 = (Assignment)cGroup_8.eContents().get(3);
-		private final RuleCall cOperationsOperationParserRuleCall_8_3_0 = (RuleCall)cOperationsAssignment_8_3.eContents().get(0);
-		private final Assignment cStateMachineAssignment_8_4 = (Assignment)cGroup_8.eContents().get(4);
-		private final RuleCall cStateMachineStateMachineParserRuleCall_8_4_0 = (RuleCall)cStateMachineAssignment_8_4.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_8_5 = (Keyword)cGroup_8.eContents().get(5);
+		private final Assignment cAnnotationsAssignment_8_3 = (Assignment)cGroup_8.eContents().get(3);
+		private final RuleCall cAnnotationsAnnotationParserRuleCall_8_3_0 = (RuleCall)cAnnotationsAssignment_8_3.eContents().get(0);
+		private final Assignment cOperationsAssignment_8_4 = (Assignment)cGroup_8.eContents().get(4);
+		private final RuleCall cOperationsOperationParserRuleCall_8_4_0 = (RuleCall)cOperationsAssignment_8_4.eContents().get(0);
+		private final Assignment cStateMachineAssignment_8_5 = (Assignment)cGroup_8.eContents().get(5);
+		private final RuleCall cStateMachineStateMachineParserRuleCall_8_5_0 = (RuleCall)cStateMachineAssignment_8_5.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_8_6 = (Keyword)cGroup_8.eContents().get(6);
 		private final Keyword cRightCurlyBracketKeyword_9 = (Keyword)cGroup.eContents().get(9);
 		
 		//// **************************************************************
@@ -1142,7 +1144,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		//	("usercode2" userCode2=DetailCode)? (intPorts+=Port | extPorts+=ExternalPort)*
 		//	serviceImplementations+=ServiceImplementation* strSAPs+=SAPRef* attributes+=Attribute* actorRefs+=ActorRef*
 		//	bindings+=Binding* connections+=LayerConnection* "}")? ("Behavior" behaviorDocu=Documentation? "{"
-		//	operations+=Operation* stateMachine=StateMachine? "}")? "}";
+		//	annotations+=Annotation* operations+=Operation* stateMachine=StateMachine? "}")? "}";
 		public ParserRule getRule() { return rule; }
 
 		//abstract?="abstract"? "ActorClass" name=ID docu=Documentation? ("extends" base=[ActorClass|FQN])? "{" ("Interface" "{"
@@ -1150,7 +1152,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		//("usercode2" userCode2=DetailCode)? (intPorts+=Port | extPorts+=ExternalPort)*
 		//serviceImplementations+=ServiceImplementation* strSAPs+=SAPRef* attributes+=Attribute* actorRefs+=ActorRef*
 		//bindings+=Binding* connections+=LayerConnection* "}")? ("Behavior" behaviorDocu=Documentation? "{"
-		//operations+=Operation* stateMachine=StateMachine? "}")? "}"
+		//annotations+=Annotation* operations+=Operation* stateMachine=StateMachine? "}")? "}"
 		public Group getGroup() { return cGroup; }
 
 		//abstract?="abstract"?
@@ -1311,7 +1313,8 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		//"}"
 		public Keyword getRightCurlyBracketKeyword_7_12() { return cRightCurlyBracketKeyword_7_12; }
 
-		//("Behavior" behaviorDocu=Documentation? "{" operations+=Operation* stateMachine=StateMachine? "}")?
+		//("Behavior" behaviorDocu=Documentation? "{" annotations+=Annotation* operations+=Operation* stateMachine=StateMachine?
+		//"}")?
 		public Group getGroup_8() { return cGroup_8; }
 
 		//"Behavior"
@@ -1326,20 +1329,26 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		//"{"
 		public Keyword getLeftCurlyBracketKeyword_8_2() { return cLeftCurlyBracketKeyword_8_2; }
 
+		//annotations+=Annotation*
+		public Assignment getAnnotationsAssignment_8_3() { return cAnnotationsAssignment_8_3; }
+
+		//Annotation
+		public RuleCall getAnnotationsAnnotationParserRuleCall_8_3_0() { return cAnnotationsAnnotationParserRuleCall_8_3_0; }
+
 		//operations+=Operation*
-		public Assignment getOperationsAssignment_8_3() { return cOperationsAssignment_8_3; }
+		public Assignment getOperationsAssignment_8_4() { return cOperationsAssignment_8_4; }
 
 		//Operation
-		public RuleCall getOperationsOperationParserRuleCall_8_3_0() { return cOperationsOperationParserRuleCall_8_3_0; }
+		public RuleCall getOperationsOperationParserRuleCall_8_4_0() { return cOperationsOperationParserRuleCall_8_4_0; }
 
 		//stateMachine=StateMachine?
-		public Assignment getStateMachineAssignment_8_4() { return cStateMachineAssignment_8_4; }
+		public Assignment getStateMachineAssignment_8_5() { return cStateMachineAssignment_8_5; }
 
 		//StateMachine
-		public RuleCall getStateMachineStateMachineParserRuleCall_8_4_0() { return cStateMachineStateMachineParserRuleCall_8_4_0; }
+		public RuleCall getStateMachineStateMachineParserRuleCall_8_5_0() { return cStateMachineStateMachineParserRuleCall_8_5_0; }
 
 		//"}"
-		public Keyword getRightCurlyBracketKeyword_8_5() { return cRightCurlyBracketKeyword_8_5; }
+		public Keyword getRightCurlyBracketKeyword_8_6() { return cRightCurlyBracketKeyword_8_6; }
 
 		//"}"
 		public Keyword getRightCurlyBracketKeyword_9() { return cRightCurlyBracketKeyword_9; }
@@ -3663,6 +3672,98 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		public Keyword getRightSquareBracketKeyword_2() { return cRightSquareBracketKeyword_2; }
 	}
 
+	public class AnnotationElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Annotation");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cCommercialAtKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
+		private final Keyword cLeftParenthesisKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
+		private final Assignment cAttributesAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
+		private final RuleCall cAttributesKeyValueParserRuleCall_2_1_0 = (RuleCall)cAttributesAssignment_2_1.eContents().get(0);
+		private final Group cGroup_2_2 = (Group)cGroup_2.eContents().get(2);
+		private final Keyword cCommaKeyword_2_2_0 = (Keyword)cGroup_2_2.eContents().get(0);
+		private final Assignment cAttributesAssignment_2_2_1 = (Assignment)cGroup_2_2.eContents().get(1);
+		private final RuleCall cAttributesKeyValueParserRuleCall_2_2_1_0 = (RuleCall)cAttributesAssignment_2_2_1.eContents().get(0);
+		private final Keyword cRightParenthesisKeyword_2_3 = (Keyword)cGroup_2.eContents().get(3);
+		
+		//Annotation:
+		//	"@" name=ID ("(" attributes+=KeyValue ("," attributes+=KeyValue)* ")")?;
+		public ParserRule getRule() { return rule; }
+
+		//"@" name=ID ("(" attributes+=KeyValue ("," attributes+=KeyValue)* ")")?
+		public Group getGroup() { return cGroup; }
+
+		//"@"
+		public Keyword getCommercialAtKeyword_0() { return cCommercialAtKeyword_0; }
+
+		//name=ID
+		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
+
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
+
+		//("(" attributes+=KeyValue ("," attributes+=KeyValue)* ")")?
+		public Group getGroup_2() { return cGroup_2; }
+
+		//"("
+		public Keyword getLeftParenthesisKeyword_2_0() { return cLeftParenthesisKeyword_2_0; }
+
+		//attributes+=KeyValue
+		public Assignment getAttributesAssignment_2_1() { return cAttributesAssignment_2_1; }
+
+		//KeyValue
+		public RuleCall getAttributesKeyValueParserRuleCall_2_1_0() { return cAttributesKeyValueParserRuleCall_2_1_0; }
+
+		//("," attributes+=KeyValue)*
+		public Group getGroup_2_2() { return cGroup_2_2; }
+
+		//","
+		public Keyword getCommaKeyword_2_2_0() { return cCommaKeyword_2_2_0; }
+
+		//attributes+=KeyValue
+		public Assignment getAttributesAssignment_2_2_1() { return cAttributesAssignment_2_2_1; }
+
+		//KeyValue
+		public RuleCall getAttributesKeyValueParserRuleCall_2_2_1_0() { return cAttributesKeyValueParserRuleCall_2_2_1_0; }
+
+		//")"
+		public Keyword getRightParenthesisKeyword_2_3() { return cRightParenthesisKeyword_2_3; }
+	}
+
+	public class KeyValueElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "KeyValue");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cKeyAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cKeyIDTerminalRuleCall_0_0 = (RuleCall)cKeyAssignment_0.eContents().get(0);
+		private final Keyword cEqualsSignKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cValueAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cValueSTRINGTerminalRuleCall_2_0 = (RuleCall)cValueAssignment_2.eContents().get(0);
+		
+		//KeyValue:
+		//	key=ID "=" value=STRING;
+		public ParserRule getRule() { return rule; }
+
+		//key=ID "=" value=STRING
+		public Group getGroup() { return cGroup; }
+
+		//key=ID
+		public Assignment getKeyAssignment_0() { return cKeyAssignment_0; }
+
+		//ID
+		public RuleCall getKeyIDTerminalRuleCall_0_0() { return cKeyIDTerminalRuleCall_0_0; }
+
+		//"="
+		public Keyword getEqualsSignKeyword_1() { return cEqualsSignKeyword_1; }
+
+		//value=STRING
+		public Assignment getValueAssignment_2() { return cValueAssignment_2; }
+
+		//STRING
+		public RuleCall getValueSTRINGTerminalRuleCall_2_0() { return cValueSTRINGTerminalRuleCall_2_0; }
+	}
+
 	public class ImportElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Import");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -3931,6 +4032,8 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	private MessageFromIfElements pMessageFromIf;
 	private GuardElements pGuard;
 	private DocumentationElements pDocumentation;
+	private AnnotationElements pAnnotation;
+	private KeyValueElements pKeyValue;
 	private ImportElements pImport;
 	private ImportedFQNElements pImportedFQN;
 	private FQNElements pFQN;
@@ -4203,7 +4306,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//	("usercode2" userCode2=DetailCode)? (intPorts+=Port | extPorts+=ExternalPort)*
 	//	serviceImplementations+=ServiceImplementation* strSAPs+=SAPRef* attributes+=Attribute* actorRefs+=ActorRef*
 	//	bindings+=Binding* connections+=LayerConnection* "}")? ("Behavior" behaviorDocu=Documentation? "{"
-	//	operations+=Operation* stateMachine=StateMachine? "}")? "}";
+	//	annotations+=Annotation* operations+=Operation* stateMachine=StateMachine? "}")? "}";
 	public ActorClassElements getActorClassAccess() {
 		return (pActorClass != null) ? pActorClass : (pActorClass = new ActorClassElements());
 	}
@@ -4761,6 +4864,26 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getDocumentationRule() {
 		return getDocumentationAccess().getRule();
+	}
+
+	//Annotation:
+	//	"@" name=ID ("(" attributes+=KeyValue ("," attributes+=KeyValue)* ")")?;
+	public AnnotationElements getAnnotationAccess() {
+		return (pAnnotation != null) ? pAnnotation : (pAnnotation = new AnnotationElements());
+	}
+	
+	public ParserRule getAnnotationRule() {
+		return getAnnotationAccess().getRule();
+	}
+
+	//KeyValue:
+	//	key=ID "=" value=STRING;
+	public KeyValueElements getKeyValueAccess() {
+		return (pKeyValue != null) ? pKeyValue : (pKeyValue = new KeyValueElements());
+	}
+	
+	public ParserRule getKeyValueRule() {
+		return getKeyValueAccess().getRule();
 	}
 
 	//Import:

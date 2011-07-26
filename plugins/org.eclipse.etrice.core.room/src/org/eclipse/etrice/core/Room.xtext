@@ -160,6 +160,7 @@ ActorClass:
 			connections+=LayerConnection*
 		'}')?
 		('Behavior' (behaviorDocu=Documentation)? '{'
+			annotations+=Annotation*
 			operations+=Operation*
 			(stateMachine=StateMachine)?
 		'}')?
@@ -394,6 +395,9 @@ Guard:
 Documentation: '['
 		text+=STRING+
 	']';
+
+Annotation: '@' name=ID ('(' attributes+=KeyValue (',' attributes+=KeyValue)* ')')?;
+KeyValue: key=ID '=' value=STRING;
 
 Import :
 	'import' importedNamespace=ImportedFQN;

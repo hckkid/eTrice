@@ -138,6 +138,8 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
       case RoomPackage.MESSAGE_FROM_IF: return createMessageFromIf();
       case RoomPackage.GUARD: return createGuard();
       case RoomPackage.DOCUMENTATION: return createDocumentation();
+      case RoomPackage.ANNOTATION: return createAnnotation();
+      case RoomPackage.KEY_VALUE: return createKeyValue();
       case RoomPackage.IMPORT: return createImport();
       case RoomPackage.PLAIN_STATE_GRAPH: return createPlainStateGraph();
       default:
@@ -936,6 +938,28 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
   {
     DocumentationImpl documentation = new DocumentationImpl();
     return documentation;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Annotation createAnnotation()
+  {
+    AnnotationImpl annotation = new AnnotationImpl();
+    return annotation;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public KeyValue createKeyValue()
+  {
+    KeyValueImpl keyValue = new KeyValueImpl();
+    return keyValue;
   }
 
   /**
