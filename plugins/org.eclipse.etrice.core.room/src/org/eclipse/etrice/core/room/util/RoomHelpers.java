@@ -502,4 +502,19 @@ public class RoomHelpers {
 		}
 		return "";
 	}
+	
+	public static boolean hasFlatStateMachine(ActorClass ac) {
+		if (ac.getStateMachine()==null)
+			return false;
+
+		if (!ac.getStateMachine().getTrPoints().isEmpty())
+			return false;
+		
+		for (State st : ac.getStateMachine().getStates()) {
+			if (hasDirectSubStructure(st))
+				return false;
+		}
+		
+		return true;
+	}
 }
