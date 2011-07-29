@@ -4020,9 +4020,9 @@ ruleBaseState returns [EObject current=null]
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getBaseStateAccess().getSubgraphStateGraphParserRuleCall_3_3_1_0()); 
+	        newCompositeNode(grammarAccess.getBaseStateAccess().getSubgraphPlainStateGraphParserRuleCall_3_3_1_0()); 
 	    }
-		lv_subgraph_9_0=ruleStateGraph		{
+		lv_subgraph_9_0=rulePlainStateGraph		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getBaseStateRule());
 	        }
@@ -4030,7 +4030,7 @@ ruleBaseState returns [EObject current=null]
        			$current, 
        			"subgraph",
         		lv_subgraph_9_0, 
-        		"StateGraph");
+        		"PlainStateGraph");
 	        afterParserOrEnumRuleCall();
 	    }
 

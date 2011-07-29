@@ -156,6 +156,9 @@ public class RoomNameProvider {
 			else if (t instanceof CPBranchTransition) {
 				return fromTo+"_COND_"+t.getName();
 			}
+			else if (t instanceof GuardedTransition) {
+				return fromTo+"_GUARD_"+t.getName();
+			}
 		}
 		
 		assert(false): "Unexpected transition class "+t.eClass().getName();

@@ -17994,8 +17994,8 @@ rule__BaseState__SubgraphAssignment_3_3_1
     }
 :
 (
-{ before(grammarAccess.getBaseStateAccess().getSubgraphStateGraphParserRuleCall_3_3_1_0()); }
-	ruleStateGraph{ after(grammarAccess.getBaseStateAccess().getSubgraphStateGraphParserRuleCall_3_3_1_0()); }
+{ before(grammarAccess.getBaseStateAccess().getSubgraphPlainStateGraphParserRuleCall_3_3_1_0()); }
+	rulePlainStateGraph{ after(grammarAccess.getBaseStateAccess().getSubgraphPlainStateGraphParserRuleCall_3_3_1_0()); }
 )
 
 ;

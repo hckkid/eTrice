@@ -12062,12 +12062,12 @@ protected class StateMachine_RightCurlyBracketKeyword_5 extends KeywordToken  {
  * 
  * BaseState:
  * 	"State" name=ID docu=Documentation? ("{" ("entry" entryCode=DetailCode)? ("exit" exitCode=DetailCode)? ("subgraph"
- * 	subgraph=StateGraph)? "}")?;
+ * 	subgraph=PlainStateGraph)? "}")?;
  *
  **/
 
 // "State" name=ID docu=Documentation? ("{" ("entry" entryCode=DetailCode)? ("exit" exitCode=DetailCode)? ("subgraph"
-// subgraph=StateGraph)? "}")?
+// subgraph=PlainStateGraph)? "}")?
 protected class BaseState_Group extends GroupToken {
 	
 	public BaseState_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -12199,7 +12199,7 @@ protected class BaseState_DocuAssignment_2 extends AssignmentToken  {
 	}	
 }
 
-// ("{" ("entry" entryCode=DetailCode)? ("exit" exitCode=DetailCode)? ("subgraph" subgraph=StateGraph)? "}")?
+// ("{" ("entry" entryCode=DetailCode)? ("exit" exitCode=DetailCode)? ("subgraph" subgraph=PlainStateGraph)? "}")?
 protected class BaseState_Group_3 extends GroupToken {
 	
 	public BaseState_Group_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -12427,7 +12427,7 @@ protected class BaseState_ExitCodeAssignment_3_2_1 extends AssignmentToken  {
 }
 
 
-// ("subgraph" subgraph=StateGraph)?
+// ("subgraph" subgraph=PlainStateGraph)?
 protected class BaseState_Group_3_3 extends GroupToken {
 	
 	public BaseState_Group_3_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -12473,7 +12473,7 @@ protected class BaseState_SubgraphKeyword_3_3_0 extends KeywordToken  {
 
 }
 
-// subgraph=StateGraph
+// subgraph=PlainStateGraph
 protected class BaseState_SubgraphAssignment_3_3_1 extends AssignmentToken  {
 	
 	public BaseState_SubgraphAssignment_3_3_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -12488,7 +12488,7 @@ protected class BaseState_SubgraphAssignment_3_3_1 extends AssignmentToken  {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new StateGraph_Alternatives(this, this, 0, inst);
+			case 0: return new PlainStateGraph_Group(this, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -12499,9 +12499,9 @@ protected class BaseState_SubgraphAssignment_3_3_1 extends AssignmentToken  {
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("subgraph");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getStateGraphRule().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getPlainStateGraphRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getBaseStateAccess().getSubgraphStateGraphParserRuleCall_3_3_1_0(); 
+				element = grammarAccess.getBaseStateAccess().getSubgraphPlainStateGraphParserRuleCall_3_3_1_0(); 
 				consumed = obj;
 				return param;
 			}

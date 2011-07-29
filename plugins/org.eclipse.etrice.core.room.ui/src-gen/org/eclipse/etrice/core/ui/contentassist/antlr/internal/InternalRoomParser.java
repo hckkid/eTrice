@@ -48176,25 +48176,25 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__BaseState__SubgraphAssignment_3_3_1"
-    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:17991:1: rule__BaseState__SubgraphAssignment_3_3_1 : ( ruleStateGraph ) ;
+    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:17991:1: rule__BaseState__SubgraphAssignment_3_3_1 : ( rulePlainStateGraph ) ;
     public final void rule__BaseState__SubgraphAssignment_3_3_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:17995:1: ( ( ruleStateGraph ) )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:17996:1: ( ruleStateGraph )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:17995:1: ( ( rulePlainStateGraph ) )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:17996:1: ( rulePlainStateGraph )
             {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:17996:1: ( ruleStateGraph )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:17997:1: ruleStateGraph
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:17996:1: ( rulePlainStateGraph )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:17997:1: rulePlainStateGraph
             {
-             before(grammarAccess.getBaseStateAccess().getSubgraphStateGraphParserRuleCall_3_3_1_0()); 
-            pushFollow(FOLLOW_ruleStateGraph_in_rule__BaseState__SubgraphAssignment_3_3_136230);
-            ruleStateGraph();
+             before(grammarAccess.getBaseStateAccess().getSubgraphPlainStateGraphParserRuleCall_3_3_1_0()); 
+            pushFollow(FOLLOW_rulePlainStateGraph_in_rule__BaseState__SubgraphAssignment_3_3_136230);
+            rulePlainStateGraph();
 
             state._fsp--;
 
-             after(grammarAccess.getBaseStateAccess().getSubgraphStateGraphParserRuleCall_3_3_1_0()); 
+             after(grammarAccess.getBaseStateAccess().getSubgraphPlainStateGraphParserRuleCall_3_3_1_0()); 
 
             }
 
@@ -51688,7 +51688,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_78_in_rule__BaseState__Group_3_2__0__Impl22554 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__BaseState__Group_3_2__1__Impl_in_rule__BaseState__Group_3_2__122585 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__BaseState__ExitCodeAssignment_3_2_1_in_rule__BaseState__Group_3_2__1__Impl22612 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__BaseState__Group_3_3__0__Impl_in_rule__BaseState__Group_3_3__022646 = new BitSet(new long[]{0x0000000001000000L,0x0000004000000800L});
+    public static final BitSet FOLLOW_rule__BaseState__Group_3_3__0__Impl_in_rule__BaseState__Group_3_3__022646 = new BitSet(new long[]{0x0000000001000000L});
     public static final BitSet FOLLOW_rule__BaseState__Group_3_3__1_in_rule__BaseState__Group_3_3__022649 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_79_in_rule__BaseState__Group_3_3__0__Impl22677 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__BaseState__Group_3_3__1__Impl_in_rule__BaseState__Group_3_3__122708 = new BitSet(new long[]{0x0000000000000002L});
@@ -52225,7 +52225,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_ruleDocumentation_in_rule__BaseState__DocuAssignment_236137 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleDetailCode_in_rule__BaseState__EntryCodeAssignment_3_1_136168 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleDetailCode_in_rule__BaseState__ExitCodeAssignment_3_2_136199 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleStateGraph_in_rule__BaseState__SubgraphAssignment_3_3_136230 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rulePlainStateGraph_in_rule__BaseState__SubgraphAssignment_3_3_136230 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleFQN_in_rule__RefinedState__BaseAssignment_136265 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleDocumentation_in_rule__RefinedState__DocuAssignment_236300 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleDetailCode_in_rule__RefinedState__EntryCodeAssignment_4_136331 = new BitSet(new long[]{0x0000000000000002L});

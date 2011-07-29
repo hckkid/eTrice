@@ -517,7 +517,7 @@ public class StateSupport {
 						s = rs;
 					}
 
-					s.setSubgraph(RoomFactory.eINSTANCE.createStateGraph());
+					s.setSubgraph(RoomFactory.eINSTANCE.createPlainStateGraph());
 
 					AddContext addContext = new AddContext();
 					addContext.setNewObject(s.getSubgraph());
