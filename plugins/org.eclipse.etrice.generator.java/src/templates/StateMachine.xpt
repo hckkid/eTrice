@@ -198,6 +198,7 @@ private int enterHistory(int state, boolean handler, boolean skip_entry) {
 		}
 		skip_entry = false;
 	}
+	return NO_STATE;
 }
 
 //*** Entry and Exit Codes
