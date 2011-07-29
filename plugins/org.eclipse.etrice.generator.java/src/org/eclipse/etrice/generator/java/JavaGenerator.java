@@ -12,12 +12,9 @@
 
 package org.eclipse.etrice.generator.java;
 
-import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.room.InitialTransition;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.MessageFromIf;
-import org.eclipse.etrice.core.room.State;
-import org.eclipse.etrice.core.room.StateGraphNode;
 import org.eclipse.etrice.core.room.Transition;
 import org.eclipse.etrice.core.room.Trigger;
 import org.eclipse.etrice.core.room.TriggeredTransition;
@@ -27,50 +24,6 @@ import org.eclipse.etrice.generator.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.generator.etricegen.TransitionChain;
 
 public class JavaGenerator {
-
-	// public static interface used by Xtend
-	
-	public static String getActionCodeOperationName(Transition t) {
-		return "action_"+RoomNameProvider.getFullPath(t);
-	}
-	
-	public static String getEntryCodeOperationName(State s) {
-		return "entry_"+getStatePathName(s);
-	}
-	
-	public static String getExitCodeOperationName(State s) {
-		return "exit_"+getStatePathName(s);
-	}
-	
-	public static String getChainId(TransitionChain tc) {
-		return "CHAIN_"+RoomNameProvider.getFullPath(tc.getTransition());
-	}
-	
-	public static boolean isTopLevel(StateGraphNode s) {
-		return !(s.eContainer().eContainer() instanceof State);
-	}
-	
-	public static State getParentState(StateGraphNode s) {
-		if (isTopLevel(s))
-			return null;
-		else
-			return (State) s.eContainer().eContainer();
-	}
-	
-	public static String getStatePathName(State s) {
-		return RoomNameProvider.getFullPath(s);
-	}
-	
-	public static String getStateId(State s) {
-		if (s==null)
-			return "STATE_"+RoomNameProvider.getStateName(s);
-		else
-			return "STATE_"+RoomNameProvider.getFullPath(s);
-	}
-	
-	public static String getParentStateId(State s) {
-		return getStateId(getParentState(s));
-	}
 
 	public static String getExecuteChain(ExpandedActorClass ac, TransitionChain tc) {
 		JavaTransitionChainVisitor tcv = new JavaTransitionChainVisitor(ac, tc);

@@ -14,6 +14,7 @@
 «IMPORT room»;
 «IMPORT etricegen»;
 
+«EXTENSION org::eclipse::etrice::generator::extensions::Extensions»
 «EXTENSION extensions::Extensions»
 «EXTENSION org::eclipse::xtend::util::stdlib::io»
 

@@ -22,6 +22,7 @@ import org.eclipse.etrice.core.room.TypedID;
 import org.eclipse.etrice.generator.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.generator.etricegen.ITransitionChainVisitor;
 import org.eclipse.etrice.generator.etricegen.TransitionChain;
+import org.eclipse.etrice.generator.extensions.Extensions;
 
 public class JavaTransitionChainVisitor implements ITransitionChainVisitor {
 
@@ -47,19 +48,19 @@ public class JavaTransitionChainVisitor implements ITransitionChainVisitor {
 	public String genActionOperationCall(Transition tr) {
 		if (tr.getAction()!=null && !tr.getAction().getCommands().isEmpty()) {
 			if (tr instanceof InitialTransition)
-				return JavaGenerator.getActionCodeOperationName(tr)+"();\n";
+				return Extensions.getActionCodeOperationName(tr)+"();\n";
 			else
-				return JavaGenerator.getActionCodeOperationName(tr)+"(ifitem"+dataArg+");\n";
+				return Extensions.getActionCodeOperationName(tr)+"(ifitem"+dataArg+");\n";
 		}
 		return "";
 	}
 
 	public String genEntryOperationCall(State state) {
-		return JavaGenerator.getEntryCodeOperationName(state)+"();\n";
+		return Extensions.getEntryCodeOperationName(state)+"();\n";
 	}
 
 	public String genExitOperationCall(State state) {
-		return JavaGenerator.getExitCodeOperationName(state)+"();\n";
+		return Extensions.getExitCodeOperationName(state)+"();\n";
 	}
 
 	public String genElseIfBranch(CPBranchTransition tr, boolean isFirst) {
@@ -83,7 +84,7 @@ public class JavaTransitionChainVisitor implements ITransitionChainVisitor {
 	}
 
 	public String genReturnState(State state) {
-		return "return " + JavaGenerator.getStateId(state) + ";";
+		return "return " + Extensions.getStateId(state) + ";";
 	}
 
 	public String genTypedData() {

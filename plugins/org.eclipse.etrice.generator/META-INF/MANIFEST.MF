@@ -27,6 +27,7 @@ Export-Package: org.eclipse.etrice.generator.builder;uses:="org.eclipse.emf.ecor
    org.eclipse.etrice.generator.etricegen,
    org.eclipse.emf.ecore.resource.impl,
    org.eclipse.emf.common.notify",
+ org.eclipse.etrice.generator.extensions,
  org.eclipse.etrice.generator.workflow;
   uses:="org.eclipse.emf.ecore,
    org.eclipse.etrice.generator.etricegen,
