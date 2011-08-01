@@ -1,21 +1,13 @@
-/**
- * <copyright>
- *
- * Copyright (c) 2005-2006 IBM Corporation and others.
- * All rights reserved.   This program and the accompanying materials
+/*******************************************************************************
+ * Copyright (c) 2011 protos software gmbh (http://www.protos.de).
+ * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
- * Contributors: 
- *   IBM - Initial API and implementation
- *
- * </copyright>
- *
- * EmptyProjectWizard.java,v 1.1 2005/05/06 02:19:59 marcelop Exp
- */
-package org.eclipse.etrice.core.ui.newwizard;
+ *******************************************************************************/
+package org.eclipse.etrice.generator.java.newwizard;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -28,8 +20,7 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.BasicMonitor;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.etrice.core.ui.internal.RoomActivator;
-import org.eclipse.jface.resource.ImageDescriptor;
+import org.eclipse.etrice.core.ui.newwizard.ProjectCreator;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.StructuredSelection;
@@ -43,7 +34,8 @@ import org.eclipse.ui.dialogs.WizardNewProjectCreationPage;
 import org.eclipse.ui.part.ISetSelectionTarget;
 
 /**
- * @since 2.1.0
+ * @author Henrik Rentz-Reichert (initial contribution and API)
+ *
  */
 public class EmptyProjectWizard extends Wizard implements INewWizard {
 	protected IWorkbench workbench;
@@ -54,33 +46,9 @@ public class EmptyProjectWizard extends Wizard implements INewWizard {
 	protected IProject runtimeProject;
 	protected String initialProjectName;
 
-	/**
-	 * Returns an image descriptor for the image file at the given plug-in
-	 * relative path
-	 * 
-	 * @param path
-	 *            the path
-	 * @return the image descriptor
-	 */
-	public ImageDescriptor getImageDescriptor(String path) {
-		ImageDescriptor desc = RoomActivator.getInstance().getImageRegistry()
-				.getDescriptor(path);
-		if (desc == null) {
-			desc = RoomActivator.imageDescriptorFromPlugin(
-					"org.eclipse.etrice.core.room.ui", path);
-			if (desc == null)
-				System.err.println("image not found: " + path);
-			else {
-				RoomActivator.getInstance().getImageRegistry().put(path, desc);
-				RoomActivator.getInstance().getImageRegistry().get(path);
-			}
-		}
-		return desc;
-	}
-
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
 		this.workbench = workbench;
-		setDefaultPageImageDescriptor(getImageDescriptor("icons/NewETriceProjectWizban.gif"));
+		setDefaultPageImageDescriptor(ProjectCreator.getImageDescriptor("icons/NewETriceProjectWizban.gif"));
 		setWindowTitle("New Empty eTrice Project");
 
 		IWorkspace workspace = ResourcesPlugin.getWorkspace();
@@ -119,7 +87,7 @@ public class EmptyProjectWizard extends Wizard implements INewWizard {
 	}
 
 	private List<String> getRequiredBundles() {
-		List<String> requiredBundles = ProjectCreator.getCommonRequiredBundles();
+		List<String> requiredBundles = new ArrayList<String>(ProjectCreator.getCommonRequiredBundles());
 		requiredBundles.add("org.eclipse.etrice.generator.java;bundle-version=\"0.1.0\"");
 		requiredBundles.add("org.eclipse.etrice.modellib;bundle-version=\"0.1.0\"");
 		return requiredBundles;

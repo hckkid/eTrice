@@ -37,10 +37,12 @@ import org.eclipse.emf.common.util.Monitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.UniqueEList;
 import org.eclipse.emf.ecore.resource.URIConverter;
+import org.eclipse.etrice.core.ui.internal.RoomActivator;
 import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.launching.JavaRuntime;
+import org.eclipse.jface.resource.ImageDescriptor;
 
 /**
  * @author Henrik Rentz-Reichert - Initial contribution and API
@@ -454,8 +456,9 @@ public class ProjectCreator {
 				manifest.print("Require-Bundle:");
 				manifest.print(" "+it.next());
 				while (it.hasNext()) {
-					manifest.println(",\n "+it.next());
+					manifest.print(",\n "+it.next());
 				}
+				manifest.println("");
 			}
 			manifest.println("Bundle-RequiredExecutionEnvironment: JavaSE-1.6");
 			manifest.close();
@@ -540,5 +543,29 @@ public class ProjectCreator {
 		} catch (IOException e) {
 			Logger.getLogger(ProjectCreator.class).error(e.getMessage(), e);
 		}
+	}
+
+	/**
+	 * Returns an image descriptor for the image file at the given plug-in
+	 * relative path
+	 * 
+	 * @param path
+	 *            the path
+	 * @return the image descriptor
+	 */
+	public static ImageDescriptor getImageDescriptor(String path) {
+		ImageDescriptor desc = RoomActivator.getInstance().getImageRegistry()
+				.getDescriptor(path);
+		if (desc == null) {
+			desc = RoomActivator.imageDescriptorFromPlugin(
+					"org.eclipse.etrice.core.room.ui", path);
+			if (desc == null)
+				System.err.println("image not found: " + path);
+			else {
+				RoomActivator.getInstance().getImageRegistry().put(path, desc);
+				RoomActivator.getInstance().getImageRegistry().get(path);
+			}
+		}
+		return desc;
 	}
 }

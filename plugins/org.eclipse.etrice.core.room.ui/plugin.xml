@@ -205,20 +205,4 @@
       </menuContribution>
    </extension>
 
-   <extension point="org.eclipse.ui.newWizards">
-      <category
-            id="org.eclipse.etrice.core.ui.wizardCategory"
-            name="eTrice"/>
-      <wizard
-            id="org.eclipse.etrice.core.ui.newwizard.EmptyProjectWizard"
-            name="Empty eTrice Java Project"
-            class="org.eclipse.etrice.core.ui.newwizard.EmptyProjectWizard"
-            category="org.eclipse.etrice.core.ui.wizardCategory"
-            project="true"
-            icon="icons/NewETriceProject.gif">
-         <description>Create an empty Java plug-in project with eTrice dependencies</description>
-         <selection class="org.eclipse.core.resources.IResource"/>
-      </wizard>
-   </extension>
-
 </plugin>
