@@ -48,31 +48,47 @@ import org.eclipse.jdt.launching.JavaRuntime;
  */
 public class ProjectCreator {
 
-	private static final String JAVA_NATURE_ID = JavaCore.NATURE_ID;
-	private static final String ORG_ECLIPSE_XTEND_SHARED_UI_XTEND_X_PAND_NATURE = "org.eclipse.xtend.shared.ui.xtendXPandNature";
-	private static final String ORG_ECLIPSE_XTEXT_UI_SHARED_XTEXT_NATURE = "org.eclipse.xtext.ui.shared.xtextNature";
-	private static final String ORG_ECLIPSE_PDE_PLUGIN_NATURE = "org.eclipse.pde.PluginNature";
-
-	private static final String[] requiredBundles = {
-		"org.eclipse.etrice.generator.java;bundle-version=\"0.1.0\"",
-		 "org.eclipse.etrice.generator;bundle-version=\"0.1.0\"",
-		 "org.eclipse.etrice.modellib;bundle-version=\"0.1.0\"",
-		 "org.eclipse.emf.mwe2.launch;bundle-version=\"1.0.1\";resolution:=optional",
-		 "org.eclipse.emf.mwe.utils;bundle-version=\"1.0.0\";visibility:=reexport",
-		 "org.apache.log4j;bundle-version=\"1.2.15\"",
-		 "org.apache.commons.logging;bundle-version=\"1.0.4\"",
-		 "org.eclipse.jface.text;bundle-version=\"3.6.0\"",
-		 "org.eclipse.jdt.core;bundle-version=\"3.6.0\"",
-		 "org.eclipse.xtend.util.stdlib;bundle-version=\"1.0.0\"",
-		 "org.eclipse.core.runtime;bundle-version=\"3.6.0\"",
-		 "org.eclipse.xtext.generator;bundle-version=\"1.0.0\""
+	private static final String[] commonNatureIDs = {
+		JavaCore.NATURE_ID,
+		"org.eclipse.xtend.shared.ui.xtendXPandNature",
+		"org.eclipse.xtext.ui.shared.xtextNature",
+		"org.eclipse.pde.PluginNature"
+	};
+	private static final String[] commonBuilderIDs = {
+		"org.eclipse.pde.ManifestBuilder",
+		"org.eclipse.pde.SchemaBuilder",
+		"org.eclipse.xtext.ui.shared.xtextBuilder",
+		"org.eclipse.xtend.shared.ui.xtendBuilder"
 	};
 
+	private static final String[] commonRequiredBundles = {
+			"org.eclipse.etrice.generator;bundle-version=\"0.1.0\"",
+			"org.eclipse.emf.mwe2.launch;bundle-version=\"1.0.1\";resolution:=optional",
+			"org.eclipse.emf.mwe.utils;bundle-version=\"1.0.0\";visibility:=reexport",
+			"org.apache.log4j;bundle-version=\"1.2.15\"",
+			"org.apache.commons.logging;bundle-version=\"1.0.4\"",
+			"org.eclipse.jface.text;bundle-version=\"3.6.0\"",
+			"org.eclipse.jdt.core;bundle-version=\"3.6.0\"",
+			"org.eclipse.xtend.util.stdlib;bundle-version=\"1.0.0\"",
+			"org.eclipse.core.runtime;bundle-version=\"3.6.0\"",
+			"org.eclipse.xtext.generator;bundle-version=\"1.0.0\""
+		};
+
+	public static List<String> getCommonNatureIDs() {
+		return Arrays.asList(commonNatureIDs);
+	}
+
+	public static List<String> getCommonBuilderIDs() {
+		return Arrays.asList(commonBuilderIDs);
+	}
+	
 	public static IProject createETriceProject(
 			IPath javaSource,
 			IPath javaSourceGen,
 			URI projectLocationURI,
 			IProject runtimeProject,
+			List<String> naturesToAdd,
+			List<String> buildersToAdd,
 			Monitor monitor
 		) {
 		IProgressMonitor progressMonitor = BasicMonitor
@@ -83,7 +99,7 @@ public class ProjectCreator {
 			List<IClasspathEntry> classpathEntries = new UniqueEList<IClasspathEntry>();
 
 			progressMonitor.beginTask("", 10);
-			progressMonitor.subTask("Creating EMF project "
+			progressMonitor.subTask("Creating eTrice project "
 					+ projectName
 					+ " ("
 					+ (projectLocationURI != null ? projectLocationURI
@@ -123,7 +139,7 @@ public class ProjectCreator {
 			else {
 				projectDescription = project.getDescription();
 				project.open(new SubProgressMonitor(progressMonitor, 1));
-				if (project.hasNature(JAVA_NATURE_ID)) {
+				if (project.hasNature(JavaCore.NATURE_ID)) {
 					classpathEntries.addAll(Arrays.asList(javaProject
 							.getRawClasspath()));
 				}
@@ -149,17 +165,10 @@ public class ProjectCreator {
 			{
 				String[] natureIds = projectDescription.getNatureIds();
 				if (natureIds == null) {
-					natureIds = new String[] {
-							JAVA_NATURE_ID,
-							ORG_ECLIPSE_PDE_PLUGIN_NATURE,
-							ORG_ECLIPSE_XTEXT_UI_SHARED_XTEXT_NATURE,
-							ORG_ECLIPSE_XTEND_SHARED_UI_XTEND_X_PAND_NATURE};
+					natureIds = new String[0];
 				}
-				else {
-					natureIds = addNature(JAVA_NATURE_ID, natureIds, project);
-					natureIds = addNature(ORG_ECLIPSE_PDE_PLUGIN_NATURE, natureIds, project);
-					natureIds = addNature(ORG_ECLIPSE_XTEXT_UI_SHARED_XTEXT_NATURE, natureIds, project);
-					natureIds = addNature(ORG_ECLIPSE_XTEND_SHARED_UI_XTEND_X_PAND_NATURE, natureIds, project);
+				for (String nature : naturesToAdd) {
+					natureIds = addNature(nature, natureIds, project);
 				}
 				projectDescription.setNatureIds(natureIds);
 
@@ -167,10 +176,9 @@ public class ProjectCreator {
 				if (builders == null) {
 					builders = new ICommand[0];
 				}
-				builders = addBuilder("org.eclipse.pde.ManifestBuilder", builders, projectDescription);
-				builders = addBuilder("org.eclipse.pde.SchemaBuilder", builders, projectDescription);
-				builders = addBuilder("org.eclipse.xtext.ui.shared.xtextBuilder", builders, projectDescription);
-				builders = addBuilder("org.eclipse.xtend.shared.ui.xtendBuilder", builders, projectDescription);
+				for (String builder : buildersToAdd) {
+					builders = addBuilder(builder, builders, projectDescription);
+				}
 				projectDescription.setBuildSpec(builders);
 
 				project.setDescription(projectDescription,
@@ -276,20 +284,20 @@ public class ProjectCreator {
 	}
 
 	/**
-	 * @param javaNatureId
+	 * @param natureId
 	 * @param natureIds
 	 * @param project
 	 * @return
 	 * @throws CoreException
 	 */
-	private static String[] addNature(String javaNatureId, String[] natureIds,
+	private static String[] addNature(String natureId, String[] natureIds,
 			IProject project) throws CoreException {
-		if (!project.hasNature(javaNatureId)) {
+		if (!project.hasNature(natureId)) {
 			String[] oldNatureIds = natureIds;
 			natureIds = new String[oldNatureIds.length + 1];
 			System.arraycopy(oldNatureIds, 0, natureIds, 0,
 					oldNatureIds.length);
-			natureIds[oldNatureIds.length] = javaNatureId;
+			natureIds[oldNatureIds.length] = natureId;
 		}
 		return natureIds;
 	}
@@ -397,7 +405,7 @@ public class ProjectCreator {
       }
     }
 
-    public static void createWorkflow(URI uri, String name) {
+    public static void createWorkflow(URI uri, String name, String generatorName) {
 		try {
 			PrintStream workflow = new PrintStream(
 					URIConverter.INSTANCE.createOutputStream(uri, null),
@@ -417,7 +425,7 @@ public class ProjectCreator {
 	    	workflow.println("		directory = destDir");
 	    	workflow.println("	}");
 	    	workflow.println("");
-	    	workflow.println("	component = @RoomGenerator {");
+	    	workflow.println("	component = @"+generatorName+" {");
 	    	workflow.println("		sourceDir = \"model\"");
 	    	workflow.println("		targetDir = destDir");
 	    	workflow.println("	}");
@@ -430,7 +438,7 @@ public class ProjectCreator {
 		}
     }
 
-	public static void createManifest(URI uri, String baseName) {
+	public static void createManifest(URI uri, String baseName, List<String> requiredBundles) {
 		try {
 			PrintStream manifest = new PrintStream(
 					URIConverter.INSTANCE.createOutputStream(uri, null),
@@ -441,10 +449,13 @@ public class ProjectCreator {
 			manifest.println("Bundle-Name: "+baseName);
 			manifest.println("Bundle-SymbolicName: "+CodeGenUtil.validPluginID(baseName));
 			manifest.println("Bundle-Version: 0.1.0");
-			manifest.print("Require-Bundle:");
-			for (int i = 0; i < requiredBundles.length; i++) {
-				String sep = (i<requiredBundles.length-1)? ",":"";
-				manifest.println(" "+requiredBundles[i]+sep);
+			Iterator<String> it = requiredBundles.iterator();
+			if (it.hasNext()) {
+				manifest.print("Require-Bundle:");
+				manifest.print(" "+it.next());
+				while (it.hasNext()) {
+					manifest.println(",\n "+it.next());
+				}
 			}
 			manifest.println("Bundle-RequiredExecutionEnvironment: JavaSE-1.6");
 			manifest.close();
@@ -453,6 +464,10 @@ public class ProjectCreator {
 		} catch (IOException e) {
 			Logger.getLogger(ProjectCreator.class).error(e.getMessage(), e);
 		}
+	}
+
+	public static List<String> getCommonRequiredBundles() {
+		return Arrays.asList(commonRequiredBundles);
 	}
 
 	public static void createModel(URI uri, String baseName) {

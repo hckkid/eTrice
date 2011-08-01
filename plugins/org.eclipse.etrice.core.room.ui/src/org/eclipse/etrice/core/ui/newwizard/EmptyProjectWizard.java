@@ -16,6 +16,8 @@
  */
 package org.eclipse.etrice.core.ui.newwizard;
 
+import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspace;
@@ -116,6 +118,13 @@ public class EmptyProjectWizard extends Wizard implements INewWizard {
 		addPage(newProjectCreationPage);
 	}
 
+	private List<String> getRequiredBundles() {
+		List<String> requiredBundles = ProjectCreator.getCommonRequiredBundles();
+		requiredBundles.add("org.eclipse.etrice.generator.java;bundle-version=\"0.1.0\"");
+		requiredBundles.add("org.eclipse.etrice.modellib;bundle-version=\"0.1.0\"");
+		return requiredBundles;
+	}
+	
 	@Override
 	public boolean performFinish() {
 		WorkspaceModifyOperation operation = new WorkspaceModifyOperation() {
@@ -128,6 +137,8 @@ public class EmptyProjectWizard extends Wizard implements INewWizard {
 							new Path(sourceGenPath.toString()),
 							modelProjectURI,
 							runtimeProject,
+							ProjectCreator.getCommonNatureIDs(),
+							ProjectCreator.getCommonBuilderIDs(),
 							BasicMonitor.toMonitor(progressMonitor)
 						);
 
@@ -143,7 +154,8 @@ public class EmptyProjectWizard extends Wizard implements INewWizard {
 					ProjectCreator.createManifest(URI.createPlatformResourceURI("/"
 							+ baseName
 							+ "/META-INF/MANIFEST.MF", true),
-							baseName);
+							baseName,
+							getRequiredBundles());
 
 					ProjectCreator.findOrCreateContainer(new Path("/"
 							+ baseName + "/src/workflow"),
@@ -151,7 +163,8 @@ public class EmptyProjectWizard extends Wizard implements INewWizard {
 					ProjectCreator.createWorkflow(URI.createPlatformResourceURI("/"
 							+ baseName
 							+ "/src/workflow/"+baseName+".mwe2", true),
-							baseName);
+							baseName,
+							"RoomGenerator");
 
 					ProjectCreator.createBuildProperties(URI.createPlatformResourceURI("/"
 							+baseName+"/build.properties", true),
