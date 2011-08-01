@@ -198,7 +198,7 @@ private int enterHistory(int state, boolean handler, boolean skip_entry) {
 		}
 		skip_entry = false;
 	}
-	return NO_STATE;
+	«REM»return NO_STATE; // required by CDT but detected as unreachable by JDT because of while (true)«ENDREM»
 }
 
 //*** Entry and Exit Codes
