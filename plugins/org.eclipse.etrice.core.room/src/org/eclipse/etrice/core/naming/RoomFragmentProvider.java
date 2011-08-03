@@ -358,7 +358,8 @@ public class RoomFragmentProvider implements IFragmentProvider {
 				return getTransition(rc, remainder);
 			}
 			else if (type.equals(RoomPackage.eINSTANCE.getStateGraph().getName())
-					|| type.equals(RoomPackage.eINSTANCE.getStateMachine().getName())) {
+					|| type.equals(RoomPackage.eINSTANCE.getStateMachine().getName())
+					|| type.equals(RoomPackage.eINSTANCE.getPlainStateGraph().getName())) {
 				return getStateGraph(rc, remainder);
 			}
 		}
