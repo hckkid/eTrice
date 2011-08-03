@@ -30,13 +30,18 @@
 <topic href="help/Addadataclass.html" label="Add a data class"></topic>
 <topic href="help/Createanewprotocol2.html" label="Create a new protocol"></topic>
 <topic href="help/CreateMrPingandMrPongActors.html" label="Create MrPing and MrPong Actors"></topic>
-<topic href="help/DefinetheActorsStructureandBehavior.html" label="Define the Actors Structure and Behavior">
-<topic href="help/DefinetheActorsStructureandBehavior.html#DefineMrPongsbehavior" label="Define MrPongs behavior"></topic>
-<topic href="help/DefinetheActorsStructureandBehavior.html#DefineMrPingbehavior" label="Define MrPing behavior"></topic>
+<topic href="help/DefineActorStructureandBehavior.html" label="Define Actor Structure and Behavior">
+<topic href="help/DefineActorStructureandBehavior.html#DefineMrPongsbehavior" label="Define MrPongs behavior"></topic>
+<topic href="help/DefineActorStructureandBehavior.html#DefineMrPingbehavior" label="Define MrPing behavior"></topic>
 </topic>
 <topic href="help/Definethetoplevel.html" label="Define the top level"></topic>
 <topic href="help/Generateandrunthemodel.html" label="Generate and run the model"></topic>
 <topic href="help/Summary3.html" label="Summary"></topic>
+</topic>
+<topic href="help/TutorialPedestrianLights.html" label="Tutorial Pedestrian Lights">
+<topic href="help/TutorialPedestrianLights.html#Scope4" label="Scope"></topic>
+<topic href="help/Setupthemodel.html" label="Setup the model"></topic>
+<topic href="help/Whydoesitworkandwhyisitsafe.html" label="Why does it work and why is it safe?"></topic>
 </topic>
 <topic href="help/ROOMConcepts.html" label="ROOM Concepts">
 <topic href="help/ROOMConcepts.html#MainConcepts" label="Main Concepts"></topic>

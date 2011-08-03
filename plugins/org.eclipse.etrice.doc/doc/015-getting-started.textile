@@ -2,7 +2,7 @@ h1. Tutorial HelloWorld
 
 h2. Scope
 
-In this tutorial you will build your first very simple etrice model. The goal is to learn the work flow of eTrice and to understand a few basic features of ROOM. You will perform the following steps:
+In this tutorial you will build your first very simple eTrice model. The goal is to learn the work flow of eTrice and to understand a few basic features of ROOM. You will perform the following steps:
 
 # create a new model from scratch
 # add a very simple state machine to an actor
@@ -49,9 +49,9 @@ The goal of eTrice is to describe distributed systems on a logical level. In the
 * at least one ??SubSystemClass??
 * at least one ??ActorClass??
 
-The ??LogicalSystem?? represents the complete distributed system and contains at least one ??SubSystemRef??. The ??SubSystemClass?? represents an address space and contains at least one ??ActorRef??. The ??ActorClass?? is the building block of which an application will be build of. It is a good idea to define a top level actor that can be used as reference within the subsystem.
+The ??LogicalSystem?? represents the complete distributed system and contains at least one ??SubSystemRef??. The ??SubSystemClass?? represents an address space and contains at least one ??ActorRef??. The ??ActorClass?? is the building block of which an application will be built of. It is in general a good idea to define a top level actor that can be used as reference within the subsystem.
 
-Mention that a outline view was created that represents all currently existing model elements in a graphical way.
+The outline view of the textual ROOM editor shows the main modeling elements in an easy to navigate tree.
 
 
 !images/015-HelloWorld02.PNG!
@@ -82,7 +82,7 @@ Now the model is finished and source code can be generated. The project wizard h
 
 !images/015-HelloWorld06.PNG!
 
-The code will be generated to the src-gen directory. The main class will be contained in ??SubSystem_HelloWorldRunner.java??. Select this file and run it as Java application.
+The code will be generated to the src-gen directory. The main function will be contained in ??SubSystem_HelloWorldRunner.java??. Select this file and run it as Java application.
 
 !images/015-HelloWorld07.PNG!
 
@@ -93,7 +93,7 @@ The Hello World application starts and the string will be printed on the console
 
 h2. Open the Message Sequence Chart
 
-During runtime the application produces a MSC and wrote it to a file. Open /org.eclipse.etrice.doc.tutorials/tmp/log/SubSystem_HelloWorld_Async.seq. You should see something like this:
+During runtime the application produced a MSC and wrote it to a file. Open /org.eclipse.etrice.doc.tutorials/tmp/log/SubSystem_HelloWorld_Async.seq using Trace2UML (it is open source and can be obtained from  http://trace2uml.tigris.org/). You should see something like this:
 
 !images/015-HelloWorld09.PNG!
 
@@ -101,5 +101,5 @@ During runtime the application produces a MSC and wrote it to a file. Open /org.
 h2. Summary
 
 Now you have generated your first eTrice model from scratch. You can switch between diagram editor and model (.room file) and you can see what will be generated during editing and saving the diagram files. 
-You should take a look at the generated source files to understand how the state machine is generated and the life cycle of the application. The next tutorials deals with more complex state machines hierarchies in structure and behavior.
+You should take a look at the generated source files to understand how the state machine is generated and the life cycle of the application. The next tutorials will deal with more complex hierarchies in structure and behavior.
  

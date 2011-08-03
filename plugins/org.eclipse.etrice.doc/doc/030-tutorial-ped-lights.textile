@@ -2,9 +2,9 @@ h1. Tutorial Pedestrian Lights
 
 h2. Scope
 
-The scope of this tutorial is to demonstrate how to receive model messages from outside the model. Calling methods which are not part of the model is simple and you have already done this within the blinky tutorial (this is the other way round model => external code). Receiving events from outside the model is a very common problem and a very frequently asked question. Therefore this tutorial shows how an external event (outside the model) can be received from the model.
+The scope of this tutorial is to demonstrate how to receive model messages from outside the model. Calling methods which are not part of the model is simple and you have already done this within the blinky tutorial (this is the other way round: model => external code). Receiving events from outside the model is a very common problem and a very frequently asked question. Therefore this tutorial shows how an external event (outside the model) can be received from the model.
 
-This tutorial is not like hello world or blinky. Be familiar with the basic tool features is a precondition for this tutorial. The goal is to understand the mechanism not to learn the tool features.
+This tutorial is not like hello world or blinky. Being familiar with the basic tool features is mandatory for this tutorial. The goal is to understand the mechanism not to learn the tool features.
 
 The idea behind the exercise is, to control a Pedestrian crossing light. We will use the same GUI as for the blinky tutorial but now we will use the ??REQUEST?? button to start a FSM, which controls the traffic lights.
 
@@ -12,7 +12,7 @@ The idea behind the exercise is, to control a Pedestrian crossing light. We will
 
 The ??REQUEST?? must lead to a model message which starts the activity of the lights.
 
-There are a view possibilities to receive external events (e.g. TCP/UDP Socket, using OS messaging mechanism), but the easiest way is, to make a port usable from outside the model. To do that a view steps are necessary:
+There are several possibilities to receive external events (e.g. TCP/UDP Socket, using OS messaging mechanism), but the easiest way is, to make a port usable from outside the model. To do that a few steps are necessary:
 # specify the messages (within a protocol) which should be sent into the model
 # model an actor with a port (which uses the specified protocol) and connect the port to the receiver 
 # the external code should know the port (import of the port class)
@@ -23,7 +23,7 @@ h2. Setup the model
 
 * Use the ??New Model Wizzard?? to create a new eTrice project and name it ??PedLightsController??.
 * Copy the package ??de.protos.PedLightGUI?? to your ??src?? directory (see blinky tutorial).
-* Uncoment line 15 (import), 36, 122 (usage) and 132-134 (registration).
+* In PedestrianLightWndNoTcp.jav uncomment line 15 (import), 36, 122 (usage) and 132-134 (registration).
 * Copy the following model to your model file:
 
 bc.. 
@@ -216,10 +216,10 @@ The ??Controller?? receives the ??start?? message and controls the timing of the
 
 !images/030-PedLights04.PNG!
 
-h2. Why does it work and why is it save?
+h2. Why does it work and why is it safe?
 
 The tutorial shows that it is generally possible to use every port from outside the model as long as the port knows its peer. This is guaranteed by describing protocol and the complete structure (especially the bindings) within the model. 
-The only remaining question is: Why is it save and does not hurt the "run to completion" semantic. To answer this question, take a look at the ??MessageService.java?? from the runtime environment. There you will find the receive method which puts each message into the queue. 
+The only remaining question is: Why is it safe and does not violate the "run to completion" semantic. To answer this question, take a look at the ??MessageService.java?? from the runtime environment. There you will find the receive method which puts each message into the queue. 
 
 bc.. 
 	@Override

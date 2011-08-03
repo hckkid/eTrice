@@ -29,7 +29,7 @@
 		<title>Tutorial HelloWorld</title>
 		<section id="Scope">
 			<title>Scope</title>
-			<para>In this tutorial you will build your first very simple etrice model. The goal is to learn the work flow of eTrice and to understand a few basic features of ROOM. You will perform the following steps:</para>
+			<para>In this tutorial you will build your first very simple eTrice model. The goal is to learn the work flow of eTrice and to understand a few basic features of ROOM. You will perform the following steps:</para>
 			<orderedlist>
 				<listitem>
 					<para>create a new model from scratch</para>
@@ -123,9 +123,9 @@
 				<citation>SubSystemRef</citation>. The 
 				<citation>SubSystemClass</citation> represents an address space and contains at least one 
 				<citation>ActorRef</citation>. The 
-				<citation>ActorClass</citation> is the building block of which an application will be build of. It is a good idea to define a top level actor that can be used as reference within the subsystem.
+				<citation>ActorClass</citation> is the building block of which an application will be built of. It is in general a good idea to define a top level actor that can be used as reference within the subsystem.
 			</para>
-			<para>Mention that a outline view was created that represents all currently existing model elements in a graphical way.</para>
+			<para>The outline view of the textual ROOM editor shows the main modeling elements in an easy to navigate tree.</para>
 			<para>
 				<mediaobject>
 					<imageobject>
@@ -187,7 +187,7 @@
 					</imageobject>
 				</mediaobject>
 			</para>
-			<para>The code will be generated to the src-gen directory. The main class will be contained in 
+			<para>The code will be generated to the src-gen directory. The main function will be contained in 
 				<citation>SubSystem_HelloWorldRunner.java</citation>. Select this file and run it as Java application.
 			</para>
 			<para>
@@ -210,7 +210,7 @@
 		</section>
 		<section id="OpentheMessageSequenceChart">
 			<title>Open the Message Sequence Chart</title>
-			<para>During runtime the application produces a MSC and wrote it to a file. Open /org.eclipse.etrice.doc.tutorials/tmp/log/SubSystem_HelloWorld_Async.seq. You should see something like this:</para>
+			<para>During runtime the application produced a MSC and wrote it to a file. Open /org.eclipse.etrice.doc.tutorials/tmp/log/SubSystem_HelloWorld_Async.seq using Trace2UML (it is open source and can be obtained from  http://trace2uml.tigris.org/). You should see something like this:</para>
 			<para>
 				<mediaobject>
 					<imageobject>
@@ -222,7 +222,7 @@
 		<section id="Summary">
 			<title>Summary</title>
 			<para>Now you have generated your first eTrice model from scratch. You can switch between diagram editor and model (.room file) and you can see what will be generated during editing and saving the diagram files. 
-				You should take a look at the generated source files to understand how the state machine is generated and the life cycle of the application. The next tutorials deals with more complex state machines hierarchies in structure and behavior.</para>
+				You should take a look at the generated source files to understand how the state machine is generated and the life cycle of the application. The next tutorials will deal with more complex hierarchies in structure and behavior.</para>
 		</section>
 	</chapter>
 	<chapter id="TutorialBlinky">
@@ -230,12 +230,12 @@
 		<section id="Scope2">
 			<title>Scope</title>
 			<para>This tutorial describes how to use the 
-				<citation>TimingService</citation>, combine a generated model with manual code and how to modeling a hierarchical state machine. The idea of the tutorial is, to switch a LED on and off. The behavior of the LED should be: blinking in a one second interval for 5 seconds, stop blinking for 5 seconds, blinking, stop,...  
+				<citation>TimingService</citation>, how to combine a generated model with manual code and how to model a hierarchical state machine. The idea of the tutorial is to switch a LED on and off. The behavior of the LED should be: blinking in a one second interval for 5 seconds, stop blinking for 5 seconds, blinking, stop,...  
 				For this exercise we will use a little GUI class that will be used in more sophisticated tutorials too. The GUI simulates a pedestrian traffic crossing. For now, just a simple LED simulation will be used from the GUI. 
 			</para>
 			<para>To use the GUI please copy the package 
 				<citation>de.protos.PedLightGUI</citation> to your 
-				<citation>src</citation> directory. The package contains four java classes which implements a little window with a 3-light traffic light which simulates the signals for the car traffic and a 2-light traffic light which simulates the pedestrian signals.
+				<citation>src</citation> directory. The package contains four java classes which implement a small window with a 3-light traffic light which simulates the signals for the car traffic and a 2-light traffic light which simulates the pedestrian signals.
 			</para>
 			<para>The GUI looks like this:</para>
 			<para>
@@ -245,7 +245,7 @@
 					</imageobject>
 				</mediaobject>
 			</para>
-			<para>Within this tutorial we just will switching on and off the yellow light.</para>
+			<para>Within this tutorial we just will toggle the yellow light.</para>
 			<para>You will perform the following steps:</para>
 			<orderedlist>
 				<listitem>
@@ -338,7 +338,7 @@
 				<citation>ProtocolClass</citation> and name it 
 				<citation>BlinkyControlProtocol</citation>.
 				Inside the brackets use the 
-				<citation>Content Assist</citation> (CTRL+Space) to create two incomming messages called 
+				<citation>Content Assist</citation> (CTRL+Space) to create two incoming messages called 
 				<citation>start</citation> and 
 				<citation>stop</citation>.
 			</para>
@@ -351,7 +351,7 @@
 				</mediaobject> 
 			</para>
 			<para>With Ctrl-Shift+F or selecting 
-				<citation>Format</citation> from the context menu you can format the text. Mention that all elements are displayed in the outline view.
+				<citation>Format</citation> from the context menu you can format the text. Note that all elements are displayed in the outline view.
 			</para>
 		</section>
 		<section id="ImporttheTimingService">
@@ -423,7 +423,7 @@
 				<citation>stop</citation> as incoming messages. 
 				<citation>Blinky</citation> receives this messages and therefore 
 				<citation>Blinky</citation>'s 
-				<citation>ControlPort</citation> must be a base port and 
+				<citation>ControlPort</citation> must be a regular port and 
 				<citation>BlinkyController</citation>'s 
 				<citation>ControlPort</citation> must be a conjugated port.
 			</para>
@@ -479,7 +479,7 @@
 				</mediaobject> 
 			</para>
 			<para>The defined ports will be generated as a member attribute of the actor class from type of the attached protocol. So, to send e message you must state 
-				<citation>port.message(p1,p2);</citation>. In this example 
+				<citation>port.message(param);</citation>. In this example 
 				<citation>ControlPort.start()</citation> sends the 
 				<citation>start</citation> message via the 
 				<citation>ControlPort</citation> to the outside world. Assuming that 
@@ -779,7 +779,7 @@ carLights.setState(TrafficLight3.OFF);
 		</section>
 		<section id="Summary2">
 			<title>Summary</title>
-			<para>Run the model and take look at the generated MSCs. Inspect the generated code to understand the runtime model of eTrice. Within this tutorial you have learned how to create a hierarchical FSM with group transitions and history transitions and you have used entry code. You are now familiar with the basic features of eTrice. The further tutorials will take this knowledge as a precondition.</para>
+			<para>Run the model and take a look at the generated MSCs. Inspect the generated code to understand the runtime model of eTrice. Within this tutorial you have learned how to create a hierarchical FSM with group transitions and history transitions and you have used entry code. You are now familiar with the basic features of eTrice. The further tutorials will take this knowledge as a precondition.</para>
 		</section>
 	</chapter>
 	<chapter id="TutorialSendingData">
@@ -787,7 +787,7 @@ carLights.setState(TrafficLight3.OFF);
 		<section id="Scope3">
 			<title>Scope</title>
 			<para>This tutorial shows how data will be sent in a eTrice model. Within the example you will create two actors (MrPing and MrPong). MrPong will simply loop back every data it received.
-				MrPing will sent data and verify the result.   </para>
+				MrPing will send data and verify the result.   </para>
 			<para>You will perform the following steps:</para>
 			<orderedlist>
 				<listitem>
@@ -949,8 +949,8 @@ carLights.setState(TrafficLight3.OFF);
 				</mediaobject>
 			</para>
 		</section>
-		<section id="DefinetheActorsStructureandBehavior">
-			<title>Define the Actors Structure and Behavior</title>
+		<section id="DefineActorStructureandBehavior">
+			<title>Define Actor Structure and Behavior</title>
 			<para>Save the model and visit the outline view. Within the outline view, right click on the 
 				<citation>MrPong</citation> actor and select 
 				<citation>Edit Structure</citation>. Select an 
@@ -1090,7 +1090,6 @@ carLights.setState(TrafficLight3.OFF);
 				</mediaobject>
 			</para>
 			<para>The model is finished now and the model file should look like this:</para>
-			<literallayout></literallayout>
 			<literallayout><code>RoomModel SendingData {
 
 	LogicalSystem SendingData_LogSystem {
@@ -1237,67 +1236,401 @@ carLights.setState(TrafficLight3.OFF);
 			<title>Generate and run the model</title>
 			<para>With the MWe2 workflow generate the code and run the model. 
 				The output should look like this:</para>
-			<para>type &#8218;quit’ to exit
-				/SendingData_SubSystem/SendigDataTopRef/ref0 -&gt; waitForPongSimple
-				/SendingData_SubSystem/SendigDataTopRef/ref1 -&gt; looping
-				/SendingData_SubSystem/SendigDataTopRef/ref1 -&gt; looping
-				data: 1
-				/SendingData_SubSystem/SendigDataTopRef/ref0 -&gt; waitForPongSimple
-				/SendingData_SubSystem/SendigDataTopRef/ref1 -&gt; looping
-				data: 2
-				/SendingData_SubSystem/SendigDataTopRef/ref0 -&gt; waitForPongSimple
-				/SendingData_SubSystem/SendigDataTopRef/ref1 -&gt; looping
-				data: 3
-				/SendingData_SubSystem/SendigDataTopRef/ref0 -&gt; waitForPongSimple
-				/SendingData_SubSystem/SendigDataTopRef/ref1 -&gt; looping
-				data: 4
-				/SendingData_SubSystem/SendigDataTopRef/ref0 -&gt; waitForPongSimple
-				/SendingData_SubSystem/SendigDataTopRef/ref1 -&gt; looping
-				data: 5
-				/SendingData_SubSystem/SendigDataTopRef/ref0 -&gt; waitForPongSimple
-				/SendingData_SubSystem/SendigDataTopRef/ref1 -&gt; looping
-				data: 6
-				/SendingData_SubSystem/SendigDataTopRef/ref0 -&gt; waitForPongSimple
-				/SendingData_SubSystem/SendigDataTopRef/ref1 -&gt; looping
-				data: 7
-				/SendingData_SubSystem/SendigDataTopRef/ref0 -&gt; waitForPongSimple
-				/SendingData_SubSystem/SendigDataTopRef/ref1 -&gt; looping
-				data: 8
-				/SendingData_SubSystem/SendigDataTopRef/ref0 -&gt; waitForPongSimple
-				/SendingData_SubSystem/SendigDataTopRef/ref1 -&gt; looping
-				data: 9
-				/SendingData_SubSystem/SendigDataTopRef/ref0 -&gt; waitForPongSimple
-				/SendingData_SubSystem/SendigDataTopRef/ref1 -&gt; looping
-				data: 10
-				/SendingData_SubSystem/SendigDataTopRef/ref0 -&gt; waitForPong
-				/SendingData_SubSystem/SendigDataTopRef/ref1 -&gt; looping
-				/SendingData_SubSystem/SendigDataTopRef/ref1 -&gt; looping
-				d.int32Val: 4711
-				d.float64Val: 0,000000
-				d.int8Array: 1 2 3 4 5 6 7 8 9 10 
-				d.stringVal: empty
-				/SendingData_SubSystem/SendigDataTopRef/ref0 -&gt; waitForPong
-				d.int32Val: 815
-				d.float64Val: 3,141234
-				d.int8Array: 100 101 102 103 104 105 106 107 108 109 
-				d.stringVal: some contents
-				/SendingData_SubSystem/SendigDataTopRef/ref0 -&gt; waitForPong
-				quit
-				echo: quit</para>
+			<blockquote>
+				<para>
+					type &#8218;quit’ to exit
+					/SendingData_SubSystem/SendigDataTopRef/ref0 -&gt; waitForPongSimple
+					/SendingData_SubSystem/SendigDataTopRef/ref1 -&gt; looping
+					/SendingData_SubSystem/SendigDataTopRef/ref1 -&gt; looping
+					data: 1
+					/SendingData_SubSystem/SendigDataTopRef/ref0 -&gt; waitForPongSimple
+					/SendingData_SubSystem/SendigDataTopRef/ref1 -&gt; looping
+					data: 2
+					/SendingData_SubSystem/SendigDataTopRef/ref0 -&gt; waitForPongSimple
+					/SendingData_SubSystem/SendigDataTopRef/ref1 -&gt; looping
+					data: 3
+					/SendingData_SubSystem/SendigDataTopRef/ref0 -&gt; waitForPongSimple
+					/SendingData_SubSystem/SendigDataTopRef/ref1 -&gt; looping
+					data: 4
+					/SendingData_SubSystem/SendigDataTopRef/ref0 -&gt; waitForPongSimple
+					/SendingData_SubSystem/SendigDataTopRef/ref1 -&gt; looping
+					data: 5
+					/SendingData_SubSystem/SendigDataTopRef/ref0 -&gt; waitForPongSimple
+					/SendingData_SubSystem/SendigDataTopRef/ref1 -&gt; looping
+					data: 6
+					/SendingData_SubSystem/SendigDataTopRef/ref0 -&gt; waitForPongSimple
+					/SendingData_SubSystem/SendigDataTopRef/ref1 -&gt; looping
+					data: 7
+					/SendingData_SubSystem/SendigDataTopRef/ref0 -&gt; waitForPongSimple
+					/SendingData_SubSystem/SendigDataTopRef/ref1 -&gt; looping
+					data: 8
+					/SendingData_SubSystem/SendigDataTopRef/ref0 -&gt; waitForPongSimple
+					/SendingData_SubSystem/SendigDataTopRef/ref1 -&gt; looping
+					data: 9
+					/SendingData_SubSystem/SendigDataTopRef/ref0 -&gt; waitForPongSimple
+					/SendingData_SubSystem/SendigDataTopRef/ref1 -&gt; looping
+					data: 10
+					/SendingData_SubSystem/SendigDataTopRef/ref0 -&gt; waitForPong
+					/SendingData_SubSystem/SendigDataTopRef/ref1 -&gt; looping
+					/SendingData_SubSystem/SendigDataTopRef/ref1 -&gt; looping
+					d.int32Val: 4711
+					d.float64Val: 0,000000
+					d.int8Array: 1 2 3 4 5 6 7 8 9 10 
+					d.stringVal: empty
+					/SendingData_SubSystem/SendigDataTopRef/ref0 -&gt; waitForPong
+					d.int32Val: 815
+					d.float64Val: 3,141234
+					d.int8Array: 100 101 102 103 104 105 106 107 108 109 
+					d.stringVal: some contents
+					/SendingData_SubSystem/SendigDataTopRef/ref0 -&gt; waitForPong
+					quit
+					echo: quit</para>
+			</blockquote>
+			<blockquote>
+				<para></para>
+			</blockquote>
 		</section>
 		<section id="Summary3">
 			<title>Summary</title>
-			<para>Within the first loop a integer value will be incremented from 
+			<para>Within the first loop an integer value will be incremented from 
 				<citation>MrPong</citation> and sent back to 
-				<citation>MrPing</citation>. Is long as the guard is true 
+				<citation>MrPing</citation>. As long as the guard is true 
 				<citation>MrPing</citation> sends back the value.
 			</para>
 			<para>Within the 
 				<citation>next</citation> transition, 
 				<citation>MrPing</citation> creates a data class and sends the default values. Than 
 				<citation>MrPing</citation> changes the values and sends the class again. At this point you should note that during the send operation, a copy of the data class will be created and sent. Otherwise it would not be possible to send the same object two times, even more it would not be possible to send a stack object at all. 
-				In later versions of eTrice a additional mechanism to send references will be implemented. However, keep in mind that sending references takes the responsibility of the life cycle of the sent object to the user. It looks simple but is a very common source of failures.  
+				In future versions of eTrice an additional mechanism to send references will be implemented. However, keep in mind that sending references transfers the responsibility of the life cycle of the sent object to the user. It looks simple but is a very common source of failures.  
 			</para>
+		</section>
+	</chapter>
+	<chapter id="TutorialPedestrianLights">
+		<title>Tutorial Pedestrian Lights</title>
+		<section id="Scope4">
+			<title>Scope</title>
+			<para>The scope of this tutorial is to demonstrate how to receive model messages from outside the model. Calling methods which are not part of the model is simple and you have already done this within the blinky tutorial (this is the other way round: model =&gt; external code). Receiving events from outside the model is a very common problem and a very frequently asked question. Therefore this tutorial shows how an external event (outside the model) can be received from the model.</para>
+			<para>This tutorial is not like hello world or blinky. Being familiar with the basic tool features is mandatory for this tutorial. The goal is to understand the mechanism not to learn the tool features.</para>
+			<para>The idea behind the exercise is, to control a Pedestrian crossing light. We will use the same GUI as for the blinky tutorial but now we will use the 
+				<citation>REQUEST</citation> button to start a FSM, which controls the traffic lights.
+			</para>
+			<para>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/020-Blinky08.PNG"/>
+					</imageobject>
+				</mediaobject>
+			</para>
+			<para>The 
+				<citation>REQUEST</citation> must lead to a model message which starts the activity of the lights.
+			</para>
+			<para>There are several possibilities to receive external events (e.g. TCP/UDP Socket, using OS messaging mechanism), but the easiest way is, to make a port usable from outside the model. To do that a few steps are necessary:</para>
+			<orderedlist>
+				<listitem>
+					<para>specify the messages (within a protocol) which should be sent into the model</para>
+				</listitem>
+				<listitem>
+					<para>model an actor with a port (which uses the specified protocol) and connect the port to the receiver </para>
+				</listitem>
+				<listitem>
+					<para>the external code should know the port (import of the port class)</para>
+				</listitem>
+				<listitem>
+					<para>the external code should provide a registration method, so that the actor is able to allow access to this port</para>
+				</listitem>
+				<listitem>
+					<para>the port can be used from the external code</para>
+				</listitem>
+			</orderedlist>
+		</section>
+		<section id="Setupthemodel">
+			<title>Setup the model</title>
+			<itemizedlist>
+				<listitem>
+					<para>Use the 
+						<citation>New Model Wizzard</citation> to create a new eTrice project and name it 
+						<citation>PedLightsController</citation>.
+					</para>
+				</listitem>
+				<listitem>
+					<para>Copy the package 
+						<citation>de.protos.PedLightGUI</citation> to your 
+						<citation>src</citation> directory (see blinky tutorial).
+					</para>
+				</listitem>
+				<listitem>
+					<para>In PedestrianLightWndNoTcp.jav uncomment line 15 (import), 36, 122 (usage) and 132-134 (registration).</para>
+				</listitem>
+				<listitem>
+					<para>Copy the following model to your model file:</para>
+				</listitem>
+			</itemizedlist>
+			<literallayout><code>RoomModel PedLightsController {
+
+	LogicalSystem LogSys_PedLights {
+		SubSystemRef application: SubSys_PedLights
+	}
+
+	SubSystemClass SubSys_PedLights {
+		ActorRef PedLightsTopRef: PedLightsTop
+		ActorRef timingService: room.basic.service.timing.ATimingService
+		LayerConnection ref PedLightsTopRef satisfied_by timingService.timer
+		LayerConnection ref PedLightsTopRef satisfied_by timingService.timeout
+	}
+
+	ActorClass PedLightsTop {
+		Structure {
+			ActorRef adapter: GuiAdapter
+			ActorRef controller: Controller
+			Binding adapter.ControlPort and controller.ControlPort
+		}
+		Behavior { }
+	}
+
+	ActorClass GuiAdapter {
+		Interface {
+			conjugated Port ControlPort: PedControlProtocol
+		}
+		Structure {
+			usercode1 {
+				"import PedLightGUI.*;"
+			}
+			usercode2 {
+				"private PedestrianLightWndNoTcp lights = new PedestrianLightWndNoTcp(\"Pedestrian Lights\",\"  external port connection \");"
+				"private TrafficLight3 carLights;"
+				"private TrafficLight2 pedLights;"
+			}
+			external Port ControlPort
+		}
+		Behavior {
+			Operation destroyUser() {
+				"lights.closeWindow();"
+			}
+			StateMachine {
+				Transition init: initial -&gt; running {
+					action {
+						"carLights=lights.getCarLights();"
+						"pedLights=lights.getPedLights();"
+						"carLights.setState(TrafficLight3.OFF);"
+						"pedLights.setState(TrafficLight2.OFF);"
+						"lights.setPort(ControlPort);"
+					}
+				}
+				Transition tr0: running -&gt; running {
+					triggers {
+						&lt;setCarLights: ControlPort&gt;
+					}
+					action {
+						"carLights.setState(state);"
+					}
+				}
+				Transition tr1: running -&gt; running {
+					triggers {
+						&lt;setPedLights: ControlPort&gt;
+					}
+					action {
+						"pedLights.setState(state);"
+					}
+				}
+				State running
+			}
+		}
+	}
+
+	ActorClass Controller {
+		Interface {
+			Port ControlPort: PedControlProtocol
+		}
+		Structure {
+			usercode1 {
+				"import PedLightGUI.*;"
+			}
+			external Port ControlPort
+			SAP timer: room.basic.service.timing.PTimeout
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -&gt; off { }
+				Transition tr0: off -&gt; carsGreen {
+					triggers {
+						&lt;start: ControlPort&gt;
+					}
+					action {
+						"timer.Start(700);"
+						"ControlPort.setCarLights(TrafficLight3.GREEN);"
+						"ControlPort.setPedLights(TrafficLight2.RED);"
+					}
+				}
+				Transition tr1: carsGreen -&gt; carsYellow {
+					triggers {
+						&lt;timeoutTick: timer&gt;
+					}
+					action {
+						"timer.Start(700);"
+						"ControlPort.setCarLights(TrafficLight3.YELLOW);"
+						"ControlPort.setPedLights(TrafficLight2.RED);"
+					}
+				}
+				Transition tr2: carsYellow -&gt; carsRed {
+					triggers {
+						&lt;timeoutTick: timer&gt;
+					}
+					action {
+						"timer.Start(1500);"
+						"ControlPort.setCarLights(TrafficLight3.RED);"
+						"ControlPort.setPedLights(TrafficLight2.GREEN);"
+					}
+				}
+				Transition tr3: carsRed -&gt; carsYellowRed {
+					triggers {
+						&lt;timeoutTick: timer&gt;
+					}
+					action {
+						"timer.Start(700);"
+						"ControlPort.setCarLights(TrafficLight3.YELLOW_RED);"
+						"ControlPort.setPedLights(TrafficLight2.RED);"
+					}
+				}
+				Transition tr4: carsYellowRed -&gt; carsGreen2 {
+					triggers {
+						&lt;timeoutTick: timer&gt;
+					}
+					action {
+						"timer.Start(700);"
+						"ControlPort.setCarLights(TrafficLight3.GREEN);"
+						"ControlPort.setPedLights(TrafficLight2.RED);"
+					}
+				}
+				Transition tr5: carsGreen2 -&gt; off {
+					triggers {
+						&lt;timeoutTick: timer&gt;
+					}
+					action {
+						"ControlPort.setCarLights(TrafficLight3.OFF);"
+						"ControlPort.setPedLights(TrafficLight2.OFF);"
+					}
+				}
+				State off
+				State carsGreen
+				State carsYellow
+				State carsRed
+				State carsYellowRed
+				State carsGreen2
+			}
+		}
+	}
+
+	ProtocolClass PedControlProtocol {
+		incoming {
+			Message start()
+		}
+		outgoing {
+			Message setCarLights(state: int32)
+			Message setPedLights(state: int32)
+		}
+	}
+}
+</code></literallayout>
+			<blockquote>
+				<para></para>
+			</blockquote>
+			<itemizedlist>
+				<listitem>
+					<para>Arrange the Structure and the Statemachines to understand the model </para>
+				</listitem>
+			</itemizedlist>
+			<para>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/030-PedLights01.PNG"/>
+					</imageobject>
+				</mediaobject>
+				The 
+				<citation>GuiAdapter</citation> represents the interface to the external code. It registers its 
+				<citation>ControlPort</citation> by the external code.
+			</para>
+			<para>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/030-PedLights02.PNG"/>
+					</imageobject>
+				</mediaobject>
+				Visit the initial transition to understand the registration. The actor handles the incoming messages as usual and controls the traffic lights as known from blinky. 
+			</para>
+			<para>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/030-PedLights03.PNG"/>
+					</imageobject>
+				</mediaobject>
+				The 
+				<citation>Controller</citation> receives the 
+				<citation>start</citation> message and controls the timing of the lights. Note that the 
+				<citation>start</citation> message will be sent from the external code whenever the 
+				<citation>REQUEST</citation> button is pressed.
+			</para>
+			<itemizedlist>
+				<listitem>
+					<para> Visit the model and take a closer look to the following elements:</para>
+				</listitem>
+			</itemizedlist>
+			<orderedlist>
+				<listitem>
+					<para>PedControlProtocol =&gt; notice that the start message is defined as usual</para>
+				</listitem>
+				<listitem>
+					<para>Initial transition of the 
+						<citation>GuiAdapter</citation> =&gt; see the registration
+					</para>
+				</listitem>
+				<listitem>
+					<para>The 
+						<citation>Controller</citation> =&gt; notice that the 
+						<citation>Controller</citation> receives the external message (not the 
+						<citation>GuiAdapter</citation>). The 
+						<citation>GuiAdapter</citation> just provides its port and handles the incoming messages.
+					</para>
+				</listitem>
+				<listitem>
+					<para>Visit the hand written code =&gt; see the import statement of the protocol class and the usage of the port.</para>
+				</listitem>
+			</orderedlist>
+			<itemizedlist>
+				<listitem>
+					<para>Generate and test the model</para>
+				</listitem>
+				<listitem>
+					<para>Take a look at the generated MSC =&gt; notice that the start message will shown as if the 
+						<citation>GuiAdapter</citation> had sent it.
+					</para>
+				</listitem>
+			</itemizedlist>
+			<para>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/030-PedLights04.PNG"/>
+					</imageobject>
+				</mediaobject>
+			</para>
+		</section>
+		<section id="Whydoesitworkandwhyisitsafe">
+			<title>Why does it work and why is it safe?</title>
+			<para>The tutorial shows that it is generally possible to use every port from outside the model as long as the port knows its peer. This is guaranteed by describing protocol and the complete structure (especially the bindings) within the model. 
+				The only remaining question is: Why is it safe and does not violate the &#8222;run to completion” semantic. To answer this question, take a look at the 
+				<citation>MessageService.java</citation> from the runtime environment. There you will find the receive method which puts each message into the queue. 
+			</para>
+			<literallayout><code>	@Override
+	public synchronized void receive(Message msg) {
+		if (msg!=null) {
+			messageQueue.push(msg);
+			notifyAll(); // wake up thread to compute message
+		}
+	}
+</code></literallayout>
+			<blockquote>
+				<para></para>
+			</blockquote>
+			<para>This method is synchronized. That means, regardless who sends the message, the queue is secured. If we later on (e.g. for performance reasons in C/C++) distinguish between internal and external senders (same thread or not), care must be taken to use the external (secure) queue.</para>
 		</section>
 	</chapter>
 	<chapter id="ROOMConcepts">

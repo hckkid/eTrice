@@ -2,16 +2,16 @@ h1. Tutorial Blinky
 
 h2. Scope
 
-This tutorial describes how to use the ??TimingService??, combine a generated model with manual code and how to modeling a hierarchical state machine. The idea of the tutorial is, to switch a LED on and off. The behavior of the LED should be: blinking in a one second interval for 5 seconds, stop blinking for 5 seconds, blinking, stop,...  
+This tutorial describes how to use the ??TimingService??, how to combine a generated model with manual code and how to model a hierarchical state machine. The idea of the tutorial is to switch a LED on and off. The behavior of the LED should be: blinking in a one second interval for 5 seconds, stop blinking for 5 seconds, blinking, stop,...  
 For this exercise we will use a little GUI class that will be used in more sophisticated tutorials too. The GUI simulates a pedestrian traffic crossing. For now, just a simple LED simulation will be used from the GUI. 
 
-To use the GUI please copy the package ??de.protos.PedLightGUI?? to your ??src?? directory. The package contains four java classes which implements a little window with a 3-light traffic light which simulates the signals for the car traffic and a 2-light traffic light which simulates the pedestrian signals.
+To use the GUI please copy the package ??de.protos.PedLightGUI?? to your ??src?? directory. The package contains four java classes which implement a small window with a 3-light traffic light which simulates the signals for the car traffic and a 2-light traffic light which simulates the pedestrian signals.
 
 The GUI looks like this:
 
 !images/020-Blinky08.PNG!
 
-Within this tutorial we just will switching on and off the yellow light.
+Within this tutorial we just will toggle the yellow light.
 
 You will perform the following steps:
 
@@ -63,13 +63,13 @@ Save the model and visit the outline view.
 h2. Create a new protocol
 
 With the help of ??Content Assist?? create a ??ProtocolClass?? and name it ??BlinkyControlProtocol??.
-Inside the brackets use the ??Content Assist?? (CTRL+Space) to create two incomming messages called ??start?? and ??stop??.
+Inside the brackets use the ??Content Assist?? (CTRL+Space) to create two incoming messages called ??start?? and ??stop??.
 
 The resulting code should look like this:
 
 !images/020-Blinky03.PNG! 
 
-With Ctrl-Shift+F or selecting ??Format?? from the context menu you can format the text. Mention that all elements are displayed in the outline view.
+With Ctrl-Shift+F or selecting ??Format?? from the context menu you can format the text. Note that all elements are displayed in the outline view.
 
 h2. Import the Timing Service
 
@@ -97,7 +97,7 @@ From the outline view right click to ??Blinky?? and select ??Edit Structure??. D
 
 Repeat the above steps for the ??BlinkyController??. Make the port ??Conjugated??
 
-Keep in mind that the protocol defines ??start?? and ??stop?? as incoming messages. ??Blinky?? receives this messages and therefore ??Blinky??'s ??ControlPort?? must be a base port and ??BlinkyController??'s ??ControlPort?? must be a conjugated port.
+Keep in mind that the protocol defines ??start?? and ??stop?? as incoming messages. ??Blinky?? receives this messages and therefore ??Blinky??'s ??ControlPort?? must be a regular port and ??BlinkyController??'s ??ControlPort?? must be a conjugated port.
 
 
 From the outline view right click ??BlinkyTop?? and select ??Edit Structure??.
@@ -120,7 +120,7 @@ The dialog should look like this:
 
 !{width=500px}images/020-Blinky09.PNG! 
 
-The defined ports will be generated as a member attribute of the actor class from type of the attached protocol. So, to send e message you must state ??port.message(p1,p2);??. In this example ??ControlPort.start()?? sends the ??start?? message via the ??ControlPort?? to the outside world. Assuming that ??Blinky?? is connected to this port, the message will start the one second blinking FSM. It is the same thing with the ??timer??. The SAP is also a port and follows the same rules. So it is clear that ??timer.Start(5000);?? will send the ??Start?? message to the timing service. The timing service will send a ??timeoutTick?? message back after 5000ms.
+The defined ports will be generated as a member attribute of the actor class from type of the attached protocol. So, to send e message you must state ??port.message(param);??. In this example ??ControlPort.start()?? sends the ??start?? message via the ??ControlPort?? to the outside world. Assuming that ??Blinky?? is connected to this port, the message will start the one second blinking FSM. It is the same thing with the ??timer??. The SAP is also a port and follows the same rules. So it is clear that ??timer.Start(5000);?? will send the ??Start?? message to the timing service. The timing service will send a ??timeoutTick?? message back after 5000ms.
 
 Within each transition the timer will be restarted and the appropriate message will be sent via the ??ControlPort??. 
 
@@ -349,5 +349,5 @@ The model is complete now. You can run and debug the model as described in getti
 
 h2. Summary
 
-Run the model and take look at the generated MSCs. Inspect the generated code to understand the runtime model of eTrice. Within this tutorial you have learned how to create a hierarchical FSM with group transitions and history transitions and you have used entry code. You are now familiar with the basic features of eTrice. The further tutorials will take this knowledge as a precondition.
+Run the model and take a look at the generated MSCs. Inspect the generated code to understand the runtime model of eTrice. Within this tutorial you have learned how to create a hierarchical FSM with group transitions and history transitions and you have used entry code. You are now familiar with the basic features of eTrice. The further tutorials will take this knowledge as a precondition.
 

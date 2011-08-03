@@ -82,7 +82,7 @@
                     <fo:table-row>
                         <fo:table-cell text-align="center">
                             <fo:block>
-                                <fo:external-graphic src="file:build/images/logo/xtext_logo.jpg"/>
+                                <fo:external-graphic src="file:doc/images/logo/eTRICE-logo.png"/>
                             </fo:block>
                         </fo:table-cell>
                     </fo:table-row>

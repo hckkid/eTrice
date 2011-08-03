@@ -3,7 +3,7 @@ h1. Tutorial Sending Data
 h2. Scope
 
 This tutorial shows how data will be sent in a eTrice model. Within the example you will create two actors (MrPing and MrPong). MrPong will simply loop back every data it received.
-MrPing will sent data and verify the result.   
+MrPing will send data and verify the result.   
 
 You will perform the following steps:
 
@@ -19,6 +19,7 @@ h2. Create a new model from scratch
 Remember exercise ??HelloWorld??.
 Create a new eTrice project and name it ??SendingData??
 Open the ??SendingData.room?? file and copy the following code into the file or use content assist to create the model.
+
 
 bc.. 
 RoomModel SendingData {
@@ -125,7 +126,7 @@ The outline view should look like this:
 
 !images/025-SendingData03.png!
 
-h2. Define the Actors Structure and Behavior
+h2. Define Actor Structure and Behavior
 
 Save the model and visit the outline view. Within the outline view, right click on the ??MrPong?? actor and select ??Edit Structure??. Select an ??Interface Port?? from the toolbox and add it to MrPong. Name the Port ??PingPongPort?? and select the ??PingPongProtocol??
 
@@ -345,7 +346,7 @@ h2. Generate and run the model
 With the MWe2 workflow generate the code and run the model. 
 The output should look like this:
 
-
+bq.. 
 type 'quit' to exit
 /SendingData_SubSystem/SendigDataTopRef/ref0 -> waitForPongSimple
 /SendingData_SubSystem/SendigDataTopRef/ref1 -> looping
@@ -393,12 +394,13 @@ d.stringVal: some contents
 /SendingData_SubSystem/SendigDataTopRef/ref0 -> waitForPong
 quit
 echo: quit
+bq. 
 
 h2. Summary
 
-Within the first loop a integer value will be incremented from ??MrPong?? and sent back to ??MrPing??. Is long as the guard is true ??MrPing?? sends back the value.
+Within the first loop an integer value will be incremented from ??MrPong?? and sent back to ??MrPing??. As long as the guard is true ??MrPing?? sends back the value.
 
 Within the ??next?? transition, ??MrPing?? creates a data class and sends the default values. Than ??MrPing?? changes the values and sends the class again. At this point you should note that during the send operation, a copy of the data class will be created and sent. Otherwise it would not be possible to send the same object two times, even more it would not be possible to send a stack object at all. 
-In later versions of eTrice a additional mechanism to send references will be implemented. However, keep in mind that sending references takes the responsibility of the life cycle of the sent object to the user. It looks simple but is a very common source of failures.  
+In future versions of eTrice an additional mechanism to send references will be implemented. However, keep in mind that sending references transfers the responsibility of the life cycle of the sent object to the user. It looks simple but is a very common source of failures.  
 
 

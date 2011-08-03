@@ -27,7 +27,7 @@ h1. Tutorial HelloWorld
 
 h2. Scope
 
-In this tutorial you will build your first very simple etrice model. The goal is to learn the work flow of eTrice and to understand a few basic features of ROOM. You will perform the following steps:
+In this tutorial you will build your first very simple eTrice model. The goal is to learn the work flow of eTrice and to understand a few basic features of ROOM. You will perform the following steps:
 
 # create a new model from scratch
 # add a very simple state machine to an actor
@@ -74,9 +74,9 @@ The goal of eTrice is to describe distributed systems on a logical level. In the
 * at least one ??SubSystemClass??
 * at least one ??ActorClass??
 
-The ??LogicalSystem?? represents the complete distributed system and contains at least one ??SubSystemRef??. The ??SubSystemClass?? represents an address space and contains at least one ??ActorRef??. The ??ActorClass?? is the building block of which an application will be build of. It is a good idea to define a top level actor that can be used as reference within the subsystem.
+The ??LogicalSystem?? represents the complete distributed system and contains at least one ??SubSystemRef??. The ??SubSystemClass?? represents an address space and contains at least one ??ActorRef??. The ??ActorClass?? is the building block of which an application will be built of. It is in general a good idea to define a top level actor that can be used as reference within the subsystem.
 
-Mention that a outline view was created that represents all currently existing model elements in a graphical way.
+The outline view of the textual ROOM editor shows the main modeling elements in an easy to navigate tree.
 
 
 !images/015-HelloWorld02.PNG!
@@ -107,7 +107,7 @@ Now the model is finished and source code can be generated. The project wizard h
 
 !images/015-HelloWorld06.PNG!
 
-The code will be generated to the src-gen directory. The main class will be contained in ??SubSystem_HelloWorldRunner.java??. Select this file and run it as Java application.
+The code will be generated to the src-gen directory. The main function will be contained in ??SubSystem_HelloWorldRunner.java??. Select this file and run it as Java application.
 
 !images/015-HelloWorld07.PNG!
 
@@ -118,7 +118,7 @@ The Hello World application starts and the string will be printed on the console
 
 h2. Open the Message Sequence Chart
 
-During runtime the application produces a MSC and wrote it to a file. Open /org.eclipse.etrice.doc.tutorials/tmp/log/SubSystem_HelloWorld_Async.seq. You should see something like this:
+During runtime the application produced a MSC and wrote it to a file. Open /org.eclipse.etrice.doc.tutorials/tmp/log/SubSystem_HelloWorld_Async.seq using Trace2UML (it is open source and can be obtained from  http://trace2uml.tigris.org/). You should see something like this:
 
 !images/015-HelloWorld09.PNG!
 
@@ -126,23 +126,23 @@ During runtime the application produces a MSC and wrote it to a file. Open /org.
 h2. Summary
 
 Now you have generated your first eTrice model from scratch. You can switch between diagram editor and model (.room file) and you can see what will be generated during editing and saving the diagram files. 
-You should take a look at the generated source files to understand how the state machine is generated and the life cycle of the application. The next tutorials deals with more complex state machines hierarchies in structure and behavior.
+You should take a look at the generated source files to understand how the state machine is generated and the life cycle of the application. The next tutorials will deal with more complex hierarchies in structure and behavior.
  
 
 h1. Tutorial Blinky
 
 h2. Scope
 
-This tutorial describes how to use the ??TimingService??, combine a generated model with manual code and how to modeling a hierarchical state machine. The idea of the tutorial is, to switch a LED on and off. The behavior of the LED should be: blinking in a one second interval for 5 seconds, stop blinking for 5 seconds, blinking, stop,...  
+This tutorial describes how to use the ??TimingService??, how to combine a generated model with manual code and how to model a hierarchical state machine. The idea of the tutorial is to switch a LED on and off. The behavior of the LED should be: blinking in a one second interval for 5 seconds, stop blinking for 5 seconds, blinking, stop,...  
 For this exercise we will use a little GUI class that will be used in more sophisticated tutorials too. The GUI simulates a pedestrian traffic crossing. For now, just a simple LED simulation will be used from the GUI. 
 
-To use the GUI please copy the package ??de.protos.PedLightGUI?? to your ??src?? directory. The package contains four java classes which implements a little window with a 3-light traffic light which simulates the signals for the car traffic and a 2-light traffic light which simulates the pedestrian signals.
+To use the GUI please copy the package ??de.protos.PedLightGUI?? to your ??src?? directory. The package contains four java classes which implement a small window with a 3-light traffic light which simulates the signals for the car traffic and a 2-light traffic light which simulates the pedestrian signals.
 
 The GUI looks like this:
 
 !images/020-Blinky08.PNG!
 
-Within this tutorial we just will switching on and off the yellow light.
+Within this tutorial we just will toggle the yellow light.
 
 You will perform the following steps:
 
@@ -194,13 +194,13 @@ Save the model and visit the outline view.
 h2. Create a new protocol
 
 With the help of ??Content Assist?? create a ??ProtocolClass?? and name it ??BlinkyControlProtocol??.
-Inside the brackets use the ??Content Assist?? (CTRL+Space) to create two incomming messages called ??start?? and ??stop??.
+Inside the brackets use the ??Content Assist?? (CTRL+Space) to create two incoming messages called ??start?? and ??stop??.
 
 The resulting code should look like this:
 
 !images/020-Blinky03.PNG! 
 
-With Ctrl-Shift+F or selecting ??Format?? from the context menu you can format the text. Mention that all elements are displayed in the outline view.
+With Ctrl-Shift+F or selecting ??Format?? from the context menu you can format the text. Note that all elements are displayed in the outline view.
 
 h2. Import the Timing Service
 
@@ -228,7 +228,7 @@ From the outline view right click to ??Blinky?? and select ??Edit Structure??. D
 
 Repeat the above steps for the ??BlinkyController??. Make the port ??Conjugated??
 
-Keep in mind that the protocol defines ??start?? and ??stop?? as incoming messages. ??Blinky?? receives this messages and therefore ??Blinky??'s ??ControlPort?? must be a base port and ??BlinkyController??'s ??ControlPort?? must be a conjugated port.
+Keep in mind that the protocol defines ??start?? and ??stop?? as incoming messages. ??Blinky?? receives this messages and therefore ??Blinky??'s ??ControlPort?? must be a regular port and ??BlinkyController??'s ??ControlPort?? must be a conjugated port.
 
 
 From the outline view right click ??BlinkyTop?? and select ??Edit Structure??.
@@ -251,7 +251,7 @@ The dialog should look like this:
 
 !{width=500px}images/020-Blinky09.PNG! 
 
-The defined ports will be generated as a member attribute of the actor class from type of the attached protocol. So, to send e message you must state ??port.message(p1,p2);??. In this example ??ControlPort.start()?? sends the ??start?? message via the ??ControlPort?? to the outside world. Assuming that ??Blinky?? is connected to this port, the message will start the one second blinking FSM. It is the same thing with the ??timer??. The SAP is also a port and follows the same rules. So it is clear that ??timer.Start(5000);?? will send the ??Start?? message to the timing service. The timing service will send a ??timeoutTick?? message back after 5000ms.
+The defined ports will be generated as a member attribute of the actor class from type of the attached protocol. So, to send e message you must state ??port.message(param);??. In this example ??ControlPort.start()?? sends the ??start?? message via the ??ControlPort?? to the outside world. Assuming that ??Blinky?? is connected to this port, the message will start the one second blinking FSM. It is the same thing with the ??timer??. The SAP is also a port and follows the same rules. So it is clear that ??timer.Start(5000);?? will send the ??Start?? message to the timing service. The timing service will send a ??timeoutTick?? message back after 5000ms.
 
 Within each transition the timer will be restarted and the appropriate message will be sent via the ??ControlPort??. 
 
@@ -480,7 +480,7 @@ The model is complete now. You can run and debug the model as described in getti
 
 h2. Summary
 
-Run the model and take look at the generated MSCs. Inspect the generated code to understand the runtime model of eTrice. Within this tutorial you have learned how to create a hierarchical FSM with group transitions and history transitions and you have used entry code. You are now familiar with the basic features of eTrice. The further tutorials will take this knowledge as a precondition.
+Run the model and take a look at the generated MSCs. Inspect the generated code to understand the runtime model of eTrice. Within this tutorial you have learned how to create a hierarchical FSM with group transitions and history transitions and you have used entry code. You are now familiar with the basic features of eTrice. The further tutorials will take this knowledge as a precondition.
 
 
 h1. Tutorial Sending Data
@@ -488,7 +488,7 @@ h1. Tutorial Sending Data
 h2. Scope
 
 This tutorial shows how data will be sent in a eTrice model. Within the example you will create two actors (MrPing and MrPong). MrPong will simply loop back every data it received.
-MrPing will sent data and verify the result.   
+MrPing will send data and verify the result.   
 
 You will perform the following steps:
 
@@ -504,6 +504,7 @@ h2. Create a new model from scratch
 Remember exercise ??HelloWorld??.
 Create a new eTrice project and name it ??SendingData??
 Open the ??SendingData.room?? file and copy the following code into the file or use content assist to create the model.
+
 
 bc.. 
 RoomModel SendingData {
@@ -610,7 +611,7 @@ The outline view should look like this:
 
 !images/025-SendingData03.png!
 
-h2. Define the Actors Structure and Behavior
+h2. Define Actor Structure and Behavior
 
 Save the model and visit the outline view. Within the outline view, right click on the ??MrPong?? actor and select ??Edit Structure??. Select an ??Interface Port?? from the toolbox and add it to MrPong. Name the Port ??PingPongPort?? and select the ??PingPongProtocol??
 
@@ -685,7 +686,6 @@ Open the Structure from SendingDataTop and add MrPing and MrPong as a reference.
 
 The model is finished now and the model file should look like this:
 
-pre.. 
 bc.. 
 RoomModel SendingData {
 
@@ -831,7 +831,7 @@ h2. Generate and run the model
 With the MWe2 workflow generate the code and run the model. 
 The output should look like this:
 
-
+bq.. 
 type 'quit' to exit
 /SendingData_SubSystem/SendigDataTopRef/ref0 -> waitForPongSimple
 /SendingData_SubSystem/SendigDataTopRef/ref1 -> looping
@@ -879,13 +879,252 @@ d.stringVal: some contents
 /SendingData_SubSystem/SendigDataTopRef/ref0 -> waitForPong
 quit
 echo: quit
+bq. 
 
 h2. Summary
 
-Within the first loop a integer value will be incremented from ??MrPong?? and sent back to ??MrPing??. Is long as the guard is true ??MrPing?? sends back the value.
+Within the first loop an integer value will be incremented from ??MrPong?? and sent back to ??MrPing??. As long as the guard is true ??MrPing?? sends back the value.
 
 Within the ??next?? transition, ??MrPing?? creates a data class and sends the default values. Than ??MrPing?? changes the values and sends the class again. At this point you should note that during the send operation, a copy of the data class will be created and sent. Otherwise it would not be possible to send the same object two times, even more it would not be possible to send a stack object at all. 
-In later versions of eTrice a additional mechanism to send references will be implemented. However, keep in mind that sending references takes the responsibility of the life cycle of the sent object to the user. It looks simple but is a very common source of failures.  
+In future versions of eTrice an additional mechanism to send references will be implemented. However, keep in mind that sending references transfers the responsibility of the life cycle of the sent object to the user. It looks simple but is a very common source of failures.  
+
+
+
+h1. Tutorial Pedestrian Lights
+
+h2. Scope
+
+The scope of this tutorial is to demonstrate how to receive model messages from outside the model. Calling methods which are not part of the model is simple and you have already done this within the blinky tutorial (this is the other way round: model => external code). Receiving events from outside the model is a very common problem and a very frequently asked question. Therefore this tutorial shows how an external event (outside the model) can be received from the model.
+
+This tutorial is not like hello world or blinky. Being familiar with the basic tool features is mandatory for this tutorial. The goal is to understand the mechanism not to learn the tool features.
+
+The idea behind the exercise is, to control a Pedestrian crossing light. We will use the same GUI as for the blinky tutorial but now we will use the ??REQUEST?? button to start a FSM, which controls the traffic lights.
+
+!images/020-Blinky08.PNG!
+
+The ??REQUEST?? must lead to a model message which starts the activity of the lights.
+
+There are several possibilities to receive external events (e.g. TCP/UDP Socket, using OS messaging mechanism), but the easiest way is, to make a port usable from outside the model. To do that a few steps are necessary:
+# specify the messages (within a protocol) which should be sent into the model
+# model an actor with a port (which uses the specified protocol) and connect the port to the receiver 
+# the external code should know the port (import of the port class)
+# the external code should provide a registration method, so that the actor is able to allow access to this port
+# the port can be used from the external code
+
+h2. Setup the model
+
+* Use the ??New Model Wizzard?? to create a new eTrice project and name it ??PedLightsController??.
+* Copy the package ??de.protos.PedLightGUI?? to your ??src?? directory (see blinky tutorial).
+* In PedestrianLightWndNoTcp.jav uncomment line 15 (import), 36, 122 (usage) and 132-134 (registration).
+* Copy the following model to your model file:
+
+bc.. 
+RoomModel PedLightsController {
+
+	LogicalSystem LogSys_PedLights {
+		SubSystemRef application: SubSys_PedLights
+	}
+
+	SubSystemClass SubSys_PedLights {
+		ActorRef PedLightsTopRef: PedLightsTop
+		ActorRef timingService: room.basic.service.timing.ATimingService
+		LayerConnection ref PedLightsTopRef satisfied_by timingService.timer
+		LayerConnection ref PedLightsTopRef satisfied_by timingService.timeout
+	}
+
+	ActorClass PedLightsTop {
+		Structure {
+			ActorRef adapter: GuiAdapter
+			ActorRef controller: Controller
+			Binding adapter.ControlPort and controller.ControlPort
+		}
+		Behavior { }
+	}
+
+	ActorClass GuiAdapter {
+		Interface {
+			conjugated Port ControlPort: PedControlProtocol
+		}
+		Structure {
+			usercode1 {
+				"import PedLightGUI.*;"
+			}
+			usercode2 {
+				"private PedestrianLightWndNoTcp lights = new PedestrianLightWndNoTcp(\"Pedestrian Lights\",\"  external port connection \");"
+				"private TrafficLight3 carLights;"
+				"private TrafficLight2 pedLights;"
+			}
+			external Port ControlPort
+		}
+		Behavior {
+			Operation destroyUser() {
+				"lights.closeWindow();"
+			}
+			StateMachine {
+				Transition init: initial -> running {
+					action {
+						"carLights=lights.getCarLights();"
+						"pedLights=lights.getPedLights();"
+						"carLights.setState(TrafficLight3.OFF);"
+						"pedLights.setState(TrafficLight2.OFF);"
+						"lights.setPort(ControlPort);"
+					}
+				}
+				Transition tr0: running -> running {
+					triggers {
+						<setCarLights: ControlPort>
+					}
+					action {
+						"carLights.setState(state);"
+					}
+				}
+				Transition tr1: running -> running {
+					triggers {
+						<setPedLights: ControlPort>
+					}
+					action {
+						"pedLights.setState(state);"
+					}
+				}
+				State running
+			}
+		}
+	}
+
+	ActorClass Controller {
+		Interface {
+			Port ControlPort: PedControlProtocol
+		}
+		Structure {
+			usercode1 {
+				"import PedLightGUI.*;"
+			}
+			external Port ControlPort
+			SAP timer: room.basic.service.timing.PTimeout
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> off { }
+				Transition tr0: off -> carsGreen {
+					triggers {
+						<start: ControlPort>
+					}
+					action {
+						"timer.Start(700);"
+						"ControlPort.setCarLights(TrafficLight3.GREEN);"
+						"ControlPort.setPedLights(TrafficLight2.RED);"
+					}
+				}
+				Transition tr1: carsGreen -> carsYellow {
+					triggers {
+						<timeoutTick: timer>
+					}
+					action {
+						"timer.Start(700);"
+						"ControlPort.setCarLights(TrafficLight3.YELLOW);"
+						"ControlPort.setPedLights(TrafficLight2.RED);"
+					}
+				}
+				Transition tr2: carsYellow -> carsRed {
+					triggers {
+						<timeoutTick: timer>
+					}
+					action {
+						"timer.Start(1500);"
+						"ControlPort.setCarLights(TrafficLight3.RED);"
+						"ControlPort.setPedLights(TrafficLight2.GREEN);"
+					}
+				}
+				Transition tr3: carsRed -> carsYellowRed {
+					triggers {
+						<timeoutTick: timer>
+					}
+					action {
+						"timer.Start(700);"
+						"ControlPort.setCarLights(TrafficLight3.YELLOW_RED);"
+						"ControlPort.setPedLights(TrafficLight2.RED);"
+					}
+				}
+				Transition tr4: carsYellowRed -> carsGreen2 {
+					triggers {
+						<timeoutTick: timer>
+					}
+					action {
+						"timer.Start(700);"
+						"ControlPort.setCarLights(TrafficLight3.GREEN);"
+						"ControlPort.setPedLights(TrafficLight2.RED);"
+					}
+				}
+				Transition tr5: carsGreen2 -> off {
+					triggers {
+						<timeoutTick: timer>
+					}
+					action {
+						"ControlPort.setCarLights(TrafficLight3.OFF);"
+						"ControlPort.setPedLights(TrafficLight2.OFF);"
+					}
+				}
+				State off
+				State carsGreen
+				State carsYellow
+				State carsRed
+				State carsYellowRed
+				State carsGreen2
+			}
+		}
+	}
+
+	ProtocolClass PedControlProtocol {
+		incoming {
+			Message start()
+		}
+		outgoing {
+			Message setCarLights(state: int32)
+			Message setPedLights(state: int32)
+		}
+	}
+}
+bq. 
+
+* Arrange the Structure and the Statemachines to understand the model 
+
+!images/030-PedLights01.PNG!
+The ??GuiAdapter?? represents the interface to the external code. It registers its ??ControlPort?? by the external code.
+
+!images/030-PedLights02.PNG!
+Visit the initial transition to understand the registration. The actor handles the incoming messages as usual and controls the traffic lights as known from blinky. 
+
+!images/030-PedLights03.PNG!
+The ??Controller?? receives the ??start?? message and controls the timing of the lights. Note that the ??start?? message will be sent from the external code whenever the ??REQUEST?? button is pressed.
+
+*  Visit the model and take a closer look to the following elements:
+# PedControlProtocol => notice that the start message is defined as usual
+# Initial transition of the ??GuiAdapter?? => see the registration
+# The ??Controller?? => notice that the ??Controller?? receives the external message (not the ??GuiAdapter??). The ??GuiAdapter?? just provides its port and handles the incoming messages.
+# Visit the hand written code => see the import statement of the protocol class and the usage of the port.
+
+* Generate and test the model
+* Take a look at the generated MSC => notice that the start message will shown as if the ??GuiAdapter?? had sent it.
+
+!images/030-PedLights04.PNG!
+
+h2. Why does it work and why is it safe?
+
+The tutorial shows that it is generally possible to use every port from outside the model as long as the port knows its peer. This is guaranteed by describing protocol and the complete structure (especially the bindings) within the model. 
+The only remaining question is: Why is it safe and does not violate the "run to completion" semantic. To answer this question, take a look at the ??MessageService.java?? from the runtime environment. There you will find the receive method which puts each message into the queue. 
+
+bc.. 
+	@Override
+	public synchronized void receive(Message msg) {
+		if (msg!=null) {
+			messageQueue.push(msg);
+			notifyAll(); // wake up thread to compute message
+		}
+	}
+bq. 
+
+This method is synchronized. That means, regardless who sends the message, the queue is secured. If we later on (e.g. for performance reasons in C/C++) distinguish between internal and external senders (same thread or not), care must be taken to use the external (secure) queue.
+
 
 
 

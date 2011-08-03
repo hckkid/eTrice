@@ -7,7 +7,7 @@
 <link rel="home" href="index.html" title="eTrice User Guide">
 <link rel="up" href="TutorialSendingData.html" title="Tutorial Sending Data">
 <link rel="prev" href="Generateandrunthemodel.html" title="Generate and run the model">
-<link rel="next" href="ROOMConcepts.html" title="ROOM Concepts">
+<link rel="next" href="TutorialPedestrianLights.html" title="Tutorial Pedestrian Lights">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Summary</h1>
@@ -20,16 +20,16 @@
 </div>
 </div>
 </div>
-<p>Within the first loop a integer value will be incremented from 
+<p>Within the first loop an integer value will be incremented from 
 				[<span class="citation">MrPong</span>] and sent back to 
-				[<span class="citation">MrPing</span>]. Is long as the guard is true 
+				[<span class="citation">MrPing</span>]. As long as the guard is true 
 				[<span class="citation">MrPing</span>] sends back the value.
 			</p>
 <p>Within the 
 				[<span class="citation">next</span>] transition, 
 				[<span class="citation">MrPing</span>] creates a data class and sends the default values. Than 
 				[<span class="citation">MrPing</span>] changes the values and sends the class again. At this point you should note that during the send operation, a copy of the data class will be created and sent. Otherwise it would not be possible to send the same object two times, even more it would not be possible to send a stack object at all. 
-				In later versions of eTrice a additional mechanism to send references will be implemented. However, keep in mind that sending references takes the responsibility of the life cycle of the sent object to the user. It looks simple but is a very common source of failures.  
+				In future versions of eTrice an additional mechanism to send references will be implemented. However, keep in mind that sending references transfers the responsibility of the life cycle of the sent object to the user. It looks simple but is a very common source of failures.  
 			</p>
 </div>
 </body>
