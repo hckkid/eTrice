@@ -36,10 +36,10 @@
       <xsl:variable name="Version">
           <xsl:choose>
               <xsl:when test="//releaseinfo">
-                      <xsl:text>Xtext </xsl:text><xsl:value-of select="//releaseinfo"/>
+                      <xsl:text>eTrice </xsl:text><xsl:value-of select="//releaseinfo"/>
               </xsl:when>
               <xsl:otherwise>
-                  Xtext 1.0
+                  eTrice 0.1
               </xsl:otherwise>
           </xsl:choose>
       </xsl:variable>

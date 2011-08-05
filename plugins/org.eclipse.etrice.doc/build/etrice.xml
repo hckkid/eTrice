@@ -24,6 +24,37 @@
 	</chapter>
 	<chapter id="IntroductiontotheROOMLanguage">
 		<title>Introduction to the ROOM Language</title>
+		<section id="ScopeofROOM">
+			<title>Scope of ROOM</title>
+		</section>
+		<section id="BasicConcepts">
+			<title>Basic Concepts</title>
+		</section>
+		<section id="Benefits">
+			<title>Benefits</title>
+		</section>
+		<section id="ExecutionModels">
+			<title>Execution Models</title>
+			<section id="LogicalMachine">
+				<title>Logical Machine</title>
+				<itemizedlist>
+					<listitem>
+						<para>run to completion</para>
+					</listitem>
+				</itemizedlist>
+			</section>
+			<section id="QueueBasedExecutionModel">
+				<title>Queue Based Execution Model</title>
+			</section>
+			<section id="PolledExecutionModel">
+				<title>Polled Execution Model
+					not implemented yet</title>
+			</section>
+			<section id="HybridExecutionModel">
+				<title>Hybrid Execution Model
+					not implemented yet</title>
+			</section>
+		</section>
 	</chapter>
 	<chapter id="TutorialHelloWorld">
 		<title>Tutorial HelloWorld</title>
@@ -1090,7 +1121,6 @@ carLights.setState(TrafficLight3.OFF);
 				</mediaobject>
 			</para>
 			<para>The model is finished now and the model file should look like this:</para>
-			<literallayout></literallayout>
 			<literallayout><code>RoomModel SendingData {
 
 	LogicalSystem SendingData_LogSystem {
@@ -1300,10 +1330,341 @@ carLights.setState(TrafficLight3.OFF);
 			</para>
 		</section>
 	</chapter>
+	<chapter id="TutorialPedestrianLights">
+		<title>Tutorial Pedestrian Lights</title>
+		<section id="Scope4">
+			<title>Scope</title>
+			<para>The scope of this tutorial is to demonstrate how to receive model messages from outside the model. Calling methods which are not part of the model is simple and you have already done this within the blinky tutorial (this is the other way round model =&gt; external code). Receiving events from outside the model is a very common problem and a very frequently asked question. Therefore this tutorial shows how an external event (outside the model) can be received from the model.</para>
+			<para>This tutorial is not like hello world or blinky. Be familiar with the basic tool features is a precondition for this tutorial. The goal is to understand the mechanism not to learn the tool features.</para>
+			<para>The idea behind the exercise is, to control a Pedestrian crossing light. We will use the same GUI as for the blinky tutorial but now we will use the 
+				<citation>REQUEST</citation> button to start a FSM, which controls the traffic lights.
+			</para>
+			<para>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/020-Blinky08.PNG"/>
+					</imageobject>
+				</mediaobject>
+			</para>
+			<para>The 
+				<citation>REQUEST</citation> must lead to a model message which starts the activity of the lights.
+			</para>
+			<para>There are a view possibilities to receive external events (e.g. TCP/UDP Socket, using OS messaging mechanism), but the easiest way is, to make a port usable from outside the model. To do that a view steps are necessary:</para>
+			<orderedlist>
+				<listitem>
+					<para>specify the messages (within a protocol) which should be sent into the model</para>
+				</listitem>
+				<listitem>
+					<para>model an actor with a port (which uses the specified protocol) and connect the port to the receiver </para>
+				</listitem>
+				<listitem>
+					<para>the external code should know the port (import of the port class)</para>
+				</listitem>
+				<listitem>
+					<para>the external code should provide a registration method, so that the actor is able to allow access to this port</para>
+				</listitem>
+				<listitem>
+					<para>the port can be used from the external code</para>
+				</listitem>
+			</orderedlist>
+		</section>
+		<section id="Setupthemodel">
+			<title>Setup the model</title>
+			<itemizedlist>
+				<listitem>
+					<para>Use the 
+						<citation>New Model Wizzard</citation> to create a new eTrice project and name it 
+						<citation>PedLightsController</citation>.
+					</para>
+				</listitem>
+				<listitem>
+					<para>Copy the package 
+						<citation>de.protos.PedLightGUI</citation> to your 
+						<citation>src</citation> directory (see blinky tutorial).
+					</para>
+				</listitem>
+				<listitem>
+					<para>Uncoment line 15 (import), 36, 122 (usage) and 132-134 (registration).</para>
+				</listitem>
+				<listitem>
+					<para>Copy the following model to your model file:</para>
+				</listitem>
+			</itemizedlist>
+			<literallayout><code>RoomModel PedLightsController {
+
+	LogicalSystem LogSys_PedLights {
+		SubSystemRef application: SubSys_PedLights
+	}
+
+	SubSystemClass SubSys_PedLights {
+		ActorRef PedLightsTopRef: PedLightsTop
+		ActorRef timingService: room.basic.service.timing.ATimingService
+		LayerConnection ref PedLightsTopRef satisfied_by timingService.timer
+		LayerConnection ref PedLightsTopRef satisfied_by timingService.timeout
+	}
+
+	ActorClass PedLightsTop {
+		Structure {
+			ActorRef adapter: GuiAdapter
+			ActorRef controller: Controller
+			Binding adapter.ControlPort and controller.ControlPort
+		}
+		Behavior { }
+	}
+
+	ActorClass GuiAdapter {
+		Interface {
+			conjugated Port ControlPort: PedControlProtocol
+		}
+		Structure {
+			usercode1 {
+				"import PedLightGUI.*;"
+			}
+			usercode2 {
+				"private PedestrianLightWndNoTcp lights = new PedestrianLightWndNoTcp(\"Pedestrian Lights\",\"  external port connection \");"
+				"private TrafficLight3 carLights;"
+				"private TrafficLight2 pedLights;"
+			}
+			external Port ControlPort
+		}
+		Behavior {
+			Operation destroyUser() {
+				"lights.closeWindow();"
+			}
+			StateMachine {
+				Transition init: initial -&gt; running {
+					action {
+						"carLights=lights.getCarLights();"
+						"pedLights=lights.getPedLights();"
+						"carLights.setState(TrafficLight3.OFF);"
+						"pedLights.setState(TrafficLight2.OFF);"
+						"lights.setPort(ControlPort);"
+					}
+				}
+				Transition tr0: running -&gt; running {
+					triggers {
+						&lt;setCarLights: ControlPort&gt;
+					}
+					action {
+						"carLights.setState(state);"
+					}
+				}
+				Transition tr1: running -&gt; running {
+					triggers {
+						&lt;setPedLights: ControlPort&gt;
+					}
+					action {
+						"pedLights.setState(state);"
+					}
+				}
+				State running
+			}
+		}
+	}
+
+	ActorClass Controller {
+		Interface {
+			Port ControlPort: PedControlProtocol
+		}
+		Structure {
+			usercode1 {
+				"import PedLightGUI.*;"
+			}
+			external Port ControlPort
+			SAP timer: room.basic.service.timing.PTimeout
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -&gt; off { }
+				Transition tr0: off -&gt; carsGreen {
+					triggers {
+						&lt;start: ControlPort&gt;
+					}
+					action {
+						"timer.Start(700);"
+						"ControlPort.setCarLights(TrafficLight3.GREEN);"
+						"ControlPort.setPedLights(TrafficLight2.RED);"
+					}
+				}
+				Transition tr1: carsGreen -&gt; carsYellow {
+					triggers {
+						&lt;timeoutTick: timer&gt;
+					}
+					action {
+						"timer.Start(700);"
+						"ControlPort.setCarLights(TrafficLight3.YELLOW);"
+						"ControlPort.setPedLights(TrafficLight2.RED);"
+					}
+				}
+				Transition tr2: carsYellow -&gt; carsRed {
+					triggers {
+						&lt;timeoutTick: timer&gt;
+					}
+					action {
+						"timer.Start(1500);"
+						"ControlPort.setCarLights(TrafficLight3.RED);"
+						"ControlPort.setPedLights(TrafficLight2.GREEN);"
+					}
+				}
+				Transition tr3: carsRed -&gt; carsYellowRed {
+					triggers {
+						&lt;timeoutTick: timer&gt;
+					}
+					action {
+						"timer.Start(700);"
+						"ControlPort.setCarLights(TrafficLight3.YELLOW_RED);"
+						"ControlPort.setPedLights(TrafficLight2.RED);"
+					}
+				}
+				Transition tr4: carsYellowRed -&gt; carsGreen2 {
+					triggers {
+						&lt;timeoutTick: timer&gt;
+					}
+					action {
+						"timer.Start(700);"
+						"ControlPort.setCarLights(TrafficLight3.GREEN);"
+						"ControlPort.setPedLights(TrafficLight2.RED);"
+					}
+				}
+				Transition tr5: carsGreen2 -&gt; off {
+					triggers {
+						&lt;timeoutTick: timer&gt;
+					}
+					action {
+						"ControlPort.setCarLights(TrafficLight3.OFF);"
+						"ControlPort.setPedLights(TrafficLight2.OFF);"
+					}
+				}
+				State off
+				State carsGreen
+				State carsYellow
+				State carsRed
+				State carsYellowRed
+				State carsGreen2
+			}
+		}
+	}
+
+	ProtocolClass PedControlProtocol {
+		incoming {
+			Message start()
+		}
+		outgoing {
+			Message setCarLights(state: int32)
+			Message setPedLights(state: int32)
+		}
+	}
+}
+</code></literallayout>
+			<blockquote>
+				<para></para>
+			</blockquote>
+			<itemizedlist>
+				<listitem>
+					<para>Arrange the Structure and the Statemachines to understand the model </para>
+				</listitem>
+			</itemizedlist>
+			<para>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/030-PedLights01.PNG"/>
+					</imageobject>
+				</mediaobject>
+				The 
+				<citation>GuiAdapter</citation> represents the interface to the external code. It registers its 
+				<citation>ControlPort</citation> by the external code.
+			</para>
+			<para>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/030-PedLights02.PNG"/>
+					</imageobject>
+				</mediaobject>
+				Visit the initial transition to understand the registration. The actor handles the incoming messages as usual and controls the traffic lights as known from blinky. 
+			</para>
+			<para>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/030-PedLights03.PNG"/>
+					</imageobject>
+				</mediaobject>
+				The 
+				<citation>Controller</citation> receives the 
+				<citation>start</citation> message and controls the timing of the lights. Note that the 
+				<citation>start</citation> message will be sent from the external code whenever the 
+				<citation>REQUEST</citation> button is pressed.
+			</para>
+			<itemizedlist>
+				<listitem>
+					<para> Visit the model and take a closer look to the following elements:</para>
+				</listitem>
+			</itemizedlist>
+			<orderedlist>
+				<listitem>
+					<para>PedControlProtocol =&gt; notice that the start message is defined as usual</para>
+				</listitem>
+				<listitem>
+					<para>Initial transition of the 
+						<citation>GuiAdapter</citation> =&gt; see the registration
+					</para>
+				</listitem>
+				<listitem>
+					<para>The 
+						<citation>Controller</citation> =&gt; notice that the 
+						<citation>Controller</citation> receives the external message (not the 
+						<citation>GuiAdapter</citation>). The 
+						<citation>GuiAdapter</citation> just provides its port and handles the incoming messages.
+					</para>
+				</listitem>
+				<listitem>
+					<para>Visit the hand written code =&gt; see the import statement of the protocol class and the usage of the port.</para>
+				</listitem>
+			</orderedlist>
+			<itemizedlist>
+				<listitem>
+					<para>Generate and test the model</para>
+				</listitem>
+				<listitem>
+					<para>Take a look at the generated MSC =&gt; notice that the start message will shown as if the 
+						<citation>GuiAdapter</citation> had sent it.
+					</para>
+				</listitem>
+			</itemizedlist>
+			<para>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/030-PedLights04.PNG"/>
+					</imageobject>
+				</mediaobject>
+			</para>
+		</section>
+		<section id="Whydoesitworkandwhyisitsave">
+			<title>Why does it work and why is it save?</title>
+			<para>The tutorial shows that it is generally possible to use every port from outside the model as long as the port knows its peer. This is guaranteed by describing protocol and the complete structure (especially the bindings) within the model. 
+				The only remaining question is: Why is it save and does not hurt the &#8222;run to completion” semantic. To answer this question, take a look at the 
+				<citation>MessageService.java</citation> from the runtime environment. There you will find the receive method which puts each message into the queue. 
+			</para>
+			<literallayout><code>	@Override
+	public synchronized void receive(Message msg) {
+		if (msg!=null) {
+			messageQueue.push(msg);
+			notifyAll(); // wake up thread to compute message
+		}
+	}
+</code></literallayout>
+			<blockquote>
+				<para></para>
+			</blockquote>
+			<para>This method is synchronized. That means, regardless who sends the message, the queue is secured. If we later on (e.g. for performance reasons in C/C++) distinguish between internal and external senders (same thread or not), care must be taken to use the external (secure) queue.</para>
+		</section>
+	</chapter>
 	<chapter id="ROOMConcepts">
 		<title>ROOM Concepts</title>
 		<section id="MainConcepts">
-			<title>Main Concepts</title>
+			<title>Main Concepts
+				h3. ActorClass
+				h3. Port
+				h3. Protocol</title>
 		</section>
 	</chapter>
 </book>
