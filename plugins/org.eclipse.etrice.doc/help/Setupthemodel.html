@@ -1,0 +1,316 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Setup the model</title>
+<link href="book.css" rel="stylesheet" type="text/css">
+<meta content="DocBook XSL Stylesheets V1.75.1" name="generator">
+<link rel="home" href="index.html" title="eTrice User Guide">
+<link rel="up" href="TutorialPedestrianLights.html" title="Tutorial Pedestrian Lights">
+<link rel="prev" href="TutorialPedestrianLights.html" title="Tutorial Pedestrian Lights">
+<link rel="next" href="Whydoesitworkandwhyisitsave.html" title="Why does it work and why is it save?">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Setup the model</h1>
+<div class="section" title="Setup the model">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both">
+<a name="Setupthemodel"></a>Setup the model</h2>
+</div>
+</div>
+</div>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="disc">
+<li class="listitem">
+<p>Use the 
+						[<span class="citation">New Model Wizzard</span>] to create a new eTrice project and name it 
+						[<span class="citation">PedLightsController</span>].
+					</p>
+</li>
+<li class="listitem">
+<p>Copy the package 
+						[<span class="citation">de.protos.PedLightGUI</span>] to your 
+						[<span class="citation">src</span>] directory (see blinky tutorial).
+					</p>
+</li>
+<li class="listitem">
+<p>Uncoment line 15 (import), 36, 122 (usage) and 132-134 (registration).</p>
+</li>
+<li class="listitem">
+<p>Copy the following model to your model file:</p>
+</li>
+</ul>
+</div>
+<div class="literallayout">
+<p>
+<code class="code">RoomModel&nbsp;PedLightsController&nbsp;{<br>
+
+<br>
+	LogicalSystem&nbsp;LogSys_PedLights&nbsp;{<br>
+		SubSystemRef&nbsp;application:&nbsp;SubSys_PedLights<br>
+	}<br>
+
+<br>
+	SubSystemClass&nbsp;SubSys_PedLights&nbsp;{<br>
+		ActorRef&nbsp;PedLightsTopRef:&nbsp;PedLightsTop<br>
+		ActorRef&nbsp;timingService:&nbsp;room.basic.service.timing.ATimingService<br>
+		LayerConnection&nbsp;ref&nbsp;PedLightsTopRef&nbsp;satisfied_by&nbsp;timingService.timer<br>
+		LayerConnection&nbsp;ref&nbsp;PedLightsTopRef&nbsp;satisfied_by&nbsp;timingService.timeout<br>
+	}<br>
+
+<br>
+	ActorClass&nbsp;PedLightsTop&nbsp;{<br>
+		Structure&nbsp;{<br>
+			ActorRef&nbsp;adapter:&nbsp;GuiAdapter<br>
+			ActorRef&nbsp;controller:&nbsp;Controller<br>
+			Binding&nbsp;adapter.ControlPort&nbsp;and&nbsp;controller.ControlPort<br>
+		}<br>
+		Behavior&nbsp;{&nbsp;}<br>
+	}<br>
+
+<br>
+	ActorClass&nbsp;GuiAdapter&nbsp;{<br>
+		Interface&nbsp;{<br>
+			conjugated&nbsp;Port&nbsp;ControlPort:&nbsp;PedControlProtocol<br>
+		}<br>
+		Structure&nbsp;{<br>
+			usercode1&nbsp;{<br>
+				"import&nbsp;PedLightGUI.*;"<br>
+			}<br>
+			usercode2&nbsp;{<br>
+				"private&nbsp;PedestrianLightWndNoTcp&nbsp;lights&nbsp;=&nbsp;new&nbsp;PedestrianLightWndNoTcp(\"Pedestrian&nbsp;Lights\",\"&nbsp;&nbsp;external&nbsp;port&nbsp;connection&nbsp;\");"<br>
+				"private&nbsp;TrafficLight3&nbsp;carLights;"<br>
+				"private&nbsp;TrafficLight2&nbsp;pedLights;"<br>
+			}<br>
+			external&nbsp;Port&nbsp;ControlPort<br>
+		}<br>
+		Behavior&nbsp;{<br>
+			Operation&nbsp;destroyUser()&nbsp;{<br>
+				"lights.closeWindow();"<br>
+			}<br>
+			StateMachine&nbsp;{<br>
+				Transition&nbsp;init:&nbsp;initial&nbsp;-&gt;&nbsp;running&nbsp;{<br>
+					action&nbsp;{<br>
+						"carLights=lights.getCarLights();"<br>
+						"pedLights=lights.getPedLights();"<br>
+						"carLights.setState(TrafficLight3.OFF);"<br>
+						"pedLights.setState(TrafficLight2.OFF);"<br>
+						"lights.setPort(ControlPort);"<br>
+					}<br>
+				}<br>
+				Transition&nbsp;tr0:&nbsp;running&nbsp;-&gt;&nbsp;running&nbsp;{<br>
+					triggers&nbsp;{<br>
+						&lt;setCarLights:&nbsp;ControlPort&gt;<br>
+					}<br>
+					action&nbsp;{<br>
+						"carLights.setState(state);"<br>
+					}<br>
+				}<br>
+				Transition&nbsp;tr1:&nbsp;running&nbsp;-&gt;&nbsp;running&nbsp;{<br>
+					triggers&nbsp;{<br>
+						&lt;setPedLights:&nbsp;ControlPort&gt;<br>
+					}<br>
+					action&nbsp;{<br>
+						"pedLights.setState(state);"<br>
+					}<br>
+				}<br>
+				State&nbsp;running<br>
+			}<br>
+		}<br>
+	}<br>
+
+<br>
+	ActorClass&nbsp;Controller&nbsp;{<br>
+		Interface&nbsp;{<br>
+			Port&nbsp;ControlPort:&nbsp;PedControlProtocol<br>
+		}<br>
+		Structure&nbsp;{<br>
+			usercode1&nbsp;{<br>
+				"import&nbsp;PedLightGUI.*;"<br>
+			}<br>
+			external&nbsp;Port&nbsp;ControlPort<br>
+			SAP&nbsp;timer:&nbsp;room.basic.service.timing.PTimeout<br>
+		}<br>
+		Behavior&nbsp;{<br>
+			StateMachine&nbsp;{<br>
+				Transition&nbsp;init:&nbsp;initial&nbsp;-&gt;&nbsp;off&nbsp;{&nbsp;}<br>
+				Transition&nbsp;tr0:&nbsp;off&nbsp;-&gt;&nbsp;carsGreen&nbsp;{<br>
+					triggers&nbsp;{<br>
+						&lt;start:&nbsp;ControlPort&gt;<br>
+					}<br>
+					action&nbsp;{<br>
+						"timer.Start(700);"<br>
+						"ControlPort.setCarLights(TrafficLight3.GREEN);"<br>
+						"ControlPort.setPedLights(TrafficLight2.RED);"<br>
+					}<br>
+				}<br>
+				Transition&nbsp;tr1:&nbsp;carsGreen&nbsp;-&gt;&nbsp;carsYellow&nbsp;{<br>
+					triggers&nbsp;{<br>
+						&lt;timeoutTick:&nbsp;timer&gt;<br>
+					}<br>
+					action&nbsp;{<br>
+						"timer.Start(700);"<br>
+						"ControlPort.setCarLights(TrafficLight3.YELLOW);"<br>
+						"ControlPort.setPedLights(TrafficLight2.RED);"<br>
+					}<br>
+				}<br>
+				Transition&nbsp;tr2:&nbsp;carsYellow&nbsp;-&gt;&nbsp;carsRed&nbsp;{<br>
+					triggers&nbsp;{<br>
+						&lt;timeoutTick:&nbsp;timer&gt;<br>
+					}<br>
+					action&nbsp;{<br>
+						"timer.Start(1500);"<br>
+						"ControlPort.setCarLights(TrafficLight3.RED);"<br>
+						"ControlPort.setPedLights(TrafficLight2.GREEN);"<br>
+					}<br>
+				}<br>
+				Transition&nbsp;tr3:&nbsp;carsRed&nbsp;-&gt;&nbsp;carsYellowRed&nbsp;{<br>
+					triggers&nbsp;{<br>
+						&lt;timeoutTick:&nbsp;timer&gt;<br>
+					}<br>
+					action&nbsp;{<br>
+						"timer.Start(700);"<br>
+						"ControlPort.setCarLights(TrafficLight3.YELLOW_RED);"<br>
+						"ControlPort.setPedLights(TrafficLight2.RED);"<br>
+					}<br>
+				}<br>
+				Transition&nbsp;tr4:&nbsp;carsYellowRed&nbsp;-&gt;&nbsp;carsGreen2&nbsp;{<br>
+					triggers&nbsp;{<br>
+						&lt;timeoutTick:&nbsp;timer&gt;<br>
+					}<br>
+					action&nbsp;{<br>
+						"timer.Start(700);"<br>
+						"ControlPort.setCarLights(TrafficLight3.GREEN);"<br>
+						"ControlPort.setPedLights(TrafficLight2.RED);"<br>
+					}<br>
+				}<br>
+				Transition&nbsp;tr5:&nbsp;carsGreen2&nbsp;-&gt;&nbsp;off&nbsp;{<br>
+					triggers&nbsp;{<br>
+						&lt;timeoutTick:&nbsp;timer&gt;<br>
+					}<br>
+					action&nbsp;{<br>
+						"ControlPort.setCarLights(TrafficLight3.OFF);"<br>
+						"ControlPort.setPedLights(TrafficLight2.OFF);"<br>
+					}<br>
+				}<br>
+				State&nbsp;off<br>
+				State&nbsp;carsGreen<br>
+				State&nbsp;carsYellow<br>
+				State&nbsp;carsRed<br>
+				State&nbsp;carsYellowRed<br>
+				State&nbsp;carsGreen2<br>
+			}<br>
+		}<br>
+	}<br>
+
+<br>
+	ProtocolClass&nbsp;PedControlProtocol&nbsp;{<br>
+		incoming&nbsp;{<br>
+			Message&nbsp;start()<br>
+		}<br>
+		outgoing&nbsp;{<br>
+			Message&nbsp;setCarLights(state:&nbsp;int32)<br>
+			Message&nbsp;setPedLights(state:&nbsp;int32)<br>
+		}<br>
+	}<br>
+}<br>
+
+</code>
+</p>
+</div>
+<div class="blockquote">
+<blockquote class="blockquote">
+<p></p>
+</blockquote>
+</div>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="disc">
+<li class="listitem">
+<p>Arrange the Structure and the Statemachines to understand the model </p>
+</li>
+</ul>
+</div>
+<p>
+				
+</p>
+<div class="mediaobject">
+<img src="images/030-PedLights01.PNG"></div>
+<p>
+				The 
+				[<span class="citation">GuiAdapter</span>] represents the interface to the external code. It registers its 
+				[<span class="citation">ControlPort</span>] by the external code.
+			</p>
+<p>
+				
+</p>
+<div class="mediaobject">
+<img src="images/030-PedLights02.PNG"></div>
+<p>
+				Visit the initial transition to understand the registration. The actor handles the incoming messages as usual and controls the traffic lights as known from blinky. 
+			</p>
+<p>
+				
+</p>
+<div class="mediaobject">
+<img src="images/030-PedLights03.PNG"></div>
+<p>
+				The 
+				[<span class="citation">Controller</span>] receives the 
+				[<span class="citation">start</span>] message and controls the timing of the lights. Note that the 
+				[<span class="citation">start</span>] message will be sent from the external code whenever the 
+				[<span class="citation">REQUEST</span>] button is pressed.
+			</p>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="disc">
+<li class="listitem">
+<p> Visit the model and take a closer look to the following elements:</p>
+</li>
+</ul>
+</div>
+<div class="orderedlist">
+<ol class="orderedlist" type="1">
+<li class="listitem">
+<p>PedControlProtocol =&gt; notice that the start message is defined as usual</p>
+</li>
+<li class="listitem">
+<p>Initial transition of the 
+						[<span class="citation">GuiAdapter</span>] =&gt; see the registration
+					</p>
+</li>
+<li class="listitem">
+<p>The 
+						[<span class="citation">Controller</span>] =&gt; notice that the 
+						[<span class="citation">Controller</span>] receives the external message (not the 
+						[<span class="citation">GuiAdapter</span>]). The 
+						[<span class="citation">GuiAdapter</span>] just provides its port and handles the incoming messages.
+					</p>
+</li>
+<li class="listitem">
+<p>Visit the hand written code =&gt; see the import statement of the protocol class and the usage of the port.</p>
+</li>
+</ol>
+</div>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="disc">
+<li class="listitem">
+<p>Generate and test the model</p>
+</li>
+<li class="listitem">
+<p>Take a look at the generated MSC =&gt; notice that the start message will shown as if the 
+						[<span class="citation">GuiAdapter</span>] had sent it.
+					</p>
+</li>
+</ul>
+</div>
+<p>
+				
+</p>
+<div class="mediaobject">
+<img src="images/030-PedLights04.PNG"></div>
+<p>
+			
+</p>
+</div>
+</body>
+</html>
