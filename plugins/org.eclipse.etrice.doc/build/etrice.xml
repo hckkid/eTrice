@@ -1661,10 +1661,16 @@ carLights.setState(TrafficLight3.OFF);
 	<chapter id="ROOMConcepts">
 		<title>ROOM Concepts</title>
 		<section id="MainConcepts">
-			<title>Main Concepts
-				h3. ActorClass
-				h3. Port
-				h3. Protocol</title>
+			<title>Main Concepts</title>
+			<section id="ActorClass">
+				<title>ActorClass</title>
+			</section>
+			<section id="Port">
+				<title>Port</title>
+			</section>
+			<section id="Protocol">
+				<title>Protocol</title>
+			</section>
 		</section>
 	</chapter>
 </book>

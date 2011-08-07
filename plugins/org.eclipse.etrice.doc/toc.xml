@@ -54,6 +54,10 @@
 <topic href="help/Whydoesitworkandwhyisitsave.html" label="Why does it work and why is it save?"></topic>
 </topic>
 <topic href="help/ROOMConcepts.html" label="ROOM Concepts">
-<topic href="help/ROOMConcepts.html#MainConcepts" label="Main Concepts h3. ActorClass h3. Port h3. Protocol"></topic>
+<topic href="help/ROOMConcepts.html#MainConcepts" label="Main Concepts">
+<topic href="help/ROOMConcepts.html#ActorClass" label="ActorClass"></topic>
+<topic href="help/ROOMConcepts.html#Port" label="Port"></topic>
+<topic href="help/ROOMConcepts.html#Protocol" label="Protocol"></topic>
+</topic>
 </topic>
 </toc>
