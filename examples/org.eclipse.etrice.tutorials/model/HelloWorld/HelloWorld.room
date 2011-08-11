@@ -1,0 +1,22 @@
+RoomModel HelloWorld {
+		LogicalSystem System_HelloWorld {
+			SubSystemRef subsystem:SubSystem_HelloWorld 
+		}
+		SubSystemClass SubSystem_HelloWorld {
+			ActorRef application:HelloWorldTop 
+		}
+		ActorClass HelloWorldTop {
+			Structure {}
+			Behavior {
+				StateMachine{
+					Transition init: initial -> state0{
+						action{
+							"System.out.println(\"HelloWorld !\");"
+						}
+					}
+					State state0
+				}
+			}
+		}
+		
+	}

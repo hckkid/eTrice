@@ -12,7 +12,7 @@
 package org.eclipse.etrice.tutorials.PedLightGUI;
 
 //This is used for PedLightController tutorial and must be disabled for Blinky 
-//import PedLightsController.PedControlProtocol.*;
+import PedLightsController.PedControlProtocol.*;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -33,7 +33,7 @@ implements ActionListener {
 	TextField statusLine;
 
 	//This is used for PedLightController tutorial and must be disabled for Blinky
-	//private PedControlProtocolConjPort port=null;
+	private PedControlProtocolConjPort port=null;
 	
 	// Constructors
 	public PedestrianLightWndNoTcp(){
@@ -119,7 +119,7 @@ implements ActionListener {
 		if (s.equals("REQUEST")) {
 			System.out.println("Taste gedrückt");
 		// This is used for PedLightController tutorial and must be disabled for Blinky	
-		//	if (port != null) port.start();
+			if (port != null) port.start();
 		}
 	}
 	public void closeWindow(){
@@ -129,7 +129,7 @@ implements ActionListener {
 	}
 
 // This is used for PedLightController tutorial and must be disabled for Blinky	
-//	public void setPort(PedControlProtocolConjPort p){
-//		port=p;
-//	}
+	public void setPort(PedControlProtocolConjPort p){
+		port=p;
+	}
 }
