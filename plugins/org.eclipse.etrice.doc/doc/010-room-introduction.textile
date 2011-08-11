@@ -2,7 +2,74 @@ h1. Introduction to the ROOM Language
 
 h2. Scope of ROOM
 
+This chapter will give a rough overview of what ROOM (*R* eal time *O* bject *O* riented *M* odeling) is and where it is good for. It will try to answer the following questions:
+* Where does it come from?
+* Which kind of SW-Systems will be addressed?
+* What is the relation between OOP and ROOM?
+* What are the benefits of ROOM?
+* Which consequences must be taken into account?
+
+h3. Where does it come from?
+
+Room was developed in the 1990th on the background of the upcoming mobile applications with the goal to manage the complexity of such huge SW-Systems. From the very beginning ROOM has focused on a certain type of SW-Systems and, is in contrast to the UML, well suited for this kind of  systems. In this sense, ROOM is a DSL (Domain Specific Language) for distributed, event driven, real time systems. 
+
+Bran Selic, Garth Gullekson and Paul T. Ward have published the concepts 1994 in the book "REAL-TIME OBJECT-ORIENTED MODELING". The company ??object time?? (TM) developed a ROOM tool which was taken over from ??Rational SW?? (TM) and later on from ??IBM?? (TM). Unfortunately the tool is no longer maintained from ??IBM?? (TM). The company ??Protos SW Gmbh?? (TM) also developed a ROOM tool called ??trice?? (TM) for controlling production machines. ??Trice?? (TM) is the predecessor of eTrice (see Introduction to eTrice). 
+ 
+From our point of view ROOM provides still the clearest, simplest, completest and best suited modeling concepts for the real time domain. All later proposals like the UML does not fit such perfect to this kind of problems.
+ 
+
+h3. Which kind of SW-Systems will be addressed?
+
+As mentioned before ROOM addresses distributed, event driven, real time systems. But what is a "real time system"? ROOM defines a set of properties which are typically for a real time system. This properties are:
+* Timeliness
+* dynamic internal structure
+* Reactiveness
+* Concurrent
+* Distributed
+* Reliable
+
+Each of this properties has potential to make SW development complex. If a given system can be characterized which some or all of this properties, ROOM might be applied to such a system.  
+
+As an example take a look at a washing machine. The system has to react on user interactions, has to handle some error conditions like a closed water tap or a defective lye pump. It has to react simultaneously to all this inputs. It has to close the water valve in a certain time to avoid flooding the basement. 
+So, the system can by characterized as timeliness, concurrent and reactive. As long as the washing machine does not transform to a laundry dryer by themself, the system has no dynamic internal structure and as long as all functions are running on a single microcontroller the (SW)-system is not distributed. 
+ROOM fits perfect to such a system.
+
+A SW system which mainly consists of transformations like signal processing or image processing (pure algorithms) cannot be characterized with any of the above mentioned properties. However, in the real world most of the SW systems will be a combination of both. ROOM can be mixed up with non model code. 
+
+h3. What is the relation between OOP and ROOM?
+
+The relation between classic object oriented programming and ROOM is comparable to the relation between assembler programming and C programming. It provides a shift of the object paradigm. As the picture shows, the classic object paradigm provides some kind of information hiding. Attributes can be accessed via access methods. Logical higher level methods provides the requested behavior to the user.   
+
+!images/010-RoomIntroduction01.png!
+
+As the figure illustrates, the classic object paradigm does not care about concurrency issues. The threads of control will be provided from the underlying operating system.
+
+!images/010-RoomIntroduction02.png!
+
+ROOM provides the concept of a logical machine (called actor) with it´s own thread of control. It provides some kind of cooperative communication infrastructure with "run to completion" semantic. That makes developing of business logic easy and save (see basic concepts).  
+
+!images/010-RoomIntroduction03.png!
+
+This thinking of an object is much more general than the classic one.  
+
+h3. What are the benefits of ROOM?
+
+The main benefits are:
+- ROOM provides model execution, which makes it easy to find defects early enough, to reduce expensive debugging during the testing phase or even in the costumer environment.
+- ROOM promotes component building which is essential to make SW reusable
+- Graphical modeling makes it easy to understand, maintain and share code with other developers
+- higher abstraction in combination with automated code generation provides very efficient mechanisms to the developer. 
+
+h3. Which consequences must be taken into account?
+
+Generating code from models will introduce some overhead in terms of footprint as well as performance. For most systems the overhead will be negligible. However, the decision using ROOM should be made explicitly and it is always a tread of between development costs, time to market and costs in terms of a little bit more of memory and performance. As mentioned, in most cases the decision will be very clear. Especially in case of product lines or products which requires maintenance or feature updates, the ROOM methodology has big advantages.  
+  
+Care must be taken during introduction of the new methodology. Due to the fact that ROOM provides a shift of the object paradigm, developers often needs a phase of adaption. Even some of them will never adapt.
+
 h2. Basic Concepts
+
+port, protocol, actor, interface, asynchronous communication
+hierarchical FSM, hierarchical structure
 
 
 
