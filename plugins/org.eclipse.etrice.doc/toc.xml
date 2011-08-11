@@ -5,7 +5,17 @@
 <topic href="help/HowDoesItWork.html" label="How Does It Work?"></topic>
 <topic href="help/WhoisBehindeTrice.html" label="Who is Behind eTrice?"></topic>
 </topic>
-<topic href="help/IntroductiontotheROOMLanguage.html" label="Introduction to the ROOM Language"></topic>
+<topic href="help/IntroductiontotheROOMLanguage.html" label="Introduction to the ROOM Language">
+<topic href="help/IntroductiontotheROOMLanguage.html#ScopeofROOM" label="Scope of ROOM"></topic>
+<topic href="help/BasicConcepts.html" label="Basic Concepts"></topic>
+<topic href="help/Benefits.html" label="Benefits"></topic>
+<topic href="help/ExecutionModels.html" label="Execution Models">
+<topic href="help/ExecutionModels.html#LogicalMachine" label="Logical Machine"></topic>
+<topic href="help/ExecutionModels.html#QueueBasedExecutionModel" label="Queue Based Execution Model"></topic>
+<topic href="help/ExecutionModels.html#PolledExecutionModel" label="Polled Execution Model not implemented yet"></topic>
+<topic href="help/ExecutionModels.html#HybridExecutionModel" label="Hybrid Execution Model not implemented yet"></topic>
+</topic>
+</topic>
 <topic href="help/TutorialHelloWorld.html" label="Tutorial HelloWorld">
 <topic href="help/TutorialHelloWorld.html#Scope" label="Scope"></topic>
 <topic href="help/Createanewmodelfromscratch.html" label="Create a new model from scratch"></topic>
@@ -44,6 +54,10 @@
 <topic href="help/Whydoesitworkandwhyisitsafe.html" label="Why does it work and why is it safe?"></topic>
 </topic>
 <topic href="help/ROOMConcepts.html" label="ROOM Concepts">
-<topic href="help/ROOMConcepts.html#MainConcepts" label="Main Concepts"></topic>
+<topic href="help/ROOMConcepts.html#MainConcepts" label="Main Concepts">
+<topic href="help/ROOMConcepts.html#ActorClass" label="ActorClass"></topic>
+<topic href="help/ROOMConcepts.html#Port" label="Port"></topic>
+<topic href="help/ROOMConcepts.html#Protocol" label="Protocol"></topic>
+</topic>
 </topic>
 </toc>

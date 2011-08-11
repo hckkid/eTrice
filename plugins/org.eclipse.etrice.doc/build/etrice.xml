@@ -24,6 +24,37 @@
 	</chapter>
 	<chapter id="IntroductiontotheROOMLanguage">
 		<title>Introduction to the ROOM Language</title>
+		<section id="ScopeofROOM">
+			<title>Scope of ROOM</title>
+		</section>
+		<section id="BasicConcepts">
+			<title>Basic Concepts</title>
+		</section>
+		<section id="Benefits">
+			<title>Benefits</title>
+		</section>
+		<section id="ExecutionModels">
+			<title>Execution Models</title>
+			<section id="LogicalMachine">
+				<title>Logical Machine</title>
+				<itemizedlist>
+					<listitem>
+						<para>run to completion</para>
+					</listitem>
+				</itemizedlist>
+			</section>
+			<section id="QueueBasedExecutionModel">
+				<title>Queue Based Execution Model</title>
+			</section>
+			<section id="PolledExecutionModel">
+				<title>Polled Execution Model
+					not implemented yet</title>
+			</section>
+			<section id="HybridExecutionModel">
+				<title>Hybrid Execution Model
+					not implemented yet</title>
+			</section>
+		</section>
 	</chapter>
 	<chapter id="TutorialHelloWorld">
 		<title>Tutorial HelloWorld</title>
@@ -1637,6 +1668,15 @@ carLights.setState(TrafficLight3.OFF);
 		<title>ROOM Concepts</title>
 		<section id="MainConcepts">
 			<title>Main Concepts</title>
+			<section id="ActorClass">
+				<title>ActorClass</title>
+			</section>
+			<section id="Port">
+				<title>Port</title>
+			</section>
+			<section id="Protocol">
+				<title>Protocol</title>
+			</section>
 		</section>
 	</chapter>
 </book>
