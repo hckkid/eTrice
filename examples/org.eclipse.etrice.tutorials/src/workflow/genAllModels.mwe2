@@ -10,14 +10,28 @@ Workflow {
 	component = DirectoryCleaner {
 		directory = destDir
 	}
+	
+	component = @workflow.RoomGenerator {
+		sourceDir = "model/Blinky"
+		targetDir = destDir
+	}	
 
 	component = @workflow.RoomGenerator {
-		sourceDir = "model/scratch"
+		sourceDir = "model/HelloWorld"
+		targetDir = destDir
+	}
+	
+		component = @workflow.RoomGenerator {
+		sourceDir = "model/PedLightsController"
+		targetDir = destDir
+	}
+	component = @workflow.RoomGenerator {
+		sourceDir = "model/SendingData"
 		targetDir = destDir
 	}
 
 	component = @workflow.RoomGenerator {
-		sourceDir = "model/fast"
+		sourceDir = "model/scratch"
 		targetDir = destDir
 	}
  
