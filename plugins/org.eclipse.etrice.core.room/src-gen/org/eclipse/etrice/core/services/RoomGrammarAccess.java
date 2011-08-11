@@ -240,20 +240,43 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		public RuleCall getTypeFreeTypeParserRuleCall_2_0() { return cTypeFreeTypeParserRuleCall_2_0; }
 	}
 
+	public class BasicTypeElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "BasicType");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cTypeParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cFreeTypeParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		
+		//BasicType:
+		//	Type | FreeType;
+		public ParserRule getRule() { return rule; }
+
+		//Type | FreeType
+		public Alternatives getAlternatives() { return cAlternatives; }
+
+		//Type
+		public RuleCall getTypeParserRuleCall_0() { return cTypeParserRuleCall_0; }
+
+		//FreeType
+		public RuleCall getFreeTypeParserRuleCall_1() { return cFreeTypeParserRuleCall_1; }
+	}
+
 	public class TypeElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Type");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Assignment cPrimAssignment_0 = (Assignment)cAlternatives.eContents().get(0);
 		private final RuleCall cPrimPrimitiveTypeEnumRuleCall_0_0 = (RuleCall)cPrimAssignment_0.eContents().get(0);
-		private final Assignment cTypeAssignment_1 = (Assignment)cAlternatives.eContents().get(1);
-		private final CrossReference cTypeDataClassCrossReference_1_0 = (CrossReference)cTypeAssignment_1.eContents().get(0);
-		private final RuleCall cTypeDataClassFQNParserRuleCall_1_0_1 = (RuleCall)cTypeDataClassCrossReference_1_0.eContents().get(1);
+		private final Group cGroup_1 = (Group)cAlternatives.eContents().get(1);
+		private final Assignment cTypeAssignment_1_0 = (Assignment)cGroup_1.eContents().get(0);
+		private final CrossReference cTypeDataClassCrossReference_1_0_0 = (CrossReference)cTypeAssignment_1_0.eContents().get(0);
+		private final RuleCall cTypeDataClassFQNParserRuleCall_1_0_0_1 = (RuleCall)cTypeDataClassCrossReference_1_0_0.eContents().get(1);
+		private final Assignment cRefAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
+		private final Keyword cRefRefKeyword_1_1_0 = (Keyword)cRefAssignment_1_1.eContents().get(0);
 		
 		//Type:
-		//	prim=PrimitiveType | type=[DataClass|FQN];
+		//	prim=PrimitiveType | type=[DataClass|FQN] ref?="ref"?;
 		public ParserRule getRule() { return rule; }
 
-		//prim=PrimitiveType | type=[DataClass|FQN]
+		//prim=PrimitiveType | type=[DataClass|FQN] ref?="ref"?
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//prim=PrimitiveType
@@ -262,14 +285,23 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		//PrimitiveType
 		public RuleCall getPrimPrimitiveTypeEnumRuleCall_0_0() { return cPrimPrimitiveTypeEnumRuleCall_0_0; }
 
+		//type=[DataClass|FQN] ref?="ref"?
+		public Group getGroup_1() { return cGroup_1; }
+
 		//type=[DataClass|FQN]
-		public Assignment getTypeAssignment_1() { return cTypeAssignment_1; }
+		public Assignment getTypeAssignment_1_0() { return cTypeAssignment_1_0; }
 
 		//[DataClass|FQN]
-		public CrossReference getTypeDataClassCrossReference_1_0() { return cTypeDataClassCrossReference_1_0; }
+		public CrossReference getTypeDataClassCrossReference_1_0_0() { return cTypeDataClassCrossReference_1_0_0; }
 
 		//FQN
-		public RuleCall getTypeDataClassFQNParserRuleCall_1_0_1() { return cTypeDataClassFQNParserRuleCall_1_0_1; }
+		public RuleCall getTypeDataClassFQNParserRuleCall_1_0_0_1() { return cTypeDataClassFQNParserRuleCall_1_0_0_1; }
+
+		//ref?="ref"?
+		public Assignment getRefAssignment_1_1() { return cRefAssignment_1_1; }
+
+		//"ref"
+		public Keyword getRefRefKeyword_1_1_0() { return cRefRefKeyword_1_1_0; }
 	}
 
 	public class FreeTypeElements extends AbstractParserRuleElementFinder {
@@ -277,14 +309,17 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Assignment cPrimAssignment_0 = (Assignment)cAlternatives.eContents().get(0);
 		private final RuleCall cPrimPrimitiveTypeEnumRuleCall_0_0 = (RuleCall)cPrimAssignment_0.eContents().get(0);
-		private final Assignment cTypeAssignment_1 = (Assignment)cAlternatives.eContents().get(1);
-		private final RuleCall cTypeIDTerminalRuleCall_1_0 = (RuleCall)cTypeAssignment_1.eContents().get(0);
+		private final Group cGroup_1 = (Group)cAlternatives.eContents().get(1);
+		private final Assignment cTypeAssignment_1_0 = (Assignment)cGroup_1.eContents().get(0);
+		private final RuleCall cTypeIDTerminalRuleCall_1_0_0 = (RuleCall)cTypeAssignment_1_0.eContents().get(0);
+		private final Assignment cRefAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
+		private final Keyword cRefRefKeyword_1_1_0 = (Keyword)cRefAssignment_1_1.eContents().get(0);
 		
 		//FreeType:
-		//	prim=PrimitiveType | type=ID;
+		//	prim=PrimitiveType | type=ID ref?="ref"?;
 		public ParserRule getRule() { return rule; }
 
-		//prim=PrimitiveType | type=ID
+		//prim=PrimitiveType | type=ID ref?="ref"?
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//prim=PrimitiveType
@@ -293,11 +328,20 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		//PrimitiveType
 		public RuleCall getPrimPrimitiveTypeEnumRuleCall_0_0() { return cPrimPrimitiveTypeEnumRuleCall_0_0; }
 
+		//type=ID ref?="ref"?
+		public Group getGroup_1() { return cGroup_1; }
+
 		//type=ID
-		public Assignment getTypeAssignment_1() { return cTypeAssignment_1; }
+		public Assignment getTypeAssignment_1_0() { return cTypeAssignment_1_0; }
 
 		//ID
-		public RuleCall getTypeIDTerminalRuleCall_1_0() { return cTypeIDTerminalRuleCall_1_0; }
+		public RuleCall getTypeIDTerminalRuleCall_1_0_0() { return cTypeIDTerminalRuleCall_1_0_0; }
+
+		//ref?="ref"?
+		public Assignment getRefAssignment_1_1() { return cRefAssignment_1_1; }
+
+		//"ref"
+		public Keyword getRefRefKeyword_1_1_0() { return cRefRefKeyword_1_1_0; }
 	}
 
 	public class DataClassElements extends AbstractParserRuleElementFinder {
@@ -3968,6 +4012,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	private PrimitiveTypeElements unknownRulePrimitiveType;
 	private TypedIDElements pTypedID;
 	private FreeTypedIDElements pFreeTypedID;
+	private BasicTypeElements pBasicType;
 	private TypeElements pType;
 	private FreeTypeElements pFreeType;
 	private DataClassElements pDataClass;
@@ -4138,8 +4183,18 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		return getFreeTypedIDAccess().getRule();
 	}
 
+	//BasicType:
+	//	Type | FreeType;
+	public BasicTypeElements getBasicTypeAccess() {
+		return (pBasicType != null) ? pBasicType : (pBasicType = new BasicTypeElements());
+	}
+	
+	public ParserRule getBasicTypeRule() {
+		return getBasicTypeAccess().getRule();
+	}
+
 	//Type:
-	//	prim=PrimitiveType | type=[DataClass|FQN];
+	//	prim=PrimitiveType | type=[DataClass|FQN] ref?="ref"?;
 	public TypeElements getTypeAccess() {
 		return (pType != null) ? pType : (pType = new TypeElements());
 	}
@@ -4149,7 +4204,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//FreeType:
-	//	prim=PrimitiveType | type=ID;
+	//	prim=PrimitiveType | type=ID ref?="ref"?;
 	public FreeTypeElements getFreeTypeAccess() {
 		return (pFreeType != null) ? pFreeType : (pFreeType = new FreeTypeElements());
 	}

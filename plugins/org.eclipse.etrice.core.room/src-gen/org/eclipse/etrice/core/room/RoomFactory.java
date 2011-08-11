@@ -81,6 +81,15 @@ public interface RoomFactory extends EFactory
   FreeTypedID createFreeTypedID();
 
   /**
+   * Returns a new object of class '<em>Basic Type</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Basic Type</em>'.
+   * @generated
+   */
+  BasicType createBasicType();
+
+  /**
    * Returns a new object of class '<em>Type</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

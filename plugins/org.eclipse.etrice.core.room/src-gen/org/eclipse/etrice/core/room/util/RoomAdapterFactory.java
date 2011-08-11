@@ -109,6 +109,11 @@ public class RoomAdapterFactory extends AdapterFactoryImpl
         return createFreeTypedIDAdapter();
       }
       @Override
+      public Adapter caseBasicType(BasicType object)
+      {
+        return createBasicTypeAdapter();
+      }
+      @Override
       public Adapter caseType(Type object)
       {
         return createTypeAdapter();
@@ -551,6 +556,21 @@ public class RoomAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createFreeTypedIDAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.BasicType <em>Basic Type</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.etrice.core.room.BasicType
+   * @generated
+   */
+  public Adapter createBasicTypeAdapter()
   {
     return null;
   }

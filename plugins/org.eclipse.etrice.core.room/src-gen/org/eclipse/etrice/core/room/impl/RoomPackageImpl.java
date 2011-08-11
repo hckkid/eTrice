@@ -22,6 +22,7 @@ import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.Annotation;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.BaseState;
+import org.eclipse.etrice.core.room.BasicType;
 import org.eclipse.etrice.core.room.Binding;
 import org.eclipse.etrice.core.room.BindingEndPoint;
 import org.eclipse.etrice.core.room.CPBranchTransition;
@@ -140,6 +141,13 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * @generated
    */
   private EClass freeTypedIDEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass basicTypeEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -945,6 +953,36 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getBasicType()
+  {
+    return basicTypeEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getBasicType_Prim()
+  {
+    return (EAttribute)basicTypeEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getBasicType_Ref()
+  {
+    return (EAttribute)basicTypeEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getType()
   {
     return typeEClass;
@@ -955,19 +993,9 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getType_Prim()
-  {
-    return (EAttribute)typeEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EReference getType_Type()
   {
-    return (EReference)typeEClass.getEStructuralFeatures().get(1);
+    return (EReference)typeEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -985,19 +1013,9 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getFreeType_Prim()
-  {
-    return (EAttribute)freeTypeEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EAttribute getFreeType_Type()
   {
-    return (EAttribute)freeTypeEClass.getEStructuralFeatures().get(1);
+    return (EAttribute)freeTypeEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -2872,12 +2890,14 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
     createEAttribute(freeTypedIDEClass, FREE_TYPED_ID__NAME);
     createEReference(freeTypedIDEClass, FREE_TYPED_ID__TYPE);
 
+    basicTypeEClass = createEClass(BASIC_TYPE);
+    createEAttribute(basicTypeEClass, BASIC_TYPE__PRIM);
+    createEAttribute(basicTypeEClass, BASIC_TYPE__REF);
+
     typeEClass = createEClass(TYPE);
-    createEAttribute(typeEClass, TYPE__PRIM);
     createEReference(typeEClass, TYPE__TYPE);
 
     freeTypeEClass = createEClass(FREE_TYPE);
-    createEAttribute(freeTypeEClass, FREE_TYPE__PRIM);
     createEAttribute(freeTypeEClass, FREE_TYPE__TYPE);
 
     dataClassEClass = createEClass(DATA_CLASS);
@@ -3160,6 +3180,8 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
     // Add supertypes to classes
     structureClassEClass.getESuperTypes().add(this.getRoomClass());
     actorContainerClassEClass.getESuperTypes().add(this.getStructureClass());
+    typeEClass.getESuperTypes().add(this.getBasicType());
+    freeTypeEClass.getESuperTypes().add(this.getBasicType());
     dataClassEClass.getESuperTypes().add(this.getRoomClass());
     protocolClassEClass.getESuperTypes().add(this.getRoomClass());
     semanticsInRuleEClass.getESuperTypes().add(this.getSemanticsRule());
@@ -3230,12 +3252,14 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
     initEAttribute(getFreeTypedID_Name(), ecorePackage.getEString(), "name", null, 0, 1, FreeTypedID.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getFreeTypedID_Type(), this.getFreeType(), null, "type", null, 0, 1, FreeTypedID.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+    initEClass(basicTypeEClass, BasicType.class, "BasicType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getBasicType_Prim(), this.getPrimitiveType(), "prim", null, 0, 1, BasicType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getBasicType_Ref(), ecorePackage.getEBoolean(), "ref", null, 0, 1, BasicType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
     initEClass(typeEClass, Type.class, "Type", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getType_Prim(), this.getPrimitiveType(), "prim", null, 0, 1, Type.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getType_Type(), this.getDataClass(), null, "type", null, 0, 1, Type.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(freeTypeEClass, FreeType.class, "FreeType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getFreeType_Prim(), this.getPrimitiveType(), "prim", null, 0, 1, FreeType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getFreeType_Type(), ecorePackage.getEString(), "type", null, 0, 1, FreeType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(dataClassEClass, DataClass.class, "DataClass", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

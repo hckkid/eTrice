@@ -64,8 +64,10 @@ TypedID:
 FreeTypedID:
 	name=ID ':' type=FreeType;
 	
-Type: prim=PrimitiveType | type=[DataClass|FQN];
-FreeType: prim=PrimitiveType | type=ID;
+BasicType: Type | FreeType;
+
+Type: prim=PrimitiveType | (type=[DataClass|FQN] (ref?='ref')?);
+FreeType: prim=PrimitiveType | (type=ID (ref?='ref')?);
 
 // TODOHRR: define detail level language?
 DataClass:

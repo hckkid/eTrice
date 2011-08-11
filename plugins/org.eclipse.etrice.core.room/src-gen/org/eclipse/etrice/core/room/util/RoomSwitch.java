@@ -121,10 +121,18 @@ public class RoomSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case RoomPackage.BASIC_TYPE:
+      {
+        BasicType basicType = (BasicType)theEObject;
+        T result = caseBasicType(basicType);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case RoomPackage.TYPE:
       {
         Type type = (Type)theEObject;
         T result = caseType(type);
+        if (result == null) result = caseBasicType(type);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -132,6 +140,7 @@ public class RoomSwitch<T> extends Switch<T>
       {
         FreeType freeType = (FreeType)theEObject;
         T result = caseFreeType(freeType);
+        if (result == null) result = caseBasicType(freeType);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -750,6 +759,22 @@ public class RoomSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseFreeTypedID(FreeTypedID object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Basic Type</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Basic Type</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseBasicType(BasicType object)
   {
     return null;
   }

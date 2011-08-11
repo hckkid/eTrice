@@ -449,6 +449,8 @@ ruleFreeTypedID returns [EObject current=null]
 
 
 
+
+
 // Entry rule entryRuleType
 entryRuleType returns [EObject current=null] 
 	:
@@ -482,7 +484,7 @@ ruleType returns [EObject current=null]
 
 )
 )
-    |(
+    |((
 (
 		{
 			if ($current==null) {
@@ -490,14 +492,29 @@ ruleType returns [EObject current=null]
 	        }
         }
 		{ 
-	        newCompositeNode(grammarAccess.getTypeAccess().getTypeDataClassCrossReference_1_0()); 
+	        newCompositeNode(grammarAccess.getTypeAccess().getTypeDataClassCrossReference_1_0_0()); 
 	    }
 		ruleFQN		{ 
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-))
+)(
+(
+		lv_ref_2_0=	'ref' 
+    {
+        newLeafNode(lv_ref_2_0, grammarAccess.getTypeAccess().getRefRefKeyword_1_1_0());
+    }
+ 
+	    {
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getTypeRule());
+	        }
+       		setWithLastConsumed($current, "ref", true, "ref");
+	    }
+
+)
+)?))
 ;
 
 
@@ -537,11 +554,11 @@ ruleFreeType returns [EObject current=null]
 
 )
 )
-    |(
+    |((
 (
 		lv_type_1_0=RULE_ID
 		{
-			newLeafNode(lv_type_1_0, grammarAccess.getFreeTypeAccess().getTypeIDTerminalRuleCall_1_0()); 
+			newLeafNode(lv_type_1_0, grammarAccess.getFreeTypeAccess().getTypeIDTerminalRuleCall_1_0_0()); 
 		}
 		{
 	        if ($current==null) {
@@ -555,7 +572,22 @@ ruleFreeType returns [EObject current=null]
 	    }
 
 )
-))
+)(
+(
+		lv_ref_2_0=	'ref' 
+    {
+        newLeafNode(lv_ref_2_0, grammarAccess.getFreeTypeAccess().getRefRefKeyword_1_1_0());
+    }
+ 
+	    {
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getFreeTypeRule());
+	        }
+       		setWithLastConsumed($current, "ref", true, "ref");
+	    }
+
+)
+)?))
 ;
 
 

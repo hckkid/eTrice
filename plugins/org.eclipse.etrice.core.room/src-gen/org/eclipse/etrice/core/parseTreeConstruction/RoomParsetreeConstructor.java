@@ -37,73 +37,74 @@ protected class ThisRootNode extends RootToken {
 			case 3: return new ActorContainerClass_Alternatives(this, this, 3, inst);
 			case 4: return new TypedID_Group(this, this, 4, inst);
 			case 5: return new FreeTypedID_Group(this, this, 5, inst);
-			case 6: return new Type_Alternatives(this, this, 6, inst);
-			case 7: return new FreeType_Alternatives(this, this, 7, inst);
-			case 8: return new DataClass_Group(this, this, 8, inst);
-			case 9: return new Attribute_Group(this, this, 9, inst);
-			case 10: return new Operation_Group(this, this, 10, inst);
-			case 11: return new ProtocolClass_Group(this, this, 11, inst);
-			case 12: return new Message_Group(this, this, 12, inst);
-			case 13: return new PortClass_Group(this, this, 13, inst);
-			case 14: return new MessageHandler_Group(this, this, 14, inst);
-			case 15: return new ProtocolSemantics_Group(this, this, 15, inst);
-			case 16: return new SemanticsRule_Alternatives(this, this, 16, inst);
-			case 17: return new SemanticsInRule_Group(this, this, 17, inst);
-			case 18: return new SemanticsOutRule_Group(this, this, 18, inst);
-			case 19: return new ActorClass_Group(this, this, 19, inst);
-			case 20: return new InterfaceItem_Alternatives(this, this, 20, inst);
-			case 21: return new Port_Group(this, this, 21, inst);
-			case 22: return new ExternalPort_Group(this, this, 22, inst);
-			case 23: return new SAPRef_Group(this, this, 23, inst);
-			case 24: return new SPPRef_Group(this, this, 24, inst);
-			case 25: return new ServiceImplementation_Group(this, this, 25, inst);
-			case 26: return new LogicalSystem_Group(this, this, 26, inst);
-			case 27: return new ActorContainerRef_Alternatives(this, this, 27, inst);
-			case 28: return new SubSystemRef_Group(this, this, 28, inst);
-			case 29: return new SubSystemClass_Group(this, this, 29, inst);
-			case 30: return new LogicalThread_Group(this, this, 30, inst);
-			case 31: return new ActorInstancePath_Group(this, this, 31, inst);
-			case 32: return new Binding_Group(this, this, 32, inst);
-			case 33: return new BindingEndPoint_Group(this, this, 33, inst);
-			case 34: return new LayerConnection_Group(this, this, 34, inst);
-			case 35: return new SAPoint_Alternatives(this, this, 35, inst);
-			case 36: return new RefSAPoint_Group(this, this, 36, inst);
-			case 37: return new RelaySAPoint_Group(this, this, 37, inst);
-			case 38: return new SPPoint_Group(this, this, 38, inst);
-			case 39: return new ActorRef_Group(this, this, 39, inst);
-			case 40: return new StateGraphNode_Alternatives(this, this, 40, inst);
-			case 41: return new StateGraphItem_Alternatives(this, this, 41, inst);
-			case 42: return new State_Alternatives(this, this, 42, inst);
-			case 43: return new StateGraph_Alternatives(this, this, 43, inst);
-			case 44: return new PlainStateGraph_Group(this, this, 44, inst);
-			case 45: return new StateMachine_Group(this, this, 45, inst);
-			case 46: return new BaseState_Group(this, this, 46, inst);
-			case 47: return new RefinedState_Group(this, this, 47, inst);
-			case 48: return new DetailCode_Group(this, this, 48, inst);
-			case 49: return new TrPoint_Alternatives(this, this, 49, inst);
-			case 50: return new TransitionPoint_Group(this, this, 50, inst);
-			case 51: return new EntryPoint_Group(this, this, 51, inst);
-			case 52: return new ExitPoint_Group(this, this, 52, inst);
-			case 53: return new ChoicePoint_Group(this, this, 53, inst);
-			case 54: return new Transition_Alternatives(this, this, 54, inst);
-			case 55: return new NonInitialTransition_Alternatives(this, this, 55, inst);
-			case 56: return new InitialTransition_Group(this, this, 56, inst);
-			case 57: return new ContinuationTransition_Group(this, this, 57, inst);
-			case 58: return new TriggeredTransition_Group(this, this, 58, inst);
-			case 59: return new GuardedTransition_Group(this, this, 59, inst);
-			case 60: return new CPBranchTransition_Group(this, this, 60, inst);
-			case 61: return new TransitionTerminal_Alternatives(this, this, 61, inst);
-			case 62: return new StateTerminal_StateAssignment(this, this, 62, inst);
-			case 63: return new TrPointTerminal_Group(this, this, 63, inst);
-			case 64: return new SubStateTrPointTerminal_Group(this, this, 64, inst);
-			case 65: return new ChoicepointTerminal_Group(this, this, 65, inst);
-			case 66: return new Trigger_Group(this, this, 66, inst);
-			case 67: return new MessageFromIf_Group(this, this, 67, inst);
-			case 68: return new Guard_Group(this, this, 68, inst);
-			case 69: return new Documentation_Group(this, this, 69, inst);
-			case 70: return new Annotation_Group(this, this, 70, inst);
-			case 71: return new KeyValue_Group(this, this, 71, inst);
-			case 72: return new Import_Group(this, this, 72, inst);
+			case 6: return new BasicType_Alternatives(this, this, 6, inst);
+			case 7: return new Type_Alternatives(this, this, 7, inst);
+			case 8: return new FreeType_Alternatives(this, this, 8, inst);
+			case 9: return new DataClass_Group(this, this, 9, inst);
+			case 10: return new Attribute_Group(this, this, 10, inst);
+			case 11: return new Operation_Group(this, this, 11, inst);
+			case 12: return new ProtocolClass_Group(this, this, 12, inst);
+			case 13: return new Message_Group(this, this, 13, inst);
+			case 14: return new PortClass_Group(this, this, 14, inst);
+			case 15: return new MessageHandler_Group(this, this, 15, inst);
+			case 16: return new ProtocolSemantics_Group(this, this, 16, inst);
+			case 17: return new SemanticsRule_Alternatives(this, this, 17, inst);
+			case 18: return new SemanticsInRule_Group(this, this, 18, inst);
+			case 19: return new SemanticsOutRule_Group(this, this, 19, inst);
+			case 20: return new ActorClass_Group(this, this, 20, inst);
+			case 21: return new InterfaceItem_Alternatives(this, this, 21, inst);
+			case 22: return new Port_Group(this, this, 22, inst);
+			case 23: return new ExternalPort_Group(this, this, 23, inst);
+			case 24: return new SAPRef_Group(this, this, 24, inst);
+			case 25: return new SPPRef_Group(this, this, 25, inst);
+			case 26: return new ServiceImplementation_Group(this, this, 26, inst);
+			case 27: return new LogicalSystem_Group(this, this, 27, inst);
+			case 28: return new ActorContainerRef_Alternatives(this, this, 28, inst);
+			case 29: return new SubSystemRef_Group(this, this, 29, inst);
+			case 30: return new SubSystemClass_Group(this, this, 30, inst);
+			case 31: return new LogicalThread_Group(this, this, 31, inst);
+			case 32: return new ActorInstancePath_Group(this, this, 32, inst);
+			case 33: return new Binding_Group(this, this, 33, inst);
+			case 34: return new BindingEndPoint_Group(this, this, 34, inst);
+			case 35: return new LayerConnection_Group(this, this, 35, inst);
+			case 36: return new SAPoint_Alternatives(this, this, 36, inst);
+			case 37: return new RefSAPoint_Group(this, this, 37, inst);
+			case 38: return new RelaySAPoint_Group(this, this, 38, inst);
+			case 39: return new SPPoint_Group(this, this, 39, inst);
+			case 40: return new ActorRef_Group(this, this, 40, inst);
+			case 41: return new StateGraphNode_Alternatives(this, this, 41, inst);
+			case 42: return new StateGraphItem_Alternatives(this, this, 42, inst);
+			case 43: return new State_Alternatives(this, this, 43, inst);
+			case 44: return new StateGraph_Alternatives(this, this, 44, inst);
+			case 45: return new PlainStateGraph_Group(this, this, 45, inst);
+			case 46: return new StateMachine_Group(this, this, 46, inst);
+			case 47: return new BaseState_Group(this, this, 47, inst);
+			case 48: return new RefinedState_Group(this, this, 48, inst);
+			case 49: return new DetailCode_Group(this, this, 49, inst);
+			case 50: return new TrPoint_Alternatives(this, this, 50, inst);
+			case 51: return new TransitionPoint_Group(this, this, 51, inst);
+			case 52: return new EntryPoint_Group(this, this, 52, inst);
+			case 53: return new ExitPoint_Group(this, this, 53, inst);
+			case 54: return new ChoicePoint_Group(this, this, 54, inst);
+			case 55: return new Transition_Alternatives(this, this, 55, inst);
+			case 56: return new NonInitialTransition_Alternatives(this, this, 56, inst);
+			case 57: return new InitialTransition_Group(this, this, 57, inst);
+			case 58: return new ContinuationTransition_Group(this, this, 58, inst);
+			case 59: return new TriggeredTransition_Group(this, this, 59, inst);
+			case 60: return new GuardedTransition_Group(this, this, 60, inst);
+			case 61: return new CPBranchTransition_Group(this, this, 61, inst);
+			case 62: return new TransitionTerminal_Alternatives(this, this, 62, inst);
+			case 63: return new StateTerminal_StateAssignment(this, this, 63, inst);
+			case 64: return new TrPointTerminal_Group(this, this, 64, inst);
+			case 65: return new SubStateTrPointTerminal_Group(this, this, 65, inst);
+			case 66: return new ChoicepointTerminal_Group(this, this, 66, inst);
+			case 67: return new Trigger_Group(this, this, 67, inst);
+			case 68: return new MessageFromIf_Group(this, this, 68, inst);
+			case 69: return new Guard_Group(this, this, 69, inst);
+			case 70: return new Documentation_Group(this, this, 70, inst);
+			case 71: return new Annotation_Group(this, this, 71, inst);
+			case 72: return new KeyValue_Group(this, this, 72, inst);
+			case 73: return new Import_Group(this, this, 73, inst);
 			default: return null;
 		}	
 	}	
@@ -1283,14 +1284,128 @@ protected class FreeTypedID_TypeAssignment_2 extends AssignmentToken  {
 /************ end Rule FreeTypedID ****************/
 
 
-/************ begin Rule Type ****************
+/************ begin Rule BasicType ****************
  *
- * Type:
- * 	prim=PrimitiveType | type=[DataClass|FQN];
+ * BasicType:
+ * 	Type | FreeType;
  *
  **/
 
-// prim=PrimitiveType | type=[DataClass|FQN]
+// Type | FreeType
+protected class BasicType_Alternatives extends AlternativesToken {
+
+	public BasicType_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Alternatives getGrammarElement() {
+		return grammarAccess.getBasicTypeAccess().getAlternatives();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new BasicType_TypeParserRuleCall_0(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new BasicType_FreeTypeParserRuleCall_1(lastRuleCallOrigin, this, 1, inst);
+			default: return null;
+		}	
+	}
+
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getFreeTypeRule().getType().getClassifier() && 
+		   getEObject().eClass() != grammarAccess.getTypeRule().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
+	}
+
+}
+
+// Type
+protected class BasicType_TypeParserRuleCall_0 extends RuleCallToken {
+	
+	public BasicType_TypeParserRuleCall_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public RuleCall getGrammarElement() {
+		return grammarAccess.getBasicTypeAccess().getTypeParserRuleCall_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new Type_Alternatives(this, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getTypeRule().getType().getClassifier())
+			return null;
+		if(checkForRecursion(Type_Alternatives.class, eObjectConsumer)) return null;
+		return eObjectConsumer;
+	}
+	
+    @Override
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index, inst);
+		}	
+	}	
+}
+
+// FreeType
+protected class BasicType_FreeTypeParserRuleCall_1 extends RuleCallToken {
+	
+	public BasicType_FreeTypeParserRuleCall_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public RuleCall getGrammarElement() {
+		return grammarAccess.getBasicTypeAccess().getFreeTypeParserRuleCall_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new FreeType_Alternatives(this, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getFreeTypeRule().getType().getClassifier())
+			return null;
+		if(checkForRecursion(FreeType_Alternatives.class, eObjectConsumer)) return null;
+		return eObjectConsumer;
+	}
+	
+    @Override
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index, inst);
+		}	
+	}	
+}
+
+
+/************ end Rule BasicType ****************/
+
+
+/************ begin Rule Type ****************
+ *
+ * Type:
+ * 	prim=PrimitiveType | type=[DataClass|FQN] ref?="ref"?;
+ *
+ **/
+
+// prim=PrimitiveType | type=[DataClass|FQN] ref?="ref"?
 protected class Type_Alternatives extends AlternativesToken {
 
 	public Type_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1306,7 +1421,7 @@ protected class Type_Alternatives extends AlternativesToken {
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new Type_PrimAssignment_0(lastRuleCallOrigin, this, 0, inst);
-			case 1: return new Type_TypeAssignment_1(lastRuleCallOrigin, this, 1, inst);
+			case 1: return new Type_Group_1(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
@@ -1353,16 +1468,39 @@ protected class Type_PrimAssignment_0 extends AssignmentToken  {
 
 }
 
-// type=[DataClass|FQN]
-protected class Type_TypeAssignment_1 extends AssignmentToken  {
+// type=[DataClass|FQN] ref?="ref"?
+protected class Type_Group_1 extends GroupToken {
 	
-	public Type_TypeAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public Type_Group_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getTypeAccess().getGroup_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new Type_RefAssignment_1_1(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new Type_TypeAssignment_1_0(lastRuleCallOrigin, this, 1, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// type=[DataClass|FQN]
+protected class Type_TypeAssignment_1_0 extends AssignmentToken  {
+	
+	public Type_TypeAssignment_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getTypeAccess().getTypeAssignment_1();
+		return grammarAccess.getTypeAccess().getTypeAssignment_1_0();
 	}
 
     @Override
@@ -1378,9 +1516,9 @@ protected class Type_TypeAssignment_1 extends AssignmentToken  {
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("type");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getTypeAccess().getTypeDataClassCrossReference_1_0().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getTypeAccess().getTypeDataClassCrossReference_1_0_0().getType().getClassifier())) {
 				type = AssignmentType.CROSS_REFERENCE;
-				element = grammarAccess.getTypeAccess().getTypeDataClassCrossReference_1_0(); 
+				element = grammarAccess.getTypeAccess().getTypeDataClassCrossReference_1_0_0(); 
 				return obj;
 			}
 		}
@@ -1389,6 +1527,41 @@ protected class Type_TypeAssignment_1 extends AssignmentToken  {
 
 }
 
+// ref?="ref"?
+protected class Type_RefAssignment_1_1 extends AssignmentToken  {
+	
+	public Type_RefAssignment_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getTypeAccess().getRefAssignment_1_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new Type_TypeAssignment_1_0(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("ref",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("ref");
+		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+			type = AssignmentType.KEYWORD;
+			element = grammarAccess.getTypeAccess().getRefRefKeyword_1_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+
 
 /************ end Rule Type ****************/
 
@@ -1396,11 +1569,11 @@ protected class Type_TypeAssignment_1 extends AssignmentToken  {
 /************ begin Rule FreeType ****************
  *
  * FreeType:
- * 	prim=PrimitiveType | type=ID;
+ * 	prim=PrimitiveType | type=ID ref?="ref"?;
  *
  **/
 
-// prim=PrimitiveType | type=ID
+// prim=PrimitiveType | type=ID ref?="ref"?
 protected class FreeType_Alternatives extends AlternativesToken {
 
 	public FreeType_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1416,7 +1589,7 @@ protected class FreeType_Alternatives extends AlternativesToken {
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new FreeType_PrimAssignment_0(lastRuleCallOrigin, this, 0, inst);
-			case 1: return new FreeType_TypeAssignment_1(lastRuleCallOrigin, this, 1, inst);
+			case 1: return new FreeType_Group_1(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
@@ -1463,16 +1636,39 @@ protected class FreeType_PrimAssignment_0 extends AssignmentToken  {
 
 }
 
-// type=ID
-protected class FreeType_TypeAssignment_1 extends AssignmentToken  {
+// type=ID ref?="ref"?
+protected class FreeType_Group_1 extends GroupToken {
 	
-	public FreeType_TypeAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public FreeType_Group_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getFreeTypeAccess().getGroup_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new FreeType_RefAssignment_1_1(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new FreeType_TypeAssignment_1_0(lastRuleCallOrigin, this, 1, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// type=ID
+protected class FreeType_TypeAssignment_1_0 extends AssignmentToken  {
+	
+	public FreeType_TypeAssignment_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getFreeTypeAccess().getTypeAssignment_1();
+		return grammarAccess.getFreeTypeAccess().getTypeAssignment_1_0();
 	}
 
     @Override
@@ -1486,15 +1682,50 @@ protected class FreeType_TypeAssignment_1 extends AssignmentToken  {
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("type",true)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("type");
-		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getFreeTypeAccess().getTypeIDTerminalRuleCall_1_0(), value, null)) {
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getFreeTypeAccess().getTypeIDTerminalRuleCall_1_0_0(), value, null)) {
 			type = AssignmentType.TERMINAL_RULE_CALL;
-			element = grammarAccess.getFreeTypeAccess().getTypeIDTerminalRuleCall_1_0();
+			element = grammarAccess.getFreeTypeAccess().getTypeIDTerminalRuleCall_1_0_0();
 			return obj;
 		}
 		return null;
 	}
 
 }
+
+// ref?="ref"?
+protected class FreeType_RefAssignment_1_1 extends AssignmentToken  {
+	
+	public FreeType_RefAssignment_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getFreeTypeAccess().getRefAssignment_1_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new FreeType_TypeAssignment_1_0(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("ref",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("ref");
+		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+			type = AssignmentType.KEYWORD;
+			element = grammarAccess.getFreeTypeAccess().getRefRefKeyword_1_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
 
 
 /************ end Rule FreeType ****************/

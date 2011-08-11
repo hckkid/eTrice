@@ -75,6 +75,7 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
       case RoomPackage.ACTOR_CONTAINER_CLASS: return createActorContainerClass();
       case RoomPackage.TYPED_ID: return createTypedID();
       case RoomPackage.FREE_TYPED_ID: return createFreeTypedID();
+      case RoomPackage.BASIC_TYPE: return createBasicType();
       case RoomPackage.TYPE: return createType();
       case RoomPackage.FREE_TYPE: return createFreeType();
       case RoomPackage.DATA_CLASS: return createDataClass();
@@ -245,6 +246,17 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
   {
     FreeTypedIDImpl freeTypedID = new FreeTypedIDImpl();
     return freeTypedID;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public BasicType createBasicType()
+  {
+    BasicTypeImpl basicType = new BasicTypeImpl();
+    return basicType;
   }
 
   /**
