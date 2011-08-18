@@ -13,7 +13,12 @@
 <topic href="help/IntroductiontotheROOMLanguage.html#WhatarethebenefitsofROOM" label="What are the benefits of ROOM?"></topic>
 <topic href="help/IntroductiontotheROOMLanguage.html#Whichconsequencesmustbetakenintoaccount" label="Which consequences must be taken into account?"></topic>
 </topic>
-<topic href="help/BasicConcepts.html" label="Basic Concepts"></topic>
+<topic href="help/BasicConcepts.html" label="Basic Concepts">
+<topic href="help/BasicConcepts.html#ActorPortProtocol" label="Actor, Port, Protocol"></topic>
+<topic href="help/BasicConcepts.html#HierarchyinStructureandFSM" label="Hierarchy in Structure and FSM"></topic>
+<topic href="help/BasicConcepts.html#RuntoCompletion" label="Run to Completion"></topic>
+<topic href="help/BasicConcepts.html#Layering" label="Layering"></topic>
+</topic>
 <topic href="help/Benefits.html" label="Benefits"></topic>
 <topic href="help/ExecutionModels.html" label="Execution Models">
 <topic href="help/ExecutionModels.html#LogicalMachine" label="Logical Machine"></topic>

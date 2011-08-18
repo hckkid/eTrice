@@ -79,7 +79,7 @@
 </div>
 </div>
 </div>
-<p>Room was developed in the 1990th on the background of the upcoming mobile applications with the goal to manage the complexity of such huge SW-Systems. From the very beginning ROOM has focused on a certain type of SW-Systems and, is in contrast to the UML, well suited for this kind of  systems. In this sense, ROOM is a DSL (Domain Specific Language) for distributed, event driven, real time systems. </p>
+<p>Room was developed in the 1990th on the background of the upcoming mobile applications with the goal to manage the complexity of such huge SW-Systems. From the very beginning ROOM has focused on a certain type of SW-Systems and, is in contrast to the UML, well suited for this kind of systems. In this sense, ROOM is a DSL (Domain Specific Language) for distributed, event driven, real time systems. </p>
 <p>Bran Selic, Garth Gullekson and Paul T. Ward have published the concepts 1994 in the book &bdquo;REAL-TIME OBJECT-ORIENTED MODELING&rdquo;. The company 
 					[<span class="citation">object time</span>] &trade; developed a ROOM tool which was taken over from 
 					[<span class="citation">Rational SW</span>] &trade; and later on from 
@@ -127,7 +127,9 @@
 <p>As an example take a look at a washing machine. The system has to react on user interactions, has to handle some error conditions like a closed water tap or a defective lye pump. It has to react simultaneously to all this inputs. It has to close the water valve in a certain time to avoid flooding the basement. 
 					So, the system can by characterized as timeliness, concurrent and reactive. As long as the washing machine does not transform to a laundry dryer by themself, the system has no dynamic internal structure and as long as all functions are running on a single microcontroller the (SW)-system is not distributed. 
 					ROOM fits perfect to such a system.</p>
-<p>A SW system which mainly consists of transformations like signal processing or image processing (pure algorithms) cannot be characterized with any of the above mentioned properties. However, in the real world most of the SW systems will be a combination of both. ROOM can be mixed up with non model code. </p>
+<p>A SW system which mainly consists of data transformations like signal/image processing or loop controller (PID regulator) cannot be characterized with any of the above mentioned properties. However, in the real world most of the SW systems will be a combination of both. ROOM can be combined with such systems, so that for example an actor provides a 
+					[<span class="citation">run to completion</span>] context for calculating a image processing algorithm.  
+				</p>
 </div>
 <div class="section" title="What is the relation between OOP and ROOM?">
 <div class="titlepage">
@@ -147,7 +149,7 @@
 <p>
 				
 </p>
-<p>As the figure illustrates, the classic object paradigm does not care about concurrency issues. The threads of control will be provided from the underlying operating system.</p>
+<p>As the figure illustrates, the classic object paradigm does not care about concurrency issues. The threads of control will be provided from the underlying operating system and the user is responsible to avoid access violations by using operating system mechanisms (semaphore, mutex).</p>
 <p>
 					
 </p>
@@ -156,7 +158,7 @@
 <p>
 				
 </p>
-<p>ROOM provides the concept of a logical machine (called actor) with it&acute;s own thread of control. It provides some kind of cooperative communication infrastructure with &bdquo;run to completion&rdquo; semantic. That makes developing of business logic easy and save (see basic concepts).  </p>
+<p>ROOM provides the concept of a logical machine (called actor) with it&acute;s own thread of control. It provides some kind of cooperative communication infrastructure with &bdquo;run to completion&rdquo; semantic. That makes developing of business logic easy and save (see basic concepts). The logical machine provides an encapsulation shell including concurrency issues (see chapter &bdquo;Run to completion&rdquo;). </p>
 <p>
 					
 </p>
@@ -176,11 +178,24 @@
 </div>
 </div>
 </div>
-<p>The main benefits are:
-					- ROOM provides model execution, which makes it easy to find defects early enough, to reduce expensive debugging during the testing phase or even in the costumer environment.
-					- ROOM promotes component building which is essential to make SW reusable
-					- Graphical modeling makes it easy to understand, maintain and share code with other developers
-					- higher abstraction in combination with automated code generation provides very efficient mechanisms to the developer. </p>
+<p>ROOM has a lot of benefits and it depends on the users point of view which is the most important one. From a general point of view the most important benefit is, that ROOM allows to create SW systems very efficient, robust and safe due to the fact that it provides some abstract, high level modeling concepts combined with code generation and a small efficient runtime environment.  </p>
+<p>In detail:</p>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="disc">
+<li class="listitem">
+<p>ROOM models contain well defined interfaces (protocols). That makes it easy to reuse components in different applications or e.g. in a test harness. </p>
+</li>
+<li class="listitem">
+<p>Graphical modeling makes it easy to understand, maintain and share code with other developers</p>
+</li>
+<li class="listitem">
+<p>Higher abstraction in combination with automated code generation provides very efficient mechanisms to the developer. </p>
+</li>
+<li class="listitem">
+<p>ROOM provides graphical model execution, which makes it easy to understand the application or  find defects in a very early phase. </p>
+</li>
+</ul>
+</div>
 </div>
 <div class="section" title="Which consequences must be taken into account?">
 <div class="titlepage">

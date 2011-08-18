@@ -194,6 +194,9 @@ carLights.setState(TrafficLight3.OFF);<br>
 				[<span class="citation">off</span>] is the 
 				[<span class="citation">stop</span>] event from the 
 				[<span class="citation">ControlPort</span>].
+				Note: The transition from 
+				[<span class="citation">blinking</span>] to 
+				[<span class="citation">off</span>] is a so called group transition. This is a outgoing transition from a super state (state with sub states) without specifying the concrete leave state (state without sub states). An incoming transition to a super state is called history transition.   
 			</p>
 <p>Action code of the init transition is:</p>
 <div class="literallayout">

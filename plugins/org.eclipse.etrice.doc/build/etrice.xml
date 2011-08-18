@@ -51,7 +51,7 @@
 			</itemizedlist>
 			<section id="Wheredoesitcomefrom">
 				<title>Where does it come from?</title>
-				<para>Room was developed in the 1990th on the background of the upcoming mobile applications with the goal to manage the complexity of such huge SW-Systems. From the very beginning ROOM has focused on a certain type of SW-Systems and, is in contrast to the UML, well suited for this kind of  systems. In this sense, ROOM is a DSL (Domain Specific Language) for distributed, event driven, real time systems. </para>
+				<para>Room was developed in the 1990th on the background of the upcoming mobile applications with the goal to manage the complexity of such huge SW-Systems. From the very beginning ROOM has focused on a certain type of SW-Systems and, is in contrast to the UML, well suited for this kind of systems. In this sense, ROOM is a DSL (Domain Specific Language) for distributed, event driven, real time systems. </para>
 				<para>Bran Selic, Garth Gullekson and Paul T. Ward have published the concepts 1994 in the book &#8222;REAL-TIME OBJECT-ORIENTED MODELING”. The company 
 					<citation>object time</citation> &#8482; developed a ROOM tool which was taken over from 
 					<citation>Rational SW</citation> &#8482; and later on from 
@@ -90,7 +90,9 @@
 				<para>As an example take a look at a washing machine. The system has to react on user interactions, has to handle some error conditions like a closed water tap or a defective lye pump. It has to react simultaneously to all this inputs. It has to close the water valve in a certain time to avoid flooding the basement. 
 					So, the system can by characterized as timeliness, concurrent and reactive. As long as the washing machine does not transform to a laundry dryer by themself, the system has no dynamic internal structure and as long as all functions are running on a single microcontroller the (SW)-system is not distributed. 
 					ROOM fits perfect to such a system.</para>
-				<para>A SW system which mainly consists of transformations like signal processing or image processing (pure algorithms) cannot be characterized with any of the above mentioned properties. However, in the real world most of the SW systems will be a combination of both. ROOM can be mixed up with non model code. </para>
+				<para>A SW system which mainly consists of data transformations like signal/image processing or loop controller (PID regulator) cannot be characterized with any of the above mentioned properties. However, in the real world most of the SW systems will be a combination of both. ROOM can be combined with such systems, so that for example an actor provides a 
+					<citation>run to completion</citation> context for calculating a image processing algorithm.  
+				</para>
 			</section>
 			<section id="WhatistherelationbetweenOOPandROOM">
 				<title>What is the relation between OOP and ROOM?</title>
@@ -102,7 +104,7 @@
 						</imageobject>
 					</mediaobject>
 				</para>
-				<para>As the figure illustrates, the classic object paradigm does not care about concurrency issues. The threads of control will be provided from the underlying operating system.</para>
+				<para>As the figure illustrates, the classic object paradigm does not care about concurrency issues. The threads of control will be provided from the underlying operating system and the user is responsible to avoid access violations by using operating system mechanisms (semaphore, mutex).</para>
 				<para>
 					<mediaobject>
 						<imageobject>
@@ -110,7 +112,7 @@
 						</imageobject>
 					</mediaobject>
 				</para>
-				<para>ROOM provides the concept of a logical machine (called actor) with it´s own thread of control. It provides some kind of cooperative communication infrastructure with &#8222;run to completion” semantic. That makes developing of business logic easy and save (see basic concepts).  </para>
+				<para>ROOM provides the concept of a logical machine (called actor) with it´s own thread of control. It provides some kind of cooperative communication infrastructure with &#8222;run to completion” semantic. That makes developing of business logic easy and save (see basic concepts). The logical machine provides an encapsulation shell including concurrency issues (see chapter &#8222;Run to completion”). </para>
 				<para>
 					<mediaobject>
 						<imageobject>
@@ -122,11 +124,22 @@
 			</section>
 			<section id="WhatarethebenefitsofROOM">
 				<title>What are the benefits of ROOM?</title>
-				<para>The main benefits are:
-					- ROOM provides model execution, which makes it easy to find defects early enough, to reduce expensive debugging during the testing phase or even in the costumer environment.
-					- ROOM promotes component building which is essential to make SW reusable
-					- Graphical modeling makes it easy to understand, maintain and share code with other developers
-					- higher abstraction in combination with automated code generation provides very efficient mechanisms to the developer. </para>
+				<para>ROOM has a lot of benefits and it depends on the users point of view which is the most important one. From a general point of view the most important benefit is, that ROOM allows to create SW systems very efficient, robust and safe due to the fact that it provides some abstract, high level modeling concepts combined with code generation and a small efficient runtime environment.  </para>
+				<para>In detail:</para>
+				<itemizedlist>
+					<listitem>
+						<para>ROOM models contain well defined interfaces (protocols). That makes it easy to reuse components in different applications or e.g. in a test harness. </para>
+					</listitem>
+					<listitem>
+						<para>Graphical modeling makes it easy to understand, maintain and share code with other developers</para>
+					</listitem>
+					<listitem>
+						<para>Higher abstraction in combination with automated code generation provides very efficient mechanisms to the developer. </para>
+					</listitem>
+					<listitem>
+						<para>ROOM provides graphical model execution, which makes it easy to understand the application or  find defects in a very early phase. </para>
+					</listitem>
+				</itemizedlist>
 			</section>
 			<section id="Whichconsequencesmustbetakenintoaccount">
 				<title>Which consequences must be taken into account?</title>
@@ -136,8 +149,42 @@
 		</section>
 		<section id="BasicConcepts">
 			<title>Basic Concepts</title>
-			<para>port, protocol, actor, interface, asynchronous communication
-				hierarchical FSM, hierarchical structure</para>
+			<section id="ActorPortProtocol">
+				<title>Actor, Port, Protocol</title>
+				<para>The basic elements of ROOM are the actor with its ports and protocols. The protocol provides a formal interface description. The port is an interaction point where the actor interacts with its outside world. Each port has exactly one protocol attached. The sum of all ports builds up the complete interface of an actor. Each port can receive messages with or without data which is defined in the protocol. Each message will be handled from the actors behavior (state machine) or will be delegated to the actors internal structure.</para>
+				<para>The actor provides access protection for it´s own attributes (including complex types (classic objects)), including concurrency protection. An actor has neither public attributes nor public operations. The only interaction with the outside world takes place via interface ports. This ensures a high degree of reuse ability on actor level and provides an effective and safe programming model to the developer. </para>
+				<para>Receiving a message via a port will trigger the internal state machine. A transition will be executed depending on the message and the actual state. Within this transition, detailed code will be executed and response messages can be sent.</para>
+				<para>
+					<ulink url="images\010-room-introduction01.avi">receiving a message</ulink>
+				</para>
+				<para>With this model, a complex behavior will be divided into many relatively simple, linked actors. To say it the other way round: The complex behavior will be provided by a network of relatively simple components which are communicating with each other via well defined interfaces.</para>
+			</section>
+			<section id="HierarchyinStructureandFSM">
+				<title>Hierarchy in Structure and FSM</title>
+				<para>ROOM provides two types of hierarchy. Behavioral hierarchy and structural hierarchy. Structural hierarchy means that actors can be nested to any level. Usually you will add more and more details to your application with each nesting level. That means you can focus yourself on any level of abstraction with always the same element, the actor. Structural hierarchy provides a power full mechanism to divide your problem in smaller pieces, so that you can focus the level of abstraction you want to work on. </para>
+				<para>The actors behavior will be described with a state machine. The states itself may contain sub states. This is also a possibility to focus on an abstraction level. Take the simple FSM from the blinky actor from the blinky tutorial:    </para>
+				<para>
+					<mediaobject>
+						<imageobject>
+							<imagedata fileref="images\020-Blinky15.png"/>
+						</imageobject>
+					</mediaobject>
+				</para>
+				<para>From an abstract point of view there is a state &#8222;blinking”. But a simple LED is not able to blink autonomously. Therefore you have to add more details to your model to make a LED blinking, but for the current work it is not of interest how blinking is realized. This will be done in the next lower level of the hierarchy. </para>
+				<para>With this very simple example you can easily imagine how power full this mechanisms is.</para>
+				<para>The hierarchical FSM provides a rich tool box to describe real world problems. (see &#8222;room concepts”).</para>
+			</section>
+			<section id="RuntoCompletion">
+				<title>Run to Completion</title>
+				<para>&#8222;Run to completion” (RTC) is a very central concept of ROOM. It enables the developer to concentrate on the functional aspects of the system. The developer must not take care about concurrency issues all the time. This job is concentrated to the system designer in a very flexible way.
+					What does &#8222;run to completion” mean:
+					RTC means that an actor, which is processing a message, can not be receive the next message as long as the processing of the current message has not been finished. Receiving of the next message will be queued from the underlying run time system.</para>
+				<para>Note: It is very important not to confuse run to completion and preemption. Run to completion means that an actor will finish the processing of a message before he can receive a new one (regardless of its priority). That does not mean that an actor cannot be preempted from an higher prior thread of control. Even a message from this higher prior thread of control will be queued till the current processing has been finished. </para>
+				<para>With this mechanism all actor internal attributes and data structures are protected. Due to the fact that multiple actors share one thread of control, all objects are protected which are accessed from one thread of control but multiple actors. This provides the possibility to decompose complex functionality to several actors without the risk to produce access violations.</para>
+			</section>
+			<section id="Layering">
+				<title>Layering</title>
+			</section>
 		</section>
 		<section id="Benefits">
 			<title>Benefits</title>
@@ -162,6 +209,9 @@
 			<section id="HybridExecutionModel">
 				<title>Hybrid Execution Model
 					not implemented yet</title>
+				<para>port, protocol, actor, interface, asynchronous communication
+					hierarchical FSM, hierarchical structure</para>
+				<para>run to completion</para>
 			</section>
 		</section>
 	</chapter>
@@ -187,6 +237,9 @@
 					<para>open the message sequence chart</para>
 				</listitem>
 			</orderedlist>
+			<para>
+				<ulink url="images\015-HelloWorld01.avi">video</ulink>
+			</para>
 		</section>
 		<section id="Createanewmodelfromscratch">
 			<title>Create a new model from scratch</title>
@@ -741,6 +794,9 @@ carLights.setState(TrafficLight3.OFF);
 				<citation>off</citation> is the 
 				<citation>stop</citation> event from the 
 				<citation>ControlPort</citation>.
+				Note: The transition from 
+				<citation>blinking</citation> to 
+				<citation>off</citation> is a so called group transition. This is a outgoing transition from a super state (state with sub states) without specifying the concrete leave state (state without sub states). An incoming transition to a super state is called history transition.   
 			</para>
 			<para>Action code of the init transition is:</para>
 			<literallayout><code>carLights = light.getCarLights();
@@ -1146,9 +1202,14 @@ carLights.setState(TrafficLight3.OFF);
 			<para>Within the 
 				<citation>next</citation> transition, 
 				<citation>MrPing</citation> creates a data class and sends the default values. Than 
-				<citation>MrPing</citation> changes the values and sends the class again. At this point you should note that during the send operation, a copy of the data class will be created and sent. Otherwise it would not be possible to send the same object two times, even more it would not be possible to send a stack object at all. 
-				In future versions of eTrice an additional mechanism to send references will be implemented. However, keep in mind that sending references transfers the responsibility of the life cycle of the sent object to the user. It looks simple but is a very common source of failures.  
+				<citation>MrPing</citation> changes the values and sends the class again. At this point you should note that during the send operation, a copy of the data class will be created and sent. Otherwise it would not be possible to send the same object two times, even more it would not be possible to send a stack object at all.
+				However, for performance reasons some applications requires sending data by value. In this case the user is responsible for the life cycle of the object. In Java the VM takes care about the life cycle of an object. This is not the case for C/C++. Consider that a object which is created within a transition of a state machine will be destroyed when the transition is finished. The receiving FSM would receive an invalid reference. Therefore care must be taken by sending references.      
 			</para>
+			<para>For sending data by reference you simply have to add the keyword 
+				<citation>ref</citation> to the protocol definition.
+			</para>
+			<literallayout><code>Message ping(data: DemoData ref)
+</code></literallayout>
 		</section>
 	</chapter>
 	<chapter id="TutorialPedestrianLights">
