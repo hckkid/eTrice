@@ -32,17 +32,17 @@
 
 «DEFINE Attributes FOR List[Attribute] »
 	//--------------------- attributes
-	«FOREACH this AS attribute»«IF attribute.size==0»protected «attribute.type.typeName()» «attribute.name»;«ELSE»protected «attribute.type.typeName()»[] «attribute.name»«IF attribute.defaultValueLiteral==null» =new «attribute.type.typeName()»[«attribute.size»];«ELSE» = «attribute.defaultValueLiteral»;«ENDIF»
+	«FOREACH this AS attribute»«IF attribute.size==0»protected «IF attribute.type.ext != null»«attribute.type.ext»«ELSE»«attribute.type.typeName()»«ENDIF» «attribute.name»;«ELSE»protected «attribute.type.typeName()»[] «attribute.name»«IF attribute.defaultValueLiteral==null» =new «attribute.type.typeName()»[«attribute.size»];«ELSE» = «attribute.defaultValueLiteral»;«ENDIF»
 	«ENDIF» 
 	«ENDFOREACH»
 «ENDDEFINE»
 
 «DEFINE AttributeSettersGetters FOR List[Attribute] »
 	//--------------------- attribute setters and getters
-	«FOREACH this AS attribute»public void set«attribute.name.toFirstUpper()» («attribute.type.typeName()»«IF attribute.size!=0»[]«ENDIF» «attribute.name») {
+	«FOREACH this AS attribute»public void set«attribute.name.toFirstUpper()» («IF attribute.type.ext != null» «attribute.type.ext»«ELSE»«attribute.type.typeName()»«ENDIF»«IF attribute.size!=0»[]«ENDIF» «attribute.name») {
 		 this.«attribute.name» = «attribute.name»;
 	}
-	public «attribute.type.typeName()»«IF attribute.size!=0»[]«ENDIF» get«attribute.name.toFirstUpper()» () {
+	public «IF attribute.type.ext != null» «attribute.type.ext»«ELSE»«attribute.type.typeName()»«ENDIF»«IF attribute.size!=0»[]«ENDIF» get«attribute.name.toFirstUpper()» () {
 		return «attribute.name»;
 	}«ENDFOREACH»
 «ENDDEFINE»

@@ -514,6 +514,44 @@ ruleType returns [EObject current=null]
 	    }
 
 )
+)?)
+    |((
+(
+		{ 
+	        newCompositeNode(grammarAccess.getTypeAccess().getExtFQNParserRuleCall_2_0_0()); 
+	    }
+		lv_ext_3_0=ruleFQN		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getTypeRule());
+	        }
+       		set(
+       			$current, 
+       			"ext",
+        		lv_ext_3_0, 
+        		"FQN");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)	otherlv_4='ext' 
+    {
+    	newLeafNode(otherlv_4, grammarAccess.getTypeAccess().getExtKeyword_2_1());
+    }
+(
+(
+		lv_ref_5_0=	'ref' 
+    {
+        newLeafNode(lv_ref_5_0, grammarAccess.getTypeAccess().getRefRefKeyword_2_2_0());
+    }
+ 
+	    {
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getTypeRule());
+	        }
+       		setWithLastConsumed($current, "ref", true, "ref");
+	    }
+
+)
 )?))
 ;
 

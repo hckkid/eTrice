@@ -260,7 +260,9 @@ h2. Summary
 
 Within the first loop an integer value will be incremented from ??MrPong?? and sent back to ??MrPing??. As long as the guard is true ??MrPing?? sends back the value.
 
-Within the ??next?? transition, ??MrPing?? creates a data class and sends the default values. Than ??MrPing?? changes the values and sends the class again. At this point you should note that during the send operation, a copy of the data class will be created and sent. Otherwise it would not be possible to send the same object two times, even more it would not be possible to send a stack object at all. 
-In future versions of eTrice an additional mechanism to send references will be implemented. However, keep in mind that sending references transfers the responsibility of the life cycle of the sent object to the user. It looks simple but is a very common source of failures.  
+Within the ??next?? transition, ??MrPing?? creates a data class and sends the default values. Than ??MrPing?? changes the values and sends the class again. At this point you should note that during the send operation, a copy of the data class will be created and sent. Otherwise it would not be possible to send the same object two times, even more it would not be possible to send a stack object at all.
+However, for performance reasons some applications requires sending data by value. In this case the user is responsible for the life cycle of the object. In Java the VM takes care about the life cycle of an object. This is not the case for C/C++. Consider that a object which is created within a transition of a state machine will be destroyed when the transition is finished. The receiving FSM would receive an invalid reference. Therefore care must be taken by sending references.      
 
-
+For sending data by reference you simply have to add the keyword ??ref?? to the protocol definition.
+ 
+bc. Message ping(data: DemoData ref)

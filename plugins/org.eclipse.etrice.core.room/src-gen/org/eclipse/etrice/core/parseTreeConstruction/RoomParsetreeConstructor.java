@@ -1401,11 +1401,11 @@ protected class BasicType_FreeTypeParserRuleCall_1 extends RuleCallToken {
 /************ begin Rule Type ****************
  *
  * Type:
- * 	prim=PrimitiveType | type=[DataClass|FQN] ref?="ref"?;
+ * 	prim=PrimitiveType | type=[DataClass|FQN] ref?="ref"? | ext=FQN "ext" ref?="ref"?;
  *
  **/
 
-// prim=PrimitiveType | type=[DataClass|FQN] ref?="ref"?
+// prim=PrimitiveType | type=[DataClass|FQN] ref?="ref"? | ext=FQN "ext" ref?="ref"?
 protected class Type_Alternatives extends AlternativesToken {
 
 	public Type_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1422,6 +1422,7 @@ protected class Type_Alternatives extends AlternativesToken {
 		switch(index) {
 			case 0: return new Type_PrimAssignment_0(lastRuleCallOrigin, this, 0, inst);
 			case 1: return new Type_Group_1(lastRuleCallOrigin, this, 1, inst);
+			case 2: return new Type_Group_2(lastRuleCallOrigin, this, 2, inst);
 			default: return null;
 		}	
 	}
@@ -1554,6 +1555,119 @@ protected class Type_RefAssignment_1_1 extends AssignmentToken  {
 		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getTypeAccess().getRefRefKeyword_1_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+
+// ext=FQN "ext" ref?="ref"?
+protected class Type_Group_2 extends GroupToken {
+	
+	public Type_Group_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getTypeAccess().getGroup_2();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new Type_RefAssignment_2_2(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new Type_ExtKeyword_2_1(lastRuleCallOrigin, this, 1, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// ext=FQN
+protected class Type_ExtAssignment_2_0 extends AssignmentToken  {
+	
+	public Type_ExtAssignment_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getTypeAccess().getExtAssignment_2_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("ext",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("ext");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getTypeAccess().getExtFQNParserRuleCall_2_0_0(), value, null)) {
+			type = AssignmentType.DATATYPE_RULE_CALL;
+			element = grammarAccess.getTypeAccess().getExtFQNParserRuleCall_2_0_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// "ext"
+protected class Type_ExtKeyword_2_1 extends KeywordToken  {
+	
+	public Type_ExtKeyword_2_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getTypeAccess().getExtKeyword_2_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new Type_ExtAssignment_2_0(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// ref?="ref"?
+protected class Type_RefAssignment_2_2 extends AssignmentToken  {
+	
+	public Type_RefAssignment_2_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getTypeAccess().getRefAssignment_2_2();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new Type_ExtKeyword_2_1(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("ref",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("ref");
+		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+			type = AssignmentType.KEYWORD;
+			element = grammarAccess.getTypeAccess().getRefRefKeyword_2_2_0();
 			return obj;
 		}
 		return null;

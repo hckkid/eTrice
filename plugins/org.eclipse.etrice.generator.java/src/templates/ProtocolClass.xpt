@@ -34,6 +34,14 @@ import org.eclipse.etrice.runtime.java.messaging.Message;
 import org.eclipse.etrice.runtime.java.modelbase.*;
 import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
 
+«REM»
+«FOREACH pc.getAllIncomingMessages() AS message»
+«IF message.data.type.ext != null»
+«FOREACH message.data.type.ext.imports AS imp»import «imp.importedNamespace».*; «ENDFOREACH»
+«ENDIF»
+«ENDFOREACH»
+«ENDREM»
+
 «EXPAND ProcedureHelpers::UserCode FOR pc.userCode1»
 
 «LET this.getReferencedModels(pc) AS models»
@@ -200,6 +208,11 @@ public interface I«name»{
 «ENDLET»
 «ENDDEFINE»
 
+«REM»
+«DEFINE messageSignature FOR Message»public void «this.name» («IF this.data!=null»«this.data.type.typeName()» «this.data.name»«ENDIF»)«ENDDEFINE»
+«DEFINE messageSignature FOR Message»public void «this.name» («IF this.data!=null»«IF this.data.type.ext==null»«this.data.type.typeName()»«ELSE»«this.data.type.ext.name»«ENDIF» «this.data.name»«ENDIF»)«ENDDEFINE»
+«ENDREM»
+
 «DEFINE messageSignature FOR Message»public void «this.name» («IF this.data!=null»«this.data.type.typeName()» «this.data.name»«ENDIF»)«ENDDEFINE»
 «DEFINE messageCall FOR Message»«this.name»(«IF this.data!=null» «this.data.name»«ENDIF»)«ENDDEFINE»
 «DEFINE sendMessage(boolean conj) FOR Message-»
@@ -216,7 +229,7 @@ public interface I«name»{
 			}
 			if (getPeerAddress()!=null)
 			«IF this.data==null»getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), «dir»_«this.name»));
-			«ELSE»getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), «dir»_«this.name», «this.data.name»«IF this.data.type.type!=null».deepCopy()«ENDIF»));
+			«ELSE»getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), «dir»_«this.name», «this.data.name»«IF (!this.data.type.ref && this.data.type.type!=null)».deepCopy()«ENDIF»));
 			«ENDIF-»
 		«ENDIF-»
 	}

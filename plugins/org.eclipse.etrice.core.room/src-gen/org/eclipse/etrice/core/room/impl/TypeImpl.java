@@ -25,6 +25,7 @@ import org.eclipse.etrice.core.room.Type;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.room.impl.TypeImpl#getType <em>Type</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.impl.TypeImpl#getExt <em>Ext</em>}</li>
  * </ul>
  * </p>
  *
@@ -41,6 +42,26 @@ public class TypeImpl extends BasicTypeImpl implements Type
    * @ordered
    */
   protected DataClass type;
+
+  /**
+   * The default value of the '{@link #getExt() <em>Ext</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getExt()
+   * @generated
+   * @ordered
+   */
+  protected static final String EXT_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getExt() <em>Ext</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getExt()
+   * @generated
+   * @ordered
+   */
+  protected String ext = EXT_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
@@ -111,6 +132,29 @@ public class TypeImpl extends BasicTypeImpl implements Type
    * <!-- end-user-doc -->
    * @generated
    */
+  public String getExt()
+  {
+    return ext;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setExt(String newExt)
+  {
+    String oldExt = ext;
+    ext = newExt;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.TYPE__EXT, oldExt, ext));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
@@ -119,6 +163,8 @@ public class TypeImpl extends BasicTypeImpl implements Type
       case RoomPackage.TYPE__TYPE:
         if (resolve) return getType();
         return basicGetType();
+      case RoomPackage.TYPE__EXT:
+        return getExt();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -135,6 +181,9 @@ public class TypeImpl extends BasicTypeImpl implements Type
     {
       case RoomPackage.TYPE__TYPE:
         setType((DataClass)newValue);
+        return;
+      case RoomPackage.TYPE__EXT:
+        setExt((String)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -153,6 +202,9 @@ public class TypeImpl extends BasicTypeImpl implements Type
       case RoomPackage.TYPE__TYPE:
         setType((DataClass)null);
         return;
+      case RoomPackage.TYPE__EXT:
+        setExt(EXT_EDEFAULT);
+        return;
     }
     super.eUnset(featureID);
   }
@@ -169,8 +221,27 @@ public class TypeImpl extends BasicTypeImpl implements Type
     {
       case RoomPackage.TYPE__TYPE:
         return type != null;
+      case RoomPackage.TYPE__EXT:
+        return EXT_EDEFAULT == null ? ext != null : !EXT_EDEFAULT.equals(ext);
     }
     return super.eIsSet(featureID);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String toString()
+  {
+    if (eIsProxy()) return super.toString();
+
+    StringBuffer result = new StringBuffer(super.toString());
+    result.append(" (ext: ");
+    result.append(ext);
+    result.append(')');
+    return result.toString();
   }
 
 } //TypeImpl

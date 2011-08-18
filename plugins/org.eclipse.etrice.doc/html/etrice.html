@@ -251,6 +251,155 @@
 </div>
 </div>
 </div>
+<p>This chapter will give a rough overview of what ROOM (
+				<span class="bold"><strong>R</strong></span> eal time 
+				<span class="bold"><strong>O</strong></span> bject 
+				<span class="bold"><strong>O</strong></span> riented 
+				<span class="bold"><strong>M</strong></span> odeling) is and where it is good for. It will try to answer the following questions:
+			</p>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="disc">
+<li class="listitem">
+<p>Where does it come from?</p>
+</li>
+<li class="listitem">
+<p>Which kind of SW-Systems will be addressed?</p>
+</li>
+<li class="listitem">
+<p>What is the relation between OOP and ROOM?</p>
+</li>
+<li class="listitem">
+<p>What are the benefits of ROOM?</p>
+</li>
+<li class="listitem">
+<p>Which consequences must be taken into account?</p>
+</li>
+</ul>
+</div>
+<div class="section" title="Where does it come from?">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="Wheredoesitcomefrom"></a>Where does it come from?</h3>
+</div>
+</div>
+</div>
+<p>Room was developed in the 1990th on the background of the upcoming mobile applications with the goal to manage the complexity of such huge SW-Systems. From the very beginning ROOM has focused on a certain type of SW-Systems and, is in contrast to the UML, well suited for this kind of  systems. In this sense, ROOM is a DSL (Domain Specific Language) for distributed, event driven, real time systems. </p>
+<p>Bran Selic, Garth Gullekson and Paul T. Ward have published the concepts 1994 in the book &bdquo;REAL-TIME OBJECT-ORIENTED MODELING&rdquo;. The company 
+					[<span class="citation">object time</span>] &trade; developed a ROOM tool which was taken over from 
+					[<span class="citation">Rational SW</span>] &trade; and later on from 
+					[<span class="citation">IBM</span>] &trade;. Unfortunately the tool is no longer maintained from 
+					[<span class="citation">IBM</span>] &trade;. The company 
+					[<span class="citation">Protos SW Gmbh</span>] &trade; also developed a ROOM tool called 
+					[<span class="citation">trice</span>] &trade; for controlling production machines. 
+					[<span class="citation">Trice</span>] &trade; is the predecessor of eTrice (see Introduction to eTrice). 
+				</p>
+<p>From our point of view ROOM provides still the clearest, simplest, completest and best suited modeling concepts for the real time domain. All later proposals like the UML does not fit such perfect to this kind of problems.</p>
+</div>
+<div class="section" title="Which kind of SW-Systems will be addressed?">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="WhichkindofSWSystemswillbeaddressed"></a>Which kind of SW-Systems will be addressed?</h3>
+</div>
+</div>
+</div>
+<p>As mentioned before ROOM addresses distributed, event driven, real time systems. But what is a &bdquo;real time system&rdquo;? ROOM defines a set of properties which are typically for a real time system. This properties are:</p>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="disc">
+<li class="listitem">
+<p>Timeliness</p>
+</li>
+<li class="listitem">
+<p>dynamic internal structure</p>
+</li>
+<li class="listitem">
+<p>Reactiveness</p>
+</li>
+<li class="listitem">
+<p>Concurrent</p>
+</li>
+<li class="listitem">
+<p>Distributed</p>
+</li>
+<li class="listitem">
+<p>Reliable</p>
+</li>
+</ul>
+</div>
+<p>Each of this properties has potential to make SW development complex. If a given system can be characterized which some or all of this properties, ROOM might be applied to such a system.  </p>
+<p>As an example take a look at a washing machine. The system has to react on user interactions, has to handle some error conditions like a closed water tap or a defective lye pump. It has to react simultaneously to all this inputs. It has to close the water valve in a certain time to avoid flooding the basement. 
+					So, the system can by characterized as timeliness, concurrent and reactive. As long as the washing machine does not transform to a laundry dryer by themself, the system has no dynamic internal structure and as long as all functions are running on a single microcontroller the (SW)-system is not distributed. 
+					ROOM fits perfect to such a system.</p>
+<p>A SW system which mainly consists of transformations like signal processing or image processing (pure algorithms) cannot be characterized with any of the above mentioned properties. However, in the real world most of the SW systems will be a combination of both. ROOM can be mixed up with non model code. </p>
+</div>
+<div class="section" title="What is the relation between OOP and ROOM?">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="WhatistherelationbetweenOOPandROOM"></a>What is the relation between OOP and ROOM?</h3>
+</div>
+</div>
+</div>
+<p>The relation between classic object oriented programming and ROOM is comparable to the relation between assembler programming and C programming. It provides a shift of the object paradigm. As the picture shows, the classic object paradigm provides some kind of information hiding. Attributes can be accessed via access methods. Logical higher level methods provides the requested behavior to the user.   </p>
+<p>
+					
+</p>
+<div class="mediaobject">
+<img src="images/010-RoomIntroduction01.png"></div>
+<p>
+				
+</p>
+<p>As the figure illustrates, the classic object paradigm does not care about concurrency issues. The threads of control will be provided from the underlying operating system.</p>
+<p>
+					
+</p>
+<div class="mediaobject">
+<img src="images/010-RoomIntroduction02.png"></div>
+<p>
+				
+</p>
+<p>ROOM provides the concept of a logical machine (called actor) with it&acute;s own thread of control. It provides some kind of cooperative communication infrastructure with &bdquo;run to completion&rdquo; semantic. That makes developing of business logic easy and save (see basic concepts).  </p>
+<p>
+					
+</p>
+<div class="mediaobject">
+<img src="images/010-RoomIntroduction03.png"></div>
+<p>
+				
+</p>
+<p>This thinking of an object is much more general than the classic one.  </p>
+</div>
+<div class="section" title="What are the benefits of ROOM?">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="WhatarethebenefitsofROOM"></a>What are the benefits of ROOM?</h3>
+</div>
+</div>
+</div>
+<p>The main benefits are:
+					- ROOM provides model execution, which makes it easy to find defects early enough, to reduce expensive debugging during the testing phase or even in the costumer environment.
+					- ROOM promotes component building which is essential to make SW reusable
+					- Graphical modeling makes it easy to understand, maintain and share code with other developers
+					- higher abstraction in combination with automated code generation provides very efficient mechanisms to the developer. </p>
+</div>
+<div class="section" title="Which consequences must be taken into account?">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="Whichconsequencesmustbetakenintoaccount"></a>Which consequences must be taken into account?</h3>
+</div>
+</div>
+</div>
+<p>Generating code from models will introduce some overhead in terms of footprint as well as performance. For most systems the overhead will be negligible. However, the decision using ROOM should be made explicitly and it is always a tread of between development costs, time to market and costs in terms of a little bit more of memory and performance. As mentioned, in most cases the decision will be very clear. Especially in case of product lines or products which requires maintenance or feature updates, the ROOM methodology has big advantages.  </p>
+<p>Care must be taken during introduction of the new methodology. Due to the fact that ROOM provides a shift of the object paradigm, developers often needs a phase of adaption. Even some of them will never adapt.</p>
+</div>
 </div>
 <div class="section" title="Basic Concepts">
 <div class="titlepage">
@@ -261,6 +410,8 @@
 </div>
 </div>
 </div>
+<p>port, protocol, actor, interface, asynchronous communication
+				hierarchical FSM, hierarchical structure</p>
 </div>
 <div class="section" title="Benefits">
 <div class="titlepage">
@@ -1123,176 +1274,8 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 <p></p>
 </blockquote>
 </div>
-<p>The complete resulting model looks like this:</p>
-<div class="literallayout">
-<p>
-<code class="code">RoomModel&nbsp;Blinky&nbsp;{<br>
-
-<br>
-	LogicalSystem&nbsp;System_Blinky&nbsp;{<br>
-		SubSystemRef&nbsp;subsystem:&nbsp;SubSystem_Blinky<br>
-	}<br>
-
-<br>
-	SubSystemClass&nbsp;SubSystem_Blinky&nbsp;{<br>
-		ActorRef&nbsp;application:&nbsp;BlinkyTop<br>
-		ActorRef&nbsp;timingService:&nbsp;room.basic.service.timing.ATimingService<br>
-		LayerConnection&nbsp;ref&nbsp;application&nbsp;satisfied_by&nbsp;timingService.timer<br>
-		LayerConnection&nbsp;ref&nbsp;application&nbsp;satisfied_by&nbsp;timingService.timeout<br>
-	}<br>
-
-<br>
-	ActorClass&nbsp;BlinkyTop&nbsp;{<br>
-		Structure&nbsp;{<br>
-			ActorRef&nbsp;blinky:&nbsp;Blinky<br>
-			ActorRef&nbsp;controller:&nbsp;BlinkyController<br>
-			Binding&nbsp;blinky.ControlPort&nbsp;and&nbsp;controller.ControlPort<br>
-		}<br>
-		Behavior&nbsp;{&nbsp;}<br>
-	}<br>
-
-<br>
-	ActorClass&nbsp;Blinky&nbsp;{<br>
-		Interface&nbsp;{<br>
-			Port&nbsp;ControlPort:&nbsp;BlinkyControlProtocoll<br>
-		}<br>
-		Structure&nbsp;{<br>
-			usercode1{<br>
-				"import&nbsp;de.protos.PedLightGUI.*;"<br>
-			}<br>
-			usercode2&nbsp;{<br>
-				"private&nbsp;PedestrianLightWndNoTcp&nbsp;light&nbsp;=&nbsp;new&nbsp;PedestrianLightWndNoTcp();"<br>
-				"private&nbsp;TrafficLight3&nbsp;carLights;"<br>
-				"private&nbsp;TrafficLight2&nbsp;pedLights;"<br>
-				
-<br>
-			}<br>
-			external&nbsp;Port&nbsp;ControlPort<br>
-			SAP&nbsp;timer:&nbsp;room.basic.service.timing.PTimeout<br>
-		}<br>
-		Behavior&nbsp;{<br>
-			Operation&nbsp;destroyUser(){<br>
-				"light.closeWindow();"<br>
-			}<br>
-			StateMachine&nbsp;{<br>
-				Transition&nbsp;init:&nbsp;initial&nbsp;-&gt;&nbsp;off&nbsp;{<br>
-					action&nbsp;{<br>
-						"carLights&nbsp;=&nbsp;light.getCarLights();"<br>
-						"pedLights&nbsp;=&nbsp;light.getPedLights();"<br>
-						"carLights.setState(TrafficLight3.OFF);"<br>
-						"pedLights.setState(TrafficLight2.OFF);"<br>
-					}<br>
-				}<br>
-				Transition&nbsp;tr0:&nbsp;off&nbsp;-&gt;&nbsp;tp0&nbsp;of&nbsp;blinking&nbsp;{<br>
-					triggers&nbsp;{<br>
-						&lt;start:&nbsp;ControlPort&gt;<br>
-					}<br>
-				}<br>
-				Transition&nbsp;tr1:&nbsp;blinking&nbsp;-&gt;&nbsp;off&nbsp;{<br>
-					triggers&nbsp;{<br>
-						&lt;stop:&nbsp;ControlPort&gt;<br>
-					}<br>
-					action&nbsp;{<br>
-						"timer.Kill();"<br>
-						"carLights.setState(TrafficLight3.OFF);"<br>
-					}<br>
-				}<br>
-				State&nbsp;off<br>
-				State&nbsp;blinking&nbsp;{<br>
-					subgraph&nbsp;{<br>
-						Transition&nbsp;tr0:&nbsp;my&nbsp;tp0&nbsp;-&gt;&nbsp;on<br>
-						Transition&nbsp;tr1:&nbsp;on&nbsp;-&gt;&nbsp;off&nbsp;{<br>
-							triggers&nbsp;{<br>
-								&lt;timeoutTick:&nbsp;timer&gt;<br>
-							}<br>
-						}<br>
-						Transition&nbsp;tr2:&nbsp;off&nbsp;-&gt;&nbsp;on&nbsp;{<br>
-							triggers&nbsp;{<br>
-								&lt;timeoutTick:&nbsp;timer&gt;<br>
-							}<br>
-						}<br>
-						Transition&nbsp;init:&nbsp;initial&nbsp;-&gt;&nbsp;on&nbsp;{&nbsp;}<br>
-						EntryPoint&nbsp;tp0<br>
-						State&nbsp;on&nbsp;{<br>
-							entry&nbsp;{<br>
-								"timer.Start(1000);"<br>
-								"carLights.setState(TrafficLight3.YELLOW);"<br>
-							}<br>
-						}<br>
-						State&nbsp;off&nbsp;{<br>
-							entry&nbsp;{<br>
-								"timer.Start(1000);"<br>
-								"carLights.setState(TrafficLight3.OFF);"<br>
-							}<br>
-						}<br>
-					}<br>
-				}<br>
-			}<br>
-		}<br>
-	}<br>
-
-<br>
-	ActorClass&nbsp;BlinkyController&nbsp;{<br>
-		Interface&nbsp;{<br>
-			conjugated&nbsp;Port&nbsp;ControlPort:&nbsp;BlinkyControlProtocoll<br>
-		}<br>
-		Structure&nbsp;{<br>
-			external&nbsp;Port&nbsp;ControlPort<br>
-			SAP&nbsp;timer:&nbsp;room.basic.service.timing.PTimeout<br>
-		}<br>
-		Behavior&nbsp;{<br>
-			StateMachine&nbsp;{<br>
-				Transition&nbsp;init:&nbsp;initial&nbsp;-&gt;&nbsp;on&nbsp;{<br>
-					action&nbsp;{<br>
-						"timer.Start(5000);"<br>
-						"ControlPort.start();"<br>
-					}<br>
-				}<br>
-				Transition&nbsp;goOff:&nbsp;on&nbsp;-&gt;&nbsp;off&nbsp;{<br>
-					triggers&nbsp;{<br>
-						&lt;timeoutTick:&nbsp;timer&gt;<br>
-					}<br>
-					action&nbsp;{<br>
-						"ControlPort.stop();"<br>
-						"timer.Start(5000);"<br>
-					}<br>
-				}<br>
-				Transition&nbsp;goOn:&nbsp;off&nbsp;-&gt;&nbsp;on&nbsp;{<br>
-					triggers&nbsp;{<br>
-						&lt;timeoutTick:&nbsp;timer|timeoutTick:&nbsp;timer&gt;<br>
-					}<br>
-					action&nbsp;{<br>
-						"ControlPort.start();"<br>
-						"timer.Start(5000);"<br>
-					}<br>
-				}<br>
-				State&nbsp;on<br>
-				State&nbsp;off<br>
-			}<br>
-		}<br>
-	}<br>
-
-<br>
-	ProtocolClass&nbsp;BlinkyControlProtocoll&nbsp;{<br>
-		incoming&nbsp;{<br>
-			Message&nbsp;start()<br>
-			Message&nbsp;stop()<br>
-		}<br>
-		outgoing&nbsp;{&nbsp;}<br>
-	}<br>
-
-<br>
-}<br>
-
-</code>
-</p>
-</div>
-<div class="blockquote">
-<blockquote class="blockquote">
-<p></p>
-</blockquote>
-</div>
 <p>The model is complete now. You can run and debug the model as described in getting started. Have fun.</p>
+<p>The complete model can be found in /org.eclipse.etrice.tutorials/model/Blinky.</p>
 </div>
 <div class="section" title="Summary">
 <div class="titlepage">
@@ -1741,164 +1724,7 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 <p>
 			
 </p>
-<p>The model is finished now and the model file should look like this:</p>
-<div class="literallayout">
-<p>
-<code class="code">RoomModel&nbsp;SendingData&nbsp;{<br>
-
-<br>
-	LogicalSystem&nbsp;SendingData_LogSystem&nbsp;{<br>
-		SubSystemRef&nbsp;SendingDataAppl:&nbsp;SendingData_SubSystem<br>
-	}<br>
-
-<br>
-	SubSystemClass&nbsp;SendingData_SubSystem&nbsp;{<br>
-		ActorRef&nbsp;SendigDataTopRef:&nbsp;SendingDataTop<br>
-	}<br>
-
-<br>
-	ActorClass&nbsp;SendingDataTop&nbsp;{<br>
-		Structure&nbsp;{<br>
-			ActorRef&nbsp;ref0:&nbsp;MrPing<br>
-			ActorRef&nbsp;ref1:&nbsp;MrPong<br>
-			Binding&nbsp;ref0.PingPongPort&nbsp;and&nbsp;ref1.PingPongPort<br>
-		}<br>
-		Behavior&nbsp;{&nbsp;}<br>
-	}<br>
-
-<br>
-	ActorClass&nbsp;MrPing&nbsp;{<br>
-		Interface&nbsp;{<br>
-			conjugated&nbsp;Port&nbsp;PingPongPort:&nbsp;PingPongProtocol<br>
-		}<br>
-		Structure&nbsp;{<br>
-			external&nbsp;Port&nbsp;PingPongPort<br>
-		}<br>
-		Behavior&nbsp;{<br>
-						
-<br>
-			Operation&nbsp;printData(d:&nbsp;DemoData)&nbsp;:&nbsp;void&nbsp;{<br>
-						"System.out.printf(\"d.int32Val:&nbsp;%d\\n\",d.int32Val);"<br>
-						"System.out.printf(\"d.float64Val:&nbsp;%f\\n\",d.float64Val);"<br>
-						"System.out.printf(\"d.int8Array:&nbsp;\");"<br>
-						"for(int&nbsp;i&nbsp;=&nbsp;0;&nbsp;i&lt;d.int8Array.length;&nbsp;i++)&nbsp;{"<br>
-						"System.out.printf(\"%d&nbsp;\",d.int8Array[i]);}"<br>
-						"System.out.printf(\"\\nd.stringVal:&nbsp;%s\\n\",d.stringVal);"<br>
-					}<br>
-					
-<br>
-			StateMachine&nbsp;{<br>
-				Transition&nbsp;wait2:&nbsp;waitForPong&nbsp;-&gt;&nbsp;waitForPong&nbsp;{<br>
-					triggers&nbsp;{<br>
-						&lt;pong:&nbsp;PingPongPort&gt;<br>
-					}<br>
-					action&nbsp;{<br>
-						"printData(data);"<br>
-					}<br>
-				}<br>
-				Transition&nbsp;wait1:&nbsp;waitForPongSimple&nbsp;-&gt;&nbsp;waitForPongSimple&nbsp;{<br>
-					triggers&nbsp;{<br>
-						&lt;pongSimple:&nbsp;PingPongPort&nbsp;guard&nbsp;{<br>
-							"data&nbsp;&lt;&nbsp;10"<br>
-						}&gt;<br>
-					}<br>
-					action&nbsp;{<br>
-						"//&nbsp;keep&nbsp;in&nbsp;mind&nbsp;that&nbsp;MrPong&nbsp;increments"<br>
-						"PingPongPort.pingSimple(data);"<br>
-						"System.out.printf(\"data:&nbsp;%d\\n\",data);"<br>
-					}<br>
-				}<br>
-				Transition&nbsp;next:&nbsp;waitForPongSimple&nbsp;-&gt;&nbsp;waitForPong&nbsp;{<br>
-					triggers&nbsp;{<br>
-						&lt;pongSimple:&nbsp;PingPongPort&gt;<br>
-					}<br>
-					action&nbsp;{<br>
-						"System.out.printf(\"data:&nbsp;%d\\n\",data);"<br>
-						""<br>
-						"DemoData&nbsp;d&nbsp;=&nbsp;new&nbsp;DemoData();"<br>
-						"//&nbsp;send&nbsp;the&nbsp;default&nbsp;values"<br>
-						"PingPongPort.ping(d);"<br>
-						"d.int32Val=815;"<br>
-						"for&nbsp;(int&nbsp;i&nbsp;=&nbsp;0;&nbsp;i&lt;d.int8Array.length;i++){"<br>
-						"\td.int8Array[i]=(byte)(i+100);"<br>
-						"\t}"<br>
-						"d.stringVal=\"some&nbsp;contents\";"<br>
-						"d.float64Val=3.141234;"<br>
-						"PingPongPort.ping(d);"<br>
-					}<br>
-				}<br>
-				Transition&nbsp;init0:&nbsp;initial&nbsp;-&gt;&nbsp;waitForPongSimple&nbsp;{<br>
-					action&nbsp;{<br>
-						"PingPongPort.pingSimple(0);"<br>
-					}<br>
-				}<br>
-				State&nbsp;waitForPong<br>
-				State&nbsp;waitForPongSimple<br>
-			}<br>
-		}<br>
-	}<br>
-
-<br>
-	ActorClass&nbsp;MrPong&nbsp;{<br>
-		Interface&nbsp;{<br>
-			Port&nbsp;PingPongPort:&nbsp;PingPongProtocol<br>
-		}<br>
-		Structure&nbsp;{<br>
-			external&nbsp;Port&nbsp;PingPongPort<br>
-		}<br>
-		Behavior&nbsp;{<br>
-			StateMachine&nbsp;{<br>
-				Transition&nbsp;init:&nbsp;initial&nbsp;-&gt;&nbsp;looping&nbsp;{&nbsp;}<br>
-				Transition&nbsp;tr0:&nbsp;looping&nbsp;-&gt;&nbsp;looping&nbsp;{<br>
-					triggers&nbsp;{<br>
-						&lt;ping:&nbsp;PingPongPort&gt;<br>
-					}<br>
-					action&nbsp;{<br>
-						"PingPongPort.pong(data);"<br>
-					}<br>
-				}<br>
-				Transition&nbsp;tr1:&nbsp;looping&nbsp;-&gt;&nbsp;looping&nbsp;{<br>
-					triggers&nbsp;{<br>
-						&lt;pingSimple:&nbsp;PingPongPort&gt;<br>
-					}<br>
-					action&nbsp;{<br>
-						"PingPongPort.pongSimple(data+1);"<br>
-					}<br>
-				}<br>
-				State&nbsp;looping<br>
-			}<br>
-		}<br>
-	}<br>
-
-<br>
-	ProtocolClass&nbsp;PingPongProtocol&nbsp;{<br>
-		incoming&nbsp;{<br>
-			Message&nbsp;ping(data:&nbsp;DemoData)<br>
-			Message&nbsp;pingSimple(data:&nbsp;int32)<br>
-		}<br>
-		outgoing&nbsp;{<br>
-			Message&nbsp;pong(data:&nbsp;DemoData)<br>
-			Message&nbsp;pongSimple(data:&nbsp;int32)<br>
-		}<br>
-	}<br>
-
-<br>
-	DataClass&nbsp;DemoData&nbsp;{<br>
-		Attribute&nbsp;int32Val:&nbsp;int32&nbsp;=&nbsp;"4711"<br>
-		Attribute&nbsp;int8Array&nbsp;[&nbsp;10&nbsp;]:&nbsp;int8&nbsp;=&nbsp;"{1,2,3,4,5,6,7,8,9,10}"<br>
-		Attribute&nbsp;float64Val:&nbsp;float64&nbsp;=&nbsp;"0.0"<br>
-		Attribute&nbsp;stringVal:&nbsp;string&nbsp;=&nbsp;"\"empty\""<br>
-	}<br>
-}<br>
-
-</code>
-</p>
-</div>
-<div class="blockquote">
-<blockquote class="blockquote">
-<p></p>
-</blockquote>
-</div>
+<p>The model is finished now and can be found in /org.eclipse.etrice.tutorials/model/SendingData.</p>
 </div>
 <div class="section" title="Generate and run the model">
 <div class="titlepage">
@@ -2073,196 +1899,10 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 <p>In PedestrianLightWndNoTcp.jav uncomment line 15 (import), 36, 122 (usage) and 132-134 (registration).</p>
 </li>
 <li class="listitem">
-<p>Copy the following model to your model file:</p>
+<p>Copy the model from /org.eclipse.etrice.tutorials/model/PedLightsController to your model file, or run the model directly in the tutorial directory:</p>
 </li>
-</ul>
-</div>
-<div class="literallayout">
-<p>
-<code class="code">RoomModel&nbsp;PedLightsController&nbsp;{<br>
-
-<br>
-	LogicalSystem&nbsp;LogSys_PedLights&nbsp;{<br>
-		SubSystemRef&nbsp;application:&nbsp;SubSys_PedLights<br>
-	}<br>
-
-<br>
-	SubSystemClass&nbsp;SubSys_PedLights&nbsp;{<br>
-		ActorRef&nbsp;PedLightsTopRef:&nbsp;PedLightsTop<br>
-		ActorRef&nbsp;timingService:&nbsp;room.basic.service.timing.ATimingService<br>
-		LayerConnection&nbsp;ref&nbsp;PedLightsTopRef&nbsp;satisfied_by&nbsp;timingService.timer<br>
-		LayerConnection&nbsp;ref&nbsp;PedLightsTopRef&nbsp;satisfied_by&nbsp;timingService.timeout<br>
-	}<br>
-
-<br>
-	ActorClass&nbsp;PedLightsTop&nbsp;{<br>
-		Structure&nbsp;{<br>
-			ActorRef&nbsp;adapter:&nbsp;GuiAdapter<br>
-			ActorRef&nbsp;controller:&nbsp;Controller<br>
-			Binding&nbsp;adapter.ControlPort&nbsp;and&nbsp;controller.ControlPort<br>
-		}<br>
-		Behavior&nbsp;{&nbsp;}<br>
-	}<br>
-
-<br>
-	ActorClass&nbsp;GuiAdapter&nbsp;{<br>
-		Interface&nbsp;{<br>
-			conjugated&nbsp;Port&nbsp;ControlPort:&nbsp;PedControlProtocol<br>
-		}<br>
-		Structure&nbsp;{<br>
-			usercode1&nbsp;{<br>
-				"import&nbsp;PedLightGUI.*;"<br>
-			}<br>
-			usercode2&nbsp;{<br>
-				"private&nbsp;PedestrianLightWndNoTcp&nbsp;lights&nbsp;=&nbsp;new&nbsp;PedestrianLightWndNoTcp(\"Pedestrian&nbsp;Lights\",\"&nbsp;&nbsp;external&nbsp;port&nbsp;connection&nbsp;\");"<br>
-				"private&nbsp;TrafficLight3&nbsp;carLights;"<br>
-				"private&nbsp;TrafficLight2&nbsp;pedLights;"<br>
-			}<br>
-			external&nbsp;Port&nbsp;ControlPort<br>
-		}<br>
-		Behavior&nbsp;{<br>
-			Operation&nbsp;destroyUser()&nbsp;{<br>
-				"lights.closeWindow();"<br>
-			}<br>
-			StateMachine&nbsp;{<br>
-				Transition&nbsp;init:&nbsp;initial&nbsp;-&gt;&nbsp;running&nbsp;{<br>
-					action&nbsp;{<br>
-						"carLights=lights.getCarLights();"<br>
-						"pedLights=lights.getPedLights();"<br>
-						"carLights.setState(TrafficLight3.OFF);"<br>
-						"pedLights.setState(TrafficLight2.OFF);"<br>
-						"lights.setPort(ControlPort);"<br>
-					}<br>
-				}<br>
-				Transition&nbsp;tr0:&nbsp;running&nbsp;-&gt;&nbsp;running&nbsp;{<br>
-					triggers&nbsp;{<br>
-						&lt;setCarLights:&nbsp;ControlPort&gt;<br>
-					}<br>
-					action&nbsp;{<br>
-						"carLights.setState(state);"<br>
-					}<br>
-				}<br>
-				Transition&nbsp;tr1:&nbsp;running&nbsp;-&gt;&nbsp;running&nbsp;{<br>
-					triggers&nbsp;{<br>
-						&lt;setPedLights:&nbsp;ControlPort&gt;<br>
-					}<br>
-					action&nbsp;{<br>
-						"pedLights.setState(state);"<br>
-					}<br>
-				}<br>
-				State&nbsp;running<br>
-			}<br>
-		}<br>
-	}<br>
-
-<br>
-	ActorClass&nbsp;Controller&nbsp;{<br>
-		Interface&nbsp;{<br>
-			Port&nbsp;ControlPort:&nbsp;PedControlProtocol<br>
-		}<br>
-		Structure&nbsp;{<br>
-			usercode1&nbsp;{<br>
-				"import&nbsp;PedLightGUI.*;"<br>
-			}<br>
-			external&nbsp;Port&nbsp;ControlPort<br>
-			SAP&nbsp;timer:&nbsp;room.basic.service.timing.PTimeout<br>
-		}<br>
-		Behavior&nbsp;{<br>
-			StateMachine&nbsp;{<br>
-				Transition&nbsp;init:&nbsp;initial&nbsp;-&gt;&nbsp;off&nbsp;{&nbsp;}<br>
-				Transition&nbsp;tr0:&nbsp;off&nbsp;-&gt;&nbsp;carsGreen&nbsp;{<br>
-					triggers&nbsp;{<br>
-						&lt;start:&nbsp;ControlPort&gt;<br>
-					}<br>
-					action&nbsp;{<br>
-						"timer.Start(700);"<br>
-						"ControlPort.setCarLights(TrafficLight3.GREEN);"<br>
-						"ControlPort.setPedLights(TrafficLight2.RED);"<br>
-					}<br>
-				}<br>
-				Transition&nbsp;tr1:&nbsp;carsGreen&nbsp;-&gt;&nbsp;carsYellow&nbsp;{<br>
-					triggers&nbsp;{<br>
-						&lt;timeoutTick:&nbsp;timer&gt;<br>
-					}<br>
-					action&nbsp;{<br>
-						"timer.Start(700);"<br>
-						"ControlPort.setCarLights(TrafficLight3.YELLOW);"<br>
-						"ControlPort.setPedLights(TrafficLight2.RED);"<br>
-					}<br>
-				}<br>
-				Transition&nbsp;tr2:&nbsp;carsYellow&nbsp;-&gt;&nbsp;carsRed&nbsp;{<br>
-					triggers&nbsp;{<br>
-						&lt;timeoutTick:&nbsp;timer&gt;<br>
-					}<br>
-					action&nbsp;{<br>
-						"timer.Start(1500);"<br>
-						"ControlPort.setCarLights(TrafficLight3.RED);"<br>
-						"ControlPort.setPedLights(TrafficLight2.GREEN);"<br>
-					}<br>
-				}<br>
-				Transition&nbsp;tr3:&nbsp;carsRed&nbsp;-&gt;&nbsp;carsYellowRed&nbsp;{<br>
-					triggers&nbsp;{<br>
-						&lt;timeoutTick:&nbsp;timer&gt;<br>
-					}<br>
-					action&nbsp;{<br>
-						"timer.Start(700);"<br>
-						"ControlPort.setCarLights(TrafficLight3.YELLOW_RED);"<br>
-						"ControlPort.setPedLights(TrafficLight2.RED);"<br>
-					}<br>
-				}<br>
-				Transition&nbsp;tr4:&nbsp;carsYellowRed&nbsp;-&gt;&nbsp;carsGreen2&nbsp;{<br>
-					triggers&nbsp;{<br>
-						&lt;timeoutTick:&nbsp;timer&gt;<br>
-					}<br>
-					action&nbsp;{<br>
-						"timer.Start(700);"<br>
-						"ControlPort.setCarLights(TrafficLight3.GREEN);"<br>
-						"ControlPort.setPedLights(TrafficLight2.RED);"<br>
-					}<br>
-				}<br>
-				Transition&nbsp;tr5:&nbsp;carsGreen2&nbsp;-&gt;&nbsp;off&nbsp;{<br>
-					triggers&nbsp;{<br>
-						&lt;timeoutTick:&nbsp;timer&gt;<br>
-					}<br>
-					action&nbsp;{<br>
-						"ControlPort.setCarLights(TrafficLight3.OFF);"<br>
-						"ControlPort.setPedLights(TrafficLight2.OFF);"<br>
-					}<br>
-				}<br>
-				State&nbsp;off<br>
-				State&nbsp;carsGreen<br>
-				State&nbsp;carsYellow<br>
-				State&nbsp;carsRed<br>
-				State&nbsp;carsYellowRed<br>
-				State&nbsp;carsGreen2<br>
-			}<br>
-		}<br>
-	}<br>
-
-<br>
-	ProtocolClass&nbsp;PedControlProtocol&nbsp;{<br>
-		incoming&nbsp;{<br>
-			Message&nbsp;start()<br>
-		}<br>
-		outgoing&nbsp;{<br>
-			Message&nbsp;setCarLights(state:&nbsp;int32)<br>
-			Message&nbsp;setPedLights(state:&nbsp;int32)<br>
-		}<br>
-	}<br>
-}<br>
-
-</code>
-</p>
-</div>
-<div class="blockquote">
-<blockquote class="blockquote">
-<p></p>
-</blockquote>
-</div>
-<div class="itemizedlist">
-<ul class="itemizedlist" type="disc">
 <li class="listitem">
-<p>Arrange the Structure and the Statemachines to understand the model </p>
+<p>Arrange the Structure and the Statemachines to understand the model</p>
 </li>
 </ul>
 </div>

@@ -10,6 +10,8 @@ In this tutorial you will build your first very simple eTrice model. The goal is
 # run the model
 # open the message sequence chart
 
+"video":avis\015-HelloWorld01.avi
+
 h2. Create a new model from scratch
 
 The easiest way to create a new eTrice Project is to use the eclipse project wizard. From the eclipse file menu select ??File->New->Project?? and create a new eTrice project and name it ??HelloWorld??

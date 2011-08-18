@@ -1003,6 +1003,16 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EAttribute getType_Ext()
+  {
+    return (EAttribute)typeEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getFreeType()
   {
     return freeTypeEClass;
@@ -2896,6 +2906,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
 
     typeEClass = createEClass(TYPE);
     createEReference(typeEClass, TYPE__TYPE);
+    createEAttribute(typeEClass, TYPE__EXT);
 
     freeTypeEClass = createEClass(FREE_TYPE);
     createEAttribute(freeTypeEClass, FREE_TYPE__TYPE);
@@ -3258,6 +3269,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
 
     initEClass(typeEClass, Type.class, "Type", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getType_Type(), this.getDataClass(), null, "type", null, 0, 1, Type.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getType_Ext(), ecorePackage.getEString(), "ext", null, 0, 1, Type.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(freeTypeEClass, FreeType.class, "FreeType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getFreeType_Type(), ecorePackage.getEString(), "type", null, 0, 1, FreeType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

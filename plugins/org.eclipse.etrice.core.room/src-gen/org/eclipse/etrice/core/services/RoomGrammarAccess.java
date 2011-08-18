@@ -271,12 +271,18 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cTypeDataClassFQNParserRuleCall_1_0_0_1 = (RuleCall)cTypeDataClassCrossReference_1_0_0.eContents().get(1);
 		private final Assignment cRefAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
 		private final Keyword cRefRefKeyword_1_1_0 = (Keyword)cRefAssignment_1_1.eContents().get(0);
+		private final Group cGroup_2 = (Group)cAlternatives.eContents().get(2);
+		private final Assignment cExtAssignment_2_0 = (Assignment)cGroup_2.eContents().get(0);
+		private final RuleCall cExtFQNParserRuleCall_2_0_0 = (RuleCall)cExtAssignment_2_0.eContents().get(0);
+		private final Keyword cExtKeyword_2_1 = (Keyword)cGroup_2.eContents().get(1);
+		private final Assignment cRefAssignment_2_2 = (Assignment)cGroup_2.eContents().get(2);
+		private final Keyword cRefRefKeyword_2_2_0 = (Keyword)cRefAssignment_2_2.eContents().get(0);
 		
 		//Type:
-		//	prim=PrimitiveType | type=[DataClass|FQN] ref?="ref"?;
+		//	prim=PrimitiveType | type=[DataClass|FQN] ref?="ref"? | ext=FQN "ext" ref?="ref"?;
 		public ParserRule getRule() { return rule; }
 
-		//prim=PrimitiveType | type=[DataClass|FQN] ref?="ref"?
+		//prim=PrimitiveType | type=[DataClass|FQN] ref?="ref"? | ext=FQN "ext" ref?="ref"?
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//prim=PrimitiveType
@@ -302,6 +308,24 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 
 		//"ref"
 		public Keyword getRefRefKeyword_1_1_0() { return cRefRefKeyword_1_1_0; }
+
+		//ext=FQN "ext" ref?="ref"?
+		public Group getGroup_2() { return cGroup_2; }
+
+		//ext=FQN
+		public Assignment getExtAssignment_2_0() { return cExtAssignment_2_0; }
+
+		//FQN
+		public RuleCall getExtFQNParserRuleCall_2_0_0() { return cExtFQNParserRuleCall_2_0_0; }
+
+		//"ext"
+		public Keyword getExtKeyword_2_1() { return cExtKeyword_2_1; }
+
+		//ref?="ref"?
+		public Assignment getRefAssignment_2_2() { return cRefAssignment_2_2; }
+
+		//"ref"
+		public Keyword getRefRefKeyword_2_2_0() { return cRefRefKeyword_2_2_0; }
 	}
 
 	public class FreeTypeElements extends AbstractParserRuleElementFinder {
@@ -4194,7 +4218,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Type:
-	//	prim=PrimitiveType | type=[DataClass|FQN] ref?="ref"?;
+	//	prim=PrimitiveType | type=[DataClass|FQN] ref?="ref"? | ext=FQN "ext" ref?="ref"?;
 	public TypeElements getTypeAccess() {
 		return (pType != null) ? pType : (pType = new TypeElements());
 	}

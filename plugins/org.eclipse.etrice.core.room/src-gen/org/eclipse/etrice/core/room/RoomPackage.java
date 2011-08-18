@@ -484,13 +484,22 @@ public interface RoomPackage extends EPackage
   int TYPE__TYPE = BASIC_TYPE_FEATURE_COUNT + 0;
 
   /**
+   * The feature id for the '<em><b>Ext</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TYPE__EXT = BASIC_TYPE_FEATURE_COUNT + 1;
+
+  /**
    * The number of structural features of the '<em>Type</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int TYPE_FEATURE_COUNT = BASIC_TYPE_FEATURE_COUNT + 1;
+  int TYPE_FEATURE_COUNT = BASIC_TYPE_FEATURE_COUNT + 2;
 
   /**
    * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.FreeTypeImpl <em>Free Type</em>}' class.
@@ -3918,6 +3927,17 @@ public interface RoomPackage extends EPackage
   EReference getType_Type();
 
   /**
+   * Returns the meta object for the attribute '{@link org.eclipse.etrice.core.room.Type#getExt <em>Ext</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Ext</em>'.
+   * @see org.eclipse.etrice.core.room.Type#getExt()
+   * @see #getType()
+   * @generated
+   */
+  EAttribute getType_Ext();
+
+  /**
    * Returns the meta object for class '{@link org.eclipse.etrice.core.room.FreeType <em>Free Type</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -6149,6 +6169,14 @@ public interface RoomPackage extends EPackage
      * @generated
      */
     EReference TYPE__TYPE = eINSTANCE.getType_Type();
+
+    /**
+     * The meta object literal for the '<em><b>Ext</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute TYPE__EXT = eINSTANCE.getType_Ext();
 
     /**
      * The meta object literal for the '{@link org.eclipse.etrice.core.room.impl.FreeTypeImpl <em>Free Type</em>}' class.

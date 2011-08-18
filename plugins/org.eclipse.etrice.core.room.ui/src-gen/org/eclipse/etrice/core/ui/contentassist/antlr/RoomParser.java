@@ -65,6 +65,7 @@ public class RoomParser extends AbstractContentAssistParser {
 					put(grammarAccess.getTypedIDAccess().getGroup(), "rule__TypedID__Group__0");
 					put(grammarAccess.getFreeTypedIDAccess().getGroup(), "rule__FreeTypedID__Group__0");
 					put(grammarAccess.getTypeAccess().getGroup_1(), "rule__Type__Group_1__0");
+					put(grammarAccess.getTypeAccess().getGroup_2(), "rule__Type__Group_2__0");
 					put(grammarAccess.getFreeTypeAccess().getGroup_1(), "rule__FreeType__Group_1__0");
 					put(grammarAccess.getDataClassAccess().getGroup(), "rule__DataClass__Group__0");
 					put(grammarAccess.getDataClassAccess().getGroup_3(), "rule__DataClass__Group_3__0");
@@ -178,6 +179,8 @@ public class RoomParser extends AbstractContentAssistParser {
 					put(grammarAccess.getTypeAccess().getPrimAssignment_0(), "rule__Type__PrimAssignment_0");
 					put(grammarAccess.getTypeAccess().getTypeAssignment_1_0(), "rule__Type__TypeAssignment_1_0");
 					put(grammarAccess.getTypeAccess().getRefAssignment_1_1(), "rule__Type__RefAssignment_1_1");
+					put(grammarAccess.getTypeAccess().getExtAssignment_2_0(), "rule__Type__ExtAssignment_2_0");
+					put(grammarAccess.getTypeAccess().getRefAssignment_2_2(), "rule__Type__RefAssignment_2_2");
 					put(grammarAccess.getFreeTypeAccess().getPrimAssignment_0(), "rule__FreeType__PrimAssignment_0");
 					put(grammarAccess.getFreeTypeAccess().getTypeAssignment_1_0(), "rule__FreeType__TypeAssignment_1_0");
 					put(grammarAccess.getFreeTypeAccess().getRefAssignment_1_1(), "rule__FreeType__RefAssignment_1_1");

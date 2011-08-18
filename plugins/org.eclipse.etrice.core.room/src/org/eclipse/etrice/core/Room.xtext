@@ -62,11 +62,11 @@ enum PrimitiveType:
 TypedID:
 	name=ID ':' type=Type;
 FreeTypedID:
-	name=ID ':' type=FreeType;
-	
+	name=ID ':' type=FreeType;	
+		
 BasicType: Type | FreeType;
 
-Type: prim=PrimitiveType | (type=[DataClass|FQN] (ref?='ref')?);
+Type	: prim=PrimitiveType | (type=[DataClass|FQN] (ref?='ref')?) | (ext=FQN 'ext' (ref?='ref')?);
 FreeType: prim=PrimitiveType | (type=ID (ref?='ref')?);
 
 // TODOHRR: define detail level language?
@@ -76,7 +76,8 @@ DataClass:
 		attributes+=Attribute+
 		operations+=Operation*
 	'}';
-
+	
+	
 Attribute:
 	'Attribute' name=ID ('[' size=INT ']')? ':' type=Type ('=' defaultValueLiteral=STRING)? (docu=Documentation)?;
 
