@@ -78,7 +78,7 @@ The actor provides access protection for it´s own attributes (including complex 
 
 Receiving a message via a port will trigger the internal state machine. A transition will be executed depending on the message and the actual state. Within this transition, detailed code will be executed and response messages can be sent.
 
-"receiving a message":avis\010-room-introduction01.avi
+"receiving a message":images\010-room-introduction01.avi
 
 With this model, a complex behavior will be divided into many relatively simple, linked actors. To say it the other way round: The complex behavior will be provided by a network of relatively simple components which are communicating with each other via well defined interfaces.
 
