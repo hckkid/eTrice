@@ -15,7 +15,7 @@
 </topic>
 <topic href="help/BasicConcepts.html" label="Basic Concepts">
 <topic href="help/BasicConcepts.html#ActorPortProtocol" label="Actor, Port, Protocol"></topic>
-<topic href="help/BasicConcepts.html#HierarchyinStructureandFSM" label="Hierarchy in Structure and FSM"></topic>
+<topic href="help/BasicConcepts.html#HierarchyinStructureandFiniteStateMachines" label="Hierarchy in Structure and Finite State Machines"></topic>
 <topic href="help/BasicConcepts.html#RuntoCompletion" label="Run to Completion"></topic>
 <topic href="help/BasicConcepts.html#Layering" label="Layering"></topic>
 </topic>
@@ -23,8 +23,8 @@
 <topic href="help/ExecutionModels.html" label="Execution Models">
 <topic href="help/ExecutionModels.html#LogicalMachine" label="Logical Machine"></topic>
 <topic href="help/ExecutionModels.html#QueueBasedExecutionModel" label="Queue Based Execution Model"></topic>
-<topic href="help/ExecutionModels.html#PolledExecutionModel" label="Polled Execution Model not implemented yet"></topic>
-<topic href="help/ExecutionModels.html#HybridExecutionModel" label="Hybrid Execution Model not implemented yet"></topic>
+<topic href="help/ExecutionModels.html#PolledExecutionModel" label="Polled Execution Model"></topic>
+<topic href="help/ExecutionModels.html#HybridExecutionModel" label="Hybrid Execution Model"></topic>
 </topic>
 </topic>
 <topic href="help/TutorialHelloWorld.html" label="Tutorial HelloWorld">
