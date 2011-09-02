@@ -45,7 +45,7 @@ public class TestHierarchy extends TestInstanceModelBuilderBase {
 		assertEquals("Number of ComponentInstances", 1, instances.get(ETriceGenPackage.eINSTANCE.getSubSystemInstance()).size());
 		assertEquals("Number of ActorInstances", 18, instances.get(ETriceGenPackage.eINSTANCE.getActorInstance()).size());
 		
-		ActorInstance ai = root.getSubSystems().get(0).getInstances().get(0);
+		ActorInstance ai = root.getSubSystemInstances().get(0).getInstances().get(0);
 		assertEquals("Instance Path", "/CMain/l1a", ai.getPath());
 		
 		ai = ai.getInstances().get(1);

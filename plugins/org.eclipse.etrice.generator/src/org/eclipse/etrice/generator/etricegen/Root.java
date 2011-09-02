@@ -12,6 +12,7 @@ import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RoomClass;
 import org.eclipse.etrice.core.room.RoomModel;
 
+import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EObject;
@@ -24,14 +25,15 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.etrice.generator.etricegen.Root#getSubSystems <em>Sub Systems</em>}</li>
+ *   <li>{@link org.eclipse.etrice.generator.etricegen.Root#isLibrary <em>Library</em>}</li>
+ *   <li>{@link org.eclipse.etrice.generator.etricegen.Root#getSubSystemInstances <em>Sub System Instances</em>}</li>
  *   <li>{@link org.eclipse.etrice.generator.etricegen.Root#getModels <em>Models</em>}</li>
  *   <li>{@link org.eclipse.etrice.generator.etricegen.Root#getXpActorClasses <em>Xp Actor Classes</em>}</li>
  *   <li>{@link org.eclipse.etrice.generator.etricegen.Root#getUsedDataClasses <em>Used Data Classes</em>}</li>
  *   <li>{@link org.eclipse.etrice.generator.etricegen.Root#getUsedProtocolClasses <em>Used Protocol Classes</em>}</li>
  *   <li>{@link org.eclipse.etrice.generator.etricegen.Root#getUsedActorClasses <em>Used Actor Classes</em>}</li>
  *   <li>{@link org.eclipse.etrice.generator.etricegen.Root#getUsedRoomModels <em>Used Room Models</em>}</li>
- *   <li>{@link org.eclipse.etrice.generator.etricegen.Root#isLibrary <em>Library</em>}</li>
+ *   <li>{@link org.eclipse.etrice.generator.etricegen.Root#getMainPathSubSystemClasses <em>Main Path Sub System Classes</em>}</li>
  * </ul>
  * </p>
  *
@@ -41,7 +43,7 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface Root extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Sub Systems</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Sub System Instances</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.etrice.generator.etricegen.SubSystemInstance}.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -49,12 +51,12 @@ public interface Root extends EObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Sub Systems</em>' containment reference list.
-	 * @see org.eclipse.etrice.generator.etricegen.ETriceGenPackage#getRoot_SubSystems()
+	 * @return the value of the '<em>Sub System Instances</em>' containment reference list.
+	 * @see org.eclipse.etrice.generator.etricegen.ETriceGenPackage#getRoot_SubSystemInstances()
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<SubSystemInstance> getSubSystems();
+	EList<SubSystemInstance> getSubSystemInstances();
 
 	/**
 	 * Returns the value of the '<em><b>Models</b></em>' reference list.
@@ -153,6 +155,22 @@ public interface Root extends EObject {
 	EList<RoomModel> getUsedRoomModels();
 
 	/**
+	 * Returns the value of the '<em><b>Main Path Sub System Classes</b></em>' reference list.
+	 * The list contents are of type {@link org.eclipse.etrice.core.room.SubSystemClass}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Main Path Sub System Classes</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Main Path Sub System Classes</em>' reference list.
+	 * @see org.eclipse.etrice.generator.etricegen.ETriceGenPackage#getRoot_MainPathSubSystemClasses()
+	 * @model transient="true" volatile="true" derived="true"
+	 * @generated
+	 */
+	EList<SubSystemClass> getMainPathSubSystemClasses();
+
+	/**
 	 * Returns the value of the '<em><b>Library</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -162,7 +180,7 @@ public interface Root extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Library</em>' attribute.
 	 * @see org.eclipse.etrice.generator.etricegen.ETriceGenPackage#getRoot_Library()
-	 * @model changeable="false" derived="true"
+	 * @model transient="true" changeable="false" volatile="true" derived="true"
 	 * @generated
 	 */
 	boolean isLibrary();

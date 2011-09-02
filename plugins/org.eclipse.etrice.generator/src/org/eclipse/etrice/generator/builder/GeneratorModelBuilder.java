@@ -126,10 +126,8 @@ public class GeneratorModelBuilder {
 			
 			determineRelayPorts(root);
 			
-			for (RoomModel model : models) {
-				for (SubSystemClass comp : model.getSubSystemClasses()) {
-					root.getSubSystems().add(createSubSystemInstance(comp));
-				}
+			for (SubSystemClass comp : root.getMainPathSubSystemClasses()) {
+				root.getSubSystemInstances().add(createSubSystemInstance(comp));
 			}
 			
 			connectPorts(root);
@@ -161,7 +159,7 @@ public class GeneratorModelBuilder {
 	 * @param root
 	 */
 	private void createServiceMappings(Root root) {
-		for (SubSystemInstance comp : root.getSubSystems()) {
+		for (SubSystemInstance comp : root.getSubSystemInstances()) {
 			createServiceMappings(comp);
 		}
 	}
@@ -263,7 +261,7 @@ public class GeneratorModelBuilder {
 	 * @param root
 	 */
 	private void bindSAPs(Root root) {
-		for (SubSystemInstance comp : root.getSubSystems()) {
+		for (SubSystemInstance comp : root.getSubSystemInstances()) {
 			bindSAPs(comp);
 			setServiceObjectIDs(comp, comp.getObjCounter());
 		}

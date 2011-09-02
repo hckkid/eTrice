@@ -21,7 +21,7 @@
 
 «DEFINE docGraphviz FOR Root»
 
-«FOREACH this.subSystems AS comp»
+«FOREACH this.subSystemInstances AS comp»
 
 «LET comp.subSystemClass AS ssc»
 

@@ -20,7 +20,7 @@
 
 «DEFINE subSystemRunner FOR Root»
 
-«FOREACH this.subSystems AS ssc»
+«FOREACH this.subSystemInstances AS ssc»
 
 «LET ssc.subSystemClass AS cc»
 

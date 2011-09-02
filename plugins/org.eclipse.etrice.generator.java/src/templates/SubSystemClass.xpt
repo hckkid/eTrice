@@ -20,7 +20,7 @@
 
 «DEFINE subSystemClass FOR Root»
 
-«FOREACH this.subSystems AS comp»
+«FOREACH this.subSystemInstances AS comp»
 
 «LET comp.subSystemClass AS cc»
 

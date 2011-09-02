@@ -10,7 +10,9 @@
     <eOperations name="getReferencedProtocols" upperBound="-1" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//ProtocolClass">
       <eParameters name="cls" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//ActorClass"/>
     </eOperations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="subSystems" upperBound="-1"
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="library" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        changeable="false" volatile="true" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subSystemInstances" upperBound="-1"
         eType="#//SubSystemInstance" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="models" upperBound="-1"
         eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//RoomModel"/>
@@ -28,8 +30,9 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="usedRoomModels" upperBound="-1"
         eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//RoomModel"
         volatile="true" transient="true" derived="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="library" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
-        changeable="false" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="mainPathSubSystemClasses"
+        upperBound="-1" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//SubSystemClass"
+        volatile="true" transient="true" derived="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Counter">
     <eOperations name="getAndIncrementCount" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">

@@ -45,13 +45,13 @@ public class TestPorts extends TestInstanceModelBuilderBase {
 	
 	@Test
 	public void testPortInstancePaths() {
-		PortInstance pi = root.getSubSystems().get(0).getInstances().get(0).getPorts().get(0);
+		PortInstance pi = root.getSubSystemInstances().get(0).getInstances().get(0).getPorts().get(0);
 		assertEquals("Port Name", "/CMain/test/externalEnd", pi.getPath());
 		
-		pi = root.getSubSystems().get(0).getInstances().get(0).getPorts().get(1);
+		pi = root.getSubSystemInstances().get(0).getInstances().get(0).getPorts().get(1);
 		assertEquals("Port Name", "/CMain/test/internalEnd", pi.getPath());
 		
-		pi = root.getSubSystems().get(0).getInstances().get(0).getPorts().get(2);
+		pi = root.getSubSystemInstances().get(0).getInstances().get(0).getPorts().get(2);
 		assertEquals("Port Name", "/CMain/test/relay", pi.getPath());
 	}
 
