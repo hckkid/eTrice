@@ -112,7 +112,7 @@ public class TestInstanceModelBuilderBase {
 	protected Root buildInstanceModel(String modelName) {
 		GeneratorModelBuilder builder = new GeneratorModelBuilder(new Logger(), new Diagnostician());
 		LinkedList<RoomModel> models = getModels(modelName);
-		Root root = builder.createInstanceModel(models);
+		Root root = builder.createGeneratorModel(models);
 		return root;
 	}
 

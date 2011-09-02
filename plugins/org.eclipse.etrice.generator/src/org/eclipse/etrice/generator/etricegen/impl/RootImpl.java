@@ -17,6 +17,7 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -59,12 +60,14 @@ import org.eclipse.etrice.generator.etricegen.SubSystemInstance;
  *   <li>{@link org.eclipse.etrice.generator.etricegen.impl.RootImpl#getUsedProtocolClasses <em>Used Protocol Classes</em>}</li>
  *   <li>{@link org.eclipse.etrice.generator.etricegen.impl.RootImpl#getUsedActorClasses <em>Used Actor Classes</em>}</li>
  *   <li>{@link org.eclipse.etrice.generator.etricegen.impl.RootImpl#getUsedRoomModels <em>Used Room Models</em>}</li>
+ *   <li>{@link org.eclipse.etrice.generator.etricegen.impl.RootImpl#isLibrary <em>Library</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
 public class RootImpl extends EObjectImpl implements Root {
+	
 	/**
 	 * The cached value of the '{@link #getSubSystems() <em>Sub Systems</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -112,6 +115,27 @@ public class RootImpl extends EObjectImpl implements Root {
 	 * @ordered
 	 */
 	protected EList<ExpandedActorClass> xpActorClasses;
+
+	/**
+	 * The default value of the '{@link #isLibrary() <em>Library</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isLibrary()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean LIBRARY_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isLibrary() <em>Library</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isLibrary()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean library = LIBRARY_EDEFAULT;
+	private boolean libraryAttributeInitialized = false;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -214,6 +238,64 @@ public class RootImpl extends EObjectImpl implements Root {
 			computeUsedClasses();
 		}
 		return usedRoomModels;
+	}
+	
+	private interface IModelVisitor {
+		public boolean visit(RoomModel mdl);
+	}
+
+	private void traverseModelsOnMainPath(IModelVisitor visitor) {
+		if (!getModels().isEmpty()) {
+			// determine the path of the main model
+			RoomModel main = getModels().get(0);
+			URI mainPath = null;
+			if (main.eResource()!=null) {
+				mainPath = main.eResource().getURI().trimSegments(1);
+			}
+			
+			for (RoomModel mdl : getModels()) {
+				URI currPath = null;
+				if (mdl.eResource()!=null) {
+					currPath = mdl.eResource().getURI().trimSegments(1);
+				}
+				if ((mainPath==null && currPath==null) || (mainPath!=null && mainPath.equals(currPath))) {
+					if (!visitor.visit(mdl))
+						break;
+				}
+			}
+		}
+	}
+	
+	private static class CheckForLibrary implements IModelVisitor {
+
+		boolean library = true;
+		
+		@Override
+		public boolean visit(RoomModel mdl) {
+			// we have a library if no SubSystemClass is contained in the models
+			if (!mdl.getSubSystemClasses().isEmpty()) {
+				library = false;
+				return false;
+			}
+			return true;
+		}
+		
+	}
+	
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public boolean isLibrary() {
+		if (!libraryAttributeInitialized) {
+			libraryAttributeInitialized = true;
+
+			CheckForLibrary checkForLibrary = new CheckForLibrary();
+			traverseModelsOnMainPath(checkForLibrary);
+			library = checkForLibrary.library;
+		}
+		return library;
 	}
 
 	/**
@@ -331,6 +413,8 @@ public class RootImpl extends EObjectImpl implements Root {
 				return getUsedActorClasses();
 			case ETriceGenPackage.ROOT__USED_ROOM_MODELS:
 				return getUsedRoomModels();
+			case ETriceGenPackage.ROOT__LIBRARY:
+				return isLibrary();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -431,8 +515,26 @@ public class RootImpl extends EObjectImpl implements Root {
 				return !getUsedActorClasses().isEmpty();
 			case ETriceGenPackage.ROOT__USED_ROOM_MODELS:
 				return !getUsedRoomModels().isEmpty();
+			case ETriceGenPackage.ROOT__LIBRARY:
+				return library != LIBRARY_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (library: ");
+		result.append(library);
+		result.append(')');
+		return result.toString();
 	}
 
 	private HashMap<String, DataClass> name2dc = new HashMap<String, DataClass>();
@@ -442,37 +544,60 @@ public class RootImpl extends EObjectImpl implements Root {
 	private BasicEList<ActorClass> usedActorClasses = null;
 	private BasicEList<RoomModel> usedRoomModels = null;
 	
-	private void computeUsedClasses() {
-		for (RoomModel mdl : getModels()) {
-			for (DataClass dc : mdl.getDataClasses()) {
-				name2dc.put(dc.getName(), dc);
-			}
-		}
+	private class CollectMainPathClasses implements IModelVisitor {
 
-		// first we collect actor classes
-		HashSet<ActorClass> actorClasses = new HashSet<ActorClass>();
-		for (SubSystemInstance ci : getSubSystems()) {
-			TreeIterator<EObject> it = ci.eAllContents();
-			while (it.hasNext()) {
-				EObject obj = it.next();
-				if (obj instanceof ActorInstance) {
-					ActorClass ac = ((ActorInstance)obj).getActorClass();
-					actorClasses.add(ac);
+		@Override
+		public boolean visit(RoomModel mdl) {
+			usedDataClasses.addAll(mdl.getDataClasses());
+			usedProtocolClasses.addAll(mdl.getProtocolClasses());
+			usedActorClasses.addAll(mdl.getActorClasses());
+			usedRoomModels.add(mdl);
+			return true;
+		}
+		
+	}
+	
+	private void computeUsedClasses() {
+		if (isLibrary()) {
+			usedDataClasses = new BasicEList<DataClass>();
+			usedProtocolClasses = new BasicEList<ProtocolClass>();
+			usedActorClasses = new BasicEList<ActorClass>();
+			usedRoomModels = new BasicEList<RoomModel>();
+
+			traverseModelsOnMainPath(new CollectMainPathClasses());
+		}
+		else {
+			for (RoomModel mdl : getModels()) {
+				for (DataClass dc : mdl.getDataClasses()) {
+					name2dc.put(dc.getName(), dc);
 				}
 			}
+			
+			// first we collect actor classes
+			HashSet<ActorClass> actorClasses = new HashSet<ActorClass>();
+			for (SubSystemInstance ci : getSubSystems()) {
+				TreeIterator<EObject> it = ci.eAllContents();
+				while (it.hasNext()) {
+					EObject obj = it.next();
+					if (obj instanceof ActorInstance) {
+						ActorClass ac = ((ActorInstance)obj).getActorClass();
+						actorClasses.add(ac);
+					}
+				}
+			}
+			
+			HashSet<DataClass> dataClasses = new HashSet<DataClass>();
+			HashSet<ProtocolClass> protocolClasses = new HashSet<ProtocolClass>();
+			HashSet<RoomModel> models = new HashSet<RoomModel>();
+			
+			getReferencedClassesAndModels(dataClasses, protocolClasses,
+					actorClasses, models);
+			
+			usedDataClasses = new BasicEList<DataClass>(dataClasses);
+			usedProtocolClasses = new BasicEList<ProtocolClass>(protocolClasses);
+			usedActorClasses = new BasicEList<ActorClass>(actorClasses);
+			usedRoomModels = new BasicEList<RoomModel>(models);
 		}
-
-		HashSet<DataClass> dataClasses = new HashSet<DataClass>();
-		HashSet<ProtocolClass> protocolClasses = new HashSet<ProtocolClass>();
-		HashSet<RoomModel> models = new HashSet<RoomModel>();
-
-		getReferencedClassesAndModels(dataClasses, protocolClasses,
-				actorClasses, models);
-
-		usedDataClasses = new BasicEList<DataClass>(dataClasses);
-		usedProtocolClasses = new BasicEList<ProtocolClass>(protocolClasses);
-		usedActorClasses = new BasicEList<ActorClass>(actorClasses);
-		usedRoomModels = new BasicEList<RoomModel>(models);
 	}
 
 	private void getReferencedClassesAndModels(HashSet<DataClass> dataClasses,

@@ -28,6 +28,8 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="usedRoomModels" upperBound="-1"
         eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//RoomModel"
         volatile="true" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="library" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        changeable="false" derived="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Counter">
     <eOperations name="getAndIncrementCount" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">

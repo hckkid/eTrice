@@ -136,13 +136,22 @@ public interface ETriceGenPackage extends EPackage {
 	int ROOT__USED_ROOM_MODELS = 6;
 
 	/**
+	 * The feature id for the '<em><b>Library</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ROOT__LIBRARY = 7;
+
+	/**
 	 * The number of structural features of the '<em>Root</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ROOT_FEATURE_COUNT = 7;
+	int ROOT_FEATURE_COUNT = 8;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.etrice.generator.etricegen.impl.CounterImpl <em>Counter</em>}' class.
@@ -1431,6 +1440,15 @@ public interface ETriceGenPackage extends EPackage {
 	int EXPANDED_ACTOR_CLASS__BEHAVIOR_DOCU = RoomPackage.ACTOR_CLASS__BEHAVIOR_DOCU;
 
 	/**
+	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPANDED_ACTOR_CLASS__ANNOTATIONS = RoomPackage.ACTOR_CLASS__ANNOTATIONS;
+
+	/**
 	 * The feature id for the '<em><b>Operations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1563,6 +1581,17 @@ public interface ETriceGenPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getRoot_UsedRoomModels();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.etrice.generator.etricegen.Root#isLibrary <em>Library</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Library</em>'.
+	 * @see org.eclipse.etrice.generator.etricegen.Root#isLibrary()
+	 * @see #getRoot()
+	 * @generated
+	 */
+	EAttribute getRoot_Library();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.etrice.generator.etricegen.Counter <em>Counter</em>}'.
@@ -2251,6 +2280,14 @@ public interface ETriceGenPackage extends EPackage {
 		 * @generated
 		 */
 		EReference ROOT__USED_ROOM_MODELS = eINSTANCE.getRoot_UsedRoomModels();
+
+		/**
+		 * The meta object literal for the '<em><b>Library</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ROOT__LIBRARY = eINSTANCE.getRoot_Library();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.etrice.generator.etricegen.impl.CounterImpl <em>Counter</em>}' class.

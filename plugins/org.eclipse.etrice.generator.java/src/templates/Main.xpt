@@ -13,8 +13,10 @@
 «ENDREM»
 «IMPORT room»;
 «IMPORT etricegen»
+«EXTENSION org::eclipse::xtend::util::stdlib::io»
 
 «DEFINE main FOR Root-»
+«IF this.library»«("generating model library (all ROOM classes)").info()»«ENDIF»
   «EXPAND DataClass::dataClass FOR this»
   «EXPAND ProtocolClass::protocolClass FOR this»
   «EXPAND ActorClass::actorClass FOR this»

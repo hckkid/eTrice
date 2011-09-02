@@ -67,7 +67,7 @@ public class RoomModelValidator extends RoomJavaValidator implements ILogger {
 			
 			LinkedList<RoomModel> models = new LinkedList<RoomModel>();
 			models.add(model);
-			builder.createInstanceModel(models);
+			builder.createGeneratorModel(models);
 
 			System.out.println("done checking model "+model.getName()+" with result: "+(diagnostician.isFailed()?"failed":"ok"));
 		}

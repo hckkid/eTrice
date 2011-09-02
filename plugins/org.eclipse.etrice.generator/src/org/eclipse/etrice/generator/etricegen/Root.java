@@ -31,6 +31,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.eclipse.etrice.generator.etricegen.Root#getUsedProtocolClasses <em>Used Protocol Classes</em>}</li>
  *   <li>{@link org.eclipse.etrice.generator.etricegen.Root#getUsedActorClasses <em>Used Actor Classes</em>}</li>
  *   <li>{@link org.eclipse.etrice.generator.etricegen.Root#getUsedRoomModels <em>Used Room Models</em>}</li>
+ *   <li>{@link org.eclipse.etrice.generator.etricegen.Root#isLibrary <em>Library</em>}</li>
  * </ul>
  * </p>
  *
@@ -150,6 +151,21 @@ public interface Root extends EObject {
 	 * @generated
 	 */
 	EList<RoomModel> getUsedRoomModels();
+
+	/**
+	 * Returns the value of the '<em><b>Library</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Library</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Library</em>' attribute.
+	 * @see org.eclipse.etrice.generator.etricegen.ETriceGenPackage#getRoot_Library()
+	 * @model changeable="false" derived="true"
+	 * @generated
+	 */
+	boolean isLibrary();
 
 	/**
 	 * <!-- begin-user-doc -->

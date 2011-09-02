@@ -109,7 +109,7 @@ public class GeneratorModelBuilder {
 	 * bindings.
 	 * After creating the instance tree ports are connected to
 	 * their peers.
-	 * Similar SAPs, Services and layer conenctions are treated.
+	 * Similar SAPs, Services and layer connections are treated.
 	 * Finally expanded (xp) actor classes are created which
 	 * contain also inherited state graph items and where RefinedStates
 	 * are removed and their contents is relocated.
@@ -117,23 +117,28 @@ public class GeneratorModelBuilder {
 	 * @param models
 	 * @return the root of the newly created instance model
 	 */
-	public Root createInstanceModel(List<RoomModel> models) {
+	public Root createGeneratorModel(List<RoomModel> models) {
 		Root root = ETriceGenFactory.eINSTANCE.createRoot();
 		root.getModels().addAll(models);
 
-		determineRelayPorts(root);
-		
-		for (RoomModel model : models) {
-			for (SubSystemClass comp : model.getSubSystemClasses()) {
-				root.getSubSystems().add(createSubSystemInstance(comp));
+		if (!root.isLibrary()) {
+			// create instance model
+			
+			determineRelayPorts(root);
+			
+			for (RoomModel model : models) {
+				for (SubSystemClass comp : model.getSubSystemClasses()) {
+					root.getSubSystems().add(createSubSystemInstance(comp));
+				}
 			}
+			
+			connectPorts(root);
+			checkPortMultiplicity(root);
+			
+			connectServices(root);
 		}
 		
-		connectPorts(root);
-		checkPortMultiplicity(root);
-		
-		connectServices(root);
-		
+		// transform actor classes
 		createExpandedActorClasses(root);
 		
 		return root;

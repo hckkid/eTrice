@@ -71,7 +71,7 @@ public class GeneratorModelCreator extends WorkflowComponentWithTwoSlots {
 		List<RoomModel> models = getRoomModels(ctx);
 	    
 	    if (models.size()>0) {
-    		Root root = builder.createInstanceModel(models);
+    		Root root = builder.createGeneratorModel(models);
     		
     		List<Root> result = new LinkedList<Root>();
     		result.add(root);
