@@ -2,6 +2,7 @@
 <rm:rmap xmlns:bc="http://www.eclipse.org/buckminster/Common-1.0" xmlns:rm="http://www.eclipse.org/buckminster/RMap-1.0">
   <rm:property key="build.type" value="N"/>
   <rm:locator pattern="^org\.eclipse\.etrice\.releng.*" searchPathRef="releng"/>
+  <rm:locator pattern="^org\.eclipse\.etrice\.site" searchPathRef="releng"/>
   <rm:locator pattern="^org\.eclipse\.etrice\.*" searchPathRef="sources"/>
   <rm:locator pattern="^org\.eclipse\.license.*" searchPathRef="eclipse.license"/>
   <rm:locator searchPathRef="platform.binaries" failOnError="false"/>
