@@ -36,15 +36,15 @@ http://www.eclipse.org/legal/epl-v10.html
    </url>
 
    <includes
-         id="org.eclipse.etrice.core"
+         id="org.eclipse.etrice.core.feature"
          version="0.0.0"/>
 
    <includes
-         id="org.eclipse.etrice.tests"
+         id="org.eclipse.etrice.tests.feature"
          version="0.0.0"/>
 
    <includes
-         id="org.eclipse.etrice.examples"
+         id="org.eclipse.etrice.examples.feature"
          version="0.0.0"/>
 
 </feature>
