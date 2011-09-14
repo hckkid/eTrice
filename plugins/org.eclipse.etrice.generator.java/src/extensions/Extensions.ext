@@ -78,7 +78,7 @@ String defaultValue(TypedID a): a.type.type!=null? "new "+a.type.type.name+"()" 
 
 private String getDataTypeCast(TriggeredTransition tt): tt.triggers.msgFromIfPairs.message.select(e|e.data!=null).first().data.type.typeObjectName();
 private String getDataType(TriggeredTransition tt): tt.triggers.msgFromIfPairs.message.select(e|e.data!=null).first().data.type.typeName();
-String getArgumentList(ExpandedActorClass xpac, Transition t): JAVA org.eclipse.etrice.generator.java.JavaGenerator.getArgumentList(org.eclipse.etrice.generator.etricegen.ExpandedActorClass, org.eclipse.etrice.core.room.Transition);
-String getTypedDataDefinition(Message m): JAVA org.eclipse.etrice.generator.java.JavaGenerator.getTypedData(org.eclipse.etrice.core.room.Message);
+String getArgumentList(ExpandedActorClass xpac, Transition t): JAVA org.eclipse.etrice.generator.java.gen.JavaGenerator.getArgumentList(org.eclipse.etrice.generator.etricegen.ExpandedActorClass, org.eclipse.etrice.core.room.Transition);
+String getTypedDataDefinition(Message m): JAVA org.eclipse.etrice.generator.java.gen.JavaGenerator.getTypedData(org.eclipse.etrice.core.room.Message);
 
-String getExecuteChainCode(ExpandedActorClass ac, TransitionChain tc): JAVA org.eclipse.etrice.generator.java.JavaGenerator.getExecuteChain(org.eclipse.etrice.generator.etricegen.ExpandedActorClass, org.eclipse.etrice.generator.etricegen.TransitionChain);
+String getExecuteChainCode(ExpandedActorClass ac, TransitionChain tc): JAVA org.eclipse.etrice.generator.java.gen.JavaGenerator.getExecuteChain(org.eclipse.etrice.generator.etricegen.ExpandedActorClass, org.eclipse.etrice.generator.etricegen.TransitionChain);

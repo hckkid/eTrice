@@ -10,7 +10,7 @@
  * 
  *******************************************************************************/
 
-package org.eclipse.etrice.generator.java;
+package org.eclipse.etrice.generator.java.gen;
 
 import org.eclipse.etrice.core.room.InitialTransition;
 import org.eclipse.etrice.core.room.Message;
@@ -25,12 +25,12 @@ import org.eclipse.etrice.generator.etricegen.TransitionChain;
 
 public class JavaGenerator {
 
-	public static String getExecuteChain(ExpandedActorClass ac, TransitionChain tc) {
+	public String getExecuteChain(ExpandedActorClass ac, TransitionChain tc) {
 		JavaTransitionChainVisitor tcv = new JavaTransitionChainVisitor(ac, tc);
 		return tc.genExecuteChain(tcv);
 	}
 
-	public static String getArgumentList(ExpandedActorClass xpac, Transition t) {
+	public String getArgumentList(ExpandedActorClass xpac, Transition t) {
 		if (t instanceof InitialTransition)
 			// actually is InitialTransition
 			return "";
@@ -45,19 +45,19 @@ public class JavaGenerator {
 		return getTypedArgumentList(mif.getMessage());
 	}
 
-	public static String getArgumentList(Message m) {
+	public String getArgumentList(Message m) {
 		return getArglistAndTypedData(m.getData())[0];
 	}
 
-	public static String getTypedData(Message m) {
+	public String getTypedData(Message m) {
 		return getArglistAndTypedData(m.getData())[1];
 	}
 
-	public static String getTypedArgumentList(Message m) {
+	public String getTypedArgumentList(Message m) {
 		return getArglistAndTypedData(m.getData())[2];
 	}
 	
-	public static String[] getArglistAndTypedData(TypedID data) {
+	public String[] getArglistAndTypedData(TypedID data) {
 		if (data==null)
 			return new String[] {"", "", ""};
 		

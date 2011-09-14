@@ -10,7 +10,7 @@
  * 
  *******************************************************************************/
 
-package org.eclipse.etrice.generator.java;
+package org.eclipse.etrice.generator.java.gen;
 
 import org.eclipse.etrice.core.room.CPBranchTransition;
 import org.eclipse.etrice.core.room.ContinuationTransition;
@@ -27,6 +27,7 @@ import org.eclipse.etrice.generator.extensions.Extensions;
 public class JavaTransitionChainVisitor implements ITransitionChainVisitor {
 
 	private ExpandedActorClass ac;
+	private JavaGenerator javaGen = new JavaGenerator();
 	private String typedData = "";
 	private String dataArg = "";
 
@@ -37,7 +38,7 @@ public class JavaTransitionChainVisitor implements ITransitionChainVisitor {
 			// we rely on the previous checking during the generator model creation
 			TypedID data = ((TriggeredTransition)tc.getTransition()).getTriggers().get(0).getMsgFromIfPairs().get(0).getMessage().getData();
 			
-			String[] result = JavaGenerator.getArglistAndTypedData(data);
+			String[] result = javaGen.getArglistAndTypedData(data);
 			dataArg = result[0];
 			typedData = result[1];
 		}
