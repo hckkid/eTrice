@@ -10,7 +10,7 @@
  * 
  *******************************************************************************/
 
-package org.eclipse.etrice.generator.java;
+package org.eclipse.etrice.generator.java.setup;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.generator.builder.ILogger;

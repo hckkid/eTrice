@@ -24,7 +24,7 @@ import org.eclipse.emf.ecore.*
 
 import org.eclipse.etrice.core.room.*
 import org.eclipse.etrice.generator.etricegen.*
-import org.eclipse.etrice.generator.java.Logger
+import org.eclipse.etrice.generator.java.setup.Logger
 
 class PrepareFileSystem {
 	

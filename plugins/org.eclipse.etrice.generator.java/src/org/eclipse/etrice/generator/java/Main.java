@@ -27,6 +27,7 @@ import org.eclipse.etrice.generator.builder.GeneratorModelBuilder;
 import org.eclipse.etrice.generator.builder.ILogger;
 import org.eclipse.etrice.generator.etricegen.IDiagnostician;
 import org.eclipse.etrice.generator.etricegen.Root;
+import org.eclipse.etrice.generator.java.setup.StandaloneSetup;
 import org.eclipse.xtext.generator.IGenerator;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
 import org.eclipse.xtext.util.CancelIndicator;
