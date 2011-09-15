@@ -64,6 +64,7 @@ public class ProjectCreator {
 	};
 
 	private static final String[] commonRequiredBundles = {
+			"org.eclipse.etrice.core.room;bundle-version=\"0.1.0\"",
 			"org.eclipse.etrice.generator;bundle-version=\"0.1.0\"",
 			"org.eclipse.emf.mwe2.launch;bundle-version=\"1.0.1\";resolution:=optional",
 			"org.eclipse.emf.mwe.utils;bundle-version=\"1.0.0\";visibility:=reexport",
@@ -521,22 +522,14 @@ public class ProjectCreator {
 					false,
 					"UTF-8");
 			launch.println("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>");
-			launch.println("<launchConfiguration type=\"org.eclipse.jdt.launching.localJavaApplication\">");
-			launch.println("<listAttribute key=\"org.eclipse.debug.core.MAPPED_RESOURCE_PATHS\">");
-			launch.println("<listEntry value=\"/org.eclipse.etrice.generator.java/src/org/eclipse/etrice/generator/java/Main.java\"/>");
-			launch.println("</listAttribute>");
-			launch.println("<listAttribute key=\"org.eclipse.debug.core.MAPPED_RESOURCE_TYPES\">");
-			launch.println("<listEntry value=\"1\"/>");
+			launch.println("<launchConfiguration type=\"org.eclipse.etrice.generator.launch.java.launchConfigurationType\">");
+			launch.println("<listAttribute key=\"ModelFiles\">");
+			launch.println("<listEntry value=\"${workspace_loc:/"+baseName+"/model/"+baseName+".room}\"/>");
 			launch.println("</listAttribute>");
 			launch.println("<listAttribute key=\"org.eclipse.debug.ui.favoriteGroups\">");
 			launch.println("<listEntry value=\"org.eclipse.debug.ui.launchGroup.run\"/>");
 			launch.println("</listAttribute>");
-			launch.println("<stringAttribute key=\"org.eclipse.jdt.launching.MAIN_TYPE\" value=\"org.eclipse.etrice.generator.java.Main\"/>");
-			launch.println("<stringAttribute key=\"org.eclipse.jdt.launching.PROGRAM_ARGUMENTS\" value=\"${workspace_loc:"+baseName+"}\\model\\"+baseName+".room"
-					+"&#13;&#10;${workspace_loc:org.eclipse.etrice.modellib}\\models\\TimingService.room\"/>");
-			launch.println("<stringAttribute key=\"org.eclipse.jdt.launching.PROJECT_ATTR\" value=\"org.eclipse.etrice.generator.java\"/>");
-			launch.println("<stringAttribute key=\"org.eclipse.jdt.launching.VM_ARGUMENTS\" value=\"-ea\"/>");
-			launch.println("<stringAttribute key=\"org.eclipse.jdt.launching.WORKING_DIRECTORY\" value=\"${workspace_loc:org.eclipse.etrice.tutorials}\"/>");
+			launch.println("<stringAttribute key=\"org.eclipse.jdt.launching.PROJECT_ATTR\" value=\""+baseName+"\"/>");
 			launch.println("</launchConfiguration>");
 			launch.close();
 		} catch (UnsupportedEncodingException e) {

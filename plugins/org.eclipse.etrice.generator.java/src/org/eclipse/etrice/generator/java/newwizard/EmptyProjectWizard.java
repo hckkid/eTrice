@@ -130,7 +130,7 @@ public class EmptyProjectWizard extends Wizard implements INewWizard {
 							baseName);
 
 					ProjectCreator.createLaunchConfig(URI.createPlatformResourceURI("/"
-							+baseName+"/"+baseName+".launch", true),
+							+baseName+"/gen_"+baseName+".launch", true),
 							baseName);
 
 					ProjectCreator.findOrCreateContainer(new Path("/"
