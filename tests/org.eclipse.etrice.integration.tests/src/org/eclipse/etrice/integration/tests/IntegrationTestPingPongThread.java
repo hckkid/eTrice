@@ -17,24 +17,13 @@ import static org.junit.Assert.assertEquals;
 
 import org.eclipse.etrice.integration.PingPongThreadTest.SubSystem_PingPong;
 import org.eclipse.etrice.integration.tests.base.IntegrationTestBase;
-import org.eclipse.etrice.runtime.java.modelbase.SubSystemClassBase;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-
-
 public class IntegrationTestPingPongThread extends IntegrationTestBase {
 	@Before
 	public void setUp() throws Exception {
-		// we have to launch a JUnit Plugin test since for the build we need an Eclipse environment
-		// in this context the Mwe2Launcher suffers from https://bugs.eclipse.org/bugs/show_bug.cgi?id=318721
-		/*
-		Mwe2Launcher.main(new String[]{"/org.eclipse.etrice.integration.tests/src/de/protos/etrice/integration/test/IntegrationTestFSMGenerator.mwe2"});
-		final IWorkspace workspace = ResourcesPlugin.getWorkspace();
-        final IProject project = workspace.getRoot().getProject("/org.eclipse.etrice.integration.tests");
-		project.build(IncrementalProjectBuilder.INCREMENTAL_BUILD, null);
-		*/
 	}
 	
 	@Test (timeout=10000)
