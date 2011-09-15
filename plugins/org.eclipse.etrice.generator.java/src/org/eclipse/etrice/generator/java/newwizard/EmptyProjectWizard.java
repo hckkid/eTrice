@@ -125,15 +125,6 @@ public class EmptyProjectWizard extends Wizard implements INewWizard {
 							baseName,
 							getRequiredBundles());
 
-					ProjectCreator.findOrCreateContainer(new Path("/"
-							+ baseName + "/src/workflow"),
-							true, projectLocation, progressMonitor);
-					ProjectCreator.createWorkflow(URI.createPlatformResourceURI("/"
-							+ baseName
-							+ "/src/workflow/"+baseName+".mwe2", true),
-							baseName,
-							"RoomGenerator");
-
 					ProjectCreator.createBuildProperties(URI.createPlatformResourceURI("/"
 							+baseName+"/build.properties", true),
 							baseName);

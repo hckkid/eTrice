@@ -26,7 +26,10 @@ public class Logger implements ILogger {
 	}
 
 	public void logError(String text, EObject obj) {
-		System.out.println("Error: " + text + " " + obj.toString());
+		if (obj == null)
+			System.out.println("Error: " + text);
+		else
+			System.out.println("Error: " + text + " " + obj.toString());
 	}
 
 }
