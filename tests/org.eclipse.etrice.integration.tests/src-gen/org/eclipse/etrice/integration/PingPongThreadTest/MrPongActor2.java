@@ -198,10 +198,10 @@ public class MrPongActor2 extends ActorClassBase {
 		try{
 		Thread.sleep(5000);
 		}catch (InterruptedException e){}
-		}
+	}
 	protected void action_TRANS_waitForPing_TO_waitForPing_BY_pingPingPongPort_myTrigger(InterfaceItemBase ifitem) {
 		PingPongPort.pong();
-		}
+	}
 		 
 	//******************************************
 	// END of generated code for FSM

@@ -196,7 +196,7 @@ public class CPTester extends ActorClassBase {
 		
 		TestPort1.msg1();
 		System.out.println("msg1 sent ");
-		}
+	}
 		 
 	//******************************************
 	// END of generated code for FSM

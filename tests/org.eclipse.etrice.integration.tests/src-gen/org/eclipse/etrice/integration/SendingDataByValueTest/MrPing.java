@@ -152,8 +152,8 @@ public class MrPing extends ActorClassBase {
 					switch(trigger) {
 					case TRIG_PingPongPort__pong:
 						{ PingPongData p = (PingPongData) generic_data;
-							if (p.getI32Val()==3
-							)
+						if (p.getI32Val()==3
+						)
 						{
 							chain = CHAIN_TRANS_state0_TO_state1_BY_pongPingPongPort;
 							catching_state = STATE_TOP;
@@ -468,23 +468,23 @@ public class MrPing extends ActorClassBase {
 		data.setStringVal("Falscher Hase !");
 		
 		crcGen.update(10);
-		}
+	}
 	protected void action_TRANS_tp0_TO_tp0_BY_pongPingPongPort_tr0(InterfaceItemBase ifitem, PingPongData p) {
 		System.out.printf("Top Level : \n");
 		printData(p);
 		crcGen.update(20);
-		}
+	}
 	protected void action_TRANS_tp0_TO_tp0_BY_pongSimplePingPongPort_tr1(InterfaceItemBase ifitem, int p) {
 		System.out.printf("Top Level Simple: \n");
 		crcGen.update(35);
-		}
+	}
 	protected void action_TRANS_waitForPong_TO_cp0_BY_pongPingPongPort(InterfaceItemBase ifitem, PingPongData p) {
 		printData(p);
 		crcGen.update(11);
-		}
+	}
 	protected void action_TRANS_cp0_TO_waitForPong(InterfaceItemBase ifitem, PingPongData p) {
 		crcGen.update(12);
-		}
+	}
 	protected void action_TRANS_cp0_TO_state0_COND_tr3(InterfaceItemBase ifitem, PingPongData p) {
 		// send default values
 		PingPongPort.ping(data);
@@ -508,26 +508,26 @@ public class MrPing extends ActorClassBase {
 		
 		PingPongPort.ping(data);
 		crcGen.update(13);
-		}
+	}
 	protected void action_TRANS_state0_TO_state1_BY_pongPingPongPort(InterfaceItemBase ifitem, PingPongData p) {
 		printData(p);
 		PingPongPort.pingSimple(12);
 		PingPongPort.pingSimple(27);
 		crcGen.update(14);
-		}
+	}
 	protected void action_TRANS_state1_TO_state2_BY_pongSimplePingPongPort(InterfaceItemBase ifitem, int p) {
 		crcGen.update(15);
-		}
+	}
 	protected void action_TRANS_state2_TO_cp1_BY_pongSimplePingPongPort(InterfaceItemBase ifitem, int p) {
 		crcGen.update(16);
 		System.out.printf("CRC: %d \n", crcGen.getCrc());
-		}
+	}
 	protected void action_TRANS_cp1_TO_TestFalse(InterfaceItemBase ifitem, int p) {
 		RTServices.getInstance().getSubSystem().testFinished(1);
-		}
+	}
 	protected void action_TRANS_cp1_TO_TestOk_COND_tr9(InterfaceItemBase ifitem, int p) {
 		RTServices.getInstance().getSubSystem().testFinished(0);
-		}
+	}
 		 
 	//******************************************
 	// END of generated code for FSM

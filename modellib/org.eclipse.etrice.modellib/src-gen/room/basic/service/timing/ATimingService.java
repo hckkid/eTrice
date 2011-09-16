@@ -247,24 +247,24 @@ public class ATimingService extends ActorClassBase {
 	//*** Entry and Exit Codes
 	protected void entry_Operational() {
 		// prepare
-		}
+	}
 	
 	//*** Action Codes
 	protected void action_TRANS_INITIAL_TO__Operational() {
 		timerService = new Timer();
-		}
+	}
 	protected void action_TRANS_Operational_TO_Operational_BY_Starttimeout_tr1(InterfaceItemBase ifitem, int time_ms) {
 		// start timeout
 		taskCount++;
 		if (taskCount>PURGE_LIMIT) timerService.purge();
 		timerService.schedule(((PTimeoutPort)ifitem).getTask(), time_ms);
-		}
+	}
 	protected void action_TRANS_Operational_TO_Operational_BY_Starttimer_tr3(InterfaceItemBase ifitem, int time_ms) {
 		// start timer
 		taskCount++;
 		if (taskCount>PURGE_LIMIT) timerService.purge();
 		timerService.scheduleAtFixedRate(((PTimerPort)ifitem).getTask(), time_ms, time_ms);
-		}
+	}
 		 
 	//******************************************
 	// END of generated code for FSM

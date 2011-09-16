@@ -140,6 +140,14 @@ public abstract class SubSystemClassBase extends RTObject implements IEventRecei
 		if (testSem != null) {
 			testErrorCode = errorCode;
 			testSem.release(1);
+			
+			// making this thread sleep seems to fix a problem that the tester thread doesn't
+			// acquire control before the test timeout is reached
+			try {
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
 			}
+		}
 	}
 }

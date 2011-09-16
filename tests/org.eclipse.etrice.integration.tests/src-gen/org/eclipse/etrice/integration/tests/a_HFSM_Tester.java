@@ -357,12 +357,12 @@ public class a_HFSM_Tester extends ActorClassBase {
 	//*** Entry and Exit Codes
 	protected void entry_TestPass() {
 		RTServices.getInstance().getSubSystem().testFinished(0);
-		}
+	}
 	
 	//*** Action Codes
 	protected void action_TRANS_State2_TO_State3_BY_s1_entrytestee(InterfaceItemBase ifitem) {
 		testee.m1();
-		}
+	}
 		 
 	//******************************************
 	// END of generated code for FSM

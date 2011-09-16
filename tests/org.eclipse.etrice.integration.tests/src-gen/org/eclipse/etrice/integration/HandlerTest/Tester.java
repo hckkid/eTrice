@@ -213,7 +213,7 @@ public class Tester extends ActorClassBase {
 		System.out.println("msg1(8) sent ");
 		TestPort1.msg6(12);
 		System.out.println("msg6(12) sent ");
-		}
+	}
 		 
 	//******************************************
 	// END of generated code for FSM

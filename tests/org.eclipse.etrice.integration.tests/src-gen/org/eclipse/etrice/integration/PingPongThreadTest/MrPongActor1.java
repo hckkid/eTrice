@@ -194,7 +194,7 @@ public class MrPongActor1 extends ActorClassBase {
 	//*** Action Codes
 	protected void action_TRANS_waitForPing_TO_waitForPing_BY_pingPingPongPort_myTrigger(InterfaceItemBase ifitem) {
 		PingPongPort.pong();
-		}
+	}
 		 
 	//******************************************
 	// END of generated code for FSM

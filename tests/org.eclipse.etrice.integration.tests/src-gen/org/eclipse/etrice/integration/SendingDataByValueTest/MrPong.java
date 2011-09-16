@@ -224,10 +224,10 @@ public class MrPong extends ActorClassBase {
 		
 		
 		PingPongPort.pong(p);
-		}
+	}
 	protected void action_TRANS_reply_TO_reply_BY_pingSimplePingPongPort_tr1(InterfaceItemBase ifitem, int p) {
 		PingPongPort.pongSimple(++p);
-		}
+	}
 		 
 	//******************************************
 	// END of generated code for FSM

@@ -127,14 +127,14 @@ public class CPUser extends ActorClassBase {
 					switch(trigger) {
 					case TRIG_TestPort1__msg1:
 						{ 
-							if (counter==2
-							)
+						if (counter==2
+						)
 						{
 							chain = CHAIN_TRANS_state1_TO_cp2_BY_msg1TestPort1;
 							catching_state = STATE_TOP;
 						} else 
-							if (counter==1
-							)
+						if (counter==1
+						)
 						{
 							chain = CHAIN_TRANS_state1_TO_state0_BY_msg1TestPort1;
 							catching_state = STATE_TOP;
@@ -356,100 +356,100 @@ public class CPUser extends ActorClassBase {
 	protected void entry_state0() {
 		System.out.println("state0: entry code");
 		crcGen.update(12);
-		}
+	}
 	protected void exit_state0() {
 		System.out.println("state0: exit code");
 		crcGen.update(13);
-		}
+	}
 	protected void entry_state1() {
 		System.out.println("state1: entry code");
 		crcGen.update(20);
-		}
+	}
 	protected void exit_state1() {
 		System.out.println("state1: exit code");
 		crcGen.update(21);
-		}
+	}
 	protected void entry_state1_state0() {
 		System.out.println("state1\\0: entry code");
 		System.out.printf("counter => %d\n",counter);
 		crcGen.update(22);
-		}
+	}
 	protected void exit_state1_state0() {
 		System.out.println("state1\\0: exit code");
 		crcGen.update(23);
-		}
+	}
 	
 	//*** Action Codes
 	protected void action_TRANS_INITIAL_TO__cp0() {
 		System.out.println("Top Level init transition");
 		crcGen.update(10);
 		counter = 0;
-		}
+	}
 	protected void action_TRANS_cp0_TO_state0(InterfaceItemBase ifitem) {
 		System.out.println("choice0: else code");
 		crcGen.update(17);
-		}
+	}
 	protected void action_TRANS_cp0_TO_state0_COND_LastCheck(InterfaceItemBase ifitem) {
 		System.out.println("choice0: true code");
 		crcGen.update(15);
-		}
+	}
 	protected void action_TRANS_state0_TO_cp1_BY_msg1TestPort1(InterfaceItemBase ifitem) {
 		System.out.println("state0: msg1: transition code");
 		crcGen.update(18);
-		}
+	}
 	protected void action_TRANS_cp1_TO_state0(InterfaceItemBase ifitem) {
 		System.out.println("choice1: else code");
 		crcGen.update(10);
 		counter=3;
-		}
+	}
 	protected void action_TRANS_cp1_TO_state1_tp0_COND_tr3(InterfaceItemBase ifitem) {
 		System.out.println("choice1: to entry state1 code");
 		crcGen.update(30);
-		}
+	}
 	protected void action_TRANS_state1_TO_cp2_BY_msg1TestPort1(InterfaceItemBase ifitem) {
 		System.out.println("state1: msg1: transition code");
 		crcGen.update(30);
 		System.out.printf("CRC: %d \n", crcGen.getCrc());
-		}
+	}
 	protected void action_TRANS_cp2_TO_testFalse(InterfaceItemBase ifitem) {
 		System.out.println("Test false");
 		RTServices.getInstance().getSubSystem().testFinished(1);
-		}
+	}
 	protected void action_TRANS_cp2_TO_testOk_COND_tr6(InterfaceItemBase ifitem) {
 		System.out.println("Test ok");
 		RTServices.getInstance().getSubSystem().testFinished(0);
-		}
+	}
 	protected void action_TRANS_cp1_TO_state1_COND_tr11(InterfaceItemBase ifitem) {
 		System.out.println("choice1: history to State1 transition code");
 		crcGen.update(25);
 		counter = 1;
-		}
+	}
 	protected void action_TRANS_state1_TO_state0_BY_msg1TestPort1(InterfaceItemBase ifitem) {
 		System.out.println("state1: msg1: transition code to state0");
 		crcGen.update(51);
 		counter=4;
-		}
+	}
 	protected void action_TRANS_tp0_TO_tp0_BY_msg1TestPort1_tr8(InterfaceItemBase ifitem) {
 		System.out.println("Handler: msg1 received ");
 		crcGen.update(115);
 		counter = 2;
-		}
+	}
 	protected void action_state1_TRANS_tp0_TO_cp0(InterfaceItemBase ifitem) {
 		System.out.println("state1: tp0: transition code");
 		crcGen.update(25);
-		}
+	}
 	protected void action_state1_TRANS_cp0_TO_state0(InterfaceItemBase ifitem) {
 		System.out.println("state1: choice false code");
 		crcGen.update(57);
-		}
+	}
 	protected void action_state1_TRANS_cp0_TO_state0_COND_tr0(InterfaceItemBase ifitem) {
 		System.out.println("state1 choice: true code");
 		crcGen.update(56);
-		}
+	}
 	protected void action_state1_TRANS_INITIAL_TO__state0() {
 		System.out.println("state1 initial transition code");
 		crcGen.update(53);
-		}
+	}
 		 
 	//******************************************
 	// END of generated code for FSM

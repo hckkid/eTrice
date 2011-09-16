@@ -236,23 +236,23 @@ public class MrPingActor extends ActorClassBase {
 	protected void action_TRANS_INITIAL_TO__waitForTimer() {
 		count = 0;
 		timer.Start(1000);
-		}
+	}
 	protected void action_TRANS_waitForTimer_TO_waitForPong_BY_timeoutTicktimer(InterfaceItemBase ifitem) {
 		PingPongPort.get(0).ping();
 		PingPongPort.get(1).ping();
 		PingPongPort.get(2).ping();
 		pongCount = 0;
-		}
+	}
 	protected void action_TRANS_waitForPong_TO_cp0_BY_pongPingPongPort(InterfaceItemBase ifitem) {
 		pongCount++;
-		}
+	}
 	protected void action_TRANS_cp0_TO_waitForTimer(InterfaceItemBase ifitem) {
 		if (count++ > 1000) {
 		RTServices.getInstance().getSubSystem().testFinished(0);
 		} else {
 		System.out.println(count);
 		timer.Start(5);}
-		}
+	}
 		 
 	//******************************************
 	// END of generated code for FSM
