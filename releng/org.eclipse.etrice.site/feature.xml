@@ -14,9 +14,7 @@
       label="eTrice (Incubation) 0.1.0 Update Site"
       version="0.1.0.qualifier"
       provider-name="%providerName"
-      image="eclipse_update_120.jpg"
-      license-feature="org.eclipse.license"
-      license-feature-version="1.0.0.qualifier">
+      image="eclipse_update_120.jpg">
 
    <description>
       %description
