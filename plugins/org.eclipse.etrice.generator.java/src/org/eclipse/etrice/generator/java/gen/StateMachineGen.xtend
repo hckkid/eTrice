@@ -188,8 +188,8 @@ class StateMachineGen {
 							«IF state.subgraph.hasInitTransition()»
 								// with init transition
 								if (history[«state.getStateId()»]==NO_STATE) {
-									«var inittt = state.subgraph.getInitTransition()»
-									state = executeTransitionChain(«xpac.getChain(initt).getChainId()», null, null);
+									«var sub_initt = state.subgraph.getInitTransition()»
+									state = executeTransitionChain(«xpac.getChain(sub_initt).getChainId()», null, null);
 								}
 								else {
 									state = history[«state.getStateId()»];
@@ -215,11 +215,13 @@ class StateMachineGen {
 			«IF xpac.isOwnObject(state)»
 				«IF state.hasEntryCode()»
 					protected void «state.getEntryCodeOperationName()»() {
-						«xpac.getEntryCode(state)»}
+						«xpac.getEntryCode(state)»
+					}
 				«ENDIF»
 				«IF state.hasExitCode()»
 					protected void «state.getExitCodeOperationName()»() {
-						«xpac.getExitCode(state)»}
+						«xpac.getExitCode(state)»
+					}
 				«ENDIF»
 			«ENDIF»
 		«ENDFOR»
@@ -228,25 +230,26 @@ class StateMachineGen {
 		«FOR tr : xpac.stateMachine.getTransitionList()»
 			«IF xpac.isOwnObject(tr) && tr.hasActionCode()»
 				protected void «tr.getActionCodeOperationName()»(«IF tr instanceof NonInitialTransition»InterfaceItemBase ifitem«javaGen.getArgumentList(xpac, tr)»«ENDIF») {
-					«xpac.getActionCode(tr)»}
+					«xpac.getActionCode(tr)»
+				}
 			«ENDIF»
 		«ENDFOR»
 			 
 		//******************************************
 		// END of generated code for FSM
 		//******************************************
-			'''}
-			
-			def dispatch guard(TriggeredTransition tt, String trigger, ExpandedActorClass ac) {'''
-			«var tr = tt.triggers.findFirst(e|ac.isMatching(e, trigger))»
-				«IF tr.hasGuard()»
-					if («ac.getCode(tr.guard.guard)»)
-				«ENDIF»
-			'''
-			}
+	'''}
 		
-			def dispatch guard(Transition t, String trigger, ExpandedActorClass ac) {'''
-			/* error */
+	def dispatch guard(TriggeredTransition tt, String trigger, ExpandedActorClass ac) {'''
+		«var tr = tt.triggers.findFirst(e|ac.isMatching(e, trigger))»
+		«IF tr.hasGuard()»
+			if («ac.getCode(tr.guard.guard)»)
+		«ENDIF»
+	'''
+	}
+
+	def dispatch guard(Transition t, String trigger, ExpandedActorClass ac) {'''
+		/* error */
 	'''
 	}
 }

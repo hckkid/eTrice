@@ -647,13 +647,13 @@ public class StateMachineGen {
                 _builder.append("\t");
                 StateGraph _subgraph_1 = state_5.getSubgraph();
                 Transition _initTransition_1 = this.stdExt.getInitTransition(_subgraph_1);
-                Transition inittt = _initTransition_1;
+                Transition sub_initt = _initTransition_1;
                 _builder.newLineIfNotEmpty();
                 _builder.append("\t\t\t");
                 _builder.append("\t");
                 _builder.append("\t");
                 _builder.append("state = executeTransitionChain(");
-                TransitionChain _chain_2 = xpac.getChain(initt);
+                TransitionChain _chain_2 = xpac.getChain(sub_initt);
                 String _chainId_4 = this.nameProvider.getChainId(_chain_2);
                 _builder.append(_chainId_4, "					");
                 _builder.append(", null, null);");
@@ -743,8 +743,9 @@ public class StateMachineGen {
                 _builder.append("\t");
                 String _entryCode = this.stdExt.getEntryCode(xpac, state_6);
                 _builder.append(_entryCode, "	");
-                _builder.append("}");
                 _builder.newLineIfNotEmpty();
+                _builder.append("}");
+                _builder.newLine();
               }
             }
             {
@@ -758,8 +759,9 @@ public class StateMachineGen {
                 _builder.append("\t");
                 String _exitCode = this.stdExt.getExitCode(xpac, state_6);
                 _builder.append(_exitCode, "	");
-                _builder.append("}");
                 _builder.newLineIfNotEmpty();
+                _builder.append("}");
+                _builder.newLine();
               }
             }
           }
@@ -799,8 +801,9 @@ public class StateMachineGen {
             _builder.append("\t");
             String _actionCode = this.stdExt.getActionCode(xpac, tr);
             _builder.append(_actionCode, "	");
-            _builder.append("}");
             _builder.newLineIfNotEmpty();
+            _builder.append("}");
+            _builder.newLine();
           }
         }
       }
@@ -831,12 +834,11 @@ public class StateMachineGen {
     {
       boolean _hasGuard = this.stdExt.hasGuard(tr);
       if (_hasGuard) {
-        _builder.append("\t");
         _builder.append("if (");
         Guard _guard = tr.getGuard();
         DetailCode _guard_1 = _guard.getGuard();
         String _code = ac.getCode(_guard_1);
-        _builder.append(_code, "	");
+        _builder.append(_code, "");
         _builder.append(")");
         _builder.newLineIfNotEmpty();
       }

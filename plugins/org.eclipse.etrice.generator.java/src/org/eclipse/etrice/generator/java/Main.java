@@ -28,6 +28,7 @@ import org.eclipse.etrice.generator.builder.ILogger;
 import org.eclipse.etrice.generator.etricegen.IDiagnostician;
 import org.eclipse.etrice.generator.etricegen.Root;
 import org.eclipse.etrice.generator.java.setup.StandaloneSetup;
+import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.generator.IGenerator;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
 import org.eclipse.xtext.util.CancelIndicator;
@@ -111,30 +112,42 @@ public class Main {
 
 		logger.logInfo("-- reading models");
 		List<Resource> resourceList = new ArrayList<Resource>();
-		for (String uriString : uriList) {
-			logger.logInfo("Loading " + uriString);
-			resourceList.add(rs.getResource(URI.createURI(uriString), true));
+		{
+			for (String uriString : uriList) {
+				logger.logInfo("Loading " + uriString);
+				resourceList.add(rs.getResource(URI.createURI(uriString), true));
+			}
+			
+			EcoreUtil.resolveAll(rs);
 		}
 
-		// resolving all model proxies
-		EcoreUtil.resolveAll(rs);
-
-		// validate all resources
 		logger.logInfo("-- validating models");
-		for (Resource resource : resourceList) {
-			List<Issue> list = validator.validate(resource, CheckMode.ALL, CancelIndicator.NullImpl);
-			if (!list.isEmpty()) {
-				for (Issue issue : list) {
-					logger.logError(issue.toString(), null);
+		{
+			int errors = 0;
+			int warnings = 0;
+			for (Resource resource : resourceList) {
+				List<Issue> list = validator.validate(resource, CheckMode.ALL, CancelIndicator.NullImpl);
+				if (!list.isEmpty()) {
+					for (Issue issue : list) {
+						if (issue.getSeverity()==Severity.ERROR) {
+							++errors;
+							logger.logError(issue.toString(), null);
+						}
+						else {
+							++warnings;
+							logger.logInfo(issue.toString());
+						}
+					}
 				}
+			}
+			logger.logInfo("validation finished with "+errors+" errors and "+warnings+" warnings");
+			if (errors>0) {
+				logger.logError("-- terminating", null);
 				return;
 			}
 		}
-		fileAccess.setOutputPath("src-gen/");
 
-		logger.logInfo("-- starting code generation");
-
-		// check resources for right number and types of room models and build a list of them 
+		// create a list of ROOM models
 		List<RoomModel> rml = new ArrayList<RoomModel>();
 		for (Resource resource : resourceList) {
 			List<EObject> contents = resource.getContents();
@@ -143,26 +156,36 @@ public class Main {
 			}
 		}
 		if (rml.isEmpty()) {
-			logger.logError("no RoomModels found", null);
+			logger.logError("-- terminating", null);
+			return;
 		}
 		else {
-			// create generator model
+			logger.logInfo("-- creating generator model");
 			GeneratorModelBuilder gmb = new GeneratorModelBuilder(logger, diagnostician);
 			Root gmRoot = gmb.createGeneratorModel(rml);
+			if (diagnostician.isFailed()) {
+				logger.logInfo("validation failed during build of generator model");
+				logger.logError("-- terminating", null);
+				return;
+			}
 			URI genModelURI = genModelPath!=null? URI.createURI(genModelPath) : URI.createFileURI("tmp.rim");
 			Resource genResource = rs.createResource(genModelURI);
 			genResource.getContents().add(gmRoot);
 			if (genModelPath!=null) {
 				try {
-					logger.logInfo("-- saving genmodel to "+genModelPath);
+					logger.logInfo("saving genmodel to "+genModelPath);
 					genResource.save(Collections.EMPTY_MAP);
-				} catch (IOException e) {
+				}
+				catch (IOException e) {
 					logger.logError(e.getMessage(), null);
+					logger.logError("-- terminating", null);
+					return;
 				}
 			}
+			logger.logInfo("-- starting code generation");
+			fileAccess.setOutputPath("src-gen/");
 			generator.doGenerate(genResource, fileAccess);
+			logger.logInfo("-- finished code generation");
 		}
-			
-		logger.logInfo("-- fineshed code generation");
 	}
 }

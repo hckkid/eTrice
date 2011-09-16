@@ -327,7 +327,7 @@ public class CPUser extends ActorClassBase {
 					// state has a sub graph
 					// with init transition
 					if (history[STATE_state1]==NO_STATE) {
-						state = executeTransitionChain(CHAIN_TRANS_INITIAL_TO__cp0, null, null);
+						state = executeTransitionChain(CHAIN_state1_TRANS_INITIAL_TO__state0, null, null);
 					}
 					else {
 						state = history[STATE_state1];

@@ -670,7 +670,7 @@ public class HandlerUser extends ActorClassBase {
 					// state has a sub graph
 					// with init transition
 					if (history[STATE_state0]==NO_STATE) {
-						state = executeTransitionChain(CHAIN_TRANS_INITIAL_TO__state0_tp2, null, null);
+						state = executeTransitionChain(CHAIN_state0_TRANS_INITIAL_TO__state2, null, null);
 					}
 					else {
 						state = history[STATE_state0];
@@ -681,7 +681,7 @@ public class HandlerUser extends ActorClassBase {
 					// state has a sub graph
 					// with init transition
 					if (history[STATE_state0_state1]==NO_STATE) {
-						state = executeTransitionChain(CHAIN_TRANS_INITIAL_TO__state0_tp2, null, null);
+						state = executeTransitionChain(CHAIN_state0_state1_TRANS_INITIAL_TO__state7, null, null);
 					}
 					else {
 						state = history[STATE_state0_state1];
