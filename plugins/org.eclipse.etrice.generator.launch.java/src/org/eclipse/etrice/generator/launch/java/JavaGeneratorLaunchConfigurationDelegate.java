@@ -45,14 +45,19 @@ public class JavaGeneratorLaunchConfigurationDelegate extends GeneratorLaunchCon
 	 */
 	@Override
 	protected void addArguments(ILaunchConfiguration configuration, StringBuffer argString) throws CoreException {
+		if (configuration.getAttribute(JavaGeneratorConfigTab.SAVE_GEN_MODEL, false)) {
+			argString.append(" -saveGenModel");
+			argString.append(" file://"+configuration.getAttribute(JavaGeneratorConfigTab.GEN_MODEL_PATH, "?"));
+		}
+		if (configuration.getAttribute(JavaGeneratorConfigTab.GEN_INSTANCE_DIAGRAM, false))
+			argString.append(" -genInstDiag");
 	}
 
 	/* (non-Javadoc)
 	 * @see org.eclipse.etrice.generator.launch.GeneratorLaunchConfigurationDelegate#launch(org.eclipse.debug.core.ILaunchConfiguration, java.lang.String, org.eclipse.debug.core.ILaunch, org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	@Override
-	public void launch(final ILaunchConfiguration configuration, String mode,
-			ILaunch launch, IProgressMonitor monitor) throws CoreException {
+	public void launch(final ILaunchConfiguration configuration, String mode, ILaunch launch, IProgressMonitor monitor) throws CoreException {
 		if (RefreshTab.getRefreshScope(configuration) != null) {
 			DebugPlugin.getDefault().addDebugEventListener(new IDebugEventSetListener() {
 				public void handleDebugEvents(DebugEvent[] events) {

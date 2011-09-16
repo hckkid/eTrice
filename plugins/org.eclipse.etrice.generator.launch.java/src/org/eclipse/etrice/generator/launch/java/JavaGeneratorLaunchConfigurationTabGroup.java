@@ -13,6 +13,7 @@ public class JavaGeneratorLaunchConfigurationTabGroup extends AbstractLaunchConf
 	public void createTabs(ILaunchConfigurationDialog dialog, String mode) {
 		ILaunchConfigurationTab[] tabs = new ILaunchConfigurationTab[] {
 				new JavaGeneratorMainTab(),
+				new JavaGeneratorConfigTab(),
 				new RefreshTab(),
 				new EnvironmentTab(),
 				new CommonTab()

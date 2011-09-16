@@ -27,6 +27,7 @@ import org.eclipse.etrice.generator.builder.GeneratorModelBuilder;
 import org.eclipse.etrice.generator.builder.ILogger;
 import org.eclipse.etrice.generator.etricegen.IDiagnostician;
 import org.eclipse.etrice.generator.etricegen.Root;
+import org.eclipse.etrice.generator.java.gen.InstanceDiagramGen;
 import org.eclipse.etrice.generator.java.setup.StandaloneSetup;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.generator.IGenerator;
@@ -41,6 +42,17 @@ import com.google.inject.Injector;
 import com.google.inject.Provider;
 
 public class Main {
+	
+	/**
+	 * print usage message to stderr
+	 */
+	private static void printUsage() {
+		System.err.println(Main.class.getName()+" [-saveGenModel <genmodel path>] [-genInstDiag] <list of model file paths>");
+		System.err.println("      <list of model file paths>        # model file paths may be specified as");
+		System.err.println("                                        # e.g. C:\\path\\to\\model\\mymodel.room");
+		System.err.println("      -saveGenModel <genmodel path>     # if specified the generator model will be saved to this location");
+		System.err.println("      -genInstDiag                      # if specified an instance diagram is created for each subsystem");
+	}
 
 	public static void main(String[] args) {
 		if (args.length == 0) {
@@ -52,11 +64,15 @@ public class Main {
 		// parsing arguments
 		String genModelPath = null;
 		List<String> uriList = new ArrayList<String>();
+		boolean genInstDiag = false;
 		for (int i=0; i<args.length; ++i) {
 			if (args[i].equals("-saveGenModel")) {
 				if (++i<args.length) {
-					genModelPath = convertToURI(args[i]);
+					genModelPath = convertToURI(args[i]+"/genmodel.rim");
 				}
+			}
+			else if (args[i].equals("-genInstDiag")) {
+				genInstDiag = true;
 			}
 			else {
 				uriList.add(convertToURI(args[i]));
@@ -70,7 +86,7 @@ public class Main {
 
 		Injector injector = new StandaloneSetup().createInjectorAndDoEMFRegistration();
 		Main main = injector.getInstance(Main.class);
-		main.runGenerator(uriList, genModelPath, validator);
+		main.runGenerator(uriList, genModelPath, genInstDiag, validator);
 	}
 
 	private static String convertToURI(String uri) {
@@ -80,16 +96,6 @@ public class Main {
 		else {
 			return "file://"+uri.replace('\\', '/');
 		}
-	}
-	
-	/**
-	 * print usage message to stderr
-	 */
-	private static void printUsage() {
-		System.err.println(Main.class.getName()+" [-saveGenModel <genmodel path>] <list of model file paths>");
-		System.err.println("      <list of model file paths>        # model file paths may be specified as");
-		System.err.println("                                        # e.g. C:\\path\\to\\model\\mymodel.room");
-		System.err.println("      -saveGenModel <genmodel path>     # if specified the generator model will be saved to this location");
 	}
 
 	@Inject
@@ -102,12 +108,15 @@ public class Main {
 	private IDiagnostician diagnostician;
 
 	@Inject
-	private IGenerator generator;
+	private IGenerator mainGenerator;
 
+	@Inject
+	private InstanceDiagramGen instanceDiagramGenerator;
+	
 	@Inject
 	private JavaIoFileSystemAccess fileAccess;
 
-	protected void runGenerator(List<String> uriList, String genModelPath, IResourceValidator validator) {
+	protected void runGenerator(List<String> uriList, String genModelPath, boolean genInstDiag, IResourceValidator validator) {
 		ResourceSet rs = resourceSetProvider.get();
 
 		logger.logInfo("-- reading models");
@@ -184,7 +193,10 @@ public class Main {
 			}
 			logger.logInfo("-- starting code generation");
 			fileAccess.setOutputPath("src-gen/");
-			generator.doGenerate(genResource, fileAccess);
+			mainGenerator.doGenerate(genResource, fileAccess);
+			if (genInstDiag) {
+				instanceDiagramGenerator.doGenerate(gmRoot);
+			}
 			logger.logInfo("-- finished code generation");
 		}
 	}
