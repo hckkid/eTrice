@@ -45,6 +45,10 @@ public class EmptyProjectWizard extends Wizard implements INewWizard {
 	protected IProject project;
 	protected IProject runtimeProject;
 	protected String initialProjectName;
+	
+	private String[] additionalLaunchConfigLines = new String[] {
+		"<stringAttribute key=\"org.eclipse.debug.core.ATTR_REFRESH_SCOPE\" value=\"${workspace}\"/>"
+	};
 
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
 		this.workbench = workbench;
@@ -96,6 +100,7 @@ public class EmptyProjectWizard extends Wizard implements INewWizard {
 	@Override
 	public boolean performFinish() {
 		WorkspaceModifyOperation operation = new WorkspaceModifyOperation() {
+
 			@Override
 			protected void execute(IProgressMonitor progressMonitor) {
 				try {
@@ -131,7 +136,8 @@ public class EmptyProjectWizard extends Wizard implements INewWizard {
 
 					ProjectCreator.createLaunchConfig(URI.createPlatformResourceURI("/"
 							+baseName+"/gen_"+baseName+".launch", true),
-							baseName);
+							baseName,
+							additionalLaunchConfigLines);
 
 					ProjectCreator.findOrCreateContainer(new Path("/"
 							+ baseName + "/tmp/log"),

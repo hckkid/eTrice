@@ -515,7 +515,7 @@ public class ProjectCreator {
 		}
 	}
 
-	public static void createLaunchConfig(URI uri, String baseName) {
+	public static void createLaunchConfig(URI uri, String baseName, String[] addLines) {
 		try {
 			PrintStream launch = new PrintStream(
 					URIConverter.INSTANCE.createOutputStream(uri, null),
@@ -530,6 +530,9 @@ public class ProjectCreator {
 			launch.println("<listEntry value=\"org.eclipse.debug.ui.launchGroup.run\"/>");
 			launch.println("</listAttribute>");
 			launch.println("<stringAttribute key=\"org.eclipse.jdt.launching.PROJECT_ATTR\" value=\""+baseName+"\"/>");
+			for (String line : addLines) {
+				launch.println(line);
+			}
 			launch.println("</launchConfiguration>");
 			launch.close();
 		} catch (UnsupportedEncodingException e) {
