@@ -8,19 +8,13 @@
 
 package org.eclipse.etrice.runtime.java.modelbase;
 
+import junit.framework.TestCase;
+
 import org.eclipse.etrice.runtime.java.messaging.Address;
-import org.eclipse.etrice.runtime.java.messaging.IMessageReceiver;
 import org.eclipse.etrice.runtime.java.messaging.IRTObject;
 import org.eclipse.etrice.runtime.java.messaging.Message;
 import org.eclipse.etrice.runtime.java.messaging.MessageService;
 import org.eclipse.etrice.runtime.java.messaging.RTServices;
-import org.eclipse.etrice.runtime.java.modelbase.ActorClassBase;
-import org.eclipse.etrice.runtime.java.modelbase.IEventReceiver;
-import org.eclipse.etrice.runtime.java.modelbase.InterfaceItemBase;
-import org.eclipse.etrice.runtime.java.modelbase.PortBase;
-import org.eclipse.etrice.runtime.java.modelbase.ActorClassBaseTest.MockRTObject;
-
-import junit.framework.TestCase;
 
 public class PortBaseTest extends TestCase {
 	// TODO: pull out all Mock Objects 

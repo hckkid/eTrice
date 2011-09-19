@@ -42,8 +42,7 @@ public abstract class ActorClassBase extends EventReceiver implements IMessageRe
 
 	private MessageService ownMsgsvc = null;
 	private Address ownAddr = null;
-	// the System Port
-	private RTSystemServicesProtocolPort RTSystemPort = null;
+	protected RTSystemServicesProtocolPort RTSystemPort = null;
 	
 	public ActorClassBase(IRTObject parent, String name, Address ownAddr, Address systemPortPeerAddr) {
 		super(parent, name);

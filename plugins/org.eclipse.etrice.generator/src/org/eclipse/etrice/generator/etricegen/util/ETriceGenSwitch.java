@@ -6,19 +6,32 @@
  */
 package org.eclipse.etrice.generator.etricegen.util;
 
-import java.util.List;
-
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorContainerClass;
 import org.eclipse.etrice.core.room.RoomClass;
 import org.eclipse.etrice.core.room.StructureClass;
-
-import org.eclipse.etrice.generator.etricegen.*;
+import org.eclipse.etrice.generator.etricegen.ActiveTrigger;
+import org.eclipse.etrice.generator.etricegen.ActorInstance;
+import org.eclipse.etrice.generator.etricegen.BindingInstance;
+import org.eclipse.etrice.generator.etricegen.ConnectionInstance;
+import org.eclipse.etrice.generator.etricegen.Counter;
+import org.eclipse.etrice.generator.etricegen.ETriceGenPackage;
+import org.eclipse.etrice.generator.etricegen.ExpandedActorClass;
+import org.eclipse.etrice.generator.etricegen.IDiagnostician;
+import org.eclipse.etrice.generator.etricegen.ITransitionChainVisitor;
+import org.eclipse.etrice.generator.etricegen.InstanceBase;
+import org.eclipse.etrice.generator.etricegen.InterfaceItemInstance;
+import org.eclipse.etrice.generator.etricegen.PortInstance;
+import org.eclipse.etrice.generator.etricegen.Root;
+import org.eclipse.etrice.generator.etricegen.SAPInstance;
+import org.eclipse.etrice.generator.etricegen.SPPInstance;
+import org.eclipse.etrice.generator.etricegen.ServiceImplInstance;
+import org.eclipse.etrice.generator.etricegen.StructureInstance;
+import org.eclipse.etrice.generator.etricegen.SubSystemInstance;
+import org.eclipse.etrice.generator.etricegen.TransitionChain;
 
 /**
  * <!-- begin-user-doc -->

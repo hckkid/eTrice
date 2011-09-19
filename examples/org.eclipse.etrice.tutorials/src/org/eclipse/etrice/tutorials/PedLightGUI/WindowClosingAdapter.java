@@ -23,7 +23,6 @@ import java.awt.event.*;
  * @author Thomas Jung
  * 
 **/
-@SuppressWarnings("unused")
 public class WindowClosingAdapter
 extends WindowAdapter
 {
