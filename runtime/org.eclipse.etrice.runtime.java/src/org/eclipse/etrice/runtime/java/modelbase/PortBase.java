@@ -9,7 +9,6 @@
 package org.eclipse.etrice.runtime.java.modelbase;
 
 import org.eclipse.etrice.runtime.java.messaging.Address;
-import org.eclipse.etrice.runtime.java.messaging.IMessageReceiver;
 
 /**
  * An abstract base class for port instances.

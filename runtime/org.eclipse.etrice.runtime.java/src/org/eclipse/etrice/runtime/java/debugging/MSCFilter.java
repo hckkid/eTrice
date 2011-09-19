@@ -35,7 +35,8 @@ public class MSCFilter {
 		if (filterList.isEmpty())
 			return true; // no filters -> all messages will be logged
 		for (FilterItem item : filterList){
-			if (text.startsWith(item.filter)) return true;
+			if (text.startsWith(item.filter))
+				return !item.exclude;
 		}
 		return false;
 	}
