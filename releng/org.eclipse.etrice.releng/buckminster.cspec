@@ -7,12 +7,12 @@
         <cs:dependency name="org.eclipse.etrice.core.feature" componentType="eclipse.feature"/>
         <cs:dependency name="org.eclipse.etrice.examples.feature" componentType="eclipse.feature"/>
         <cs:dependency name="org.eclipse.etrice.runtime.java" componentType="buckminster"/>
+        <cs:dependency name="org.eclipse.etrice.runtime.java.tests" componentType="buckminster"/>
         <cs:dependency name="org.eclipse.etrice.site" componentType="eclipse.feature"/>
         <cs:dependency name="org.eclipse.pde" componentType="eclipse.feature"/>
         <cs:dependency name="org.eclipse.pde.source" componentType="eclipse.feature"/>
         <cs:dependency name="org.eclipse.platform" componentType="eclipse.feature"/>
         <cs:dependency name="org.eclipse.platform.source" componentType="eclipse.feature"/>
-        <cs:dependency name="org.eclipse.etrice.runtime.java.tests" componentType="buckminster"/>
     </cs:dependencies>
     <cs:actions>
         <cs:public name="copy.sites" actor="ant">
@@ -25,6 +25,12 @@
                 <cs:property key="root" value="${WORKSPACE}"/>
             </cs:properties>
             <cs:products alias="action.output" base="${WORKSPACE}/last_success/"/>
+        </cs:public>
+        <cs:public name="create.doc" actor="ant">
+            <cs:actorProperties>
+                <cs:property key="buildFile" value="../../plugins/org.eclipse.etrice.doc/build-etrice-doc.xml"/>
+                <cs:property key="targets" value="build-doc"/>
+            </cs:actorProperties>
         </cs:public>
         <cs:public name="create.javadoc" actor="ant">
             <cs:actorProperties>
@@ -56,10 +62,10 @@
                 <cs:property key="targets" value="promote.sites"/>
             </cs:actorProperties>
             <cs:properties>
-                <cs:property key="download.area" value="${graphiti.download.area}"/>
+                <cs:property key="download.area" value="${etrice.download.area}"/>
                 <cs:property key="root" value="${WORKSPACE}"/>
             </cs:properties>
-            <cs:products alias="action.output" base="${graphiti.download.area}/updates/nightly/"/>
+            <cs:products alias="action.output" base="${etrice.download.area}/updates/nightly/"/>
         </cs:public>
     </cs:actions>
 </cs:cspec>
