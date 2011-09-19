@@ -13,11 +13,11 @@
 		</path>
 		
 		 <!-- clean and create output location --> 
-		<delete dir="${root}/buildroot/buckminster.workspace/../../etrice_local_repo/plugins/org.eclipse.etrie.doc/javadoc"/>
-		<mkdir dir="${root}/buildroot/buckminster.workspace/../../etrice_local_repo/plugins/org.eclipse.etrice.doc/javadoc"/>
+		<delete dir="${root}/buildroot/buckminster.workspace/../../etrice_local_repo/plugins/org.eclipse.etrie.doc/html/javadoc"/>
+		<mkdir dir="${root}/buildroot/buckminster.workspace/../../etrice_local_repo/plugins/org.eclipse.etrice.doc/html/javadoc"/>
 		
 		<!-- generate the javadoc -->
-		<javadoc  destdir="${root}/buildroot/buckminster.workspace/../../etrice_local_repo/plugins/org.eclipse.etrice.doc/javadoc"  
+		<javadoc  destdir="${root}/buildroot/buckminster.workspace/../../etrice_local_repo/plugins/org.eclipse.etrice.doc/html/javadoc"  
 			classpathref="files-classpath"
 			author="true"
 			version="true"
