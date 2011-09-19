@@ -2,6 +2,7 @@
 <cs:cspec xmlns:cs="http://www.eclipse.org/buckminster/CSpec-1.0" name="org.eclipse.etrice.releng" componentType="buckminster" version="0.1.0.qualifier">
     <cs:dependencies>
         <cs:dependency name="com.thoughtworks.qdox" componentType="osgi.bundle"/>
+        <cs:dependency name="org.aopalliance" componentType="osgi.bundle"/>
         <cs:dependency name="org.eclipse.draw2d" componentType="eclipse.feature"/>
         <cs:dependency name="org.eclipse.etrice.core.feature" componentType="eclipse.feature"/>
         <cs:dependency name="org.eclipse.etrice.examples.feature" componentType="eclipse.feature"/>
@@ -11,7 +12,7 @@
         <cs:dependency name="org.eclipse.pde.source" componentType="eclipse.feature"/>
         <cs:dependency name="org.eclipse.platform" componentType="eclipse.feature"/>
         <cs:dependency name="org.eclipse.platform.source" componentType="eclipse.feature"/>
-        <cs:dependency name="org.aopalliance" componentType="osgi.bundle"/>
+        <cs:dependency name="org.eclipse.etrice.runtime.java.tests" componentType="buckminster"/>
     </cs:dependencies>
     <cs:actions>
         <cs:public name="copy.sites" actor="ant">
