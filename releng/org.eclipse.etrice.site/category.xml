@@ -9,7 +9,7 @@
    <feature url="features/org.eclipse.etrice.tests_0.1.0.qualifier.jar" id="org.eclipse.etrice.tests" version="0.1.0.qualifier">
       <category name="org.eclipse.etrice"/>
    </feature>
-   <category-def name="org.eclipse.etrice" label="etrice">
+   <category-def name="org.eclipse.etrice" label="eTrice">
       <description>
          The eTrice update site provides access to the eTrice modeling tools and all additional features.
       </description>

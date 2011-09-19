@@ -13,11 +13,11 @@
 		</path>
 		
 		 <!-- clean and create output location --> 
-		<delete dir="${root}/buildroot/buckminster.workspace/../../etrice_local_repo/examples/org.eclipse.etrie.doc/javadoc"/>
-		<mkdir dir="${root}/buildroot/buckminster.workspace/../../etrice_local_repo/examples/org.eclipse.etrice.doc/javadoc"/>
+		<delete dir="${root}/buildroot/buckminster.workspace/../../etrice_local_repo/plugins/org.eclipse.etrie.doc/javadoc"/>
+		<mkdir dir="${root}/buildroot/buckminster.workspace/../../etrice_local_repo/plugins/org.eclipse.etrice.doc/javadoc"/>
 		
 		<!-- generate the javadoc -->
-		<javadoc  destdir="${root}/buildroot/buckminster.workspace/../../etrice_local_repo/examples/org.eclipse.etrice.doc/javadoc"  
+		<javadoc  destdir="${root}/buildroot/buckminster.workspace/../../etrice_local_repo/plugins/org.eclipse.etrice.doc/javadoc"  
 			classpathref="files-classpath"
 			author="true"
 			version="true"
@@ -49,7 +49,6 @@
 				<exclude name="**/internal/**"/>    
 				<exclude name="**/tests/**"/>
 				<exclude name="**/examples/**"/>
-				<exclude name="**/testtool/**"/> 
 			</fileset>
 			<bottom><![CDATA[ <a href="http://www.eclipse.org/legal/epl-v10.html" shape="rect">Copyright (c) Protos Software GmbH 2010, 2011.</a>]]></bottom>
 		</javadoc>
