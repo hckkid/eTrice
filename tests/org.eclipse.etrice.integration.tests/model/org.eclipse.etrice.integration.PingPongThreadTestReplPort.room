@@ -3,11 +3,11 @@ RoomModel org.eclipse.etrice.integration.PingPongThreadTestReplPort {
 	import room.basic.service.timing.*
 
 
-	LogicalSystem System_PingPong {
-		SubSystemRef subsystem: SubSystem_PingPong
+	LogicalSystem System_PingPongReplPort {
+		SubSystemRef subsystem: SubSystem_PingPongReplPort
 	}
 
-	SubSystemClass SubSystem_PingPong {
+	SubSystemClass SubSystem_PingPongReplPort {
 		ActorRef application: PingPongTop
 		ActorRef services: ATimingService
 		LayerConnection ref application satisfied_by services.timer
@@ -28,6 +28,7 @@ RoomModel org.eclipse.etrice.integration.PingPongThreadTestReplPort {
 			Binding MrPing.PingPongPort and MrPong2.PingPongPort
 			Binding MrPing.PingPongPort and MrPong3.PingPongPort
 		}
+		Behavior { }
 	}
 
 	ActorClass MrPingActor {
@@ -70,13 +71,19 @@ RoomModel org.eclipse.etrice.integration.PingPongThreadTestReplPort {
 						"pongCount++;"
 					}
 				}
-				Transition tr5: cp cp0 -> waitForTimer {
+				Transition tr4: cp cp0 -> waitForTimer {
 					action {
 						"if (count++ > 1000) {"
 						"RTServices.getInstance().getSubSystem().testFinished(0);"
 						"} else {"
+						"//PingPongPort.get(0).ping();"
+						"//PingPongPort.get(1).ping();"
+						"//PingPongPort.get(2).ping();"
+						"System.out.println(pongCount);"
 						"System.out.println(count);"
-						"timer.Start(5);}"
+						"pongCount = 0;"
+						"timer.Start(10);"
+						"}"
 					}
 				}
 				Transition tr6: cp cp0 -> waitForPong {
@@ -85,8 +92,8 @@ RoomModel org.eclipse.etrice.integration.PingPongThreadTestReplPort {
 					}
 				}
 				ChoicePoint cp0
-				State waitForTimer { }
-				State waitForPong { }
+				State waitForTimer
+				State waitForPong
 			}
 		}
 	}
@@ -109,7 +116,7 @@ RoomModel org.eclipse.etrice.integration.PingPongThreadTestReplPort {
 						"PingPongPort.pong();"
 					}
 				}
-				State waitForPing { }
+				State waitForPing
 			}
 		}
 	}
