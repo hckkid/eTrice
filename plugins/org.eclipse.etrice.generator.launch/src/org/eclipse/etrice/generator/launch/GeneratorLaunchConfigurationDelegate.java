@@ -87,7 +87,7 @@ public abstract class GeneratorLaunchConfigurationDelegate extends AbstractJavaL
 
 			String[] args = pgmArgs.split("[ \t]");
 
-			final MessageConsole myConsole = findConsole("EM Generator Output");
+			final MessageConsole myConsole = findConsole(getConsoleName());
 			Display.getDefault().syncExec(new Runnable() {
 				@Override
 				public void run() {
@@ -141,6 +141,7 @@ public abstract class GeneratorLaunchConfigurationDelegate extends AbstractJavaL
 		for (int i = 0; i < existing.length; i++)
 			if (name.equals(existing[i].getName()))
 				return (MessageConsole) existing[i];
+		
 		// no console found, so create a new one
 		MessageConsole myConsole = new MessageConsole(name, null);
 		conMan.addConsoles(new IConsole[] { myConsole });
@@ -171,4 +172,9 @@ public abstract class GeneratorLaunchConfigurationDelegate extends AbstractJavaL
 	 * @param out line wise output to console
 	 */
 	protected abstract void runGenerator(String[] args, ILineOutput out);
+	
+	/**
+	 * @return the name of the console for the generator output
+	 */
+	protected abstract String getConsoleName();
 }

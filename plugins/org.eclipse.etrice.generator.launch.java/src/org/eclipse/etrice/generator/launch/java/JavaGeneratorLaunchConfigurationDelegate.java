@@ -45,4 +45,12 @@ public class JavaGeneratorLaunchConfigurationDelegate extends GeneratorLaunchCon
 		org.eclipse.etrice.generator.java.Main.main(args);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.etrice.generator.launch.GeneratorLaunchConfigurationDelegate#getConsoleName()
+	 */
+	@Override
+	protected String getConsoleName() {
+		return "eTrice Java Generator Console";
+	}
+
 }
