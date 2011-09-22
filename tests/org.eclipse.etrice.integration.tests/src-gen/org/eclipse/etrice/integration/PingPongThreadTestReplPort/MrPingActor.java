@@ -250,8 +250,14 @@ public class MrPingActor extends ActorClassBase {
 		if (count++ > 1000) {
 		RTServices.getInstance().getSubSystem().testFinished(0);
 		} else {
+		//PingPongPort.get(0).ping();
+		//PingPongPort.get(1).ping();
+		//PingPongPort.get(2).ping();
+		System.out.println(pongCount);
 		System.out.println(count);
-		timer.Start(5);}
+		pongCount = 0;
+		timer.Start(10);
+		}
 	}
 		 
 	//******************************************
