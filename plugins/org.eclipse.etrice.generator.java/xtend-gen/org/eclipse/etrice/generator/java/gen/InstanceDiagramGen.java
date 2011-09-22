@@ -5,7 +5,8 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.SubSystemClass;
-import org.eclipse.etrice.generator.base.Logger;
+import org.eclipse.etrice.generator.base.ILogger;
+import org.eclipse.etrice.generator.base.IRoomGenerator;
 import org.eclipse.etrice.generator.etricegen.ActorInstance;
 import org.eclipse.etrice.generator.etricegen.Root;
 import org.eclipse.etrice.generator.etricegen.StructureInstance;
@@ -16,7 +17,7 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 
 @SuppressWarnings("all")
-public class InstanceDiagramGen {
+public class InstanceDiagramGen implements IRoomGenerator {
   
   @Inject
   private JavaIoFileSystemAccess fileAccess;
@@ -25,7 +26,7 @@ public class InstanceDiagramGen {
   private StdExtensions stdExt;
   
   @Inject
-  private Logger logger;
+  private ILogger logger;
   
   public void doGenerate(final Root root) {
     EList<SubSystemInstance> _subSystemInstances = root.getSubSystemInstances();

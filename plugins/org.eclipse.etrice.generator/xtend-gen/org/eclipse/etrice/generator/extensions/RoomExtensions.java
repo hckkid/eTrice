@@ -49,8 +49,9 @@ public class RoomExtensions {
   
   public <T> List<T> union(final List<T> l1, final List<T> l2) {
     {
-      ArrayList<T> _arrayList = new ArrayList<T>(l1);
+      ArrayList<T> _arrayList = new ArrayList<T>();
       ArrayList<T> ret = _arrayList;
+      ret.addAll(l1);
       ret.addAll(l2);
       return ret;
     }

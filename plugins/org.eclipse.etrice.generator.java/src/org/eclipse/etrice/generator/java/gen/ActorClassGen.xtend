@@ -21,7 +21,7 @@ import static extension org.eclipse.xtext.xtend2.lib.*
 
 import org.eclipse.etrice.core.room.*
 import org.eclipse.etrice.generator.etricegen.*
-import org.eclipse.etrice.generator.base.Logger
+import org.eclipse.etrice.generator.base.ILogger
 
 class ActorClassGen {
 	
@@ -29,7 +29,7 @@ class ActorClassGen {
 	@Inject extension StdExtensions stdExt
 	@Inject extension ProcedureHelpers helpers
 	@Inject extension StateMachineGen stateMachineGen
-	@Inject Logger logger
+	@Inject ILogger logger
 	
 	def doGenerate(Root root) {
 		for (xpac: root.xpActorClasses) {

@@ -37,7 +37,8 @@ class RoomExtensions {
 	// union methods
 	
 	def <T> List<T> union(List<T> l1, List<T> l2) {
-		var ret = new ArrayList<T>(l1)
+		var ret = new ArrayList<T>()
+		ret.addAll(l1)
 		ret.addAll(l2)
 		return ret
 	}

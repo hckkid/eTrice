@@ -8,7 +8,7 @@ import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.LogicalThread;
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.SubSystemClass;
-import org.eclipse.etrice.generator.base.Logger;
+import org.eclipse.etrice.generator.base.ILogger;
 import org.eclipse.etrice.generator.etricegen.ActorInstance;
 import org.eclipse.etrice.generator.etricegen.Counter;
 import org.eclipse.etrice.generator.etricegen.InterfaceItemInstance;
@@ -36,7 +36,7 @@ public class SubSystemClassGen {
   private ProcedureHelpers helpers;
   
   @Inject
-  private Logger logger;
+  private ILogger logger;
   
   public void doGenerate(final Root root) {
     EList<SubSystemInstance> _subSystemInstances = root.getSubSystemInstances();

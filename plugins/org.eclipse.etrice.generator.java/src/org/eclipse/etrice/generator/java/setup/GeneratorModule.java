@@ -12,31 +12,22 @@
 
 package org.eclipse.etrice.generator.java.setup;
 
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.etrice.generator.base.Diagnostician;
-import org.eclipse.etrice.generator.base.ILineOutputLogger;
-import org.eclipse.etrice.generator.base.Logger;
-import org.eclipse.etrice.generator.etricegen.IDiagnostician;
+import org.eclipse.etrice.generator.base.AbstractGenerator;
+import org.eclipse.etrice.generator.base.GeneratorBaseModule;
+import org.eclipse.etrice.generator.java.Main;
 import org.eclipse.etrice.generator.java.gen.MainGen;
 import org.eclipse.xtext.generator.IGenerator;
 
 import com.google.inject.Binder;
-import com.google.inject.Module;
-import com.google.inject.Singleton;
 
-public class GeneratorModule implements Module {
+public class GeneratorModule extends GeneratorBaseModule {
 
 //	@Override
 	public void configure(Binder binder) {
-		binder.bind(IGenerator.class).to(MainGen.class);
-		binder.bind(ResourceSet.class).to(ResourceSetImpl.class);
-
-		binder.bind(Logger.class).in(Singleton.class);
-		binder.bind(ILineOutputLogger.class).to(Logger.class);
+		super.configure(binder);
 		
-		binder.bind(Diagnostician.class).in(Singleton.class);
-		binder.bind(IDiagnostician.class).to(Diagnostician.class);
+		binder.bind(AbstractGenerator.class).to(Main.class);
+		binder.bind(IGenerator.class).to(MainGen.class);
 	}
 
 }

@@ -21,14 +21,14 @@ import static extension org.eclipse.xtext.xtend2.lib.*
 
 import org.eclipse.etrice.core.room.*
 import org.eclipse.etrice.generator.etricegen.*
-import org.eclipse.etrice.generator.base.Logger
+import org.eclipse.etrice.generator.base.ILogger
 
 class DataClassGen {
 
 	@Inject extension JavaIoFileSystemAccess fileAccess
 	@Inject extension StdExtensions stdExt
 	@Inject extension ProcedureHelpers helpers
-	@Inject Logger logger
+	@Inject ILogger logger
 	
 	def doGenerate(Root root) {
 		for (dc: root.usedDataClasses) {

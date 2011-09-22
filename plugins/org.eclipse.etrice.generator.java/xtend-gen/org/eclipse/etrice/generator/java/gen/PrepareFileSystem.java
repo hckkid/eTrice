@@ -8,7 +8,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.etrice.core.room.RoomModel;
-import org.eclipse.etrice.generator.base.Logger;
+import org.eclipse.etrice.generator.base.ILogger;
 import org.eclipse.etrice.generator.etricegen.Root;
 import org.eclipse.etrice.generator.java.gen.StdExtensions;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
@@ -25,7 +25,7 @@ public class PrepareFileSystem {
   private JavaIoFileSystemAccess fileAccess;
   
   @Inject
-  private Logger logger;
+  private ILogger logger;
   
   public void prepare(final Resource resource) {
     {

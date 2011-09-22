@@ -31,7 +31,6 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.SubProgressMonitor;
-import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.eclipse.emf.common.util.BasicMonitor;
 import org.eclipse.emf.common.util.Monitor;
 import org.eclipse.emf.common.util.URI;
@@ -370,75 +369,7 @@ public class ProjectCreator {
       }
     }
 
-    /**
-     * @param uri
-     * @param name
-     * @param generatorName
-     * @deprecated new Xtend2 based generator uses Java launch 
-     */
-    public static void createWorkflow(URI uri, String name, String generatorName) {
-		try {
-			PrintStream workflow = new PrintStream(
-					URIConverter.INSTANCE.createOutputStream(uri, null),
-					false,
-					"UTF-8"
-				);
-	    	workflow.println("module "+name);
-	    	workflow.println("");
-	    	workflow.println("import workflow.RoomGenerator");
-	    	workflow.println("import org.eclipse.emf.mwe.utils.*");
-	    	workflow.println("");
-	    	workflow.println("var destDir = \"src-gen\"");
-	    	workflow.println("");
-	    	workflow.println("Workflow {");
-	    	workflow.println("");
-	    	workflow.println("	component = DirectoryCleaner {");
-	    	workflow.println("		directory = destDir");
-	    	workflow.println("	}");
-	    	workflow.println("");
-	    	workflow.println("	component = @"+generatorName+" {");
-	    	workflow.println("		sourceDir = \"model\"");
-	    	workflow.println("		targetDir = destDir");
-	    	workflow.println("	}");
-	    	workflow.println("}");
-			workflow.close();
-		} catch (UnsupportedEncodingException e) {
-			Logger.getLogger(ProjectCreator.class).error(e.getMessage(), e);
-		} catch (IOException e) {
-			Logger.getLogger(ProjectCreator.class).error(e.getMessage(), e);
-		}
-    }
-
-	public static void createManifest(URI uri, String baseName, List<String> requiredBundles) {
-		try {
-			PrintStream manifest = new PrintStream(
-					URIConverter.INSTANCE.createOutputStream(uri, null),
-					false,
-					"UTF-8");
-			manifest.println("Manifest-Version: 1.0");
-			manifest.println("Bundle-ManifestVersion: 2");
-			manifest.println("Bundle-Name: "+baseName);
-			manifest.println("Bundle-SymbolicName: "+CodeGenUtil.validPluginID(baseName));
-			manifest.println("Bundle-Version: 0.1.0");
-			Iterator<String> it = requiredBundles.iterator();
-			if (it.hasNext()) {
-				manifest.print("Require-Bundle:");
-				manifest.print(" "+it.next());
-				while (it.hasNext()) {
-					manifest.print(",\n "+it.next());
-				}
-				manifest.println("");
-			}
-			manifest.println("Bundle-RequiredExecutionEnvironment: JavaSE-1.6");
-			manifest.close();
-		} catch (UnsupportedEncodingException e) {
-			Logger.getLogger(ProjectCreator.class).error(e.getMessage(), e);
-		} catch (IOException e) {
-			Logger.getLogger(ProjectCreator.class).error(e.getMessage(), e);
-		}
-	}
-
-	public static void createModel(URI uri, String baseName) {
+    public static void createModel(URI uri, String baseName) {
 		try {
 			PrintStream model = new PrintStream(
 					URIConverter.INSTANCE.createOutputStream(uri, null),

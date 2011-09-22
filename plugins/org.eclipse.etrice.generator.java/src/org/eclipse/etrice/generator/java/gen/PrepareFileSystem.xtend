@@ -24,13 +24,13 @@ import org.eclipse.emf.ecore.*
 
 import org.eclipse.etrice.core.room.*
 import org.eclipse.etrice.generator.etricegen.*
-import org.eclipse.etrice.generator.base.Logger
+import org.eclipse.etrice.generator.base.ILogger
 
 class PrepareFileSystem {
 	
 	@Inject extension StdExtensions stdExt
 	@Inject extension JavaIoFileSystemAccess fileAccess
-	@Inject Logger logger
+	@Inject ILogger logger
 	
 	def void prepare(Resource resource) {
 		var Set<String> pathes = new HashSet<String>();

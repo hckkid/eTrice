@@ -6,22 +6,24 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * CONTRIBUTORS:
- * 		Henrik Rentz-Reichert (initial contribution)
+ * 		Thomas Schuetz and Henrik Rentz-Reichert (initial contribution)
  * 
  *******************************************************************************/
 
-package org.eclipse.etrice.generator.java.setup;
+package org.eclipse.etrice.generator.base;
 
-import org.eclipse.xtext.ISetup;
+import org.eclipse.etrice.generator.etricegen.Root;
 
-import com.google.inject.Guice;
-import com.google.inject.Injector;
+/**
+ * @author hrentz
+ *
+ */
+public interface IRoomGenerator {
 
-public class StandaloneSetup implements ISetup {
-
-//	@Override
-	public Injector createInjectorAndDoEMFRegistration() {
-		return Guice.createInjector(new GeneratorModule());
-	}
-
+	/**
+	 * generate code from an eTrice generator model
+	 * 
+	 * @param root the root object of the eTrice generator model
+	 */
+	void doGenerate(Root root);
 }

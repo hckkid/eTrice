@@ -12,45 +12,19 @@
 
 package org.eclipse.etrice.generator.java;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.etrice.core.room.RoomModel;
-import org.eclipse.etrice.generator.base.ILineOutput;
-import org.eclipse.etrice.generator.base.ILineOutputLogger;
-import org.eclipse.etrice.generator.base.StdLineOutput;
-import org.eclipse.etrice.generator.builder.GeneratorModelBuilder;
-import org.eclipse.etrice.generator.etricegen.IDiagnostician;
+import org.eclipse.etrice.generator.base.AbstractGenerator;
 import org.eclipse.etrice.generator.etricegen.Root;
 import org.eclipse.etrice.generator.java.gen.InstanceDiagramGen;
-import org.eclipse.etrice.generator.java.setup.StandaloneSetup;
-import org.eclipse.xtext.diagnostics.Severity;
+import org.eclipse.etrice.generator.java.setup.GeneratorModule;
 import org.eclipse.xtext.generator.IGenerator;
-import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
-import org.eclipse.xtext.util.CancelIndicator;
-import org.eclipse.xtext.validation.CheckMode;
-import org.eclipse.xtext.validation.IResourceValidator;
-import org.eclipse.xtext.validation.Issue;
 
 import com.google.inject.Inject;
-import com.google.inject.Injector;
-import com.google.inject.Provider;
 
-public class Main {
-	
-	private static ILineOutput output = new StdLineOutput();
-	
-	public static void setOutput(ILineOutput out) {
-		if (out!=null)
-			output = out;
-	}
+public class Main extends AbstractGenerator {
 	
 	/**
 	 * print usage message to stderr
@@ -64,8 +38,18 @@ public class Main {
 	}
 
 	public static void main(String[] args) {
+		createAndRunGenerator(new GeneratorModule(), args);
+	}
+
+	@Inject
+	private IGenerator mainGenerator;
+
+	@Inject
+	protected InstanceDiagramGen instanceDiagramGenerator;
+	
+	public void runGenerator(String[] args) {
 		if (args.length == 0) {
-			output.println(Main.class.getName()+" - aborting: no arguments!");
+			logger.logError(Main.class.getName()+" - aborting: no arguments!", null);
 			printUsage();
 			return;
 		}
@@ -77,7 +61,7 @@ public class Main {
 		for (int i=0; i<args.length; ++i) {
 			if (args[i].equals("-saveGenModel")) {
 				if (++i<args.length) {
-					genModelPath = convertToURI(args[i]+"/genmodel.rim");
+					genModelPath = convertToURI(args[i]+"/genmodel.egm");
 				}
 			}
 			else if (args[i].equals("-genInstDiag")) {
@@ -88,126 +72,31 @@ public class Main {
 			}
 		}
 
-		// setting up required models
-		Injector roomInjector = new org.eclipse.etrice.core.RoomStandaloneSetup().createInjectorAndDoEMFRegistration();
-		IResourceValidator validator = roomInjector.getInstance(IResourceValidator.class);
-		org.eclipse.etrice.generator.SetupGenerator.doSetup();
+		setupRoomModel();
 
-		Injector injector = new StandaloneSetup().createInjectorAndDoEMFRegistration();
-		Main main = injector.getInstance(Main.class);
-		main.logger.setOutput(output);
-		main.runGenerator(uriList, genModelPath, genInstDiag, validator);
+		runGenerator(uriList, genModelPath, genInstDiag);
 	}
 
-	private static String convertToURI(String uri) {
-		if (uri.startsWith("file:")) {
-			return uri.replace('\\', '/');
-		}
-		else {
-			return "file://"+uri.replace('\\', '/');
-		}
-	}
-
-	@Inject
-	private Provider<ResourceSet> resourceSetProvider;
-	
-	@Inject
-	private ILineOutputLogger logger;
-	
-	@Inject
-	private IDiagnostician diagnostician;
-
-	@Inject
-	private IGenerator mainGenerator;
-
-	@Inject
-	private InstanceDiagramGen instanceDiagramGenerator;
-	
-	@Inject
-	private JavaIoFileSystemAccess fileAccess;
-
-	protected void runGenerator(List<String> uriList, String genModelPath, boolean genInstDiag, IResourceValidator validator) {
+	protected boolean runGenerator(List<String> uriList, String genModelPath, boolean genInstDiag) {
 		ResourceSet rs = resourceSetProvider.get();
 
-		logger.logInfo("-- reading models");
-		List<Resource> resourceList = new ArrayList<Resource>();
-		{
-			for (String uriString : uriList) {
-				logger.logInfo("Loading " + uriString);
-				resourceList.add(rs.getResource(URI.createURI(uriString), true));
-			}
-			
-			EcoreUtil.resolveAll(rs);
-		}
+		loadModels(uriList, rs);
 
-		logger.logInfo("-- validating models");
-		{
-			int errors = 0;
-			int warnings = 0;
-			for (Resource resource : resourceList) {
-				List<Issue> list = validator.validate(resource, CheckMode.ALL, CancelIndicator.NullImpl);
-				if (!list.isEmpty()) {
-					for (Issue issue : list) {
-						if (issue.getSeverity()==Severity.ERROR) {
-							++errors;
-							logger.logError(issue.toString(), null);
-						}
-						else {
-							++warnings;
-							logger.logInfo(issue.toString());
-						}
-					}
-				}
-			}
-			logger.logInfo("validation finished with "+errors+" errors and "+warnings+" warnings");
-			if (errors>0) {
-				logger.logError("-- terminating", null);
-				return;
-			}
-		}
+		if (!validateModels(rs))
+			return false;
 
-		// create a list of ROOM models
-		List<RoomModel> rml = new ArrayList<RoomModel>();
-		for (Resource resource : resourceList) {
-			List<EObject> contents = resource.getContents();
-			if (!contents.isEmpty() && contents.get(0) instanceof RoomModel) {
-				rml.add((RoomModel)contents.get(0));
-			}
+		Root genModel = createGeneratorModel(rs, genModelPath);
+		if (genModel==null)
+			return false;
+		
+		logger.logInfo("-- starting code generation");
+		fileAccess.setOutputPath("src-gen/");
+		mainGenerator.doGenerate(genModel.eResource(), fileAccess);
+		if (genInstDiag) {
+			instanceDiagramGenerator.doGenerate(genModel);
 		}
-		if (rml.isEmpty()) {
-			logger.logError("-- terminating", null);
-			return;
-		}
-		else {
-			logger.logInfo("-- creating generator model");
-			GeneratorModelBuilder gmb = new GeneratorModelBuilder(logger, diagnostician);
-			Root gmRoot = gmb.createGeneratorModel(rml);
-			if (diagnostician.isFailed()) {
-				logger.logInfo("validation failed during build of generator model");
-				logger.logError("-- terminating", null);
-				return;
-			}
-			URI genModelURI = genModelPath!=null? URI.createURI(genModelPath) : URI.createFileURI("tmp.rim");
-			Resource genResource = rs.createResource(genModelURI);
-			genResource.getContents().add(gmRoot);
-			if (genModelPath!=null) {
-				try {
-					logger.logInfo("saving genmodel to "+genModelPath);
-					genResource.save(Collections.EMPTY_MAP);
-				}
-				catch (IOException e) {
-					logger.logError(e.getMessage(), null);
-					logger.logError("-- terminating", null);
-					return;
-				}
-			}
-			logger.logInfo("-- starting code generation");
-			fileAccess.setOutputPath("src-gen/");
-			mainGenerator.doGenerate(genResource, fileAccess);
-			if (genInstDiag) {
-				instanceDiagramGenerator.doGenerate(gmRoot);
-			}
-			logger.logInfo("-- finished code generation");
-		}
+		logger.logInfo("-- finished code generation");
+		
+		return true;
 	}
 }

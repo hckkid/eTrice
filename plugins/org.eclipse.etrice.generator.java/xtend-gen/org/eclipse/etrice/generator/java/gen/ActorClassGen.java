@@ -18,7 +18,7 @@ import org.eclipse.etrice.core.room.ServiceImplementation;
 import org.eclipse.etrice.core.room.StateMachine;
 import org.eclipse.etrice.core.room.Type;
 import org.eclipse.etrice.core.room.TypedID;
-import org.eclipse.etrice.generator.base.Logger;
+import org.eclipse.etrice.generator.base.ILogger;
 import org.eclipse.etrice.generator.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.generator.etricegen.Root;
 import org.eclipse.etrice.generator.java.gen.ProcedureHelpers;
@@ -47,7 +47,7 @@ public class ActorClassGen {
   private StateMachineGen stateMachineGen;
   
   @Inject
-  private Logger logger;
+  private ILogger logger;
   
   public void doGenerate(final Root root) {
     EList<ExpandedActorClass> _xpActorClasses = root.getXpActorClasses();

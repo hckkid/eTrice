@@ -21,15 +21,16 @@ import static extension org.eclipse.xtext.xtend2.lib.*
 
 import org.eclipse.etrice.core.room.*
 import org.eclipse.etrice.generator.etricegen.*
-import org.eclipse.etrice.generator.base.Logger
+import org.eclipse.etrice.generator.base.IRoomGenerator
+import org.eclipse.etrice.generator.base.ILogger
 
-class InstanceDiagramGen {
+class InstanceDiagramGen implements IRoomGenerator {
 
 	@Inject extension JavaIoFileSystemAccess fileAccess
 	@Inject extension StdExtensions stdExt
-	@Inject Logger logger
+	@Inject ILogger logger
 	
-	def doGenerate(Root root) {
+	override doGenerate(Root root) {
 		for (sc: root.subSystemInstances) {
 			var path = sc.subSystemClass.generationTargetPath+sc.subSystemClass.getPath
 			var file = sc.subSystemClass.name+".dot"
