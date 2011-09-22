@@ -35,6 +35,7 @@ public class GeneratorBaseModule implements Module {
 
 		binder.bind(Logger.class).in(Singleton.class);
 		binder.bind(ILineOutputLogger.class).to(Logger.class);
+		binder.bind(ILogger.class).to(Logger.class);
 		
 		binder.bind(Diagnostician.class).in(Singleton.class);
 		binder.bind(IDiagnostician.class).to(Diagnostician.class);
