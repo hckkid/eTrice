@@ -41,6 +41,7 @@ import org.eclipse.etrice.core.room.SPPoint;
 import org.eclipse.etrice.core.room.ServiceImplementation;
 import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.core.room.SubSystemRef;
+import org.eclipse.etrice.generator.base.ILogger;
 import org.eclipse.etrice.generator.etricegen.ActorInstance;
 import org.eclipse.etrice.generator.etricegen.BindingInstance;
 import org.eclipse.etrice.generator.etricegen.ConnectionInstance;

@@ -12,21 +12,34 @@
 
 package org.eclipse.etrice.generator.launch;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Map;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.core.variables.VariablesPlugin;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;
+import org.eclipse.debug.ui.RefreshTab;
+import org.eclipse.etrice.generator.base.ILineOutput;
 import org.eclipse.jdt.launching.AbstractJavaLaunchConfigurationDelegate;
-import org.eclipse.jdt.launching.ExecutionArguments;
-import org.eclipse.jdt.launching.IVMRunner;
-import org.eclipse.jdt.launching.VMRunnerConfiguration;
-import org.eclipse.core.variables.VariablesPlugin;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.ui.IWorkbench;
+import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.IWorkbenchWindow;
+import org.eclipse.ui.PartInitException;
+import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.console.ConsolePlugin;
+import org.eclipse.ui.console.IConsole;
+import org.eclipse.ui.console.IConsoleConstants;
+import org.eclipse.ui.console.IConsoleManager;
+import org.eclipse.ui.console.IConsoleView;
+import org.eclipse.ui.console.MessageConsole;
+import org.eclipse.ui.console.MessageConsoleStream;
 
 /**
  * @author Henrik Rentz-Reichert (initial contribution)
@@ -34,6 +47,20 @@ import org.eclipse.core.variables.VariablesPlugin;
  */
 public abstract class GeneratorLaunchConfigurationDelegate extends AbstractJavaLaunchConfigurationDelegate{
 	
+	protected static class ConsoleLineOutput implements ILineOutput {
+	
+		private MessageConsoleStream stream;
+	
+		public ConsoleLineOutput(MessageConsoleStream stream) {
+			this.stream = stream;
+		}
+		
+		@Override
+		public void println(String txt) {
+			stream.println(txt);
+		}
+	}
+
 	@Override
 	public void launch(ILaunchConfiguration configuration, String mode,
 			ILaunch launch, IProgressMonitor monitor) throws CoreException {
@@ -53,72 +80,71 @@ public abstract class GeneratorLaunchConfigurationDelegate extends AbstractJavaL
 			// constructing program arguments
 			addModels(configuration, argString);
 			addArguments(configuration, argString);
-			
-			monitor.subTask("launching generator"); 
-							
-			String mainTypeName = getMainTypeName();
-			IVMRunner runner = getVMRunner(configuration, mode);
-	
-			File workingDir = verifyWorkingDirectory(configuration);
-			String workingDirName = null;
-			if (workingDir != null) {
-				workingDirName = workingDir.getAbsolutePath();
+
+			String pgmArgs = argString.toString().trim();
+			pgmArgs = VariablesPlugin.getDefault().getStringVariableManager()
+					.performStringSubstitution(pgmArgs);
+
+			String[] args = pgmArgs.split("[ \t]");
+
+			final MessageConsole myConsole = findConsole("EM Generator Output");
+			Display.getDefault().syncExec(new Runnable() {
+				@Override
+				public void run() {
+					try {
+						IWorkbench wb = PlatformUI.getWorkbench();
+						IWorkbenchWindow win = wb.getActiveWorkbenchWindow();
+						IWorkbenchPage page = win.getActivePage();
+						String id = IConsoleConstants.ID_CONSOLE_VIEW;
+						IConsoleView view = (IConsoleView) page.showView(id);
+						view.display(myConsole);
+					} catch (PartInitException e) {
+						e.printStackTrace();
+					}
+				}
+			});
+			MessageConsoleStream out = myConsole.newMessageStream();
+			out.getConsole().clearConsole();
+			ConsoleLineOutput output = new ConsoleLineOutput(out);
+			runGenerator(args, output);
+
+			// check for cancellation
+			if (monitor.isCanceled()) {
+				return;
 			}
-			
-			// Environment variables
-			String[] envp= getEnvironment(configuration);
-			
-			// Program & VM arguments
-			String pgmArgs = argString.toString();
-			pgmArgs = VariablesPlugin.getDefault().getStringVariableManager().performStringSubstitution(pgmArgs);
-			String vmArgs = getVMArguments(configuration);
-			ExecutionArguments execArgs = new ExecutionArguments(vmArgs, pgmArgs);
-			
-			// VM-specific attributes
-			@SuppressWarnings("rawtypes")
-			Map vmAttributesMap = getVMSpecificAttributesMap(configuration);
-			
-			// Classpath
-			String[] classpath = getClasspath(configuration);
-			
-			// Create VM config
-			VMRunnerConfiguration runConfig = new VMRunnerConfiguration(mainTypeName, classpath);
-			runConfig.setProgramArguments(execArgs.getProgramArgumentsArray());
-			runConfig.setEnvironment(envp);
-			runConfig.setVMArguments(execArgs.getVMArgumentsArray());
-			runConfig.setWorkingDirectory(workingDirName);
-			runConfig.setVMSpecificAttributesMap(vmAttributesMap);
-	
-			// Bootpath
-			runConfig.setBootClassPath(getBootpath(configuration));
-			
-			// check for cancellation
-			if (monitor.isCanceled()) {
-				return;
-			}		
-			
-			// stop in main
-			prepareStopInMain(configuration);
-			
-			// done the verification phase
-			monitor.worked(1);
-			
-			monitor.subTask("locating sources"); 
-			// set the default source locator if required
-			setDefaultSourceLocator(launch, configuration);
-			monitor.worked(1);		
-			
-			// Launch the configuration - 1 unit of work
-			runner.run(runConfig, launch, monitor);
-			
-			// check for cancellation
-			if (monitor.isCanceled()) {
-				return;
-			}	
-		}
-		finally {
+		} finally {
 			monitor.done();
 		}
+		
+		launchRefreshJob(configuration);
+	}
+
+	private void launchRefreshJob(final ILaunchConfiguration configuration) {
+		Job job = new Job("refresh resources after code generation") {
+			public IStatus run(IProgressMonitor monitor) {
+				try {
+					RefreshTab.refreshResources(configuration, monitor);
+				} catch (CoreException e) {
+					e.printStackTrace();
+					return e.getStatus();
+				}
+				return Status.OK_STATUS;
+			}
+		};
+		job.schedule();
+	}
+	
+	private MessageConsole findConsole(String name) {
+		ConsolePlugin plugin = ConsolePlugin.getDefault();
+		IConsoleManager conMan = plugin.getConsoleManager();
+		IConsole[] existing = conMan.getConsoles();
+		for (int i = 0; i < existing.length; i++)
+			if (name.equals(existing[i].getName()))
+				return (MessageConsole) existing[i];
+		// no console found, so create a new one
+		MessageConsole myConsole = new MessageConsole(name, null);
+		conMan.addConsoles(new IConsole[] { myConsole });
+		return myConsole;
 	}
 
 	protected void addModels(ILaunchConfiguration configuration, StringBuffer argString) throws CoreException {
@@ -128,11 +154,6 @@ public abstract class GeneratorLaunchConfigurationDelegate extends AbstractJavaL
 			argString.append(" file://"+model);
 		}
 	}
-
-	/**
-	 * @return the main type of the generator as fully qualified name
-	 */
-	protected abstract String getMainTypeName();
 	
 	/**
 	 * assemble the command line by adding further parameters
@@ -142,4 +163,12 @@ public abstract class GeneratorLaunchConfigurationDelegate extends AbstractJavaL
 	 * @throws CoreException
 	 */
 	protected abstract void addArguments(ILaunchConfiguration configuration, StringBuffer argString) throws CoreException;
+	
+	/**
+	 * call the generator main method
+	 * 
+	 * @param args the command line arguments
+	 * @param out line wise output to console
+	 */
+	protected abstract void runGenerator(String[] args, ILineOutput out);
 }

@@ -13,7 +13,7 @@
 package org.eclipse.etrice.generator.workflow;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.etrice.generator.builder.ILogger;
+import org.eclipse.etrice.generator.base.ILogger;
 import org.eclipse.xtend.util.stdlib.IOExtensions;
 
 

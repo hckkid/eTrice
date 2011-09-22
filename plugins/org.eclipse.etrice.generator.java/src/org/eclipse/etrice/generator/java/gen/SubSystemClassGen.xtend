@@ -21,7 +21,7 @@ import static extension org.eclipse.xtext.xtend2.lib.*
 
 import org.eclipse.etrice.core.room.*
 import org.eclipse.etrice.generator.etricegen.*
-import org.eclipse.etrice.generator.java.setup.Logger
+import org.eclipse.etrice.generator.base.Logger
 
 class SubSystemClassGen {
 	

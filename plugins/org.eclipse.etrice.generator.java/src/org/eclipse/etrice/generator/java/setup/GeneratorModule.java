@@ -14,7 +14,9 @@ package org.eclipse.etrice.generator.java.setup;
 
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.etrice.generator.builder.ILogger;
+import org.eclipse.etrice.generator.base.Diagnostician;
+import org.eclipse.etrice.generator.base.ILineOutputLogger;
+import org.eclipse.etrice.generator.base.Logger;
 import org.eclipse.etrice.generator.etricegen.IDiagnostician;
 import org.eclipse.etrice.generator.java.gen.MainGen;
 import org.eclipse.xtext.generator.IGenerator;
@@ -31,7 +33,7 @@ public class GeneratorModule implements Module {
 		binder.bind(ResourceSet.class).to(ResourceSetImpl.class);
 
 		binder.bind(Logger.class).in(Singleton.class);
-		binder.bind(ILogger.class).to(Logger.class);
+		binder.bind(ILineOutputLogger.class).to(Logger.class);
 		
 		binder.bind(Diagnostician.class).in(Singleton.class);
 		binder.bind(IDiagnostician.class).to(Diagnostician.class);

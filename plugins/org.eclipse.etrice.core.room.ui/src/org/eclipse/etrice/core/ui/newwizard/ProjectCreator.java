@@ -52,30 +52,11 @@ public class ProjectCreator {
 
 	private static final String[] commonNatureIDs = {
 		JavaCore.NATURE_ID,
-		"org.eclipse.xtend.shared.ui.xtendXPandNature",
-		"org.eclipse.xtext.ui.shared.xtextNature",
-		"org.eclipse.pde.PluginNature"
+		"org.eclipse.xtext.ui.shared.xtextNature"
 	};
 	private static final String[] commonBuilderIDs = {
-		"org.eclipse.pde.ManifestBuilder",
-		"org.eclipse.pde.SchemaBuilder",
 		"org.eclipse.xtext.ui.shared.xtextBuilder",
-		"org.eclipse.xtend.shared.ui.xtendBuilder"
 	};
-
-	private static final String[] commonRequiredBundles = {
-			"org.eclipse.etrice.core.room;bundle-version=\"0.1.0\"",
-			"org.eclipse.etrice.generator;bundle-version=\"0.1.0\"",
-			"org.eclipse.emf.mwe2.launch;bundle-version=\"1.0.1\";resolution:=optional",
-			"org.eclipse.emf.mwe.utils;bundle-version=\"1.0.0\";visibility:=reexport",
-			"org.apache.log4j;bundle-version=\"1.2.15\"",
-			"org.apache.commons.logging;bundle-version=\"1.0.4\"",
-			"org.eclipse.jface.text;bundle-version=\"3.6.0\"",
-			"org.eclipse.jdt.core;bundle-version=\"3.6.0\"",
-			"org.eclipse.xtend.util.stdlib;bundle-version=\"1.0.0\"",
-			"org.eclipse.core.runtime;bundle-version=\"3.6.0\"",
-			"org.eclipse.xtext.generator;bundle-version=\"1.0.0\""
-		};
 
 	public static List<String> getCommonNatureIDs() {
 		return Arrays.asList(commonNatureIDs);
@@ -196,8 +177,7 @@ public class ProjectCreator {
 									JavaRuntime.JRELIB_VARIABLE), new Path(
 									JavaRuntime.JRESRC_VARIABLE), new Path(
 									JavaRuntime.JRESRCROOT_VARIABLE));
-					for (Iterator<IClasspathEntry> i = classpathEntries
-							.iterator(); i.hasNext();) {
+					for (Iterator<IClasspathEntry> i = classpathEntries.iterator(); i.hasNext();) {
 						IClasspathEntry classpathEntry = i.next();
 						if (classpathEntry.getPath().isPrefixOf(
 								jreClasspathEntry.getPath())) {
@@ -221,24 +201,6 @@ public class ProjectCreator {
 						new Path("/" + javaSource.segment(0) + "/bin"),
 						new SubProgressMonitor(progressMonitor, 1));
 			}
-            
-			classpathEntries.add(JavaCore.newContainerEntry(new Path("org.eclipse.pde.core.requiredPlugins")));
-
-            // Remove variables since the plugin.xml should provide the complete path information.
-            //
-			/*
-			 * hrr: this would remove the runtime project which we need of course
-            for (Iterator<IClasspathEntry> i = classpathEntries.iterator(); i.hasNext(); )
-            {
-              IClasspathEntry classpathEntry = i.next();
-              if (classpathEntry.getEntryKind() == IClasspathEntry.CPE_VARIABLE && 
-                    !JavaRuntime.JRELIB_VARIABLE.equals(classpathEntry.getPath().toString()) ||
-                    classpathEntry.getEntryKind() == IClasspathEntry.CPE_PROJECT)
-              {
-                i.remove();
-              }
-            }
-			 */
 
             javaProject.setRawClasspath
             (classpathEntries.toArray(new IClasspathEntry[classpathEntries.size()]),
@@ -476,10 +438,6 @@ public class ProjectCreator {
 		}
 	}
 
-	public static List<String> getCommonRequiredBundles() {
-		return Arrays.asList(commonRequiredBundles);
-	}
-
 	public static void createModel(URI uri, String baseName) {
 		try {
 			PrintStream model = new PrintStream(
@@ -505,8 +463,6 @@ public class ProjectCreator {
 					"UTF-8");
 			prop.println("source.. = src/,\\");
 			prop.println("src-gen/");
-			prop.println("bin.includes = META-INF/,\\");
-			prop.println("       .");
 			prop.close();
 		} catch (UnsupportedEncodingException e) {
 			Logger.getLogger(ProjectCreator.class).error(e.getMessage(), e);
@@ -529,7 +485,6 @@ public class ProjectCreator {
 			launch.println("<listAttribute key=\"org.eclipse.debug.ui.favoriteGroups\">");
 			launch.println("<listEntry value=\"org.eclipse.debug.ui.launchGroup.run\"/>");
 			launch.println("</listAttribute>");
-			launch.println("<stringAttribute key=\"org.eclipse.jdt.launching.PROJECT_ATTR\" value=\""+baseName+"\"/>");
 			for (String line : addLines) {
 				launch.println(line);
 			}

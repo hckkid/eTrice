@@ -10,26 +10,19 @@
  * 
  *******************************************************************************/
 
-package org.eclipse.etrice.generator.java.setup;
+package org.eclipse.etrice.generator.base;
 
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.etrice.generator.builder.ILogger;
 
 /**
+ * An ILineOutputLogger will send its output to the specified {@link org.eclipse.etrice.generator.base.ILogger ILogger} if one is set.
+ * 
  * @author hrentz
  *
  */
-public class Logger implements ILogger {
+public interface ILineOutputLogger extends ILogger {
 
-	public void logInfo(String text) {
-		System.out.println("Info: " + text);
-	}
-
-	public void logError(String text, EObject obj) {
-		if (obj == null)
-			System.out.println("Error: " + text);
-		else
-			System.out.println("Error: " + text + " " + obj.toString());
-	}
-
+	/**
+	 * @param lo a line output to be used by the logger
+	 */
+	void setOutput(ILineOutput lo);
 }

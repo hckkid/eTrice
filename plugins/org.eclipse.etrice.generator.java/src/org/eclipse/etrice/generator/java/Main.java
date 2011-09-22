@@ -23,8 +23,10 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.etrice.core.room.RoomModel;
+import org.eclipse.etrice.generator.base.ILineOutput;
+import org.eclipse.etrice.generator.base.ILineOutputLogger;
+import org.eclipse.etrice.generator.base.StdLineOutput;
 import org.eclipse.etrice.generator.builder.GeneratorModelBuilder;
-import org.eclipse.etrice.generator.builder.ILogger;
 import org.eclipse.etrice.generator.etricegen.IDiagnostician;
 import org.eclipse.etrice.generator.etricegen.Root;
 import org.eclipse.etrice.generator.java.gen.InstanceDiagramGen;
@@ -43,20 +45,27 @@ import com.google.inject.Provider;
 
 public class Main {
 	
+	private static ILineOutput output = new StdLineOutput();
+	
+	public static void setOutput(ILineOutput out) {
+		if (out!=null)
+			output = out;
+	}
+	
 	/**
 	 * print usage message to stderr
 	 */
 	private static void printUsage() {
-		System.err.println(Main.class.getName()+" [-saveGenModel <genmodel path>] [-genInstDiag] <list of model file paths>");
-		System.err.println("      <list of model file paths>        # model file paths may be specified as");
-		System.err.println("                                        # e.g. C:\\path\\to\\model\\mymodel.room");
-		System.err.println("      -saveGenModel <genmodel path>     # if specified the generator model will be saved to this location");
-		System.err.println("      -genInstDiag                      # if specified an instance diagram is created for each subsystem");
+		output.println(Main.class.getName()+" [-saveGenModel <genmodel path>] [-genInstDiag] <list of model file paths>");
+		output.println("      <list of model file paths>        # model file paths may be specified as");
+		output.println("                                        # e.g. C:\\path\\to\\model\\mymodel.room");
+		output.println("      -saveGenModel <genmodel path>     # if specified the generator model will be saved to this location");
+		output.println("      -genInstDiag                      # if specified an instance diagram is created for each subsystem");
 	}
 
 	public static void main(String[] args) {
 		if (args.length == 0) {
-			System.err.println(Main.class.getName()+" - aborting: no arguments!");
+			output.println(Main.class.getName()+" - aborting: no arguments!");
 			printUsage();
 			return;
 		}
@@ -86,6 +95,7 @@ public class Main {
 
 		Injector injector = new StandaloneSetup().createInjectorAndDoEMFRegistration();
 		Main main = injector.getInstance(Main.class);
+		main.logger.setOutput(output);
 		main.runGenerator(uriList, genModelPath, genInstDiag, validator);
 	}
 
@@ -102,7 +112,7 @@ public class Main {
 	private Provider<ResourceSet> resourceSetProvider;
 	
 	@Inject
-	private ILogger logger;
+	private ILineOutputLogger logger;
 	
 	@Inject
 	private IDiagnostician diagnostician;

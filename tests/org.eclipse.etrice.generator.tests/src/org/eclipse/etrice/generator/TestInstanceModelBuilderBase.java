@@ -34,7 +34,7 @@ import org.eclipse.xtext.resource.XtextResourceSet;
 
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.StateGraphItem;
-import org.eclipse.etrice.generator.builder.ILogger;
+import org.eclipse.etrice.generator.base.ILogger;
 import org.eclipse.etrice.generator.builder.GeneratorModelBuilder;
 import org.eclipse.etrice.generator.etricegen.IDiagnostician;
 import org.eclipse.etrice.generator.etricegen.InstanceBase;

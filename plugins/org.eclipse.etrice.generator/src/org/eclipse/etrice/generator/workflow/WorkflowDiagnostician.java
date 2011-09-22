@@ -15,7 +15,7 @@ package org.eclipse.etrice.generator.workflow;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.etrice.core.naming.RoomNameProvider;
-import org.eclipse.etrice.generator.builder.ILogger;
+import org.eclipse.etrice.generator.base.ILogger;
 import org.eclipse.etrice.generator.etricegen.IDiagnostician;
 
 

@@ -10,12 +10,26 @@
  * 
  *******************************************************************************/
 
-package org.eclipse.etrice.generator.builder;
+package org.eclipse.etrice.generator.base;
 
 import org.eclipse.emf.ecore.EObject;
 
+/**
+ * A simple logger interface for error messages during model validation and code generation.
+ * 
+ * @author hrentz
+ *
+ */
 public interface ILogger {
 
+	/**
+	 * @param text informational text
+	 */
 	void logInfo(String text);
+	
+	/**
+	 * @param text error text
+	 * @param obj {@link org.eclipse.emf.ecore.EObject EObject} (if available) where the error occurred
+	 */
 	void logError(String text, EObject obj);
 }

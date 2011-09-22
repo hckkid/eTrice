@@ -15,27 +15,15 @@ package org.eclipse.etrice.generator.launch;
 import java.util.ArrayList;
 
 import org.eclipse.core.resources.IResource;
-import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.variables.VariablesPlugin;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
 import org.eclipse.debug.ui.AbstractLaunchConfigurationTab;
-import org.eclipse.jdt.core.IJavaModel;
-import org.eclipse.jdt.core.IJavaProject;
-import org.eclipse.jdt.core.JavaCore;
-import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.launching.IJavaLaunchConfigurationConstants;
-import org.eclipse.jdt.ui.JavaElementLabelProvider;
 import org.eclipse.jface.dialogs.Dialog;
-import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.ModifyEvent;
-import org.eclipse.swt.events.ModifyListener;
-import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
@@ -46,7 +34,6 @@ import org.eclipse.swt.widgets.List;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
-import org.eclipse.ui.dialogs.ElementListSelectionDialog;
 import org.eclipse.ui.dialogs.ResourceListSelectionDialog;
 import org.eclipse.ui.dialogs.ResourceSelectionDialog;
 
@@ -58,7 +45,6 @@ public abstract class GeneratorMainTab extends AbstractLaunchConfigurationTab {
 
 	private List modelList;
 	private Text projectText;
-	private Button browseProject;
 	
 	@Override
 	public void createControl(Composite parent) {
@@ -69,12 +55,10 @@ public abstract class GeneratorMainTab extends AbstractLaunchConfigurationTab {
 			
 			GridLayout layout= new GridLayout();
 			layout.numColumns = 2;
-			layout.marginHeight = 10;
+			layout.marginHeight = 0;
 			layout.marginWidth = 10;
 			mainComposite.setLayout(layout);
 	
-			createProjectEditor(mainComposite);
-			
 			createModelsEditor(mainComposite);
 			
 			Dialog.applyDialogFont(mainComposite);
@@ -118,7 +102,7 @@ public abstract class GeneratorMainTab extends AbstractLaunchConfigurationTab {
 	 */
 	private void createModelList(Composite parent) {
 		Label label = new Label(parent, SWT.NONE);
-		label.setText("ROOM Models:");
+		label.setText("Models to generate:");
 		GridData gd = new GridData(SWT.BEGINNING, SWT.BEGINNING, true, false, 2, 1);
 		gd.verticalIndent = 20;
 		label.setLayoutData(gd);
@@ -148,97 +132,6 @@ public abstract class GeneratorMainTab extends AbstractLaunchConfigurationTab {
 		addBtn.addListener(SWT.Selection,listener);
 		return gd;
 	}
-	
-	protected void createProjectEditor(Composite parent) {
-		Label label = new Label(parent, SWT.NONE);
-		label.setText("Project:");
-		GridData gd = new GridData(SWT.BEGINNING, SWT.BEGINNING, true, false, 2, 1);
-		label.setLayoutData(gd);
-		
-		projectText = createSingleText(parent, 1);
-		projectText.addModifyListener(new ModifyListener() {
-			@Override
-			public void modifyText(ModifyEvent e) {
-				updateLaunchConfigurationDialog();
-			}
-		});
-		browseProject = createPushButton(parent, "Browse...", null); 
-		browseProject.addSelectionListener(new SelectionListener(	) {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				handleProjectButtonSelected();
-			}
-			@Override
-			public void widgetDefaultSelected(SelectionEvent e) {
-				handleProjectButtonSelected();
-			}
-		});
-	}
-
-	private void updateProjectFromConfig(ILaunchConfiguration config) {
-		String projectName = "";
-		try {
-			projectName = config.getAttribute(IJavaLaunchConfigurationConstants.ATTR_PROJECT_NAME, "");	
-		}
-		catch (CoreException ce) {
-			setErrorMessage(ce.getStatus().getMessage());
-		}
-		projectText.setText(projectName);
-	}
-	
-	private void handleProjectButtonSelected() {
-		IJavaProject project = chooseJavaProject();
-		if (project == null) {
-			return;
-		}
-		String projectName = project.getElementName();
-		projectText.setText(projectName);
-		updateLaunchConfigurationDialog();
-	}
-	
-	private IJavaProject chooseJavaProject() {
-		ILabelProvider labelProvider= new JavaElementLabelProvider(JavaElementLabelProvider.SHOW_DEFAULT);
-		ElementListSelectionDialog dialog= new ElementListSelectionDialog(getShell(), labelProvider);
-		dialog.setTitle("Project Selection"); 
-		dialog.setMessage("Select a project to constrain your search"); 
-		try {
-			dialog.setElements(JavaCore.create(getWorkspaceRoot()).getJavaProjects());
-		}
-		catch (JavaModelException jme) {Activator.getDefault().log(jme);}
-		IJavaProject javaProject= getJavaProject();
-		if (javaProject != null) {
-			dialog.setInitialSelections(new Object[] { javaProject });
-		}
-		if (dialog.open() == Window.OK) {			
-			return (IJavaProject) dialog.getFirstResult();
-		}		
-		return null;		
-	}
-
-	private IJavaModel getJavaModel() {
-		return JavaCore.create(getWorkspaceRoot());
-	}
-	
-	private IJavaProject getJavaProject() {
-		String projectName = projectText.getText().trim();
-		if (projectName.length() < 1) {
-			return null;
-		}
-		return getJavaModel().getJavaProject(projectName);		
-	}
-
-	private IWorkspaceRoot getWorkspaceRoot() {
-		return ResourcesPlugin.getWorkspace().getRoot();
-	}
-
-	private static Text createSingleText(Composite parent, int hspan) {
-    	Text t = new Text(parent, SWT.SINGLE | SWT.BORDER);
-    	t.setFont(parent.getFont());
-    	GridData gd = new GridData(GridData.FILL_HORIZONTAL);
-    	gd.horizontalSpan = hspan;
-    	t.setLayoutData(gd);
-    	return t;
-    }
 
 	@Override
 	public void setDefaults(ILaunchConfigurationWorkingCopy configuration) {
@@ -248,8 +141,6 @@ public abstract class GeneratorMainTab extends AbstractLaunchConfigurationTab {
 	@Override
 	public void initializeFrom(ILaunchConfiguration configuration) {
 		try {
-			updateProjectFromConfig(configuration);
-			
 			modelList.removeAll();
 			ArrayList<String> param = new ArrayList<String>();
 			param = (ArrayList<String>) configuration.getAttribute("ModelFiles", param);

@@ -8,6 +8,7 @@ Bundle-Vendor: eTrice (Incubation)
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6,
  J2SE-1.5
 Export-Package: org.eclipse.etrice.generator,
+ org.eclipse.etrice.generator.base,
  org.eclipse.etrice.generator.builder;uses:="org.eclipse.emf.ecore,org.eclipse.etrice.generator.etricegen",
  org.eclipse.etrice.generator.etricegen;uses:="org.eclipse.emf.ecore,org.eclipse.emf.common.util,org.eclipse.etrice.core.room",
  org.eclipse.etrice.generator.etricegen.impl;

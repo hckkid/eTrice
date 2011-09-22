@@ -7,9 +7,6 @@
  *******************************************************************************/
 package org.eclipse.etrice.generator.java.newwizard;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspace;
@@ -89,13 +86,6 @@ public class EmptyProjectWizard extends Wizard implements INewWizard {
 				.setDescription("Create an empty Java plug-in project with eTrice dependencies");
 		addPage(newProjectCreationPage);
 	}
-
-	private List<String> getRequiredBundles() {
-		List<String> requiredBundles = new ArrayList<String>(ProjectCreator.getCommonRequiredBundles());
-		requiredBundles.add("org.eclipse.etrice.generator.java;bundle-version=\"0.1.0\"");
-		requiredBundles.add("org.eclipse.etrice.modellib;bundle-version=\"0.1.0\"");
-		return requiredBundles;
-	}
 	
 	@Override
 	public boolean performFinish() {
@@ -123,12 +113,6 @@ public class EmptyProjectWizard extends Wizard implements INewWizard {
 							+ baseName
 							+ "/model/"+baseName+".room", true),
 							baseName);
-
-					ProjectCreator.createManifest(URI.createPlatformResourceURI("/"
-							+ baseName
-							+ "/META-INF/MANIFEST.MF", true),
-							baseName,
-							getRequiredBundles());
 
 					ProjectCreator.createBuildProperties(URI.createPlatformResourceURI("/"
 							+baseName+"/build.properties", true),
