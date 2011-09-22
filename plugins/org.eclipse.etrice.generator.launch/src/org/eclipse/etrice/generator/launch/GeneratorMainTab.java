@@ -20,7 +20,6 @@ import org.eclipse.core.variables.VariablesPlugin;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
 import org.eclipse.debug.ui.AbstractLaunchConfigurationTab;
-import org.eclipse.jdt.launching.IJavaLaunchConfigurationConstants;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.SWT;
@@ -33,7 +32,6 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.List;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.dialogs.ResourceListSelectionDialog;
 import org.eclipse.ui.dialogs.ResourceSelectionDialog;
 
@@ -44,7 +42,6 @@ import org.eclipse.ui.dialogs.ResourceSelectionDialog;
 public abstract class GeneratorMainTab extends AbstractLaunchConfigurationTab {
 
 	private List modelList;
-	private Text projectText;
 	
 	@Override
 	public void createControl(Composite parent) {
@@ -162,7 +159,6 @@ public abstract class GeneratorMainTab extends AbstractLaunchConfigurationTab {
 				param.add(tmp[i]);
 			}
 			configuration.setAttribute("ModelFiles", param);
-			configuration.setAttribute(IJavaLaunchConfigurationConstants.ATTR_PROJECT_NAME, projectText.getText().trim());
 		}
 		catch (Exception e) {
 			e.printStackTrace();
