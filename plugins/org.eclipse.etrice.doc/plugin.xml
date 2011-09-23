@@ -5,8 +5,16 @@
    <extension
          point="org.eclipse.help.toc">
       <toc
-            file="toc.xml"
+            file="top-toc.xml"
             primary="true">
+      </toc>
+      <toc
+            file="toc.xml"
+            primary="false">
+      </toc>
+      <toc
+            file="reference-toc.xml"
+            primary="false">
       </toc>
    </extension>
 

@@ -1,22 +1,72 @@
 <?xml version="1.0"?>
 <project name="project">
 	
+	<target name="create.javadoc">
+
+			<property name="projectName" value="eTrice" />
+
+			<!-- workspace defaults -->
+			<property name="output" value="${root}/buildroot/buckminster.workspace/../../etrice_local_repo/plugins/org.eclipse.etrie.doc/html/javadoc" />
+			<property name="checkoutLocation" value="${root}/etrice_local_repo/" />
+			<property name="targetPlatform" value="${eclipse.home}" />
+
+			<property name="sourcesLocation" value="${checkoutLocation}/plugins/" />
+
+
+			<echo message="Source code location ${sourcesLocation}" />
+			<echo message="Javadoc output location ${output}" />
+			<echo message="Target platform path ${targetPlatform}" />
+
+			<!-- Define classpath -->
+			<path id="javadoc-classpath">
+				<fileset dir="${targetPlatform}">
+					<include name="**/*.jar" />
+				</fileset>
+			</path>
+
+			<!-- Prepare dirs -->
+			<delete dir="${output}" />
+			<mkdir dir="${output}" />
+
+			<javadoc destdir="${output}" Encoding="ISO-8859-1" classpathref="javadoc-classpath" maxmemory="1024m" source="1.5" useexternalfile="true" author="true" version="true" use="true" Verbose="no" windowtitle="${projectName} Documentation">
+				<fileset dir="${sourcesLocation}" defaultexcludes="true">
+					<include name="**/*.java" />
+					<exclude name="**/testdata/**" />
+					<exclude name="**/packrat/**" />
+				</fileset>
+
+				<tag name="generated" description="EMF generated code" />
+				<tag name="model" description="EMF model element" />
+				<tag name="ordered" description="EMF ordered" />
+				<tag name="noimplement" description="This interface is not intended to be implemented by clients." />
+				<tag name="noextend" description="This class is not intended to be subclassed by clients." />
+				<tag name="noinstantiate" description="This class is not intended to be instantiated by clients." />
+				<tag name="noreference" description="This method is not intended to be referenced by clients." />
+				<tag name="nooverride" description="This method is not intended to be extended (re-implement with a call to the overridden parent) or re-implemented (with no call to the overridden parent) by clients." />
+			</javadoc>
+			<!-- Compress the output javadoc in a zip file -->
+			<zip destfile="${output}/javadoc.zip" basedir="${output}">
+				<exclude name="*.zip" />
+			</zip>
+		</target>
+	
+	<!--
 	<target name="create.javadoc" description="Generate the JavaDoc for the sources">
 		<echo message="Generate the JavaDoc for the sources"></echo>
 		<echo message="javadoc source ${root}/buildroot/buckminster.workspace" />
 		
-		<!-- set targetPlatformPath as classpath --> 
+		<- set targetPlatformPath as classpath -> 
 		<path id="files-classpath">  
 			<fileset dir="${root}/buildroot/target.platform">   
 				<include name="*.jar"/>  
 			</fileset> 
 		</path>
 		
-		 <!-- clean and create output location --> 
+		 <- clean and create output location -> 
 		<delete dir="${root}/buildroot/buckminster.workspace/../../etrice_local_repo/plugins/org.eclipse.etrie.doc/html/javadoc"/>
 		<mkdir dir="${root}/buildroot/buckminster.workspace/../../etrice_local_repo/plugins/org.eclipse.etrice.doc/html/javadoc"/>
 		
-		<!-- generate the javadoc -->
+		<- generate the javadoc ->
 		<javadoc  destdir="${root}/buildroot/buckminster.workspace/../../etrice_local_repo/plugins/org.eclipse.etrice.doc/html/javadoc"  
 			classpathref="files-classpath"
 			author="true"
@@ -38,12 +88,12 @@
 			<arg value="-J-Dhttp.proxyHost=proxy.eclipse.org"/>
 			<arg value="-J-Dhttp.proxyPort=9898"/>
 
-			<!-- link external APIs -->   
+			<- link external APIs ->   
 			<link href="http://download.oracle.com/javase/6/docs/api/"/>
 			<link href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/"/>
 			<link href="http://download.eclipse.org/modeling/emf/transaction/javadoc/workspace/1.4.0/"/>
 			
-			<!-- eTrice sources -->   
+			<- eTrice sources ->   
 			<fileset dir="${root}/etrice_local_repo/plugins/" defaultexcludes="true">    
 				<include name="**/*.java"/>    
 				<exclude name="**/internal/**"/>    
@@ -53,6 +103,7 @@
 			<bottom><![CDATA[ <a href="http://www.eclipse.org/legal/epl-v10.html" shape="rect">Copyright (c) Protos Software GmbH 2010, 2011.</a>]]></bottom>
 		</javadoc>
 	</target>
+	-->
 	
 	<target name="create.site.index">
 		<echo message="Creating human readable index.html" />
