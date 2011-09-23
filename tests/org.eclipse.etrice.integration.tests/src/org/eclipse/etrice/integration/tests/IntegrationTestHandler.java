@@ -24,31 +24,31 @@ import org.junit.Test;
 
 
 public class IntegrationTestHandler extends IntegrationTestBase {
+	private SubSystem_HandlerTest main_component;
+
 	@Before
 	public void setUp() throws Exception {
+		main_component = new SubSystem_HandlerTest(null,"MainComponent");
+		
+		// hand over the semaphore to the subsystem
+		main_component.setTestSemaphore(this.testSem);
 	}
 	
 	@Test (timeout=5000)
 	public void testHandler(){
-		SubSystem_HandlerTest main_component = new SubSystem_HandlerTest(null,"MainComponent");
-		
-		// hand over the semaphore to the subsystem
-		main_component.setTestSemaphore(this.testSem);
-
 		main_component.init(); // lifecycle init
 		main_component.start(); // lifecycle start
 		
 		waitForTestcase();
 		
 		assertEquals(0,main_component.getTestErrorCode());
-
-		// end the lifecycle
-		main_component.stop(); // lifecycle stop
-		main_component.destroy(); // lifecycle destroy
 	}
 
 	@After
 	public void tearDown() throws Exception {
+		// end the lifecycle
+		main_component.stop(); // lifecycle stop
+		main_component.destroy(); // lifecycle destroy
 	}
 
 	

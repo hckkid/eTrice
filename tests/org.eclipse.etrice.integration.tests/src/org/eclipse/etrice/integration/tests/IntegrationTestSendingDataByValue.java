@@ -22,31 +22,31 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class IntegrationTestSendingDataByValue extends IntegrationTestBase {
+	private SubSys_SendingData main_component = null;
+
 	@Before
 	public void setUp() throws Exception {
+		main_component  = new SubSys_SendingData(null,"MainComponent");
+		
+		// hand over the semaphore to the subsystem
+		main_component.setTestSemaphore(this.testSem);
 	}
 	
 	@Test (timeout=5000)
 	public void testSendingDataByValue(){
-		SubSys_SendingData main_component = new SubSys_SendingData(null,"MainComponent");
-		
-		// hand over the semaphore to the subsystem
-		main_component.setTestSemaphore(this.testSem);
-
 		main_component.init(); // lifecycle init
 		main_component.start(); // lifecycle start
 		
 		waitForTestcase();
 		
 		assertEquals(0,main_component.getTestErrorCode());
-
-		// end the lifecycle
-		main_component.stop(); // lifecycle stop
-		main_component.destroy(); // lifecycle destroy
 	}
 
 	@After
 	public void tearDown() throws Exception {
+		// end the lifecycle
+		main_component.stop(); // lifecycle stop
+		main_component.destroy(); // lifecycle destroy
 	}
 
 	
