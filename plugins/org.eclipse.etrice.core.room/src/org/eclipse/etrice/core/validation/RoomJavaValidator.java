@@ -20,6 +20,7 @@ import org.eclipse.etrice.core.room.ActorInstancePath;
 import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.Binding;
 import org.eclipse.etrice.core.room.DataClass;
+import org.eclipse.etrice.core.room.GuardedTransition;
 import org.eclipse.etrice.core.room.InitialTransition;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.LayerConnection;
@@ -32,6 +33,7 @@ import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.core.room.TrPoint;
 import org.eclipse.etrice.core.room.Transition;
+import org.eclipse.etrice.core.room.TriggeredTransition;
 import org.eclipse.etrice.core.validation.ValidationUtil.Result;
 import org.eclipse.xtext.validation.Check;
 
@@ -159,7 +161,14 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 	public void checkTransition(Transition trans) {
 		Result result = ValidationUtil.checkTransition(trans);
 		if (!result.isOk())
-			error(result.getMsg(), RoomPackage.eINSTANCE.getGuardedTransition_Guard());
+			if (trans instanceof GuardedTransition)
+				error(result.getMsg(), RoomPackage.eINSTANCE.getGuardedTransition_Guard());
+			else if (trans instanceof TriggeredTransition)
+				error(result.getMsg(), RoomPackage.eINSTANCE.getTriggeredTransition_Triggers());
+			else {
+				assert(false): "unexpected sub type";
+				return;
+			}
 
 		if (trans instanceof InitialTransition) {
 			result = ValidationUtil.isConnectable(null, trans.getTo(), trans, (StateGraph)trans.eContainer());
