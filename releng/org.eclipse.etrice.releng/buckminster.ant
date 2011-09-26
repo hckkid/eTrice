@@ -6,8 +6,8 @@
 			<property name="projectName" value="eTrice" />
 
 			<!-- workspace defaults -->
-			<property name="output" value="${root}/buildroot/buckminster.workspace/../../etrice_local_repo/plugins/org.eclipse.etrie.doc/html/javadoc" />
 			<property name="checkoutLocation" value="${root}/etrice_local_repo/" />
+			<property name="output" value="${checkoutLocation}/plugins/org.eclipse.etrice.doc/html/javadoc" />
 			<property name="targetPlatform" value="${eclipse.home}" />
 
 			<property name="sourcesLocation" value="${checkoutLocation}/plugins/" />
