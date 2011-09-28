@@ -21,6 +21,7 @@ import org.eclipse.etrice.core.room.ContinuationTransition;
 import org.eclipse.etrice.core.room.EntryPoint;
 import org.eclipse.etrice.core.room.InitialTransition;
 import org.eclipse.etrice.core.room.NonInitialTransition;
+import org.eclipse.etrice.core.room.GuardedTransition;
 import org.eclipse.etrice.core.room.RoomFactory;
 import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.SubStateTrPointTerminal;
@@ -395,8 +396,16 @@ public class TransitionSupport {
 					trans = t;
 				}
 				else {
-					TriggeredTransition t = (orig instanceof TriggeredTransition)?
-							(TriggeredTransition)orig : RoomFactory.eINSTANCE.createTriggeredTransition();
+					ActorClass ac = SupportUtil.getActorClass(getDiagram());
+					NonInitialTransition t = ac.getStateMachine().isDataDriven()?
+						((orig instanceof GuardedTransition)?
+							(GuardedTransition)orig : RoomFactory.eINSTANCE.createGuardedTransition()
+						)
+						:
+						((orig instanceof TriggeredTransition)?
+							(TriggeredTransition)orig : RoomFactory.eINSTANCE.createTriggeredTransition()
+						)
+						;
 					t.setFrom(src);
 					t.setTo(dst);
 					trans = t;
