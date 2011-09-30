@@ -149,4 +149,8 @@ public class RoomOutlineTreeProvider extends DefaultOutlineTreeProvider {
 	protected boolean _isLeaf(Operation o) {
 		return true;
 	}
+	
+	protected boolean _isLeaf(Attribute ac) {
+		return true;
+	}
 }

@@ -250,7 +250,9 @@ public class RoomLabelProvider extends DefaultEObjectLabelProvider {
 	
 	String text(Attribute attr) {
 		String type = attr.getType()!=null? (" : "+getName(attr.getType())):"";
-		return "Attr "+attr.getName()+type;
+		String value = (attr.getDefaultValueLiteral()!=null && !attr.getDefaultValueLiteral().isEmpty())?
+				(" = "+attr.getDefaultValueLiteral()) : "";
+		return "Attr "+attr.getName()+type+value;
 	}
 	
 	String text(Operation op) {
