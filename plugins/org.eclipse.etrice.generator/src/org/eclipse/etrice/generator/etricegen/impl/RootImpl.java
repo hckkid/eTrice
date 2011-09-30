@@ -6,7 +6,6 @@
  */
 package org.eclipse.etrice.generator.etricegen.impl;
 
-import java.io.File;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
@@ -14,10 +13,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 
-import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IWorkspaceRoot;
-import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
@@ -31,22 +26,22 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.etrice.core.room.ActorClass;
-import org.eclipse.etrice.core.room.DataClass;
-import org.eclipse.etrice.core.room.ProtocolClass;
-import org.eclipse.etrice.core.room.RoomClass;
-import org.eclipse.etrice.core.room.RoomModel;
-
-import org.eclipse.etrice.generator.etricegen.ETriceGenPackage;
 import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.Attribute;
-import org.eclipse.etrice.core.room.SubSystemClass;
+import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.FreeTypedID;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.Operation;
+import org.eclipse.etrice.core.room.ProtocolClass;
+import org.eclipse.etrice.core.room.RoomClass;
+import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.ServiceImplementation;
+import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.core.room.TypedID;
+import org.eclipse.etrice.generator.base.FileSystemHelpers;
 import org.eclipse.etrice.generator.etricegen.ActorInstance;
+import org.eclipse.etrice.generator.etricegen.ETriceGenPackage;
 import org.eclipse.etrice.generator.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.generator.etricegen.Root;
 import org.eclipse.etrice.generator.etricegen.SubSystemInstance;
@@ -268,55 +263,16 @@ public class RootImpl extends EObjectImpl implements Root {
 		if (!getModels().isEmpty()) {
 			// determine the path of the main model
 			RoomModel main = getModels().get(0);
-			URI mainPath = getProjectURI(main);
+			URI mainPath = FileSystemHelpers.getProjectURI(main);
 			
 			for (RoomModel mdl : getModels()) {
-				URI currPath = getProjectURI(mdl);
+				URI currPath = FileSystemHelpers.getProjectURI(mdl);
 				if ((mainPath==null && currPath==null) || (mainPath!=null && mainPath.equals(currPath))) {
 					if (!visitor.visit(mdl))
 						break;
 				}
 			}
 		}
-	}
-
-	/**
-	 * @param model
-	 * @return
-	 */
-	private URI getProjectURI(RoomModel model) {
-		URI mainPath = null;
-		if (model.eResource()!=null) {
-			mainPath = model.eResource().getURI().trimSegments(1);
-			File parent = null;
-			if (mainPath.isPlatform()) {
-				// HOWTO: get absolute OS path suitable for java.io.File from platform scheme EMF URI
-				IWorkspaceRoot workspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
-				IFile file = workspaceRoot.getFile(new Path(mainPath.toPlatformString(true)));
-				String osString = file.getLocation().toOSString();
-				parent = new File(osString);
-			}
-			else {
-				parent = new File(mainPath.toFileString());
-			}
-			boolean isProject = false;
-			int nUp = 0;
-			do {
-				parent = parent.getParentFile();
-				String[] contents = parent.list();
-				for (int i = 0; i < contents.length; i++) {
-					if (contents[i].equals(".project")) {
-						isProject = true;
-						break;
-					}
-				}
-				++nUp;
-			}
-			while (!isProject && parent!=null);
-			if (isProject && nUp>0)
-				mainPath = mainPath.trimSegments(nUp);
-		}
-		return mainPath;
 	}
 	
 	/**
