@@ -25,6 +25,14 @@ import org.eclipse.emf.ecore.EObject;
  * @author hrentz
  *
  */
+/**
+ * @author hrentz
+ *
+ */
+/**
+ * @author hrentz
+ *
+ */
 public class FileSystemHelpers {
 
 	/**
@@ -89,21 +97,34 @@ public class FileSystemHelpers {
 		return s1.equals(s2);
 	}
 
+	/**
+	 * the given paths are converted to file URIs (using {@link URI#createFileURI(String)}
+	 * and then {@link #getRelativePath(URI, URI)} is called.
+	 * 
+	 * @param base the base path
+	 * @param path the path for which the relative path is computed
+	 * @return relative path (<code>null</code>if there is none)
+	 */
 	public static String getRelativePath(String base, String path) {
 		return getRelativePath(URI.createFileURI(base), URI.createFileURI(path));
 	}
 	
+	/**
+	 * compute a relative path to a given base path.
+	 * Both paths must be of the same scheme and absolute and the given
+	 * path has to have the first segments identical with the base path.
+	 * Returned is a relative path separated by / characters.
+	 * If there is no such relative path <code>null</code> is returned.
+	 * 
+	 * @param base the base path
+	 * @param path the path for which the relative path is computed
+	 * @return relative path (<code>null</code>if there is none)
+	 */
 	public static String getRelativePath(URI base, URI path) {
 		if (base==null || path==null)
 			return null;
 		
 		if (!bothNullOrEqual(base.scheme(),path.scheme()))
-			return null;
-		
-		if (!bothNullOrEqual(base.authority(), path.authority()))
-			return null;
-		
-		if (!bothNullOrEqual(base.device(), path.device()))
 			return null;
 		
 		if (!base.hasAbsolutePath())
