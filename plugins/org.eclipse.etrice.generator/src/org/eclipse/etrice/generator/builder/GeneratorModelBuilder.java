@@ -118,9 +118,10 @@ public class GeneratorModelBuilder {
 	 * @param models
 	 * @return the root of the newly created instance model
 	 */
-	public Root createGeneratorModel(List<RoomModel> models) {
+	public Root createGeneratorModel(List<RoomModel> models, boolean asLibrary) {
 		Root root = ETriceGenFactory.eINSTANCE.createRoot();
 		root.getModels().addAll(models);
+		root.setLibrary(asLibrary);
 
 		if (!root.isLibrary()) {
 			// create instance model

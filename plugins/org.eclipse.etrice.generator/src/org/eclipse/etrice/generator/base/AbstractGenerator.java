@@ -101,7 +101,7 @@ public abstract class AbstractGenerator {
 	 * 
 	 * @return the {@link Root} object of the generator model (is added to a new Resource also)
 	 */
-	protected Root createGeneratorModel(ResourceSet rs, String genModelPath) {
+	protected Root createGeneratorModel(ResourceSet rs, boolean asLibrary, String genModelPath) {
 		// create a list of ROOM models
 		List<RoomModel> rml = new ArrayList<RoomModel>();
 		for (Resource resource : rs.getResources()) {
@@ -118,7 +118,7 @@ public abstract class AbstractGenerator {
 		else {
 			logger.logInfo("-- creating generator model");
 			GeneratorModelBuilder gmb = new GeneratorModelBuilder(logger, diagnostician);
-			Root gmRoot = gmb.createGeneratorModel(rml);
+			Root gmRoot = gmb.createGeneratorModel(rml, asLibrary);
 			if (diagnostician.isFailed()) {
 				logger.logInfo("validation failed during build of generator model");
 				logger.logError("-- terminating", null);
@@ -182,19 +182,23 @@ public abstract class AbstractGenerator {
 	 * @param uriList a list of {@link URI}s as Strings
 	 * @param rs the {@link ResourceSet}
 	 */
-	protected void loadModels(List<String> uriList, ResourceSet rs) {
+	protected boolean loadModels(List<String> uriList, ResourceSet rs) {
 		logger.logInfo("-- reading models");
+		boolean ok = true;
 		for (String uriString : uriList) {
 			logger.logInfo("Loading " + uriString);
 			try {
 				rs.getResource(URI.createURI(uriString), true);
 			}
 			catch (RuntimeException e) {
-				logger.logError("couldn't load", null);
+				ok = false;
+				logger.logError("couldn't load '"+uriString+"'", null);
 			}
 		}
 		
 		EcoreUtil.resolveAll(rs);
+		
+		return ok;
 	}
 
 	/**

@@ -99,14 +99,39 @@ public class FileSystemHelpers {
 
 	/**
 	 * the given paths are converted to file URIs (using {@link URI#createFileURI(String)}
-	 * and then {@link #getRelativePath(URI, URI)} is called.
+	 * and then {@link #getRelativePath(URI, URI, boolean)} is called with <code>goUpIfNeeded=false</code>.
 	 * 
 	 * @param base the base path
 	 * @param path the path for which the relative path is computed
 	 * @return relative path (<code>null</code>if there is none)
 	 */
 	public static String getRelativePath(String base, String path) {
-		return getRelativePath(URI.createFileURI(base), URI.createFileURI(path));
+		return getRelativePath(URI.createFileURI(base), URI.createFileURI(path), false);
+	}
+
+	/**
+	 * the given paths are converted to file URIs (using {@link URI#createFileURI(String)}
+	 * and then {@link #getRelativePath(URI, URI, boolean)} is called.
+	 * 
+	 * @param base the base path
+	 * @param path the path for which the relative path is computed
+	 * @param goUpIfNeeded allow also ascending to parent directories
+	 * @return relative path (<code>null</code>if there is none)
+	 */
+	public static String getRelativePath(String base, String path, boolean goUpIfNeeded) {
+		return getRelativePath(URI.createFileURI(base), URI.createFileURI(path), goUpIfNeeded);
+	}
+	
+	/**
+	 * {@link #getRelativePath(URI, URI, boolean)} is called with
+	 * <code>goUpIfNeeded=false</code>
+	 * 
+	 * @param base the base path
+	 * @param path the path for which the relative path is computed
+	 * @return relative path (<code>null</code>if there is none)
+	 */
+	public static String getRelativePath(URI base, URI path) {
+		return getRelativePath(base, path, false);
 	}
 	
 	/**
@@ -118,9 +143,10 @@ public class FileSystemHelpers {
 	 * 
 	 * @param base the base path
 	 * @param path the path for which the relative path is computed
+	 * @param goUpIfNeeded allow also ascending to parent directories
 	 * @return relative path (<code>null</code>if there is none)
 	 */
-	public static String getRelativePath(URI base, URI path) {
+	public static String getRelativePath(URI base, URI path, boolean goUpIfNeeded) {
 		if (base==null || path==null)
 			return null;
 		
@@ -136,16 +162,34 @@ public class FileSystemHelpers {
 		if (path.segmentCount()<base.segmentCount())
 			return null;
 		
-		for (int i=0; i<base.segmentCount(); ++i) {
-			if (!base.segment(i).equals(path.segment(i)))
-				return null;
-		}
-		
 		StringBuffer result = new StringBuffer();
-		for (int i=base.segmentCount(); i<path.segmentCount(); ++i) {
-			result.append(path.segment(i)+"/");
+		if (goUpIfNeeded) {
+			int max = base.segmentCount()<path.segmentCount()? base.segmentCount():path.segmentCount();
+			int common;
+			for (common=0; common<max; ++common) {
+				if (!base.segment(common).equals(path.segment(common)))
+					break;
+			}
+			for (int i=common; i<base.segmentCount(); ++i) {
+				result.append("../");
+			}
+			for (int i=common; i<path.segmentCount(); ++i) {
+				result.append(path.segment(i)+"/");
+			}
+
+			return result.substring(0, result.length()-1);
 		}
-		
-		return result.substring(0, result.length()-1);
+		else {
+			for (int i=0; i<base.segmentCount(); ++i) {
+				if (!base.segment(i).equals(path.segment(i)))
+					return null;
+			}
+			
+			for (int i=base.segmentCount(); i<path.segmentCount(); ++i) {
+				result.append(path.segment(i)+"/");
+			}
+			
+			return result.substring(0, result.length()-1);
+		}
 	}
 }

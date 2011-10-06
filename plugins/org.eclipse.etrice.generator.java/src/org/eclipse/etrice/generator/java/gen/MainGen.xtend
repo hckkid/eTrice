@@ -46,6 +46,8 @@ class MainGen implements IGenerator {
 		actorClassGen.doGenerate(e);
 		subsystemClassGen.doGenerate(e);
 		
-		subsystemRunnerGen.doGenerate(e);
+		if (!e.library) {
+			subsystemRunnerGen.doGenerate(e);
+		}
 	}
 }

@@ -179,11 +179,22 @@ public interface Root extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Library</em>' attribute.
+	 * @see #setLibrary(boolean)
 	 * @see org.eclipse.etrice.generator.etricegen.ETriceGenPackage#getRoot_Library()
-	 * @model transient="true" changeable="false" volatile="true" derived="true"
+	 * @model
 	 * @generated
 	 */
 	boolean isLibrary();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.etrice.generator.etricegen.Root#isLibrary <em>Library</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Library</em>' attribute.
+	 * @see #isLibrary()
+	 * @generated
+	 */
+	void setLibrary(boolean value);
 
 	/**
 	 * <!-- begin-user-doc -->

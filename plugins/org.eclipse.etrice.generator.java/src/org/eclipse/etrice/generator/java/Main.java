@@ -30,11 +30,12 @@ public class Main extends AbstractGenerator {
 	 * print usage message to stderr
 	 */
 	private static void printUsage() {
-		output.println(Main.class.getName()+" [-saveGenModel <genmodel path>] [-genInstDiag] <list of model file paths>");
+		output.println(Main.class.getName()+" [-saveGenModel <genmodel path>] [-genInstDiag] [-lib] <list of model file paths>");
 		output.println("      <list of model file paths>        # model file paths may be specified as");
 		output.println("                                        # e.g. C:\\path\\to\\model\\mymodel.room");
 		output.println("      -saveGenModel <genmodel path>     # if specified the generator model will be saved to this location");
 		output.println("      -genInstDiag                      # if specified an instance diagram is created for each subsystem");
+		output.println("      -lib                              # if specified all classes are generated and no instances");
 	}
 
 	public static void main(String[] args) {
@@ -58,6 +59,7 @@ public class Main extends AbstractGenerator {
 		String genModelPath = null;
 		List<String> uriList = new ArrayList<String>();
 		boolean genInstDiag = false;
+		boolean asLibrary = false;
 		for (int i=0; i<args.length; ++i) {
 			if (args[i].equals("-saveGenModel")) {
 				if (++i<args.length) {
@@ -67,6 +69,9 @@ public class Main extends AbstractGenerator {
 			else if (args[i].equals("-genInstDiag")) {
 				genInstDiag = true;
 			}
+			else if (args[i].equals("-lib")) {
+				asLibrary = true;
+			}
 			else {
 				uriList.add(convertToURI(args[i]));
 			}
@@ -74,10 +79,10 @@ public class Main extends AbstractGenerator {
 
 		setupRoomModel();
 
-		runGenerator(uriList, genModelPath, genInstDiag);
+		runGenerator(uriList, genModelPath, genInstDiag, asLibrary);
 	}
 
-	protected boolean runGenerator(List<String> uriList, String genModelPath, boolean genInstDiag) {
+	protected boolean runGenerator(List<String> uriList, String genModelPath, boolean genInstDiag, boolean asLibrary) {
 		ResourceSet rs = resourceSetProvider.get();
 
 		loadModels(uriList, rs);
@@ -85,7 +90,7 @@ public class Main extends AbstractGenerator {
 		if (!validateModels(rs))
 			return false;
 
-		Root genModel = createGeneratorModel(rs, genModelPath);
+		Root genModel = createGeneratorModel(rs, asLibrary, genModelPath);
 		if (genModel==null)
 			return false;
 		

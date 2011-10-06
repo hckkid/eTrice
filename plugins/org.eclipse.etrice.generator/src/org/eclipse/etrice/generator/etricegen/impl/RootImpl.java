@@ -7,6 +7,7 @@
 package org.eclipse.etrice.generator.etricegen.impl;
 
 import java.util.Collection;
+import org.eclipse.emf.common.notify.Notification;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -21,6 +22,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
@@ -96,6 +98,16 @@ public class RootImpl extends EObjectImpl implements Root {
 	 * @ordered
 	 */
 	protected static final boolean LIBRARY_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isLibrary() <em>Library</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isLibrary()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean library = LIBRARY_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getSubSystemInstances() <em>Sub System Instances</em>}' containment reference list.
@@ -278,10 +290,22 @@ public class RootImpl extends EObjectImpl implements Root {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * @generated
 	 */
 	public boolean isLibrary() {
-		return getMainPathSubSystemClasses().isEmpty();
+		return library;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setLibrary(boolean newLibrary) {
+		boolean oldLibrary = library;
+		library = newLibrary;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ETriceGenPackage.ROOT__LIBRARY, oldLibrary, library));
 	}
 
 	/**
@@ -416,6 +440,9 @@ public class RootImpl extends EObjectImpl implements Root {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case ETriceGenPackage.ROOT__LIBRARY:
+				setLibrary((Boolean)newValue);
+				return;
 			case ETriceGenPackage.ROOT__SUB_SYSTEM_INSTANCES:
 				getSubSystemInstances().clear();
 				getSubSystemInstances().addAll((Collection<? extends SubSystemInstance>)newValue);
@@ -460,6 +487,9 @@ public class RootImpl extends EObjectImpl implements Root {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case ETriceGenPackage.ROOT__LIBRARY:
+				setLibrary(LIBRARY_EDEFAULT);
+				return;
 			case ETriceGenPackage.ROOT__SUB_SYSTEM_INSTANCES:
 				getSubSystemInstances().clear();
 				return;
@@ -497,7 +527,7 @@ public class RootImpl extends EObjectImpl implements Root {
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case ETriceGenPackage.ROOT__LIBRARY:
-				return isLibrary() != LIBRARY_EDEFAULT;
+				return library != LIBRARY_EDEFAULT;
 			case ETriceGenPackage.ROOT__SUB_SYSTEM_INSTANCES:
 				return subSystemInstances != null && !subSystemInstances.isEmpty();
 			case ETriceGenPackage.ROOT__MODELS:
@@ -516,6 +546,22 @@ public class RootImpl extends EObjectImpl implements Root {
 				return !getMainPathSubSystemClasses().isEmpty();
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (library: ");
+		result.append(library);
+		result.append(')');
+		return result.toString();
 	}
 
 	private HashMap<String, DataClass> name2dc = new HashMap<String, DataClass>();
