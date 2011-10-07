@@ -25,25 +25,30 @@ public class Diagnostician implements IDiagnostician {
 	private boolean validationFailed = false;
 
 	public void warning(String msg, EObject source, EStructuralFeature feature) {
-		System.out.println("Validation warning: " + msg + " " + source.toString() + " " + feature.toString());
+		System.out.println("Validation warning: " + getMsgTxt(msg, source, feature));
 	}
 
 	public void warning(String msg, EObject source, EStructuralFeature feature, int idx) {
-		System.out.println("Validation warning: " + msg + " " + source.toString() + " " + feature.toString());
+		System.out.println("Validation warning: " + getMsgTxt(msg, source, feature) + " at index "+idx);
 	}
 
 	public void error(String msg, EObject source, EStructuralFeature feature) {
 		validationFailed = true;
-		System.out.println("Validation error: " + msg + " " + source.toString() + " " + feature.toString());
+		System.out.println("Validation error: " + getMsgTxt(msg, source, feature));
 	}
 
 	public void error(String msg, EObject source, EStructuralFeature feature, int idx) {
 		validationFailed = true;
-		System.out.println("Validation error: " + msg + " " + source.toString() + " " + feature.toString());
+		System.out.println("Validation error: " + getMsgTxt(msg, source, feature) + " at index "+idx);
 	}
 
 	public boolean isFailed() {
 		return validationFailed;
+	}
+
+	private String getMsgTxt(String msg, EObject source, EStructuralFeature feature) {
+		return msg + " " + (source==null? "":source.toString()) + " "
+						+ (feature==null?"":feature.toString());
 	}
 
 }

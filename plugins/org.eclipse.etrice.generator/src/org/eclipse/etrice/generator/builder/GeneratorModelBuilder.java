@@ -312,7 +312,7 @@ public class GeneratorModelBuilder {
 		
 		ActorClass ac = (ActorClass) sap.getSap().eContainer();
 		int idx = ac.getStrSAPs().indexOf(sap.getSap());
-		diagnostician.error("SAP not satisfied!", sap.getSap(), RoomPackage.eINSTANCE.getActorClass_StrSAPs(), idx);
+		diagnostician.error("SAP not satisfied!", ac, RoomPackage.eINSTANCE.getActorClass_StrSAPs(), idx);
 	}
 
 	/**
