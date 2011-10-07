@@ -83,7 +83,7 @@ public class EmptyProjectWizard extends Wizard implements INewWizard {
 		newProjectCreationPage.setInitialProjectName(initialProjectName);
 		newProjectCreationPage.setTitle("Empty eTrice Project");
 		newProjectCreationPage
-				.setDescription("Create an empty Java plug-in project with eTrice dependencies");
+				.setDescription("Create an empty Java project with eTrice dependencies");
 		addPage(newProjectCreationPage);
 	}
 	

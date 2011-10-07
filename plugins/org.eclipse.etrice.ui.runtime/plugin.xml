@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+	<!-- ========= org.eclipse.etrice.runtime.java ========= -->
+	<extension point="org.eclipse.ui.newWizards">
+		<wizard	id="org.eclipse.etrice.ui.runtime.NewRuntimeWizard" 
+			name="eTrice Java Runtime" 
+			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
+			category="org.eclipse.etrice.core.ui.wizardCategory"
+			icon="icons/genproject.gif" 
+			project="true">
+			<description>The Java Runtime required by eTrice Java projects</description>
+		</wizard>
+	</extension>
+	<extension point="org.eclipse.emf.common.ui.examples">
+	   <example wizardID="org.eclipse.etrice.ui.runtime.NewRuntimeWizard" pageImage="icons/genproject.gif">
+		 <projectDescriptor name="org.eclipse.etrice.runtime.java" contentURI="contents/org.eclipse.etrice.runtime.java.zip" description="eTrice Runtime for Java"/>
+	  </example>
+	</extension>   
+
+	<!-- ========= org.eclipse.etrice.modellib ========= -->
+	<extension point="org.eclipse.ui.newWizards">
+		<wizard	id="org.eclipse.etrice.ui.runtime.NewModelLibWizard" 
+			name="eTrice Java ModelLib" 
+			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
+			category="org.eclipse.etrice.core.ui.wizardCategory"
+			icon="icons/genproject.gif" 
+			project="true">
+			<description>A ROOM Model Library for Java with useful services</description>
+		</wizard>
+	</extension>
+	<extension point="org.eclipse.emf.common.ui.examples">
+	   <example wizardID="org.eclipse.etrice.ui.runtime.NewModelLibWizard" pageImage="icons/genproject.gif">
+		 <projectDescriptor name="org.eclipse.etrice.modellib" contentURI="contents/org.eclipse.etrice.modellib.zip" description="eTrice ModelLib for Java"/>
+	  </example>
+	</extension>   
+
+</plugin>
