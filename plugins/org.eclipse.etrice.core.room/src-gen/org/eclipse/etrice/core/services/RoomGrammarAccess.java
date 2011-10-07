@@ -3838,12 +3838,21 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cImportKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cImportedNamespaceAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cImportedNamespaceImportedFQNParserRuleCall_1_0 = (RuleCall)cImportedNamespaceAssignment_1.eContents().get(0);
+		private final Keyword cFromKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cImportURIAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cImportURISTRINGTerminalRuleCall_3_0 = (RuleCall)cImportURIAssignment_3.eContents().get(0);
 		
+		//// note:
+		//
+		//// the attribute 'importedNamespace' is picked up by the ImportedNamespaceAwareLocalScopeProvider
+		//
+		//// the attribute 'importURI' is picked up by the ImportUriGlobalScopeProvider
+		//
 		//Import:
-		//	"import" importedNamespace=ImportedFQN;
+		//	"import" importedNamespace=ImportedFQN "from" importURI=STRING;
 		public ParserRule getRule() { return rule; }
 
-		//"import" importedNamespace=ImportedFQN
+		//"import" importedNamespace=ImportedFQN "from" importURI=STRING
 		public Group getGroup() { return cGroup; }
 
 		//"import"
@@ -3854,6 +3863,15 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 
 		//ImportedFQN
 		public RuleCall getImportedNamespaceImportedFQNParserRuleCall_1_0() { return cImportedNamespaceImportedFQNParserRuleCall_1_0; }
+
+		//"from"
+		public Keyword getFromKeyword_2() { return cFromKeyword_2; }
+
+		//importURI=STRING
+		public Assignment getImportURIAssignment_3() { return cImportURIAssignment_3; }
+
+		//STRING
+		public RuleCall getImportURISTRINGTerminalRuleCall_3_0() { return cImportURISTRINGTerminalRuleCall_3_0; }
 	}
 
 	public class ImportedFQNElements extends AbstractParserRuleElementFinder {
@@ -4965,8 +4983,14 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		return getKeyValueAccess().getRule();
 	}
 
+	//// note:
+	//
+	//// the attribute 'importedNamespace' is picked up by the ImportedNamespaceAwareLocalScopeProvider
+	//
+	//// the attribute 'importURI' is picked up by the ImportUriGlobalScopeProvider
+	//
 	//Import:
-	//	"import" importedNamespace=ImportedFQN;
+	//	"import" importedNamespace=ImportedFQN "from" importURI=STRING;
 	public ImportElements getImportAccess() {
 		return (pImport != null) ? pImport : (pImport = new ImportElements());
 	}

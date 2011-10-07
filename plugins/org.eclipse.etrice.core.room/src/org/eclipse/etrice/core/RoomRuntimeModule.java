@@ -17,6 +17,8 @@ import org.eclipse.etrice.core.naming.RoomQualifiedNameProvider;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.resource.IFragmentProvider;
 
+import com.google.inject.Binder;
+
 
 /**
  * Use this class to register components to be used within the IDE.
@@ -31,5 +33,15 @@ public class RoomRuntimeModule extends org.eclipse.etrice.core.AbstractRoomRunti
 	@Override
 	public Class<? extends IFragmentProvider> bindIFragmentProvider() {
 		return RoomFragmentProvider.class;
+	}
+	
+	/* (non-Javadoc)
+	 * @see org.eclipse.etrice.core.AbstractRoomRuntimeModule#configureIScopeProviderDelegate(com.google.inject.Binder)
+	 */
+	@Override
+	public void configureIScopeProviderDelegate(Binder binder) {
+		binder.bind(org.eclipse.xtext.scoping.IScopeProvider.class).annotatedWith(
+				com.google.inject.name.Names.named(org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider.NAMED_DELEGATE)).to(
+						org.eclipse.xtext.scoping.impl.ImportedNamespaceAwareLocalScopeProvider.class);
 	}
 }

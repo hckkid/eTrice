@@ -366,6 +366,7 @@ public class RoomParser extends AbstractContentAssistParser {
 					put(grammarAccess.getKeyValueAccess().getKeyAssignment_0(), "rule__KeyValue__KeyAssignment_0");
 					put(grammarAccess.getKeyValueAccess().getValueAssignment_2(), "rule__KeyValue__ValueAssignment_2");
 					put(grammarAccess.getImportAccess().getImportedNamespaceAssignment_1(), "rule__Import__ImportedNamespaceAssignment_1");
+					put(grammarAccess.getImportAccess().getImportURIAssignment_3(), "rule__Import__ImportURIAssignment_3");
 				}
 			};
 		}

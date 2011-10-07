@@ -3519,13 +3519,22 @@ public interface RoomPackage extends EPackage
   int IMPORT__IMPORTED_NAMESPACE = 0;
 
   /**
+   * The feature id for the '<em><b>Import URI</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int IMPORT__IMPORT_URI = 1;
+
+  /**
    * The number of structural features of the '<em>Import</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int IMPORT_FEATURE_COUNT = 1;
+  int IMPORT_FEATURE_COUNT = 2;
 
   /**
    * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.PlainStateGraphImpl <em>Plain State Graph</em>}' class.
@@ -5864,6 +5873,17 @@ public interface RoomPackage extends EPackage
   EAttribute getImport_ImportedNamespace();
 
   /**
+   * Returns the meta object for the attribute '{@link org.eclipse.etrice.core.room.Import#getImportURI <em>Import URI</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Import URI</em>'.
+   * @see org.eclipse.etrice.core.room.Import#getImportURI()
+   * @see #getImport()
+   * @generated
+   */
+  EAttribute getImport_ImportURI();
+
+  /**
    * Returns the meta object for class '{@link org.eclipse.etrice.core.room.PlainStateGraph <em>Plain State Graph</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -7755,6 +7775,14 @@ public interface RoomPackage extends EPackage
      * @generated
      */
     EAttribute IMPORT__IMPORTED_NAMESPACE = eINSTANCE.getImport_ImportedNamespace();
+
+    /**
+     * The meta object literal for the '<em><b>Import URI</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute IMPORT__IMPORT_URI = eINSTANCE.getImport_ImportURI();
 
     /**
      * The meta object literal for the '{@link org.eclipse.etrice.core.room.impl.PlainStateGraphImpl <em>Plain State Graph</em>}' class.

@@ -402,8 +402,15 @@ Documentation: '['
 Annotation: '@' name=ID ('(' attributes+=KeyValue (',' attributes+=KeyValue)* ')')?;
 KeyValue: key=ID '=' value=STRING;
 
+// HOWTO: use a combination of URI global scopes and namespace aware local scope provider
+// this is confugured in the work flow by
+//			fragment = scoping.ImportURIScopingFragment {}
+// and by overriding configureIScopeProviderDelegate in the runtime module with 
+//			ImportedNamespaceAwareLocalScopeProvider
+// the attribute 'importedNamespace' is picked up by the ImportedNamespaceAwareLocalScopeProvider
+// the attribute 'importURI' is picked up by the ImportUriGlobalScopeProvider
 Import :
-	'import' importedNamespace=ImportedFQN;
+	'import' importedNamespace=ImportedFQN 'from' importURI=STRING;
 
 ImportedFQN:
 	FQN ('.' '*')?;

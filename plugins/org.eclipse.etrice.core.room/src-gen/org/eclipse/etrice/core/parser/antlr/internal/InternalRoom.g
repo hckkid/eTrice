@@ -6044,6 +6044,28 @@ ruleImport returns [EObject current=null]
 	    }
 
 )
+)	otherlv_2='from' 
+    {
+    	newLeafNode(otherlv_2, grammarAccess.getImportAccess().getFromKeyword_2());
+    }
+(
+(
+		lv_importURI_3_0=RULE_STRING
+		{
+			newLeafNode(lv_importURI_3_0, grammarAccess.getImportAccess().getImportURISTRINGTerminalRuleCall_3_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getImportRule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"importURI",
+        		lv_importURI_3_0, 
+        		"STRING");
+	    }
+
+)
 ))
 ;
 
