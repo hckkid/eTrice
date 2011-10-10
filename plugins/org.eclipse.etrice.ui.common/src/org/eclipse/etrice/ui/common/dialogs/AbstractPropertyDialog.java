@@ -273,7 +273,7 @@ public abstract class AbstractPropertyDialog extends FormDialog {
 		
 		int style = SWT.BORDER;
 		if (multiline)
-			style |= SWT.MULTI;
+			style |= SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL;
 		Text text = toolkit.createText(parent, "", style);
 		GridData gd = new GridData(multiline?GridData.FILL_BOTH:GridData.FILL_HORIZONTAL);
 		text.setLayoutData(gd);
