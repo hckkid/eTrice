@@ -2248,13 +2248,22 @@ public interface RoomPackage extends EPackage
   int STATE__EXIT_CODE = STATE_GRAPH_NODE_FEATURE_COUNT + 2;
 
   /**
+   * The feature id for the '<em><b>Do Code</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int STATE__DO_CODE = STATE_GRAPH_NODE_FEATURE_COUNT + 3;
+
+  /**
    * The feature id for the '<em><b>Subgraph</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int STATE__SUBGRAPH = STATE_GRAPH_NODE_FEATURE_COUNT + 3;
+  int STATE__SUBGRAPH = STATE_GRAPH_NODE_FEATURE_COUNT + 4;
 
   /**
    * The number of structural features of the '<em>State</em>' class.
@@ -2263,7 +2272,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int STATE_FEATURE_COUNT = STATE_GRAPH_NODE_FEATURE_COUNT + 4;
+  int STATE_FEATURE_COUNT = STATE_GRAPH_NODE_FEATURE_COUNT + 5;
 
   /**
    * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.StateGraphImpl <em>State Graph</em>}' class.
@@ -2422,6 +2431,15 @@ public interface RoomPackage extends EPackage
   int BASE_STATE__EXIT_CODE = STATE__EXIT_CODE;
 
   /**
+   * The feature id for the '<em><b>Do Code</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int BASE_STATE__DO_CODE = STATE__DO_CODE;
+
+  /**
    * The feature id for the '<em><b>Subgraph</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -2484,6 +2502,15 @@ public interface RoomPackage extends EPackage
    * @ordered
    */
   int REFINED_STATE__EXIT_CODE = STATE__EXIT_CODE;
+
+  /**
+   * The feature id for the '<em><b>Do Code</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int REFINED_STATE__DO_CODE = STATE__DO_CODE;
 
   /**
    * The feature id for the '<em><b>Subgraph</b></em>' containment reference.
@@ -5176,6 +5203,17 @@ public interface RoomPackage extends EPackage
   EReference getState_ExitCode();
 
   /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.etrice.core.room.State#getDoCode <em>Do Code</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Do Code</em>'.
+   * @see org.eclipse.etrice.core.room.State#getDoCode()
+   * @see #getState()
+   * @generated
+   */
+  EReference getState_DoCode();
+
+  /**
    * Returns the meta object for the containment reference '{@link org.eclipse.etrice.core.room.State#getSubgraph <em>Subgraph</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -7189,6 +7227,14 @@ public interface RoomPackage extends EPackage
      * @generated
      */
     EReference STATE__EXIT_CODE = eINSTANCE.getState_ExitCode();
+
+    /**
+     * The meta object literal for the '<em><b>Do Code</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference STATE__DO_CODE = eINSTANCE.getState_DoCode();
 
     /**
      * The meta object literal for the '<em><b>Subgraph</b></em>' containment reference feature.

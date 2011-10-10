@@ -287,6 +287,7 @@ BaseState:
 	'State' name=ID (docu=Documentation)? ('{'
 		('entry' entryCode=DetailCode)?
 		('exit' exitCode=DetailCode)?
+		('do' doCode=DetailCode)?
 		('subgraph' subgraph=PlainStateGraph)?
 	'}')?;
 
@@ -294,6 +295,7 @@ RefinedState:
 	'RefinedState' base=[BaseState|FQN] (docu=Documentation)? '{'
 		('entry' entryCode=DetailCode)?
 		('exit' exitCode=DetailCode)?
+		('do' doCode=DetailCode)?
 		('subgraph' subgraph=StateGraph)?
 	'}';
 

@@ -11255,6 +11255,7 @@ rule__BaseState__Group_3__4
     }
 :
 	rule__BaseState__Group_3__4__Impl
+	rule__BaseState__Group_3__5
 ;
 finally {
 	restoreStackSize(stackSize);
@@ -11266,17 +11267,47 @@ rule__BaseState__Group_3__4__Impl
     }
 :
 (
-{ before(grammarAccess.getBaseStateAccess().getRightCurlyBracketKeyword_3_4()); }
-
-	'}' 
-
-{ after(grammarAccess.getBaseStateAccess().getRightCurlyBracketKeyword_3_4()); }
+{ before(grammarAccess.getBaseStateAccess().getGroup_3_4()); }
+(rule__BaseState__Group_3_4__0)?
+{ after(grammarAccess.getBaseStateAccess().getGroup_3_4()); }
 )
 
 ;
 finally {
 	restoreStackSize(stackSize);
 }
+
+
+rule__BaseState__Group_3__5
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__BaseState__Group_3__5__Impl
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__BaseState__Group_3__5__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getBaseStateAccess().getRightCurlyBracketKeyword_3_5()); }
+
+	'}' 
+
+{ after(grammarAccess.getBaseStateAccess().getRightCurlyBracketKeyword_3_5()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
 
 
 
@@ -11433,11 +11464,11 @@ rule__BaseState__Group_3_3__0__Impl
     }
 :
 (
-{ before(grammarAccess.getBaseStateAccess().getSubgraphKeyword_3_3_0()); }
+{ before(grammarAccess.getBaseStateAccess().getDoKeyword_3_3_0()); }
 
-	'subgraph' 
+	'do' 
 
-{ after(grammarAccess.getBaseStateAccess().getSubgraphKeyword_3_3_0()); }
+{ after(grammarAccess.getBaseStateAccess().getDoKeyword_3_3_0()); }
 )
 
 ;
@@ -11463,9 +11494,72 @@ rule__BaseState__Group_3_3__1__Impl
     }
 :
 (
-{ before(grammarAccess.getBaseStateAccess().getSubgraphAssignment_3_3_1()); }
-(rule__BaseState__SubgraphAssignment_3_3_1)
-{ after(grammarAccess.getBaseStateAccess().getSubgraphAssignment_3_3_1()); }
+{ before(grammarAccess.getBaseStateAccess().getDoCodeAssignment_3_3_1()); }
+(rule__BaseState__DoCodeAssignment_3_3_1)
+{ after(grammarAccess.getBaseStateAccess().getDoCodeAssignment_3_3_1()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
+
+
+
+
+rule__BaseState__Group_3_4__0
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__BaseState__Group_3_4__0__Impl
+	rule__BaseState__Group_3_4__1
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__BaseState__Group_3_4__0__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getBaseStateAccess().getSubgraphKeyword_3_4_0()); }
+
+	'subgraph' 
+
+{ after(grammarAccess.getBaseStateAccess().getSubgraphKeyword_3_4_0()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
+rule__BaseState__Group_3_4__1
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__BaseState__Group_3_4__1__Impl
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__BaseState__Group_3_4__1__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getBaseStateAccess().getSubgraphAssignment_3_4_1()); }
+(rule__BaseState__SubgraphAssignment_3_4_1)
+{ after(grammarAccess.getBaseStateAccess().getSubgraphAssignment_3_4_1()); }
 )
 
 ;
@@ -11691,6 +11785,7 @@ rule__RefinedState__Group__7
     }
 :
 	rule__RefinedState__Group__7__Impl
+	rule__RefinedState__Group__8
 ;
 finally {
 	restoreStackSize(stackSize);
@@ -11702,17 +11797,47 @@ rule__RefinedState__Group__7__Impl
     }
 :
 (
-{ before(grammarAccess.getRefinedStateAccess().getRightCurlyBracketKeyword_7()); }
-
-	'}' 
-
-{ after(grammarAccess.getRefinedStateAccess().getRightCurlyBracketKeyword_7()); }
+{ before(grammarAccess.getRefinedStateAccess().getGroup_7()); }
+(rule__RefinedState__Group_7__0)?
+{ after(grammarAccess.getRefinedStateAccess().getGroup_7()); }
 )
 
 ;
 finally {
 	restoreStackSize(stackSize);
 }
+
+
+rule__RefinedState__Group__8
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__RefinedState__Group__8__Impl
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__RefinedState__Group__8__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getRefinedStateAccess().getRightCurlyBracketKeyword_8()); }
+
+	'}' 
+
+{ after(grammarAccess.getRefinedStateAccess().getRightCurlyBracketKeyword_8()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
 
 
 
@@ -11875,11 +12000,11 @@ rule__RefinedState__Group_6__0__Impl
     }
 :
 (
-{ before(grammarAccess.getRefinedStateAccess().getSubgraphKeyword_6_0()); }
+{ before(grammarAccess.getRefinedStateAccess().getDoKeyword_6_0()); }
 
-	'subgraph' 
+	'do' 
 
-{ after(grammarAccess.getRefinedStateAccess().getSubgraphKeyword_6_0()); }
+{ after(grammarAccess.getRefinedStateAccess().getDoKeyword_6_0()); }
 )
 
 ;
@@ -11905,9 +12030,72 @@ rule__RefinedState__Group_6__1__Impl
     }
 :
 (
-{ before(grammarAccess.getRefinedStateAccess().getSubgraphAssignment_6_1()); }
-(rule__RefinedState__SubgraphAssignment_6_1)
-{ after(grammarAccess.getRefinedStateAccess().getSubgraphAssignment_6_1()); }
+{ before(grammarAccess.getRefinedStateAccess().getDoCodeAssignment_6_1()); }
+(rule__RefinedState__DoCodeAssignment_6_1)
+{ after(grammarAccess.getRefinedStateAccess().getDoCodeAssignment_6_1()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
+
+
+
+
+rule__RefinedState__Group_7__0
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__RefinedState__Group_7__0__Impl
+	rule__RefinedState__Group_7__1
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__RefinedState__Group_7__0__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getRefinedStateAccess().getSubgraphKeyword_7_0()); }
+
+	'subgraph' 
+
+{ after(grammarAccess.getRefinedStateAccess().getSubgraphKeyword_7_0()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
+rule__RefinedState__Group_7__1
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__RefinedState__Group_7__1__Impl
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__RefinedState__Group_7__1__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getRefinedStateAccess().getSubgraphAssignment_7_1()); }
+(rule__RefinedState__SubgraphAssignment_7_1)
+{ after(grammarAccess.getRefinedStateAccess().getSubgraphAssignment_7_1()); }
 )
 
 ;
@@ -18361,14 +18549,29 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__BaseState__SubgraphAssignment_3_3_1
+rule__BaseState__DoCodeAssignment_3_3_1
     @init {
 		int stackSize = keepStackSize();
     }
 :
 (
-{ before(grammarAccess.getBaseStateAccess().getSubgraphPlainStateGraphParserRuleCall_3_3_1_0()); }
-	rulePlainStateGraph{ after(grammarAccess.getBaseStateAccess().getSubgraphPlainStateGraphParserRuleCall_3_3_1_0()); }
+{ before(grammarAccess.getBaseStateAccess().getDoCodeDetailCodeParserRuleCall_3_3_1_0()); }
+	ruleDetailCode{ after(grammarAccess.getBaseStateAccess().getDoCodeDetailCodeParserRuleCall_3_3_1_0()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__BaseState__SubgraphAssignment_3_4_1
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getBaseStateAccess().getSubgraphPlainStateGraphParserRuleCall_3_4_1_0()); }
+	rulePlainStateGraph{ after(grammarAccess.getBaseStateAccess().getSubgraphPlainStateGraphParserRuleCall_3_4_1_0()); }
 )
 
 ;
@@ -18440,14 +18643,29 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__RefinedState__SubgraphAssignment_6_1
+rule__RefinedState__DoCodeAssignment_6_1
     @init {
 		int stackSize = keepStackSize();
     }
 :
 (
-{ before(grammarAccess.getRefinedStateAccess().getSubgraphStateGraphParserRuleCall_6_1_0()); }
-	ruleStateGraph{ after(grammarAccess.getRefinedStateAccess().getSubgraphStateGraphParserRuleCall_6_1_0()); }
+{ before(grammarAccess.getRefinedStateAccess().getDoCodeDetailCodeParserRuleCall_6_1_0()); }
+	ruleDetailCode{ after(grammarAccess.getRefinedStateAccess().getDoCodeDetailCodeParserRuleCall_6_1_0()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__RefinedState__SubgraphAssignment_7_1
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getRefinedStateAccess().getSubgraphStateGraphParserRuleCall_7_1_0()); }
+	ruleStateGraph{ after(grammarAccess.getRefinedStateAccess().getSubgraphStateGraphParserRuleCall_7_1_0()); }
 )
 
 ;

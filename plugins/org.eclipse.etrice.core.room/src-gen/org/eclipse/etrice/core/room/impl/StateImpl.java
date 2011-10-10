@@ -30,6 +30,7 @@ import org.eclipse.etrice.core.room.StateGraph;
  *   <li>{@link org.eclipse.etrice.core.room.impl.StateImpl#getDocu <em>Docu</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.StateImpl#getEntryCode <em>Entry Code</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.StateImpl#getExitCode <em>Exit Code</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.impl.StateImpl#getDoCode <em>Do Code</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.StateImpl#getSubgraph <em>Subgraph</em>}</li>
  * </ul>
  * </p>
@@ -67,6 +68,16 @@ public class StateImpl extends StateGraphNodeImpl implements State
    * @ordered
    */
   protected DetailCode exitCode;
+
+  /**
+   * The cached value of the '{@link #getDoCode() <em>Do Code</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getDoCode()
+   * @generated
+   * @ordered
+   */
+  protected DetailCode doCode;
 
   /**
    * The cached value of the '{@link #getSubgraph() <em>Subgraph</em>}' containment reference.
@@ -248,6 +259,54 @@ public class StateImpl extends StateGraphNodeImpl implements State
    * <!-- end-user-doc -->
    * @generated
    */
+  public DetailCode getDoCode()
+  {
+    return doCode;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetDoCode(DetailCode newDoCode, NotificationChain msgs)
+  {
+    DetailCode oldDoCode = doCode;
+    doCode = newDoCode;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RoomPackage.STATE__DO_CODE, oldDoCode, newDoCode);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setDoCode(DetailCode newDoCode)
+  {
+    if (newDoCode != doCode)
+    {
+      NotificationChain msgs = null;
+      if (doCode != null)
+        msgs = ((InternalEObject)doCode).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RoomPackage.STATE__DO_CODE, null, msgs);
+      if (newDoCode != null)
+        msgs = ((InternalEObject)newDoCode).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RoomPackage.STATE__DO_CODE, null, msgs);
+      msgs = basicSetDoCode(newDoCode, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.STATE__DO_CODE, newDoCode, newDoCode));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public StateGraph getSubgraph()
   {
     return subgraph;
@@ -317,6 +376,8 @@ public class StateImpl extends StateGraphNodeImpl implements State
         return basicSetEntryCode(null, msgs);
       case RoomPackage.STATE__EXIT_CODE:
         return basicSetExitCode(null, msgs);
+      case RoomPackage.STATE__DO_CODE:
+        return basicSetDoCode(null, msgs);
       case RoomPackage.STATE__SUBGRAPH:
         return basicSetSubgraph(null, msgs);
     }
@@ -339,6 +400,8 @@ public class StateImpl extends StateGraphNodeImpl implements State
         return getEntryCode();
       case RoomPackage.STATE__EXIT_CODE:
         return getExitCode();
+      case RoomPackage.STATE__DO_CODE:
+        return getDoCode();
       case RoomPackage.STATE__SUBGRAPH:
         return getSubgraph();
     }
@@ -363,6 +426,9 @@ public class StateImpl extends StateGraphNodeImpl implements State
         return;
       case RoomPackage.STATE__EXIT_CODE:
         setExitCode((DetailCode)newValue);
+        return;
+      case RoomPackage.STATE__DO_CODE:
+        setDoCode((DetailCode)newValue);
         return;
       case RoomPackage.STATE__SUBGRAPH:
         setSubgraph((StateGraph)newValue);
@@ -390,6 +456,9 @@ public class StateImpl extends StateGraphNodeImpl implements State
       case RoomPackage.STATE__EXIT_CODE:
         setExitCode((DetailCode)null);
         return;
+      case RoomPackage.STATE__DO_CODE:
+        setDoCode((DetailCode)null);
+        return;
       case RoomPackage.STATE__SUBGRAPH:
         setSubgraph((StateGraph)null);
         return;
@@ -413,6 +482,8 @@ public class StateImpl extends StateGraphNodeImpl implements State
         return entryCode != null;
       case RoomPackage.STATE__EXIT_CODE:
         return exitCode != null;
+      case RoomPackage.STATE__DO_CODE:
+        return doCode != null;
       case RoomPackage.STATE__SUBGRAPH:
         return subgraph != null;
     }

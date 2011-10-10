@@ -20,7 +20,6 @@ import org.eclipse.etrice.core.room.ActorInstancePath;
 import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.Binding;
 import org.eclipse.etrice.core.room.DataClass;
-import org.eclipse.etrice.core.room.GuardedTransition;
 import org.eclipse.etrice.core.room.InitialTransition;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.LayerConnection;
@@ -33,7 +32,6 @@ import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.core.room.TrPoint;
 import org.eclipse.etrice.core.room.Transition;
-import org.eclipse.etrice.core.room.TriggeredTransition;
 import org.eclipse.etrice.core.validation.ValidationUtil.Result;
 import org.eclipse.xtext.validation.Check;
 
@@ -147,7 +145,7 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 	public void checkTrPoint(TrPoint tp) {
 		Result result = ValidationUtil.isValid(tp);
 		if (!result.isOk())
-			error(result.getMsg(), result.getSource(), result.getFeature(), result.getIndex());
+			error(result);
 	}
 	
 	@Check
@@ -161,24 +159,26 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 	public void checkTransition(Transition trans) {
 		Result result = ValidationUtil.checkTransition(trans);
 		if (!result.isOk())
-			if (trans instanceof GuardedTransition)
-				error(result.getMsg(), RoomPackage.eINSTANCE.getGuardedTransition_Guard());
-			else if (trans instanceof TriggeredTransition)
-				error(result.getMsg(), RoomPackage.eINSTANCE.getTriggeredTransition_Triggers());
-			else {
-				assert(false): "unexpected sub type";
-				return;
-			}
+			error(result);
 
 		if (trans instanceof InitialTransition) {
 			result = ValidationUtil.isConnectable(null, trans.getTo(), trans, (StateGraph)trans.eContainer());
-			if (!result.isOk())
-				error(result.getMsg(), result.getSource(), result.getFeature(), result.getIndex());
 		}
 		else {
 			result = ValidationUtil.isConnectable(((NonInitialTransition)trans).getFrom(), trans.getTo(), trans, (StateGraph)trans.eContainer());
-			if (!result.isOk())
-				error(result.getMsg(), result.getSource(), result.getFeature(), result.getIndex());
 		}
+		if (!result.isOk())
+			error(result);
+	}
+	
+	@Check
+	public void checkState(org.eclipse.etrice.core.room.State state) {
+		Result result = ValidationUtil.checkState(state);
+		if (!result.isOk())
+			error(result);
+	}
+	
+	private void error(Result result) {
+		error(result.getMsg(), result.getSource(), result.getFeature(), result.getIndex());
 	}
 }

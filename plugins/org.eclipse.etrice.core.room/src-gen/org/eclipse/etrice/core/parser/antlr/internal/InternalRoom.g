@@ -4083,31 +4083,53 @@ ruleBaseState returns [EObject current=null]
 	    }
 
 )
-))?(	otherlv_8='subgraph' 
+))?(	otherlv_8='do' 
     {
-    	newLeafNode(otherlv_8, grammarAccess.getBaseStateAccess().getSubgraphKeyword_3_3_0());
+    	newLeafNode(otherlv_8, grammarAccess.getBaseStateAccess().getDoKeyword_3_3_0());
     }
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getBaseStateAccess().getSubgraphPlainStateGraphParserRuleCall_3_3_1_0()); 
+	        newCompositeNode(grammarAccess.getBaseStateAccess().getDoCodeDetailCodeParserRuleCall_3_3_1_0()); 
 	    }
-		lv_subgraph_9_0=rulePlainStateGraph		{
+		lv_doCode_9_0=ruleDetailCode		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getBaseStateRule());
+	        }
+       		set(
+       			$current, 
+       			"doCode",
+        		lv_doCode_9_0, 
+        		"DetailCode");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+))?(	otherlv_10='subgraph' 
+    {
+    	newLeafNode(otherlv_10, grammarAccess.getBaseStateAccess().getSubgraphKeyword_3_4_0());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getBaseStateAccess().getSubgraphPlainStateGraphParserRuleCall_3_4_1_0()); 
+	    }
+		lv_subgraph_11_0=rulePlainStateGraph		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getBaseStateRule());
 	        }
        		set(
        			$current, 
        			"subgraph",
-        		lv_subgraph_9_0, 
+        		lv_subgraph_11_0, 
         		"PlainStateGraph");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-))?	otherlv_10='}' 
+))?	otherlv_12='}' 
     {
-    	newLeafNode(otherlv_10, grammarAccess.getBaseStateAccess().getRightCurlyBracketKeyword_3_4());
+    	newLeafNode(otherlv_12, grammarAccess.getBaseStateAccess().getRightCurlyBracketKeyword_3_5());
     }
 )?)
 ;
@@ -4215,31 +4237,53 @@ ruleRefinedState returns [EObject current=null]
 	    }
 
 )
-))?(	otherlv_8='subgraph' 
+))?(	otherlv_8='do' 
     {
-    	newLeafNode(otherlv_8, grammarAccess.getRefinedStateAccess().getSubgraphKeyword_6_0());
+    	newLeafNode(otherlv_8, grammarAccess.getRefinedStateAccess().getDoKeyword_6_0());
     }
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getRefinedStateAccess().getSubgraphStateGraphParserRuleCall_6_1_0()); 
+	        newCompositeNode(grammarAccess.getRefinedStateAccess().getDoCodeDetailCodeParserRuleCall_6_1_0()); 
 	    }
-		lv_subgraph_9_0=ruleStateGraph		{
+		lv_doCode_9_0=ruleDetailCode		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getRefinedStateRule());
+	        }
+       		set(
+       			$current, 
+       			"doCode",
+        		lv_doCode_9_0, 
+        		"DetailCode");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+))?(	otherlv_10='subgraph' 
+    {
+    	newLeafNode(otherlv_10, grammarAccess.getRefinedStateAccess().getSubgraphKeyword_7_0());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getRefinedStateAccess().getSubgraphStateGraphParserRuleCall_7_1_0()); 
+	    }
+		lv_subgraph_11_0=ruleStateGraph		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getRefinedStateRule());
 	        }
        		set(
        			$current, 
        			"subgraph",
-        		lv_subgraph_9_0, 
+        		lv_subgraph_11_0, 
         		"StateGraph");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-))?	otherlv_10='}' 
+))?	otherlv_12='}' 
     {
-    	newLeafNode(otherlv_10, grammarAccess.getRefinedStateAccess().getRightCurlyBracketKeyword_7());
+    	newLeafNode(otherlv_12, grammarAccess.getRefinedStateAccess().getRightCurlyBracketKeyword_8());
     }
 )
 ;

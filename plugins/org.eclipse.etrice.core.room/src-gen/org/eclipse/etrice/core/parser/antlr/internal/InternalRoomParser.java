@@ -22,7 +22,7 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalRoomParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'RoomModel'", "'{'", "'}'", "':'", "'ref'", "'ext'", "'DataClass'", "'extends'", "'Attribute'", "'['", "']'", "'='", "'Operation'", "'('", "','", "')'", "'ProtocolClass'", "'usercode1'", "'usercode2'", "'incoming'", "'outgoing'", "'regular'", "'PortClass'", "'conjugate'", "'Message'", "'usercode'", "'handle'", "'semantics'", "'in'", "'->'", "'out'", "'abstract'", "'ActorClass'", "'Interface'", "'Structure'", "'Behavior'", "'conjugated'", "'Port'", "'external'", "'SAP'", "'SPP'", "'ServiceImplementation'", "'of'", "'LogicalSystem'", "'SubSystemRef'", "'SubSystemClass'", "'LogicalThread'", "'prio'", "'.'", "'Binding'", "'and'", "'LayerConnection'", "'satisfied_by'", "'relay_sap'", "'ActorRef'", "'data_driven'", "'StateMachine'", "'State'", "'entry'", "'exit'", "'subgraph'", "'RefinedState'", "'handler'", "'TransitionPoint'", "'EntryPoint'", "'ExitPoint'", "'ChoicePoint'", "'Transition'", "'initial'", "'action'", "'triggers'", "'or'", "'guard'", "'cond'", "'my'", "'cp'", "'<'", "'|'", "'>'", "'@'", "'import'", "'from'", "'*'", "'void'", "'int8'", "'int16'", "'int32'", "'uint8'", "'uint16'", "'uint32'", "'float32'", "'float64'", "'boolean'", "'string'", "'char'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'RoomModel'", "'{'", "'}'", "':'", "'ref'", "'ext'", "'DataClass'", "'extends'", "'Attribute'", "'['", "']'", "'='", "'Operation'", "'('", "','", "')'", "'ProtocolClass'", "'usercode1'", "'usercode2'", "'incoming'", "'outgoing'", "'regular'", "'PortClass'", "'conjugate'", "'Message'", "'usercode'", "'handle'", "'semantics'", "'in'", "'->'", "'out'", "'abstract'", "'ActorClass'", "'Interface'", "'Structure'", "'Behavior'", "'conjugated'", "'Port'", "'external'", "'SAP'", "'SPP'", "'ServiceImplementation'", "'of'", "'LogicalSystem'", "'SubSystemRef'", "'SubSystemClass'", "'LogicalThread'", "'prio'", "'.'", "'Binding'", "'and'", "'LayerConnection'", "'satisfied_by'", "'relay_sap'", "'ActorRef'", "'data_driven'", "'StateMachine'", "'State'", "'entry'", "'exit'", "'do'", "'subgraph'", "'RefinedState'", "'handler'", "'TransitionPoint'", "'EntryPoint'", "'ExitPoint'", "'ChoicePoint'", "'Transition'", "'initial'", "'action'", "'triggers'", "'or'", "'guard'", "'cond'", "'my'", "'cp'", "'<'", "'|'", "'>'", "'@'", "'import'", "'from'", "'*'", "'void'", "'int8'", "'int16'", "'int32'", "'uint8'", "'uint16'", "'uint32'", "'float32'", "'float64'", "'boolean'", "'string'", "'char'"
     };
     public static final int RULE_ID=4;
     public static final int T__29=29;
@@ -100,6 +100,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
     public static final int T__59=59;
     public static final int T__104=104;
     public static final int T__105=105;
+    public static final int T__106=106;
     public static final int RULE_INT=5;
     public static final int T__50=50;
     public static final int T__42=42;
@@ -323,7 +324,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 int alt2=2;
                 int LA2_0 = input.LA(1);
 
-                if ( (LA2_0==91) ) {
+                if ( (LA2_0==92) ) {
                     alt2=1;
                 }
 
@@ -1463,7 +1464,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             int alt10=2;
             int LA10_0 = input.LA(1);
 
-            if ( ((LA10_0>=94 && LA10_0<=105)) ) {
+            if ( ((LA10_0>=95 && LA10_0<=106)) ) {
                 alt10=1;
             }
             else if ( (LA10_0==RULE_ID) ) {
@@ -1799,7 +1800,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 int alt13=2;
                 int LA13_0 = input.LA(1);
 
-                if ( (LA13_0==91) ) {
+                if ( (LA13_0==92) ) {
                     alt13=1;
                 }
 
@@ -5462,7 +5463,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                         int alt58=2;
                         int LA58_0 = input.LA(1);
 
-                        if ( (LA58_0==90) ) {
+                        if ( (LA58_0==91) ) {
                             alt58=1;
                         }
 
@@ -8952,20 +8953,20 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             int alt84=3;
             switch ( input.LA(1) ) {
             case 68:
-            case 72:
+            case 73:
                 {
                 alt84=1;
                 }
                 break;
-            case 77:
+            case 78:
                 {
                 alt84=2;
                 }
                 break;
-            case 73:
             case 74:
             case 75:
             case 76:
+            case 77:
                 {
                 alt84=3;
                 }
@@ -9111,7 +9112,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             if ( (LA85_0==68) ) {
                 alt85=1;
             }
-            else if ( (LA85_0==72) ) {
+            else if ( (LA85_0==73) ) {
                 alt85=2;
             }
             else {
@@ -9384,25 +9385,25 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 int alt87=5;
                 switch ( input.LA(1) ) {
                 case 68:
-                case 72:
+                case 73:
                     {
                     alt87=1;
                     }
                     break;
-                case 73:
                 case 74:
                 case 75:
                 case 76:
+                case 77:
                     {
                     alt87=2;
                     }
                     break;
-                case 77:
+                case 78:
                     {
                     alt87=3;
                     }
                     break;
-                case 78:
+                case 79:
                     {
                     alt87=4;
                     }
@@ -9710,25 +9711,25 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 int alt89=5;
                 switch ( input.LA(1) ) {
                 case 68:
-                case 72:
+                case 73:
                     {
                     alt89=1;
                     }
                     break;
-                case 73:
                 case 74:
                 case 75:
                 case 76:
+                case 77:
                     {
                     alt89=2;
                     }
                     break;
-                case 77:
+                case 78:
                     {
                     alt89=3;
                     }
                     break;
-                case 78:
+                case 79:
                     {
                     alt89=4;
                     }
@@ -9952,7 +9953,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleBaseState"
-    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3994:1: ruleBaseState returns [EObject current=null] : (otherlv_0= 'State' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? (otherlv_3= '{' (otherlv_4= 'entry' ( (lv_entryCode_5_0= ruleDetailCode ) ) )? (otherlv_6= 'exit' ( (lv_exitCode_7_0= ruleDetailCode ) ) )? (otherlv_8= 'subgraph' ( (lv_subgraph_9_0= rulePlainStateGraph ) ) )? otherlv_10= '}' )? ) ;
+    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3994:1: ruleBaseState returns [EObject current=null] : (otherlv_0= 'State' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? (otherlv_3= '{' (otherlv_4= 'entry' ( (lv_entryCode_5_0= ruleDetailCode ) ) )? (otherlv_6= 'exit' ( (lv_exitCode_7_0= ruleDetailCode ) ) )? (otherlv_8= 'do' ( (lv_doCode_9_0= ruleDetailCode ) ) )? (otherlv_10= 'subgraph' ( (lv_subgraph_11_0= rulePlainStateGraph ) ) )? otherlv_12= '}' )? ) ;
     public final EObject ruleBaseState() throws RecognitionException {
         EObject current = null;
 
@@ -9963,23 +9964,26 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
         Token otherlv_6=null;
         Token otherlv_8=null;
         Token otherlv_10=null;
+        Token otherlv_12=null;
         EObject lv_docu_2_0 = null;
 
         EObject lv_entryCode_5_0 = null;
 
         EObject lv_exitCode_7_0 = null;
 
-        EObject lv_subgraph_9_0 = null;
+        EObject lv_doCode_9_0 = null;
+
+        EObject lv_subgraph_11_0 = null;
 
 
          enterRule(); 
             
         try {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3997:28: ( (otherlv_0= 'State' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? (otherlv_3= '{' (otherlv_4= 'entry' ( (lv_entryCode_5_0= ruleDetailCode ) ) )? (otherlv_6= 'exit' ( (lv_exitCode_7_0= ruleDetailCode ) ) )? (otherlv_8= 'subgraph' ( (lv_subgraph_9_0= rulePlainStateGraph ) ) )? otherlv_10= '}' )? ) )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3998:1: (otherlv_0= 'State' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? (otherlv_3= '{' (otherlv_4= 'entry' ( (lv_entryCode_5_0= ruleDetailCode ) ) )? (otherlv_6= 'exit' ( (lv_exitCode_7_0= ruleDetailCode ) ) )? (otherlv_8= 'subgraph' ( (lv_subgraph_9_0= rulePlainStateGraph ) ) )? otherlv_10= '}' )? )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3997:28: ( (otherlv_0= 'State' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? (otherlv_3= '{' (otherlv_4= 'entry' ( (lv_entryCode_5_0= ruleDetailCode ) ) )? (otherlv_6= 'exit' ( (lv_exitCode_7_0= ruleDetailCode ) ) )? (otherlv_8= 'do' ( (lv_doCode_9_0= ruleDetailCode ) ) )? (otherlv_10= 'subgraph' ( (lv_subgraph_11_0= rulePlainStateGraph ) ) )? otherlv_12= '}' )? ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3998:1: (otherlv_0= 'State' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? (otherlv_3= '{' (otherlv_4= 'entry' ( (lv_entryCode_5_0= ruleDetailCode ) ) )? (otherlv_6= 'exit' ( (lv_exitCode_7_0= ruleDetailCode ) ) )? (otherlv_8= 'do' ( (lv_doCode_9_0= ruleDetailCode ) ) )? (otherlv_10= 'subgraph' ( (lv_subgraph_11_0= rulePlainStateGraph ) ) )? otherlv_12= '}' )? )
             {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3998:1: (otherlv_0= 'State' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? (otherlv_3= '{' (otherlv_4= 'entry' ( (lv_entryCode_5_0= ruleDetailCode ) ) )? (otherlv_6= 'exit' ( (lv_exitCode_7_0= ruleDetailCode ) ) )? (otherlv_8= 'subgraph' ( (lv_subgraph_9_0= rulePlainStateGraph ) ) )? otherlv_10= '}' )? )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3998:3: otherlv_0= 'State' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? (otherlv_3= '{' (otherlv_4= 'entry' ( (lv_entryCode_5_0= ruleDetailCode ) ) )? (otherlv_6= 'exit' ( (lv_exitCode_7_0= ruleDetailCode ) ) )? (otherlv_8= 'subgraph' ( (lv_subgraph_9_0= rulePlainStateGraph ) ) )? otherlv_10= '}' )?
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3998:1: (otherlv_0= 'State' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? (otherlv_3= '{' (otherlv_4= 'entry' ( (lv_entryCode_5_0= ruleDetailCode ) ) )? (otherlv_6= 'exit' ( (lv_exitCode_7_0= ruleDetailCode ) ) )? (otherlv_8= 'do' ( (lv_doCode_9_0= ruleDetailCode ) ) )? (otherlv_10= 'subgraph' ( (lv_subgraph_11_0= rulePlainStateGraph ) ) )? otherlv_12= '}' )? )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3998:3: otherlv_0= 'State' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? (otherlv_3= '{' (otherlv_4= 'entry' ( (lv_entryCode_5_0= ruleDetailCode ) ) )? (otherlv_6= 'exit' ( (lv_exitCode_7_0= ruleDetailCode ) ) )? (otherlv_8= 'do' ( (lv_doCode_9_0= ruleDetailCode ) ) )? (otherlv_10= 'subgraph' ( (lv_subgraph_11_0= rulePlainStateGraph ) ) )? otherlv_12= '}' )?
             {
             otherlv_0=(Token)match(input,68,FOLLOW_68_in_ruleBaseState8100); 
 
@@ -10053,16 +10057,16 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4038:3: (otherlv_3= '{' (otherlv_4= 'entry' ( (lv_entryCode_5_0= ruleDetailCode ) ) )? (otherlv_6= 'exit' ( (lv_exitCode_7_0= ruleDetailCode ) ) )? (otherlv_8= 'subgraph' ( (lv_subgraph_9_0= rulePlainStateGraph ) ) )? otherlv_10= '}' )?
-            int alt94=2;
-            int LA94_0 = input.LA(1);
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4038:3: (otherlv_3= '{' (otherlv_4= 'entry' ( (lv_entryCode_5_0= ruleDetailCode ) ) )? (otherlv_6= 'exit' ( (lv_exitCode_7_0= ruleDetailCode ) ) )? (otherlv_8= 'do' ( (lv_doCode_9_0= ruleDetailCode ) ) )? (otherlv_10= 'subgraph' ( (lv_subgraph_11_0= rulePlainStateGraph ) ) )? otherlv_12= '}' )?
+            int alt95=2;
+            int LA95_0 = input.LA(1);
 
-            if ( (LA94_0==12) ) {
-                alt94=1;
+            if ( (LA95_0==12) ) {
+                alt95=1;
             }
-            switch (alt94) {
+            switch (alt95) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4038:5: otherlv_3= '{' (otherlv_4= 'entry' ( (lv_entryCode_5_0= ruleDetailCode ) ) )? (otherlv_6= 'exit' ( (lv_exitCode_7_0= ruleDetailCode ) ) )? (otherlv_8= 'subgraph' ( (lv_subgraph_9_0= rulePlainStateGraph ) ) )? otherlv_10= '}'
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4038:5: otherlv_3= '{' (otherlv_4= 'entry' ( (lv_entryCode_5_0= ruleDetailCode ) ) )? (otherlv_6= 'exit' ( (lv_exitCode_7_0= ruleDetailCode ) ) )? (otherlv_8= 'do' ( (lv_doCode_9_0= ruleDetailCode ) ) )? (otherlv_10= 'subgraph' ( (lv_subgraph_11_0= rulePlainStateGraph ) ) )? otherlv_12= '}'
                     {
                     otherlv_3=(Token)match(input,12,FOLLOW_12_in_ruleBaseState8157); 
 
@@ -10172,7 +10176,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4086:4: (otherlv_8= 'subgraph' ( (lv_subgraph_9_0= rulePlainStateGraph ) ) )?
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4086:4: (otherlv_8= 'do' ( (lv_doCode_9_0= ruleDetailCode ) ) )?
                     int alt93=2;
                     int LA93_0 = input.LA(1);
 
@@ -10181,23 +10185,75 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     }
                     switch (alt93) {
                         case 1 :
-                            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4086:6: otherlv_8= 'subgraph' ( (lv_subgraph_9_0= rulePlainStateGraph ) )
+                            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4086:6: otherlv_8= 'do' ( (lv_doCode_9_0= ruleDetailCode ) )
                             {
                             otherlv_8=(Token)match(input,71,FOLLOW_71_in_ruleBaseState8242); 
 
-                                	newLeafNode(otherlv_8, grammarAccess.getBaseStateAccess().getSubgraphKeyword_3_3_0());
+                                	newLeafNode(otherlv_8, grammarAccess.getBaseStateAccess().getDoKeyword_3_3_0());
                                 
-                            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4090:1: ( (lv_subgraph_9_0= rulePlainStateGraph ) )
-                            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4091:1: (lv_subgraph_9_0= rulePlainStateGraph )
+                            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4090:1: ( (lv_doCode_9_0= ruleDetailCode ) )
+                            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4091:1: (lv_doCode_9_0= ruleDetailCode )
                             {
-                            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4091:1: (lv_subgraph_9_0= rulePlainStateGraph )
-                            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4092:3: lv_subgraph_9_0= rulePlainStateGraph
+                            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4091:1: (lv_doCode_9_0= ruleDetailCode )
+                            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4092:3: lv_doCode_9_0= ruleDetailCode
                             {
                              
-                            	        newCompositeNode(grammarAccess.getBaseStateAccess().getSubgraphPlainStateGraphParserRuleCall_3_3_1_0()); 
+                            	        newCompositeNode(grammarAccess.getBaseStateAccess().getDoCodeDetailCodeParserRuleCall_3_3_1_0()); 
                             	    
-                            pushFollow(FOLLOW_rulePlainStateGraph_in_ruleBaseState8263);
-                            lv_subgraph_9_0=rulePlainStateGraph();
+                            pushFollow(FOLLOW_ruleDetailCode_in_ruleBaseState8263);
+                            lv_doCode_9_0=ruleDetailCode();
+
+                            state._fsp--;
+
+
+                            	        if (current==null) {
+                            	            current = createModelElementForParent(grammarAccess.getBaseStateRule());
+                            	        }
+                                   		set(
+                                   			current, 
+                                   			"doCode",
+                                    		lv_doCode_9_0, 
+                                    		"DetailCode");
+                            	        afterParserOrEnumRuleCall();
+                            	    
+
+                            }
+
+
+                            }
+
+
+                            }
+                            break;
+
+                    }
+
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4108:4: (otherlv_10= 'subgraph' ( (lv_subgraph_11_0= rulePlainStateGraph ) ) )?
+                    int alt94=2;
+                    int LA94_0 = input.LA(1);
+
+                    if ( (LA94_0==72) ) {
+                        alt94=1;
+                    }
+                    switch (alt94) {
+                        case 1 :
+                            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4108:6: otherlv_10= 'subgraph' ( (lv_subgraph_11_0= rulePlainStateGraph ) )
+                            {
+                            otherlv_10=(Token)match(input,72,FOLLOW_72_in_ruleBaseState8278); 
+
+                                	newLeafNode(otherlv_10, grammarAccess.getBaseStateAccess().getSubgraphKeyword_3_4_0());
+                                
+                            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4112:1: ( (lv_subgraph_11_0= rulePlainStateGraph ) )
+                            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4113:1: (lv_subgraph_11_0= rulePlainStateGraph )
+                            {
+                            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4113:1: (lv_subgraph_11_0= rulePlainStateGraph )
+                            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4114:3: lv_subgraph_11_0= rulePlainStateGraph
+                            {
+                             
+                            	        newCompositeNode(grammarAccess.getBaseStateAccess().getSubgraphPlainStateGraphParserRuleCall_3_4_1_0()); 
+                            	    
+                            pushFollow(FOLLOW_rulePlainStateGraph_in_ruleBaseState8299);
+                            lv_subgraph_11_0=rulePlainStateGraph();
 
                             state._fsp--;
 
@@ -10208,7 +10264,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                                    		set(
                                    			current, 
                                    			"subgraph",
-                                    		lv_subgraph_9_0, 
+                                    		lv_subgraph_11_0, 
                                     		"PlainStateGraph");
                             	        afterParserOrEnumRuleCall();
                             	    
@@ -10224,9 +10280,9 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    otherlv_10=(Token)match(input,13,FOLLOW_13_in_ruleBaseState8277); 
+                    otherlv_12=(Token)match(input,13,FOLLOW_13_in_ruleBaseState8313); 
 
-                        	newLeafNode(otherlv_10, grammarAccess.getBaseStateAccess().getRightCurlyBracketKeyword_3_4());
+                        	newLeafNode(otherlv_12, grammarAccess.getBaseStateAccess().getRightCurlyBracketKeyword_3_5());
                         
 
                     }
@@ -10255,7 +10311,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleRefinedState"
-    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4120:1: entryRuleRefinedState returns [EObject current=null] : iv_ruleRefinedState= ruleRefinedState EOF ;
+    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4142:1: entryRuleRefinedState returns [EObject current=null] : iv_ruleRefinedState= ruleRefinedState EOF ;
     public final EObject entryRuleRefinedState() throws RecognitionException {
         EObject current = null;
 
@@ -10263,17 +10319,17 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4121:2: (iv_ruleRefinedState= ruleRefinedState EOF )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4122:2: iv_ruleRefinedState= ruleRefinedState EOF
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4143:2: (iv_ruleRefinedState= ruleRefinedState EOF )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4144:2: iv_ruleRefinedState= ruleRefinedState EOF
             {
              newCompositeNode(grammarAccess.getRefinedStateRule()); 
-            pushFollow(FOLLOW_ruleRefinedState_in_entryRuleRefinedState8315);
+            pushFollow(FOLLOW_ruleRefinedState_in_entryRuleRefinedState8351);
             iv_ruleRefinedState=ruleRefinedState();
 
             state._fsp--;
 
              current =iv_ruleRefinedState; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleRefinedState8325); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleRefinedState8361); 
 
             }
 
@@ -10291,7 +10347,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleRefinedState"
-    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4129:1: ruleRefinedState returns [EObject current=null] : (otherlv_0= 'RefinedState' ( ( ruleFQN ) ) ( (lv_docu_2_0= ruleDocumentation ) )? otherlv_3= '{' (otherlv_4= 'entry' ( (lv_entryCode_5_0= ruleDetailCode ) ) )? (otherlv_6= 'exit' ( (lv_exitCode_7_0= ruleDetailCode ) ) )? (otherlv_8= 'subgraph' ( (lv_subgraph_9_0= ruleStateGraph ) ) )? otherlv_10= '}' ) ;
+    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4151:1: ruleRefinedState returns [EObject current=null] : (otherlv_0= 'RefinedState' ( ( ruleFQN ) ) ( (lv_docu_2_0= ruleDocumentation ) )? otherlv_3= '{' (otherlv_4= 'entry' ( (lv_entryCode_5_0= ruleDetailCode ) ) )? (otherlv_6= 'exit' ( (lv_exitCode_7_0= ruleDetailCode ) ) )? (otherlv_8= 'do' ( (lv_doCode_9_0= ruleDetailCode ) ) )? (otherlv_10= 'subgraph' ( (lv_subgraph_11_0= ruleStateGraph ) ) )? otherlv_12= '}' ) ;
     public final EObject ruleRefinedState() throws RecognitionException {
         EObject current = null;
 
@@ -10301,33 +10357,36 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
         Token otherlv_6=null;
         Token otherlv_8=null;
         Token otherlv_10=null;
+        Token otherlv_12=null;
         EObject lv_docu_2_0 = null;
 
         EObject lv_entryCode_5_0 = null;
 
         EObject lv_exitCode_7_0 = null;
 
-        EObject lv_subgraph_9_0 = null;
+        EObject lv_doCode_9_0 = null;
+
+        EObject lv_subgraph_11_0 = null;
 
 
          enterRule(); 
             
         try {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4132:28: ( (otherlv_0= 'RefinedState' ( ( ruleFQN ) ) ( (lv_docu_2_0= ruleDocumentation ) )? otherlv_3= '{' (otherlv_4= 'entry' ( (lv_entryCode_5_0= ruleDetailCode ) ) )? (otherlv_6= 'exit' ( (lv_exitCode_7_0= ruleDetailCode ) ) )? (otherlv_8= 'subgraph' ( (lv_subgraph_9_0= ruleStateGraph ) ) )? otherlv_10= '}' ) )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4133:1: (otherlv_0= 'RefinedState' ( ( ruleFQN ) ) ( (lv_docu_2_0= ruleDocumentation ) )? otherlv_3= '{' (otherlv_4= 'entry' ( (lv_entryCode_5_0= ruleDetailCode ) ) )? (otherlv_6= 'exit' ( (lv_exitCode_7_0= ruleDetailCode ) ) )? (otherlv_8= 'subgraph' ( (lv_subgraph_9_0= ruleStateGraph ) ) )? otherlv_10= '}' )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4154:28: ( (otherlv_0= 'RefinedState' ( ( ruleFQN ) ) ( (lv_docu_2_0= ruleDocumentation ) )? otherlv_3= '{' (otherlv_4= 'entry' ( (lv_entryCode_5_0= ruleDetailCode ) ) )? (otherlv_6= 'exit' ( (lv_exitCode_7_0= ruleDetailCode ) ) )? (otherlv_8= 'do' ( (lv_doCode_9_0= ruleDetailCode ) ) )? (otherlv_10= 'subgraph' ( (lv_subgraph_11_0= ruleStateGraph ) ) )? otherlv_12= '}' ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4155:1: (otherlv_0= 'RefinedState' ( ( ruleFQN ) ) ( (lv_docu_2_0= ruleDocumentation ) )? otherlv_3= '{' (otherlv_4= 'entry' ( (lv_entryCode_5_0= ruleDetailCode ) ) )? (otherlv_6= 'exit' ( (lv_exitCode_7_0= ruleDetailCode ) ) )? (otherlv_8= 'do' ( (lv_doCode_9_0= ruleDetailCode ) ) )? (otherlv_10= 'subgraph' ( (lv_subgraph_11_0= ruleStateGraph ) ) )? otherlv_12= '}' )
             {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4133:1: (otherlv_0= 'RefinedState' ( ( ruleFQN ) ) ( (lv_docu_2_0= ruleDocumentation ) )? otherlv_3= '{' (otherlv_4= 'entry' ( (lv_entryCode_5_0= ruleDetailCode ) ) )? (otherlv_6= 'exit' ( (lv_exitCode_7_0= ruleDetailCode ) ) )? (otherlv_8= 'subgraph' ( (lv_subgraph_9_0= ruleStateGraph ) ) )? otherlv_10= '}' )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4133:3: otherlv_0= 'RefinedState' ( ( ruleFQN ) ) ( (lv_docu_2_0= ruleDocumentation ) )? otherlv_3= '{' (otherlv_4= 'entry' ( (lv_entryCode_5_0= ruleDetailCode ) ) )? (otherlv_6= 'exit' ( (lv_exitCode_7_0= ruleDetailCode ) ) )? (otherlv_8= 'subgraph' ( (lv_subgraph_9_0= ruleStateGraph ) ) )? otherlv_10= '}'
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4155:1: (otherlv_0= 'RefinedState' ( ( ruleFQN ) ) ( (lv_docu_2_0= ruleDocumentation ) )? otherlv_3= '{' (otherlv_4= 'entry' ( (lv_entryCode_5_0= ruleDetailCode ) ) )? (otherlv_6= 'exit' ( (lv_exitCode_7_0= ruleDetailCode ) ) )? (otherlv_8= 'do' ( (lv_doCode_9_0= ruleDetailCode ) ) )? (otherlv_10= 'subgraph' ( (lv_subgraph_11_0= ruleStateGraph ) ) )? otherlv_12= '}' )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4155:3: otherlv_0= 'RefinedState' ( ( ruleFQN ) ) ( (lv_docu_2_0= ruleDocumentation ) )? otherlv_3= '{' (otherlv_4= 'entry' ( (lv_entryCode_5_0= ruleDetailCode ) ) )? (otherlv_6= 'exit' ( (lv_exitCode_7_0= ruleDetailCode ) ) )? (otherlv_8= 'do' ( (lv_doCode_9_0= ruleDetailCode ) ) )? (otherlv_10= 'subgraph' ( (lv_subgraph_11_0= ruleStateGraph ) ) )? otherlv_12= '}'
             {
-            otherlv_0=(Token)match(input,72,FOLLOW_72_in_ruleRefinedState8362); 
+            otherlv_0=(Token)match(input,73,FOLLOW_73_in_ruleRefinedState8398); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getRefinedStateAccess().getRefinedStateKeyword_0());
                 
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4137:1: ( ( ruleFQN ) )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4138:1: ( ruleFQN )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4159:1: ( ( ruleFQN ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4160:1: ( ruleFQN )
             {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4138:1: ( ruleFQN )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4139:3: ruleFQN
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4160:1: ( ruleFQN )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4161:3: ruleFQN
             {
 
             			if (current==null) {
@@ -10337,7 +10396,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
              
             	        newCompositeNode(grammarAccess.getRefinedStateAccess().getBaseBaseStateCrossReference_1_0()); 
             	    
-            pushFollow(FOLLOW_ruleFQN_in_ruleRefinedState8385);
+            pushFollow(FOLLOW_ruleFQN_in_ruleRefinedState8421);
             ruleFQN();
 
             state._fsp--;
@@ -10351,24 +10410,24 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4152:2: ( (lv_docu_2_0= ruleDocumentation ) )?
-            int alt95=2;
-            int LA95_0 = input.LA(1);
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4174:2: ( (lv_docu_2_0= ruleDocumentation ) )?
+            int alt96=2;
+            int LA96_0 = input.LA(1);
 
-            if ( (LA95_0==20) ) {
-                alt95=1;
+            if ( (LA96_0==20) ) {
+                alt96=1;
             }
-            switch (alt95) {
+            switch (alt96) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4153:1: (lv_docu_2_0= ruleDocumentation )
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4175:1: (lv_docu_2_0= ruleDocumentation )
                     {
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4153:1: (lv_docu_2_0= ruleDocumentation )
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4154:3: lv_docu_2_0= ruleDocumentation
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4175:1: (lv_docu_2_0= ruleDocumentation )
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4176:3: lv_docu_2_0= ruleDocumentation
                     {
                      
                     	        newCompositeNode(grammarAccess.getRefinedStateAccess().getDocuDocumentationParserRuleCall_2_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleDocumentation_in_ruleRefinedState8406);
+                    pushFollow(FOLLOW_ruleDocumentation_in_ruleRefinedState8442);
                     lv_docu_2_0=ruleDocumentation();
 
                     state._fsp--;
@@ -10393,35 +10452,35 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_3=(Token)match(input,12,FOLLOW_12_in_ruleRefinedState8419); 
+            otherlv_3=(Token)match(input,12,FOLLOW_12_in_ruleRefinedState8455); 
 
                 	newLeafNode(otherlv_3, grammarAccess.getRefinedStateAccess().getLeftCurlyBracketKeyword_3());
                 
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4174:1: (otherlv_4= 'entry' ( (lv_entryCode_5_0= ruleDetailCode ) ) )?
-            int alt96=2;
-            int LA96_0 = input.LA(1);
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4196:1: (otherlv_4= 'entry' ( (lv_entryCode_5_0= ruleDetailCode ) ) )?
+            int alt97=2;
+            int LA97_0 = input.LA(1);
 
-            if ( (LA96_0==69) ) {
-                alt96=1;
+            if ( (LA97_0==69) ) {
+                alt97=1;
             }
-            switch (alt96) {
+            switch (alt97) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4174:3: otherlv_4= 'entry' ( (lv_entryCode_5_0= ruleDetailCode ) )
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4196:3: otherlv_4= 'entry' ( (lv_entryCode_5_0= ruleDetailCode ) )
                     {
-                    otherlv_4=(Token)match(input,69,FOLLOW_69_in_ruleRefinedState8432); 
+                    otherlv_4=(Token)match(input,69,FOLLOW_69_in_ruleRefinedState8468); 
 
                         	newLeafNode(otherlv_4, grammarAccess.getRefinedStateAccess().getEntryKeyword_4_0());
                         
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4178:1: ( (lv_entryCode_5_0= ruleDetailCode ) )
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4179:1: (lv_entryCode_5_0= ruleDetailCode )
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4200:1: ( (lv_entryCode_5_0= ruleDetailCode ) )
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4201:1: (lv_entryCode_5_0= ruleDetailCode )
                     {
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4179:1: (lv_entryCode_5_0= ruleDetailCode )
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4180:3: lv_entryCode_5_0= ruleDetailCode
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4201:1: (lv_entryCode_5_0= ruleDetailCode )
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4202:3: lv_entryCode_5_0= ruleDetailCode
                     {
                      
                     	        newCompositeNode(grammarAccess.getRefinedStateAccess().getEntryCodeDetailCodeParserRuleCall_4_1_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleDetailCode_in_ruleRefinedState8453);
+                    pushFollow(FOLLOW_ruleDetailCode_in_ruleRefinedState8489);
                     lv_entryCode_5_0=ruleDetailCode();
 
                     state._fsp--;
@@ -10449,31 +10508,31 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4196:4: (otherlv_6= 'exit' ( (lv_exitCode_7_0= ruleDetailCode ) ) )?
-            int alt97=2;
-            int LA97_0 = input.LA(1);
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4218:4: (otherlv_6= 'exit' ( (lv_exitCode_7_0= ruleDetailCode ) ) )?
+            int alt98=2;
+            int LA98_0 = input.LA(1);
 
-            if ( (LA97_0==70) ) {
-                alt97=1;
+            if ( (LA98_0==70) ) {
+                alt98=1;
             }
-            switch (alt97) {
+            switch (alt98) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4196:6: otherlv_6= 'exit' ( (lv_exitCode_7_0= ruleDetailCode ) )
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4218:6: otherlv_6= 'exit' ( (lv_exitCode_7_0= ruleDetailCode ) )
                     {
-                    otherlv_6=(Token)match(input,70,FOLLOW_70_in_ruleRefinedState8468); 
+                    otherlv_6=(Token)match(input,70,FOLLOW_70_in_ruleRefinedState8504); 
 
                         	newLeafNode(otherlv_6, grammarAccess.getRefinedStateAccess().getExitKeyword_5_0());
                         
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4200:1: ( (lv_exitCode_7_0= ruleDetailCode ) )
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4201:1: (lv_exitCode_7_0= ruleDetailCode )
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4222:1: ( (lv_exitCode_7_0= ruleDetailCode ) )
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4223:1: (lv_exitCode_7_0= ruleDetailCode )
                     {
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4201:1: (lv_exitCode_7_0= ruleDetailCode )
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4202:3: lv_exitCode_7_0= ruleDetailCode
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4223:1: (lv_exitCode_7_0= ruleDetailCode )
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4224:3: lv_exitCode_7_0= ruleDetailCode
                     {
                      
                     	        newCompositeNode(grammarAccess.getRefinedStateAccess().getExitCodeDetailCodeParserRuleCall_5_1_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleDetailCode_in_ruleRefinedState8489);
+                    pushFollow(FOLLOW_ruleDetailCode_in_ruleRefinedState8525);
                     lv_exitCode_7_0=ruleDetailCode();
 
                     state._fsp--;
@@ -10501,32 +10560,84 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4218:4: (otherlv_8= 'subgraph' ( (lv_subgraph_9_0= ruleStateGraph ) ) )?
-            int alt98=2;
-            int LA98_0 = input.LA(1);
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4240:4: (otherlv_8= 'do' ( (lv_doCode_9_0= ruleDetailCode ) ) )?
+            int alt99=2;
+            int LA99_0 = input.LA(1);
 
-            if ( (LA98_0==71) ) {
-                alt98=1;
+            if ( (LA99_0==71) ) {
+                alt99=1;
             }
-            switch (alt98) {
+            switch (alt99) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4218:6: otherlv_8= 'subgraph' ( (lv_subgraph_9_0= ruleStateGraph ) )
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4240:6: otherlv_8= 'do' ( (lv_doCode_9_0= ruleDetailCode ) )
                     {
-                    otherlv_8=(Token)match(input,71,FOLLOW_71_in_ruleRefinedState8504); 
+                    otherlv_8=(Token)match(input,71,FOLLOW_71_in_ruleRefinedState8540); 
 
-                        	newLeafNode(otherlv_8, grammarAccess.getRefinedStateAccess().getSubgraphKeyword_6_0());
+                        	newLeafNode(otherlv_8, grammarAccess.getRefinedStateAccess().getDoKeyword_6_0());
                         
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4222:1: ( (lv_subgraph_9_0= ruleStateGraph ) )
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4223:1: (lv_subgraph_9_0= ruleStateGraph )
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4244:1: ( (lv_doCode_9_0= ruleDetailCode ) )
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4245:1: (lv_doCode_9_0= ruleDetailCode )
                     {
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4223:1: (lv_subgraph_9_0= ruleStateGraph )
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4224:3: lv_subgraph_9_0= ruleStateGraph
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4245:1: (lv_doCode_9_0= ruleDetailCode )
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4246:3: lv_doCode_9_0= ruleDetailCode
                     {
                      
-                    	        newCompositeNode(grammarAccess.getRefinedStateAccess().getSubgraphStateGraphParserRuleCall_6_1_0()); 
+                    	        newCompositeNode(grammarAccess.getRefinedStateAccess().getDoCodeDetailCodeParserRuleCall_6_1_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleStateGraph_in_ruleRefinedState8525);
-                    lv_subgraph_9_0=ruleStateGraph();
+                    pushFollow(FOLLOW_ruleDetailCode_in_ruleRefinedState8561);
+                    lv_doCode_9_0=ruleDetailCode();
+
+                    state._fsp--;
+
+
+                    	        if (current==null) {
+                    	            current = createModelElementForParent(grammarAccess.getRefinedStateRule());
+                    	        }
+                           		set(
+                           			current, 
+                           			"doCode",
+                            		lv_doCode_9_0, 
+                            		"DetailCode");
+                    	        afterParserOrEnumRuleCall();
+                    	    
+
+                    }
+
+
+                    }
+
+
+                    }
+                    break;
+
+            }
+
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4262:4: (otherlv_10= 'subgraph' ( (lv_subgraph_11_0= ruleStateGraph ) ) )?
+            int alt100=2;
+            int LA100_0 = input.LA(1);
+
+            if ( (LA100_0==72) ) {
+                alt100=1;
+            }
+            switch (alt100) {
+                case 1 :
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4262:6: otherlv_10= 'subgraph' ( (lv_subgraph_11_0= ruleStateGraph ) )
+                    {
+                    otherlv_10=(Token)match(input,72,FOLLOW_72_in_ruleRefinedState8576); 
+
+                        	newLeafNode(otherlv_10, grammarAccess.getRefinedStateAccess().getSubgraphKeyword_7_0());
+                        
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4266:1: ( (lv_subgraph_11_0= ruleStateGraph ) )
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4267:1: (lv_subgraph_11_0= ruleStateGraph )
+                    {
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4267:1: (lv_subgraph_11_0= ruleStateGraph )
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4268:3: lv_subgraph_11_0= ruleStateGraph
+                    {
+                     
+                    	        newCompositeNode(grammarAccess.getRefinedStateAccess().getSubgraphStateGraphParserRuleCall_7_1_0()); 
+                    	    
+                    pushFollow(FOLLOW_ruleStateGraph_in_ruleRefinedState8597);
+                    lv_subgraph_11_0=ruleStateGraph();
 
                     state._fsp--;
 
@@ -10537,7 +10648,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                            		set(
                            			current, 
                            			"subgraph",
-                            		lv_subgraph_9_0, 
+                            		lv_subgraph_11_0, 
                             		"StateGraph");
                     	        afterParserOrEnumRuleCall();
                     	    
@@ -10553,9 +10664,9 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_10=(Token)match(input,13,FOLLOW_13_in_ruleRefinedState8539); 
+            otherlv_12=(Token)match(input,13,FOLLOW_13_in_ruleRefinedState8611); 
 
-                	newLeafNode(otherlv_10, grammarAccess.getRefinedStateAccess().getRightCurlyBracketKeyword_7());
+                	newLeafNode(otherlv_12, grammarAccess.getRefinedStateAccess().getRightCurlyBracketKeyword_8());
                 
 
             }
@@ -10578,7 +10689,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleDetailCode"
-    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4252:1: entryRuleDetailCode returns [EObject current=null] : iv_ruleDetailCode= ruleDetailCode EOF ;
+    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4296:1: entryRuleDetailCode returns [EObject current=null] : iv_ruleDetailCode= ruleDetailCode EOF ;
     public final EObject entryRuleDetailCode() throws RecognitionException {
         EObject current = null;
 
@@ -10586,17 +10697,17 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4253:2: (iv_ruleDetailCode= ruleDetailCode EOF )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4254:2: iv_ruleDetailCode= ruleDetailCode EOF
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4297:2: (iv_ruleDetailCode= ruleDetailCode EOF )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4298:2: iv_ruleDetailCode= ruleDetailCode EOF
             {
              newCompositeNode(grammarAccess.getDetailCodeRule()); 
-            pushFollow(FOLLOW_ruleDetailCode_in_entryRuleDetailCode8575);
+            pushFollow(FOLLOW_ruleDetailCode_in_entryRuleDetailCode8647);
             iv_ruleDetailCode=ruleDetailCode();
 
             state._fsp--;
 
              current =iv_ruleDetailCode; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleDetailCode8585); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleDetailCode8657); 
 
             }
 
@@ -10614,7 +10725,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleDetailCode"
-    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4261:1: ruleDetailCode returns [EObject current=null] : (otherlv_0= '{' ( (lv_commands_1_0= RULE_STRING ) )+ otherlv_2= '}' ) ;
+    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4305:1: ruleDetailCode returns [EObject current=null] : (otherlv_0= '{' ( (lv_commands_1_0= RULE_STRING ) )+ otherlv_2= '}' ) ;
     public final EObject ruleDetailCode() throws RecognitionException {
         EObject current = null;
 
@@ -10625,36 +10736,36 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4264:28: ( (otherlv_0= '{' ( (lv_commands_1_0= RULE_STRING ) )+ otherlv_2= '}' ) )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4265:1: (otherlv_0= '{' ( (lv_commands_1_0= RULE_STRING ) )+ otherlv_2= '}' )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4308:28: ( (otherlv_0= '{' ( (lv_commands_1_0= RULE_STRING ) )+ otherlv_2= '}' ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4309:1: (otherlv_0= '{' ( (lv_commands_1_0= RULE_STRING ) )+ otherlv_2= '}' )
             {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4265:1: (otherlv_0= '{' ( (lv_commands_1_0= RULE_STRING ) )+ otherlv_2= '}' )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4265:3: otherlv_0= '{' ( (lv_commands_1_0= RULE_STRING ) )+ otherlv_2= '}'
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4309:1: (otherlv_0= '{' ( (lv_commands_1_0= RULE_STRING ) )+ otherlv_2= '}' )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4309:3: otherlv_0= '{' ( (lv_commands_1_0= RULE_STRING ) )+ otherlv_2= '}'
             {
-            otherlv_0=(Token)match(input,12,FOLLOW_12_in_ruleDetailCode8622); 
+            otherlv_0=(Token)match(input,12,FOLLOW_12_in_ruleDetailCode8694); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getDetailCodeAccess().getLeftCurlyBracketKeyword_0());
                 
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4269:1: ( (lv_commands_1_0= RULE_STRING ) )+
-            int cnt99=0;
-            loop99:
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4313:1: ( (lv_commands_1_0= RULE_STRING ) )+
+            int cnt101=0;
+            loop101:
             do {
-                int alt99=2;
-                int LA99_0 = input.LA(1);
+                int alt101=2;
+                int LA101_0 = input.LA(1);
 
-                if ( (LA99_0==RULE_STRING) ) {
-                    alt99=1;
+                if ( (LA101_0==RULE_STRING) ) {
+                    alt101=1;
                 }
 
 
-                switch (alt99) {
+                switch (alt101) {
             	case 1 :
-            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4270:1: (lv_commands_1_0= RULE_STRING )
+            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4314:1: (lv_commands_1_0= RULE_STRING )
             	    {
-            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4270:1: (lv_commands_1_0= RULE_STRING )
-            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4271:3: lv_commands_1_0= RULE_STRING
+            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4314:1: (lv_commands_1_0= RULE_STRING )
+            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4315:3: lv_commands_1_0= RULE_STRING
             	    {
-            	    lv_commands_1_0=(Token)match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleDetailCode8639); 
+            	    lv_commands_1_0=(Token)match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleDetailCode8711); 
 
             	    			newLeafNode(lv_commands_1_0, grammarAccess.getDetailCodeAccess().getCommandsSTRINGTerminalRuleCall_1_0()); 
             	    		
@@ -10676,15 +10787,15 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    if ( cnt99 >= 1 ) break loop99;
+            	    if ( cnt101 >= 1 ) break loop101;
                         EarlyExitException eee =
-                            new EarlyExitException(99, input);
+                            new EarlyExitException(101, input);
                         throw eee;
                 }
-                cnt99++;
+                cnt101++;
             } while (true);
 
-            otherlv_2=(Token)match(input,13,FOLLOW_13_in_ruleDetailCode8657); 
+            otherlv_2=(Token)match(input,13,FOLLOW_13_in_ruleDetailCode8729); 
 
                 	newLeafNode(otherlv_2, grammarAccess.getDetailCodeAccess().getRightCurlyBracketKeyword_2());
                 
@@ -10709,7 +10820,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleTrPoint"
-    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4299:1: entryRuleTrPoint returns [EObject current=null] : iv_ruleTrPoint= ruleTrPoint EOF ;
+    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4343:1: entryRuleTrPoint returns [EObject current=null] : iv_ruleTrPoint= ruleTrPoint EOF ;
     public final EObject entryRuleTrPoint() throws RecognitionException {
         EObject current = null;
 
@@ -10717,17 +10828,17 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4300:2: (iv_ruleTrPoint= ruleTrPoint EOF )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4301:2: iv_ruleTrPoint= ruleTrPoint EOF
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4344:2: (iv_ruleTrPoint= ruleTrPoint EOF )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4345:2: iv_ruleTrPoint= ruleTrPoint EOF
             {
              newCompositeNode(grammarAccess.getTrPointRule()); 
-            pushFollow(FOLLOW_ruleTrPoint_in_entryRuleTrPoint8693);
+            pushFollow(FOLLOW_ruleTrPoint_in_entryRuleTrPoint8765);
             iv_ruleTrPoint=ruleTrPoint();
 
             state._fsp--;
 
              current =iv_ruleTrPoint; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleTrPoint8703); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleTrPoint8775); 
 
             }
 
@@ -10745,7 +10856,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleTrPoint"
-    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4308:1: ruleTrPoint returns [EObject current=null] : (this_TransitionPoint_0= ruleTransitionPoint | this_EntryPoint_1= ruleEntryPoint | this_ExitPoint_2= ruleExitPoint ) ;
+    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4352:1: ruleTrPoint returns [EObject current=null] : (this_TransitionPoint_0= ruleTransitionPoint | this_EntryPoint_1= ruleEntryPoint | this_ExitPoint_2= ruleExitPoint ) ;
     public final EObject ruleTrPoint() throws RecognitionException {
         EObject current = null;
 
@@ -10759,43 +10870,43 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4311:28: ( (this_TransitionPoint_0= ruleTransitionPoint | this_EntryPoint_1= ruleEntryPoint | this_ExitPoint_2= ruleExitPoint ) )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4312:1: (this_TransitionPoint_0= ruleTransitionPoint | this_EntryPoint_1= ruleEntryPoint | this_ExitPoint_2= ruleExitPoint )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4355:28: ( (this_TransitionPoint_0= ruleTransitionPoint | this_EntryPoint_1= ruleEntryPoint | this_ExitPoint_2= ruleExitPoint ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4356:1: (this_TransitionPoint_0= ruleTransitionPoint | this_EntryPoint_1= ruleEntryPoint | this_ExitPoint_2= ruleExitPoint )
             {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4312:1: (this_TransitionPoint_0= ruleTransitionPoint | this_EntryPoint_1= ruleEntryPoint | this_ExitPoint_2= ruleExitPoint )
-            int alt100=3;
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4356:1: (this_TransitionPoint_0= ruleTransitionPoint | this_EntryPoint_1= ruleEntryPoint | this_ExitPoint_2= ruleExitPoint )
+            int alt102=3;
             switch ( input.LA(1) ) {
-            case 73:
             case 74:
-                {
-                alt100=1;
-                }
-                break;
             case 75:
                 {
-                alt100=2;
+                alt102=1;
                 }
                 break;
             case 76:
                 {
-                alt100=3;
+                alt102=2;
+                }
+                break;
+            case 77:
+                {
+                alt102=3;
                 }
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("", 100, 0, input);
+                    new NoViableAltException("", 102, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt100) {
+            switch (alt102) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4313:5: this_TransitionPoint_0= ruleTransitionPoint
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4357:5: this_TransitionPoint_0= ruleTransitionPoint
                     {
                      
                             newCompositeNode(grammarAccess.getTrPointAccess().getTransitionPointParserRuleCall_0()); 
                         
-                    pushFollow(FOLLOW_ruleTransitionPoint_in_ruleTrPoint8750);
+                    pushFollow(FOLLOW_ruleTransitionPoint_in_ruleTrPoint8822);
                     this_TransitionPoint_0=ruleTransitionPoint();
 
                     state._fsp--;
@@ -10808,12 +10919,12 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4323:5: this_EntryPoint_1= ruleEntryPoint
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4367:5: this_EntryPoint_1= ruleEntryPoint
                     {
                      
                             newCompositeNode(grammarAccess.getTrPointAccess().getEntryPointParserRuleCall_1()); 
                         
-                    pushFollow(FOLLOW_ruleEntryPoint_in_ruleTrPoint8777);
+                    pushFollow(FOLLOW_ruleEntryPoint_in_ruleTrPoint8849);
                     this_EntryPoint_1=ruleEntryPoint();
 
                     state._fsp--;
@@ -10826,12 +10937,12 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4333:5: this_ExitPoint_2= ruleExitPoint
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4377:5: this_ExitPoint_2= ruleExitPoint
                     {
                      
                             newCompositeNode(grammarAccess.getTrPointAccess().getExitPointParserRuleCall_2()); 
                         
-                    pushFollow(FOLLOW_ruleExitPoint_in_ruleTrPoint8804);
+                    pushFollow(FOLLOW_ruleExitPoint_in_ruleTrPoint8876);
                     this_ExitPoint_2=ruleExitPoint();
 
                     state._fsp--;
@@ -10864,7 +10975,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleTransitionPoint"
-    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4349:1: entryRuleTransitionPoint returns [EObject current=null] : iv_ruleTransitionPoint= ruleTransitionPoint EOF ;
+    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4393:1: entryRuleTransitionPoint returns [EObject current=null] : iv_ruleTransitionPoint= ruleTransitionPoint EOF ;
     public final EObject entryRuleTransitionPoint() throws RecognitionException {
         EObject current = null;
 
@@ -10872,17 +10983,17 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4350:2: (iv_ruleTransitionPoint= ruleTransitionPoint EOF )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4351:2: iv_ruleTransitionPoint= ruleTransitionPoint EOF
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4394:2: (iv_ruleTransitionPoint= ruleTransitionPoint EOF )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4395:2: iv_ruleTransitionPoint= ruleTransitionPoint EOF
             {
              newCompositeNode(grammarAccess.getTransitionPointRule()); 
-            pushFollow(FOLLOW_ruleTransitionPoint_in_entryRuleTransitionPoint8839);
+            pushFollow(FOLLOW_ruleTransitionPoint_in_entryRuleTransitionPoint8911);
             iv_ruleTransitionPoint=ruleTransitionPoint();
 
             state._fsp--;
 
              current =iv_ruleTransitionPoint; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleTransitionPoint8849); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleTransitionPoint8921); 
 
             }
 
@@ -10900,7 +11011,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleTransitionPoint"
-    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4358:1: ruleTransitionPoint returns [EObject current=null] : ( ( (lv_handler_0_0= 'handler' ) )? otherlv_1= 'TransitionPoint' ( (lv_name_2_0= RULE_ID ) ) ) ;
+    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4402:1: ruleTransitionPoint returns [EObject current=null] : ( ( (lv_handler_0_0= 'handler' ) )? otherlv_1= 'TransitionPoint' ( (lv_name_2_0= RULE_ID ) ) ) ;
     public final EObject ruleTransitionPoint() throws RecognitionException {
         EObject current = null;
 
@@ -10911,27 +11022,27 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4361:28: ( ( ( (lv_handler_0_0= 'handler' ) )? otherlv_1= 'TransitionPoint' ( (lv_name_2_0= RULE_ID ) ) ) )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4362:1: ( ( (lv_handler_0_0= 'handler' ) )? otherlv_1= 'TransitionPoint' ( (lv_name_2_0= RULE_ID ) ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4405:28: ( ( ( (lv_handler_0_0= 'handler' ) )? otherlv_1= 'TransitionPoint' ( (lv_name_2_0= RULE_ID ) ) ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4406:1: ( ( (lv_handler_0_0= 'handler' ) )? otherlv_1= 'TransitionPoint' ( (lv_name_2_0= RULE_ID ) ) )
             {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4362:1: ( ( (lv_handler_0_0= 'handler' ) )? otherlv_1= 'TransitionPoint' ( (lv_name_2_0= RULE_ID ) ) )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4362:2: ( (lv_handler_0_0= 'handler' ) )? otherlv_1= 'TransitionPoint' ( (lv_name_2_0= RULE_ID ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4406:1: ( ( (lv_handler_0_0= 'handler' ) )? otherlv_1= 'TransitionPoint' ( (lv_name_2_0= RULE_ID ) ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4406:2: ( (lv_handler_0_0= 'handler' ) )? otherlv_1= 'TransitionPoint' ( (lv_name_2_0= RULE_ID ) )
             {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4362:2: ( (lv_handler_0_0= 'handler' ) )?
-            int alt101=2;
-            int LA101_0 = input.LA(1);
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4406:2: ( (lv_handler_0_0= 'handler' ) )?
+            int alt103=2;
+            int LA103_0 = input.LA(1);
 
-            if ( (LA101_0==73) ) {
-                alt101=1;
+            if ( (LA103_0==74) ) {
+                alt103=1;
             }
-            switch (alt101) {
+            switch (alt103) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4363:1: (lv_handler_0_0= 'handler' )
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4407:1: (lv_handler_0_0= 'handler' )
                     {
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4363:1: (lv_handler_0_0= 'handler' )
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4364:3: lv_handler_0_0= 'handler'
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4407:1: (lv_handler_0_0= 'handler' )
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4408:3: lv_handler_0_0= 'handler'
                     {
-                    lv_handler_0_0=(Token)match(input,73,FOLLOW_73_in_ruleTransitionPoint8892); 
+                    lv_handler_0_0=(Token)match(input,74,FOLLOW_74_in_ruleTransitionPoint8964); 
 
                             newLeafNode(lv_handler_0_0, grammarAccess.getTransitionPointAccess().getHandlerHandlerKeyword_0_0());
                         
@@ -10950,17 +11061,17 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,74,FOLLOW_74_in_ruleTransitionPoint8918); 
+            otherlv_1=(Token)match(input,75,FOLLOW_75_in_ruleTransitionPoint8990); 
 
                 	newLeafNode(otherlv_1, grammarAccess.getTransitionPointAccess().getTransitionPointKeyword_1());
                 
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4381:1: ( (lv_name_2_0= RULE_ID ) )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4382:1: (lv_name_2_0= RULE_ID )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4425:1: ( (lv_name_2_0= RULE_ID ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4426:1: (lv_name_2_0= RULE_ID )
             {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4382:1: (lv_name_2_0= RULE_ID )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4383:3: lv_name_2_0= RULE_ID
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4426:1: (lv_name_2_0= RULE_ID )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4427:3: lv_name_2_0= RULE_ID
             {
-            lv_name_2_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleTransitionPoint8935); 
+            lv_name_2_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleTransitionPoint9007); 
 
             			newLeafNode(lv_name_2_0, grammarAccess.getTransitionPointAccess().getNameIDTerminalRuleCall_2_0()); 
             		
@@ -11001,7 +11112,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEntryPoint"
-    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4407:1: entryRuleEntryPoint returns [EObject current=null] : iv_ruleEntryPoint= ruleEntryPoint EOF ;
+    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4451:1: entryRuleEntryPoint returns [EObject current=null] : iv_ruleEntryPoint= ruleEntryPoint EOF ;
     public final EObject entryRuleEntryPoint() throws RecognitionException {
         EObject current = null;
 
@@ -11009,17 +11120,17 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4408:2: (iv_ruleEntryPoint= ruleEntryPoint EOF )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4409:2: iv_ruleEntryPoint= ruleEntryPoint EOF
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4452:2: (iv_ruleEntryPoint= ruleEntryPoint EOF )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4453:2: iv_ruleEntryPoint= ruleEntryPoint EOF
             {
              newCompositeNode(grammarAccess.getEntryPointRule()); 
-            pushFollow(FOLLOW_ruleEntryPoint_in_entryRuleEntryPoint8976);
+            pushFollow(FOLLOW_ruleEntryPoint_in_entryRuleEntryPoint9048);
             iv_ruleEntryPoint=ruleEntryPoint();
 
             state._fsp--;
 
              current =iv_ruleEntryPoint; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleEntryPoint8986); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleEntryPoint9058); 
 
             }
 
@@ -11037,7 +11148,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEntryPoint"
-    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4416:1: ruleEntryPoint returns [EObject current=null] : (otherlv_0= 'EntryPoint' ( (lv_name_1_0= RULE_ID ) ) ) ;
+    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4460:1: ruleEntryPoint returns [EObject current=null] : (otherlv_0= 'EntryPoint' ( (lv_name_1_0= RULE_ID ) ) ) ;
     public final EObject ruleEntryPoint() throws RecognitionException {
         EObject current = null;
 
@@ -11047,23 +11158,23 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4419:28: ( (otherlv_0= 'EntryPoint' ( (lv_name_1_0= RULE_ID ) ) ) )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4420:1: (otherlv_0= 'EntryPoint' ( (lv_name_1_0= RULE_ID ) ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4463:28: ( (otherlv_0= 'EntryPoint' ( (lv_name_1_0= RULE_ID ) ) ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4464:1: (otherlv_0= 'EntryPoint' ( (lv_name_1_0= RULE_ID ) ) )
             {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4420:1: (otherlv_0= 'EntryPoint' ( (lv_name_1_0= RULE_ID ) ) )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4420:3: otherlv_0= 'EntryPoint' ( (lv_name_1_0= RULE_ID ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4464:1: (otherlv_0= 'EntryPoint' ( (lv_name_1_0= RULE_ID ) ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4464:3: otherlv_0= 'EntryPoint' ( (lv_name_1_0= RULE_ID ) )
             {
-            otherlv_0=(Token)match(input,75,FOLLOW_75_in_ruleEntryPoint9023); 
+            otherlv_0=(Token)match(input,76,FOLLOW_76_in_ruleEntryPoint9095); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getEntryPointAccess().getEntryPointKeyword_0());
                 
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4424:1: ( (lv_name_1_0= RULE_ID ) )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4425:1: (lv_name_1_0= RULE_ID )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4468:1: ( (lv_name_1_0= RULE_ID ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4469:1: (lv_name_1_0= RULE_ID )
             {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4425:1: (lv_name_1_0= RULE_ID )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4426:3: lv_name_1_0= RULE_ID
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4469:1: (lv_name_1_0= RULE_ID )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4470:3: lv_name_1_0= RULE_ID
             {
-            lv_name_1_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEntryPoint9040); 
+            lv_name_1_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEntryPoint9112); 
 
             			newLeafNode(lv_name_1_0, grammarAccess.getEntryPointAccess().getNameIDTerminalRuleCall_1_0()); 
             		
@@ -11104,7 +11215,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleExitPoint"
-    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4450:1: entryRuleExitPoint returns [EObject current=null] : iv_ruleExitPoint= ruleExitPoint EOF ;
+    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4494:1: entryRuleExitPoint returns [EObject current=null] : iv_ruleExitPoint= ruleExitPoint EOF ;
     public final EObject entryRuleExitPoint() throws RecognitionException {
         EObject current = null;
 
@@ -11112,17 +11223,17 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4451:2: (iv_ruleExitPoint= ruleExitPoint EOF )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4452:2: iv_ruleExitPoint= ruleExitPoint EOF
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4495:2: (iv_ruleExitPoint= ruleExitPoint EOF )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4496:2: iv_ruleExitPoint= ruleExitPoint EOF
             {
              newCompositeNode(grammarAccess.getExitPointRule()); 
-            pushFollow(FOLLOW_ruleExitPoint_in_entryRuleExitPoint9081);
+            pushFollow(FOLLOW_ruleExitPoint_in_entryRuleExitPoint9153);
             iv_ruleExitPoint=ruleExitPoint();
 
             state._fsp--;
 
              current =iv_ruleExitPoint; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleExitPoint9091); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleExitPoint9163); 
 
             }
 
@@ -11140,7 +11251,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleExitPoint"
-    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4459:1: ruleExitPoint returns [EObject current=null] : (otherlv_0= 'ExitPoint' ( (lv_name_1_0= RULE_ID ) ) ) ;
+    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4503:1: ruleExitPoint returns [EObject current=null] : (otherlv_0= 'ExitPoint' ( (lv_name_1_0= RULE_ID ) ) ) ;
     public final EObject ruleExitPoint() throws RecognitionException {
         EObject current = null;
 
@@ -11150,23 +11261,23 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4462:28: ( (otherlv_0= 'ExitPoint' ( (lv_name_1_0= RULE_ID ) ) ) )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4463:1: (otherlv_0= 'ExitPoint' ( (lv_name_1_0= RULE_ID ) ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4506:28: ( (otherlv_0= 'ExitPoint' ( (lv_name_1_0= RULE_ID ) ) ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4507:1: (otherlv_0= 'ExitPoint' ( (lv_name_1_0= RULE_ID ) ) )
             {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4463:1: (otherlv_0= 'ExitPoint' ( (lv_name_1_0= RULE_ID ) ) )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4463:3: otherlv_0= 'ExitPoint' ( (lv_name_1_0= RULE_ID ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4507:1: (otherlv_0= 'ExitPoint' ( (lv_name_1_0= RULE_ID ) ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4507:3: otherlv_0= 'ExitPoint' ( (lv_name_1_0= RULE_ID ) )
             {
-            otherlv_0=(Token)match(input,76,FOLLOW_76_in_ruleExitPoint9128); 
+            otherlv_0=(Token)match(input,77,FOLLOW_77_in_ruleExitPoint9200); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getExitPointAccess().getExitPointKeyword_0());
                 
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4467:1: ( (lv_name_1_0= RULE_ID ) )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4468:1: (lv_name_1_0= RULE_ID )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4511:1: ( (lv_name_1_0= RULE_ID ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4512:1: (lv_name_1_0= RULE_ID )
             {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4468:1: (lv_name_1_0= RULE_ID )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4469:3: lv_name_1_0= RULE_ID
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4512:1: (lv_name_1_0= RULE_ID )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4513:3: lv_name_1_0= RULE_ID
             {
-            lv_name_1_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleExitPoint9145); 
+            lv_name_1_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleExitPoint9217); 
 
             			newLeafNode(lv_name_1_0, grammarAccess.getExitPointAccess().getNameIDTerminalRuleCall_1_0()); 
             		
@@ -11207,7 +11318,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleChoicePoint"
-    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4493:1: entryRuleChoicePoint returns [EObject current=null] : iv_ruleChoicePoint= ruleChoicePoint EOF ;
+    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4537:1: entryRuleChoicePoint returns [EObject current=null] : iv_ruleChoicePoint= ruleChoicePoint EOF ;
     public final EObject entryRuleChoicePoint() throws RecognitionException {
         EObject current = null;
 
@@ -11215,17 +11326,17 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4494:2: (iv_ruleChoicePoint= ruleChoicePoint EOF )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4495:2: iv_ruleChoicePoint= ruleChoicePoint EOF
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4538:2: (iv_ruleChoicePoint= ruleChoicePoint EOF )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4539:2: iv_ruleChoicePoint= ruleChoicePoint EOF
             {
              newCompositeNode(grammarAccess.getChoicePointRule()); 
-            pushFollow(FOLLOW_ruleChoicePoint_in_entryRuleChoicePoint9186);
+            pushFollow(FOLLOW_ruleChoicePoint_in_entryRuleChoicePoint9258);
             iv_ruleChoicePoint=ruleChoicePoint();
 
             state._fsp--;
 
              current =iv_ruleChoicePoint; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleChoicePoint9196); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleChoicePoint9268); 
 
             }
 
@@ -11243,7 +11354,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleChoicePoint"
-    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4502:1: ruleChoicePoint returns [EObject current=null] : (otherlv_0= 'ChoicePoint' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? ) ;
+    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4546:1: ruleChoicePoint returns [EObject current=null] : (otherlv_0= 'ChoicePoint' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? ) ;
     public final EObject ruleChoicePoint() throws RecognitionException {
         EObject current = null;
 
@@ -11255,23 +11366,23 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4505:28: ( (otherlv_0= 'ChoicePoint' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? ) )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4506:1: (otherlv_0= 'ChoicePoint' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4549:28: ( (otherlv_0= 'ChoicePoint' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4550:1: (otherlv_0= 'ChoicePoint' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? )
             {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4506:1: (otherlv_0= 'ChoicePoint' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4506:3: otherlv_0= 'ChoicePoint' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )?
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4550:1: (otherlv_0= 'ChoicePoint' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4550:3: otherlv_0= 'ChoicePoint' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )?
             {
-            otherlv_0=(Token)match(input,77,FOLLOW_77_in_ruleChoicePoint9233); 
+            otherlv_0=(Token)match(input,78,FOLLOW_78_in_ruleChoicePoint9305); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getChoicePointAccess().getChoicePointKeyword_0());
                 
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4510:1: ( (lv_name_1_0= RULE_ID ) )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4511:1: (lv_name_1_0= RULE_ID )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4554:1: ( (lv_name_1_0= RULE_ID ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4555:1: (lv_name_1_0= RULE_ID )
             {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4511:1: (lv_name_1_0= RULE_ID )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4512:3: lv_name_1_0= RULE_ID
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4555:1: (lv_name_1_0= RULE_ID )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4556:3: lv_name_1_0= RULE_ID
             {
-            lv_name_1_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleChoicePoint9250); 
+            lv_name_1_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleChoicePoint9322); 
 
             			newLeafNode(lv_name_1_0, grammarAccess.getChoicePointAccess().getNameIDTerminalRuleCall_1_0()); 
             		
@@ -11291,24 +11402,24 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4528:2: ( (lv_docu_2_0= ruleDocumentation ) )?
-            int alt102=2;
-            int LA102_0 = input.LA(1);
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4572:2: ( (lv_docu_2_0= ruleDocumentation ) )?
+            int alt104=2;
+            int LA104_0 = input.LA(1);
 
-            if ( (LA102_0==20) ) {
-                alt102=1;
+            if ( (LA104_0==20) ) {
+                alt104=1;
             }
-            switch (alt102) {
+            switch (alt104) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4529:1: (lv_docu_2_0= ruleDocumentation )
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4573:1: (lv_docu_2_0= ruleDocumentation )
                     {
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4529:1: (lv_docu_2_0= ruleDocumentation )
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4530:3: lv_docu_2_0= ruleDocumentation
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4573:1: (lv_docu_2_0= ruleDocumentation )
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4574:3: lv_docu_2_0= ruleDocumentation
                     {
                      
                     	        newCompositeNode(grammarAccess.getChoicePointAccess().getDocuDocumentationParserRuleCall_2_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleDocumentation_in_ruleChoicePoint9276);
+                    pushFollow(FOLLOW_ruleDocumentation_in_ruleChoicePoint9348);
                     lv_docu_2_0=ruleDocumentation();
 
                     state._fsp--;
@@ -11354,7 +11465,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleTransition"
-    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4554:1: entryRuleTransition returns [EObject current=null] : iv_ruleTransition= ruleTransition EOF ;
+    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4598:1: entryRuleTransition returns [EObject current=null] : iv_ruleTransition= ruleTransition EOF ;
     public final EObject entryRuleTransition() throws RecognitionException {
         EObject current = null;
 
@@ -11362,17 +11473,17 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4555:2: (iv_ruleTransition= ruleTransition EOF )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4556:2: iv_ruleTransition= ruleTransition EOF
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4599:2: (iv_ruleTransition= ruleTransition EOF )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4600:2: iv_ruleTransition= ruleTransition EOF
             {
              newCompositeNode(grammarAccess.getTransitionRule()); 
-            pushFollow(FOLLOW_ruleTransition_in_entryRuleTransition9313);
+            pushFollow(FOLLOW_ruleTransition_in_entryRuleTransition9385);
             iv_ruleTransition=ruleTransition();
 
             state._fsp--;
 
              current =iv_ruleTransition; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleTransition9323); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleTransition9395); 
 
             }
 
@@ -11390,7 +11501,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleTransition"
-    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4563:1: ruleTransition returns [EObject current=null] : (this_InitialTransition_0= ruleInitialTransition | this_NonInitialTransition_1= ruleNonInitialTransition ) ;
+    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4607:1: ruleTransition returns [EObject current=null] : (this_InitialTransition_0= ruleInitialTransition | this_NonInitialTransition_1= ruleNonInitialTransition ) ;
     public final EObject ruleTransition() throws RecognitionException {
         EObject current = null;
 
@@ -11402,79 +11513,79 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4566:28: ( (this_InitialTransition_0= ruleInitialTransition | this_NonInitialTransition_1= ruleNonInitialTransition ) )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4567:1: (this_InitialTransition_0= ruleInitialTransition | this_NonInitialTransition_1= ruleNonInitialTransition )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4610:28: ( (this_InitialTransition_0= ruleInitialTransition | this_NonInitialTransition_1= ruleNonInitialTransition ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4611:1: (this_InitialTransition_0= ruleInitialTransition | this_NonInitialTransition_1= ruleNonInitialTransition )
             {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4567:1: (this_InitialTransition_0= ruleInitialTransition | this_NonInitialTransition_1= ruleNonInitialTransition )
-            int alt103=2;
-            int LA103_0 = input.LA(1);
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4611:1: (this_InitialTransition_0= ruleInitialTransition | this_NonInitialTransition_1= ruleNonInitialTransition )
+            int alt105=2;
+            int LA105_0 = input.LA(1);
 
-            if ( (LA103_0==78) ) {
-                int LA103_1 = input.LA(2);
+            if ( (LA105_0==79) ) {
+                int LA105_1 = input.LA(2);
 
-                if ( (LA103_1==RULE_ID) ) {
-                    int LA103_2 = input.LA(3);
+                if ( (LA105_1==RULE_ID) ) {
+                    int LA105_2 = input.LA(3);
 
-                    if ( (LA103_2==14) ) {
-                        int LA103_3 = input.LA(4);
+                    if ( (LA105_2==14) ) {
+                        int LA105_3 = input.LA(4);
 
-                        if ( (LA103_3==79) ) {
-                            alt103=1;
+                        if ( (LA105_3==80) ) {
+                            alt105=1;
                         }
-                        else if ( (LA103_3==RULE_ID||(LA103_3>=85 && LA103_3<=86)) ) {
-                            alt103=2;
+                        else if ( (LA105_3==RULE_ID||(LA105_3>=86 && LA105_3<=87)) ) {
+                            alt105=2;
                         }
                         else {
                             NoViableAltException nvae =
-                                new NoViableAltException("", 103, 3, input);
+                                new NoViableAltException("", 105, 3, input);
 
                             throw nvae;
                         }
                     }
                     else {
                         NoViableAltException nvae =
-                            new NoViableAltException("", 103, 2, input);
+                            new NoViableAltException("", 105, 2, input);
 
                         throw nvae;
                     }
                 }
-                else if ( (LA103_1==14) ) {
-                    int LA103_3 = input.LA(3);
+                else if ( (LA105_1==14) ) {
+                    int LA105_3 = input.LA(3);
 
-                    if ( (LA103_3==79) ) {
-                        alt103=1;
+                    if ( (LA105_3==80) ) {
+                        alt105=1;
                     }
-                    else if ( (LA103_3==RULE_ID||(LA103_3>=85 && LA103_3<=86)) ) {
-                        alt103=2;
+                    else if ( (LA105_3==RULE_ID||(LA105_3>=86 && LA105_3<=87)) ) {
+                        alt105=2;
                     }
                     else {
                         NoViableAltException nvae =
-                            new NoViableAltException("", 103, 3, input);
+                            new NoViableAltException("", 105, 3, input);
 
                         throw nvae;
                     }
                 }
                 else {
                     NoViableAltException nvae =
-                        new NoViableAltException("", 103, 1, input);
+                        new NoViableAltException("", 105, 1, input);
 
                     throw nvae;
                 }
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 103, 0, input);
+                    new NoViableAltException("", 105, 0, input);
 
                 throw nvae;
             }
-            switch (alt103) {
+            switch (alt105) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4568:5: this_InitialTransition_0= ruleInitialTransition
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4612:5: this_InitialTransition_0= ruleInitialTransition
                     {
                      
                             newCompositeNode(grammarAccess.getTransitionAccess().getInitialTransitionParserRuleCall_0()); 
                         
-                    pushFollow(FOLLOW_ruleInitialTransition_in_ruleTransition9370);
+                    pushFollow(FOLLOW_ruleInitialTransition_in_ruleTransition9442);
                     this_InitialTransition_0=ruleInitialTransition();
 
                     state._fsp--;
@@ -11487,12 +11598,12 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4578:5: this_NonInitialTransition_1= ruleNonInitialTransition
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4622:5: this_NonInitialTransition_1= ruleNonInitialTransition
                     {
                      
                             newCompositeNode(grammarAccess.getTransitionAccess().getNonInitialTransitionParserRuleCall_1()); 
                         
-                    pushFollow(FOLLOW_ruleNonInitialTransition_in_ruleTransition9397);
+                    pushFollow(FOLLOW_ruleNonInitialTransition_in_ruleTransition9469);
                     this_NonInitialTransition_1=ruleNonInitialTransition();
 
                     state._fsp--;
@@ -11525,7 +11636,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleNonInitialTransition"
-    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4594:1: entryRuleNonInitialTransition returns [EObject current=null] : iv_ruleNonInitialTransition= ruleNonInitialTransition EOF ;
+    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4638:1: entryRuleNonInitialTransition returns [EObject current=null] : iv_ruleNonInitialTransition= ruleNonInitialTransition EOF ;
     public final EObject entryRuleNonInitialTransition() throws RecognitionException {
         EObject current = null;
 
@@ -11533,17 +11644,17 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4595:2: (iv_ruleNonInitialTransition= ruleNonInitialTransition EOF )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4596:2: iv_ruleNonInitialTransition= ruleNonInitialTransition EOF
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4639:2: (iv_ruleNonInitialTransition= ruleNonInitialTransition EOF )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4640:2: iv_ruleNonInitialTransition= ruleNonInitialTransition EOF
             {
              newCompositeNode(grammarAccess.getNonInitialTransitionRule()); 
-            pushFollow(FOLLOW_ruleNonInitialTransition_in_entryRuleNonInitialTransition9432);
+            pushFollow(FOLLOW_ruleNonInitialTransition_in_entryRuleNonInitialTransition9504);
             iv_ruleNonInitialTransition=ruleNonInitialTransition();
 
             state._fsp--;
 
              current =iv_ruleNonInitialTransition; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleNonInitialTransition9442); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleNonInitialTransition9514); 
 
             }
 
@@ -11561,7 +11672,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleNonInitialTransition"
-    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4603:1: ruleNonInitialTransition returns [EObject current=null] : (this_TriggeredTransition_0= ruleTriggeredTransition | this_GuardedTransition_1= ruleGuardedTransition | this_ContinuationTransition_2= ruleContinuationTransition | this_CPBranchTransition_3= ruleCPBranchTransition ) ;
+    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4647:1: ruleNonInitialTransition returns [EObject current=null] : (this_TriggeredTransition_0= ruleTriggeredTransition | this_GuardedTransition_1= ruleGuardedTransition | this_ContinuationTransition_2= ruleContinuationTransition | this_CPBranchTransition_3= ruleCPBranchTransition ) ;
     public final EObject ruleNonInitialTransition() throws RecognitionException {
         EObject current = null;
 
@@ -11577,20 +11688,20 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4606:28: ( (this_TriggeredTransition_0= ruleTriggeredTransition | this_GuardedTransition_1= ruleGuardedTransition | this_ContinuationTransition_2= ruleContinuationTransition | this_CPBranchTransition_3= ruleCPBranchTransition ) )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4607:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_GuardedTransition_1= ruleGuardedTransition | this_ContinuationTransition_2= ruleContinuationTransition | this_CPBranchTransition_3= ruleCPBranchTransition )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4650:28: ( (this_TriggeredTransition_0= ruleTriggeredTransition | this_GuardedTransition_1= ruleGuardedTransition | this_ContinuationTransition_2= ruleContinuationTransition | this_CPBranchTransition_3= ruleCPBranchTransition ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4651:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_GuardedTransition_1= ruleGuardedTransition | this_ContinuationTransition_2= ruleContinuationTransition | this_CPBranchTransition_3= ruleCPBranchTransition )
             {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4607:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_GuardedTransition_1= ruleGuardedTransition | this_ContinuationTransition_2= ruleContinuationTransition | this_CPBranchTransition_3= ruleCPBranchTransition )
-            int alt104=4;
-            alt104 = dfa104.predict(input);
-            switch (alt104) {
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4651:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_GuardedTransition_1= ruleGuardedTransition | this_ContinuationTransition_2= ruleContinuationTransition | this_CPBranchTransition_3= ruleCPBranchTransition )
+            int alt106=4;
+            alt106 = dfa106.predict(input);
+            switch (alt106) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4608:5: this_TriggeredTransition_0= ruleTriggeredTransition
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4652:5: this_TriggeredTransition_0= ruleTriggeredTransition
                     {
                      
                             newCompositeNode(grammarAccess.getNonInitialTransitionAccess().getTriggeredTransitionParserRuleCall_0()); 
                         
-                    pushFollow(FOLLOW_ruleTriggeredTransition_in_ruleNonInitialTransition9489);
+                    pushFollow(FOLLOW_ruleTriggeredTransition_in_ruleNonInitialTransition9561);
                     this_TriggeredTransition_0=ruleTriggeredTransition();
 
                     state._fsp--;
@@ -11603,12 +11714,12 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4618:5: this_GuardedTransition_1= ruleGuardedTransition
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4662:5: this_GuardedTransition_1= ruleGuardedTransition
                     {
                      
                             newCompositeNode(grammarAccess.getNonInitialTransitionAccess().getGuardedTransitionParserRuleCall_1()); 
                         
-                    pushFollow(FOLLOW_ruleGuardedTransition_in_ruleNonInitialTransition9516);
+                    pushFollow(FOLLOW_ruleGuardedTransition_in_ruleNonInitialTransition9588);
                     this_GuardedTransition_1=ruleGuardedTransition();
 
                     state._fsp--;
@@ -11621,12 +11732,12 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4628:5: this_ContinuationTransition_2= ruleContinuationTransition
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4672:5: this_ContinuationTransition_2= ruleContinuationTransition
                     {
                      
                             newCompositeNode(grammarAccess.getNonInitialTransitionAccess().getContinuationTransitionParserRuleCall_2()); 
                         
-                    pushFollow(FOLLOW_ruleContinuationTransition_in_ruleNonInitialTransition9543);
+                    pushFollow(FOLLOW_ruleContinuationTransition_in_ruleNonInitialTransition9615);
                     this_ContinuationTransition_2=ruleContinuationTransition();
 
                     state._fsp--;
@@ -11639,12 +11750,12 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 4 :
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4638:5: this_CPBranchTransition_3= ruleCPBranchTransition
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4682:5: this_CPBranchTransition_3= ruleCPBranchTransition
                     {
                      
                             newCompositeNode(grammarAccess.getNonInitialTransitionAccess().getCPBranchTransitionParserRuleCall_3()); 
                         
-                    pushFollow(FOLLOW_ruleCPBranchTransition_in_ruleNonInitialTransition9570);
+                    pushFollow(FOLLOW_ruleCPBranchTransition_in_ruleNonInitialTransition9642);
                     this_CPBranchTransition_3=ruleCPBranchTransition();
 
                     state._fsp--;
@@ -11677,7 +11788,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleInitialTransition"
-    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4654:1: entryRuleInitialTransition returns [EObject current=null] : iv_ruleInitialTransition= ruleInitialTransition EOF ;
+    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4698:1: entryRuleInitialTransition returns [EObject current=null] : iv_ruleInitialTransition= ruleInitialTransition EOF ;
     public final EObject entryRuleInitialTransition() throws RecognitionException {
         EObject current = null;
 
@@ -11685,17 +11796,17 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4655:2: (iv_ruleInitialTransition= ruleInitialTransition EOF )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4656:2: iv_ruleInitialTransition= ruleInitialTransition EOF
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4699:2: (iv_ruleInitialTransition= ruleInitialTransition EOF )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4700:2: iv_ruleInitialTransition= ruleInitialTransition EOF
             {
              newCompositeNode(grammarAccess.getInitialTransitionRule()); 
-            pushFollow(FOLLOW_ruleInitialTransition_in_entryRuleInitialTransition9605);
+            pushFollow(FOLLOW_ruleInitialTransition_in_entryRuleInitialTransition9677);
             iv_ruleInitialTransition=ruleInitialTransition();
 
             state._fsp--;
 
              current =iv_ruleInitialTransition; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleInitialTransition9615); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleInitialTransition9687); 
 
             }
 
@@ -11713,7 +11824,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleInitialTransition"
-    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4663:1: ruleInitialTransition returns [EObject current=null] : (otherlv_0= 'Transition' ( (lv_name_1_0= RULE_ID ) )? otherlv_2= ':' otherlv_3= 'initial' otherlv_4= '->' ( (lv_to_5_0= ruleTransitionTerminal ) ) ( (lv_docu_6_0= ruleDocumentation ) )? otherlv_7= '{' (otherlv_8= 'action' ( (lv_action_9_0= ruleDetailCode ) ) )? otherlv_10= '}' ) ;
+    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4707:1: ruleInitialTransition returns [EObject current=null] : (otherlv_0= 'Transition' ( (lv_name_1_0= RULE_ID ) )? otherlv_2= ':' otherlv_3= 'initial' otherlv_4= '->' ( (lv_to_5_0= ruleTransitionTerminal ) ) ( (lv_docu_6_0= ruleDocumentation ) )? otherlv_7= '{' (otherlv_8= 'action' ( (lv_action_9_0= ruleDetailCode ) ) )? otherlv_10= '}' ) ;
     public final EObject ruleInitialTransition() throws RecognitionException {
         EObject current = null;
 
@@ -11735,31 +11846,31 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4666:28: ( (otherlv_0= 'Transition' ( (lv_name_1_0= RULE_ID ) )? otherlv_2= ':' otherlv_3= 'initial' otherlv_4= '->' ( (lv_to_5_0= ruleTransitionTerminal ) ) ( (lv_docu_6_0= ruleDocumentation ) )? otherlv_7= '{' (otherlv_8= 'action' ( (lv_action_9_0= ruleDetailCode ) ) )? otherlv_10= '}' ) )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4667:1: (otherlv_0= 'Transition' ( (lv_name_1_0= RULE_ID ) )? otherlv_2= ':' otherlv_3= 'initial' otherlv_4= '->' ( (lv_to_5_0= ruleTransitionTerminal ) ) ( (lv_docu_6_0= ruleDocumentation ) )? otherlv_7= '{' (otherlv_8= 'action' ( (lv_action_9_0= ruleDetailCode ) ) )? otherlv_10= '}' )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4710:28: ( (otherlv_0= 'Transition' ( (lv_name_1_0= RULE_ID ) )? otherlv_2= ':' otherlv_3= 'initial' otherlv_4= '->' ( (lv_to_5_0= ruleTransitionTerminal ) ) ( (lv_docu_6_0= ruleDocumentation ) )? otherlv_7= '{' (otherlv_8= 'action' ( (lv_action_9_0= ruleDetailCode ) ) )? otherlv_10= '}' ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4711:1: (otherlv_0= 'Transition' ( (lv_name_1_0= RULE_ID ) )? otherlv_2= ':' otherlv_3= 'initial' otherlv_4= '->' ( (lv_to_5_0= ruleTransitionTerminal ) ) ( (lv_docu_6_0= ruleDocumentation ) )? otherlv_7= '{' (otherlv_8= 'action' ( (lv_action_9_0= ruleDetailCode ) ) )? otherlv_10= '}' )
             {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4667:1: (otherlv_0= 'Transition' ( (lv_name_1_0= RULE_ID ) )? otherlv_2= ':' otherlv_3= 'initial' otherlv_4= '->' ( (lv_to_5_0= ruleTransitionTerminal ) ) ( (lv_docu_6_0= ruleDocumentation ) )? otherlv_7= '{' (otherlv_8= 'action' ( (lv_action_9_0= ruleDetailCode ) ) )? otherlv_10= '}' )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4667:3: otherlv_0= 'Transition' ( (lv_name_1_0= RULE_ID ) )? otherlv_2= ':' otherlv_3= 'initial' otherlv_4= '->' ( (lv_to_5_0= ruleTransitionTerminal ) ) ( (lv_docu_6_0= ruleDocumentation ) )? otherlv_7= '{' (otherlv_8= 'action' ( (lv_action_9_0= ruleDetailCode ) ) )? otherlv_10= '}'
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4711:1: (otherlv_0= 'Transition' ( (lv_name_1_0= RULE_ID ) )? otherlv_2= ':' otherlv_3= 'initial' otherlv_4= '->' ( (lv_to_5_0= ruleTransitionTerminal ) ) ( (lv_docu_6_0= ruleDocumentation ) )? otherlv_7= '{' (otherlv_8= 'action' ( (lv_action_9_0= ruleDetailCode ) ) )? otherlv_10= '}' )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4711:3: otherlv_0= 'Transition' ( (lv_name_1_0= RULE_ID ) )? otherlv_2= ':' otherlv_3= 'initial' otherlv_4= '->' ( (lv_to_5_0= ruleTransitionTerminal ) ) ( (lv_docu_6_0= ruleDocumentation ) )? otherlv_7= '{' (otherlv_8= 'action' ( (lv_action_9_0= ruleDetailCode ) ) )? otherlv_10= '}'
             {
-            otherlv_0=(Token)match(input,78,FOLLOW_78_in_ruleInitialTransition9652); 
+            otherlv_0=(Token)match(input,79,FOLLOW_79_in_ruleInitialTransition9724); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getInitialTransitionAccess().getTransitionKeyword_0());
                 
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4671:1: ( (lv_name_1_0= RULE_ID ) )?
-            int alt105=2;
-            int LA105_0 = input.LA(1);
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4715:1: ( (lv_name_1_0= RULE_ID ) )?
+            int alt107=2;
+            int LA107_0 = input.LA(1);
 
-            if ( (LA105_0==RULE_ID) ) {
-                alt105=1;
+            if ( (LA107_0==RULE_ID) ) {
+                alt107=1;
             }
-            switch (alt105) {
+            switch (alt107) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4672:1: (lv_name_1_0= RULE_ID )
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4716:1: (lv_name_1_0= RULE_ID )
                     {
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4672:1: (lv_name_1_0= RULE_ID )
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4673:3: lv_name_1_0= RULE_ID
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4716:1: (lv_name_1_0= RULE_ID )
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4717:3: lv_name_1_0= RULE_ID
                     {
-                    lv_name_1_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleInitialTransition9669); 
+                    lv_name_1_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleInitialTransition9741); 
 
                     			newLeafNode(lv_name_1_0, grammarAccess.getInitialTransitionAccess().getNameIDTerminalRuleCall_1_0()); 
                     		
@@ -11782,28 +11893,28 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_2=(Token)match(input,14,FOLLOW_14_in_ruleInitialTransition9687); 
+            otherlv_2=(Token)match(input,14,FOLLOW_14_in_ruleInitialTransition9759); 
 
                 	newLeafNode(otherlv_2, grammarAccess.getInitialTransitionAccess().getColonKeyword_2());
                 
-            otherlv_3=(Token)match(input,79,FOLLOW_79_in_ruleInitialTransition9699); 
+            otherlv_3=(Token)match(input,80,FOLLOW_80_in_ruleInitialTransition9771); 
 
                 	newLeafNode(otherlv_3, grammarAccess.getInitialTransitionAccess().getInitialKeyword_3());
                 
-            otherlv_4=(Token)match(input,40,FOLLOW_40_in_ruleInitialTransition9711); 
+            otherlv_4=(Token)match(input,40,FOLLOW_40_in_ruleInitialTransition9783); 
 
                 	newLeafNode(otherlv_4, grammarAccess.getInitialTransitionAccess().getHyphenMinusGreaterThanSignKeyword_4());
                 
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4701:1: ( (lv_to_5_0= ruleTransitionTerminal ) )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4702:1: (lv_to_5_0= ruleTransitionTerminal )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4745:1: ( (lv_to_5_0= ruleTransitionTerminal ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4746:1: (lv_to_5_0= ruleTransitionTerminal )
             {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4702:1: (lv_to_5_0= ruleTransitionTerminal )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4703:3: lv_to_5_0= ruleTransitionTerminal
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4746:1: (lv_to_5_0= ruleTransitionTerminal )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4747:3: lv_to_5_0= ruleTransitionTerminal
             {
              
             	        newCompositeNode(grammarAccess.getInitialTransitionAccess().getToTransitionTerminalParserRuleCall_5_0()); 
             	    
-            pushFollow(FOLLOW_ruleTransitionTerminal_in_ruleInitialTransition9732);
+            pushFollow(FOLLOW_ruleTransitionTerminal_in_ruleInitialTransition9804);
             lv_to_5_0=ruleTransitionTerminal();
 
             state._fsp--;
@@ -11825,24 +11936,24 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4719:2: ( (lv_docu_6_0= ruleDocumentation ) )?
-            int alt106=2;
-            int LA106_0 = input.LA(1);
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4763:2: ( (lv_docu_6_0= ruleDocumentation ) )?
+            int alt108=2;
+            int LA108_0 = input.LA(1);
 
-            if ( (LA106_0==20) ) {
-                alt106=1;
+            if ( (LA108_0==20) ) {
+                alt108=1;
             }
-            switch (alt106) {
+            switch (alt108) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4720:1: (lv_docu_6_0= ruleDocumentation )
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4764:1: (lv_docu_6_0= ruleDocumentation )
                     {
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4720:1: (lv_docu_6_0= ruleDocumentation )
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4721:3: lv_docu_6_0= ruleDocumentation
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4764:1: (lv_docu_6_0= ruleDocumentation )
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4765:3: lv_docu_6_0= ruleDocumentation
                     {
                      
                     	        newCompositeNode(grammarAccess.getInitialTransitionAccess().getDocuDocumentationParserRuleCall_6_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleDocumentation_in_ruleInitialTransition9753);
+                    pushFollow(FOLLOW_ruleDocumentation_in_ruleInitialTransition9825);
                     lv_docu_6_0=ruleDocumentation();
 
                     state._fsp--;
@@ -11867,35 +11978,35 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_7=(Token)match(input,12,FOLLOW_12_in_ruleInitialTransition9766); 
+            otherlv_7=(Token)match(input,12,FOLLOW_12_in_ruleInitialTransition9838); 
 
                 	newLeafNode(otherlv_7, grammarAccess.getInitialTransitionAccess().getLeftCurlyBracketKeyword_7());
                 
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4741:1: (otherlv_8= 'action' ( (lv_action_9_0= ruleDetailCode ) ) )?
-            int alt107=2;
-            int LA107_0 = input.LA(1);
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4785:1: (otherlv_8= 'action' ( (lv_action_9_0= ruleDetailCode ) ) )?
+            int alt109=2;
+            int LA109_0 = input.LA(1);
 
-            if ( (LA107_0==80) ) {
-                alt107=1;
+            if ( (LA109_0==81) ) {
+                alt109=1;
             }
-            switch (alt107) {
+            switch (alt109) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4741:3: otherlv_8= 'action' ( (lv_action_9_0= ruleDetailCode ) )
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4785:3: otherlv_8= 'action' ( (lv_action_9_0= ruleDetailCode ) )
                     {
-                    otherlv_8=(Token)match(input,80,FOLLOW_80_in_ruleInitialTransition9779); 
+                    otherlv_8=(Token)match(input,81,FOLLOW_81_in_ruleInitialTransition9851); 
 
                         	newLeafNode(otherlv_8, grammarAccess.getInitialTransitionAccess().getActionKeyword_8_0());
                         
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4745:1: ( (lv_action_9_0= ruleDetailCode ) )
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4746:1: (lv_action_9_0= ruleDetailCode )
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4789:1: ( (lv_action_9_0= ruleDetailCode ) )
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4790:1: (lv_action_9_0= ruleDetailCode )
                     {
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4746:1: (lv_action_9_0= ruleDetailCode )
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4747:3: lv_action_9_0= ruleDetailCode
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4790:1: (lv_action_9_0= ruleDetailCode )
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4791:3: lv_action_9_0= ruleDetailCode
                     {
                      
                     	        newCompositeNode(grammarAccess.getInitialTransitionAccess().getActionDetailCodeParserRuleCall_8_1_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleDetailCode_in_ruleInitialTransition9800);
+                    pushFollow(FOLLOW_ruleDetailCode_in_ruleInitialTransition9872);
                     lv_action_9_0=ruleDetailCode();
 
                     state._fsp--;
@@ -11923,7 +12034,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_10=(Token)match(input,13,FOLLOW_13_in_ruleInitialTransition9814); 
+            otherlv_10=(Token)match(input,13,FOLLOW_13_in_ruleInitialTransition9886); 
 
                 	newLeafNode(otherlv_10, grammarAccess.getInitialTransitionAccess().getRightCurlyBracketKeyword_9());
                 
@@ -11948,7 +12059,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleContinuationTransition"
-    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4775:1: entryRuleContinuationTransition returns [EObject current=null] : iv_ruleContinuationTransition= ruleContinuationTransition EOF ;
+    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4819:1: entryRuleContinuationTransition returns [EObject current=null] : iv_ruleContinuationTransition= ruleContinuationTransition EOF ;
     public final EObject entryRuleContinuationTransition() throws RecognitionException {
         EObject current = null;
 
@@ -11956,17 +12067,17 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4776:2: (iv_ruleContinuationTransition= ruleContinuationTransition EOF )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4777:2: iv_ruleContinuationTransition= ruleContinuationTransition EOF
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4820:2: (iv_ruleContinuationTransition= ruleContinuationTransition EOF )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4821:2: iv_ruleContinuationTransition= ruleContinuationTransition EOF
             {
              newCompositeNode(grammarAccess.getContinuationTransitionRule()); 
-            pushFollow(FOLLOW_ruleContinuationTransition_in_entryRuleContinuationTransition9850);
+            pushFollow(FOLLOW_ruleContinuationTransition_in_entryRuleContinuationTransition9922);
             iv_ruleContinuationTransition=ruleContinuationTransition();
 
             state._fsp--;
 
              current =iv_ruleContinuationTransition; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleContinuationTransition9860); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleContinuationTransition9932); 
 
             }
 
@@ -11984,7 +12095,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleContinuationTransition"
-    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4784:1: ruleContinuationTransition returns [EObject current=null] : (otherlv_0= 'Transition' ( (lv_name_1_0= RULE_ID ) )? otherlv_2= ':' ( (lv_from_3_0= ruleTransitionTerminal ) ) otherlv_4= '->' ( (lv_to_5_0= ruleTransitionTerminal ) ) ( (lv_docu_6_0= ruleDocumentation ) )? (otherlv_7= '{' (otherlv_8= 'action' ( (lv_action_9_0= ruleDetailCode ) ) )? otherlv_10= '}' )? ) ;
+    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4828:1: ruleContinuationTransition returns [EObject current=null] : (otherlv_0= 'Transition' ( (lv_name_1_0= RULE_ID ) )? otherlv_2= ':' ( (lv_from_3_0= ruleTransitionTerminal ) ) otherlv_4= '->' ( (lv_to_5_0= ruleTransitionTerminal ) ) ( (lv_docu_6_0= ruleDocumentation ) )? (otherlv_7= '{' (otherlv_8= 'action' ( (lv_action_9_0= ruleDetailCode ) ) )? otherlv_10= '}' )? ) ;
     public final EObject ruleContinuationTransition() throws RecognitionException {
         EObject current = null;
 
@@ -12007,31 +12118,31 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4787:28: ( (otherlv_0= 'Transition' ( (lv_name_1_0= RULE_ID ) )? otherlv_2= ':' ( (lv_from_3_0= ruleTransitionTerminal ) ) otherlv_4= '->' ( (lv_to_5_0= ruleTransitionTerminal ) ) ( (lv_docu_6_0= ruleDocumentation ) )? (otherlv_7= '{' (otherlv_8= 'action' ( (lv_action_9_0= ruleDetailCode ) ) )? otherlv_10= '}' )? ) )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4788:1: (otherlv_0= 'Transition' ( (lv_name_1_0= RULE_ID ) )? otherlv_2= ':' ( (lv_from_3_0= ruleTransitionTerminal ) ) otherlv_4= '->' ( (lv_to_5_0= ruleTransitionTerminal ) ) ( (lv_docu_6_0= ruleDocumentation ) )? (otherlv_7= '{' (otherlv_8= 'action' ( (lv_action_9_0= ruleDetailCode ) ) )? otherlv_10= '}' )? )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4831:28: ( (otherlv_0= 'Transition' ( (lv_name_1_0= RULE_ID ) )? otherlv_2= ':' ( (lv_from_3_0= ruleTransitionTerminal ) ) otherlv_4= '->' ( (lv_to_5_0= ruleTransitionTerminal ) ) ( (lv_docu_6_0= ruleDocumentation ) )? (otherlv_7= '{' (otherlv_8= 'action' ( (lv_action_9_0= ruleDetailCode ) ) )? otherlv_10= '}' )? ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4832:1: (otherlv_0= 'Transition' ( (lv_name_1_0= RULE_ID ) )? otherlv_2= ':' ( (lv_from_3_0= ruleTransitionTerminal ) ) otherlv_4= '->' ( (lv_to_5_0= ruleTransitionTerminal ) ) ( (lv_docu_6_0= ruleDocumentation ) )? (otherlv_7= '{' (otherlv_8= 'action' ( (lv_action_9_0= ruleDetailCode ) ) )? otherlv_10= '}' )? )
             {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4788:1: (otherlv_0= 'Transition' ( (lv_name_1_0= RULE_ID ) )? otherlv_2= ':' ( (lv_from_3_0= ruleTransitionTerminal ) ) otherlv_4= '->' ( (lv_to_5_0= ruleTransitionTerminal ) ) ( (lv_docu_6_0= ruleDocumentation ) )? (otherlv_7= '{' (otherlv_8= 'action' ( (lv_action_9_0= ruleDetailCode ) ) )? otherlv_10= '}' )? )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4788:3: otherlv_0= 'Transition' ( (lv_name_1_0= RULE_ID ) )? otherlv_2= ':' ( (lv_from_3_0= ruleTransitionTerminal ) ) otherlv_4= '->' ( (lv_to_5_0= ruleTransitionTerminal ) ) ( (lv_docu_6_0= ruleDocumentation ) )? (otherlv_7= '{' (otherlv_8= 'action' ( (lv_action_9_0= ruleDetailCode ) ) )? otherlv_10= '}' )?
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4832:1: (otherlv_0= 'Transition' ( (lv_name_1_0= RULE_ID ) )? otherlv_2= ':' ( (lv_from_3_0= ruleTransitionTerminal ) ) otherlv_4= '->' ( (lv_to_5_0= ruleTransitionTerminal ) ) ( (lv_docu_6_0= ruleDocumentation ) )? (otherlv_7= '{' (otherlv_8= 'action' ( (lv_action_9_0= ruleDetailCode ) ) )? otherlv_10= '}' )? )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4832:3: otherlv_0= 'Transition' ( (lv_name_1_0= RULE_ID ) )? otherlv_2= ':' ( (lv_from_3_0= ruleTransitionTerminal ) ) otherlv_4= '->' ( (lv_to_5_0= ruleTransitionTerminal ) ) ( (lv_docu_6_0= ruleDocumentation ) )? (otherlv_7= '{' (otherlv_8= 'action' ( (lv_action_9_0= ruleDetailCode ) ) )? otherlv_10= '}' )?
             {
-            otherlv_0=(Token)match(input,78,FOLLOW_78_in_ruleContinuationTransition9897); 
+            otherlv_0=(Token)match(input,79,FOLLOW_79_in_ruleContinuationTransition9969); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getContinuationTransitionAccess().getTransitionKeyword_0());
                 
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4792:1: ( (lv_name_1_0= RULE_ID ) )?
-            int alt108=2;
-            int LA108_0 = input.LA(1);
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4836:1: ( (lv_name_1_0= RULE_ID ) )?
+            int alt110=2;
+            int LA110_0 = input.LA(1);
 
-            if ( (LA108_0==RULE_ID) ) {
-                alt108=1;
+            if ( (LA110_0==RULE_ID) ) {
+                alt110=1;
             }
-            switch (alt108) {
+            switch (alt110) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4793:1: (lv_name_1_0= RULE_ID )
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4837:1: (lv_name_1_0= RULE_ID )
                     {
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4793:1: (lv_name_1_0= RULE_ID )
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4794:3: lv_name_1_0= RULE_ID
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4837:1: (lv_name_1_0= RULE_ID )
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4838:3: lv_name_1_0= RULE_ID
                     {
-                    lv_name_1_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleContinuationTransition9914); 
+                    lv_name_1_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleContinuationTransition9986); 
 
                     			newLeafNode(lv_name_1_0, grammarAccess.getContinuationTransitionAccess().getNameIDTerminalRuleCall_1_0()); 
                     		
@@ -12054,20 +12165,20 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_2=(Token)match(input,14,FOLLOW_14_in_ruleContinuationTransition9932); 
+            otherlv_2=(Token)match(input,14,FOLLOW_14_in_ruleContinuationTransition10004); 
 
                 	newLeafNode(otherlv_2, grammarAccess.getContinuationTransitionAccess().getColonKeyword_2());
                 
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4814:1: ( (lv_from_3_0= ruleTransitionTerminal ) )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4815:1: (lv_from_3_0= ruleTransitionTerminal )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4858:1: ( (lv_from_3_0= ruleTransitionTerminal ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4859:1: (lv_from_3_0= ruleTransitionTerminal )
             {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4815:1: (lv_from_3_0= ruleTransitionTerminal )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4816:3: lv_from_3_0= ruleTransitionTerminal
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4859:1: (lv_from_3_0= ruleTransitionTerminal )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4860:3: lv_from_3_0= ruleTransitionTerminal
             {
              
             	        newCompositeNode(grammarAccess.getContinuationTransitionAccess().getFromTransitionTerminalParserRuleCall_3_0()); 
             	    
-            pushFollow(FOLLOW_ruleTransitionTerminal_in_ruleContinuationTransition9953);
+            pushFollow(FOLLOW_ruleTransitionTerminal_in_ruleContinuationTransition10025);
             lv_from_3_0=ruleTransitionTerminal();
 
             state._fsp--;
@@ -12089,20 +12200,20 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_4=(Token)match(input,40,FOLLOW_40_in_ruleContinuationTransition9965); 
+            otherlv_4=(Token)match(input,40,FOLLOW_40_in_ruleContinuationTransition10037); 
 
                 	newLeafNode(otherlv_4, grammarAccess.getContinuationTransitionAccess().getHyphenMinusGreaterThanSignKeyword_4());
                 
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4836:1: ( (lv_to_5_0= ruleTransitionTerminal ) )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4837:1: (lv_to_5_0= ruleTransitionTerminal )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4880:1: ( (lv_to_5_0= ruleTransitionTerminal ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4881:1: (lv_to_5_0= ruleTransitionTerminal )
             {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4837:1: (lv_to_5_0= ruleTransitionTerminal )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4838:3: lv_to_5_0= ruleTransitionTerminal
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4881:1: (lv_to_5_0= ruleTransitionTerminal )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4882:3: lv_to_5_0= ruleTransitionTerminal
             {
              
             	        newCompositeNode(grammarAccess.getContinuationTransitionAccess().getToTransitionTerminalParserRuleCall_5_0()); 
             	    
-            pushFollow(FOLLOW_ruleTransitionTerminal_in_ruleContinuationTransition9986);
+            pushFollow(FOLLOW_ruleTransitionTerminal_in_ruleContinuationTransition10058);
             lv_to_5_0=ruleTransitionTerminal();
 
             state._fsp--;
@@ -12124,24 +12235,24 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4854:2: ( (lv_docu_6_0= ruleDocumentation ) )?
-            int alt109=2;
-            int LA109_0 = input.LA(1);
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4898:2: ( (lv_docu_6_0= ruleDocumentation ) )?
+            int alt111=2;
+            int LA111_0 = input.LA(1);
 
-            if ( (LA109_0==20) ) {
-                alt109=1;
+            if ( (LA111_0==20) ) {
+                alt111=1;
             }
-            switch (alt109) {
+            switch (alt111) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4855:1: (lv_docu_6_0= ruleDocumentation )
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4899:1: (lv_docu_6_0= ruleDocumentation )
                     {
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4855:1: (lv_docu_6_0= ruleDocumentation )
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4856:3: lv_docu_6_0= ruleDocumentation
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4899:1: (lv_docu_6_0= ruleDocumentation )
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4900:3: lv_docu_6_0= ruleDocumentation
                     {
                      
                     	        newCompositeNode(grammarAccess.getContinuationTransitionAccess().getDocuDocumentationParserRuleCall_6_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleDocumentation_in_ruleContinuationTransition10007);
+                    pushFollow(FOLLOW_ruleDocumentation_in_ruleContinuationTransition10079);
                     lv_docu_6_0=ruleDocumentation();
 
                     state._fsp--;
@@ -12166,46 +12277,46 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4872:3: (otherlv_7= '{' (otherlv_8= 'action' ( (lv_action_9_0= ruleDetailCode ) ) )? otherlv_10= '}' )?
-            int alt111=2;
-            int LA111_0 = input.LA(1);
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4916:3: (otherlv_7= '{' (otherlv_8= 'action' ( (lv_action_9_0= ruleDetailCode ) ) )? otherlv_10= '}' )?
+            int alt113=2;
+            int LA113_0 = input.LA(1);
 
-            if ( (LA111_0==12) ) {
-                alt111=1;
+            if ( (LA113_0==12) ) {
+                alt113=1;
             }
-            switch (alt111) {
+            switch (alt113) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4872:5: otherlv_7= '{' (otherlv_8= 'action' ( (lv_action_9_0= ruleDetailCode ) ) )? otherlv_10= '}'
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4916:5: otherlv_7= '{' (otherlv_8= 'action' ( (lv_action_9_0= ruleDetailCode ) ) )? otherlv_10= '}'
                     {
-                    otherlv_7=(Token)match(input,12,FOLLOW_12_in_ruleContinuationTransition10021); 
+                    otherlv_7=(Token)match(input,12,FOLLOW_12_in_ruleContinuationTransition10093); 
 
                         	newLeafNode(otherlv_7, grammarAccess.getContinuationTransitionAccess().getLeftCurlyBracketKeyword_7_0());
                         
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4876:1: (otherlv_8= 'action' ( (lv_action_9_0= ruleDetailCode ) ) )?
-                    int alt110=2;
-                    int LA110_0 = input.LA(1);
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4920:1: (otherlv_8= 'action' ( (lv_action_9_0= ruleDetailCode ) ) )?
+                    int alt112=2;
+                    int LA112_0 = input.LA(1);
 
-                    if ( (LA110_0==80) ) {
-                        alt110=1;
+                    if ( (LA112_0==81) ) {
+                        alt112=1;
                     }
-                    switch (alt110) {
+                    switch (alt112) {
                         case 1 :
-                            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4876:3: otherlv_8= 'action' ( (lv_action_9_0= ruleDetailCode ) )
+                            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4920:3: otherlv_8= 'action' ( (lv_action_9_0= ruleDetailCode ) )
                             {
-                            otherlv_8=(Token)match(input,80,FOLLOW_80_in_ruleContinuationTransition10034); 
+                            otherlv_8=(Token)match(input,81,FOLLOW_81_in_ruleContinuationTransition10106); 
 
                                 	newLeafNode(otherlv_8, grammarAccess.getContinuationTransitionAccess().getActionKeyword_7_1_0());
                                 
-                            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4880:1: ( (lv_action_9_0= ruleDetailCode ) )
-                            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4881:1: (lv_action_9_0= ruleDetailCode )
+                            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4924:1: ( (lv_action_9_0= ruleDetailCode ) )
+                            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4925:1: (lv_action_9_0= ruleDetailCode )
                             {
-                            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4881:1: (lv_action_9_0= ruleDetailCode )
-                            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4882:3: lv_action_9_0= ruleDetailCode
+                            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4925:1: (lv_action_9_0= ruleDetailCode )
+                            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4926:3: lv_action_9_0= ruleDetailCode
                             {
                              
                             	        newCompositeNode(grammarAccess.getContinuationTransitionAccess().getActionDetailCodeParserRuleCall_7_1_1_0()); 
                             	    
-                            pushFollow(FOLLOW_ruleDetailCode_in_ruleContinuationTransition10055);
+                            pushFollow(FOLLOW_ruleDetailCode_in_ruleContinuationTransition10127);
                             lv_action_9_0=ruleDetailCode();
 
                             state._fsp--;
@@ -12233,7 +12344,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    otherlv_10=(Token)match(input,13,FOLLOW_13_in_ruleContinuationTransition10069); 
+                    otherlv_10=(Token)match(input,13,FOLLOW_13_in_ruleContinuationTransition10141); 
 
                         	newLeafNode(otherlv_10, grammarAccess.getContinuationTransitionAccess().getRightCurlyBracketKeyword_7_2());
                         
@@ -12264,7 +12375,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleTriggeredTransition"
-    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4910:1: entryRuleTriggeredTransition returns [EObject current=null] : iv_ruleTriggeredTransition= ruleTriggeredTransition EOF ;
+    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4954:1: entryRuleTriggeredTransition returns [EObject current=null] : iv_ruleTriggeredTransition= ruleTriggeredTransition EOF ;
     public final EObject entryRuleTriggeredTransition() throws RecognitionException {
         EObject current = null;
 
@@ -12272,17 +12383,17 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4911:2: (iv_ruleTriggeredTransition= ruleTriggeredTransition EOF )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4912:2: iv_ruleTriggeredTransition= ruleTriggeredTransition EOF
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4955:2: (iv_ruleTriggeredTransition= ruleTriggeredTransition EOF )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4956:2: iv_ruleTriggeredTransition= ruleTriggeredTransition EOF
             {
              newCompositeNode(grammarAccess.getTriggeredTransitionRule()); 
-            pushFollow(FOLLOW_ruleTriggeredTransition_in_entryRuleTriggeredTransition10107);
+            pushFollow(FOLLOW_ruleTriggeredTransition_in_entryRuleTriggeredTransition10179);
             iv_ruleTriggeredTransition=ruleTriggeredTransition();
 
             state._fsp--;
 
              current =iv_ruleTriggeredTransition; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleTriggeredTransition10117); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleTriggeredTransition10189); 
 
             }
 
@@ -12300,7 +12411,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleTriggeredTransition"
-    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4919:1: ruleTriggeredTransition returns [EObject current=null] : (otherlv_0= 'Transition' ( (lv_name_1_0= RULE_ID ) )? otherlv_2= ':' ( (lv_from_3_0= ruleTransitionTerminal ) ) otherlv_4= '->' ( (lv_to_5_0= ruleTransitionTerminal ) ) ( (lv_docu_6_0= ruleDocumentation ) )? otherlv_7= '{' otherlv_8= 'triggers' otherlv_9= '{' ( (lv_triggers_10_0= ruleTrigger ) ) (otherlv_11= 'or' ( (lv_triggers_12_0= ruleTrigger ) ) )* otherlv_13= '}' (otherlv_14= 'action' ( (lv_action_15_0= ruleDetailCode ) ) )? otherlv_16= '}' ) ;
+    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4963:1: ruleTriggeredTransition returns [EObject current=null] : (otherlv_0= 'Transition' ( (lv_name_1_0= RULE_ID ) )? otherlv_2= ':' ( (lv_from_3_0= ruleTransitionTerminal ) ) otherlv_4= '->' ( (lv_to_5_0= ruleTransitionTerminal ) ) ( (lv_docu_6_0= ruleDocumentation ) )? otherlv_7= '{' otherlv_8= 'triggers' otherlv_9= '{' ( (lv_triggers_10_0= ruleTrigger ) ) (otherlv_11= 'or' ( (lv_triggers_12_0= ruleTrigger ) ) )* otherlv_13= '}' (otherlv_14= 'action' ( (lv_action_15_0= ruleDetailCode ) ) )? otherlv_16= '}' ) ;
     public final EObject ruleTriggeredTransition() throws RecognitionException {
         EObject current = null;
 
@@ -12331,31 +12442,31 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4922:28: ( (otherlv_0= 'Transition' ( (lv_name_1_0= RULE_ID ) )? otherlv_2= ':' ( (lv_from_3_0= ruleTransitionTerminal ) ) otherlv_4= '->' ( (lv_to_5_0= ruleTransitionTerminal ) ) ( (lv_docu_6_0= ruleDocumentation ) )? otherlv_7= '{' otherlv_8= 'triggers' otherlv_9= '{' ( (lv_triggers_10_0= ruleTrigger ) ) (otherlv_11= 'or' ( (lv_triggers_12_0= ruleTrigger ) ) )* otherlv_13= '}' (otherlv_14= 'action' ( (lv_action_15_0= ruleDetailCode ) ) )? otherlv_16= '}' ) )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4923:1: (otherlv_0= 'Transition' ( (lv_name_1_0= RULE_ID ) )? otherlv_2= ':' ( (lv_from_3_0= ruleTransitionTerminal ) ) otherlv_4= '->' ( (lv_to_5_0= ruleTransitionTerminal ) ) ( (lv_docu_6_0= ruleDocumentation ) )? otherlv_7= '{' otherlv_8= 'triggers' otherlv_9= '{' ( (lv_triggers_10_0= ruleTrigger ) ) (otherlv_11= 'or' ( (lv_triggers_12_0= ruleTrigger ) ) )* otherlv_13= '}' (otherlv_14= 'action' ( (lv_action_15_0= ruleDetailCode ) ) )? otherlv_16= '}' )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4966:28: ( (otherlv_0= 'Transition' ( (lv_name_1_0= RULE_ID ) )? otherlv_2= ':' ( (lv_from_3_0= ruleTransitionTerminal ) ) otherlv_4= '->' ( (lv_to_5_0= ruleTransitionTerminal ) ) ( (lv_docu_6_0= ruleDocumentation ) )? otherlv_7= '{' otherlv_8= 'triggers' otherlv_9= '{' ( (lv_triggers_10_0= ruleTrigger ) ) (otherlv_11= 'or' ( (lv_triggers_12_0= ruleTrigger ) ) )* otherlv_13= '}' (otherlv_14= 'action' ( (lv_action_15_0= ruleDetailCode ) ) )? otherlv_16= '}' ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4967:1: (otherlv_0= 'Transition' ( (lv_name_1_0= RULE_ID ) )? otherlv_2= ':' ( (lv_from_3_0= ruleTransitionTerminal ) ) otherlv_4= '->' ( (lv_to_5_0= ruleTransitionTerminal ) ) ( (lv_docu_6_0= ruleDocumentation ) )? otherlv_7= '{' otherlv_8= 'triggers' otherlv_9= '{' ( (lv_triggers_10_0= ruleTrigger ) ) (otherlv_11= 'or' ( (lv_triggers_12_0= ruleTrigger ) ) )* otherlv_13= '}' (otherlv_14= 'action' ( (lv_action_15_0= ruleDetailCode ) ) )? otherlv_16= '}' )
             {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4923:1: (otherlv_0= 'Transition' ( (lv_name_1_0= RULE_ID ) )? otherlv_2= ':' ( (lv_from_3_0= ruleTransitionTerminal ) ) otherlv_4= '->' ( (lv_to_5_0= ruleTransitionTerminal ) ) ( (lv_docu_6_0= ruleDocumentation ) )? otherlv_7= '{' otherlv_8= 'triggers' otherlv_9= '{' ( (lv_triggers_10_0= ruleTrigger ) ) (otherlv_11= 'or' ( (lv_triggers_12_0= ruleTrigger ) ) )* otherlv_13= '}' (otherlv_14= 'action' ( (lv_action_15_0= ruleDetailCode ) ) )? otherlv_16= '}' )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4923:3: otherlv_0= 'Transition' ( (lv_name_1_0= RULE_ID ) )? otherlv_2= ':' ( (lv_from_3_0= ruleTransitionTerminal ) ) otherlv_4= '->' ( (lv_to_5_0= ruleTransitionTerminal ) ) ( (lv_docu_6_0= ruleDocumentation ) )? otherlv_7= '{' otherlv_8= 'triggers' otherlv_9= '{' ( (lv_triggers_10_0= ruleTrigger ) ) (otherlv_11= 'or' ( (lv_triggers_12_0= ruleTrigger ) ) )* otherlv_13= '}' (otherlv_14= 'action' ( (lv_action_15_0= ruleDetailCode ) ) )? otherlv_16= '}'
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4967:1: (otherlv_0= 'Transition' ( (lv_name_1_0= RULE_ID ) )? otherlv_2= ':' ( (lv_from_3_0= ruleTransitionTerminal ) ) otherlv_4= '->' ( (lv_to_5_0= ruleTransitionTerminal ) ) ( (lv_docu_6_0= ruleDocumentation ) )? otherlv_7= '{' otherlv_8= 'triggers' otherlv_9= '{' ( (lv_triggers_10_0= ruleTrigger ) ) (otherlv_11= 'or' ( (lv_triggers_12_0= ruleTrigger ) ) )* otherlv_13= '}' (otherlv_14= 'action' ( (lv_action_15_0= ruleDetailCode ) ) )? otherlv_16= '}' )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4967:3: otherlv_0= 'Transition' ( (lv_name_1_0= RULE_ID ) )? otherlv_2= ':' ( (lv_from_3_0= ruleTransitionTerminal ) ) otherlv_4= '->' ( (lv_to_5_0= ruleTransitionTerminal ) ) ( (lv_docu_6_0= ruleDocumentation ) )? otherlv_7= '{' otherlv_8= 'triggers' otherlv_9= '{' ( (lv_triggers_10_0= ruleTrigger ) ) (otherlv_11= 'or' ( (lv_triggers_12_0= ruleTrigger ) ) )* otherlv_13= '}' (otherlv_14= 'action' ( (lv_action_15_0= ruleDetailCode ) ) )? otherlv_16= '}'
             {
-            otherlv_0=(Token)match(input,78,FOLLOW_78_in_ruleTriggeredTransition10154); 
+            otherlv_0=(Token)match(input,79,FOLLOW_79_in_ruleTriggeredTransition10226); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getTriggeredTransitionAccess().getTransitionKeyword_0());
                 
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4927:1: ( (lv_name_1_0= RULE_ID ) )?
-            int alt112=2;
-            int LA112_0 = input.LA(1);
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4971:1: ( (lv_name_1_0= RULE_ID ) )?
+            int alt114=2;
+            int LA114_0 = input.LA(1);
 
-            if ( (LA112_0==RULE_ID) ) {
-                alt112=1;
+            if ( (LA114_0==RULE_ID) ) {
+                alt114=1;
             }
-            switch (alt112) {
+            switch (alt114) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4928:1: (lv_name_1_0= RULE_ID )
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4972:1: (lv_name_1_0= RULE_ID )
                     {
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4928:1: (lv_name_1_0= RULE_ID )
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4929:3: lv_name_1_0= RULE_ID
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4972:1: (lv_name_1_0= RULE_ID )
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4973:3: lv_name_1_0= RULE_ID
                     {
-                    lv_name_1_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleTriggeredTransition10171); 
+                    lv_name_1_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleTriggeredTransition10243); 
 
                     			newLeafNode(lv_name_1_0, grammarAccess.getTriggeredTransitionAccess().getNameIDTerminalRuleCall_1_0()); 
                     		
@@ -12378,20 +12489,20 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_2=(Token)match(input,14,FOLLOW_14_in_ruleTriggeredTransition10189); 
+            otherlv_2=(Token)match(input,14,FOLLOW_14_in_ruleTriggeredTransition10261); 
 
                 	newLeafNode(otherlv_2, grammarAccess.getTriggeredTransitionAccess().getColonKeyword_2());
                 
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4949:1: ( (lv_from_3_0= ruleTransitionTerminal ) )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4950:1: (lv_from_3_0= ruleTransitionTerminal )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4993:1: ( (lv_from_3_0= ruleTransitionTerminal ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4994:1: (lv_from_3_0= ruleTransitionTerminal )
             {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4950:1: (lv_from_3_0= ruleTransitionTerminal )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4951:3: lv_from_3_0= ruleTransitionTerminal
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4994:1: (lv_from_3_0= ruleTransitionTerminal )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4995:3: lv_from_3_0= ruleTransitionTerminal
             {
              
             	        newCompositeNode(grammarAccess.getTriggeredTransitionAccess().getFromTransitionTerminalParserRuleCall_3_0()); 
             	    
-            pushFollow(FOLLOW_ruleTransitionTerminal_in_ruleTriggeredTransition10210);
+            pushFollow(FOLLOW_ruleTransitionTerminal_in_ruleTriggeredTransition10282);
             lv_from_3_0=ruleTransitionTerminal();
 
             state._fsp--;
@@ -12413,20 +12524,20 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_4=(Token)match(input,40,FOLLOW_40_in_ruleTriggeredTransition10222); 
+            otherlv_4=(Token)match(input,40,FOLLOW_40_in_ruleTriggeredTransition10294); 
 
                 	newLeafNode(otherlv_4, grammarAccess.getTriggeredTransitionAccess().getHyphenMinusGreaterThanSignKeyword_4());
                 
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4971:1: ( (lv_to_5_0= ruleTransitionTerminal ) )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4972:1: (lv_to_5_0= ruleTransitionTerminal )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5015:1: ( (lv_to_5_0= ruleTransitionTerminal ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5016:1: (lv_to_5_0= ruleTransitionTerminal )
             {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4972:1: (lv_to_5_0= ruleTransitionTerminal )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4973:3: lv_to_5_0= ruleTransitionTerminal
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5016:1: (lv_to_5_0= ruleTransitionTerminal )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5017:3: lv_to_5_0= ruleTransitionTerminal
             {
              
             	        newCompositeNode(grammarAccess.getTriggeredTransitionAccess().getToTransitionTerminalParserRuleCall_5_0()); 
             	    
-            pushFollow(FOLLOW_ruleTransitionTerminal_in_ruleTriggeredTransition10243);
+            pushFollow(FOLLOW_ruleTransitionTerminal_in_ruleTriggeredTransition10315);
             lv_to_5_0=ruleTransitionTerminal();
 
             state._fsp--;
@@ -12448,24 +12559,24 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4989:2: ( (lv_docu_6_0= ruleDocumentation ) )?
-            int alt113=2;
-            int LA113_0 = input.LA(1);
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5033:2: ( (lv_docu_6_0= ruleDocumentation ) )?
+            int alt115=2;
+            int LA115_0 = input.LA(1);
 
-            if ( (LA113_0==20) ) {
-                alt113=1;
+            if ( (LA115_0==20) ) {
+                alt115=1;
             }
-            switch (alt113) {
+            switch (alt115) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4990:1: (lv_docu_6_0= ruleDocumentation )
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5034:1: (lv_docu_6_0= ruleDocumentation )
                     {
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4990:1: (lv_docu_6_0= ruleDocumentation )
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4991:3: lv_docu_6_0= ruleDocumentation
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5034:1: (lv_docu_6_0= ruleDocumentation )
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5035:3: lv_docu_6_0= ruleDocumentation
                     {
                      
                     	        newCompositeNode(grammarAccess.getTriggeredTransitionAccess().getDocuDocumentationParserRuleCall_6_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleDocumentation_in_ruleTriggeredTransition10264);
+                    pushFollow(FOLLOW_ruleDocumentation_in_ruleTriggeredTransition10336);
                     lv_docu_6_0=ruleDocumentation();
 
                     state._fsp--;
@@ -12490,28 +12601,28 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_7=(Token)match(input,12,FOLLOW_12_in_ruleTriggeredTransition10277); 
+            otherlv_7=(Token)match(input,12,FOLLOW_12_in_ruleTriggeredTransition10349); 
 
                 	newLeafNode(otherlv_7, grammarAccess.getTriggeredTransitionAccess().getLeftCurlyBracketKeyword_7());
                 
-            otherlv_8=(Token)match(input,81,FOLLOW_81_in_ruleTriggeredTransition10289); 
+            otherlv_8=(Token)match(input,82,FOLLOW_82_in_ruleTriggeredTransition10361); 
 
                 	newLeafNode(otherlv_8, grammarAccess.getTriggeredTransitionAccess().getTriggersKeyword_8());
                 
-            otherlv_9=(Token)match(input,12,FOLLOW_12_in_ruleTriggeredTransition10301); 
+            otherlv_9=(Token)match(input,12,FOLLOW_12_in_ruleTriggeredTransition10373); 
 
                 	newLeafNode(otherlv_9, grammarAccess.getTriggeredTransitionAccess().getLeftCurlyBracketKeyword_9());
                 
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5019:1: ( (lv_triggers_10_0= ruleTrigger ) )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5020:1: (lv_triggers_10_0= ruleTrigger )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5063:1: ( (lv_triggers_10_0= ruleTrigger ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5064:1: (lv_triggers_10_0= ruleTrigger )
             {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5020:1: (lv_triggers_10_0= ruleTrigger )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5021:3: lv_triggers_10_0= ruleTrigger
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5064:1: (lv_triggers_10_0= ruleTrigger )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5065:3: lv_triggers_10_0= ruleTrigger
             {
              
             	        newCompositeNode(grammarAccess.getTriggeredTransitionAccess().getTriggersTriggerParserRuleCall_10_0()); 
             	    
-            pushFollow(FOLLOW_ruleTrigger_in_ruleTriggeredTransition10322);
+            pushFollow(FOLLOW_ruleTrigger_in_ruleTriggeredTransition10394);
             lv_triggers_10_0=ruleTrigger();
 
             state._fsp--;
@@ -12533,35 +12644,35 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5037:2: (otherlv_11= 'or' ( (lv_triggers_12_0= ruleTrigger ) ) )*
-            loop114:
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5081:2: (otherlv_11= 'or' ( (lv_triggers_12_0= ruleTrigger ) ) )*
+            loop116:
             do {
-                int alt114=2;
-                int LA114_0 = input.LA(1);
+                int alt116=2;
+                int LA116_0 = input.LA(1);
 
-                if ( (LA114_0==82) ) {
-                    alt114=1;
+                if ( (LA116_0==83) ) {
+                    alt116=1;
                 }
 
 
-                switch (alt114) {
+                switch (alt116) {
             	case 1 :
-            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5037:4: otherlv_11= 'or' ( (lv_triggers_12_0= ruleTrigger ) )
+            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5081:4: otherlv_11= 'or' ( (lv_triggers_12_0= ruleTrigger ) )
             	    {
-            	    otherlv_11=(Token)match(input,82,FOLLOW_82_in_ruleTriggeredTransition10335); 
+            	    otherlv_11=(Token)match(input,83,FOLLOW_83_in_ruleTriggeredTransition10407); 
 
             	        	newLeafNode(otherlv_11, grammarAccess.getTriggeredTransitionAccess().getOrKeyword_11_0());
             	        
-            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5041:1: ( (lv_triggers_12_0= ruleTrigger ) )
-            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5042:1: (lv_triggers_12_0= ruleTrigger )
+            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5085:1: ( (lv_triggers_12_0= ruleTrigger ) )
+            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5086:1: (lv_triggers_12_0= ruleTrigger )
             	    {
-            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5042:1: (lv_triggers_12_0= ruleTrigger )
-            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5043:3: lv_triggers_12_0= ruleTrigger
+            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5086:1: (lv_triggers_12_0= ruleTrigger )
+            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5087:3: lv_triggers_12_0= ruleTrigger
             	    {
             	     
             	    	        newCompositeNode(grammarAccess.getTriggeredTransitionAccess().getTriggersTriggerParserRuleCall_11_1_0()); 
             	    	    
-            	    pushFollow(FOLLOW_ruleTrigger_in_ruleTriggeredTransition10356);
+            	    pushFollow(FOLLOW_ruleTrigger_in_ruleTriggeredTransition10428);
             	    lv_triggers_12_0=ruleTrigger();
 
             	    state._fsp--;
@@ -12588,39 +12699,39 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    break loop114;
+            	    break loop116;
                 }
             } while (true);
 
-            otherlv_13=(Token)match(input,13,FOLLOW_13_in_ruleTriggeredTransition10370); 
+            otherlv_13=(Token)match(input,13,FOLLOW_13_in_ruleTriggeredTransition10442); 
 
                 	newLeafNode(otherlv_13, grammarAccess.getTriggeredTransitionAccess().getRightCurlyBracketKeyword_12());
                 
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5063:1: (otherlv_14= 'action' ( (lv_action_15_0= ruleDetailCode ) ) )?
-            int alt115=2;
-            int LA115_0 = input.LA(1);
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5107:1: (otherlv_14= 'action' ( (lv_action_15_0= ruleDetailCode ) ) )?
+            int alt117=2;
+            int LA117_0 = input.LA(1);
 
-            if ( (LA115_0==80) ) {
-                alt115=1;
+            if ( (LA117_0==81) ) {
+                alt117=1;
             }
-            switch (alt115) {
+            switch (alt117) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5063:3: otherlv_14= 'action' ( (lv_action_15_0= ruleDetailCode ) )
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5107:3: otherlv_14= 'action' ( (lv_action_15_0= ruleDetailCode ) )
                     {
-                    otherlv_14=(Token)match(input,80,FOLLOW_80_in_ruleTriggeredTransition10383); 
+                    otherlv_14=(Token)match(input,81,FOLLOW_81_in_ruleTriggeredTransition10455); 
 
                         	newLeafNode(otherlv_14, grammarAccess.getTriggeredTransitionAccess().getActionKeyword_13_0());
                         
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5067:1: ( (lv_action_15_0= ruleDetailCode ) )
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5068:1: (lv_action_15_0= ruleDetailCode )
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5111:1: ( (lv_action_15_0= ruleDetailCode ) )
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5112:1: (lv_action_15_0= ruleDetailCode )
                     {
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5068:1: (lv_action_15_0= ruleDetailCode )
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5069:3: lv_action_15_0= ruleDetailCode
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5112:1: (lv_action_15_0= ruleDetailCode )
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5113:3: lv_action_15_0= ruleDetailCode
                     {
                      
                     	        newCompositeNode(grammarAccess.getTriggeredTransitionAccess().getActionDetailCodeParserRuleCall_13_1_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleDetailCode_in_ruleTriggeredTransition10404);
+                    pushFollow(FOLLOW_ruleDetailCode_in_ruleTriggeredTransition10476);
                     lv_action_15_0=ruleDetailCode();
 
                     state._fsp--;
@@ -12648,7 +12759,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_16=(Token)match(input,13,FOLLOW_13_in_ruleTriggeredTransition10418); 
+            otherlv_16=(Token)match(input,13,FOLLOW_13_in_ruleTriggeredTransition10490); 
 
                 	newLeafNode(otherlv_16, grammarAccess.getTriggeredTransitionAccess().getRightCurlyBracketKeyword_14());
                 
@@ -12673,7 +12784,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleGuardedTransition"
-    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5097:1: entryRuleGuardedTransition returns [EObject current=null] : iv_ruleGuardedTransition= ruleGuardedTransition EOF ;
+    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5141:1: entryRuleGuardedTransition returns [EObject current=null] : iv_ruleGuardedTransition= ruleGuardedTransition EOF ;
     public final EObject entryRuleGuardedTransition() throws RecognitionException {
         EObject current = null;
 
@@ -12681,17 +12792,17 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5098:2: (iv_ruleGuardedTransition= ruleGuardedTransition EOF )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5099:2: iv_ruleGuardedTransition= ruleGuardedTransition EOF
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5142:2: (iv_ruleGuardedTransition= ruleGuardedTransition EOF )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5143:2: iv_ruleGuardedTransition= ruleGuardedTransition EOF
             {
              newCompositeNode(grammarAccess.getGuardedTransitionRule()); 
-            pushFollow(FOLLOW_ruleGuardedTransition_in_entryRuleGuardedTransition10454);
+            pushFollow(FOLLOW_ruleGuardedTransition_in_entryRuleGuardedTransition10526);
             iv_ruleGuardedTransition=ruleGuardedTransition();
 
             state._fsp--;
 
              current =iv_ruleGuardedTransition; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleGuardedTransition10464); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleGuardedTransition10536); 
 
             }
 
@@ -12709,7 +12820,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleGuardedTransition"
-    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5106:1: ruleGuardedTransition returns [EObject current=null] : (otherlv_0= 'Transition' ( (lv_name_1_0= RULE_ID ) )? otherlv_2= ':' ( (lv_from_3_0= ruleTransitionTerminal ) ) otherlv_4= '->' ( (lv_to_5_0= ruleTransitionTerminal ) ) ( (lv_docu_6_0= ruleDocumentation ) )? otherlv_7= '{' otherlv_8= 'guard' ( (lv_guard_9_0= ruleDetailCode ) ) (otherlv_10= 'action' ( (lv_action_11_0= ruleDetailCode ) ) )? otherlv_12= '}' ) ;
+    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5150:1: ruleGuardedTransition returns [EObject current=null] : (otherlv_0= 'Transition' ( (lv_name_1_0= RULE_ID ) )? otherlv_2= ':' ( (lv_from_3_0= ruleTransitionTerminal ) ) otherlv_4= '->' ( (lv_to_5_0= ruleTransitionTerminal ) ) ( (lv_docu_6_0= ruleDocumentation ) )? otherlv_7= '{' otherlv_8= 'guard' ( (lv_guard_9_0= ruleDetailCode ) ) (otherlv_10= 'action' ( (lv_action_11_0= ruleDetailCode ) ) )? otherlv_12= '}' ) ;
     public final EObject ruleGuardedTransition() throws RecognitionException {
         EObject current = null;
 
@@ -12735,31 +12846,31 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5109:28: ( (otherlv_0= 'Transition' ( (lv_name_1_0= RULE_ID ) )? otherlv_2= ':' ( (lv_from_3_0= ruleTransitionTerminal ) ) otherlv_4= '->' ( (lv_to_5_0= ruleTransitionTerminal ) ) ( (lv_docu_6_0= ruleDocumentation ) )? otherlv_7= '{' otherlv_8= 'guard' ( (lv_guard_9_0= ruleDetailCode ) ) (otherlv_10= 'action' ( (lv_action_11_0= ruleDetailCode ) ) )? otherlv_12= '}' ) )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5110:1: (otherlv_0= 'Transition' ( (lv_name_1_0= RULE_ID ) )? otherlv_2= ':' ( (lv_from_3_0= ruleTransitionTerminal ) ) otherlv_4= '->' ( (lv_to_5_0= ruleTransitionTerminal ) ) ( (lv_docu_6_0= ruleDocumentation ) )? otherlv_7= '{' otherlv_8= 'guard' ( (lv_guard_9_0= ruleDetailCode ) ) (otherlv_10= 'action' ( (lv_action_11_0= ruleDetailCode ) ) )? otherlv_12= '}' )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5153:28: ( (otherlv_0= 'Transition' ( (lv_name_1_0= RULE_ID ) )? otherlv_2= ':' ( (lv_from_3_0= ruleTransitionTerminal ) ) otherlv_4= '->' ( (lv_to_5_0= ruleTransitionTerminal ) ) ( (lv_docu_6_0= ruleDocumentation ) )? otherlv_7= '{' otherlv_8= 'guard' ( (lv_guard_9_0= ruleDetailCode ) ) (otherlv_10= 'action' ( (lv_action_11_0= ruleDetailCode ) ) )? otherlv_12= '}' ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5154:1: (otherlv_0= 'Transition' ( (lv_name_1_0= RULE_ID ) )? otherlv_2= ':' ( (lv_from_3_0= ruleTransitionTerminal ) ) otherlv_4= '->' ( (lv_to_5_0= ruleTransitionTerminal ) ) ( (lv_docu_6_0= ruleDocumentation ) )? otherlv_7= '{' otherlv_8= 'guard' ( (lv_guard_9_0= ruleDetailCode ) ) (otherlv_10= 'action' ( (lv_action_11_0= ruleDetailCode ) ) )? otherlv_12= '}' )
             {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5110:1: (otherlv_0= 'Transition' ( (lv_name_1_0= RULE_ID ) )? otherlv_2= ':' ( (lv_from_3_0= ruleTransitionTerminal ) ) otherlv_4= '->' ( (lv_to_5_0= ruleTransitionTerminal ) ) ( (lv_docu_6_0= ruleDocumentation ) )? otherlv_7= '{' otherlv_8= 'guard' ( (lv_guard_9_0= ruleDetailCode ) ) (otherlv_10= 'action' ( (lv_action_11_0= ruleDetailCode ) ) )? otherlv_12= '}' )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5110:3: otherlv_0= 'Transition' ( (lv_name_1_0= RULE_ID ) )? otherlv_2= ':' ( (lv_from_3_0= ruleTransitionTerminal ) ) otherlv_4= '->' ( (lv_to_5_0= ruleTransitionTerminal ) ) ( (lv_docu_6_0= ruleDocumentation ) )? otherlv_7= '{' otherlv_8= 'guard' ( (lv_guard_9_0= ruleDetailCode ) ) (otherlv_10= 'action' ( (lv_action_11_0= ruleDetailCode ) ) )? otherlv_12= '}'
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5154:1: (otherlv_0= 'Transition' ( (lv_name_1_0= RULE_ID ) )? otherlv_2= ':' ( (lv_from_3_0= ruleTransitionTerminal ) ) otherlv_4= '->' ( (lv_to_5_0= ruleTransitionTerminal ) ) ( (lv_docu_6_0= ruleDocumentation ) )? otherlv_7= '{' otherlv_8= 'guard' ( (lv_guard_9_0= ruleDetailCode ) ) (otherlv_10= 'action' ( (lv_action_11_0= ruleDetailCode ) ) )? otherlv_12= '}' )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5154:3: otherlv_0= 'Transition' ( (lv_name_1_0= RULE_ID ) )? otherlv_2= ':' ( (lv_from_3_0= ruleTransitionTerminal ) ) otherlv_4= '->' ( (lv_to_5_0= ruleTransitionTerminal ) ) ( (lv_docu_6_0= ruleDocumentation ) )? otherlv_7= '{' otherlv_8= 'guard' ( (lv_guard_9_0= ruleDetailCode ) ) (otherlv_10= 'action' ( (lv_action_11_0= ruleDetailCode ) ) )? otherlv_12= '}'
             {
-            otherlv_0=(Token)match(input,78,FOLLOW_78_in_ruleGuardedTransition10501); 
+            otherlv_0=(Token)match(input,79,FOLLOW_79_in_ruleGuardedTransition10573); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getGuardedTransitionAccess().getTransitionKeyword_0());
                 
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5114:1: ( (lv_name_1_0= RULE_ID ) )?
-            int alt116=2;
-            int LA116_0 = input.LA(1);
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5158:1: ( (lv_name_1_0= RULE_ID ) )?
+            int alt118=2;
+            int LA118_0 = input.LA(1);
 
-            if ( (LA116_0==RULE_ID) ) {
-                alt116=1;
+            if ( (LA118_0==RULE_ID) ) {
+                alt118=1;
             }
-            switch (alt116) {
+            switch (alt118) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5115:1: (lv_name_1_0= RULE_ID )
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5159:1: (lv_name_1_0= RULE_ID )
                     {
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5115:1: (lv_name_1_0= RULE_ID )
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5116:3: lv_name_1_0= RULE_ID
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5159:1: (lv_name_1_0= RULE_ID )
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5160:3: lv_name_1_0= RULE_ID
                     {
-                    lv_name_1_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleGuardedTransition10518); 
+                    lv_name_1_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleGuardedTransition10590); 
 
                     			newLeafNode(lv_name_1_0, grammarAccess.getGuardedTransitionAccess().getNameIDTerminalRuleCall_1_0()); 
                     		
@@ -12782,20 +12893,20 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_2=(Token)match(input,14,FOLLOW_14_in_ruleGuardedTransition10536); 
+            otherlv_2=(Token)match(input,14,FOLLOW_14_in_ruleGuardedTransition10608); 
 
                 	newLeafNode(otherlv_2, grammarAccess.getGuardedTransitionAccess().getColonKeyword_2());
                 
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5136:1: ( (lv_from_3_0= ruleTransitionTerminal ) )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5137:1: (lv_from_3_0= ruleTransitionTerminal )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5180:1: ( (lv_from_3_0= ruleTransitionTerminal ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5181:1: (lv_from_3_0= ruleTransitionTerminal )
             {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5137:1: (lv_from_3_0= ruleTransitionTerminal )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5138:3: lv_from_3_0= ruleTransitionTerminal
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5181:1: (lv_from_3_0= ruleTransitionTerminal )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5182:3: lv_from_3_0= ruleTransitionTerminal
             {
              
             	        newCompositeNode(grammarAccess.getGuardedTransitionAccess().getFromTransitionTerminalParserRuleCall_3_0()); 
             	    
-            pushFollow(FOLLOW_ruleTransitionTerminal_in_ruleGuardedTransition10557);
+            pushFollow(FOLLOW_ruleTransitionTerminal_in_ruleGuardedTransition10629);
             lv_from_3_0=ruleTransitionTerminal();
 
             state._fsp--;
@@ -12817,20 +12928,20 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_4=(Token)match(input,40,FOLLOW_40_in_ruleGuardedTransition10569); 
+            otherlv_4=(Token)match(input,40,FOLLOW_40_in_ruleGuardedTransition10641); 
 
                 	newLeafNode(otherlv_4, grammarAccess.getGuardedTransitionAccess().getHyphenMinusGreaterThanSignKeyword_4());
                 
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5158:1: ( (lv_to_5_0= ruleTransitionTerminal ) )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5159:1: (lv_to_5_0= ruleTransitionTerminal )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5202:1: ( (lv_to_5_0= ruleTransitionTerminal ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5203:1: (lv_to_5_0= ruleTransitionTerminal )
             {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5159:1: (lv_to_5_0= ruleTransitionTerminal )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5160:3: lv_to_5_0= ruleTransitionTerminal
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5203:1: (lv_to_5_0= ruleTransitionTerminal )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5204:3: lv_to_5_0= ruleTransitionTerminal
             {
              
             	        newCompositeNode(grammarAccess.getGuardedTransitionAccess().getToTransitionTerminalParserRuleCall_5_0()); 
             	    
-            pushFollow(FOLLOW_ruleTransitionTerminal_in_ruleGuardedTransition10590);
+            pushFollow(FOLLOW_ruleTransitionTerminal_in_ruleGuardedTransition10662);
             lv_to_5_0=ruleTransitionTerminal();
 
             state._fsp--;
@@ -12852,24 +12963,24 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5176:2: ( (lv_docu_6_0= ruleDocumentation ) )?
-            int alt117=2;
-            int LA117_0 = input.LA(1);
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5220:2: ( (lv_docu_6_0= ruleDocumentation ) )?
+            int alt119=2;
+            int LA119_0 = input.LA(1);
 
-            if ( (LA117_0==20) ) {
-                alt117=1;
+            if ( (LA119_0==20) ) {
+                alt119=1;
             }
-            switch (alt117) {
+            switch (alt119) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5177:1: (lv_docu_6_0= ruleDocumentation )
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5221:1: (lv_docu_6_0= ruleDocumentation )
                     {
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5177:1: (lv_docu_6_0= ruleDocumentation )
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5178:3: lv_docu_6_0= ruleDocumentation
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5221:1: (lv_docu_6_0= ruleDocumentation )
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5222:3: lv_docu_6_0= ruleDocumentation
                     {
                      
                     	        newCompositeNode(grammarAccess.getGuardedTransitionAccess().getDocuDocumentationParserRuleCall_6_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleDocumentation_in_ruleGuardedTransition10611);
+                    pushFollow(FOLLOW_ruleDocumentation_in_ruleGuardedTransition10683);
                     lv_docu_6_0=ruleDocumentation();
 
                     state._fsp--;
@@ -12894,24 +13005,24 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_7=(Token)match(input,12,FOLLOW_12_in_ruleGuardedTransition10624); 
+            otherlv_7=(Token)match(input,12,FOLLOW_12_in_ruleGuardedTransition10696); 
 
                 	newLeafNode(otherlv_7, grammarAccess.getGuardedTransitionAccess().getLeftCurlyBracketKeyword_7());
                 
-            otherlv_8=(Token)match(input,83,FOLLOW_83_in_ruleGuardedTransition10636); 
+            otherlv_8=(Token)match(input,84,FOLLOW_84_in_ruleGuardedTransition10708); 
 
                 	newLeafNode(otherlv_8, grammarAccess.getGuardedTransitionAccess().getGuardKeyword_8());
                 
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5202:1: ( (lv_guard_9_0= ruleDetailCode ) )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5203:1: (lv_guard_9_0= ruleDetailCode )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5246:1: ( (lv_guard_9_0= ruleDetailCode ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5247:1: (lv_guard_9_0= ruleDetailCode )
             {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5203:1: (lv_guard_9_0= ruleDetailCode )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5204:3: lv_guard_9_0= ruleDetailCode
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5247:1: (lv_guard_9_0= ruleDetailCode )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5248:3: lv_guard_9_0= ruleDetailCode
             {
              
             	        newCompositeNode(grammarAccess.getGuardedTransitionAccess().getGuardDetailCodeParserRuleCall_9_0()); 
             	    
-            pushFollow(FOLLOW_ruleDetailCode_in_ruleGuardedTransition10657);
+            pushFollow(FOLLOW_ruleDetailCode_in_ruleGuardedTransition10729);
             lv_guard_9_0=ruleDetailCode();
 
             state._fsp--;
@@ -12933,31 +13044,31 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5220:2: (otherlv_10= 'action' ( (lv_action_11_0= ruleDetailCode ) ) )?
-            int alt118=2;
-            int LA118_0 = input.LA(1);
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5264:2: (otherlv_10= 'action' ( (lv_action_11_0= ruleDetailCode ) ) )?
+            int alt120=2;
+            int LA120_0 = input.LA(1);
 
-            if ( (LA118_0==80) ) {
-                alt118=1;
+            if ( (LA120_0==81) ) {
+                alt120=1;
             }
-            switch (alt118) {
+            switch (alt120) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5220:4: otherlv_10= 'action' ( (lv_action_11_0= ruleDetailCode ) )
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5264:4: otherlv_10= 'action' ( (lv_action_11_0= ruleDetailCode ) )
                     {
-                    otherlv_10=(Token)match(input,80,FOLLOW_80_in_ruleGuardedTransition10670); 
+                    otherlv_10=(Token)match(input,81,FOLLOW_81_in_ruleGuardedTransition10742); 
 
                         	newLeafNode(otherlv_10, grammarAccess.getGuardedTransitionAccess().getActionKeyword_10_0());
                         
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5224:1: ( (lv_action_11_0= ruleDetailCode ) )
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5225:1: (lv_action_11_0= ruleDetailCode )
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5268:1: ( (lv_action_11_0= ruleDetailCode ) )
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5269:1: (lv_action_11_0= ruleDetailCode )
                     {
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5225:1: (lv_action_11_0= ruleDetailCode )
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5226:3: lv_action_11_0= ruleDetailCode
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5269:1: (lv_action_11_0= ruleDetailCode )
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5270:3: lv_action_11_0= ruleDetailCode
                     {
                      
                     	        newCompositeNode(grammarAccess.getGuardedTransitionAccess().getActionDetailCodeParserRuleCall_10_1_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleDetailCode_in_ruleGuardedTransition10691);
+                    pushFollow(FOLLOW_ruleDetailCode_in_ruleGuardedTransition10763);
                     lv_action_11_0=ruleDetailCode();
 
                     state._fsp--;
@@ -12985,7 +13096,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_12=(Token)match(input,13,FOLLOW_13_in_ruleGuardedTransition10705); 
+            otherlv_12=(Token)match(input,13,FOLLOW_13_in_ruleGuardedTransition10777); 
 
                 	newLeafNode(otherlv_12, grammarAccess.getGuardedTransitionAccess().getRightCurlyBracketKeyword_11());
                 
@@ -13010,7 +13121,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleCPBranchTransition"
-    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5254:1: entryRuleCPBranchTransition returns [EObject current=null] : iv_ruleCPBranchTransition= ruleCPBranchTransition EOF ;
+    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5298:1: entryRuleCPBranchTransition returns [EObject current=null] : iv_ruleCPBranchTransition= ruleCPBranchTransition EOF ;
     public final EObject entryRuleCPBranchTransition() throws RecognitionException {
         EObject current = null;
 
@@ -13018,17 +13129,17 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5255:2: (iv_ruleCPBranchTransition= ruleCPBranchTransition EOF )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5256:2: iv_ruleCPBranchTransition= ruleCPBranchTransition EOF
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5299:2: (iv_ruleCPBranchTransition= ruleCPBranchTransition EOF )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5300:2: iv_ruleCPBranchTransition= ruleCPBranchTransition EOF
             {
              newCompositeNode(grammarAccess.getCPBranchTransitionRule()); 
-            pushFollow(FOLLOW_ruleCPBranchTransition_in_entryRuleCPBranchTransition10741);
+            pushFollow(FOLLOW_ruleCPBranchTransition_in_entryRuleCPBranchTransition10813);
             iv_ruleCPBranchTransition=ruleCPBranchTransition();
 
             state._fsp--;
 
              current =iv_ruleCPBranchTransition; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleCPBranchTransition10751); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleCPBranchTransition10823); 
 
             }
 
@@ -13046,7 +13157,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleCPBranchTransition"
-    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5263:1: ruleCPBranchTransition returns [EObject current=null] : (otherlv_0= 'Transition' ( (lv_name_1_0= RULE_ID ) )? otherlv_2= ':' ( (lv_from_3_0= ruleTransitionTerminal ) ) otherlv_4= '->' ( (lv_to_5_0= ruleTransitionTerminal ) ) ( (lv_docu_6_0= ruleDocumentation ) )? otherlv_7= '{' otherlv_8= 'cond' ( (lv_condition_9_0= ruleDetailCode ) ) (otherlv_10= 'action' ( (lv_action_11_0= ruleDetailCode ) ) )? otherlv_12= '}' ) ;
+    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5307:1: ruleCPBranchTransition returns [EObject current=null] : (otherlv_0= 'Transition' ( (lv_name_1_0= RULE_ID ) )? otherlv_2= ':' ( (lv_from_3_0= ruleTransitionTerminal ) ) otherlv_4= '->' ( (lv_to_5_0= ruleTransitionTerminal ) ) ( (lv_docu_6_0= ruleDocumentation ) )? otherlv_7= '{' otherlv_8= 'cond' ( (lv_condition_9_0= ruleDetailCode ) ) (otherlv_10= 'action' ( (lv_action_11_0= ruleDetailCode ) ) )? otherlv_12= '}' ) ;
     public final EObject ruleCPBranchTransition() throws RecognitionException {
         EObject current = null;
 
@@ -13072,31 +13183,31 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5266:28: ( (otherlv_0= 'Transition' ( (lv_name_1_0= RULE_ID ) )? otherlv_2= ':' ( (lv_from_3_0= ruleTransitionTerminal ) ) otherlv_4= '->' ( (lv_to_5_0= ruleTransitionTerminal ) ) ( (lv_docu_6_0= ruleDocumentation ) )? otherlv_7= '{' otherlv_8= 'cond' ( (lv_condition_9_0= ruleDetailCode ) ) (otherlv_10= 'action' ( (lv_action_11_0= ruleDetailCode ) ) )? otherlv_12= '}' ) )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5267:1: (otherlv_0= 'Transition' ( (lv_name_1_0= RULE_ID ) )? otherlv_2= ':' ( (lv_from_3_0= ruleTransitionTerminal ) ) otherlv_4= '->' ( (lv_to_5_0= ruleTransitionTerminal ) ) ( (lv_docu_6_0= ruleDocumentation ) )? otherlv_7= '{' otherlv_8= 'cond' ( (lv_condition_9_0= ruleDetailCode ) ) (otherlv_10= 'action' ( (lv_action_11_0= ruleDetailCode ) ) )? otherlv_12= '}' )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5310:28: ( (otherlv_0= 'Transition' ( (lv_name_1_0= RULE_ID ) )? otherlv_2= ':' ( (lv_from_3_0= ruleTransitionTerminal ) ) otherlv_4= '->' ( (lv_to_5_0= ruleTransitionTerminal ) ) ( (lv_docu_6_0= ruleDocumentation ) )? otherlv_7= '{' otherlv_8= 'cond' ( (lv_condition_9_0= ruleDetailCode ) ) (otherlv_10= 'action' ( (lv_action_11_0= ruleDetailCode ) ) )? otherlv_12= '}' ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5311:1: (otherlv_0= 'Transition' ( (lv_name_1_0= RULE_ID ) )? otherlv_2= ':' ( (lv_from_3_0= ruleTransitionTerminal ) ) otherlv_4= '->' ( (lv_to_5_0= ruleTransitionTerminal ) ) ( (lv_docu_6_0= ruleDocumentation ) )? otherlv_7= '{' otherlv_8= 'cond' ( (lv_condition_9_0= ruleDetailCode ) ) (otherlv_10= 'action' ( (lv_action_11_0= ruleDetailCode ) ) )? otherlv_12= '}' )
             {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5267:1: (otherlv_0= 'Transition' ( (lv_name_1_0= RULE_ID ) )? otherlv_2= ':' ( (lv_from_3_0= ruleTransitionTerminal ) ) otherlv_4= '->' ( (lv_to_5_0= ruleTransitionTerminal ) ) ( (lv_docu_6_0= ruleDocumentation ) )? otherlv_7= '{' otherlv_8= 'cond' ( (lv_condition_9_0= ruleDetailCode ) ) (otherlv_10= 'action' ( (lv_action_11_0= ruleDetailCode ) ) )? otherlv_12= '}' )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5267:3: otherlv_0= 'Transition' ( (lv_name_1_0= RULE_ID ) )? otherlv_2= ':' ( (lv_from_3_0= ruleTransitionTerminal ) ) otherlv_4= '->' ( (lv_to_5_0= ruleTransitionTerminal ) ) ( (lv_docu_6_0= ruleDocumentation ) )? otherlv_7= '{' otherlv_8= 'cond' ( (lv_condition_9_0= ruleDetailCode ) ) (otherlv_10= 'action' ( (lv_action_11_0= ruleDetailCode ) ) )? otherlv_12= '}'
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5311:1: (otherlv_0= 'Transition' ( (lv_name_1_0= RULE_ID ) )? otherlv_2= ':' ( (lv_from_3_0= ruleTransitionTerminal ) ) otherlv_4= '->' ( (lv_to_5_0= ruleTransitionTerminal ) ) ( (lv_docu_6_0= ruleDocumentation ) )? otherlv_7= '{' otherlv_8= 'cond' ( (lv_condition_9_0= ruleDetailCode ) ) (otherlv_10= 'action' ( (lv_action_11_0= ruleDetailCode ) ) )? otherlv_12= '}' )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5311:3: otherlv_0= 'Transition' ( (lv_name_1_0= RULE_ID ) )? otherlv_2= ':' ( (lv_from_3_0= ruleTransitionTerminal ) ) otherlv_4= '->' ( (lv_to_5_0= ruleTransitionTerminal ) ) ( (lv_docu_6_0= ruleDocumentation ) )? otherlv_7= '{' otherlv_8= 'cond' ( (lv_condition_9_0= ruleDetailCode ) ) (otherlv_10= 'action' ( (lv_action_11_0= ruleDetailCode ) ) )? otherlv_12= '}'
             {
-            otherlv_0=(Token)match(input,78,FOLLOW_78_in_ruleCPBranchTransition10788); 
+            otherlv_0=(Token)match(input,79,FOLLOW_79_in_ruleCPBranchTransition10860); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getCPBranchTransitionAccess().getTransitionKeyword_0());
                 
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5271:1: ( (lv_name_1_0= RULE_ID ) )?
-            int alt119=2;
-            int LA119_0 = input.LA(1);
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5315:1: ( (lv_name_1_0= RULE_ID ) )?
+            int alt121=2;
+            int LA121_0 = input.LA(1);
 
-            if ( (LA119_0==RULE_ID) ) {
-                alt119=1;
+            if ( (LA121_0==RULE_ID) ) {
+                alt121=1;
             }
-            switch (alt119) {
+            switch (alt121) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5272:1: (lv_name_1_0= RULE_ID )
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5316:1: (lv_name_1_0= RULE_ID )
                     {
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5272:1: (lv_name_1_0= RULE_ID )
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5273:3: lv_name_1_0= RULE_ID
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5316:1: (lv_name_1_0= RULE_ID )
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5317:3: lv_name_1_0= RULE_ID
                     {
-                    lv_name_1_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleCPBranchTransition10805); 
+                    lv_name_1_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleCPBranchTransition10877); 
 
                     			newLeafNode(lv_name_1_0, grammarAccess.getCPBranchTransitionAccess().getNameIDTerminalRuleCall_1_0()); 
                     		
@@ -13119,20 +13230,20 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_2=(Token)match(input,14,FOLLOW_14_in_ruleCPBranchTransition10823); 
+            otherlv_2=(Token)match(input,14,FOLLOW_14_in_ruleCPBranchTransition10895); 
 
                 	newLeafNode(otherlv_2, grammarAccess.getCPBranchTransitionAccess().getColonKeyword_2());
                 
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5293:1: ( (lv_from_3_0= ruleTransitionTerminal ) )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5294:1: (lv_from_3_0= ruleTransitionTerminal )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5337:1: ( (lv_from_3_0= ruleTransitionTerminal ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5338:1: (lv_from_3_0= ruleTransitionTerminal )
             {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5294:1: (lv_from_3_0= ruleTransitionTerminal )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5295:3: lv_from_3_0= ruleTransitionTerminal
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5338:1: (lv_from_3_0= ruleTransitionTerminal )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5339:3: lv_from_3_0= ruleTransitionTerminal
             {
              
             	        newCompositeNode(grammarAccess.getCPBranchTransitionAccess().getFromTransitionTerminalParserRuleCall_3_0()); 
             	    
-            pushFollow(FOLLOW_ruleTransitionTerminal_in_ruleCPBranchTransition10844);
+            pushFollow(FOLLOW_ruleTransitionTerminal_in_ruleCPBranchTransition10916);
             lv_from_3_0=ruleTransitionTerminal();
 
             state._fsp--;
@@ -13154,20 +13265,20 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_4=(Token)match(input,40,FOLLOW_40_in_ruleCPBranchTransition10856); 
+            otherlv_4=(Token)match(input,40,FOLLOW_40_in_ruleCPBranchTransition10928); 
 
                 	newLeafNode(otherlv_4, grammarAccess.getCPBranchTransitionAccess().getHyphenMinusGreaterThanSignKeyword_4());
                 
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5315:1: ( (lv_to_5_0= ruleTransitionTerminal ) )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5316:1: (lv_to_5_0= ruleTransitionTerminal )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5359:1: ( (lv_to_5_0= ruleTransitionTerminal ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5360:1: (lv_to_5_0= ruleTransitionTerminal )
             {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5316:1: (lv_to_5_0= ruleTransitionTerminal )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5317:3: lv_to_5_0= ruleTransitionTerminal
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5360:1: (lv_to_5_0= ruleTransitionTerminal )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5361:3: lv_to_5_0= ruleTransitionTerminal
             {
              
             	        newCompositeNode(grammarAccess.getCPBranchTransitionAccess().getToTransitionTerminalParserRuleCall_5_0()); 
             	    
-            pushFollow(FOLLOW_ruleTransitionTerminal_in_ruleCPBranchTransition10877);
+            pushFollow(FOLLOW_ruleTransitionTerminal_in_ruleCPBranchTransition10949);
             lv_to_5_0=ruleTransitionTerminal();
 
             state._fsp--;
@@ -13189,24 +13300,24 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5333:2: ( (lv_docu_6_0= ruleDocumentation ) )?
-            int alt120=2;
-            int LA120_0 = input.LA(1);
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5377:2: ( (lv_docu_6_0= ruleDocumentation ) )?
+            int alt122=2;
+            int LA122_0 = input.LA(1);
 
-            if ( (LA120_0==20) ) {
-                alt120=1;
+            if ( (LA122_0==20) ) {
+                alt122=1;
             }
-            switch (alt120) {
+            switch (alt122) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5334:1: (lv_docu_6_0= ruleDocumentation )
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5378:1: (lv_docu_6_0= ruleDocumentation )
                     {
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5334:1: (lv_docu_6_0= ruleDocumentation )
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5335:3: lv_docu_6_0= ruleDocumentation
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5378:1: (lv_docu_6_0= ruleDocumentation )
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5379:3: lv_docu_6_0= ruleDocumentation
                     {
                      
                     	        newCompositeNode(grammarAccess.getCPBranchTransitionAccess().getDocuDocumentationParserRuleCall_6_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleDocumentation_in_ruleCPBranchTransition10898);
+                    pushFollow(FOLLOW_ruleDocumentation_in_ruleCPBranchTransition10970);
                     lv_docu_6_0=ruleDocumentation();
 
                     state._fsp--;
@@ -13231,24 +13342,24 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_7=(Token)match(input,12,FOLLOW_12_in_ruleCPBranchTransition10911); 
+            otherlv_7=(Token)match(input,12,FOLLOW_12_in_ruleCPBranchTransition10983); 
 
                 	newLeafNode(otherlv_7, grammarAccess.getCPBranchTransitionAccess().getLeftCurlyBracketKeyword_7());
                 
-            otherlv_8=(Token)match(input,84,FOLLOW_84_in_ruleCPBranchTransition10923); 
+            otherlv_8=(Token)match(input,85,FOLLOW_85_in_ruleCPBranchTransition10995); 
 
                 	newLeafNode(otherlv_8, grammarAccess.getCPBranchTransitionAccess().getCondKeyword_8());
                 
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5359:1: ( (lv_condition_9_0= ruleDetailCode ) )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5360:1: (lv_condition_9_0= ruleDetailCode )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5403:1: ( (lv_condition_9_0= ruleDetailCode ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5404:1: (lv_condition_9_0= ruleDetailCode )
             {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5360:1: (lv_condition_9_0= ruleDetailCode )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5361:3: lv_condition_9_0= ruleDetailCode
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5404:1: (lv_condition_9_0= ruleDetailCode )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5405:3: lv_condition_9_0= ruleDetailCode
             {
              
             	        newCompositeNode(grammarAccess.getCPBranchTransitionAccess().getConditionDetailCodeParserRuleCall_9_0()); 
             	    
-            pushFollow(FOLLOW_ruleDetailCode_in_ruleCPBranchTransition10944);
+            pushFollow(FOLLOW_ruleDetailCode_in_ruleCPBranchTransition11016);
             lv_condition_9_0=ruleDetailCode();
 
             state._fsp--;
@@ -13270,31 +13381,31 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5377:2: (otherlv_10= 'action' ( (lv_action_11_0= ruleDetailCode ) ) )?
-            int alt121=2;
-            int LA121_0 = input.LA(1);
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5421:2: (otherlv_10= 'action' ( (lv_action_11_0= ruleDetailCode ) ) )?
+            int alt123=2;
+            int LA123_0 = input.LA(1);
 
-            if ( (LA121_0==80) ) {
-                alt121=1;
+            if ( (LA123_0==81) ) {
+                alt123=1;
             }
-            switch (alt121) {
+            switch (alt123) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5377:4: otherlv_10= 'action' ( (lv_action_11_0= ruleDetailCode ) )
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5421:4: otherlv_10= 'action' ( (lv_action_11_0= ruleDetailCode ) )
                     {
-                    otherlv_10=(Token)match(input,80,FOLLOW_80_in_ruleCPBranchTransition10957); 
+                    otherlv_10=(Token)match(input,81,FOLLOW_81_in_ruleCPBranchTransition11029); 
 
                         	newLeafNode(otherlv_10, grammarAccess.getCPBranchTransitionAccess().getActionKeyword_10_0());
                         
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5381:1: ( (lv_action_11_0= ruleDetailCode ) )
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5382:1: (lv_action_11_0= ruleDetailCode )
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5425:1: ( (lv_action_11_0= ruleDetailCode ) )
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5426:1: (lv_action_11_0= ruleDetailCode )
                     {
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5382:1: (lv_action_11_0= ruleDetailCode )
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5383:3: lv_action_11_0= ruleDetailCode
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5426:1: (lv_action_11_0= ruleDetailCode )
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5427:3: lv_action_11_0= ruleDetailCode
                     {
                      
                     	        newCompositeNode(grammarAccess.getCPBranchTransitionAccess().getActionDetailCodeParserRuleCall_10_1_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleDetailCode_in_ruleCPBranchTransition10978);
+                    pushFollow(FOLLOW_ruleDetailCode_in_ruleCPBranchTransition11050);
                     lv_action_11_0=ruleDetailCode();
 
                     state._fsp--;
@@ -13322,7 +13433,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_12=(Token)match(input,13,FOLLOW_13_in_ruleCPBranchTransition10992); 
+            otherlv_12=(Token)match(input,13,FOLLOW_13_in_ruleCPBranchTransition11064); 
 
                 	newLeafNode(otherlv_12, grammarAccess.getCPBranchTransitionAccess().getRightCurlyBracketKeyword_11());
                 
@@ -13347,7 +13458,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleTransitionTerminal"
-    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5411:1: entryRuleTransitionTerminal returns [EObject current=null] : iv_ruleTransitionTerminal= ruleTransitionTerminal EOF ;
+    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5455:1: entryRuleTransitionTerminal returns [EObject current=null] : iv_ruleTransitionTerminal= ruleTransitionTerminal EOF ;
     public final EObject entryRuleTransitionTerminal() throws RecognitionException {
         EObject current = null;
 
@@ -13355,17 +13466,17 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5412:2: (iv_ruleTransitionTerminal= ruleTransitionTerminal EOF )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5413:2: iv_ruleTransitionTerminal= ruleTransitionTerminal EOF
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5456:2: (iv_ruleTransitionTerminal= ruleTransitionTerminal EOF )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5457:2: iv_ruleTransitionTerminal= ruleTransitionTerminal EOF
             {
              newCompositeNode(grammarAccess.getTransitionTerminalRule()); 
-            pushFollow(FOLLOW_ruleTransitionTerminal_in_entryRuleTransitionTerminal11028);
+            pushFollow(FOLLOW_ruleTransitionTerminal_in_entryRuleTransitionTerminal11100);
             iv_ruleTransitionTerminal=ruleTransitionTerminal();
 
             state._fsp--;
 
              current =iv_ruleTransitionTerminal; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleTransitionTerminal11038); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleTransitionTerminal11110); 
 
             }
 
@@ -13383,7 +13494,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleTransitionTerminal"
-    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5420:1: ruleTransitionTerminal returns [EObject current=null] : (this_StateTerminal_0= ruleStateTerminal | this_TrPointTerminal_1= ruleTrPointTerminal | this_SubStateTrPointTerminal_2= ruleSubStateTrPointTerminal | this_ChoicepointTerminal_3= ruleChoicepointTerminal ) ;
+    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5464:1: ruleTransitionTerminal returns [EObject current=null] : (this_StateTerminal_0= ruleStateTerminal | this_TrPointTerminal_1= ruleTrPointTerminal | this_SubStateTrPointTerminal_2= ruleSubStateTrPointTerminal | this_ChoicepointTerminal_3= ruleChoicepointTerminal ) ;
     public final EObject ruleTransitionTerminal() throws RecognitionException {
         EObject current = null;
 
@@ -13399,55 +13510,55 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5423:28: ( (this_StateTerminal_0= ruleStateTerminal | this_TrPointTerminal_1= ruleTrPointTerminal | this_SubStateTrPointTerminal_2= ruleSubStateTrPointTerminal | this_ChoicepointTerminal_3= ruleChoicepointTerminal ) )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5424:1: (this_StateTerminal_0= ruleStateTerminal | this_TrPointTerminal_1= ruleTrPointTerminal | this_SubStateTrPointTerminal_2= ruleSubStateTrPointTerminal | this_ChoicepointTerminal_3= ruleChoicepointTerminal )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5467:28: ( (this_StateTerminal_0= ruleStateTerminal | this_TrPointTerminal_1= ruleTrPointTerminal | this_SubStateTrPointTerminal_2= ruleSubStateTrPointTerminal | this_ChoicepointTerminal_3= ruleChoicepointTerminal ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5468:1: (this_StateTerminal_0= ruleStateTerminal | this_TrPointTerminal_1= ruleTrPointTerminal | this_SubStateTrPointTerminal_2= ruleSubStateTrPointTerminal | this_ChoicepointTerminal_3= ruleChoicepointTerminal )
             {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5424:1: (this_StateTerminal_0= ruleStateTerminal | this_TrPointTerminal_1= ruleTrPointTerminal | this_SubStateTrPointTerminal_2= ruleSubStateTrPointTerminal | this_ChoicepointTerminal_3= ruleChoicepointTerminal )
-            int alt122=4;
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5468:1: (this_StateTerminal_0= ruleStateTerminal | this_TrPointTerminal_1= ruleTrPointTerminal | this_SubStateTrPointTerminal_2= ruleSubStateTrPointTerminal | this_ChoicepointTerminal_3= ruleChoicepointTerminal )
+            int alt124=4;
             switch ( input.LA(1) ) {
             case RULE_ID:
                 {
-                int LA122_1 = input.LA(2);
+                int LA124_1 = input.LA(2);
 
-                if ( (LA122_1==EOF||(LA122_1>=12 && LA122_1<=13)||LA122_1==20||LA122_1==40||LA122_1==68||(LA122_1>=72 && LA122_1<=78)) ) {
-                    alt122=1;
+                if ( (LA124_1==EOF||(LA124_1>=12 && LA124_1<=13)||LA124_1==20||LA124_1==40||LA124_1==68||(LA124_1>=73 && LA124_1<=79)) ) {
+                    alt124=1;
                 }
-                else if ( (LA122_1==53) ) {
-                    alt122=3;
+                else if ( (LA124_1==53) ) {
+                    alt124=3;
                 }
                 else {
                     NoViableAltException nvae =
-                        new NoViableAltException("", 122, 1, input);
+                        new NoViableAltException("", 124, 1, input);
 
                     throw nvae;
                 }
                 }
                 break;
-            case 85:
-                {
-                alt122=2;
-                }
-                break;
             case 86:
                 {
-                alt122=4;
+                alt124=2;
+                }
+                break;
+            case 87:
+                {
+                alt124=4;
                 }
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("", 122, 0, input);
+                    new NoViableAltException("", 124, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt122) {
+            switch (alt124) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5425:5: this_StateTerminal_0= ruleStateTerminal
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5469:5: this_StateTerminal_0= ruleStateTerminal
                     {
                      
                             newCompositeNode(grammarAccess.getTransitionTerminalAccess().getStateTerminalParserRuleCall_0()); 
                         
-                    pushFollow(FOLLOW_ruleStateTerminal_in_ruleTransitionTerminal11085);
+                    pushFollow(FOLLOW_ruleStateTerminal_in_ruleTransitionTerminal11157);
                     this_StateTerminal_0=ruleStateTerminal();
 
                     state._fsp--;
@@ -13460,12 +13571,12 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5435:5: this_TrPointTerminal_1= ruleTrPointTerminal
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5479:5: this_TrPointTerminal_1= ruleTrPointTerminal
                     {
                      
                             newCompositeNode(grammarAccess.getTransitionTerminalAccess().getTrPointTerminalParserRuleCall_1()); 
                         
-                    pushFollow(FOLLOW_ruleTrPointTerminal_in_ruleTransitionTerminal11112);
+                    pushFollow(FOLLOW_ruleTrPointTerminal_in_ruleTransitionTerminal11184);
                     this_TrPointTerminal_1=ruleTrPointTerminal();
 
                     state._fsp--;
@@ -13478,12 +13589,12 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5445:5: this_SubStateTrPointTerminal_2= ruleSubStateTrPointTerminal
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5489:5: this_SubStateTrPointTerminal_2= ruleSubStateTrPointTerminal
                     {
                      
                             newCompositeNode(grammarAccess.getTransitionTerminalAccess().getSubStateTrPointTerminalParserRuleCall_2()); 
                         
-                    pushFollow(FOLLOW_ruleSubStateTrPointTerminal_in_ruleTransitionTerminal11139);
+                    pushFollow(FOLLOW_ruleSubStateTrPointTerminal_in_ruleTransitionTerminal11211);
                     this_SubStateTrPointTerminal_2=ruleSubStateTrPointTerminal();
 
                     state._fsp--;
@@ -13496,12 +13607,12 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 4 :
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5455:5: this_ChoicepointTerminal_3= ruleChoicepointTerminal
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5499:5: this_ChoicepointTerminal_3= ruleChoicepointTerminal
                     {
                      
                             newCompositeNode(grammarAccess.getTransitionTerminalAccess().getChoicepointTerminalParserRuleCall_3()); 
                         
-                    pushFollow(FOLLOW_ruleChoicepointTerminal_in_ruleTransitionTerminal11166);
+                    pushFollow(FOLLOW_ruleChoicepointTerminal_in_ruleTransitionTerminal11238);
                     this_ChoicepointTerminal_3=ruleChoicepointTerminal();
 
                     state._fsp--;
@@ -13534,7 +13645,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleStateTerminal"
-    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5471:1: entryRuleStateTerminal returns [EObject current=null] : iv_ruleStateTerminal= ruleStateTerminal EOF ;
+    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5515:1: entryRuleStateTerminal returns [EObject current=null] : iv_ruleStateTerminal= ruleStateTerminal EOF ;
     public final EObject entryRuleStateTerminal() throws RecognitionException {
         EObject current = null;
 
@@ -13542,17 +13653,17 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5472:2: (iv_ruleStateTerminal= ruleStateTerminal EOF )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5473:2: iv_ruleStateTerminal= ruleStateTerminal EOF
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5516:2: (iv_ruleStateTerminal= ruleStateTerminal EOF )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5517:2: iv_ruleStateTerminal= ruleStateTerminal EOF
             {
              newCompositeNode(grammarAccess.getStateTerminalRule()); 
-            pushFollow(FOLLOW_ruleStateTerminal_in_entryRuleStateTerminal11201);
+            pushFollow(FOLLOW_ruleStateTerminal_in_entryRuleStateTerminal11273);
             iv_ruleStateTerminal=ruleStateTerminal();
 
             state._fsp--;
 
              current =iv_ruleStateTerminal; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleStateTerminal11211); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleStateTerminal11283); 
 
             }
 
@@ -13570,7 +13681,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleStateTerminal"
-    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5480:1: ruleStateTerminal returns [EObject current=null] : ( (otherlv_0= RULE_ID ) ) ;
+    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5524:1: ruleStateTerminal returns [EObject current=null] : ( (otherlv_0= RULE_ID ) ) ;
     public final EObject ruleStateTerminal() throws RecognitionException {
         EObject current = null;
 
@@ -13579,21 +13690,21 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5483:28: ( ( (otherlv_0= RULE_ID ) ) )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5484:1: ( (otherlv_0= RULE_ID ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5527:28: ( ( (otherlv_0= RULE_ID ) ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5528:1: ( (otherlv_0= RULE_ID ) )
             {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5484:1: ( (otherlv_0= RULE_ID ) )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5485:1: (otherlv_0= RULE_ID )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5528:1: ( (otherlv_0= RULE_ID ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5529:1: (otherlv_0= RULE_ID )
             {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5485:1: (otherlv_0= RULE_ID )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5486:3: otherlv_0= RULE_ID
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5529:1: (otherlv_0= RULE_ID )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5530:3: otherlv_0= RULE_ID
             {
 
             			if (current==null) {
             	            current = createModelElement(grammarAccess.getStateTerminalRule());
             	        }
                     
-            otherlv_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleStateTerminal11255); 
+            otherlv_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleStateTerminal11327); 
 
             		newLeafNode(otherlv_0, grammarAccess.getStateTerminalAccess().getStateBaseStateCrossReference_0()); 
             	
@@ -13621,7 +13732,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleTrPointTerminal"
-    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5505:1: entryRuleTrPointTerminal returns [EObject current=null] : iv_ruleTrPointTerminal= ruleTrPointTerminal EOF ;
+    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5549:1: entryRuleTrPointTerminal returns [EObject current=null] : iv_ruleTrPointTerminal= ruleTrPointTerminal EOF ;
     public final EObject entryRuleTrPointTerminal() throws RecognitionException {
         EObject current = null;
 
@@ -13629,17 +13740,17 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5506:2: (iv_ruleTrPointTerminal= ruleTrPointTerminal EOF )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5507:2: iv_ruleTrPointTerminal= ruleTrPointTerminal EOF
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5550:2: (iv_ruleTrPointTerminal= ruleTrPointTerminal EOF )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5551:2: iv_ruleTrPointTerminal= ruleTrPointTerminal EOF
             {
              newCompositeNode(grammarAccess.getTrPointTerminalRule()); 
-            pushFollow(FOLLOW_ruleTrPointTerminal_in_entryRuleTrPointTerminal11290);
+            pushFollow(FOLLOW_ruleTrPointTerminal_in_entryRuleTrPointTerminal11362);
             iv_ruleTrPointTerminal=ruleTrPointTerminal();
 
             state._fsp--;
 
              current =iv_ruleTrPointTerminal; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleTrPointTerminal11300); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleTrPointTerminal11372); 
 
             }
 
@@ -13657,7 +13768,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleTrPointTerminal"
-    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5514:1: ruleTrPointTerminal returns [EObject current=null] : (otherlv_0= 'my' ( (otherlv_1= RULE_ID ) ) ) ;
+    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5558:1: ruleTrPointTerminal returns [EObject current=null] : (otherlv_0= 'my' ( (otherlv_1= RULE_ID ) ) ) ;
     public final EObject ruleTrPointTerminal() throws RecognitionException {
         EObject current = null;
 
@@ -13667,28 +13778,28 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5517:28: ( (otherlv_0= 'my' ( (otherlv_1= RULE_ID ) ) ) )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5518:1: (otherlv_0= 'my' ( (otherlv_1= RULE_ID ) ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5561:28: ( (otherlv_0= 'my' ( (otherlv_1= RULE_ID ) ) ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5562:1: (otherlv_0= 'my' ( (otherlv_1= RULE_ID ) ) )
             {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5518:1: (otherlv_0= 'my' ( (otherlv_1= RULE_ID ) ) )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5518:3: otherlv_0= 'my' ( (otherlv_1= RULE_ID ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5562:1: (otherlv_0= 'my' ( (otherlv_1= RULE_ID ) ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5562:3: otherlv_0= 'my' ( (otherlv_1= RULE_ID ) )
             {
-            otherlv_0=(Token)match(input,85,FOLLOW_85_in_ruleTrPointTerminal11337); 
+            otherlv_0=(Token)match(input,86,FOLLOW_86_in_ruleTrPointTerminal11409); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getTrPointTerminalAccess().getMyKeyword_0());
                 
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5522:1: ( (otherlv_1= RULE_ID ) )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5523:1: (otherlv_1= RULE_ID )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5566:1: ( (otherlv_1= RULE_ID ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5567:1: (otherlv_1= RULE_ID )
             {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5523:1: (otherlv_1= RULE_ID )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5524:3: otherlv_1= RULE_ID
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5567:1: (otherlv_1= RULE_ID )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5568:3: otherlv_1= RULE_ID
             {
 
             			if (current==null) {
             	            current = createModelElement(grammarAccess.getTrPointTerminalRule());
             	        }
                     
-            otherlv_1=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleTrPointTerminal11357); 
+            otherlv_1=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleTrPointTerminal11429); 
 
             		newLeafNode(otherlv_1, grammarAccess.getTrPointTerminalAccess().getTrPointTrPointCrossReference_1_0()); 
             	
@@ -13719,7 +13830,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleSubStateTrPointTerminal"
-    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5543:1: entryRuleSubStateTrPointTerminal returns [EObject current=null] : iv_ruleSubStateTrPointTerminal= ruleSubStateTrPointTerminal EOF ;
+    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5587:1: entryRuleSubStateTrPointTerminal returns [EObject current=null] : iv_ruleSubStateTrPointTerminal= ruleSubStateTrPointTerminal EOF ;
     public final EObject entryRuleSubStateTrPointTerminal() throws RecognitionException {
         EObject current = null;
 
@@ -13727,17 +13838,17 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5544:2: (iv_ruleSubStateTrPointTerminal= ruleSubStateTrPointTerminal EOF )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5545:2: iv_ruleSubStateTrPointTerminal= ruleSubStateTrPointTerminal EOF
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5588:2: (iv_ruleSubStateTrPointTerminal= ruleSubStateTrPointTerminal EOF )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5589:2: iv_ruleSubStateTrPointTerminal= ruleSubStateTrPointTerminal EOF
             {
              newCompositeNode(grammarAccess.getSubStateTrPointTerminalRule()); 
-            pushFollow(FOLLOW_ruleSubStateTrPointTerminal_in_entryRuleSubStateTrPointTerminal11393);
+            pushFollow(FOLLOW_ruleSubStateTrPointTerminal_in_entryRuleSubStateTrPointTerminal11465);
             iv_ruleSubStateTrPointTerminal=ruleSubStateTrPointTerminal();
 
             state._fsp--;
 
              current =iv_ruleSubStateTrPointTerminal; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleSubStateTrPointTerminal11403); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleSubStateTrPointTerminal11475); 
 
             }
 
@@ -13755,7 +13866,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleSubStateTrPointTerminal"
-    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5552:1: ruleSubStateTrPointTerminal returns [EObject current=null] : ( ( (otherlv_0= RULE_ID ) ) otherlv_1= 'of' ( (otherlv_2= RULE_ID ) ) ) ;
+    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5596:1: ruleSubStateTrPointTerminal returns [EObject current=null] : ( ( (otherlv_0= RULE_ID ) ) otherlv_1= 'of' ( (otherlv_2= RULE_ID ) ) ) ;
     public final EObject ruleSubStateTrPointTerminal() throws RecognitionException {
         EObject current = null;
 
@@ -13766,24 +13877,24 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5555:28: ( ( ( (otherlv_0= RULE_ID ) ) otherlv_1= 'of' ( (otherlv_2= RULE_ID ) ) ) )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5556:1: ( ( (otherlv_0= RULE_ID ) ) otherlv_1= 'of' ( (otherlv_2= RULE_ID ) ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5599:28: ( ( ( (otherlv_0= RULE_ID ) ) otherlv_1= 'of' ( (otherlv_2= RULE_ID ) ) ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5600:1: ( ( (otherlv_0= RULE_ID ) ) otherlv_1= 'of' ( (otherlv_2= RULE_ID ) ) )
             {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5556:1: ( ( (otherlv_0= RULE_ID ) ) otherlv_1= 'of' ( (otherlv_2= RULE_ID ) ) )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5556:2: ( (otherlv_0= RULE_ID ) ) otherlv_1= 'of' ( (otherlv_2= RULE_ID ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5600:1: ( ( (otherlv_0= RULE_ID ) ) otherlv_1= 'of' ( (otherlv_2= RULE_ID ) ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5600:2: ( (otherlv_0= RULE_ID ) ) otherlv_1= 'of' ( (otherlv_2= RULE_ID ) )
             {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5556:2: ( (otherlv_0= RULE_ID ) )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5557:1: (otherlv_0= RULE_ID )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5600:2: ( (otherlv_0= RULE_ID ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5601:1: (otherlv_0= RULE_ID )
             {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5557:1: (otherlv_0= RULE_ID )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5558:3: otherlv_0= RULE_ID
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5601:1: (otherlv_0= RULE_ID )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5602:3: otherlv_0= RULE_ID
             {
 
             			if (current==null) {
             	            current = createModelElement(grammarAccess.getSubStateTrPointTerminalRule());
             	        }
                     
-            otherlv_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleSubStateTrPointTerminal11448); 
+            otherlv_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleSubStateTrPointTerminal11520); 
 
             		newLeafNode(otherlv_0, grammarAccess.getSubStateTrPointTerminalAccess().getTrPointTrPointCrossReference_0_0()); 
             	
@@ -13793,22 +13904,22 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,53,FOLLOW_53_in_ruleSubStateTrPointTerminal11460); 
+            otherlv_1=(Token)match(input,53,FOLLOW_53_in_ruleSubStateTrPointTerminal11532); 
 
                 	newLeafNode(otherlv_1, grammarAccess.getSubStateTrPointTerminalAccess().getOfKeyword_1());
                 
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5573:1: ( (otherlv_2= RULE_ID ) )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5574:1: (otherlv_2= RULE_ID )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5617:1: ( (otherlv_2= RULE_ID ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5618:1: (otherlv_2= RULE_ID )
             {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5574:1: (otherlv_2= RULE_ID )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5575:3: otherlv_2= RULE_ID
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5618:1: (otherlv_2= RULE_ID )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5619:3: otherlv_2= RULE_ID
             {
 
             			if (current==null) {
             	            current = createModelElement(grammarAccess.getSubStateTrPointTerminalRule());
             	        }
                     
-            otherlv_2=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleSubStateTrPointTerminal11480); 
+            otherlv_2=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleSubStateTrPointTerminal11552); 
 
             		newLeafNode(otherlv_2, grammarAccess.getSubStateTrPointTerminalAccess().getStateBaseStateCrossReference_2_0()); 
             	
@@ -13839,7 +13950,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleChoicepointTerminal"
-    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5594:1: entryRuleChoicepointTerminal returns [EObject current=null] : iv_ruleChoicepointTerminal= ruleChoicepointTerminal EOF ;
+    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5638:1: entryRuleChoicepointTerminal returns [EObject current=null] : iv_ruleChoicepointTerminal= ruleChoicepointTerminal EOF ;
     public final EObject entryRuleChoicepointTerminal() throws RecognitionException {
         EObject current = null;
 
@@ -13847,17 +13958,17 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5595:2: (iv_ruleChoicepointTerminal= ruleChoicepointTerminal EOF )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5596:2: iv_ruleChoicepointTerminal= ruleChoicepointTerminal EOF
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5639:2: (iv_ruleChoicepointTerminal= ruleChoicepointTerminal EOF )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5640:2: iv_ruleChoicepointTerminal= ruleChoicepointTerminal EOF
             {
              newCompositeNode(grammarAccess.getChoicepointTerminalRule()); 
-            pushFollow(FOLLOW_ruleChoicepointTerminal_in_entryRuleChoicepointTerminal11516);
+            pushFollow(FOLLOW_ruleChoicepointTerminal_in_entryRuleChoicepointTerminal11588);
             iv_ruleChoicepointTerminal=ruleChoicepointTerminal();
 
             state._fsp--;
 
              current =iv_ruleChoicepointTerminal; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleChoicepointTerminal11526); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleChoicepointTerminal11598); 
 
             }
 
@@ -13875,7 +13986,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleChoicepointTerminal"
-    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5603:1: ruleChoicepointTerminal returns [EObject current=null] : (otherlv_0= 'cp' ( (otherlv_1= RULE_ID ) ) ) ;
+    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5647:1: ruleChoicepointTerminal returns [EObject current=null] : (otherlv_0= 'cp' ( (otherlv_1= RULE_ID ) ) ) ;
     public final EObject ruleChoicepointTerminal() throws RecognitionException {
         EObject current = null;
 
@@ -13885,28 +13996,28 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5606:28: ( (otherlv_0= 'cp' ( (otherlv_1= RULE_ID ) ) ) )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5607:1: (otherlv_0= 'cp' ( (otherlv_1= RULE_ID ) ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5650:28: ( (otherlv_0= 'cp' ( (otherlv_1= RULE_ID ) ) ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5651:1: (otherlv_0= 'cp' ( (otherlv_1= RULE_ID ) ) )
             {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5607:1: (otherlv_0= 'cp' ( (otherlv_1= RULE_ID ) ) )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5607:3: otherlv_0= 'cp' ( (otherlv_1= RULE_ID ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5651:1: (otherlv_0= 'cp' ( (otherlv_1= RULE_ID ) ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5651:3: otherlv_0= 'cp' ( (otherlv_1= RULE_ID ) )
             {
-            otherlv_0=(Token)match(input,86,FOLLOW_86_in_ruleChoicepointTerminal11563); 
+            otherlv_0=(Token)match(input,87,FOLLOW_87_in_ruleChoicepointTerminal11635); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getChoicepointTerminalAccess().getCpKeyword_0());
                 
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5611:1: ( (otherlv_1= RULE_ID ) )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5612:1: (otherlv_1= RULE_ID )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5655:1: ( (otherlv_1= RULE_ID ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5656:1: (otherlv_1= RULE_ID )
             {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5612:1: (otherlv_1= RULE_ID )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5613:3: otherlv_1= RULE_ID
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5656:1: (otherlv_1= RULE_ID )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5657:3: otherlv_1= RULE_ID
             {
 
             			if (current==null) {
             	            current = createModelElement(grammarAccess.getChoicepointTerminalRule());
             	        }
                     
-            otherlv_1=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleChoicepointTerminal11583); 
+            otherlv_1=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleChoicepointTerminal11655); 
 
             		newLeafNode(otherlv_1, grammarAccess.getChoicepointTerminalAccess().getCpChoicePointCrossReference_1_0()); 
             	
@@ -13937,7 +14048,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleTrigger"
-    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5632:1: entryRuleTrigger returns [EObject current=null] : iv_ruleTrigger= ruleTrigger EOF ;
+    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5676:1: entryRuleTrigger returns [EObject current=null] : iv_ruleTrigger= ruleTrigger EOF ;
     public final EObject entryRuleTrigger() throws RecognitionException {
         EObject current = null;
 
@@ -13945,17 +14056,17 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5633:2: (iv_ruleTrigger= ruleTrigger EOF )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5634:2: iv_ruleTrigger= ruleTrigger EOF
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5677:2: (iv_ruleTrigger= ruleTrigger EOF )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5678:2: iv_ruleTrigger= ruleTrigger EOF
             {
              newCompositeNode(grammarAccess.getTriggerRule()); 
-            pushFollow(FOLLOW_ruleTrigger_in_entryRuleTrigger11619);
+            pushFollow(FOLLOW_ruleTrigger_in_entryRuleTrigger11691);
             iv_ruleTrigger=ruleTrigger();
 
             state._fsp--;
 
              current =iv_ruleTrigger; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleTrigger11629); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleTrigger11701); 
 
             }
 
@@ -13973,7 +14084,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleTrigger"
-    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5641:1: ruleTrigger returns [EObject current=null] : (otherlv_0= '<' ( (lv_msgFromIfPairs_1_0= ruleMessageFromIf ) ) (otherlv_2= '|' ( (lv_msgFromIfPairs_3_0= ruleMessageFromIf ) ) )* ( (lv_guard_4_0= ruleGuard ) )? otherlv_5= '>' ) ;
+    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5685:1: ruleTrigger returns [EObject current=null] : (otherlv_0= '<' ( (lv_msgFromIfPairs_1_0= ruleMessageFromIf ) ) (otherlv_2= '|' ( (lv_msgFromIfPairs_3_0= ruleMessageFromIf ) ) )* ( (lv_guard_4_0= ruleGuard ) )? otherlv_5= '>' ) ;
     public final EObject ruleTrigger() throws RecognitionException {
         EObject current = null;
 
@@ -13990,26 +14101,26 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5644:28: ( (otherlv_0= '<' ( (lv_msgFromIfPairs_1_0= ruleMessageFromIf ) ) (otherlv_2= '|' ( (lv_msgFromIfPairs_3_0= ruleMessageFromIf ) ) )* ( (lv_guard_4_0= ruleGuard ) )? otherlv_5= '>' ) )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5645:1: (otherlv_0= '<' ( (lv_msgFromIfPairs_1_0= ruleMessageFromIf ) ) (otherlv_2= '|' ( (lv_msgFromIfPairs_3_0= ruleMessageFromIf ) ) )* ( (lv_guard_4_0= ruleGuard ) )? otherlv_5= '>' )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5688:28: ( (otherlv_0= '<' ( (lv_msgFromIfPairs_1_0= ruleMessageFromIf ) ) (otherlv_2= '|' ( (lv_msgFromIfPairs_3_0= ruleMessageFromIf ) ) )* ( (lv_guard_4_0= ruleGuard ) )? otherlv_5= '>' ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5689:1: (otherlv_0= '<' ( (lv_msgFromIfPairs_1_0= ruleMessageFromIf ) ) (otherlv_2= '|' ( (lv_msgFromIfPairs_3_0= ruleMessageFromIf ) ) )* ( (lv_guard_4_0= ruleGuard ) )? otherlv_5= '>' )
             {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5645:1: (otherlv_0= '<' ( (lv_msgFromIfPairs_1_0= ruleMessageFromIf ) ) (otherlv_2= '|' ( (lv_msgFromIfPairs_3_0= ruleMessageFromIf ) ) )* ( (lv_guard_4_0= ruleGuard ) )? otherlv_5= '>' )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5645:3: otherlv_0= '<' ( (lv_msgFromIfPairs_1_0= ruleMessageFromIf ) ) (otherlv_2= '|' ( (lv_msgFromIfPairs_3_0= ruleMessageFromIf ) ) )* ( (lv_guard_4_0= ruleGuard ) )? otherlv_5= '>'
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5689:1: (otherlv_0= '<' ( (lv_msgFromIfPairs_1_0= ruleMessageFromIf ) ) (otherlv_2= '|' ( (lv_msgFromIfPairs_3_0= ruleMessageFromIf ) ) )* ( (lv_guard_4_0= ruleGuard ) )? otherlv_5= '>' )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5689:3: otherlv_0= '<' ( (lv_msgFromIfPairs_1_0= ruleMessageFromIf ) ) (otherlv_2= '|' ( (lv_msgFromIfPairs_3_0= ruleMessageFromIf ) ) )* ( (lv_guard_4_0= ruleGuard ) )? otherlv_5= '>'
             {
-            otherlv_0=(Token)match(input,87,FOLLOW_87_in_ruleTrigger11666); 
+            otherlv_0=(Token)match(input,88,FOLLOW_88_in_ruleTrigger11738); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getTriggerAccess().getLessThanSignKeyword_0());
                 
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5649:1: ( (lv_msgFromIfPairs_1_0= ruleMessageFromIf ) )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5650:1: (lv_msgFromIfPairs_1_0= ruleMessageFromIf )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5693:1: ( (lv_msgFromIfPairs_1_0= ruleMessageFromIf ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5694:1: (lv_msgFromIfPairs_1_0= ruleMessageFromIf )
             {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5650:1: (lv_msgFromIfPairs_1_0= ruleMessageFromIf )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5651:3: lv_msgFromIfPairs_1_0= ruleMessageFromIf
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5694:1: (lv_msgFromIfPairs_1_0= ruleMessageFromIf )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5695:3: lv_msgFromIfPairs_1_0= ruleMessageFromIf
             {
              
             	        newCompositeNode(grammarAccess.getTriggerAccess().getMsgFromIfPairsMessageFromIfParserRuleCall_1_0()); 
             	    
-            pushFollow(FOLLOW_ruleMessageFromIf_in_ruleTrigger11687);
+            pushFollow(FOLLOW_ruleMessageFromIf_in_ruleTrigger11759);
             lv_msgFromIfPairs_1_0=ruleMessageFromIf();
 
             state._fsp--;
@@ -14031,35 +14142,35 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5667:2: (otherlv_2= '|' ( (lv_msgFromIfPairs_3_0= ruleMessageFromIf ) ) )*
-            loop123:
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5711:2: (otherlv_2= '|' ( (lv_msgFromIfPairs_3_0= ruleMessageFromIf ) ) )*
+            loop125:
             do {
-                int alt123=2;
-                int LA123_0 = input.LA(1);
+                int alt125=2;
+                int LA125_0 = input.LA(1);
 
-                if ( (LA123_0==88) ) {
-                    alt123=1;
+                if ( (LA125_0==89) ) {
+                    alt125=1;
                 }
 
 
-                switch (alt123) {
+                switch (alt125) {
             	case 1 :
-            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5667:4: otherlv_2= '|' ( (lv_msgFromIfPairs_3_0= ruleMessageFromIf ) )
+            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5711:4: otherlv_2= '|' ( (lv_msgFromIfPairs_3_0= ruleMessageFromIf ) )
             	    {
-            	    otherlv_2=(Token)match(input,88,FOLLOW_88_in_ruleTrigger11700); 
+            	    otherlv_2=(Token)match(input,89,FOLLOW_89_in_ruleTrigger11772); 
 
             	        	newLeafNode(otherlv_2, grammarAccess.getTriggerAccess().getVerticalLineKeyword_2_0());
             	        
-            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5671:1: ( (lv_msgFromIfPairs_3_0= ruleMessageFromIf ) )
-            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5672:1: (lv_msgFromIfPairs_3_0= ruleMessageFromIf )
+            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5715:1: ( (lv_msgFromIfPairs_3_0= ruleMessageFromIf ) )
+            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5716:1: (lv_msgFromIfPairs_3_0= ruleMessageFromIf )
             	    {
-            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5672:1: (lv_msgFromIfPairs_3_0= ruleMessageFromIf )
-            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5673:3: lv_msgFromIfPairs_3_0= ruleMessageFromIf
+            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5716:1: (lv_msgFromIfPairs_3_0= ruleMessageFromIf )
+            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5717:3: lv_msgFromIfPairs_3_0= ruleMessageFromIf
             	    {
             	     
             	    	        newCompositeNode(grammarAccess.getTriggerAccess().getMsgFromIfPairsMessageFromIfParserRuleCall_2_1_0()); 
             	    	    
-            	    pushFollow(FOLLOW_ruleMessageFromIf_in_ruleTrigger11721);
+            	    pushFollow(FOLLOW_ruleMessageFromIf_in_ruleTrigger11793);
             	    lv_msgFromIfPairs_3_0=ruleMessageFromIf();
 
             	    state._fsp--;
@@ -14086,28 +14197,28 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    break loop123;
+            	    break loop125;
                 }
             } while (true);
 
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5689:4: ( (lv_guard_4_0= ruleGuard ) )?
-            int alt124=2;
-            int LA124_0 = input.LA(1);
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5733:4: ( (lv_guard_4_0= ruleGuard ) )?
+            int alt126=2;
+            int LA126_0 = input.LA(1);
 
-            if ( (LA124_0==83) ) {
-                alt124=1;
+            if ( (LA126_0==84) ) {
+                alt126=1;
             }
-            switch (alt124) {
+            switch (alt126) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5690:1: (lv_guard_4_0= ruleGuard )
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5734:1: (lv_guard_4_0= ruleGuard )
                     {
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5690:1: (lv_guard_4_0= ruleGuard )
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5691:3: lv_guard_4_0= ruleGuard
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5734:1: (lv_guard_4_0= ruleGuard )
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5735:3: lv_guard_4_0= ruleGuard
                     {
                      
                     	        newCompositeNode(grammarAccess.getTriggerAccess().getGuardGuardParserRuleCall_3_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleGuard_in_ruleTrigger11744);
+                    pushFollow(FOLLOW_ruleGuard_in_ruleTrigger11816);
                     lv_guard_4_0=ruleGuard();
 
                     state._fsp--;
@@ -14132,7 +14243,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_5=(Token)match(input,89,FOLLOW_89_in_ruleTrigger11757); 
+            otherlv_5=(Token)match(input,90,FOLLOW_90_in_ruleTrigger11829); 
 
                 	newLeafNode(otherlv_5, grammarAccess.getTriggerAccess().getGreaterThanSignKeyword_4());
                 
@@ -14157,7 +14268,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleMessageFromIf"
-    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5719:1: entryRuleMessageFromIf returns [EObject current=null] : iv_ruleMessageFromIf= ruleMessageFromIf EOF ;
+    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5763:1: entryRuleMessageFromIf returns [EObject current=null] : iv_ruleMessageFromIf= ruleMessageFromIf EOF ;
     public final EObject entryRuleMessageFromIf() throws RecognitionException {
         EObject current = null;
 
@@ -14165,17 +14276,17 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5720:2: (iv_ruleMessageFromIf= ruleMessageFromIf EOF )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5721:2: iv_ruleMessageFromIf= ruleMessageFromIf EOF
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5764:2: (iv_ruleMessageFromIf= ruleMessageFromIf EOF )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5765:2: iv_ruleMessageFromIf= ruleMessageFromIf EOF
             {
              newCompositeNode(grammarAccess.getMessageFromIfRule()); 
-            pushFollow(FOLLOW_ruleMessageFromIf_in_entryRuleMessageFromIf11793);
+            pushFollow(FOLLOW_ruleMessageFromIf_in_entryRuleMessageFromIf11865);
             iv_ruleMessageFromIf=ruleMessageFromIf();
 
             state._fsp--;
 
              current =iv_ruleMessageFromIf; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleMessageFromIf11803); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleMessageFromIf11875); 
 
             }
 
@@ -14193,7 +14304,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleMessageFromIf"
-    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5728:1: ruleMessageFromIf returns [EObject current=null] : ( ( (otherlv_0= RULE_ID ) ) otherlv_1= ':' ( (otherlv_2= RULE_ID ) ) ) ;
+    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5772:1: ruleMessageFromIf returns [EObject current=null] : ( ( (otherlv_0= RULE_ID ) ) otherlv_1= ':' ( (otherlv_2= RULE_ID ) ) ) ;
     public final EObject ruleMessageFromIf() throws RecognitionException {
         EObject current = null;
 
@@ -14204,24 +14315,24 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5731:28: ( ( ( (otherlv_0= RULE_ID ) ) otherlv_1= ':' ( (otherlv_2= RULE_ID ) ) ) )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5732:1: ( ( (otherlv_0= RULE_ID ) ) otherlv_1= ':' ( (otherlv_2= RULE_ID ) ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5775:28: ( ( ( (otherlv_0= RULE_ID ) ) otherlv_1= ':' ( (otherlv_2= RULE_ID ) ) ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5776:1: ( ( (otherlv_0= RULE_ID ) ) otherlv_1= ':' ( (otherlv_2= RULE_ID ) ) )
             {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5732:1: ( ( (otherlv_0= RULE_ID ) ) otherlv_1= ':' ( (otherlv_2= RULE_ID ) ) )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5732:2: ( (otherlv_0= RULE_ID ) ) otherlv_1= ':' ( (otherlv_2= RULE_ID ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5776:1: ( ( (otherlv_0= RULE_ID ) ) otherlv_1= ':' ( (otherlv_2= RULE_ID ) ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5776:2: ( (otherlv_0= RULE_ID ) ) otherlv_1= ':' ( (otherlv_2= RULE_ID ) )
             {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5732:2: ( (otherlv_0= RULE_ID ) )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5733:1: (otherlv_0= RULE_ID )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5776:2: ( (otherlv_0= RULE_ID ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5777:1: (otherlv_0= RULE_ID )
             {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5733:1: (otherlv_0= RULE_ID )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5734:3: otherlv_0= RULE_ID
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5777:1: (otherlv_0= RULE_ID )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5778:3: otherlv_0= RULE_ID
             {
 
             			if (current==null) {
             	            current = createModelElement(grammarAccess.getMessageFromIfRule());
             	        }
                     
-            otherlv_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleMessageFromIf11848); 
+            otherlv_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleMessageFromIf11920); 
 
             		newLeafNode(otherlv_0, grammarAccess.getMessageFromIfAccess().getMessageMessageCrossReference_0_0()); 
             	
@@ -14231,22 +14342,22 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,14,FOLLOW_14_in_ruleMessageFromIf11860); 
+            otherlv_1=(Token)match(input,14,FOLLOW_14_in_ruleMessageFromIf11932); 
 
                 	newLeafNode(otherlv_1, grammarAccess.getMessageFromIfAccess().getColonKeyword_1());
                 
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5749:1: ( (otherlv_2= RULE_ID ) )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5750:1: (otherlv_2= RULE_ID )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5793:1: ( (otherlv_2= RULE_ID ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5794:1: (otherlv_2= RULE_ID )
             {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5750:1: (otherlv_2= RULE_ID )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5751:3: otherlv_2= RULE_ID
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5794:1: (otherlv_2= RULE_ID )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5795:3: otherlv_2= RULE_ID
             {
 
             			if (current==null) {
             	            current = createModelElement(grammarAccess.getMessageFromIfRule());
             	        }
                     
-            otherlv_2=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleMessageFromIf11880); 
+            otherlv_2=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleMessageFromIf11952); 
 
             		newLeafNode(otherlv_2, grammarAccess.getMessageFromIfAccess().getFromInterfaceItemCrossReference_2_0()); 
             	
@@ -14277,7 +14388,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleGuard"
-    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5770:1: entryRuleGuard returns [EObject current=null] : iv_ruleGuard= ruleGuard EOF ;
+    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5814:1: entryRuleGuard returns [EObject current=null] : iv_ruleGuard= ruleGuard EOF ;
     public final EObject entryRuleGuard() throws RecognitionException {
         EObject current = null;
 
@@ -14285,17 +14396,17 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5771:2: (iv_ruleGuard= ruleGuard EOF )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5772:2: iv_ruleGuard= ruleGuard EOF
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5815:2: (iv_ruleGuard= ruleGuard EOF )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5816:2: iv_ruleGuard= ruleGuard EOF
             {
              newCompositeNode(grammarAccess.getGuardRule()); 
-            pushFollow(FOLLOW_ruleGuard_in_entryRuleGuard11916);
+            pushFollow(FOLLOW_ruleGuard_in_entryRuleGuard11988);
             iv_ruleGuard=ruleGuard();
 
             state._fsp--;
 
              current =iv_ruleGuard; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleGuard11926); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleGuard11998); 
 
             }
 
@@ -14313,7 +14424,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleGuard"
-    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5779:1: ruleGuard returns [EObject current=null] : (otherlv_0= 'guard' ( (lv_guard_1_0= ruleDetailCode ) ) ) ;
+    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5823:1: ruleGuard returns [EObject current=null] : (otherlv_0= 'guard' ( (lv_guard_1_0= ruleDetailCode ) ) ) ;
     public final EObject ruleGuard() throws RecognitionException {
         EObject current = null;
 
@@ -14324,26 +14435,26 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5782:28: ( (otherlv_0= 'guard' ( (lv_guard_1_0= ruleDetailCode ) ) ) )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5783:1: (otherlv_0= 'guard' ( (lv_guard_1_0= ruleDetailCode ) ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5826:28: ( (otherlv_0= 'guard' ( (lv_guard_1_0= ruleDetailCode ) ) ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5827:1: (otherlv_0= 'guard' ( (lv_guard_1_0= ruleDetailCode ) ) )
             {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5783:1: (otherlv_0= 'guard' ( (lv_guard_1_0= ruleDetailCode ) ) )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5783:3: otherlv_0= 'guard' ( (lv_guard_1_0= ruleDetailCode ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5827:1: (otherlv_0= 'guard' ( (lv_guard_1_0= ruleDetailCode ) ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5827:3: otherlv_0= 'guard' ( (lv_guard_1_0= ruleDetailCode ) )
             {
-            otherlv_0=(Token)match(input,83,FOLLOW_83_in_ruleGuard11963); 
+            otherlv_0=(Token)match(input,84,FOLLOW_84_in_ruleGuard12035); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getGuardAccess().getGuardKeyword_0());
                 
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5787:1: ( (lv_guard_1_0= ruleDetailCode ) )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5788:1: (lv_guard_1_0= ruleDetailCode )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5831:1: ( (lv_guard_1_0= ruleDetailCode ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5832:1: (lv_guard_1_0= ruleDetailCode )
             {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5788:1: (lv_guard_1_0= ruleDetailCode )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5789:3: lv_guard_1_0= ruleDetailCode
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5832:1: (lv_guard_1_0= ruleDetailCode )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5833:3: lv_guard_1_0= ruleDetailCode
             {
              
             	        newCompositeNode(grammarAccess.getGuardAccess().getGuardDetailCodeParserRuleCall_1_0()); 
             	    
-            pushFollow(FOLLOW_ruleDetailCode_in_ruleGuard11984);
+            pushFollow(FOLLOW_ruleDetailCode_in_ruleGuard12056);
             lv_guard_1_0=ruleDetailCode();
 
             state._fsp--;
@@ -14386,7 +14497,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleDocumentation"
-    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5813:1: entryRuleDocumentation returns [EObject current=null] : iv_ruleDocumentation= ruleDocumentation EOF ;
+    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5857:1: entryRuleDocumentation returns [EObject current=null] : iv_ruleDocumentation= ruleDocumentation EOF ;
     public final EObject entryRuleDocumentation() throws RecognitionException {
         EObject current = null;
 
@@ -14394,17 +14505,17 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5814:2: (iv_ruleDocumentation= ruleDocumentation EOF )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5815:2: iv_ruleDocumentation= ruleDocumentation EOF
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5858:2: (iv_ruleDocumentation= ruleDocumentation EOF )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5859:2: iv_ruleDocumentation= ruleDocumentation EOF
             {
              newCompositeNode(grammarAccess.getDocumentationRule()); 
-            pushFollow(FOLLOW_ruleDocumentation_in_entryRuleDocumentation12020);
+            pushFollow(FOLLOW_ruleDocumentation_in_entryRuleDocumentation12092);
             iv_ruleDocumentation=ruleDocumentation();
 
             state._fsp--;
 
              current =iv_ruleDocumentation; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleDocumentation12030); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleDocumentation12102); 
 
             }
 
@@ -14422,7 +14533,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleDocumentation"
-    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5822:1: ruleDocumentation returns [EObject current=null] : (otherlv_0= '[' ( (lv_text_1_0= RULE_STRING ) )+ otherlv_2= ']' ) ;
+    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5866:1: ruleDocumentation returns [EObject current=null] : (otherlv_0= '[' ( (lv_text_1_0= RULE_STRING ) )+ otherlv_2= ']' ) ;
     public final EObject ruleDocumentation() throws RecognitionException {
         EObject current = null;
 
@@ -14433,36 +14544,36 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5825:28: ( (otherlv_0= '[' ( (lv_text_1_0= RULE_STRING ) )+ otherlv_2= ']' ) )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5826:1: (otherlv_0= '[' ( (lv_text_1_0= RULE_STRING ) )+ otherlv_2= ']' )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5869:28: ( (otherlv_0= '[' ( (lv_text_1_0= RULE_STRING ) )+ otherlv_2= ']' ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5870:1: (otherlv_0= '[' ( (lv_text_1_0= RULE_STRING ) )+ otherlv_2= ']' )
             {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5826:1: (otherlv_0= '[' ( (lv_text_1_0= RULE_STRING ) )+ otherlv_2= ']' )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5826:3: otherlv_0= '[' ( (lv_text_1_0= RULE_STRING ) )+ otherlv_2= ']'
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5870:1: (otherlv_0= '[' ( (lv_text_1_0= RULE_STRING ) )+ otherlv_2= ']' )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5870:3: otherlv_0= '[' ( (lv_text_1_0= RULE_STRING ) )+ otherlv_2= ']'
             {
-            otherlv_0=(Token)match(input,20,FOLLOW_20_in_ruleDocumentation12067); 
+            otherlv_0=(Token)match(input,20,FOLLOW_20_in_ruleDocumentation12139); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getDocumentationAccess().getLeftSquareBracketKeyword_0());
                 
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5830:1: ( (lv_text_1_0= RULE_STRING ) )+
-            int cnt125=0;
-            loop125:
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5874:1: ( (lv_text_1_0= RULE_STRING ) )+
+            int cnt127=0;
+            loop127:
             do {
-                int alt125=2;
-                int LA125_0 = input.LA(1);
+                int alt127=2;
+                int LA127_0 = input.LA(1);
 
-                if ( (LA125_0==RULE_STRING) ) {
-                    alt125=1;
+                if ( (LA127_0==RULE_STRING) ) {
+                    alt127=1;
                 }
 
 
-                switch (alt125) {
+                switch (alt127) {
             	case 1 :
-            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5831:1: (lv_text_1_0= RULE_STRING )
+            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5875:1: (lv_text_1_0= RULE_STRING )
             	    {
-            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5831:1: (lv_text_1_0= RULE_STRING )
-            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5832:3: lv_text_1_0= RULE_STRING
+            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5875:1: (lv_text_1_0= RULE_STRING )
+            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5876:3: lv_text_1_0= RULE_STRING
             	    {
-            	    lv_text_1_0=(Token)match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleDocumentation12084); 
+            	    lv_text_1_0=(Token)match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleDocumentation12156); 
 
             	    			newLeafNode(lv_text_1_0, grammarAccess.getDocumentationAccess().getTextSTRINGTerminalRuleCall_1_0()); 
             	    		
@@ -14484,15 +14595,15 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    if ( cnt125 >= 1 ) break loop125;
+            	    if ( cnt127 >= 1 ) break loop127;
                         EarlyExitException eee =
-                            new EarlyExitException(125, input);
+                            new EarlyExitException(127, input);
                         throw eee;
                 }
-                cnt125++;
+                cnt127++;
             } while (true);
 
-            otherlv_2=(Token)match(input,21,FOLLOW_21_in_ruleDocumentation12102); 
+            otherlv_2=(Token)match(input,21,FOLLOW_21_in_ruleDocumentation12174); 
 
                 	newLeafNode(otherlv_2, grammarAccess.getDocumentationAccess().getRightSquareBracketKeyword_2());
                 
@@ -14517,7 +14628,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleAnnotation"
-    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5860:1: entryRuleAnnotation returns [EObject current=null] : iv_ruleAnnotation= ruleAnnotation EOF ;
+    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5904:1: entryRuleAnnotation returns [EObject current=null] : iv_ruleAnnotation= ruleAnnotation EOF ;
     public final EObject entryRuleAnnotation() throws RecognitionException {
         EObject current = null;
 
@@ -14525,17 +14636,17 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5861:2: (iv_ruleAnnotation= ruleAnnotation EOF )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5862:2: iv_ruleAnnotation= ruleAnnotation EOF
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5905:2: (iv_ruleAnnotation= ruleAnnotation EOF )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5906:2: iv_ruleAnnotation= ruleAnnotation EOF
             {
              newCompositeNode(grammarAccess.getAnnotationRule()); 
-            pushFollow(FOLLOW_ruleAnnotation_in_entryRuleAnnotation12138);
+            pushFollow(FOLLOW_ruleAnnotation_in_entryRuleAnnotation12210);
             iv_ruleAnnotation=ruleAnnotation();
 
             state._fsp--;
 
              current =iv_ruleAnnotation; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleAnnotation12148); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleAnnotation12220); 
 
             }
 
@@ -14553,7 +14664,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleAnnotation"
-    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5869:1: ruleAnnotation returns [EObject current=null] : (otherlv_0= '@' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= '(' ( (lv_attributes_3_0= ruleKeyValue ) ) (otherlv_4= ',' ( (lv_attributes_5_0= ruleKeyValue ) ) )* otherlv_6= ')' )? ) ;
+    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5913:1: ruleAnnotation returns [EObject current=null] : (otherlv_0= '@' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= '(' ( (lv_attributes_3_0= ruleKeyValue ) ) (otherlv_4= ',' ( (lv_attributes_5_0= ruleKeyValue ) ) )* otherlv_6= ')' )? ) ;
     public final EObject ruleAnnotation() throws RecognitionException {
         EObject current = null;
 
@@ -14570,23 +14681,23 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5872:28: ( (otherlv_0= '@' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= '(' ( (lv_attributes_3_0= ruleKeyValue ) ) (otherlv_4= ',' ( (lv_attributes_5_0= ruleKeyValue ) ) )* otherlv_6= ')' )? ) )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5873:1: (otherlv_0= '@' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= '(' ( (lv_attributes_3_0= ruleKeyValue ) ) (otherlv_4= ',' ( (lv_attributes_5_0= ruleKeyValue ) ) )* otherlv_6= ')' )? )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5916:28: ( (otherlv_0= '@' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= '(' ( (lv_attributes_3_0= ruleKeyValue ) ) (otherlv_4= ',' ( (lv_attributes_5_0= ruleKeyValue ) ) )* otherlv_6= ')' )? ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5917:1: (otherlv_0= '@' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= '(' ( (lv_attributes_3_0= ruleKeyValue ) ) (otherlv_4= ',' ( (lv_attributes_5_0= ruleKeyValue ) ) )* otherlv_6= ')' )? )
             {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5873:1: (otherlv_0= '@' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= '(' ( (lv_attributes_3_0= ruleKeyValue ) ) (otherlv_4= ',' ( (lv_attributes_5_0= ruleKeyValue ) ) )* otherlv_6= ')' )? )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5873:3: otherlv_0= '@' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= '(' ( (lv_attributes_3_0= ruleKeyValue ) ) (otherlv_4= ',' ( (lv_attributes_5_0= ruleKeyValue ) ) )* otherlv_6= ')' )?
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5917:1: (otherlv_0= '@' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= '(' ( (lv_attributes_3_0= ruleKeyValue ) ) (otherlv_4= ',' ( (lv_attributes_5_0= ruleKeyValue ) ) )* otherlv_6= ')' )? )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5917:3: otherlv_0= '@' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= '(' ( (lv_attributes_3_0= ruleKeyValue ) ) (otherlv_4= ',' ( (lv_attributes_5_0= ruleKeyValue ) ) )* otherlv_6= ')' )?
             {
-            otherlv_0=(Token)match(input,90,FOLLOW_90_in_ruleAnnotation12185); 
+            otherlv_0=(Token)match(input,91,FOLLOW_91_in_ruleAnnotation12257); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getAnnotationAccess().getCommercialAtKeyword_0());
                 
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5877:1: ( (lv_name_1_0= RULE_ID ) )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5878:1: (lv_name_1_0= RULE_ID )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5921:1: ( (lv_name_1_0= RULE_ID ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5922:1: (lv_name_1_0= RULE_ID )
             {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5878:1: (lv_name_1_0= RULE_ID )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5879:3: lv_name_1_0= RULE_ID
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5922:1: (lv_name_1_0= RULE_ID )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5923:3: lv_name_1_0= RULE_ID
             {
-            lv_name_1_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleAnnotation12202); 
+            lv_name_1_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleAnnotation12274); 
 
             			newLeafNode(lv_name_1_0, grammarAccess.getAnnotationAccess().getNameIDTerminalRuleCall_1_0()); 
             		
@@ -14606,31 +14717,31 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5895:2: (otherlv_2= '(' ( (lv_attributes_3_0= ruleKeyValue ) ) (otherlv_4= ',' ( (lv_attributes_5_0= ruleKeyValue ) ) )* otherlv_6= ')' )?
-            int alt127=2;
-            int LA127_0 = input.LA(1);
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5939:2: (otherlv_2= '(' ( (lv_attributes_3_0= ruleKeyValue ) ) (otherlv_4= ',' ( (lv_attributes_5_0= ruleKeyValue ) ) )* otherlv_6= ')' )?
+            int alt129=2;
+            int LA129_0 = input.LA(1);
 
-            if ( (LA127_0==24) ) {
-                alt127=1;
+            if ( (LA129_0==24) ) {
+                alt129=1;
             }
-            switch (alt127) {
+            switch (alt129) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5895:4: otherlv_2= '(' ( (lv_attributes_3_0= ruleKeyValue ) ) (otherlv_4= ',' ( (lv_attributes_5_0= ruleKeyValue ) ) )* otherlv_6= ')'
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5939:4: otherlv_2= '(' ( (lv_attributes_3_0= ruleKeyValue ) ) (otherlv_4= ',' ( (lv_attributes_5_0= ruleKeyValue ) ) )* otherlv_6= ')'
                     {
-                    otherlv_2=(Token)match(input,24,FOLLOW_24_in_ruleAnnotation12220); 
+                    otherlv_2=(Token)match(input,24,FOLLOW_24_in_ruleAnnotation12292); 
 
                         	newLeafNode(otherlv_2, grammarAccess.getAnnotationAccess().getLeftParenthesisKeyword_2_0());
                         
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5899:1: ( (lv_attributes_3_0= ruleKeyValue ) )
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5900:1: (lv_attributes_3_0= ruleKeyValue )
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5943:1: ( (lv_attributes_3_0= ruleKeyValue ) )
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5944:1: (lv_attributes_3_0= ruleKeyValue )
                     {
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5900:1: (lv_attributes_3_0= ruleKeyValue )
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5901:3: lv_attributes_3_0= ruleKeyValue
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5944:1: (lv_attributes_3_0= ruleKeyValue )
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5945:3: lv_attributes_3_0= ruleKeyValue
                     {
                      
                     	        newCompositeNode(grammarAccess.getAnnotationAccess().getAttributesKeyValueParserRuleCall_2_1_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleKeyValue_in_ruleAnnotation12241);
+                    pushFollow(FOLLOW_ruleKeyValue_in_ruleAnnotation12313);
                     lv_attributes_3_0=ruleKeyValue();
 
                     state._fsp--;
@@ -14652,35 +14763,35 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5917:2: (otherlv_4= ',' ( (lv_attributes_5_0= ruleKeyValue ) ) )*
-                    loop126:
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5961:2: (otherlv_4= ',' ( (lv_attributes_5_0= ruleKeyValue ) ) )*
+                    loop128:
                     do {
-                        int alt126=2;
-                        int LA126_0 = input.LA(1);
+                        int alt128=2;
+                        int LA128_0 = input.LA(1);
 
-                        if ( (LA126_0==25) ) {
-                            alt126=1;
+                        if ( (LA128_0==25) ) {
+                            alt128=1;
                         }
 
 
-                        switch (alt126) {
+                        switch (alt128) {
                     	case 1 :
-                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5917:4: otherlv_4= ',' ( (lv_attributes_5_0= ruleKeyValue ) )
+                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5961:4: otherlv_4= ',' ( (lv_attributes_5_0= ruleKeyValue ) )
                     	    {
-                    	    otherlv_4=(Token)match(input,25,FOLLOW_25_in_ruleAnnotation12254); 
+                    	    otherlv_4=(Token)match(input,25,FOLLOW_25_in_ruleAnnotation12326); 
 
                     	        	newLeafNode(otherlv_4, grammarAccess.getAnnotationAccess().getCommaKeyword_2_2_0());
                     	        
-                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5921:1: ( (lv_attributes_5_0= ruleKeyValue ) )
-                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5922:1: (lv_attributes_5_0= ruleKeyValue )
+                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5965:1: ( (lv_attributes_5_0= ruleKeyValue ) )
+                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5966:1: (lv_attributes_5_0= ruleKeyValue )
                     	    {
-                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5922:1: (lv_attributes_5_0= ruleKeyValue )
-                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5923:3: lv_attributes_5_0= ruleKeyValue
+                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5966:1: (lv_attributes_5_0= ruleKeyValue )
+                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5967:3: lv_attributes_5_0= ruleKeyValue
                     	    {
                     	     
                     	    	        newCompositeNode(grammarAccess.getAnnotationAccess().getAttributesKeyValueParserRuleCall_2_2_1_0()); 
                     	    	    
-                    	    pushFollow(FOLLOW_ruleKeyValue_in_ruleAnnotation12275);
+                    	    pushFollow(FOLLOW_ruleKeyValue_in_ruleAnnotation12347);
                     	    lv_attributes_5_0=ruleKeyValue();
 
                     	    state._fsp--;
@@ -14707,11 +14818,11 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     	    break;
 
                     	default :
-                    	    break loop126;
+                    	    break loop128;
                         }
                     } while (true);
 
-                    otherlv_6=(Token)match(input,26,FOLLOW_26_in_ruleAnnotation12289); 
+                    otherlv_6=(Token)match(input,26,FOLLOW_26_in_ruleAnnotation12361); 
 
                         	newLeafNode(otherlv_6, grammarAccess.getAnnotationAccess().getRightParenthesisKeyword_2_3());
                         
@@ -14742,7 +14853,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleKeyValue"
-    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5951:1: entryRuleKeyValue returns [EObject current=null] : iv_ruleKeyValue= ruleKeyValue EOF ;
+    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5995:1: entryRuleKeyValue returns [EObject current=null] : iv_ruleKeyValue= ruleKeyValue EOF ;
     public final EObject entryRuleKeyValue() throws RecognitionException {
         EObject current = null;
 
@@ -14750,17 +14861,17 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5952:2: (iv_ruleKeyValue= ruleKeyValue EOF )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5953:2: iv_ruleKeyValue= ruleKeyValue EOF
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5996:2: (iv_ruleKeyValue= ruleKeyValue EOF )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5997:2: iv_ruleKeyValue= ruleKeyValue EOF
             {
              newCompositeNode(grammarAccess.getKeyValueRule()); 
-            pushFollow(FOLLOW_ruleKeyValue_in_entryRuleKeyValue12327);
+            pushFollow(FOLLOW_ruleKeyValue_in_entryRuleKeyValue12399);
             iv_ruleKeyValue=ruleKeyValue();
 
             state._fsp--;
 
              current =iv_ruleKeyValue; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleKeyValue12337); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleKeyValue12409); 
 
             }
 
@@ -14778,7 +14889,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleKeyValue"
-    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5960:1: ruleKeyValue returns [EObject current=null] : ( ( (lv_key_0_0= RULE_ID ) ) otherlv_1= '=' ( (lv_value_2_0= RULE_STRING ) ) ) ;
+    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6004:1: ruleKeyValue returns [EObject current=null] : ( ( (lv_key_0_0= RULE_ID ) ) otherlv_1= '=' ( (lv_value_2_0= RULE_STRING ) ) ) ;
     public final EObject ruleKeyValue() throws RecognitionException {
         EObject current = null;
 
@@ -14789,19 +14900,19 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5963:28: ( ( ( (lv_key_0_0= RULE_ID ) ) otherlv_1= '=' ( (lv_value_2_0= RULE_STRING ) ) ) )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5964:1: ( ( (lv_key_0_0= RULE_ID ) ) otherlv_1= '=' ( (lv_value_2_0= RULE_STRING ) ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6007:28: ( ( ( (lv_key_0_0= RULE_ID ) ) otherlv_1= '=' ( (lv_value_2_0= RULE_STRING ) ) ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6008:1: ( ( (lv_key_0_0= RULE_ID ) ) otherlv_1= '=' ( (lv_value_2_0= RULE_STRING ) ) )
             {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5964:1: ( ( (lv_key_0_0= RULE_ID ) ) otherlv_1= '=' ( (lv_value_2_0= RULE_STRING ) ) )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5964:2: ( (lv_key_0_0= RULE_ID ) ) otherlv_1= '=' ( (lv_value_2_0= RULE_STRING ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6008:1: ( ( (lv_key_0_0= RULE_ID ) ) otherlv_1= '=' ( (lv_value_2_0= RULE_STRING ) ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6008:2: ( (lv_key_0_0= RULE_ID ) ) otherlv_1= '=' ( (lv_value_2_0= RULE_STRING ) )
             {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5964:2: ( (lv_key_0_0= RULE_ID ) )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5965:1: (lv_key_0_0= RULE_ID )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6008:2: ( (lv_key_0_0= RULE_ID ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6009:1: (lv_key_0_0= RULE_ID )
             {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5965:1: (lv_key_0_0= RULE_ID )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5966:3: lv_key_0_0= RULE_ID
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6009:1: (lv_key_0_0= RULE_ID )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6010:3: lv_key_0_0= RULE_ID
             {
-            lv_key_0_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleKeyValue12379); 
+            lv_key_0_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleKeyValue12451); 
 
             			newLeafNode(lv_key_0_0, grammarAccess.getKeyValueAccess().getKeyIDTerminalRuleCall_0_0()); 
             		
@@ -14821,17 +14932,17 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,22,FOLLOW_22_in_ruleKeyValue12396); 
+            otherlv_1=(Token)match(input,22,FOLLOW_22_in_ruleKeyValue12468); 
 
                 	newLeafNode(otherlv_1, grammarAccess.getKeyValueAccess().getEqualsSignKeyword_1());
                 
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5986:1: ( (lv_value_2_0= RULE_STRING ) )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5987:1: (lv_value_2_0= RULE_STRING )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6030:1: ( (lv_value_2_0= RULE_STRING ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6031:1: (lv_value_2_0= RULE_STRING )
             {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5987:1: (lv_value_2_0= RULE_STRING )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5988:3: lv_value_2_0= RULE_STRING
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6031:1: (lv_value_2_0= RULE_STRING )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6032:3: lv_value_2_0= RULE_STRING
             {
-            lv_value_2_0=(Token)match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleKeyValue12413); 
+            lv_value_2_0=(Token)match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleKeyValue12485); 
 
             			newLeafNode(lv_value_2_0, grammarAccess.getKeyValueAccess().getValueSTRINGTerminalRuleCall_2_0()); 
             		
@@ -14872,7 +14983,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleImport"
-    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6012:1: entryRuleImport returns [EObject current=null] : iv_ruleImport= ruleImport EOF ;
+    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6056:1: entryRuleImport returns [EObject current=null] : iv_ruleImport= ruleImport EOF ;
     public final EObject entryRuleImport() throws RecognitionException {
         EObject current = null;
 
@@ -14880,17 +14991,17 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6013:2: (iv_ruleImport= ruleImport EOF )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6014:2: iv_ruleImport= ruleImport EOF
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6057:2: (iv_ruleImport= ruleImport EOF )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6058:2: iv_ruleImport= ruleImport EOF
             {
              newCompositeNode(grammarAccess.getImportRule()); 
-            pushFollow(FOLLOW_ruleImport_in_entryRuleImport12454);
+            pushFollow(FOLLOW_ruleImport_in_entryRuleImport12526);
             iv_ruleImport=ruleImport();
 
             state._fsp--;
 
              current =iv_ruleImport; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleImport12464); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleImport12536); 
 
             }
 
@@ -14908,7 +15019,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleImport"
-    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6021:1: ruleImport returns [EObject current=null] : (otherlv_0= 'import' ( (lv_importedNamespace_1_0= ruleImportedFQN ) ) otherlv_2= 'from' ( (lv_importURI_3_0= RULE_STRING ) ) ) ;
+    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6065:1: ruleImport returns [EObject current=null] : (otherlv_0= 'import' ( (lv_importedNamespace_1_0= ruleImportedFQN ) ) otherlv_2= 'from' ( (lv_importURI_3_0= RULE_STRING ) ) ) ;
     public final EObject ruleImport() throws RecognitionException {
         EObject current = null;
 
@@ -14921,26 +15032,26 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6024:28: ( (otherlv_0= 'import' ( (lv_importedNamespace_1_0= ruleImportedFQN ) ) otherlv_2= 'from' ( (lv_importURI_3_0= RULE_STRING ) ) ) )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6025:1: (otherlv_0= 'import' ( (lv_importedNamespace_1_0= ruleImportedFQN ) ) otherlv_2= 'from' ( (lv_importURI_3_0= RULE_STRING ) ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6068:28: ( (otherlv_0= 'import' ( (lv_importedNamespace_1_0= ruleImportedFQN ) ) otherlv_2= 'from' ( (lv_importURI_3_0= RULE_STRING ) ) ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6069:1: (otherlv_0= 'import' ( (lv_importedNamespace_1_0= ruleImportedFQN ) ) otherlv_2= 'from' ( (lv_importURI_3_0= RULE_STRING ) ) )
             {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6025:1: (otherlv_0= 'import' ( (lv_importedNamespace_1_0= ruleImportedFQN ) ) otherlv_2= 'from' ( (lv_importURI_3_0= RULE_STRING ) ) )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6025:3: otherlv_0= 'import' ( (lv_importedNamespace_1_0= ruleImportedFQN ) ) otherlv_2= 'from' ( (lv_importURI_3_0= RULE_STRING ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6069:1: (otherlv_0= 'import' ( (lv_importedNamespace_1_0= ruleImportedFQN ) ) otherlv_2= 'from' ( (lv_importURI_3_0= RULE_STRING ) ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6069:3: otherlv_0= 'import' ( (lv_importedNamespace_1_0= ruleImportedFQN ) ) otherlv_2= 'from' ( (lv_importURI_3_0= RULE_STRING ) )
             {
-            otherlv_0=(Token)match(input,91,FOLLOW_91_in_ruleImport12501); 
+            otherlv_0=(Token)match(input,92,FOLLOW_92_in_ruleImport12573); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getImportAccess().getImportKeyword_0());
                 
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6029:1: ( (lv_importedNamespace_1_0= ruleImportedFQN ) )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6030:1: (lv_importedNamespace_1_0= ruleImportedFQN )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6073:1: ( (lv_importedNamespace_1_0= ruleImportedFQN ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6074:1: (lv_importedNamespace_1_0= ruleImportedFQN )
             {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6030:1: (lv_importedNamespace_1_0= ruleImportedFQN )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6031:3: lv_importedNamespace_1_0= ruleImportedFQN
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6074:1: (lv_importedNamespace_1_0= ruleImportedFQN )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6075:3: lv_importedNamespace_1_0= ruleImportedFQN
             {
              
             	        newCompositeNode(grammarAccess.getImportAccess().getImportedNamespaceImportedFQNParserRuleCall_1_0()); 
             	    
-            pushFollow(FOLLOW_ruleImportedFQN_in_ruleImport12522);
+            pushFollow(FOLLOW_ruleImportedFQN_in_ruleImport12594);
             lv_importedNamespace_1_0=ruleImportedFQN();
 
             state._fsp--;
@@ -14962,17 +15073,17 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_2=(Token)match(input,92,FOLLOW_92_in_ruleImport12534); 
+            otherlv_2=(Token)match(input,93,FOLLOW_93_in_ruleImport12606); 
 
                 	newLeafNode(otherlv_2, grammarAccess.getImportAccess().getFromKeyword_2());
                 
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6051:1: ( (lv_importURI_3_0= RULE_STRING ) )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6052:1: (lv_importURI_3_0= RULE_STRING )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6095:1: ( (lv_importURI_3_0= RULE_STRING ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6096:1: (lv_importURI_3_0= RULE_STRING )
             {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6052:1: (lv_importURI_3_0= RULE_STRING )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6053:3: lv_importURI_3_0= RULE_STRING
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6096:1: (lv_importURI_3_0= RULE_STRING )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6097:3: lv_importURI_3_0= RULE_STRING
             {
-            lv_importURI_3_0=(Token)match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleImport12551); 
+            lv_importURI_3_0=(Token)match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleImport12623); 
 
             			newLeafNode(lv_importURI_3_0, grammarAccess.getImportAccess().getImportURISTRINGTerminalRuleCall_3_0()); 
             		
@@ -15013,7 +15124,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleImportedFQN"
-    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6077:1: entryRuleImportedFQN returns [String current=null] : iv_ruleImportedFQN= ruleImportedFQN EOF ;
+    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6121:1: entryRuleImportedFQN returns [String current=null] : iv_ruleImportedFQN= ruleImportedFQN EOF ;
     public final String entryRuleImportedFQN() throws RecognitionException {
         String current = null;
 
@@ -15021,17 +15132,17 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6078:2: (iv_ruleImportedFQN= ruleImportedFQN EOF )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6079:2: iv_ruleImportedFQN= ruleImportedFQN EOF
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6122:2: (iv_ruleImportedFQN= ruleImportedFQN EOF )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6123:2: iv_ruleImportedFQN= ruleImportedFQN EOF
             {
              newCompositeNode(grammarAccess.getImportedFQNRule()); 
-            pushFollow(FOLLOW_ruleImportedFQN_in_entryRuleImportedFQN12593);
+            pushFollow(FOLLOW_ruleImportedFQN_in_entryRuleImportedFQN12665);
             iv_ruleImportedFQN=ruleImportedFQN();
 
             state._fsp--;
 
              current =iv_ruleImportedFQN.getText(); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleImportedFQN12604); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleImportedFQN12676); 
 
             }
 
@@ -15049,7 +15160,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleImportedFQN"
-    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6086:1: ruleImportedFQN returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_FQN_0= ruleFQN (kw= '.' kw= '*' )? ) ;
+    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6130:1: ruleImportedFQN returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_FQN_0= ruleFQN (kw= '.' kw= '*' )? ) ;
     public final AntlrDatatypeRuleToken ruleImportedFQN() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -15060,16 +15171,16 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6089:28: ( (this_FQN_0= ruleFQN (kw= '.' kw= '*' )? ) )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6090:1: (this_FQN_0= ruleFQN (kw= '.' kw= '*' )? )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6133:28: ( (this_FQN_0= ruleFQN (kw= '.' kw= '*' )? ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6134:1: (this_FQN_0= ruleFQN (kw= '.' kw= '*' )? )
             {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6090:1: (this_FQN_0= ruleFQN (kw= '.' kw= '*' )? )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6091:5: this_FQN_0= ruleFQN (kw= '.' kw= '*' )?
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6134:1: (this_FQN_0= ruleFQN (kw= '.' kw= '*' )? )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6135:5: this_FQN_0= ruleFQN (kw= '.' kw= '*' )?
             {
              
                     newCompositeNode(grammarAccess.getImportedFQNAccess().getFQNParserRuleCall_0()); 
                 
-            pushFollow(FOLLOW_ruleFQN_in_ruleImportedFQN12651);
+            pushFollow(FOLLOW_ruleFQN_in_ruleImportedFQN12723);
             this_FQN_0=ruleFQN();
 
             state._fsp--;
@@ -15080,23 +15191,23 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
              
                     afterParserOrEnumRuleCall();
                 
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6101:1: (kw= '.' kw= '*' )?
-            int alt128=2;
-            int LA128_0 = input.LA(1);
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6145:1: (kw= '.' kw= '*' )?
+            int alt130=2;
+            int LA130_0 = input.LA(1);
 
-            if ( (LA128_0==59) ) {
-                alt128=1;
+            if ( (LA130_0==59) ) {
+                alt130=1;
             }
-            switch (alt128) {
+            switch (alt130) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6102:2: kw= '.' kw= '*'
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6146:2: kw= '.' kw= '*'
                     {
-                    kw=(Token)match(input,59,FOLLOW_59_in_ruleImportedFQN12670); 
+                    kw=(Token)match(input,59,FOLLOW_59_in_ruleImportedFQN12742); 
 
                             current.merge(kw);
                             newLeafNode(kw, grammarAccess.getImportedFQNAccess().getFullStopKeyword_1_0()); 
                         
-                    kw=(Token)match(input,93,FOLLOW_93_in_ruleImportedFQN12683); 
+                    kw=(Token)match(input,94,FOLLOW_94_in_ruleImportedFQN12755); 
 
                             current.merge(kw);
                             newLeafNode(kw, grammarAccess.getImportedFQNAccess().getAsteriskKeyword_1_1()); 
@@ -15128,7 +15239,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleFQN"
-    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6121:1: entryRuleFQN returns [String current=null] : iv_ruleFQN= ruleFQN EOF ;
+    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6165:1: entryRuleFQN returns [String current=null] : iv_ruleFQN= ruleFQN EOF ;
     public final String entryRuleFQN() throws RecognitionException {
         String current = null;
 
@@ -15136,17 +15247,17 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6122:2: (iv_ruleFQN= ruleFQN EOF )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6123:2: iv_ruleFQN= ruleFQN EOF
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6166:2: (iv_ruleFQN= ruleFQN EOF )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6167:2: iv_ruleFQN= ruleFQN EOF
             {
              newCompositeNode(grammarAccess.getFQNRule()); 
-            pushFollow(FOLLOW_ruleFQN_in_entryRuleFQN12726);
+            pushFollow(FOLLOW_ruleFQN_in_entryRuleFQN12798);
             iv_ruleFQN=ruleFQN();
 
             state._fsp--;
 
              current =iv_ruleFQN.getText(); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleFQN12737); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleFQN12809); 
 
             }
 
@@ -15164,7 +15275,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleFQN"
-    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6130:1: ruleFQN returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* ) ;
+    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6174:1: ruleFQN returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* ) ;
     public final AntlrDatatypeRuleToken ruleFQN() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -15175,46 +15286,46 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6133:28: ( (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* ) )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6134:1: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6177:28: ( (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6178:1: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* )
             {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6134:1: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6134:6: this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )*
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6178:1: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6178:6: this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )*
             {
-            this_ID_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleFQN12777); 
+            this_ID_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleFQN12849); 
 
             		current.merge(this_ID_0);
                 
              
                 newLeafNode(this_ID_0, grammarAccess.getFQNAccess().getIDTerminalRuleCall_0()); 
                 
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6141:1: (kw= '.' this_ID_2= RULE_ID )*
-            loop129:
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6185:1: (kw= '.' this_ID_2= RULE_ID )*
+            loop131:
             do {
-                int alt129=2;
-                int LA129_0 = input.LA(1);
+                int alt131=2;
+                int LA131_0 = input.LA(1);
 
-                if ( (LA129_0==59) ) {
-                    int LA129_2 = input.LA(2);
+                if ( (LA131_0==59) ) {
+                    int LA131_2 = input.LA(2);
 
-                    if ( (LA129_2==RULE_ID) ) {
-                        alt129=1;
+                    if ( (LA131_2==RULE_ID) ) {
+                        alt131=1;
                     }
 
 
                 }
 
 
-                switch (alt129) {
+                switch (alt131) {
             	case 1 :
-            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6142:2: kw= '.' this_ID_2= RULE_ID
+            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6186:2: kw= '.' this_ID_2= RULE_ID
             	    {
-            	    kw=(Token)match(input,59,FOLLOW_59_in_ruleFQN12796); 
+            	    kw=(Token)match(input,59,FOLLOW_59_in_ruleFQN12868); 
 
             	            current.merge(kw);
             	            newLeafNode(kw, grammarAccess.getFQNAccess().getFullStopKeyword_1_0()); 
             	        
-            	    this_ID_2=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleFQN12811); 
+            	    this_ID_2=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleFQN12883); 
 
             	    		current.merge(this_ID_2);
             	        
@@ -15226,7 +15337,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    break loop129;
+            	    break loop131;
                 }
             } while (true);
 
@@ -15251,7 +15362,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "rulePrimitiveType"
-    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6162:1: rulePrimitiveType returns [Enumerator current=null] : ( (enumLiteral_0= 'void' ) | (enumLiteral_1= 'int8' ) | (enumLiteral_2= 'int16' ) | (enumLiteral_3= 'int32' ) | (enumLiteral_4= 'uint8' ) | (enumLiteral_5= 'uint16' ) | (enumLiteral_6= 'uint32' ) | (enumLiteral_7= 'float32' ) | (enumLiteral_8= 'float64' ) | (enumLiteral_9= 'boolean' ) | (enumLiteral_10= 'string' ) | (enumLiteral_11= 'char' ) ) ;
+    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6206:1: rulePrimitiveType returns [Enumerator current=null] : ( (enumLiteral_0= 'void' ) | (enumLiteral_1= 'int8' ) | (enumLiteral_2= 'int16' ) | (enumLiteral_3= 'int32' ) | (enumLiteral_4= 'uint8' ) | (enumLiteral_5= 'uint16' ) | (enumLiteral_6= 'uint32' ) | (enumLiteral_7= 'float32' ) | (enumLiteral_8= 'float64' ) | (enumLiteral_9= 'boolean' ) | (enumLiteral_10= 'string' ) | (enumLiteral_11= 'char' ) ) ;
     public final Enumerator rulePrimitiveType() throws RecognitionException {
         Enumerator current = null;
 
@@ -15270,87 +15381,87 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
          enterRule(); 
         try {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6164:28: ( ( (enumLiteral_0= 'void' ) | (enumLiteral_1= 'int8' ) | (enumLiteral_2= 'int16' ) | (enumLiteral_3= 'int32' ) | (enumLiteral_4= 'uint8' ) | (enumLiteral_5= 'uint16' ) | (enumLiteral_6= 'uint32' ) | (enumLiteral_7= 'float32' ) | (enumLiteral_8= 'float64' ) | (enumLiteral_9= 'boolean' ) | (enumLiteral_10= 'string' ) | (enumLiteral_11= 'char' ) ) )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6165:1: ( (enumLiteral_0= 'void' ) | (enumLiteral_1= 'int8' ) | (enumLiteral_2= 'int16' ) | (enumLiteral_3= 'int32' ) | (enumLiteral_4= 'uint8' ) | (enumLiteral_5= 'uint16' ) | (enumLiteral_6= 'uint32' ) | (enumLiteral_7= 'float32' ) | (enumLiteral_8= 'float64' ) | (enumLiteral_9= 'boolean' ) | (enumLiteral_10= 'string' ) | (enumLiteral_11= 'char' ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6208:28: ( ( (enumLiteral_0= 'void' ) | (enumLiteral_1= 'int8' ) | (enumLiteral_2= 'int16' ) | (enumLiteral_3= 'int32' ) | (enumLiteral_4= 'uint8' ) | (enumLiteral_5= 'uint16' ) | (enumLiteral_6= 'uint32' ) | (enumLiteral_7= 'float32' ) | (enumLiteral_8= 'float64' ) | (enumLiteral_9= 'boolean' ) | (enumLiteral_10= 'string' ) | (enumLiteral_11= 'char' ) ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6209:1: ( (enumLiteral_0= 'void' ) | (enumLiteral_1= 'int8' ) | (enumLiteral_2= 'int16' ) | (enumLiteral_3= 'int32' ) | (enumLiteral_4= 'uint8' ) | (enumLiteral_5= 'uint16' ) | (enumLiteral_6= 'uint32' ) | (enumLiteral_7= 'float32' ) | (enumLiteral_8= 'float64' ) | (enumLiteral_9= 'boolean' ) | (enumLiteral_10= 'string' ) | (enumLiteral_11= 'char' ) )
             {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6165:1: ( (enumLiteral_0= 'void' ) | (enumLiteral_1= 'int8' ) | (enumLiteral_2= 'int16' ) | (enumLiteral_3= 'int32' ) | (enumLiteral_4= 'uint8' ) | (enumLiteral_5= 'uint16' ) | (enumLiteral_6= 'uint32' ) | (enumLiteral_7= 'float32' ) | (enumLiteral_8= 'float64' ) | (enumLiteral_9= 'boolean' ) | (enumLiteral_10= 'string' ) | (enumLiteral_11= 'char' ) )
-            int alt130=12;
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6209:1: ( (enumLiteral_0= 'void' ) | (enumLiteral_1= 'int8' ) | (enumLiteral_2= 'int16' ) | (enumLiteral_3= 'int32' ) | (enumLiteral_4= 'uint8' ) | (enumLiteral_5= 'uint16' ) | (enumLiteral_6= 'uint32' ) | (enumLiteral_7= 'float32' ) | (enumLiteral_8= 'float64' ) | (enumLiteral_9= 'boolean' ) | (enumLiteral_10= 'string' ) | (enumLiteral_11= 'char' ) )
+            int alt132=12;
             switch ( input.LA(1) ) {
-            case 94:
-                {
-                alt130=1;
-                }
-                break;
             case 95:
                 {
-                alt130=2;
+                alt132=1;
                 }
                 break;
             case 96:
                 {
-                alt130=3;
+                alt132=2;
                 }
                 break;
             case 97:
                 {
-                alt130=4;
+                alt132=3;
                 }
                 break;
             case 98:
                 {
-                alt130=5;
+                alt132=4;
                 }
                 break;
             case 99:
                 {
-                alt130=6;
+                alt132=5;
                 }
                 break;
             case 100:
                 {
-                alt130=7;
+                alt132=6;
                 }
                 break;
             case 101:
                 {
-                alt130=8;
+                alt132=7;
                 }
                 break;
             case 102:
                 {
-                alt130=9;
+                alt132=8;
                 }
                 break;
             case 103:
                 {
-                alt130=10;
+                alt132=9;
                 }
                 break;
             case 104:
                 {
-                alt130=11;
+                alt132=10;
                 }
                 break;
             case 105:
                 {
-                alt130=12;
+                alt132=11;
+                }
+                break;
+            case 106:
+                {
+                alt132=12;
                 }
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("", 130, 0, input);
+                    new NoViableAltException("", 132, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt130) {
+            switch (alt132) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6165:2: (enumLiteral_0= 'void' )
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6209:2: (enumLiteral_0= 'void' )
                     {
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6165:2: (enumLiteral_0= 'void' )
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6165:4: enumLiteral_0= 'void'
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6209:2: (enumLiteral_0= 'void' )
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6209:4: enumLiteral_0= 'void'
                     {
-                    enumLiteral_0=(Token)match(input,94,FOLLOW_94_in_rulePrimitiveType12872); 
+                    enumLiteral_0=(Token)match(input,95,FOLLOW_95_in_rulePrimitiveType12944); 
 
                             current = grammarAccess.getPrimitiveTypeAccess().getVoidEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
                             newLeafNode(enumLiteral_0, grammarAccess.getPrimitiveTypeAccess().getVoidEnumLiteralDeclaration_0()); 
@@ -15362,12 +15473,12 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6171:6: (enumLiteral_1= 'int8' )
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6215:6: (enumLiteral_1= 'int8' )
                     {
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6171:6: (enumLiteral_1= 'int8' )
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6171:8: enumLiteral_1= 'int8'
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6215:6: (enumLiteral_1= 'int8' )
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6215:8: enumLiteral_1= 'int8'
                     {
-                    enumLiteral_1=(Token)match(input,95,FOLLOW_95_in_rulePrimitiveType12889); 
+                    enumLiteral_1=(Token)match(input,96,FOLLOW_96_in_rulePrimitiveType12961); 
 
                             current = grammarAccess.getPrimitiveTypeAccess().getInt8EnumLiteralDeclaration_1().getEnumLiteral().getInstance();
                             newLeafNode(enumLiteral_1, grammarAccess.getPrimitiveTypeAccess().getInt8EnumLiteralDeclaration_1()); 
@@ -15379,12 +15490,12 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6177:6: (enumLiteral_2= 'int16' )
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6221:6: (enumLiteral_2= 'int16' )
                     {
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6177:6: (enumLiteral_2= 'int16' )
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6177:8: enumLiteral_2= 'int16'
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6221:6: (enumLiteral_2= 'int16' )
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6221:8: enumLiteral_2= 'int16'
                     {
-                    enumLiteral_2=(Token)match(input,96,FOLLOW_96_in_rulePrimitiveType12906); 
+                    enumLiteral_2=(Token)match(input,97,FOLLOW_97_in_rulePrimitiveType12978); 
 
                             current = grammarAccess.getPrimitiveTypeAccess().getInt16EnumLiteralDeclaration_2().getEnumLiteral().getInstance();
                             newLeafNode(enumLiteral_2, grammarAccess.getPrimitiveTypeAccess().getInt16EnumLiteralDeclaration_2()); 
@@ -15396,12 +15507,12 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 4 :
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6183:6: (enumLiteral_3= 'int32' )
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6227:6: (enumLiteral_3= 'int32' )
                     {
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6183:6: (enumLiteral_3= 'int32' )
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6183:8: enumLiteral_3= 'int32'
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6227:6: (enumLiteral_3= 'int32' )
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6227:8: enumLiteral_3= 'int32'
                     {
-                    enumLiteral_3=(Token)match(input,97,FOLLOW_97_in_rulePrimitiveType12923); 
+                    enumLiteral_3=(Token)match(input,98,FOLLOW_98_in_rulePrimitiveType12995); 
 
                             current = grammarAccess.getPrimitiveTypeAccess().getInt32EnumLiteralDeclaration_3().getEnumLiteral().getInstance();
                             newLeafNode(enumLiteral_3, grammarAccess.getPrimitiveTypeAccess().getInt32EnumLiteralDeclaration_3()); 
@@ -15413,12 +15524,12 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 5 :
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6189:6: (enumLiteral_4= 'uint8' )
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6233:6: (enumLiteral_4= 'uint8' )
                     {
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6189:6: (enumLiteral_4= 'uint8' )
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6189:8: enumLiteral_4= 'uint8'
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6233:6: (enumLiteral_4= 'uint8' )
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6233:8: enumLiteral_4= 'uint8'
                     {
-                    enumLiteral_4=(Token)match(input,98,FOLLOW_98_in_rulePrimitiveType12940); 
+                    enumLiteral_4=(Token)match(input,99,FOLLOW_99_in_rulePrimitiveType13012); 
 
                             current = grammarAccess.getPrimitiveTypeAccess().getUint8EnumLiteralDeclaration_4().getEnumLiteral().getInstance();
                             newLeafNode(enumLiteral_4, grammarAccess.getPrimitiveTypeAccess().getUint8EnumLiteralDeclaration_4()); 
@@ -15430,12 +15541,12 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 6 :
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6195:6: (enumLiteral_5= 'uint16' )
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6239:6: (enumLiteral_5= 'uint16' )
                     {
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6195:6: (enumLiteral_5= 'uint16' )
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6195:8: enumLiteral_5= 'uint16'
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6239:6: (enumLiteral_5= 'uint16' )
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6239:8: enumLiteral_5= 'uint16'
                     {
-                    enumLiteral_5=(Token)match(input,99,FOLLOW_99_in_rulePrimitiveType12957); 
+                    enumLiteral_5=(Token)match(input,100,FOLLOW_100_in_rulePrimitiveType13029); 
 
                             current = grammarAccess.getPrimitiveTypeAccess().getUint16EnumLiteralDeclaration_5().getEnumLiteral().getInstance();
                             newLeafNode(enumLiteral_5, grammarAccess.getPrimitiveTypeAccess().getUint16EnumLiteralDeclaration_5()); 
@@ -15447,12 +15558,12 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 7 :
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6201:6: (enumLiteral_6= 'uint32' )
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6245:6: (enumLiteral_6= 'uint32' )
                     {
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6201:6: (enumLiteral_6= 'uint32' )
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6201:8: enumLiteral_6= 'uint32'
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6245:6: (enumLiteral_6= 'uint32' )
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6245:8: enumLiteral_6= 'uint32'
                     {
-                    enumLiteral_6=(Token)match(input,100,FOLLOW_100_in_rulePrimitiveType12974); 
+                    enumLiteral_6=(Token)match(input,101,FOLLOW_101_in_rulePrimitiveType13046); 
 
                             current = grammarAccess.getPrimitiveTypeAccess().getUint32EnumLiteralDeclaration_6().getEnumLiteral().getInstance();
                             newLeafNode(enumLiteral_6, grammarAccess.getPrimitiveTypeAccess().getUint32EnumLiteralDeclaration_6()); 
@@ -15464,12 +15575,12 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 8 :
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6207:6: (enumLiteral_7= 'float32' )
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6251:6: (enumLiteral_7= 'float32' )
                     {
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6207:6: (enumLiteral_7= 'float32' )
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6207:8: enumLiteral_7= 'float32'
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6251:6: (enumLiteral_7= 'float32' )
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6251:8: enumLiteral_7= 'float32'
                     {
-                    enumLiteral_7=(Token)match(input,101,FOLLOW_101_in_rulePrimitiveType12991); 
+                    enumLiteral_7=(Token)match(input,102,FOLLOW_102_in_rulePrimitiveType13063); 
 
                             current = grammarAccess.getPrimitiveTypeAccess().getFloat32EnumLiteralDeclaration_7().getEnumLiteral().getInstance();
                             newLeafNode(enumLiteral_7, grammarAccess.getPrimitiveTypeAccess().getFloat32EnumLiteralDeclaration_7()); 
@@ -15481,12 +15592,12 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 9 :
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6213:6: (enumLiteral_8= 'float64' )
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6257:6: (enumLiteral_8= 'float64' )
                     {
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6213:6: (enumLiteral_8= 'float64' )
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6213:8: enumLiteral_8= 'float64'
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6257:6: (enumLiteral_8= 'float64' )
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6257:8: enumLiteral_8= 'float64'
                     {
-                    enumLiteral_8=(Token)match(input,102,FOLLOW_102_in_rulePrimitiveType13008); 
+                    enumLiteral_8=(Token)match(input,103,FOLLOW_103_in_rulePrimitiveType13080); 
 
                             current = grammarAccess.getPrimitiveTypeAccess().getFloat64EnumLiteralDeclaration_8().getEnumLiteral().getInstance();
                             newLeafNode(enumLiteral_8, grammarAccess.getPrimitiveTypeAccess().getFloat64EnumLiteralDeclaration_8()); 
@@ -15498,12 +15609,12 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 10 :
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6219:6: (enumLiteral_9= 'boolean' )
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6263:6: (enumLiteral_9= 'boolean' )
                     {
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6219:6: (enumLiteral_9= 'boolean' )
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6219:8: enumLiteral_9= 'boolean'
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6263:6: (enumLiteral_9= 'boolean' )
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6263:8: enumLiteral_9= 'boolean'
                     {
-                    enumLiteral_9=(Token)match(input,103,FOLLOW_103_in_rulePrimitiveType13025); 
+                    enumLiteral_9=(Token)match(input,104,FOLLOW_104_in_rulePrimitiveType13097); 
 
                             current = grammarAccess.getPrimitiveTypeAccess().getBooleanEnumLiteralDeclaration_9().getEnumLiteral().getInstance();
                             newLeafNode(enumLiteral_9, grammarAccess.getPrimitiveTypeAccess().getBooleanEnumLiteralDeclaration_9()); 
@@ -15515,12 +15626,12 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 11 :
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6225:6: (enumLiteral_10= 'string' )
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6269:6: (enumLiteral_10= 'string' )
                     {
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6225:6: (enumLiteral_10= 'string' )
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6225:8: enumLiteral_10= 'string'
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6269:6: (enumLiteral_10= 'string' )
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6269:8: enumLiteral_10= 'string'
                     {
-                    enumLiteral_10=(Token)match(input,104,FOLLOW_104_in_rulePrimitiveType13042); 
+                    enumLiteral_10=(Token)match(input,105,FOLLOW_105_in_rulePrimitiveType13114); 
 
                             current = grammarAccess.getPrimitiveTypeAccess().getStringEnumLiteralDeclaration_10().getEnumLiteral().getInstance();
                             newLeafNode(enumLiteral_10, grammarAccess.getPrimitiveTypeAccess().getStringEnumLiteralDeclaration_10()); 
@@ -15532,12 +15643,12 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 12 :
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6231:6: (enumLiteral_11= 'char' )
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6275:6: (enumLiteral_11= 'char' )
                     {
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6231:6: (enumLiteral_11= 'char' )
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6231:8: enumLiteral_11= 'char'
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6275:6: (enumLiteral_11= 'char' )
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6275:8: enumLiteral_11= 'char'
                     {
-                    enumLiteral_11=(Token)match(input,105,FOLLOW_105_in_rulePrimitiveType13059); 
+                    enumLiteral_11=(Token)match(input,106,FOLLOW_106_in_rulePrimitiveType13131); 
 
                             current = grammarAccess.getPrimitiveTypeAccess().getCharEnumLiteralDeclaration_11().getEnumLiteral().getInstance();
                             newLeafNode(enumLiteral_11, grammarAccess.getPrimitiveTypeAccess().getCharEnumLiteralDeclaration_11()); 
@@ -15571,29 +15682,29 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
     protected DFA8 dfa8 = new DFA8(this);
-    protected DFA104 dfa104 = new DFA104(this);
+    protected DFA106 dfa106 = new DFA106(this);
     static final String DFA8_eotS =
         "\7\uffff";
     static final String DFA8_eofS =
-        "\2\uffff\1\5\3\uffff\1\5";
+        "\2\uffff\1\4\3\uffff\1\4";
     static final String DFA8_minS =
         "\1\4\1\uffff\1\15\1\4\2\uffff\1\15";
     static final String DFA8_maxS =
-        "\1\151\1\uffff\1\101\1\4\2\uffff\1\101";
+        "\1\152\1\uffff\1\101\1\4\2\uffff\1\101";
     static final String DFA8_acceptS =
-        "\1\uffff\1\1\2\uffff\1\3\1\2\1\uffff";
+        "\1\uffff\1\1\2\uffff\1\2\1\3\1\uffff";
     static final String DFA8_specialS =
         "\7\uffff}>";
     static final String[] DFA8_transitionS = {
-            "\1\2\131\uffff\14\1",
+            "\1\2\132\uffff\14\1",
             "",
-            "\1\5\1\uffff\1\5\1\4\2\uffff\2\5\1\uffff\2\5\2\uffff\1\5\12"+
-            "\uffff\1\5\25\uffff\1\3\1\5\1\uffff\1\5\2\uffff\1\5",
+            "\1\4\1\uffff\1\4\1\5\2\uffff\2\4\1\uffff\2\4\2\uffff\1\4\12"+
+            "\uffff\1\4\25\uffff\1\3\1\4\1\uffff\1\4\2\uffff\1\4",
             "\1\6",
             "",
             "",
-            "\1\5\1\uffff\1\5\1\4\2\uffff\2\5\1\uffff\2\5\2\uffff\1\5\12"+
-            "\uffff\1\5\25\uffff\1\3\1\5\1\uffff\1\5\2\uffff\1\5"
+            "\1\4\1\uffff\1\4\1\5\2\uffff\2\4\1\uffff\2\4\2\uffff\1\4\12"+
+            "\uffff\1\4\25\uffff\1\3\1\4\1\uffff\1\4\2\uffff\1\4"
     };
 
     static final short[] DFA8_eot = DFA.unpackEncodedString(DFA8_eotS);
@@ -15629,82 +15740,82 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             return "468:1: ( ( (lv_prim_0_0= rulePrimitiveType ) ) | ( ( ( ruleFQN ) ) ( (lv_ref_2_0= 'ref' ) )? ) | ( ( (lv_ext_3_0= ruleFQN ) ) otherlv_4= 'ext' ( (lv_ref_5_0= 'ref' ) )? ) )";
         }
     }
-    static final String DFA104_eotS =
+    static final String DFA106_eotS =
         "\33\uffff";
-    static final String DFA104_eofS =
-        "\14\uffff\1\21\6\uffff\2\21\4\uffff\2\21";
-    static final String DFA104_minS =
-        "\1\116\1\4\1\16\1\4\1\50\4\4\3\50\1\14\2\4\1\6\1\15\1\uffff\1\4"+
-        "\2\14\1\6\3\uffff\2\14";
-    static final String DFA104_maxS =
-        "\1\116\2\16\1\126\1\65\3\4\1\126\3\50\1\116\2\4\1\6\1\124\1\uffff"+
-        "\1\4\2\116\1\25\3\uffff\2\116";
-    static final String DFA104_acceptS =
-        "\21\uffff\1\3\4\uffff\1\1\1\2\1\4\2\uffff";
-    static final String DFA104_specialS =
+    static final String DFA106_eofS =
+        "\14\uffff\1\22\6\uffff\3\22\4\uffff\1\22";
+    static final String DFA106_minS =
+        "\1\117\1\4\1\16\1\4\1\50\4\4\3\50\1\14\3\4\1\6\1\15\1\uffff\3\14"+
+        "\1\6\3\uffff\1\14";
+    static final String DFA106_maxS =
+        "\1\117\2\16\1\127\1\65\3\4\1\127\3\50\1\117\3\4\1\6\1\125\1\uffff"+
+        "\3\117\1\25\3\uffff\1\117";
+    static final String DFA106_acceptS =
+        "\22\uffff\1\3\4\uffff\1\1\1\4\1\2\1\uffff";
+    static final String DFA106_specialS =
         "\33\uffff}>";
-    static final String[] DFA104_transitionS = {
+    static final String[] DFA106_transitionS = {
             "\1\1",
             "\1\2\11\uffff\1\3",
             "\1\3",
-            "\1\4\120\uffff\1\5\1\6",
+            "\1\4\121\uffff\1\5\1\6",
             "\1\10\14\uffff\1\7",
             "\1\11",
             "\1\12",
             "\1\13",
-            "\1\14\120\uffff\1\15\1\16",
+            "\1\14\121\uffff\1\15\1\16",
             "\1\10",
             "\1\10",
             "\1\10",
-            "\1\20\1\21\6\uffff\1\17\40\uffff\1\22\16\uffff\1\21\3\uffff"+
-            "\7\21",
+            "\1\21\1\22\6\uffff\1\20\40\uffff\1\17\16\uffff\1\22\4\uffff"+
+            "\7\22",
             "\1\23",
             "\1\24",
             "\1\25",
-            "\1\21\102\uffff\1\21\1\26\1\uffff\1\27\1\30",
+            "\1\26",
+            "\1\22\103\uffff\1\22\1\27\1\uffff\1\31\1\30",
             "",
-            "\1\31",
-            "\1\20\1\21\6\uffff\1\17\57\uffff\1\21\3\uffff\7\21",
-            "\1\20\1\21\6\uffff\1\17\57\uffff\1\21\3\uffff\7\21",
-            "\1\25\16\uffff\1\32",
+            "\1\21\1\22\6\uffff\1\20\57\uffff\1\22\4\uffff\7\22",
+            "\1\21\1\22\6\uffff\1\20\57\uffff\1\22\4\uffff\7\22",
+            "\1\21\1\22\6\uffff\1\20\57\uffff\1\22\4\uffff\7\22",
+            "\1\26\16\uffff\1\32",
             "",
             "",
             "",
-            "\1\20\1\21\6\uffff\1\17\57\uffff\1\21\3\uffff\7\21",
-            "\1\20\1\21\66\uffff\1\21\3\uffff\7\21"
+            "\1\21\1\22\66\uffff\1\22\4\uffff\7\22"
     };
 
-    static final short[] DFA104_eot = DFA.unpackEncodedString(DFA104_eotS);
-    static final short[] DFA104_eof = DFA.unpackEncodedString(DFA104_eofS);
-    static final char[] DFA104_min = DFA.unpackEncodedStringToUnsignedChars(DFA104_minS);
-    static final char[] DFA104_max = DFA.unpackEncodedStringToUnsignedChars(DFA104_maxS);
-    static final short[] DFA104_accept = DFA.unpackEncodedString(DFA104_acceptS);
-    static final short[] DFA104_special = DFA.unpackEncodedString(DFA104_specialS);
-    static final short[][] DFA104_transition;
+    static final short[] DFA106_eot = DFA.unpackEncodedString(DFA106_eotS);
+    static final short[] DFA106_eof = DFA.unpackEncodedString(DFA106_eofS);
+    static final char[] DFA106_min = DFA.unpackEncodedStringToUnsignedChars(DFA106_minS);
+    static final char[] DFA106_max = DFA.unpackEncodedStringToUnsignedChars(DFA106_maxS);
+    static final short[] DFA106_accept = DFA.unpackEncodedString(DFA106_acceptS);
+    static final short[] DFA106_special = DFA.unpackEncodedString(DFA106_specialS);
+    static final short[][] DFA106_transition;
 
     static {
-        int numStates = DFA104_transitionS.length;
-        DFA104_transition = new short[numStates][];
+        int numStates = DFA106_transitionS.length;
+        DFA106_transition = new short[numStates][];
         for (int i=0; i<numStates; i++) {
-            DFA104_transition[i] = DFA.unpackEncodedString(DFA104_transitionS[i]);
+            DFA106_transition[i] = DFA.unpackEncodedString(DFA106_transitionS[i]);
         }
     }
 
-    class DFA104 extends DFA {
+    class DFA106 extends DFA {
 
-        public DFA104(BaseRecognizer recognizer) {
+        public DFA106(BaseRecognizer recognizer) {
             this.recognizer = recognizer;
-            this.decisionNumber = 104;
-            this.eot = DFA104_eot;
-            this.eof = DFA104_eof;
-            this.min = DFA104_min;
-            this.max = DFA104_max;
-            this.accept = DFA104_accept;
-            this.special = DFA104_special;
-            this.transition = DFA104_transition;
+            this.decisionNumber = 106;
+            this.eot = DFA106_eot;
+            this.eof = DFA106_eof;
+            this.min = DFA106_min;
+            this.max = DFA106_max;
+            this.accept = DFA106_accept;
+            this.special = DFA106_special;
+            this.transition = DFA106_transition;
         }
         public String getDescription() {
-            return "4607:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_GuardedTransition_1= ruleGuardedTransition | this_ContinuationTransition_2= ruleContinuationTransition | this_CPBranchTransition_3= ruleCPBranchTransition )";
+            return "4651:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_GuardedTransition_1= ruleGuardedTransition | this_ContinuationTransition_2= ruleContinuationTransition | this_CPBranchTransition_3= ruleCPBranchTransition )";
         }
     }
  
@@ -15714,8 +15825,8 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_11_in_ruleRoomModel122 = new BitSet(new long[]{0x0000000000000010L});
     public static final BitSet FOLLOW_ruleFQN_in_ruleRoomModel143 = new BitSet(new long[]{0x0000000000101000L});
     public static final BitSet FOLLOW_ruleDocumentation_in_ruleRoomModel164 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_ruleRoomModel177 = new BitSet(new long[]{0x01400C0008022000L,0x0000000008000000L});
-    public static final BitSet FOLLOW_ruleImport_in_ruleRoomModel198 = new BitSet(new long[]{0x01400C0008022000L,0x0000000008000000L});
+    public static final BitSet FOLLOW_12_in_ruleRoomModel177 = new BitSet(new long[]{0x01400C0008022000L,0x0000000010000000L});
+    public static final BitSet FOLLOW_ruleImport_in_ruleRoomModel198 = new BitSet(new long[]{0x01400C0008022000L,0x0000000010000000L});
     public static final BitSet FOLLOW_ruleDataClass_in_ruleRoomModel221 = new BitSet(new long[]{0x01400C0008022000L});
     public static final BitSet FOLLOW_ruleProtocolClass_in_ruleRoomModel248 = new BitSet(new long[]{0x01400C0008022000L});
     public static final BitSet FOLLOW_ruleActorClass_in_ruleRoomModel275 = new BitSet(new long[]{0x01400C0008022000L});
@@ -15733,12 +15844,12 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_ruleTypedID_in_entryRuleTypedID619 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleTypedID629 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_RULE_ID_in_ruleTypedID671 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_14_in_ruleTypedID688 = new BitSet(new long[]{0x0000000000000010L,0x000003FFC0000000L});
+    public static final BitSet FOLLOW_14_in_ruleTypedID688 = new BitSet(new long[]{0x0000000000000010L,0x000007FF80000000L});
     public static final BitSet FOLLOW_ruleType_in_ruleTypedID709 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleFreeTypedID_in_entryRuleFreeTypedID745 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleFreeTypedID755 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_RULE_ID_in_ruleFreeTypedID797 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_14_in_ruleFreeTypedID814 = new BitSet(new long[]{0x0000000000000010L,0x000003FFC0000000L});
+    public static final BitSet FOLLOW_14_in_ruleFreeTypedID814 = new BitSet(new long[]{0x0000000000000010L,0x000007FF80000000L});
     public static final BitSet FOLLOW_ruleFreeType_in_ruleFreeTypedID835 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleType_in_entryRuleType873 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleType883 = new BitSet(new long[]{0x0000000000000002L});
@@ -15760,9 +15871,9 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_ruleDocumentation_in_ruleDataClass1345 = new BitSet(new long[]{0x0000000000041000L});
     public static final BitSet FOLLOW_18_in_ruleDataClass1359 = new BitSet(new long[]{0x0000000000000010L});
     public static final BitSet FOLLOW_ruleFQN_in_ruleDataClass1382 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_ruleDataClass1396 = new BitSet(new long[]{0x0000000000080000L,0x0000000008000000L});
-    public static final BitSet FOLLOW_ruleImport_in_ruleDataClass1417 = new BitSet(new long[]{0x0000000000080000L,0x0000000008000000L});
-    public static final BitSet FOLLOW_ruleAttribute_in_ruleDataClass1439 = new BitSet(new long[]{0x0000000000882000L,0x0000000008000000L});
+    public static final BitSet FOLLOW_12_in_ruleDataClass1396 = new BitSet(new long[]{0x0000000000080000L,0x0000000010000000L});
+    public static final BitSet FOLLOW_ruleImport_in_ruleDataClass1417 = new BitSet(new long[]{0x0000000000080000L,0x0000000010000000L});
+    public static final BitSet FOLLOW_ruleAttribute_in_ruleDataClass1439 = new BitSet(new long[]{0x0000000000882000L,0x0000000010000000L});
     public static final BitSet FOLLOW_ruleOperation_in_ruleDataClass1461 = new BitSet(new long[]{0x0000000000802000L});
     public static final BitSet FOLLOW_13_in_ruleDataClass1474 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleAttribute_in_entryRuleAttribute1510 = new BitSet(new long[]{0x0000000000000000L});
@@ -15772,7 +15883,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_20_in_ruleAttribute1592 = new BitSet(new long[]{0x0000000000000020L});
     public static final BitSet FOLLOW_RULE_INT_in_ruleAttribute1609 = new BitSet(new long[]{0x0000000000200000L});
     public static final BitSet FOLLOW_21_in_ruleAttribute1626 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_14_in_ruleAttribute1640 = new BitSet(new long[]{0x0000000000000010L,0x000003FFC0000000L});
+    public static final BitSet FOLLOW_14_in_ruleAttribute1640 = new BitSet(new long[]{0x0000000000000010L,0x000007FF80000000L});
     public static final BitSet FOLLOW_ruleType_in_ruleAttribute1661 = new BitSet(new long[]{0x0000000000500002L});
     public static final BitSet FOLLOW_22_in_ruleAttribute1674 = new BitSet(new long[]{0x0000000000000040L});
     public static final BitSet FOLLOW_RULE_STRING_in_ruleAttribute1691 = new BitSet(new long[]{0x0000000000100002L});
@@ -15786,7 +15897,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_25_in_ruleOperation1872 = new BitSet(new long[]{0x0000000000000010L});
     public static final BitSet FOLLOW_ruleFreeTypedID_in_ruleOperation1893 = new BitSet(new long[]{0x0000000006000000L});
     public static final BitSet FOLLOW_26_in_ruleOperation1909 = new BitSet(new long[]{0x0000000000105000L});
-    public static final BitSet FOLLOW_14_in_ruleOperation1922 = new BitSet(new long[]{0x0000000000000010L,0x000003FFC0000000L});
+    public static final BitSet FOLLOW_14_in_ruleOperation1922 = new BitSet(new long[]{0x0000000000000010L,0x000007FF80000000L});
     public static final BitSet FOLLOW_ruleFreeType_in_ruleOperation1943 = new BitSet(new long[]{0x0000000000105000L});
     public static final BitSet FOLLOW_ruleDocumentation_in_ruleOperation1966 = new BitSet(new long[]{0x0000000000105000L});
     public static final BitSet FOLLOW_ruleDetailCode_in_ruleOperation1988 = new BitSet(new long[]{0x0000000000000002L});
@@ -15828,12 +15939,12 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_ruleDocumentation_in_ruleMessage2655 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rulePortClass_in_entryRulePortClass2692 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRulePortClass2702 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_12_in_rulePortClass2739 = new BitSet(new long[]{0x0000003000880000L,0x0000000008000000L});
+    public static final BitSet FOLLOW_12_in_rulePortClass2739 = new BitSet(new long[]{0x0000003000880000L,0x0000000010000000L});
     public static final BitSet FOLLOW_36_in_rulePortClass2752 = new BitSet(new long[]{0x0000000000105000L});
-    public static final BitSet FOLLOW_ruleDetailCode_in_rulePortClass2773 = new BitSet(new long[]{0x0000003000880000L,0x0000000008000000L});
-    public static final BitSet FOLLOW_ruleAttribute_in_rulePortClass2797 = new BitSet(new long[]{0x0000003000882000L,0x0000000008000000L});
-    public static final BitSet FOLLOW_ruleOperation_in_rulePortClass2824 = new BitSet(new long[]{0x0000003000882000L,0x0000000008000000L});
-    public static final BitSet FOLLOW_ruleMessageHandler_in_rulePortClass2851 = new BitSet(new long[]{0x0000003000882000L,0x0000000008000000L});
+    public static final BitSet FOLLOW_ruleDetailCode_in_rulePortClass2773 = new BitSet(new long[]{0x0000003000880000L,0x0000000010000000L});
+    public static final BitSet FOLLOW_ruleAttribute_in_rulePortClass2797 = new BitSet(new long[]{0x0000003000882000L,0x0000000010000000L});
+    public static final BitSet FOLLOW_ruleOperation_in_rulePortClass2824 = new BitSet(new long[]{0x0000003000882000L,0x0000000010000000L});
+    public static final BitSet FOLLOW_ruleMessageHandler_in_rulePortClass2851 = new BitSet(new long[]{0x0000003000882000L,0x0000000010000000L});
     public static final BitSet FOLLOW_13_in_rulePortClass2865 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleMessageHandler_in_entryRuleMessageHandler2901 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleMessageHandler2911 = new BitSet(new long[]{0x0000000000000002L});
@@ -15882,24 +15993,24 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_13_in_ruleActorClass3849 = new BitSet(new long[]{0x0000600000002000L});
     public static final BitSet FOLLOW_45_in_ruleActorClass3864 = new BitSet(new long[]{0x0000000000101000L});
     public static final BitSet FOLLOW_ruleDocumentation_in_ruleActorClass3885 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_ruleActorClass3898 = new BitSet(new long[]{0x5017800030082000L,0x0000000008000002L});
+    public static final BitSet FOLLOW_12_in_ruleActorClass3898 = new BitSet(new long[]{0x5017800030082000L,0x0000000010000002L});
     public static final BitSet FOLLOW_28_in_ruleActorClass3911 = new BitSet(new long[]{0x0000000000105000L});
-    public static final BitSet FOLLOW_ruleDetailCode_in_ruleActorClass3932 = new BitSet(new long[]{0x5017800020082000L,0x0000000008000002L});
+    public static final BitSet FOLLOW_ruleDetailCode_in_ruleActorClass3932 = new BitSet(new long[]{0x5017800020082000L,0x0000000010000002L});
     public static final BitSet FOLLOW_29_in_ruleActorClass3947 = new BitSet(new long[]{0x0000000000105000L});
-    public static final BitSet FOLLOW_ruleDetailCode_in_ruleActorClass3968 = new BitSet(new long[]{0x5017800000082000L,0x0000000008000002L});
-    public static final BitSet FOLLOW_rulePort_in_ruleActorClass3992 = new BitSet(new long[]{0x5017800000082000L,0x0000000008000002L});
-    public static final BitSet FOLLOW_ruleExternalPort_in_ruleActorClass4019 = new BitSet(new long[]{0x5017800000082000L,0x0000000008000002L});
-    public static final BitSet FOLLOW_ruleServiceImplementation_in_ruleActorClass4042 = new BitSet(new long[]{0x5014000000082000L,0x0000000008000002L});
-    public static final BitSet FOLLOW_ruleSAPRef_in_ruleActorClass4064 = new BitSet(new long[]{0x5004000000082000L,0x0000000008000002L});
-    public static final BitSet FOLLOW_ruleAttribute_in_ruleActorClass4086 = new BitSet(new long[]{0x5000000000082000L,0x0000000008000002L});
+    public static final BitSet FOLLOW_ruleDetailCode_in_ruleActorClass3968 = new BitSet(new long[]{0x5017800000082000L,0x0000000010000002L});
+    public static final BitSet FOLLOW_rulePort_in_ruleActorClass3992 = new BitSet(new long[]{0x5017800000082000L,0x0000000010000002L});
+    public static final BitSet FOLLOW_ruleExternalPort_in_ruleActorClass4019 = new BitSet(new long[]{0x5017800000082000L,0x0000000010000002L});
+    public static final BitSet FOLLOW_ruleServiceImplementation_in_ruleActorClass4042 = new BitSet(new long[]{0x5014000000082000L,0x0000000010000002L});
+    public static final BitSet FOLLOW_ruleSAPRef_in_ruleActorClass4064 = new BitSet(new long[]{0x5004000000082000L,0x0000000010000002L});
+    public static final BitSet FOLLOW_ruleAttribute_in_ruleActorClass4086 = new BitSet(new long[]{0x5000000000082000L,0x0000000010000002L});
     public static final BitSet FOLLOW_ruleActorRef_in_ruleActorClass4108 = new BitSet(new long[]{0x5000000000002000L,0x0000000000000002L});
     public static final BitSet FOLLOW_ruleBinding_in_ruleActorClass4130 = new BitSet(new long[]{0x5000000000002000L});
     public static final BitSet FOLLOW_ruleLayerConnection_in_ruleActorClass4152 = new BitSet(new long[]{0x4000000000002000L});
     public static final BitSet FOLLOW_13_in_ruleActorClass4165 = new BitSet(new long[]{0x0000400000002000L});
     public static final BitSet FOLLOW_46_in_ruleActorClass4180 = new BitSet(new long[]{0x0000000000101000L});
     public static final BitSet FOLLOW_ruleDocumentation_in_ruleActorClass4201 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_ruleActorClass4214 = new BitSet(new long[]{0x0000000000802000L,0x000000000400000CL});
-    public static final BitSet FOLLOW_ruleAnnotation_in_ruleActorClass4235 = new BitSet(new long[]{0x0000000000802000L,0x000000000400000CL});
+    public static final BitSet FOLLOW_12_in_ruleActorClass4214 = new BitSet(new long[]{0x0000000000802000L,0x000000000800000CL});
+    public static final BitSet FOLLOW_ruleAnnotation_in_ruleActorClass4235 = new BitSet(new long[]{0x0000000000802000L,0x000000000800000CL});
     public static final BitSet FOLLOW_ruleOperation_in_ruleActorClass4257 = new BitSet(new long[]{0x0000000000802000L,0x000000000000000CL});
     public static final BitSet FOLLOW_ruleStateMachine_in_ruleActorClass4279 = new BitSet(new long[]{0x0000000000002000L});
     public static final BitSet FOLLOW_13_in_ruleActorClass4292 = new BitSet(new long[]{0x0000000000002000L});
@@ -16044,246 +16155,250 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_ruleStateMachine_in_ruleStateGraph7556 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rulePlainStateGraph_in_entryRulePlainStateGraph7591 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRulePlainStateGraph7601 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_12_in_rulePlainStateGraph7647 = new BitSet(new long[]{0x0000000000002000L,0x0000000000007F10L});
-    public static final BitSet FOLLOW_ruleState_in_rulePlainStateGraph7669 = new BitSet(new long[]{0x0000000000002000L,0x0000000000007F10L});
-    public static final BitSet FOLLOW_ruleTrPoint_in_rulePlainStateGraph7696 = new BitSet(new long[]{0x0000000000002000L,0x0000000000007F10L});
-    public static final BitSet FOLLOW_ruleChoicePoint_in_rulePlainStateGraph7723 = new BitSet(new long[]{0x0000000000002000L,0x0000000000007F10L});
-    public static final BitSet FOLLOW_ruleTransition_in_rulePlainStateGraph7750 = new BitSet(new long[]{0x0000000000002000L,0x0000000000007F10L});
+    public static final BitSet FOLLOW_12_in_rulePlainStateGraph7647 = new BitSet(new long[]{0x0000000000002000L,0x000000000000FE10L});
+    public static final BitSet FOLLOW_ruleState_in_rulePlainStateGraph7669 = new BitSet(new long[]{0x0000000000002000L,0x000000000000FE10L});
+    public static final BitSet FOLLOW_ruleTrPoint_in_rulePlainStateGraph7696 = new BitSet(new long[]{0x0000000000002000L,0x000000000000FE10L});
+    public static final BitSet FOLLOW_ruleChoicePoint_in_rulePlainStateGraph7723 = new BitSet(new long[]{0x0000000000002000L,0x000000000000FE10L});
+    public static final BitSet FOLLOW_ruleTransition_in_rulePlainStateGraph7750 = new BitSet(new long[]{0x0000000000002000L,0x000000000000FE10L});
     public static final BitSet FOLLOW_13_in_rulePlainStateGraph7764 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleStateMachine_in_entryRuleStateMachine7800 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleStateMachine7810 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_66_in_ruleStateMachine7862 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000008L});
     public static final BitSet FOLLOW_67_in_ruleStateMachine7888 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_ruleStateMachine7900 = new BitSet(new long[]{0x0000000000002000L,0x0000000000007F10L});
-    public static final BitSet FOLLOW_ruleState_in_ruleStateMachine7922 = new BitSet(new long[]{0x0000000000002000L,0x0000000000007F10L});
-    public static final BitSet FOLLOW_ruleTrPoint_in_ruleStateMachine7949 = new BitSet(new long[]{0x0000000000002000L,0x0000000000007F10L});
-    public static final BitSet FOLLOW_ruleChoicePoint_in_ruleStateMachine7976 = new BitSet(new long[]{0x0000000000002000L,0x0000000000007F10L});
-    public static final BitSet FOLLOW_ruleTransition_in_ruleStateMachine8003 = new BitSet(new long[]{0x0000000000002000L,0x0000000000007F10L});
+    public static final BitSet FOLLOW_12_in_ruleStateMachine7900 = new BitSet(new long[]{0x0000000000002000L,0x000000000000FE10L});
+    public static final BitSet FOLLOW_ruleState_in_ruleStateMachine7922 = new BitSet(new long[]{0x0000000000002000L,0x000000000000FE10L});
+    public static final BitSet FOLLOW_ruleTrPoint_in_ruleStateMachine7949 = new BitSet(new long[]{0x0000000000002000L,0x000000000000FE10L});
+    public static final BitSet FOLLOW_ruleChoicePoint_in_ruleStateMachine7976 = new BitSet(new long[]{0x0000000000002000L,0x000000000000FE10L});
+    public static final BitSet FOLLOW_ruleTransition_in_ruleStateMachine8003 = new BitSet(new long[]{0x0000000000002000L,0x000000000000FE10L});
     public static final BitSet FOLLOW_13_in_ruleStateMachine8017 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleBaseState_in_entryRuleBaseState8053 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleBaseState8063 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_68_in_ruleBaseState8100 = new BitSet(new long[]{0x0000000000000010L});
     public static final BitSet FOLLOW_RULE_ID_in_ruleBaseState8117 = new BitSet(new long[]{0x0000000000101002L});
     public static final BitSet FOLLOW_ruleDocumentation_in_ruleBaseState8143 = new BitSet(new long[]{0x0000000000001002L});
-    public static final BitSet FOLLOW_12_in_ruleBaseState8157 = new BitSet(new long[]{0x0000000000002000L,0x00000000000000E0L});
+    public static final BitSet FOLLOW_12_in_ruleBaseState8157 = new BitSet(new long[]{0x0000000000002000L,0x00000000000001E0L});
     public static final BitSet FOLLOW_69_in_ruleBaseState8170 = new BitSet(new long[]{0x0000000000105000L});
-    public static final BitSet FOLLOW_ruleDetailCode_in_ruleBaseState8191 = new BitSet(new long[]{0x0000000000002000L,0x00000000000000C0L});
+    public static final BitSet FOLLOW_ruleDetailCode_in_ruleBaseState8191 = new BitSet(new long[]{0x0000000000002000L,0x00000000000001C0L});
     public static final BitSet FOLLOW_70_in_ruleBaseState8206 = new BitSet(new long[]{0x0000000000105000L});
-    public static final BitSet FOLLOW_ruleDetailCode_in_ruleBaseState8227 = new BitSet(new long[]{0x0000000000002000L,0x0000000000000080L});
-    public static final BitSet FOLLOW_71_in_ruleBaseState8242 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_rulePlainStateGraph_in_ruleBaseState8263 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_13_in_ruleBaseState8277 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleRefinedState_in_entryRuleRefinedState8315 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleRefinedState8325 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_72_in_ruleRefinedState8362 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_ruleFQN_in_ruleRefinedState8385 = new BitSet(new long[]{0x0000000000101000L});
-    public static final BitSet FOLLOW_ruleDocumentation_in_ruleRefinedState8406 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_ruleRefinedState8419 = new BitSet(new long[]{0x0000000000002000L,0x00000000000000E0L});
-    public static final BitSet FOLLOW_69_in_ruleRefinedState8432 = new BitSet(new long[]{0x0000000000105000L});
-    public static final BitSet FOLLOW_ruleDetailCode_in_ruleRefinedState8453 = new BitSet(new long[]{0x0000000000002000L,0x00000000000000C0L});
-    public static final BitSet FOLLOW_70_in_ruleRefinedState8468 = new BitSet(new long[]{0x0000000000105000L});
-    public static final BitSet FOLLOW_ruleDetailCode_in_ruleRefinedState8489 = new BitSet(new long[]{0x0000000000002000L,0x0000000000000080L});
-    public static final BitSet FOLLOW_71_in_ruleRefinedState8504 = new BitSet(new long[]{0x0000000000001000L,0x000000000000000CL});
-    public static final BitSet FOLLOW_ruleStateGraph_in_ruleRefinedState8525 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_13_in_ruleRefinedState8539 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDetailCode_in_entryRuleDetailCode8575 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleDetailCode8585 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_12_in_ruleDetailCode8622 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_RULE_STRING_in_ruleDetailCode8639 = new BitSet(new long[]{0x0000000000002040L});
-    public static final BitSet FOLLOW_13_in_ruleDetailCode8657 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTrPoint_in_entryRuleTrPoint8693 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleTrPoint8703 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTransitionPoint_in_ruleTrPoint8750 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEntryPoint_in_ruleTrPoint8777 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExitPoint_in_ruleTrPoint8804 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTransitionPoint_in_entryRuleTransitionPoint8839 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleTransitionPoint8849 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_73_in_ruleTransitionPoint8892 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000400L});
-    public static final BitSet FOLLOW_74_in_ruleTransitionPoint8918 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleTransitionPoint8935 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEntryPoint_in_entryRuleEntryPoint8976 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleEntryPoint8986 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_75_in_ruleEntryPoint9023 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleEntryPoint9040 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExitPoint_in_entryRuleExitPoint9081 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleExitPoint9091 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_76_in_ruleExitPoint9128 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleExitPoint9145 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleChoicePoint_in_entryRuleChoicePoint9186 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleChoicePoint9196 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_77_in_ruleChoicePoint9233 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleChoicePoint9250 = new BitSet(new long[]{0x0000000000100002L});
-    public static final BitSet FOLLOW_ruleDocumentation_in_ruleChoicePoint9276 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTransition_in_entryRuleTransition9313 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleTransition9323 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleInitialTransition_in_ruleTransition9370 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleNonInitialTransition_in_ruleTransition9397 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleNonInitialTransition_in_entryRuleNonInitialTransition9432 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleNonInitialTransition9442 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTriggeredTransition_in_ruleNonInitialTransition9489 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleGuardedTransition_in_ruleNonInitialTransition9516 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleContinuationTransition_in_ruleNonInitialTransition9543 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleCPBranchTransition_in_ruleNonInitialTransition9570 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleInitialTransition_in_entryRuleInitialTransition9605 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleInitialTransition9615 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_78_in_ruleInitialTransition9652 = new BitSet(new long[]{0x0000000000004010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleInitialTransition9669 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_14_in_ruleInitialTransition9687 = new BitSet(new long[]{0x0000000000000000L,0x0000000000008000L});
-    public static final BitSet FOLLOW_79_in_ruleInitialTransition9699 = new BitSet(new long[]{0x0000010000000000L});
-    public static final BitSet FOLLOW_40_in_ruleInitialTransition9711 = new BitSet(new long[]{0x0000000000000010L,0x0000000000600000L});
-    public static final BitSet FOLLOW_ruleTransitionTerminal_in_ruleInitialTransition9732 = new BitSet(new long[]{0x0000000000101000L});
-    public static final BitSet FOLLOW_ruleDocumentation_in_ruleInitialTransition9753 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_ruleInitialTransition9766 = new BitSet(new long[]{0x0000000000002000L,0x0000000000010000L});
-    public static final BitSet FOLLOW_80_in_ruleInitialTransition9779 = new BitSet(new long[]{0x0000000000105000L});
-    public static final BitSet FOLLOW_ruleDetailCode_in_ruleInitialTransition9800 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_13_in_ruleInitialTransition9814 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleContinuationTransition_in_entryRuleContinuationTransition9850 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleContinuationTransition9860 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_78_in_ruleContinuationTransition9897 = new BitSet(new long[]{0x0000000000004010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleContinuationTransition9914 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_14_in_ruleContinuationTransition9932 = new BitSet(new long[]{0x0000000000000010L,0x0000000000600000L});
-    public static final BitSet FOLLOW_ruleTransitionTerminal_in_ruleContinuationTransition9953 = new BitSet(new long[]{0x0000010000000000L});
-    public static final BitSet FOLLOW_40_in_ruleContinuationTransition9965 = new BitSet(new long[]{0x0000000000000010L,0x0000000000600000L});
-    public static final BitSet FOLLOW_ruleTransitionTerminal_in_ruleContinuationTransition9986 = new BitSet(new long[]{0x0000000000101002L});
-    public static final BitSet FOLLOW_ruleDocumentation_in_ruleContinuationTransition10007 = new BitSet(new long[]{0x0000000000001002L});
-    public static final BitSet FOLLOW_12_in_ruleContinuationTransition10021 = new BitSet(new long[]{0x0000000000002000L,0x0000000000010000L});
-    public static final BitSet FOLLOW_80_in_ruleContinuationTransition10034 = new BitSet(new long[]{0x0000000000105000L});
-    public static final BitSet FOLLOW_ruleDetailCode_in_ruleContinuationTransition10055 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_13_in_ruleContinuationTransition10069 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTriggeredTransition_in_entryRuleTriggeredTransition10107 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleTriggeredTransition10117 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_78_in_ruleTriggeredTransition10154 = new BitSet(new long[]{0x0000000000004010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleTriggeredTransition10171 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_14_in_ruleTriggeredTransition10189 = new BitSet(new long[]{0x0000000000000010L,0x0000000000600000L});
-    public static final BitSet FOLLOW_ruleTransitionTerminal_in_ruleTriggeredTransition10210 = new BitSet(new long[]{0x0000010000000000L});
-    public static final BitSet FOLLOW_40_in_ruleTriggeredTransition10222 = new BitSet(new long[]{0x0000000000000010L,0x0000000000600000L});
-    public static final BitSet FOLLOW_ruleTransitionTerminal_in_ruleTriggeredTransition10243 = new BitSet(new long[]{0x0000000000101000L});
-    public static final BitSet FOLLOW_ruleDocumentation_in_ruleTriggeredTransition10264 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_ruleTriggeredTransition10277 = new BitSet(new long[]{0x0000000000000000L,0x0000000000020000L});
-    public static final BitSet FOLLOW_81_in_ruleTriggeredTransition10289 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_ruleTriggeredTransition10301 = new BitSet(new long[]{0x0000000000000000L,0x0000000000800000L});
-    public static final BitSet FOLLOW_ruleTrigger_in_ruleTriggeredTransition10322 = new BitSet(new long[]{0x0000000000002000L,0x0000000000040000L});
-    public static final BitSet FOLLOW_82_in_ruleTriggeredTransition10335 = new BitSet(new long[]{0x0000000000000000L,0x0000000000800000L});
-    public static final BitSet FOLLOW_ruleTrigger_in_ruleTriggeredTransition10356 = new BitSet(new long[]{0x0000000000002000L,0x0000000000040000L});
-    public static final BitSet FOLLOW_13_in_ruleTriggeredTransition10370 = new BitSet(new long[]{0x0000000000002000L,0x0000000000010000L});
-    public static final BitSet FOLLOW_80_in_ruleTriggeredTransition10383 = new BitSet(new long[]{0x0000000000105000L});
-    public static final BitSet FOLLOW_ruleDetailCode_in_ruleTriggeredTransition10404 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_13_in_ruleTriggeredTransition10418 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleGuardedTransition_in_entryRuleGuardedTransition10454 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleGuardedTransition10464 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_78_in_ruleGuardedTransition10501 = new BitSet(new long[]{0x0000000000004010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleGuardedTransition10518 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_14_in_ruleGuardedTransition10536 = new BitSet(new long[]{0x0000000000000010L,0x0000000000600000L});
-    public static final BitSet FOLLOW_ruleTransitionTerminal_in_ruleGuardedTransition10557 = new BitSet(new long[]{0x0000010000000000L});
-    public static final BitSet FOLLOW_40_in_ruleGuardedTransition10569 = new BitSet(new long[]{0x0000000000000010L,0x0000000000600000L});
-    public static final BitSet FOLLOW_ruleTransitionTerminal_in_ruleGuardedTransition10590 = new BitSet(new long[]{0x0000000000101000L});
-    public static final BitSet FOLLOW_ruleDocumentation_in_ruleGuardedTransition10611 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_ruleGuardedTransition10624 = new BitSet(new long[]{0x0000000000000000L,0x0000000000080000L});
-    public static final BitSet FOLLOW_83_in_ruleGuardedTransition10636 = new BitSet(new long[]{0x0000000000105000L});
-    public static final BitSet FOLLOW_ruleDetailCode_in_ruleGuardedTransition10657 = new BitSet(new long[]{0x0000000000002000L,0x0000000000010000L});
-    public static final BitSet FOLLOW_80_in_ruleGuardedTransition10670 = new BitSet(new long[]{0x0000000000105000L});
-    public static final BitSet FOLLOW_ruleDetailCode_in_ruleGuardedTransition10691 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_13_in_ruleGuardedTransition10705 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleCPBranchTransition_in_entryRuleCPBranchTransition10741 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleCPBranchTransition10751 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_78_in_ruleCPBranchTransition10788 = new BitSet(new long[]{0x0000000000004010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleCPBranchTransition10805 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_14_in_ruleCPBranchTransition10823 = new BitSet(new long[]{0x0000000000000010L,0x0000000000600000L});
-    public static final BitSet FOLLOW_ruleTransitionTerminal_in_ruleCPBranchTransition10844 = new BitSet(new long[]{0x0000010000000000L});
-    public static final BitSet FOLLOW_40_in_ruleCPBranchTransition10856 = new BitSet(new long[]{0x0000000000000010L,0x0000000000600000L});
-    public static final BitSet FOLLOW_ruleTransitionTerminal_in_ruleCPBranchTransition10877 = new BitSet(new long[]{0x0000000000101000L});
-    public static final BitSet FOLLOW_ruleDocumentation_in_ruleCPBranchTransition10898 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_ruleCPBranchTransition10911 = new BitSet(new long[]{0x0000000000000000L,0x0000000000100000L});
-    public static final BitSet FOLLOW_84_in_ruleCPBranchTransition10923 = new BitSet(new long[]{0x0000000000105000L});
-    public static final BitSet FOLLOW_ruleDetailCode_in_ruleCPBranchTransition10944 = new BitSet(new long[]{0x0000000000002000L,0x0000000000010000L});
-    public static final BitSet FOLLOW_80_in_ruleCPBranchTransition10957 = new BitSet(new long[]{0x0000000000105000L});
-    public static final BitSet FOLLOW_ruleDetailCode_in_ruleCPBranchTransition10978 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_13_in_ruleCPBranchTransition10992 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTransitionTerminal_in_entryRuleTransitionTerminal11028 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleTransitionTerminal11038 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleStateTerminal_in_ruleTransitionTerminal11085 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTrPointTerminal_in_ruleTransitionTerminal11112 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleSubStateTrPointTerminal_in_ruleTransitionTerminal11139 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleChoicepointTerminal_in_ruleTransitionTerminal11166 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleStateTerminal_in_entryRuleStateTerminal11201 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleStateTerminal11211 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleStateTerminal11255 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTrPointTerminal_in_entryRuleTrPointTerminal11290 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleTrPointTerminal11300 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_85_in_ruleTrPointTerminal11337 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleTrPointTerminal11357 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleSubStateTrPointTerminal_in_entryRuleSubStateTrPointTerminal11393 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleSubStateTrPointTerminal11403 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleSubStateTrPointTerminal11448 = new BitSet(new long[]{0x0020000000000000L});
-    public static final BitSet FOLLOW_53_in_ruleSubStateTrPointTerminal11460 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleSubStateTrPointTerminal11480 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleChoicepointTerminal_in_entryRuleChoicepointTerminal11516 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleChoicepointTerminal11526 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_86_in_ruleChoicepointTerminal11563 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleChoicepointTerminal11583 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTrigger_in_entryRuleTrigger11619 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleTrigger11629 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_87_in_ruleTrigger11666 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_ruleMessageFromIf_in_ruleTrigger11687 = new BitSet(new long[]{0x0000000000000000L,0x0000000003080000L});
-    public static final BitSet FOLLOW_88_in_ruleTrigger11700 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_ruleMessageFromIf_in_ruleTrigger11721 = new BitSet(new long[]{0x0000000000000000L,0x0000000003080000L});
-    public static final BitSet FOLLOW_ruleGuard_in_ruleTrigger11744 = new BitSet(new long[]{0x0000000000000000L,0x0000000002000000L});
-    public static final BitSet FOLLOW_89_in_ruleTrigger11757 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleMessageFromIf_in_entryRuleMessageFromIf11793 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleMessageFromIf11803 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleMessageFromIf11848 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_14_in_ruleMessageFromIf11860 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleMessageFromIf11880 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleGuard_in_entryRuleGuard11916 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleGuard11926 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_83_in_ruleGuard11963 = new BitSet(new long[]{0x0000000000105000L});
-    public static final BitSet FOLLOW_ruleDetailCode_in_ruleGuard11984 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDocumentation_in_entryRuleDocumentation12020 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleDocumentation12030 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_20_in_ruleDocumentation12067 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_RULE_STRING_in_ruleDocumentation12084 = new BitSet(new long[]{0x0000000000200040L});
-    public static final BitSet FOLLOW_21_in_ruleDocumentation12102 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleAnnotation_in_entryRuleAnnotation12138 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleAnnotation12148 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_90_in_ruleAnnotation12185 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleAnnotation12202 = new BitSet(new long[]{0x0000000001000002L});
-    public static final BitSet FOLLOW_24_in_ruleAnnotation12220 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_ruleKeyValue_in_ruleAnnotation12241 = new BitSet(new long[]{0x0000000006000000L});
-    public static final BitSet FOLLOW_25_in_ruleAnnotation12254 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_ruleKeyValue_in_ruleAnnotation12275 = new BitSet(new long[]{0x0000000006000000L});
-    public static final BitSet FOLLOW_26_in_ruleAnnotation12289 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleKeyValue_in_entryRuleKeyValue12327 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleKeyValue12337 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleKeyValue12379 = new BitSet(new long[]{0x0000000000400000L});
-    public static final BitSet FOLLOW_22_in_ruleKeyValue12396 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_RULE_STRING_in_ruleKeyValue12413 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleImport_in_entryRuleImport12454 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleImport12464 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_91_in_ruleImport12501 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_ruleImportedFQN_in_ruleImport12522 = new BitSet(new long[]{0x0000000000000000L,0x0000000010000000L});
-    public static final BitSet FOLLOW_92_in_ruleImport12534 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_RULE_STRING_in_ruleImport12551 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleImportedFQN_in_entryRuleImportedFQN12593 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleImportedFQN12604 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleFQN_in_ruleImportedFQN12651 = new BitSet(new long[]{0x0800000000000002L});
-    public static final BitSet FOLLOW_59_in_ruleImportedFQN12670 = new BitSet(new long[]{0x0000000000000000L,0x0000000020000000L});
-    public static final BitSet FOLLOW_93_in_ruleImportedFQN12683 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleFQN_in_entryRuleFQN12726 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleFQN12737 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleFQN12777 = new BitSet(new long[]{0x0800000000000002L});
-    public static final BitSet FOLLOW_59_in_ruleFQN12796 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleFQN12811 = new BitSet(new long[]{0x0800000000000002L});
-    public static final BitSet FOLLOW_94_in_rulePrimitiveType12872 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_95_in_rulePrimitiveType12889 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_96_in_rulePrimitiveType12906 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_97_in_rulePrimitiveType12923 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_98_in_rulePrimitiveType12940 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_99_in_rulePrimitiveType12957 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_100_in_rulePrimitiveType12974 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_101_in_rulePrimitiveType12991 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_102_in_rulePrimitiveType13008 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_103_in_rulePrimitiveType13025 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_104_in_rulePrimitiveType13042 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_105_in_rulePrimitiveType13059 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleDetailCode_in_ruleBaseState8227 = new BitSet(new long[]{0x0000000000002000L,0x0000000000000180L});
+    public static final BitSet FOLLOW_71_in_ruleBaseState8242 = new BitSet(new long[]{0x0000000000105000L});
+    public static final BitSet FOLLOW_ruleDetailCode_in_ruleBaseState8263 = new BitSet(new long[]{0x0000000000002000L,0x0000000000000100L});
+    public static final BitSet FOLLOW_72_in_ruleBaseState8278 = new BitSet(new long[]{0x0000000000001000L});
+    public static final BitSet FOLLOW_rulePlainStateGraph_in_ruleBaseState8299 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_ruleBaseState8313 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleRefinedState_in_entryRuleRefinedState8351 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleRefinedState8361 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_73_in_ruleRefinedState8398 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_ruleFQN_in_ruleRefinedState8421 = new BitSet(new long[]{0x0000000000101000L});
+    public static final BitSet FOLLOW_ruleDocumentation_in_ruleRefinedState8442 = new BitSet(new long[]{0x0000000000001000L});
+    public static final BitSet FOLLOW_12_in_ruleRefinedState8455 = new BitSet(new long[]{0x0000000000002000L,0x00000000000001E0L});
+    public static final BitSet FOLLOW_69_in_ruleRefinedState8468 = new BitSet(new long[]{0x0000000000105000L});
+    public static final BitSet FOLLOW_ruleDetailCode_in_ruleRefinedState8489 = new BitSet(new long[]{0x0000000000002000L,0x00000000000001C0L});
+    public static final BitSet FOLLOW_70_in_ruleRefinedState8504 = new BitSet(new long[]{0x0000000000105000L});
+    public static final BitSet FOLLOW_ruleDetailCode_in_ruleRefinedState8525 = new BitSet(new long[]{0x0000000000002000L,0x0000000000000180L});
+    public static final BitSet FOLLOW_71_in_ruleRefinedState8540 = new BitSet(new long[]{0x0000000000105000L});
+    public static final BitSet FOLLOW_ruleDetailCode_in_ruleRefinedState8561 = new BitSet(new long[]{0x0000000000002000L,0x0000000000000100L});
+    public static final BitSet FOLLOW_72_in_ruleRefinedState8576 = new BitSet(new long[]{0x0000000000001000L,0x000000000000000CL});
+    public static final BitSet FOLLOW_ruleStateGraph_in_ruleRefinedState8597 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_ruleRefinedState8611 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleDetailCode_in_entryRuleDetailCode8647 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleDetailCode8657 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_12_in_ruleDetailCode8694 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_RULE_STRING_in_ruleDetailCode8711 = new BitSet(new long[]{0x0000000000002040L});
+    public static final BitSet FOLLOW_13_in_ruleDetailCode8729 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTrPoint_in_entryRuleTrPoint8765 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleTrPoint8775 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTransitionPoint_in_ruleTrPoint8822 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleEntryPoint_in_ruleTrPoint8849 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExitPoint_in_ruleTrPoint8876 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTransitionPoint_in_entryRuleTransitionPoint8911 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleTransitionPoint8921 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_74_in_ruleTransitionPoint8964 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000800L});
+    public static final BitSet FOLLOW_75_in_ruleTransitionPoint8990 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleTransitionPoint9007 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleEntryPoint_in_entryRuleEntryPoint9048 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleEntryPoint9058 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_76_in_ruleEntryPoint9095 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleEntryPoint9112 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExitPoint_in_entryRuleExitPoint9153 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleExitPoint9163 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_77_in_ruleExitPoint9200 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleExitPoint9217 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleChoicePoint_in_entryRuleChoicePoint9258 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleChoicePoint9268 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_78_in_ruleChoicePoint9305 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleChoicePoint9322 = new BitSet(new long[]{0x0000000000100002L});
+    public static final BitSet FOLLOW_ruleDocumentation_in_ruleChoicePoint9348 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTransition_in_entryRuleTransition9385 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleTransition9395 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleInitialTransition_in_ruleTransition9442 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleNonInitialTransition_in_ruleTransition9469 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleNonInitialTransition_in_entryRuleNonInitialTransition9504 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleNonInitialTransition9514 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTriggeredTransition_in_ruleNonInitialTransition9561 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleGuardedTransition_in_ruleNonInitialTransition9588 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleContinuationTransition_in_ruleNonInitialTransition9615 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleCPBranchTransition_in_ruleNonInitialTransition9642 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleInitialTransition_in_entryRuleInitialTransition9677 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleInitialTransition9687 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_79_in_ruleInitialTransition9724 = new BitSet(new long[]{0x0000000000004010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleInitialTransition9741 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_14_in_ruleInitialTransition9759 = new BitSet(new long[]{0x0000000000000000L,0x0000000000010000L});
+    public static final BitSet FOLLOW_80_in_ruleInitialTransition9771 = new BitSet(new long[]{0x0000010000000000L});
+    public static final BitSet FOLLOW_40_in_ruleInitialTransition9783 = new BitSet(new long[]{0x0000000000000010L,0x0000000000C00000L});
+    public static final BitSet FOLLOW_ruleTransitionTerminal_in_ruleInitialTransition9804 = new BitSet(new long[]{0x0000000000101000L});
+    public static final BitSet FOLLOW_ruleDocumentation_in_ruleInitialTransition9825 = new BitSet(new long[]{0x0000000000001000L});
+    public static final BitSet FOLLOW_12_in_ruleInitialTransition9838 = new BitSet(new long[]{0x0000000000002000L,0x0000000000020000L});
+    public static final BitSet FOLLOW_81_in_ruleInitialTransition9851 = new BitSet(new long[]{0x0000000000105000L});
+    public static final BitSet FOLLOW_ruleDetailCode_in_ruleInitialTransition9872 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_ruleInitialTransition9886 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleContinuationTransition_in_entryRuleContinuationTransition9922 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleContinuationTransition9932 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_79_in_ruleContinuationTransition9969 = new BitSet(new long[]{0x0000000000004010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleContinuationTransition9986 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_14_in_ruleContinuationTransition10004 = new BitSet(new long[]{0x0000000000000010L,0x0000000000C00000L});
+    public static final BitSet FOLLOW_ruleTransitionTerminal_in_ruleContinuationTransition10025 = new BitSet(new long[]{0x0000010000000000L});
+    public static final BitSet FOLLOW_40_in_ruleContinuationTransition10037 = new BitSet(new long[]{0x0000000000000010L,0x0000000000C00000L});
+    public static final BitSet FOLLOW_ruleTransitionTerminal_in_ruleContinuationTransition10058 = new BitSet(new long[]{0x0000000000101002L});
+    public static final BitSet FOLLOW_ruleDocumentation_in_ruleContinuationTransition10079 = new BitSet(new long[]{0x0000000000001002L});
+    public static final BitSet FOLLOW_12_in_ruleContinuationTransition10093 = new BitSet(new long[]{0x0000000000002000L,0x0000000000020000L});
+    public static final BitSet FOLLOW_81_in_ruleContinuationTransition10106 = new BitSet(new long[]{0x0000000000105000L});
+    public static final BitSet FOLLOW_ruleDetailCode_in_ruleContinuationTransition10127 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_ruleContinuationTransition10141 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTriggeredTransition_in_entryRuleTriggeredTransition10179 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleTriggeredTransition10189 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_79_in_ruleTriggeredTransition10226 = new BitSet(new long[]{0x0000000000004010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleTriggeredTransition10243 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_14_in_ruleTriggeredTransition10261 = new BitSet(new long[]{0x0000000000000010L,0x0000000000C00000L});
+    public static final BitSet FOLLOW_ruleTransitionTerminal_in_ruleTriggeredTransition10282 = new BitSet(new long[]{0x0000010000000000L});
+    public static final BitSet FOLLOW_40_in_ruleTriggeredTransition10294 = new BitSet(new long[]{0x0000000000000010L,0x0000000000C00000L});
+    public static final BitSet FOLLOW_ruleTransitionTerminal_in_ruleTriggeredTransition10315 = new BitSet(new long[]{0x0000000000101000L});
+    public static final BitSet FOLLOW_ruleDocumentation_in_ruleTriggeredTransition10336 = new BitSet(new long[]{0x0000000000001000L});
+    public static final BitSet FOLLOW_12_in_ruleTriggeredTransition10349 = new BitSet(new long[]{0x0000000000000000L,0x0000000000040000L});
+    public static final BitSet FOLLOW_82_in_ruleTriggeredTransition10361 = new BitSet(new long[]{0x0000000000001000L});
+    public static final BitSet FOLLOW_12_in_ruleTriggeredTransition10373 = new BitSet(new long[]{0x0000000000000000L,0x0000000001000000L});
+    public static final BitSet FOLLOW_ruleTrigger_in_ruleTriggeredTransition10394 = new BitSet(new long[]{0x0000000000002000L,0x0000000000080000L});
+    public static final BitSet FOLLOW_83_in_ruleTriggeredTransition10407 = new BitSet(new long[]{0x0000000000000000L,0x0000000001000000L});
+    public static final BitSet FOLLOW_ruleTrigger_in_ruleTriggeredTransition10428 = new BitSet(new long[]{0x0000000000002000L,0x0000000000080000L});
+    public static final BitSet FOLLOW_13_in_ruleTriggeredTransition10442 = new BitSet(new long[]{0x0000000000002000L,0x0000000000020000L});
+    public static final BitSet FOLLOW_81_in_ruleTriggeredTransition10455 = new BitSet(new long[]{0x0000000000105000L});
+    public static final BitSet FOLLOW_ruleDetailCode_in_ruleTriggeredTransition10476 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_ruleTriggeredTransition10490 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleGuardedTransition_in_entryRuleGuardedTransition10526 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleGuardedTransition10536 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_79_in_ruleGuardedTransition10573 = new BitSet(new long[]{0x0000000000004010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleGuardedTransition10590 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_14_in_ruleGuardedTransition10608 = new BitSet(new long[]{0x0000000000000010L,0x0000000000C00000L});
+    public static final BitSet FOLLOW_ruleTransitionTerminal_in_ruleGuardedTransition10629 = new BitSet(new long[]{0x0000010000000000L});
+    public static final BitSet FOLLOW_40_in_ruleGuardedTransition10641 = new BitSet(new long[]{0x0000000000000010L,0x0000000000C00000L});
+    public static final BitSet FOLLOW_ruleTransitionTerminal_in_ruleGuardedTransition10662 = new BitSet(new long[]{0x0000000000101000L});
+    public static final BitSet FOLLOW_ruleDocumentation_in_ruleGuardedTransition10683 = new BitSet(new long[]{0x0000000000001000L});
+    public static final BitSet FOLLOW_12_in_ruleGuardedTransition10696 = new BitSet(new long[]{0x0000000000000000L,0x0000000000100000L});
+    public static final BitSet FOLLOW_84_in_ruleGuardedTransition10708 = new BitSet(new long[]{0x0000000000105000L});
+    public static final BitSet FOLLOW_ruleDetailCode_in_ruleGuardedTransition10729 = new BitSet(new long[]{0x0000000000002000L,0x0000000000020000L});
+    public static final BitSet FOLLOW_81_in_ruleGuardedTransition10742 = new BitSet(new long[]{0x0000000000105000L});
+    public static final BitSet FOLLOW_ruleDetailCode_in_ruleGuardedTransition10763 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_ruleGuardedTransition10777 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleCPBranchTransition_in_entryRuleCPBranchTransition10813 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleCPBranchTransition10823 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_79_in_ruleCPBranchTransition10860 = new BitSet(new long[]{0x0000000000004010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleCPBranchTransition10877 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_14_in_ruleCPBranchTransition10895 = new BitSet(new long[]{0x0000000000000010L,0x0000000000C00000L});
+    public static final BitSet FOLLOW_ruleTransitionTerminal_in_ruleCPBranchTransition10916 = new BitSet(new long[]{0x0000010000000000L});
+    public static final BitSet FOLLOW_40_in_ruleCPBranchTransition10928 = new BitSet(new long[]{0x0000000000000010L,0x0000000000C00000L});
+    public static final BitSet FOLLOW_ruleTransitionTerminal_in_ruleCPBranchTransition10949 = new BitSet(new long[]{0x0000000000101000L});
+    public static final BitSet FOLLOW_ruleDocumentation_in_ruleCPBranchTransition10970 = new BitSet(new long[]{0x0000000000001000L});
+    public static final BitSet FOLLOW_12_in_ruleCPBranchTransition10983 = new BitSet(new long[]{0x0000000000000000L,0x0000000000200000L});
+    public static final BitSet FOLLOW_85_in_ruleCPBranchTransition10995 = new BitSet(new long[]{0x0000000000105000L});
+    public static final BitSet FOLLOW_ruleDetailCode_in_ruleCPBranchTransition11016 = new BitSet(new long[]{0x0000000000002000L,0x0000000000020000L});
+    public static final BitSet FOLLOW_81_in_ruleCPBranchTransition11029 = new BitSet(new long[]{0x0000000000105000L});
+    public static final BitSet FOLLOW_ruleDetailCode_in_ruleCPBranchTransition11050 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_ruleCPBranchTransition11064 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTransitionTerminal_in_entryRuleTransitionTerminal11100 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleTransitionTerminal11110 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleStateTerminal_in_ruleTransitionTerminal11157 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTrPointTerminal_in_ruleTransitionTerminal11184 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleSubStateTrPointTerminal_in_ruleTransitionTerminal11211 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleChoicepointTerminal_in_ruleTransitionTerminal11238 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleStateTerminal_in_entryRuleStateTerminal11273 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleStateTerminal11283 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleStateTerminal11327 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTrPointTerminal_in_entryRuleTrPointTerminal11362 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleTrPointTerminal11372 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_86_in_ruleTrPointTerminal11409 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleTrPointTerminal11429 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleSubStateTrPointTerminal_in_entryRuleSubStateTrPointTerminal11465 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleSubStateTrPointTerminal11475 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleSubStateTrPointTerminal11520 = new BitSet(new long[]{0x0020000000000000L});
+    public static final BitSet FOLLOW_53_in_ruleSubStateTrPointTerminal11532 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleSubStateTrPointTerminal11552 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleChoicepointTerminal_in_entryRuleChoicepointTerminal11588 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleChoicepointTerminal11598 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_87_in_ruleChoicepointTerminal11635 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleChoicepointTerminal11655 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTrigger_in_entryRuleTrigger11691 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleTrigger11701 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_88_in_ruleTrigger11738 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_ruleMessageFromIf_in_ruleTrigger11759 = new BitSet(new long[]{0x0000000000000000L,0x0000000006100000L});
+    public static final BitSet FOLLOW_89_in_ruleTrigger11772 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_ruleMessageFromIf_in_ruleTrigger11793 = new BitSet(new long[]{0x0000000000000000L,0x0000000006100000L});
+    public static final BitSet FOLLOW_ruleGuard_in_ruleTrigger11816 = new BitSet(new long[]{0x0000000000000000L,0x0000000004000000L});
+    public static final BitSet FOLLOW_90_in_ruleTrigger11829 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleMessageFromIf_in_entryRuleMessageFromIf11865 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleMessageFromIf11875 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleMessageFromIf11920 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_14_in_ruleMessageFromIf11932 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleMessageFromIf11952 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleGuard_in_entryRuleGuard11988 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleGuard11998 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_84_in_ruleGuard12035 = new BitSet(new long[]{0x0000000000105000L});
+    public static final BitSet FOLLOW_ruleDetailCode_in_ruleGuard12056 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleDocumentation_in_entryRuleDocumentation12092 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleDocumentation12102 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_20_in_ruleDocumentation12139 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_RULE_STRING_in_ruleDocumentation12156 = new BitSet(new long[]{0x0000000000200040L});
+    public static final BitSet FOLLOW_21_in_ruleDocumentation12174 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleAnnotation_in_entryRuleAnnotation12210 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleAnnotation12220 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_91_in_ruleAnnotation12257 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleAnnotation12274 = new BitSet(new long[]{0x0000000001000002L});
+    public static final BitSet FOLLOW_24_in_ruleAnnotation12292 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_ruleKeyValue_in_ruleAnnotation12313 = new BitSet(new long[]{0x0000000006000000L});
+    public static final BitSet FOLLOW_25_in_ruleAnnotation12326 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_ruleKeyValue_in_ruleAnnotation12347 = new BitSet(new long[]{0x0000000006000000L});
+    public static final BitSet FOLLOW_26_in_ruleAnnotation12361 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleKeyValue_in_entryRuleKeyValue12399 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleKeyValue12409 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleKeyValue12451 = new BitSet(new long[]{0x0000000000400000L});
+    public static final BitSet FOLLOW_22_in_ruleKeyValue12468 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_RULE_STRING_in_ruleKeyValue12485 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleImport_in_entryRuleImport12526 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleImport12536 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_92_in_ruleImport12573 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_ruleImportedFQN_in_ruleImport12594 = new BitSet(new long[]{0x0000000000000000L,0x0000000020000000L});
+    public static final BitSet FOLLOW_93_in_ruleImport12606 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_RULE_STRING_in_ruleImport12623 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleImportedFQN_in_entryRuleImportedFQN12665 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleImportedFQN12676 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleFQN_in_ruleImportedFQN12723 = new BitSet(new long[]{0x0800000000000002L});
+    public static final BitSet FOLLOW_59_in_ruleImportedFQN12742 = new BitSet(new long[]{0x0000000000000000L,0x0000000040000000L});
+    public static final BitSet FOLLOW_94_in_ruleImportedFQN12755 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleFQN_in_entryRuleFQN12798 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleFQN12809 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleFQN12849 = new BitSet(new long[]{0x0800000000000002L});
+    public static final BitSet FOLLOW_59_in_ruleFQN12868 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleFQN12883 = new BitSet(new long[]{0x0800000000000002L});
+    public static final BitSet FOLLOW_95_in_rulePrimitiveType12944 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_96_in_rulePrimitiveType12961 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_97_in_rulePrimitiveType12978 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_98_in_rulePrimitiveType12995 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_99_in_rulePrimitiveType13012 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_100_in_rulePrimitiveType13029 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_101_in_rulePrimitiveType13046 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_102_in_rulePrimitiveType13063 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_103_in_rulePrimitiveType13080 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_104_in_rulePrimitiveType13097 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_105_in_rulePrimitiveType13114 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_106_in_rulePrimitiveType13131 = new BitSet(new long[]{0x0000000000000002L});
 
 }

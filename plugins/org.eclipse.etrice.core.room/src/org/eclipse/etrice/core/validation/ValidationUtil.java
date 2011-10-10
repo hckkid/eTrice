@@ -65,11 +65,14 @@ public class ValidationUtil {
 		static Result ok() {
 			return new Result(true, "", null, null, 0);
 		}
+		static Result error(String msg) {
+			return new Result(false, msg, null, null, -1);
+		}
+		static Result error(String msg, EObject source, EStructuralFeature feature) {
+			return new Result(false, msg, source, feature, -1);
+		}
 		static Result error(String msg, EObject source, EStructuralFeature feature, int index) {
 			return new Result(false, msg, source, feature, index);
-		}
-		static Result error(String msg) {
-			return new Result(false, msg, null, null, 0);
 		}
 		
 		private Result(boolean ok, String msg, EObject source, EStructuralFeature feature, int index) {
@@ -685,14 +688,32 @@ public class ValidationUtil {
 		ActorClass ac = RoomHelpers.getActorClass(tr);
 		if (ac.getStateMachine().isDataDriven()) {
 			if (tr instanceof TriggeredTransition)
-				return Result.error("data driven state machine must not contain triggered transition");
+				return Result.error("data driven state machine must not contain triggered transition",
+						tr.eContainer(),
+						RoomPackage.eINSTANCE.getStateGraph_Transitions(),
+						((StateGraph)tr.eContainer()).getTransitions().indexOf(tr));
 			if (tr instanceof GuardedTransition)
 				if (!RoomHelpers.hasDetailCode(((GuardedTransition) tr).getGuard()))
-					return Result.error("guard must not be empty");
+					return Result.error("guard must not be empty", tr, RoomPackage.eINSTANCE.getGuardedTransition_Guard());
 		}
 		else {
 			if (tr instanceof GuardedTransition)
-				return Result.error("event driven state machine must not contain guarded transition");
+				return Result.error("event driven state machine must not contain guarded transition",
+						tr.eContainer(),
+						RoomPackage.eINSTANCE.getStateGraph_Transitions(),
+						((StateGraph)tr.eContainer()).getTransitions().indexOf(tr));
+		}
+		return Result.ok();
+	}
+	
+	public static Result checkState(State state) {
+		if (state.getDoCode()!=null) {
+			ActorClass ac = RoomHelpers.getActorClass(state);
+			if (!ac.getStateMachine().isDataDriven()) {
+				return Result.error("only data driven state machines may have 'do' action code",
+						state,
+						RoomPackage.eINSTANCE.getState_DoCode());
+			}
 		}
 		return Result.ok();
 	}

@@ -2578,22 +2578,26 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cExitCodeAssignment_3_2_1 = (Assignment)cGroup_3_2.eContents().get(1);
 		private final RuleCall cExitCodeDetailCodeParserRuleCall_3_2_1_0 = (RuleCall)cExitCodeAssignment_3_2_1.eContents().get(0);
 		private final Group cGroup_3_3 = (Group)cGroup_3.eContents().get(3);
-		private final Keyword cSubgraphKeyword_3_3_0 = (Keyword)cGroup_3_3.eContents().get(0);
-		private final Assignment cSubgraphAssignment_3_3_1 = (Assignment)cGroup_3_3.eContents().get(1);
-		private final RuleCall cSubgraphPlainStateGraphParserRuleCall_3_3_1_0 = (RuleCall)cSubgraphAssignment_3_3_1.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_3_4 = (Keyword)cGroup_3.eContents().get(4);
+		private final Keyword cDoKeyword_3_3_0 = (Keyword)cGroup_3_3.eContents().get(0);
+		private final Assignment cDoCodeAssignment_3_3_1 = (Assignment)cGroup_3_3.eContents().get(1);
+		private final RuleCall cDoCodeDetailCodeParserRuleCall_3_3_1_0 = (RuleCall)cDoCodeAssignment_3_3_1.eContents().get(0);
+		private final Group cGroup_3_4 = (Group)cGroup_3.eContents().get(4);
+		private final Keyword cSubgraphKeyword_3_4_0 = (Keyword)cGroup_3_4.eContents().get(0);
+		private final Assignment cSubgraphAssignment_3_4_1 = (Assignment)cGroup_3_4.eContents().get(1);
+		private final RuleCall cSubgraphPlainStateGraphParserRuleCall_3_4_1_0 = (RuleCall)cSubgraphAssignment_3_4_1.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_3_5 = (Keyword)cGroup_3.eContents().get(5);
 		
 		//// entry and exit code have multiplicity many: in BaseState to be able to add derived class codes here,
 		//
 		//// in RefinedState to still have both features in the common base class State
 		//
 		//BaseState:
-		//	"State" name=ID docu=Documentation? ("{" ("entry" entryCode=DetailCode)? ("exit" exitCode=DetailCode)? ("subgraph"
-		//	subgraph=PlainStateGraph)? "}")?;
+		//	"State" name=ID docu=Documentation? ("{" ("entry" entryCode=DetailCode)? ("exit" exitCode=DetailCode)? ("do"
+		//	doCode=DetailCode)? ("subgraph" subgraph=PlainStateGraph)? "}")?;
 		public ParserRule getRule() { return rule; }
 
-		//"State" name=ID docu=Documentation? ("{" ("entry" entryCode=DetailCode)? ("exit" exitCode=DetailCode)? ("subgraph"
-		//subgraph=PlainStateGraph)? "}")?
+		//"State" name=ID docu=Documentation? ("{" ("entry" entryCode=DetailCode)? ("exit" exitCode=DetailCode)? ("do"
+		//doCode=DetailCode)? ("subgraph" subgraph=PlainStateGraph)? "}")?
 		public Group getGroup() { return cGroup; }
 
 		//"State"
@@ -2611,7 +2615,8 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		//Documentation
 		public RuleCall getDocuDocumentationParserRuleCall_2_0() { return cDocuDocumentationParserRuleCall_2_0; }
 
-		//("{" ("entry" entryCode=DetailCode)? ("exit" exitCode=DetailCode)? ("subgraph" subgraph=PlainStateGraph)? "}")?
+		//("{" ("entry" entryCode=DetailCode)? ("exit" exitCode=DetailCode)? ("do" doCode=DetailCode)? ("subgraph"
+		//subgraph=PlainStateGraph)? "}")?
 		public Group getGroup_3() { return cGroup_3; }
 
 		//"{"
@@ -2641,20 +2646,32 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		//DetailCode
 		public RuleCall getExitCodeDetailCodeParserRuleCall_3_2_1_0() { return cExitCodeDetailCodeParserRuleCall_3_2_1_0; }
 
-		//("subgraph" subgraph=PlainStateGraph)?
+		//("do" doCode=DetailCode)?
 		public Group getGroup_3_3() { return cGroup_3_3; }
 
+		//"do"
+		public Keyword getDoKeyword_3_3_0() { return cDoKeyword_3_3_0; }
+
+		//doCode=DetailCode
+		public Assignment getDoCodeAssignment_3_3_1() { return cDoCodeAssignment_3_3_1; }
+
+		//DetailCode
+		public RuleCall getDoCodeDetailCodeParserRuleCall_3_3_1_0() { return cDoCodeDetailCodeParserRuleCall_3_3_1_0; }
+
+		//("subgraph" subgraph=PlainStateGraph)?
+		public Group getGroup_3_4() { return cGroup_3_4; }
+
 		//"subgraph"
-		public Keyword getSubgraphKeyword_3_3_0() { return cSubgraphKeyword_3_3_0; }
+		public Keyword getSubgraphKeyword_3_4_0() { return cSubgraphKeyword_3_4_0; }
 
 		//subgraph=PlainStateGraph
-		public Assignment getSubgraphAssignment_3_3_1() { return cSubgraphAssignment_3_3_1; }
+		public Assignment getSubgraphAssignment_3_4_1() { return cSubgraphAssignment_3_4_1; }
 
 		//PlainStateGraph
-		public RuleCall getSubgraphPlainStateGraphParserRuleCall_3_3_1_0() { return cSubgraphPlainStateGraphParserRuleCall_3_3_1_0; }
+		public RuleCall getSubgraphPlainStateGraphParserRuleCall_3_4_1_0() { return cSubgraphPlainStateGraphParserRuleCall_3_4_1_0; }
 
 		//"}"
-		public Keyword getRightCurlyBracketKeyword_3_4() { return cRightCurlyBracketKeyword_3_4; }
+		public Keyword getRightCurlyBracketKeyword_3_5() { return cRightCurlyBracketKeyword_3_5; }
 	}
 
 	public class RefinedStateElements extends AbstractParserRuleElementFinder {
@@ -2676,18 +2693,22 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cExitCodeAssignment_5_1 = (Assignment)cGroup_5.eContents().get(1);
 		private final RuleCall cExitCodeDetailCodeParserRuleCall_5_1_0 = (RuleCall)cExitCodeAssignment_5_1.eContents().get(0);
 		private final Group cGroup_6 = (Group)cGroup.eContents().get(6);
-		private final Keyword cSubgraphKeyword_6_0 = (Keyword)cGroup_6.eContents().get(0);
-		private final Assignment cSubgraphAssignment_6_1 = (Assignment)cGroup_6.eContents().get(1);
-		private final RuleCall cSubgraphStateGraphParserRuleCall_6_1_0 = (RuleCall)cSubgraphAssignment_6_1.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_7 = (Keyword)cGroup.eContents().get(7);
+		private final Keyword cDoKeyword_6_0 = (Keyword)cGroup_6.eContents().get(0);
+		private final Assignment cDoCodeAssignment_6_1 = (Assignment)cGroup_6.eContents().get(1);
+		private final RuleCall cDoCodeDetailCodeParserRuleCall_6_1_0 = (RuleCall)cDoCodeAssignment_6_1.eContents().get(0);
+		private final Group cGroup_7 = (Group)cGroup.eContents().get(7);
+		private final Keyword cSubgraphKeyword_7_0 = (Keyword)cGroup_7.eContents().get(0);
+		private final Assignment cSubgraphAssignment_7_1 = (Assignment)cGroup_7.eContents().get(1);
+		private final RuleCall cSubgraphStateGraphParserRuleCall_7_1_0 = (RuleCall)cSubgraphAssignment_7_1.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_8 = (Keyword)cGroup.eContents().get(8);
 		
 		//RefinedState:
 		//	"RefinedState" base=[BaseState|FQN] docu=Documentation? "{" ("entry" entryCode=DetailCode)? ("exit"
-		//	exitCode=DetailCode)? ("subgraph" subgraph=StateGraph)? "}";
+		//	exitCode=DetailCode)? ("do" doCode=DetailCode)? ("subgraph" subgraph=StateGraph)? "}";
 		public ParserRule getRule() { return rule; }
 
 		//"RefinedState" base=[BaseState|FQN] docu=Documentation? "{" ("entry" entryCode=DetailCode)? ("exit"
-		//exitCode=DetailCode)? ("subgraph" subgraph=StateGraph)? "}"
+		//exitCode=DetailCode)? ("do" doCode=DetailCode)? ("subgraph" subgraph=StateGraph)? "}"
 		public Group getGroup() { return cGroup; }
 
 		//"RefinedState"
@@ -2735,20 +2756,32 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		//DetailCode
 		public RuleCall getExitCodeDetailCodeParserRuleCall_5_1_0() { return cExitCodeDetailCodeParserRuleCall_5_1_0; }
 
-		//("subgraph" subgraph=StateGraph)?
+		//("do" doCode=DetailCode)?
 		public Group getGroup_6() { return cGroup_6; }
 
+		//"do"
+		public Keyword getDoKeyword_6_0() { return cDoKeyword_6_0; }
+
+		//doCode=DetailCode
+		public Assignment getDoCodeAssignment_6_1() { return cDoCodeAssignment_6_1; }
+
+		//DetailCode
+		public RuleCall getDoCodeDetailCodeParserRuleCall_6_1_0() { return cDoCodeDetailCodeParserRuleCall_6_1_0; }
+
+		//("subgraph" subgraph=StateGraph)?
+		public Group getGroup_7() { return cGroup_7; }
+
 		//"subgraph"
-		public Keyword getSubgraphKeyword_6_0() { return cSubgraphKeyword_6_0; }
+		public Keyword getSubgraphKeyword_7_0() { return cSubgraphKeyword_7_0; }
 
 		//subgraph=StateGraph
-		public Assignment getSubgraphAssignment_6_1() { return cSubgraphAssignment_6_1; }
+		public Assignment getSubgraphAssignment_7_1() { return cSubgraphAssignment_7_1; }
 
 		//StateGraph
-		public RuleCall getSubgraphStateGraphParserRuleCall_6_1_0() { return cSubgraphStateGraphParserRuleCall_6_1_0; }
+		public RuleCall getSubgraphStateGraphParserRuleCall_7_1_0() { return cSubgraphStateGraphParserRuleCall_7_1_0; }
 
 		//"}"
-		public Keyword getRightCurlyBracketKeyword_7() { return cRightCurlyBracketKeyword_7; }
+		public Keyword getRightCurlyBracketKeyword_8() { return cRightCurlyBracketKeyword_8; }
 	}
 
 	public class DetailCodeElements extends AbstractParserRuleElementFinder {
@@ -3842,7 +3875,15 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cImportURIAssignment_3 = (Assignment)cGroup.eContents().get(3);
 		private final RuleCall cImportURISTRINGTerminalRuleCall_3_0 = (RuleCall)cImportURIAssignment_3.eContents().get(0);
 		
-		//// note:
+		//// HOWTO: use a combination of URI global scopes and namespace aware local scope provider
+		//
+		//// this is confugured in the work flow by
+		//
+		////			fragment = scoping.ImportURIScopingFragment {}
+		//
+		//// and by overriding configureIScopeProviderDelegate in the runtime module with 
+		//
+		////			ImportedNamespaceAwareLocalScopeProvider
 		//
 		//// the attribute 'importedNamespace' is picked up by the ImportedNamespaceAwareLocalScopeProvider
 		//
@@ -4697,8 +4738,8 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//// in RefinedState to still have both features in the common base class State
 	//
 	//BaseState:
-	//	"State" name=ID docu=Documentation? ("{" ("entry" entryCode=DetailCode)? ("exit" exitCode=DetailCode)? ("subgraph"
-	//	subgraph=PlainStateGraph)? "}")?;
+	//	"State" name=ID docu=Documentation? ("{" ("entry" entryCode=DetailCode)? ("exit" exitCode=DetailCode)? ("do"
+	//	doCode=DetailCode)? ("subgraph" subgraph=PlainStateGraph)? "}")?;
 	public BaseStateElements getBaseStateAccess() {
 		return (pBaseState != null) ? pBaseState : (pBaseState = new BaseStateElements());
 	}
@@ -4709,7 +4750,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 
 	//RefinedState:
 	//	"RefinedState" base=[BaseState|FQN] docu=Documentation? "{" ("entry" entryCode=DetailCode)? ("exit"
-	//	exitCode=DetailCode)? ("subgraph" subgraph=StateGraph)? "}";
+	//	exitCode=DetailCode)? ("do" doCode=DetailCode)? ("subgraph" subgraph=StateGraph)? "}";
 	public RefinedStateElements getRefinedStateAccess() {
 		return (pRefinedState != null) ? pRefinedState : (pRefinedState = new RefinedStateElements());
 	}
@@ -4983,7 +5024,15 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		return getKeyValueAccess().getRule();
 	}
 
-	//// note:
+	//// HOWTO: use a combination of URI global scopes and namespace aware local scope provider
+	//
+	//// this is confugured in the work flow by
+	//
+	////			fragment = scoping.ImportURIScopingFragment {}
+	//
+	//// and by overriding configureIScopeProviderDelegate in the runtime module with 
+	//
+	////			ImportedNamespaceAwareLocalScopeProvider
 	//
 	//// the attribute 'importedNamespace' is picked up by the ImportedNamespaceAwareLocalScopeProvider
 	//

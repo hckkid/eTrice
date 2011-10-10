@@ -18,6 +18,7 @@ package org.eclipse.etrice.core.room;
  *   <li>{@link org.eclipse.etrice.core.room.State#getDocu <em>Docu</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.State#getEntryCode <em>Entry Code</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.State#getExitCode <em>Exit Code</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.State#getDoCode <em>Do Code</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.State#getSubgraph <em>Subgraph</em>}</li>
  * </ul>
  * </p>
@@ -105,6 +106,32 @@ public interface State extends StateGraphNode
    * @generated
    */
   void setExitCode(DetailCode value);
+
+  /**
+   * Returns the value of the '<em><b>Do Code</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Do Code</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Do Code</em>' containment reference.
+   * @see #setDoCode(DetailCode)
+   * @see org.eclipse.etrice.core.room.RoomPackage#getState_DoCode()
+   * @model containment="true"
+   * @generated
+   */
+  DetailCode getDoCode();
+
+  /**
+   * Sets the value of the '{@link org.eclipse.etrice.core.room.State#getDoCode <em>Do Code</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Do Code</em>' containment reference.
+   * @see #getDoCode()
+   * @generated
+   */
+  void setDoCode(DetailCode value);
 
   /**
    * Returns the value of the '<em><b>Subgraph</b></em>' containment reference.

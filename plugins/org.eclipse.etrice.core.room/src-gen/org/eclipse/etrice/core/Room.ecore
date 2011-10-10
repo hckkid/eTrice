@@ -311,6 +311,8 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="exitCode" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//DetailCode"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="doCode" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//DetailCode"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="subgraph" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//StateGraph"
         containment="true"/>
   </eClassifiers>

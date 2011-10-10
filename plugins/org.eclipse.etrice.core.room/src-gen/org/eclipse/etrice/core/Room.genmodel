@@ -208,6 +208,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//State/docu"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//State/entryCode"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//State/exitCode"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//State/doCode"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//State/subgraph"/>
       <genOperations ecoreOperation="platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//State/getName"/>
     </genClasses>

@@ -2163,9 +2163,19 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getState_Subgraph()
+  public EReference getState_DoCode()
   {
     return (EReference)stateEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getState_Subgraph()
+  {
+    return (EReference)stateEClass.getEStructuralFeatures().get(4);
   }
 
   /**
@@ -3068,6 +3078,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
     createEReference(stateEClass, STATE__DOCU);
     createEReference(stateEClass, STATE__ENTRY_CODE);
     createEReference(stateEClass, STATE__EXIT_CODE);
+    createEReference(stateEClass, STATE__DO_CODE);
     createEReference(stateEClass, STATE__SUBGRAPH);
 
     stateGraphEClass = createEClass(STATE_GRAPH);
@@ -3434,6 +3445,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
     initEReference(getState_Docu(), this.getDocumentation(), null, "docu", null, 0, 1, State.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getState_EntryCode(), this.getDetailCode(), null, "entryCode", null, 0, 1, State.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getState_ExitCode(), this.getDetailCode(), null, "exitCode", null, 0, 1, State.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getState_DoCode(), this.getDetailCode(), null, "doCode", null, 0, 1, State.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getState_Subgraph(), this.getStateGraph(), null, "subgraph", null, 0, 1, State.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     addEOperation(stateEClass, ecorePackage.getEString(), "getName", 0, 1, IS_UNIQUE, IS_ORDERED);
