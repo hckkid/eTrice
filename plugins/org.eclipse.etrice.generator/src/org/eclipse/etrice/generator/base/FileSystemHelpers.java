@@ -159,9 +159,6 @@ public class FileSystemHelpers {
 		if (!path.hasAbsolutePath())
 			return null;
 		
-		if (path.segmentCount()<base.segmentCount())
-			return null;
-		
 		StringBuffer result = new StringBuffer();
 		if (goUpIfNeeded) {
 			int max = base.segmentCount()<path.segmentCount()? base.segmentCount():path.segmentCount();
@@ -180,6 +177,9 @@ public class FileSystemHelpers {
 			return result.substring(0, result.length()-1);
 		}
 		else {
+			if (path.segmentCount()<base.segmentCount())
+				return null;
+			
 			for (int i=0; i<base.segmentCount(); ++i) {
 				if (!base.segment(i).equals(path.segment(i)))
 					return null;
