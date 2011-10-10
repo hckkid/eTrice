@@ -55,6 +55,7 @@ import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorContainerClass;
+import org.eclipse.etrice.core.room.ExternalPort;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.RoomFactory;
@@ -86,13 +87,19 @@ public class PortSupport extends InterfaceItemSupport {
 				// create Port
 		        Port port = RoomFactory.eINSTANCE.createPort();
 		        port.setName(RoomNameProvider.getUniqueInterfaceItemName("p", acc));
-				
+		        ExternalPort xp = null;
+		        
 		        if (acc instanceof ActorClass) {
 		        	ActorClass ac = (ActorClass) acc;
 		        	if (internal)
 		        		ac.getIntPorts().add(port);
-		        	else
+		        	else {
 		        		ac.getIfPorts().add(port);
+		        		
+						xp = RoomFactory.eINSTANCE.createExternalPort();
+						xp.setIfport(port);
+						ac.getExtPorts().add(xp);
+		        	}
 		        }
 		        else if (acc instanceof SubSystemClass) {
 		        	SubSystemClass ssc = (SubSystemClass) acc;
@@ -111,8 +118,10 @@ public class PortSupport extends InterfaceItemSupport {
 			        	ActorClass ac = (ActorClass) acc;
 			        	if (internal)
 			        		ac.getIntPorts().remove(port);
-			        	else
+			        	else {
 			        		ac.getIfPorts().remove(port);
+							ac.getExtPorts().remove(xp);
+			        	}
 			        }
 			        else if (acc instanceof SubSystemClass) {
 			        	SubSystemClass ssc = (SubSystemClass) acc;
