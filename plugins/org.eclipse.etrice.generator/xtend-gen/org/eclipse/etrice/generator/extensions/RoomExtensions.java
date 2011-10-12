@@ -61,7 +61,7 @@ public class RoomExtensions {
     {
       ArrayList<Port> _arrayList = new ArrayList<Port>();
       ArrayList<Port> ret = _arrayList;
-      for (final ExternalPort ele : in2) {
+      for (ExternalPort ele : in2) {
         Port _ifport = ele.getIfport();
         ret.add(_ifport);
       }
@@ -117,7 +117,7 @@ public class RoomExtensions {
             tmpf = _parentFile;
             String[] _list = tmpf.list();
             String[] contents = _list;
-            for (final String f : contents) {
+            for (String f : contents) {
               boolean _equals = f.equals(".project");
               if (_equals) {
                 isProject = true;
@@ -283,7 +283,7 @@ public class RoomExtensions {
       } else {
         PortClass _portClass_1 = this.getPortClass(pc, conj);
         EList<MessageHandler> _msgHandlers = _portClass_1.getMsgHandlers();
-        for (final MessageHandler hdlr : _msgHandlers) {
+        for (MessageHandler hdlr : _msgHandlers) {
           List<Message> _outgoing = this.getOutgoing(pc, conj);
           Message _msg = hdlr.getMsg();
           boolean _contains = _outgoing.contains(_msg);
@@ -305,7 +305,7 @@ public class RoomExtensions {
       } else {
         PortClass _portClass_1 = this.getPortClass(pc, conj);
         EList<MessageHandler> _msgHandlers = _portClass_1.getMsgHandlers();
-        for (final MessageHandler hdlr : _msgHandlers) {
+        for (MessageHandler hdlr : _msgHandlers) {
           List<Message> _incoming = this.getIncoming(pc, conj);
           Message _msg = hdlr.getMsg();
           boolean _contains = _incoming.contains(_msg);
@@ -330,7 +330,7 @@ public class RoomExtensions {
         ArrayList<MessageHandler> res = _arrayList_1;
         PortClass _portClass_1 = this.getPortClass(pc, conj);
         EList<MessageHandler> _msgHandlers = _portClass_1.getMsgHandlers();
-        for (final MessageHandler hdlr : _msgHandlers) {
+        for (MessageHandler hdlr : _msgHandlers) {
           List<Message> _incoming = this.getIncoming(pc, conj);
           Message _msg = hdlr.getMsg();
           boolean _contains = _incoming.contains(_msg);
@@ -355,7 +355,7 @@ public class RoomExtensions {
         ArrayList<MessageHandler> res = _arrayList_1;
         PortClass _portClass_1 = this.getPortClass(pc, conj);
         EList<MessageHandler> _msgHandlers = _portClass_1.getMsgHandlers();
-        for (final MessageHandler hdlr : _msgHandlers) {
+        for (MessageHandler hdlr : _msgHandlers) {
           List<Message> _outgoing = this.getOutgoing(pc, conj);
           Message _msg = hdlr.getMsg();
           boolean _contains = _outgoing.contains(_msg);
@@ -413,7 +413,7 @@ public class RoomExtensions {
       ArrayList<State> _arrayList = new ArrayList<State>();
       ArrayList<State> res = _arrayList;
       EList<State> _states = sg.getStates();
-      for (final State s : _states) {
+      for (State s : _states) {
         List<State> _leafStateList = this.getLeafStateList(s);
         res.addAll(_leafStateList);
       }
@@ -442,7 +442,7 @@ public class RoomExtensions {
       ArrayList<State> _arrayList = new ArrayList<State>();
       ArrayList<State> ret = _arrayList;
       EList<State> _states = sg.getStates();
-      for (final State e : _states) {
+      for (State e : _states) {
         {
           ret.add(e);
           StateGraph _subgraph = e.getSubgraph();
@@ -464,7 +464,7 @@ public class RoomExtensions {
       ArrayList<State> _arrayList = new ArrayList<State>();
       ArrayList<State> ret = _arrayList;
       List<State> _stateList = this.getStateList(sg);
-      for (final State e : _stateList) {
+      for (State e : _stateList) {
         if ((e instanceof org.eclipse.etrice.core.room.BaseState)) {
           ret.add(e);
         }
@@ -616,7 +616,7 @@ public class RoomExtensions {
     {
       boolean hasGuard = false;
       EList<TriggeredTransition> _transitions = at.getTransitions();
-      for (final TriggeredTransition t : _transitions) {
+      for (TriggeredTransition t : _transitions) {
         EList<Trigger> _triggers = t.getTriggers();
         final Function1<Trigger,Boolean> _function = new Function1<Trigger,Boolean>() {
             public Boolean apply(final Trigger e) {
@@ -731,14 +731,14 @@ public class RoomExtensions {
   
   public String getContextId(final TransitionChain tc) {
     State _stateContext = tc.getStateContext();
-    String _stateId = this.getStateId(_stateContext);
+    String _stateId = this.nameProvider.getStateId(_stateContext);
     return _stateId;
   }
   
   public Transition getInitTransition(final StateGraph sg) {
     {
       EList<Transition> _transitions = sg.getTransitions();
-      for (final Transition tr : _transitions) {
+      for (Transition tr : _transitions) {
         if ((tr instanceof org.eclipse.etrice.core.room.InitialTransition)) {
           return tr;
         }
@@ -750,7 +750,7 @@ public class RoomExtensions {
   public boolean hasInitTransition(final StateGraph sg) {
     {
       EList<Transition> _transitions = sg.getTransitions();
-      for (final Transition tr : _transitions) {
+      for (Transition tr : _transitions) {
         if ((tr instanceof org.eclipse.etrice.core.room.InitialTransition)) {
           return true;
         }
@@ -777,7 +777,7 @@ public class RoomExtensions {
       ArrayList<Transition> _arrayList = new ArrayList<Transition>(_transitions);
       ArrayList<Transition> res = _arrayList;
       EList<State> _states = sg.getStates();
-      for (final State s : _states) {
+      for (State s : _states) {
         List<Transition> _transitionList = this.getTransitionList(s);
         res.addAll(_transitionList);
       }

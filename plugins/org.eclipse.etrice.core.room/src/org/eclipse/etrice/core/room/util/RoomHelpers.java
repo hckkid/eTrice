@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorContainerRef;
 import org.eclipse.etrice.core.room.Annotation;
+import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.Binding;
 import org.eclipse.etrice.core.room.ChoicePoint;
 import org.eclipse.etrice.core.room.DetailCode;
@@ -28,6 +29,7 @@ import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.KeyValue;
 import org.eclipse.etrice.core.room.LayerConnection;
 import org.eclipse.etrice.core.room.LogicalSystem;
+import org.eclipse.etrice.core.room.Operation;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.RefinedState;
 import org.eclipse.etrice.core.room.RoomPackage;
@@ -390,6 +392,30 @@ public class RoomHelpers {
 		}
 		
 		return names;
+	}
+	
+	public static List<Attribute> getAllAttributes(ActorClass ac) {
+		ArrayList<Attribute> result = new ArrayList<Attribute>();
+		
+		while (ac!=null) {
+			result.addAll(ac.getAttributes());
+			
+			ac = ac.getBase();
+		}
+		
+		return result;
+	}
+	
+	public static List<Operation> getAllOperations(ActorClass ac) {
+		ArrayList<Operation> result = new ArrayList<Operation>();
+		
+		while (ac!=null) {
+			result.addAll(ac.getOperations());
+			
+			ac = ac.getBase();
+		}
+		
+		return result;
 	}
 	
 	public static List<Port> getAllEndPorts(ActorClass ac) {
