@@ -155,13 +155,13 @@
 		<delete dir="/home/data/httpd/download.eclipse.org/etrice/updates/nightly/" failonerror="true" />
 		
 		<echo message="Promoting site.packed" />
-		<copydir dest="/home/data/httpd/download.eclipse.org/etrice/updates/nightly/" src="/opt/public/jobs/gmp-etrice-nightly/workspace/last_success/site.packed" />
+		<copydir dest="/home/data/httpd/download.eclipse.org/etrice/updates/nightly/" src="/opt/public/jobs/mdt-etrice-nightly/workspace/last_success/site.packed" />
 		
 		<echo message="Deleting old ZIP archive from downloads area" />
 		<delete dir="/home/data/httpd/download.eclipse.org/etrice/archives/nightly/zips/" failonerror="true" />
 		
 		<echo message="Promoting site.p2.zip" />
-		<copydir dest="/home/data/httpd/download.eclipse.org/etrice/archives/nightly/zips/" src="/opt/public/jobs/gmp-etrice-nightly/workspace/last_success/site.p2.zip" />
+		<copydir dest="/home/data/httpd/download.eclipse.org/etrice/archives/nightly/zips/" src="/opt/public/jobs/mdt-etrice-nightly/workspace/last_success/site.p2.zip" />
 	</target>
 
 </project>
