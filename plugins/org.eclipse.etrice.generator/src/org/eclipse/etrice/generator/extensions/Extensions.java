@@ -19,7 +19,7 @@ import org.eclipse.etrice.core.room.Transition;
 import org.eclipse.etrice.generator.etricegen.TransitionChain;
 
 /**
- * @author hrentz
+ * @author Henrik Rentz-Reichert
  *
  */
 public class Extensions {

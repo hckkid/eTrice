@@ -15,7 +15,7 @@ package org.eclipse.etrice.generator.base;
 /**
  * A line output that prints to {@link java.lang.System#out System.out}
  * 
- * @author hrentz
+ * @author Henrik Rentz-Reichert
  *
  */
 public class StdLineOutput implements ILineOutput {

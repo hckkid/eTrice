@@ -40,7 +40,7 @@ import com.google.inject.Module;
 import com.google.inject.Provider;
 
 /**
- * @author hrentz
+ * @author Henrik Rentz-Reichert
  *
  */
 public abstract class AbstractGenerator {

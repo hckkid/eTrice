@@ -18,7 +18,7 @@ import org.eclipse.etrice.generator.base.ILineOutput;
 import org.eclipse.etrice.generator.launch.GeneratorLaunchConfigurationDelegate;
 
 /**
- * @author hrentz
+ * @author Henrik Rentz-Reichert
  *
  */
 public class JavaGeneratorLaunchConfigurationDelegate extends GeneratorLaunchConfigurationDelegate {

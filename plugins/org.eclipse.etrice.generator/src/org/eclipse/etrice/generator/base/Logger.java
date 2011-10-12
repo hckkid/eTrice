@@ -18,7 +18,7 @@ import org.eclipse.emf.ecore.EObject;
  * a simple logger class implementing the {@link org.eclipse.etrice.generator.base.ILineOutputLogger ILineOutputLogger} interface.
  * If no ILineOutputLogger is set then output is sent to {@link java.lang.System#out System.out}.
  * 
- * @author hrentz
+ * @author Henrik Rentz-Reichert
  *
  */
 public class Logger implements ILineOutputLogger {

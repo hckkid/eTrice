@@ -15,7 +15,7 @@ package org.eclipse.etrice.generator.base;
 import org.eclipse.etrice.generator.etricegen.Root;
 
 /**
- * @author hrentz
+ * @author Henrik Rentz-Reichert
  *
  */
 public interface IRoomGenerator {

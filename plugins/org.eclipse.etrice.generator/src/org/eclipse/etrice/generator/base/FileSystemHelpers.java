@@ -22,15 +22,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 
 /**
- * @author hrentz
- *
- */
-/**
- * @author hrentz
- *
- */
-/**
- * @author hrentz
+ * @author Henrik Rentz-Reichert
  *
  */
 public class FileSystemHelpers {
