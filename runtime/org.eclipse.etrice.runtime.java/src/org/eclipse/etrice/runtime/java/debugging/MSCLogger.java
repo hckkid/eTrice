@@ -39,25 +39,25 @@ public class MSCLogger {
 	}
 	
 	
-	public void addMessageAsyncOut(String source, String target, String message){
+	public synchronized void addMessageAsyncOut(String source, String target, String message){
 		createLine(source, " >-- ", target, message);
 	}
 
-	public void addMessageAsyncIn(String source, String target, String message){
+	public synchronized void addMessageAsyncIn(String source, String target, String message){
 		createLine(source, " --> ", target, message);
 	}
 
 
-	public void addMessageSyncCall(String source, String target, String message){
+	public synchronized void addMessageSyncCall(String source, String target, String message){
 		createLine(source, " ==> ", target, message);
 	}
 
-	public void addMessageSyncReturn(String source, String target, String message){
+	public synchronized void addMessageSyncReturn(String source, String target, String message){
 		createLine(source, " <== ", target, message);
 	}
 
 	
-	public void addActorState(String actor, String state){
+	public synchronized void addActorState(String actor, String state){
 		if (filter.applyTo(actor))
 			getCommandList().add( new String ("\t"+filter.reduceString(actor)+" >>> "+state) );
 	}
