@@ -14,8 +14,10 @@ package org.eclipse.etrice.core;
 
 import org.eclipse.etrice.core.naming.RoomFragmentProvider;
 import org.eclipse.etrice.core.naming.RoomQualifiedNameProvider;
+import org.eclipse.etrice.core.scoping.PlatformRelativeUriResolver;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.resource.IFragmentProvider;
+import org.eclipse.xtext.scoping.impl.ImportUriResolver;
 
 import com.google.inject.Binder;
 
@@ -43,5 +45,9 @@ public class RoomRuntimeModule extends org.eclipse.etrice.core.AbstractRoomRunti
 		binder.bind(org.eclipse.xtext.scoping.IScopeProvider.class).annotatedWith(
 				com.google.inject.name.Names.named(org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider.NAMED_DELEGATE)).to(
 						org.eclipse.xtext.scoping.impl.ImportedNamespaceAwareLocalScopeProvider.class);
+	}
+	
+	public Class<? extends ImportUriResolver> bindImportUriResolver() {
+		return PlatformRelativeUriResolver.class;
 	}
 }
