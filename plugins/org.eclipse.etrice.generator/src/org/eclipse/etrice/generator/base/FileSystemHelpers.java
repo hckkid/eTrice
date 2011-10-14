@@ -44,7 +44,7 @@ public class FileSystemHelpers {
 	 * 
 	 * @param obj an objected which should be located in a resource
 	 * @param markerFileName name of marker file
-	 * @return the URI of the first directory containing marker
+	 * @return the URI of the first directory containing marker or <code>null</code> if not found
 	 */
 	public static URI getMarkerFileURI(EObject obj, String markerFileName) {
 		URI mainPath = null;
@@ -63,8 +63,11 @@ public class FileSystemHelpers {
 			}
 			boolean isProject = false;
 			int nUp = 0;
-			do {
+			while (!isProject && parent!=null) {
 				parent = parent.getParentFile();
+				if (parent==null)
+					break;
+				
 				String[] contents = parent.list();
 				for (int i = 0; i < contents.length; i++) {
 					if (contents[i].equals(markerFileName)) {
@@ -74,11 +77,10 @@ public class FileSystemHelpers {
 				}
 				++nUp;
 			}
-			while (!isProject && parent!=null);
 			if (isProject && nUp>0)
 				mainPath = mainPath.trimSegments(nUp);
 		}
-		return mainPath;
+		return null;
 	}
 	
 	private static boolean bothNullOrEqual(String s1, String s2) {
