@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="ASCII"?>
+<pi:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:al="http://eclipse.org/graphiti/mm/algorithms" xmlns:pi="http://eclipse.org/graphiti/mm/pictograms" visible="true" gridUnit="10" diagramTypeId="room.structure" name="Structure of ActorClass1" snapToGrid="true" showGuides="true" pictogramLinks="//@children.0/@link //@link //@children.0/@children.0/@link //@children.0/@children.1/@link //@children.0/@children.2/@link //@children.0/@children.3/@link //@children.0/@children.4/@link //@children.0/@children.5/@link //@children.0/@children.2/@children.1/@link //@children.0/@children.2/@children.2/@link //@children.0/@children.2/@children.3/@link //@connections.0/@link //@children.0/@children.3/@children.1/@link //@children.0/@children.3/@children.2/@link //@children.0/@children.3/@children.3/@link //@connections.1/@link //@connections.2/@link //@children.0/@children.6/@link //@children.0/@children.7/@link //@connections.3/@link //@connections.4/@link //@children.0/@children.8/@link //@children.0/@children.9/@link //@children.0/@children.10/@link //@children.0/@children.11/@link">
+  <graphicsAlgorithm xsi:type="al:Rectangle" background="//@colors.1" foreground="//@colors.0" lineWidth="1" transparency="0.0" width="1000" height="1000"/>
+  <link>
+    <businessObjects href="../040-room-concepts.room#ActorClass:ActorClass1"/>
+  </link>
+  <children xsi:type="pi:ContainerShape" visible="true" active="true">
+    <properties key="obj-type" value="cls"/>
+    <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="711" height="331" x="40" y="40">
+      <graphicsAlgorithmChildren xsi:type="al:Rectangle" background="//@colors.1" foreground="//@colors.2" lineWidth="4" transparency="0.0" width="631" height="251" x="40" y="40"/>
+    </graphicsAlgorithm>
+    <link>
+      <businessObjects href="../040-room-concepts.room#ActorClass:ActorClass1"/>
+    </link>
+    <children xsi:type="pi:ContainerShape" visible="true" active="true">
+      <properties key="obj-type" value="port"/>
+      <properties key="item-kind" value="R"/>
+      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="80" height="80" y="100">
+        <graphicsAlgorithmChildren xsi:type="al:Rectangle" background="//@colors.1" foreground="//@colors.2" lineWidth="2" transparency="0.0" width="40" height="40" x="20" y="20"/>
+      </graphicsAlgorithm>
+      <link>
+        <businessObjects href="../040-room-concepts.room#Port:ActorClass1$port11"/>
+      </link>
+      <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.0" referencedGraphicsAlgorithm="//@children.0/@children.0/@graphicsAlgorithm/@graphicsAlgorithmChildren.0"/>
+      <children visible="true">
+        <graphicsAlgorithm xsi:type="al:Text" background="//@colors.2" foreground="//@colors.2" lineWidth="1" transparency="0.0" width="80" height="20" y="60" font="//@fonts.0" value="port11"/>
+      </children>
+    </children>
+    <children xsi:type="pi:ContainerShape" visible="true" active="true">
+      <properties key="obj-type" value="port"/>
+      <properties key="item-kind" value=""/>
+      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="80" height="80" x="220">
+        <graphicsAlgorithmChildren xsi:type="al:Rectangle" background="//@colors.2" foreground="//@colors.2" lineWidth="2" transparency="0.0" width="40" height="40" x="20" y="20"/>
+        <graphicsAlgorithmChildren xsi:type="al:Ellipse" background="//@colors.1" foreground="//@colors.1" lineWidth="2" transparency="0.0" width="20" height="20" x="30" y="30"/>
+      </graphicsAlgorithm>
+      <link>
+        <businessObjects href="../040-room-concepts.room#Port:ActorClass1$port13"/>
+      </link>
+      <anchors xsi:type="pi:ChopboxAnchor" referencedGraphicsAlgorithm="//@children.0/@children.1/@graphicsAlgorithm/@graphicsAlgorithmChildren.0"/>
+      <children visible="true">
+        <graphicsAlgorithm xsi:type="al:Text" background="//@colors.2" foreground="//@colors.2" lineWidth="1" transparency="0.0" width="80" height="20" font="//@fonts.0" horizontalAlignment="ALIGNMENT_CENTER" value="port13"/>
+      </children>
+    </children>
+    <children xsi:type="pi:ContainerShape" visible="true" active="true">
+      <properties key="obj-type" value="ref"/>
+      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="220" height="120" x="110" y="150">
+        <graphicsAlgorithmChildren xsi:type="al:Rectangle" background="//@colors.3" foreground="//@colors.2" lineWidth="1" transparency="0.0" width="180" height="80" x="20" y="20">
+          <graphicsAlgorithmChildren xsi:type="al:Rectangle" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="20" height="10" x="150" y="50"/>
+          <graphicsAlgorithmChildren xsi:type="al:Rectangle" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="20" height="10" x="145" y="65"/>
+        </graphicsAlgorithmChildren>
+      </graphicsAlgorithm>
+      <link>
+        <businessObjects href="../040-room-concepts.room#ActorRef:ActorClass1$ActorRef_A"/>
+      </link>
+      <anchors xsi:type="pi:ChopboxAnchor" referencedGraphicsAlgorithm="//@children.0/@children.2/@graphicsAlgorithm/@graphicsAlgorithmChildren.0"/>
+      <children visible="true">
+        <graphicsAlgorithm xsi:type="al:Text" background="//@colors.2" foreground="//@colors.2" lineWidth="1" transparency="0.0" width="180" height="80" x="20" y="20" font="//@fonts.0" horizontalAlignment="ALIGNMENT_CENTER" value="ActorRef_A&#xA;(ActorClass2)"/>
+      </children>
+      <children xsi:type="pi:ContainerShape" visible="true" active="true">
+        <properties key="obj-type" value="port"/>
+        <properties key="item-kind" value=""/>
+        <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="40" height="40" y="25">
+          <graphicsAlgorithmChildren xsi:type="al:Rectangle" background="//@colors.2" foreground="//@colors.2" lineWidth="1" transparency="0.0" width="20" height="20" x="10" y="10"/>
+        </graphicsAlgorithm>
+        <link>
+          <businessObjects href="../040-room-concepts.room#Port:ActorClass2$port21"/>
+        </link>
+        <anchors xsi:type="pi:ChopboxAnchor" incomingConnections="//@connections.0" referencedGraphicsAlgorithm="//@children.0/@children.2/@children.1/@graphicsAlgorithm/@graphicsAlgorithmChildren.0"/>
+        <children visible="true">
+          <graphicsAlgorithm xsi:type="al:Text" background="//@colors.2" foreground="//@colors.2" lineWidth="1" transparency="0.0" width="40" height="10" y="30" font="//@fonts.0" value="port21"/>
+        </children>
+      </children>
+      <children xsi:type="pi:ContainerShape" visible="true" active="true">
+        <properties key="obj-type" value="port"/>
+        <properties key="item-kind" value="C"/>
+        <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="40" height="40" x="180" y="30">
+          <graphicsAlgorithmChildren xsi:type="al:Rectangle" background="//@colors.1" foreground="//@colors.2" lineWidth="1" transparency="0.0" width="20" height="20" x="10" y="10"/>
+        </graphicsAlgorithm>
+        <link>
+          <businessObjects href="../040-room-concepts.room#Port:ActorClass2$port22"/>
+        </link>
+        <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.1" referencedGraphicsAlgorithm="//@children.0/@children.2/@children.2/@graphicsAlgorithm/@graphicsAlgorithmChildren.0"/>
+        <children visible="true">
+          <graphicsAlgorithm xsi:type="al:Text" background="//@colors.2" foreground="//@colors.2" lineWidth="1" transparency="0.0" width="40" height="10" y="30" font="//@fonts.0" horizontalAlignment="ALIGNMENT_RIGHT" value="port22"/>
+        </children>
+      </children>
+      <children xsi:type="pi:ContainerShape" visible="true" active="true">
+        <properties key="obj-type" value="port"/>
+        <properties key="item-kind" value=""/>
+        <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="40" height="40" x="80">
+          <graphicsAlgorithmChildren xsi:type="al:Rectangle" background="//@colors.2" foreground="//@colors.2" lineWidth="1" transparency="0.0" width="20" height="20" x="10" y="10"/>
+        </graphicsAlgorithm>
+        <link>
+          <businessObjects href="../040-room-concepts.room#Port:ActorClass2$port23"/>
+        </link>
+        <anchors xsi:type="pi:ChopboxAnchor" incomingConnections="//@connections.3" referencedGraphicsAlgorithm="//@children.0/@children.2/@children.3/@graphicsAlgorithm/@graphicsAlgorithmChildren.0"/>
+        <children visible="true">
+          <graphicsAlgorithm xsi:type="al:Text" background="//@colors.2" foreground="//@colors.2" lineWidth="1" transparency="0.0" width="40" height="10" font="//@fonts.0" horizontalAlignment="ALIGNMENT_CENTER" value="port23"/>
+        </children>
+      </children>
+    </children>
+    <children xsi:type="pi:ContainerShape" visible="true" active="true">
+      <properties key="obj-type" value="ref"/>
+      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="220" height="120" x="390" y="150">
+        <graphicsAlgorithmChildren xsi:type="al:Rectangle" background="//@colors.3" foreground="//@colors.2" lineWidth="1" transparency="0.0" width="180" height="80" x="20" y="20">
+          <graphicsAlgorithmChildren xsi:type="al:Rectangle" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="20" height="10" x="150" y="50"/>
+          <graphicsAlgorithmChildren xsi:type="al:Rectangle" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="20" height="10" x="145" y="65"/>
+        </graphicsAlgorithmChildren>
+      </graphicsAlgorithm>
+      <link>
+        <businessObjects href="../040-room-concepts.room#ActorRef:ActorClass1$ActorRef_B"/>
+      </link>
+      <anchors xsi:type="pi:ChopboxAnchor" referencedGraphicsAlgorithm="//@children.0/@children.3/@graphicsAlgorithm/@graphicsAlgorithmChildren.0"/>
+      <children visible="true">
+        <graphicsAlgorithm xsi:type="al:Text" background="//@colors.2" foreground="//@colors.2" lineWidth="1" transparency="0.0" width="180" height="80" x="20" y="20" font="//@fonts.0" horizontalAlignment="ALIGNMENT_CENTER" value="ActorRef_B&#xA;(ActorClass3)"/>
+      </children>
+      <children xsi:type="pi:ContainerShape" visible="true" active="true">
+        <properties key="obj-type" value="port"/>
+        <properties key="item-kind" value=""/>
+        <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="40" height="40" y="30">
+          <graphicsAlgorithmChildren xsi:type="al:Rectangle" background="//@colors.2" foreground="//@colors.2" lineWidth="1" transparency="0.0" width="20" height="20" x="10" y="10"/>
+        </graphicsAlgorithm>
+        <link>
+          <businessObjects href="../040-room-concepts.room#Port:ActorClass3$port31"/>
+        </link>
+        <anchors xsi:type="pi:ChopboxAnchor" incomingConnections="//@connections.1" referencedGraphicsAlgorithm="//@children.0/@children.3/@children.1/@graphicsAlgorithm/@graphicsAlgorithmChildren.0"/>
+        <children visible="true">
+          <graphicsAlgorithm xsi:type="al:Text" background="//@colors.2" foreground="//@colors.2" lineWidth="1" transparency="0.0" width="40" height="10" y="30" font="//@fonts.0" value="port31"/>
+        </children>
+      </children>
+      <children xsi:type="pi:ContainerShape" visible="true" active="true">
+        <properties key="obj-type" value="port"/>
+        <properties key="item-kind" value="C"/>
+        <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="40" height="40" x="180" y="22">
+          <graphicsAlgorithmChildren xsi:type="al:Rectangle" background="//@colors.1" foreground="//@colors.2" lineWidth="1" transparency="0.0" width="20" height="20" x="10" y="10"/>
+        </graphicsAlgorithm>
+        <link>
+          <businessObjects href="../040-room-concepts.room#Port:ActorClass3$port32"/>
+        </link>
+        <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.2" referencedGraphicsAlgorithm="//@children.0/@children.3/@children.2/@graphicsAlgorithm/@graphicsAlgorithmChildren.0"/>
+        <children visible="true">
+          <graphicsAlgorithm xsi:type="al:Text" background="//@colors.2" foreground="//@colors.2" lineWidth="1" transparency="0.0" width="40" height="10" y="30" font="//@fonts.0" horizontalAlignment="ALIGNMENT_CENTER" value="port32"/>
+        </children>
+      </children>
+      <children xsi:type="pi:ContainerShape" visible="true" active="true">
+        <properties key="obj-type" value="port"/>
+        <properties key="item-kind" value="C"/>
+        <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="40" height="40" x="80">
+          <graphicsAlgorithmChildren xsi:type="al:Rectangle" background="//@colors.1" foreground="//@colors.2" lineWidth="1" transparency="0.0" width="20" height="20" x="10" y="10"/>
+        </graphicsAlgorithm>
+        <link>
+          <businessObjects href="../040-room-concepts.room#Port:ActorClass3$port33"/>
+        </link>
+        <anchors xsi:type="pi:ChopboxAnchor" incomingConnections="//@connections.4" referencedGraphicsAlgorithm="//@children.0/@children.3/@children.3/@graphicsAlgorithm/@graphicsAlgorithmChildren.0"/>
+        <children visible="true">
+          <graphicsAlgorithm xsi:type="al:Text" background="//@colors.2" foreground="//@colors.2" lineWidth="1" transparency="0.0" width="40" height="10" font="//@fonts.0" horizontalAlignment="ALIGNMENT_CENTER" value="port33"/>
+        </children>
+      </children>
+    </children>
+    <children xsi:type="pi:ContainerShape" visible="true" active="true">
+      <properties key="obj-type" value="port"/>
+      <properties key="item-kind" value="CR"/>
+      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="80" height="80" x="631" y="90">
+        <graphicsAlgorithmChildren xsi:type="al:Rectangle" background="//@colors.1" foreground="//@colors.2" lineWidth="2" transparency="0.0" width="40" height="40" x="20" y="20"/>
+        <graphicsAlgorithmChildren xsi:type="al:Rectangle" background="//@colors.2" foreground="//@colors.2" lineWidth="2" transparency="0.0" width="20" height="20" x="30" y="30"/>
+      </graphicsAlgorithm>
+      <link>
+        <businessObjects href="../040-room-concepts.room#Port:ActorClass1$port12"/>
+      </link>
+      <anchors xsi:type="pi:ChopboxAnchor" incomingConnections="//@connections.2" referencedGraphicsAlgorithm="//@children.0/@children.4/@graphicsAlgorithm/@graphicsAlgorithmChildren.0"/>
+      <children visible="true">
+        <graphicsAlgorithm xsi:type="al:Text" background="//@colors.2" foreground="//@colors.2" lineWidth="1" transparency="0.0" width="80" height="20" y="60" font="//@fonts.0" horizontalAlignment="ALIGNMENT_CENTER" value="port12"/>
+      </children>
+    </children>
+    <children xsi:type="pi:ContainerShape" visible="true" active="true">
+      <properties key="obj-type" value="port"/>
+      <properties key="item-kind" value="C"/>
+      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="80" height="80" x="420">
+        <graphicsAlgorithmChildren xsi:type="al:Rectangle" background="//@colors.1" foreground="//@colors.2" lineWidth="2" transparency="0.0" width="40" height="40" x="20" y="20"/>
+        <graphicsAlgorithmChildren xsi:type="al:Ellipse" background="//@colors.2" foreground="//@colors.2" lineWidth="2" transparency="0.0" width="20" height="20" x="30" y="30"/>
+      </graphicsAlgorithm>
+      <link>
+        <businessObjects href="../040-room-concepts.room#Port:ActorClass1$port14"/>
+      </link>
+      <anchors xsi:type="pi:ChopboxAnchor" referencedGraphicsAlgorithm="//@children.0/@children.5/@graphicsAlgorithm/@graphicsAlgorithmChildren.0"/>
+      <children visible="true">
+        <graphicsAlgorithm xsi:type="al:Text" background="//@colors.2" foreground="//@colors.2" lineWidth="1" transparency="0.0" width="80" height="20" font="//@fonts.0" horizontalAlignment="ALIGNMENT_CENTER" value="port14"/>
+      </children>
+    </children>
+    <children xsi:type="pi:ContainerShape" visible="true" active="true">
+      <properties key="obj-type" value="port"/>
+      <properties key="item-kind" value="C"/>
+      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="80" height="80" x="170" y="61">
+        <graphicsAlgorithmChildren xsi:type="al:Rectangle" background="//@colors.1" foreground="//@colors.2" lineWidth="2" transparency="0.0" width="40" height="40" x="20" y="20"/>
+        <graphicsAlgorithmChildren xsi:type="al:Ellipse" background="//@colors.2" foreground="//@colors.2" lineWidth="2" transparency="0.0" width="20" height="20" x="30" y="30"/>
+      </graphicsAlgorithm>
+      <link>
+        <businessObjects href="../040-room-concepts.room#Port:ActorClass1$port15"/>
+      </link>
+      <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.3" referencedGraphicsAlgorithm="//@children.0/@children.6/@graphicsAlgorithm/@graphicsAlgorithmChildren.0"/>
+      <children visible="true">
+        <graphicsAlgorithm xsi:type="al:Text" background="//@colors.2" foreground="//@colors.2" lineWidth="1" transparency="0.0" width="80" height="20" y="60" font="//@fonts.0" horizontalAlignment="ALIGNMENT_CENTER" value="port15"/>
+      </children>
+    </children>
+    <children xsi:type="pi:ContainerShape" visible="true" active="true">
+      <properties key="obj-type" value="port"/>
+      <properties key="item-kind" value=""/>
+      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="80" height="80" x="450" y="61">
+        <graphicsAlgorithmChildren xsi:type="al:Rectangle" background="//@colors.2" foreground="//@colors.2" lineWidth="2" transparency="0.0" width="40" height="40" x="20" y="20"/>
+        <graphicsAlgorithmChildren xsi:type="al:Ellipse" background="//@colors.1" foreground="//@colors.1" lineWidth="2" transparency="0.0" width="20" height="20" x="30" y="30"/>
+      </graphicsAlgorithm>
+      <link>
+        <businessObjects href="../040-room-concepts.room#Port:ActorClass1$port16"/>
+      </link>
+      <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.4" referencedGraphicsAlgorithm="//@children.0/@children.7/@graphicsAlgorithm/@graphicsAlgorithmChildren.0"/>
+      <children visible="true">
+        <graphicsAlgorithm xsi:type="al:Text" background="//@colors.2" foreground="//@colors.2" lineWidth="1" transparency="0.0" width="80" height="20" y="60" font="//@fonts.0" horizontalAlignment="ALIGNMENT_CENTER" value="port16"/>
+      </children>
+    </children>
+    <children xsi:type="pi:ContainerShape" visible="true" active="true">
+      <properties key="obj-type" value="port"/>
+      <properties key="item-kind" value="M"/>
+      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="80" height="80" x="115" y="251">
+        <graphicsAlgorithmChildren xsi:type="al:Rectangle" background="//@colors.1" foreground="//@colors.2" lineWidth="2" transparency="0.0" width="40" height="40" x="25" y="15"/>
+        <graphicsAlgorithmChildren xsi:type="al:Rectangle" background="//@colors.2" foreground="//@colors.2" lineWidth="2" transparency="0.0" width="40" height="40" x="20" y="20"/>
+        <graphicsAlgorithmChildren xsi:type="al:Ellipse" background="//@colors.1" foreground="//@colors.1" lineWidth="2" transparency="0.0" width="20" height="20" x="30" y="30"/>
+      </graphicsAlgorithm>
+      <link>
+        <businessObjects href="../040-room-concepts.room#Port:ActorClass1$port17"/>
+      </link>
+      <anchors xsi:type="pi:ChopboxAnchor" referencedGraphicsAlgorithm="//@children.0/@children.8/@graphicsAlgorithm/@graphicsAlgorithmChildren.1"/>
+      <children visible="true">
+        <graphicsAlgorithm xsi:type="al:Text" background="//@colors.2" foreground="//@colors.2" lineWidth="1" transparency="0.0" width="80" height="20" y="60" font="//@fonts.0" horizontalAlignment="ALIGNMENT_CENTER" value="port17"/>
+      </children>
+    </children>
+    <children xsi:type="pi:ContainerShape" visible="true" active="true">
+      <properties key="obj-type" value="port"/>
+      <properties key="item-kind" value="CM"/>
+      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="80" height="80" x="230" y="251">
+        <graphicsAlgorithmChildren xsi:type="al:Rectangle" background="//@colors.1" foreground="//@colors.2" lineWidth="2" transparency="0.0" width="40" height="40" x="25" y="15"/>
+        <graphicsAlgorithmChildren xsi:type="al:Rectangle" background="//@colors.1" foreground="//@colors.2" lineWidth="2" transparency="0.0" width="40" height="40" x="20" y="20"/>
+        <graphicsAlgorithmChildren xsi:type="al:Ellipse" background="//@colors.2" foreground="//@colors.2" lineWidth="2" transparency="0.0" width="20" height="20" x="30" y="30"/>
+      </graphicsAlgorithm>
+      <link>
+        <businessObjects href="../040-room-concepts.room#Port:ActorClass1$port08"/>
+      </link>
+      <anchors xsi:type="pi:ChopboxAnchor" referencedGraphicsAlgorithm="//@children.0/@children.9/@graphicsAlgorithm/@graphicsAlgorithmChildren.1"/>
+      <children visible="true">
+        <graphicsAlgorithm xsi:type="al:Text" background="//@colors.2" foreground="//@colors.2" lineWidth="1" transparency="0.0" width="80" height="20" y="60" font="//@fonts.0" horizontalAlignment="ALIGNMENT_CENTER" value="port08"/>
+      </children>
+    </children>
+    <children xsi:type="pi:ContainerShape" visible="true" active="true">
+      <properties key="obj-type" value="port"/>
+      <properties key="item-kind" value="RM"/>
+      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="80" height="80" x="340" y="251">
+        <graphicsAlgorithmChildren xsi:type="al:Rectangle" background="//@colors.1" foreground="//@colors.2" lineWidth="2" transparency="0.0" width="40" height="40" x="25" y="15"/>
+        <graphicsAlgorithmChildren xsi:type="al:Rectangle" background="//@colors.1" foreground="//@colors.2" lineWidth="2" transparency="0.0" width="40" height="40" x="20" y="20"/>
+      </graphicsAlgorithm>
+      <link>
+        <businessObjects href="../040-room-concepts.room#Port:ActorClass1$port09"/>
+      </link>
+      <anchors xsi:type="pi:ChopboxAnchor" referencedGraphicsAlgorithm="//@children.0/@children.10/@graphicsAlgorithm/@graphicsAlgorithmChildren.1"/>
+      <children visible="true">
+        <graphicsAlgorithm xsi:type="al:Text" background="//@colors.2" foreground="//@colors.2" lineWidth="1" transparency="0.0" width="80" height="20" y="60" font="//@fonts.0" horizontalAlignment="ALIGNMENT_CENTER" value="port09"/>
+      </children>
+    </children>
+    <children xsi:type="pi:ContainerShape" visible="true" active="true">
+      <properties key="obj-type" value="port"/>
+      <properties key="item-kind" value="CRM"/>
+      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="80" height="80" x="470" y="251">
+        <graphicsAlgorithmChildren xsi:type="al:Rectangle" background="//@colors.1" foreground="//@colors.2" lineWidth="2" transparency="0.0" width="40" height="40" x="25" y="15"/>
+        <graphicsAlgorithmChildren xsi:type="al:Rectangle" background="//@colors.1" foreground="//@colors.2" lineWidth="2" transparency="0.0" width="40" height="40" x="20" y="20"/>
+        <graphicsAlgorithmChildren xsi:type="al:Rectangle" background="//@colors.2" foreground="//@colors.2" lineWidth="2" transparency="0.0" width="20" height="20" x="30" y="30"/>
+      </graphicsAlgorithm>
+      <link>
+        <businessObjects href="../040-room-concepts.room#Port:ActorClass1$port00"/>
+      </link>
+      <anchors xsi:type="pi:ChopboxAnchor" referencedGraphicsAlgorithm="//@children.0/@children.11/@graphicsAlgorithm/@graphicsAlgorithmChildren.1"/>
+      <children visible="true">
+        <graphicsAlgorithm xsi:type="al:Text" background="//@colors.2" foreground="//@colors.2" lineWidth="1" transparency="0.0" width="80" height="20" y="60" font="//@fonts.0" horizontalAlignment="ALIGNMENT_CENTER" value="port00"/>
+      </children>
+    </children>
+  </children>
+  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.0/@children.0/@anchors.0" end="//@children.0/@children.2/@children.1/@anchors.0">
+    <properties key="obj-type" value="bind"/>
+    <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0"/>
+    <link>
+      <businessObjects href="../040-room-concepts.room#Binding:ActorClass1$port11!.-port21!ActorRef_A"/>
+    </link>
+  </connections>
+  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.0/@children.2/@children.2/@anchors.0" end="//@children.0/@children.3/@children.1/@anchors.0">
+    <properties key="obj-type" value="bind"/>
+    <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0"/>
+    <link>
+      <businessObjects href="../040-room-concepts.room#Binding:ActorClass1$port22!ActorRef_A-port31!ActorRef_B"/>
+    </link>
+  </connections>
+  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.0/@children.3/@children.2/@anchors.0" end="//@children.0/@children.4/@anchors.0">
+    <properties key="obj-type" value="bind"/>
+    <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0"/>
+    <link>
+      <businessObjects href="../040-room-concepts.room#Binding:ActorClass1$port32!ActorRef_B-port12!."/>
+    </link>
+  </connections>
+  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.0/@children.6/@anchors.0" end="//@children.0/@children.2/@children.3/@anchors.0">
+    <properties key="obj-type" value="bind"/>
+    <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0"/>
+    <link>
+      <businessObjects href="../040-room-concepts.room#Binding:ActorClass1$port15!.-port23!ActorRef_A"/>
+    </link>
+  </connections>
+  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.0/@children.7/@anchors.0" end="//@children.0/@children.3/@children.3/@anchors.0">
+    <properties key="obj-type" value="bind"/>
+    <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0"/>
+    <link>
+      <businessObjects href="../040-room-concepts.room#Binding:ActorClass1$port16!.-port33!ActorRef_B"/>
+    </link>
+  </connections>
+  <colors red="227" green="238" blue="249"/>
+  <colors red="255" green="255" blue="255"/>
+  <colors/>
+  <colors red="200" green="200" blue="200"/>
+  <fonts name="Arial" size="8"/>
+</pi:Diagram>

@@ -1,0 +1,87 @@
+RoomModel ModelName {
+
+	LogicalSystem LogSysName {
+		SubSystemRef SubSysRefName: SubSysClassName
+	}
+
+	SubSystemClass SubSysClassName {
+		ActorRef ActorRefName: ActorClass1
+	}
+
+	ActorClass ActorClass1 {
+		Interface {
+			Port port11: ProtocolClass1
+			Port port13: ProtocolClass1
+			conjugated Port port12: ProtocolClass1
+			conjugated Port port14: ProtocolClass1
+			Port port17 [ 2 ]: ProtocolClass1
+			conjugated Port port08 [ 2 ]: ProtocolClass1
+			Port port09 [ 2 ]: ProtocolClass1
+			conjugated Port port00 [ 2 ]: ProtocolClass1
+		}
+		Structure {
+			external Port port13
+			external Port port14
+			external Port port17
+			external Port port08
+			conjugated Port port15: ProtocolClass1
+			Port port16: ProtocolClass1
+			ActorRef ActorRef_A: ActorClass2
+			ActorRef ActorRef_B: ActorClass3
+			Binding port11 and ActorRef_A.port21
+			Binding ActorRef_A.port22 and ActorRef_B.port31
+			Binding ActorRef_B.port32 and port12
+			Binding port15 and ActorRef_A.port23
+			Binding port16 and ActorRef_B.port33
+		}
+		Behavior { }
+	}
+
+	ActorClass ActorClass2 {
+		Interface {
+			Port port21: ProtocolClass1
+			conjugated Port port22: ProtocolClass1
+			Port port23: ProtocolClass1
+		}
+		Structure {
+			external Port port21
+			external Port port22
+			external Port port23
+		}
+		Behavior { }
+	}
+
+	ActorClass ActorClass3 {
+		Interface {
+			Port port31: ProtocolClass1
+			conjugated Port port32: ProtocolClass1
+			conjugated Port port33: ProtocolClass1
+		}
+		Structure {
+			external Port port31
+			external Port port32
+			external Port port33
+		}
+		Behavior { }
+	}
+
+	ProtocolClass ProtocolClass1 {
+		incoming {
+			Message start(par: DataClass1)
+		}
+		outgoing {
+			Message done(par: int16)
+		}
+	}
+
+	DataClass DataClass1 {
+		Attribute par1: int16
+		Attribute par2: float32
+	}
+	
+	DataClass DataClass2 {
+		Attribute par1: int16
+		Attribute par2: DataClass1
+	}
+
+}
