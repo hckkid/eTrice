@@ -16,7 +16,7 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.etrice.generator.launch.GeneratorMainTab;
 
 /**
- * @author hrentz
+ * @author Henrik Rentz-Reichert
  *
  */
 public class JavaGeneratorMainTab extends GeneratorMainTab {

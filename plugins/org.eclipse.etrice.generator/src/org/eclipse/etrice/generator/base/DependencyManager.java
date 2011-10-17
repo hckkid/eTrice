@@ -61,7 +61,7 @@ public class DependencyManager {
 	public void computeDependencies(List<RoomModel> models, URI main, String projectMarker) {
 		for (RoomModel model : models) {
 			URI uri = FileSystemHelpers.getMarkerFileURI(model, projectMarker);
-			if (!uri.equals(main)) {
+			if (uri!=null && !uri.equals(main)) {
 				String relativePath = FileSystemHelpers.getRelativePath(main, uri, true);
 				refmodel2relpath.put(model.getName(), relativePath);
 			}

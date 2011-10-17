@@ -21,7 +21,7 @@ import com.google.inject.Module;
 import com.google.inject.Singleton;
 
 /**
- * @author hrentz
+ * @author Henrik Rentz-Reichert
  *
  */
 public class GeneratorBaseModule implements Module {

@@ -299,7 +299,10 @@ public class PortSupport extends InterfaceItemSupport {
 			Rectangle rect = gaService.createRectangle(invisibleRectangle);
 			rect.setForeground(darkColor);
 			rect.setBackground(bg);
-			rect.setLineWidth(line);
+			if (!refport && relay && !port.isConjugated())
+				rect.setLineWidth(4*line);
+			else
+				rect.setLineWidth(line);
 			gaService.setLocationAndSize(rect, size/2, size/2, size, size);
 
 			if (containerShape.getAnchors().isEmpty()) {

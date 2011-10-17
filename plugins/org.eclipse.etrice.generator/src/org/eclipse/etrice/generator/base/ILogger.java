@@ -17,7 +17,7 @@ import org.eclipse.emf.ecore.EObject;
 /**
  * A simple logger interface for error messages during model validation and code generation.
  * 
- * @author hrentz
+ * @author Henrik Rentz-Reichert
  *
  */
 public interface ILogger {

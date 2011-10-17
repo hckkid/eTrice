@@ -1,12 +1,14 @@
 RoomModel Blinky {
 
+	import room.basic.service.timing.* from "../../../org.eclipse.etrice.modellib/models/TimingService.room"
+
 	LogicalSystem System_Blinky {
 		SubSystemRef subsystem: SubSystem_Blinky
 	}
 
 	SubSystemClass SubSystem_Blinky {
 		ActorRef application: BlinkyTop
-		ActorRef timingService: room.basic.service.timing.ATimingService
+		ActorRef timingService: ATimingService
 		LayerConnection ref application satisfied_by timingService.timer
 		LayerConnection ref application satisfied_by timingService.timeout
 	}
@@ -34,7 +36,7 @@ RoomModel Blinky {
 				"private TrafficLight2 pedLights;"
 			}
 			external Port ControlPort
-			SAP timer: room.basic.service.timing.PTimeout
+			SAP timer: PTimeout
 		}
 		Behavior {
 			Operation destroyUser() {
@@ -103,7 +105,7 @@ RoomModel Blinky {
 		}
 		Structure {
 			external Port ControlPort
-			SAP timer: room.basic.service.timing.PTimeout
+			SAP timer: PTimeout
 		}
 		Behavior {
 			StateMachine {

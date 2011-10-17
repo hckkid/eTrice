@@ -13,6 +13,7 @@ import org.eclipse.etrice.generator.java.gen.SubSystemClassGen;
 import org.eclipse.etrice.generator.java.gen.SubSystemRunnerGen;
 import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.eclipse.xtext.generator.IGenerator;
+import org.eclipse.xtext.xbase.lib.BooleanExtensions;
 
 @SuppressWarnings("all")
 public class MainGen implements IGenerator {
@@ -53,7 +54,11 @@ public class MainGen implements IGenerator {
       this.protocolClassGen.doGenerate(e);
       this.actorClassGen.doGenerate(e);
       this.subsystemClassGen.doGenerate(e);
-      this.subsystemRunnerGen.doGenerate(e);
+      boolean _isLibrary = e.isLibrary();
+      boolean _operator_not = BooleanExtensions.operator_not(_isLibrary);
+      if (_operator_not) {
+        this.subsystemRunnerGen.doGenerate(e);
+      }
     }
   }
 }

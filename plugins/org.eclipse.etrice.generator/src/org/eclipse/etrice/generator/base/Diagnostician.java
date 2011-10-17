@@ -17,7 +17,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.etrice.generator.etricegen.IDiagnostician;
 
 /**
- * @author hrentz
+ * @author Henrik Rentz-Reichert
  *
  */
 public class Diagnostician implements IDiagnostician {

@@ -32,7 +32,7 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.dialogs.ContainerSelectionDialog;
 
 /**
- * @author hrentz
+ * @author Henrik Rentz-Reichert
  *
  */
 public class JavaGeneratorConfigTab extends AbstractLaunchConfigurationTab {

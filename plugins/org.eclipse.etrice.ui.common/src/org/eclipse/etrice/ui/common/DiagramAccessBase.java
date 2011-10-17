@@ -38,7 +38,7 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.FileEditorInput;
 
 /**
- * @author hrentz
+ * @author Henrik Rentz-Reichert
  *
  */
 public abstract class DiagramAccessBase {

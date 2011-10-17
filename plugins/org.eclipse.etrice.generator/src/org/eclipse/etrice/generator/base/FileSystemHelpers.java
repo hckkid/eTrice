@@ -14,7 +14,7 @@ package org.eclipse.etrice.generator.base;
 
 import java.io.File;
 
-import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.Path;
@@ -22,15 +22,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 
 /**
- * @author hrentz
- *
- */
-/**
- * @author hrentz
- *
- */
-/**
- * @author hrentz
+ * @author Henrik Rentz-Reichert
  *
  */
 public class FileSystemHelpers {
@@ -52,7 +44,7 @@ public class FileSystemHelpers {
 	 * 
 	 * @param obj an objected which should be located in a resource
 	 * @param markerFileName name of marker file
-	 * @return the URI of the first directory containing marker
+	 * @return the URI of the first directory containing marker or <code>null</code> if not found
 	 */
 	public static URI getMarkerFileURI(EObject obj, String markerFileName) {
 		URI mainPath = null;
@@ -62,17 +54,17 @@ public class FileSystemHelpers {
 			if (mainPath.isPlatform()) {
 				// HOWTO: get absolute OS path suitable for java.io.File from platform scheme EMF URI
 				IWorkspaceRoot workspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
-				IFile file = workspaceRoot.getFile(new Path(mainPath.toPlatformString(true)));
+				IFolder file = workspaceRoot.getFolder(new Path(mainPath.toPlatformString(true)));
 				String osString = file.getLocation().toOSString();
 				parent = new File(osString);
 			}
 			else {
 				parent = new File(mainPath.toFileString());
 			}
+			
 			boolean isProject = false;
 			int nUp = 0;
-			do {
-				parent = parent.getParentFile();
+			while (!isProject && parent!=null) {
 				String[] contents = parent.list();
 				for (int i = 0; i < contents.length; i++) {
 					if (contents[i].equals(markerFileName)) {
@@ -80,9 +72,12 @@ public class FileSystemHelpers {
 						break;
 					}
 				}
+				if (isProject)
+					break;
+				
+				parent = parent.getParentFile();
 				++nUp;
 			}
-			while (!isProject && parent!=null);
 			if (isProject && nUp>0)
 				mainPath = mainPath.trimSegments(nUp);
 		}
