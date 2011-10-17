@@ -37,11 +37,11 @@ public class PlatformRelativeUriResolver extends ImportUriResolver {
 		if (resolve!=null && object.eResource()!=null && object.eResource().getURI()!=null) {
 			URI uri = URI.createURI(resolve);
 			if (uri.isRelative()) {
-				URI base = object.eResource().getURI();
+				URI base = object.eResource().getURI().trimSegments(1);
 				if (base.isPlatformResource()) {
-					base = base.trimSegments(1);
 					IFolder folder = ResourcesPlugin.getWorkspace().getRoot().getFolder(new Path(base.toPlatformString(true)));
-					String abs = folder.getRawLocationURI().toString();
+					// URI.resolve expects a trailing separator for some reason...
+					String abs = folder.getRawLocationURI().toString()+"/";
 					base = URI.createURI(abs);
 				}
 				uri = uri.resolve(base);
