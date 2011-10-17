@@ -14,7 +14,7 @@ package org.eclipse.etrice.generator.base;
 
 import java.io.File;
 
-import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.Path;
@@ -54,20 +54,17 @@ public class FileSystemHelpers {
 			if (mainPath.isPlatform()) {
 				// HOWTO: get absolute OS path suitable for java.io.File from platform scheme EMF URI
 				IWorkspaceRoot workspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
-				IFile file = workspaceRoot.getFile(new Path(mainPath.toPlatformString(true)));
+				IFolder file = workspaceRoot.getFolder(new Path(mainPath.toPlatformString(true)));
 				String osString = file.getLocation().toOSString();
 				parent = new File(osString);
 			}
 			else {
 				parent = new File(mainPath.toFileString());
 			}
+			
 			boolean isProject = false;
 			int nUp = 0;
 			while (!isProject && parent!=null) {
-				parent = parent.getParentFile();
-				if (parent==null)
-					break;
-				
 				String[] contents = parent.list();
 				for (int i = 0; i < contents.length; i++) {
 					if (contents[i].equals(markerFileName)) {
@@ -75,12 +72,16 @@ public class FileSystemHelpers {
 						break;
 					}
 				}
+				if (isProject)
+					break;
+				
+				parent = parent.getParentFile();
 				++nUp;
 			}
 			if (isProject && nUp>0)
 				mainPath = mainPath.trimSegments(nUp);
 		}
-		return null;
+		return mainPath;
 	}
 	
 	private static boolean bothNullOrEqual(String s1, String s2) {
