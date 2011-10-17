@@ -41,9 +41,10 @@ public class PlatformRelativeUriResolver extends ImportUriResolver {
 				if (base.isPlatformResource()) {
 					IFolder folder = ResourcesPlugin.getWorkspace().getRoot().getFolder(new Path(base.toPlatformString(true)));
 					// URI.resolve expects a trailing separator for some reason...
-					String abs = folder.getRawLocationURI().toString()+"/";
+					String abs = folder.getRawLocationURI().toString();
 					base = URI.createURI(abs);
 				}
+				base = base.appendSegment("");
 				uri = uri.resolve(base);
 				resolve = uri.toString();
 			}
