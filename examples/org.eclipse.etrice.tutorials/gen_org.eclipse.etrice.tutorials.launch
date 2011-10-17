@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<launchConfiguration type="org.eclipse.jdt.launching.localJavaApplication">
-<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
-<listEntry value="/org.eclipse.etrice.generator.java/src/org/eclipse/etrice/generator/java/Main.java"/>
+<launchConfiguration type="org.eclipse.etrice.generator.launch.java.launchConfigurationType">
+<booleanAttribute key="GenInstanceDiagram" value="false"/>
+<stringAttribute key="GenModelPath" value=""/>
+<listAttribute key="ModelFiles">
+<listEntry value="${workspace_loc:/org.eclipse.etrice.tutorials/model/scratch/PingPong.room}"/>
+<listEntry value="${workspace_loc:/org.eclipse.etrice.tutorials/model/Blinky/Blinky.room}"/>
+<listEntry value="${workspace_loc:/org.eclipse.etrice.tutorials/model/PedLightsController/PedLightsController.room}"/>
+<listEntry value="${workspace_loc:/org.eclipse.etrice.tutorials/model/SendingData/SendingData.room}"/>
+<listEntry value="${workspace_loc:/org.eclipse.etrice.tutorials/model/HelloWorld/HelloWorld.room}"/>
 </listAttribute>
-<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
-<listEntry value="1"/>
-</listAttribute>
-<stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="org.eclipse.etrice.generator.java.Main"/>
-<stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="${workspace_loc:org.eclipse.etrice.tutorials}\model\HelloWorld\HelloWorld.room&#13;&#10;${workspace_loc:org.eclipse.etrice.tutorials}\model\Blinky\Blinky.room&#13;&#10;${workspace_loc:org.eclipse.etrice.tutorials}\model\PedLightsController\PedLightsController.room&#13;&#10;${workspace_loc:org.eclipse.etrice.tutorials}\model\SendingData\SendingData.room&#13;&#10;${workspace_loc:org.eclipse.etrice.modellib}\models\TimingService.room"/>
-<stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="org.eclipse.etrice.generator.java"/>
-<stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-ea"/>
-<stringAttribute key="org.eclipse.jdt.launching.WORKING_DIRECTORY" value="${workspace_loc:org.eclipse.etrice.tutorials}"/>
+<booleanAttribute key="SaveGenModel" value="false"/>
+<stringAttribute key="org.eclipse.debug.core.ATTR_REFRESH_SCOPE" value="${project}"/>
 </launchConfiguration>
