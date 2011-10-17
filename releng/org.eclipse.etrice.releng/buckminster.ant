@@ -12,6 +12,8 @@
 
 			<property name="sourcesLocation" value="${checkoutLocation}/plugins/" />
 
+			<property name="lastSuccessful" value="/opt/public/jobs/mdt-etrice-nightly/lastSuccessful/archive/" />
+
 
 			<echo message="Source code location ${sourcesLocation}" />
 			<echo message="Javadoc output location ${output}" />
@@ -121,31 +123,31 @@
 	<target name="copy.sites" >
 		
 		<echo message="Deleting old packed update site from last_success area" />
-		<delete dir="${root}/last_success/site.packed/" failonerror="true" />
+		<delete dir="${lastSuccessful}/site.packed/" failonerror="true" />
 		
 		<echo message="Deleting old ZIP archive from last_success area" />
-		<delete dir="${root}/last_success/site.p2.zip/" failonerror="true" />
+		<delete dir="${lastSuccessful}/site.p2.zip/" failonerror="true" />
 
 		<echo message="Copying site.packed to last_success area" />
-		<copydir dest="${root}/last_success/site.packed/" src="${root}/buildroot/buckminster.build/org.eclipse.etrice.site_1.0.0-eclipse.feature/site.packed" />
+		<copydir dest="${lastSuccessful}/site.packed/" src="${root}/buildroot/buckminster.build/org.eclipse.etrice.site_1.0.0-eclipse.feature/site.packed" />
 
 		<echo message="Add update site stuff and user-readable description to site.packed folder (copy from site.p2 folder)" />
-		<copy todir="${root}/last_success/site.packed/" file="${root}/buildroot/buckminster.build/org.eclipse.etrice.site_1.0.0-eclipse.feature/site.p2/artifacts.jar" />
-		<copy todir="${root}/last_success/site.packed/" file="${root}/buildroot/buckminster.build/org.eclipse.etrice.site_1.0.0-eclipse.feature/site.p2/content.jar" />
-		<copy todir="${root}/last_success/site.packed/" file="${root}/buildroot/buckminster.build/org.eclipse.etrice.site_1.0.0-eclipse.feature/site.p2/index.html" />
-		<copy todir="${root}/last_success/site.packed/" file="${root}/buildroot/buckminster.build/org.eclipse.etrice.site_1.0.0-eclipse.feature/site.p2/index.xml" />
+		<copy todir="${lastSuccessful}/site.packed/" file="${root}/buildroot/buckminster.build/org.eclipse.etrice.site_1.0.0-eclipse.feature/site.p2/artifacts.jar" />
+		<copy todir="${lastSuccessful}/site.packed/" file="${root}/buildroot/buckminster.build/org.eclipse.etrice.site_1.0.0-eclipse.feature/site.p2/content.jar" />
+		<copy todir="${lastSuccessful}/site.packed/" file="${root}/buildroot/buckminster.build/org.eclipse.etrice.site_1.0.0-eclipse.feature/site.p2/index.html" />
+		<copy todir="${lastSuccessful}/site.packed/" file="${root}/buildroot/buckminster.build/org.eclipse.etrice.site_1.0.0-eclipse.feature/site.p2/index.xml" />
 
 		<echo message="Copying site.p2.zip to last_success area" />
-		<copydir dest="${root}/last_success/site.p2.zip/" src="${root}/buildroot/buckminster.build/org.eclipse.etrice.site_1.0.0-eclipse.feature/site.p2.zip" />
-		<rename dest="${root}/last_success/site.p2.zip/org.eclipse.etrice.site_0.1.0.${build_id}.zip" 
-			src="${root}/last_success/site.p2.zip/org.eclipse.etrice.site_0.1.0.qualifier.zip"/>
+		<copydir dest="${lastSuccessful}/site.p2.zip/" src="${root}/buildroot/buckminster.build/org.eclipse.etrice.site_1.0.0-eclipse.feature/site.p2.zip" />
+		<rename dest="${lastSuccessful}/site.p2.zip/org.eclipse.etrice.site_0.1.0.${build_id}.zip" 
+			src="${lastSuccessful}/site.p2.zip/org.eclipse.etrice.site_0.1.0.qualifier.zip"/>
 
 	</target>
 	
 	<!-- Sub targets for copy.sites -->
 	<target name="sub.delete.last_success.site.signed" if="site.signed.exists">
 		<echo message="Deleting old signed update site from last_success area" />
-		<delete dir="${root}/last_success/site.signed/" failonerror="true" />
+		<delete dir="${lastSuccessful}/site.signed/" failonerror="true" />
 	</target>
 	<!-- End sub targets -->
 
