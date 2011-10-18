@@ -22,9 +22,6 @@ import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.Operation;
-import org.eclipse.etrice.core.room.Port;
-import org.eclipse.etrice.core.room.SAPRef;
-import org.eclipse.etrice.core.room.SPPRef;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 
 /**
@@ -114,16 +111,21 @@ public class DetailCodeTranslator {
 					else {
 						InterfaceItem item = name2item.get(token);
 						if (item!=null) {
-							Message msg = getMessage(text, curr, item);
-							ArrayList<String> args = getArgs(text, curr);
+							int start = curr.pos;
+							Message msg = getMessage(text, curr, item, true);
 							if (msg!=null) {
+								ArrayList<String> args = getArgs(text, curr);
 								if (args!=null) {
 									if (argsMatching(msg, args)) {
 										String orig = text.substring(last, curr.pos);
 										translated = provider.getInterfaceItemMessageText(item, msg, args, orig);
 									}
 								}
-								else {
+							}
+							else {
+								curr.pos = start;
+								msg = getMessage(text, curr, item, false);
+								if (msg!=null) {
 									if (text.charAt(curr.pos)!='(') {
 										String orig = text.substring(last, curr.pos);
 										translated = provider.getInterfaceItemMessageValue(item, msg, orig);
@@ -187,7 +189,7 @@ public class DetailCodeTranslator {
 		}
 	}
 	
-	private Message getMessage(String text, Position curr, InterfaceItem item) {
+	private Message getMessage(String text, Position curr, InterfaceItem item, boolean outgoing) {
 		proceedToToken(text, curr);
 
 		if (text.charAt(curr.pos)!='.')
@@ -198,24 +200,7 @@ public class DetailCodeTranslator {
 		
 		String token = getToken(text, curr);
 		
-		List<Message> messages = null;
-		if (item instanceof Port) {
-			if (((Port) item).isConjugated())
-				messages = ((Port) item).getProtocol().getIncomingMessages();
-			else
-				messages = ((Port) item).getProtocol().getOutgoingMessages();
-		}
-		else if (item instanceof SAPRef) {
-			messages = ((SAPRef)item).getProtocol().getIncomingMessages();
-		}
-		else if (item instanceof SPPRef) {
-			messages = ((SPPRef)item).getProtocol().getOutgoingMessages();
-		}
-		else {
-			assert(false): "unexpected sub type";
-			return null;
-		}
-		
+		List<Message> messages = RoomHelpers.getMessageList(item, outgoing);
 		for (Message message : messages) {
 			if (message.getName().equals(token))
 				return message;

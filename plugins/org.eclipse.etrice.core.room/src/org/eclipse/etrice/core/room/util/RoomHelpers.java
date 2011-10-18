@@ -29,10 +29,14 @@ import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.KeyValue;
 import org.eclipse.etrice.core.room.LayerConnection;
 import org.eclipse.etrice.core.room.LogicalSystem;
+import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.Operation;
 import org.eclipse.etrice.core.room.Port;
+import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RefinedState;
 import org.eclipse.etrice.core.room.RoomPackage;
+import org.eclipse.etrice.core.room.SAPRef;
+import org.eclipse.etrice.core.room.SPPRef;
 import org.eclipse.etrice.core.room.ServiceImplementation;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraph;
@@ -543,4 +547,27 @@ public class RoomHelpers {
 		
 		return true;
 	}
+	
+	public static List<Message> getMessageList(InterfaceItem item, boolean outgoing) {
+		ProtocolClass protocol = null;
+		if (item instanceof Port) {
+			protocol = ((Port) item).getProtocol();
+			if (((Port) item).isConjugated())
+				outgoing = !outgoing;
+		}
+		else if (item instanceof SAPRef) {
+			outgoing = !outgoing;
+			protocol = ((SAPRef)item).getProtocol();
+		}
+		else if (item instanceof SPPRef) {
+			protocol = ((SPPRef)item).getProtocol();
+		}
+		else {
+			assert(false): "unexpected sub type";
+			return null;
+		}
+		
+		return outgoing? protocol.getOutgoingMessages():protocol.getIncomingMessages();
+	}
+	
 }

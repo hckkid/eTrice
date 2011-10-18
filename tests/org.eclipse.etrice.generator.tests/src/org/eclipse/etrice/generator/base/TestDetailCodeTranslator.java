@@ -102,6 +102,9 @@ public class TestDetailCodeTranslator {
 		out2.setData(typedID);
 		pc.getOutgoingMessages().add(out1);
 		pc.getOutgoingMessages().add(out2);
+		Message in1 = RoomFactory.eINSTANCE.createMessage();
+		in1.setName("in1");
+		pc.getIncomingMessages().add(in1);
 		
 		ac = RoomFactory.eINSTANCE.createActorClass();
 		model.getActorClasses().add(ac);
@@ -189,11 +192,21 @@ public class TestDetailCodeTranslator {
 	@Test
 	public void testPortMsgValue() {
 		DetailCode dc = RoomFactory.eINSTANCE.createDetailCode();
+		dc.getCommands().add("x = 2*fct.in1;");
+		
+		String result = translator.translateDetailCode(dc);
+		
+		assertEquals("port.message as value (getter) replacement", "x = 2*>fct.in1<;", result);
+	}
+	
+	@Test
+	public void testPortMsgValueNoReplace() {
+		DetailCode dc = RoomFactory.eINSTANCE.createDetailCode();
 		dc.getCommands().add("x = 2*fct.out1;");
 		
 		String result = translator.translateDetailCode(dc);
 		
-		assertEquals("port.message as value (getter) replacement", "x = 2*>fct.out1<;", result);
+		assertEquals("port.message as value (getter) replacement", "x = 2*fct.out1;", result);
 	}
 	
 	@Test
