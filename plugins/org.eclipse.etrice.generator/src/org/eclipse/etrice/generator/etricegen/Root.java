@@ -33,7 +33,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.eclipse.etrice.generator.etricegen.Root#getUsedProtocolClasses <em>Used Protocol Classes</em>}</li>
  *   <li>{@link org.eclipse.etrice.generator.etricegen.Root#getUsedActorClasses <em>Used Actor Classes</em>}</li>
  *   <li>{@link org.eclipse.etrice.generator.etricegen.Root#getUsedRoomModels <em>Used Room Models</em>}</li>
- *   <li>{@link org.eclipse.etrice.generator.etricegen.Root#getMainPathSubSystemClasses <em>Main Path Sub System Classes</em>}</li>
+ *   <li>{@link org.eclipse.etrice.generator.etricegen.Root#getSubSystemClasses <em>Sub System Classes</em>}</li>
  * </ul>
  * </p>
  *
@@ -155,20 +155,20 @@ public interface Root extends EObject {
 	EList<RoomModel> getUsedRoomModels();
 
 	/**
-	 * Returns the value of the '<em><b>Main Path Sub System Classes</b></em>' reference list.
+	 * Returns the value of the '<em><b>Sub System Classes</b></em>' reference list.
 	 * The list contents are of type {@link org.eclipse.etrice.core.room.SubSystemClass}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Main Path Sub System Classes</em>' reference list isn't clear,
+	 * If the meaning of the '<em>Sub System Classes</em>' reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Main Path Sub System Classes</em>' reference list.
-	 * @see org.eclipse.etrice.generator.etricegen.ETriceGenPackage#getRoot_MainPathSubSystemClasses()
+	 * @return the value of the '<em>Sub System Classes</em>' reference list.
+	 * @see org.eclipse.etrice.generator.etricegen.ETriceGenPackage#getRoot_SubSystemClasses()
 	 * @model transient="true" volatile="true" derived="true"
 	 * @generated
 	 */
-	EList<SubSystemClass> getMainPathSubSystemClasses();
+	EList<SubSystemClass> getSubSystemClasses();
 
 	/**
 	 * Returns the value of the '<em><b>Library</b></em>' attribute.
