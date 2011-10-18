@@ -63,6 +63,11 @@ public class TestDetailCodeTranslator {
 		public String getInterfaceItemMessageText(InterfaceItem item, Message msg, ArrayList<String> args, String orig) {
 			return ">"+item.getName()+"."+msg.getName()+"("+getArgList(args)+")<";
 		}
+		
+		@Override
+		public String getInterfaceItemMessageValue(InterfaceItem item, Message msg, String orig) {
+			return ">"+item.getName()+"."+msg.getName()+"<";
+		}
 
 		private String getArgList(ArrayList<String> args) {
 			StringBuilder result = new StringBuilder();
@@ -179,6 +184,16 @@ public class TestDetailCodeTranslator {
 		String result = translator.translateDetailCode(dc);
 		
 		assertEquals("port.message replacement", ">fct.out1()<;", result);
+	}
+	
+	@Test
+	public void testPortMsgValue() {
+		DetailCode dc = RoomFactory.eINSTANCE.createDetailCode();
+		dc.getCommands().add("x = 2*fct.out1;");
+		
+		String result = translator.translateDetailCode(dc);
+		
+		assertEquals("port.message as value (getter) replacement", "x = 2*>fct.out1<;", result);
 	}
 	
 	@Test

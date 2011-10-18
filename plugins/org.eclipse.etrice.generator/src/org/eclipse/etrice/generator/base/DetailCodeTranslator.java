@@ -37,6 +37,7 @@ public class DetailCodeTranslator {
 		String getAttributeText(Attribute att, String orig);
 		String getOperationText(Operation op, ArrayList<String> args, String orig);
 		String getInterfaceItemMessageText(InterfaceItem item, Message msg, ArrayList<String> args, String orig);
+		String getInterfaceItemMessageValue(InterfaceItem item, Message msg, String orig);
 	}
 
 	private static class Position {
@@ -83,7 +84,7 @@ public class DetailCodeTranslator {
 			
 			String token = getToken(text, curr);
 			if (token.isEmpty()) {
-				while (curr.pos<text.length() && !Character.isWhitespace(text.charAt(curr.pos)))
+				while (curr.pos<text.length() && !isTokenChar(text.charAt(curr.pos)))
 					++curr.pos;
 				last = appendParsed(text, curr, last, result);
 			}
@@ -115,9 +116,19 @@ public class DetailCodeTranslator {
 						if (item!=null) {
 							Message msg = getMessage(text, curr, item);
 							ArrayList<String> args = getArgs(text, curr);
-							if (msg!=null && args!=null && argsMatching(msg, args)) {
-								String orig = text.substring(last, curr.pos);
-								translated = provider.getInterfaceItemMessageText(item, msg, args, orig);
+							if (msg!=null) {
+								if (args!=null) {
+									if (argsMatching(msg, args)) {
+										String orig = text.substring(last, curr.pos);
+										translated = provider.getInterfaceItemMessageText(item, msg, args, orig);
+									}
+								}
+								else {
+									if (text.charAt(curr.pos)!='(') {
+										String orig = text.substring(last, curr.pos);
+										translated = provider.getInterfaceItemMessageValue(item, msg, orig);
+									}
+								}
 							}
 						}
 					}
