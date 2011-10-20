@@ -162,10 +162,14 @@ public class PortMessageSelectionDialog extends FormDialog {
 					return ((MsgItemPair) element).msg.getName();
 				break;
 			case 1:
+				if (element instanceof MsgItemPair)
+					return ((MsgItemPair) element).out? "out" : "in";
+				break;
+			case 2:
 				if (element instanceof MsgItemPair) {
 					Message msg = ((MsgItemPair) element).msg;
 					if (msg.getData()!=null)
-						return msg.getData().getName();
+						return msg.getData().getName()+" : "+RoomHelpers.getName(msg.getData().getType());
 				}
 				break;
 			}
@@ -218,7 +222,9 @@ public class PortMessageSelectionDialog extends FormDialog {
 		TreeColumn col0 = new TreeColumn(viewer.getTree(), SWT.NONE);
 		col0.setText("interface item/message");
 		TreeColumn col1 = new TreeColumn(viewer.getTree(), SWT.NONE);
-		col1.setText("data");
+		col1.setText("direction");
+		TreeColumn col2 = new TreeColumn(viewer.getTree(), SWT.NONE);
+		col2.setText("data");
 
 		viewer.getTree().setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		viewer.setContentProvider(new PortMessageContentProvider());
@@ -252,8 +258,9 @@ public class PortMessageSelectionDialog extends FormDialog {
 		TreeColumnLayout layout = new TreeColumnLayout();
 		body.setLayout(layout);
 
-		layout.setColumnData(col0, new ColumnWeightData(50));
-		layout.setColumnData(col1, new ColumnWeightData(50));
+		layout.setColumnData(col0, new ColumnWeightData(40));
+		layout.setColumnData(col1, new ColumnWeightData(20));
+		layout.setColumnData(col2, new ColumnWeightData(40));
 	}
 	
 	@Override
