@@ -25,6 +25,8 @@ import org.eclipse.etrice.core.room.Binding;
 import org.eclipse.etrice.core.room.ChoicePoint;
 import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.ExternalPort;
+import org.eclipse.etrice.core.room.FreeType;
+import org.eclipse.etrice.core.room.FreeTypedID;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.KeyValue;
 import org.eclipse.etrice.core.room.LayerConnection;
@@ -46,6 +48,7 @@ import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.core.room.TrPoint;
 import org.eclipse.etrice.core.room.Transition;
 import org.eclipse.etrice.core.room.Trigger;
+import org.eclipse.etrice.core.room.Type;
 
 /**
  * description
@@ -568,6 +571,36 @@ public class RoomHelpers {
 		}
 		
 		return outgoing? protocol.getOutgoingMessages():protocol.getIncomingMessages();
+	}
+	
+	public static String getName(Type tp) {
+		if (tp.getType()!=null)
+			return tp.getType().getName();
+		else if (tp.getPrim()!=null)
+			return tp.getPrim().getName();
+		else
+			return "?";
+	}
+	
+	public static String getName(FreeType tp) {
+		if (tp.getType()!=null)
+			return tp.getType();
+		else if (tp.getPrim()!=null)
+			return tp.getPrim().getName();
+		else
+			return "?";
+	}
+
+	public static String getSignature(Operation op) {
+		String signature = "";
+		for (FreeTypedID arg : op.getArguments()) {
+			if (signature.isEmpty())
+				signature = arg.getName()+": "+getName(arg.getType());
+			else
+				signature += ", "+arg.getName()+": "+getName(arg.getType());
+		}
+		signature = "("+signature+")";
+		return signature;
 	}
 	
 }
