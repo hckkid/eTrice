@@ -117,16 +117,31 @@ public class RoomDiagramEditor extends DiagramEditor {
 	@SuppressWarnings("restriction")
 	@Override
 	public void createPartControl(Composite parent) {
-			super.createPartControl(parent);
-			
-			/* we have to save here whether changes have been done or not to get rid of the dirty state
-			 * CAUTION: save in
-			 * init(IEditorSite site, IEditorInput input)
-			 * or
-			 * setInput(IEditorInput input)
-			 * did not work correctly
-			 */
-	//		if (AutoUpdateFeature.isLastDoneChanges())
-				doSave(null);
-		}
+		super.createPartControl(parent);
+		
+		/* we have to save here whether changes have been done or not to get rid of the dirty state
+		 * CAUTION: save in
+		 * init(IEditorSite site, IEditorInput input)
+		 * or
+		 * setInput(IEditorInput input)
+		 * did not work correctly
+		 */
+//		if (AutoUpdateFeature.isLastDoneChanges())
+			doSave(null);
+	}
+	
+	/* (non-Javadoc)
+	 * @see org.eclipse.graphiti.ui.internal.editor.DiagramEditorInternal#setFocus()
+	 */
+	@SuppressWarnings("restriction")
+	@Override
+	public void setFocus() {
+		boolean dirtyAlready = isDirty();
+		
+		// inside this call auto refresh will happen iff (and turn the editor dirty)
+		super.setFocus();
+		
+		if (!dirtyAlready && isDirty())
+			doSave(null);
+	}
 }
