@@ -82,7 +82,7 @@ public abstract class AbstractMemberAwarePropertyDialog extends AbstractProperty
 	 * @param body
 	 */
 	protected void createMembersAndMessagesButtons(Composite body) {
-		Composite buttonsArea = new Composite(body, SWT.NONE);
+		Composite buttonsArea = getToolkit().createComposite(body);
 		buttonsArea.setLayout(new GridLayout(2, true));
 		GridData gd = new GridData();
 		gd.grabExcessHorizontalSpace = true;
