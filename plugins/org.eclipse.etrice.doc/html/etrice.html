@@ -52,9 +52,6 @@
 <span class="section"><a href="#BasicConcepts">Basic Concepts</a></span>
 </dt>
 <dt>
-<span class="section"><a href="#Benefits">Benefits</a></span>
-</dt>
-<dt>
 <span class="section"><a href="#ExecutionModels">Execution Models</a></span>
 </dt>
 </dl>
@@ -255,7 +252,7 @@
 				<span class="bold"><strong>R</strong></span> eal time 
 				<span class="bold"><strong>O</strong></span> bject 
 				<span class="bold"><strong>O</strong></span> riented 
-				<span class="bold"><strong>M</strong></span> odeling) is and where it is good for. It will try to answer the following questions:
+				<span class="bold"><strong>M</strong></span> odeling) is and what it is good for. It will try to answer the following questions:
 			</p>
 <div class="itemizedlist">
 <ul class="itemizedlist" type="disc">
@@ -289,13 +286,13 @@
 <p>Bran Selic, Garth Gullekson and Paul T. Ward have published the concepts 1994 in the book &bdquo;REAL-TIME OBJECT-ORIENTED MODELING&rdquo;. The company 
 					[<span class="citation">object time</span>] &trade; developed a ROOM tool which was taken over by 
 					[<span class="citation">Rational SW</span>] &trade; and later on by 
-					[<span class="citation">IBM</span>] &trade;. Unfortunately the tool is no longer maintained by 
-					[<span class="citation">IBM</span>] &trade;. The company 
+					[<span class="citation">IBM</span>] &trade;. 
+					The company 
 					[<span class="citation">Protos Software Gmbh</span>] &trade; also developed a ROOM tool called 
-					[<span class="citation">Trice</span>] &trade; for controlling production machines. 
+					[<span class="citation">Trice</span>] &trade; for control software for production machines and automotive systems. 
 					[<span class="citation">Trice</span>] &trade; is the predecessor of eTrice (see Introduction to eTrice). 
 				</p>
-<p>From our point of view ROOM provides still the clearest, simplest, completest and best suited modeling concepts for the real time domain. All later proposals like the UML does not fit such perfect to this kind of problems.</p>
+<p>From our point of view ROOM provides still the clearest, simplest, most complete and best suited modeling concepts for the real time domain. All later proposals like the UML do not fit as well to this kind of problems.</p>
 </div>
 <div class="section" title="Which kind of SW-Systems will be addressed?">
 <div class="titlepage">
@@ -330,11 +327,11 @@
 </ul>
 </div>
 <p>Each of these properties has potential to make SW development complex. If a given system can be characterized with a combination of or all of these properties, ROOM might be applied to such a system.  </p>
-<p>As an example take a look at a washing machine. The system has to react on user interactions, has to handle some error conditions like a closed water tap or a defective lye pump. It has to react simultaneously to all this inputs. It has to close the water valve in a certain time to avoid flooding the basement. 
-					So, the system can by characterized as timely, concurrent and reactive. As long as the washing machine does not transform to a laundry drier by itself, the system has no dynamic internal structure and as long as all functions are running on a single micro controller the (SW)-system is not distributed. 
+<p>As an example take a look at a washing machine. The system has to react on user interactions, has to handle some error conditions like a closed water tap or a defective lye pump. It has to react simultaneously to all these inputs. It has to close the water valve in a certain time to avoid flooding the basement. 
+					So, the system can be characterized as timely, concurrent and reactive. As long as the washing machine does not transform to a laundry drier by itself, the system has no dynamic internal structure and as long as all functions are running on a single micro controller the (SW)-system is not distributed. 
 					ROOM fits perfect to such a system.</p>
 <p>A SW system which mainly consists of data transformations like signal/image processing or a loop controller (e.g. a PID controller) cannot be characterized with any of the above mentioned properties. However, in the real world most of the SW systems will be a combination of both. ROOM can be combined with such systems, so that for example an actor provides a 
-					[<span class="citation">run to completion</span>] context for calculating an image processing algorithm.  
+					[<span class="citation">run to completion</span>] context for calculating an image processing algorithm or a PID controller.  
 				</p>
 </div>
 <div class="section" title="What is the relation between OOP and ROOM?">
@@ -355,7 +352,7 @@
 <p>
 				
 </p>
-<p>As the figure illustrates, the classical object paradigm does not care about concurrency issues. The threads of control will be provided from the underlying operating system and the user is responsible to avoid access violations by using operating system mechanisms (semaphore, mutex).</p>
+<p>As the figure illustrates, the classical object paradigm does not care about concurrency issues. The threads of control will be provided by the underlying operating system and the user is responsible to avoid access violations by using those operating system mechanisms directly (semaphore, mutex).</p>
 <p>
 					
 </p>
@@ -389,7 +386,7 @@
 <div class="itemizedlist">
 <ul class="itemizedlist" type="disc">
 <li class="listitem">
-<p>ROOM models contain well defined interfaces (protocols). That makes it easy to reuse components in different applications or e.g. in a test harness. </p>
+<p>ROOM models contain well defined interfaces (protocols), which makes it easy to reuse components in different applications or e.g. in a test harness. </p>
 </li>
 <li class="listitem">
 <p>Graphical modeling makes it easy to understand, maintain and share code with other developers</p>
@@ -412,8 +409,8 @@
 </div>
 </div>
 </div>
-<p>Generating code from models will introduce some overhead in terms of memory footprint as well as performance. For most systems the overhead will be negligible. However, the decision using ROOM should be made explicitly and it is always a trade of between development costs, time to market and costs in terms of a little bit more of memory and performance. As mentioned, in most cases the decision will be very clear. Especially in case of product lines or products which require maintenance or feature updates, the ROOM methodology has big advantages.  </p>
-<p>Care must be taken during the introduction of the new methodology. Due to the fact that ROOM provides a shift of the object paradigm, developers often need a phase of adaption. Even some of them will never adapt.</p>
+<p>Generating code from models will introduce some overhead in terms of memory footprint as well as performance. For most systems the overhead will be negligible. However, the decision for using ROOM should be made explicitly and it is always a trade off between development costs, time to market and costs in terms of a little bit more of memory and performance. Thanks to the powerful component model, ROOM is especially well suited for the development of software product lines with their need for reusable core assets.  </p>
+<p>Care must be taken during the introduction of the new methodology. Due to the fact that ROOM provides a shift of the object paradigm, developers and teams need a phase of adaption. Every benefit comes at a price.</p>
 </div>
 </div>
 <div class="section" title="Basic Concepts">
@@ -434,26 +431,27 @@
 </div>
 </div>
 </div>
-<p>The basic elements of ROOM are the actors with their ports and protocols. The protocol provides a formal interface description. The port is an interaction point where the actor interacts with its outside world. Each port has exactly one protocol attached. The sum of all ports builds up the complete interface of an actor. Each port can receive messages with or without data which is defined in the protocol. Each message will be handled by the actors behavior (state machine) or will be delegated to the actors internal structure.</p>
-<p>The actor provides access protection for its own attributes (including complex types (classical objects)), including concurrency protection. An actor has neither public attributes nor public operations. The only interaction with the outside world takes place via interface ports. This ensures a high degree of reuse ability on actor level and provides an effective and safe programming model to the developer. </p>
-<p>Receiving a message via a port will trigger the internal state machine. A transition will be executed depending on the message and the current state. Within this transition, detailed code will be executed and response messages can be sent.</p>
+<p>TODO: Screenshot of Actor with Port and another with a Protocol</p>
+<p>The basic elements of ROOM are the actors with their ports and protocols. The protocol provides a formal interface description. The port is an interaction point where the actor interacts with its outside world. Each port has exactly one protocol attached. The sum of all ports builds up the complete interface of an actor. Each port can receive messages, with or without data, which are defined in the attached protocol. Each message will be handled by the actors behavior (state machine) or will be delegated to the actors internal structure.</p>
+<p>The actor provides access protection for its own attributes (including complex types (classical objects)), including concurrency protection. An actor has neither public attributes nor public operations. The only interaction with the outside world takes place via interface ports. This ensures a high degree of reusability on actor level and provides an effective and safe programming model to the developer. </p>
+<p>Receiving a message via a port will trigger the internal state machine. A transition will be executed depending on the message and the current state. Within this transition, detail level code will be executed and response messages can be sent.</p>
 <p>
 					
 <a class="ulink" href="images\010-room-introduction01.avi" target="_new">receiving a message</a>
 				
 </p>
-<p>With this model, a complex behavior will be divided into many relatively simple, linked actors. To put it the other way round: The complex behavior will be provided by a network of relatively simple components which are communicating with each other via well defined interfaces.</p>
+<p>With this model, a complex behavior can be divided into many relatively simple, linked actors. To put it the other way round: The complex behavior will be provided by a network of relatively simple components which are communicating with each other via well defined interfaces.</p>
 </div>
-<div class="section" title="Hierarchy in Structure and Finite State Machines">
+<div class="section" title="Hierarchy in Structure and Behavior">
 <div class="titlepage">
 <div>
 <div>
 <h3 class="title">
-<a name="HierarchyinStructureandFiniteStateMachines"></a>Hierarchy in Structure and Finite State Machines</h3>
+<a name="HierarchyinStructureandBehavior"></a>Hierarchy in Structure and Behavior</h3>
 </div>
 </div>
 </div>
-<p>ROOM provides two types of hierarchy. Behavioral hierarchy and structural hierarchy. Structural hierarchy means that actors can be nested to arbitrary depth. Usually you will add more and more details to your application with each nesting level. That means you can focus yourself on any level of abstraction with always the same element, the actor. Structural hierarchy provides a powerful mechanism to divide your problem in smaller pieces, so that you can focus the level of abstraction you want to work on. </p>
+<p>ROOM provides two types of hierarchy. Behavioral hierarchy and structural hierarchy. Structural hierarchy means that actors can be nested to arbitrary depth. Usually you will add more and more details to your application with each nesting level. That means you can focus yourself on any level of abstraction with always the same element, the actor. Structural hierarchy provides a powerful mechanism to divide your problem in smaller pieces, so that you can focus on the level of abstraction you want to work on. </p>
 <p>The actor&rsquo;s behavior will be described with a state machine. A state in turn may contain sub states. This is another possibility to focus on an abstraction level. Take the simple FSM from the blinky actor from the blinky tutorial:    </p>
 <p>
 					
@@ -461,11 +459,29 @@
 <div class="mediaobject">
 <img src="images\020-Blinky15.png"></div>
 <p>
-				
-</p>
+					TODO: add a screenshot of the SubStateMachine
+				</p>
 <p>From an abstract point of view there is a state &bdquo;blinking&rdquo;. But a simple LED is not able to blink autonomously. Therefore you have to add more details to your model to make a LED blinking, but for the current work it is not of interest how the blinking is realized. This will be done in the next lower level of the hierarchy. </p>
-<p>With this very simple example you can easily imagine how powerful this mechanisms is.</p>
+<p>This simple example might give an idea how powerful this mechanisms is.</p>
 <p>The hierarchical FSM provides a rich tool box to describe real world problems (see &bdquo;room concepts&rdquo;).</p>
+</div>
+<div class="section" title="Layering">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="Layering"></a>Layering</h3>
+</div>
+</div>
+</div>
+<p>Layering is another well known form of abstraction to reduce complexity in the structure of systems. ROOM is probably the only language that supports Layering directly as language feature.
+					Layering can be expressed in ROOM by Actors with specialized Ports, called Service Access Points (
+					<span class="bold"><strong>SAP</strong></span>) and Service Provision Points (
+					<span class="bold"><strong>SPP</strong></span>).
+				</p>
+<p>TODO: Screenshot of Timing Service</p>
+<p>The Actor that provides a service implements an SPP and the client of that service implements an SAP. The Layer Connection connects all SAPs of a specific Protocol within an Actor hierarchy with an SPP that implements the service.</p>
+<p>From the Actors point of view, SAP and SPP behave almost like regular ports.</p>
 </div>
 <div class="section" title="Run to Completion">
 <div class="titlepage">
@@ -482,26 +498,6 @@
 <p>Note: It is very important not to confuse run to completion and preemption. Run to completion means that an actor will finish the processing of a message before he can receive a new one (regardless of its priority). That does not mean that an actor cannot be preempted from an higher priority thread of control. But even a message from this higher prior thread of control will be queued until the current processing has been finished. </p>
 <p>With this mechanism all actor internal attributes and data structures are protected. Due to the fact that multiple actors share one thread of control, all objects are protected which are accessed from one thread of control but multiple actors. This provides the possibility to decompose complex functionality to several actors without the risk to produce access violations or dead locks.</p>
 </div>
-<div class="section" title="Layering">
-<div class="titlepage">
-<div>
-<div>
-<h3 class="title">
-<a name="Layering"></a>Layering</h3>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="section" title="Benefits">
-<div class="titlepage">
-<div>
-<div>
-<h2 class="title" style="clear: both">
-<a name="Benefits"></a>Benefits</h2>
-</div>
-</div>
-</div>
 </div>
 <div class="section" title="Execution Models">
 <div class="titlepage">
@@ -512,57 +508,127 @@
 </div>
 </div>
 </div>
-<div class="section" title="Logical Machine">
+<p>Since from ROOM models executable code can be generated, it is important to define the way the actors are executed and communicate with each other. The combination of communication and execution is called the Execution Model.
+				Currently the eTrice tooling only supports the 
+				<span class="bold"><strong>message driven</strong></span> and parts of the 
+				<span class="bold"><strong>data driven</strong></span> execution model. In future releases more execution models will be supported, depending on the requirements of the community.
+			</p>
+<div class="section" title="Communication Methods">
 <div class="titlepage">
 <div>
 <div>
 <h3 class="title">
-<a name="LogicalMachine"></a>Logical Machine</h3>
+<a name="CommunicationMethods"></a>Communication Methods</h3>
 </div>
 </div>
 </div>
 <div class="itemizedlist">
 <ul class="itemizedlist" type="disc">
 <li class="listitem">
-<p>run to completion</p>
+<p>
+							
+<span class="bold"><strong>message driven</strong></span> (asynchronous, non blocking, no return value): Usually the message driven communication is implemented with message queues. Message queues are inherently asynchronous and enable a very good decoupling of the communicating parties.
+						</p>
+</li>
+<li class="listitem">
+<p>
+							
+<span class="bold"><strong>data driven</strong></span> (asynchronous, non blocking, no return value): In data driven communication sender and receiver often have a shared block of data. The sender writes the data and the receiver polls the data.
+						</p>
+</li>
+<li class="listitem">
+<p>
+							
+<span class="bold"><strong>function call</strong></span> (synchronous, blocking, return value): Regular function call as known in most programming languages.
+						</p>
 </li>
 </ul>
 </div>
 </div>
-<div class="section" title="Queue Based Execution Model">
+<div class="section" title="Execution Methods">
 <div class="titlepage">
 <div>
 <div>
 <h3 class="title">
-<a name="QueueBasedExecutionModel"></a>Queue Based Execution Model</h3>
+<a name="ExecutionMethods"></a>Execution Methods</h3>
 </div>
 </div>
 </div>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="disc">
+<li class="listitem">
+<p>
+							
+<span class="bold"><strong>execution by receive event</strong></span>: The message queue or the event dispatcher calls a &bdquo;receive event&rdquo; function of the message receiver an thereby executes the processing of the event.
+						</p>
+</li>
+<li class="listitem">
+<p>
+							
+<span class="bold"><strong>polled execution</strong></span>: The objects are processed by a cyclic &bdquo;execute&rdquo; call
+						</p>
+</li>
+<li class="listitem">
+<p>
+							
+<span class="bold"><strong>execution by function call</strong></span>: The caller executes the called object via function call
+						</p>
+</li>
+</ul>
 </div>
-<div class="section" title="Polled Execution Model">
+</div>
+<div class="section" title="Execution Models">
 <div class="titlepage">
 <div>
 <div>
 <h3 class="title">
-<a name="PolledExecutionModel"></a>Polled Execution Model</h3>
+<a name="ExecutionModels2"></a>Execution Models</h3>
 </div>
 </div>
 </div>
-<p>not implemented yet</p>
-</div>
-<div class="section" title="Hybrid Execution Model">
+<p>In todays software systems in most cases one or several of the following execution models are used:</p>
+<div class="section" title="message driven">
 <div class="titlepage">
 <div>
 <div>
-<h3 class="title">
-<a name="HybridExecutionModel"></a>Hybrid Execution Model</h3>
+<h4 class="title">
+<a name="messagedriven"></a>message driven</h4>
 </div>
 </div>
 </div>
-<p>not implemented yet</p>
-<p>port, protocol, actor, interface, asynchronous communication
-					hierarchical FSM, hierarchical structure</p>
-<p>run to completion</p>
+<p>The message driven execution model is a combination of message driven communication and execution by receive event.
+						This model allows for distributed systems with a very high throughput.
+						It can be deterministic but the determinism is hard to proof.
+						This execution model is often found in telecommunication systems and high performance automation control systems.</p>
+</div>
+<div class="section" title="data driven">
+<div class="titlepage">
+<div>
+<div>
+<h4 class="title">
+<a name="datadriven"></a>data driven</h4>
+</div>
+</div>
+</div>
+<p>The data driven execution model is a combination of data driven communication and polled execution.
+						This model is highly deterministic and very robust, but the polling creates a huge performance overhead.
+						The determinism is easy to proof (simple mathematics). 
+						The execution model is also compatible with the execution model of control software generated by Tools like Matlab&trade; and LabView&trade;.
+						This model is usually used for systems with requirements for safety, such as automotive and avionic systems.</p>
+</div>
+<div class="section" title="synchronous">
+<div class="titlepage">
+<div>
+<div>
+<h4 class="title">
+<a name="synchronous"></a>synchronous</h4>
+</div>
+</div>
+</div>
+<p>The synchronous execution model could also be called &bdquo;simple function calls&rdquo;. 
+						This model is in general not very well suited to support the &bdquo;run to completion&rdquo; semantic typical for ROOM models, but could also be generated from ROOM models. 
+						With this execution model also lower levels of a software system, such as device drivers, could be generated from ROOM models.</p>
+</div>
 </div>
 </div>
 </div>
@@ -631,7 +697,7 @@
 <p>
 			
 </p>
-<p>The wizard creates everything that is needed to create, build and run a eTrice model. The resulting project should look like this:</p>
+<p>The wizard creates everything that is needed to create, build and run an eTrice model. The resulting project should look like this:</p>
 <p>
 				
 </p>
@@ -642,7 +708,7 @@
 </p>
 <p>Within the model directory the model file 
 				[<span class="citation">HelloWorld.room</span>] was created. Open the 
-				[<span class="citation">HelloWorld.room</span>] file and position the cursor at the very beginning of the file. Open the content assist with Ctrl+Space and select 
+				[<span class="citation">HelloWorld.room</span>] file and delete the contents of the file. Open the content assist with Ctrl+Space and select 
 				[<span class="citation">model skeleton</span>].
 			</p>
 <p>
@@ -653,7 +719,7 @@
 <p>   
 			
 </p>
-<p>Edit the template variables and remove the artefacts from the wizard. </p>
+<p>Edit the template variables by typing the new names and jumping with Tab from name to name.</p>
 <p>The resulting model code should look like this:</p>
 <div class="literallayout">
 <p>
@@ -783,9 +849,9 @@
 </div>
 </div>
 </div>
-<p>Now the model is finished and source code can be generated. The project wizard has created a workflow that is responsible to generate the source code. From 
-				[<span class="citation">HelloWorld/src/workflow</span>] right click 
-				[<span class="citation">HelloWorld.mwe2</span>] and run it as MWE2Workflow. All model files in the model directory will be generated.
+<p>Now the model is finished and source code can be generated. The project wizard has created a launch configuration that is responsible for generating the source code. From 
+				[<span class="citation">HelloWorld/</span>] right click 
+				[<span class="citation">gen_HelloWorld.launch</span>] and run it as gen_HelloWorld. All model files in the model directory will be generated.
 			</p>
 <p>
 				
