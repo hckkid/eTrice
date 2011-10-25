@@ -15,6 +15,7 @@ package org.eclipse.etrice.generator.launch.java;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.etrice.generator.base.ILineOutput;
+import org.eclipse.etrice.generator.java.Main;
 import org.eclipse.etrice.generator.launch.GeneratorLaunchConfigurationDelegate;
 
 /**
@@ -28,12 +29,15 @@ public class JavaGeneratorLaunchConfigurationDelegate extends GeneratorLaunchCon
 	 */
 	@Override
 	protected void addArguments(ILaunchConfiguration configuration, StringBuffer argString) throws CoreException {
+		if (configuration.getAttribute(JavaGeneratorConfigTab.LIB, false)) {
+			argString.append(" "+Main.OPTION_LIB);
+		}
 		if (configuration.getAttribute(JavaGeneratorConfigTab.SAVE_GEN_MODEL, false)) {
-			argString.append(" -saveGenModel");
+			argString.append(" "+Main.OPTION_SAVE_GEN_MODEL);
 			argString.append(" file://"+configuration.getAttribute(JavaGeneratorConfigTab.GEN_MODEL_PATH, "?"));
 		}
 		if (configuration.getAttribute(JavaGeneratorConfigTab.GEN_INSTANCE_DIAGRAM, false))
-			argString.append(" -genInstDiag");
+			argString.append(" "+Main.OPTION_GEN_INST_DIAG);
 	}
 
 	/* (non-Javadoc)
