@@ -135,7 +135,7 @@ public class MemberSelectionDialog extends FormDialog {
 		FormToolkit toolkit = mform.getToolkit();
 
 		Form form = mform.getForm().getForm();
-		form.setText("select a port.message combination");
+		form.setText("Select an Attribute or Operation");
 
 		form.setImage(Activator.getImage("icons/Behavior.gif"));
 		toolkit.decorateFormHeading(form);

@@ -210,7 +210,7 @@ public class PortMessageSelectionDialog extends FormDialog {
 		FormToolkit toolkit = mform.getToolkit();
 
 		Form form = mform.getForm().getForm();
-		form.setText("select a port.message combination");
+		form.setText("Select a port.message Combination");
 
 		form.setImage(Activator.getImage("icons/Behavior.gif"));
 		toolkit.decorateFormHeading(form);
