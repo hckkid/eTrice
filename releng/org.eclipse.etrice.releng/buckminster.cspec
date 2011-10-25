@@ -13,7 +13,7 @@
         <cs:dependency name="org.eclipse.pde.source" componentType="eclipse.feature"/>
         <cs:dependency name="org.eclipse.platform" componentType="eclipse.feature"/>
         <cs:dependency name="org.eclipse.platform.source" componentType="eclipse.feature"/>
-        <cs:dependency name="org.eclipse.etrice.tests" componentType="eclipse.feature"/>
+        <cs:dependency name="org.eclipse.etrice.tests.feature" componentType="eclipse.feature"/>
     </cs:dependencies>
     <cs:actions>
         <cs:public name="copy.sites" actor="ant">
