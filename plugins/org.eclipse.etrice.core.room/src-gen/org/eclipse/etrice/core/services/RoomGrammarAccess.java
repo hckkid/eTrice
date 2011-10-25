@@ -3869,11 +3869,14 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Import");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cImportKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cImportedNamespaceAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cImportedNamespaceImportedFQNParserRuleCall_1_0 = (RuleCall)cImportedNamespaceAssignment_1.eContents().get(0);
-		private final Keyword cFromKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Assignment cImportURIAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cImportURISTRINGTerminalRuleCall_3_0 = (RuleCall)cImportURIAssignment_3.eContents().get(0);
+		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
+		private final Group cGroup_1_0 = (Group)cAlternatives_1.eContents().get(0);
+		private final Assignment cImportedNamespaceAssignment_1_0_0 = (Assignment)cGroup_1_0.eContents().get(0);
+		private final RuleCall cImportedNamespaceImportedFQNParserRuleCall_1_0_0_0 = (RuleCall)cImportedNamespaceAssignment_1_0_0.eContents().get(0);
+		private final Keyword cFromKeyword_1_0_1 = (Keyword)cGroup_1_0.eContents().get(1);
+		private final Keyword cModelKeyword_1_1 = (Keyword)cAlternatives_1.eContents().get(1);
+		private final Assignment cImportURIAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cImportURISTRINGTerminalRuleCall_2_0 = (RuleCall)cImportURIAssignment_2.eContents().get(0);
 		
 		//// HOWTO: use a combination of URI global scopes and namespace aware local scope provider
 		//
@@ -3890,29 +3893,38 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		//// the attribute 'importURI' is picked up by the ImportUriGlobalScopeProvider
 		//
 		//Import:
-		//	"import" importedNamespace=ImportedFQN "from" importURI=STRING;
+		//	"import" (importedNamespace=ImportedFQN "from" | "model") importURI=STRING;
 		public ParserRule getRule() { return rule; }
 
-		//"import" importedNamespace=ImportedFQN "from" importURI=STRING
+		//"import" (importedNamespace=ImportedFQN "from" | "model") importURI=STRING
 		public Group getGroup() { return cGroup; }
 
 		//"import"
 		public Keyword getImportKeyword_0() { return cImportKeyword_0; }
 
+		//importedNamespace=ImportedFQN "from" | "model"
+		public Alternatives getAlternatives_1() { return cAlternatives_1; }
+
+		//importedNamespace=ImportedFQN "from"
+		public Group getGroup_1_0() { return cGroup_1_0; }
+
 		//importedNamespace=ImportedFQN
-		public Assignment getImportedNamespaceAssignment_1() { return cImportedNamespaceAssignment_1; }
+		public Assignment getImportedNamespaceAssignment_1_0_0() { return cImportedNamespaceAssignment_1_0_0; }
 
 		//ImportedFQN
-		public RuleCall getImportedNamespaceImportedFQNParserRuleCall_1_0() { return cImportedNamespaceImportedFQNParserRuleCall_1_0; }
+		public RuleCall getImportedNamespaceImportedFQNParserRuleCall_1_0_0_0() { return cImportedNamespaceImportedFQNParserRuleCall_1_0_0_0; }
 
 		//"from"
-		public Keyword getFromKeyword_2() { return cFromKeyword_2; }
+		public Keyword getFromKeyword_1_0_1() { return cFromKeyword_1_0_1; }
+
+		//"model"
+		public Keyword getModelKeyword_1_1() { return cModelKeyword_1_1; }
 
 		//importURI=STRING
-		public Assignment getImportURIAssignment_3() { return cImportURIAssignment_3; }
+		public Assignment getImportURIAssignment_2() { return cImportURIAssignment_2; }
 
 		//STRING
-		public RuleCall getImportURISTRINGTerminalRuleCall_3_0() { return cImportURISTRINGTerminalRuleCall_3_0; }
+		public RuleCall getImportURISTRINGTerminalRuleCall_2_0() { return cImportURISTRINGTerminalRuleCall_2_0; }
 	}
 
 	public class ImportedFQNElements extends AbstractParserRuleElementFinder {
@@ -5039,7 +5051,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//// the attribute 'importURI' is picked up by the ImportUriGlobalScopeProvider
 	//
 	//Import:
-	//	"import" importedNamespace=ImportedFQN "from" importURI=STRING;
+	//	"import" (importedNamespace=ImportedFQN "from" | "model") importURI=STRING;
 	public ImportElements getImportAccess() {
 		return (pImport != null) ? pImport : (pImport = new ImportElements());
 	}

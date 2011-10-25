@@ -8,20 +8,21 @@
      ====================================================================== -->
 <project name="project" default="zip_all_projects">
 
-	<property name="source" location="../../runtime" />
 	<property name="target" location="contents" />
 
 	<macrodef name="zip_project">
 		<attribute name="name" default="default" />
+		<attribute name="source" default="default" />
 		<sequential>
 			<delete file="${target}/@{name}.zip" />
-			<zip destfile="${target}/@{name}.zip" basedir="${source}/@{name}" excludes="bin,bin/**"  />
+			<zip destfile="${target}/@{name}.zip" basedir="@{source}/@{name}" excludes="bin,bin/**"  />
 		</sequential>
 	</macrodef>
 
 	<target name="zip_all_projects">
-		<zip_project name="org.eclipse.etrice.runtime.java" />
-		<zip_project name="org.eclipse.etrice.modellib" />
+		<zip_project source="../../runtime" name="org.eclipse.etrice.runtime.java" />
+		<zip_project source="../../runtime" name="org.eclipse.etrice.modellib" />
+		<zip_project source="../../examples" name="org.eclipse.etrice.tutorials" />
 	</target>
 
 </project>

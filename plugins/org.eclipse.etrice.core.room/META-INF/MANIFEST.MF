@@ -30,5 +30,6 @@ Export-Package: org.eclipse.etrice.core,
  org.eclipse.etrice.core.room,
  org.eclipse.etrice.core.room.impl,
  org.eclipse.etrice.core.room.util,
+ org.eclipse.etrice.core.scoping,
  org.eclipse.etrice.core.services,
  org.eclipse.etrice.core.validation

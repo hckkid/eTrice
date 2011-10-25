@@ -18688,11 +18688,11 @@ protected class KeyValue_ValueAssignment_2 extends AssignmentToken  {
  * // the attribute 'importURI' is picked up by the ImportUriGlobalScopeProvider
  * 
  * Import:
- * 	"import" importedNamespace=ImportedFQN "from" importURI=STRING;
+ * 	"import" (importedNamespace=ImportedFQN "from" | "model") importURI=STRING;
  *
  **/
 
-// "import" importedNamespace=ImportedFQN "from" importURI=STRING
+// "import" (importedNamespace=ImportedFQN "from" | "model") importURI=STRING
 protected class Import_Group extends GroupToken {
 	
 	public Import_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -18707,7 +18707,7 @@ protected class Import_Group extends GroupToken {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Import_ImportURIAssignment_3(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new Import_ImportURIAssignment_2(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -18742,16 +18742,61 @@ protected class Import_ImportKeyword_0 extends KeywordToken  {
 
 }
 
-// importedNamespace=ImportedFQN
-protected class Import_ImportedNamespaceAssignment_1 extends AssignmentToken  {
+// importedNamespace=ImportedFQN "from" | "model"
+protected class Import_Alternatives_1 extends AlternativesToken {
+
+	public Import_Alternatives_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
 	
-	public Import_ImportedNamespaceAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	@Override
+	public Alternatives getGrammarElement() {
+		return grammarAccess.getImportAccess().getAlternatives_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new Import_Group_1_0(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new Import_ModelKeyword_1_1(lastRuleCallOrigin, this, 1, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// importedNamespace=ImportedFQN "from"
+protected class Import_Group_1_0 extends GroupToken {
+	
+	public Import_Group_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getImportAccess().getGroup_1_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new Import_FromKeyword_1_0_1(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// importedNamespace=ImportedFQN
+protected class Import_ImportedNamespaceAssignment_1_0_0 extends AssignmentToken  {
+	
+	public Import_ImportedNamespaceAssignment_1_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getImportAccess().getImportedNamespaceAssignment_1();
+		return grammarAccess.getImportAccess().getImportedNamespaceAssignment_1_0_0();
 	}
 
     @Override
@@ -18766,9 +18811,9 @@ protected class Import_ImportedNamespaceAssignment_1 extends AssignmentToken  {
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("importedNamespace",true)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("importedNamespace");
-		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getImportAccess().getImportedNamespaceImportedFQNParserRuleCall_1_0(), value, null)) {
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getImportAccess().getImportedNamespaceImportedFQNParserRuleCall_1_0_0_0(), value, null)) {
 			type = AssignmentType.DATATYPE_RULE_CALL;
-			element = grammarAccess.getImportAccess().getImportedNamespaceImportedFQNParserRuleCall_1_0();
+			element = grammarAccess.getImportAccess().getImportedNamespaceImportedFQNParserRuleCall_1_0_0_0();
 			return obj;
 		}
 		return null;
@@ -18777,43 +18822,67 @@ protected class Import_ImportedNamespaceAssignment_1 extends AssignmentToken  {
 }
 
 // "from"
-protected class Import_FromKeyword_2 extends KeywordToken  {
+protected class Import_FromKeyword_1_0_1 extends KeywordToken  {
 	
-	public Import_FromKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public Import_FromKeyword_1_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Keyword getGrammarElement() {
-		return grammarAccess.getImportAccess().getFromKeyword_2();
+		return grammarAccess.getImportAccess().getFromKeyword_1_0_1();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Import_ImportedNamespaceAssignment_1(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new Import_ImportedNamespaceAssignment_1_0_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
 }
 
-// importURI=STRING
-protected class Import_ImportURIAssignment_3 extends AssignmentToken  {
+
+// "model"
+protected class Import_ModelKeyword_1_1 extends KeywordToken  {
 	
-	public Import_ImportURIAssignment_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public Import_ModelKeyword_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
-	public Assignment getGrammarElement() {
-		return grammarAccess.getImportAccess().getImportURIAssignment_3();
+	public Keyword getGrammarElement() {
+		return grammarAccess.getImportAccess().getModelKeyword_1_1();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Import_FromKeyword_2(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new Import_ImportKeyword_0(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+
+// importURI=STRING
+protected class Import_ImportURIAssignment_2 extends AssignmentToken  {
+	
+	public Import_ImportURIAssignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getImportAccess().getImportURIAssignment_2();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new Import_Alternatives_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -18822,9 +18891,9 @@ protected class Import_ImportURIAssignment_3 extends AssignmentToken  {
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("importURI",true)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("importURI");
-		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getImportAccess().getImportURISTRINGTerminalRuleCall_3_0(), value, null)) {
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getImportAccess().getImportURISTRINGTerminalRuleCall_2_0(), value, null)) {
 			type = AssignmentType.TERMINAL_RULE_CALL;
-			element = grammarAccess.getImportAccess().getImportURISTRINGTerminalRuleCall_3_0();
+			element = grammarAccess.getImportAccess().getImportURISTRINGTerminalRuleCall_2_0();
 			return obj;
 		}
 		return null;

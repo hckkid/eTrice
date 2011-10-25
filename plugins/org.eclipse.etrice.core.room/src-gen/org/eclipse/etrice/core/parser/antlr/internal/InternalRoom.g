@@ -6070,10 +6070,10 @@ ruleImport returns [EObject current=null]
     {
     	newLeafNode(otherlv_0, grammarAccess.getImportAccess().getImportKeyword_0());
     }
-(
+(((
 (
 		{ 
-	        newCompositeNode(grammarAccess.getImportAccess().getImportedNamespaceImportedFQNParserRuleCall_1_0()); 
+	        newCompositeNode(grammarAccess.getImportAccess().getImportedNamespaceImportedFQNParserRuleCall_1_0_0_0()); 
 	    }
 		lv_importedNamespace_1_0=ruleImportedFQN		{
 	        if ($current==null) {
@@ -6090,13 +6090,18 @@ ruleImport returns [EObject current=null]
 )
 )	otherlv_2='from' 
     {
-    	newLeafNode(otherlv_2, grammarAccess.getImportAccess().getFromKeyword_2());
+    	newLeafNode(otherlv_2, grammarAccess.getImportAccess().getFromKeyword_1_0_1());
     }
+)
+    |	otherlv_3='model' 
+    {
+    	newLeafNode(otherlv_3, grammarAccess.getImportAccess().getModelKeyword_1_1());
+    }
+)(
 (
-(
-		lv_importURI_3_0=RULE_STRING
+		lv_importURI_4_0=RULE_STRING
 		{
-			newLeafNode(lv_importURI_3_0, grammarAccess.getImportAccess().getImportURISTRINGTerminalRuleCall_3_0()); 
+			newLeafNode(lv_importURI_4_0, grammarAccess.getImportAccess().getImportURISTRINGTerminalRuleCall_2_0()); 
 		}
 		{
 	        if ($current==null) {
@@ -6105,7 +6110,7 @@ ruleImport returns [EObject current=null]
        		setWithLastConsumed(
        			$current, 
        			"importURI",
-        		lv_importURI_3_0, 
+        		lv_importURI_4_0, 
         		"STRING");
 	    }
 
