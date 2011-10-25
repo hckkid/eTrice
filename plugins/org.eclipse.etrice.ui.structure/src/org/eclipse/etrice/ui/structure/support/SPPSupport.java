@@ -241,6 +241,7 @@ public class SPPSupport extends InterfaceItemSupport {
 			boolean relay = ValidationUtil.isRelay(spp);
 			
 			int size = refspp?ITEM_SIZE_SMALL:ITEM_SIZE;
+			int margin = refspp?MARGIN_SMALL:MARGIN;
 			int line = refspp?LINE_WIDTH/2:LINE_WIDTH;
 			
 			Color bg = brightDolor;
@@ -257,8 +258,8 @@ public class SPPSupport extends InterfaceItemSupport {
 			IGaService gaService = Graphiti.getGaService();
 			
 			// TODOHRR: depicting SPPs as diamond using polygon didn't work
-//			int s2 = size/2;
-//			int xy[] = new int[] { s2, 0, size, s2, s2, size, 0, s2};
+//			int s2 = margin-size/2;
+//			int xy[] = new int[] { s2, 0, margin, s2, s2, margin, 0, s2};
 //			Polygon rect = gaService.createPolygon(invisibleRectangle, xy);
 //			rect.setForeground(darkColor);
 //			rect.setBackground(bg);
@@ -270,7 +271,7 @@ public class SPPSupport extends InterfaceItemSupport {
 			rect.setForeground(darkColor);
 			rect.setBackground(bg);
 			rect.setLineWidth(line);
-			gaService.setLocationAndSize(rect, size/2, size/2, size, size);
+			gaService.setLocationAndSize(rect, margin-size/2, margin-size/2, size, size);
 
 			if (containerShape.getAnchors().isEmpty()) {
 				// here we place our anchor

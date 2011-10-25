@@ -74,7 +74,9 @@ import org.eclipse.graphiti.util.IColorConstant;
 public class InterfaceItemSupport {
 	
 	public static final int ITEM_SIZE = StructureClassSupport.MARGIN;
-	public static final int ITEM_SIZE_SMALL = ActorContainerRefSupport.MARGIN;
+	public static final int ITEM_SIZE_SMALL = (int) (ActorContainerRefSupport.MARGIN*0.8);
+	public static final int MARGIN = StructureClassSupport.MARGIN;
+	public static final int MARGIN_SMALL = ActorContainerRefSupport.MARGIN;
 
 	protected static final int LINE_WIDTH = 2;
 	protected static final IColorConstant DARK_COLOR = new ColorConstant(0, 0, 0);
@@ -146,7 +148,7 @@ public class InterfaceItemSupport {
 				boolean inherited = isInherited(port, bo, acShape);
 				boolean refport = (bo instanceof ActorContainerRef);
 	
-				int margin = refport?ITEM_SIZE_SMALL:ITEM_SIZE;
+				int margin = refport?MARGIN_SMALL:MARGIN;
 				int size = refport?ITEM_SIZE_SMALL:ITEM_SIZE;
 
 				// CONTAINER SHAPE WITH RECTANGLE
@@ -211,7 +213,7 @@ public class InterfaceItemSupport {
 				IGaService gaService = Graphiti.getGaService();
 				{
 					final Rectangle invisibleRectangle = gaService.createInvisibleRectangle(containerShape);
-					gaService.setLocationAndSize(invisibleRectangle, x, y, 2*size, 2*size);
+					gaService.setLocationAndSize(invisibleRectangle, x, y, 2*margin, 2*margin);
 	
 					createItemFigure(port, refport,
 							containerShape,
@@ -230,7 +232,7 @@ public class InterfaceItemSupport {
 					label.setBackground(dark);
 					label.setHorizontalAlignment(Orientation.ALIGNMENT_CENTER);
 					label.setVerticalAlignment(Orientation.ALIGNMENT_CENTER);
-					gaService.setLocationAndSize(label, 0, 3*size/2, 2*size, size/2);
+					gaService.setLocationAndSize(label, 0, 3*margin/2, 2*margin, margin/2);
 					adjustLabel(label, x, y, width, margin, size);
 				}
 
@@ -289,8 +291,8 @@ public class InterfaceItemSupport {
 				ContainerShape acShape = context.getTargetContainer();
 				boolean refport = (getBusinessObjectForPictogramElement(acShape) instanceof ActorContainerRef);
 	
-				int margin = refport?ActorContainerRefSupport.MARGIN:StructureClassSupport.MARGIN;
-				int size = refport?ActorContainerRefSupport.MARGIN:ITEM_SIZE;
+				int margin = refport?MARGIN_SMALL:MARGIN;
+				int size = refport?ITEM_SIZE_SMALL:ITEM_SIZE;
 	
 				int x = context.getX();
 				int y = context.getY();
@@ -637,7 +639,7 @@ public class InterfaceItemSupport {
 			Orientation align = Orientation.ALIGNMENT_CENTER;
 			label.setHorizontalAlignment(align);
 	
-			int pos = 3*size/2;
+			int pos = 3*margin/2;
 			
 			if (x<=margin)
 				align = Orientation.ALIGNMENT_LEFT;
@@ -651,7 +653,7 @@ public class InterfaceItemSupport {
 			}
 			if (pos!=label.getY()) {
 				IGaService gaService = Graphiti.getGaService();
-				gaService.setLocationAndSize(label, 0, pos, 2*size, size/2);
+				gaService.setLocationAndSize(label, 0, pos, 2*margin, margin/2);
 			}
 		}
 		
