@@ -58,6 +58,7 @@ public class StatePropertyDialog extends AbstractMemberAwarePropertyDialog {
 			NameValidator nv = new NameValidator();
 			
 			Text name = createText(body, "&Name:", state, RoomPackage.eINSTANCE.getBaseState_Name(), nv);
+			makeMemberAware(name, false, false);
 			
 			createDecorator(name, "invalid name");
 			
@@ -75,7 +76,7 @@ public class StatePropertyDialog extends AbstractMemberAwarePropertyDialog {
 		
 		{
 			Text entry = createText(body, "&Entry Code:", state, RoomPackage.eINSTANCE.getState_EntryCode(), null, s2m, m2s, true);
-			entry.addFocusListener(new LastTextListener(entry));
+			makeMemberAware(entry, true, true);
 			GridData gd = new GridData(GridData.FILL_BOTH);
 			gd.heightHint = 100;
 			entry.setLayoutData(gd);
@@ -83,7 +84,7 @@ public class StatePropertyDialog extends AbstractMemberAwarePropertyDialog {
 		
 		{
 			Text exit = createText(body, "E&xit Code:", state, RoomPackage.eINSTANCE.getState_ExitCode(), null, s2m, m2s, true);
-			exit.addFocusListener(new LastTextListener(exit));
+			makeMemberAware(exit, true, true);
 			GridData gd = new GridData(GridData.FILL_BOTH);
 			gd.heightHint = 100;
 			exit.setLayoutData(gd);
@@ -93,7 +94,7 @@ public class StatePropertyDialog extends AbstractMemberAwarePropertyDialog {
 		if (ac.getStateMachine().isDataDriven())
 		{
 			Text dotxt = createText(body, "&Do Code:", state, RoomPackage.eINSTANCE.getState_DoCode(), null, s2m, m2s, true);
-			dotxt.addFocusListener(new LastTextListener(dotxt));
+			makeMemberAware(dotxt, true, true);
 			GridData gd = new GridData(GridData.FILL_BOTH);
 			gd.heightHint = 100;
 			dotxt.setLayoutData(gd);
