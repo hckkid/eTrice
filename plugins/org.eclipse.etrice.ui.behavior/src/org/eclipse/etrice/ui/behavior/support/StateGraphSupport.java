@@ -134,6 +134,7 @@ public class StateGraphSupport {
 					RoundedRectangle rect = gaService.createRoundedRectangle(invisibleRectangle, CORNER_SIZE, CORNER_SIZE);
 					rect.setForeground(manageColor(LINE_COLOR));
 					rect.setBackground(manageColor(BACKGROUND));
+					rect.setTransparency(0.4);
 					rect.setLineWidth(LINE_WIDTH);
 					gaService.setLocationAndSize(rect, MARGIN, MARGIN, width, height);
 	
