@@ -12,6 +12,8 @@
 
 package org.eclipse.etrice.ui.behavior.dialogs;
 
+import java.util.HashSet;
+
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.Operation;
@@ -28,6 +30,7 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
@@ -37,18 +40,25 @@ import org.eclipse.swt.widgets.Text;
  */
 public abstract class AbstractMemberAwarePropertyDialog extends AbstractPropertyDialog {
 	
-	final class LastTextListener implements FocusListener {
-		private final Text text;
-
-		LastTextListener(Text text) {
-			this.text = text;
-		}
+	private class LastTextListener implements FocusListener {
 
 		@Override
 		public void focusGained(FocusEvent e) {
-			lastTextField = text;
-			members.setEnabled(true);
-			messages.setEnabled(true);
+			if (e.getSource() instanceof Text) {
+				boolean enableMemberButton = memberAware.contains(e.getSource());
+				boolean enableMessageButton = messageAware.contains(e.getSource());
+				if (enableMemberButton || enableMessageButton)
+					lastTextField = (Text) e.getSource();
+				else
+					lastTextField = null;
+				members.setEnabled(enableMemberButton);
+				messages.setEnabled(enableMessageButton);
+			}
+			else {
+				lastTextField = null;
+				members.setEnabled(false);
+				messages.setEnabled(false);
+			}
 		}
 
 		@Override
@@ -60,7 +70,10 @@ public abstract class AbstractMemberAwarePropertyDialog extends AbstractProperty
 	private Button members;
 	private Button messages;
 	private ActorClass ac;
-
+	private LastTextListener listener = new LastTextListener();
+	private HashSet<Control> memberAware = new HashSet<Control>();
+	private HashSet<Control> messageAware = new HashSet<Control>();
+	
 	/**
 	 * @param shell
 	 * @param title
@@ -169,4 +182,11 @@ public abstract class AbstractMemberAwarePropertyDialog extends AbstractProperty
 		}
 	}
 
+	public void makeMemberAware(Control ctrl, boolean useMembers, boolean useMessages) {
+		if (useMembers)
+			memberAware.add(ctrl);
+		if (useMessages)
+			messageAware.add(ctrl);
+		ctrl.addFocusListener(listener);
+	}
 }

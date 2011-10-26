@@ -118,9 +118,9 @@ public class StructureClassSupport {
 				int width = context.getWidth() <= 0 ? DEFAULT_SIZE_X : context.getWidth();
 				int height = context.getHeight() <= 0 ? DEFAULT_SIZE_Y : context.getHeight();
 	
-				Rectangle rect; // need to access it later
-				IGaService gaService = Graphiti.getGaService();
 				{
+					IGaService gaService = Graphiti.getGaService();
+
 					// create invisible outer rectangle expanded by
 					// the width needed for the ports
 					Rectangle invisibleRectangle =
@@ -130,9 +130,17 @@ public class StructureClassSupport {
 							context.getX(), context.getY(), width + 2*MARGIN, height + 2*MARGIN);
 	
 					// create and set visible rectangle inside invisible rectangle
-					rect = gaService.createRectangle(invisibleRectangle);
+					// transparent first
+					Rectangle rect = gaService.createRectangle(invisibleRectangle);
 					rect.setForeground(manageColor(LINE_COLOR));
 					rect.setBackground(manageColor(BACKGROUND));
+					rect.setTransparency(0.5);
+					rect.setLineWidth(LINE_WIDTH);
+					gaService.setLocationAndSize(rect, MARGIN, MARGIN, width, height);
+					// then unfilled opaque
+					rect = gaService.createRectangle(invisibleRectangle);
+					rect.setForeground(manageColor(LINE_COLOR));
+					rect.setFilled(false);
 					rect.setLineWidth(LINE_WIDTH);
 					gaService.setLocationAndSize(rect, MARGIN, MARGIN, width, height);
 	
@@ -194,8 +202,11 @@ public class StructureClassSupport {
 				int w = containerGa.getWidth();
 				int h = containerGa.getHeight();
 	
-				if (containerGa.getGraphicsAlgorithmChildren().size()==1) {
+				if (containerGa.getGraphicsAlgorithmChildren().size()==2) {
 					GraphicsAlgorithm ga = containerGa.getGraphicsAlgorithmChildren().get(0);
+					ga.setWidth(w-2*MARGIN);
+					ga.setHeight(h-2*MARGIN);
+					ga = containerGa.getGraphicsAlgorithmChildren().get(1);
 					ga.setWidth(w-2*MARGIN);
 					ga.setHeight(h-2*MARGIN);
 					anythingChanged = true;
@@ -406,7 +417,7 @@ public class StructureClassSupport {
 				
 				if (containerShape.getGraphicsAlgorithm()!=null) {
 					GraphicsAlgorithm containerGa = containerShape.getGraphicsAlgorithm();
-					if (containerGa.getGraphicsAlgorithmChildren().size()==1) {
+					if (containerGa.getGraphicsAlgorithmChildren().size()==2) {
 						// scale interface item coordinates
 						// we refer to the visible rectangle which defines the border of our structure class
 						// since the margin is not scaled
