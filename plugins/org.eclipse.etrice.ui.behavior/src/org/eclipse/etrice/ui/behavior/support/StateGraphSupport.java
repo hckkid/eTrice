@@ -121,7 +121,6 @@ public class StateGraphSupport {
 	
 				IGaService gaService = Graphiti.getGaService();
 				{
-
 					// create invisible outer rectangle expanded by
 					// the width needed for the ports
 					Rectangle invisibleRectangle =
@@ -131,13 +130,20 @@ public class StateGraphSupport {
 							context.getX(), context.getY(), width + 2*MARGIN, height + 2*MARGIN);
 	
 					// create and set visible rectangle inside invisible rectangle
+					// transparent first
 					RoundedRectangle rect = gaService.createRoundedRectangle(invisibleRectangle, CORNER_SIZE, CORNER_SIZE);
 					rect.setForeground(manageColor(LINE_COLOR));
 					rect.setBackground(manageColor(BACKGROUND));
-					rect.setTransparency(0.4);
+					rect.setTransparency(0.5);
 					rect.setLineWidth(LINE_WIDTH);
 					gaService.setLocationAndSize(rect, MARGIN, MARGIN, width, height);
-	
+					// then unfilled opaque
+					rect = gaService.createRoundedRectangle(invisibleRectangle, CORNER_SIZE, CORNER_SIZE);
+					rect.setForeground(manageColor(LINE_COLOR));
+					rect.setFilled(false);
+					rect.setLineWidth(LINE_WIDTH);
+					gaService.setLocationAndSize(rect, MARGIN, MARGIN, width, height);
+
 					// create link and wire it
 					link(containerShape, sg);
 				}
@@ -212,6 +218,9 @@ public class StateGraphSupport {
 	
 				if (containerGa.getGraphicsAlgorithmChildren().size()>=1) {
 					GraphicsAlgorithm ga = containerGa.getGraphicsAlgorithmChildren().get(0);
+					ga.setWidth(w-2*MARGIN);
+					ga.setHeight(h-2*MARGIN);
+					ga = containerGa.getGraphicsAlgorithmChildren().get(1);
 					ga.setWidth(w-2*MARGIN);
 					ga.setHeight(h-2*MARGIN);
 					anythingChanged = true;
@@ -454,7 +463,7 @@ public class StateGraphSupport {
 				
 				if (containerShape.getGraphicsAlgorithm()!=null) {
 					GraphicsAlgorithm containerGa = containerShape.getGraphicsAlgorithm();
-					if (containerGa.getGraphicsAlgorithmChildren().size()==1) {
+					if (containerGa.getGraphicsAlgorithmChildren().size()==2) {
 						// scale interface item coordinates
 						// we refer to the visible rectangle which defines the border of our structure class
 						// since the margin is not scaled
