@@ -29,6 +29,7 @@ import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RoomClass;
 import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.etrice.core.room.StateGraph;
+import org.eclipse.etrice.core.room.StateMachine;
 import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.core.room.TrPoint;
 import org.eclipse.etrice.core.room.Transition;
@@ -85,6 +86,25 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 		ActorClass base = ac.getBase();
 		if (base!=null && ValidationUtil.isBaseOf(ac, base))
 			error("Base classes are circular", RoomPackage.eINSTANCE.getActorClass_Base());
+	}
+	
+	@Check
+	public void checkStateMachineTypeConsistent(StateMachine sm) {
+		ActorClass ac = (ActorClass) sm.eContainer();
+		boolean first = true;
+		boolean dataDriven = false;
+		do {
+			if (ac.getStateMachine()!=null) {
+				if (first) {
+					first = false;
+					dataDriven = ac.getStateMachine().isDataDriven();
+				}
+				else if (dataDriven!=ac.getStateMachine().isDataDriven())
+					error("data_driven attribute not consistent in inheritance hierarchy", RoomPackage.eINSTANCE.getStateMachine_DataDriven());
+			}
+			ac = ac.getBase();
+		}
+		while (ac!=null);
 	}
 	
 	private SubSystemClass getSubSystemClass(EObject obj) {
