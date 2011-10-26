@@ -7,18 +7,17 @@
 package org.eclipse.etrice.generator.etricegen.impl;
 
 import java.util.Collection;
-import org.eclipse.emf.common.notify.Notification;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -41,7 +40,6 @@ import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.ServiceImplementation;
 import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.core.room.TypedID;
-import org.eclipse.etrice.generator.base.FileSystemHelpers;
 import org.eclipse.etrice.generator.etricegen.ActorInstance;
 import org.eclipse.etrice.generator.etricegen.ETriceGenPackage;
 import org.eclipse.etrice.generator.etricegen.ExpandedActorClass;
@@ -63,7 +61,7 @@ import org.eclipse.etrice.generator.etricegen.SubSystemInstance;
  *   <li>{@link org.eclipse.etrice.generator.etricegen.impl.RootImpl#getUsedProtocolClasses <em>Used Protocol Classes</em>}</li>
  *   <li>{@link org.eclipse.etrice.generator.etricegen.impl.RootImpl#getUsedActorClasses <em>Used Actor Classes</em>}</li>
  *   <li>{@link org.eclipse.etrice.generator.etricegen.impl.RootImpl#getUsedRoomModels <em>Used Room Models</em>}</li>
- *   <li>{@link org.eclipse.etrice.generator.etricegen.impl.RootImpl#getMainPathSubSystemClasses <em>Main Path Sub System Classes</em>}</li>
+ *   <li>{@link org.eclipse.etrice.generator.etricegen.impl.RootImpl#getSubSystemClasses <em>Sub System Classes</em>}</li>
  * </ul>
  * </p>
  *
@@ -241,48 +239,27 @@ public class RootImpl extends EObjectImpl implements Root {
 		}
 		return usedRoomModels;
 	}
-	
-	private BasicEList<SubSystemClass> mainPathSubSystemClasses = null;
-	
-	private class CollectMainPathSubSystems implements IModelVisitor {
-		@Override
-		public boolean visit(RoomModel mdl) {
-			mainPathSubSystemClasses.addAll(mdl.getSubSystemClasses());
-			return true;
-		}
-	}
 
+	private BasicEList<SubSystemClass> subSystemClasses = null;
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public EList<SubSystemClass> getMainPathSubSystemClasses() {
-		if (mainPathSubSystemClasses==null) {
-			mainPathSubSystemClasses = new BasicEList<SubSystemClass>();
-			CollectMainPathSubSystems collector = new CollectMainPathSubSystems();
-			traverseModelsOnMainPath(collector);
+	public EList<SubSystemClass> getSubSystemClasses() {
+		if (subSystemClasses==null) {
+			collectSubSystems();
 		}
-		
-		return mainPathSubSystemClasses;
+		return subSystemClasses;
 	}
 
-	private interface IModelVisitor {
-		public boolean visit(RoomModel mdl);
-	}
-
-	private void traverseModelsOnMainPath(IModelVisitor visitor) {
+	private void collectSubSystems() {
+		subSystemClasses = new BasicEList<SubSystemClass>();
+	
 		if (!getModels().isEmpty()) {
-			// determine the path of the main model
-			RoomModel main = getModels().get(0);
-			URI mainPath = FileSystemHelpers.getProjectURI(main);
-			
 			for (RoomModel mdl : getModels()) {
-				URI currPath = FileSystemHelpers.getProjectURI(mdl);
-				if ((mainPath==null && currPath==null) || (mainPath!=null && mainPath.equals(currPath))) {
-					if (!visitor.visit(mdl))
-						break;
-				}
+				subSystemClasses.addAll(mdl.getSubSystemClasses());
 			}
 		}
 	}
@@ -425,8 +402,8 @@ public class RootImpl extends EObjectImpl implements Root {
 				return getUsedActorClasses();
 			case ETriceGenPackage.ROOT__USED_ROOM_MODELS:
 				return getUsedRoomModels();
-			case ETriceGenPackage.ROOT__MAIN_PATH_SUB_SYSTEM_CLASSES:
-				return getMainPathSubSystemClasses();
+			case ETriceGenPackage.ROOT__SUB_SYSTEM_CLASSES:
+				return getSubSystemClasses();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -471,9 +448,9 @@ public class RootImpl extends EObjectImpl implements Root {
 				getUsedRoomModels().clear();
 				getUsedRoomModels().addAll((Collection<? extends RoomModel>)newValue);
 				return;
-			case ETriceGenPackage.ROOT__MAIN_PATH_SUB_SYSTEM_CLASSES:
-				getMainPathSubSystemClasses().clear();
-				getMainPathSubSystemClasses().addAll((Collection<? extends SubSystemClass>)newValue);
+			case ETriceGenPackage.ROOT__SUB_SYSTEM_CLASSES:
+				getSubSystemClasses().clear();
+				getSubSystemClasses().addAll((Collection<? extends SubSystemClass>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -511,8 +488,8 @@ public class RootImpl extends EObjectImpl implements Root {
 			case ETriceGenPackage.ROOT__USED_ROOM_MODELS:
 				getUsedRoomModels().clear();
 				return;
-			case ETriceGenPackage.ROOT__MAIN_PATH_SUB_SYSTEM_CLASSES:
-				getMainPathSubSystemClasses().clear();
+			case ETriceGenPackage.ROOT__SUB_SYSTEM_CLASSES:
+				getSubSystemClasses().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -542,8 +519,8 @@ public class RootImpl extends EObjectImpl implements Root {
 				return !getUsedActorClasses().isEmpty();
 			case ETriceGenPackage.ROOT__USED_ROOM_MODELS:
 				return !getUsedRoomModels().isEmpty();
-			case ETriceGenPackage.ROOT__MAIN_PATH_SUB_SYSTEM_CLASSES:
-				return !getMainPathSubSystemClasses().isEmpty();
+			case ETriceGenPackage.ROOT__SUB_SYSTEM_CLASSES:
+				return !getSubSystemClasses().isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -571,27 +548,20 @@ public class RootImpl extends EObjectImpl implements Root {
 	private BasicEList<ActorClass> usedActorClasses = null;
 	private BasicEList<RoomModel> usedRoomModels = null;
 	
-	private class CollectMainPathClasses implements IModelVisitor {
-
-		@Override
-		public boolean visit(RoomModel mdl) {
-			usedDataClasses.addAll(mdl.getDataClasses());
-			usedProtocolClasses.addAll(mdl.getProtocolClasses());
-			usedActorClasses.addAll(mdl.getActorClasses());
-			usedRoomModels.add(mdl);
-			return true;
-		}
-		
-	}
-	
 	private void computeUsedClasses() {
 		if (isLibrary()) {
 			usedDataClasses = new BasicEList<DataClass>();
 			usedProtocolClasses = new BasicEList<ProtocolClass>();
 			usedActorClasses = new BasicEList<ActorClass>();
 			usedRoomModels = new BasicEList<RoomModel>();
-
-			traverseModelsOnMainPath(new CollectMainPathClasses());
+			subSystemClasses = new BasicEList<SubSystemClass>();
+			for (RoomModel mdl : getModels()) {
+				usedDataClasses.addAll(mdl.getDataClasses());
+				usedProtocolClasses.addAll(mdl.getProtocolClasses());
+				usedActorClasses.addAll(mdl.getActorClasses());
+				subSystemClasses.addAll(mdl.getSubSystemClasses());
+				usedRoomModels.add(mdl);
+			}
 		}
 		else {
 			for (RoomModel mdl : getModels()) {

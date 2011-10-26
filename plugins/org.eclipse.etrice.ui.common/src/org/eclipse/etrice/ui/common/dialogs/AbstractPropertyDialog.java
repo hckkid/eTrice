@@ -405,4 +405,11 @@ public abstract class AbstractPropertyDialog extends FormDialog {
 	protected DataBindingContext getBindingContext() {
 		return bindingContext;
 	}
+
+	/**
+	 * @return the toolkit
+	 */
+	public FormToolkit getToolkit() {
+		return toolkit;
+	}
 }

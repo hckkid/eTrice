@@ -29,8 +29,8 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="usedRoomModels" upperBound="-1"
         eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//RoomModel"
         volatile="true" transient="true" derived="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="mainPathSubSystemClasses"
-        upperBound="-1" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//SubSystemClass"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subSystemClasses" upperBound="-1"
+        eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//SubSystemClass"
         volatile="true" transient="true" derived="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Counter">

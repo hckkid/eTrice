@@ -40,7 +40,9 @@ public class JavaGeneratorConfigTab extends AbstractLaunchConfigurationTab {
 	public static final String GEN_INSTANCE_DIAGRAM = "GenInstanceDiagram";
 	public static final String GEN_MODEL_PATH = "GenModelPath";
 	public static final String SAVE_GEN_MODEL = "SaveGenModel";
+	public static final String LIB = "Lib";
 	
+	private Button libButton;
 	private Button instanceDiagramButton;
 	private Button saveGenModel;
 	private Text genModelPath;
@@ -69,6 +71,9 @@ public class JavaGeneratorConfigTab extends AbstractLaunchConfigurationTab {
 		layout.marginWidth = 10;
 		mainComposite.setLayout(layout);
 		
+		libButton = createCheckButton(mainComposite, "generate all classes as library");
+		libButton.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, false, false, 2, 1));
+
 		saveGenModel = createCheckButton(mainComposite, "save generator model");
 		saveGenModel.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, false, false, 2, 1));
 		saveGenModel.addSelectionListener(new SelectionListener() {
@@ -168,6 +173,7 @@ public class JavaGeneratorConfigTab extends AbstractLaunchConfigurationTab {
 	@Override
 	public void initializeFrom(ILaunchConfiguration configuration) {
 		try {
+			libButton.setSelection(configuration.getAttribute(LIB, false));
 			boolean save = configuration.getAttribute(SAVE_GEN_MODEL, false);
 			saveGenModel.setSelection(save);
 			genModelPath.setEnabled(save);
@@ -185,6 +191,7 @@ public class JavaGeneratorConfigTab extends AbstractLaunchConfigurationTab {
 	 */
 	@Override
 	public void performApply(ILaunchConfigurationWorkingCopy configuration) {
+		configuration.setAttribute(LIB, libButton.getSelection());
 		configuration.setAttribute(SAVE_GEN_MODEL, saveGenModel.getSelection());
 		configuration.setAttribute(GEN_MODEL_PATH, genModelPath.getText());
 		configuration.setAttribute(GEN_INSTANCE_DIAGRAM, instanceDiagramButton.getSelection());

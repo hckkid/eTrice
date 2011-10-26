@@ -24,6 +24,7 @@ import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.TrPoint;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.ui.behavior.ImageProvider;
+import org.eclipse.etrice.ui.behavior.dialogs.AbstractMemberAwarePropertyDialog;
 import org.eclipse.etrice.ui.behavior.dialogs.StatePropertyDialog;
 import org.eclipse.etrice.ui.common.support.CommonSupportUtil;
 import org.eclipse.graphiti.datatypes.IDimension;
@@ -155,7 +156,7 @@ public class StateSupport {
 				sg.getStates().add(s);
 		        
 	        	Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-				StatePropertyDialog dlg = new StatePropertyDialog(shell, s);
+				AbstractMemberAwarePropertyDialog dlg = new StatePropertyDialog(shell, ac, s);
 				if (dlg.open()!=Window.OK) {
 					if (inherited) {
 						SupportUtil.undoInsertRefinedState(sg, ac, targetContainer, getFeatureProvider());
@@ -353,17 +354,17 @@ public class StateSupport {
 
 			@Override
 			public void execute(ICustomContext context) {
+				ActorClass ac = SupportUtil.getActorClass(getDiagram());
 				State s = (State) getBusinessObjectForPictogramElement(context.getPictogramElements()[0]);
 
 				Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-				StatePropertyDialog dlg = new StatePropertyDialog(shell, s);
+				AbstractMemberAwarePropertyDialog dlg = new StatePropertyDialog(shell, ac, s);
 				if (dlg.open()!=Window.OK)
 					return;
 
 				doneChanges = true;
 				updateFigure(s, context);
 				
-		        ActorClass ac = SupportUtil.getActorClass(getDiagram());
 				adjustSubgraphLabels(s, ac);
 			}
 

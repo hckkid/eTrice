@@ -270,6 +270,7 @@ public class PortSupport extends InterfaceItemSupport {
 			boolean relay = ValidationUtil.isRelay(port);
 			
 			int size = refport?ITEM_SIZE_SMALL:ITEM_SIZE;
+			int margin = refport?MARGIN_SMALL:MARGIN;
 			int offset = refport?REPL_OFFSET_SMALL:REPL_OFFSET;
 			int line = refport?LINE_WIDTH/2:LINE_WIDTH;
 			
@@ -293,7 +294,7 @@ public class PortSupport extends InterfaceItemSupport {
 				rect.setForeground(darkColor);
 				rect.setBackground(brightDolor);
 				rect.setLineWidth(line);
-				gaService.setLocationAndSize(rect, size/2+offset, size/2-offset, size, size);
+				gaService.setLocationAndSize(rect, margin-size/2+offset, margin-size/2-offset, size, size);
 			}
 			
 			Rectangle rect = gaService.createRectangle(invisibleRectangle);
@@ -303,7 +304,7 @@ public class PortSupport extends InterfaceItemSupport {
 				rect.setLineWidth(4*line);
 			else
 				rect.setLineWidth(line);
-			gaService.setLocationAndSize(rect, size/2, size/2, size, size);
+			gaService.setLocationAndSize(rect, margin-size/2, margin-size/2, size, size);
 
 			if (containerShape.getAnchors().isEmpty()) {
 				// here we place our anchor
@@ -326,7 +327,7 @@ public class PortSupport extends InterfaceItemSupport {
 						inset.setForeground(darkColor);
 						inset.setBackground(darkColor);
 						inset.setLineWidth(LINE_WIDTH);
-						gaService.setLocationAndSize(inset, 3*size/4, 3*size/4, size/2, size/2);
+						gaService.setLocationAndSize(inset, margin-size/4, margin-size/4, size/2, size/2);
 					}
 					else {
 						Color fill = port.isConjugated()?darkColor:brightDolor;
@@ -335,7 +336,7 @@ public class PortSupport extends InterfaceItemSupport {
 						inset.setForeground(fill);
 						inset.setBackground(fill);
 						inset.setLineWidth(LINE_WIDTH);
-						gaService.setLocationAndSize(inset, 3*size/4, 3*size/4, size/2, size/2);
+						gaService.setLocationAndSize(inset, margin-size/4, margin-size/4, size/2, size/2);
 					}
 				}
 			}

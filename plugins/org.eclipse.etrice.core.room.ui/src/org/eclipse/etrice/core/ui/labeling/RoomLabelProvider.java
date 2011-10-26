@@ -13,32 +13,29 @@
 package org.eclipse.etrice.core.ui.labeling;
 
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
-import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider;
-
-import com.google.inject.Inject;
-
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.BaseState;
-import org.eclipse.etrice.core.room.Import;
-import org.eclipse.etrice.core.room.RoomModel;
-import org.eclipse.etrice.core.room.SubSystemClass;
-import org.eclipse.etrice.core.room.SubSystemRef;
-import org.eclipse.etrice.core.room.LogicalSystem;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.ExternalPort;
-import org.eclipse.etrice.core.room.FreeType;
-import org.eclipse.etrice.core.room.FreeTypedID;
+import org.eclipse.etrice.core.room.Import;
+import org.eclipse.etrice.core.room.LogicalSystem;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.Operation;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RefinedState;
+import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.SAPRef;
 import org.eclipse.etrice.core.room.SPPRef;
 import org.eclipse.etrice.core.room.ServiceImplementation;
-import org.eclipse.etrice.core.room.Type;
+import org.eclipse.etrice.core.room.SubSystemClass;
+import org.eclipse.etrice.core.room.SubSystemRef;
+import org.eclipse.etrice.core.room.util.RoomHelpers;
+import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider;
+
+import com.google.inject.Inject;
 
 /**
  * Provides labels for a EObjects.
@@ -230,48 +227,23 @@ public class RoomLabelProvider extends DefaultEObjectLabelProvider {
 		return "ref "+ref.getName()+cls;
 	}
 	
-	private String getName(Type tp) {
-		if (tp.getType()!=null)
-			return tp.getType().getName();
-		else if (tp.getPrim()!=null)
-			return tp.getPrim().getName();
-		else
-			return "?";
-	}
-	
-	private String getName(FreeType tp) {
-		if (tp.getType()!=null)
-			return tp.getType();
-		else if (tp.getPrim()!=null)
-			return tp.getPrim().getName();
-		else
-			return "?";
-	}
-	
 	String text(Attribute attr) {
-		String type = attr.getType()!=null? (" : "+getName(attr.getType())):"";
+		String type = attr.getType()!=null? (" : "+RoomHelpers.getName(attr.getType())):"";
 		String value = (attr.getDefaultValueLiteral()!=null && !attr.getDefaultValueLiteral().isEmpty())?
 				(" = "+attr.getDefaultValueLiteral()) : "";
 		return "Attr "+attr.getName()+type+value;
 	}
 	
 	String text(Operation op) {
-		String rt = op.getReturntype()!=null? ": "+getName(op.getReturntype()):"";
-		String signature = "";
-		for (FreeTypedID arg : op.getArguments()) {
-			if (signature.isEmpty())
-				signature = arg.getName()+": "+getName(arg.getType());
-			else
-				signature += ", "+arg.getName()+": "+getName(arg.getType());
-		}
-		signature = "("+signature+")";
+		String rt = op.getReturntype()!=null? ": "+RoomHelpers.getName(op.getReturntype()):"";
+		String signature = RoomHelpers.getSignature(op);
 		return op.getName()+signature+rt;
 	}
 	
 	String text(Message m) {
 		String signature = "";
 		if (m.getData()!=null)
-			signature = m.getData().getName()+":"+getName(m.getData().getType());
+			signature = m.getData().getName()+":"+RoomHelpers.getName(m.getData().getType());
 		signature = "("+signature+")";
 		return m.getName()+signature;
 	}

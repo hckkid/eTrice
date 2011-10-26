@@ -1,12 +1,14 @@
 RoomModel PedLightsController {
 
+	import room.basic.service.timing.* from "../../../org.eclipse.etrice.modellib/models/TimingService.room"
+
 	LogicalSystem LogSys_PedLights {
 		SubSystemRef application: SubSys_PedLights
 	}
 
 	SubSystemClass SubSys_PedLights {
 		ActorRef PedLightsTopRef: PedLightsTop
-		ActorRef timingService: room.basic.service.timing.ATimingService
+		ActorRef timingService: ATimingService
 		LayerConnection ref PedLightsTopRef satisfied_by timingService.timer
 		LayerConnection ref PedLightsTopRef satisfied_by timingService.timeout
 	}
@@ -79,7 +81,7 @@ RoomModel PedLightsController {
 				"import org.eclipse.etrice.tutorials.PedLightGUI.*;"
 			}
 			external Port ControlPort
-			SAP timer: room.basic.service.timing.PTimeout
+			SAP timer: PTimeout
 		}
 		Behavior {
 			StateMachine {

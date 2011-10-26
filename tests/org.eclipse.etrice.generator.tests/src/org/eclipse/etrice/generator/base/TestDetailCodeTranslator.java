@@ -48,20 +48,25 @@ public class TestDetailCodeTranslator {
 	 *
 	 */
 	private final class TestTranslationProvider implements ITranslationProvider {
+		
 		@Override
-		public String getOperationText(Operation op, ArrayList<String> args) {
+		public String getAttributeText(Attribute att, String orig) {
+			return ">"+att.getName()+"<";
+		}
+
+		@Override
+		public String getOperationText(Operation op, ArrayList<String> args, String orig) {
 			return ">"+op.getName()+"("+getArgList(args)+")<";
 		}
 
 		@Override
-		public String getInterfaceItemMessageText(InterfaceItem item, Message msg,
-				ArrayList<String> args) {
+		public String getInterfaceItemMessageText(InterfaceItem item, Message msg, ArrayList<String> args, String orig) {
 			return ">"+item.getName()+"."+msg.getName()+"("+getArgList(args)+")<";
 		}
-
+		
 		@Override
-		public String getAttributeText(Attribute att) {
-			return ">"+att.getName()+"<";
+		public String getInterfaceItemMessageValue(InterfaceItem item, Message msg, String orig) {
+			return ">"+item.getName()+"."+msg.getName()+"<";
 		}
 
 		private String getArgList(ArrayList<String> args) {
@@ -97,6 +102,9 @@ public class TestDetailCodeTranslator {
 		out2.setData(typedID);
 		pc.getOutgoingMessages().add(out1);
 		pc.getOutgoingMessages().add(out2);
+		Message in1 = RoomFactory.eINSTANCE.createMessage();
+		in1.setName("in1");
+		pc.getIncomingMessages().add(in1);
 		
 		ac = RoomFactory.eINSTANCE.createActorClass();
 		model.getActorClasses().add(ac);
@@ -140,6 +148,28 @@ public class TestDetailCodeTranslator {
 	}
 	
 	@Test
+	public void testSingleComment() {
+		DetailCode dc = RoomFactory.eINSTANCE.createDetailCode();
+		dc.getCommands().add("//");
+		
+		String result = translator.translateDetailCode(dc);
+		
+		assertEquals("comment", "//", result);
+	}
+	
+	@Test
+	public void testMultiComment() {
+		DetailCode dc = RoomFactory.eINSTANCE.createDetailCode();
+		dc.getCommands().add("/* some comment");
+		dc.getCommands().add("continued");
+		dc.getCommands().add("*/");
+		
+		String result = translator.translateDetailCode(dc);
+		
+		assertEquals("comment", "/* some comment\ncontinued\n*/", result);
+	}
+	
+	@Test
 	public void testPortNonExMsg() {
 		DetailCode dc = RoomFactory.eINSTANCE.createDetailCode();
 		dc.getCommands().add("fct.out();");
@@ -157,6 +187,26 @@ public class TestDetailCodeTranslator {
 		String result = translator.translateDetailCode(dc);
 		
 		assertEquals("port.message replacement", ">fct.out1()<;", result);
+	}
+	
+	@Test
+	public void testPortMsgValue() {
+		DetailCode dc = RoomFactory.eINSTANCE.createDetailCode();
+		dc.getCommands().add("x = 2*fct.in1;");
+		
+		String result = translator.translateDetailCode(dc);
+		
+		assertEquals("port.message as value (getter) replacement", "x = 2*>fct.in1<;", result);
+	}
+	
+	@Test
+	public void testPortMsgValueNoReplace() {
+		DetailCode dc = RoomFactory.eINSTANCE.createDetailCode();
+		dc.getCommands().add("x = 2*fct.out1;");
+		
+		String result = translator.translateDetailCode(dc);
+		
+		assertEquals("port.message as value (getter) replacement", "x = 2*fct.out1;", result);
 	}
 	
 	@Test
@@ -238,7 +288,7 @@ public class TestDetailCodeTranslator {
 		
 		String result = translator.translateDetailCode(dc);
 		
-		assertEquals("fct(123) replacement", ">bar1(123)<;", result);
+		assertEquals("bar1(123) replacement", ">bar1(123)<;", result);
 	}
 	
 	@Test
@@ -248,7 +298,27 @@ public class TestDetailCodeTranslator {
 		
 		String result = translator.translateDetailCode(dc);
 		
-		assertEquals("fct(123) replacement", ">bar2(123, 456)<;", result);
+		assertEquals("bar2(123, 456) replacement", ">bar2(123, 456)<;", result);
+	}
+	
+	@Test
+	public void testOperation3() {
+		DetailCode dc = RoomFactory.eINSTANCE.createDetailCode();
+		dc.getCommands().add("bar2(123, value);");
+		
+		String result = translator.translateDetailCode(dc);
+		
+		assertEquals("bar2(123, value) recursive replacement", ">bar2(123, >value<)<;", result);
+	}
+	
+	@Test
+	public void testOperation4() {
+		DetailCode dc = RoomFactory.eINSTANCE.createDetailCode();
+		dc.getCommands().add("bar2(123, bar1(value));");
+		
+		String result = translator.translateDetailCode(dc);
+		
+		assertEquals("bar2(123, value) recursive replacement", ">bar2(123, >bar1(>value<)<)<;", result);
 	}
 	
 	@Test

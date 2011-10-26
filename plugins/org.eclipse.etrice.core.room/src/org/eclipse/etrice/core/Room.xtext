@@ -412,7 +412,7 @@ KeyValue: key=ID '=' value=STRING;
 // the attribute 'importedNamespace' is picked up by the ImportedNamespaceAwareLocalScopeProvider
 // the attribute 'importURI' is picked up by the ImportUriGlobalScopeProvider
 Import :
-	'import' importedNamespace=ImportedFQN 'from' importURI=STRING;
+	'import' (importedNamespace=ImportedFQN 'from' | 'model') importURI=STRING;
 
 ImportedFQN:
 	FQN ('.' '*')?;

@@ -128,8 +128,10 @@ public class GeneratorModelBuilder {
 			
 			determineRelayPorts(root);
 			
-			for (SubSystemClass comp : root.getMainPathSubSystemClasses()) {
-				root.getSubSystemInstances().add(createSubSystemInstance(comp));
+			for (RoomModel mdl : models) {
+				for (SubSystemClass comp : mdl.getSubSystemClasses()) {
+					root.getSubSystemInstances().add(createSubSystemInstance(comp));
+				}
 			}
 			
 			connectPorts(root);

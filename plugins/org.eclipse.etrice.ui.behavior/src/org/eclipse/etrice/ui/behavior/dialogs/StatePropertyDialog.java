@@ -13,7 +13,6 @@ import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.core.validation.ValidationUtil;
 import org.eclipse.etrice.core.validation.ValidationUtil.Result;
 import org.eclipse.etrice.ui.behavior.Activator;
-import org.eclipse.etrice.ui.common.dialogs.AbstractPropertyDialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
@@ -22,8 +21,8 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.forms.IManagedForm;
 
-public class StatePropertyDialog extends AbstractPropertyDialog {
-	
+public class StatePropertyDialog extends AbstractMemberAwarePropertyDialog {
+
 	class NameValidator implements IValidator {
 
 		@Override
@@ -41,8 +40,8 @@ public class StatePropertyDialog extends AbstractPropertyDialog {
 
 	private State state;
 
-	public StatePropertyDialog(Shell shell, State s) {
-		super(shell, "Edit State");
+	public StatePropertyDialog(Shell shell, ActorClass ac, State s) {
+		super(shell, "Edit State", ac);
 		this.state = s;
 	}
 
@@ -58,7 +57,7 @@ public class StatePropertyDialog extends AbstractPropertyDialog {
 		if (state instanceof BaseState) {
 			NameValidator nv = new NameValidator();
 			
-			Text name = createText(body, "Name:", state, RoomPackage.eINSTANCE.getBaseState_Name(), nv);
+			Text name = createText(body, "&Name:", state, RoomPackage.eINSTANCE.getBaseState_Name(), nv);
 			
 			createDecorator(name, "invalid name");
 			
@@ -76,6 +75,7 @@ public class StatePropertyDialog extends AbstractPropertyDialog {
 		
 		{
 			Text entry = createText(body, "&Entry Code:", state, RoomPackage.eINSTANCE.getState_EntryCode(), null, s2m, m2s, true);
+			entry.addFocusListener(new LastTextListener(entry));
 			GridData gd = new GridData(GridData.FILL_BOTH);
 			gd.heightHint = 100;
 			entry.setLayoutData(gd);
@@ -83,6 +83,7 @@ public class StatePropertyDialog extends AbstractPropertyDialog {
 		
 		{
 			Text exit = createText(body, "E&xit Code:", state, RoomPackage.eINSTANCE.getState_ExitCode(), null, s2m, m2s, true);
+			exit.addFocusListener(new LastTextListener(exit));
 			GridData gd = new GridData(GridData.FILL_BOTH);
 			gd.heightHint = 100;
 			exit.setLayoutData(gd);
@@ -92,10 +93,13 @@ public class StatePropertyDialog extends AbstractPropertyDialog {
 		if (ac.getStateMachine().isDataDriven())
 		{
 			Text dotxt = createText(body, "&Do Code:", state, RoomPackage.eINSTANCE.getState_DoCode(), null, s2m, m2s, true);
+			dotxt.addFocusListener(new LastTextListener(dotxt));
 			GridData gd = new GridData(GridData.FILL_BOTH);
 			gd.heightHint = 100;
 			dotxt.setLayoutData(gd);
 		}
+		
+		createMembersAndMessagesButtons(body);
 	}
 
 }

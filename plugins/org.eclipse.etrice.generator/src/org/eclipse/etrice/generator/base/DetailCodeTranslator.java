@@ -22,9 +22,6 @@ import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.Operation;
-import org.eclipse.etrice.core.room.Port;
-import org.eclipse.etrice.core.room.SAPRef;
-import org.eclipse.etrice.core.room.SPPRef;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 
 /**
@@ -34,17 +31,21 @@ import org.eclipse.etrice.core.room.util.RoomHelpers;
 public class DetailCodeTranslator {
 
 	public static interface ITranslationProvider {
-		String getInterfaceItemMessageText(InterfaceItem item, Message msg, ArrayList<String> args);
-		String getAttributeText(Attribute att);
-		String getOperationText(Operation op, ArrayList<String> args);
+		String getAttributeText(Attribute att, String orig);
+		String getOperationText(Operation op, ArrayList<String> args, String orig);
+		String getInterfaceItemMessageText(InterfaceItem item, Message msg, ArrayList<String> args, String orig);
+		String getInterfaceItemMessageValue(InterfaceItem item, Message msg, String orig);
 	}
 
+	private static class Position {
+		int pos = 0;
+	}
+	
 	private ActorClass ac;
 	private ITranslationProvider provider;
 	private HashMap<String, InterfaceItem> name2item;
 	private HashMap<String, Attribute> name2attr;
 	private HashMap<String, Operation> name2op;
-	private int curr;
 	
 	public DetailCodeTranslator(ActorClass ac, ITranslationProvider provider) {
 		this.ac = ac;
@@ -70,53 +71,76 @@ public class DetailCodeTranslator {
 	}
 	
 	private void translateText(String text, StringBuilder result) {
-		curr = 0;
+		Position curr = new Position();
 		int last = 0;
 		
-		while (curr<text.length()) {
-			proceedToToken(text);
+		while (curr.pos<text.length()) {
+			proceedToToken(text, curr);
 			
-			last = appendParsed(text, last, result);
+			last = appendParsed(text, curr, last, result);
 			
-			String token = getToken(text);
+			String token = getToken(text, curr);
 			if (token.isEmpty()) {
-				while (curr<text.length() && !Character.isWhitespace(text.charAt(curr)))
-					++curr;
-				last = appendParsed(text, last, result);
+				while (curr.pos<text.length() && !isTokenChar(text.charAt(curr.pos)))
+					++curr.pos;
+				last = appendParsed(text, curr, last, result);
 			}
 			else {
 				// translate token if possible
 				String translated = null;
 				Attribute attribute = name2attr.get(token);
 				if (attribute!=null) {
-					translated = provider.getAttributeText(attribute);
+					String orig = text.substring(last, curr.pos);
+					translated = provider.getAttributeText(attribute, orig);
 				}
 				else {
 					Operation operation = name2op.get(token);
 					if (operation!=null) {
-						ArrayList<String> args = getArgs(text);
+						ArrayList<String> args = getArgs(text, curr);
 						if (args!=null && operation.getArguments().size()==args.size()) {
-							// TODO: recursively apply this algorithm to each argument (needs curr to be wrapped in object and passed as param)
-							translated = provider.getOperationText(operation, args);
+							// recursively apply this algorithm to each argument
+							for (int i=0; i<args.size(); ++i) {
+								StringBuilder transArg = new StringBuilder();
+								translateText(args.remove(i), transArg);
+								args.add(i, transArg.toString());
+							}
+							String orig = text.substring(last, curr.pos);
+							translated = provider.getOperationText(operation, args, orig);
 						}
 					}
 					else {
 						InterfaceItem item = name2item.get(token);
 						if (item!=null) {
-							Message msg = getMessage(text, item);
-							ArrayList<String> args = getArgs(text);
-							if (msg!=null && args!=null && argsMatching(msg, args)) {
-								translated = provider.getInterfaceItemMessageText(item, msg, args);
+							int start = curr.pos;
+							Message msg = getMessage(text, curr, item, true);
+							if (msg!=null) {
+								ArrayList<String> args = getArgs(text, curr);
+								if (args!=null) {
+									if (argsMatching(msg, args)) {
+										String orig = text.substring(last, curr.pos);
+										translated = provider.getInterfaceItemMessageText(item, msg, args, orig);
+									}
+								}
+							}
+							else {
+								curr.pos = start;
+								msg = getMessage(text, curr, item, false);
+								if (msg!=null) {
+									if (text.charAt(curr.pos)!='(') {
+										String orig = text.substring(last, curr.pos);
+										translated = provider.getInterfaceItemMessageValue(item, msg, orig);
+									}
+								}
 							}
 						}
 					}
 				}
 				if (translated!=null) {
-					last = curr;
+					last = curr.pos;
 					result.append(translated);
 				}
 				else
-					last = appendParsed(text, last, result);
+					last = appendParsed(text, curr, last, result);
 			}
 		}
 	}
@@ -126,10 +150,10 @@ public class DetailCodeTranslator {
 	 * @param result
 	 * @return 
 	 */
-	private int appendParsed(String text, int last, StringBuilder result) {
-		String str = text.substring(last, curr);
+	private int appendParsed(String text, Position curr, int last, StringBuilder result) {
+		String str = text.substring(last, curr.pos);
 		result.append(str);
-		return curr;
+		return curr.pos;
 	}
 
 	private boolean argsMatching(Message msg, ArrayList<String> args) {
@@ -141,59 +165,42 @@ public class DetailCodeTranslator {
 		return false;
 	}
 
-	private void proceedToToken(String text) {
+	private void proceedToToken(String text, Position curr) {
 		boolean stop = false;
-		while (curr<text.length() && !stop) {
-			if (text.charAt(curr)=='"') {
-				skipString(text);
+		while (curr.pos<text.length() && !stop) {
+			if (text.charAt(curr.pos)=='"') {
+				skipString(text, curr);
 			}
-			else if (text.charAt(curr)=='/') {
-				if (curr+1<text.length()) {
-					if (text.charAt(curr+1)=='/') {
-						skipSingleComment(text);
+			else if (text.charAt(curr.pos)=='/') {
+				if (curr.pos+1<text.length()) {
+					if (text.charAt(curr.pos+1)=='/') {
+						skipSingleComment(text, curr);
 					}
-					else if (text.charAt(curr+1)=='*') {
-						skipMultiComment(text);
+					else if (text.charAt(curr.pos+1)=='*') {
+						skipMultiComment(text, curr);
 					}
 				}
 			}
-			else if (Character.isWhitespace(text.charAt(curr))) {
-				skipWhiteSpace(text);
+			else if (Character.isWhitespace(text.charAt(curr.pos))) {
+				skipWhiteSpace(text, curr);
 			}
 			else
 				stop = true;
 		}
 	}
 	
-	private Message getMessage(String text, InterfaceItem item) {
-		proceedToToken(text);
+	private Message getMessage(String text, Position curr, InterfaceItem item, boolean outgoing) {
+		proceedToToken(text, curr);
 
-		if (text.charAt(curr)!='.')
+		if (text.charAt(curr.pos)!='.')
 			return null;
-		++curr;
+		++curr.pos;
 		
-		proceedToToken(text);
+		proceedToToken(text, curr);
 		
-		String token = getToken(text);
+		String token = getToken(text, curr);
 		
-		List<Message> messages = null;
-		if (item instanceof Port) {
-			if (((Port) item).isConjugated())
-				messages = ((Port) item).getProtocol().getIncomingMessages();
-			else
-				messages = ((Port) item).getProtocol().getOutgoingMessages();
-		}
-		else if (item instanceof SAPRef) {
-			messages = ((SAPRef)item).getProtocol().getIncomingMessages();
-		}
-		else if (item instanceof SPPRef) {
-			messages = ((SPPRef)item).getProtocol().getOutgoingMessages();
-		}
-		else {
-			assert(false): "unexpected sub type";
-			return null;
-		}
-		
+		List<Message> messages = RoomHelpers.getMessageList(item, outgoing);
 		for (Message message : messages) {
 			if (message.getName().equals(token))
 				return message;
@@ -202,91 +209,93 @@ public class DetailCodeTranslator {
 		return null;
 	}
 	
-	private ArrayList<String> getArgs(String text) {
-		proceedToToken(text);
+	private ArrayList<String> getArgs(String text, Position curr) {
+		proceedToToken(text, curr);
 
-		if (text.charAt(curr)!='(')
+		if (text.charAt(curr.pos)!='(')
 			return null;
-		++curr;
+		++curr.pos;
 		
 		ArrayList<String> result = new ArrayList<String>();
 		
 		boolean stop = false;
 		do {
-			proceedToToken(text);
-			if (text.charAt(curr)!=')') {
-				String arg = getParam(text);
+			proceedToToken(text, curr);
+			if (text.charAt(curr.pos)!=')') {
+				String arg = getParam(text, curr);
 				result.add(arg);
-				proceedToToken(text);
+				proceedToToken(text, curr);
 			}
-			if (text.charAt(curr)==',')
-				++curr;
+			if (text.charAt(curr.pos)==',')
+				++curr.pos;
 			else
 				stop = true;
 		}
 		while (!stop);
 
-		if (text.charAt(curr)!=')')
+		if (text.charAt(curr.pos)!=')')
 			return null;
 		
-		++curr;
+		++curr.pos;
 		
 		return result;
 	}
 
-	private String getToken(String text) {
-		int begin = curr;
-		while (curr<text.length() && isTokenChar(text.charAt(curr)))
-			++curr;
-		String token = text.substring(begin, curr);
+	private String getToken(String text, Position curr) {
+		int begin = curr.pos;
+		while (curr.pos<text.length() && isTokenChar(text.charAt(curr.pos)))
+			++curr.pos;
+		String token = text.substring(begin, curr.pos);
 		return token;
 	}
 
-	private String getParam(String text) {
-		int begin = curr;
+	private String getParam(String text, Position curr) {
+		int begin = curr.pos;
 		int parenthesisLevel = 0;
-		while (curr<text.length()) {
-			if (text.charAt(curr)=='(')
+		while (curr.pos<text.length()) {
+			if (text.charAt(curr.pos)=='(')
 				++parenthesisLevel;
-			else if (text.charAt(curr)==')') {
+			else if (text.charAt(curr.pos)==')') {
 				if (parenthesisLevel==0)
 					break;
 				else
 					--parenthesisLevel;
 			}
 			else if (parenthesisLevel==0) {
-				if (text.charAt(curr)==',')
+				if (text.charAt(curr.pos)==',')
 					break;
 			}
-			++curr;
+			++curr.pos;
 		}
-		String token = text.substring(begin, curr).trim();
+		String token = text.substring(begin, curr.pos).trim();
 		return token;
 	}
 
-	private void skipWhiteSpace(String text) {
-		while (curr<text.length() && Character.isWhitespace(text.charAt(curr)))
-			++curr;
+	private void skipWhiteSpace(String text, Position curr) {
+		while (curr.pos<text.length() && Character.isWhitespace(text.charAt(curr.pos)))
+			++curr.pos;
 	}
 
-	private void skipMultiComment(String text) {
-		curr += 2;
-		while (curr<text.length()-1 && text.charAt(curr++)!='*')
-			if (text.charAt(curr)=='/')
+	private void skipMultiComment(String text, Position curr) {
+		curr.pos += 2;
+		while (curr.pos<text.length()-1 && text.charAt(curr.pos++)!='*')
+			if (text.charAt(curr.pos)=='/')
 				break;
-		++curr;
+		if (curr.pos<text.length())
+			++curr.pos;
 	}
 
-	private void skipSingleComment(String text) {
-		while (curr<text.length() && text.charAt(curr)!='\n')
-			++curr;
-		++curr;
+	private void skipSingleComment(String text, Position curr) {
+		while (curr.pos<text.length() && text.charAt(curr.pos)!='\n')
+			++curr.pos;
+		if (curr.pos<text.length())
+			++curr.pos;
 	}
 
-	private void skipString(String text) {
-		while (++curr<text.length() && text.charAt(curr)!='"')
-			if (text.charAt(curr)=='\\')
-				++curr;
+	private void skipString(String text, Position curr) {
+		while (++curr.pos<text.length() && text.charAt(curr.pos)!='"')
+			if (text.charAt(curr.pos)=='\\')
+				++curr.pos;
 	}
 
 	private boolean isTokenChar(char c) {

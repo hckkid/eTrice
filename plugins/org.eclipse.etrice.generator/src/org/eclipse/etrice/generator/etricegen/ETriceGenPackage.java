@@ -145,13 +145,13 @@ public interface ETriceGenPackage extends EPackage {
 	int ROOT__USED_ROOM_MODELS = 7;
 
 	/**
-	 * The feature id for the '<em><b>Main Path Sub System Classes</b></em>' reference list.
+	 * The feature id for the '<em><b>Sub System Classes</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ROOT__MAIN_PATH_SUB_SYSTEM_CLASSES = 8;
+	int ROOT__SUB_SYSTEM_CLASSES = 8;
 
 	/**
 	 * The number of structural features of the '<em>Root</em>' class.
@@ -1581,15 +1581,15 @@ public interface ETriceGenPackage extends EPackage {
 	EReference getRoot_UsedRoomModels();
 
 	/**
-	 * Returns the meta object for the reference list '{@link org.eclipse.etrice.generator.etricegen.Root#getMainPathSubSystemClasses <em>Main Path Sub System Classes</em>}'.
+	 * Returns the meta object for the reference list '{@link org.eclipse.etrice.generator.etricegen.Root#getSubSystemClasses <em>Sub System Classes</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Main Path Sub System Classes</em>'.
-	 * @see org.eclipse.etrice.generator.etricegen.Root#getMainPathSubSystemClasses()
+	 * @return the meta object for the reference list '<em>Sub System Classes</em>'.
+	 * @see org.eclipse.etrice.generator.etricegen.Root#getSubSystemClasses()
 	 * @see #getRoot()
 	 * @generated
 	 */
-	EReference getRoot_MainPathSubSystemClasses();
+	EReference getRoot_SubSystemClasses();
 
 	/**
 	 * Returns the meta object for the attribute '{@link org.eclipse.etrice.generator.etricegen.Root#isLibrary <em>Library</em>}'.
@@ -2294,12 +2294,12 @@ public interface ETriceGenPackage extends EPackage {
 		EReference ROOT__USED_ROOM_MODELS = eINSTANCE.getRoot_UsedRoomModels();
 
 		/**
-		 * The meta object literal for the '<em><b>Main Path Sub System Classes</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Sub System Classes</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference ROOT__MAIN_PATH_SUB_SYSTEM_CLASSES = eINSTANCE.getRoot_MainPathSubSystemClasses();
+		EReference ROOT__SUB_SYSTEM_CLASSES = eINSTANCE.getRoot_SubSystemClasses();
 
 		/**
 		 * The meta object literal for the '<em><b>Library</b></em>' attribute feature.

@@ -32,7 +32,6 @@ import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.core.validation.ValidationUtil;
 import org.eclipse.etrice.core.validation.ValidationUtil.Result;
 import org.eclipse.etrice.ui.behavior.Activator;
-import org.eclipse.etrice.ui.common.dialogs.AbstractPropertyDialog;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.viewers.IBaseLabelProvider;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
@@ -61,7 +60,7 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.forms.IManagedForm;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 
-public class TransitionPropertyDialog extends AbstractPropertyDialog {
+public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog {
 	
 	private class TriggerContentProvider implements IStructuredContentProvider {
 		@Override
@@ -164,11 +163,9 @@ public class TransitionPropertyDialog extends AbstractPropertyDialog {
 	}
 	
 	private Transition trans;
-	private StateGraph sg;
 	private Combo messageCombo;
 	private Combo interfaceCombo;
 	private TableViewer mifViewer;
-	private ActorClass ac;
 	private List<InterfaceItem> interfaceItems = new ArrayList<InterfaceItem>();
 	private TableViewer triggerViewer;
 	private EList<Message> currentMsgs;
@@ -181,20 +178,18 @@ public class TransitionPropertyDialog extends AbstractPropertyDialog {
 	private boolean triggerError = false;
 
 	public TransitionPropertyDialog(Shell shell, StateGraph sg, Transition trans) {
-		super(shell, "Edit Transition");
-		this.sg = sg;
+		super(shell, "Edit Transition", getActorClass(sg));
 		this.trans = trans;
-		this.ac = getActorClass(sg);
 
 		m2s = new DetailCodeToString();
 		m2s_null_empty = new DetailCodeToString(true);
 		s2m = new StringToDetailCode();
 		s2m_not_null = new StringToDetailCode(false);
 		
-		interfaceItems = RoomHelpers.getAllInterfaceItems(ac);
+		interfaceItems = RoomHelpers.getAllInterfaceItems(getActorClass());
 	}
 
-	private ActorClass getActorClass(StateGraph sg2) {
+	private static ActorClass getActorClass(StateGraph sg) {
 		EObject obj = sg;
 		while (obj!=null) {
 			if (obj instanceof ActorClass) {
@@ -218,7 +213,7 @@ public class TransitionPropertyDialog extends AbstractPropertyDialog {
 		if (!(trans instanceof InitialTransition)) {
 			NameValidator nv = new NameValidator();
 			
-			Text name = createText(body, "Name:", trans, RoomPackage.eINSTANCE.getTransition_Name(), nv);
+			Text name = createText(body, "&Name:", trans, RoomPackage.eINSTANCE.getTransition_Name(), nv);
 			
 			createDecorator(name, "invalid name");
 			
@@ -251,7 +246,8 @@ public class TransitionPropertyDialog extends AbstractPropertyDialog {
 		if (trans instanceof GuardedTransition) {
 			GuardValidator gv = new GuardValidator();
 			
-			Text cond = createText(body, "Guard:", trans, RoomPackage.eINSTANCE.getGuardedTransition_Guard(), gv, s2m_not_null, m2s_null_empty, true);
+			Text cond = createText(body, "&Guard:", trans, RoomPackage.eINSTANCE.getGuardedTransition_Guard(), gv, s2m_not_null, m2s_null_empty, true);
+			cond.addFocusListener(new LastTextListener(cond));
 			GridData gd = new GridData(GridData.FILL_BOTH);
 			gd.heightHint = 100;
 			cond.setLayoutData(gd);
@@ -260,18 +256,22 @@ public class TransitionPropertyDialog extends AbstractPropertyDialog {
 		}
 		
 		if (trans instanceof CPBranchTransition) {
-			Text cond = createText(body, "Condition:", trans, RoomPackage.eINSTANCE.getCPBranchTransition_Condition(), null, s2m, m2s, true);
+			Text cond = createText(body, "&Condition:", trans, RoomPackage.eINSTANCE.getCPBranchTransition_Condition(), null, s2m, m2s, true);
+			cond.addFocusListener(new LastTextListener(cond));
 			GridData gd = new GridData(GridData.FILL_BOTH);
 			gd.heightHint = 100;
 			cond.setLayoutData(gd);
 		}
 		
 		{
-			Text action = createText(body, "Action Code:", trans, RoomPackage.eINSTANCE.getTransition_Action(), null, s2m, m2s, true);
+			Text action = createText(body, "&Action Code:", trans, RoomPackage.eINSTANCE.getTransition_Action(), null, s2m, m2s, true);
+			action.addFocusListener(new LastTextListener(action));
 			GridData gd = new GridData(GridData.FILL_BOTH);
 			gd.heightHint = 100;
 			action.setLayoutData(gd);
 		}
+		
+		createMembersAndMessagesButtons(body);
 	}
 
 	private boolean triggersAvailable() {

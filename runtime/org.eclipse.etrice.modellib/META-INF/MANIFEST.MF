@@ -4,5 +4,6 @@ Bundle-Name: eTrice Model Library
 Bundle-SymbolicName: org.eclipse.etrice.modellib
 Bundle-Version: 0.1.0.qualifier
 Bundle-Vendor: eTrice (Incubation)
-Export-Package: room.basic.service.timing
+Export-Package: org.eclipse.etrice.modellib.Socket,
+ room.basic.service.timing
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6

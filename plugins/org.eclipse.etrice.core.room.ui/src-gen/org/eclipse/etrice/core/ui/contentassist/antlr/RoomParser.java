@@ -60,6 +60,7 @@ public class RoomParser extends AbstractContentAssistParser {
 					put(grammarAccess.getTransitionAccess().getAlternatives(), "rule__Transition__Alternatives");
 					put(grammarAccess.getNonInitialTransitionAccess().getAlternatives(), "rule__NonInitialTransition__Alternatives");
 					put(grammarAccess.getTransitionTerminalAccess().getAlternatives(), "rule__TransitionTerminal__Alternatives");
+					put(grammarAccess.getImportAccess().getAlternatives_1(), "rule__Import__Alternatives_1");
 					put(grammarAccess.getPrimitiveTypeAccess().getAlternatives(), "rule__PrimitiveType__Alternatives");
 					put(grammarAccess.getRoomModelAccess().getGroup(), "rule__RoomModel__Group__0");
 					put(grammarAccess.getTypedIDAccess().getGroup(), "rule__TypedID__Group__0");
@@ -162,6 +163,7 @@ public class RoomParser extends AbstractContentAssistParser {
 					put(grammarAccess.getAnnotationAccess().getGroup_2_2(), "rule__Annotation__Group_2_2__0");
 					put(grammarAccess.getKeyValueAccess().getGroup(), "rule__KeyValue__Group__0");
 					put(grammarAccess.getImportAccess().getGroup(), "rule__Import__Group__0");
+					put(grammarAccess.getImportAccess().getGroup_1_0(), "rule__Import__Group_1_0__0");
 					put(grammarAccess.getImportedFQNAccess().getGroup(), "rule__ImportedFQN__Group__0");
 					put(grammarAccess.getImportedFQNAccess().getGroup_1(), "rule__ImportedFQN__Group_1__0");
 					put(grammarAccess.getFQNAccess().getGroup(), "rule__FQN__Group__0");
@@ -369,8 +371,8 @@ public class RoomParser extends AbstractContentAssistParser {
 					put(grammarAccess.getAnnotationAccess().getAttributesAssignment_2_2_1(), "rule__Annotation__AttributesAssignment_2_2_1");
 					put(grammarAccess.getKeyValueAccess().getKeyAssignment_0(), "rule__KeyValue__KeyAssignment_0");
 					put(grammarAccess.getKeyValueAccess().getValueAssignment_2(), "rule__KeyValue__ValueAssignment_2");
-					put(grammarAccess.getImportAccess().getImportedNamespaceAssignment_1(), "rule__Import__ImportedNamespaceAssignment_1");
-					put(grammarAccess.getImportAccess().getImportURIAssignment_3(), "rule__Import__ImportURIAssignment_3");
+					put(grammarAccess.getImportAccess().getImportedNamespaceAssignment_1_0_0(), "rule__Import__ImportedNamespaceAssignment_1_0_0");
+					put(grammarAccess.getImportAccess().getImportURIAssignment_2(), "rule__Import__ImportURIAssignment_2");
 				}
 			};
 		}

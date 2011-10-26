@@ -5,7 +5,7 @@ Bundle-SymbolicName: org.eclipse.etrice.ui.structure.tests
 Bundle-Version: 0.1.0.qualifier
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
- org.junit;bundle-version="4.8.1",
+ org.junit4;bundle-version="[4.8.1,4.9.0)",
  org.eclipse.etrice.core.room;bundle-version="0.1.0",
  org.eclipse.etrice.ui.structure;bundle-version="0.1.0",
  org.eclipse.etrice.ui.common;bundle-version="0.1.0",

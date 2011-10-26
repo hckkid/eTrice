@@ -26,6 +26,10 @@ import com.google.inject.Inject;
 
 public class Main extends AbstractGenerator {
 	
+	public static final String OPTION_LIB = "-lib";
+	public static final String OPTION_GEN_INST_DIAG = "-genInstDiag";
+	public static final String OPTION_SAVE_GEN_MODEL = "-saveGenModel";
+
 	/**
 	 * print usage message to stderr
 	 */
@@ -61,15 +65,15 @@ public class Main extends AbstractGenerator {
 		boolean genInstDiag = false;
 		boolean asLibrary = false;
 		for (int i=0; i<args.length; ++i) {
-			if (args[i].equals("-saveGenModel")) {
+			if (args[i].equals(OPTION_SAVE_GEN_MODEL)) {
 				if (++i<args.length) {
 					genModelPath = convertToURI(args[i]+"/genmodel.egm");
 				}
 			}
-			else if (args[i].equals("-genInstDiag")) {
+			else if (args[i].equals(OPTION_GEN_INST_DIAG)) {
 				genInstDiag = true;
 			}
-			else if (args[i].equals("-lib")) {
+			else if (args[i].equals(OPTION_LIB)) {
 				asLibrary = true;
 			}
 			else {
