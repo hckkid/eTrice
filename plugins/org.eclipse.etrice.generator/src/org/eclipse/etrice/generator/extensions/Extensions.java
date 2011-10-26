@@ -38,6 +38,10 @@ public class Extensions {
 		return "exit_"+getStatePathName(s);
 	}
 	
+	public static String getDoCodeOperationName(State s) {
+		return "do_"+getStatePathName(s);
+	}
+	
 	public static String getChainId(TransitionChain tc) {
 		return "CHAIN_"+RoomNameProvider.getFullPath(tc.getTransition());
 	}
