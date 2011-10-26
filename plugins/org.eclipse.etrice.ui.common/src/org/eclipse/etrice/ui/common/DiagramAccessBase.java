@@ -30,8 +30,10 @@ import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.transaction.util.TransactionUtil;
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.StructureClass;
+import org.eclipse.etrice.ui.common.preferences.PreferenceConstants;
 import org.eclipse.graphiti.mm.pictograms.Diagram;
 import org.eclipse.graphiti.services.Graphiti;
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
@@ -96,7 +98,18 @@ public abstract class DiagramAccessBase {
 		else {
 			Resource diagRes = rs.createResource(diagURI);
 			
-			Diagram diagram = Graphiti.getPeCreateService().createDiagram(getDiagramTypeId(), getDiagramName(sc), true);
+			IPreferenceStore store = Activator.getDefault().getPreferenceStore();
+			boolean snap = store.getBoolean(PreferenceConstants.SNAP_TO_GRID);
+			boolean useGrid = store.getBoolean(PreferenceConstants.USE_GRID);
+			int horUnit = useGrid? store.getInt(PreferenceConstants.HOR_GRID_UNIT) : 0;
+			int verUnit = useGrid? store.getInt(PreferenceConstants.VER_GRID_UNIT) : 0;
+			
+			Diagram diagram = Graphiti.getPeCreateService().createDiagram(
+					getDiagramTypeId(),
+					getDiagramName(sc),
+					horUnit,
+					verUnit,
+					snap);
 			diagRes.getContents().add(diagram);
 			
 			populateDiagram(sc, diagram);
