@@ -16,6 +16,7 @@ import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.transaction.RecordingCommand;
+import org.eclipse.etrice.core.RoomDefaultValues;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.RefinedState;
 import org.eclipse.etrice.core.room.State;
@@ -25,10 +26,12 @@ import org.eclipse.etrice.ui.behavior.Activator;
 import org.eclipse.etrice.ui.behavior.support.ContextSwitcher;
 import org.eclipse.etrice.ui.behavior.support.SupportUtil;
 import org.eclipse.etrice.ui.common.editor.RoomDiagramEditor;
+import org.eclipse.etrice.ui.common.preferences.PreferenceConstants;
 import org.eclipse.graphiti.mm.pictograms.Diagram;
 import org.eclipse.graphiti.mm.pictograms.Shape;
 import org.eclipse.graphiti.services.Graphiti;
 import org.eclipse.graphiti.ui.editor.DiagramEditorInput;
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.swt.graphics.Image;
 
 
@@ -38,6 +41,10 @@ public class BehaviorEditor extends RoomDiagramEditor {
 	
 	public BehaviorEditor() {
 		super();
+		
+		IPreferenceStore store = org.eclipse.etrice.ui.common.Activator.getDefault().getPreferenceStore();
+		boolean dataDriven = store.getBoolean(PreferenceConstants.DATA_DRIVEN_FSM);
+		RoomDefaultValues.setUseDataDrivenStateMachine(dataDriven);
 	}
 	
 	@Override
