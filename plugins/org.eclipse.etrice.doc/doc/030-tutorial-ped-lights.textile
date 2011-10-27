@@ -8,7 +8,7 @@ This tutorial is not like hello world or blinky. Being familiar with the basic t
 
 The idea behind the exercise is, to control a Pedestrian crossing light. We will use the same GUI as for the blinky tutorial but now we will use the ??REQUEST?? button to start a FSM, which controls the traffic lights.
 
-!images/020-Blinky08.PNG!
+!images/020-Blinky08.png!
 
 The ??REQUEST?? must lead to a model message which starts the activity of the lights.
 
@@ -27,13 +27,13 @@ h2. Setup the model
 * Copy the model from /org.eclipse.etrice.tutorials/model/PedLightsController to your model file, or run the model directly in the tutorial directory:
 * Arrange the Structure and the Statemachines to understand the model
 
-!images/030-PedLights01.PNG!
+!images/030-PedLights01.png!
 The ??GuiAdapter?? represents the interface to the external code. It registers its ??ControlPort?? by the external code.
 
-!images/030-PedLights02.PNG!
+!images/030-PedLights02.png!
 Visit the initial transition to understand the registration. The actor handles the incoming messages as usual and controls the traffic lights as known from blinky. 
 
-!images/030-PedLights03.PNG!
+!images/030-PedLights03.png!
 The ??Controller?? receives the ??start?? message and controls the timing of the lights. Note that the ??start?? message will be sent from the external code whenever the ??REQUEST?? button is pressed.
 
 *  Visit the model and take a closer look to the following elements:
@@ -45,7 +45,7 @@ The ??Controller?? receives the ??start?? message and controls the timing of the
 * Generate and test the model
 * Take a look at the generated MSC => notice that the start message will shown as if the ??GuiAdapter?? had sent it.
 
-!images/030-PedLights04.PNG!
+!images/030-PedLights04.png!
 
 h2. Why does it work and why is it safe?
 

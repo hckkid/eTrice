@@ -16,15 +16,15 @@ h2. Create a new model from scratch
 
 The easiest way to create a new eTrice Project is to use the eclipse project wizard. From the eclipse file menu select ??File->New->Project?? and create a new eTrice project and name it ??HelloWorld??
 
-!images/015-HelloWorld10.PNG!
+!images/015-HelloWorld10.png!
 
 The wizard creates everything that is needed to create, build and run an eTrice model. The resulting project should look like this:
 
-!images/015-HelloWorld11.PNG!
+!images/015-HelloWorld11.png!
 
 Within the model directory the model file ??HelloWorld.room?? was created. Open the ??HelloWorld.room?? file and delete the contents of the file. Open the content assist with Ctrl+Space and select ??model skeleton??.
 
-!images/015-HelloWorld12.PNG!   
+!images/015-HelloWorld12.png!   
 
 Edit the template variables by typing the new names and jumping with Tab from name to name.
 
@@ -56,14 +56,14 @@ The ??LogicalSystem?? represents the complete distributed system and contains at
 The outline view of the textual ROOM editor shows the main modeling elements in an easy to navigate tree.
 
 
-!images/015-HelloWorld02.PNG!
+!images/015-HelloWorld02.png!
 
 
 h2. Create a state machine
 
 We will implement the Hello World code on the initial transition of the ??HelloWorldTop?? actor. Therefore open the state machine editor by right clicking the ??HelloWorldTop?? actor in the outline view and select ??Edit Behavior??.
 
-!images/015-HelloWorld03.PNG!
+!images/015-HelloWorld03.png!
 
 The state machine editor will be opened. Drag and drop an ??Initial Point?? from the tool box to the diagram into the top level state. Drag and drop a ??State?? from the tool box to the diagram. Confirm the dialogue with ??ok??. Select the ??Transition?? in the tool box and draw the transition from the ??Initial Point?? to the State. Open the transition dialogue by double clicking the caption of the transition and fill in the action code.
 
@@ -71,33 +71,33 @@ bc. System.out.println("Hello World !");
  
 The result should look like this:
 
-!images/015-HelloWorld04.PNG!
+!images/015-HelloWorld04.png!
 
 Save the diagram and inspect the model file. Note that the textual representation was created after saving the diagram.
 
-!images/015-HelloWorld05.PNG!
+!images/015-HelloWorld05.png!
 
 
 h2. Build and run the model
 
 Now the model is finished and source code can be generated. The project wizard has created a launch configuration that is responsible for generating the source code. From ??HelloWorld/?? right click ??gen_HelloWorld.launch?? and run it as gen_HelloWorld. All model files in the model directory will be generated.
 
-!images/015-HelloWorld06.PNG!
+!images/015-HelloWorld06.png!
 
 The code will be generated to the src-gen directory. The main function will be contained in ??SubSystem_HelloWorldRunner.java??. Select this file and run it as Java application.
 
-!images/015-HelloWorld07.PNG!
+!images/015-HelloWorld07.png!
 
 
 The Hello World application starts and the string will be printed on the console window. To stop the application the user must type ??quit?? in the console window.
 
-!images/015-HelloWorld08.PNG!
+!images/015-HelloWorld08.png!
 
 h2. Open the Message Sequence Chart
 
 During runtime the application produced a MSC and wrote it to a file. Open /org.eclipse.etrice.doc.tutorials/tmp/log/SubSystem_HelloWorld_Async.seq using Trace2UML (it is open source and can be obtained from  http://trace2uml.tigris.org/). You should see something like this:
 
-!images/015-HelloWorld09.PNG!
+!images/015-HelloWorld09.png!
 
 
 h2. Summary

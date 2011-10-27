@@ -68,8 +68,13 @@
 </topic>
 <topic href="help/ROOMConcepts.html" label="ROOM Concepts">
 <topic href="help/ROOMConcepts.html#MainConcepts" label="Main Concepts">
-<topic href="help/ROOMConcepts.html#ActorClass" label="ActorClass"></topic>
-<topic href="help/ROOMConcepts.html#Port" label="Port"></topic>
+<topic href="help/ROOMConcepts.html#Actor" label="Actor"></topic>
+<topic href="help/ROOMConcepts.html#Port" label="Port">
+<topic href="help/ROOMConcepts.html#Notation" label="Notation">
+<topic href="help/ROOMConcepts.html#ClassPorts" label="Class Ports"></topic>
+<topic href="help/ROOMConcepts.html#ReferencePorts" label="Reference Ports"></topic>
+</topic>
+</topic>
 <topic href="help/ROOMConcepts.html#Protocol" label="Protocol"></topic>
 </topic>
 </topic>
