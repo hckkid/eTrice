@@ -1,0 +1,114 @@
+RoomModel ModelName {
+
+	LogicalSystem LogSysName {
+		SubSystemRef SubSysRefName: SubSysClassName
+	}
+
+	SubSystemClass SubSysClassName {
+		ActorRef ActorRefName: ActorClass1
+	}
+
+	ActorClass ActorClass1 {
+		Interface {
+			Port port10: ProtocolClass1
+			Port port12: ProtocolClass1
+			conjugated Port port11: ProtocolClass1
+			conjugated Port port13: ProtocolClass1
+			Port port16 [ 2 ]: ProtocolClass1
+			conjugated Port port17 [ 2 ]: ProtocolClass1
+			conjugated Port port19 [ 2 ]: ProtocolClass1
+			Port port18 [ 2 ]: ProtocolClass1
+		}
+		Structure {
+			external Port port12
+			external Port port13
+			external Port port16
+			external Port port17
+			conjugated Port port14: ProtocolClass1
+			Port port15: ProtocolClass1
+			ActorRef ActorRef_A: ActorClass2
+			ActorRef ActorRef_B: ActorClass3
+
+			Binding ActorRef_A.port21 and ActorRef_B.port30
+			Binding ActorRef_B.port31 and port11
+			Binding port14 and ActorRef_A.port22
+			Binding port15 and ActorRef_B.port32
+			Binding port10 and ActorRef_A.port20
+			Binding port18 and ActorRef_A.port28
+			Binding port19 and ActorRef_B.port39
+		}
+		Behavior { }
+	}
+
+	ActorClass ActorClass2 {
+		Interface {
+			Port port20: ProtocolClass1
+			conjugated Port port21: ProtocolClass1
+			Port port22: ProtocolClass1
+			Port port28 [ 2 ]: ProtocolClass1
+		}
+		Structure {
+			external Port port20
+			external Port port21
+			external Port port22
+			external Port port28
+		}
+		Behavior { }
+	}
+
+	ActorClass ActorClass3 {
+		Interface {
+			Port port30: ProtocolClass1
+			conjugated Port port31: ProtocolClass1
+			conjugated Port port32: ProtocolClass1
+			conjugated Port port39 [ 2 ]: ProtocolClass1
+		}
+		Structure {
+			external Port port30
+			external Port port31
+			external Port port32
+			external Port port39
+		}
+		Behavior { }
+	}
+
+	ActorClass ActorClass5 {
+		Interface {
+			Port port10: ProtocolClass1
+			Port port12: ProtocolClass1
+			conjugated Port port11: ProtocolClass1
+			conjugated Port port13: ProtocolClass1
+			Port port16 [ 2 ]: ProtocolClass1
+			conjugated Port port17 [ 2 ]: ProtocolClass1
+			conjugated Port port19 [ 2 ]: ProtocolClass1
+			Port port18 [ 2 ]: ProtocolClass1
+		}
+		Structure {
+			external Port port12
+			external Port port13
+			external Port port16
+			external Port port17
+		}
+		Behavior { }
+	}
+
+	ProtocolClass ProtocolClass1 {
+		incoming {
+			Message start(par: DataClass1)
+		}
+		outgoing {
+			Message done(par: int16)
+		}
+	}
+
+	DataClass DataClass1 {
+		Attribute par1: int16
+		Attribute par2: float32
+	}
+	
+	DataClass DataClass2 {
+		Attribute par1: int16
+		Attribute par2: DataClass1
+	}
+
+}

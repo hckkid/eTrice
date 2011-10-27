@@ -141,6 +141,7 @@ public abstract class SubSystemClassBase extends RTObject implements IEventRecei
 			testErrorCode = errorCode;
 			testSem.release(1);
 			
+			// TODO: TS: if the non deterministic errors in integration.tests are fixed, please delete this work around! 
 			// making this thread sleep seems to fix a problem that the tester thread doesn't
 			// acquire control before the test timeout is reached
 //			try {

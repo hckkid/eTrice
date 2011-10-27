@@ -842,9 +842,45 @@ h1. ROOM Concepts
 
 h2. Main Concepts
 
-h3. ActorClass
+h3. Actor
+
+Basic building block for building software systems
+An actor can be refined hierarchically
+can be of arbitrarily large scope
+scope can be as large or as small as desired
+Ports define the interface of an actor.
+
+
+
 
 h3. Port
+
+h4. Notation
+
+h5. Class Ports
+
+These symbols can only appear on the border of an actor class symbol.
+
+|!images\040-ClassEndPort.png!|Class End Port|
+|img|Conjugated Class End Port|
+|img|Class Relay Port|
+|img|Conjugated Class Relay Port|
+|img|Replicated Class End Port|
+|img|Conjugated Replicated Class End Port|
+|img|Replicated Class Relay Port|
+|img|Conjugated Replicated Class Relay Port|
+
+h5. Reference Ports
+
+These symbols can only appear on the border of an actor reference symbol.
+
+|img|Reference Port|
+|img|Conjugated Reference Port|
+|img|Replicated Reference Port|
+|img|Conjugated Replicated Reference Port|
+
+
+
 
 h3. Protocol
 
