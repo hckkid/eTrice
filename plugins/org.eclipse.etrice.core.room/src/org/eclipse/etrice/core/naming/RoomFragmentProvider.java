@@ -16,6 +16,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.etrice.core.RoomDefaultValues;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorContainerClass;
 import org.eclipse.etrice.core.room.ActorContainerRef;
@@ -466,8 +467,11 @@ public class RoomFragmentProvider implements IFragmentProvider {
 	private StateGraph getStateGraph(RoomClass rc, String remainder) {
 		if (rc instanceof ActorClass) {
 			StateGraph sg = ((ActorClass) rc).getStateMachine();
-			if (sg==null)
+			if (sg==null) {
 				((ActorClass) rc).setStateMachine(RoomFactory.eINSTANCE.createStateMachine());
+				((ActorClass) rc).getStateMachine().setDataDriven(RoomDefaultValues.isUseDataDrivenStateMachine());
+				sg = ((ActorClass) rc).getStateMachine();
+			}
 			int begin = 0;
 			int end = remainder.indexOf(SEP);
 			while (end>=0) {
