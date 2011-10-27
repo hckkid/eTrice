@@ -85,8 +85,10 @@ public class PortMessageSelectionDialog extends FormDialog {
 			for (InterfaceItem item : items) {
 				ArrayList<MsgItemPair> pairs = new ArrayList<MsgItemPair>();
 				List<Message> out = RoomHelpers.getMessageList(item, true);
-				for (Message msg : out) {
-					pairs.add(new MsgItemPair(msg, item, true));
+				if (!recvOnly) {
+					for (Message msg : out) {
+						pairs.add(new MsgItemPair(msg, item, true));
+					}
 				}
 				if (ac.getStateMachine().isDataDriven()) {
 					List<Message> in = RoomHelpers.getMessageList(item, false);
@@ -163,7 +165,7 @@ public class PortMessageSelectionDialog extends FormDialog {
 				break;
 			case 1:
 				if (element instanceof MsgItemPair)
-					return ((MsgItemPair) element).out? "out" : "in";
+					return ((MsgItemPair) element).out? "send" : "recv";
 				break;
 			case 2:
 				if (element instanceof MsgItemPair) {
@@ -188,6 +190,7 @@ public class PortMessageSelectionDialog extends FormDialog {
 	}
 	
 	private ActorClass ac;
+	private boolean recvOnly;
 	private TreeViewer viewer;
 	private MsgItemPair selected = null;
 
@@ -197,9 +200,10 @@ public class PortMessageSelectionDialog extends FormDialog {
 	/**
 	 * @param shell
 	 */
-	public PortMessageSelectionDialog(Shell shell, ActorClass ac) {
+	public PortMessageSelectionDialog(Shell shell, ActorClass ac, boolean recvOnly) {
 		super(shell);
 		this.ac = ac;
+		this.recvOnly = recvOnly;
 		
 		Injector injector = RoomUiModule.getInjector();
         injector.injectMembers(this);

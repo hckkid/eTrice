@@ -214,7 +214,7 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 			NameValidator nv = new NameValidator();
 			
 			Text name = createText(body, "&Name:", trans, RoomPackage.eINSTANCE.getTransition_Name(), nv);
-			makeMemberAware(name, false, false);
+			configureMemberAware(name);
 			
 			createDecorator(name, "invalid name");
 			
@@ -248,7 +248,7 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 			GuardValidator gv = new GuardValidator();
 			
 			Text cond = createText(body, "&Guard:", trans, RoomPackage.eINSTANCE.getGuardedTransition_Guard(), gv, s2m_not_null, m2s_null_empty, true);
-			makeMemberAware(cond, true, true);
+			configureMemberAware(cond, true, true, true);
 			GridData gd = new GridData(GridData.FILL_BOTH);
 			gd.heightHint = 100;
 			cond.setLayoutData(gd);
@@ -258,7 +258,7 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 		
 		if (trans instanceof CPBranchTransition) {
 			Text cond = createText(body, "&Condition:", trans, RoomPackage.eINSTANCE.getCPBranchTransition_Condition(), null, s2m, m2s, true);
-			makeMemberAware(cond, true, false);
+			configureMemberAware(cond, true, true, true);
 			GridData gd = new GridData(GridData.FILL_BOTH);
 			gd.heightHint = 100;
 			cond.setLayoutData(gd);
@@ -266,7 +266,7 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 		
 		{
 			Text action = createText(body, "&Action Code:", trans, RoomPackage.eINSTANCE.getTransition_Action(), null, s2m, m2s, true);
-			makeMemberAware(action, true, true);
+			configureMemberAware(action, true, true);
 			GridData gd = new GridData(GridData.FILL_BOTH);
 			gd.heightHint = 100;
 			action.setLayoutData(gd);
@@ -327,7 +327,7 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 		triggerViewer.setContentProvider(new TriggerContentProvider());
 		triggerViewer.setLabelProvider(new TriggerLabelProvider());
 		triggerViewer.setInput(trans);
-		makeMemberAware(triggerTable, false, false);
+		configureMemberAware(triggerTable);
 		
 		if (((TriggeredTransition) trans).getTriggers().isEmpty())
 			addNewTrigger();
@@ -335,14 +335,14 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 		Button add = toolkit.createButton(tableCompartment, "Add", SWT.NONE);
 		gd = new GridData(GridData.FILL_HORIZONTAL);
 		add.setLayoutData(gd);
-		makeMemberAware(add, false, false);
+		configureMemberAware(add);
 		
 		final Button remove = toolkit.createButton(tableCompartment, "Remove", SWT.NONE);
 		gd = new GridData(GridData.FILL_HORIZONTAL);
 		remove.setLayoutData(gd);
 		if (((TriggeredTransition) trans).getTriggers().size()==1)
 			remove.setEnabled(false);
-		makeMemberAware(remove, false, false);
+		configureMemberAware(remove);
 		
 		add.addSelectionListener(new SelectionListener() {
 			@Override
@@ -387,17 +387,17 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 		mifViewer = new TableViewer(mifTable);
 		mifViewer.setContentProvider(new MessageFromInterfaceContentProvider());
 		mifViewer.setLabelProvider(new MessageFromInterfaceLabelProvider());
-		makeMemberAware(mifTable, false, false);
+		configureMemberAware(mifTable);
 		
 		Button add = toolkit.createButton(tableCompartment, "Add", SWT.NONE);
 		gd = new GridData(GridData.FILL_HORIZONTAL);
 		add.setLayoutData(gd);
-		makeMemberAware(add, false, false);
+		configureMemberAware(add);
 		
 		removeMifButton = toolkit.createButton(tableCompartment, "Remove", SWT.NONE);
 		gd = new GridData(GridData.FILL_HORIZONTAL);
 		removeMifButton.setLayoutData(gd);
-		makeMemberAware(removeMifButton, false, false);
+		configureMemberAware(removeMifButton);
 		
 		add.addSelectionListener(new SelectionListener() {
 			@Override
@@ -444,7 +444,7 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 		l.setLayoutData(new GridData());
 
 		guardText = toolkit.createText(mifCompartment, "", SWT.BORDER | SWT.MULTI);
-		makeMemberAware(guardText, true, false);
+		configureMemberAware(guardText, true, true, true);
 		gd = new GridData(GridData.FILL_HORIZONTAL);
 		gd.heightHint = 50;
 		guardText.setLayoutData(gd);
@@ -461,7 +461,7 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 		interfaceCombo.setLayoutData(gd);
 		interfaceCombo.setVisibleItemCount(10);
 		toolkit.adapt(interfaceCombo, true, true);
-		makeMemberAware(interfaceCombo, false, false);
+		configureMemberAware(interfaceCombo);
 		
 		for (InterfaceItem item : interfaceItems) {
 			interfaceCombo.add(item.getName());
@@ -477,7 +477,7 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 		messageCombo.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		messageCombo.setVisibleItemCount(10);
 		toolkit.adapt(messageCombo, true, true);
-		makeMemberAware(messageCombo, false, false);
+		configureMemberAware(messageCombo);
 	}
 
 	private void addListeners() {

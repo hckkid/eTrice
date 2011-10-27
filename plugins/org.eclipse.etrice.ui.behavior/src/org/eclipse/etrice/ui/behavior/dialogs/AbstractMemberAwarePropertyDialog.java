@@ -73,6 +73,7 @@ public abstract class AbstractMemberAwarePropertyDialog extends AbstractProperty
 	private LastTextListener listener = new LastTextListener();
 	private HashSet<Control> memberAware = new HashSet<Control>();
 	private HashSet<Control> messageAware = new HashSet<Control>();
+	private HashSet<Control> recvOnly = new HashSet<Control>();
 	
 	/**
 	 * @param shell
@@ -156,7 +157,8 @@ public abstract class AbstractMemberAwarePropertyDialog extends AbstractProperty
 	}
 
 	protected void handleMessagesPressed() {
-		PortMessageSelectionDialog dlg = new PortMessageSelectionDialog(getShell(), ac);
+		boolean receiveOnly = recvOnly.contains(lastTextField);
+		PortMessageSelectionDialog dlg = new PortMessageSelectionDialog(getShell(), ac, receiveOnly);
 		if (dlg.open()==Window.OK) {
 			if (dlg.getMsgItemPair()!=null) {
 				MsgItemPair pair = dlg.getMsgItemPair();
@@ -182,11 +184,21 @@ public abstract class AbstractMemberAwarePropertyDialog extends AbstractProperty
 		}
 	}
 
-	public void makeMemberAware(Control ctrl, boolean useMembers, boolean useMessages) {
+	public void configureMemberAware(Control ctrl) {
+		configureMemberAware(ctrl, false, false);
+	}
+	
+	public void configureMemberAware(Control ctrl, boolean useMembers, boolean useMessages) {
+		configureMemberAware(ctrl, useMembers, useMembers, false);
+	}
+	
+	public void configureMemberAware(Control ctrl, boolean useMembers, boolean useMessages, boolean useRecvMessagesOnly) {
 		if (useMembers)
 			memberAware.add(ctrl);
 		if (useMessages)
 			messageAware.add(ctrl);
+		if (useRecvMessagesOnly)
+			recvOnly.add(ctrl);
 		ctrl.addFocusListener(listener);
 	}
 }
