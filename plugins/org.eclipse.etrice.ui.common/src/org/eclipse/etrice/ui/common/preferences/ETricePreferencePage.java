@@ -51,10 +51,16 @@ public class ETricePreferencePage
 					getFieldEditorParent()));
 
 		addLabel("");
-		addLabel("All Diagram Editors (applies only to new diagrams)");
+		addLabel("All Diagram Editors");
+		addField(
+				new BooleanFieldEditor(
+					PreferenceConstants.CONFIRM_DELETE,
+					"&Confirm diagram element deletion",
+					getFieldEditorParent()));
+		
 		BooleanFieldEditor useGrid = new BooleanFieldEditor(
 			PreferenceConstants.USE_GRID,
-			"Use &Grid",
+			"Use &Grid (grid settings apply to new diagrams only)",
 			getFieldEditorParent());
 		addField(useGrid);
 		

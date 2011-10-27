@@ -31,6 +31,7 @@ import org.eclipse.etrice.core.room.StructureClass;
 import org.eclipse.etrice.core.room.SubSystemRef;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.ui.common.support.CommonSupportUtil;
+import org.eclipse.etrice.ui.common.support.DeleteWithoutConfirmFeature;
 import org.eclipse.etrice.ui.structure.DiagramAccess;
 import org.eclipse.etrice.ui.structure.DiagramTypeProvider;
 import org.eclipse.etrice.ui.structure.ImageProvider;
@@ -88,7 +89,6 @@ import org.eclipse.graphiti.tb.ContextButtonEntry;
 import org.eclipse.graphiti.tb.DefaultToolBehaviorProvider;
 import org.eclipse.graphiti.tb.IContextButtonPadData;
 import org.eclipse.graphiti.tb.IToolBehaviorProvider;
-import org.eclipse.graphiti.ui.features.DefaultDeleteFeature;
 import org.eclipse.graphiti.ui.features.DefaultFeatureProvider;
 import org.eclipse.graphiti.util.ColorConstant;
 import org.eclipse.graphiti.util.IColorConstant;
@@ -634,7 +634,7 @@ public class ActorContainerRefSupport {
 			}
 		}
 		
-		private class DeleteFeature extends DefaultDeleteFeature {
+		private class DeleteFeature extends DeleteWithoutConfirmFeature {
 
 			public DeleteFeature(IFeatureProvider fp) {
 				super(fp);

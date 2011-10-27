@@ -26,6 +26,7 @@ import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.SPPRef;
 import org.eclipse.etrice.core.room.SubSystemRef;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
+import org.eclipse.etrice.ui.common.support.DeleteWithoutConfirmFeature;
 import org.eclipse.etrice.ui.common.support.NoResizeFeature;
 import org.eclipse.etrice.ui.structure.DiagramAccess;
 import org.eclipse.graphiti.dt.IDiagramTypeProvider;
@@ -66,7 +67,6 @@ import org.eclipse.graphiti.services.Graphiti;
 import org.eclipse.graphiti.services.IGaService;
 import org.eclipse.graphiti.services.IPeCreateService;
 import org.eclipse.graphiti.tb.DefaultToolBehaviorProvider;
-import org.eclipse.graphiti.ui.features.DefaultDeleteFeature;
 import org.eclipse.graphiti.ui.features.DefaultFeatureProvider;
 import org.eclipse.graphiti.util.ColorConstant;
 import org.eclipse.graphiti.util.IColorConstant;
@@ -494,7 +494,7 @@ public class InterfaceItemSupport {
 			}
 		}
 		
-		protected static class DeleteFeature extends DefaultDeleteFeature {
+		protected static class DeleteFeature extends DeleteWithoutConfirmFeature {
 
 			public DeleteFeature(IFeatureProvider fp) {
 				super(fp);

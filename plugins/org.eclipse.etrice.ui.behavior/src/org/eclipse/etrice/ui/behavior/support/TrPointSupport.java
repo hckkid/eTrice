@@ -29,6 +29,7 @@ import org.eclipse.etrice.core.validation.ValidationUtil;
 import org.eclipse.etrice.ui.behavior.ImageProvider;
 import org.eclipse.etrice.ui.behavior.dialogs.TrPointPropertyDialog;
 import org.eclipse.etrice.ui.common.support.CommonSupportUtil;
+import org.eclipse.etrice.ui.common.support.DeleteWithoutConfirmFeature;
 import org.eclipse.etrice.ui.common.support.NoResizeFeature;
 import org.eclipse.graphiti.dt.IDiagramTypeProvider;
 import org.eclipse.graphiti.features.IAddFeature;
@@ -85,7 +86,6 @@ import org.eclipse.graphiti.tb.ContextButtonEntry;
 import org.eclipse.graphiti.tb.DefaultToolBehaviorProvider;
 import org.eclipse.graphiti.tb.IContextButtonPadData;
 import org.eclipse.graphiti.tb.IToolBehaviorProvider;
-import org.eclipse.graphiti.ui.features.DefaultDeleteFeature;
 import org.eclipse.graphiti.ui.features.DefaultFeatureProvider;
 import org.eclipse.graphiti.util.ColorConstant;
 import org.eclipse.graphiti.util.IColorConstant;
@@ -641,7 +641,7 @@ public class TrPointSupport {
 			}
 		}
 		
-		protected static class DeleteFeature extends DefaultDeleteFeature {
+		protected static class DeleteFeature extends DeleteWithoutConfirmFeature {
 
 			public DeleteFeature(IFeatureProvider fp) {
 				super(fp);

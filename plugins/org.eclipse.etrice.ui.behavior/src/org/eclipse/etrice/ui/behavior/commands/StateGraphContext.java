@@ -12,13 +12,9 @@ import org.eclipse.etrice.core.room.RoomFactory;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.StateGraphItem;
-import org.eclipse.etrice.core.room.StateMachine;
 import org.eclipse.etrice.core.room.TrPoint;
 import org.eclipse.etrice.core.room.Transition;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
-import org.eclipse.etrice.ui.common.Activator;
-import org.eclipse.etrice.ui.common.preferences.PreferenceConstants;
-import org.eclipse.jface.preference.IPreferenceStore;
 
 class StateGraphContext {
 	private ArrayList<StateGraphContext> children = new ArrayList<StateGraphContext>();
@@ -34,12 +30,8 @@ class StateGraphContext {
 	static StateGraphContext createContextTree(ActorClass ac) {
 		
 		// the top level state graph is always the one of our actor class
-		if (ac.getStateMachine()==null) {
-			IPreferenceStore store = Activator.getDefault().getPreferenceStore();
-			StateMachine sm = RoomFactory.eINSTANCE.createStateMachine();
-			boolean dataDriven = store.getBoolean(PreferenceConstants.DATA_DRIVEN_FSM);
-			sm.setDataDriven(dataDriven);
-			ac.setStateMachine(sm);
+		if (ac.getStateMachine()==null || ac.getStateMachine().eIsProxy()) {
+			ac.setStateMachine(RoomFactory.eINSTANCE.createStateMachine());
 		}
 		
 		// base classes in reverse order

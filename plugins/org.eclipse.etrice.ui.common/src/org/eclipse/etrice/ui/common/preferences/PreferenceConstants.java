@@ -22,4 +22,5 @@ public class PreferenceConstants {
 	public static final String HOR_GRID_UNIT = "HorGridUnit";
 	public static final String VER_GRID_UNIT = "VerGridUnit";
 	public static final String DATA_DRIVEN_FSM = "DataDrivenFSM";
+	public static final String CONFIRM_DELETE = "ConfirmDelete";
 }
