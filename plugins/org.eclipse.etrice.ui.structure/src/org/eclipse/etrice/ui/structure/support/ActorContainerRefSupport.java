@@ -105,7 +105,7 @@ public class ActorContainerRefSupport {
 	public static final int DEFAULT_SIZE_Y = 80;
 	public static final int MIN_SIZE_X = 100;
 	public static final int MIN_SIZE_Y = 60;
-	public static final int MARGIN = 25;
+	public static final int MARGIN = 30;
 	
 	public static final IColorConstant LINE_COLOR = new ColorConstant(0, 0, 0);
 	public static final IColorConstant INHERITED_COLOR = new ColorConstant(100, 100, 100);

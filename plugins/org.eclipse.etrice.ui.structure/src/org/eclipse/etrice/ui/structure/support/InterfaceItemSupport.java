@@ -74,7 +74,7 @@ import org.eclipse.graphiti.util.IColorConstant;
 public class InterfaceItemSupport {
 	
 	public static final int ITEM_SIZE = StructureClassSupport.MARGIN;
-	public static final int ITEM_SIZE_SMALL = (int) (ActorContainerRefSupport.MARGIN*0.8);
+	public static final int ITEM_SIZE_SMALL = (int) (ActorContainerRefSupport.MARGIN*0.625);
 	public static final int MARGIN = StructureClassSupport.MARGIN;
 	public static final int MARGIN_SMALL = ActorContainerRefSupport.MARGIN;
 
@@ -229,10 +229,14 @@ public class InterfaceItemSupport {
 					Shape labelShape = peCreateService.createShape(containerShape, false);
 					Text label = gaService.createDefaultText(getDiagram(), labelShape, port.getName());
 					label.setForeground(dark);
-					label.setBackground(dark);
 					label.setHorizontalAlignment(Orientation.ALIGNMENT_CENTER);
 					label.setVerticalAlignment(Orientation.ALIGNMENT_CENTER);
-					gaService.setLocationAndSize(label, 0, 3*margin/2, 2*margin, margin/2);
+//					label.setBackground(manageColor(INHERITED_COLOR));
+//					label.setFilled(true);
+//					label.setLineVisible(true);
+//					label.setLineWidth(3);
+//					label.setLineStyle(LineStyle.DOT);
+					gaService.setLocationAndSize(label, 0, margin+size/2, 2*margin, margin/2);
 					adjustLabel(label, x, y, width, margin, size);
 				}
 
@@ -639,14 +643,14 @@ public class InterfaceItemSupport {
 			Orientation align = Orientation.ALIGNMENT_CENTER;
 			label.setHorizontalAlignment(align);
 	
-			int pos = 3*margin/2;
+			int pos = margin+size/2;
 			
 			if (x<=margin)
 				align = Orientation.ALIGNMENT_LEFT;
 			else if ((width-margin)<=x)
 				align = Orientation.ALIGNMENT_RIGHT;
 			if (y<=margin)
-				pos = 0;
+				pos = (margin-size)/2;
 	
 			if (align!=label.getHorizontalAlignment()) {
 				label.setHorizontalAlignment(align);
