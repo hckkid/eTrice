@@ -1,0 +1,28 @@
+h1. Setting up the Workspace
+
+ETrice generates code out of ROOM models. The code generator and the generated code relies on a runtime framework and on some ready to use model parts. This parts provide services like:
+
+* messaging
+* logging
+* timing
+
+Additionally some tutorial models will be provided to make it easy to start with eTrice. All this parts must be available in our workspace before you can start working. After installation of eclipse (indigo) and the eTrice plug in your workspace should look like this:  
+
+!images/013-SetupWorkspace01.png!
+
+Just the ??eTrice?? menu item is visible from the eTrice tool.
+From the ??File?? menu select ??File->New->Project??
+
+!images/013-SetupWorkspace02.png!
+
+Open the ??eTrice?? tab and select ??eTrice Java ModelLib??
+
+Press ??Next?? and ??Finish?? to install the Modellib into your workspace.
+
+!images/013-SetupWorkspace03.png!
+
+Do the same steps for ??eTrice Java Runtime?? and ??eTrice Java Tutorials??. The resulting workspace should look like this:
+
+!images/013-SetupWorkspace04.png!
+
+Now workspace is set up and you can perform the tutorials or start with your work.
