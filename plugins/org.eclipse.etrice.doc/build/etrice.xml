@@ -292,7 +292,11 @@
 					<para>open the message sequence chart</para>
 				</listitem>
 			</orderedlist>
-			<para>
+			<para>Make sure that you have set up the workspace as described in 
+				<citation>Setting up the workspace</citation>.
+			</para>
+			<para>ToDoTJ:update video
+
 				<ulink url="images\015-HelloWorld01.avi">video</ulink>
 			</para>
 		</section>
@@ -458,7 +462,7 @@
 		</section>
 		<section id="OpentheMessageSequenceChart">
 			<title>Open the Message Sequence Chart</title>
-			<para>During runtime the application produced a MSC and wrote it to a file. Open /org.eclipse.etrice.doc.tutorials/tmp/log/SubSystem_HelloWorld_Async.seq using Trace2UML (it is open source and can be obtained from  http://trace2uml.tigris.org/). You should see something like this:</para>
+			<para>During runtime the application produced a MSC and wrote it to a file. Open HelloWorld/tmp/log/SubSystem_HelloWorld_Async.seq using Trace2UML (it is open source and can be obtained from  http://trace2uml.tigris.org/). You should see something like this:</para>
 			<para>
 				<mediaobject>
 					<imageobject>

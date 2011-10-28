@@ -201,6 +201,9 @@ In this tutorial you will build your first very simple eTrice model. The goal is
 # run the model
 # open the message sequence chart
 
+Make sure that you have set up the workspace as described in ??Setting up the workspace??.
+
+ToDoTJ:update video
 "video":images\015-HelloWorld01.avi
 
 h2. Create a new model from scratch
@@ -286,7 +289,7 @@ The Hello World application starts and the string will be printed on the console
 
 h2. Open the Message Sequence Chart
 
-During runtime the application produced a MSC and wrote it to a file. Open /org.eclipse.etrice.doc.tutorials/tmp/log/SubSystem_HelloWorld_Async.seq using Trace2UML (it is open source and can be obtained from  http://trace2uml.tigris.org/). You should see something like this:
+During runtime the application produced a MSC and wrote it to a file. Open HelloWorld/tmp/log/SubSystem_HelloWorld_Async.seq using Trace2UML (it is open source and can be obtained from  http://trace2uml.tigris.org/). You should see something like this:
 
 !images/015-HelloWorld09.png!
 
