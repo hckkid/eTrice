@@ -4,7 +4,7 @@
         <cs:dependency name="com.thoughtworks.qdox" componentType="osgi.bundle"/>
         <cs:dependency name="org.aopalliance" componentType="osgi.bundle"/>
         <cs:dependency name="org.eclipse.draw2d" componentType="eclipse.feature"/>
-        <cs:dependency name="org.eclipse.etrice.core.feature" componentType="eclipse.feature"/>
+        <cs:dependency name="org.eclipse.etrice.feature" componentType="eclipse.feature"/>
         <cs:dependency name="org.eclipse.etrice.runtime.java" componentType="buckminster"/>
         <cs:dependency name="org.eclipse.etrice.runtime.java.tests" componentType="buckminster"/>
         <cs:dependency name="org.eclipse.etrice.site" componentType="eclipse.feature"/>
