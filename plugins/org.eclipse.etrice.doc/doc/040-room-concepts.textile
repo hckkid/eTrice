@@ -2,18 +2,23 @@ h1. ROOM Concepts
 
 h2. Main Concepts
 
-h3. Actor
+h3. Actors
 
-Basic building block for building software systems
-An actor can be refined hierarchically
-can be of arbitrarily large scope
-scope can be as large or as small as desired
-Ports define the interface of an actor.
+The actor is the basic building block for building systems with ROOM. An actor can be refined hierarchically and thus can be of arbitrarily large scope. Ports define the interface of an actor.
+
+h4.  Actor Classes and Actor References
 
 
+An ActorClass defines the type (or blueprint) of an actor. Hierarchies are built by ActorClasses that contain ActorReferences which have another ActorClass as type. The interface of an ActorClass is always defined by Ports.
 
+!images\040-ActorClass.png!
+
+The Behavior of an actor is usually defined by a state machine but could also be defined by manual code or other implementations.
 
 h3. Port
+
+Ports are the only interfaces of actors. A port has always a protocol assigned. 
+Service Access Points (SAP) and Service Provision Points (SPP) are specialized ports that are used to define layering.
 
 h4. Notation
 
@@ -21,27 +26,27 @@ h5. Class Ports
 
 These symbols can only appear on the border of an actor class symbol.
 
-|_. !images\040-ClassEndPort.png!|_. Class End Port|
-|img|Conjugated Class End Port|
-|img|Class Relay Port|
-|img|Conjugated Class Relay Port|
-|img|Replicated Class End Port|
-|img|Conjugated Replicated Class End Port|
-|img|Replicated Class Relay Port|
-|img|Conjugated Replicated Class Relay Port|
+|!images\040-ClassEndPort.png! &nbsp;&nbsp;&nbsp;&nbsp; |Class End Port|
+|!images\040-ConjugatedClassEndPort.png!|Conjugated Class End Port|
+|!images\040-ClassRelayPort.png!|Class Relay Port|
+|!images\040-ConjugatedClassRelayPort.png!|Conjugated Class Relay Port|
+|!images\040-ReplicatedClassEndPort.png!|Replicated Class End Port|
+|!images\040-ConjugatedReplicatedClassEndPort.png!|Conjugated Replicated Class End Port|
+|!images\040-ReplicatedClassRelayPort.png!|Replicated Class Relay Port|
+|!images\040-ConjugatedReplicatedClassRelayPort.png!|Conjugated Replicated Class Relay Port|
 
 h5. Reference Ports
 
 These symbols can only appear on the border of an actor reference symbol.
 
-|img|Reference Port|
-|img|Conjugated Reference Port|
-|img|Replicated Reference Port|
-|img|Conjugated Replicated Reference Port|
-
+|!images\040-ReferencePort.png!&nbsp;&nbsp;&nbsp;&nbsp;|Reference Port|
+|!images\040-ConjugatedReferencePort.png!|Conjugated Reference Port|
+|!images\040-ReplicatedReferencePort.png!|Replicated Reference Port|
+|!images\040-ConjugatedReplicatedReferencePort.png!|Conjugated Replicated Reference Port|
 
 
 
 h3. Protocol
+
 
 
