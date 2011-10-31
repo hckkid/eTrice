@@ -28,14 +28,6 @@ RoomModel ModelName {
 			Port port15: ProtocolClass1
 			ActorRef ActorRef_A: ActorClass2
 			ActorRef ActorRef_B: ActorClass3
-
-			Binding ActorRef_A.port21 and ActorRef_B.port30
-			Binding ActorRef_B.port31 and port11
-			Binding port14 and ActorRef_A.port22
-			Binding port15 and ActorRef_B.port32
-			Binding port10 and ActorRef_A.port20
-			Binding port18 and ActorRef_A.port28
-			Binding port19 and ActorRef_B.port39
 		}
 		Behavior { }
 	}
