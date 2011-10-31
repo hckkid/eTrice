@@ -113,10 +113,13 @@ h3. Hierarchy in Structure and Behavior
 
 ROOM provides two types of hierarchy. Behavioral hierarchy and structural hierarchy. Structural hierarchy means that actors can be nested to arbitrary depth. Usually you will add more and more details to your application with each nesting level. That means you can focus yourself on any level of abstraction with always the same element, the actor. Structural hierarchy provides a powerful mechanism to divide your problem in smaller pieces, so that you can focus on the level of abstraction you want to work on. 
 
-The actor's behavior will be described with a state machine. A state in turn may contain sub states. This is another possibility to focus on an abstraction level. Take the simple FSM from the blinky actor from the blinky tutorial:    
-
+The actor's behavior will be described with a state machine. A state in turn may contain sub states. This is another possibility to focus on an abstraction level. Take the simple FSM from the blinky actor from the blinky tutorial. 
+   
+Top level:
 !images\020-Blinky15.png!
-TODO: add a screenshot of the SubStateMachine
+
+??blinking?? Sub machine:
+!images\020-Blinky151.png!
 
 From an abstract point of view there is a state "blinking". But a simple LED is not able to blink autonomously. Therefore you have to add more details to your model to make a LED blinking, but for the current work it is not of interest how the blinking is realized. This will be done in the next lower level of the hierarchy. 
 
@@ -188,6 +191,49 @@ This model is in general not very well suited to support the "run to completion"
 With this execution model also lower levels of a software system, such as device drivers, could be generated from ROOM models.
 
 
+
+h1. Setting up the Workspace
+
+ETrice generates code out of ROOM models. The code generator and the generated code relies on a runtime framework and on some ready to use model parts. This parts provide services like:
+
+* messaging
+* logging
+* timing
+
+Additionally some tutorial models will be provided to make it easy to start with eTrice. All this parts must be available in our workspace before you can start working. After installation of eclipse (indigo) and the eTrice plug in your workspace should look like this:  
+
+!images/013-SetupWorkspace01.png!
+
+Just the ??eTrice?? menu item is visible from the eTrice tool.
+From the ??File?? menu select ??File->New->Project??
+
+!images/013-SetupWorkspace02.png!
+
+Open the ??eTrice?? tab and select ??eTrice Java ModelLib??
+
+Press ??Next?? and ??Finish?? to install the Modellib into your workspace.
+
+!images/013-SetupWorkspace03.png!
+
+Do the same steps for ??eTrice Java Runtime?? and ??eTrice Java Tutorials??. The resulting workspace should look like this:
+
+!images/013-SetupWorkspace04.png!
+
+Now workspace is set up and you can perform the tutorials or start with your work.
+
+The tutorial models are available in the ??org.eclipse.etrice.tutorials?? project. All tutorials are ready to generate and run without any changes. To start the code generator simply run ??gen_org.eclipse.etrice.tutorials.launch?? as ??gen_org.eclipse.etrice.tutorials.launch??: 
+
+!images/013-SetupWorkspace05.png!
+
+After generation for each tutorial a java file called ??SubSystem_ModelnameRunner.java?? is generated. To run the model simply run this file as a java application:
+
+!images/013-SetupWorkspace06.png!
+
+To stop the application type "quit" in the console window.
+ 
+!images/013-SetupWorkspace07.png!
+
+Performing the tutorials will setup an dedicated project for each tutorial. Therefore there are some slight changes especially whenever a path must be set (e.g. to the model library) within your own projects. All this is described in the tutorials.
 
 h1. Tutorial HelloWorld
 
@@ -307,13 +353,15 @@ h2. Scope
 This tutorial describes how to use the ??TimingService??, how to combine a generated model with manual code and how to model a hierarchical state machine. The idea of the tutorial is to switch a LED on and off. The behavior of the LED should be: blinking in a one second interval for 5 seconds, stop blinking for 5 seconds, blinking, stop,...  
 For this exercise we will use a little GUI class that will be used in more sophisticated tutorials too. The GUI simulates a pedestrian traffic crossing. For now, just a simple LED simulation will be used from the GUI. 
 
-To use the GUI please copy the package ??de.protos.PedLightGUI?? to your ??src?? directory. The package contains four java classes which implement a small window with a 3-light traffic light which simulates the signals for the car traffic and a 2-light traffic light which simulates the pedestrian signals.
+After the exercise is created you must copy the GUI to your src directory (see below).
+
+The package contains four java classes which implements a small window with a 3-light traffic light which simulates the signals for the car traffic and a 2-light traffic light which simulates the pedestrian signals.
 
 The GUI looks like this:
 
 !images/020-Blinky08.png!
 
-Within this tutorial we just will toggle the yellow light.
+Within this tutorial we will just toggle the yellow light.
 
 You will perform the following steps:
 
@@ -330,6 +378,9 @@ h2. Create a new model from scratch
 
 Remember exercise ??HelloWorld??.
 Create a new eTrice project and name it ??Blinky??
+
+To use the GUI please copy the package ??org.eclipse.etrice.tutorials.PedLightGUI?? from "org.eclipse.etrice.tutorials/src" to your ??src?? directory "Blinky/src". For this tutorial you must remove the error markers by editing the file ??PedestrianLightWndNoTcp.java??. Appropriate comments are provided to remove the error marker for this turorial.
+
 Open the ??Blinky.room?? file and copy the following code into the file or use content assist to create the model.
 
 bc.. 
@@ -360,6 +411,8 @@ Select ??ActorClass - actor class skeleton?? and name it ??Blinky??.
 
 Repeat the described procedure and name the new actor ??BlinkyController??.
 
+With Ctrl+Shift+F you can beautify the model code. 
+
 Save the model and visit the outline view.
 
 h2. Create a new protocol
@@ -375,7 +428,29 @@ With Ctrl-Shift+F or selecting ??Format?? from the context menu you can format t
 
 h2. Import the Timing Service
 
-Switching on and off the LED is timing controlled. Therefore a timing service is needed. To import the timing service in the outline view right click to ??SubSystem_Blinky??. Select ??Edit Structure??. Drag and Drop an ??ActorRef?? to the ??SubSystem_Blinky?? and name it ??application??. From the actor class drop down list select ??BlinkyTop??. Do the same clicks for the timing service. Name it ??timingService?? and from the drop down list select ??room.basic.service.timing.ATimingService??. Draw a ??LayerConnection?? from ??application?? to each service provision point (SPP) of the ??timingService??. The resulting structure should look like this:
+Switching on and off the LED is timing controlled. The timing service is provided from the model library and must be imported before it can be used from the model.
+
+This is the first time you use an element from the modellib. Make sure that your Java Build Path has the appropriate entry to the modellib. Otherwise the jave code, which will be generated from the modellib, can not be referenced.
+(right click to ??Blinky?? and select properties. Select the ??Java Build Path?? tab) 
+  
+!images/020-Blinky16.png! 
+
+After the build path is set up return to the model and navigate the cursor at the beginning of the model and import the timing service: 
+
+bc.. 
+RoomModel Blinky {
+	
+	import room.basic.service.timing.* from "../../org.eclipse.etrice.modellib/models/TimingService.room" 
+	
+	LogicalSystem System_Blinky {
+		SubSystemRef subsystem: SubSystem_Blinky
+	}
+...	 
+bq. 
+
+Make sure that the path fits to your folder structure.  
+
+Now it can be used within the model. Right click to ??SubSystem_Blinky?? within the outline view. Select ??Edit Structure??. The ??application?? is already referenced in the subsystem. Drag and Drop an ??ActorRef?? to the ??SubSystem_Blinky?? and name it ??timingService??. From the actor class drop down list select ??room.basic.service.timing.ATimingService??. Draw a ??LayerConnection?? from ??application?? to each service provision point (SPP) of the ??timingService??. The resulting structure should look like this:
 
 !images/020-Blinky06.png! 
 
@@ -392,7 +467,7 @@ The resulting code should look like this:
 
 h2. Finish the model structure
 
-From the outline view right click to ??Blinky?? and select ??Edit Structure??. Drag and Drop an ??Interface Port?? to the boarder of the ??Blinky?? actor. Note that an interface port is not possible inside the the actor. Name the port ??ControlPort?? and select ??BlinkyControlProtocol?? from the drop down list. Uncheck ??Conjugated?? and ??Is Relay Port??. Klick ??ok??. The resulting structure should look like this:
+From the outline view right click to ??Blinky?? and select ??Edit Structure??. Drag and Drop an ??Interface Port?? to the boarder of the ??Blinky?? actor. Note that an interface port is not possible inside the actor. Name the port ??ControlPort?? and select ??BlinkyControlProtocol?? from the drop down list. Uncheck ??Conjugated?? and ??Is Relay Port??. Klick ??ok??. The resulting structure should look like this:
 
 
 !images/020-Blinky04.png!
@@ -418,7 +493,7 @@ Use the ??Transition?? tool to draw transitions from ??init?? to ??off?? from ??
 
 Open the transition dialog by double click the arrow to specify the trigger event and the action code of each transition. Note that the initial transition does not have a trigger event.
 
-The dialog should look like this:
+The transition dialog should look like this:
 
 !{width=500px}images/020-Blinky09.png! 
 
@@ -427,6 +502,7 @@ The defined ports will be generated as a member attribute of the actor class fro
 Within each transition the timer will be restarted and the appropriate message will be sent via the ??ControlPort??. 
 
 The resulting state machine should look like this:
+(Note that the arrows peak changes if the transition contains action code.)
 
 !images/020-Blinky10.png!
 
@@ -438,15 +514,16 @@ Now we will implement ??Blinky??. Due to the fact that ??Blinky?? interacts with
 
 Double click ??Blinky?? in the outline view to navigate to ??Blinky?? within the model file.
 Add the following code:
+(type it or simply copy it from the tutorial project)
 
 !images/020-Blinky12.png! 
 
 ??usercode1?? will be generated at the beginning of the file, outside the class definition. ??usercode2?? will be generated within the class definition. The code imports the GUI class and instantiates the window class. Attributes for the carLights and pedLights will be declared to easily access the lights in the state machine.
 The Operation ??destroyUser()?? is a predefined operation that will be called during shutdown of the application. Within this operation, cleanup of manual coded classes can be done.
  
- 
- 
-Now design the FSM of ??Blinky??. Open the behavior diagram of ??Blinky?? by right clicking the ??Blinky?? actor in the outline view. Create two states named ??blinking?? and ??off??. Right click to ??blinking?? and create a subgraph.
+Now design the FSM of ??Blinky??. Remember, as the name suggested ??blinking?? is a state in which the LED must be switched on and off. We will realize that by an hierarchical FSM in which the ??blinking?? state has two sub states.
+
+Open the behavior diagram of ??Blinky?? by right clicking the ??Blinky?? actor in the outline view. Create two states named ??blinking?? and ??off??. Right click to ??blinking?? and create a subgraph.
 
 !images/020-Blinky13.png!
 
@@ -869,7 +946,7 @@ h5. Class Ports
 
 These symbols can only appear on the border of an actor class symbol.
 
-|!images\040-ClassEndPort.png! &nbsp;&nbsp;&nbsp;&nbsp; |Class End Port|
+|!images\040-ClassEndPort.png!|Class End Port|
 |!images\040-ConjugatedClassEndPort.png!|Conjugated Class End Port|
 |!images\040-ClassRelayPort.png!|Class Relay Port|
 |!images\040-ConjugatedClassRelayPort.png!|Conjugated Class Relay Port|
@@ -882,7 +959,7 @@ h5. Reference Ports
 
 These symbols can only appear on the border of an actor reference symbol.
 
-|!images\040-ReferencePort.png!&nbsp;&nbsp;&nbsp;&nbsp;|Reference Port|
+|!images\040-ReferencePort.png!|Reference Port|
 |!images\040-ConjugatedReferencePort.png!|Conjugated Reference Port|
 |!images\040-ReplicatedReferencePort.png!|Replicated Reference Port|
 |!images\040-ConjugatedReplicatedReferencePort.png!|Conjugated Replicated Reference Port|

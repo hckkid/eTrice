@@ -42,7 +42,7 @@
 				[<span class="citation">on</span>].
 			</p>
 <p>Open the transition dialog by double click the arrow to specify the trigger event and the action code of each transition. Note that the initial transition does not have a trigger event.</p>
-<p>The dialog should look like this:</p>
+<p>The transition dialog should look like this:</p>
 <p>
 				
 </p>
@@ -65,7 +65,8 @@
 <p>Within each transition the timer will be restarted and the appropriate message will be sent via the 
 				[<span class="citation">ControlPort</span>]. 
 			</p>
-<p>The resulting state machine should look like this:</p>
+<p>The resulting state machine should look like this:
+				(Note that the arrows peak changes if the transition contains action code.)</p>
 <p>
 				
 </p>
@@ -94,6 +95,7 @@
 				[<span class="citation">Blinky</span>] in the outline view to navigate to 
 				[<span class="citation">Blinky</span>] within the model file.
 				Add the following code:
+				(type it or simply copy it from the tutorial project)
 			</p>
 <p>
 				
@@ -110,7 +112,11 @@
 				[<span class="citation">destroyUser()</span>] is a predefined operation that will be called during shutdown of the application. Within this operation, cleanup of manual coded classes can be done.
 			</p>
 <p>Now design the FSM of 
-				[<span class="citation">Blinky</span>]. Open the behavior diagram of 
+				[<span class="citation">Blinky</span>]. Remember, as the name suggested 
+				[<span class="citation">blinking</span>] is a state in which the LED must be switched on and off. We will realize that by an hierarchical FSM in which the 
+				[<span class="citation">blinking</span>] state has two sub states.
+			</p>
+<p>Open the behavior diagram of 
 				[<span class="citation">Blinky</span>] by right clicking the 
 				[<span class="citation">Blinky</span>] actor in the outline view. Create two states named 
 				[<span class="citation">blinking</span>] and 

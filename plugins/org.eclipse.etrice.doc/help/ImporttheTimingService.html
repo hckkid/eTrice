@@ -20,14 +20,50 @@
 </div>
 </div>
 </div>
-<p>Switching on and off the LED is timing controlled. Therefore a timing service is needed. To import the timing service in the outline view right click to 
-				[<span class="citation">SubSystem_Blinky</span>]. Select 
-				[<span class="citation">Edit Structure</span>]. Drag and Drop an 
+<p>Switching on and off the LED is timing controlled. The timing service is provided from the model library and must be imported before it can be used from the model.</p>
+<p>This is the first time you use an element from the modellib. Make sure that your Java Build Path has the appropriate entry to the modellib. Otherwise the jave code, which will be generated from the modellib, can not be referenced.
+				(right click to 
+				[<span class="citation">Blinky</span>] and select properties. Select the 
+				[<span class="citation">Java Build Path</span>] tab) 
+			</p>
+<p>
+				
+</p>
+<div class="mediaobject">
+<img src="images/020-Blinky16.png"></div>
+<p> 
+			
+</p>
+<p>After the build path is set up return to the model and navigate the cursor at the beginning of the model and import the timing service: </p>
+<div class="literallayout">
+<p>
+<code class="code">RoomModel&nbsp;Blinky&nbsp;{<br>
+	
+<br>
+	import&nbsp;room.basic.service.timing.*&nbsp;from&nbsp;"../../org.eclipse.etrice.modellib/models/TimingService.room"&nbsp;<br>
+	
+<br>
+	LogicalSystem&nbsp;System_Blinky&nbsp;{<br>
+		SubSystemRef&nbsp;subsystem:&nbsp;SubSystem_Blinky<br>
+	}<br>
+...	&nbsp;<br>
+
+</code>
+</p>
+</div>
+<div class="blockquote">
+<blockquote class="blockquote">
+<p></p>
+</blockquote>
+</div>
+<p>Make sure that the path fits to your folder structure.  </p>
+<p>Now it can be used within the model. Right click to 
+				[<span class="citation">SubSystem_Blinky</span>] within the outline view. Select 
+				[<span class="citation">Edit Structure</span>]. The 
+				[<span class="citation">application</span>] is already referenced in the subsystem. Drag and Drop an 
 				[<span class="citation">ActorRef</span>] to the 
 				[<span class="citation">SubSystem_Blinky</span>] and name it 
-				[<span class="citation">application</span>]. From the actor class drop down list select 
-				[<span class="citation">BlinkyTop</span>]. Do the same clicks for the timing service. Name it 
-				[<span class="citation">timingService</span>] and from the drop down list select 
+				[<span class="citation">timingService</span>]. From the actor class drop down list select 
 				[<span class="citation">room.basic.service.timing.ATimingService</span>]. Draw a 
 				[<span class="citation">LayerConnection</span>] from 
 				[<span class="citation">application</span>] to each service provision point (SPP) of the 
