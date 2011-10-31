@@ -31,15 +31,26 @@ public class GenDir extends GenItem {
 		return dirs;
 	}
 	
+	public ArrayList<String> getNestedRelativePathsWithExtension(String ext) {
+		ArrayList<String> dirs = new ArrayList<String>();
+		for (GenItem item : contents) {
+			if (item instanceof GenDir)
+				if (((GenDir)item).hasFilesWithExtension(ext))
+					dirs.add(item.getName());
+				else {
+					ArrayList<String> nested = ((GenDir)item).getNestedRelativePathsWithExtension(ext);
+					for (String ndir : nested) {
+						dirs.add(((GenDir)item).getName()+"/"+ndir);
+					}
+				}
+		}
+		return dirs;
+	}
+	
 	public boolean hasFilesWithExtension(String ext) {
 		ArrayList<GenFile> sources = getSources();
 		for (GenFile source : sources) {
 			if (source.getExtension().equals(ext))
-				return true;
-		}
-		ArrayList<GenDir> dirs = getDirs();
-		for (GenDir dir : dirs) {
-			if (dir.hasFilesWithExtension(ext))
 				return true;
 		}
 		return false;

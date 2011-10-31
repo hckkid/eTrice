@@ -12,6 +12,7 @@
 
 package org.eclipse.etrice.generator.base;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
@@ -38,5 +39,30 @@ public class RecordingFileSystemAccess extends JavaIoFileSystemAccess {
 	
 	public ArrayList<String> getFiles() {
 		return files;
+	}
+	
+	public ArrayList<String> getFiles(String path, String extension) {
+		ArrayList<String> result = new ArrayList<String>();
+		
+		path = toSystemFileName(path);
+		getFilesRecursively(path, result, extension);
+		
+		return result;
+	}
+
+	private void getFilesRecursively(String path, ArrayList<String> result, String extension) {
+		File file = new File(path);
+		if (file.isDirectory()) {
+			if (!file.getName().equals(".svn")) {
+				String[] contents = file.list();
+				for (String sub : contents) {
+					getFilesRecursively(path+File.separator+sub, result, extension);
+				}
+			}
+		}
+		else {
+			if (file.getName().endsWith(extension))
+				result.add(file.getAbsolutePath());
+		}
 	}
 }

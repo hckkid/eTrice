@@ -40,4 +40,9 @@ public class GenItem {
 		
 		return parent.getPath()+name+"/";
 	}
+	
+	@Override
+	public String toString() {
+		return getPath();
+	}
 }

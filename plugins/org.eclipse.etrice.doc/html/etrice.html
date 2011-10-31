@@ -670,9 +670,12 @@
 </li>
 </ol>
 </div>
-<p>
-				
-<a class="ulink" href="images\015-HelloWorld01.avi" target="_new">video</a>
+<p>Make sure that you have set up the workspace as described in 
+				[<span class="citation">Setting up the workspace</span>].
+			</p>
+<p>ToDoTJ:update video
+
+				<a class="ulink" href="images\015-HelloWorld01.avi" target="_new">video</a>
 			
 </p>
 </div>
@@ -893,7 +896,7 @@
 </div>
 </div>
 </div>
-<p>During runtime the application produced a MSC and wrote it to a file. Open /org.eclipse.etrice.doc.tutorials/tmp/log/SubSystem_HelloWorld_Async.seq using Trace2UML (it is open source and can be obtained from  http://trace2uml.tigris.org/). You should see something like this:</p>
+<p>During runtime the application produced a MSC and wrote it to a file. Open HelloWorld/tmp/log/SubSystem_HelloWorld_Async.seq using Trace2UML (it is open source and can be obtained from  http://trace2uml.tigris.org/). You should see something like this:</p>
 <p>
 				
 </p>
@@ -2206,20 +2209,36 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 </div>
 </div>
 </div>
-<div class="section" title="Actor">
+<div class="section" title="Actors">
 <div class="titlepage">
 <div>
 <div>
 <h3 class="title">
-<a name="Actor"></a>Actor</h3>
+<a name="Actors"></a>Actors</h3>
 </div>
 </div>
 </div>
-<p>Basic building block for building software systems
-					An actor can be refined hierarchically
-					can be of arbitrarily large scope
-					scope can be as large or as small as desired
-					Ports define the interface of an actor.</p>
+<p>The actor is the basic building block for building systems with ROOM. An actor can be refined hierarchically and thus can be of arbitrarily large scope. Ports define the interface of an actor.</p>
+<div class="section" title="Actor Classes and Actor References">
+<div class="titlepage">
+<div>
+<div>
+<h4 class="title">
+<a name="ActorClassesandActorReferences"></a>Actor Classes and Actor References</h4>
+</div>
+</div>
+</div>
+<p>An ActorClass defines the type (or blueprint) of an actor. Hierarchies are built by ActorClasses that contain ActorReferences which have another ActorClass as type. The interface of an ActorClass is always defined by Ports.</p>
+<p>
+						
+</p>
+<div class="mediaobject">
+<img src="images\040-ActorClass.png"></div>
+<p>
+					
+</p>
+<p>The Behavior of an actor is usually defined by a state machine but could also be defined by manual code or other implementations.</p>
+</div>
 </div>
 <div class="section" title="Port">
 <div class="titlepage">
@@ -2230,6 +2249,8 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 </div>
 </div>
 </div>
+<p>Ports are the only interfaces of actors. A port has always a protocol assigned. 
+					Service Access Points (SAP) and Service Provision Points (SPP) are specialized ports that are used to define layering.</p>
 <div class="section" title="Notation">
 <div class="titlepage">
 <div>
@@ -2249,57 +2270,91 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 </div>
 </div>
 <p>These symbols can only appear on the border of an actor class symbol.</p>
-<table id="N10742">
+<table id="N10758">
 <tr>
 								
-<th>
+<td>
 									
 <div class="mediaobject">
-<img src="images\040-ClassEndPort.png"></div>
-								
-</th>
-								<th>Class End Port</th>
+<img src="images\040-ClassEndPort.png"></div> &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 
+								</td>
+								<td>Class End Port</td>
 							
 </tr>
 <tr>
 								
-<td>img</td>
+<td>
+									
+<div class="mediaobject">
+<img src="images\040-ConjugatedClassEndPort.png"></div>
+								
+</td>
 								<td>Conjugated Class End Port</td>
 							
 </tr>
 <tr>
 								
-<td>img</td>
+<td>
+									
+<div class="mediaobject">
+<img src="images\040-ClassRelayPort.png"></div>
+								
+</td>
 								<td>Class Relay Port</td>
 							
 </tr>
 <tr>
 								
-<td>img</td>
+<td>
+									
+<div class="mediaobject">
+<img src="images\040-ConjugatedClassRelayPort.png"></div>
+								
+</td>
 								<td>Conjugated Class Relay Port</td>
 							
 </tr>
 <tr>
 								
-<td>img</td>
+<td>
+									
+<div class="mediaobject">
+<img src="images\040-ReplicatedClassEndPort.png"></div>
+								
+</td>
 								<td>Replicated Class End Port</td>
 							
 </tr>
 <tr>
 								
-<td>img</td>
+<td>
+									
+<div class="mediaobject">
+<img src="images\040-ConjugatedReplicatedClassEndPort.png"></div>
+								
+</td>
 								<td>Conjugated Replicated Class End Port</td>
 							
 </tr>
 <tr>
 								
-<td>img</td>
+<td>
+									
+<div class="mediaobject">
+<img src="images\040-ReplicatedClassRelayPort.png"></div>
+								
+</td>
 								<td>Replicated Class Relay Port</td>
 							
 </tr>
 <tr>
 								
-<td>img</td>
+<td>
+									
+<div class="mediaobject">
+<img src="images\040-ConjugatedReplicatedClassRelayPort.png"></div>
+								
+</td>
 								<td>Conjugated Replicated Class Relay Port</td>
 							
 </tr>
@@ -2315,28 +2370,47 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 </div>
 </div>
 <p>These symbols can only appear on the border of an actor reference symbol.</p>
-<table id="N107AE">
+<table id="N107E7">
 <tr>
 								
-<td>img</td>
+<td>
+									
+<div class="mediaobject">
+<img src="images\040-ReferencePort.png"></div>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+								</td>
 								<td>Reference Port</td>
 							
 </tr>
 <tr>
 								
-<td>img</td>
+<td>
+									
+<div class="mediaobject">
+<img src="images\040-ConjugatedReferencePort.png"></div>
+								
+</td>
 								<td>Conjugated Reference Port</td>
 							
 </tr>
 <tr>
 								
-<td>img</td>
+<td>
+									
+<div class="mediaobject">
+<img src="images\040-ReplicatedReferencePort.png"></div>
+								
+</td>
 								<td>Replicated Reference Port</td>
 							
 </tr>
 <tr>
 								
-<td>img</td>
+<td>
+									
+<div class="mediaobject">
+<img src="images\040-ConjugatedReplicatedReferencePort.png"></div>
+								
+</td>
 								<td>Conjugated Replicated Reference Port</td>
 							
 </tr>

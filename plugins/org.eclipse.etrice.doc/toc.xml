@@ -68,7 +68,9 @@
 </topic>
 <topic href="help/ROOMConcepts.html" label="ROOM Concepts">
 <topic href="help/ROOMConcepts.html#MainConcepts" label="Main Concepts">
-<topic href="help/ROOMConcepts.html#Actor" label="Actor"></topic>
+<topic href="help/ROOMConcepts.html#Actors" label="Actors">
+<topic href="help/ROOMConcepts.html#ActorClassesandActorReferences" label="Actor Classes and Actor References"></topic>
+</topic>
 <topic href="help/ROOMConcepts.html#Port" label="Port">
 <topic href="help/ROOMConcepts.html#Notation" label="Notation">
 <topic href="help/ROOMConcepts.html#ClassPorts" label="Class Ports"></topic>

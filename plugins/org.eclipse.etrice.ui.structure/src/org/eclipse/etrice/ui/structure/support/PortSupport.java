@@ -20,11 +20,13 @@ import org.eclipse.graphiti.dt.IDiagramTypeProvider;
 import org.eclipse.graphiti.features.IAddFeature;
 import org.eclipse.graphiti.features.ICreateConnectionFeature;
 import org.eclipse.graphiti.features.ICreateFeature;
+import org.eclipse.graphiti.features.IDeleteFeature;
 import org.eclipse.graphiti.features.IFeatureProvider;
 import org.eclipse.graphiti.features.IUpdateFeature;
 import org.eclipse.graphiti.features.context.IAddContext;
 import org.eclipse.graphiti.features.context.ICreateContext;
 import org.eclipse.graphiti.features.context.ICustomContext;
+import org.eclipse.graphiti.features.context.IDeleteContext;
 import org.eclipse.graphiti.features.context.IDoubleClickContext;
 import org.eclipse.graphiti.features.context.IPictogramElementContext;
 import org.eclipse.graphiti.features.context.IUpdateContext;
@@ -239,6 +241,36 @@ public class PortSupport extends InterfaceItemSupport {
 			
 		}
 		
+		private static class DeleteFeature extends InterfaceItemSupport.FeatureProvider.DeleteFeature {
+
+			public DeleteFeature(IFeatureProvider fp) {
+				super(fp);
+			}
+			
+			/* (non-Javadoc)
+			 * @see org.eclipse.graphiti.ui.features.DefaultDeleteFeature#deleteBusinessObject(java.lang.Object)
+			 */
+			@Override
+			protected void deleteBusinessObject(Object bo) {
+				if (bo instanceof Port) {
+					Port port = (Port) bo;
+					if (port.eContainer() instanceof ActorClass) {
+						ExternalPort external = null;
+						ActorClass ac = (ActorClass) port.eContainer();
+						for (ExternalPort extp : ac.getExtPorts()) {
+							if (extp.getIfport()==port) {
+								external = extp;
+								break;
+							}
+						}
+						if (external!=null)
+							super.deleteBusinessObject(external);
+					}
+				}
+				super.deleteBusinessObject(bo);
+			}
+		}
+		
 		public FeatureProvider(IDiagramTypeProvider dtp, IFeatureProvider fp) {
 			super(dtp, fp);
 		}
@@ -263,6 +295,11 @@ public class PortSupport extends InterfaceItemSupport {
 			return new UpdateFeature(fp);
 		}
 
+		@Override
+		public IDeleteFeature getDeleteFeature(IDeleteContext context) {
+			return new DeleteFeature(fp);
+		}
+		
 		protected static void createPortFigure(Port port, boolean refport,
 				ContainerShape containerShape,
 				GraphicsAlgorithm invisibleRectangle, Color darkColor, Color brightDolor) {

@@ -292,7 +292,11 @@
 					<para>open the message sequence chart</para>
 				</listitem>
 			</orderedlist>
-			<para>
+			<para>Make sure that you have set up the workspace as described in 
+				<citation>Setting up the workspace</citation>.
+			</para>
+			<para>ToDoTJ:update video
+
 				<ulink url="images\015-HelloWorld01.avi">video</ulink>
 			</para>
 		</section>
@@ -458,7 +462,7 @@
 		</section>
 		<section id="OpentheMessageSequenceChart">
 			<title>Open the Message Sequence Chart</title>
-			<para>During runtime the application produced a MSC and wrote it to a file. Open /org.eclipse.etrice.doc.tutorials/tmp/log/SubSystem_HelloWorld_Async.seq using Trace2UML (it is open source and can be obtained from  http://trace2uml.tigris.org/). You should see something like this:</para>
+			<para>During runtime the application produced a MSC and wrote it to a file. Open HelloWorld/tmp/log/SubSystem_HelloWorld_Async.seq using Trace2UML (it is open source and can be obtained from  http://trace2uml.tigris.org/). You should see something like this:</para>
 			<para>
 				<mediaobject>
 					<imageobject>
@@ -1428,16 +1432,26 @@ carLights.setState(TrafficLight3.OFF);
 		<title>ROOM Concepts</title>
 		<section id="MainConcepts">
 			<title>Main Concepts</title>
-			<section id="Actor">
-				<title>Actor</title>
-				<para>Basic building block for building software systems
-					An actor can be refined hierarchically
-					can be of arbitrarily large scope
-					scope can be as large or as small as desired
-					Ports define the interface of an actor.</para>
+			<section id="Actors">
+				<title>Actors</title>
+				<para>The actor is the basic building block for building systems with ROOM. An actor can be refined hierarchically and thus can be of arbitrarily large scope. Ports define the interface of an actor.</para>
+				<section id="ActorClassesandActorReferences">
+					<title>Actor Classes and Actor References</title>
+					<para>An ActorClass defines the type (or blueprint) of an actor. Hierarchies are built by ActorClasses that contain ActorReferences which have another ActorClass as type. The interface of an ActorClass is always defined by Ports.</para>
+					<para>
+						<mediaobject>
+							<imageobject>
+								<imagedata fileref="images\040-ActorClass.png"/>
+							</imageobject>
+						</mediaobject>
+					</para>
+					<para>The Behavior of an actor is usually defined by a state machine but could also be defined by manual code or other implementations.</para>
+				</section>
 			</section>
 			<section id="Port">
 				<title>Port</title>
+				<para>Ports are the only interfaces of actors. A port has always a protocol assigned. 
+					Service Access Points (SAP) and Service Provision Points (SPP) are specialized ports that are used to define layering.</para>
 				<section id="Notation">
 					<title>Notation</title>
 					<section id="ClassPorts">
@@ -1445,41 +1459,83 @@ carLights.setState(TrafficLight3.OFF);
 						<para>These symbols can only appear on the border of an actor class symbol.</para>
 						<informaltable>
 							<tr>
-								<th>
+								<td>
 									<mediaobject>
 										<imageobject>
 											<imagedata fileref="images\040-ClassEndPort.png"/>
 										</imageobject>
-									</mediaobject>
-								</th>
-								<th>Class End Port</th>
+									</mediaobject> &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 
+								</td>
+								<td>Class End Port</td>
 							</tr>
 							<tr>
-								<td>img</td>
+								<td>
+									<mediaobject>
+										<imageobject>
+											<imagedata fileref="images\040-ConjugatedClassEndPort.png"/>
+										</imageobject>
+									</mediaobject>
+								</td>
 								<td>Conjugated Class End Port</td>
 							</tr>
 							<tr>
-								<td>img</td>
+								<td>
+									<mediaobject>
+										<imageobject>
+											<imagedata fileref="images\040-ClassRelayPort.png"/>
+										</imageobject>
+									</mediaobject>
+								</td>
 								<td>Class Relay Port</td>
 							</tr>
 							<tr>
-								<td>img</td>
+								<td>
+									<mediaobject>
+										<imageobject>
+											<imagedata fileref="images\040-ConjugatedClassRelayPort.png"/>
+										</imageobject>
+									</mediaobject>
+								</td>
 								<td>Conjugated Class Relay Port</td>
 							</tr>
 							<tr>
-								<td>img</td>
+								<td>
+									<mediaobject>
+										<imageobject>
+											<imagedata fileref="images\040-ReplicatedClassEndPort.png"/>
+										</imageobject>
+									</mediaobject>
+								</td>
 								<td>Replicated Class End Port</td>
 							</tr>
 							<tr>
-								<td>img</td>
+								<td>
+									<mediaobject>
+										<imageobject>
+											<imagedata fileref="images\040-ConjugatedReplicatedClassEndPort.png"/>
+										</imageobject>
+									</mediaobject>
+								</td>
 								<td>Conjugated Replicated Class End Port</td>
 							</tr>
 							<tr>
-								<td>img</td>
+								<td>
+									<mediaobject>
+										<imageobject>
+											<imagedata fileref="images\040-ReplicatedClassRelayPort.png"/>
+										</imageobject>
+									</mediaobject>
+								</td>
 								<td>Replicated Class Relay Port</td>
 							</tr>
 							<tr>
-								<td>img</td>
+								<td>
+									<mediaobject>
+										<imageobject>
+											<imagedata fileref="images\040-ConjugatedReplicatedClassRelayPort.png"/>
+										</imageobject>
+									</mediaobject>
+								</td>
 								<td>Conjugated Replicated Class Relay Port</td>
 							</tr>
 						</informaltable>
@@ -1489,19 +1545,43 @@ carLights.setState(TrafficLight3.OFF);
 						<para>These symbols can only appear on the border of an actor reference symbol.</para>
 						<informaltable>
 							<tr>
-								<td>img</td>
+								<td>
+									<mediaobject>
+										<imageobject>
+											<imagedata fileref="images\040-ReferencePort.png"/>
+										</imageobject>
+									</mediaobject>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+								</td>
 								<td>Reference Port</td>
 							</tr>
 							<tr>
-								<td>img</td>
+								<td>
+									<mediaobject>
+										<imageobject>
+											<imagedata fileref="images\040-ConjugatedReferencePort.png"/>
+										</imageobject>
+									</mediaobject>
+								</td>
 								<td>Conjugated Reference Port</td>
 							</tr>
 							<tr>
-								<td>img</td>
+								<td>
+									<mediaobject>
+										<imageobject>
+											<imagedata fileref="images\040-ReplicatedReferencePort.png"/>
+										</imageobject>
+									</mediaobject>
+								</td>
 								<td>Replicated Reference Port</td>
 							</tr>
 							<tr>
-								<td>img</td>
+								<td>
+									<mediaobject>
+										<imageobject>
+											<imagedata fileref="images\040-ConjugatedReplicatedReferencePort.png"/>
+										</imageobject>
+									</mediaobject>
+								</td>
 								<td>Conjugated Replicated Reference Port</td>
 							</tr>
 						</informaltable>
