@@ -13,6 +13,7 @@
 package org.eclipse.etrice.generator.base;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 
 import org.eclipse.emf.common.util.URI;
@@ -25,11 +26,11 @@ public class GenFileTreeBuilder {
 	
 	GenDir genFileTree;
 	
-	public GenFileTreeBuilder(String uri, ArrayList<String> files) {
+	public GenFileTreeBuilder(String uri, Collection<String> files) {
 		this(getURI(uri), files);
 	}
 	
-	public GenFileTreeBuilder(URI base, ArrayList<String> files) {
+	public GenFileTreeBuilder(URI base, Collection<String> files) {
 		ArrayList<String> relPaths = computeFilesAsRelativePaths(base, files);
 		genFileTree = computeGenTree(relPaths);
 	}
@@ -41,7 +42,7 @@ public class GenFileTreeBuilder {
 		return genFileTree;
 	}
 	
-	private ArrayList<String> computeFilesAsRelativePaths(URI base, ArrayList<String> files) {
+	private ArrayList<String> computeFilesAsRelativePaths(URI base, Collection<String> files) {
 		ArrayList<String> relFiles = new ArrayList<String>(files.size());
 		for (String file : files) {
 			String relPath = FileSystemHelpers.getRelativePath(base, URI.createFileURI(file.replace("\\\\", "\\")));
@@ -54,8 +55,7 @@ public class GenFileTreeBuilder {
 
 	private GenDir computeGenTree(ArrayList<String> relPaths) {
 		GenDir root = new GenDir(null, "root");
-		ArrayList<String> paths = relPaths;
-		for (String path : paths) {
+		for (String path : relPaths) {
 			String[] segments = path.split("/");
 			GenDir dir = makeDir(root, segments);
 			new GenFile(dir, segments[segments.length-1]);
