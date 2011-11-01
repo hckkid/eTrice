@@ -23,8 +23,16 @@ h2. Setup the model
 
 * Use the ??New Model Wizzard?? to create a new eTrice project and name it ??PedLightsController??.
 * Copy the package ??de.protos.PedLightGUI?? to your ??src?? directory (see blinky tutorial).
-* In PedestrianLightWndNoTcp.jav uncomment line 15 (import), 36, 122 (usage) and 132-134 (registration).
-* Copy the model from /org.eclipse.etrice.tutorials/model/PedLightsController to your model file, or run the model directly in the tutorial directory:
+* In PedestrianLightWndNoTcp.jav uncomment line 15 (import), 36, 122 (usage) and 132-134 (registration). The error markers will disappear after the code is generated from the model.
+* Copy the model from /org.eclipse.etrice.tutorials/model/PedLightsController to your model file, or run the model directly in the tutorial directory. 
+* Adapt the import statement to your path.
+bc.. 
+import room.basic.service.timing.* from "../../org.eclipse.etrice.modellib/models/TimingService.room" 
+bq. 
+
+* Generate the code from the model.
+* Add the org.eclipse.etrice.modellib to the Java Class Path of your project.
+* All error markers should be disappeared and the model should be operable. 
 * Arrange the Structure and the Statemachines to understand the model
 
 !images/030-PedLights01.png!
