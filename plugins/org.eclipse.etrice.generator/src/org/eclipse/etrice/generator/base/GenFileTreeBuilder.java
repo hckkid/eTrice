@@ -24,13 +24,15 @@ import org.eclipse.emf.common.util.URI;
  */
 public class GenFileTreeBuilder {
 	
-	GenDir genFileTree;
+	private GenDir genFileTree;
+	private IFileFilter filter; 
 	
-	public GenFileTreeBuilder(String uri, Collection<String> files) {
-		this(getURI(uri), files);
+	public GenFileTreeBuilder(String uri, Collection<String> files, IFileFilter filter) {
+		this(getURI(uri), files, filter);
 	}
 	
-	public GenFileTreeBuilder(URI base, Collection<String> files) {
+	public GenFileTreeBuilder(URI base, Collection<String> files, IFileFilter filter) {
+		this.filter = filter;
 		ArrayList<String> relPaths = computeFilesAsRelativePaths(base, files);
 		genFileTree = computeGenTree(relPaths);
 	}
@@ -46,7 +48,7 @@ public class GenFileTreeBuilder {
 		ArrayList<String> relFiles = new ArrayList<String>(files.size());
 		for (String file : files) {
 			String relPath = FileSystemHelpers.getRelativePath(base, URI.createFileURI(file.replace("\\\\", "\\")));
-			if (relPath!=null)
+			if (relPath!=null && (filter==null || filter.accept(relPath)))
 				relFiles.add(relPath);
 		}
 		Collections.sort(relFiles);
