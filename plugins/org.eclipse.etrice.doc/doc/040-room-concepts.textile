@@ -26,7 +26,7 @@ h5. Class Ports
 
 These symbols can only appear on the border of an actor class symbol.
 
-|!images\040-ClassEndPort.png! &nbsp;&nbsp;&nbsp;&nbsp; |Class End Port|
+|!images\040-ClassEndPort.png!|Class End Port|
 |!images\040-ConjugatedClassEndPort.png!|Conjugated Class End Port|
 |!images\040-ClassRelayPort.png!|Class Relay Port|
 |!images\040-ConjugatedClassRelayPort.png!|Conjugated Class Relay Port|
@@ -39,7 +39,7 @@ h5. Reference Ports
 
 These symbols can only appear on the border of an actor reference symbol.
 
-|!images\040-ReferencePort.png!&nbsp;&nbsp;&nbsp;&nbsp;|Reference Port|
+|!images\040-ReferencePort.png!|Reference Port|
 |!images\040-ConjugatedReferencePort.png!|Conjugated Reference Port|
 |!images\040-ReplicatedReferencePort.png!|Replicated Reference Port|
 |!images\040-ConjugatedReplicatedReferencePort.png!|Conjugated Replicated Reference Port|

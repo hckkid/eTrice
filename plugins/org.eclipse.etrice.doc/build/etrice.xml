@@ -163,14 +163,23 @@
 			<section id="HierarchyinStructureandBehavior">
 				<title>Hierarchy in Structure and Behavior</title>
 				<para>ROOM provides two types of hierarchy. Behavioral hierarchy and structural hierarchy. Structural hierarchy means that actors can be nested to arbitrary depth. Usually you will add more and more details to your application with each nesting level. That means you can focus yourself on any level of abstraction with always the same element, the actor. Structural hierarchy provides a powerful mechanism to divide your problem in smaller pieces, so that you can focus on the level of abstraction you want to work on. </para>
-				<para>The actor’s behavior will be described with a state machine. A state in turn may contain sub states. This is another possibility to focus on an abstraction level. Take the simple FSM from the blinky actor from the blinky tutorial:    </para>
-				<para>
+				<para>The actor’s behavior will be described with a state machine. A state in turn may contain sub states. This is another possibility to focus on an abstraction level. Take the simple FSM from the blinky actor from the blinky tutorial. </para>
+				<para>Top level:
+
 					<mediaobject>
 						<imageobject>
 							<imagedata fileref="images\020-Blinky15.png"/>
 						</imageobject>
 					</mediaobject>
-					TODO: add a screenshot of the SubStateMachine
+				</para>
+				<para>
+					<citation>blinking</citation> Sub machine:
+
+					<mediaobject>
+						<imageobject>
+							<imagedata fileref="images\020-Blinky151.png"/>
+						</imageobject>
+					</mediaobject>
 				</para>
 				<para>From an abstract point of view there is a state &#8222;blinking”. But a simple LED is not able to blink autonomously. Therefore you have to add more details to your model to make a LED blinking, but for the current work it is not of interest how the blinking is realized. This will be done in the next lower level of the hierarchy. </para>
 				<para>This simple example might give an idea how powerful this mechanisms is.</para>
@@ -269,6 +278,100 @@
 				</section>
 			</section>
 		</section>
+	</chapter>
+	<chapter id="SettinguptheWorkspace">
+		<title>Setting up the Workspace</title>
+		<para>ETrice generates code out of ROOM models. The code generator and the generated code relies on a runtime framework and on some ready to use model parts. This parts provide services like:</para>
+		<itemizedlist>
+			<listitem>
+				<para>messaging</para>
+			</listitem>
+			<listitem>
+				<para>logging</para>
+			</listitem>
+			<listitem>
+				<para>timing</para>
+			</listitem>
+		</itemizedlist>
+		<para>Additionally some tutorial models will be provided to make it easy to start with eTrice. All this parts must be available in our workspace before you can start working. After installation of eclipse (indigo) and the eTrice plug in your workspace should look like this:  </para>
+		<para>
+			<mediaobject>
+				<imageobject>
+					<imagedata fileref="images/013-SetupWorkspace01.png"/>
+				</imageobject>
+			</mediaobject>
+		</para>
+		<para>Just the 
+			<citation>eTrice</citation> menu item is visible from the eTrice tool.
+			From the 
+			<citation>File</citation> menu select 
+			<citation>File-&gt;New-&gt;Project</citation>
+		</para>
+		<para>
+			<mediaobject>
+				<imageobject>
+					<imagedata fileref="images/013-SetupWorkspace02.png"/>
+				</imageobject>
+			</mediaobject>
+		</para>
+		<para>Open the 
+			<citation>eTrice</citation> tab and select 
+			<citation>eTrice Java ModelLib</citation>
+		</para>
+		<para>Press 
+			<citation>Next</citation> and 
+			<citation>Finish</citation> to install the Modellib into your workspace.
+		</para>
+		<para>
+			<mediaobject>
+				<imageobject>
+					<imagedata fileref="images/013-SetupWorkspace03.png"/>
+				</imageobject>
+			</mediaobject>
+		</para>
+		<para>Do the same steps for 
+			<citation>eTrice Java Runtime</citation> and 
+			<citation>eTrice Java Tutorials</citation>. The resulting workspace should look like this:
+		</para>
+		<para>
+			<mediaobject>
+				<imageobject>
+					<imagedata fileref="images/013-SetupWorkspace04.png"/>
+				</imageobject>
+			</mediaobject>
+		</para>
+		<para>Now workspace is set up and you can perform the tutorials or start with your work.</para>
+		<para>The tutorial models are available in the 
+			<citation>org.eclipse.etrice.tutorials</citation> project. All tutorials are ready to generate and run without any changes. To start the code generator simply run 
+			<citation>gen_org.eclipse.etrice.tutorials.launch</citation> as 
+			<citation>gen_org.eclipse.etrice.tutorials.launch</citation>: 
+		</para>
+		<para>
+			<mediaobject>
+				<imageobject>
+					<imagedata fileref="images/013-SetupWorkspace05.png"/>
+				</imageobject>
+			</mediaobject>
+		</para>
+		<para>After generation for each tutorial a java file called 
+			<citation>SubSystem_ModelnameRunner.java</citation> is generated. To run the model simply run this file as a java application:
+		</para>
+		<para>
+			<mediaobject>
+				<imageobject>
+					<imagedata fileref="images/013-SetupWorkspace06.png"/>
+				</imageobject>
+			</mediaobject>
+		</para>
+		<para>To stop the application type &#8222;quit” in the console window.</para>
+		<para>
+			<mediaobject>
+				<imageobject>
+					<imagedata fileref="images/013-SetupWorkspace07.png"/>
+				</imageobject>
+			</mediaobject>
+		</para>
+		<para>Performing the tutorials will setup an dedicated project for each tutorial. Therefore there are some slight changes especially whenever a path must be set (e.g. to the model library) within your own projects. All this is described in the tutorials.</para>
 	</chapter>
 	<chapter id="TutorialHelloWorld">
 		<title>Tutorial HelloWorld</title>
@@ -485,10 +588,8 @@
 				<citation>TimingService</citation>, how to combine a generated model with manual code and how to model a hierarchical state machine. The idea of the tutorial is to switch a LED on and off. The behavior of the LED should be: blinking in a one second interval for 5 seconds, stop blinking for 5 seconds, blinking, stop,...  
 				For this exercise we will use a little GUI class that will be used in more sophisticated tutorials too. The GUI simulates a pedestrian traffic crossing. For now, just a simple LED simulation will be used from the GUI. 
 			</para>
-			<para>To use the GUI please copy the package 
-				<citation>de.protos.PedLightGUI</citation> to your 
-				<citation>src</citation> directory. The package contains four java classes which implement a small window with a 3-light traffic light which simulates the signals for the car traffic and a 2-light traffic light which simulates the pedestrian signals.
-			</para>
+			<para>After the exercise is created you must copy the GUI to your src directory (see below).</para>
+			<para>The package contains four java classes which implements a small window with a 3-light traffic light which simulates the signals for the car traffic and a 2-light traffic light which simulates the pedestrian signals.</para>
 			<para>The GUI looks like this:</para>
 			<para>
 				<mediaobject>
@@ -497,7 +598,7 @@
 					</imageobject>
 				</mediaobject>
 			</para>
-			<para>Within this tutorial we just will toggle the yellow light.</para>
+			<para>Within this tutorial we will just toggle the yellow light.</para>
 			<para>You will perform the following steps:</para>
 			<orderedlist>
 				<listitem>
@@ -534,7 +635,13 @@
 				<citation>HelloWorld</citation>.
 				Create a new eTrice project and name it 
 				<citation>Blinky</citation>
-				Open the 
+			</para>
+			<para>To use the GUI please copy the package 
+				<citation>org.eclipse.etrice.tutorials.PedLightGUI</citation> from &#8222;org.eclipse.etrice.tutorials/src” to your 
+				<citation>src</citation> directory &#8222;Blinky/src”. For this tutorial you must remove the error markers by editing the file 
+				<citation>PedestrianLightWndNoTcp.java</citation>. Appropriate comments are provided to remove the error marker for this turorial.
+			</para>
+			<para>Open the 
 				<citation>Blinky.room</citation> file and copy the following code into the file or use content assist to create the model.
 			</para>
 			<literallayout><code>RoomModel Blinky {
@@ -581,6 +688,7 @@
 			<para>Repeat the described procedure and name the new actor 
 				<citation>BlinkyController</citation>.
 			</para>
+			<para>With Ctrl+Shift+F you can beautify the model code. </para>
 			<para>Save the model and visit the outline view.</para>
 		</section>
 		<section id="Createanewprotocol">
@@ -608,14 +716,40 @@
 		</section>
 		<section id="ImporttheTimingService">
 			<title>Import the Timing Service</title>
-			<para>Switching on and off the LED is timing controlled. Therefore a timing service is needed. To import the timing service in the outline view right click to 
-				<citation>SubSystem_Blinky</citation>. Select 
-				<citation>Edit Structure</citation>. Drag and Drop an 
+			<para>Switching on and off the LED is timing controlled. The timing service is provided from the model library and must be imported before it can be used from the model.</para>
+			<para>This is the first time you use an element from the modellib. Make sure that your Java Build Path has the appropriate entry to the modellib. Otherwise the jave code, which will be generated from the modellib, can not be referenced.
+				(right click to 
+				<citation>Blinky</citation> and select properties. Select the 
+				<citation>Java Build Path</citation> tab) 
+			</para>
+			<para>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/020-Blinky16.png"/>
+					</imageobject>
+				</mediaobject> 
+			</para>
+			<para>After the build path is set up return to the model and navigate the cursor at the beginning of the model and import the timing service: </para>
+			<literallayout><code>RoomModel Blinky {
+	
+	import room.basic.service.timing.* from "../../org.eclipse.etrice.modellib/models/TimingService.room" 
+	
+	LogicalSystem System_Blinky {
+		SubSystemRef subsystem: SubSystem_Blinky
+	}
+...	 
+</code></literallayout>
+			<blockquote>
+				<para></para>
+			</blockquote>
+			<para>Make sure that the path fits to your folder structure.  </para>
+			<para>Now it can be used within the model. Right click to 
+				<citation>SubSystem_Blinky</citation> within the outline view. Select 
+				<citation>Edit Structure</citation>. The 
+				<citation>application</citation> is already referenced in the subsystem. Drag and Drop an 
 				<citation>ActorRef</citation> to the 
 				<citation>SubSystem_Blinky</citation> and name it 
-				<citation>application</citation>. From the actor class drop down list select 
-				<citation>BlinkyTop</citation>. Do the same clicks for the timing service. Name it 
-				<citation>timingService</citation> and from the drop down list select 
+				<citation>timingService</citation>. From the actor class drop down list select 
 				<citation>room.basic.service.timing.ATimingService</citation>. Draw a 
 				<citation>LayerConnection</citation> from 
 				<citation>application</citation> to each service provision point (SPP) of the 
@@ -652,7 +786,7 @@
 				<citation>Blinky</citation> and select 
 				<citation>Edit Structure</citation>. Drag and Drop an 
 				<citation>Interface Port</citation> to the boarder of the 
-				<citation>Blinky</citation> actor. Note that an interface port is not possible inside the the actor. Name the port 
+				<citation>Blinky</citation> actor. Note that an interface port is not possible inside the actor. Name the port 
 				<citation>ControlPort</citation> and select 
 				<citation>BlinkyControlProtocol</citation> from the drop down list. Uncheck 
 				<citation>Conjugated</citation> and 
@@ -722,7 +856,7 @@
 				<citation>on</citation>.
 			</para>
 			<para>Open the transition dialog by double click the arrow to specify the trigger event and the action code of each transition. Note that the initial transition does not have a trigger event.</para>
-			<para>The dialog should look like this:</para>
+			<para>The transition dialog should look like this:</para>
 			<para>
 				<mediaobject>
 					<imageobject>
@@ -744,7 +878,8 @@
 			<para>Within each transition the timer will be restarted and the appropriate message will be sent via the 
 				<citation>ControlPort</citation>. 
 			</para>
-			<para>The resulting state machine should look like this:</para>
+			<para>The resulting state machine should look like this:
+				(Note that the arrows peak changes if the transition contains action code.)</para>
 			<para>
 				<mediaobject>
 					<imageobject>
@@ -771,6 +906,7 @@
 				<citation>Blinky</citation> in the outline view to navigate to 
 				<citation>Blinky</citation> within the model file.
 				Add the following code:
+				(type it or simply copy it from the tutorial project)
 			</para>
 			<para>
 				<mediaobject>
@@ -786,7 +922,11 @@
 				<citation>destroyUser()</citation> is a predefined operation that will be called during shutdown of the application. Within this operation, cleanup of manual coded classes can be done.
 			</para>
 			<para>Now design the FSM of 
-				<citation>Blinky</citation>. Open the behavior diagram of 
+				<citation>Blinky</citation>. Remember, as the name suggested 
+				<citation>blinking</citation> is a state in which the LED must be switched on and off. We will realize that by an hierarchical FSM in which the 
+				<citation>blinking</citation> state has two sub states.
+			</para>
+			<para>Open the behavior diagram of 
 				<citation>Blinky</citation> by right clicking the 
 				<citation>Blinky</citation> actor in the outline view. Create two states named 
 				<citation>blinking</citation> and 
@@ -1464,7 +1604,7 @@ carLights.setState(TrafficLight3.OFF);
 										<imageobject>
 											<imagedata fileref="images\040-ClassEndPort.png"/>
 										</imageobject>
-									</mediaobject> &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 
+									</mediaobject>
 								</td>
 								<td>Class End Port</td>
 							</tr>
@@ -1550,7 +1690,7 @@ carLights.setState(TrafficLight3.OFF);
 										<imageobject>
 											<imagedata fileref="images\040-ReferencePort.png"/>
 										</imageobject>
-									</mediaobject>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+									</mediaobject>
 								</td>
 								<td>Reference Port</td>
 							</tr>

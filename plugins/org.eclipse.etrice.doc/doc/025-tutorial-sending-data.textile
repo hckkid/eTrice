@@ -172,6 +172,7 @@ Operation printData(d: DemoData) : void {
 bq. 
 
 For MrPing create the following state machine:
+(Remember that you can copy and paste the action code from the tutorial directory.)
 
 !images/025-SendingData08.png!
 
@@ -203,7 +204,7 @@ The model is finished now and can be found in /org.eclipse.etrice.tutorials/mode
 
 h2. Generate and run the model
 
-With the MWe2 workflow generate the code and run the model. 
+Generate the code by right click to ??gen_SendingData.launch?? and run it as ??gen_SendingData??. Run the model. 
 The output should look like this:
 
 bq.. 
@@ -260,9 +261,11 @@ h2. Summary
 
 Within the first loop an integer value will be incremented from ??MrPong?? and sent back to ??MrPing??. As long as the guard is true ??MrPing?? sends back the value.
 
-Within the ??next?? transition, ??MrPing?? creates a data class and sends the default values. Than ??MrPing?? changes the values and sends the class again. At this point you should note that during the send operation, a copy of the data class will be created and sent. Otherwise it would not be possible to send the same object two times, even more it would not be possible to send a stack object at all.
-However, for performance reasons some applications requires sending data by value. In this case the user is responsible for the life cycle of the object. In Java the VM takes care about the life cycle of an object. This is not the case for C/C++. Consider that a object which is created within a transition of a state machine will be destroyed when the transition is finished. The receiving FSM would receive an invalid reference. Therefore care must be taken by sending references.      
+Within the ??next?? transition, ??MrPing?? creates a data class and sends the default values. Than ??MrPing?? changes the values and sends the class again. At this point you should note that during the send operation, a copy of the data class will be created and sent. Otherwise it would not be possible to send the same object two times, even more it would not be possible to send a stack object at all. This type of data passing is called ??sending data by value??.
+However, for performance reasons some applications requires ??sending data by reference??. In this case the user is responsible for the life cycle of the object. In Java the VM takes care about the life cycle of an object. This is not the case for C/C++. Consider that a object which is created within a transition of a state machine will be destroyed when the transition is finished. The receiving FSM would receive an invalid reference. Therefore care must be taken by sending references.      
 
 For sending data by reference you simply have to add the keyword ??ref?? to the protocol definition.
  
 bc. Message ping(data: DemoData ref)
+
+Make the test and inspect the console output.

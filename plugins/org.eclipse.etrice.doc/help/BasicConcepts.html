@@ -50,15 +50,24 @@
 </div>
 </div>
 <p>ROOM provides two types of hierarchy. Behavioral hierarchy and structural hierarchy. Structural hierarchy means that actors can be nested to arbitrary depth. Usually you will add more and more details to your application with each nesting level. That means you can focus yourself on any level of abstraction with always the same element, the actor. Structural hierarchy provides a powerful mechanism to divide your problem in smaller pieces, so that you can focus on the level of abstraction you want to work on. </p>
-<p>The actor&rsquo;s behavior will be described with a state machine. A state in turn may contain sub states. This is another possibility to focus on an abstraction level. Take the simple FSM from the blinky actor from the blinky tutorial:    </p>
-<p>
-					
-</p>
+<p>The actor&rsquo;s behavior will be described with a state machine. A state in turn may contain sub states. This is another possibility to focus on an abstraction level. Take the simple FSM from the blinky actor from the blinky tutorial. </p>
+<p>Top level:
+
+					</p>
 <div class="mediaobject">
 <img src="images\020-Blinky15.png"></div>
 <p>
-					TODO: add a screenshot of the SubStateMachine
-				</p>
+				
+</p>
+<p>
+					[<span class="citation">blinking</span>] Sub machine:
+
+					</p>
+<div class="mediaobject">
+<img src="images\020-Blinky151.png"></div>
+<p>
+				
+</p>
 <p>From an abstract point of view there is a state &bdquo;blinking&rdquo;. But a simple LED is not able to blink autonomously. Therefore you have to add more details to your model to make a LED blinking, but for the current work it is not of interest how the blinking is realized. This will be done in the next lower level of the hierarchy. </p>
 <p>This simple example might give an idea how powerful this mechanisms is.</p>
 <p>The hierarchical FSM provides a rich tool box to describe real world problems (see &bdquo;room concepts&rdquo;).</p>
