@@ -13,12 +13,10 @@ import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorContainerClass;
 import org.eclipse.etrice.core.room.RoomClass;
 import org.eclipse.etrice.core.room.StructureClass;
-import org.eclipse.etrice.generator.etricegen.*;
 import org.eclipse.etrice.generator.etricegen.ActiveTrigger;
 import org.eclipse.etrice.generator.etricegen.ActorInstance;
 import org.eclipse.etrice.generator.etricegen.BindingInstance;
 import org.eclipse.etrice.generator.etricegen.ConnectionInstance;
-import org.eclipse.etrice.generator.etricegen.Counter;
 import org.eclipse.etrice.generator.etricegen.ETriceGenPackage;
 import org.eclipse.etrice.generator.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.generator.etricegen.IDiagnostician;
@@ -94,12 +92,6 @@ public class ETriceGenSwitch<T> extends Switch<T> {
 			case ETriceGenPackage.ROOT: {
 				Root root = (Root)theEObject;
 				T result = caseRoot(root);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case ETriceGenPackage.COUNTER: {
-				Counter counter = (Counter)theEObject;
-				T result = caseCounter(counter);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -220,21 +212,6 @@ public class ETriceGenSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseRoot(Root object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Counter</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Counter</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseCounter(Counter object) {
 		return null;
 	}
 

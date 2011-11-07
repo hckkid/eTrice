@@ -2300,15 +2300,11 @@ rulePort returns [EObject current=null]
 	    }
 
 )
-)(	otherlv_3='[' 
-    {
-    	newLeafNode(otherlv_3, grammarAccess.getPortAccess().getLeftSquareBracketKeyword_3_0());
-    }
+)(
 (
-(
-		lv_multiplicity_4_0=RULE_INT
+		lv_multiplicity_3_0=RULE_MULTIPLICITY
 		{
-			newLeafNode(lv_multiplicity_4_0, grammarAccess.getPortAccess().getMultiplicityINTTerminalRuleCall_3_1_0()); 
+			newLeafNode(lv_multiplicity_3_0, grammarAccess.getPortAccess().getMultiplicityMULTIPLICITYTerminalRuleCall_3_0()); 
 		}
 		{
 	        if ($current==null) {
@@ -2317,18 +2313,14 @@ rulePort returns [EObject current=null]
        		setWithLastConsumed(
        			$current, 
        			"multiplicity",
-        		lv_multiplicity_4_0, 
-        		"INT");
+        		lv_multiplicity_3_0, 
+        		"MULTIPLICITY");
 	    }
 
 )
-)	otherlv_5=']' 
+)?	otherlv_4=':' 
     {
-    	newLeafNode(otherlv_5, grammarAccess.getPortAccess().getRightSquareBracketKeyword_3_2());
-    }
-)?	otherlv_6=':' 
-    {
-    	newLeafNode(otherlv_6, grammarAccess.getPortAccess().getColonKeyword_4());
+    	newLeafNode(otherlv_4, grammarAccess.getPortAccess().getColonKeyword_4());
     }
 (
 (
@@ -2350,14 +2342,14 @@ rulePort returns [EObject current=null]
 		{ 
 	        newCompositeNode(grammarAccess.getPortAccess().getDocuDocumentationParserRuleCall_6_0()); 
 	    }
-		lv_docu_8_0=ruleDocumentation		{
+		lv_docu_6_0=ruleDocumentation		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getPortRule());
 	        }
        		set(
        			$current, 
        			"docu",
-        		lv_docu_8_0, 
+        		lv_docu_6_0, 
         		"Documentation");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -6285,6 +6277,8 @@ rulePrimitiveType returns [Enumerator current=null]
 ));
 
 
+
+RULE_MULTIPLICITY : '[' ('*'|('0'..'9')+) ']';
 
 RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 

@@ -9,8 +9,8 @@ import org.eclipse.etrice.core.room.LogicalThread;
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.generator.base.ILogger;
+import org.eclipse.etrice.generator.base.Indexed;
 import org.eclipse.etrice.generator.etricegen.ActorInstance;
-import org.eclipse.etrice.generator.etricegen.Counter;
 import org.eclipse.etrice.generator.etricegen.InterfaceItemInstance;
 import org.eclipse.etrice.generator.etricegen.Root;
 import org.eclipse.etrice.generator.etricegen.SubSystemInstance;
@@ -194,16 +194,18 @@ public class SubSystemClassGen {
     _builder.newLine();
     {
       EList<ActorInstance> _allContainedInstances = comp.getAllContainedInstances();
-      for(ActorInstance ai : _allContainedInstances) {
+      int _maxObjId = comp.getMaxObjId();
+      Iterable<Indexed<ActorInstance>> _indexed = Indexed.<ActorInstance>indexed(_allContainedInstances, _maxObjId);
+      for(Indexed<ActorInstance> ai : _indexed) {
         _builder.append("\t\t");
         _builder.append("Address addr_item_SystemPort_");
         EList<ActorInstance> _allContainedInstances_1 = comp.getAllContainedInstances();
-        int _indexOf_1 = _allContainedInstances_1.indexOf(ai);
+        ActorInstance _value = ai.getValue();
+        int _indexOf_1 = _allContainedInstances_1.indexOf(_value);
         _builder.append(_indexOf_1, "		");
         _builder.append(" = new Address(0,0,");
-        Counter _objCounter = comp.getObjCounter();
-        int _andIncrementCount = _objCounter.getAndIncrementCount();
-        _builder.append(_andIncrementCount, "		");
+        int _index1 = ai.getIndex1();
+        _builder.append(_index1, "		");
         _builder.append(");");
         _builder.newLineIfNotEmpty();
       }

@@ -7,7 +7,6 @@
 package org.eclipse.etrice.generator.etricegen.validation;
 
 import org.eclipse.etrice.core.room.SubSystemClass;
-import org.eclipse.etrice.generator.etricegen.Counter;
 
 /**
  * A sample validator interface for {@link org.eclipse.etrice.generator.etricegen.SubSystemInstance}.
@@ -19,5 +18,4 @@ public interface SubSystemInstanceValidator {
 	boolean validate();
 
 	boolean validateSubSystemClass(SubSystemClass value);
-	boolean validateObjCounter(Counter value);
 }

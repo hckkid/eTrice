@@ -98,7 +98,6 @@ public class RoomParser extends AbstractContentAssistParser {
 					put(grammarAccess.getActorClassAccess().getGroup_7_4(), "rule__ActorClass__Group_7_4__0");
 					put(grammarAccess.getActorClassAccess().getGroup_8(), "rule__ActorClass__Group_8__0");
 					put(grammarAccess.getPortAccess().getGroup(), "rule__Port__Group__0");
-					put(grammarAccess.getPortAccess().getGroup_3(), "rule__Port__Group_3__0");
 					put(grammarAccess.getExternalPortAccess().getGroup(), "rule__ExternalPort__Group__0");
 					put(grammarAccess.getSAPRefAccess().getGroup(), "rule__SAPRef__Group__0");
 					put(grammarAccess.getSPPRefAccess().getGroup(), "rule__SPPRef__Group__0");
@@ -252,7 +251,7 @@ public class RoomParser extends AbstractContentAssistParser {
 					put(grammarAccess.getActorClassAccess().getStateMachineAssignment_8_5(), "rule__ActorClass__StateMachineAssignment_8_5");
 					put(grammarAccess.getPortAccess().getConjugatedAssignment_0(), "rule__Port__ConjugatedAssignment_0");
 					put(grammarAccess.getPortAccess().getNameAssignment_2(), "rule__Port__NameAssignment_2");
-					put(grammarAccess.getPortAccess().getMultiplicityAssignment_3_1(), "rule__Port__MultiplicityAssignment_3_1");
+					put(grammarAccess.getPortAccess().getMultiplicityAssignment_3(), "rule__Port__MultiplicityAssignment_3");
 					put(grammarAccess.getPortAccess().getProtocolAssignment_5(), "rule__Port__ProtocolAssignment_5");
 					put(grammarAccess.getPortAccess().getDocuAssignment_6(), "rule__Port__DocuAssignment_6");
 					put(grammarAccess.getExternalPortAccess().getIfportAssignment_2(), "rule__ExternalPort__IfportAssignment_2");

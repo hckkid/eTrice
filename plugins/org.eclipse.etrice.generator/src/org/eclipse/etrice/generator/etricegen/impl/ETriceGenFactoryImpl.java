@@ -62,7 +62,6 @@ public class ETriceGenFactoryImpl extends EFactoryImpl implements ETriceGenFacto
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
 			case ETriceGenPackage.ROOT: return createRoot();
-			case ETriceGenPackage.COUNTER: return createCounter();
 			case ETriceGenPackage.STRUCTURE_INSTANCE: return createStructureInstance();
 			case ETriceGenPackage.SUB_SYSTEM_INSTANCE: return createSubSystemInstance();
 			case ETriceGenPackage.ACTOR_INSTANCE: return createActorInstance();
@@ -119,16 +118,6 @@ public class ETriceGenFactoryImpl extends EFactoryImpl implements ETriceGenFacto
 	public Root createRoot() {
 		RootImpl root = new RootImpl();
 		return root;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Counter createCounter() {
-		CounterImpl counter = new CounterImpl();
-		return counter;
 	}
 
 	/**

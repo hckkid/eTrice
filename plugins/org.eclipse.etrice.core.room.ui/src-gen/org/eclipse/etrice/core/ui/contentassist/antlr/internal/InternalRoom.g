@@ -7877,9 +7877,9 @@ rule__Port__Group__3__Impl
     }
 :
 (
-{ before(grammarAccess.getPortAccess().getGroup_3()); }
-(rule__Port__Group_3__0)?
-{ after(grammarAccess.getPortAccess().getGroup_3()); }
+{ before(grammarAccess.getPortAccess().getMultiplicityAssignment_3()); }
+(rule__Port__MultiplicityAssignment_3)?
+{ after(grammarAccess.getPortAccess().getMultiplicityAssignment_3()); }
 )
 
 ;
@@ -7982,102 +7982,6 @@ finally {
 
 
 
-
-
-
-
-
-
-
-
-rule__Port__Group_3__0
-    @init {
-		int stackSize = keepStackSize();
-    }
-:
-	rule__Port__Group_3__0__Impl
-	rule__Port__Group_3__1
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-rule__Port__Group_3__0__Impl
-    @init {
-		int stackSize = keepStackSize();
-    }
-:
-(
-{ before(grammarAccess.getPortAccess().getLeftSquareBracketKeyword_3_0()); }
-
-	'[' 
-
-{ after(grammarAccess.getPortAccess().getLeftSquareBracketKeyword_3_0()); }
-)
-
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-
-rule__Port__Group_3__1
-    @init {
-		int stackSize = keepStackSize();
-    }
-:
-	rule__Port__Group_3__1__Impl
-	rule__Port__Group_3__2
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-rule__Port__Group_3__1__Impl
-    @init {
-		int stackSize = keepStackSize();
-    }
-:
-(
-{ before(grammarAccess.getPortAccess().getMultiplicityAssignment_3_1()); }
-(rule__Port__MultiplicityAssignment_3_1)
-{ after(grammarAccess.getPortAccess().getMultiplicityAssignment_3_1()); }
-)
-
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-
-rule__Port__Group_3__2
-    @init {
-		int stackSize = keepStackSize();
-    }
-:
-	rule__Port__Group_3__2__Impl
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-rule__Port__Group_3__2__Impl
-    @init {
-		int stackSize = keepStackSize();
-    }
-:
-(
-{ before(grammarAccess.getPortAccess().getRightSquareBracketKeyword_3_2()); }
-
-	']' 
-
-{ after(grammarAccess.getPortAccess().getRightSquareBracketKeyword_3_2()); }
-)
-
-;
-finally {
-	restoreStackSize(stackSize);
-}
 
 
 
@@ -17658,14 +17562,14 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__Port__MultiplicityAssignment_3_1
+rule__Port__MultiplicityAssignment_3
     @init {
 		int stackSize = keepStackSize();
     }
 :
 (
-{ before(grammarAccess.getPortAccess().getMultiplicityINTTerminalRuleCall_3_1_0()); }
-	RULE_INT{ after(grammarAccess.getPortAccess().getMultiplicityINTTerminalRuleCall_3_1_0()); }
+{ before(grammarAccess.getPortAccess().getMultiplicityMULTIPLICITYTerminalRuleCall_3_0()); }
+	RULE_MULTIPLICITY{ after(grammarAccess.getPortAccess().getMultiplicityMULTIPLICITYTerminalRuleCall_3_0()); }
 )
 
 ;
@@ -19573,6 +19477,8 @@ finally {
 	restoreStackSize(stackSize);
 }
 
+
+RULE_MULTIPLICITY : '[' ('*'|('0'..'9')+) ']';
 
 RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 

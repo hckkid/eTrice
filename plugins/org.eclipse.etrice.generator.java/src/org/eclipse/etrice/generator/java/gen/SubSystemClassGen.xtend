@@ -22,6 +22,7 @@ import static extension org.eclipse.xtext.xtend2.lib.*
 import org.eclipse.etrice.core.room.*
 import org.eclipse.etrice.generator.etricegen.*
 import org.eclipse.etrice.generator.base.ILogger
+import static extension org.eclipse.etrice.generator.base.Indexed.*
 
 class SubSystemClassGen {
 	
@@ -39,7 +40,7 @@ class SubSystemClassGen {
 			fileAccess.generateFile(file, root.generate(ssi, ssi.subSystemClass))
 		}
 	}
-	
+
 	def generate(Root root, SubSystemInstance comp, SubSystemClass cc) {'''
 		package «cc.getPackage()»;
 		
@@ -83,8 +84,8 @@ class SubSystemClassGen {
 			public void instantiateActors(){
 				// all addresses
 				// Addresses for the Subsystem Systemport
-				«FOR ai : comp.allContainedInstances»
-					Address addr_item_SystemPort_«comp.allContainedInstances.indexOf(ai)» = new Address(0,0,«comp.objCounter.getAndIncrementCount()»);
+				«FOR ai : comp.allContainedInstances.indexed(comp.maxObjId)»
+					Address addr_item_SystemPort_«comp.allContainedInstances.indexOf(ai.value)» = new Address(0,0,«ai.index1»);
 				«ENDFOR»
 				
 				«FOR ai : comp.allContainedInstances»

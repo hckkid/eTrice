@@ -12,15 +12,15 @@ import java.util.HashMap;
 import org.eclipse.etrice.core.room.ActorInstancePath;
 import org.eclipse.etrice.core.room.LogicalThread;
 import org.eclipse.etrice.core.room.SubSystemClass;
-import org.eclipse.etrice.generator.etricegen.Counter;
 import org.eclipse.etrice.generator.etricegen.ETriceGenPackage;
 import org.eclipse.etrice.generator.etricegen.InstanceBase;
 import org.eclipse.etrice.generator.etricegen.SubSystemInstance;
 
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.TreeIterator;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
@@ -33,7 +33,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.etrice.generator.etricegen.impl.SubSystemInstanceImpl#getSubSystemClass <em>Sub System Class</em>}</li>
- *   <li>{@link org.eclipse.etrice.generator.etricegen.impl.SubSystemInstanceImpl#getObjCounter <em>Obj Counter</em>}</li>
+ *   <li>{@link org.eclipse.etrice.generator.etricegen.impl.SubSystemInstanceImpl#getMaxObjId <em>Max Obj Id</em>}</li>
  * </ul>
  * </p>
  *
@@ -51,14 +51,14 @@ public class SubSystemInstanceImpl extends StructureInstanceImpl implements SubS
 	protected SubSystemClass subSystemClass;
 
 	/**
-	 * The cached value of the '{@link #getObjCounter() <em>Obj Counter</em>}' containment reference.
+	 * The default value of the '{@link #getMaxObjId() <em>Max Obj Id</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getObjCounter()
+	 * @see #getMaxObjId()
 	 * @generated
 	 * @ordered
 	 */
-	protected Counter objCounter;
+	protected static final int MAX_OBJ_ID_EDEFAULT = 0;
 
 	private HashMap<String, Integer> inst2thread = null;
 	
@@ -122,44 +122,19 @@ public class SubSystemInstanceImpl extends StructureInstanceImpl implements SubS
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
-	public Counter getObjCounter() {
-		return objCounter;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetObjCounter(Counter newObjCounter, NotificationChain msgs) {
-		Counter oldObjCounter = objCounter;
-		objCounter = newObjCounter;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ETriceGenPackage.SUB_SYSTEM_INSTANCE__OBJ_COUNTER, oldObjCounter, newObjCounter);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
+	public int getMaxObjId() {
+		int max = 0;
+		TreeIterator<EObject> it = eAllContents();
+		while (it.hasNext()) {
+			EObject obj = it.next();
+			if (obj instanceof InstanceBase)
+				if (max <= ((InstanceBase)obj).getObjId())
+					max = ((InstanceBase)obj).getObjId();
 		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setObjCounter(Counter newObjCounter) {
-		if (newObjCounter != objCounter) {
-			NotificationChain msgs = null;
-			if (objCounter != null)
-				msgs = ((InternalEObject)objCounter).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ETriceGenPackage.SUB_SYSTEM_INSTANCE__OBJ_COUNTER, null, msgs);
-			if (newObjCounter != null)
-				msgs = ((InternalEObject)newObjCounter).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ETriceGenPackage.SUB_SYSTEM_INSTANCE__OBJ_COUNTER, null, msgs);
-			msgs = basicSetObjCounter(newObjCounter, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ETriceGenPackage.SUB_SYSTEM_INSTANCE__OBJ_COUNTER, newObjCounter, newObjCounter));
+		
+		return max;
 	}
 
 	/**
@@ -203,27 +178,13 @@ public class SubSystemInstanceImpl extends StructureInstanceImpl implements SubS
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case ETriceGenPackage.SUB_SYSTEM_INSTANCE__OBJ_COUNTER:
-				return basicSetObjCounter(null, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case ETriceGenPackage.SUB_SYSTEM_INSTANCE__SUB_SYSTEM_CLASS:
 				if (resolve) return getSubSystemClass();
 				return basicGetSubSystemClass();
-			case ETriceGenPackage.SUB_SYSTEM_INSTANCE__OBJ_COUNTER:
-				return getObjCounter();
+			case ETriceGenPackage.SUB_SYSTEM_INSTANCE__MAX_OBJ_ID:
+				return getMaxObjId();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -238,9 +199,6 @@ public class SubSystemInstanceImpl extends StructureInstanceImpl implements SubS
 		switch (featureID) {
 			case ETriceGenPackage.SUB_SYSTEM_INSTANCE__SUB_SYSTEM_CLASS:
 				setSubSystemClass((SubSystemClass)newValue);
-				return;
-			case ETriceGenPackage.SUB_SYSTEM_INSTANCE__OBJ_COUNTER:
-				setObjCounter((Counter)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -257,9 +215,6 @@ public class SubSystemInstanceImpl extends StructureInstanceImpl implements SubS
 			case ETriceGenPackage.SUB_SYSTEM_INSTANCE__SUB_SYSTEM_CLASS:
 				setSubSystemClass((SubSystemClass)null);
 				return;
-			case ETriceGenPackage.SUB_SYSTEM_INSTANCE__OBJ_COUNTER:
-				setObjCounter((Counter)null);
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -274,8 +229,8 @@ public class SubSystemInstanceImpl extends StructureInstanceImpl implements SubS
 		switch (featureID) {
 			case ETriceGenPackage.SUB_SYSTEM_INSTANCE__SUB_SYSTEM_CLASS:
 				return subSystemClass != null;
-			case ETriceGenPackage.SUB_SYSTEM_INSTANCE__OBJ_COUNTER:
-				return objCounter != null;
+			case ETriceGenPackage.SUB_SYSTEM_INSTANCE__MAX_OBJ_ID:
+				return getMaxObjId() != MAX_OBJ_ID_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}

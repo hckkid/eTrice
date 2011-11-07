@@ -81,10 +81,6 @@ public class ETriceGenAdapterFactory extends AdapterFactoryImpl {
 				return createRootAdapter();
 			}
 			@Override
-			public Adapter caseCounter(Counter object) {
-				return createCounterAdapter();
-			}
-			@Override
 			public Adapter caseInstanceBase(InstanceBase object) {
 				return createInstanceBaseAdapter();
 			}
@@ -195,20 +191,6 @@ public class ETriceGenAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createRootAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.etrice.generator.etricegen.Counter <em>Counter</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.etrice.generator.etricegen.Counter
-	 * @generated
-	 */
-	public Adapter createCounterAdapter() {
 		return null;
 	}
 

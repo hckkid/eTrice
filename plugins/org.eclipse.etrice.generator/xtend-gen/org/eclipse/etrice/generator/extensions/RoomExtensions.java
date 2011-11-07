@@ -182,9 +182,8 @@ public class RoomExtensions {
       boolean _isConjugated = p.isConjugated();
       String _portClassName = this.getPortClassName(_protocol, _isConjugated);
       String ret = _portClassName;
-      int _multiplicity = p.getMultiplicity();
-      boolean _operator_greaterThan = ComparableExtensions.<Integer>operator_greaterThan(((Integer)_multiplicity), ((Integer)1));
-      if (_operator_greaterThan) {
+      boolean _isReplicated = p.isReplicated();
+      if (_isReplicated) {
         String _operator_plus = StringExtensions.operator_plus(ret, "Repl");
         ret = _operator_plus;
       }

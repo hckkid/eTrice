@@ -21,7 +21,6 @@ import org.eclipse.etrice.generator.etricegen.ActiveTrigger;
 import org.eclipse.etrice.generator.etricegen.ActorInstance;
 import org.eclipse.etrice.generator.etricegen.BindingInstance;
 import org.eclipse.etrice.generator.etricegen.ConnectionInstance;
-import org.eclipse.etrice.generator.etricegen.Counter;
 import org.eclipse.etrice.generator.etricegen.ETriceGenFactory;
 import org.eclipse.etrice.generator.etricegen.ETriceGenPackage;
 import org.eclipse.etrice.generator.etricegen.ExpandedActorClass;
@@ -50,13 +49,6 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * @generated
 	 */
 	private EClass rootEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass counterEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -336,24 +328,6 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getCounter() {
-		return counterEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getCounter_Counter() {
-		return (EAttribute)counterEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getInstanceBase() {
 		return instanceBaseEClass;
 	}
@@ -507,8 +481,8 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getSubSystemInstance_ObjCounter() {
-		return (EReference)subSystemInstanceEClass.getEStructuralFeatures().get(1);
+	public EAttribute getSubSystemInstance_MaxObjId() {
+		return (EAttribute)subSystemInstanceEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -874,9 +848,6 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 		createEReference(rootEClass, ROOT__USED_ROOM_MODELS);
 		createEReference(rootEClass, ROOT__SUB_SYSTEM_CLASSES);
 
-		counterEClass = createEClass(COUNTER);
-		createEAttribute(counterEClass, COUNTER__COUNTER);
-
 		instanceBaseEClass = createEClass(INSTANCE_BASE);
 		createEAttribute(instanceBaseEClass, INSTANCE_BASE__NAME);
 		createEAttribute(instanceBaseEClass, INSTANCE_BASE__PATH);
@@ -896,7 +867,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 
 		subSystemInstanceEClass = createEClass(SUB_SYSTEM_INSTANCE);
 		createEReference(subSystemInstanceEClass, SUB_SYSTEM_INSTANCE__SUB_SYSTEM_CLASS);
-		createEReference(subSystemInstanceEClass, SUB_SYSTEM_INSTANCE__OBJ_COUNTER);
+		createEAttribute(subSystemInstanceEClass, SUB_SYSTEM_INSTANCE__MAX_OBJ_ID);
 
 		actorInstanceEClass = createEClass(ACTOR_INSTANCE);
 		createEReference(actorInstanceEClass, ACTOR_INSTANCE__ACTOR_CLASS);
@@ -1009,14 +980,6 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 		op = addEOperation(rootEClass, theRoomPackage.getProtocolClass(), "getReferencedProtocols", 0, -1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theRoomPackage.getActorClass(), "cls", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		initEClass(counterEClass, Counter.class, "Counter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getCounter_Counter(), ecorePackage.getEInt(), "counter", "0", 0, 1, Counter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		addEOperation(counterEClass, ecorePackage.getEInt(), "getAndIncrementCount", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(counterEClass, ecorePackage.getEInt(), "getAndIncrementCount", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, ecorePackage.getEInt(), "n", 0, 1, IS_UNIQUE, IS_ORDERED);
-
 		initEClass(instanceBaseEClass, InstanceBase.class, "InstanceBase", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getInstanceBase_Name(), ecorePackage.getEString(), "name", null, 0, 1, InstanceBase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getInstanceBase_Path(), ecorePackage.getEString(), "path", null, 0, 1, InstanceBase.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
@@ -1036,7 +999,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 
 		initEClass(subSystemInstanceEClass, SubSystemInstance.class, "SubSystemInstance", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSubSystemInstance_SubSystemClass(), theRoomPackage.getSubSystemClass(), null, "subSystemClass", null, 0, 1, SubSystemInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getSubSystemInstance_ObjCounter(), this.getCounter(), null, "objCounter", null, 0, 1, SubSystemInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSubSystemInstance_MaxObjId(), ecorePackage.getEInt(), "maxObjId", null, 0, 1, SubSystemInstance.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		op = addEOperation(subSystemInstanceEClass, ecorePackage.getEInt(), "getThreadId", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getInstanceBase(), "instance", 0, 1, IS_UNIQUE, IS_ORDERED);

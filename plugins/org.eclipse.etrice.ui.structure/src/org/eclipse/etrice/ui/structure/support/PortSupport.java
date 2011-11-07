@@ -326,7 +326,7 @@ public class PortSupport extends InterfaceItemSupport {
 			}
 
 			IGaService gaService = Graphiti.getGaService();
-			if (port.getMultiplicity()>1) {
+			if (port.isReplicated()) {
 				Rectangle rect = gaService.createRectangle(invisibleRectangle);
 				rect.setForeground(darkColor);
 				rect.setBackground(brightDolor);
@@ -463,7 +463,7 @@ public class PortSupport extends InterfaceItemSupport {
 			kind += "C";
 		if (ValidationUtil.isRelay(port))
 			kind += "R";
-		if (port.getMultiplicity()>1)
+		if (port.isReplicated())
 			kind += "M";
 		return kind;
 	}

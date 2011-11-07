@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="ASCII"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:xtext="http://www.eclipse.org/2008/Xtext">
   <xtext:Grammar name="org.eclipse.etrice.core.Room" usedGrammars="/1">
+    <metamodelDeclarations xsi:type="xtext:ReferencedMetamodel" alias="ecore">
+      <ePackage href="http://www.eclipse.org/emf/2002/Ecore#/"/>
+    </metamodelDeclarations>
     <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="room">
       <ePackage href="http://www.eclipse.org/etrice/Room#/"/>
     </metamodelDeclarations>
     <rules xsi:type="xtext:ParserRule" name="RoomModel">
-      <type metamodel="/0/@metamodelDeclarations.0">
+      <type metamodel="/0/@metamodelDeclarations.1">
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//RoomModel"/>
       </type>
       <alternatives xsi:type="xtext:Group">
@@ -41,7 +44,7 @@
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="RoomClass">
-      <type metamodel="/0/@metamodelDeclarations.0">
+      <type metamodel="/0/@metamodelDeclarations.1">
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//RoomClass"/>
       </type>
       <alternatives xsi:type="xtext:Alternatives">
@@ -51,7 +54,7 @@
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="StructureClass">
-      <type metamodel="/0/@metamodelDeclarations.0">
+      <type metamodel="/0/@metamodelDeclarations.1">
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//StructureClass"/>
       </type>
       <alternatives xsi:type="xtext:Alternatives">
@@ -60,7 +63,7 @@
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="ActorContainerClass">
-      <type metamodel="/0/@metamodelDeclarations.0">
+      <type metamodel="/0/@metamodelDeclarations.1">
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//ActorContainerClass"/>
       </type>
       <alternatives xsi:type="xtext:Alternatives">
@@ -69,7 +72,7 @@
       </alternatives>
     </rules>
     <rules xsi:type="xtext:EnumRule" name="PrimitiveType">
-      <type metamodel="/0/@metamodelDeclarations.0">
+      <type metamodel="/0/@metamodelDeclarations.1">
         <classifier xsi:type="ecore:EEnum" href="http://www.eclipse.org/etrice/Room#//PrimitiveType"/>
       </type>
       <alternatives xsi:type="xtext:Alternatives">
@@ -124,7 +127,7 @@
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="TypedID">
-      <type metamodel="/0/@metamodelDeclarations.0">
+      <type metamodel="/0/@metamodelDeclarations.1">
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//TypedID"/>
       </type>
       <alternatives xsi:type="xtext:Group">
@@ -138,7 +141,7 @@
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="FreeTypedID">
-      <type metamodel="/0/@metamodelDeclarations.0">
+      <type metamodel="/0/@metamodelDeclarations.1">
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//FreeTypedID"/>
       </type>
       <alternatives xsi:type="xtext:Group">
@@ -152,7 +155,7 @@
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="BasicType">
-      <type metamodel="/0/@metamodelDeclarations.0">
+      <type metamodel="/0/@metamodelDeclarations.1">
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//BasicType"/>
       </type>
       <alternatives xsi:type="xtext:Alternatives">
@@ -161,7 +164,7 @@
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="Type">
-      <type metamodel="/0/@metamodelDeclarations.0">
+      <type metamodel="/0/@metamodelDeclarations.1">
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//Type"/>
       </type>
       <alternatives xsi:type="xtext:Alternatives">
@@ -171,7 +174,7 @@
         <elements xsi:type="xtext:Group">
           <elements xsi:type="xtext:Assignment" feature="type" operator="=">
             <terminal xsi:type="xtext:CrossReference">
-              <type metamodel="/0/@metamodelDeclarations.0">
+              <type metamodel="/0/@metamodelDeclarations.1">
                 <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//DataClass"/>
               </type>
               <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.76"/>
@@ -193,7 +196,7 @@
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="FreeType">
-      <type metamodel="/0/@metamodelDeclarations.0">
+      <type metamodel="/0/@metamodelDeclarations.1">
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//FreeType"/>
       </type>
       <alternatives xsi:type="xtext:Alternatives">
@@ -211,7 +214,7 @@
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="DataClass">
-      <type metamodel="/0/@metamodelDeclarations.0">
+      <type metamodel="/0/@metamodelDeclarations.1">
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//DataClass"/>
       </type>
       <alternatives xsi:type="xtext:Group">
@@ -226,7 +229,7 @@
           <elements xsi:type="xtext:Keyword" value="extends"/>
           <elements xsi:type="xtext:Assignment" feature="base" operator="=">
             <terminal xsi:type="xtext:CrossReference">
-              <type metamodel="/0/@metamodelDeclarations.0">
+              <type metamodel="/0/@metamodelDeclarations.1">
                 <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//DataClass"/>
               </type>
               <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.76"/>
@@ -247,7 +250,7 @@
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="Attribute">
-      <type metamodel="/0/@metamodelDeclarations.0">
+      <type metamodel="/0/@metamodelDeclarations.1">
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//Attribute"/>
       </type>
       <alternatives xsi:type="xtext:Group">
@@ -278,7 +281,7 @@
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="Operation">
-      <type metamodel="/0/@metamodelDeclarations.0">
+      <type metamodel="/0/@metamodelDeclarations.1">
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//Operation"/>
       </type>
       <alternatives xsi:type="xtext:Group">
@@ -314,7 +317,7 @@
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="ProtocolClass">
-      <type metamodel="/0/@metamodelDeclarations.0">
+      <type metamodel="/0/@metamodelDeclarations.1">
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//ProtocolClass"/>
       </type>
       <alternatives xsi:type="xtext:Group">
@@ -329,7 +332,7 @@
           <elements xsi:type="xtext:Keyword" value="extends"/>
           <elements xsi:type="xtext:Assignment" feature="base" operator="=">
             <terminal xsi:type="xtext:CrossReference">
-              <type metamodel="/0/@metamodelDeclarations.0">
+              <type metamodel="/0/@metamodelDeclarations.1">
                 <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//ProtocolClass"/>
               </type>
               <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.76"/>
@@ -382,7 +385,7 @@
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="Message">
-      <type metamodel="/0/@metamodelDeclarations.0">
+      <type metamodel="/0/@metamodelDeclarations.1">
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//Message"/>
       </type>
       <alternatives xsi:type="xtext:Group">
@@ -401,7 +404,7 @@
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="PortClass">
-      <type metamodel="/0/@metamodelDeclarations.0">
+      <type metamodel="/0/@metamodelDeclarations.1">
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//PortClass"/>
       </type>
       <alternatives xsi:type="xtext:Group">
@@ -427,14 +430,14 @@
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="MessageHandler">
-      <type metamodel="/0/@metamodelDeclarations.0">
+      <type metamodel="/0/@metamodelDeclarations.1">
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//MessageHandler"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Keyword" value="handle"/>
         <elements xsi:type="xtext:Assignment" feature="msg" operator="=">
           <terminal xsi:type="xtext:CrossReference">
-            <type metamodel="/0/@metamodelDeclarations.0">
+            <type metamodel="/0/@metamodelDeclarations.1">
               <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//Message"/>
             </type>
             <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
@@ -446,7 +449,7 @@
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="ProtocolSemantics">
-      <type metamodel="/0/@metamodelDeclarations.0">
+      <type metamodel="/0/@metamodelDeclarations.1">
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//ProtocolSemantics"/>
       </type>
       <alternatives xsi:type="xtext:Group">
@@ -459,7 +462,7 @@
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="SemanticsRule">
-      <type metamodel="/0/@metamodelDeclarations.0">
+      <type metamodel="/0/@metamodelDeclarations.1">
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//SemanticsRule"/>
       </type>
       <alternatives xsi:type="xtext:Alternatives">
@@ -468,14 +471,14 @@
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="SemanticsInRule">
-      <type metamodel="/0/@metamodelDeclarations.0">
+      <type metamodel="/0/@metamodelDeclarations.1">
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//SemanticsInRule"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Keyword" value="in"/>
         <elements xsi:type="xtext:Assignment" feature="msg" operator="=">
           <terminal xsi:type="xtext:CrossReference">
-            <type metamodel="/0/@metamodelDeclarations.0">
+            <type metamodel="/0/@metamodelDeclarations.1">
               <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//Message"/>
             </type>
             <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
@@ -490,14 +493,14 @@
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="SemanticsOutRule">
-      <type metamodel="/0/@metamodelDeclarations.0">
+      <type metamodel="/0/@metamodelDeclarations.1">
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//SemanticsOutRule"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Keyword" value="out"/>
         <elements xsi:type="xtext:Assignment" feature="msg" operator="=">
           <terminal xsi:type="xtext:CrossReference">
-            <type metamodel="/0/@metamodelDeclarations.0">
+            <type metamodel="/0/@metamodelDeclarations.1">
               <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//Message"/>
             </type>
             <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
@@ -512,7 +515,7 @@
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="ActorClass">
-      <type metamodel="/0/@metamodelDeclarations.0">
+      <type metamodel="/0/@metamodelDeclarations.1">
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//ActorClass"/>
       </type>
       <alternatives xsi:type="xtext:Group">
@@ -530,7 +533,7 @@
           <elements xsi:type="xtext:Keyword" value="extends"/>
           <elements xsi:type="xtext:Assignment" feature="base" operator="=">
             <terminal xsi:type="xtext:CrossReference">
-              <type metamodel="/0/@metamodelDeclarations.0">
+              <type metamodel="/0/@metamodelDeclarations.1">
                 <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//ActorClass"/>
               </type>
               <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.76"/>
@@ -616,7 +619,7 @@
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="InterfaceItem">
-      <type metamodel="/0/@metamodelDeclarations.0">
+      <type metamodel="/0/@metamodelDeclarations.1">
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//InterfaceItem"/>
       </type>
       <alternatives xsi:type="xtext:Alternatives">
@@ -626,7 +629,7 @@
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="Port">
-      <type metamodel="/0/@metamodelDeclarations.0">
+      <type metamodel="/0/@metamodelDeclarations.1">
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//Port"/>
       </type>
       <alternatives xsi:type="xtext:Group">
@@ -637,17 +640,13 @@
         <elements xsi:type="xtext:Assignment" feature="name" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
         </elements>
-        <elements xsi:type="xtext:Group" cardinality="?">
-          <elements xsi:type="xtext:Keyword" value="["/>
-          <elements xsi:type="xtext:Assignment" feature="multiplicity" operator="=">
-            <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.1"/>
-          </elements>
-          <elements xsi:type="xtext:Keyword" value="]"/>
+        <elements xsi:type="xtext:Assignment" cardinality="?" feature="multiplicity" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.77"/>
         </elements>
         <elements xsi:type="xtext:Keyword" value=":"/>
         <elements xsi:type="xtext:Assignment" feature="protocol" operator="=">
           <terminal xsi:type="xtext:CrossReference">
-            <type metamodel="/0/@metamodelDeclarations.0">
+            <type metamodel="/0/@metamodelDeclarations.1">
               <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//ProtocolClass"/>
             </type>
             <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.76"/>
@@ -659,7 +658,7 @@
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="ExternalPort">
-      <type metamodel="/0/@metamodelDeclarations.0">
+      <type metamodel="/0/@metamodelDeclarations.1">
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//ExternalPort"/>
       </type>
       <alternatives xsi:type="xtext:Group">
@@ -667,7 +666,7 @@
         <elements xsi:type="xtext:Keyword" value="Port"/>
         <elements xsi:type="xtext:Assignment" feature="ifport" operator="=">
           <terminal xsi:type="xtext:CrossReference">
-            <type metamodel="/0/@metamodelDeclarations.0">
+            <type metamodel="/0/@metamodelDeclarations.1">
               <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//Port"/>
             </type>
             <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
@@ -676,7 +675,7 @@
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="SAPRef">
-      <type metamodel="/0/@metamodelDeclarations.0">
+      <type metamodel="/0/@metamodelDeclarations.1">
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//SAPRef"/>
       </type>
       <alternatives xsi:type="xtext:Group">
@@ -687,7 +686,7 @@
         <elements xsi:type="xtext:Keyword" value=":"/>
         <elements xsi:type="xtext:Assignment" feature="protocol" operator="=">
           <terminal xsi:type="xtext:CrossReference">
-            <type metamodel="/0/@metamodelDeclarations.0">
+            <type metamodel="/0/@metamodelDeclarations.1">
               <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//ProtocolClass"/>
             </type>
             <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.76"/>
@@ -696,7 +695,7 @@
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="SPPRef">
-      <type metamodel="/0/@metamodelDeclarations.0">
+      <type metamodel="/0/@metamodelDeclarations.1">
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//SPPRef"/>
       </type>
       <alternatives xsi:type="xtext:Group">
@@ -707,7 +706,7 @@
         <elements xsi:type="xtext:Keyword" value=":"/>
         <elements xsi:type="xtext:Assignment" feature="protocol" operator="=">
           <terminal xsi:type="xtext:CrossReference">
-            <type metamodel="/0/@metamodelDeclarations.0">
+            <type metamodel="/0/@metamodelDeclarations.1">
               <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//ProtocolClass"/>
             </type>
             <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.76"/>
@@ -716,7 +715,7 @@
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="ServiceImplementation">
-      <type metamodel="/0/@metamodelDeclarations.0">
+      <type metamodel="/0/@metamodelDeclarations.1">
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//ServiceImplementation"/>
       </type>
       <alternatives xsi:type="xtext:Group">
@@ -724,7 +723,7 @@
         <elements xsi:type="xtext:Keyword" value="of"/>
         <elements xsi:type="xtext:Assignment" feature="spp" operator="=">
           <terminal xsi:type="xtext:CrossReference">
-            <type metamodel="/0/@metamodelDeclarations.0">
+            <type metamodel="/0/@metamodelDeclarations.1">
               <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//SPPRef"/>
             </type>
             <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
@@ -733,7 +732,7 @@
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="LogicalSystem">
-      <type metamodel="/0/@metamodelDeclarations.0">
+      <type metamodel="/0/@metamodelDeclarations.1">
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//LogicalSystem"/>
       </type>
       <alternatives xsi:type="xtext:Group">
@@ -758,7 +757,7 @@
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="ActorContainerRef">
-      <type metamodel="/0/@metamodelDeclarations.0">
+      <type metamodel="/0/@metamodelDeclarations.1">
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//ActorContainerRef"/>
       </type>
       <alternatives xsi:type="xtext:Alternatives">
@@ -767,7 +766,7 @@
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="SubSystemRef">
-      <type metamodel="/0/@metamodelDeclarations.0">
+      <type metamodel="/0/@metamodelDeclarations.1">
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//SubSystemRef"/>
       </type>
       <alternatives xsi:type="xtext:Group">
@@ -778,7 +777,7 @@
         <elements xsi:type="xtext:Keyword" value=":"/>
         <elements xsi:type="xtext:Assignment" feature="type" operator="=">
           <terminal xsi:type="xtext:CrossReference">
-            <type metamodel="/0/@metamodelDeclarations.0">
+            <type metamodel="/0/@metamodelDeclarations.1">
               <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//SubSystemClass"/>
             </type>
             <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.76"/>
@@ -790,7 +789,7 @@
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="SubSystemClass">
-      <type metamodel="/0/@metamodelDeclarations.0">
+      <type metamodel="/0/@metamodelDeclarations.1">
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//SubSystemClass"/>
       </type>
       <alternatives xsi:type="xtext:Group">
@@ -836,7 +835,7 @@
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="LogicalThread">
-      <type metamodel="/0/@metamodelDeclarations.0">
+      <type metamodel="/0/@metamodelDeclarations.1">
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//LogicalThread"/>
       </type>
       <alternatives xsi:type="xtext:Group">
@@ -863,7 +862,7 @@
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="ActorInstancePath">
-      <type metamodel="/0/@metamodelDeclarations.0">
+      <type metamodel="/0/@metamodelDeclarations.1">
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//ActorInstancePath"/>
       </type>
       <alternatives xsi:type="xtext:Group">
@@ -879,7 +878,7 @@
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="Binding">
-      <type metamodel="/0/@metamodelDeclarations.0">
+      <type metamodel="/0/@metamodelDeclarations.1">
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//Binding"/>
       </type>
       <alternatives xsi:type="xtext:Group">
@@ -894,14 +893,14 @@
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="BindingEndPoint">
-      <type metamodel="/0/@metamodelDeclarations.0">
+      <type metamodel="/0/@metamodelDeclarations.1">
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//BindingEndPoint"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Group" cardinality="?">
           <elements xsi:type="xtext:Assignment" feature="actorRef" operator="=">
             <terminal xsi:type="xtext:CrossReference">
-              <type metamodel="/0/@metamodelDeclarations.0">
+              <type metamodel="/0/@metamodelDeclarations.1">
                 <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//ActorContainerRef"/>
               </type>
               <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
@@ -911,7 +910,7 @@
         </elements>
         <elements xsi:type="xtext:Assignment" feature="port" operator="=">
           <terminal xsi:type="xtext:CrossReference">
-            <type metamodel="/0/@metamodelDeclarations.0">
+            <type metamodel="/0/@metamodelDeclarations.1">
               <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//Port"/>
             </type>
             <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
@@ -920,7 +919,7 @@
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="LayerConnection">
-      <type metamodel="/0/@metamodelDeclarations.0">
+      <type metamodel="/0/@metamodelDeclarations.1">
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//LayerConnection"/>
       </type>
       <alternatives xsi:type="xtext:Group">
@@ -935,7 +934,7 @@
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="SAPoint">
-      <type metamodel="/0/@metamodelDeclarations.0">
+      <type metamodel="/0/@metamodelDeclarations.1">
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//SAPoint"/>
       </type>
       <alternatives xsi:type="xtext:Alternatives">
@@ -944,14 +943,14 @@
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="RefSAPoint">
-      <type metamodel="/0/@metamodelDeclarations.0">
+      <type metamodel="/0/@metamodelDeclarations.1">
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//RefSAPoint"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Keyword" value="ref"/>
         <elements xsi:type="xtext:Assignment" feature="ref" operator="=">
           <terminal xsi:type="xtext:CrossReference">
-            <type metamodel="/0/@metamodelDeclarations.0">
+            <type metamodel="/0/@metamodelDeclarations.1">
               <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//ActorContainerRef"/>
             </type>
             <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
@@ -960,14 +959,14 @@
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="RelaySAPoint">
-      <type metamodel="/0/@metamodelDeclarations.0">
+      <type metamodel="/0/@metamodelDeclarations.1">
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//RelaySAPoint"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Keyword" value="relay_sap"/>
         <elements xsi:type="xtext:Assignment" feature="relay" operator="=">
           <terminal xsi:type="xtext:CrossReference">
-            <type metamodel="/0/@metamodelDeclarations.0">
+            <type metamodel="/0/@metamodelDeclarations.1">
               <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//SPPRef"/>
             </type>
             <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
@@ -976,13 +975,13 @@
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="SPPoint">
-      <type metamodel="/0/@metamodelDeclarations.0">
+      <type metamodel="/0/@metamodelDeclarations.1">
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//SPPoint"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Assignment" feature="ref" operator="=">
           <terminal xsi:type="xtext:CrossReference">
-            <type metamodel="/0/@metamodelDeclarations.0">
+            <type metamodel="/0/@metamodelDeclarations.1">
               <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//ActorContainerRef"/>
             </type>
             <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
@@ -991,7 +990,7 @@
         <elements xsi:type="xtext:Keyword" value="."/>
         <elements xsi:type="xtext:Assignment" feature="service" operator="=">
           <terminal xsi:type="xtext:CrossReference">
-            <type metamodel="/0/@metamodelDeclarations.0">
+            <type metamodel="/0/@metamodelDeclarations.1">
               <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//SPPRef"/>
             </type>
             <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
@@ -1000,7 +999,7 @@
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="ActorRef">
-      <type metamodel="/0/@metamodelDeclarations.0">
+      <type metamodel="/0/@metamodelDeclarations.1">
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//ActorRef"/>
       </type>
       <alternatives xsi:type="xtext:Group">
@@ -1011,7 +1010,7 @@
         <elements xsi:type="xtext:Keyword" value=":"/>
         <elements xsi:type="xtext:Assignment" feature="type" operator="=">
           <terminal xsi:type="xtext:CrossReference">
-            <type metamodel="/0/@metamodelDeclarations.0">
+            <type metamodel="/0/@metamodelDeclarations.1">
               <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//ActorClass"/>
             </type>
             <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.76"/>
@@ -1023,7 +1022,7 @@
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="StateGraphNode">
-      <type metamodel="/0/@metamodelDeclarations.0">
+      <type metamodel="/0/@metamodelDeclarations.1">
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//StateGraphNode"/>
       </type>
       <alternatives xsi:type="xtext:Alternatives">
@@ -1033,7 +1032,7 @@
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="StateGraphItem">
-      <type metamodel="/0/@metamodelDeclarations.0">
+      <type metamodel="/0/@metamodelDeclarations.1">
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//StateGraphItem"/>
       </type>
       <alternatives xsi:type="xtext:Alternatives">
@@ -1042,7 +1041,7 @@
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="State">
-      <type metamodel="/0/@metamodelDeclarations.0">
+      <type metamodel="/0/@metamodelDeclarations.1">
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//State"/>
       </type>
       <alternatives xsi:type="xtext:Alternatives">
@@ -1051,7 +1050,7 @@
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="StateGraph">
-      <type metamodel="/0/@metamodelDeclarations.0">
+      <type metamodel="/0/@metamodelDeclarations.1">
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//StateGraph"/>
       </type>
       <alternatives xsi:type="xtext:Alternatives">
@@ -1060,12 +1059,12 @@
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="PlainStateGraph">
-      <type metamodel="/0/@metamodelDeclarations.0">
+      <type metamodel="/0/@metamodelDeclarations.1">
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//StateGraph"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Action">
-          <type metamodel="/0/@metamodelDeclarations.0">
+          <type metamodel="/0/@metamodelDeclarations.1">
             <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//PlainStateGraph"/>
           </type>
         </elements>
@@ -1088,12 +1087,12 @@
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="StateMachine">
-      <type metamodel="/0/@metamodelDeclarations.0">
+      <type metamodel="/0/@metamodelDeclarations.1">
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//StateMachine"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Action">
-          <type metamodel="/0/@metamodelDeclarations.0">
+          <type metamodel="/0/@metamodelDeclarations.1">
             <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//StateMachine"/>
           </type>
         </elements>
@@ -1120,7 +1119,7 @@
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="BaseState">
-      <type metamodel="/0/@metamodelDeclarations.0">
+      <type metamodel="/0/@metamodelDeclarations.1">
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//BaseState"/>
       </type>
       <alternatives xsi:type="xtext:Group">
@@ -1162,14 +1161,14 @@
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="RefinedState">
-      <type metamodel="/0/@metamodelDeclarations.0">
+      <type metamodel="/0/@metamodelDeclarations.1">
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//RefinedState"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Keyword" value="RefinedState"/>
         <elements xsi:type="xtext:Assignment" feature="base" operator="=">
           <terminal xsi:type="xtext:CrossReference">
-            <type metamodel="/0/@metamodelDeclarations.0">
+            <type metamodel="/0/@metamodelDeclarations.1">
               <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//BaseState"/>
             </type>
             <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.76"/>
@@ -1207,7 +1206,7 @@
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="DetailCode">
-      <type metamodel="/0/@metamodelDeclarations.0">
+      <type metamodel="/0/@metamodelDeclarations.1">
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//DetailCode"/>
       </type>
       <alternatives xsi:type="xtext:Group">
@@ -1219,7 +1218,7 @@
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="TrPoint">
-      <type metamodel="/0/@metamodelDeclarations.0">
+      <type metamodel="/0/@metamodelDeclarations.1">
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//TrPoint"/>
       </type>
       <alternatives xsi:type="xtext:Alternatives">
@@ -1229,7 +1228,7 @@
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="TransitionPoint">
-      <type metamodel="/0/@metamodelDeclarations.0">
+      <type metamodel="/0/@metamodelDeclarations.1">
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//TransitionPoint"/>
       </type>
       <alternatives xsi:type="xtext:Group">
@@ -1243,7 +1242,7 @@
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="EntryPoint">
-      <type metamodel="/0/@metamodelDeclarations.0">
+      <type metamodel="/0/@metamodelDeclarations.1">
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//EntryPoint"/>
       </type>
       <alternatives xsi:type="xtext:Group">
@@ -1254,7 +1253,7 @@
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="ExitPoint">
-      <type metamodel="/0/@metamodelDeclarations.0">
+      <type metamodel="/0/@metamodelDeclarations.1">
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//ExitPoint"/>
       </type>
       <alternatives xsi:type="xtext:Group">
@@ -1265,7 +1264,7 @@
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="ChoicePoint">
-      <type metamodel="/0/@metamodelDeclarations.0">
+      <type metamodel="/0/@metamodelDeclarations.1">
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//ChoicePoint"/>
       </type>
       <alternatives xsi:type="xtext:Group">
@@ -1279,7 +1278,7 @@
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="Transition">
-      <type metamodel="/0/@metamodelDeclarations.0">
+      <type metamodel="/0/@metamodelDeclarations.1">
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//Transition"/>
       </type>
       <alternatives xsi:type="xtext:Alternatives">
@@ -1288,7 +1287,7 @@
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="NonInitialTransition">
-      <type metamodel="/0/@metamodelDeclarations.0">
+      <type metamodel="/0/@metamodelDeclarations.1">
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//NonInitialTransition"/>
       </type>
       <alternatives xsi:type="xtext:Alternatives">
@@ -1299,7 +1298,7 @@
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="InitialTransition">
-      <type metamodel="/0/@metamodelDeclarations.0">
+      <type metamodel="/0/@metamodelDeclarations.1">
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//InitialTransition"/>
       </type>
       <alternatives xsi:type="xtext:Group">
@@ -1327,7 +1326,7 @@
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="ContinuationTransition">
-      <type metamodel="/0/@metamodelDeclarations.0">
+      <type metamodel="/0/@metamodelDeclarations.1">
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//ContinuationTransition"/>
       </type>
       <alternatives xsi:type="xtext:Group">
@@ -1359,7 +1358,7 @@
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="TriggeredTransition">
-      <type metamodel="/0/@metamodelDeclarations.0">
+      <type metamodel="/0/@metamodelDeclarations.1">
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//TriggeredTransition"/>
       </type>
       <alternatives xsi:type="xtext:Group">
@@ -1401,7 +1400,7 @@
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="GuardedTransition">
-      <type metamodel="/0/@metamodelDeclarations.0">
+      <type metamodel="/0/@metamodelDeclarations.1">
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//GuardedTransition"/>
       </type>
       <alternatives xsi:type="xtext:Group">
@@ -1435,7 +1434,7 @@
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="CPBranchTransition">
-      <type metamodel="/0/@metamodelDeclarations.0">
+      <type metamodel="/0/@metamodelDeclarations.1">
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//CPBranchTransition"/>
       </type>
       <alternatives xsi:type="xtext:Group">
@@ -1469,7 +1468,7 @@
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="TransitionTerminal">
-      <type metamodel="/0/@metamodelDeclarations.0">
+      <type metamodel="/0/@metamodelDeclarations.1">
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//TransitionTerminal"/>
       </type>
       <alternatives xsi:type="xtext:Alternatives">
@@ -1480,12 +1479,12 @@
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="StateTerminal">
-      <type metamodel="/0/@metamodelDeclarations.0">
+      <type metamodel="/0/@metamodelDeclarations.1">
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//StateTerminal"/>
       </type>
       <alternatives xsi:type="xtext:Assignment" feature="state" operator="=">
         <terminal xsi:type="xtext:CrossReference">
-          <type metamodel="/0/@metamodelDeclarations.0">
+          <type metamodel="/0/@metamodelDeclarations.1">
             <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//BaseState"/>
           </type>
           <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
@@ -1493,14 +1492,14 @@
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="TrPointTerminal">
-      <type metamodel="/0/@metamodelDeclarations.0">
+      <type metamodel="/0/@metamodelDeclarations.1">
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//TrPointTerminal"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Keyword" value="my"/>
         <elements xsi:type="xtext:Assignment" feature="trPoint" operator="=">
           <terminal xsi:type="xtext:CrossReference">
-            <type metamodel="/0/@metamodelDeclarations.0">
+            <type metamodel="/0/@metamodelDeclarations.1">
               <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//TrPoint"/>
             </type>
             <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
@@ -1509,13 +1508,13 @@
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="SubStateTrPointTerminal">
-      <type metamodel="/0/@metamodelDeclarations.0">
+      <type metamodel="/0/@metamodelDeclarations.1">
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//SubStateTrPointTerminal"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Assignment" feature="trPoint" operator="=">
           <terminal xsi:type="xtext:CrossReference">
-            <type metamodel="/0/@metamodelDeclarations.0">
+            <type metamodel="/0/@metamodelDeclarations.1">
               <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//TrPoint"/>
             </type>
             <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
@@ -1524,7 +1523,7 @@
         <elements xsi:type="xtext:Keyword" value="of"/>
         <elements xsi:type="xtext:Assignment" feature="state" operator="=">
           <terminal xsi:type="xtext:CrossReference">
-            <type metamodel="/0/@metamodelDeclarations.0">
+            <type metamodel="/0/@metamodelDeclarations.1">
               <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//BaseState"/>
             </type>
             <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
@@ -1533,14 +1532,14 @@
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="ChoicepointTerminal">
-      <type metamodel="/0/@metamodelDeclarations.0">
+      <type metamodel="/0/@metamodelDeclarations.1">
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//ChoicepointTerminal"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Keyword" value="cp"/>
         <elements xsi:type="xtext:Assignment" feature="cp" operator="=">
           <terminal xsi:type="xtext:CrossReference">
-            <type metamodel="/0/@metamodelDeclarations.0">
+            <type metamodel="/0/@metamodelDeclarations.1">
               <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//ChoicePoint"/>
             </type>
             <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
@@ -1549,7 +1548,7 @@
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="Trigger">
-      <type metamodel="/0/@metamodelDeclarations.0">
+      <type metamodel="/0/@metamodelDeclarations.1">
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//Trigger"/>
       </type>
       <alternatives xsi:type="xtext:Group">
@@ -1570,13 +1569,13 @@
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="MessageFromIf">
-      <type metamodel="/0/@metamodelDeclarations.0">
+      <type metamodel="/0/@metamodelDeclarations.1">
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//MessageFromIf"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Assignment" feature="message" operator="=">
           <terminal xsi:type="xtext:CrossReference">
-            <type metamodel="/0/@metamodelDeclarations.0">
+            <type metamodel="/0/@metamodelDeclarations.1">
               <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//Message"/>
             </type>
             <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
@@ -1585,7 +1584,7 @@
         <elements xsi:type="xtext:Keyword" value=":"/>
         <elements xsi:type="xtext:Assignment" feature="from" operator="=">
           <terminal xsi:type="xtext:CrossReference">
-            <type metamodel="/0/@metamodelDeclarations.0">
+            <type metamodel="/0/@metamodelDeclarations.1">
               <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//InterfaceItem"/>
             </type>
             <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
@@ -1594,7 +1593,7 @@
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="Guard">
-      <type metamodel="/0/@metamodelDeclarations.0">
+      <type metamodel="/0/@metamodelDeclarations.1">
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//Guard"/>
       </type>
       <alternatives xsi:type="xtext:Group">
@@ -1605,7 +1604,7 @@
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="Documentation">
-      <type metamodel="/0/@metamodelDeclarations.0">
+      <type metamodel="/0/@metamodelDeclarations.1">
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//Documentation"/>
       </type>
       <alternatives xsi:type="xtext:Group">
@@ -1617,7 +1616,7 @@
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="Annotation">
-      <type metamodel="/0/@metamodelDeclarations.0">
+      <type metamodel="/0/@metamodelDeclarations.1">
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//Annotation"/>
       </type>
       <alternatives xsi:type="xtext:Group">
@@ -1641,7 +1640,7 @@
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="KeyValue">
-      <type metamodel="/0/@metamodelDeclarations.0">
+      <type metamodel="/0/@metamodelDeclarations.1">
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//KeyValue"/>
       </type>
       <alternatives xsi:type="xtext:Group">
@@ -1655,7 +1654,7 @@
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="Import">
-      <type metamodel="/0/@metamodelDeclarations.0">
+      <type metamodel="/0/@metamodelDeclarations.1">
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//Import"/>
       </type>
       <alternatives xsi:type="xtext:Group">
@@ -1675,7 +1674,7 @@
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="ImportedFQN">
-      <type metamodel="/1/@metamodelDeclarations.0">
+      <type metamodel="/0/@metamodelDeclarations.0">
         <classifier xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       </type>
       <alternatives xsi:type="xtext:Group">
@@ -1687,7 +1686,7 @@
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="FQN">
-      <type metamodel="/1/@metamodelDeclarations.0">
+      <type metamodel="/0/@metamodelDeclarations.0">
         <classifier xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       </type>
       <alternatives xsi:type="xtext:Group">
@@ -1696,6 +1695,22 @@
           <elements xsi:type="xtext:Keyword" value="."/>
           <elements xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
         </elements>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:TerminalRule" name="MULTIPLICITY">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:Keyword" value="["/>
+        <elements xsi:type="xtext:Alternatives">
+          <elements xsi:type="xtext:Keyword" value="*"/>
+          <elements xsi:type="xtext:CharacterRange" cardinality="+">
+            <left value="0"/>
+            <right value="9"/>
+          </elements>
+        </elements>
+        <elements xsi:type="xtext:Keyword" value="]"/>
       </alternatives>
     </rules>
   </xtext:Grammar>

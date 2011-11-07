@@ -25,6 +25,7 @@ import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.LayerConnection;
 import org.eclipse.etrice.core.room.LogicalSystem;
 import org.eclipse.etrice.core.room.NonInitialTransition;
+import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RoomClass;
 import org.eclipse.etrice.core.room.RoomPackage;
@@ -196,6 +197,14 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 		Result result = ValidationUtil.checkState(state);
 		if (!result.isOk())
 			error(result);
+	}
+	
+	@Check
+	public void checkPort(Port port) {
+		if (port.getMultiplicity()==0)
+			error("multiplicity must not be 0", RoomPackage.eINSTANCE.getPort_Multiplicity());
+		if (port.getMultiplicity()<-1)
+			error("multiplicity must be -1 or positive", RoomPackage.eINSTANCE.getPort_Multiplicity());
 	}
 	
 	private void error(Result result) {

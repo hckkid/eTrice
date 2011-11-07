@@ -7257,13 +7257,12 @@ protected class InterfaceItem_SPPRefParserRuleCall_2 extends RuleCallToken {
 /************ begin Rule Port ****************
  *
  * Port:
- * 	conjugated?="conjugated"? "Port" name=ID ("[" multiplicity=INT "]")? ":" protocol=[ProtocolClass|FQN]
+ * 	conjugated?="conjugated"? "Port" name=ID multiplicity=MULTIPLICITY? ":" protocol=[ProtocolClass|FQN]
  * 	docu=Documentation?;
  *
  **/
 
-// conjugated?="conjugated"? "Port" name=ID ("[" multiplicity=INT "]")? ":" protocol=[ProtocolClass|FQN]
-// docu=Documentation?
+// conjugated?="conjugated"? "Port" name=ID multiplicity=MULTIPLICITY? ":" protocol=[ProtocolClass|FQN] docu=Documentation?
 protected class Port_Group extends GroupToken {
 	
 	public Port_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -7382,38 +7381,16 @@ protected class Port_NameAssignment_2 extends AssignmentToken  {
 
 }
 
-// ("[" multiplicity=INT "]")?
-protected class Port_Group_3 extends GroupToken {
+// multiplicity=MULTIPLICITY?
+protected class Port_MultiplicityAssignment_3 extends AssignmentToken  {
 	
-	public Port_Group_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public Port_MultiplicityAssignment_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
-	public Group getGrammarElement() {
-		return grammarAccess.getPortAccess().getGroup_3();
-	}
-
-    @Override
-	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
-		switch(index) {
-			case 0: return new Port_RightSquareBracketKeyword_3_2(lastRuleCallOrigin, this, 0, inst);
-			default: return null;
-		}	
-	}
-
-}
-
-// "["
-protected class Port_LeftSquareBracketKeyword_3_0 extends KeywordToken  {
-	
-	public Port_LeftSquareBracketKeyword_3_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
-		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
-	}
-	
-	@Override
-	public Keyword getGrammarElement() {
-		return grammarAccess.getPortAccess().getLeftSquareBracketKeyword_3_0();
+	public Assignment getGrammarElement() {
+		return grammarAccess.getPortAccess().getMultiplicityAssignment_3();
 	}
 
     @Override
@@ -7424,64 +7401,19 @@ protected class Port_LeftSquareBracketKeyword_3_0 extends KeywordToken  {
 		}	
 	}
 
-}
-
-// multiplicity=INT
-protected class Port_MultiplicityAssignment_3_1 extends AssignmentToken  {
-	
-	public Port_MultiplicityAssignment_3_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
-		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
-	}
-	
-	@Override
-	public Assignment getGrammarElement() {
-		return grammarAccess.getPortAccess().getMultiplicityAssignment_3_1();
-	}
-
-    @Override
-	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
-		switch(index) {
-			case 0: return new Port_LeftSquareBracketKeyword_3_0(lastRuleCallOrigin, this, 0, inst);
-			default: return null;
-		}	
-	}
-
     @Override	
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("multiplicity",false)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("multiplicity");
-		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getPortAccess().getMultiplicityINTTerminalRuleCall_3_1_0(), value, null)) {
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getPortAccess().getMultiplicityMULTIPLICITYTerminalRuleCall_3_0(), value, null)) {
 			type = AssignmentType.TERMINAL_RULE_CALL;
-			element = grammarAccess.getPortAccess().getMultiplicityINTTerminalRuleCall_3_1_0();
+			element = grammarAccess.getPortAccess().getMultiplicityMULTIPLICITYTerminalRuleCall_3_0();
 			return obj;
 		}
 		return null;
 	}
 
 }
-
-// "]"
-protected class Port_RightSquareBracketKeyword_3_2 extends KeywordToken  {
-	
-	public Port_RightSquareBracketKeyword_3_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
-		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
-	}
-	
-	@Override
-	public Keyword getGrammarElement() {
-		return grammarAccess.getPortAccess().getRightSquareBracketKeyword_3_2();
-	}
-
-    @Override
-	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
-		switch(index) {
-			case 0: return new Port_MultiplicityAssignment_3_1(lastRuleCallOrigin, this, 0, inst);
-			default: return null;
-		}	
-	}
-
-}
-
 
 // ":"
 protected class Port_ColonKeyword_4 extends KeywordToken  {
@@ -7498,7 +7430,7 @@ protected class Port_ColonKeyword_4 extends KeywordToken  {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Port_Group_3(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new Port_MultiplicityAssignment_3(lastRuleCallOrigin, this, 0, inst);
 			case 1: return new Port_NameAssignment_2(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	

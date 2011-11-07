@@ -236,7 +236,7 @@ public class ValidationUtil {
 	}
 	
 	public static Result isConnectable(Port port, ActorContainerRef ref, StructureClass acc, Binding exclude) {
-		if (port.getMultiplicity()==1 && isConnected(port, ref, acc, exclude))
+		if (!port.isReplicated() && isConnected(port, ref, acc, exclude))
 			return Result.error("port with multiplicity 1 is already connected");
 
 		if (acc instanceof ActorClass) {
@@ -299,9 +299,9 @@ public class ValidationUtil {
 					return Result.error("connected relay port must have same direction");
 				
 				// both must be replicated or both must be not
-				if (local.getMultiplicity()>1 && sub.getMultiplicity()==1)
+				if (local.isReplicated() && !sub.isReplicated())
 					return Result.error("connected relay port must match replication type of peer");
-				if (local.getMultiplicity()==1 && sub.getMultiplicity()>1)
+				if (!local.isReplicated() && sub.isReplicated())
 					return Result.error("connected relay port must match replication type of peer");
 
 				Result result = isConnectable(local, null, acc, exclude);
@@ -317,7 +317,7 @@ public class ValidationUtil {
 				if (local.isConjugated()==sub.isConjugated())
 					return Result.error("internal end port must have opposite direction");
 				
-				if (local.getMultiplicity()>1 && sub.getMultiplicity()>1)
+				if (local.isReplicated() && sub.isReplicated())
 					return Result.error("not both ports can be replicated");
 			}
 		}

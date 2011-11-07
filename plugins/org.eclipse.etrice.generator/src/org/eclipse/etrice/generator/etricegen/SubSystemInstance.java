@@ -17,7 +17,7 @@ import org.eclipse.etrice.core.room.SubSystemClass;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.eclipse.etrice.generator.etricegen.SubSystemInstance#getSubSystemClass <em>Sub System Class</em>}</li>
- *   <li>{@link org.eclipse.etrice.generator.etricegen.SubSystemInstance#getObjCounter <em>Obj Counter</em>}</li>
+ *   <li>{@link org.eclipse.etrice.generator.etricegen.SubSystemInstance#getMaxObjId <em>Max Obj Id</em>}</li>
  * </ul>
  * </p>
  *
@@ -53,30 +53,19 @@ public interface SubSystemInstance extends StructureInstance {
 	void setSubSystemClass(SubSystemClass value);
 
 	/**
-	 * Returns the value of the '<em><b>Obj Counter</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Max Obj Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Obj Counter</em>' reference isn't clear,
+	 * If the meaning of the '<em>Max Obj Id</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Obj Counter</em>' containment reference.
-	 * @see #setObjCounter(Counter)
-	 * @see org.eclipse.etrice.generator.etricegen.ETriceGenPackage#getSubSystemInstance_ObjCounter()
-	 * @model containment="true"
+	 * @return the value of the '<em>Max Obj Id</em>' attribute.
+	 * @see org.eclipse.etrice.generator.etricegen.ETriceGenPackage#getSubSystemInstance_MaxObjId()
+	 * @model transient="true" changeable="false" volatile="true" derived="true"
 	 * @generated
 	 */
-	Counter getObjCounter();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.etrice.generator.etricegen.SubSystemInstance#getObjCounter <em>Obj Counter</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Obj Counter</em>' containment reference.
-	 * @see #getObjCounter()
-	 * @generated
-	 */
-	void setObjCounter(Counter value);
+	int getMaxObjId();
 
 	/**
 	 * <!-- begin-user-doc -->

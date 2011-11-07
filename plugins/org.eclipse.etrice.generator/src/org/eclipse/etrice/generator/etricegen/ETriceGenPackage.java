@@ -163,34 +163,6 @@ public interface ETriceGenPackage extends EPackage {
 	int ROOT_FEATURE_COUNT = 9;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.etrice.generator.etricegen.impl.CounterImpl <em>Counter</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.etrice.generator.etricegen.impl.CounterImpl
-	 * @see org.eclipse.etrice.generator.etricegen.impl.ETriceGenPackageImpl#getCounter()
-	 * @generated
-	 */
-	int COUNTER = 1;
-
-	/**
-	 * The feature id for the '<em><b>Counter</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COUNTER__COUNTER = 0;
-
-	/**
-	 * The number of structural features of the '<em>Counter</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COUNTER_FEATURE_COUNT = 1;
-
-	/**
 	 * The meta object id for the '{@link org.eclipse.etrice.generator.etricegen.impl.InstanceBaseImpl <em>Instance Base</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -198,7 +170,7 @@ public interface ETriceGenPackage extends EPackage {
 	 * @see org.eclipse.etrice.generator.etricegen.impl.ETriceGenPackageImpl#getInstanceBase()
 	 * @generated
 	 */
-	int INSTANCE_BASE = 2;
+	int INSTANCE_BASE = 1;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -253,7 +225,7 @@ public interface ETriceGenPackage extends EPackage {
 	 * @see org.eclipse.etrice.generator.etricegen.impl.ETriceGenPackageImpl#getStructureInstance()
 	 * @generated
 	 */
-	int STRUCTURE_INSTANCE = 3;
+	int STRUCTURE_INSTANCE = 2;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -389,7 +361,7 @@ public interface ETriceGenPackage extends EPackage {
 	 * @see org.eclipse.etrice.generator.etricegen.impl.ETriceGenPackageImpl#getSubSystemInstance()
 	 * @generated
 	 */
-	int SUB_SYSTEM_INSTANCE = 4;
+	int SUB_SYSTEM_INSTANCE = 3;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -518,13 +490,13 @@ public interface ETriceGenPackage extends EPackage {
 	int SUB_SYSTEM_INSTANCE__SUB_SYSTEM_CLASS = STRUCTURE_INSTANCE_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Obj Counter</b></em>' containment reference.
+	 * The feature id for the '<em><b>Max Obj Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SUB_SYSTEM_INSTANCE__OBJ_COUNTER = STRUCTURE_INSTANCE_FEATURE_COUNT + 1;
+	int SUB_SYSTEM_INSTANCE__MAX_OBJ_ID = STRUCTURE_INSTANCE_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Sub System Instance</em>' class.
@@ -543,7 +515,7 @@ public interface ETriceGenPackage extends EPackage {
 	 * @see org.eclipse.etrice.generator.etricegen.impl.ETriceGenPackageImpl#getActorInstance()
 	 * @generated
 	 */
-	int ACTOR_INSTANCE = 5;
+	int ACTOR_INSTANCE = 4;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -688,7 +660,7 @@ public interface ETriceGenPackage extends EPackage {
 	 * @see org.eclipse.etrice.generator.etricegen.impl.ETriceGenPackageImpl#getInterfaceItemInstance()
 	 * @generated
 	 */
-	int INTERFACE_ITEM_INSTANCE = 6;
+	int INTERFACE_ITEM_INSTANCE = 5;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -752,7 +724,7 @@ public interface ETriceGenPackage extends EPackage {
 	 * @see org.eclipse.etrice.generator.etricegen.impl.ETriceGenPackageImpl#getPortInstance()
 	 * @generated
 	 */
-	int PORT_INSTANCE = 7;
+	int PORT_INSTANCE = 6;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -843,7 +815,7 @@ public interface ETriceGenPackage extends EPackage {
 	 * @see org.eclipse.etrice.generator.etricegen.impl.ETriceGenPackageImpl#getBindingInstance()
 	 * @generated
 	 */
-	int BINDING_INSTANCE = 8;
+	int BINDING_INSTANCE = 7;
 
 	/**
 	 * The feature id for the '<em><b>Ports</b></em>' reference list.
@@ -871,7 +843,7 @@ public interface ETriceGenPackage extends EPackage {
 	 * @see org.eclipse.etrice.generator.etricegen.impl.ETriceGenPackageImpl#getSAPInstance()
 	 * @generated
 	 */
-	int SAP_INSTANCE = 9;
+	int SAP_INSTANCE = 8;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -944,7 +916,7 @@ public interface ETriceGenPackage extends EPackage {
 	 * @see org.eclipse.etrice.generator.etricegen.impl.ETriceGenPackageImpl#getSPPInstance()
 	 * @generated
 	 */
-	int SPP_INSTANCE = 10;
+	int SPP_INSTANCE = 9;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1026,7 +998,7 @@ public interface ETriceGenPackage extends EPackage {
 	 * @see org.eclipse.etrice.generator.etricegen.impl.ETriceGenPackageImpl#getServiceImplInstance()
 	 * @generated
 	 */
-	int SERVICE_IMPL_INSTANCE = 11;
+	int SERVICE_IMPL_INSTANCE = 10;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1099,7 +1071,7 @@ public interface ETriceGenPackage extends EPackage {
 	 * @see org.eclipse.etrice.generator.etricegen.impl.ETriceGenPackageImpl#getConnectionInstance()
 	 * @generated
 	 */
-	int CONNECTION_INSTANCE = 12;
+	int CONNECTION_INSTANCE = 11;
 
 	/**
 	 * The feature id for the '<em><b>From AI</b></em>' reference.
@@ -1154,7 +1126,7 @@ public interface ETriceGenPackage extends EPackage {
 	 * @see org.eclipse.etrice.generator.etricegen.impl.ETriceGenPackageImpl#getActiveTrigger()
 	 * @generated
 	 */
-	int ACTIVE_TRIGGER = 13;
+	int ACTIVE_TRIGGER = 12;
 
 	/**
 	 * The feature id for the '<em><b>Msg</b></em>' reference.
@@ -1209,7 +1181,7 @@ public interface ETriceGenPackage extends EPackage {
 	 * @see org.eclipse.etrice.generator.etricegen.impl.ETriceGenPackageImpl#getTransitionChain()
 	 * @generated
 	 */
-	int TRANSITION_CHAIN = 14;
+	int TRANSITION_CHAIN = 13;
 
 	/**
 	 * The feature id for the '<em><b>Transition</b></em>' reference.
@@ -1246,7 +1218,7 @@ public interface ETriceGenPackage extends EPackage {
 	 * @see org.eclipse.etrice.generator.etricegen.impl.ETriceGenPackageImpl#getITransitionChainVisitor()
 	 * @generated
 	 */
-	int ITRANSITION_CHAIN_VISITOR = 15;
+	int ITRANSITION_CHAIN_VISITOR = 14;
 
 	/**
 	 * The number of structural features of the '<em>ITransition Chain Visitor</em>' class.
@@ -1265,7 +1237,7 @@ public interface ETriceGenPackage extends EPackage {
 	 * @see org.eclipse.etrice.generator.etricegen.impl.ETriceGenPackageImpl#getIDiagnostician()
 	 * @generated
 	 */
-	int IDIAGNOSTICIAN = 16;
+	int IDIAGNOSTICIAN = 15;
 
 	/**
 	 * The number of structural features of the '<em>IDiagnostician</em>' class.
@@ -1284,7 +1256,7 @@ public interface ETriceGenPackage extends EPackage {
 	 * @see org.eclipse.etrice.generator.etricegen.impl.ETriceGenPackageImpl#getExpandedActorClass()
 	 * @generated
 	 */
-	int EXPANDED_ACTOR_CLASS = 17;
+	int EXPANDED_ACTOR_CLASS = 16;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1501,7 +1473,7 @@ public interface ETriceGenPackage extends EPackage {
 	 * @see org.eclipse.etrice.generator.etricegen.impl.ETriceGenPackageImpl#getPortKind()
 	 * @generated
 	 */
-	int PORT_KIND = 18;
+	int PORT_KIND = 17;
 
 
 	/**
@@ -1612,27 +1584,6 @@ public interface ETriceGenPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getRoot_SubSystemInstances();
-
-	/**
-	 * Returns the meta object for class '{@link org.eclipse.etrice.generator.etricegen.Counter <em>Counter</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Counter</em>'.
-	 * @see org.eclipse.etrice.generator.etricegen.Counter
-	 * @generated
-	 */
-	EClass getCounter();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.etrice.generator.etricegen.Counter#getCounter <em>Counter</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Counter</em>'.
-	 * @see org.eclipse.etrice.generator.etricegen.Counter#getCounter()
-	 * @see #getCounter()
-	 * @generated
-	 */
-	EAttribute getCounter_Counter();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.etrice.generator.etricegen.InstanceBase <em>Instance Base</em>}'.
@@ -1819,15 +1770,15 @@ public interface ETriceGenPackage extends EPackage {
 	EReference getSubSystemInstance_SubSystemClass();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.etrice.generator.etricegen.SubSystemInstance#getObjCounter <em>Obj Counter</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.etrice.generator.etricegen.SubSystemInstance#getMaxObjId <em>Max Obj Id</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Obj Counter</em>'.
-	 * @see org.eclipse.etrice.generator.etricegen.SubSystemInstance#getObjCounter()
+	 * @return the meta object for the attribute '<em>Max Obj Id</em>'.
+	 * @see org.eclipse.etrice.generator.etricegen.SubSystemInstance#getMaxObjId()
 	 * @see #getSubSystemInstance()
 	 * @generated
 	 */
-	EReference getSubSystemInstance_ObjCounter();
+	EAttribute getSubSystemInstance_MaxObjId();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.etrice.generator.etricegen.ActorInstance <em>Actor Instance</em>}'.
@@ -2318,24 +2269,6 @@ public interface ETriceGenPackage extends EPackage {
 		EReference ROOT__SUB_SYSTEM_INSTANCES = eINSTANCE.getRoot_SubSystemInstances();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.etrice.generator.etricegen.impl.CounterImpl <em>Counter</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipse.etrice.generator.etricegen.impl.CounterImpl
-		 * @see org.eclipse.etrice.generator.etricegen.impl.ETriceGenPackageImpl#getCounter()
-		 * @generated
-		 */
-		EClass COUNTER = eINSTANCE.getCounter();
-
-		/**
-		 * The meta object literal for the '<em><b>Counter</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute COUNTER__COUNTER = eINSTANCE.getCounter_Counter();
-
-		/**
 		 * The meta object literal for the '{@link org.eclipse.etrice.generator.etricegen.impl.InstanceBaseImpl <em>Instance Base</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2478,12 +2411,12 @@ public interface ETriceGenPackage extends EPackage {
 		EReference SUB_SYSTEM_INSTANCE__SUB_SYSTEM_CLASS = eINSTANCE.getSubSystemInstance_SubSystemClass();
 
 		/**
-		 * The meta object literal for the '<em><b>Obj Counter</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Max Obj Id</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference SUB_SYSTEM_INSTANCE__OBJ_COUNTER = eINSTANCE.getSubSystemInstance_ObjCounter();
+		EAttribute SUB_SYSTEM_INSTANCE__MAX_OBJ_ID = eINSTANCE.getSubSystemInstance_MaxObjId();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.etrice.generator.etricegen.impl.ActorInstanceImpl <em>Actor Instance</em>}' class.

@@ -45,10 +45,10 @@ import org.eclipse.etrice.generator.base.ILogger;
 import org.eclipse.etrice.generator.etricegen.ActorInstance;
 import org.eclipse.etrice.generator.etricegen.BindingInstance;
 import org.eclipse.etrice.generator.etricegen.ConnectionInstance;
-import org.eclipse.etrice.generator.etricegen.Counter;
 import org.eclipse.etrice.generator.etricegen.ETriceGenFactory;
 import org.eclipse.etrice.generator.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.generator.etricegen.IDiagnostician;
+import org.eclipse.etrice.generator.etricegen.InstanceBase;
 import org.eclipse.etrice.generator.etricegen.PortInstance;
 import org.eclipse.etrice.generator.etricegen.PortKind;
 import org.eclipse.etrice.generator.etricegen.Root;
@@ -77,6 +77,11 @@ public class GeneratorModelBuilder {
 	 * a set containing all relay ports for fast frequent access to this information
 	 */
 	private HashSet<Port> relayPorts = new HashSet<Port>();
+	
+	/**
+	 * a list containing all InstanceBase objects
+	 */
+	private LinkedList<InstanceBase> allObjects = new LinkedList<InstanceBase>();
 	
 	/**
 	 * an instance of a logger
@@ -138,6 +143,8 @@ public class GeneratorModelBuilder {
 			checkPortMultiplicity(root);
 			
 			connectServices(root);
+			
+			setObjectIDs();
 		}
 		
 		// transform actor classes
@@ -267,7 +274,6 @@ public class GeneratorModelBuilder {
 	private void bindSAPs(Root root) {
 		for (SubSystemInstance comp : root.getSubSystemInstances()) {
 			bindSAPs(comp);
-			setServiceObjectIDs(comp, comp.getObjCounter());
 		}
 	}
 
@@ -318,22 +324,6 @@ public class GeneratorModelBuilder {
 	}
 
 	/**
-	 * Finally recursively the Address object IDs are calculated and assigned
-	 * @param si
-	 * @param counter
-	 */
-	private void setServiceObjectIDs(StructureInstance si, Counter counter) {
-		for (ServiceImplInstance svc : si.getServices()) {
-			svc.setObjId(counter.getAndIncrementCount(svc.getPeers().size()));
-		}
-		
-		// recursive call for all children
-		for (ActorInstance child : si.getInstances()) {
-			setServiceObjectIDs(child, counter);
-		}
-	}
-
-	/**
 	 * for efficiency reasons we create a set holding all relay ports
 	 * @param root - the root object
 	 */
@@ -370,6 +360,43 @@ public class GeneratorModelBuilder {
 	}
 
 	/**
+	 * this method loops over all InstaneBase objects and sets the ObjId. It starts enumerating at
+	 * offset {@link OBJ_ID_OFFSET}
+	 */
+	private void setObjectIDs() {
+		int counter = 0;
+		for (InstanceBase obj : allObjects) {
+			if (obj instanceof SubSystemInstance) {
+				counter = OBJ_ID_OFFSET;
+				obj.setObjId(counter++);
+			}
+			else if (obj instanceof ActorInstance) {
+				obj.setObjId(counter++);
+			}
+			else if (obj instanceof PortInstance) {
+				PortInstance pi = (PortInstance) obj;
+				// relay ports are not instantiated and thus have no object ID
+				if (pi.getKind()!=PortKind.RELAY) {
+					// replicated ports have subsequent object IDs
+					int multiplicity = pi.getPort().getMultiplicity();
+					if (multiplicity==-1)
+						multiplicity = pi.getBindings().size();
+					pi.setObjId(counter);
+					counter += multiplicity;
+				}
+			}
+			else if (obj instanceof SAPInstance) {
+				obj.setObjId(counter++);
+			}
+			else if (obj instanceof ServiceImplInstance) {
+				ServiceImplInstance svc = (ServiceImplInstance) obj;
+				svc.setObjId(counter);
+				counter += svc.getPeers().size();
+			}
+		}
+	}
+	
+	/**
 	 * hierarchically (i.e. recursively) creates all instances implied by this component
 	 * @param comp - the component class
 	 * @return the newly created hierarchy of instances
@@ -378,18 +405,15 @@ public class GeneratorModelBuilder {
 		logger.logInfo("GeneratorModelBuilder: creating component instance from "+comp.getName());
 
 		SubSystemInstance instance = ETriceGenFactory.eINSTANCE.createSubSystemInstance();
+		allObjects.add(instance);
 		
 		instance.setName(comp.getName());
-		Counter objCounter = ETriceGenFactory.eINSTANCE.createCounter();
-		objCounter.setCounter(OBJ_ID_OFFSET);
-		instance.setObjCounter(objCounter);
-		instance.setObjId(objCounter.getAndIncrementCount());
 		instance.setSubSystemClass(comp);
 		
 		// TODOHRR: enumerate object ids per thread
 		
 		for (ActorRef ar : comp.getActorRefs()) {
-			instance.getInstances().add(recursivelyCreateActorInstances(objCounter, ar));
+			instance.getInstances().add(recursivelyCreateActorInstances(ar));
 		}
 		
 		// bindings are handled now since port instances of sub-actor instances are available
@@ -401,17 +425,17 @@ public class GeneratorModelBuilder {
 	
 	/**
 	 * hierarchically (i.e. recursively) creates all instances implied by this actor
-	 * @param instance - the root component instance
 	 * @param aref - create the instance sub-tree of this actor reference
+	 * @param instance - the root component instance
 	 * @return the newly created actor instance
 	 */
-	private ActorInstance recursivelyCreateActorInstances(Counter objCounter, ActorRef aref) {
+	private ActorInstance recursivelyCreateActorInstances(ActorRef aref) {
 		logger.logInfo("GeneratorModelBuilder: creating actor instance "+aref.getName()+" from "+aref.getType().getName());
 
 		ActorInstance ai = ETriceGenFactory.eINSTANCE.createActorInstance();
+		allObjects.add(ai);
 		
 		ai.setName(aref.getName());
-		ai.setObjId(objCounter.getAndIncrementCount());
 		ActorClass ac = aref.getType();
 		ai.setActorClass(ac);
 
@@ -427,12 +451,12 @@ public class GeneratorModelBuilder {
 		// super classes first ensures that actor refs are present when bindings are created
 		for (ActorClass acl : classes) {
 			// first we add our port instances to have them numbered subsequently
-			createPortInstances(objCounter, ai, acl);
-			createServiceRelatedInstances(objCounter, ai, acl);
+			createPortInstances(ai, acl);
+			createServiceRelatedInstances(ai, acl);
 			
 			// recurse down into sub-actors
 			for (ActorRef ar : acl.getActorRefs()) {
-				ai.getInstances().add(recursivelyCreateActorInstances(objCounter, ar));
+				ai.getInstances().add(recursivelyCreateActorInstances(ar));
 			}
 			
 		}
@@ -447,18 +471,15 @@ public class GeneratorModelBuilder {
 
 	/**
 	 * create port instances for every kind of port
-	 * @param objCounter - for unique object id used for address creation
 	 * @param ai - the currently considered actor instance
 	 * @param ac - the actor class (might be a base class)
 	 */
-	private void createPortInstances(Counter objCounter, ActorInstance ai,
-			ActorClass ac) {
+	private void createPortInstances(ActorInstance ai, ActorClass ac) {
 		for (ExternalPort port : ac.getExtPorts()) {
 			PortInstance pi = ETriceGenFactory.eINSTANCE.createPortInstance();
+			allObjects.add(pi);
 			
 			pi.setName(port.getIfport().getName());
-			// replicated ports have subsequent object IDs
-			pi.setObjId(objCounter.getAndIncrementCount(port.getIfport().getMultiplicity()));
 			pi.setPort(port.getIfport());
 			pi.setKind(PortKind.EXTERNAL);
 			
@@ -466,10 +487,9 @@ public class GeneratorModelBuilder {
 		}
 		for (Port port : ac.getIntPorts()) {
 			PortInstance pi = ETriceGenFactory.eINSTANCE.createPortInstance();
+			allObjects.add(pi);
 			
 			pi.setName(port.getName());
-			// replicated ports have subsequent object IDs
-			pi.setObjId(objCounter.getAndIncrementCount(port.getMultiplicity()));
 			pi.setPort(port);
 			pi.setKind(PortKind.INTERNAL);
 			
@@ -478,10 +498,9 @@ public class GeneratorModelBuilder {
 		for (Port port : ac.getIfPorts()) {
 			if (relayPorts.contains(port)) {
 				PortInstance pi = ETriceGenFactory.eINSTANCE.createPortInstance();
+				allObjects.add(pi);
 				
 				pi.setName(port.getName());
-				// relay ports are not instantiated and thus have no object ID
-				//pi.setObjId(instance.getAndIncrementObjCount());
 				pi.setPort(port);
 				pi.setKind(PortKind.RELAY);
 				
@@ -492,22 +511,21 @@ public class GeneratorModelBuilder {
 	
 	/**
 	 * create sap, spp and service instances
-	 * @param objCounter - for unique object id used for address creation
 	 * @param ai - the currently considered actor instance
 	 * @param ac - the actor class (might be a base class)
 	 */
-	private void createServiceRelatedInstances(Counter objCounter, ActorInstance ai,
-			ActorClass ac) {
+	private void createServiceRelatedInstances(ActorInstance ai, ActorClass ac) {
 		for (SAPRef sap : ac.getStrSAPs()) {
 			SAPInstance si = ETriceGenFactory.eINSTANCE.createSAPInstance();
+			allObjects.add(si);
 			si.setName(sap.getName());
-			si.setObjId(objCounter.getAndIncrementCount());
 			si.setSap(sap);
 			
 			ai.getSaps().add(si);
 		}
 		for (SPPRef sap : ac.getIfSPPs()) {
 			SPPInstance si = ETriceGenFactory.eINSTANCE.createSPPInstance();
+			allObjects.add(si);
 			si.setName(sap.getName());
 			// SPPs are not instantiated and thus need no object ID
 			//si.setObjId(objCounter.getAndIncrementCount());
@@ -517,6 +535,7 @@ public class GeneratorModelBuilder {
 		}
 		for (ServiceImplementation svcimpl : ac.getServiceImplementations()) {
 			ServiceImplInstance sii = ETriceGenFactory.eINSTANCE.createServiceImplInstance();
+			allObjects.add(sii);
 			sii.setName(svcimpl.getSpp().getName());
 			//will set the object ID later when we know all connected saps
 			//sii.setObjId(objCounter.getAndIncrementCount());
@@ -745,7 +764,7 @@ public class GeneratorModelBuilder {
 				ActorInstance ai = (ActorInstance) obj;
 				for (PortInstance pi : ai.getPorts()) {
 					if (pi.getKind()!=PortKind.RELAY) {
-						if (pi.getBindings().size()>pi.getPort().getMultiplicity()) {
+						if (pi.getBindings().size()>pi.getPort().getMultiplicity() && pi.getPort().getMultiplicity()!=-1) {
 							EStructuralFeature feature = null;
 							int idx = IDiagnostician.INSIGNIFICANT_INDEX;
 							if (pi.getPort().eContainer() instanceof ActorClass) {

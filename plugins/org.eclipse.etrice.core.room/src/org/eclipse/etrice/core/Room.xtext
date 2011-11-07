@@ -20,6 +20,8 @@
 
 grammar org.eclipse.etrice.core.Room with org.eclipse.xtext.common.Terminals
 
+import "http://www.eclipse.org/emf/2002/Ecore" as ecore
+
 generate room "http://www.eclipse.org/etrice/Room"
 
 RoomModel :
@@ -172,7 +174,7 @@ ActorClass:
 InterfaceItem: Port | SAPRef | SPPRef;
 
 Port:
-	(conjugated?='conjugated')? 'Port' name=ID ('[' multiplicity=INT ']')? ':' protocol=[ProtocolClass|FQN] (docu=Documentation)?;
+	(conjugated?='conjugated')? 'Port' name=ID (multiplicity=MULTIPLICITY)? ':' protocol=[ProtocolClass|FQN] (docu=Documentation)?;
 ExternalPort:
 	'external' 'Port' ifport=[Port|ID] ;
 
@@ -419,3 +421,5 @@ ImportedFQN:
 
 FQN:
 	ID ('.' ID)*;
+
+terminal MULTIPLICITY returns ecore::EInt : '[' ('*' | ('0'..'9')+) ']';

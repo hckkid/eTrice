@@ -25,7 +25,8 @@ process(ecore::EPackage this) :
 
 process(EClass this) :
     switch (name) {
-        case "Port": (eAllAttributes.select(e|e.name=="multiplicity").first().setDefaultValueLiteral("1"))
+        case "Port": (eAllAttributes.select(e|e.name=="multiplicity").first().setDefaultValueLiteral("1")
+        			-> addOperation("isReplicated", getEcoreDataType("EBoolean")))
         case "State": (addOperation("getName", getEcoreDataType("EString")))
         case "StateGraphItem": (addOperation("getName", getEcoreDataType("EString")))
         default:    null
@@ -65,6 +66,8 @@ create EAnnotation newDelegatingBodyAnnotation(EClass cls, EOperation op) :
 							+ "return \"\";"))
 				    default: null
 				})
+			case "isReplicated":
+				(d.setValue("return multiplicity>1 || multiplicity==-1;"))
 	        default:    null
 	    } ->
         details.add(d) ->

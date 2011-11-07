@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import org.eclipse.core.databinding.DataBindingContext;
+import org.eclipse.core.databinding.conversion.Converter;
 import org.eclipse.core.databinding.validation.IValidator;
 import org.eclipse.core.databinding.validation.ValidationStatus;
 import org.eclipse.core.runtime.IStatus;
@@ -91,16 +92,52 @@ public class PortPropertyDialog extends AbstractPropertyDialog {
 		public IStatus validate(Object value) {
 			if (value instanceof Integer) {
 				int m = (Integer) value;
-				if (m<=0)
-					return ValidationStatus.error("multiplicity must be positive");
+				if (m==0)
+					return ValidationStatus.error("multiplicity must not be 0");
+				if (m<-1)
+					return ValidationStatus.error("multiplicity must be -1 or positive");
 				if (!mayChange) {
-					if (old==1 && m>1)
+					if (old==1 && (m>1 || m==-1))
 						return ValidationStatus.error("cannot make connected port replicated");
-					if (old>1 && m==1)
+					if ((old>1 || old==-1) && m==1)
 						return ValidationStatus.error("cannot make connected port not replicated");
 				}
 			}
 			return Status.OK_STATUS;
+		}
+	}
+
+	static class Multiplicity2StringConverter extends Converter {
+		
+		public Multiplicity2StringConverter() {
+			super(Integer.class, String.class);
+		}
+
+		@Override
+		public Object convert(Object fromObject) {
+			if (fromObject instanceof Integer) {
+				int val = (Integer) fromObject;
+				if (val==-1)
+					return "*";
+				else
+					return fromObject.toString();
+			}
+			return fromObject;
+		}
+		
+	}
+	
+	static class String2MultiplicityConverter extends Converter {
+		String2MultiplicityConverter() {
+			super(String.class, Integer.class);
+		}
+
+		@Override
+		public Object convert(Object fromObject) {
+			if (fromObject.equals("*"))
+				return -1;
+			else
+				return Integer.parseInt((String) fromObject);
 		}
 	}
 	
@@ -170,7 +207,10 @@ public class PortPropertyDialog extends AbstractPropertyDialog {
 		Button conj = createCheck(body, "Conjugated:", port, RoomPackage.eINSTANCE.getPort_Conjugated());
 		if (!internal && !refitem && (acc instanceof ActorClass))
 			createRelayCheck(body, mform.getToolkit());
-		Text multi = createText(body, "Multiplicity:", port, RoomPackage.eINSTANCE.getPort_Multiplicity(), mv);
+		
+		Multiplicity2StringConverter m2s = new Multiplicity2StringConverter();
+		String2MultiplicityConverter s2m = new String2MultiplicityConverter();
+		Text multi = createText(body, "Multiplicity:", port, RoomPackage.eINSTANCE.getPort_Multiplicity(), mv, s2m, m2s, false);
 		
 		if (!newPort) {
 			// TODOHRR: check whether port is used externally?

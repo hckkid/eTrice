@@ -12,9 +12,11 @@
 
 package org.eclipse.etrice.core;
 
+import org.eclipse.etrice.core.converter.RoomValueConverterService;
 import org.eclipse.etrice.core.naming.RoomFragmentProvider;
 import org.eclipse.etrice.core.naming.RoomQualifiedNameProvider;
 import org.eclipse.etrice.core.scoping.PlatformRelativeUriResolver;
+import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.resource.IFragmentProvider;
 import org.eclipse.xtext.scoping.impl.ImportUriResolver;
@@ -49,5 +51,11 @@ public class RoomRuntimeModule extends org.eclipse.etrice.core.AbstractRoomRunti
 	
 	public Class<? extends ImportUriResolver> bindImportUriResolver() {
 		return PlatformRelativeUriResolver.class;
+	}
+
+	// HOWTO: add a value converter
+	@Override
+	public Class<? extends IValueConverterService> bindIValueConverterService() {
+		return RoomValueConverterService.class;
 	}
 }

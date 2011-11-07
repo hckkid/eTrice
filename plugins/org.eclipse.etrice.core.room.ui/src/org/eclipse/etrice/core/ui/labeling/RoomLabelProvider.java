@@ -131,23 +131,23 @@ public class RoomLabelProvider extends DefaultEObjectLabelProvider {
 		}
 		if (relay)
 			if (p.isConjugated())
-				if (p.getMultiplicity()>1)
+				if (p.isReplicated())
 					return "ConjReplRelayPort.gif";
 				else
 					return "ConjRelayPort.gif";
 			else
-				if (p.getMultiplicity()>1)
+				if (p.isReplicated())
 					return "ReplRelayPort.gif";
 				else
 					return "RelayPort.gif";
 		else
 			if (p.isConjugated())
-				if (p.getMultiplicity()>1)
+				if (p.isReplicated())
 					return "ConjReplPort.gif";
 				else
 					return "ConjPort.gif";
 			else
-				if (p.getMultiplicity()>1)
+				if (p.isReplicated())
 					return "ReplPort.gif";
 				else
 					return "Port.gif";
@@ -190,7 +190,7 @@ public class RoomLabelProvider extends DefaultEObjectLabelProvider {
 		if (location==null)
 			location = "relay";
 		String conjugated = p.isConjugated()?"conjugated ":"";
-		String multiplicity = p.getMultiplicity()>1? ("["+p.getMultiplicity()+"]"):"";
+		String multiplicity = p.getMultiplicity()>1? ("["+p.getMultiplicity()+"]") : p.getMultiplicity()==-1? "[*]" : "";
 		String protocol = p.getProtocol()!=null? (" : "+p.getProtocol().getName()):"";
 		return conjugated+" "+location+" Port "+p.getName()+multiplicity+protocol;
 	}

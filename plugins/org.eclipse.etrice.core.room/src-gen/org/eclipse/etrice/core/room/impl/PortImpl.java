@@ -205,6 +205,16 @@ public class PortImpl extends InterfaceItemImpl implements Port
    * <!-- end-user-doc -->
    * @generated
    */
+  public boolean isReplicated()
+  {
+    return multiplicity>1 || multiplicity==-1;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {

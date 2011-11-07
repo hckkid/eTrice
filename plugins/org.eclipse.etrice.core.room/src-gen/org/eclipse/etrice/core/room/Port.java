@@ -106,4 +106,13 @@ public interface Port extends InterfaceItem
    */
   void setDocu(Documentation value);
 
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @model kind="operation"
+   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return multiplicity>1 || multiplicity==-1;'"
+   * @generated
+   */
+  boolean isReplicated();
+
 } // Port

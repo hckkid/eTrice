@@ -1454,11 +1454,8 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cPortKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
-		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
-		private final Keyword cLeftSquareBracketKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
-		private final Assignment cMultiplicityAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
-		private final RuleCall cMultiplicityINTTerminalRuleCall_3_1_0 = (RuleCall)cMultiplicityAssignment_3_1.eContents().get(0);
-		private final Keyword cRightSquareBracketKeyword_3_2 = (Keyword)cGroup_3.eContents().get(2);
+		private final Assignment cMultiplicityAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cMultiplicityMULTIPLICITYTerminalRuleCall_3_0 = (RuleCall)cMultiplicityAssignment_3.eContents().get(0);
 		private final Keyword cColonKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		private final Assignment cProtocolAssignment_5 = (Assignment)cGroup.eContents().get(5);
 		private final CrossReference cProtocolProtocolClassCrossReference_5_0 = (CrossReference)cProtocolAssignment_5.eContents().get(0);
@@ -1467,12 +1464,11 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cDocuDocumentationParserRuleCall_6_0 = (RuleCall)cDocuAssignment_6.eContents().get(0);
 		
 		//Port:
-		//	conjugated?="conjugated"? "Port" name=ID ("[" multiplicity=INT "]")? ":" protocol=[ProtocolClass|FQN]
+		//	conjugated?="conjugated"? "Port" name=ID multiplicity=MULTIPLICITY? ":" protocol=[ProtocolClass|FQN]
 		//	docu=Documentation?;
 		public ParserRule getRule() { return rule; }
 
-		//conjugated?="conjugated"? "Port" name=ID ("[" multiplicity=INT "]")? ":" protocol=[ProtocolClass|FQN]
-		//docu=Documentation?
+		//conjugated?="conjugated"? "Port" name=ID multiplicity=MULTIPLICITY? ":" protocol=[ProtocolClass|FQN] docu=Documentation?
 		public Group getGroup() { return cGroup; }
 
 		//conjugated?="conjugated"?
@@ -1490,20 +1486,11 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_2_0() { return cNameIDTerminalRuleCall_2_0; }
 
-		//("[" multiplicity=INT "]")?
-		public Group getGroup_3() { return cGroup_3; }
+		//multiplicity=MULTIPLICITY?
+		public Assignment getMultiplicityAssignment_3() { return cMultiplicityAssignment_3; }
 
-		//"["
-		public Keyword getLeftSquareBracketKeyword_3_0() { return cLeftSquareBracketKeyword_3_0; }
-
-		//multiplicity=INT
-		public Assignment getMultiplicityAssignment_3_1() { return cMultiplicityAssignment_3_1; }
-
-		//INT
-		public RuleCall getMultiplicityINTTerminalRuleCall_3_1_0() { return cMultiplicityINTTerminalRuleCall_3_1_0; }
-
-		//"]"
-		public Keyword getRightSquareBracketKeyword_3_2() { return cRightSquareBracketKeyword_3_2; }
+		//MULTIPLICITY
+		public RuleCall getMultiplicityMULTIPLICITYTerminalRuleCall_3_0() { return cMultiplicityMULTIPLICITYTerminalRuleCall_3_0; }
 
 		//":"
 		public Keyword getColonKeyword_4() { return cColonKeyword_4; }
@@ -4177,6 +4164,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	private ImportElements pImport;
 	private ImportedFQNElements pImportedFQN;
 	private FQNElements pFQN;
+	private TerminalRule tMULTIPLICITY;
 	
 	private final GrammarProvider grammarProvider;
 
@@ -4476,7 +4464,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Port:
-	//	conjugated?="conjugated"? "Port" name=ID ("[" multiplicity=INT "]")? ":" protocol=[ProtocolClass|FQN]
+	//	conjugated?="conjugated"? "Port" name=ID multiplicity=MULTIPLICITY? ":" protocol=[ProtocolClass|FQN]
 	//	docu=Documentation?;
 	public PortElements getPortAccess() {
 		return (pPort != null) ? pPort : (pPort = new PortElements());
@@ -5079,6 +5067,12 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getFQNRule() {
 		return getFQNAccess().getRule();
 	}
+
+	//terminal MULTIPLICITY returns ecore::EInt:
+	//	"[" ("*" | "0".."9"+) "]";
+	public TerminalRule getMULTIPLICITYRule() {
+		return (tMULTIPLICITY != null) ? tMULTIPLICITY : (tMULTIPLICITY = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "MULTIPLICITY"));
+	} 
 
 	//terminal ID:
 	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;

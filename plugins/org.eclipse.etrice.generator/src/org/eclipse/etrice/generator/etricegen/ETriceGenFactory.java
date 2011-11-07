@@ -35,15 +35,6 @@ public interface ETriceGenFactory extends EFactory {
 	Root createRoot();
 
 	/**
-	 * Returns a new object of class '<em>Counter</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Counter</em>'.
-	 * @generated
-	 */
-	Counter createCounter();
-
-	/**
 	 * Returns a new object of class '<em>Structure Instance</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

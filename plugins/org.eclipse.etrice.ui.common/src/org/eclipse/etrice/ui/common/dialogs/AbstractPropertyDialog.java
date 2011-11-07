@@ -139,6 +139,7 @@ public abstract class AbstractPropertyDialog extends FormDialog {
 		}
 	}
 	
+	
 	private String title;
 	private FormToolkit toolkit;
 	private DataBindingContext bindingContext;
