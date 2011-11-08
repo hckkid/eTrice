@@ -32,6 +32,12 @@ public class GenFile extends GenItem {
 			return getName();
 	}
 	
+	@Override
+	public String getPath() {
+		String path = super.getPath();
+		return path.substring(0, path.length()-1);
+	}
+	
 	public String getExtension() {
 		int pos = getName().lastIndexOf('.');
 		if (pos>=0)
