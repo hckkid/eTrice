@@ -19,6 +19,7 @@ import java.util.Collections;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.common.util.URI;
@@ -171,7 +172,19 @@ public abstract class DiagramAccessBase {
 	public void openDiagramEditor(StructureClass sc) {
 		Diagram diagram = getDiagram(sc);
 		
-		String platformString = diagram.eResource().getURI().toPlatformString(true);
+		URI uri = diagram.eResource().getURI();
+		String platformString = null;
+		if (uri.isPlatform()) {
+			platformString = uri.toPlatformString(true);
+		}
+		else {
+			Path path = new Path(uri.toFileString());
+			IPath base = ResourcesPlugin.getWorkspace().getRoot().getLocation();
+			if (base.isPrefixOf(path)) {
+				IPath relative = path.makeRelativeTo(base);
+				platformString = relative.toString();
+			}
+		}
 		IFile file = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(platformString));
 		IFileEditorInput input = new FileEditorInput(file);
 	
