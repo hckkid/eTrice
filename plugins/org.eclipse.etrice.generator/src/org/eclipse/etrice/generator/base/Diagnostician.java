@@ -16,6 +16,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.etrice.generator.etricegen.IDiagnostician;
 
+import com.google.inject.Inject;
+
 /**
  * @author Henrik Rentz-Reichert
  *
@@ -24,22 +26,25 @@ public class Diagnostician implements IDiagnostician {
 
 	private boolean validationFailed = false;
 
+	@Inject
+	private ILineOutputLogger logger;
+	
 	public void warning(String msg, EObject source, EStructuralFeature feature) {
-		System.out.println("Validation warning: " + getMsgTxt(msg, source, feature));
+		logger.logInfo("Validation warning: " + getMsgTxt(msg, source, feature));
 	}
 
 	public void warning(String msg, EObject source, EStructuralFeature feature, int idx) {
-		System.out.println("Validation warning: " + getMsgTxt(msg, source, feature) + " at index "+idx);
+		logger.logInfo("Validation warning: " + getMsgTxt(msg, source, feature) + " at index "+idx);
 	}
 
 	public void error(String msg, EObject source, EStructuralFeature feature) {
 		validationFailed = true;
-		System.out.println("Validation error: " + getMsgTxt(msg, source, feature));
+		logger.logInfo("Validation error: " + getMsgTxt(msg, source, feature));
 	}
 
 	public void error(String msg, EObject source, EStructuralFeature feature, int idx) {
 		validationFailed = true;
-		System.out.println("Validation error: " + getMsgTxt(msg, source, feature) + " at index "+idx);
+		logger.logInfo("Validation error: " + getMsgTxt(msg, source, feature) + " at index "+idx);
 	}
 
 	public boolean isFailed() {
