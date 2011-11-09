@@ -23,6 +23,7 @@ import org.eclipse.etrice.core.room.ActorContainerRef;
 import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.Binding;
 import org.eclipse.etrice.core.room.BindingEndPoint;
+import org.eclipse.etrice.core.room.ContinuationTransition;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.EntryPoint;
 import org.eclipse.etrice.core.room.ExitPoint;
@@ -42,6 +43,7 @@ import org.eclipse.etrice.core.room.ServiceImplementation;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.StateGraphItem;
+import org.eclipse.etrice.core.room.StateTerminal;
 import org.eclipse.etrice.core.room.StructureClass;
 import org.eclipse.etrice.core.room.SubStateTrPointTerminal;
 import org.eclipse.etrice.core.room.SubSystemClass;
@@ -692,6 +694,15 @@ public class ValidationUtil {
 						tr.eContainer(),
 						RoomPackage.eINSTANCE.getStateGraph_Transitions(),
 						((StateGraph)tr.eContainer()).getTransitions().indexOf(tr));
+			if (tr instanceof ContinuationTransition) {
+				// if at this point no continuation transition is allowed it probably should be a guarded transition
+				TransitionTerminal term = ((ContinuationTransition) tr).getFrom();
+				if (term instanceof StateTerminal || (term instanceof TrPointTerminal && ((TrPointTerminal)term).getTrPoint() instanceof TransitionPoint))
+					return Result.error("guard must not be empty",
+							tr.eContainer(),
+							RoomPackage.eINSTANCE.getStateGraph_Transitions(),
+							((StateGraph)tr.eContainer()).getTransitions().indexOf(tr));
+			}
 			if (tr instanceof GuardedTransition)
 				if (!RoomHelpers.hasDetailCode(((GuardedTransition) tr).getGuard()))
 					return Result.error("guard must not be empty", tr, RoomPackage.eINSTANCE.getGuardedTransition_Guard());
@@ -702,6 +713,15 @@ public class ValidationUtil {
 						tr.eContainer(),
 						RoomPackage.eINSTANCE.getStateGraph_Transitions(),
 						((StateGraph)tr.eContainer()).getTransitions().indexOf(tr));
+			if (tr instanceof ContinuationTransition) {
+				// if at this point no continuation transition is allowed it probably should be a triggered transition
+				TransitionTerminal term = ((ContinuationTransition) tr).getFrom();
+				if (term instanceof StateTerminal || (term instanceof TrPointTerminal && ((TrPointTerminal)term).getTrPoint() instanceof TransitionPoint))
+					return Result.error("trigger must not be empty",
+							tr.eContainer(),
+							RoomPackage.eINSTANCE.getStateGraph_Transitions(),
+							((StateGraph)tr.eContainer()).getTransitions().indexOf(tr));
+			}
 		}
 		return Result.ok();
 	}
