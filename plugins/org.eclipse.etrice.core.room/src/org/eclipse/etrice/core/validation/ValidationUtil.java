@@ -511,7 +511,18 @@ public class ValidationUtil {
 		if (tgt instanceof TrPointTerminal) {
 			if (((TrPointTerminal) tgt).getTrPoint() instanceof EntryPoint)
 				return Result.error("entry point can not be transition target", tgt, RoomPackage.eINSTANCE.getTrPointTerminal_TrPoint(), 0);
-			// TransitionPoint and ExitPoint are valid destinations
+			if (((TrPointTerminal) tgt).getTrPoint() instanceof TransitionPoint) {
+				if (src instanceof TrPointTerminal) {
+					TrPoint srcTP = ((TrPointTerminal)src).getTrPoint();
+					TrPoint tgtTP = ((TrPointTerminal) tgt).getTrPoint();
+					if (srcTP!=tgtTP)
+						return Result.error("transition point can only be target of self transition", tgt, RoomPackage.eINSTANCE.getTrPointTerminal_TrPoint(), 0);
+				}
+				else {
+					return Result.error("transition point can only be target of self transition", tgt, RoomPackage.eINSTANCE.getTrPointTerminal_TrPoint(), 0);
+				}
+			}
+			// ExitPoint is a valid destinations
 			// ExitPoint can be multiply connected inside a state
 		}
 		else if (tgt instanceof SubStateTrPointTerminal) {
