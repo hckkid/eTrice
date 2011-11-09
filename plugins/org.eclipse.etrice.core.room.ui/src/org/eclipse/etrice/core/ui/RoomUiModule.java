@@ -28,18 +28,18 @@ public class RoomUiModule extends org.eclipse.etrice.core.ui.AbstractRoomUiModul
 		super(plugin);
 	}
 
-	// contributed by org.eclipse.xtext.generator.validation.JavaValidatorFragment
 	@org.eclipse.xtext.service.SingletonBinding(eager=true)
 	public Class<? extends org.eclipse.etrice.core.validation.RoomJavaValidator> bindRoomJavaValidator() {
 		return org.eclipse.etrice.core.ui.RoomModelValidator.class;
 	}
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.xtext.ui.DefaultUiModule#bindIContentOutlinePage()
-	 */
 	@Override
 	public Class<? extends IContentOutlinePage> bindIContentOutlinePage() {
 		return RoomOutlinePage.class;
+	}
+	
+	public Class<? extends org.eclipse.xtext.ui.editor.IURIEditorOpener> bindIURIEditorOpener() {
+		return GlobalNonPlatformURIEditorOpener.class;
 	}
 	
 	public static Injector getInjector() {
