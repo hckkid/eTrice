@@ -18,6 +18,7 @@ import org.eclipse.etrice.core.room.InitialTransition;
 import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.Transition;
 import org.eclipse.etrice.ui.behavior.ImageProvider;
+import org.eclipse.etrice.ui.common.support.CommonSupportUtil;
 import org.eclipse.etrice.ui.common.support.DeleteWithoutConfirmFeature;
 import org.eclipse.etrice.ui.common.support.NoResizeFeature;
 import org.eclipse.graphiti.dt.IDiagramTypeProvider;
@@ -241,6 +242,14 @@ public class InitialPointSupport {
 					return true;
 				}
 				return false;
+			}
+			
+			@Override
+			public void preRemove(IRemoveContext context) {
+				super.preRemove(context);
+
+				ContainerShape container = (ContainerShape) context.getPictogramElement();
+				CommonSupportUtil.deleteConnectionsRecursive(container, getFeatureProvider());
 			}
 		}
 		
