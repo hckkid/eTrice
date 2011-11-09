@@ -12,10 +12,13 @@
 
 package org.eclipse.etrice.core.ui;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.etrice.core.validation.RoomJavaValidator;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.CheckMode;
@@ -62,11 +65,26 @@ public class RoomModelValidator extends RoomJavaValidator implements ILogger {
 		if (getCheckMode()==CheckMode.ALL) {
 			System.out.println("checking model "+model.getName());
 			
+			ArrayList<RoomModel> models = new ArrayList<RoomModel>();
+			
+			Resource resource = model.eResource();
+			if (resource!=null) {
+				ResourceSet rs = resource.getResourceSet();
+				if (rs!=null) {
+					EcoreUtil.resolveAll(rs);
+					for (Resource res : rs.getResources()) {
+						for (EObject obj : res.getContents()) {
+							if (obj instanceof RoomModel)
+								models.add((RoomModel) obj);
+						}
+					}
+				}
+			}
+			if (models.isEmpty())
+				models.add(model);
+			
 			Diag diagnostician = new Diag();
 			GeneratorModelBuilder builder = new GeneratorModelBuilder(this, diagnostician);
-			
-			LinkedList<RoomModel> models = new LinkedList<RoomModel>();
-			models.add(model);
 			builder.createGeneratorModel(models, false);
 
 			System.out.println("done checking model "+model.getName()+" with result: "+(diagnostician.isFailed()?"failed":"ok"));
