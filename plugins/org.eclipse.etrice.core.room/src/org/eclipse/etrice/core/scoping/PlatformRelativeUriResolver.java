@@ -34,7 +34,10 @@ public class PlatformRelativeUriResolver extends ImportUriResolver {
 	@Override
 	public String resolve(EObject object) {
 		String resolve = super.resolve(object);
-		if (resolve!=null && object.eResource()!=null && object.eResource().getURI()!=null) {
+		if (resolve==null || resolve.trim().isEmpty())
+			return null;
+		
+		if (object.eResource()!=null && object.eResource().getURI()!=null) {
 			URI uri = URI.createURI(resolve);
 			if (uri.isRelative()) {
 				URI base = object.eResource().getURI().trimSegments(1);
