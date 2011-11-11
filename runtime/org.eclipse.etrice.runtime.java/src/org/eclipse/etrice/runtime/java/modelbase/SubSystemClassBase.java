@@ -8,8 +8,6 @@
 
 package org.eclipse.etrice.runtime.java.modelbase;
 
-import java.util.concurrent.Semaphore;
-
 import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
 import org.eclipse.etrice.runtime.java.messaging.IRTObject;
 import org.eclipse.etrice.runtime.java.messaging.MessageService;
@@ -31,7 +29,7 @@ public abstract class SubSystemClassBase extends RTObject implements IEventRecei
 	//--------------------- interface item IDs
 	protected static final int IFITEM_RTSystemPort = 0;
 	protected ActorClassBase[] instances = null;
-	private Semaphore testSem=null;
+	private TestSemaphore testSem=null;
 	private int testErrorCode;
 	
 	public SubSystemClassBase(IRTObject parent, String name) {
@@ -127,7 +125,7 @@ public abstract class SubSystemClassBase extends RTObject implements IEventRecei
 	}
 	
 	// this is to run integration tests
-	public synchronized void setTestSemaphore(Semaphore sem){
+	public synchronized void setTestSemaphore(TestSemaphore sem){
 		testErrorCode = -1;
 		testSem=sem;
 	}
@@ -136,19 +134,17 @@ public abstract class SubSystemClassBase extends RTObject implements IEventRecei
 		return testErrorCode;
 	}
 	
-	public synchronized void testFinished(int errorCode){
+	public void testFinished(int errorCode){
 		if (testSem != null) {
-			testErrorCode = errorCode;
-			testSem.release(1);
-			
-			// TODO: TS: if the non deterministic errors in integration.tests are fixed, please delete this work around! 
-			// making this thread sleep seems to fix a problem that the tester thread doesn't
-			// acquire control before the test timeout is reached
-//			try {
-//				Thread.sleep(100);
-//			} catch (InterruptedException e) {
-//				e.printStackTrace();
-//			}
+			System.out.println("org.eclipse.etrice.runtime.java.modelbase.SubSystemClassBase.testFinished(int): before releasing semaphore");
+			testSem.printWaitingThreads();
+			synchronized (this) {
+				testErrorCode = errorCode;
+				testSem.release(1);
+			}
+			System.out.println("org.eclipse.etrice.runtime.java.modelbase.SubSystemClassBase.testFinished(int): semaphore released");
+			//testSem.printWaitingThreads();
+			Thread.yield();
 		}
 	}
 }

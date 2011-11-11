@@ -40,6 +40,8 @@ public class MessageService extends Thread implements IMessageReceiver,
 	
 	
 	public MessageService(IRTObject parent, Address addr, String name, int priority) {
+		super("MessageService "+name);
+		
 		this.parent = parent;
 		address = addr;
 		this.name = name;
