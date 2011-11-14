@@ -30,15 +30,43 @@
 </li>
 <li class="listitem">
 <p>Copy the package 
-						[<span class="citation">de.protos.PedLightGUI</span>] to your 
+						[<span class="citation">org.eclipse.etrice.tutorials.PedLightGUI</span>] to your 
 						[<span class="citation">src</span>] directory (see blinky tutorial).
 					</p>
 </li>
 <li class="listitem">
-<p>In PedestrianLightWndNoTcp.jav uncomment line 15 (import), 36, 122 (usage) and 132-134 (registration).</p>
+<p>In PedestrianLightWndNoTcp.jav uncomment line 15 (import), 36, 122 (usage) and 132-134 (registration). The error markers will disappear after the code is generated from the model.</p>
 </li>
 <li class="listitem">
-<p>Copy the model from /org.eclipse.etrice.tutorials/model/PedLightsController to your model file, or run the model directly in the tutorial directory:</p>
+<p>Copy the model from /org.eclipse.etrice.tutorials/model/PedLightsController to your model file, or run the model directly in the tutorial directory. </p>
+</li>
+<li class="listitem">
+<p>Adapt the import statement to your path.</p>
+</li>
+</ul>
+</div>
+<div class="literallayout">
+<p>
+<code class="code">import&nbsp;room.basic.service.timing.*&nbsp;from&nbsp;"../../org.eclipse.etrice.modellib/models/TimingService.room"&nbsp;<br>
+
+</code>
+</p>
+</div>
+<div class="blockquote">
+<blockquote class="blockquote">
+<p></p>
+</blockquote>
+</div>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="disc">
+<li class="listitem">
+<p>Generate the code from the model.</p>
+</li>
+<li class="listitem">
+<p>Add the org.eclipse.etrice.modellib to the Java Class Path of your project.</p>
+</li>
+<li class="listitem">
+<p>All error markers should be disappeared and the model should be operable. </p>
 </li>
 <li class="listitem">
 <p>Arrange the Structure and the Statemachines to understand the model</p>

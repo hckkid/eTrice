@@ -20,16 +20,18 @@
 </div>
 </div>
 </div>
-<p>Within the first loop an integer value will be incremented from 
+<p>Within the first loop an integer value will be incremented by 
 				[<span class="citation">MrPong</span>] and sent back to 
 				[<span class="citation">MrPing</span>]. As long as the guard is true 
 				[<span class="citation">MrPing</span>] sends back the value.
 			</p>
 <p>Within the 
 				[<span class="citation">next</span>] transition, 
-				[<span class="citation">MrPing</span>] creates a data class and sends the default values. Than 
-				[<span class="citation">MrPing</span>] changes the values and sends the class again. At this point you should note that during the send operation, a copy of the data class will be created and sent. Otherwise it would not be possible to send the same object two times, even more it would not be possible to send a stack object at all.
-				However, for performance reasons some applications requires sending data by value. In this case the user is responsible for the life cycle of the object. In Java the VM takes care about the life cycle of an object. This is not the case for C/C++. Consider that a object which is created within a transition of a state machine will be destroyed when the transition is finished. The receiving FSM would receive an invalid reference. Therefore care must be taken by sending references.      
+				[<span class="citation">MrPing</span>] creates a data class and sends the default values. Then 
+				[<span class="citation">MrPing</span>] changes the values and sends the class again. At this point you should note that during the send operation, a copy of the data class will be created and sent. Otherwise it would not be possible to send the same object two times, even more it would not be possible to send a stack object at all. This type of data passing is called 
+				[<span class="citation">sending data by value</span>].
+				However, for performance reasons some applications requires 
+				[<span class="citation">sending data by reference</span>]. In this case the user is responsible for the life cycle of the object. In Java the VM takes care of the life cycle of an object. This is not the case for C/C++. Consider that a object which is created within a transition of a state machine will be destroyed when the transition is finished. The receiving FSM would receive an invalid reference. Therefore care must be taken when sending references.      
 			</p>
 <p>For sending data by reference you simply have to add the keyword 
 				[<span class="citation">ref</span>] to the protocol definition.
@@ -41,6 +43,7 @@
 </code>
 </p>
 </div>
+<p>Make the test and inspect the console output.</p>
 </div>
 </body>
 </html>
