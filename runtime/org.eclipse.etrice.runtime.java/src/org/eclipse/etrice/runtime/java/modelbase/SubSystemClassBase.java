@@ -81,26 +81,33 @@ public abstract class SubSystemClassBase extends RTObject implements IEventRecei
 	}
 	
 	public void stop() {
+		System.out.println("*** MainComponent "+getInstancePath()+"::stop ***");
+		
 		RTServices.getInstance().getMsgSvcCtrl().stop();
+		System.out.println("=== done stop MsgSvcCtrl");
 
 		// stop all actor instances
 		if (instances!=null)
 			for (int i = 0; i < instances.length; i++) {
 				instances[i].stop();
 			}
+		System.out.println("=== done stop actor instances");
 	}
 	
 	public void destroy() {
+		System.out.println("*** MainComponent "+getInstancePath()+"::destroy ***");
 		if (instances!=null)
 			for (int i = 0; i < instances.length; i++) {
 				instances[i].destroy();
 			}
+		System.out.println("=== done destroy actor instances");
 
 		DebuggingService.getInstance().getAsyncLogger().close();
 		DebuggingService.getInstance().getSyncLogger().close();
+		System.out.println("=== done close loggers");
 
 		RTServices.getInstance().destroy();
-		System.out.println("*** MainComponent "+getInstancePath()+"::destroy ***");
+		System.out.println("=== done destroy RTServices\n\n\n");
 	}
 	
 	public MessageService getMsgService(int idx) {

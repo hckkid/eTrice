@@ -14,6 +14,7 @@ package org.eclipse.etrice.runtime.java.messaging;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * The MessageServiceController controls lifecycle of and access to all MessageServices in one SubSystem
@@ -66,8 +67,30 @@ public class MessageServiceController {
 	}
 
 	public void stop() {
+		dumpThreads("org.eclipse.etrice.runtime.java.messaging.MessageServiceController.stop()");
 		terminate();
 		waitTerminate();
+	}
+
+	/**
+	 * @param msg 
+	 * 
+	 */
+	private void dumpThreads(String msg) {
+		System.out.println("<<< begin dump threads <<<");
+		System.out.println("=== "+msg);
+		Map<Thread, StackTraceElement[]> traces = Thread.getAllStackTraces();
+		for (Thread thread : traces.keySet()) {
+			System.out.println("thread "+thread.getName());
+			StackTraceElement[] elements = traces.get(thread);
+			int n = 2;
+			if (elements.length<n)
+				n = elements.length;
+			for (int i = 0; i < n; i++) {
+				System.out.println(" "+elements[i].toString());
+			}
+		}
+		System.out.println(">>> end dump threads >>>");
 	}
 
 	private void terminate() {

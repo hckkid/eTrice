@@ -31,15 +31,15 @@ public class TestSemaphore extends Semaphore {
 	}
 
 	public void printWaitingThreads() {
-		System.out.println("=== begin semaphore info ===");
+		System.out.println(">>> begin semaphore info >>>");
 		System.out.println("current thread is "+Thread.currentThread().getName());
 		Collection<Thread> threads = getQueuedThreads();
 		if (threads.isEmpty())
 			System.out.println(" no waiting threads");
 		else
 			for (Thread thread : threads) {
-				System.out.println(" "+thread.getName());
+				System.out.println(" blocked: "+thread.getName());
 			}
-		System.out.println("=== end semaphore info ===");
+		System.out.println("<<< end semaphore info <<<");
 	}
 }

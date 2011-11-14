@@ -34,11 +34,11 @@ public class SubSystemHFSMTest extends SubSystemClassBase{
 	public void instantiateActors(){
 		// all addresses
 		// Addresses for the Subsystem Systemport
-		Address addr_item_SystemPort_0 = new Address(0,0,108);
-		Address addr_item_SystemPort_1 = new Address(0,0,109);
-		Address addr_item_SystemPort_2 = new Address(0,0,110);
-		Address addr_item_SystemPort_3 = new Address(0,0,111);
-		Address addr_item_SystemPort_4 = new Address(0,0,112);
+		Address addr_item_SystemPort_0 = new Address(0,0,109);
+		Address addr_item_SystemPort_1 = new Address(0,0,110);
+		Address addr_item_SystemPort_2 = new Address(0,0,111);
+		Address addr_item_SystemPort_3 = new Address(0,0,112);
+		Address addr_item_SystemPort_4 = new Address(0,0,113);
 		
 		// actor instance /SubSystemHFSMTest/application itself => Systemport Address
 		// TODOTJ: For each Actor, multiple addresses should be generated (actor?, systemport, debugport)
