@@ -144,7 +144,7 @@ public abstract class SubSystemClassBase extends RTObject implements IEventRecei
 	public void testFinished(int errorCode){
 		if (testSem != null) {
 			System.out.println("org.eclipse.etrice.runtime.java.modelbase.SubSystemClassBase.testFinished(int): before releasing semaphore");
-			testSem.printWaitingThreads();
+			//testSem.printWaitingThreads();
 			synchronized (this) {
 				testErrorCode = errorCode;
 				testSem.release(1);

@@ -67,7 +67,7 @@ public class MessageServiceController {
 	}
 
 	public void stop() {
-		dumpThreads("org.eclipse.etrice.runtime.java.messaging.MessageServiceController.stop()");
+		//dumpThreads("org.eclipse.etrice.runtime.java.messaging.MessageServiceController.stop()");
 		terminate();
 		waitTerminate();
 	}
