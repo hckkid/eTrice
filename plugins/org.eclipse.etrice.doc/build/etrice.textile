@@ -489,7 +489,7 @@ The application should switch on and off the LED for 5 seconds in a 1 second int
 
 Right click to ??BlinkyController?? and select ??Edit Behavior??.
 Drag and Drop the ??Initial Point?? and two ??States?? into the top state. Name the states ??on?? and ??off??. 
-Use the ??Transition?? tool to draw transitions from ??init?? to ??off?? from ??on?? to ??off?? and from ??off?? to ??on??.
+Use the ??Transition?? tool to draw transitions from ??init?? to ??on?? from ??on?? to ??off?? and from ??off?? to ??on??.
 
 Open the transition dialog by double click the arrow to specify the trigger event and the action code of each transition. Note that the initial transition does not have a trigger event.
 
@@ -623,7 +623,7 @@ Position the cursor outside any class definition and right click the mouse withi
 !images/025-SendingData01.png!
 
 Select ??DataClass - data class skeleton?? and name it ??DemoData??.
-Remove the operations and ass the following Attributes:
+Remove the operations and add the following Attributes:
 
 bc.. 
 	DataClass DemoData {
@@ -754,6 +754,7 @@ Operation printData(d: DemoData) : void {
 bq. 
 
 For MrPing create the following state machine:
+(Remember that you can copy and paste the action code from the tutorial directory.)
 
 !images/025-SendingData08.png!
 
@@ -785,7 +786,7 @@ The model is finished now and can be found in /org.eclipse.etrice.tutorials/mode
 
 h2. Generate and run the model
 
-With the MWe2 workflow generate the code and run the model. 
+Generate the code by right click to ??gen_SendingData.launch?? and run it as ??gen_SendingData??. Run the model. 
 The output should look like this:
 
 bq.. 
@@ -840,20 +841,22 @@ bq.
 
 h2. Summary
 
-Within the first loop an integer value will be incremented from ??MrPong?? and sent back to ??MrPing??. As long as the guard is true ??MrPing?? sends back the value.
+Within the first loop an integer value will be incremented by ??MrPong?? and sent back to ??MrPing??. As long as the guard is true ??MrPing?? sends back the value.
 
-Within the ??next?? transition, ??MrPing?? creates a data class and sends the default values. Than ??MrPing?? changes the values and sends the class again. At this point you should note that during the send operation, a copy of the data class will be created and sent. Otherwise it would not be possible to send the same object two times, even more it would not be possible to send a stack object at all.
-However, for performance reasons some applications requires sending data by value. In this case the user is responsible for the life cycle of the object. In Java the VM takes care about the life cycle of an object. This is not the case for C/C++. Consider that a object which is created within a transition of a state machine will be destroyed when the transition is finished. The receiving FSM would receive an invalid reference. Therefore care must be taken by sending references.      
+Within the ??next?? transition, ??MrPing?? creates a data class and sends the default values. Then ??MrPing?? changes the values and sends the class again. At this point you should note that during the send operation, a copy of the data class will be created and sent. Otherwise it would not be possible to send the same object two times, even more it would not be possible to send a stack object at all. This type of data passing is called ??sending data by value??.
+However, for performance reasons some applications requires ??sending data by reference??. In this case the user is responsible for the life cycle of the object. In Java the VM takes care of the life cycle of an object. This is not the case for C/C++. Consider that a object which is created within a transition of a state machine will be destroyed when the transition is finished. The receiving FSM would receive an invalid reference. Therefore care must be taken when sending references.      
 
 For sending data by reference you simply have to add the keyword ??ref?? to the protocol definition.
  
 bc. Message ping(data: DemoData ref)
 
+Make the test and inspect the console output.
+
 h1. Tutorial Pedestrian Lights
 
 h2. Scope
 
-The scope of this tutorial is to demonstrate how to receive model messages from outside the model. Calling methods which are not part of the model is simple and you have already done this within the blinky tutorial (this is the other way round: model => external code). Receiving events from outside the model is a very common problem and a very frequently asked question. Therefore this tutorial shows how an external event (outside the model) can be received from the model.
+The scope of this tutorial is to demonstrate how to receive model messages from outside the model. Calling methods which are not part of the model is simple and you have already done this within the blinky tutorial (this is the other way round: model => external code). Receiving events from outside the model is a very common problem and a very frequently asked question. Therefore this tutorial shows how an external event (outside the model) can be received by the model.
 
 This tutorial is not like hello world or blinky. Being familiar with the basic tool features is mandatory for this tutorial. The goal is to understand the mechanism not to learn the tool features.
 
@@ -873,9 +876,17 @@ There are several possibilities to receive external events (e.g. TCP/UDP Socket,
 h2. Setup the model
 
 * Use the ??New Model Wizzard?? to create a new eTrice project and name it ??PedLightsController??.
-* Copy the package ??de.protos.PedLightGUI?? to your ??src?? directory (see blinky tutorial).
-* In PedestrianLightWndNoTcp.jav uncomment line 15 (import), 36, 122 (usage) and 132-134 (registration).
-* Copy the model from /org.eclipse.etrice.tutorials/model/PedLightsController to your model file, or run the model directly in the tutorial directory:
+* Copy the package ??org.eclipse.etrice.tutorials.PedLightGUI?? to your ??src?? directory (see blinky tutorial).
+* In PedestrianLightWndNoTcp.jav uncomment line 15 (import), 36, 122 (usage) and 132-134 (registration). The error markers will disappear after the code is generated from the model.
+* Copy the model from /org.eclipse.etrice.tutorials/model/PedLightsController to your model file, or run the model directly in the tutorial directory. 
+* Adapt the import statement to your path.
+bc.. 
+import room.basic.service.timing.* from "../../org.eclipse.etrice.modellib/models/TimingService.room" 
+bq. 
+
+* Generate the code from the model.
+* Add the org.eclipse.etrice.modellib to the Java Class Path of your project.
+* All error markers should be disappeared and the model should be operable. 
 * Arrange the Structure and the Statemachines to understand the model
 
 !images/030-PedLights01.png!

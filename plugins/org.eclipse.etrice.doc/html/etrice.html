@@ -1401,7 +1401,7 @@
 				Use the 
 				[<span class="citation">Transition</span>] tool to draw transitions from 
 				[<span class="citation">init</span>] to 
-				[<span class="citation">off</span>] from 
+				[<span class="citation">on</span>] from 
 				[<span class="citation">on</span>] to 
 				[<span class="citation">off</span>] and from 
 				[<span class="citation">off</span>] to 
@@ -1723,7 +1723,7 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 <p>Select 
 				[<span class="citation">DataClass &ndash; data class skeleton</span>] and name it 
 				[<span class="citation">DemoData</span>].
-				Remove the operations and ass the following Attributes:
+				Remove the operations and add the following Attributes:
 			</p>
 <div class="literallayout">
 <p>
@@ -1979,7 +1979,8 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 <p></p>
 </blockquote>
 </div>
-<p>For MrPing create the following state machine:</p>
+<p>For MrPing create the following state machine:
+					(Remember that you can copy and paste the action code from the tutorial directory.)</p>
 <p>
 					
 </p>
@@ -2064,8 +2065,11 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 </div>
 </div>
 </div>
-<p>With the MWe2 workflow generate the code and run the model. 
-				The output should look like this:</p>
+<p>Generate the code by right click to 
+				[<span class="citation">gen_SendingData.launch</span>] and run it as 
+				[<span class="citation">gen_SendingData</span>]. Run the model. 
+				The output should look like this:
+			</p>
 <div class="blockquote">
 <blockquote class="blockquote">
 <p>
@@ -2133,16 +2137,18 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 </div>
 </div>
 </div>
-<p>Within the first loop an integer value will be incremented from 
+<p>Within the first loop an integer value will be incremented by 
 				[<span class="citation">MrPong</span>] and sent back to 
 				[<span class="citation">MrPing</span>]. As long as the guard is true 
 				[<span class="citation">MrPing</span>] sends back the value.
 			</p>
 <p>Within the 
 				[<span class="citation">next</span>] transition, 
-				[<span class="citation">MrPing</span>] creates a data class and sends the default values. Than 
-				[<span class="citation">MrPing</span>] changes the values and sends the class again. At this point you should note that during the send operation, a copy of the data class will be created and sent. Otherwise it would not be possible to send the same object two times, even more it would not be possible to send a stack object at all.
-				However, for performance reasons some applications requires sending data by value. In this case the user is responsible for the life cycle of the object. In Java the VM takes care about the life cycle of an object. This is not the case for C/C++. Consider that a object which is created within a transition of a state machine will be destroyed when the transition is finished. The receiving FSM would receive an invalid reference. Therefore care must be taken by sending references.      
+				[<span class="citation">MrPing</span>] creates a data class and sends the default values. Then 
+				[<span class="citation">MrPing</span>] changes the values and sends the class again. At this point you should note that during the send operation, a copy of the data class will be created and sent. Otherwise it would not be possible to send the same object two times, even more it would not be possible to send a stack object at all. This type of data passing is called 
+				[<span class="citation">sending data by value</span>].
+				However, for performance reasons some applications requires 
+				[<span class="citation">sending data by reference</span>]. In this case the user is responsible for the life cycle of the object. In Java the VM takes care of the life cycle of an object. This is not the case for C/C++. Consider that a object which is created within a transition of a state machine will be destroyed when the transition is finished. The receiving FSM would receive an invalid reference. Therefore care must be taken when sending references.      
 			</p>
 <p>For sending data by reference you simply have to add the keyword 
 				[<span class="citation">ref</span>] to the protocol definition.
@@ -2154,6 +2160,7 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 </code>
 </p>
 </div>
+<p>Make the test and inspect the console output.</p>
 </div>
 </div>
 <div class="chapter" title="Chapter&nbsp;7.&nbsp;Tutorial Pedestrian Lights">
@@ -2174,7 +2181,7 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 </div>
 </div>
 </div>
-<p>The scope of this tutorial is to demonstrate how to receive model messages from outside the model. Calling methods which are not part of the model is simple and you have already done this within the blinky tutorial (this is the other way round: model =&gt; external code). Receiving events from outside the model is a very common problem and a very frequently asked question. Therefore this tutorial shows how an external event (outside the model) can be received from the model.</p>
+<p>The scope of this tutorial is to demonstrate how to receive model messages from outside the model. Calling methods which are not part of the model is simple and you have already done this within the blinky tutorial (this is the other way round: model =&gt; external code). Receiving events from outside the model is a very common problem and a very frequently asked question. Therefore this tutorial shows how an external event (outside the model) can be received by the model.</p>
 <p>This tutorial is not like hello world or blinky. Being familiar with the basic tool features is mandatory for this tutorial. The goal is to understand the mechanism not to learn the tool features.</p>
 <p>The idea behind the exercise is, to control a Pedestrian crossing light. We will use the same GUI as for the blinky tutorial but now we will use the 
 				[<span class="citation">REQUEST</span>] button to start a FSM, which controls the traffic lights.
@@ -2230,15 +2237,43 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 </li>
 <li class="listitem">
 <p>Copy the package 
-						[<span class="citation">de.protos.PedLightGUI</span>] to your 
+						[<span class="citation">org.eclipse.etrice.tutorials.PedLightGUI</span>] to your 
 						[<span class="citation">src</span>] directory (see blinky tutorial).
 					</p>
 </li>
 <li class="listitem">
-<p>In PedestrianLightWndNoTcp.jav uncomment line 15 (import), 36, 122 (usage) and 132-134 (registration).</p>
+<p>In PedestrianLightWndNoTcp.jav uncomment line 15 (import), 36, 122 (usage) and 132-134 (registration). The error markers will disappear after the code is generated from the model.</p>
 </li>
 <li class="listitem">
-<p>Copy the model from /org.eclipse.etrice.tutorials/model/PedLightsController to your model file, or run the model directly in the tutorial directory:</p>
+<p>Copy the model from /org.eclipse.etrice.tutorials/model/PedLightsController to your model file, or run the model directly in the tutorial directory. </p>
+</li>
+<li class="listitem">
+<p>Adapt the import statement to your path.</p>
+</li>
+</ul>
+</div>
+<div class="literallayout">
+<p>
+<code class="code">import&nbsp;room.basic.service.timing.*&nbsp;from&nbsp;"../../org.eclipse.etrice.modellib/models/TimingService.room"&nbsp;<br>
+
+</code>
+</p>
+</div>
+<div class="blockquote">
+<blockquote class="blockquote">
+<p></p>
+</blockquote>
+</div>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="disc">
+<li class="listitem">
+<p>Generate the code from the model.</p>
+</li>
+<li class="listitem">
+<p>Add the org.eclipse.etrice.modellib to the Java Class Path of your project.</p>
+</li>
+<li class="listitem">
+<p>All error markers should be disappeared and the model should be operable. </p>
 </li>
 <li class="listitem">
 <p>Arrange the Structure and the Statemachines to understand the model</p>
@@ -2439,7 +2474,7 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 </div>
 </div>
 <p>These symbols can only appear on the border of an actor class symbol.</p>
-<table id="N1080A">
+<table id="N1082C">
 <tr>
 								
 <td>
@@ -2540,7 +2575,7 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 </div>
 </div>
 <p>These symbols can only appear on the border of an actor reference symbol.</p>
-<table id="N10899">
+<table id="N108BB">
 <tr>
 								
 <td>

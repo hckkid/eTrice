@@ -2,7 +2,7 @@ h1. Tutorial Pedestrian Lights
 
 h2. Scope
 
-The scope of this tutorial is to demonstrate how to receive model messages from outside the model. Calling methods which are not part of the model is simple and you have already done this within the blinky tutorial (this is the other way round: model => external code). Receiving events from outside the model is a very common problem and a very frequently asked question. Therefore this tutorial shows how an external event (outside the model) can be received from the model.
+The scope of this tutorial is to demonstrate how to receive model messages from outside the model. Calling methods which are not part of the model is simple and you have already done this within the blinky tutorial (this is the other way round: model => external code). Receiving events from outside the model is a very common problem and a very frequently asked question. Therefore this tutorial shows how an external event (outside the model) can be received by the model.
 
 This tutorial is not like hello world or blinky. Being familiar with the basic tool features is mandatory for this tutorial. The goal is to understand the mechanism not to learn the tool features.
 
@@ -22,7 +22,7 @@ There are several possibilities to receive external events (e.g. TCP/UDP Socket,
 h2. Setup the model
 
 * Use the ??New Model Wizzard?? to create a new eTrice project and name it ??PedLightsController??.
-* Copy the package ??de.protos.PedLightGUI?? to your ??src?? directory (see blinky tutorial).
+* Copy the package ??org.eclipse.etrice.tutorials.PedLightGUI?? to your ??src?? directory (see blinky tutorial).
 * In PedestrianLightWndNoTcp.jav uncomment line 15 (import), 36, 122 (usage) and 132-134 (registration). The error markers will disappear after the code is generated from the model.
 * Copy the model from /org.eclipse.etrice.tutorials/model/PedLightsController to your model file, or run the model directly in the tutorial directory. 
 * Adapt the import statement to your path.
