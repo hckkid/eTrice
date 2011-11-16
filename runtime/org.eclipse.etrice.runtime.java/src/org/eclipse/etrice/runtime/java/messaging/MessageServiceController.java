@@ -76,7 +76,7 @@ public class MessageServiceController {
 	 * @param msg 
 	 * 
 	 */
-	private void dumpThreads(String msg) {
+	protected void dumpThreads(String msg) {
 		System.out.println("<<< begin dump threads <<<");
 		System.out.println("=== "+msg);
 		Map<Thread, StackTraceElement[]> traces = Thread.getAllStackTraces();

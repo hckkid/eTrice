@@ -81,7 +81,7 @@ public class DetailCodeTranslator {
 			
 			String token = getToken(text, curr);
 			if (token.isEmpty()) {
-				while (curr.pos<text.length() && !isTokenChar(text.charAt(curr.pos)))
+				if (curr.pos<text.length() && !isTokenChar(text.charAt(curr.pos)))
 					++curr.pos;
 				last = appendParsed(text, curr, last, result);
 			}
@@ -296,6 +296,8 @@ public class DetailCodeTranslator {
 		while (++curr.pos<text.length() && text.charAt(curr.pos)!='"')
 			if (text.charAt(curr.pos)=='\\')
 				++curr.pos;
+		if (curr.pos<text.length())
+			++curr.pos;
 	}
 
 	private boolean isTokenChar(char c) {
