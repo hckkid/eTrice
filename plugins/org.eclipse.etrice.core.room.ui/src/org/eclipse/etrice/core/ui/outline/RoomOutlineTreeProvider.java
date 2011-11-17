@@ -24,6 +24,7 @@ import org.eclipse.etrice.core.room.SAPRef;
 import org.eclipse.etrice.core.room.SPPRef;
 import org.eclipse.etrice.core.room.ServiceImplementation;
 import org.eclipse.etrice.core.room.State;
+import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 import org.eclipse.xtext.ui.editor.outline.impl.DefaultOutlineTreeProvider;
 
@@ -102,6 +103,19 @@ public class RoomOutlineTreeProvider extends DefaultOutlineTreeProvider {
 			for (State s : ac.getStateMachine().getStates()) {
 				createNode(parentNode, s);
 			}
+		}
+	}
+	
+	protected boolean _isLeaf(SubSystemClass ssc) {
+		if (!ssc.getActorRefs().isEmpty()) {
+			return false;
+		}
+		return true;
+	}
+	
+	protected void _createChildren(IOutlineNode parentNode, SubSystemClass ssc) {
+		for (ActorRef aref : ssc.getActorRefs()) {
+			createNode(parentNode, aref);
 		}
 	}
 
