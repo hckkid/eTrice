@@ -33,7 +33,14 @@ import org.eclipse.etrice.core.room.ServiceImplementation;
 import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.core.room.SubSystemRef;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
+import org.eclipse.jface.resource.FontDescriptor;
+import org.eclipse.jface.resource.JFaceResources;
+import org.eclipse.jface.viewers.StyledString;
+import org.eclipse.jface.viewers.StyledString.Styler;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.RGB;
 import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider;
+import org.eclipse.xtext.ui.label.StylerFactory;
 
 import com.google.inject.Inject;
 
@@ -44,9 +51,18 @@ import com.google.inject.Inject;
  */
 public class RoomLabelProvider extends DefaultEObjectLabelProvider {
 
+	private static final String KEYWORD_COLOR = "KEYWORD_COLOR";
+
+	@Inject
+	private StylerFactory stylerFactory;
+	private Styler keywordStyler = null;
+	private Styler typeStyler = null;
+	
 	@Inject
 	public RoomLabelProvider(AdapterFactoryLabelProvider delegate) {
 		super(delegate);
+		
+		JFaceResources.getColorRegistry().put(KEYWORD_COLOR, new RGB(180, 180, 180));
 	}
 
 	// custom images for ROOM classes
@@ -155,8 +171,17 @@ public class RoomLabelProvider extends DefaultEObjectLabelProvider {
 	
 	// custom labels
 	
-	String text(Import im) {
-		return "import "+im.getImportedNamespace();
+	StyledString text(Import im) {
+		if (im.getImportedNamespace()==null) {
+			StyledString txt = new StyledString("import model "+im.getImportURI());
+			txt.setStyle(0, 12, getKeywordStyler());
+			return txt;
+		}
+		else {
+			StyledString txt = new StyledString("import ns "+im.getImportedNamespace());
+			txt.setStyle(0, 9, getKeywordStyler());
+			return txt;
+		}
 	}
 	
 	String text(DataClass dc) {
@@ -217,9 +242,12 @@ public class RoomLabelProvider extends DefaultEObjectLabelProvider {
 		return "Implementation of "+svc.getSpp().getName()+protocol;
 	}
 	
-	String text(ActorRef ref) {
+	StyledString text(ActorRef ref) {
 		String cls = ref.getType()!=null? (" : "+ref.getType().getName()):"";
-		return "ref "+ref.getName()+cls;
+		StyledString txt = new StyledString("ref "+ref.getName()+cls);
+		if (!cls.isEmpty())
+			txt.setStyle(txt.length()-cls.length()+2, cls.length()-2, getTypeStyler());
+		return txt;
 	}
 	
 	String text(SubSystemRef ref) {
@@ -258,15 +286,22 @@ public class RoomLabelProvider extends DefaultEObjectLabelProvider {
 		
 		return "";
 	}
-/*
-	//Labels and icons can be computed like this:
-	
-	String text(MyModel ele) {
-	  return "my "+ele.getName();
+
+	private Styler getKeywordStyler() {
+		if (keywordStyler==null) {
+			FontDescriptor font = JFaceResources.getFontDescriptor(JFaceResources.TEXT_FONT);
+			FontDescriptor boldFont = font.setStyle(SWT.BOLD);
+			keywordStyler = stylerFactory.createStyler(boldFont, KEYWORD_COLOR, null);
+		}
+		return keywordStyler;
 	}
-	 
-    String image(MyModel ele) {
-      return "MyModel.gif";
-    }
-*/
+
+	private Styler getTypeStyler() {
+		if (typeStyler==null) {
+			FontDescriptor font = JFaceResources.getFontDescriptor(JFaceResources.TEXT_FONT);
+			FontDescriptor italicFont = font.setStyle(SWT.ITALIC);
+			typeStyler = stylerFactory.createStyler(italicFont, null, null);
+		}
+		return typeStyler;
+	}
 }
