@@ -13,11 +13,11 @@ RoomModel ModelName {
 			Port port10: ProtocolClass1
 			Port port12: ProtocolClass1
 			conjugated Port port11: ProtocolClass1
-			conjugated Port port13: ProtocolClass1
-			Port port16 [ 2 ]: ProtocolClass1
-			conjugated Port port17 [ 2 ]: ProtocolClass1
-			conjugated Port port19 [ 2 ]: ProtocolClass1
-			Port port18 [ 2 ]: ProtocolClass1
+			conjugated Port port13: ProtocolClass1 
+			Port port16 [2]: ProtocolClass1
+			conjugated Port port17 [2]: ProtocolClass1
+			conjugated Port port19 [2]: ProtocolClass1
+			Port port18 [2]: ProtocolClass1
 		}
 		Structure {
 			external Port port12
@@ -37,7 +37,7 @@ RoomModel ModelName {
 			Port port20: ProtocolClass1
 			conjugated Port port21: ProtocolClass1
 			Port port22: ProtocolClass1
-			Port port28 [ 2 ]: ProtocolClass1
+			Port port28 [2]: ProtocolClass1
 		}
 		Structure {
 			external Port port20
@@ -53,7 +53,7 @@ RoomModel ModelName {
 			Port port30: ProtocolClass1
 			conjugated Port port31: ProtocolClass1
 			conjugated Port port32: ProtocolClass1
-			conjugated Port port39 [ 2 ]: ProtocolClass1
+			conjugated Port port39 [2]: ProtocolClass1
 		}
 		Structure {
 			external Port port30
@@ -70,10 +70,10 @@ RoomModel ModelName {
 			Port port12: ProtocolClass1
 			conjugated Port port11: ProtocolClass1
 			conjugated Port port13: ProtocolClass1
-			Port port16 [ 2 ]: ProtocolClass1
-			conjugated Port port17 [ 2 ]: ProtocolClass1
-			conjugated Port port19 [ 2 ]: ProtocolClass1
-			Port port18 [ 2 ]: ProtocolClass1
+			Port port16 [2]: ProtocolClass1
+			conjugated Port port17 [2]: ProtocolClass1
+			conjugated Port port19 [2]: ProtocolClass1
+			Port port18 [2]: ProtocolClass1
 		}
 		Structure {
 			external Port port12

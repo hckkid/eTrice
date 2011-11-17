@@ -8,6 +8,8 @@
 
 package org.eclipse.etrice.ui.commands.handlers;
 
+import java.util.List;
+
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
@@ -31,6 +33,7 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.handlers.HandlerUtil;
 import org.eclipse.ui.views.contentoutline.ContentOutline;
+import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.IFragmentProvider;
 import org.eclipse.xtext.resource.XtextResource;
@@ -42,6 +45,7 @@ import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
+import org.eclipse.xtext.validation.Issue;
 
 import com.google.inject.Inject;
 import com.google.inject.Injector;
@@ -221,11 +225,16 @@ public abstract class AbstractEditHandler extends AbstractHandler {
 					public Boolean exec(XtextResource resource) throws Exception {
 						if (resource == null)
 							return false;
-						return !resourceValidator.validate(resource, CheckMode.NORMAL_AND_FAST, new CancelIndicator() {
+						List<Issue> issueList = resourceValidator.validate(resource, CheckMode.NORMAL_AND_FAST, new CancelIndicator() {
 							public boolean isCanceled() {
 								return monitor.isCanceled();
 							}
-						}).isEmpty();
+						});
+						for (Issue issue : issueList) {
+							if (issue.getSeverity()==Severity.ERROR)
+								return true;
+						}
+						return false;
 					}
 				});
 		return issues;

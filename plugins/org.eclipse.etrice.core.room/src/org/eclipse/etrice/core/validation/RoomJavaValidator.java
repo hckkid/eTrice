@@ -118,10 +118,10 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 		return null;
 	}
 
-	@Check
+	@Check  
 	public void checkSubSystem(SubSystemClass ssc){
 		if (ssc.getActorRefs().isEmpty())
-			error("SubSystemClass must contain at least one ActorRef", RoomPackage.eINSTANCE.getActorContainerClass_ActorRefs());
+			warning("SubSystemClass must contain at least one ActorRef", RoomPackage.eINSTANCE.getActorContainerClass_ActorRefs());
 	}
 
 	@Check
