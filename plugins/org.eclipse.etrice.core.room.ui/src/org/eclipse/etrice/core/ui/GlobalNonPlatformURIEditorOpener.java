@@ -12,9 +12,9 @@
 
 package org.eclipse.etrice.core.ui;
 
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.IPath;
-import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.ui.IEditorPart;
@@ -42,11 +42,13 @@ public class GlobalNonPlatformURIEditorOpener extends GlobalURIEditorOpener {
 		if (uri.isPlatform())
 			return uri;
 		
-		Path path = new Path(uri.toFileString());
-		IPath base = ResourcesPlugin.getWorkspace().getRoot().getLocation();
-		if (base.isPrefixOf(path)) {
-			IPath relative = path.makeRelativeTo(base);
-			uri = URI.createPlatformResourceURI(relative.toString(), false).appendFragment(uri.fragment());
+		// HOWTO: find absolute path location in workspace (as platform URI)
+		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
+		IFile[] files = root.findFilesForLocationURI(java.net.URI.create(uri.toString()));
+		if (files.length!=0) {
+			String pluri = files[0].toString();
+			// the pluri starts with L/ which we have to omit for URI.createPlatformResourceURI
+			uri = URI.createPlatformResourceURI(pluri.substring(2), true);
 		}
 		return uri;
 	}
