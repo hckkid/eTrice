@@ -205,4 +205,23 @@
       </menuContribution>
    </extension>
 
+  <extension point="org.eclipse.compare.contentViewers">
+    <viewer id="org.eclipse.etrice.core.Room.compare.contentViewers"
+            class="org.eclipse.etrice.core.ui.RoomExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
+            extensions="room">
+    </viewer>
+  </extension>
+  <extension point="org.eclipse.compare.contentMergeViewers">
+    <viewer id="org.eclipse.etrice.core.Room.compare.contentMergeViewers"
+            class="org.eclipse.etrice.core.ui.RoomExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
+            extensions="room" label="Room Compare">
+     </viewer>
+  </extension>
+  <extension point="org.eclipse.ui.editors.documentProviders">
+    <provider id="org.eclipse.etrice.core.Room.editors.documentProviders"
+            class="org.eclipse.etrice.core.ui.RoomExecutableExtensionFactory:org.eclipse.xtext.ui.editor.model.XtextDocumentProvider"
+            extensions="room">
+    </provider>
+  </extension>
+
 </plugin>
