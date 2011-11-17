@@ -52,8 +52,11 @@ Workflow {
 			fragment = ecore.EcoreGeneratorFragment {
 			// referencedGenModels = "uri to genmodel, uri to next genmodel"
 			}
+
+            // Serializer 2.0
+            //fragment = serializer.SerializerFragment {}
 			
-			// the serialization component
+			// the serialization component (1.0)
 			fragment = parseTreeConstructor.ParseTreeConstructorFragment {}
 			
 			// a custom ResourceFactory for use with EMF 
@@ -124,6 +127,11 @@ Workflow {
 				modelFileExtension = file.extensions
 			}
 			*/
+
+            // provides a compare view
+            fragment = compare.CompareFragment {
+                 fileExtensions = file.extensions
+            }
 		}
 	}
 }

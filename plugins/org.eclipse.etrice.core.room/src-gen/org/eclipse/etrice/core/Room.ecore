@@ -5,41 +5,51 @@
     nsURI="http://www.eclipse.org/etrice/Room" nsPrefix="room">
   <eClassifiers xsi:type="ecore:EClass" name="RoomModel">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="docu" eType="#//Documentation"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="docu" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//Documentation"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="imports" upperBound="-1"
-        eType="#//Import" containment="true"/>
+        eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//Import"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="dataClasses" upperBound="-1"
-        eType="#//DataClass" containment="true"/>
+        eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//DataClass"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="protocolClasses" upperBound="-1"
-        eType="#//ProtocolClass" containment="true"/>
+        eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//ProtocolClass"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="actorClasses" upperBound="-1"
-        eType="#//ActorClass" containment="true"/>
+        eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//ActorClass"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="subSystemClasses" upperBound="-1"
-        eType="#//SubSystemClass" containment="true"/>
+        eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//SubSystemClass"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="systems" upperBound="-1"
-        eType="#//LogicalSystem" containment="true"/>
+        eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//LogicalSystem"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RoomClass">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="docu" eType="#//Documentation"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="docu" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//Documentation"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="StructureClass" eSuperTypes="#//RoomClass">
+  <eClassifiers xsi:type="ecore:EClass" name="StructureClass" eSuperTypes="platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//RoomClass">
     <eStructuralFeatures xsi:type="ecore:EReference" name="bindings" upperBound="-1"
-        eType="#//Binding" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="connections" upperBound="-1"
-        eType="#//LayerConnection" containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ActorContainerClass" eSuperTypes="#//StructureClass">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="ifSPPs" upperBound="-1"
-        eType="#//SPPRef" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="userCode1" eType="#//DetailCode"
+        eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//Binding"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="userCode2" eType="#//DetailCode"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="connections" upperBound="-1"
+        eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//LayerConnection"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ActorContainerClass" eSuperTypes="platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//StructureClass">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ifSPPs" upperBound="-1"
+        eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//SPPRef"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="userCode1" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//DetailCode"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="userCode2" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//DetailCode"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="actorRefs" upperBound="-1"
-        eType="#//ActorRef" containment="true"/>
+        eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//ActorRef"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="PrimitiveType">
     <eLiterals name="void" literal="void"/>
@@ -57,133 +67,154 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TypedID">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//Type" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//Type"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FreeTypedID">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//FreeType"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//FreeType"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BasicType">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="prim" eType="#//PrimitiveType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="prim" eType="ecore:EEnum platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//PrimitiveType"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="ref" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Type" eSuperTypes="#//BasicType">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//DataClass"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Type" eSuperTypes="platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//BasicType">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//DataClass"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="ext" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="FreeType" eSuperTypes="#//BasicType">
+  <eClassifiers xsi:type="ecore:EClass" name="FreeType" eSuperTypes="platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//BasicType">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="DataClass" eSuperTypes="#//RoomClass">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="base" eType="#//DataClass"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DataClass" eSuperTypes="platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//RoomClass">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="base" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//DataClass"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="imports" upperBound="-1"
-        eType="#//Import" containment="true"/>
+        eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//Import"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1"
-        eType="#//Attribute" containment="true"/>
+        eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//Attribute"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="operations" upperBound="-1"
-        eType="#//Operation" containment="true"/>
+        eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//Operation"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Attribute">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="size" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//Type" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//Type"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="defaultValueLiteral" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="docu" eType="#//Documentation"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="docu" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//Documentation"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Operation">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="arguments" upperBound="-1"
-        eType="#//FreeTypedID" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="returntype" eType="#//FreeType"
+        eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//FreeTypedID"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="docu" eType="#//Documentation"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="returntype" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//FreeType"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="detailCode" eType="#//DetailCode"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="docu" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//Documentation"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="detailCode" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//DetailCode"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ProtocolClass" eSuperTypes="#//RoomClass">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="base" eType="#//ProtocolClass"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="userCode1" eType="#//DetailCode"
+  <eClassifiers xsi:type="ecore:EClass" name="ProtocolClass" eSuperTypes="platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//RoomClass">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="base" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//ProtocolClass"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="userCode1" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//DetailCode"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="userCode2" eType="#//DetailCode"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="userCode2" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//DetailCode"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="incomingMessages" upperBound="-1"
-        eType="#//Message" containment="true"/>
+        eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//Message"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="outgoingMessages" upperBound="-1"
-        eType="#//Message" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="regular" eType="#//PortClass"
+        eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//Message"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="conjugate" eType="#//PortClass"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="regular" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//PortClass"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="semantics" eType="#//ProtocolSemantics"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="conjugate" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//PortClass"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="semantics" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//ProtocolSemantics"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Message">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="data" eType="#//TypedID"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="data" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//TypedID"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="docu" eType="#//Documentation"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="docu" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//Documentation"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PortClass">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="userCode" eType="#//DetailCode"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="userCode" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//DetailCode"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1"
-        eType="#//Attribute" containment="true"/>
+        eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//Attribute"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="operations" upperBound="-1"
-        eType="#//Operation" containment="true"/>
+        eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//Operation"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="msgHandlers" upperBound="-1"
-        eType="#//MessageHandler" containment="true"/>
+        eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//MessageHandler"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MessageHandler">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="msg" eType="#//Message"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="detailCode" eType="#//DetailCode"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="msg" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//Message"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="detailCode" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//DetailCode"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ProtocolSemantics">
     <eStructuralFeatures xsi:type="ecore:EReference" name="rules" upperBound="-1"
-        eType="#//SemanticsRule" containment="true"/>
+        eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//SemanticsRule"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SemanticsRule">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="msg" eType="#//Message"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="msg" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//Message"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="followUps" upperBound="-1"
-        eType="#//SemanticsRule" containment="true"/>
+        eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//SemanticsRule"
+        containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="SemanticsInRule" eSuperTypes="#//SemanticsRule"/>
-  <eClassifiers xsi:type="ecore:EClass" name="SemanticsOutRule" eSuperTypes="#//SemanticsRule"/>
-  <eClassifiers xsi:type="ecore:EClass" name="ActorClass" eSuperTypes="#//ActorContainerClass">
+  <eClassifiers xsi:type="ecore:EClass" name="SemanticsInRule" eSuperTypes="platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//SemanticsRule"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SemanticsOutRule" eSuperTypes="platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//SemanticsRule"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ActorClass" eSuperTypes="platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//ActorContainerClass">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="abstract" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="base" eType="#//ActorClass"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="base" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//ActorClass"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ifPorts" upperBound="-1"
-        eType="#//Port" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="structureDocu" eType="#//Documentation"
+        eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//Port"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="structureDocu" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//Documentation"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="intPorts" upperBound="-1"
-        eType="#//Port" containment="true"/>
+        eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//Port"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="extPorts" upperBound="-1"
-        eType="#//ExternalPort" containment="true"/>
+        eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//ExternalPort"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="serviceImplementations"
-        upperBound="-1" eType="#//ServiceImplementation" containment="true"/>
+        upperBound="-1" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//ServiceImplementation"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="strSAPs" upperBound="-1"
-        eType="#//SAPRef" containment="true"/>
+        eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//SAPRef"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1"
-        eType="#//Attribute" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="behaviorDocu" eType="#//Documentation"
+        eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//Attribute"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="behaviorDocu" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//Documentation"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="annotations" upperBound="-1"
-        eType="#//Annotation" containment="true"/>
+        eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//Annotation"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="operations" upperBound="-1"
-        eType="#//Operation" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="stateMachine" eType="#//StateMachine"
+        eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//Operation"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="stateMachine" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//StateMachine"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="InterfaceItem">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="protocol" eType="#//ProtocolClass"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="protocol" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//ProtocolClass"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Port" eSuperTypes="#//InterfaceItem">
+  <eClassifiers xsi:type="ecore:EClass" name="Port" eSuperTypes="platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//InterfaceItem">
     <eOperations name="isReplicated" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="body" value="return multiplicity>1 || multiplicity==-1;"/>
@@ -192,76 +223,80 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="conjugated" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="multiplicity" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
         defaultValueLiteral="1"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="docu" eType="#//Documentation"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="docu" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//Documentation"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ExternalPort">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="ifport" eType="#//Port"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ifport" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//Port"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="SAPRef" eSuperTypes="#//InterfaceItem"/>
-  <eClassifiers xsi:type="ecore:EClass" name="SPPRef" eSuperTypes="#//InterfaceItem"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SAPRef" eSuperTypes="platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//InterfaceItem"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SPPRef" eSuperTypes="platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//InterfaceItem"/>
   <eClassifiers xsi:type="ecore:EClass" name="ServiceImplementation">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="spp" eType="#//SPPRef"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="spp" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//SPPRef"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="LogicalSystem" eSuperTypes="#//StructureClass">
+  <eClassifiers xsi:type="ecore:EClass" name="LogicalSystem" eSuperTypes="platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//StructureClass">
     <eStructuralFeatures xsi:type="ecore:EReference" name="subSystems" upperBound="-1"
-        eType="#//SubSystemRef" containment="true"/>
+        eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//SubSystemRef"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ActorContainerRef">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="docu" eType="#//Documentation"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="docu" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//Documentation"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="SubSystemRef" eSuperTypes="#//ActorContainerRef">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//SubSystemClass"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SubSystemRef" eSuperTypes="platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//ActorContainerRef">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//SubSystemClass"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="SubSystemClass" eSuperTypes="#//ActorContainerClass">
+  <eClassifiers xsi:type="ecore:EClass" name="SubSystemClass" eSuperTypes="platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//ActorContainerClass">
     <eStructuralFeatures xsi:type="ecore:EReference" name="relayPorts" upperBound="-1"
-        eType="#//Port" containment="true"/>
+        eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//Port"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="threads" upperBound="-1"
-        eType="#//LogicalThread" containment="true"/>
+        eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//LogicalThread"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="LogicalThread">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="prio" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="instances" upperBound="-1"
-        eType="#//ActorInstancePath" containment="true"/>
+        eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//ActorInstancePath"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ActorInstancePath">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="segments" unique="false"
         upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Binding">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="endpoint1" eType="#//BindingEndPoint"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="endpoint1" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//BindingEndPoint"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="endpoint2" eType="#//BindingEndPoint"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="endpoint2" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//BindingEndPoint"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BindingEndPoint">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="actorRef" eType="#//ActorContainerRef"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="port" eType="#//Port"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="actorRef" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//ActorContainerRef"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="port" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//Port"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="LayerConnection">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="from" eType="#//SAPoint"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="from" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//SAPoint"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="to" eType="#//SPPoint"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="to" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//SPPoint"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SAPoint"/>
-  <eClassifiers xsi:type="ecore:EClass" name="RefSAPoint" eSuperTypes="#//SAPoint">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="ref" eType="#//ActorContainerRef"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RefSAPoint" eSuperTypes="platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//SAPoint">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ref" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//ActorContainerRef"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="RelaySAPoint" eSuperTypes="#//SAPoint">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="relay" eType="#//SPPRef"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RelaySAPoint" eSuperTypes="platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//SAPoint">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="relay" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//SPPRef"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SPPoint">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="ref" eType="#//ActorContainerRef"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="service" eType="#//SPPRef"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ref" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//ActorContainerRef"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="service" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//SPPRef"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ActorRef" eSuperTypes="#//ActorContainerRef">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//ActorClass"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ActorRef" eSuperTypes="platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//ActorContainerRef">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//ActorClass"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="StateGraphNode" eSuperTypes="#//StateGraphItem"/>
+  <eClassifiers xsi:type="ecore:EClass" name="StateGraphNode" eSuperTypes="platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//StateGraphItem"/>
   <eClassifiers xsi:type="ecore:EClass" name="StateGraphItem">
     <eOperations name="getName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -269,112 +304,118 @@
       </eAnnotations>
     </eOperations>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="State" eSuperTypes="#//StateGraphNode">
+  <eClassifiers xsi:type="ecore:EClass" name="State" eSuperTypes="platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//StateGraphNode">
     <eOperations name="getName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="body" value="return (this instanceof org.eclipse.etrice.core.room.BaseState)? ((org.eclipse.etrice.core.room.BaseState)this).getName() :((org.eclipse.etrice.core.room.RefinedState)this).getBase()==null? &quot;&quot;:((org.eclipse.etrice.core.room.RefinedState)this).getBase().getName();"/>
       </eAnnotations>
     </eOperations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="docu" eType="#//Documentation"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="docu" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//Documentation"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="entryCode" eType="#//DetailCode"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="entryCode" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//DetailCode"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="exitCode" eType="#//DetailCode"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="exitCode" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//DetailCode"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="doCode" eType="#//DetailCode"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="doCode" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//DetailCode"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="subgraph" eType="#//StateGraph"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subgraph" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//StateGraph"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="StateGraph">
     <eStructuralFeatures xsi:type="ecore:EReference" name="states" upperBound="-1"
-        eType="#//State" containment="true"/>
+        eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//State"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="trPoints" upperBound="-1"
-        eType="#//TrPoint" containment="true"/>
+        eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//TrPoint"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="chPoints" upperBound="-1"
-        eType="#//ChoicePoint" containment="true"/>
+        eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//ChoicePoint"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="transitions" upperBound="-1"
-        eType="#//Transition" containment="true"/>
+        eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//Transition"
+        containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="StateMachine" eSuperTypes="#//StateGraph">
+  <eClassifiers xsi:type="ecore:EClass" name="StateMachine" eSuperTypes="platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//StateGraph">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="dataDriven" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="BaseState" eSuperTypes="#//State">
+  <eClassifiers xsi:type="ecore:EClass" name="BaseState" eSuperTypes="platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//State">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="RefinedState" eSuperTypes="#//State">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="base" eType="#//BaseState"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RefinedState" eSuperTypes="platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//State">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="base" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//BaseState"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DetailCode">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="commands" unique="false"
         upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="TrPoint" eSuperTypes="#//StateGraphNode">
+  <eClassifiers xsi:type="ecore:EClass" name="TrPoint" eSuperTypes="platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//StateGraphNode">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="TransitionPoint" eSuperTypes="#//TrPoint">
+  <eClassifiers xsi:type="ecore:EClass" name="TransitionPoint" eSuperTypes="platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//TrPoint">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="handler" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="EntryPoint" eSuperTypes="#//TrPoint"/>
-  <eClassifiers xsi:type="ecore:EClass" name="ExitPoint" eSuperTypes="#//TrPoint"/>
-  <eClassifiers xsi:type="ecore:EClass" name="ChoicePoint" eSuperTypes="#//StateGraphNode">
+  <eClassifiers xsi:type="ecore:EClass" name="EntryPoint" eSuperTypes="platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//TrPoint"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ExitPoint" eSuperTypes="platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//TrPoint"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ChoicePoint" eSuperTypes="platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//StateGraphNode">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="docu" eType="#//Documentation"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="docu" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//Documentation"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Transition" eSuperTypes="#//StateGraphItem">
+  <eClassifiers xsi:type="ecore:EClass" name="Transition" eSuperTypes="platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//StateGraphItem">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="to" eType="#//TransitionTerminal"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="to" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//TransitionTerminal"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="docu" eType="#//Documentation"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="docu" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//Documentation"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="action" eType="#//DetailCode"
-        containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="NonInitialTransition" eSuperTypes="#//Transition">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="from" eType="#//TransitionTerminal"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="action" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//DetailCode"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="InitialTransition" eSuperTypes="#//Transition"/>
-  <eClassifiers xsi:type="ecore:EClass" name="ContinuationTransition" eSuperTypes="#//NonInitialTransition"/>
-  <eClassifiers xsi:type="ecore:EClass" name="TriggeredTransition" eSuperTypes="#//NonInitialTransition">
+  <eClassifiers xsi:type="ecore:EClass" name="NonInitialTransition" eSuperTypes="platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//Transition">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="from" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//TransitionTerminal"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="InitialTransition" eSuperTypes="platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//Transition"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ContinuationTransition" eSuperTypes="platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//NonInitialTransition"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TriggeredTransition" eSuperTypes="platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//NonInitialTransition">
     <eStructuralFeatures xsi:type="ecore:EReference" name="triggers" upperBound="-1"
-        eType="#//Trigger" containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="GuardedTransition" eSuperTypes="#//NonInitialTransition">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="guard" eType="#//DetailCode"
+        eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//Trigger"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="CPBranchTransition" eSuperTypes="#//NonInitialTransition">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="condition" eType="#//DetailCode"
+  <eClassifiers xsi:type="ecore:EClass" name="GuardedTransition" eSuperTypes="platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//NonInitialTransition">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="guard" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//DetailCode"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CPBranchTransition" eSuperTypes="platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//NonInitialTransition">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="condition" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//DetailCode"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TransitionTerminal"/>
-  <eClassifiers xsi:type="ecore:EClass" name="StateTerminal" eSuperTypes="#//TransitionTerminal">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="state" eType="#//BaseState"/>
+  <eClassifiers xsi:type="ecore:EClass" name="StateTerminal" eSuperTypes="platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//TransitionTerminal">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="state" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//BaseState"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="TrPointTerminal" eSuperTypes="#//TransitionTerminal">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="trPoint" eType="#//TrPoint"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TrPointTerminal" eSuperTypes="platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//TransitionTerminal">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="trPoint" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//TrPoint"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="SubStateTrPointTerminal" eSuperTypes="#//TransitionTerminal">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="trPoint" eType="#//TrPoint"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="state" eType="#//BaseState"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SubStateTrPointTerminal" eSuperTypes="platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//TransitionTerminal">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="trPoint" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//TrPoint"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="state" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//BaseState"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ChoicepointTerminal" eSuperTypes="#//TransitionTerminal">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="cp" eType="#//ChoicePoint"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ChoicepointTerminal" eSuperTypes="platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//TransitionTerminal">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="cp" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//ChoicePoint"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Trigger">
     <eStructuralFeatures xsi:type="ecore:EReference" name="msgFromIfPairs" upperBound="-1"
-        eType="#//MessageFromIf" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="guard" eType="#//Guard"
+        eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//MessageFromIf"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="guard" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//Guard"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MessageFromIf">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="message" eType="#//Message"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="from" eType="#//InterfaceItem"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="message" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//Message"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="from" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//InterfaceItem"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Guard">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="guard" eType="#//DetailCode"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="guard" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//DetailCode"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Documentation">
@@ -384,7 +425,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="Annotation">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1"
-        eType="#//KeyValue" containment="true"/>
+        eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//KeyValue"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="KeyValue">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -394,5 +436,5 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="importedNamespace" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="importURI" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="PlainStateGraph" eSuperTypes="#//StateGraph"/>
+  <eClassifiers xsi:type="ecore:EClass" name="PlainStateGraph" eSuperTypes="platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//StateGraph"/>
 </ecore:EPackage>
