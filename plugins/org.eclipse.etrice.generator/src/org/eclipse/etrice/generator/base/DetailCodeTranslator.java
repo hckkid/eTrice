@@ -179,7 +179,11 @@ public class DetailCodeTranslator {
 					else if (text.charAt(curr.pos+1)=='*') {
 						skipMultiComment(text, curr);
 					}
+					else
+						stop = true;
 				}
+				else
+					stop = true;
 			}
 			else if (Character.isWhitespace(text.charAt(curr.pos))) {
 				skipWhiteSpace(text, curr);

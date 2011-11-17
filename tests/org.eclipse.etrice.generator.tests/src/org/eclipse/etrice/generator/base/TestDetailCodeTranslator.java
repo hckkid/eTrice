@@ -330,5 +330,15 @@ public class TestDetailCodeTranslator {
 		
 		assertEquals("fct(123) no replacement", "bar2(123, 456, 789);", result);
 	}
+	
+	@Test (timeout=1000)
+	public void testCommentBug() {
+		DetailCode dc = RoomFactory.eINSTANCE.createDetailCode();
+		dc.getCommands().add("*/ no comment */");
+		
+		String result = translator.translateDetailCode(dc);
+		
+		assertEquals("wrong comment", "*/ no comment */", result);
+	}
 
 }
