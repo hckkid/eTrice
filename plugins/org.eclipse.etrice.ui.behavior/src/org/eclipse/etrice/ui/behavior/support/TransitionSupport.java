@@ -411,14 +411,14 @@ public class TransitionSupport {
 					trans = t;
 				}
 
-				if (trans instanceof InitialTransition) {
-					trans.setName("init");
-				}
-				else {
-					trans.setName(RoomNameProvider.getUniqueTransitionName(sg));
-				}
-				
 				if (orig!=trans) {
+					if (trans instanceof InitialTransition) {
+						trans.setName("init");
+					}
+					else {
+						trans.setName(orig.getName());
+					}
+					
 					trans.setAction(orig.getAction());
 					trans.setName(orig.getName());
 					
@@ -427,8 +427,15 @@ public class TransitionSupport {
 					
 					Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 					TransitionPropertyDialog dlg = new TransitionPropertyDialog(shell, sg, trans);
-					if (dlg.open()!=Window.OK)
+					if (dlg.open()!=Window.OK) {
+						sg.getTransitions().add(orig);
+						sg.getTransitions().remove(trans);
+						if (context.getNewAnchor()==context.getConnection().getStart())
+							context.getConnection().setStart(context.getOldAnchor());
+						else
+							context.getConnection().setEnd(context.getOldAnchor());
 						return;
+					}
 
 					link(context.getConnection(), trans);
 				}
@@ -441,7 +448,7 @@ public class TransitionSupport {
 			
 			@Override
 			public boolean hasDoneChanges() {
-				return doneChanges ;
+				return doneChanges;
 			}
 		}
 		
