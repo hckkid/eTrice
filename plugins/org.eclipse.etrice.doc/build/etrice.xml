@@ -156,7 +156,7 @@
 				<para>The actor provides access protection for its own attributes (including complex types (classical objects)), including concurrency protection. An actor has neither public attributes nor public operations. The only interaction with the outside world takes place via interface ports. This ensures a high degree of reusability on actor level and provides an effective and safe programming model to the developer. </para>
 				<para>Receiving a message via a port will trigger the internal state machine. A transition will be executed depending on the message and the current state. Within this transition, detail level code will be executed and response messages can be sent.</para>
 				<para>
-					<ulink url="images\010-room-introduction01.avi">receiving a message</ulink>
+					<ulink url="http://eclipse.org/etrice/images/010-room-introduction01.avi">video: receiving a message</ulink>
 				</para>
 				<para>With this model, a complex behavior can be divided into many relatively simple, linked actors. To put it the other way round: The complex behavior will be provided by a network of relatively simple components which are communicating with each other via well defined interfaces.</para>
 			</section>
@@ -398,9 +398,8 @@
 			<para>Make sure that you have set up the workspace as described in 
 				<citation>Setting up the workspace</citation>.
 			</para>
-			<para>ToDoTJ:update video
-
-				<ulink url="images\015-HelloWorld01.avi">video</ulink>
+			<para>
+				<ulink url="http://eclipse.org/etrice/images/015-HelloWorld01.avi">video: hello world</ulink>
 			</para>
 		</section>
 		<section id="Createanewmodelfromscratch">

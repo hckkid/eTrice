@@ -104,7 +104,7 @@ The actor provides access protection for its own attributes (including complex t
 
 Receiving a message via a port will trigger the internal state machine. A transition will be executed depending on the message and the current state. Within this transition, detail level code will be executed and response messages can be sent.
 
-"receiving a message":images\010-room-introduction01.avi
+"video: receiving a message":http://eclipse.org/etrice/images/010-room-introduction01.avi
 
 With this model, a complex behavior can be divided into many relatively simple, linked actors. To put it the other way round: The complex behavior will be provided by a network of relatively simple components which are communicating with each other via well defined interfaces.
 
@@ -249,8 +249,7 @@ In this tutorial you will build your first very simple eTrice model. The goal is
 
 Make sure that you have set up the workspace as described in ??Setting up the workspace??.
 
-ToDoTJ:update video
-"video":images\015-HelloWorld01.avi
+"video: hello world":http://eclipse.org/etrice/images/015-HelloWorld01.avi
 
 h2. Create a new model from scratch
 
