@@ -330,31 +330,31 @@ public class Controller extends ActorClassBase {
 		timer.Start(700);
 		ControlPort.setCarLights(TrafficLight3.GREEN);
 		ControlPort.setPedLights(TrafficLight2.RED);
-		}
+	}
 	protected void action_TRANS_carsGreen_TO_carsYellow_BY_timeoutTicktimer(InterfaceItemBase ifitem) {
 		timer.Start(700);
 		ControlPort.setCarLights(TrafficLight3.YELLOW);
 		ControlPort.setPedLights(TrafficLight2.RED);
-		}
+	}
 	protected void action_TRANS_carsYellow_TO_carsRed_BY_timeoutTicktimer(InterfaceItemBase ifitem) {
 		timer.Start(1500);
 		ControlPort.setCarLights(TrafficLight3.RED);
 		ControlPort.setPedLights(TrafficLight2.GREEN);
-		}
+	}
 	protected void action_TRANS_carsRed_TO_carsYellowRed_BY_timeoutTicktimer(InterfaceItemBase ifitem) {
 		timer.Start(700);
 		ControlPort.setCarLights(TrafficLight3.YELLOW_RED);
 		ControlPort.setPedLights(TrafficLight2.RED);
-		}
+	}
 	protected void action_TRANS_carsYellowRed_TO_carsGreen2_BY_timeoutTicktimer(InterfaceItemBase ifitem) {
 		timer.Start(700);
 		ControlPort.setCarLights(TrafficLight3.GREEN);
 		ControlPort.setPedLights(TrafficLight2.RED);
-		}
+	}
 	protected void action_TRANS_carsGreen2_TO_off_BY_timeoutTicktimer(InterfaceItemBase ifitem) {
 		ControlPort.setCarLights(TrafficLight3.OFF);
 		ControlPort.setPedLights(TrafficLight2.OFF);
-		}
+	}
 		 
 	//******************************************
 	// END of generated code for FSM

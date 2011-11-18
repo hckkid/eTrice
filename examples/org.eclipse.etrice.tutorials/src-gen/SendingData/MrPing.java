@@ -120,8 +120,8 @@ public class MrPing extends ActorClassBase {
 					switch(trigger) {
 					case TRIG_PingPongPort__pongSimple:
 						{ int data = (Integer) generic_data;
-							if (data < 10
-							)
+						if (data < 10
+						)
 						{
 							chain = CHAIN_TRANS_waitForPongSimple_TO_waitForPongSimple_BY_pongSimplePingPongPort_wait1;
 							catching_state = STATE_TOP;
@@ -246,12 +246,12 @@ public class MrPing extends ActorClassBase {
 	//*** Action Codes
 	protected void action_TRANS_waitForPong_TO_waitForPong_BY_pongPingPongPort_wait2(InterfaceItemBase ifitem, DemoData data) {
 		printData(data);
-		}
+	}
 	protected void action_TRANS_waitForPongSimple_TO_waitForPongSimple_BY_pongSimplePingPongPort_wait1(InterfaceItemBase ifitem, int data) {
 		// keep in mind that MrPong increments
 		PingPongPort.pingSimple(data);
 		System.out.printf("data: %d\n",data);
-		}
+	}
 	protected void action_TRANS_waitForPongSimple_TO_waitForPong_BY_pongSimplePingPongPort(InterfaceItemBase ifitem, int data) {
 		System.out.printf("data: %d\n",data);
 		
@@ -265,10 +265,10 @@ public class MrPing extends ActorClassBase {
 		d.stringVal="some contents";
 		d.float64Val=3.141234;
 		PingPongPort.ping(d);
-		}
+	}
 	protected void action_TRANS_INITIAL_TO__waitForPongSimple() {
 		PingPongPort.pingSimple(0);
-		}
+	}
 		 
 	//******************************************
 	// END of generated code for FSM

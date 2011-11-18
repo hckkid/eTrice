@@ -225,13 +225,13 @@ public class GuiAdapter extends ActorClassBase {
 		carLights.setState(TrafficLight3.OFF);
 		pedLights.setState(TrafficLight2.OFF);
 		lights.setPort(ControlPort);
-		}
+	}
 	protected void action_TRANS_running_TO_running_BY_setCarLightsControlPort_tr0(InterfaceItemBase ifitem, int state) {
 		carLights.setState(state);
-		}
+	}
 	protected void action_TRANS_running_TO_running_BY_setPedLightsControlPort_tr1(InterfaceItemBase ifitem, int state) {
 		pedLights.setState(state);
-		}
+	}
 		 
 	//******************************************
 	// END of generated code for FSM

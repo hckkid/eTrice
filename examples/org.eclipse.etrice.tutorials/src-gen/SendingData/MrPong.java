@@ -209,10 +209,10 @@ public class MrPong extends ActorClassBase {
 	//*** Action Codes
 	protected void action_TRANS_looping_TO_looping_BY_pingPingPongPort_tr0(InterfaceItemBase ifitem, DemoData data) {
 		PingPongPort.pong(data);
-		}
+	}
 	protected void action_TRANS_looping_TO_looping_BY_pingSimplePingPongPort_tr1(InterfaceItemBase ifitem, int data) {
 		PingPongPort.pongSimple(data+1);
-		}
+	}
 		 
 	//******************************************
 	// END of generated code for FSM

@@ -176,7 +176,7 @@ public class HelloWorldTop extends ActorClassBase {
 	//*** Action Codes
 	protected void action_TRANS_INITIAL_TO__state0() {
 		System.out.println("HelloWorld !");
-		}
+	}
 		 
 	//******************************************
 	// END of generated code for FSM

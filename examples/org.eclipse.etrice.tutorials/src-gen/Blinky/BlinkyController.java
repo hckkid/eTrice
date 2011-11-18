@@ -226,15 +226,15 @@ public class BlinkyController extends ActorClassBase {
 	protected void action_TRANS_INITIAL_TO__on() {
 		timer.Start(5000);
 		ControlPort.start();
-		}
+	}
 	protected void action_TRANS_on_TO_off_BY_timeoutTicktimer(InterfaceItemBase ifitem) {
 		ControlPort.stop();
 		timer.Start(5000);
-		}
+	}
 	protected void action_TRANS_off_TO_on_BY_timeoutTicktimer(InterfaceItemBase ifitem) {
 		ControlPort.start();
 		timer.Start(5000);
-		}
+	}
 		 
 	//******************************************
 	// END of generated code for FSM

@@ -273,7 +273,7 @@ public class Blinky extends ActorClassBase {
 					// state has a sub graph
 					// with init transition
 					if (history[STATE_blinking]==NO_STATE) {
-						state = executeTransitionChain(CHAIN_TRANS_INITIAL_TO__off, null, null);
+						state = executeTransitionChain(CHAIN_blinking_TRANS_INITIAL_TO__on, null, null);
 					}
 					else {
 						state = history[STATE_blinking];
@@ -300,11 +300,11 @@ public class Blinky extends ActorClassBase {
 	protected void entry_blinking_on() {
 		timer.Start(1000);
 		carLights.setState(TrafficLight3.YELLOW);
-		}
+	}
 	protected void entry_blinking_off() {
 		timer.Start(1000);
 		carLights.setState(TrafficLight3.OFF);
-		}
+	}
 	
 	//*** Action Codes
 	protected void action_TRANS_INITIAL_TO__off() {
@@ -312,11 +312,11 @@ public class Blinky extends ActorClassBase {
 		pedLights = light.getPedLights();
 		carLights.setState(TrafficLight3.OFF);
 		pedLights.setState(TrafficLight2.OFF);
-		}
+	}
 	protected void action_TRANS_blinking_TO_off_BY_stopControlPort(InterfaceItemBase ifitem) {
 		timer.Kill();
 		carLights.setState(TrafficLight3.OFF);
-		}
+	}
 		 
 	//******************************************
 	// END of generated code for FSM
