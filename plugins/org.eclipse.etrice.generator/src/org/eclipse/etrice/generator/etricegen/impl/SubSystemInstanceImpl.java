@@ -129,9 +129,11 @@ public class SubSystemInstanceImpl extends StructureInstanceImpl implements SubS
 		TreeIterator<EObject> it = eAllContents();
 		while (it.hasNext()) {
 			EObject obj = it.next();
-			if (obj instanceof InstanceBase)
-				if (max <= ((InstanceBase)obj).getObjId())
-					max = ((InstanceBase)obj).getObjId();
+			if (obj instanceof InstanceBase) {
+				int lastObjID = ((InstanceBase)obj).getObjId()+((InstanceBase)obj).getNObjIDs()-1;
+				if (max <= lastObjID)
+					max = lastObjID;
+			}
 		}
 		
 		return max;

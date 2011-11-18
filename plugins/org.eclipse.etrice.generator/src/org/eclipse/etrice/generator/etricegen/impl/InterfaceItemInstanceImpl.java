@@ -72,6 +72,13 @@ public class InterfaceItemInstanceImpl extends InstanceBaseImpl implements Inter
 		return peers;
 	}
 
+	public int getNObjIDs() {
+		int n = getPeers().size();
+		if (n==0)
+			n = 1;
+		return n;
+	}
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -29,6 +29,7 @@ import org.eclipse.etrice.generator.etricegen.SubSystemInstance;
  *   <li>{@link org.eclipse.etrice.generator.etricegen.impl.InstanceBaseImpl#getPath <em>Path</em>}</li>
  *   <li>{@link org.eclipse.etrice.generator.etricegen.impl.InstanceBaseImpl#getObjId <em>Obj Id</em>}</li>
  *   <li>{@link org.eclipse.etrice.generator.etricegen.impl.InstanceBaseImpl#getThreadId <em>Thread Id</em>}</li>
+ *   <li>{@link org.eclipse.etrice.generator.etricegen.impl.InstanceBaseImpl#getNObjIDs <em>NObj IDs</em>}</li>
  * </ul>
  * </p>
  *
@@ -104,6 +105,16 @@ public abstract class InstanceBaseImpl extends EObjectImpl implements InstanceBa
 	 * @ordered
 	 */
 	protected int threadId = THREAD_ID_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getNObjIDs() <em>NObj IDs</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getNObjIDs()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final int NOBJ_IDS_EDEFAULT = 0;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -213,6 +224,15 @@ public abstract class InstanceBaseImpl extends EObjectImpl implements InstanceBa
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public int getNObjIDs() {
+		return 1;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -226,6 +246,8 @@ public abstract class InstanceBaseImpl extends EObjectImpl implements InstanceBa
 				return getObjId();
 			case ETriceGenPackage.INSTANCE_BASE__THREAD_ID:
 				return getThreadId();
+			case ETriceGenPackage.INSTANCE_BASE__NOBJ_IDS:
+				return getNObjIDs();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -282,6 +304,8 @@ public abstract class InstanceBaseImpl extends EObjectImpl implements InstanceBa
 				return objId != OBJ_ID_EDEFAULT;
 			case ETriceGenPackage.INSTANCE_BASE__THREAD_ID:
 				return threadId != THREAD_ID_EDEFAULT;
+			case ETriceGenPackage.INSTANCE_BASE__NOBJ_IDS:
+				return getNObjIDs() != NOBJ_IDS_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}

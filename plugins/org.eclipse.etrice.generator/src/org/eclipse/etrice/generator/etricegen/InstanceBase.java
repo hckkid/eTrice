@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.eclipse.etrice.generator.etricegen.InstanceBase#getPath <em>Path</em>}</li>
  *   <li>{@link org.eclipse.etrice.generator.etricegen.InstanceBase#getObjId <em>Obj Id</em>}</li>
  *   <li>{@link org.eclipse.etrice.generator.etricegen.InstanceBase#getThreadId <em>Thread Id</em>}</li>
+ *   <li>{@link org.eclipse.etrice.generator.etricegen.InstanceBase#getNObjIDs <em>NObj IDs</em>}</li>
  * </ul>
  * </p>
  *
@@ -116,5 +117,20 @@ public interface InstanceBase extends EObject {
 	 * @generated
 	 */
 	int getThreadId();
+
+	/**
+	 * Returns the value of the '<em><b>NObj IDs</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>NObj IDs</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>NObj IDs</em>' attribute.
+	 * @see org.eclipse.etrice.generator.etricegen.ETriceGenPackage#getInstanceBase_NObjIDs()
+	 * @model transient="true" changeable="false" volatile="true" derived="true"
+	 * @generated
+	 */
+	int getNObjIDs();
 
 } // InstanceBase
