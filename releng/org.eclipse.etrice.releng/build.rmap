@@ -46,12 +46,6 @@
         <bc:propertyRef key="buckminster.component"/>
       </rm:uri>
     </rm:provider>
-    <rm:provider componentTypes="osgi.bundle" readerType="local">
-      <rm:uri format="{0}/../../etrice_local_repo/modellib/{1}">
-        <bc:propertyRef key="workspace.root"/>
-        <bc:propertyRef key="buckminster.component"/>
-      </rm:uri>
-    </rm:provider>
     <rm:provider componentTypes="osgi.bundle,buckminster" readerType="local">
       <rm:uri format="{0}/../../etrice_local_repo/runtime/{1}">
         <bc:propertyRef key="workspace.root"/>
