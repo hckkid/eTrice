@@ -1599,25 +1599,143 @@ carLights.setState(TrafficLight3.OFF);
 			<title>Main Concepts</title>
 			<section id="Actors">
 				<title>Actors</title>
-				<para>The actor is the basic building block for building systems with ROOM. An actor can be refined hierarchically and thus can be of arbitrarily large scope. Ports define the interface of an actor.</para>
-				<section id="ActorClassesandActorReferences">
-					<title>Actor Classes and Actor References</title>
-					<para>An ActorClass defines the type (or blueprint) of an actor. Hierarchies are built by ActorClasses that contain ActorReferences which have another ActorClass as type. The interface of an ActorClass is always defined by Ports.</para>
+				<section id="Description">
+					<title>Description</title>
+					<para>The actor is the basic structural building block for building systems with ROOM. An actor can be refined hierarchically and thus can be of arbitrarily large scope. Ports define the interface of an actor. An Actor can also have a behavior usually defined by a finite state machine.</para>
+				</section>
+				<section id="Motivation">
+					<title>Motivation</title>
+					<itemizedlist>
+						<listitem>
+							<para>Actors enable the construction of hierarchical structures with composition and layering</para>
+						</listitem>
+						<listitem>
+							<para>Actors have their own logical thread of execution</para>
+						</listitem>
+						<listitem>
+							<para>Actors can be freely deployed</para>
+						</listitem>
+						<listitem>
+							<para>Actors define potentially reusable blocks</para>
+						</listitem>
+					</itemizedlist>
+				</section>
+				<section id="Notation">
+					<title>Notation</title>
+					<informaltable>
+						<tr>
+							<td>
+								<emphasis role="bold">Element</emphasis>
+							</td>
+							<td>
+								<emphasis role="bold">Graphical Notation</emphasis>
+							</td>
+							<td>
+								<emphasis role="bold">Textual Notation</emphasis>
+							</td>
+						</tr>
+						<tr>
+							<td>ActorClass</td>
+							<td>
+								<mediaobject>
+									<imageobject>
+										<imagedata fileref="images\040-ActorClassNotation.png"/>
+									</imageobject>
+								</mediaobject>
+							</td>
+							<td>
+								<mediaobject>
+									<imageobject>
+										<imagedata fileref="images\040-ActorClassTextualNotation.png"/>
+									</imageobject>
+								</mediaobject>	
+							</td>
+						</tr>
+						<tr>
+							<td>ActorRef</td>
+							<td>
+								<mediaobject>
+									<imageobject>
+										<imagedata fileref="images\040-ActorReferenceNotation.png"/>
+									</imageobject>
+								</mediaobject>
+							</td>
+							<td>
+								<mediaobject>
+									<imageobject>
+										<imagedata fileref="images\040-ActorReferenceTextualNotation.png"/>
+									</imageobject>
+								</mediaobject>
+							</td>
+						</tr>
+					</informaltable>
+				</section>
+				<section id="Details">
+					<title>Details</title>
+					<section id="ActorClassesandActorReferences">
+						<title>Actor Classes and Actor References</title>
+						<para>An ActorClass defines the type (or blueprint) of an actor. Hierarchies are built by ActorClasses that contain ActorReferences which have another ActorClass as type. The interface of an ActorClass is always defined by Ports.</para>
+						<para>
+							<mediaobject>
+								<imageobject>
+									<imagedata fileref="images\040-ActorClass.png"/>
+								</imageobject>
+							</mediaobject>
+						</para>
+						<para>The Behavior of an actor is usually defined by a state machine but could also be defined by manual code or other implementations.</para>
+					</section>
+				</section>
+			</section>
+			<section id="Protocols">
+				<title>Protocols</title>
+				<section id="Description2">
+					<title>Description</title>
+					<para>A ProtocolClass defines a set of incoming and outgoing messages that can be exchanged between two ports.
+						The exact semantics of a message is defined by the execution model.</para>
+				</section>
+				<section id="Motivation2">
+					<title>Motivation</title>
+					<itemizedlist>
+						<listitem>
+							<para>ProtocolClasses provide a reusable interface specification for ports</para>
+						</listitem>
+						<listitem>
+							<para>ProtocolClasses can optionally specify valid message exchange sequences</para>
+						</listitem>
+					</itemizedlist>
+				</section>
+				<section id="Notation2">
+					<title>Notation</title>
+					<para>ProtocolClasses have only textual notation. 
+						The example defines a ProtocolClass with 2 incoming and two outgoing messages. Messages can have data attached. The data can be of a primitive type (e.g. int32, float64, ...) or a DataClass.</para>
 					<para>
 						<mediaobject>
 							<imageobject>
-								<imagedata fileref="images\040-ActorClass.png"/>
+								<imagedata fileref="images\040-ProtocolClassTextualNotation.png"/>
 							</imageobject>
 						</mediaobject>
 					</para>
-					<para>The Behavior of an actor is usually defined by a state machine but could also be defined by manual code or other implementations.</para>
 				</section>
 			</section>
-			<section id="Port">
-				<title>Port</title>
-				<para>Ports are the only interfaces of actors. A port has always a protocol assigned. 
-					Service Access Points (SAP) and Service Provision Points (SPP) are specialized ports that are used to define layering.</para>
-				<section id="Notation">
+			<section id="Ports">
+				<title>Ports</title>
+				<section id="Description3">
+					<title>Description</title>
+					<para>Ports are the only interfaces of actors. A port has always a protocol assigned. 
+						Service Access Points (SAP) and Service Provision Points (SPP) are specialized ports that are used to define layering.</para>
+				</section>
+				<section id="Motivation3">
+					<title>Motivation</title>
+					<itemizedlist>
+						<listitem>
+							<para>Ports decouple interface definition (Protocols) from interface usage</para>
+						</listitem>
+						<listitem>
+							<para>Ports decouple the logical interface from the transport </para>
+						</listitem>
+					</itemizedlist>
+				</section>
+				<section id="Notation3">
 					<title>Notation</title>
 					<section id="ClassPorts">
 						<title>Class Ports</title>
@@ -1752,9 +1870,6 @@ carLights.setState(TrafficLight3.OFF);
 						</informaltable>
 					</section>
 				</section>
-			</section>
-			<section id="Protocol">
-				<title>Protocol</title>
 			</section>
 		</section>
 	</chapter>

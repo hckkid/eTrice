@@ -70,15 +70,26 @@
 <topic href="help/ROOMConcepts.html" label="ROOM Concepts">
 <topic href="help/ROOMConcepts.html#MainConcepts" label="Main Concepts">
 <topic href="help/ROOMConcepts.html#Actors" label="Actors">
+<topic href="help/ROOMConcepts.html#Description" label="Description"></topic>
+<topic href="help/ROOMConcepts.html#Motivation" label="Motivation"></topic>
+<topic href="help/ROOMConcepts.html#Notation" label="Notation"></topic>
+<topic href="help/ROOMConcepts.html#Details" label="Details">
 <topic href="help/ROOMConcepts.html#ActorClassesandActorReferences" label="Actor Classes and Actor References"></topic>
 </topic>
-<topic href="help/ROOMConcepts.html#Port" label="Port">
-<topic href="help/ROOMConcepts.html#Notation" label="Notation">
+</topic>
+<topic href="help/ROOMConcepts.html#Protocols" label="Protocols">
+<topic href="help/ROOMConcepts.html#Description2" label="Description"></topic>
+<topic href="help/ROOMConcepts.html#Motivation2" label="Motivation"></topic>
+<topic href="help/ROOMConcepts.html#Notation2" label="Notation"></topic>
+</topic>
+<topic href="help/ROOMConcepts.html#Ports" label="Ports">
+<topic href="help/ROOMConcepts.html#Description3" label="Description"></topic>
+<topic href="help/ROOMConcepts.html#Motivation3" label="Motivation"></topic>
+<topic href="help/ROOMConcepts.html#Notation3" label="Notation">
 <topic href="help/ROOMConcepts.html#ClassPorts" label="Class Ports"></topic>
 <topic href="help/ROOMConcepts.html#ReferencePorts" label="Reference Ports"></topic>
 </topic>
 </topic>
-<topic href="help/ROOMConcepts.html#Protocol" label="Protocol"></topic>
 </topic>
 </topic>
 </toc>
