@@ -883,6 +883,11 @@ public class StateSupport {
 						label += "\n";
 					label += "exit:\n"+RoomHelpers.getDetailCode(s.getExitCode());
 				}
+				if (RoomHelpers.hasDetailCode(s.getDoCode())) {
+					if (label.length()>0)
+						label += "\n";
+					label += "do:\n"+RoomHelpers.getDetailCode(s.getDoCode());
+				}
 				if (label.length()>0)
 					return label;
 			}
@@ -959,23 +964,29 @@ public class StateSupport {
 			}
 		}
 		
-		// entry and exit code
+		// entry, exit and do code
 		{
 			int x = border.getWidth()/2;
 			int y = border.getHeight()-6;
 			IGaService gaService = Graphiti.getGaService();
-			int xy1[] = new int[] { -1, -3, -1, 3, -8,  3};
+			int xy1[] = new int[] { -3, -3, -3, 3, -11,  3};
 			Polygon entryHint = gaService.createPolygon(border, xy1);
 			entryHint.setForeground(lineColor);
 			entryHint.setFilled(false);
 			entryHint.setLineWidth(LINE_WIDTH);
 			gaService.setLocation(entryHint, x, y);
-			int xy2[] = new int[] {  1, -3,  1, 3,  8,  3};
+			int xy2[] = new int[] {  3, -3,  3, 3,  11,  3};
 			Polygon exitHint = gaService.createPolygon(border, xy2);
 			exitHint.setForeground(lineColor);
 			exitHint.setFilled(false);
 			exitHint.setLineWidth(LINE_WIDTH);
 			gaService.setLocation(exitHint, x, y);
+			int xy3[] = new int[] {  -2, -3,  -2, 3,  2,  3,  2,  -3};
+			Polygon doHint = gaService.createPolygon(border, xy3);
+			doHint.setForeground(lineColor);
+			doHint.setFilled(false);
+			doHint.setLineWidth(LINE_WIDTH);
+			gaService.setLocation(doHint, x, y);
 			
 			if (!RoomHelpers.hasDetailCode(s.getEntryCode())) {
 				entryHint.setLineVisible(false);
@@ -983,6 +994,10 @@ public class StateSupport {
 			
 			if (!RoomHelpers.hasDetailCode(s.getExitCode())) {
 				exitHint.setLineVisible(false);
+			}
+			
+			if (!RoomHelpers.hasDetailCode(s.getDoCode())) {
+				doHint.setLineVisible(false);
 			}
 		}
 	}
