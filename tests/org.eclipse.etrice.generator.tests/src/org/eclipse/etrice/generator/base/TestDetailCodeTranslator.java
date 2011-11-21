@@ -12,10 +12,16 @@
 
 package org.eclipse.etrice.generator.base;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URL;
 import java.util.ArrayList;
 
+import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.Attribute;
@@ -32,6 +38,8 @@ import org.eclipse.etrice.core.room.RoomFactory;
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.Type;
 import org.eclipse.etrice.core.room.TypedID;
+import org.eclipse.etrice.core.room.util.RoomHelpers;
+import org.eclipse.etrice.generator.InstanceTestsActivator;
 import org.eclipse.etrice.generator.base.DetailCodeTranslator.ITranslationProvider;
 import org.junit.Before;
 import org.junit.Test;
@@ -340,5 +348,33 @@ public class TestDetailCodeTranslator {
 		
 		assertEquals("wrong comment", "*/ no comment */", result);
 	}
+	
+	@Test (timeout=1000)
+	public void testLargeFile() {
+		DetailCode dc = getLargeFile();
+		String orig = RoomHelpers.getDetailCode(dc);
+		
+		String result = translator.translateDetailCode(dc);
+		
+		assertEquals("large file", orig, result);
+	}
 
+	private DetailCode getLargeFile() {
+		try {
+			URL fileURL = InstanceTestsActivator.getInstance().getBundle().getEntry("models/largeFile.cpp");
+			fileURL = FileLocator.toFileURL(fileURL);
+			InputStream istream = fileURL.openStream();
+			InputStreamReader ireader = new InputStreamReader(istream);
+			BufferedReader reader = new BufferedReader(ireader);
+			DetailCode dc = RoomFactory.eINSTANCE.createDetailCode();
+			String line;
+			while ((line = reader.readLine())!=null) {
+				dc.getCommands().add(line);
+			}
+			return dc;
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 }
