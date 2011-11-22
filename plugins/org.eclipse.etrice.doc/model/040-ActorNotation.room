@@ -1,0 +1,26 @@
+RoomModel ActorNotation {
+
+	ActorClass ActorClass1 {
+		Structure {
+			ActorRef ActorReference: ActorClass2
+		}
+	}
+
+	ActorClass ActorClass2 { }
+
+	DataClass DataClass1 {
+		Attribute a1: int16
+	}
+
+	ProtocolClass ProtocolClass1 {
+		incoming {
+			Message m1(data: int32)
+			Message m2()
+		}
+		outgoing {
+			Message m3(data: DataClass1)
+			Message m4()
+		}
+	}
+
+}

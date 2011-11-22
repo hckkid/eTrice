@@ -934,10 +934,26 @@ h2. Main Concepts
 
 h3. Actors
 
-The actor is the basic building block for building systems with ROOM. An actor can be refined hierarchically and thus can be of arbitrarily large scope. Ports define the interface of an actor.
+h4. Description
+ 
+The actor is the basic structural building block for building systems with ROOM. An actor can be refined hierarchically and thus can be of arbitrarily large scope. Ports define the interface of an actor. An Actor can also have a behavior usually defined by a finite state machine.
 
-h4.  Actor Classes and Actor References
+h4. Motivation
 
+* Actors enable the construction of hierarchical structures with composition and layering
+* Actors have their own logical thread of execution
+* Actors can be freely deployed
+* Actors define potentially reusable blocks
+
+h4. Notation
+
+|*Element*|*Graphical Notation*|*Textual Notation*|
+|ActorClass|!images\040-ActorClassNotation.png!|!images\040-ActorClassTextualNotation.png!	|
+|ActorRef|!images\040-ActorReferenceNotation.png!|!images\040-ActorReferenceTextualNotation.png!|
+
+h4. Details
+
+h5.  Actor Classes and Actor References
 
 An ActorClass defines the type (or blueprint) of an actor. Hierarchies are built by ActorClasses that contain ActorReferences which have another ActorClass as type. The interface of an ActorClass is always defined by Ports.
 
@@ -945,10 +961,36 @@ An ActorClass defines the type (or blueprint) of an actor. Hierarchies are built
 
 The Behavior of an actor is usually defined by a state machine but could also be defined by manual code or other implementations.
 
-h3. Port
+h3. Protocols
+
+h4. Description
+
+A ProtocolClass defines a set of incoming and outgoing messages that can be exchanged between two ports.
+The exact semantics of a message is defined by the execution model.
+
+h4. Motivation
+
+* ProtocolClasses provide a reusable interface specification for ports
+* ProtocolClasses can optionally specify valid message exchange sequences
+
+h4. Notation
+
+ProtocolClasses have only textual notation. 
+The example defines a ProtocolClass with 2 incoming and two outgoing messages. Messages can have data attached. The data can be of a primitive type (e.g. int32, float64, ...) or a DataClass.
+
+!images\040-ProtocolClassTextualNotation.png!
+
+h3. Ports
+
+h4. Description
 
 Ports are the only interfaces of actors. A port has always a protocol assigned. 
 Service Access Points (SAP) and Service Provision Points (SPP) are specialized ports that are used to define layering.
+
+h4. Motivation
+
+* Ports decouple interface definition (Protocols) from interface usage
+* Ports decouple the logical interface from the transport 
 
 h4. Notation
 
@@ -973,11 +1015,6 @@ These symbols can only appear on the border of an actor reference symbol.
 |!images\040-ConjugatedReferencePort.png!|Conjugated Reference Port|
 |!images\040-ReplicatedReferencePort.png!|Replicated Reference Port|
 |!images\040-ConjugatedReplicatedReferencePort.png!|Conjugated Replicated Reference Port|
-
-
-
-h3. Protocol
-
 
 
 

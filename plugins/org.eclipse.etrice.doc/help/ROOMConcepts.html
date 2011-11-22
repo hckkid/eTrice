@@ -44,45 +44,242 @@
 </div>
 </div>
 </div>
-<p>The actor is the basic building block for building systems with ROOM. An actor can be refined hierarchically and thus can be of arbitrarily large scope. Ports define the interface of an actor.</p>
-<div class="section" title="Actor Classes and Actor References">
+<div class="section" title="Description">
 <div class="titlepage">
 <div>
 <div>
 <h4 class="title">
-<a name="ActorClassesandActorReferences"></a>Actor Classes and Actor References</h4>
+<a name="Description"></a>Description</h4>
 </div>
 </div>
 </div>
-<p>An ActorClass defines the type (or blueprint) of an actor. Hierarchies are built by ActorClasses that contain ActorReferences which have another ActorClass as type. The interface of an ActorClass is always defined by Ports.</p>
-<p>
-						
-</p>
-<div class="mediaobject">
-<img src="images\040-ActorClass.png"></div>
-<p>
-					
-</p>
-<p>The Behavior of an actor is usually defined by a state machine but could also be defined by manual code or other implementations.</p>
+<p>The actor is the basic structural building block for building systems with ROOM. An actor can be refined hierarchically and thus can be of arbitrarily large scope. Ports define the interface of an actor. An Actor can also have a behavior usually defined by a finite state machine.</p>
 </div>
-</div>
-<div class="section" title="Port">
+<div class="section" title="Motivation">
 <div class="titlepage">
 <div>
 <div>
-<h3 class="title">
-<a name="Port"></a>Port</h3>
+<h4 class="title">
+<a name="Motivation"></a>Motivation</h4>
 </div>
 </div>
 </div>
-<p>Ports are the only interfaces of actors. A port has always a protocol assigned. 
-					Service Access Points (SAP) and Service Provision Points (SPP) are specialized ports that are used to define layering.</p>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="disc">
+<li class="listitem">
+<p>Actors enable the construction of hierarchical structures with composition and layering</p>
+</li>
+<li class="listitem">
+<p>Actors have their own logical thread of execution</p>
+</li>
+<li class="listitem">
+<p>Actors can be freely deployed</p>
+</li>
+<li class="listitem">
+<p>Actors define potentially reusable blocks</p>
+</li>
+</ul>
+</div>
+</div>
 <div class="section" title="Notation">
 <div class="titlepage">
 <div>
 <div>
 <h4 class="title">
 <a name="Notation"></a>Notation</h4>
+</div>
+</div>
+</div>
+<table id="N10826">
+<tr>
+							
+<td>
+								<span class="bold"><strong>Element</strong></span>
+							</td>
+							<td>
+								<span class="bold"><strong>Graphical Notation</strong></span>
+							</td>
+							<td>
+								<span class="bold"><strong>Textual Notation</strong></span>
+							</td>
+						
+</tr>
+<tr>
+							
+<td>ActorClass</td>
+							<td>
+								
+<div class="mediaobject">
+<img src="images\040-ActorClassNotation.png"></div>
+							
+</td>
+							<td>
+								
+<div class="mediaobject">
+<img src="images\040-ActorClassTextualNotation.png"></div>	
+							
+</td>
+						
+</tr>
+<tr>
+							
+<td>ActorRef</td>
+							<td>
+								
+<div class="mediaobject">
+<img src="images\040-ActorReferenceNotation.png"></div>
+							
+</td>
+							<td>
+								
+<div class="mediaobject">
+<img src="images\040-ActorReferenceTextualNotation.png"></div>
+							
+</td>
+						
+</tr>
+</table>
+</div>
+<div class="section" title="Details">
+<div class="titlepage">
+<div>
+<div>
+<h4 class="title">
+<a name="Details"></a>Details</h4>
+</div>
+</div>
+</div>
+<div class="section" title="Actor Classes and Actor References">
+<div class="titlepage">
+<div>
+<div>
+<h5 class="title">
+<a name="ActorClassesandActorReferences"></a>Actor Classes and Actor References</h5>
+</div>
+</div>
+</div>
+<p>An ActorClass defines the type (or blueprint) of an actor. Hierarchies are built by ActorClasses that contain ActorReferences which have another ActorClass as type. The interface of an ActorClass is always defined by Ports.</p>
+<p>
+							
+</p>
+<div class="mediaobject">
+<img src="images\040-ActorClass.png"></div>
+<p>
+						
+</p>
+<p>The Behavior of an actor is usually defined by a state machine but could also be defined by manual code or other implementations.</p>
+</div>
+</div>
+</div>
+<div class="section" title="Protocols">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="Protocols"></a>Protocols</h3>
+</div>
+</div>
+</div>
+<div class="section" title="Description">
+<div class="titlepage">
+<div>
+<div>
+<h4 class="title">
+<a name="Description2"></a>Description</h4>
+</div>
+</div>
+</div>
+<p>A ProtocolClass defines a set of incoming and outgoing messages that can be exchanged between two ports.
+						The exact semantics of a message is defined by the execution model.</p>
+</div>
+<div class="section" title="Motivation">
+<div class="titlepage">
+<div>
+<div>
+<h4 class="title">
+<a name="Motivation2"></a>Motivation</h4>
+</div>
+</div>
+</div>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="disc">
+<li class="listitem">
+<p>ProtocolClasses provide a reusable interface specification for ports</p>
+</li>
+<li class="listitem">
+<p>ProtocolClasses can optionally specify valid message exchange sequences</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" title="Notation">
+<div class="titlepage">
+<div>
+<div>
+<h4 class="title">
+<a name="Notation2"></a>Notation</h4>
+</div>
+</div>
+</div>
+<p>ProtocolClasses have only textual notation. 
+						The example defines a ProtocolClass with 2 incoming and two outgoing messages. Messages can have data attached. The data can be of a primitive type (e.g. int32, float64, ...) or a DataClass.</p>
+<p>
+						
+</p>
+<div class="mediaobject">
+<img src="images\040-ProtocolClassTextualNotation.png"></div>
+<p>
+					
+</p>
+</div>
+</div>
+<div class="section" title="Ports">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="Ports"></a>Ports</h3>
+</div>
+</div>
+</div>
+<div class="section" title="Description">
+<div class="titlepage">
+<div>
+<div>
+<h4 class="title">
+<a name="Description3"></a>Description</h4>
+</div>
+</div>
+</div>
+<p>Ports are the only interfaces of actors. A port has always a protocol assigned. 
+						Service Access Points (SAP) and Service Provision Points (SPP) are specialized ports that are used to define layering.</p>
+</div>
+<div class="section" title="Motivation">
+<div class="titlepage">
+<div>
+<div>
+<h4 class="title">
+<a name="Motivation3"></a>Motivation</h4>
+</div>
+</div>
+</div>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="disc">
+<li class="listitem">
+<p>Ports decouple interface definition (Protocols) from interface usage</p>
+</li>
+<li class="listitem">
+<p>Ports decouple the logical interface from the transport </p>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" title="Notation">
+<div class="titlepage">
+<div>
+<div>
+<h4 class="title">
+<a name="Notation3"></a>Notation</h4>
 </div>
 </div>
 </div>
@@ -96,7 +293,7 @@
 </div>
 </div>
 <p>These symbols can only appear on the border of an actor class symbol.</p>
-<table id="N1082C">
+<table id="N108CE">
 <tr>
 								
 <td>
@@ -197,7 +394,7 @@
 </div>
 </div>
 <p>These symbols can only appear on the border of an actor reference symbol.</p>
-<table id="N108BB">
+<table id="N1095D">
 <tr>
 								
 <td>
@@ -243,16 +440,6 @@
 							
 </tr>
 </table>
-</div>
-</div>
-</div>
-<div class="section" title="Protocol">
-<div class="titlepage">
-<div>
-<div>
-<h3 class="title">
-<a name="Protocol"></a>Protocol</h3>
-</div>
 </div>
 </div>
 </div>
