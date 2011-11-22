@@ -126,7 +126,7 @@ public class DetailCodeTranslator {
 								curr.pos = start;
 								msg = getMessage(text, curr, item, false);
 								if (msg!=null) {
-									if (text.charAt(curr.pos)!='(') {
+									if (curr.pos>=text.length() || text.charAt(curr.pos)!='(') {
 										String orig = text.substring(last, curr.pos);
 										translated = provider.getInterfaceItemMessageValue(item, msg, orig);
 									}

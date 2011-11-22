@@ -208,6 +208,16 @@ public class TestDetailCodeTranslator {
 	}
 	
 	@Test
+	public void testPortMsgValueInGuard() {
+		DetailCode dc = RoomFactory.eINSTANCE.createDetailCode();
+		dc.getCommands().add("fct.in1");
+		
+		String result = translator.translateDetailCode(dc);
+		
+		assertEquals("port.message as value (getter) replacement", ">fct.in1<", result);
+	}
+	
+	@Test
 	public void testPortMsgValueNoReplace() {
 		DetailCode dc = RoomFactory.eINSTANCE.createDetailCode();
 		dc.getCommands().add("x = 2*fct.out1;");
