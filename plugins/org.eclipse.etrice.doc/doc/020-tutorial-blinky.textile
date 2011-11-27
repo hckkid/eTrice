@@ -31,7 +31,7 @@ h2. Create a new model from scratch
 Remember exercise ??HelloWorld??.
 Create a new eTrice project and name it ??Blinky??
 
-To use the GUI please copy the package ??org.eclipse.etrice.tutorials.PedLightGUI?? from "org.eclipse.etrice.tutorials/src" to your ??src?? directory "Blinky/src". For this tutorial you must remove the error markers by editing the file ??PedestrianLightWndNoTcp.java??. Appropriate comments are provided to remove the error marker for this turorial.
+To use the GUI please copy the package ??org.eclipse.etrice.tutorials.PedLightGUI?? from ??org.eclipse.etrice.tutorials/src?? to your *src* directory ??Blinky/src??. For this tutorial you must remove the error markers by editing the file ??PedestrianLightWndNoTcp.java??. Appropriate comments are provided to remove the error marker for this turorial.
 
 Open the ??Blinky.room?? file and copy the following code into the file or use content assist to create the model.
 

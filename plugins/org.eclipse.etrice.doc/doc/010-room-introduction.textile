@@ -13,7 +13,7 @@ h3. Where does it come from?
 
 Room was developed in the 1990th on the background of the upcoming mobile applications with the goal to manage the complexity of such huge SW-Systems. From the very beginning ROOM has focused on a certain type of SW-Systems and is, in contrast to the UML, well suited for this kind of systems. In this sense, ROOM is a DSL (Domain Specific Language) for distributed, event driven, real time systems. 
 
-Bran Selic, Garth Gullekson and Paul T. Ward have published the concepts 1994 in the book "REAL-TIME OBJECT-ORIENTED MODELING". The company ??object time?? (TM) developed a ROOM tool which was taken over by ??Rational SW?? (TM) and later on by ??IBM?? (TM). 
+Bran Selic, Garth Gullekson and Paul T. Ward have published the concepts 1994 in the book *Real-Time Object-Oriented Modeling*. The company ??object time?? (TM) developed a ROOM tool which was taken over by ??Rational SW?? (TM) and later on by ??IBM?? (TM). 
 The company ??Protos Software Gmbh?? (TM) also developed a ROOM tool called ??Trice?? (TM) for control software for production machines and automotive systems. ??Trice?? (TM) is the predecessor of eTrice (see Introduction to eTrice). 
  
 From our point of view ROOM provides still the clearest, simplest, most complete and best suited modeling concepts for the real time domain. All later proposals like the UML do not fit as well to this kind of problems.
@@ -21,7 +21,7 @@ From our point of view ROOM provides still the clearest, simplest, most complete
 
 h3. Which kind of SW-Systems will be addressed?
 
-As mentioned before ROOM addresses distributed, event driven, real time systems. But what is a "real time system"? ROOM defines a set of properties which are typical for a real time system. These properties are:
+As mentioned before ROOM addresses distributed, event driven, real time systems. But what is a *real time system*? ROOM defines a set of properties which are typical for a real time system. These properties are:
 * Timeliness
 * Dynamic internal structure
 * Reactiveness
@@ -47,7 +47,7 @@ As the figure illustrates, the classical object paradigm does not care about con
 
 !images/010-RoomIntroduction02.png!
 
-ROOM provides the concept of a logical machine (called actor) with its own thread of control. It provides some kind of cooperative communication infrastructure with "run to completion" semantic. That makes developing of business logic easy and safe (see basic concepts). The logical machine provides an encapsulation shell including concurrency issues (see chapter "Run to completion"). 
+ROOM provides the concept of a logical machine (called actor) with its own thread of control. It provides some kind of cooperative communication infrastructure with *run to completion* semantic. That makes developing of business logic easy and safe (see basic concepts). The logical machine provides an encapsulation shell including concurrency issues (see chapter *Run to completion*). 
 
 !images/010-RoomIntroduction03.png!
 
@@ -81,7 +81,7 @@ The actor provides access protection for its own attributes (including complex t
 
 Receiving a message via a port will trigger the internal state machine. A transition will be executed depending on the message and the current state. Within this transition, detail level code will be executed and response messages can be sent.
 
-"video: receiving a message":http://eclipse.org/etrice/images/010-room-introduction01.avi
+*video: receiving a message*:http://eclipse.org/etrice/images/010-room-introduction01.avi
 
 With this model, a complex behavior can be divided into many relatively simple, linked actors. To put it the other way round: The complex behavior will be provided by a network of relatively simple components which are communicating with each other via well defined interfaces.
 
@@ -98,11 +98,11 @@ Top level:
 ??blinking?? Sub machine:
 !images\020-Blinky151.png!
 
-From an abstract point of view there is a state "blinking". But a simple LED is not able to blink autonomously. Therefore you have to add more details to your model to make a LED blinking, but for the current work it is not of interest how the blinking is realized. This will be done in the next lower level of the hierarchy. 
+From an abstract point of view there is a state ??blinking??. But a simple LED is not able to blink autonomously. Therefore you have to add more details to your model to make a LED blinking, but for the current work it is not of interest how the blinking is realized. This will be done in the next lower level of the hierarchy. 
 
 This simple example might give an idea how powerful this mechanisms is.
 
-The hierarchical FSM provides a rich tool box to describe real world problems (see "room concepts").
+The hierarchical FSM provides a rich tool box to describe real world problems (see *room concepts*).
 
 h3. Layering
 
@@ -117,8 +117,8 @@ From the Actors point of view, SAP and SPP behave almost like regular ports.
 
 h3. Run to Completion
 
-"Run to completion" (RTC) is a very central concept of ROOM. It enables the developer to concentrate on the functional aspects of the system. The developer doesn't have to care about concurrency issues all the time. This job is concentrated to the system designer in a very flexible way.
-What does "run to completion" mean:
+*Run to completion* (RTC) is a very central concept of ROOM. It enables the developer to concentrate on the functional aspects of the system. The developer doesn't have to care about concurrency issues all the time. This job is concentrated to the system designer in a very flexible way.
+What does *run to completion* mean:
 RTC means that an actor, which is processing a message, can not receive the next message as long as the processing of the current message has been finished. Receiving of the next message will be queued from the underlying run time system.
 
 Note: It is very important not to confuse run to completion and preemption. Run to completion means that an actor will finish the processing of a message before he can receive a new one (regardless of its priority). That does not mean that an actor cannot be preempted from an higher priority thread of control. But even a message from this higher prior thread of control will be queued until the current processing has been finished. 
@@ -138,8 +138,8 @@ h3. Communication Methods
 
 h3. Execution Methods
 
-* *execution by receive event*: The message queue or the event dispatcher calls a "receive event" function of the message receiver an thereby executes the processing of the event.
-* *polled execution*: The objects are processed by a cyclic "execute" call
+* *execution by receive event*: The message queue or the event dispatcher calls a *receive event* function of the message receiver an thereby executes the processing of the event.
+* *polled execution*: The objects are processed by a cyclic *execute* call
 * *execution by function call*: The caller executes the called object via function call
 
 h3. Execution Models
@@ -163,8 +163,8 @@ This model is usually used for systems with requirements for safety, such as aut
 
 h4. synchronous
 
-The synchronous execution model could also be called "simple function calls". 
-This model is in general not very well suited to support the "run to completion" semantic typical for ROOM models, but could also be generated from ROOM models. 
+The synchronous execution model could also be called *simple function calls*. 
+This model is in general not very well suited to support the *run to completion* semantic typical for ROOM models, but could also be generated from ROOM models. 
 With this execution model also lower levels of a software system, such as device drivers, could be generated from ROOM models.
 
 

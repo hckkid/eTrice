@@ -12,7 +12,7 @@ In this tutorial you will build your first very simple eTrice model. The goal is
 
 Make sure that you have set up the workspace as described in ??Setting up the workspace??.
 
-"video: hello world":http://eclipse.org/etrice/images/015-HelloWorld01.avi
+*video: hello world*:http://eclipse.org/etrice/images/015-HelloWorld01.avi
 
 h2. Create a new model from scratch
 

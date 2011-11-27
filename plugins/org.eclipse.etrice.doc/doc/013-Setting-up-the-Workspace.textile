@@ -35,7 +35,7 @@ After generation for each tutorial a java file called ??SubSystem_ModelnameRunne
 
 !images/013-SetupWorkspace06.png!
 
-To stop the application type "quit" in the console window.
+To stop the application type ??quit?? in the console window.
  
 !images/013-SetupWorkspace07.png!
 

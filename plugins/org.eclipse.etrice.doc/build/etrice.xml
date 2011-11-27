@@ -52,7 +52,8 @@
 			<section id="Wheredoesitcomefrom">
 				<title>Where does it come from?</title>
 				<para>Room was developed in the 1990th on the background of the upcoming mobile applications with the goal to manage the complexity of such huge SW-Systems. From the very beginning ROOM has focused on a certain type of SW-Systems and is, in contrast to the UML, well suited for this kind of systems. In this sense, ROOM is a DSL (Domain Specific Language) for distributed, event driven, real time systems. </para>
-				<para>Bran Selic, Garth Gullekson and Paul T. Ward have published the concepts 1994 in the book &#8222;REAL-TIME OBJECT-ORIENTED MODELING”. The company 
+				<para>Bran Selic, Garth Gullekson and Paul T. Ward have published the concepts 1994 in the book 
+					<emphasis role="bold">Real-Time Object-Oriented Modeling</emphasis>. The company 
 					<citation>object time</citation> &#8482; developed a ROOM tool which was taken over by 
 					<citation>Rational SW</citation> &#8482; and later on by 
 					<citation>IBM</citation> &#8482;. 
@@ -65,7 +66,9 @@
 			</section>
 			<section id="WhichkindofSWSystemswillbeaddressed">
 				<title>Which kind of SW-Systems will be addressed?</title>
-				<para>As mentioned before ROOM addresses distributed, event driven, real time systems. But what is a &#8222;real time system”? ROOM defines a set of properties which are typical for a real time system. These properties are:</para>
+				<para>As mentioned before ROOM addresses distributed, event driven, real time systems. But what is a 
+					<emphasis role="bold">real time system</emphasis>? ROOM defines a set of properties which are typical for a real time system. These properties are:
+				</para>
 				<itemizedlist>
 					<listitem>
 						<para>Timeliness</para>
@@ -112,7 +115,10 @@
 						</imageobject>
 					</mediaobject>
 				</para>
-				<para>ROOM provides the concept of a logical machine (called actor) with its own thread of control. It provides some kind of cooperative communication infrastructure with &#8222;run to completion” semantic. That makes developing of business logic easy and safe (see basic concepts). The logical machine provides an encapsulation shell including concurrency issues (see chapter &#8222;Run to completion”). </para>
+				<para>ROOM provides the concept of a logical machine (called actor) with its own thread of control. It provides some kind of cooperative communication infrastructure with 
+					<emphasis role="bold">run to completion</emphasis> semantic. That makes developing of business logic easy and safe (see basic concepts). The logical machine provides an encapsulation shell including concurrency issues (see chapter 
+					<emphasis role="bold">Run to completion</emphasis>). 
+				</para>
 				<para>
 					<mediaobject>
 						<imageobject>
@@ -156,7 +162,7 @@
 				<para>The actor provides access protection for its own attributes (including complex types (classical objects)), including concurrency protection. An actor has neither public attributes nor public operations. The only interaction with the outside world takes place via interface ports. This ensures a high degree of reusability on actor level and provides an effective and safe programming model to the developer. </para>
 				<para>Receiving a message via a port will trigger the internal state machine. A transition will be executed depending on the message and the current state. Within this transition, detail level code will be executed and response messages can be sent.</para>
 				<para>
-					<ulink url="http://eclipse.org/etrice/images/010-room-introduction01.avi">video: receiving a message</ulink>
+					<emphasis role="bold">video: receiving a message</emphasis>:http://eclipse.org/etrice/images/010-room-introduction01.avi
 				</para>
 				<para>With this model, a complex behavior can be divided into many relatively simple, linked actors. To put it the other way round: The complex behavior will be provided by a network of relatively simple components which are communicating with each other via well defined interfaces.</para>
 			</section>
@@ -181,9 +187,13 @@
 						</imageobject>
 					</mediaobject>
 				</para>
-				<para>From an abstract point of view there is a state &#8222;blinking”. But a simple LED is not able to blink autonomously. Therefore you have to add more details to your model to make a LED blinking, but for the current work it is not of interest how the blinking is realized. This will be done in the next lower level of the hierarchy. </para>
+				<para>From an abstract point of view there is a state 
+					<citation>blinking</citation>. But a simple LED is not able to blink autonomously. Therefore you have to add more details to your model to make a LED blinking, but for the current work it is not of interest how the blinking is realized. This will be done in the next lower level of the hierarchy. 
+				</para>
 				<para>This simple example might give an idea how powerful this mechanisms is.</para>
-				<para>The hierarchical FSM provides a rich tool box to describe real world problems (see &#8222;room concepts”).</para>
+				<para>The hierarchical FSM provides a rich tool box to describe real world problems (see 
+					<emphasis role="bold">room concepts</emphasis>).
+				</para>
 			</section>
 			<section id="Layering">
 				<title>Layering</title>
@@ -198,9 +208,12 @@
 			</section>
 			<section id="RuntoCompletion">
 				<title>Run to Completion</title>
-				<para>&#8222;Run to completion” (RTC) is a very central concept of ROOM. It enables the developer to concentrate on the functional aspects of the system. The developer doesn’t have to care about concurrency issues all the time. This job is concentrated to the system designer in a very flexible way.
-					What does &#8222;run to completion” mean:
-					RTC means that an actor, which is processing a message, can not receive the next message as long as the processing of the current message has been finished. Receiving of the next message will be queued from the underlying run time system.</para>
+				<para>
+					<emphasis role="bold">Run to completion</emphasis> (RTC) is a very central concept of ROOM. It enables the developer to concentrate on the functional aspects of the system. The developer doesn’t have to care about concurrency issues all the time. This job is concentrated to the system designer in a very flexible way.
+					What does 
+					<emphasis role="bold">run to completion</emphasis> mean:
+					RTC means that an actor, which is processing a message, can not receive the next message as long as the processing of the current message has been finished. Receiving of the next message will be queued from the underlying run time system.
+				</para>
 				<para>Note: It is very important not to confuse run to completion and preemption. Run to completion means that an actor will finish the processing of a message before he can receive a new one (regardless of its priority). That does not mean that an actor cannot be preempted from an higher priority thread of control. But even a message from this higher prior thread of control will be queued until the current processing has been finished. </para>
 				<para>With this mechanism all actor internal attributes and data structures are protected. Due to the fact that multiple actors share one thread of control, all objects are protected which are accessed from one thread of control but multiple actors. This provides the possibility to decompose complex functionality to several actors without the risk to produce access violations or dead locks.</para>
 			</section>
@@ -237,12 +250,14 @@
 				<itemizedlist>
 					<listitem>
 						<para>
-							<emphasis role="bold">execution by receive event</emphasis>: The message queue or the event dispatcher calls a &#8222;receive event” function of the message receiver an thereby executes the processing of the event.
+							<emphasis role="bold">execution by receive event</emphasis>: The message queue or the event dispatcher calls a 
+							<emphasis role="bold">receive event</emphasis> function of the message receiver an thereby executes the processing of the event.
 						</para>
 					</listitem>
 					<listitem>
 						<para>
-							<emphasis role="bold">polled execution</emphasis>: The objects are processed by a cyclic &#8222;execute” call
+							<emphasis role="bold">polled execution</emphasis>: The objects are processed by a cyclic 
+							<emphasis role="bold">execute</emphasis> call
 						</para>
 					</listitem>
 					<listitem>
@@ -272,9 +287,12 @@
 				</section>
 				<section id="synchronous">
 					<title>synchronous</title>
-					<para>The synchronous execution model could also be called &#8222;simple function calls”. 
-						This model is in general not very well suited to support the &#8222;run to completion” semantic typical for ROOM models, but could also be generated from ROOM models. 
-						With this execution model also lower levels of a software system, such as device drivers, could be generated from ROOM models.</para>
+					<para>The synchronous execution model could also be called 
+						<emphasis role="bold">simple function calls</emphasis>. 
+						This model is in general not very well suited to support the 
+						<emphasis role="bold">run to completion</emphasis> semantic typical for ROOM models, but could also be generated from ROOM models. 
+						With this execution model also lower levels of a software system, such as device drivers, could be generated from ROOM models.
+					</para>
 				</section>
 			</section>
 		</section>
@@ -363,7 +381,9 @@
 				</imageobject>
 			</mediaobject>
 		</para>
-		<para>To stop the application type &#8222;quit” in the console window.</para>
+		<para>To stop the application type 
+			<citation>quit</citation> in the console window.
+		</para>
 		<para>
 			<mediaobject>
 				<imageobject>
@@ -399,7 +419,7 @@
 				<citation>Setting up the workspace</citation>.
 			</para>
 			<para>
-				<ulink url="http://eclipse.org/etrice/images/015-HelloWorld01.avi">video: hello world</ulink>
+				<emphasis role="bold">video: hello world</emphasis>:http://eclipse.org/etrice/images/015-HelloWorld01.avi
 			</para>
 		</section>
 		<section id="Createanewmodelfromscratch">
@@ -636,8 +656,10 @@
 				<citation>Blinky</citation>
 			</para>
 			<para>To use the GUI please copy the package 
-				<citation>org.eclipse.etrice.tutorials.PedLightGUI</citation> from &#8222;org.eclipse.etrice.tutorials/src” to your 
-				<citation>src</citation> directory &#8222;Blinky/src”. For this tutorial you must remove the error markers by editing the file 
+				<citation>org.eclipse.etrice.tutorials.PedLightGUI</citation> from 
+				<citation>org.eclipse.etrice.tutorials/src</citation> to your 
+				<emphasis role="bold">src</emphasis> directory 
+				<citation>Blinky/src</citation>. For this tutorial you must remove the error markers by editing the file 
 				<citation>PedestrianLightWndNoTcp.java</citation>. Appropriate comments are provided to remove the error marker for this turorial.
 			</para>
 			<para>Open the 
@@ -1576,7 +1598,8 @@ carLights.setState(TrafficLight3.OFF);
 		<section id="Whydoesitworkandwhyisitsafe">
 			<title>Why does it work and why is it safe?</title>
 			<para>The tutorial shows that it is generally possible to use every port from outside the model as long as the port knows its peer. This is guaranteed by describing protocol and the complete structure (especially the bindings) within the model. 
-				The only remaining question is: Why is it safe and does not violate the &#8222;run to completion” semantic. To answer this question, take a look at the 
+				The only remaining question is: Why is it safe and does not violate the 
+				<emphasis role="bold">run to completion</emphasis> semantic. To answer this question, take a look at the 
 				<citation>MessageService.java</citation> from the runtime environment. There you will find the receive method which puts each message into the queue. 
 			</para>
 			<literallayout><code>	@Override
@@ -1622,7 +1645,7 @@ carLights.setState(TrafficLight3.OFF);
 				</section>
 				<section id="Notation">
 					<title>Notation</title>
-					<informaltable>
+					<table frame="box" border="1">
 						<tr>
 							<td>
 								<emphasis role="bold">Element</emphasis>
@@ -1668,7 +1691,7 @@ carLights.setState(TrafficLight3.OFF);
 								</mediaobject>
 							</td>
 						</tr>
-					</informaltable>
+					</table>
 				</section>
 				<section id="Details">
 					<title>Details</title>
@@ -1740,7 +1763,7 @@ carLights.setState(TrafficLight3.OFF);
 					<section id="ClassPorts">
 						<title>Class Ports</title>
 						<para>These symbols can only appear on the border of an actor class symbol.</para>
-						<informaltable>
+						<table frame="box" border="1">
 							<tr>
 								<td>
 									<mediaobject>
@@ -1821,12 +1844,12 @@ carLights.setState(TrafficLight3.OFF);
 								</td>
 								<td>Conjugated Replicated Class Relay Port</td>
 							</tr>
-						</informaltable>
+						</table>
 					</section>
 					<section id="ReferencePorts">
 						<title>Reference Ports</title>
 						<para>These symbols can only appear on the border of an actor reference symbol.</para>
-						<informaltable>
+						<table frame="box" border="1">
 							<tr>
 								<td>
 									<mediaobject>
@@ -1867,7 +1890,7 @@ carLights.setState(TrafficLight3.OFF);
 								</td>
 								<td>Conjugated Replicated Reference Port</td>
 							</tr>
-						</informaltable>
+						</table>
 					</section>
 				</section>
 			</section>

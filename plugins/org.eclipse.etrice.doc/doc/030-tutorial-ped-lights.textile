@@ -58,7 +58,7 @@ The ??Controller?? receives the ??start?? message and controls the timing of the
 h2. Why does it work and why is it safe?
 
 The tutorial shows that it is generally possible to use every port from outside the model as long as the port knows its peer. This is guaranteed by describing protocol and the complete structure (especially the bindings) within the model. 
-The only remaining question is: Why is it safe and does not violate the "run to completion" semantic. To answer this question, take a look at the ??MessageService.java?? from the runtime environment. There you will find the receive method which puts each message into the queue. 
+The only remaining question is: Why is it safe and does not violate the *run to completion* semantic. To answer this question, take a look at the ??MessageService.java?? from the runtime environment. There you will find the receive method which puts each message into the queue. 
 
 bc.. 
 	@Override
