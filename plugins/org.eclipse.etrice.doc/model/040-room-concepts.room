@@ -103,4 +103,44 @@ RoomModel ModelName {
 		Attribute par2: DataClass1
 	}
 
+
+	ActorClass ActorClassWithPort {
+		Interface {
+			Port port10: ProtocolClass1
+			
+		}
+		Structure {
+			
+		}
+		Behavior {
+						
+			
+		}
+	}
+
+/*
+	ActorClass ActorClass6 {
+		Interface {
+			Port port10: ProtocolClass1
+			Port port12: ProtocolClass1
+			conjugated Port port11: ProtocolClass1
+			conjugated Port port13: ProtocolClass1 
+			Port port16 [2]: ProtocolClass1
+			conjugated Port port17 [2]: ProtocolClass1
+			conjugated Port port19 [2]: ProtocolClass1
+			Port port18 [2]: ProtocolClass1
+		}
+		Structure {
+			external Port port12
+			external Port port13
+			external Port port16
+			external Port port17
+			conjugated Port port14: ProtocolClass1
+			Port port15: ProtocolClass1
+			ActorRef ActorRef_A: ActorClass2
+			ActorRef ActorRef_B: ActorClass3
+		}
+		Behavior { }
+	}
+ */
 }

@@ -1645,7 +1645,7 @@ carLights.setState(TrafficLight3.OFF);
 				</section>
 				<section id="Notation">
 					<title>Notation</title>
-					<table frame="box" border="1">
+					<table cellspacing="2" frame="box" border="1">
 						<tr>
 							<td>
 								<emphasis role="bold">Element</emphasis>
@@ -1695,17 +1695,91 @@ carLights.setState(TrafficLight3.OFF);
 				</section>
 				<section id="Details">
 					<title>Details</title>
-					<section id="ActorClassesandActorReferences">
-						<title>Actor Classes and Actor References</title>
-						<para>An ActorClass defines the type (or blueprint) of an actor. Hierarchies are built by ActorClasses that contain ActorReferences which have another ActorClass as type. The interface of an ActorClass is always defined by Ports.</para>
-						<para>
-							<mediaobject>
-								<imageobject>
-									<imagedata fileref="images\040-ActorClass.png"/>
-								</imageobject>
-							</mediaobject>
+					<section id="ActorClassesActorReferencesPortsandBindings">
+						<title>Actor Classes, Actor References, Ports and Bindings</title>
+						<para>An 
+							<emphasis role="bold">ActorClass</emphasis> defines the type (or blueprint) of an actor. Hierarchies are built by ActorClasses that contain 
+							<emphasis role="bold">ActorReferences</emphasis> which have another ActorClass as type. The interface of an ActorClass is always defined by Ports.
 						</para>
-						<para>The Behavior of an actor is usually defined by a state machine but could also be defined by manual code or other implementations.</para>
+						<para>
+							<emphasis role="bold">External Ports</emphasis> define the external interface of an actor and are defined in the 
+							<emphasis role="bold">Interface</emphasis> section of the ActorClass.
+						</para>
+						<para>
+							<emphasis role="bold">Internal Ports</emphasis> define the internal interface of an actor and are defined in the 
+							<emphasis role="bold">Structure</emphasis> section of the ActorClass.
+						</para>
+						<para>
+							<emphasis role="bold">Bindings</emphasis> connect Ports inside an ActorClass.
+						</para>
+						<para>Example:</para>
+						<table cellspacing="2" frame="box" border="1">
+							<tr>
+								<td>
+									<emphasis role="bold">Graphical Notation</emphasis>
+								</td>
+								<td>
+									<emphasis role="bold">Textual Notation</emphasis>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<mediaobject>
+										<imageobject>
+											<imagedata fileref="images\040-ActorClass.png"/>
+										</imageobject>
+									</mediaobject>
+								</td>
+								<td>
+									<mediaobject>
+										<imageobject>
+											<imagedata fileref="images\040-ActorClassExampleTextualNotation.png"/>
+										</imageobject>
+									</mediaobject>
+								</td>
+							</tr>
+						</table>
+						<itemizedlist>
+							<listitem>
+								<para>
+									<emphasis>ActorClass1</emphasis> contains two ActorReferences
+								</para>
+							</listitem>
+							<listitem>
+								<para>
+									<emphasis>port1</emphasis> is a 
+									<emphasis role="bold">External End Port</emphasis>. Since it connects external Actors with the behavior of the ActorClass, it is defined in the 
+									<emphasis role="bold">Interface</emphasis> section and the 
+									<emphasis role="bold">Structure</emphasis> section of the ActorClass.
+								</para>
+							</listitem>
+							<listitem>
+								<para>
+									<emphasis>port2</emphasis> and 
+									<emphasis>port3</emphasis> are 
+									<emphasis role="bold">Internal End Ports</emphasis> and can only be connected to the ports of contained ActorReferences. Internal End Ports connect the Behavior of an ActorClass with its contained ActorReferences.
+								</para>
+							</listitem>
+							<listitem>
+								<para>
+									<emphasis>port4</emphasis> is a relay port and connects outside Actors to contained ActorReferences. This port can not be accessed by the behavior of the ActorClass.
+								</para>
+							</listitem>
+							<listitem>
+								<para>
+									<emphasis role="bold">Bindings</emphasis> can connect ports of the ActorClass and its contained ActorReferences. 
+								</para>
+							</listitem>
+						</itemizedlist>
+					</section>
+					<section id="Attributes">
+						<title>Attributes</title>
+					</section>
+					<section id="Operations">
+						<title>Operations</title>
+					</section>
+					<section id="FiniteStateMachine">
+						<title>Finite State Machine</title>
 					</section>
 				</section>
 			</section>
@@ -1762,9 +1836,25 @@ carLights.setState(TrafficLight3.OFF);
 					<title>Notation</title>
 					<section id="ClassPorts">
 						<title>Class Ports</title>
-						<para>These symbols can only appear on the border of an actor class symbol.</para>
-						<table frame="box" border="1">
+						<para>These symbols can only appear on the border of an actor class symbol. 
+
+							<emphasis role="bold">Textual Notation:</emphasis> 
+							Ports that define an external interface of the ActorClass, are defined in the Interface (e.g. relay ports). Ports that define an internal interface are defined in the Structure (e.g. internal ports). An   
+						</para>
+						<table cellspacing="2" frame="box" border="1">
 							<tr>
+								<td>
+									<emphasis role="bold">Element</emphasis>
+								</td>
+								<td>
+									<emphasis role="bold">Graphical Notation</emphasis>
+								</td>
+								<td>
+									<emphasis role="bold">Textual Notation</emphasis>
+								</td>
+							</tr>
+							<tr>
+								<td>Class End Port</td>
 								<td>
 									<mediaobject>
 										<imageobject>
@@ -1772,9 +1862,9 @@ carLights.setState(TrafficLight3.OFF);
 										</imageobject>
 									</mediaobject>
 								</td>
-								<td>Class End Port</td>
 							</tr>
 							<tr>
+								<td>Conjugated Class End Port</td>
 								<td>
 									<mediaobject>
 										<imageobject>
@@ -1782,9 +1872,9 @@ carLights.setState(TrafficLight3.OFF);
 										</imageobject>
 									</mediaobject>
 								</td>
-								<td>Conjugated Class End Port</td>
 							</tr>
 							<tr>
+								<td>Class Relay Port</td>
 								<td>
 									<mediaobject>
 										<imageobject>
@@ -1792,9 +1882,9 @@ carLights.setState(TrafficLight3.OFF);
 										</imageobject>
 									</mediaobject>
 								</td>
-								<td>Class Relay Port</td>
 							</tr>
 							<tr>
+								<td>Conjugated Class Relay Port</td>
 								<td>
 									<mediaobject>
 										<imageobject>
@@ -1802,9 +1892,9 @@ carLights.setState(TrafficLight3.OFF);
 										</imageobject>
 									</mediaobject>
 								</td>
-								<td>Conjugated Class Relay Port</td>
 							</tr>
 							<tr>
+								<td>Replicated Class End Port</td>
 								<td>
 									<mediaobject>
 										<imageobject>
@@ -1812,9 +1902,9 @@ carLights.setState(TrafficLight3.OFF);
 										</imageobject>
 									</mediaobject>
 								</td>
-								<td>Replicated Class End Port</td>
 							</tr>
 							<tr>
+								<td>Conjugated Replicated Class End Port</td>
 								<td>
 									<mediaobject>
 										<imageobject>
@@ -1822,9 +1912,9 @@ carLights.setState(TrafficLight3.OFF);
 										</imageobject>
 									</mediaobject>
 								</td>
-								<td>Conjugated Replicated Class End Port</td>
 							</tr>
 							<tr>
+								<td>Replicated Class Relay Port</td>
 								<td>
 									<mediaobject>
 										<imageobject>
@@ -1832,9 +1922,9 @@ carLights.setState(TrafficLight3.OFF);
 										</imageobject>
 									</mediaobject>
 								</td>
-								<td>Replicated Class Relay Port</td>
 							</tr>
 							<tr>
+								<td>Conjugated Replicated Class Relay Port</td>
 								<td>
 									<mediaobject>
 										<imageobject>
@@ -1842,15 +1932,26 @@ carLights.setState(TrafficLight3.OFF);
 										</imageobject>
 									</mediaobject>
 								</td>
-								<td>Conjugated Replicated Class Relay Port</td>
 							</tr>
 						</table>
 					</section>
 					<section id="ReferencePorts">
 						<title>Reference Ports</title>
-						<para>These symbols can only appear on the border of an actor reference symbol.</para>
-						<table frame="box" border="1">
+						<para>These symbols can only appear on the border of an ActorReference symbol. Since the type of port is defined in the ActorClass, no textual notation exists.</para>
+						<table cellspacing="2" frame="box" border="1">
 							<tr>
+								<td>
+									<emphasis role="bold">Element</emphasis>
+								</td>
+								<td>
+									<emphasis role="bold">Graphical Notation</emphasis>
+								</td>
+								<td>
+									<emphasis role="bold">Textual Notation</emphasis>
+								</td>
+							</tr>
+							<tr>
+								<td>Reference Port</td>
 								<td>
 									<mediaobject>
 										<imageobject>
@@ -1858,9 +1959,12 @@ carLights.setState(TrafficLight3.OFF);
 										</imageobject>
 									</mediaobject>
 								</td>
-								<td>Reference Port</td>
+								<td>
+									<emphasis>implicit</emphasis> 
+								</td>
 							</tr>
 							<tr>
+								<td>Conjugated Reference Port</td>
 								<td>
 									<mediaobject>
 										<imageobject>
@@ -1868,9 +1972,12 @@ carLights.setState(TrafficLight3.OFF);
 										</imageobject>
 									</mediaobject>
 								</td>
-								<td>Conjugated Reference Port</td>
+								<td>
+									<emphasis>implicit</emphasis> 
+								</td>
 							</tr>
 							<tr>
+								<td>Replicated Reference Port</td>
 								<td>
 									<mediaobject>
 										<imageobject>
@@ -1878,9 +1985,12 @@ carLights.setState(TrafficLight3.OFF);
 										</imageobject>
 									</mediaobject>
 								</td>
-								<td>Replicated Reference Port</td>
+								<td>
+									<emphasis>implicit</emphasis> 
+								</td>
 							</tr>
 							<tr>
+								<td>Conjugated Replicated Reference Port</td>
 								<td>
 									<mediaobject>
 										<imageobject>
@@ -1888,7 +1998,9 @@ carLights.setState(TrafficLight3.OFF);
 										</imageobject>
 									</mediaobject>
 								</td>
-								<td>Conjugated Replicated Reference Port</td>
+								<td>
+									<emphasis>implicit</emphasis> 
+								</td>
 							</tr>
 						</table>
 					</section>

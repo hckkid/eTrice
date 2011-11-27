@@ -92,7 +92,7 @@
 
 	<target name="tune-docbook" description="adding better formatting for tables">
 		<!-- simple find and replace for xml tags such as <informaltable> -->
-		<replace file="${build.dir}/etrice.xml" token="&lt;informaltable&gt;" value="&lt;table frame=&quot;box&quot; border=&quot;1&quot;&gt;" />
+		<replace file="${build.dir}/etrice.xml" token="&lt;informaltable&gt;" value="&lt;table cellspacing=&quot;2&quot; frame=&quot;box&quot; border=&quot;1&quot;&gt;" />
 		<replace file="${build.dir}/etrice.xml" token="&lt;/informaltable&gt;" value="&lt;/table&gt;" />
 	</target>
 
@@ -129,12 +129,12 @@
 		<echo>Building Output...</echo>
 		<antcall target="wikitext2docbook" />
 		<antcall target="tune-docbook" />
-		<antcall target="docbook2pdf" />
 		<antcall target="docbook2html" />
+		<antcall target="docbook2eclipsehelp" />
+		<antcall target="docbook2pdf" />
 		<!--
 		<antcall target="wikitext2eclipsehelp"/>
 		-->
-		<antcall target="docbook2eclipsehelp" />
 	</target>
 
 	<target name="check-docbook">

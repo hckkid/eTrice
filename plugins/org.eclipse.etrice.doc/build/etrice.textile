@@ -953,13 +953,33 @@ h4. Notation
 
 h4. Details
 
-h5.  Actor Classes and Actor References
+h5.  Actor Classes, Actor References, Ports and Bindings
 
-An ActorClass defines the type (or blueprint) of an actor. Hierarchies are built by ActorClasses that contain ActorReferences which have another ActorClass as type. The interface of an ActorClass is always defined by Ports.
+An *ActorClass* defines the type (or blueprint) of an actor. Hierarchies are built by ActorClasses that contain *ActorReferences* which have another ActorClass as type. The interface of an ActorClass is always defined by Ports.
 
-!images\040-ActorClass.png!
+*External Ports* define the external interface of an actor and are defined in the *Interface* section of the ActorClass.
 
-The Behavior of an actor is usually defined by a state machine but could also be defined by manual code or other implementations.
+*Internal Ports* define the internal interface of an actor and are defined in the *Structure* section of the ActorClass.
+
+*Bindings* connect Ports inside an ActorClass.
+
+Example:
+
+|*Graphical Notation*|*Textual Notation*|
+|!images\040-ActorClass.png!|!images\040-ActorClassExampleTextualNotation.png!|
+
+* _ActorClass1_ contains two ActorReferences
+* _port1_ is a *External End Port*. Since it connects external Actors with the behavior of the ActorClass, it is defined in the *Interface* section and the *Structure* section of the ActorClass.
+* _port2_ and _port3_ are *Internal End Ports* and can only be connected to the ports of contained ActorReferences. Internal End Ports connect the Behavior of an ActorClass with its contained ActorReferences.
+* _port4_ is a relay port and connects outside Actors to contained ActorReferences. This port can not be accessed by the behavior of the ActorClass.
+* *Bindings* can connect ports of the ActorClass and its contained ActorReferences. 
+
+h5.  Attributes
+
+h5.  Operations
+
+h5. Finite State Machine
+
 
 h3. Protocols
 
@@ -996,25 +1016,29 @@ h4. Notation
 
 h5. Class Ports
 
-These symbols can only appear on the border of an actor class symbol.
+These symbols can only appear on the border of an actor class symbol. 
+*Textual Notation:* 
+Ports that define an external interface of the ActorClass, are defined in the Interface (e.g. relay ports). Ports that define an internal interface are defined in the Structure (e.g. internal ports). An   
 
-|!images\040-ClassEndPort.png!|Class End Port|
-|!images\040-ConjugatedClassEndPort.png!|Conjugated Class End Port|
-|!images\040-ClassRelayPort.png!|Class Relay Port|
-|!images\040-ConjugatedClassRelayPort.png!|Conjugated Class Relay Port|
-|!images\040-ReplicatedClassEndPort.png!|Replicated Class End Port|
-|!images\040-ConjugatedReplicatedClassEndPort.png!|Conjugated Replicated Class End Port|
-|!images\040-ReplicatedClassRelayPort.png!|Replicated Class Relay Port|
-|!images\040-ConjugatedReplicatedClassRelayPort.png!|Conjugated Replicated Class Relay Port|
+|*Element*|*Graphical Notation*|*Textual Notation*|
+|Class End Port|!images\040-ClassEndPort.png!||
+|Conjugated Class End Port|!images\040-ConjugatedClassEndPort.png!||
+|Class Relay Port|!images\040-ClassRelayPort.png!||
+|Conjugated Class Relay Port|!images\040-ConjugatedClassRelayPort.png!||
+|Replicated Class End Port|!images\040-ReplicatedClassEndPort.png!||
+|Conjugated Replicated Class End Port|!images\040-ConjugatedReplicatedClassEndPort.png!||
+|Replicated Class Relay Port|!images\040-ReplicatedClassRelayPort.png!||
+|Conjugated Replicated Class Relay Port|!images\040-ConjugatedReplicatedClassRelayPort.png!||
 
 h5. Reference Ports
 
-These symbols can only appear on the border of an actor reference symbol.
+These symbols can only appear on the border of an ActorReference symbol. Since the type of port is defined in the ActorClass, no textual notation exists.
 
-|!images\040-ReferencePort.png!|Reference Port|
-|!images\040-ConjugatedReferencePort.png!|Conjugated Reference Port|
-|!images\040-ReplicatedReferencePort.png!|Replicated Reference Port|
-|!images\040-ConjugatedReplicatedReferencePort.png!|Conjugated Replicated Reference Port|
+|*Element*|*Graphical Notation*|*Textual Notation*|
+|Reference Port|!images\040-ReferencePort.png!| _implicit_ |
+|Conjugated Reference Port|!images\040-ConjugatedReferencePort.png!| _implicit_ |
+|Replicated Reference Port|!images\040-ReplicatedReferencePort.png!| _implicit_ |
+|Conjugated Replicated Reference Port|!images\040-ConjugatedReplicatedReferencePort.png!| _implicit_ |
 
 
 
