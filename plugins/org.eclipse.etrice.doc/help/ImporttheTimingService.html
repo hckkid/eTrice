@@ -23,8 +23,8 @@
 <p>Switching on and off the LED is timing controlled. The timing service is provided from the model library and must be imported before it can be used from the model.</p>
 <p>This is the first time you use an element from the modellib. Make sure that your Java Build Path has the appropriate entry to the modellib. Otherwise the jave code, which will be generated from the modellib, can not be referenced.
 				(right click to 
-				[<span class="citation">Blinky</span>] and select properties. Select the 
-				[<span class="citation">Java Build Path</span>] tab) 
+				<span class="emphasis"><em>Blinky</em></span> and select properties. Select the 
+				<span class="emphasis"><em>Java Build Path</em></span> tab) 
 			</p>
 <p>
 				
@@ -57,17 +57,15 @@
 </blockquote>
 </div>
 <p>Make sure that the path fits to your folder structure.  </p>
-<p>Now it can be used within the model. Right click to 
-				[<span class="citation">SubSystem_Blinky</span>] within the outline view. Select 
-				[<span class="citation">Edit Structure</span>]. The 
-				[<span class="citation">application</span>] is already referenced in the subsystem. Drag and Drop an 
-				[<span class="citation">ActorRef</span>] to the 
-				[<span class="citation">SubSystem_Blinky</span>] and name it 
-				[<span class="citation">timingService</span>]. From the actor class drop down list select 
-				[<span class="citation">room.basic.service.timing.ATimingService</span>]. Draw a 
-				[<span class="citation">LayerConnection</span>] from 
-				[<span class="citation">application</span>] to each service provision point (SPP) of the 
-				[<span class="citation">timingService</span>]. The resulting structure should look like this:
+<p>Now it can be used within the model. Right click to _SubSystem_Blinky_ within the outline view. Select 
+				<span class="emphasis"><em>Edit Structure</em></span>. The 
+				<span class="emphasis"><em>application</em></span> is already referenced in the subsystem. Drag and Drop an 
+				<span class="emphasis"><em>ActorRef</em></span> to the _SubSystem_Blinky_ and name it 
+				<span class="emphasis"><em>timingService</em></span>. From the actor class drop down list select 
+				<span class="emphasis"><em>room.basic.service.timing.ATimingService</em></span>. Draw a 
+				<span class="emphasis"><em>LayerConnection</em></span> from 
+				<span class="emphasis"><em>application</em></span> to each service provision point (SPP) of the 
+				<span class="emphasis"><em>timingService</em></span>. The resulting structure should look like this:
 			</p>
 <p>
 				
@@ -78,8 +76,8 @@
 			
 </p>
 <p>The current version of eTrice does not provide a graphical element for a service access point (SAP). Therefore the SAPs to access the timing service must be added in the .room file. Open the 
-				[<span class="citation">Blinky.room</span>] file and navigate to the 
-				[<span class="citation">Blinky</span>] actor. Add the following line to the structure of the actor:
+				<span class="emphasis"><em>Blinky.room</em></span> file and navigate to the 
+				<span class="emphasis"><em>Blinky</em></span> actor. Add the following line to the structure of the actor:
 			</p>
 <div class="literallayout">
 <p>
@@ -89,7 +87,7 @@
 </p>
 </div>
 <p>Do the same thing for 
-				[<span class="citation">BlinkyController</span>].
+				<span class="emphasis"><em>BlinkyController</em></span>.
 			</p>
 <p>The resulting code should look like this:</p>
 <p>

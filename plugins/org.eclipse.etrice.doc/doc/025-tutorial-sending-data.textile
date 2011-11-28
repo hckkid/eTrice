@@ -16,9 +16,9 @@ You will perform the following steps:
 
 h2. Create a new model from scratch
 
-Remember exercise ??HelloWorld??.
-Create a new eTrice project and name it ??SendingData??
-Open the ??SendingData.room?? file and copy the following code into the file or use content assist to create the model.
+Remember exercise _HelloWorld_.
+Create a new eTrice project and name it _SendingData_
+Open the _SendingData.room_ file and copy the following code into the file or use content assist to create the model.
 
 
 bc.. 
@@ -36,11 +36,11 @@ bq.
 
 h2. Add a data class
 
-Position the cursor outside any class definition and right click the mouse within the editor window. From the context menu select ??Content Assist?? (or Ctrl+Space).  
+Position the cursor outside any class definition and right click the mouse within the editor window. From the context menu select _Content Assist_ (or Ctrl+Space).  
 
 !images/025-SendingData01.png!
 
-Select ??DataClass - data class skeleton?? and name it ??DemoData??.
+Select _DataClass - data class skeleton_ and name it _DemoData_.
 Remove the operations and add the following Attributes:
 
 bc.. 
@@ -57,7 +57,7 @@ Note that the outline view contains all data elements as defined in the model.
 
 h2. Create a new protocol
 
-With the help of ??Content Assist?? create a ??ProtocolClass?? and name it ??PingPongProtocol??. Create the following messages:
+With the help of _Content Assist_ create a _ProtocolClass_ and name it _PingPongProtocol_. Create the following messages:
 
 bc.. 
 ProtocolClass PingPongProtocol {
@@ -74,7 +74,7 @@ bq.
 
 h2. Create MrPing and MrPong Actors
 
-With the help of ??Content Assist?? create two new actor classes and name them ??MrPing?? and ??MrPong??. The resulting model should look like this:
+With the help of _Content Assist_ create two new actor classes and name them _MrPing_ and _MrPong_. The resulting model should look like this:
 
 bc.. 
 RoomModel SendingData {
@@ -128,24 +128,24 @@ The outline view should look like this:
 
 h2. Define Actor Structure and Behavior
 
-Save the model and visit the outline view. Within the outline view, right click on the ??MrPong?? actor and select ??Edit Structure??. Select an ??Interface Port?? from the toolbox and add it to MrPong. Name the Port ??PingPongPort?? and select the ??PingPongProtocol??
+Save the model and visit the outline view. Within the outline view, right click on the _MrPong_ actor and select _Edit Structure_. Select an _Interface Port_ from the toolbox and add it to MrPong. Name the Port _PingPongPort_ and select the _PingPongProtocol_
 
 !images/025-SendingData02.png!
 
-Do the same with MrPing but mark the port as ??conjugated??
+Do the same with MrPing but mark the port as _conjugated_
 
 h3. Define MrPongs behavior
 
-Within the outline view, right click MrPong and select ??Edit Behavior??. Create the following state machine:
+Within the outline view, right click MrPong and select _Edit Behavior_. Create the following state machine:
 
 !images/025-SendingData04.png!
 
 The transition dialogues should look like this:
-For ??ping??:
+For _ping_:
 
 !images/025-SendingData05.png!
 
-For ??pingSimple??:
+For _pingSimple_:
 
 !images/025-SendingData06.png!
 
@@ -156,7 +156,7 @@ Within the outline view double click MrPing. Navigate the cursor to the behavior
 
 !images/025-SendingData07.png!
 
-Name the operation ??printData?? and define the DemoData as a parameter.
+Name the operation _printData_ and define the DemoData as a parameter.
 
 Fill in the following code:
 
@@ -178,19 +178,19 @@ For MrPing create the following state machine:
 
 The transition dialogues should look like this:
 
-For ??init??:
+For _init_:
 
 !images/025-SendingData09.png!
 
-For ??wait1??:
+For _wait1_:
 
 !images/025-SendingData10.png!
 
-For ??next??:
+For _next_:
 
 !images/025-SendingData11.png!
 
-For ??wait2??:
+For _wait2_:
 
 !images/025-SendingData12.png!
 
@@ -204,7 +204,7 @@ The model is finished now and can be found in /org.eclipse.etrice.tutorials/mode
 
 h2. Generate and run the model
 
-Generate the code by right click to ??gen_SendingData.launch?? and run it as ??gen_SendingData??. Run the model. 
+Generate the code by right click to _gen_SendingData.launch_ and run it as _gen_SendingData_. Run the model. 
 The output should look like this:
 
 bq.. 
@@ -259,12 +259,12 @@ bq.
 
 h2. Summary
 
-Within the first loop an integer value will be incremented by ??MrPong?? and sent back to ??MrPing??. As long as the guard is true ??MrPing?? sends back the value.
+Within the first loop an integer value will be incremented by _MrPong_ and sent back to _MrPing_. As long as the guard is true _MrPing_ sends back the value.
 
-Within the ??next?? transition, ??MrPing?? creates a data class and sends the default values. Then ??MrPing?? changes the values and sends the class again. At this point you should note that during the send operation, a copy of the data class will be created and sent. Otherwise it would not be possible to send the same object two times, even more it would not be possible to send a stack object at all. This type of data passing is called ??sending data by value??.
-However, for performance reasons some applications requires ??sending data by reference??. In this case the user is responsible for the life cycle of the object. In Java the VM takes care of the life cycle of an object. This is not the case for C/C++. Consider that a object which is created within a transition of a state machine will be destroyed when the transition is finished. The receiving FSM would receive an invalid reference. Therefore care must be taken when sending references.      
+Within the _next_ transition, _MrPing_ creates a data class and sends the default values. Then _MrPing_ changes the values and sends the class again. At this point you should note that during the send operation, a copy of the data class will be created and sent. Otherwise it would not be possible to send the same object two times, even more it would not be possible to send a stack object at all. This type of data passing is called _sending data by value_.
+However, for performance reasons some applications requires _sending data by reference_. In this case the user is responsible for the life cycle of the object. In Java the VM takes care of the life cycle of an object. This is not the case for C/C++. Consider that a object which is created within a transition of a state machine will be destroyed when the transition is finished. The receiving FSM would receive an invalid reference. Therefore care must be taken when sending references.      
 
-For sending data by reference you simply have to add the keyword ??ref?? to the protocol definition.
+For sending data by reference you simply have to add the keyword _ref_ to the protocol definition.
  
 bc. Message ping(data: DemoData ref)
 

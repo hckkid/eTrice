@@ -2,7 +2,7 @@ h1. Tutorial Blinky
 
 h2. Scope
 
-This tutorial describes how to use the ??TimingService??, how to combine a generated model with manual code and how to model a hierarchical state machine. The idea of the tutorial is to switch a LED on and off. The behavior of the LED should be: blinking in a one second interval for 5 seconds, stop blinking for 5 seconds, blinking, stop,...  
+This tutorial describes how to use the _TimingService_, how to combine a generated model with manual code and how to model a hierarchical state machine. The idea of the tutorial is to switch a LED on and off. The behavior of the LED should be: blinking in a one second interval for 5 seconds, stop blinking for 5 seconds, blinking, stop,...  
 For this exercise we will use a little GUI class that will be used in more sophisticated tutorials too. The GUI simulates a pedestrian traffic crossing. For now, just a simple LED simulation will be used from the GUI. 
 
 After the exercise is created you must copy the GUI to your src directory (see below).
@@ -21,19 +21,19 @@ You will perform the following steps:
 # define a protocol
 # create an actor structure
 # create a hierarchical state machine
-# use the predefined ??TimingService??
+# use the predefined _TimingService_
 # combine manual code with generated code
 # build and run the model
 # open the message sequence chart
 
 h2. Create a new model from scratch
 
-Remember exercise ??HelloWorld??.
-Create a new eTrice project and name it ??Blinky??
+Remember exercise _HelloWorld_.
+Create a new eTrice project and name it _Blinky_
 
-To use the GUI please copy the package ??org.eclipse.etrice.tutorials.PedLightGUI?? from ??org.eclipse.etrice.tutorials/src?? to your *src* directory ??Blinky/src??. For this tutorial you must remove the error markers by editing the file ??PedestrianLightWndNoTcp.java??. Appropriate comments are provided to remove the error marker for this turorial.
+To use the GUI please copy the package _org.eclipse.etrice.tutorials.PedLightGUI_ from _org.eclipse.etrice.tutorials/src_ to your *src* directory _Blinky/src_. For this tutorial you must remove the error markers by editing the file _PedestrianLightWndNoTcp.java_. Appropriate comments are provided to remove the error marker for this turorial.
 
-Open the ??Blinky.room?? file and copy the following code into the file or use content assist to create the model.
+Open the _Blinky.room_ file and copy the following code into the file or use content assist to create the model.
 
 bc.. 
 RoomModel Blinky {
@@ -53,15 +53,15 @@ bq.
 
 h2. Add two additional actor classes
 
-Position the cursor outside any class definition and right click the mouse within the editor window. From the context menu select ??Content Assist??  
+Position the cursor outside any class definition and right click the mouse within the editor window. From the context menu select _Content Assist_  
 
 !images/020-Blinky02.png!
 
-Select ??ActorClass - actor class skeleton?? and name it ??Blinky??.
+Select _ActorClass - actor class skeleton_ and name it _Blinky_.
 
 !images/020-Blinky01.png! 
 
-Repeat the described procedure and name the new actor ??BlinkyController??.
+Repeat the described procedure and name the new actor _BlinkyController_.
 
 With Ctrl+Shift+F you can beautify the model code. 
 
@@ -69,21 +69,21 @@ Save the model and visit the outline view.
 
 h2. Create a new protocol
 
-With the help of ??Content Assist?? create a ??ProtocolClass?? and name it ??BlinkyControlProtocol??.
-Inside the brackets use the ??Content Assist?? (CTRL+Space) to create two incoming messages called ??start?? and ??stop??.
+With the help of _Content Assist_ create a _ProtocolClass_ and name it _BlinkyControlProtocol_.
+Inside the brackets use the _Content Assist_ (CTRL+Space) to create two incoming messages called _start_ and _stop_.
 
 The resulting code should look like this:
 
 !images/020-Blinky03.png! 
 
-With Ctrl-Shift+F or selecting ??Format?? from the context menu you can format the text. Note that all elements are displayed in the outline view.
+With Ctrl-Shift+F or selecting _Format_ from the context menu you can format the text. Note that all elements are displayed in the outline view.
 
 h2. Import the Timing Service
 
 Switching on and off the LED is timing controlled. The timing service is provided from the model library and must be imported before it can be used from the model.
 
 This is the first time you use an element from the modellib. Make sure that your Java Build Path has the appropriate entry to the modellib. Otherwise the jave code, which will be generated from the modellib, can not be referenced.
-(right click to ??Blinky?? and select properties. Select the ??Java Build Path?? tab) 
+(right click to _Blinky_ and select properties. Select the _Java Build Path_ tab) 
   
 !images/020-Blinky16.png! 
 
@@ -102,15 +102,15 @@ bq.
 
 Make sure that the path fits to your folder structure.  
 
-Now it can be used within the model. Right click to ??SubSystem_Blinky?? within the outline view. Select ??Edit Structure??. The ??application?? is already referenced in the subsystem. Drag and Drop an ??ActorRef?? to the ??SubSystem_Blinky?? and name it ??timingService??. From the actor class drop down list select ??room.basic.service.timing.ATimingService??. Draw a ??LayerConnection?? from ??application?? to each service provision point (SPP) of the ??timingService??. The resulting structure should look like this:
+Now it can be used within the model. Right click to _SubSystem_Blinky_ within the outline view. Select _Edit Structure_. The _application_ is already referenced in the subsystem. Drag and Drop an _ActorRef_ to the _SubSystem_Blinky_ and name it _timingService_. From the actor class drop down list select _room.basic.service.timing.ATimingService_. Draw a _LayerConnection_ from _application_ to each service provision point (SPP) of the _timingService_. The resulting structure should look like this:
 
 !images/020-Blinky06.png! 
 
-The current version of eTrice does not provide a graphical element for a service access point (SAP). Therefore the SAPs to access the timing service must be added in the .room file. Open the ??Blinky.room?? file and navigate to the ??Blinky?? actor. Add the following line to the structure of the actor:
+The current version of eTrice does not provide a graphical element for a service access point (SAP). Therefore the SAPs to access the timing service must be added in the .room file. Open the _Blinky.room_ file and navigate to the _Blinky_ actor. Add the following line to the structure of the actor:
 
 bc. SAP timer: room.basic.service.timing.PTimeout
 
-Do the same thing for ??BlinkyController??.
+Do the same thing for _BlinkyController_.
 
 The resulting code should look like this:
 
@@ -119,29 +119,29 @@ The resulting code should look like this:
 
 h2. Finish the model structure
 
-From the outline view right click to ??Blinky?? and select ??Edit Structure??. Drag and Drop an ??Interface Port?? to the boarder of the ??Blinky?? actor. Note that an interface port is not possible inside the actor. Name the port ??ControlPort?? and select ??BlinkyControlProtocol?? from the drop down list. Uncheck ??Conjugated?? and ??Is Relay Port??. Klick ??ok??. The resulting structure should look like this:
+From the outline view right click to _Blinky_ and select _Edit Structure_. Drag and Drop an _Interface Port_ to the boarder of the _Blinky_ actor. Note that an interface port is not possible inside the actor. Name the port _ControlPort_ and select _BlinkyControlProtocol_ from the drop down list. Uncheck _Conjugated_ and _Is Relay Port_. Klick _ok_. The resulting structure should look like this:
 
 
 !images/020-Blinky04.png!
 
-Repeat the above steps for the ??BlinkyController??. Make the port ??Conjugated??
+Repeat the above steps for the _BlinkyController_. Make the port _Conjugated_
 
-Keep in mind that the protocol defines ??start?? and ??stop?? as incoming messages. ??Blinky?? receives this messages and therefore ??Blinky??'s ??ControlPort?? must be a regular port and ??BlinkyController??'s ??ControlPort?? must be a conjugated port.
+Keep in mind that the protocol defines _start_ and _stop_ as incoming messages. _Blinky_ receives this messages and therefore _Blinky_'s _ControlPort_ must be a regular port and _BlinkyController_'s _ControlPort_ must be a conjugated port.
 
 
-From the outline view right click ??BlinkyTop?? and select ??Edit Structure??.
+From the outline view right click _BlinkyTop_ and select _Edit Structure_.
 
-Drag and Drop an ??ActorRef?? inside the ??BlinkyTop?? actor. Name it ??blinky??. From the actor class drop down list select ??Blinky??. Do the same for ??controller??. Connect the ports via the binding tool. The resulting structure should look like this:
+Drag and Drop an _ActorRef_ inside the _BlinkyTop_ actor. Name it _blinky_. From the actor class drop down list select _Blinky_. Do the same for _controller_. Connect the ports via the binding tool. The resulting structure should look like this:
 
 !images/020-Blinky05.png!
 
 h2. Implement the Behavior
 
-The application should switch on and off the LED for 5 seconds in a 1 second interval, than stop blinking for 5 seconds and start again. To implement this behavior we will implement two FSMs. One for the 1 second interval and one for the 5 second interval. The 1 second blinking should be implemented in ??Blinky??. The 5 second interval should be implemented in ??BlinkyController??. First implement the Controller.
+The application should switch on and off the LED for 5 seconds in a 1 second interval, than stop blinking for 5 seconds and start again. To implement this behavior we will implement two FSMs. One for the 1 second interval and one for the 5 second interval. The 1 second blinking should be implemented in _Blinky_. The 5 second interval should be implemented in _BlinkyController_. First implement the Controller.
 
-Right click to ??BlinkyController?? and select ??Edit Behavior??.
-Drag and Drop the ??Initial Point?? and two ??States?? into the top state. Name the states ??on?? and ??off??. 
-Use the ??Transition?? tool to draw transitions from ??init?? to ??on?? from ??on?? to ??off?? and from ??off?? to ??on??.
+Right click to _BlinkyController_ and select _Edit Behavior_.
+Drag and Drop the _Initial Point_ and two _States_ into the top state. Name the states _on_ and _off_. 
+Use the _Transition_ tool to draw transitions from _init_ to _on_ from _on_ to _off_ and from _off_ to _on_.
 
 Open the transition dialog by double click the arrow to specify the trigger event and the action code of each transition. Note that the initial transition does not have a trigger event.
 
@@ -149,43 +149,43 @@ The transition dialog should look like this:
 
 !{width=500px}images/020-Blinky09.png! 
 
-The defined ports will be generated as a member attribute of the actor class from type of the attached protocol. So, to send e message you must state ??port.message(param);??. In this example ??ControlPort.start()?? sends the ??start?? message via the ??ControlPort?? to the outside world. Assuming that ??Blinky?? is connected to this port, the message will start the one second blinking FSM. It is the same thing with the ??timer??. The SAP is also a port and follows the same rules. So it is clear that ??timer.Start(5000);?? will send the ??Start?? message to the timing service. The timing service will send a ??timeoutTick?? message back after 5000ms.
+The defined ports will be generated as a member attribute of the actor class from type of the attached protocol. So, to send e message you must state _port.message(param);_. In this example _ControlPort.start()_ sends the _start_ message via the _ControlPort_ to the outside world. Assuming that _Blinky_ is connected to this port, the message will start the one second blinking FSM. It is the same thing with the _timer_. The SAP is also a port and follows the same rules. So it is clear that _timer.Start(5000);_ will send the _Start_ message to the timing service. The timing service will send a _timeoutTick_ message back after 5000ms.
 
-Within each transition the timer will be restarted and the appropriate message will be sent via the ??ControlPort??. 
+Within each transition the timer will be restarted and the appropriate message will be sent via the _ControlPort_. 
 
 The resulting state machine should look like this:
 (Note that the arrows peak changes if the transition contains action code.)
 
 !images/020-Blinky10.png!
 
-Save the diagram and inspect the ??Blinky.room?? file. The ??BlinkyController?? should look like this:
+Save the diagram and inspect the _Blinky.room_ file. The _BlinkyController_ should look like this:
 
 !images/020-Blinky11.png! 
  
-Now we will implement ??Blinky??. Due to the fact that ??Blinky?? interacts with the GUI class a view things must to be done in the model file.
+Now we will implement _Blinky_. Due to the fact that _Blinky_ interacts with the GUI class a view things must to be done in the model file.
 
-Double click ??Blinky?? in the outline view to navigate to ??Blinky?? within the model file.
+Double click _Blinky_ in the outline view to navigate to _Blinky_ within the model file.
 Add the following code:
 (type it or simply copy it from the tutorial project)
 
 !images/020-Blinky12.png! 
 
-??usercode1?? will be generated at the beginning of the file, outside the class definition. ??usercode2?? will be generated within the class definition. The code imports the GUI class and instantiates the window class. Attributes for the carLights and pedLights will be declared to easily access the lights in the state machine.
-The Operation ??destroyUser()?? is a predefined operation that will be called during shutdown of the application. Within this operation, cleanup of manual coded classes can be done.
+_usercode1_ will be generated at the beginning of the file, outside the class definition. _usercode2_ will be generated within the class definition. The code imports the GUI class and instantiates the window class. Attributes for the carLights and pedLights will be declared to easily access the lights in the state machine.
+The Operation _destroyUser()_ is a predefined operation that will be called during shutdown of the application. Within this operation, cleanup of manual coded classes can be done.
  
-Now design the FSM of ??Blinky??. Remember, as the name suggested ??blinking?? is a state in which the LED must be switched on and off. We will realize that by an hierarchical FSM in which the ??blinking?? state has two sub states.
+Now design the FSM of _Blinky_. Remember, as the name suggested _blinking_ is a state in which the LED must be switched on and off. We will realize that by an hierarchical FSM in which the _blinking_ state has two sub states.
 
-Open the behavior diagram of ??Blinky?? by right clicking the ??Blinky?? actor in the outline view. Create two states named ??blinking?? and ??off??. Right click to ??blinking?? and create a subgraph.
+Open the behavior diagram of _Blinky_ by right clicking the _Blinky_ actor in the outline view. Create two states named _blinking_ and _off_. Right click to _blinking_ and create a subgraph.
 
 !images/020-Blinky13.png!
 
-Create the following state machine. The trigger events between ??on?? and ??off?? are the ??timeoutTick?? from the ??timer?? port. 
+Create the following state machine. The trigger events between _on_ and _off_ are the _timeoutTick_ from the _timer_ port. 
 
 !images/020-Blinky14.png!
 
-Create entry code for both states by right clicking the state and select ??Edit State...??
+Create entry code for both states by right clicking the state and select _Edit State..._
 
-Entry code of ??on?? is:
+Entry code of _on_ is:
 
 bc..  
 timer.Start(1000);
@@ -193,19 +193,19 @@ carLights.setState(TrafficLight3.YELLOW);
 bq. 
 
  
-Entry code  of ??off?? is:
+Entry code  of _off_ is:
 
 bc.. 
 timer.Start(1000);
 carLights.setState(TrafficLight3.OFF);
 bq. 
 
-Navigate to the Top level state by double clicking the ??/blinking?? state. Create the following state machine:
+Navigate to the Top level state by double clicking the _/blinking_ state. Create the following state machine:
 
 !images/020-Blinky15.png!
 
-The trigger event from ??off?? to ??blinking?? is the ??start?? event from the ??ControlPort??.The trigger event from ??blinking?? to ??off?? is the ??stop?? event from the ??ControlPort??.
-Note: The transition from ??blinking?? to ??off?? is a so called group transition. This is a outgoing transition from a super state (state with sub states) without specifying the concrete leave state (state without sub states). An incoming transition to a super state is called history transition.   
+The trigger event from _off_ to _blinking_ is the _start_ event from the _ControlPort_.The trigger event from _blinking_ to _off_ is the _stop_ event from the _ControlPort_.
+Note: The transition from _blinking_ to _off_ is a so called group transition. This is a outgoing transition from a super state (state with sub states) without specifying the concrete leave state (state without sub states). An incoming transition to a super state is called history transition.   
 
 Action code of the init transition is:
 
@@ -216,7 +216,7 @@ carLights.setState(TrafficLight3.OFF);
 pedLights.setState(TrafficLight2.OFF);
 bq. 
 
-Action code from ??blinking?? to ??off?? is:
+Action code from _blinking_ to _off_ is:
 
 bc.. 
 timer.Kill();

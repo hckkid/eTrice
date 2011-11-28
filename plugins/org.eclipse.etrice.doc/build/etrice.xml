@@ -54,13 +54,13 @@
 				<para>Room was developed in the 1990th on the background of the upcoming mobile applications with the goal to manage the complexity of such huge SW-Systems. From the very beginning ROOM has focused on a certain type of SW-Systems and is, in contrast to the UML, well suited for this kind of systems. In this sense, ROOM is a DSL (Domain Specific Language) for distributed, event driven, real time systems. </para>
 				<para>Bran Selic, Garth Gullekson and Paul T. Ward have published the concepts 1994 in the book 
 					<emphasis role="bold">Real-Time Object-Oriented Modeling</emphasis>. The company 
-					<citation>object time</citation> &#8482; developed a ROOM tool which was taken over by 
-					<citation>Rational SW</citation> &#8482; and later on by 
-					<citation>IBM</citation> &#8482;. 
+					<emphasis>object time</emphasis> &#8482; developed a ROOM tool which was taken over by 
+					<emphasis>Rational SW</emphasis> &#8482; and later on by 
+					<emphasis>IBM</emphasis> &#8482;. 
 					The company 
-					<citation>Protos Software Gmbh</citation> &#8482; also developed a ROOM tool called 
-					<citation>Trice</citation> &#8482; for control software for production machines and automotive systems. 
-					<citation>Trice</citation> &#8482; is the predecessor of eTrice (see Introduction to eTrice). 
+					<emphasis>Protos Software Gmbh</emphasis> &#8482; also developed a ROOM tool called 
+					<emphasis>Trice</emphasis> &#8482; for control software for production machines and automotive systems. 
+					<emphasis>Trice</emphasis> &#8482; is the predecessor of eTrice (see Introduction to eTrice). 
 				</para>
 				<para>From our point of view ROOM provides still the clearest, simplest, most complete and best suited modeling concepts for the real time domain. All later proposals like the UML do not fit as well to this kind of problems.</para>
 			</section>
@@ -94,7 +94,7 @@
 					So, the system can be characterized as timely, concurrent and reactive. As long as the washing machine does not transform to a laundry drier by itself, the system has no dynamic internal structure and as long as all functions are running on a single micro controller the (SW)-system is not distributed. 
 					ROOM fits perfect to such a system.</para>
 				<para>A SW system which mainly consists of data transformations like signal/image processing or a loop controller (e.g. a PID controller) cannot be characterized with any of the above mentioned properties. However, in the real world most of the SW systems will be a combination of both. ROOM can be combined with such systems, so that for example an actor provides a 
-					<citation>run to completion</citation> context for calculating an image processing algorithm or a PID controller.  
+					<emphasis role="bold">run to completion</emphasis> context for calculating an image processing algorithm or a PID controller.  
 				</para>
 			</section>
 			<section id="WhatistherelationbetweenOOPandROOM">
@@ -179,7 +179,7 @@
 					</mediaobject>
 				</para>
 				<para>
-					<citation>blinking</citation> Sub machine:
+					<emphasis>blinking</emphasis> Sub machine:
 
 					<mediaobject>
 						<imageobject>
@@ -188,7 +188,7 @@
 					</mediaobject>
 				</para>
 				<para>From an abstract point of view there is a state 
-					<citation>blinking</citation>. But a simple LED is not able to blink autonomously. Therefore you have to add more details to your model to make a LED blinking, but for the current work it is not of interest how the blinking is realized. This will be done in the next lower level of the hierarchy. 
+					<emphasis>blinking</emphasis>. But a simple LED is not able to blink autonomously. Therefore you have to add more details to your model to make a LED blinking, but for the current work it is not of interest how the blinking is realized. This will be done in the next lower level of the hierarchy. 
 				</para>
 				<para>This simple example might give an idea how powerful this mechanisms is.</para>
 				<para>The hierarchical FSM provides a rich tool box to describe real world problems (see 
@@ -320,10 +320,10 @@
 			</mediaobject>
 		</para>
 		<para>Just the 
-			<citation>eTrice</citation> menu item is visible from the eTrice tool.
+			<emphasis>eTrice</emphasis> menu item is visible from the eTrice tool.
 			From the 
-			<citation>File</citation> menu select 
-			<citation>File-&gt;New-&gt;Project</citation>
+			<emphasis>File</emphasis> menu select 
+			<emphasis>File-&gt;New-&gt;Project</emphasis>
 		</para>
 		<para>
 			<mediaobject>
@@ -333,12 +333,12 @@
 			</mediaobject>
 		</para>
 		<para>Open the 
-			<citation>eTrice</citation> tab and select 
-			<citation>eTrice Java ModelLib</citation>
+			<emphasis>eTrice</emphasis> tab and select 
+			<emphasis>eTrice Java ModelLib</emphasis>
 		</para>
 		<para>Press 
-			<citation>Next</citation> and 
-			<citation>Finish</citation> to install the Modellib into your workspace.
+			<emphasis>Next</emphasis> and 
+			<emphasis>Finish</emphasis> to install the Modellib into your workspace.
 		</para>
 		<para>
 			<mediaobject>
@@ -348,8 +348,8 @@
 			</mediaobject>
 		</para>
 		<para>Do the same steps for 
-			<citation>eTrice Java Runtime</citation> and 
-			<citation>eTrice Java Tutorials</citation>. The resulting workspace should look like this:
+			<emphasis>eTrice Java Runtime</emphasis> and 
+			<emphasis>eTrice Java Tutorials</emphasis>. The resulting workspace should look like this:
 		</para>
 		<para>
 			<mediaobject>
@@ -360,9 +360,7 @@
 		</para>
 		<para>Now workspace is set up and you can perform the tutorials or start with your work.</para>
 		<para>The tutorial models are available in the 
-			<citation>org.eclipse.etrice.tutorials</citation> project. All tutorials are ready to generate and run without any changes. To start the code generator simply run 
-			<citation>gen_org.eclipse.etrice.tutorials.launch</citation> as 
-			<citation>gen_org.eclipse.etrice.tutorials.launch</citation>: 
+			<emphasis>org.eclipse.etrice.tutorials</emphasis> project. All tutorials are ready to generate and run without any changes. To start the code generator simply run _gen_org.eclipse.etrice.tutorials.launch_ as _gen_org.eclipse.etrice.tutorials.launch_: 
 		</para>
 		<para>
 			<mediaobject>
@@ -371,9 +369,7 @@
 				</imageobject>
 			</mediaobject>
 		</para>
-		<para>After generation for each tutorial a java file called 
-			<citation>SubSystem_ModelnameRunner.java</citation> is generated. To run the model simply run this file as a java application:
-		</para>
+		<para>After generation for each tutorial a java file called _SubSystem_ModelnameRunner.java_ is generated. To run the model simply run this file as a java application:</para>
 		<para>
 			<mediaobject>
 				<imageobject>
@@ -382,7 +378,7 @@
 			</mediaobject>
 		</para>
 		<para>To stop the application type 
-			<citation>quit</citation> in the console window.
+			<emphasis>quit</emphasis> in the console window.
 		</para>
 		<para>
 			<mediaobject>
@@ -416,17 +412,17 @@
 				</listitem>
 			</orderedlist>
 			<para>Make sure that you have set up the workspace as described in 
-				<citation>Setting up the workspace</citation>.
+				<emphasis>Setting up the workspace</emphasis>.
 			</para>
 			<para>
-				<emphasis role="bold">video: hello world</emphasis>:http://eclipse.org/etrice/images/015-HelloWorld01.avi
+				<emphasis role="bold">video hello world:</emphasis> http://eclipse.org/etrice/images/015-HelloWorld01.avi
 			</para>
 		</section>
 		<section id="Createanewmodelfromscratch">
 			<title>Create a new model from scratch</title>
 			<para>The easiest way to create a new eTrice Project is to use the eclipse project wizard. From the eclipse file menu select 
-				<citation>File-&gt;New-&gt;Project</citation> and create a new eTrice project and name it 
-				<citation>HelloWorld</citation>
+				<emphasis>File-&gt;New-&gt;Project</emphasis> and create a new eTrice project and name it 
+				<emphasis>HelloWorld</emphasis>
 			</para>
 			<para>
 				<mediaobject>
@@ -444,9 +440,9 @@
 				</mediaobject>
 			</para>
 			<para>Within the model directory the model file 
-				<citation>HelloWorld.room</citation> was created. Open the 
-				<citation>HelloWorld.room</citation> file and delete the contents of the file. Open the content assist with Ctrl+Space and select 
-				<citation>model skeleton</citation>.
+				<emphasis>HelloWorld.room</emphasis> was created. Open the 
+				<emphasis>HelloWorld.room</emphasis> file and delete the contents of the file. Open the content assist with Ctrl+Space and select 
+				<emphasis>model skeleton</emphasis>.
 			</para>
 			<para>
 				<mediaobject>
@@ -478,26 +474,26 @@
 			<itemizedlist>
 				<listitem>
 					<para>the 
-						<citation>LogicalSystem</citation> 
+						<emphasis>LogicalSystem</emphasis> 
 					</para>
 				</listitem>
 				<listitem>
 					<para>at least one 
-						<citation>SubSystemClass</citation>
+						<emphasis>SubSystemClass</emphasis>
 					</para>
 				</listitem>
 				<listitem>
 					<para>at least one 
-						<citation>ActorClass</citation>
+						<emphasis>ActorClass</emphasis>
 					</para>
 				</listitem>
 			</itemizedlist>
 			<para>The 
-				<citation>LogicalSystem</citation> represents the complete distributed system and contains at least one 
-				<citation>SubSystemRef</citation>. The 
-				<citation>SubSystemClass</citation> represents an address space and contains at least one 
-				<citation>ActorRef</citation>. The 
-				<citation>ActorClass</citation> is the building block of which an application will be built of. It is in general a good idea to define a top level actor that can be used as reference within the subsystem.
+				<emphasis>LogicalSystem</emphasis> represents the complete distributed system and contains at least one 
+				<emphasis>SubSystemRef</emphasis>. The 
+				<emphasis>SubSystemClass</emphasis> represents an address space and contains at least one 
+				<emphasis>ActorRef</emphasis>. The 
+				<emphasis>ActorClass</emphasis> is the building block of which an application will be built of. It is in general a good idea to define a top level actor that can be used as reference within the subsystem.
 			</para>
 			<para>The outline view of the textual ROOM editor shows the main modeling elements in an easy to navigate tree.</para>
 			<para>
@@ -511,9 +507,9 @@
 		<section id="Createastatemachine">
 			<title>Create a state machine</title>
 			<para>We will implement the Hello World code on the initial transition of the 
-				<citation>HelloWorldTop</citation> actor. Therefore open the state machine editor by right clicking the 
-				<citation>HelloWorldTop</citation> actor in the outline view and select 
-				<citation>Edit Behavior</citation>.
+				<emphasis>HelloWorldTop</emphasis> actor. Therefore open the state machine editor by right clicking the 
+				<emphasis>HelloWorldTop</emphasis> actor in the outline view and select 
+				<emphasis>Edit Behavior</emphasis>.
 			</para>
 			<para>
 				<mediaobject>
@@ -523,11 +519,11 @@
 				</mediaobject>
 			</para>
 			<para>The state machine editor will be opened. Drag and drop an 
-				<citation>Initial Point</citation> from the tool box to the diagram into the top level state. Drag and drop a 
-				<citation>State</citation> from the tool box to the diagram. Confirm the dialogue with 
-				<citation>ok</citation>. Select the 
-				<citation>Transition</citation> in the tool box and draw the transition from the 
-				<citation>Initial Point</citation> to the State. Open the transition dialogue by double clicking the caption of the transition and fill in the action code.
+				<emphasis>Initial Point</emphasis> from the tool box to the diagram into the top level state. Drag and drop a 
+				<emphasis>State</emphasis> from the tool box to the diagram. Confirm the dialogue with 
+				<emphasis>ok</emphasis>. Select the 
+				<emphasis>Transition</emphasis> in the tool box and draw the transition from the 
+				<emphasis>Initial Point</emphasis> to the State. Open the transition dialogue by double clicking the caption of the transition and fill in the action code.
 			</para>
 			<literallayout><code>System.out.println("Hello World !");
 </code></literallayout>
@@ -551,8 +547,7 @@
 		<section id="Buildandrunthemodel">
 			<title>Build and run the model</title>
 			<para>Now the model is finished and source code can be generated. The project wizard has created a launch configuration that is responsible for generating the source code. From 
-				<citation>HelloWorld/</citation> right click 
-				<citation>gen_HelloWorld.launch</citation> and run it as gen_HelloWorld. All model files in the model directory will be generated.
+				<emphasis>HelloWorld/</emphasis> right click _gen_HelloWorld.launch_ and run it as gen_HelloWorld. All model files in the model directory will be generated.
 			</para>
 			<para>
 				<mediaobject>
@@ -561,9 +556,7 @@
 					</imageobject>
 				</mediaobject>
 			</para>
-			<para>The code will be generated to the src-gen directory. The main function will be contained in 
-				<citation>SubSystem_HelloWorldRunner.java</citation>. Select this file and run it as Java application.
-			</para>
+			<para>The code will be generated to the src-gen directory. The main function will be contained in _SubSystem_HelloWorldRunner.java_. Select this file and run it as Java application.</para>
 			<para>
 				<mediaobject>
 					<imageobject>
@@ -572,7 +565,7 @@
 				</mediaobject>
 			</para>
 			<para>The Hello World application starts and the string will be printed on the console window. To stop the application the user must type 
-				<citation>quit</citation> in the console window.
+				<emphasis>quit</emphasis> in the console window.
 			</para>
 			<para>
 				<mediaobject>
@@ -604,7 +597,7 @@
 		<section id="Scope2">
 			<title>Scope</title>
 			<para>This tutorial describes how to use the 
-				<citation>TimingService</citation>, how to combine a generated model with manual code and how to model a hierarchical state machine. The idea of the tutorial is to switch a LED on and off. The behavior of the LED should be: blinking in a one second interval for 5 seconds, stop blinking for 5 seconds, blinking, stop,...  
+				<emphasis>TimingService</emphasis>, how to combine a generated model with manual code and how to model a hierarchical state machine. The idea of the tutorial is to switch a LED on and off. The behavior of the LED should be: blinking in a one second interval for 5 seconds, stop blinking for 5 seconds, blinking, stop,...  
 				For this exercise we will use a little GUI class that will be used in more sophisticated tutorials too. The GUI simulates a pedestrian traffic crossing. For now, just a simple LED simulation will be used from the GUI. 
 			</para>
 			<para>After the exercise is created you must copy the GUI to your src directory (see below).</para>
@@ -634,7 +627,7 @@
 				</listitem>
 				<listitem>
 					<para>use the predefined 
-						<citation>TimingService</citation>
+						<emphasis>TimingService</emphasis>
 					</para>
 				</listitem>
 				<listitem>
@@ -651,19 +644,19 @@
 		<section id="Createanewmodelfromscratch2">
 			<title>Create a new model from scratch</title>
 			<para>Remember exercise 
-				<citation>HelloWorld</citation>.
+				<emphasis>HelloWorld</emphasis>.
 				Create a new eTrice project and name it 
-				<citation>Blinky</citation>
+				<emphasis>Blinky</emphasis>
 			</para>
 			<para>To use the GUI please copy the package 
-				<citation>org.eclipse.etrice.tutorials.PedLightGUI</citation> from 
-				<citation>org.eclipse.etrice.tutorials/src</citation> to your 
+				<emphasis>org.eclipse.etrice.tutorials.PedLightGUI</emphasis> from 
+				<emphasis>org.eclipse.etrice.tutorials/src</emphasis> to your 
 				<emphasis role="bold">src</emphasis> directory 
-				<citation>Blinky/src</citation>. For this tutorial you must remove the error markers by editing the file 
-				<citation>PedestrianLightWndNoTcp.java</citation>. Appropriate comments are provided to remove the error marker for this turorial.
+				<emphasis>Blinky/src</emphasis>. For this tutorial you must remove the error markers by editing the file 
+				<emphasis>PedestrianLightWndNoTcp.java</emphasis>. Appropriate comments are provided to remove the error marker for this turorial.
 			</para>
 			<para>Open the 
-				<citation>Blinky.room</citation> file and copy the following code into the file or use content assist to create the model.
+				<emphasis>Blinky.room</emphasis> file and copy the following code into the file or use content assist to create the model.
 			</para>
 			<literallayout><code>RoomModel Blinky {
 
@@ -686,7 +679,7 @@
 		<section id="Addtwoadditionalactorclasses">
 			<title>Add two additional actor classes</title>
 			<para>Position the cursor outside any class definition and right click the mouse within the editor window. From the context menu select 
-				<citation>Content Assist</citation>  
+				<emphasis>Content Assist</emphasis>  
 			</para>
 			<para>
 				<mediaobject>
@@ -696,8 +689,8 @@
 				</mediaobject>
 			</para>
 			<para>Select 
-				<citation>ActorClass – actor class skeleton</citation> and name it 
-				<citation>Blinky</citation>.
+				<emphasis>ActorClass – actor class skeleton</emphasis> and name it 
+				<emphasis>Blinky</emphasis>.
 			</para>
 			<para>
 				<mediaobject>
@@ -707,7 +700,7 @@
 				</mediaobject> 
 			</para>
 			<para>Repeat the described procedure and name the new actor 
-				<citation>BlinkyController</citation>.
+				<emphasis>BlinkyController</emphasis>.
 			</para>
 			<para>With Ctrl+Shift+F you can beautify the model code. </para>
 			<para>Save the model and visit the outline view.</para>
@@ -715,13 +708,13 @@
 		<section id="Createanewprotocol">
 			<title>Create a new protocol</title>
 			<para>With the help of 
-				<citation>Content Assist</citation> create a 
-				<citation>ProtocolClass</citation> and name it 
-				<citation>BlinkyControlProtocol</citation>.
+				<emphasis>Content Assist</emphasis> create a 
+				<emphasis>ProtocolClass</emphasis> and name it 
+				<emphasis>BlinkyControlProtocol</emphasis>.
 				Inside the brackets use the 
-				<citation>Content Assist</citation> (CTRL+Space) to create two incoming messages called 
-				<citation>start</citation> and 
-				<citation>stop</citation>.
+				<emphasis>Content Assist</emphasis> (CTRL+Space) to create two incoming messages called 
+				<emphasis>start</emphasis> and 
+				<emphasis>stop</emphasis>.
 			</para>
 			<para>The resulting code should look like this:</para>
 			<para>
@@ -732,7 +725,7 @@
 				</mediaobject> 
 			</para>
 			<para>With Ctrl-Shift+F or selecting 
-				<citation>Format</citation> from the context menu you can format the text. Note that all elements are displayed in the outline view.
+				<emphasis>Format</emphasis> from the context menu you can format the text. Note that all elements are displayed in the outline view.
 			</para>
 		</section>
 		<section id="ImporttheTimingService">
@@ -740,8 +733,8 @@
 			<para>Switching on and off the LED is timing controlled. The timing service is provided from the model library and must be imported before it can be used from the model.</para>
 			<para>This is the first time you use an element from the modellib. Make sure that your Java Build Path has the appropriate entry to the modellib. Otherwise the jave code, which will be generated from the modellib, can not be referenced.
 				(right click to 
-				<citation>Blinky</citation> and select properties. Select the 
-				<citation>Java Build Path</citation> tab) 
+				<emphasis>Blinky</emphasis> and select properties. Select the 
+				<emphasis>Java Build Path</emphasis> tab) 
 			</para>
 			<para>
 				<mediaobject>
@@ -764,17 +757,15 @@
 				<para></para>
 			</blockquote>
 			<para>Make sure that the path fits to your folder structure.  </para>
-			<para>Now it can be used within the model. Right click to 
-				<citation>SubSystem_Blinky</citation> within the outline view. Select 
-				<citation>Edit Structure</citation>. The 
-				<citation>application</citation> is already referenced in the subsystem. Drag and Drop an 
-				<citation>ActorRef</citation> to the 
-				<citation>SubSystem_Blinky</citation> and name it 
-				<citation>timingService</citation>. From the actor class drop down list select 
-				<citation>room.basic.service.timing.ATimingService</citation>. Draw a 
-				<citation>LayerConnection</citation> from 
-				<citation>application</citation> to each service provision point (SPP) of the 
-				<citation>timingService</citation>. The resulting structure should look like this:
+			<para>Now it can be used within the model. Right click to _SubSystem_Blinky_ within the outline view. Select 
+				<emphasis>Edit Structure</emphasis>. The 
+				<emphasis>application</emphasis> is already referenced in the subsystem. Drag and Drop an 
+				<emphasis>ActorRef</emphasis> to the _SubSystem_Blinky_ and name it 
+				<emphasis>timingService</emphasis>. From the actor class drop down list select 
+				<emphasis>room.basic.service.timing.ATimingService</emphasis>. Draw a 
+				<emphasis>LayerConnection</emphasis> from 
+				<emphasis>application</emphasis> to each service provision point (SPP) of the 
+				<emphasis>timingService</emphasis>. The resulting structure should look like this:
 			</para>
 			<para>
 				<mediaobject>
@@ -784,13 +775,13 @@
 				</mediaobject> 
 			</para>
 			<para>The current version of eTrice does not provide a graphical element for a service access point (SAP). Therefore the SAPs to access the timing service must be added in the .room file. Open the 
-				<citation>Blinky.room</citation> file and navigate to the 
-				<citation>Blinky</citation> actor. Add the following line to the structure of the actor:
+				<emphasis>Blinky.room</emphasis> file and navigate to the 
+				<emphasis>Blinky</emphasis> actor. Add the following line to the structure of the actor:
 			</para>
 			<literallayout><code>SAP timer: room.basic.service.timing.PTimeout
 </code></literallayout>
 			<para>Do the same thing for 
-				<citation>BlinkyController</citation>.
+				<emphasis>BlinkyController</emphasis>.
 			</para>
 			<para>The resulting code should look like this:</para>
 			<para>
@@ -804,15 +795,15 @@
 		<section id="Finishthemodelstructure">
 			<title>Finish the model structure</title>
 			<para>From the outline view right click to 
-				<citation>Blinky</citation> and select 
-				<citation>Edit Structure</citation>. Drag and Drop an 
-				<citation>Interface Port</citation> to the boarder of the 
-				<citation>Blinky</citation> actor. Note that an interface port is not possible inside the actor. Name the port 
-				<citation>ControlPort</citation> and select 
-				<citation>BlinkyControlProtocol</citation> from the drop down list. Uncheck 
-				<citation>Conjugated</citation> and 
-				<citation>Is Relay Port</citation>. Klick 
-				<citation>ok</citation>. The resulting structure should look like this:
+				<emphasis>Blinky</emphasis> and select 
+				<emphasis>Edit Structure</emphasis>. Drag and Drop an 
+				<emphasis>Interface Port</emphasis> to the boarder of the 
+				<emphasis>Blinky</emphasis> actor. Note that an interface port is not possible inside the actor. Name the port 
+				<emphasis>ControlPort</emphasis> and select 
+				<emphasis>BlinkyControlProtocol</emphasis> from the drop down list. Uncheck 
+				<emphasis>Conjugated</emphasis> and 
+				<emphasis>Is Relay Port</emphasis>. Klick 
+				<emphasis>ok</emphasis>. The resulting structure should look like this:
 			</para>
 			<para>
 				<mediaobject>
@@ -822,28 +813,28 @@
 				</mediaobject>
 			</para>
 			<para>Repeat the above steps for the 
-				<citation>BlinkyController</citation>. Make the port 
-				<citation>Conjugated</citation>
+				<emphasis>BlinkyController</emphasis>. Make the port 
+				<emphasis>Conjugated</emphasis>
 			</para>
 			<para>Keep in mind that the protocol defines 
-				<citation>start</citation> and 
-				<citation>stop</citation> as incoming messages. 
-				<citation>Blinky</citation> receives this messages and therefore 
-				<citation>Blinky</citation>'s 
-				<citation>ControlPort</citation> must be a regular port and 
-				<citation>BlinkyController</citation>'s 
-				<citation>ControlPort</citation> must be a conjugated port.
+				<emphasis>start</emphasis> and 
+				<emphasis>stop</emphasis> as incoming messages. 
+				<emphasis>Blinky</emphasis> receives this messages and therefore 
+				<emphasis>Blinky</emphasis>'s 
+				<emphasis>ControlPort</emphasis> must be a regular port and 
+				<emphasis>BlinkyController</emphasis>'s 
+				<emphasis>ControlPort</emphasis> must be a conjugated port.
 			</para>
 			<para>From the outline view right click 
-				<citation>BlinkyTop</citation> and select 
-				<citation>Edit Structure</citation>.
+				<emphasis>BlinkyTop</emphasis> and select 
+				<emphasis>Edit Structure</emphasis>.
 			</para>
 			<para>Drag and Drop an 
-				<citation>ActorRef</citation> inside the 
-				<citation>BlinkyTop</citation> actor. Name it 
-				<citation>blinky</citation>. From the actor class drop down list select 
-				<citation>Blinky</citation>. Do the same for 
-				<citation>controller</citation>. Connect the ports via the binding tool. The resulting structure should look like this:
+				<emphasis>ActorRef</emphasis> inside the 
+				<emphasis>BlinkyTop</emphasis> actor. Name it 
+				<emphasis>blinky</emphasis>. From the actor class drop down list select 
+				<emphasis>Blinky</emphasis>. Do the same for 
+				<emphasis>controller</emphasis>. Connect the ports via the binding tool. The resulting structure should look like this:
 			</para>
 			<para>
 				<mediaobject>
@@ -856,25 +847,25 @@
 		<section id="ImplementtheBehavior">
 			<title>Implement the Behavior</title>
 			<para>The application should switch on and off the LED for 5 seconds in a 1 second interval, than stop blinking for 5 seconds and start again. To implement this behavior we will implement two FSMs. One for the 1 second interval and one for the 5 second interval. The 1 second blinking should be implemented in 
-				<citation>Blinky</citation>. The 5 second interval should be implemented in 
-				<citation>BlinkyController</citation>. First implement the Controller.
+				<emphasis>Blinky</emphasis>. The 5 second interval should be implemented in 
+				<emphasis>BlinkyController</emphasis>. First implement the Controller.
 			</para>
 			<para>Right click to 
-				<citation>BlinkyController</citation> and select 
-				<citation>Edit Behavior</citation>.
+				<emphasis>BlinkyController</emphasis> and select 
+				<emphasis>Edit Behavior</emphasis>.
 				Drag and Drop the 
-				<citation>Initial Point</citation> and two 
-				<citation>States</citation> into the top state. Name the states 
-				<citation>on</citation> and 
-				<citation>off</citation>. 
+				<emphasis>Initial Point</emphasis> and two 
+				<emphasis>States</emphasis> into the top state. Name the states 
+				<emphasis>on</emphasis> and 
+				<emphasis>off</emphasis>. 
 				Use the 
-				<citation>Transition</citation> tool to draw transitions from 
-				<citation>init</citation> to 
-				<citation>on</citation> from 
-				<citation>on</citation> to 
-				<citation>off</citation> and from 
-				<citation>off</citation> to 
-				<citation>on</citation>.
+				<emphasis>Transition</emphasis> tool to draw transitions from 
+				<emphasis>init</emphasis> to 
+				<emphasis>on</emphasis> from 
+				<emphasis>on</emphasis> to 
+				<emphasis>off</emphasis> and from 
+				<emphasis>off</emphasis> to 
+				<emphasis>on</emphasis>.
 			</para>
 			<para>Open the transition dialog by double click the arrow to specify the trigger event and the action code of each transition. Note that the initial transition does not have a trigger event.</para>
 			<para>The transition dialog should look like this:</para>
@@ -886,18 +877,18 @@
 				</mediaobject> 
 			</para>
 			<para>The defined ports will be generated as a member attribute of the actor class from type of the attached protocol. So, to send e message you must state 
-				<citation>port.message(param);</citation>. In this example 
-				<citation>ControlPort.start()</citation> sends the 
-				<citation>start</citation> message via the 
-				<citation>ControlPort</citation> to the outside world. Assuming that 
-				<citation>Blinky</citation> is connected to this port, the message will start the one second blinking FSM. It is the same thing with the 
-				<citation>timer</citation>. The SAP is also a port and follows the same rules. So it is clear that 
-				<citation>timer.Start(5000);</citation> will send the 
-				<citation>Start</citation> message to the timing service. The timing service will send a 
-				<citation>timeoutTick</citation> message back after 5000ms.
+				<emphasis>port.message(param);</emphasis>. In this example 
+				<emphasis>ControlPort.start()</emphasis> sends the 
+				<emphasis>start</emphasis> message via the 
+				<emphasis>ControlPort</emphasis> to the outside world. Assuming that 
+				<emphasis>Blinky</emphasis> is connected to this port, the message will start the one second blinking FSM. It is the same thing with the 
+				<emphasis>timer</emphasis>. The SAP is also a port and follows the same rules. So it is clear that 
+				<emphasis>timer.Start(5000);</emphasis> will send the 
+				<emphasis>Start</emphasis> message to the timing service. The timing service will send a 
+				<emphasis>timeoutTick</emphasis> message back after 5000ms.
 			</para>
 			<para>Within each transition the timer will be restarted and the appropriate message will be sent via the 
-				<citation>ControlPort</citation>. 
+				<emphasis>ControlPort</emphasis>. 
 			</para>
 			<para>The resulting state machine should look like this:
 				(Note that the arrows peak changes if the transition contains action code.)</para>
@@ -909,8 +900,8 @@
 				</mediaobject>
 			</para>
 			<para>Save the diagram and inspect the 
-				<citation>Blinky.room</citation> file. The 
-				<citation>BlinkyController</citation> should look like this:
+				<emphasis>Blinky.room</emphasis> file. The 
+				<emphasis>BlinkyController</emphasis> should look like this:
 			</para>
 			<para>
 				<mediaobject>
@@ -920,12 +911,12 @@
 				</mediaobject> 
 			</para>
 			<para>Now we will implement 
-				<citation>Blinky</citation>. Due to the fact that 
-				<citation>Blinky</citation> interacts with the GUI class a view things must to be done in the model file.
+				<emphasis>Blinky</emphasis>. Due to the fact that 
+				<emphasis>Blinky</emphasis> interacts with the GUI class a view things must to be done in the model file.
 			</para>
 			<para>Double click 
-				<citation>Blinky</citation> in the outline view to navigate to 
-				<citation>Blinky</citation> within the model file.
+				<emphasis>Blinky</emphasis> in the outline view to navigate to 
+				<emphasis>Blinky</emphasis> within the model file.
 				Add the following code:
 				(type it or simply copy it from the tutorial project)
 			</para>
@@ -937,22 +928,22 @@
 				</mediaobject> 
 			</para>
 			<para>
-				<citation>usercode1</citation> will be generated at the beginning of the file, outside the class definition. 
-				<citation>usercode2</citation> will be generated within the class definition. The code imports the GUI class and instantiates the window class. Attributes for the carLights and pedLights will be declared to easily access the lights in the state machine.
+				<emphasis>usercode1</emphasis> will be generated at the beginning of the file, outside the class definition. 
+				<emphasis>usercode2</emphasis> will be generated within the class definition. The code imports the GUI class and instantiates the window class. Attributes for the carLights and pedLights will be declared to easily access the lights in the state machine.
 				The Operation 
-				<citation>destroyUser()</citation> is a predefined operation that will be called during shutdown of the application. Within this operation, cleanup of manual coded classes can be done.
+				<emphasis>destroyUser()</emphasis> is a predefined operation that will be called during shutdown of the application. Within this operation, cleanup of manual coded classes can be done.
 			</para>
 			<para>Now design the FSM of 
-				<citation>Blinky</citation>. Remember, as the name suggested 
-				<citation>blinking</citation> is a state in which the LED must be switched on and off. We will realize that by an hierarchical FSM in which the 
-				<citation>blinking</citation> state has two sub states.
+				<emphasis>Blinky</emphasis>. Remember, as the name suggested 
+				<emphasis>blinking</emphasis> is a state in which the LED must be switched on and off. We will realize that by an hierarchical FSM in which the 
+				<emphasis>blinking</emphasis> state has two sub states.
 			</para>
 			<para>Open the behavior diagram of 
-				<citation>Blinky</citation> by right clicking the 
-				<citation>Blinky</citation> actor in the outline view. Create two states named 
-				<citation>blinking</citation> and 
-				<citation>off</citation>. Right click to 
-				<citation>blinking</citation> and create a subgraph.
+				<emphasis>Blinky</emphasis> by right clicking the 
+				<emphasis>Blinky</emphasis> actor in the outline view. Create two states named 
+				<emphasis>blinking</emphasis> and 
+				<emphasis>off</emphasis>. Right click to 
+				<emphasis>blinking</emphasis> and create a subgraph.
 			</para>
 			<para>
 				<mediaobject>
@@ -962,10 +953,10 @@
 				</mediaobject>
 			</para>
 			<para>Create the following state machine. The trigger events between 
-				<citation>on</citation> and 
-				<citation>off</citation> are the 
-				<citation>timeoutTick</citation> from the 
-				<citation>timer</citation> port. 
+				<emphasis>on</emphasis> and 
+				<emphasis>off</emphasis> are the 
+				<emphasis>timeoutTick</emphasis> from the 
+				<emphasis>timer</emphasis> port. 
 			</para>
 			<para>
 				<mediaobject>
@@ -975,10 +966,10 @@
 				</mediaobject>
 			</para>
 			<para>Create entry code for both states by right clicking the state and select 
-				<citation>Edit State...</citation>
+				<emphasis>Edit State...</emphasis>
 			</para>
 			<para>Entry code of 
-				<citation>on</citation> is:
+				<emphasis>on</emphasis> is:
 			</para>
 			<literallayout><code>timer.Start(1000);
 carLights.setState(TrafficLight3.YELLOW); 
@@ -987,7 +978,7 @@ carLights.setState(TrafficLight3.YELLOW);
 				<para></para>
 			</blockquote>
 			<para>Entry code  of 
-				<citation>off</citation> is:
+				<emphasis>off</emphasis> is:
 			</para>
 			<literallayout><code>timer.Start(1000);
 carLights.setState(TrafficLight3.OFF);
@@ -996,7 +987,7 @@ carLights.setState(TrafficLight3.OFF);
 				<para></para>
 			</blockquote>
 			<para>Navigate to the Top level state by double clicking the 
-				<citation>/blinking</citation> state. Create the following state machine:
+				<emphasis>/blinking</emphasis> state. Create the following state machine:
 			</para>
 			<para>
 				<mediaobject>
@@ -1006,17 +997,17 @@ carLights.setState(TrafficLight3.OFF);
 				</mediaobject>
 			</para>
 			<para>The trigger event from 
-				<citation>off</citation> to 
-				<citation>blinking</citation> is the 
-				<citation>start</citation> event from the 
-				<citation>ControlPort</citation>.The trigger event from 
-				<citation>blinking</citation> to 
-				<citation>off</citation> is the 
-				<citation>stop</citation> event from the 
-				<citation>ControlPort</citation>.
+				<emphasis>off</emphasis> to 
+				<emphasis>blinking</emphasis> is the 
+				<emphasis>start</emphasis> event from the 
+				<emphasis>ControlPort</emphasis>.The trigger event from 
+				<emphasis>blinking</emphasis> to 
+				<emphasis>off</emphasis> is the 
+				<emphasis>stop</emphasis> event from the 
+				<emphasis>ControlPort</emphasis>.
 				Note: The transition from 
-				<citation>blinking</citation> to 
-				<citation>off</citation> is a so called group transition. This is a outgoing transition from a super state (state with sub states) without specifying the concrete leave state (state without sub states). An incoming transition to a super state is called history transition.   
+				<emphasis>blinking</emphasis> to 
+				<emphasis>off</emphasis> is a so called group transition. This is a outgoing transition from a super state (state with sub states) without specifying the concrete leave state (state without sub states). An incoming transition to a super state is called history transition.   
 			</para>
 			<para>Action code of the init transition is:</para>
 			<literallayout><code>carLights = light.getCarLights();
@@ -1028,8 +1019,8 @@ pedLights.setState(TrafficLight2.OFF);
 				<para></para>
 			</blockquote>
 			<para>Action code from 
-				<citation>blinking</citation> to 
-				<citation>off</citation> is:
+				<emphasis>blinking</emphasis> to 
+				<emphasis>off</emphasis> is:
 			</para>
 			<literallayout><code>timer.Kill();
 carLights.setState(TrafficLight3.OFF); 
@@ -1076,11 +1067,11 @@ carLights.setState(TrafficLight3.OFF);
 		<section id="Createanewmodelfromscratch3">
 			<title>Create a new model from scratch</title>
 			<para>Remember exercise 
-				<citation>HelloWorld</citation>.
+				<emphasis>HelloWorld</emphasis>.
 				Create a new eTrice project and name it 
-				<citation>SendingData</citation>
+				<emphasis>SendingData</emphasis>
 				Open the 
-				<citation>SendingData.room</citation> file and copy the following code into the file or use content assist to create the model.
+				<emphasis>SendingData.room</emphasis> file and copy the following code into the file or use content assist to create the model.
 			</para>
 			<literallayout><code>RoomModel SendingData {
 		LogicalSystem SendingData_LogSystem {
@@ -1100,7 +1091,7 @@ carLights.setState(TrafficLight3.OFF);
 		<section id="Addadataclass">
 			<title>Add a data class</title>
 			<para>Position the cursor outside any class definition and right click the mouse within the editor window. From the context menu select 
-				<citation>Content Assist</citation> (or Ctrl+Space).  
+				<emphasis>Content Assist</emphasis> (or Ctrl+Space).  
 			</para>
 			<para>
 				<mediaobject>
@@ -1110,8 +1101,8 @@ carLights.setState(TrafficLight3.OFF);
 				</mediaobject>
 			</para>
 			<para>Select 
-				<citation>DataClass – data class skeleton</citation> and name it 
-				<citation>DemoData</citation>.
+				<emphasis>DataClass – data class skeleton</emphasis> and name it 
+				<emphasis>DemoData</emphasis>.
 				Remove the operations and add the following Attributes:
 			</para>
 			<literallayout><code>	DataClass DemoData {
@@ -1130,9 +1121,9 @@ carLights.setState(TrafficLight3.OFF);
 		<section id="Createanewprotocol2">
 			<title>Create a new protocol</title>
 			<para>With the help of 
-				<citation>Content Assist</citation> create a 
-				<citation>ProtocolClass</citation> and name it 
-				<citation>PingPongProtocol</citation>. Create the following messages:
+				<emphasis>Content Assist</emphasis> create a 
+				<emphasis>ProtocolClass</emphasis> and name it 
+				<emphasis>PingPongProtocol</emphasis>. Create the following messages:
 			</para>
 			<literallayout><code>ProtocolClass PingPongProtocol {
 					incoming {
@@ -1152,9 +1143,9 @@ carLights.setState(TrafficLight3.OFF);
 		<section id="CreateMrPingandMrPongActors">
 			<title>Create MrPing and MrPong Actors</title>
 			<para>With the help of 
-				<citation>Content Assist</citation> create two new actor classes and name them 
-				<citation>MrPing</citation> and 
-				<citation>MrPong</citation>. The resulting model should look like this:
+				<emphasis>Content Assist</emphasis> create two new actor classes and name them 
+				<emphasis>MrPing</emphasis> and 
+				<emphasis>MrPong</emphasis>. The resulting model should look like this:
 			</para>
 			<literallayout><code>RoomModel SendingData {
 
@@ -1215,11 +1206,11 @@ carLights.setState(TrafficLight3.OFF);
 		<section id="DefineActorStructureandBehavior">
 			<title>Define Actor Structure and Behavior</title>
 			<para>Save the model and visit the outline view. Within the outline view, right click on the 
-				<citation>MrPong</citation> actor and select 
-				<citation>Edit Structure</citation>. Select an 
-				<citation>Interface Port</citation> from the toolbox and add it to MrPong. Name the Port 
-				<citation>PingPongPort</citation> and select the 
-				<citation>PingPongProtocol</citation>
+				<emphasis>MrPong</emphasis> actor and select 
+				<emphasis>Edit Structure</emphasis>. Select an 
+				<emphasis>Interface Port</emphasis> from the toolbox and add it to MrPong. Name the Port 
+				<emphasis>PingPongPort</emphasis> and select the 
+				<emphasis>PingPongProtocol</emphasis>
 			</para>
 			<para>
 				<mediaobject>
@@ -1229,12 +1220,12 @@ carLights.setState(TrafficLight3.OFF);
 				</mediaobject>
 			</para>
 			<para>Do the same with MrPing but mark the port as 
-				<citation>conjugated</citation>
+				<emphasis>conjugated</emphasis>
 			</para>
 			<section id="DefineMrPongsbehavior">
 				<title>Define MrPongs behavior</title>
 				<para>Within the outline view, right click MrPong and select 
-					<citation>Edit Behavior</citation>. Create the following state machine:
+					<emphasis>Edit Behavior</emphasis>. Create the following state machine:
 				</para>
 				<para>
 					<mediaobject>
@@ -1245,7 +1236,7 @@ carLights.setState(TrafficLight3.OFF);
 				</para>
 				<para>The transition dialogues should look like this:
 					For 
-					<citation>ping</citation>:
+					<emphasis>ping</emphasis>:
 				</para>
 				<para>
 					<mediaobject>
@@ -1255,7 +1246,7 @@ carLights.setState(TrafficLight3.OFF);
 					</mediaobject>
 				</para>
 				<para>For 
-					<citation>pingSimple</citation>:
+					<emphasis>pingSimple</emphasis>:
 				</para>
 				<para>
 					<mediaobject>
@@ -1276,7 +1267,7 @@ carLights.setState(TrafficLight3.OFF);
 					</mediaobject>
 				</para>
 				<para>Name the operation 
-					<citation>printData</citation> and define the DemoData as a parameter.
+					<emphasis>printData</emphasis> and define the DemoData as a parameter.
 				</para>
 				<para>Fill in the following code:</para>
 				<literallayout><code>Operation printData(d: DemoData) : void {
@@ -1302,7 +1293,7 @@ carLights.setState(TrafficLight3.OFF);
 				</para>
 				<para>The transition dialogues should look like this:</para>
 				<para>For 
-					<citation>init</citation>:
+					<emphasis>init</emphasis>:
 				</para>
 				<para>
 					<mediaobject>
@@ -1312,7 +1303,7 @@ carLights.setState(TrafficLight3.OFF);
 					</mediaobject>
 				</para>
 				<para>For 
-					<citation>wait1</citation>:
+					<emphasis>wait1</emphasis>:
 				</para>
 				<para>
 					<mediaobject>
@@ -1322,7 +1313,7 @@ carLights.setState(TrafficLight3.OFF);
 					</mediaobject>
 				</para>
 				<para>For 
-					<citation>next</citation>:
+					<emphasis>next</emphasis>:
 				</para>
 				<para>
 					<mediaobject>
@@ -1332,7 +1323,7 @@ carLights.setState(TrafficLight3.OFF);
 					</mediaobject>
 				</para>
 				<para>For 
-					<citation>wait2</citation>:
+					<emphasis>wait2</emphasis>:
 				</para>
 				<para>
 					<mediaobject>
@@ -1357,11 +1348,8 @@ carLights.setState(TrafficLight3.OFF);
 		</section>
 		<section id="Generateandrunthemodel">
 			<title>Generate and run the model</title>
-			<para>Generate the code by right click to 
-				<citation>gen_SendingData.launch</citation> and run it as 
-				<citation>gen_SendingData</citation>. Run the model. 
-				The output should look like this:
-			</para>
+			<para>Generate the code by right click to _gen_SendingData.launch_ and run it as _gen_SendingData_. Run the model. 
+				The output should look like this:</para>
 			<blockquote>
 				<para>
 					type &#8218;quit’ to exit
@@ -1419,20 +1407,20 @@ carLights.setState(TrafficLight3.OFF);
 		<section id="Summary3">
 			<title>Summary</title>
 			<para>Within the first loop an integer value will be incremented by 
-				<citation>MrPong</citation> and sent back to 
-				<citation>MrPing</citation>. As long as the guard is true 
-				<citation>MrPing</citation> sends back the value.
+				<emphasis>MrPong</emphasis> and sent back to 
+				<emphasis>MrPing</emphasis>. As long as the guard is true 
+				<emphasis>MrPing</emphasis> sends back the value.
 			</para>
 			<para>Within the 
-				<citation>next</citation> transition, 
-				<citation>MrPing</citation> creates a data class and sends the default values. Then 
-				<citation>MrPing</citation> changes the values and sends the class again. At this point you should note that during the send operation, a copy of the data class will be created and sent. Otherwise it would not be possible to send the same object two times, even more it would not be possible to send a stack object at all. This type of data passing is called 
-				<citation>sending data by value</citation>.
+				<emphasis>next</emphasis> transition, 
+				<emphasis>MrPing</emphasis> creates a data class and sends the default values. Then 
+				<emphasis>MrPing</emphasis> changes the values and sends the class again. At this point you should note that during the send operation, a copy of the data class will be created and sent. Otherwise it would not be possible to send the same object two times, even more it would not be possible to send a stack object at all. This type of data passing is called 
+				<emphasis>sending data by value</emphasis>.
 				However, for performance reasons some applications requires 
-				<citation>sending data by reference</citation>. In this case the user is responsible for the life cycle of the object. In Java the VM takes care of the life cycle of an object. This is not the case for C/C++. Consider that a object which is created within a transition of a state machine will be destroyed when the transition is finished. The receiving FSM would receive an invalid reference. Therefore care must be taken when sending references.      
+				<emphasis>sending data by reference</emphasis>. In this case the user is responsible for the life cycle of the object. In Java the VM takes care of the life cycle of an object. This is not the case for C/C++. Consider that a object which is created within a transition of a state machine will be destroyed when the transition is finished. The receiving FSM would receive an invalid reference. Therefore care must be taken when sending references.      
 			</para>
 			<para>For sending data by reference you simply have to add the keyword 
-				<citation>ref</citation> to the protocol definition.
+				<emphasis>ref</emphasis> to the protocol definition.
 			</para>
 			<literallayout><code>Message ping(data: DemoData ref)
 </code></literallayout>
@@ -1446,7 +1434,7 @@ carLights.setState(TrafficLight3.OFF);
 			<para>The scope of this tutorial is to demonstrate how to receive model messages from outside the model. Calling methods which are not part of the model is simple and you have already done this within the blinky tutorial (this is the other way round: model =&gt; external code). Receiving events from outside the model is a very common problem and a very frequently asked question. Therefore this tutorial shows how an external event (outside the model) can be received by the model.</para>
 			<para>This tutorial is not like hello world or blinky. Being familiar with the basic tool features is mandatory for this tutorial. The goal is to understand the mechanism not to learn the tool features.</para>
 			<para>The idea behind the exercise is, to control a Pedestrian crossing light. We will use the same GUI as for the blinky tutorial but now we will use the 
-				<citation>REQUEST</citation> button to start a FSM, which controls the traffic lights.
+				<emphasis>REQUEST</emphasis> button to start a FSM, which controls the traffic lights.
 			</para>
 			<para>
 				<mediaobject>
@@ -1456,7 +1444,7 @@ carLights.setState(TrafficLight3.OFF);
 				</mediaobject>
 			</para>
 			<para>The 
-				<citation>REQUEST</citation> must lead to a model message which starts the activity of the lights.
+				<emphasis>REQUEST</emphasis> must lead to a model message which starts the activity of the lights.
 			</para>
 			<para>There are several possibilities to receive external events (e.g. TCP/UDP Socket, using OS messaging mechanism), but the easiest way is, to make a port usable from outside the model. To do that a few steps are necessary:</para>
 			<orderedlist>
@@ -1482,14 +1470,14 @@ carLights.setState(TrafficLight3.OFF);
 			<itemizedlist>
 				<listitem>
 					<para>Use the 
-						<citation>New Model Wizzard</citation> to create a new eTrice project and name it 
-						<citation>PedLightsController</citation>.
+						<emphasis>New Model Wizzard</emphasis> to create a new eTrice project and name it 
+						<emphasis>PedLightsController</emphasis>.
 					</para>
 				</listitem>
 				<listitem>
 					<para>Copy the package 
-						<citation>org.eclipse.etrice.tutorials.PedLightGUI</citation> to your 
-						<citation>src</citation> directory (see blinky tutorial).
+						<emphasis>org.eclipse.etrice.tutorials.PedLightGUI</emphasis> to your 
+						<emphasis>src</emphasis> directory (see blinky tutorial).
 					</para>
 				</listitem>
 				<listitem>
@@ -1528,8 +1516,8 @@ carLights.setState(TrafficLight3.OFF);
 					</imageobject>
 				</mediaobject>
 				The 
-				<citation>GuiAdapter</citation> represents the interface to the external code. It registers its 
-				<citation>ControlPort</citation> by the external code.
+				<emphasis>GuiAdapter</emphasis> represents the interface to the external code. It registers its 
+				<emphasis>ControlPort</emphasis> by the external code.
 			</para>
 			<para>
 				<mediaobject>
@@ -1546,10 +1534,10 @@ carLights.setState(TrafficLight3.OFF);
 					</imageobject>
 				</mediaobject>
 				The 
-				<citation>Controller</citation> receives the 
-				<citation>start</citation> message and controls the timing of the lights. Note that the 
-				<citation>start</citation> message will be sent from the external code whenever the 
-				<citation>REQUEST</citation> button is pressed.
+				<emphasis>Controller</emphasis> receives the 
+				<emphasis>start</emphasis> message and controls the timing of the lights. Note that the 
+				<emphasis>start</emphasis> message will be sent from the external code whenever the 
+				<emphasis>REQUEST</emphasis> button is pressed.
 			</para>
 			<itemizedlist>
 				<listitem>
@@ -1562,15 +1550,15 @@ carLights.setState(TrafficLight3.OFF);
 				</listitem>
 				<listitem>
 					<para>Initial transition of the 
-						<citation>GuiAdapter</citation> =&gt; see the registration
+						<emphasis>GuiAdapter</emphasis> =&gt; see the registration
 					</para>
 				</listitem>
 				<listitem>
 					<para>The 
-						<citation>Controller</citation> =&gt; notice that the 
-						<citation>Controller</citation> receives the external message (not the 
-						<citation>GuiAdapter</citation>). The 
-						<citation>GuiAdapter</citation> just provides its port and handles the incoming messages.
+						<emphasis>Controller</emphasis> =&gt; notice that the 
+						<emphasis>Controller</emphasis> receives the external message (not the 
+						<emphasis>GuiAdapter</emphasis>). The 
+						<emphasis>GuiAdapter</emphasis> just provides its port and handles the incoming messages.
 					</para>
 				</listitem>
 				<listitem>
@@ -1583,7 +1571,7 @@ carLights.setState(TrafficLight3.OFF);
 				</listitem>
 				<listitem>
 					<para>Take a look at the generated MSC =&gt; notice that the start message will shown as if the 
-						<citation>GuiAdapter</citation> had sent it.
+						<emphasis>GuiAdapter</emphasis> had sent it.
 					</para>
 				</listitem>
 			</itemizedlist>
@@ -1600,7 +1588,7 @@ carLights.setState(TrafficLight3.OFF);
 			<para>The tutorial shows that it is generally possible to use every port from outside the model as long as the port knows its peer. This is guaranteed by describing protocol and the complete structure (especially the bindings) within the model. 
 				The only remaining question is: Why is it safe and does not violate the 
 				<emphasis role="bold">run to completion</emphasis> semantic. To answer this question, take a look at the 
-				<citation>MessageService.java</citation> from the runtime environment. There you will find the receive method which puts each message into the queue. 
+				<emphasis>MessageService.java</emphasis> from the runtime environment. There you will find the receive method which puts each message into the queue. 
 			</para>
 			<literallayout><code>	@Override
 	public synchronized void receive(Message msg) {

@@ -45,7 +45,7 @@
 <p>The scope of this tutorial is to demonstrate how to receive model messages from outside the model. Calling methods which are not part of the model is simple and you have already done this within the blinky tutorial (this is the other way round: model =&gt; external code). Receiving events from outside the model is a very common problem and a very frequently asked question. Therefore this tutorial shows how an external event (outside the model) can be received by the model.</p>
 <p>This tutorial is not like hello world or blinky. Being familiar with the basic tool features is mandatory for this tutorial. The goal is to understand the mechanism not to learn the tool features.</p>
 <p>The idea behind the exercise is, to control a Pedestrian crossing light. We will use the same GUI as for the blinky tutorial but now we will use the 
-				[<span class="citation">REQUEST</span>] button to start a FSM, which controls the traffic lights.
+				<span class="emphasis"><em>REQUEST</em></span> button to start a FSM, which controls the traffic lights.
 			</p>
 <p>
 				
@@ -56,7 +56,7 @@
 			
 </p>
 <p>The 
-				[<span class="citation">REQUEST</span>] must lead to a model message which starts the activity of the lights.
+				<span class="emphasis"><em>REQUEST</em></span> must lead to a model message which starts the activity of the lights.
 			</p>
 <p>There are several possibilities to receive external events (e.g. TCP/UDP Socket, using OS messaging mechanism), but the easiest way is, to make a port usable from outside the model. To do that a few steps are necessary:</p>
 <div class="orderedlist">
