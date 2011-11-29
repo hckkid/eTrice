@@ -44,6 +44,9 @@ public class ContextSwitcher {
 	public static void switchTo(Diagram diagram, StateGraph sg) {
 		for (Shape ctxShape : diagram.getChildren()) {
 			EObject bo = Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(ctxShape);
+			if (bo.eIsProxy())
+				continue;
+			
 			assert(bo instanceof StateGraph): "expected state graph";
 			
 			if (bo instanceof StateGraph && bo==sg)

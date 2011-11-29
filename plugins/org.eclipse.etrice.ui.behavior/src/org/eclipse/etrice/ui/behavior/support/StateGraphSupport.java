@@ -557,44 +557,46 @@ public class StateGraphSupport {
 		
 		private static void addMissingItems(StateGraph sg, ContainerShape shape, IFeatureProvider fp) {
 
-			HashMap<String, Anchor> ifitem2anchor = new HashMap<String, Anchor>();
+			HashMap<String, Anchor> node2anchor = new HashMap<String, Anchor>();
 			
 			// states
 			{
-				List<State> present = SupportUtil.getStates(shape, fp, ifitem2anchor);
+				List<State> present = SupportUtil.getStates(shape, fp, node2anchor);
 				List<State> expected = RoomHelpers.getAllStates(sg);
 				List<State> items = new ArrayList<State>();
 				for (State item : expected) {
 					if (!present.contains(item))
 						items.add(item);
 				}
-	        	SupportUtil.addStates(items, shape, fp, ifitem2anchor);
+	        	SupportUtil.addStates(items, shape, fp, node2anchor);
 			}
 			
 			// transition points
 			{
-				List<TrPoint> present = SupportUtil.getTrPoints(sg, shape, fp, ifitem2anchor);
+				List<TrPoint> present = SupportUtil.getTrPoints(sg, shape, fp, node2anchor);
 				List<TrPoint> expected = RoomHelpers.getAllTrPoints(sg);
 				List<TrPoint> items = new ArrayList<TrPoint>();
 				for (TrPoint item : expected) {
 					if (!present.contains(item))
 						items.add(item);
 				}
-	        	SupportUtil.addTransitionPoints(items, shape, fp, ifitem2anchor);
+	        	SupportUtil.addTransitionPoints(items, shape, fp, node2anchor);
 			}
 			
 			// choice points
 			{
-				List<ChoicePoint> present = SupportUtil.getChoicePoints(shape, fp, ifitem2anchor);
+				List<ChoicePoint> present = SupportUtil.getChoicePoints(shape, fp, node2anchor);
 				List<ChoicePoint> expected = RoomHelpers.getAllChoicePoints(sg);
 				List<ChoicePoint> items = new ArrayList<ChoicePoint>();
 				for (ChoicePoint item : expected) {
 					if (!present.contains(item))
 						items.add(item);
 				}
-	        	SupportUtil.addChoicePoints(items, shape, fp, ifitem2anchor);
+	        	SupportUtil.addChoicePoints(items, shape, fp, node2anchor);
 			}
 			
+			SupportUtil.getSubTpAnchors(shape, node2anchor);
+
 			// transitions
 			{
 				List<Transition> present = SupportUtil.getTransitions((Diagram) shape.eContainer(), fp);
@@ -604,7 +606,7 @@ public class StateGraphSupport {
 					if (!present.contains(trans))
 						items.add(trans);
 				}
-				SupportUtil.addTransitions(items, shape, fp, ifitem2anchor);
+				SupportUtil.addTransitions(items, shape, fp, node2anchor);
 			}
 		}
 	}

@@ -145,6 +145,11 @@ public class BehaviorEditor extends RoomDiagramEditor {
 		ArrayList<Shape> toBeRemoved = new ArrayList<Shape>();
 		for (Shape ctxShape : diagram.getChildren()) {
 			EObject bo = Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(ctxShape);
+			if (bo.eIsProxy()) {
+				toBeRemoved.add(ctxShape);
+				continue;
+			}
+			
 			assert(bo instanceof StateGraph): "expected state graph";
 			
 			StateGraph sg = (StateGraph) bo;

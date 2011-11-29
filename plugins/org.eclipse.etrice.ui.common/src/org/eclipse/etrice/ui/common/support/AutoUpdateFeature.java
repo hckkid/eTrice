@@ -52,7 +52,7 @@ public class AutoUpdateFeature extends AbstractUpdateFeature {
 		for (Connection conn : new ArrayList<Connection>(diagram.getConnections())) {
 			UpdateContext context = new UpdateContext(conn);
 			IUpdateFeature updateFeature = getFeatureProvider().getUpdateFeature(context);
-			if (updateFeature.canUpdate(context))
+			if (updateFeature!=null && updateFeature.canUpdate(context))
 				if (updateFeature.updateNeeded(context).toBoolean())
 					needed = true;
 		}
