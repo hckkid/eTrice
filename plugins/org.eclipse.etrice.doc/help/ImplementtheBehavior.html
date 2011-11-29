@@ -21,25 +21,25 @@
 </div>
 </div>
 <p>The application should switch on and off the LED for 5 seconds in a 1 second interval, than stop blinking for 5 seconds and start again. To implement this behavior we will implement two FSMs. One for the 1 second interval and one for the 5 second interval. The 1 second blinking should be implemented in 
-				[<span class="citation">Blinky</span>]. The 5 second interval should be implemented in 
-				[<span class="citation">BlinkyController</span>]. First implement the Controller.
+				<span class="emphasis"><em>Blinky</em></span>. The 5 second interval should be implemented in 
+				<span class="emphasis"><em>BlinkyController</em></span>. First implement the Controller.
 			</p>
 <p>Right click to 
-				[<span class="citation">BlinkyController</span>] and select 
-				[<span class="citation">Edit Behavior</span>].
+				<span class="emphasis"><em>BlinkyController</em></span> and select 
+				<span class="emphasis"><em>Edit Behavior</em></span>.
 				Drag and Drop the 
-				[<span class="citation">Initial Point</span>] and two 
-				[<span class="citation">States</span>] into the top state. Name the states 
-				[<span class="citation">on</span>] and 
-				[<span class="citation">off</span>]. 
+				<span class="emphasis"><em>Initial Point</em></span> and two 
+				<span class="emphasis"><em>States</em></span> into the top state. Name the states 
+				<span class="emphasis"><em>on</em></span> and 
+				<span class="emphasis"><em>off</em></span>. 
 				Use the 
-				[<span class="citation">Transition</span>] tool to draw transitions from 
-				[<span class="citation">init</span>] to 
-				[<span class="citation">on</span>] from 
-				[<span class="citation">on</span>] to 
-				[<span class="citation">off</span>] and from 
-				[<span class="citation">off</span>] to 
-				[<span class="citation">on</span>].
+				<span class="emphasis"><em>Transition</em></span> tool to draw transitions from 
+				<span class="emphasis"><em>init</em></span> to 
+				<span class="emphasis"><em>on</em></span> from 
+				<span class="emphasis"><em>on</em></span> to 
+				<span class="emphasis"><em>off</em></span> and from 
+				<span class="emphasis"><em>off</em></span> to 
+				<span class="emphasis"><em>on</em></span>.
 			</p>
 <p>Open the transition dialog by double click the arrow to specify the trigger event and the action code of each transition. Note that the initial transition does not have a trigger event.</p>
 <p>The transition dialog should look like this:</p>
@@ -52,18 +52,18 @@
 			
 </p>
 <p>The defined ports will be generated as a member attribute of the actor class from type of the attached protocol. So, to send e message you must state 
-				[<span class="citation">port.message(param);</span>]. In this example 
-				[<span class="citation">ControlPort.start()</span>] sends the 
-				[<span class="citation">start</span>] message via the 
-				[<span class="citation">ControlPort</span>] to the outside world. Assuming that 
-				[<span class="citation">Blinky</span>] is connected to this port, the message will start the one second blinking FSM. It is the same thing with the 
-				[<span class="citation">timer</span>]. The SAP is also a port and follows the same rules. So it is clear that 
-				[<span class="citation">timer.Start(5000);</span>] will send the 
-				[<span class="citation">Start</span>] message to the timing service. The timing service will send a 
-				[<span class="citation">timeoutTick</span>] message back after 5000ms.
+				<span class="emphasis"><em>port.message(param);</em></span>. In this example 
+				<span class="emphasis"><em>ControlPort.start()</em></span> sends the 
+				<span class="emphasis"><em>start</em></span> message via the 
+				<span class="emphasis"><em>ControlPort</em></span> to the outside world. Assuming that 
+				<span class="emphasis"><em>Blinky</em></span> is connected to this port, the message will start the one second blinking FSM. It is the same thing with the 
+				<span class="emphasis"><em>timer</em></span>. The SAP is also a port and follows the same rules. So it is clear that 
+				<span class="emphasis"><em>timer.Start(5000);</em></span> will send the 
+				<span class="emphasis"><em>Start</em></span> message to the timing service. The timing service will send a 
+				<span class="emphasis"><em>timeoutTick</em></span> message back after 5000ms.
 			</p>
 <p>Within each transition the timer will be restarted and the appropriate message will be sent via the 
-				[<span class="citation">ControlPort</span>]. 
+				<span class="emphasis"><em>ControlPort</em></span>. 
 			</p>
 <p>The resulting state machine should look like this:
 				(Note that the arrows peak changes if the transition contains action code.)</p>
@@ -76,8 +76,8 @@
 			
 </p>
 <p>Save the diagram and inspect the 
-				[<span class="citation">Blinky.room</span>] file. The 
-				[<span class="citation">BlinkyController</span>] should look like this:
+				<span class="emphasis"><em>Blinky.room</em></span> file. The 
+				<span class="emphasis"><em>BlinkyController</em></span> should look like this:
 			</p>
 <p>
 				
@@ -88,12 +88,12 @@
 			
 </p>
 <p>Now we will implement 
-				[<span class="citation">Blinky</span>]. Due to the fact that 
-				[<span class="citation">Blinky</span>] interacts with the GUI class a view things must to be done in the model file.
+				<span class="emphasis"><em>Blinky</em></span>. Due to the fact that 
+				<span class="emphasis"><em>Blinky</em></span> interacts with the GUI class a view things must to be done in the model file.
 			</p>
 <p>Double click 
-				[<span class="citation">Blinky</span>] in the outline view to navigate to 
-				[<span class="citation">Blinky</span>] within the model file.
+				<span class="emphasis"><em>Blinky</em></span> in the outline view to navigate to 
+				<span class="emphasis"><em>Blinky</em></span> within the model file.
 				Add the following code:
 				(type it or simply copy it from the tutorial project)
 			</p>
@@ -106,22 +106,23 @@
 			
 </p>
 <p>
-				[<span class="citation">usercode1</span>] will be generated at the beginning of the file, outside the class definition. 
-				[<span class="citation">usercode2</span>] will be generated within the class definition. The code imports the GUI class and instantiates the window class. Attributes for the carLights and pedLights will be declared to easily access the lights in the state machine.
+				
+<span class="emphasis"><em>usercode1</em></span> will be generated at the beginning of the file, outside the class definition. 
+				<span class="emphasis"><em>usercode2</em></span> will be generated within the class definition. The code imports the GUI class and instantiates the window class. Attributes for the carLights and pedLights will be declared to easily access the lights in the state machine.
 				The Operation 
-				[<span class="citation">destroyUser()</span>] is a predefined operation that will be called during shutdown of the application. Within this operation, cleanup of manual coded classes can be done.
+				<span class="emphasis"><em>destroyUser()</em></span> is a predefined operation that will be called during shutdown of the application. Within this operation, cleanup of manual coded classes can be done.
 			</p>
 <p>Now design the FSM of 
-				[<span class="citation">Blinky</span>]. Remember, as the name suggested 
-				[<span class="citation">blinking</span>] is a state in which the LED must be switched on and off. We will realize that by an hierarchical FSM in which the 
-				[<span class="citation">blinking</span>] state has two sub states.
+				<span class="emphasis"><em>Blinky</em></span>. Remember, as the name suggested 
+				<span class="emphasis"><em>blinking</em></span> is a state in which the LED must be switched on and off. We will realize that by an hierarchical FSM in which the 
+				<span class="emphasis"><em>blinking</em></span> state has two sub states.
 			</p>
 <p>Open the behavior diagram of 
-				[<span class="citation">Blinky</span>] by right clicking the 
-				[<span class="citation">Blinky</span>] actor in the outline view. Create two states named 
-				[<span class="citation">blinking</span>] and 
-				[<span class="citation">off</span>]. Right click to 
-				[<span class="citation">blinking</span>] and create a subgraph.
+				<span class="emphasis"><em>Blinky</em></span> by right clicking the 
+				<span class="emphasis"><em>Blinky</em></span> actor in the outline view. Create two states named 
+				<span class="emphasis"><em>blinking</em></span> and 
+				<span class="emphasis"><em>off</em></span>. Right click to 
+				<span class="emphasis"><em>blinking</em></span> and create a subgraph.
 			</p>
 <p>
 				
@@ -132,10 +133,10 @@
 			
 </p>
 <p>Create the following state machine. The trigger events between 
-				[<span class="citation">on</span>] and 
-				[<span class="citation">off</span>] are the 
-				[<span class="citation">timeoutTick</span>] from the 
-				[<span class="citation">timer</span>] port. 
+				<span class="emphasis"><em>on</em></span> and 
+				<span class="emphasis"><em>off</em></span> are the 
+				<span class="emphasis"><em>timeoutTick</em></span> from the 
+				<span class="emphasis"><em>timer</em></span> port. 
 			</p>
 <p>
 				
@@ -146,10 +147,11 @@
 			
 </p>
 <p>Create entry code for both states by right clicking the state and select 
-				[<span class="citation">Edit State...</span>]
-			</p>
+				<span class="emphasis"><em>Edit State...</em></span>
+			
+</p>
 <p>Entry code of 
-				[<span class="citation">on</span>] is:
+				<span class="emphasis"><em>on</em></span> is:
 			</p>
 <div class="literallayout">
 <p>
@@ -165,7 +167,7 @@ carLights.setState(TrafficLight3.YELLOW);&nbsp;<br>
 </blockquote>
 </div>
 <p>Entry code  of 
-				[<span class="citation">off</span>] is:
+				<span class="emphasis"><em>off</em></span> is:
 			</p>
 <div class="literallayout">
 <p>
@@ -181,7 +183,7 @@ carLights.setState(TrafficLight3.OFF);<br>
 </blockquote>
 </div>
 <p>Navigate to the Top level state by double clicking the 
-				[<span class="citation">/blinking</span>] state. Create the following state machine:
+				<span class="emphasis"><em>/blinking</em></span> state. Create the following state machine:
 			</p>
 <p>
 				
@@ -192,17 +194,17 @@ carLights.setState(TrafficLight3.OFF);<br>
 			
 </p>
 <p>The trigger event from 
-				[<span class="citation">off</span>] to 
-				[<span class="citation">blinking</span>] is the 
-				[<span class="citation">start</span>] event from the 
-				[<span class="citation">ControlPort</span>].The trigger event from 
-				[<span class="citation">blinking</span>] to 
-				[<span class="citation">off</span>] is the 
-				[<span class="citation">stop</span>] event from the 
-				[<span class="citation">ControlPort</span>].
+				<span class="emphasis"><em>off</em></span> to 
+				<span class="emphasis"><em>blinking</em></span> is the 
+				<span class="emphasis"><em>start</em></span> event from the 
+				<span class="emphasis"><em>ControlPort</em></span>.The trigger event from 
+				<span class="emphasis"><em>blinking</em></span> to 
+				<span class="emphasis"><em>off</em></span> is the 
+				<span class="emphasis"><em>stop</em></span> event from the 
+				<span class="emphasis"><em>ControlPort</em></span>.
 				Note: The transition from 
-				[<span class="citation">blinking</span>] to 
-				[<span class="citation">off</span>] is a so called group transition. This is a outgoing transition from a super state (state with sub states) without specifying the concrete leave state (state without sub states). An incoming transition to a super state is called history transition.   
+				<span class="emphasis"><em>blinking</em></span> to 
+				<span class="emphasis"><em>off</em></span> is a so called group transition. This is a outgoing transition from a super state (state with sub states) without specifying the concrete leave state (state without sub states). An incoming transition to a super state is called history transition.   
 			</p>
 <p>Action code of the init transition is:</p>
 <div class="literallayout">
@@ -221,8 +223,8 @@ pedLights.setState(TrafficLight2.OFF);<br>
 </blockquote>
 </div>
 <p>Action code from 
-				[<span class="citation">blinking</span>] to 
-				[<span class="citation">off</span>] is:
+				<span class="emphasis"><em>blinking</em></span> to 
+				<span class="emphasis"><em>off</em></span> is:
 			</p>
 <div class="literallayout">
 <p>

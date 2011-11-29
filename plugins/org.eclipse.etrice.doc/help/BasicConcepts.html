@@ -35,9 +35,8 @@
 <p>Receiving a message via a port will trigger the internal state machine. A transition will be executed depending on the message and the current state. Within this transition, detail level code will be executed and response messages can be sent.</p>
 <p>
 					
-<a class="ulink" href="http://eclipse.org/etrice/images/010-room-introduction01.avi" target="_new">video: receiving a message</a>
-				
-</p>
+<span class="bold"><strong>video: receiving a message</strong></span>:http://eclipse.org/etrice/images/010-room-introduction01.avi
+				</p>
 <p>With this model, a complex behavior can be divided into many relatively simple, linked actors. To put it the other way round: The complex behavior will be provided by a network of relatively simple components which are communicating with each other via well defined interfaces.</p>
 </div>
 <div class="section" title="Hierarchy in Structure and Behavior">
@@ -60,7 +59,8 @@
 				
 </p>
 <p>
-					[<span class="citation">blinking</span>] Sub machine:
+					
+<span class="emphasis"><em>blinking</em></span> Sub machine:
 
 					</p>
 <div class="mediaobject">
@@ -68,9 +68,13 @@
 <p>
 				
 </p>
-<p>From an abstract point of view there is a state &bdquo;blinking&rdquo;. But a simple LED is not able to blink autonomously. Therefore you have to add more details to your model to make a LED blinking, but for the current work it is not of interest how the blinking is realized. This will be done in the next lower level of the hierarchy. </p>
+<p>From an abstract point of view there is a state 
+					<span class="emphasis"><em>blinking</em></span>. But a simple LED is not able to blink autonomously. Therefore you have to add more details to your model to make a LED blinking, but for the current work it is not of interest how the blinking is realized. This will be done in the next lower level of the hierarchy. 
+				</p>
 <p>This simple example might give an idea how powerful this mechanisms is.</p>
-<p>The hierarchical FSM provides a rich tool box to describe real world problems (see &bdquo;room concepts&rdquo;).</p>
+<p>The hierarchical FSM provides a rich tool box to describe real world problems (see 
+					<span class="bold"><strong>room concepts</strong></span>).
+				</p>
 </div>
 <div class="section" title="Layering">
 <div class="titlepage">
@@ -99,9 +103,13 @@
 </div>
 </div>
 </div>
-<p>&bdquo;Run to completion&rdquo; (RTC) is a very central concept of ROOM. It enables the developer to concentrate on the functional aspects of the system. The developer doesn&rsquo;t have to care about concurrency issues all the time. This job is concentrated to the system designer in a very flexible way.
-					What does &bdquo;run to completion&rdquo; mean:
-					RTC means that an actor, which is processing a message, can not receive the next message as long as the processing of the current message has been finished. Receiving of the next message will be queued from the underlying run time system.</p>
+<p>
+					
+<span class="bold"><strong>Run to completion</strong></span> (RTC) is a very central concept of ROOM. It enables the developer to concentrate on the functional aspects of the system. The developer doesn&rsquo;t have to care about concurrency issues all the time. This job is concentrated to the system designer in a very flexible way.
+					What does 
+					<span class="bold"><strong>run to completion</strong></span> mean:
+					RTC means that an actor, which is processing a message, can not receive the next message as long as the processing of the current message has been finished. Receiving of the next message will be queued from the underlying run time system.
+				</p>
 <p>Note: It is very important not to confuse run to completion and preemption. Run to completion means that an actor will finish the processing of a message before he can receive a new one (regardless of its priority). That does not mean that an actor cannot be preempted from an higher priority thread of control. But even a message from this higher prior thread of control will be queued until the current processing has been finished. </p>
 <p>With this mechanism all actor internal attributes and data structures are protected. Due to the fact that multiple actors share one thread of control, all objects are protected which are accessed from one thread of control but multiple actors. This provides the possibility to decompose complex functionality to several actors without the risk to produce access violations or dead locks.</p>
 </div>

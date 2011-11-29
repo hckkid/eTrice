@@ -36,15 +36,15 @@ h3. Where does it come from?
 
 Room was developed in the 1990th on the background of the upcoming mobile applications with the goal to manage the complexity of such huge SW-Systems. From the very beginning ROOM has focused on a certain type of SW-Systems and is, in contrast to the UML, well suited for this kind of systems. In this sense, ROOM is a DSL (Domain Specific Language) for distributed, event driven, real time systems. 
 
-Bran Selic, Garth Gullekson and Paul T. Ward have published the concepts 1994 in the book "REAL-TIME OBJECT-ORIENTED MODELING". The company ??object time?? (TM) developed a ROOM tool which was taken over by ??Rational SW?? (TM) and later on by ??IBM?? (TM). 
-The company ??Protos Software Gmbh?? (TM) also developed a ROOM tool called ??Trice?? (TM) for control software for production machines and automotive systems. ??Trice?? (TM) is the predecessor of eTrice (see Introduction to eTrice). 
+Bran Selic, Garth Gullekson and Paul T. Ward have published the concepts 1994 in the book *Real-Time Object-Oriented Modeling*. The company _object time_ (TM) developed a ROOM tool which was taken over by _Rational SW_ (TM) and later on by _IBM_ (TM). 
+The company _Protos Software Gmbh_ (TM) also developed a ROOM tool called _Trice_ (TM) for control software for production machines and automotive systems. _Trice_ (TM) is the predecessor of eTrice (see Introduction to eTrice). 
  
 From our point of view ROOM provides still the clearest, simplest, most complete and best suited modeling concepts for the real time domain. All later proposals like the UML do not fit as well to this kind of problems.
  
 
 h3. Which kind of SW-Systems will be addressed?
 
-As mentioned before ROOM addresses distributed, event driven, real time systems. But what is a "real time system"? ROOM defines a set of properties which are typical for a real time system. These properties are:
+As mentioned before ROOM addresses distributed, event driven, real time systems. But what is a *real time system*? ROOM defines a set of properties which are typical for a real time system. These properties are:
 * Timeliness
 * Dynamic internal structure
 * Reactiveness
@@ -58,7 +58,7 @@ As an example take a look at a washing machine. The system has to react on user 
 So, the system can be characterized as timely, concurrent and reactive. As long as the washing machine does not transform to a laundry drier by itself, the system has no dynamic internal structure and as long as all functions are running on a single micro controller the (SW)-system is not distributed. 
 ROOM fits perfect to such a system.
 
-A SW system which mainly consists of data transformations like signal/image processing or a loop controller (e.g. a PID controller) cannot be characterized with any of the above mentioned properties. However, in the real world most of the SW systems will be a combination of both. ROOM can be combined with such systems, so that for example an actor provides a ??run to completion?? context for calculating an image processing algorithm or a PID controller.  
+A SW system which mainly consists of data transformations like signal/image processing or a loop controller (e.g. a PID controller) cannot be characterized with any of the above mentioned properties. However, in the real world most of the SW systems will be a combination of both. ROOM can be combined with such systems, so that for example an actor provides a *run to completion* context for calculating an image processing algorithm or a PID controller.  
 
 h3. What is the relation between OOP and ROOM?
 
@@ -70,7 +70,7 @@ As the figure illustrates, the classical object paradigm does not care about con
 
 !images/010-RoomIntroduction02.png!
 
-ROOM provides the concept of a logical machine (called actor) with its own thread of control. It provides some kind of cooperative communication infrastructure with "run to completion" semantic. That makes developing of business logic easy and safe (see basic concepts). The logical machine provides an encapsulation shell including concurrency issues (see chapter "Run to completion"). 
+ROOM provides the concept of a logical machine (called actor) with its own thread of control. It provides some kind of cooperative communication infrastructure with *run to completion* semantic. That makes developing of business logic easy and safe (see basic concepts). The logical machine provides an encapsulation shell including concurrency issues (see chapter *Run to completion*). 
 
 !images/010-RoomIntroduction03.png!
 
@@ -104,7 +104,7 @@ The actor provides access protection for its own attributes (including complex t
 
 Receiving a message via a port will trigger the internal state machine. A transition will be executed depending on the message and the current state. Within this transition, detail level code will be executed and response messages can be sent.
 
-"video: receiving a message":http://eclipse.org/etrice/images/010-room-introduction01.avi
+*video: receiving a message*:http://eclipse.org/etrice/images/010-room-introduction01.avi
 
 With this model, a complex behavior can be divided into many relatively simple, linked actors. To put it the other way round: The complex behavior will be provided by a network of relatively simple components which are communicating with each other via well defined interfaces.
 
@@ -118,14 +118,14 @@ The actor's behavior will be described with a state machine. A state in turn may
 Top level:
 !images\020-Blinky15.png!
 
-??blinking?? Sub machine:
+_blinking_ Sub machine:
 !images\020-Blinky151.png!
 
-From an abstract point of view there is a state "blinking". But a simple LED is not able to blink autonomously. Therefore you have to add more details to your model to make a LED blinking, but for the current work it is not of interest how the blinking is realized. This will be done in the next lower level of the hierarchy. 
+From an abstract point of view there is a state _blinking_. But a simple LED is not able to blink autonomously. Therefore you have to add more details to your model to make a LED blinking, but for the current work it is not of interest how the blinking is realized. This will be done in the next lower level of the hierarchy. 
 
 This simple example might give an idea how powerful this mechanisms is.
 
-The hierarchical FSM provides a rich tool box to describe real world problems (see "room concepts").
+The hierarchical FSM provides a rich tool box to describe real world problems (see *room concepts*).
 
 h3. Layering
 
@@ -140,8 +140,8 @@ From the Actors point of view, SAP and SPP behave almost like regular ports.
 
 h3. Run to Completion
 
-"Run to completion" (RTC) is a very central concept of ROOM. It enables the developer to concentrate on the functional aspects of the system. The developer doesn't have to care about concurrency issues all the time. This job is concentrated to the system designer in a very flexible way.
-What does "run to completion" mean:
+*Run to completion* (RTC) is a very central concept of ROOM. It enables the developer to concentrate on the functional aspects of the system. The developer doesn't have to care about concurrency issues all the time. This job is concentrated to the system designer in a very flexible way.
+What does *run to completion* mean:
 RTC means that an actor, which is processing a message, can not receive the next message as long as the processing of the current message has been finished. Receiving of the next message will be queued from the underlying run time system.
 
 Note: It is very important not to confuse run to completion and preemption. Run to completion means that an actor will finish the processing of a message before he can receive a new one (regardless of its priority). That does not mean that an actor cannot be preempted from an higher priority thread of control. But even a message from this higher prior thread of control will be queued until the current processing has been finished. 
@@ -161,8 +161,8 @@ h3. Communication Methods
 
 h3. Execution Methods
 
-* *execution by receive event*: The message queue or the event dispatcher calls a "receive event" function of the message receiver an thereby executes the processing of the event.
-* *polled execution*: The objects are processed by a cyclic "execute" call
+* *execution by receive event*: The message queue or the event dispatcher calls a *receive event* function of the message receiver an thereby executes the processing of the event.
+* *polled execution*: The objects are processed by a cyclic *execute* call
 * *execution by function call*: The caller executes the called object via function call
 
 h3. Execution Models
@@ -186,8 +186,8 @@ This model is usually used for systems with requirements for safety, such as aut
 
 h4. synchronous
 
-The synchronous execution model could also be called "simple function calls". 
-This model is in general not very well suited to support the "run to completion" semantic typical for ROOM models, but could also be generated from ROOM models. 
+The synchronous execution model could also be called *simple function calls*. 
+This model is in general not very well suited to support the *run to completion* semantic typical for ROOM models, but could also be generated from ROOM models. 
 With this execution model also lower levels of a software system, such as device drivers, could be generated from ROOM models.
 
 
@@ -204,32 +204,32 @@ Additionally some tutorial models will be provided to make it easy to start with
 
 !images/013-SetupWorkspace01.png!
 
-Just the ??eTrice?? menu item is visible from the eTrice tool.
-From the ??File?? menu select ??File->New->Project??
+Just the _eTrice_ menu item is visible from the eTrice tool.
+From the _File_ menu select _File->New->Project_
 
 !images/013-SetupWorkspace02.png!
 
-Open the ??eTrice?? tab and select ??eTrice Java ModelLib??
+Open the _eTrice_ tab and select _eTrice Java ModelLib_
 
-Press ??Next?? and ??Finish?? to install the Modellib into your workspace.
+Press _Next_ and _Finish_ to install the Modellib into your workspace.
 
 !images/013-SetupWorkspace03.png!
 
-Do the same steps for ??eTrice Java Runtime?? and ??eTrice Java Tutorials??. The resulting workspace should look like this:
+Do the same steps for _eTrice Java Runtime_ and _eTrice Java Tutorials_. The resulting workspace should look like this:
 
 !images/013-SetupWorkspace04.png!
 
 Now workspace is set up and you can perform the tutorials or start with your work.
 
-The tutorial models are available in the ??org.eclipse.etrice.tutorials?? project. All tutorials are ready to generate and run without any changes. To start the code generator simply run ??gen_org.eclipse.etrice.tutorials.launch?? as ??gen_org.eclipse.etrice.tutorials.launch??: 
+The tutorial models are available in the _org.eclipse.etrice.tutorials_ project. All tutorials are ready to generate and run without any changes. To start the code generator simply run _gen_org.eclipse.etrice.tutorials.launch_ as _gen_org.eclipse.etrice.tutorials.launch_: 
 
 !images/013-SetupWorkspace05.png!
 
-After generation for each tutorial a java file called ??SubSystem_ModelnameRunner.java?? is generated. To run the model simply run this file as a java application:
+After generation for each tutorial a java file called _SubSystem_ModelnameRunner.java_ is generated. To run the model simply run this file as a java application:
 
 !images/013-SetupWorkspace06.png!
 
-To stop the application type "quit" in the console window.
+To stop the application type _quit_ in the console window.
  
 !images/013-SetupWorkspace07.png!
 
@@ -247,13 +247,13 @@ In this tutorial you will build your first very simple eTrice model. The goal is
 # run the model
 # open the message sequence chart
 
-Make sure that you have set up the workspace as described in ??Setting up the workspace??.
+Make sure that you have set up the workspace as described in _Setting up the workspace_.
 
-"video: hello world":http://eclipse.org/etrice/images/015-HelloWorld01.avi
+*video hello world:* http://eclipse.org/etrice/images/015-HelloWorld01.avi
 
 h2. Create a new model from scratch
 
-The easiest way to create a new eTrice Project is to use the eclipse project wizard. From the eclipse file menu select ??File->New->Project?? and create a new eTrice project and name it ??HelloWorld??
+The easiest way to create a new eTrice Project is to use the eclipse project wizard. From the eclipse file menu select _File->New->Project_ and create a new eTrice project and name it _HelloWorld_
 
 !images/015-HelloWorld10.png!
 
@@ -261,7 +261,7 @@ The wizard creates everything that is needed to create, build and run an eTrice 
 
 !images/015-HelloWorld11.png!
 
-Within the model directory the model file ??HelloWorld.room?? was created. Open the ??HelloWorld.room?? file and delete the contents of the file. Open the content assist with Ctrl+Space and select ??model skeleton??.
+Within the model directory the model file _HelloWorld.room_ was created. Open the _HelloWorld.room_ file and delete the contents of the file. Open the content assist with Ctrl+Space and select _model skeleton_.
 
 !images/015-HelloWorld12.png!   
 
@@ -286,11 +286,11 @@ RoomModel HelloWorld {
 bq. 
 
 The goal of eTrice is to describe distributed systems on a logical level. In the current version not all elements will be supported. But as prerequisite for further versions the following elements are mandatory for an eTrice model:
-* the ??LogicalSystem?? 
-* at least one ??SubSystemClass??
-* at least one ??ActorClass??
+* the _LogicalSystem_ 
+* at least one _SubSystemClass_
+* at least one _ActorClass_
 
-The ??LogicalSystem?? represents the complete distributed system and contains at least one ??SubSystemRef??. The ??SubSystemClass?? represents an address space and contains at least one ??ActorRef??. The ??ActorClass?? is the building block of which an application will be built of. It is in general a good idea to define a top level actor that can be used as reference within the subsystem.
+The _LogicalSystem_ represents the complete distributed system and contains at least one _SubSystemRef_. The _SubSystemClass_ represents an address space and contains at least one _ActorRef_. The _ActorClass_ is the building block of which an application will be built of. It is in general a good idea to define a top level actor that can be used as reference within the subsystem.
 
 The outline view of the textual ROOM editor shows the main modeling elements in an easy to navigate tree.
 
@@ -300,11 +300,11 @@ The outline view of the textual ROOM editor shows the main modeling elements in 
 
 h2. Create a state machine
 
-We will implement the Hello World code on the initial transition of the ??HelloWorldTop?? actor. Therefore open the state machine editor by right clicking the ??HelloWorldTop?? actor in the outline view and select ??Edit Behavior??.
+We will implement the Hello World code on the initial transition of the _HelloWorldTop_ actor. Therefore open the state machine editor by right clicking the _HelloWorldTop_ actor in the outline view and select _Edit Behavior_.
 
 !images/015-HelloWorld03.png!
 
-The state machine editor will be opened. Drag and drop an ??Initial Point?? from the tool box to the diagram into the top level state. Drag and drop a ??State?? from the tool box to the diagram. Confirm the dialogue with ??ok??. Select the ??Transition?? in the tool box and draw the transition from the ??Initial Point?? to the State. Open the transition dialogue by double clicking the caption of the transition and fill in the action code.
+The state machine editor will be opened. Drag and drop an _Initial Point_ from the tool box to the diagram into the top level state. Drag and drop a _State_ from the tool box to the diagram. Confirm the dialogue with _ok_. Select the _Transition_ in the tool box and draw the transition from the _Initial Point_ to the State. Open the transition dialogue by double clicking the caption of the transition and fill in the action code.
 
 bc. System.out.println("Hello World !");
  
@@ -319,16 +319,16 @@ Save the diagram and inspect the model file. Note that the textual representatio
 
 h2. Build and run the model
 
-Now the model is finished and source code can be generated. The project wizard has created a launch configuration that is responsible for generating the source code. From ??HelloWorld/?? right click ??gen_HelloWorld.launch?? and run it as gen_HelloWorld. All model files in the model directory will be generated.
+Now the model is finished and source code can be generated. The project wizard has created a launch configuration that is responsible for generating the source code. From _HelloWorld/_ right click _gen_HelloWorld.launch_ and run it as gen_HelloWorld. All model files in the model directory will be generated.
 
 !images/015-HelloWorld06.png!
 
-The code will be generated to the src-gen directory. The main function will be contained in ??SubSystem_HelloWorldRunner.java??. Select this file and run it as Java application.
+The code will be generated to the src-gen directory. The main function will be contained in _SubSystem_HelloWorldRunner.java_. Select this file and run it as Java application.
 
 !images/015-HelloWorld07.png!
 
 
-The Hello World application starts and the string will be printed on the console window. To stop the application the user must type ??quit?? in the console window.
+The Hello World application starts and the string will be printed on the console window. To stop the application the user must type _quit_ in the console window.
 
 !images/015-HelloWorld08.png!
 
@@ -349,7 +349,7 @@ h1. Tutorial Blinky
 
 h2. Scope
 
-This tutorial describes how to use the ??TimingService??, how to combine a generated model with manual code and how to model a hierarchical state machine. The idea of the tutorial is to switch a LED on and off. The behavior of the LED should be: blinking in a one second interval for 5 seconds, stop blinking for 5 seconds, blinking, stop,...  
+This tutorial describes how to use the _TimingService_, how to combine a generated model with manual code and how to model a hierarchical state machine. The idea of the tutorial is to switch a LED on and off. The behavior of the LED should be: blinking in a one second interval for 5 seconds, stop blinking for 5 seconds, blinking, stop,...  
 For this exercise we will use a little GUI class that will be used in more sophisticated tutorials too. The GUI simulates a pedestrian traffic crossing. For now, just a simple LED simulation will be used from the GUI. 
 
 After the exercise is created you must copy the GUI to your src directory (see below).
@@ -368,19 +368,19 @@ You will perform the following steps:
 # define a protocol
 # create an actor structure
 # create a hierarchical state machine
-# use the predefined ??TimingService??
+# use the predefined _TimingService_
 # combine manual code with generated code
 # build and run the model
 # open the message sequence chart
 
 h2. Create a new model from scratch
 
-Remember exercise ??HelloWorld??.
-Create a new eTrice project and name it ??Blinky??
+Remember exercise _HelloWorld_.
+Create a new eTrice project and name it _Blinky_
 
-To use the GUI please copy the package ??org.eclipse.etrice.tutorials.PedLightGUI?? from "org.eclipse.etrice.tutorials/src" to your ??src?? directory "Blinky/src". For this tutorial you must remove the error markers by editing the file ??PedestrianLightWndNoTcp.java??. Appropriate comments are provided to remove the error marker for this turorial.
+To use the GUI please copy the package _org.eclipse.etrice.tutorials.PedLightGUI_ from _org.eclipse.etrice.tutorials/src_ to your *src* directory _Blinky/src_. For this tutorial you must remove the error markers by editing the file _PedestrianLightWndNoTcp.java_. Appropriate comments are provided to remove the error marker for this turorial.
 
-Open the ??Blinky.room?? file and copy the following code into the file or use content assist to create the model.
+Open the _Blinky.room_ file and copy the following code into the file or use content assist to create the model.
 
 bc.. 
 RoomModel Blinky {
@@ -400,15 +400,15 @@ bq.
 
 h2. Add two additional actor classes
 
-Position the cursor outside any class definition and right click the mouse within the editor window. From the context menu select ??Content Assist??  
+Position the cursor outside any class definition and right click the mouse within the editor window. From the context menu select _Content Assist_  
 
 !images/020-Blinky02.png!
 
-Select ??ActorClass - actor class skeleton?? and name it ??Blinky??.
+Select _ActorClass - actor class skeleton_ and name it _Blinky_.
 
 !images/020-Blinky01.png! 
 
-Repeat the described procedure and name the new actor ??BlinkyController??.
+Repeat the described procedure and name the new actor _BlinkyController_.
 
 With Ctrl+Shift+F you can beautify the model code. 
 
@@ -416,21 +416,21 @@ Save the model and visit the outline view.
 
 h2. Create a new protocol
 
-With the help of ??Content Assist?? create a ??ProtocolClass?? and name it ??BlinkyControlProtocol??.
-Inside the brackets use the ??Content Assist?? (CTRL+Space) to create two incoming messages called ??start?? and ??stop??.
+With the help of _Content Assist_ create a _ProtocolClass_ and name it _BlinkyControlProtocol_.
+Inside the brackets use the _Content Assist_ (CTRL+Space) to create two incoming messages called _start_ and _stop_.
 
 The resulting code should look like this:
 
 !images/020-Blinky03.png! 
 
-With Ctrl-Shift+F or selecting ??Format?? from the context menu you can format the text. Note that all elements are displayed in the outline view.
+With Ctrl-Shift+F or selecting _Format_ from the context menu you can format the text. Note that all elements are displayed in the outline view.
 
 h2. Import the Timing Service
 
 Switching on and off the LED is timing controlled. The timing service is provided from the model library and must be imported before it can be used from the model.
 
 This is the first time you use an element from the modellib. Make sure that your Java Build Path has the appropriate entry to the modellib. Otherwise the jave code, which will be generated from the modellib, can not be referenced.
-(right click to ??Blinky?? and select properties. Select the ??Java Build Path?? tab) 
+(right click to _Blinky_ and select properties. Select the _Java Build Path_ tab) 
   
 !images/020-Blinky16.png! 
 
@@ -449,15 +449,15 @@ bq.
 
 Make sure that the path fits to your folder structure.  
 
-Now it can be used within the model. Right click to ??SubSystem_Blinky?? within the outline view. Select ??Edit Structure??. The ??application?? is already referenced in the subsystem. Drag and Drop an ??ActorRef?? to the ??SubSystem_Blinky?? and name it ??timingService??. From the actor class drop down list select ??room.basic.service.timing.ATimingService??. Draw a ??LayerConnection?? from ??application?? to each service provision point (SPP) of the ??timingService??. The resulting structure should look like this:
+Now it can be used within the model. Right click to _SubSystem_Blinky_ within the outline view. Select _Edit Structure_. The _application_ is already referenced in the subsystem. Drag and Drop an _ActorRef_ to the _SubSystem_Blinky_ and name it _timingService_. From the actor class drop down list select _room.basic.service.timing.ATimingService_. Draw a _LayerConnection_ from _application_ to each service provision point (SPP) of the _timingService_. The resulting structure should look like this:
 
 !images/020-Blinky06.png! 
 
-The current version of eTrice does not provide a graphical element for a service access point (SAP). Therefore the SAPs to access the timing service must be added in the .room file. Open the ??Blinky.room?? file and navigate to the ??Blinky?? actor. Add the following line to the structure of the actor:
+The current version of eTrice does not provide a graphical element for a service access point (SAP). Therefore the SAPs to access the timing service must be added in the .room file. Open the _Blinky.room_ file and navigate to the _Blinky_ actor. Add the following line to the structure of the actor:
 
 bc. SAP timer: room.basic.service.timing.PTimeout
 
-Do the same thing for ??BlinkyController??.
+Do the same thing for _BlinkyController_.
 
 The resulting code should look like this:
 
@@ -466,29 +466,29 @@ The resulting code should look like this:
 
 h2. Finish the model structure
 
-From the outline view right click to ??Blinky?? and select ??Edit Structure??. Drag and Drop an ??Interface Port?? to the boarder of the ??Blinky?? actor. Note that an interface port is not possible inside the actor. Name the port ??ControlPort?? and select ??BlinkyControlProtocol?? from the drop down list. Uncheck ??Conjugated?? and ??Is Relay Port??. Klick ??ok??. The resulting structure should look like this:
+From the outline view right click to _Blinky_ and select _Edit Structure_. Drag and Drop an _Interface Port_ to the boarder of the _Blinky_ actor. Note that an interface port is not possible inside the actor. Name the port _ControlPort_ and select _BlinkyControlProtocol_ from the drop down list. Uncheck _Conjugated_ and _Is Relay Port_. Klick _ok_. The resulting structure should look like this:
 
 
 !images/020-Blinky04.png!
 
-Repeat the above steps for the ??BlinkyController??. Make the port ??Conjugated??
+Repeat the above steps for the _BlinkyController_. Make the port _Conjugated_
 
-Keep in mind that the protocol defines ??start?? and ??stop?? as incoming messages. ??Blinky?? receives this messages and therefore ??Blinky??'s ??ControlPort?? must be a regular port and ??BlinkyController??'s ??ControlPort?? must be a conjugated port.
+Keep in mind that the protocol defines _start_ and _stop_ as incoming messages. _Blinky_ receives this messages and therefore _Blinky_'s _ControlPort_ must be a regular port and _BlinkyController_'s _ControlPort_ must be a conjugated port.
 
 
-From the outline view right click ??BlinkyTop?? and select ??Edit Structure??.
+From the outline view right click _BlinkyTop_ and select _Edit Structure_.
 
-Drag and Drop an ??ActorRef?? inside the ??BlinkyTop?? actor. Name it ??blinky??. From the actor class drop down list select ??Blinky??. Do the same for ??controller??. Connect the ports via the binding tool. The resulting structure should look like this:
+Drag and Drop an _ActorRef_ inside the _BlinkyTop_ actor. Name it _blinky_. From the actor class drop down list select _Blinky_. Do the same for _controller_. Connect the ports via the binding tool. The resulting structure should look like this:
 
 !images/020-Blinky05.png!
 
 h2. Implement the Behavior
 
-The application should switch on and off the LED for 5 seconds in a 1 second interval, than stop blinking for 5 seconds and start again. To implement this behavior we will implement two FSMs. One for the 1 second interval and one for the 5 second interval. The 1 second blinking should be implemented in ??Blinky??. The 5 second interval should be implemented in ??BlinkyController??. First implement the Controller.
+The application should switch on and off the LED for 5 seconds in a 1 second interval, than stop blinking for 5 seconds and start again. To implement this behavior we will implement two FSMs. One for the 1 second interval and one for the 5 second interval. The 1 second blinking should be implemented in _Blinky_. The 5 second interval should be implemented in _BlinkyController_. First implement the Controller.
 
-Right click to ??BlinkyController?? and select ??Edit Behavior??.
-Drag and Drop the ??Initial Point?? and two ??States?? into the top state. Name the states ??on?? and ??off??. 
-Use the ??Transition?? tool to draw transitions from ??init?? to ??on?? from ??on?? to ??off?? and from ??off?? to ??on??.
+Right click to _BlinkyController_ and select _Edit Behavior_.
+Drag and Drop the _Initial Point_ and two _States_ into the top state. Name the states _on_ and _off_. 
+Use the _Transition_ tool to draw transitions from _init_ to _on_ from _on_ to _off_ and from _off_ to _on_.
 
 Open the transition dialog by double click the arrow to specify the trigger event and the action code of each transition. Note that the initial transition does not have a trigger event.
 
@@ -496,43 +496,43 @@ The transition dialog should look like this:
 
 !{width=500px}images/020-Blinky09.png! 
 
-The defined ports will be generated as a member attribute of the actor class from type of the attached protocol. So, to send e message you must state ??port.message(param);??. In this example ??ControlPort.start()?? sends the ??start?? message via the ??ControlPort?? to the outside world. Assuming that ??Blinky?? is connected to this port, the message will start the one second blinking FSM. It is the same thing with the ??timer??. The SAP is also a port and follows the same rules. So it is clear that ??timer.Start(5000);?? will send the ??Start?? message to the timing service. The timing service will send a ??timeoutTick?? message back after 5000ms.
+The defined ports will be generated as a member attribute of the actor class from type of the attached protocol. So, to send e message you must state _port.message(param);_. In this example _ControlPort.start()_ sends the _start_ message via the _ControlPort_ to the outside world. Assuming that _Blinky_ is connected to this port, the message will start the one second blinking FSM. It is the same thing with the _timer_. The SAP is also a port and follows the same rules. So it is clear that _timer.Start(5000);_ will send the _Start_ message to the timing service. The timing service will send a _timeoutTick_ message back after 5000ms.
 
-Within each transition the timer will be restarted and the appropriate message will be sent via the ??ControlPort??. 
+Within each transition the timer will be restarted and the appropriate message will be sent via the _ControlPort_. 
 
 The resulting state machine should look like this:
 (Note that the arrows peak changes if the transition contains action code.)
 
 !images/020-Blinky10.png!
 
-Save the diagram and inspect the ??Blinky.room?? file. The ??BlinkyController?? should look like this:
+Save the diagram and inspect the _Blinky.room_ file. The _BlinkyController_ should look like this:
 
 !images/020-Blinky11.png! 
  
-Now we will implement ??Blinky??. Due to the fact that ??Blinky?? interacts with the GUI class a view things must to be done in the model file.
+Now we will implement _Blinky_. Due to the fact that _Blinky_ interacts with the GUI class a view things must to be done in the model file.
 
-Double click ??Blinky?? in the outline view to navigate to ??Blinky?? within the model file.
+Double click _Blinky_ in the outline view to navigate to _Blinky_ within the model file.
 Add the following code:
 (type it or simply copy it from the tutorial project)
 
 !images/020-Blinky12.png! 
 
-??usercode1?? will be generated at the beginning of the file, outside the class definition. ??usercode2?? will be generated within the class definition. The code imports the GUI class and instantiates the window class. Attributes for the carLights and pedLights will be declared to easily access the lights in the state machine.
-The Operation ??destroyUser()?? is a predefined operation that will be called during shutdown of the application. Within this operation, cleanup of manual coded classes can be done.
+_usercode1_ will be generated at the beginning of the file, outside the class definition. _usercode2_ will be generated within the class definition. The code imports the GUI class and instantiates the window class. Attributes for the carLights and pedLights will be declared to easily access the lights in the state machine.
+The Operation _destroyUser()_ is a predefined operation that will be called during shutdown of the application. Within this operation, cleanup of manual coded classes can be done.
  
-Now design the FSM of ??Blinky??. Remember, as the name suggested ??blinking?? is a state in which the LED must be switched on and off. We will realize that by an hierarchical FSM in which the ??blinking?? state has two sub states.
+Now design the FSM of _Blinky_. Remember, as the name suggested _blinking_ is a state in which the LED must be switched on and off. We will realize that by an hierarchical FSM in which the _blinking_ state has two sub states.
 
-Open the behavior diagram of ??Blinky?? by right clicking the ??Blinky?? actor in the outline view. Create two states named ??blinking?? and ??off??. Right click to ??blinking?? and create a subgraph.
+Open the behavior diagram of _Blinky_ by right clicking the _Blinky_ actor in the outline view. Create two states named _blinking_ and _off_. Right click to _blinking_ and create a subgraph.
 
 !images/020-Blinky13.png!
 
-Create the following state machine. The trigger events between ??on?? and ??off?? are the ??timeoutTick?? from the ??timer?? port. 
+Create the following state machine. The trigger events between _on_ and _off_ are the _timeoutTick_ from the _timer_ port. 
 
 !images/020-Blinky14.png!
 
-Create entry code for both states by right clicking the state and select ??Edit State...??
+Create entry code for both states by right clicking the state and select _Edit State..._
 
-Entry code of ??on?? is:
+Entry code of _on_ is:
 
 bc..  
 timer.Start(1000);
@@ -540,19 +540,19 @@ carLights.setState(TrafficLight3.YELLOW);
 bq. 
 
  
-Entry code  of ??off?? is:
+Entry code  of _off_ is:
 
 bc.. 
 timer.Start(1000);
 carLights.setState(TrafficLight3.OFF);
 bq. 
 
-Navigate to the Top level state by double clicking the ??/blinking?? state. Create the following state machine:
+Navigate to the Top level state by double clicking the _/blinking_ state. Create the following state machine:
 
 !images/020-Blinky15.png!
 
-The trigger event from ??off?? to ??blinking?? is the ??start?? event from the ??ControlPort??.The trigger event from ??blinking?? to ??off?? is the ??stop?? event from the ??ControlPort??.
-Note: The transition from ??blinking?? to ??off?? is a so called group transition. This is a outgoing transition from a super state (state with sub states) without specifying the concrete leave state (state without sub states). An incoming transition to a super state is called history transition.   
+The trigger event from _off_ to _blinking_ is the _start_ event from the _ControlPort_.The trigger event from _blinking_ to _off_ is the _stop_ event from the _ControlPort_.
+Note: The transition from _blinking_ to _off_ is a so called group transition. This is a outgoing transition from a super state (state with sub states) without specifying the concrete leave state (state without sub states). An incoming transition to a super state is called history transition.   
 
 Action code of the init transition is:
 
@@ -563,7 +563,7 @@ carLights.setState(TrafficLight3.OFF);
 pedLights.setState(TrafficLight2.OFF);
 bq. 
 
-Action code from ??blinking?? to ??off?? is:
+Action code from _blinking_ to _off_ is:
 
 bc.. 
 timer.Kill();
@@ -597,9 +597,9 @@ You will perform the following steps:
 
 h2. Create a new model from scratch
 
-Remember exercise ??HelloWorld??.
-Create a new eTrice project and name it ??SendingData??
-Open the ??SendingData.room?? file and copy the following code into the file or use content assist to create the model.
+Remember exercise _HelloWorld_.
+Create a new eTrice project and name it _SendingData_
+Open the _SendingData.room_ file and copy the following code into the file or use content assist to create the model.
 
 
 bc.. 
@@ -617,11 +617,11 @@ bq.
 
 h2. Add a data class
 
-Position the cursor outside any class definition and right click the mouse within the editor window. From the context menu select ??Content Assist?? (or Ctrl+Space).  
+Position the cursor outside any class definition and right click the mouse within the editor window. From the context menu select _Content Assist_ (or Ctrl+Space).  
 
 !images/025-SendingData01.png!
 
-Select ??DataClass - data class skeleton?? and name it ??DemoData??.
+Select _DataClass - data class skeleton_ and name it _DemoData_.
 Remove the operations and add the following Attributes:
 
 bc.. 
@@ -638,7 +638,7 @@ Note that the outline view contains all data elements as defined in the model.
 
 h2. Create a new protocol
 
-With the help of ??Content Assist?? create a ??ProtocolClass?? and name it ??PingPongProtocol??. Create the following messages:
+With the help of _Content Assist_ create a _ProtocolClass_ and name it _PingPongProtocol_. Create the following messages:
 
 bc.. 
 ProtocolClass PingPongProtocol {
@@ -655,7 +655,7 @@ bq.
 
 h2. Create MrPing and MrPong Actors
 
-With the help of ??Content Assist?? create two new actor classes and name them ??MrPing?? and ??MrPong??. The resulting model should look like this:
+With the help of _Content Assist_ create two new actor classes and name them _MrPing_ and _MrPong_. The resulting model should look like this:
 
 bc.. 
 RoomModel SendingData {
@@ -709,24 +709,24 @@ The outline view should look like this:
 
 h2. Define Actor Structure and Behavior
 
-Save the model and visit the outline view. Within the outline view, right click on the ??MrPong?? actor and select ??Edit Structure??. Select an ??Interface Port?? from the toolbox and add it to MrPong. Name the Port ??PingPongPort?? and select the ??PingPongProtocol??
+Save the model and visit the outline view. Within the outline view, right click on the _MrPong_ actor and select _Edit Structure_. Select an _Interface Port_ from the toolbox and add it to MrPong. Name the Port _PingPongPort_ and select the _PingPongProtocol_
 
 !images/025-SendingData02.png!
 
-Do the same with MrPing but mark the port as ??conjugated??
+Do the same with MrPing but mark the port as _conjugated_
 
 h3. Define MrPongs behavior
 
-Within the outline view, right click MrPong and select ??Edit Behavior??. Create the following state machine:
+Within the outline view, right click MrPong and select _Edit Behavior_. Create the following state machine:
 
 !images/025-SendingData04.png!
 
 The transition dialogues should look like this:
-For ??ping??:
+For _ping_:
 
 !images/025-SendingData05.png!
 
-For ??pingSimple??:
+For _pingSimple_:
 
 !images/025-SendingData06.png!
 
@@ -737,7 +737,7 @@ Within the outline view double click MrPing. Navigate the cursor to the behavior
 
 !images/025-SendingData07.png!
 
-Name the operation ??printData?? and define the DemoData as a parameter.
+Name the operation _printData_ and define the DemoData as a parameter.
 
 Fill in the following code:
 
@@ -759,19 +759,19 @@ For MrPing create the following state machine:
 
 The transition dialogues should look like this:
 
-For ??init??:
+For _init_:
 
 !images/025-SendingData09.png!
 
-For ??wait1??:
+For _wait1_:
 
 !images/025-SendingData10.png!
 
-For ??next??:
+For _next_:
 
 !images/025-SendingData11.png!
 
-For ??wait2??:
+For _wait2_:
 
 !images/025-SendingData12.png!
 
@@ -785,7 +785,7 @@ The model is finished now and can be found in /org.eclipse.etrice.tutorials/mode
 
 h2. Generate and run the model
 
-Generate the code by right click to ??gen_SendingData.launch?? and run it as ??gen_SendingData??. Run the model. 
+Generate the code by right click to _gen_SendingData.launch_ and run it as _gen_SendingData_. Run the model. 
 The output should look like this:
 
 bq.. 
@@ -840,12 +840,12 @@ bq.
 
 h2. Summary
 
-Within the first loop an integer value will be incremented by ??MrPong?? and sent back to ??MrPing??. As long as the guard is true ??MrPing?? sends back the value.
+Within the first loop an integer value will be incremented by _MrPong_ and sent back to _MrPing_. As long as the guard is true _MrPing_ sends back the value.
 
-Within the ??next?? transition, ??MrPing?? creates a data class and sends the default values. Then ??MrPing?? changes the values and sends the class again. At this point you should note that during the send operation, a copy of the data class will be created and sent. Otherwise it would not be possible to send the same object two times, even more it would not be possible to send a stack object at all. This type of data passing is called ??sending data by value??.
-However, for performance reasons some applications requires ??sending data by reference??. In this case the user is responsible for the life cycle of the object. In Java the VM takes care of the life cycle of an object. This is not the case for C/C++. Consider that a object which is created within a transition of a state machine will be destroyed when the transition is finished. The receiving FSM would receive an invalid reference. Therefore care must be taken when sending references.      
+Within the _next_ transition, _MrPing_ creates a data class and sends the default values. Then _MrPing_ changes the values and sends the class again. At this point you should note that during the send operation, a copy of the data class will be created and sent. Otherwise it would not be possible to send the same object two times, even more it would not be possible to send a stack object at all. This type of data passing is called _sending data by value_.
+However, for performance reasons some applications requires _sending data by reference_. In this case the user is responsible for the life cycle of the object. In Java the VM takes care of the life cycle of an object. This is not the case for C/C++. Consider that a object which is created within a transition of a state machine will be destroyed when the transition is finished. The receiving FSM would receive an invalid reference. Therefore care must be taken when sending references.      
 
-For sending data by reference you simply have to add the keyword ??ref?? to the protocol definition.
+For sending data by reference you simply have to add the keyword _ref_ to the protocol definition.
  
 bc. Message ping(data: DemoData ref)
 
@@ -859,11 +859,11 @@ The scope of this tutorial is to demonstrate how to receive model messages from 
 
 This tutorial is not like hello world or blinky. Being familiar with the basic tool features is mandatory for this tutorial. The goal is to understand the mechanism not to learn the tool features.
 
-The idea behind the exercise is, to control a Pedestrian crossing light. We will use the same GUI as for the blinky tutorial but now we will use the ??REQUEST?? button to start a FSM, which controls the traffic lights.
+The idea behind the exercise is, to control a Pedestrian crossing light. We will use the same GUI as for the blinky tutorial but now we will use the _REQUEST_ button to start a FSM, which controls the traffic lights.
 
 !images/020-Blinky08.png!
 
-The ??REQUEST?? must lead to a model message which starts the activity of the lights.
+The _REQUEST_ must lead to a model message which starts the activity of the lights.
 
 There are several possibilities to receive external events (e.g. TCP/UDP Socket, using OS messaging mechanism), but the easiest way is, to make a port usable from outside the model. To do that a few steps are necessary:
 # specify the messages (within a protocol) which should be sent into the model
@@ -874,8 +874,8 @@ There are several possibilities to receive external events (e.g. TCP/UDP Socket,
 
 h2. Setup the model
 
-* Use the ??New Model Wizzard?? to create a new eTrice project and name it ??PedLightsController??.
-* Copy the package ??org.eclipse.etrice.tutorials.PedLightGUI?? to your ??src?? directory (see blinky tutorial).
+* Use the _New Model Wizzard_ to create a new eTrice project and name it _PedLightsController_.
+* Copy the package _org.eclipse.etrice.tutorials.PedLightGUI_ to your _src_ directory (see blinky tutorial).
 * In PedestrianLightWndNoTcp.jav uncomment line 15 (import), 36, 122 (usage) and 132-134 (registration). The error markers will disappear after the code is generated from the model.
 * Copy the model from /org.eclipse.etrice.tutorials/model/PedLightsController to your model file, or run the model directly in the tutorial directory. 
 * Adapt the import statement to your path.
@@ -889,29 +889,29 @@ bq.
 * Arrange the Structure and the Statemachines to understand the model
 
 !images/030-PedLights01.png!
-The ??GuiAdapter?? represents the interface to the external code. It registers its ??ControlPort?? by the external code.
+The _GuiAdapter_ represents the interface to the external code. It registers its _ControlPort_ by the external code.
 
 !images/030-PedLights02.png!
 Visit the initial transition to understand the registration. The actor handles the incoming messages as usual and controls the traffic lights as known from blinky. 
 
 !images/030-PedLights03.png!
-The ??Controller?? receives the ??start?? message and controls the timing of the lights. Note that the ??start?? message will be sent from the external code whenever the ??REQUEST?? button is pressed.
+The _Controller_ receives the _start_ message and controls the timing of the lights. Note that the _start_ message will be sent from the external code whenever the _REQUEST_ button is pressed.
 
 *  Visit the model and take a closer look to the following elements:
 # PedControlProtocol => notice that the start message is defined as usual
-# Initial transition of the ??GuiAdapter?? => see the registration
-# The ??Controller?? => notice that the ??Controller?? receives the external message (not the ??GuiAdapter??). The ??GuiAdapter?? just provides its port and handles the incoming messages.
+# Initial transition of the _GuiAdapter_ => see the registration
+# The _Controller_ => notice that the _Controller_ receives the external message (not the _GuiAdapter_). The _GuiAdapter_ just provides its port and handles the incoming messages.
 # Visit the hand written code => see the import statement of the protocol class and the usage of the port.
 
 * Generate and test the model
-* Take a look at the generated MSC => notice that the start message will shown as if the ??GuiAdapter?? had sent it.
+* Take a look at the generated MSC => notice that the start message will shown as if the _GuiAdapter_ had sent it.
 
 !images/030-PedLights04.png!
 
 h2. Why does it work and why is it safe?
 
 The tutorial shows that it is generally possible to use every port from outside the model as long as the port knows its peer. This is guaranteed by describing protocol and the complete structure (especially the bindings) within the model. 
-The only remaining question is: Why is it safe and does not violate the "run to completion" semantic. To answer this question, take a look at the ??MessageService.java?? from the runtime environment. There you will find the receive method which puts each message into the queue. 
+The only remaining question is: Why is it safe and does not violate the *run to completion* semantic. To answer this question, take a look at the _MessageService.java_ from the runtime environment. There you will find the receive method which puts each message into the queue. 
 
 bc.. 
 	@Override
@@ -953,13 +953,33 @@ h4. Notation
 
 h4. Details
 
-h5.  Actor Classes and Actor References
+h5.  Actor Classes, Actor References, Ports and Bindings
 
-An ActorClass defines the type (or blueprint) of an actor. Hierarchies are built by ActorClasses that contain ActorReferences which have another ActorClass as type. The interface of an ActorClass is always defined by Ports.
+An *ActorClass* defines the type (or blueprint) of an actor. Hierarchies are built by ActorClasses that contain *ActorReferences* which have another ActorClass as type. The interface of an ActorClass is always defined by Ports.
 
-!images\040-ActorClass.png!
+*External Ports* define the external interface of an actor and are defined in the *Interface* section of the ActorClass.
 
-The Behavior of an actor is usually defined by a state machine but could also be defined by manual code or other implementations.
+*Internal Ports* define the internal interface of an actor and are defined in the *Structure* section of the ActorClass.
+
+*Bindings* connect Ports inside an ActorClass.
+
+Example:
+
+|*Graphical Notation*|*Textual Notation*|
+|!images\040-ActorClass.png!|!images\040-ActorClassExampleTextualNotation.png!|
+
+* _ActorClass1_ contains two ActorReferences
+* _port1_ is a *External End Port*. Since it connects external Actors with the behavior of the ActorClass, it is defined in the *Interface* section and the *Structure* section of the ActorClass.
+* _port2_ and _port3_ are *Internal End Ports* and can only be connected to the ports of contained ActorReferences. Internal End Ports connect the Behavior of an ActorClass with its contained ActorReferences.
+* _port4_ is a relay port and connects outside Actors to contained ActorReferences. This port can not be accessed by the behavior of the ActorClass.
+* *Bindings* can connect ports of the ActorClass and its contained ActorReferences. 
+
+h5.  Attributes
+
+h5.  Operations
+
+h5. Finite State Machine
+
 
 h3. Protocols
 
@@ -996,25 +1016,29 @@ h4. Notation
 
 h5. Class Ports
 
-These symbols can only appear on the border of an actor class symbol.
+These symbols can only appear on the border of an actor class symbol. 
+*Textual Notation:* 
+Ports that define an external interface of the ActorClass, are defined in the Interface (e.g. relay ports). Ports that define an internal interface are defined in the Structure (e.g. internal ports). An   
 
-|!images\040-ClassEndPort.png!|Class End Port|
-|!images\040-ConjugatedClassEndPort.png!|Conjugated Class End Port|
-|!images\040-ClassRelayPort.png!|Class Relay Port|
-|!images\040-ConjugatedClassRelayPort.png!|Conjugated Class Relay Port|
-|!images\040-ReplicatedClassEndPort.png!|Replicated Class End Port|
-|!images\040-ConjugatedReplicatedClassEndPort.png!|Conjugated Replicated Class End Port|
-|!images\040-ReplicatedClassRelayPort.png!|Replicated Class Relay Port|
-|!images\040-ConjugatedReplicatedClassRelayPort.png!|Conjugated Replicated Class Relay Port|
+|*Element*|*Graphical Notation*|*Textual Notation*|
+|Class End Port|!images\040-ClassEndPort.png!||
+|Conjugated Class End Port|!images\040-ConjugatedClassEndPort.png!||
+|Class Relay Port|!images\040-ClassRelayPort.png!||
+|Conjugated Class Relay Port|!images\040-ConjugatedClassRelayPort.png!||
+|Replicated Class End Port|!images\040-ReplicatedClassEndPort.png!||
+|Conjugated Replicated Class End Port|!images\040-ConjugatedReplicatedClassEndPort.png!||
+|Replicated Class Relay Port|!images\040-ReplicatedClassRelayPort.png!||
+|Conjugated Replicated Class Relay Port|!images\040-ConjugatedReplicatedClassRelayPort.png!||
 
 h5. Reference Ports
 
-These symbols can only appear on the border of an actor reference symbol.
+These symbols can only appear on the border of an ActorReference symbol. Since the type of port is defined in the ActorClass, no textual notation exists.
 
-|!images\040-ReferencePort.png!|Reference Port|
-|!images\040-ConjugatedReferencePort.png!|Conjugated Reference Port|
-|!images\040-ReplicatedReferencePort.png!|Replicated Reference Port|
-|!images\040-ConjugatedReplicatedReferencePort.png!|Conjugated Replicated Reference Port|
+|*Element*|*Graphical Notation*|*Textual Notation*|
+|Reference Port|!images\040-ReferencePort.png!| _implicit_ |
+|Conjugated Reference Port|!images\040-ConjugatedReferencePort.png!| _implicit_ |
+|Replicated Reference Port|!images\040-ReplicatedReferencePort.png!| _implicit_ |
+|Conjugated Replicated Reference Port|!images\040-ConjugatedReplicatedReferencePort.png!| _implicit_ |
 
 
 

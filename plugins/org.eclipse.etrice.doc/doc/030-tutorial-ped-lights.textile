@@ -6,11 +6,11 @@ The scope of this tutorial is to demonstrate how to receive model messages from 
 
 This tutorial is not like hello world or blinky. Being familiar with the basic tool features is mandatory for this tutorial. The goal is to understand the mechanism not to learn the tool features.
 
-The idea behind the exercise is, to control a Pedestrian crossing light. We will use the same GUI as for the blinky tutorial but now we will use the ??REQUEST?? button to start a FSM, which controls the traffic lights.
+The idea behind the exercise is, to control a Pedestrian crossing light. We will use the same GUI as for the blinky tutorial but now we will use the _REQUEST_ button to start a FSM, which controls the traffic lights.
 
 !images/020-Blinky08.png!
 
-The ??REQUEST?? must lead to a model message which starts the activity of the lights.
+The _REQUEST_ must lead to a model message which starts the activity of the lights.
 
 There are several possibilities to receive external events (e.g. TCP/UDP Socket, using OS messaging mechanism), but the easiest way is, to make a port usable from outside the model. To do that a few steps are necessary:
 # specify the messages (within a protocol) which should be sent into the model
@@ -21,8 +21,8 @@ There are several possibilities to receive external events (e.g. TCP/UDP Socket,
 
 h2. Setup the model
 
-* Use the ??New Model Wizzard?? to create a new eTrice project and name it ??PedLightsController??.
-* Copy the package ??org.eclipse.etrice.tutorials.PedLightGUI?? to your ??src?? directory (see blinky tutorial).
+* Use the _New Model Wizzard_ to create a new eTrice project and name it _PedLightsController_.
+* Copy the package _org.eclipse.etrice.tutorials.PedLightGUI_ to your _src_ directory (see blinky tutorial).
 * In PedestrianLightWndNoTcp.jav uncomment line 15 (import), 36, 122 (usage) and 132-134 (registration). The error markers will disappear after the code is generated from the model.
 * Copy the model from /org.eclipse.etrice.tutorials/model/PedLightsController to your model file, or run the model directly in the tutorial directory. 
 * Adapt the import statement to your path.
@@ -36,29 +36,29 @@ bq.
 * Arrange the Structure and the Statemachines to understand the model
 
 !images/030-PedLights01.png!
-The ??GuiAdapter?? represents the interface to the external code. It registers its ??ControlPort?? by the external code.
+The _GuiAdapter_ represents the interface to the external code. It registers its _ControlPort_ by the external code.
 
 !images/030-PedLights02.png!
 Visit the initial transition to understand the registration. The actor handles the incoming messages as usual and controls the traffic lights as known from blinky. 
 
 !images/030-PedLights03.png!
-The ??Controller?? receives the ??start?? message and controls the timing of the lights. Note that the ??start?? message will be sent from the external code whenever the ??REQUEST?? button is pressed.
+The _Controller_ receives the _start_ message and controls the timing of the lights. Note that the _start_ message will be sent from the external code whenever the _REQUEST_ button is pressed.
 
 *  Visit the model and take a closer look to the following elements:
 # PedControlProtocol => notice that the start message is defined as usual
-# Initial transition of the ??GuiAdapter?? => see the registration
-# The ??Controller?? => notice that the ??Controller?? receives the external message (not the ??GuiAdapter??). The ??GuiAdapter?? just provides its port and handles the incoming messages.
+# Initial transition of the _GuiAdapter_ => see the registration
+# The _Controller_ => notice that the _Controller_ receives the external message (not the _GuiAdapter_). The _GuiAdapter_ just provides its port and handles the incoming messages.
 # Visit the hand written code => see the import statement of the protocol class and the usage of the port.
 
 * Generate and test the model
-* Take a look at the generated MSC => notice that the start message will shown as if the ??GuiAdapter?? had sent it.
+* Take a look at the generated MSC => notice that the start message will shown as if the _GuiAdapter_ had sent it.
 
 !images/030-PedLights04.png!
 
 h2. Why does it work and why is it safe?
 
 The tutorial shows that it is generally possible to use every port from outside the model as long as the port knows its peer. This is guaranteed by describing protocol and the complete structure (especially the bindings) within the model. 
-The only remaining question is: Why is it safe and does not violate the "run to completion" semantic. To answer this question, take a look at the ??MessageService.java?? from the runtime environment. There you will find the receive method which puts each message into the queue. 
+The only remaining question is: Why is it safe and does not violate the *run to completion* semantic. To answer this question, take a look at the _MessageService.java_ from the runtime environment. There you will find the receive method which puts each message into the queue. 
 
 bc.. 
 	@Override

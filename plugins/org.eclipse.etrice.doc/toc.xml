@@ -74,7 +74,10 @@
 <topic href="help/ROOMConcepts.html#Motivation" label="Motivation"></topic>
 <topic href="help/ROOMConcepts.html#Notation" label="Notation"></topic>
 <topic href="help/ROOMConcepts.html#Details" label="Details">
-<topic href="help/ROOMConcepts.html#ActorClassesandActorReferences" label="Actor Classes and Actor References"></topic>
+<topic href="help/ROOMConcepts.html#ActorClassesActorReferencesPortsandBindings" label="Actor Classes, Actor References, Ports and Bindings"></topic>
+<topic href="help/ROOMConcepts.html#Attributes" label="Attributes"></topic>
+<topic href="help/ROOMConcepts.html#Operations" label="Operations"></topic>
+<topic href="help/ROOMConcepts.html#FiniteStateMachine" label="Finite State Machine"></topic>
 </topic>
 </topic>
 <topic href="help/ROOMConcepts.html#Protocols" label="Protocols">
