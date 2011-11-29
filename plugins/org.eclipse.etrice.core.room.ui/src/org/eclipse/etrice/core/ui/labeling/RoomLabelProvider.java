@@ -62,7 +62,7 @@ public class RoomLabelProvider extends DefaultEObjectLabelProvider {
 	public RoomLabelProvider(AdapterFactoryLabelProvider delegate) {
 		super(delegate);
 		
-		JFaceResources.getColorRegistry().put(KEYWORD_COLOR, new RGB(180, 180, 180));
+		JFaceResources.getColorRegistry().put(KEYWORD_COLOR, new RGB(50, 50, 50));
 	}
 
 	// custom images for ROOM classes
