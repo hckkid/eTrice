@@ -14,6 +14,7 @@ package org.eclipse.etrice.ui.behavior.support;
 
 import java.util.List;
 
+import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.etrice.core.naming.RoomNameProvider;
@@ -536,7 +537,7 @@ public class TrPointSupport {
 				Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 				TrPointPropertyDialog dlg = new TrPointPropertyDialog(shell, tp, subtp);
 				if (dlg.open()!=Window.OK)
-					return;
+					throw new OperationCanceledException();
 
 				doneChanges = true;
 				String kind = getItemKind(tp);

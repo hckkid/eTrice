@@ -12,6 +12,7 @@
 
 package org.eclipse.etrice.ui.structure.support;
 
+import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.etrice.core.validation.ValidationUtil;
 import org.eclipse.etrice.ui.structure.DiagramTypeProvider;
 import org.eclipse.etrice.ui.structure.ImageProvider;
@@ -203,7 +204,7 @@ public class PortSupport extends InterfaceItemSupport {
 			        Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 			        PortPropertyDialog dlg = new PortPropertyDialog(shell, port, scope, acc, false, refport, internal);
 					if (dlg.open()!=Window.OK)
-						return;
+						throw new OperationCanceledException();
 
 					doneChanges  = true;
 					updatePortFigure(port, context.getPictogramElements()[0], manageColor(DARK_COLOR), manageColor(BRIGHT_COLOR));

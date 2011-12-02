@@ -14,6 +14,7 @@ package org.eclipse.etrice.ui.structure.support;
 
 import java.util.List;
 
+import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -390,7 +391,7 @@ public class ActorContainerRefSupport {
 		        Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 				ActorContainerRefPropertyDialog dlg = new ActorContainerRefPropertyDialog(shell, acr, scope, sc, false);
 				if (dlg.open()!=Window.OK)
-					return;
+					throw new OperationCanceledException();
 				
 				doneChanges   = true;
 				updateLabel(acr, context.getPictogramElements()[0]);

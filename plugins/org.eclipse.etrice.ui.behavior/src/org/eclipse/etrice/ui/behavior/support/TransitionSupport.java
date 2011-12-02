@@ -12,6 +12,7 @@
 
 package org.eclipse.etrice.ui.behavior.support;
 
+import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.etrice.core.naming.RoomNameProvider;
@@ -584,7 +585,7 @@ public class TransitionSupport {
 				Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 				TransitionPropertyDialog dlg = new TransitionPropertyDialog(shell, sg, trans);
 				if (dlg.open()!=Window.OK)
-					return;
+					throw new OperationCanceledException();
 
 				doneChanges = true;
 				

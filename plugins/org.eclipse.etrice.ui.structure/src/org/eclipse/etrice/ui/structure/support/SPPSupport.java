@@ -12,6 +12,7 @@
 
 package org.eclipse.etrice.ui.structure.support;
 
+import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.etrice.core.validation.ValidationUtil;
 import org.eclipse.etrice.ui.common.support.NoResizeFeature;
 import org.eclipse.etrice.ui.structure.DiagramTypeProvider;
@@ -165,7 +166,7 @@ public class SPPSupport extends InterfaceItemSupport {
 		        Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 				SPPPropertyDialog dlg = new SPPPropertyDialog(shell, spp, scope, acc, false, refport);
 				if (dlg.open()!=Window.OK)
-					return;
+					throw new OperationCanceledException();
 				
 				doneChanges = true;
 				updateSPPFigure(spp, context.getPictogramElements()[0], manageColor(DARK_COLOR), manageColor(BRIGHT_COLOR));
