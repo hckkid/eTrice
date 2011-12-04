@@ -157,8 +157,30 @@
 			<title>Basic Concepts</title>
 			<section id="ActorPortProtocol">
 				<title>Actor, Port, Protocol</title>
-				<para>TODO: Screenshot of Actor with Port and another with a Protocol</para>
 				<para>The basic elements of ROOM are the actors with their ports and protocols. The protocol provides a formal interface description. The port is an interaction point where the actor interacts with its outside world. Each port has exactly one protocol attached. The sum of all ports builds up the complete interface of an actor. Each port can receive messages, with or without data, which are defined in the attached protocol. Each message will be handled by the actors behavior (state machine) or will be delegated to the actors internal structure.</para>
+				<para><table title="Actor and Protocol Example">
+						<tr>
+							<td>
+					<mediaobject>
+						<imageobject>
+							<imagedata fileref="images\040-ActorClass.png"/>
+						</imageobject>
+					</mediaobject></td>
+							<td>
+					<mediaobject>
+						<imageobject>
+							<imagedata fileref="images\040-ProtocolClassTextualNotation.png"/>
+						</imageobject>
+					</mediaobject></td>
+						</tr>
+						<tr>
+							<td align="center">
+					<emphasis role="bold">Actor with Subactors</emphasis></td>
+							<td align="center">
+					<emphasis role="bold">Protocol Definition</emphasis></td>
+						</tr>
+</table>
+				</para>
 				<para>The actor provides access protection for its own attributes (including complex types (classical objects)), including concurrency protection. An actor has neither public attributes nor public operations. The only interaction with the outside world takes place via interface ports. This ensures a high degree of reusability on actor level and provides an effective and safe programming model to the developer. </para>
 				<para>Receiving a message via a port will trigger the internal state machine. A transition will be executed depending on the message and the current state. Within this transition, detail level code will be executed and response messages can be sent.</para>
 				<para>
@@ -202,9 +224,21 @@
 					<emphasis role="bold">SAP</emphasis>) and Service Provision Points (
 					<emphasis role="bold">SPP</emphasis>).
 				</para>
-				<para>TODO: Screenshot of Timing Service</para>
-				<para>The Actor that provides a service implements an SPP and the client of that service implements an SAP. The Layer Connection connects all SAPs of a specific Protocol within an Actor hierarchy with an SPP that implements the service.</para>
-				<para>From the Actors point of view, SAP and SPP behave almost like regular ports.</para>
+				<para>The Actor that provides a service implements an SPP and the client of that service implements an SAP. The Layer Connection connects all SAPs of a specific Protocol within an Actor hierarchy with an SPP that implements the service. From the Actors point of view, SAPs and SPPs behave almost like regular ports.</para>
+				<para>
+					<mediaobject>
+						<imageobject>
+							<imagedata fileref="images\010-LayerExample.png"/>
+						</imageobject>
+					</mediaobject>
+				</para>
+				<para>The Example shows a layered model. The Layer Connections define e.g. that the 
+					<emphasis>ApplicationLayer</emphasis> can only use the services of the 
+					<emphasis>ServiceLayer</emphasis> and the 
+					<emphasis>CommunicationLayer</emphasis>. Actors inside the 
+					<emphasis>ApplicationLayer</emphasis> that implement an SAP for those services are connected directly to the implementation of the services. 
+					Layering and actor hierarchies with port to port connections can be mixed on every level of granularity. 
+				</para>
 			</section>
 			<section id="RuntoCompletion">
 				<title>Run to Completion</title>
@@ -269,7 +303,7 @@
 			</section>
 			<section id="ExecutionModels2">
 				<title>Execution Models</title>
-				<para>In todays software systems in most cases one or several of the following execution models are used:</para>
+				<para>In todays embedded systems in most cases one or several of the following execution models are used:</para>
 				<section id="messagedriven">
 					<title>message driven</title>
 					<para>The message driven execution model is a combination of message driven communication and execution by receive event.
@@ -2019,6 +2053,110 @@ carLights.setState(TrafficLight3.OFF);
 						</imageobject>
 					</mediaobject>
 				</para>
+			</section>
+		</section>
+		<section id="Layering2">
+			<title>Layering</title>
+			<section id="Description5">
+				<title>Description</title>
+				<para>In addition to the Actor containment hierarchies, Layering provides another method to hierarchically structure a software system. Layering and actor hierarchies with port to port connections can be mixed on every level of granularity.</para>
+				<orderedlist>
+					<listitem>
+						<para>an ActorClass can define a Service Provision Point (SPP) to publish a specific service, defined by a ProtocolClass</para>
+					</listitem>
+					<listitem>
+						<para>an ActorClass can define a Service Access Point (SAP) if it needs a service, defined by a ProtocolClass</para>
+					</listitem>
+					<listitem>
+						<para>for a given Actor hierarchy, a LayerConnection defines which SAP will be satisfied by (connected to) which SPP</para>
+					</listitem>
+				</orderedlist>
+			</section>
+			<section id="Notation5">
+				<title>Notation</title>
+				<para><table title="Title" frame="box" border="1">
+						<tr>
+							<td align="center">
+					<emphasis role="bold">Description</emphasis></td>
+							<td align="center">
+					<emphasis role="bold">Graphical Notation</emphasis></td>
+							<td align="center">
+					<emphasis role="bold">Textual Notation</emphasis></td>
+						</tr>
+						<tr>
+							<td>The Layer Connections in this model define which services are provided by the 
+					<emphasis>ServiceLayer</emphasis>  (
+					<emphasis>digitalIO</emphasis> and 
+					<emphasis>timer</emphasis>)</td>
+							<td>
+					<mediaobject>
+						<imageobject>
+							<imagedata fileref="images\040-LayeringModel.png"/>
+						</imageobject>
+					</mediaobject></td>
+							<td>
+					<mediaobject>
+						<imageobject>
+							<imagedata fileref="images\040-LayeringModelTextual.png"/>
+						</imageobject>
+					</mediaobject></td>
+						</tr>
+						<tr>
+							<td>The implementation of the services (SPPs) can be delegated to sub actors. In this case the actor 
+					<emphasis>ServiceLayer</emphasis> relays (delegates) the implementation services 
+					<emphasis>digitalIO</emphasis> and 
+					<emphasis>timer</emphasis> to sub actors</td>
+							<td>
+					<mediaobject>
+						<imageobject>
+							<imagedata fileref="images\040-LayeringServiceLayer.png"/>
+						</imageobject>
+					</mediaobject></td>
+							<td>
+					<mediaobject>
+						<imageobject>
+							<imagedata fileref="images\040-LayeringServiceLayerTextual.png"/>
+						</imageobject>
+					</mediaobject></td>
+						</tr>
+						<tr>
+							<td>Every Actor inside the 
+					<emphasis>ApplicationLayer</emphasis> that contains an SAP with the same Protocol as 
+					<emphasis>timer</emphasis> or 
+					<emphasis>digitalIO</emphasis> will be connected to the specified SPP</td>
+							<td>
+					<mediaobject>
+						<imageobject>
+							<imagedata fileref="images\040-LayeringApplicationLayer.png"/>
+						</imageobject>
+					</mediaobject></td>
+							<td>
+					<mediaobject>
+						<imageobject>
+							<imagedata fileref="images\040-LayeringApplicationLayerTextual.png"/>
+						</imageobject>
+					</mediaobject></td>
+						</tr>
+</table>
+				</para>
+			</section>
+		</section>
+		<section id="FiniteStateMachine2">
+			<title>Finite State Machine</title>
+			<section id="Description6">
+				<title>Description</title>
+			</section>
+			<section id="Motivation4">
+				<title>Motivation</title>
+			</section>
+			<section id="Notation6">
+				<title>Notation</title>
+			</section>
+			<section id="Examples">
+				<title>Examples</title>
+			</section>
+			<section id="Details2">
+				<title>Details</title>
 			</section>
 		</section>
 	</chapter>

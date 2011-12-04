@@ -29,9 +29,15 @@ RoomModel Actor {
 	ActorClass ActorClass2 {
 		Interface {
 			Port port5: ProtocolClass1
+			conjugated Port port8: ProtocolClass1
+			Port port9: ProtocolClass1
+			Port port10: ProtocolClass1
 		}
 		Structure {
 			external Port port5
+			external Port port8
+			external Port port9
+			external Port port10
 		}
 		Behavior { }
 	}
@@ -40,10 +46,12 @@ RoomModel Actor {
 		Interface {
 			Port port6: ProtocolClass1
 			Port port7: ProtocolClass1
+			Port port9: ProtocolClass1
 		}
 		Structure {
 			external Port port6
 			external Port port7
+			external Port port9
 		}
 		Behavior { }
 	}

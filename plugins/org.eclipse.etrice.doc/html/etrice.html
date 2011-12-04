@@ -182,6 +182,12 @@
 <dt>
 <span class="section"><a href="#DataClass">DataClass</a></span>
 </dt>
+<dt>
+<span class="section"><a href="#Layering2">Layering</a></span>
+</dt>
+<dt>
+<span class="section"><a href="#FiniteStateMachine2">Finite State Machine</a></span>
+</dt>
 </dl>
 </dd>
 </dl>
@@ -191,13 +197,17 @@
 <b>List of Tables</b>
 </p>
 <dl>
-<dt>8.1. <a href="#N1084C"></a>
+<dt>2.1. <a href="#N100E7"></a>
 </dt>
-<dt>8.2. <a href="#N108CF"></a>
+<dt>8.1. <a href="#N10887"></a>
 </dt>
-<dt>8.3. <a href="#N1099B"></a>
+<dt>8.2. <a href="#N1090A"></a>
 </dt>
-<dt>8.4. <a href="#N10A6C"></a>
+<dt>8.3. <a href="#N109D6"></a>
+</dt>
+<dt>8.4. <a href="#N10AA7"></a>
+</dt>
+<dt>8.5. <a href="#N10B68"></a>
 </dt>
 </dl>
 </div>
@@ -464,8 +474,34 @@
 </div>
 </div>
 </div>
-<p>TODO: Screenshot of Actor with Port and another with a Protocol</p>
 <p>The basic elements of ROOM are the actors with their ports and protocols. The protocol provides a formal interface description. The port is an interaction point where the actor interacts with its outside world. Each port has exactly one protocol attached. The sum of all ports builds up the complete interface of an actor. Each port can receive messages, with or without data, which are defined in the attached protocol. Each message will be handled by the actors behavior (state machine) or will be delegated to the actors internal structure.</p>
+<table title="Actor and Protocol Example" id="N100E7">
+<tr>
+							
+<td>
+					
+<div class="mediaobject">
+<img src="images\040-ActorClass.png"></div>
+</td>
+							<td>
+					
+<div class="mediaobject">
+<img src="images\040-ProtocolClassTextualNotation.png"></div>
+</td>
+						
+</tr>
+<tr>
+							
+<td align="center">
+					<span class="bold"><strong>Actor with Subactors</strong></span></td>
+							<td align="center">
+					<span class="bold"><strong>Protocol Definition</strong></span></td>
+						
+</tr>
+</table>
+<p>
+				
+</p>
 <p>The actor provides access protection for its own attributes (including complex types (classical objects)), including concurrency protection. An actor has neither public attributes nor public operations. The only interaction with the outside world takes place via interface ports. This ensures a high degree of reusability on actor level and provides an effective and safe programming model to the developer. </p>
 <p>Receiving a message via a port will trigger the internal state machine. A transition will be executed depending on the message and the current state. Within this transition, detail level code will be executed and response messages can be sent.</p>
 <p>
@@ -526,9 +562,22 @@
 					<span class="bold"><strong>SAP</strong></span>) and Service Provision Points (
 					<span class="bold"><strong>SPP</strong></span>).
 				</p>
-<p>TODO: Screenshot of Timing Service</p>
-<p>The Actor that provides a service implements an SPP and the client of that service implements an SAP. The Layer Connection connects all SAPs of a specific Protocol within an Actor hierarchy with an SPP that implements the service.</p>
-<p>From the Actors point of view, SAP and SPP behave almost like regular ports.</p>
+<p>The Actor that provides a service implements an SPP and the client of that service implements an SAP. The Layer Connection connects all SAPs of a specific Protocol within an Actor hierarchy with an SPP that implements the service. From the Actors point of view, SAPs and SPPs behave almost like regular ports.</p>
+<p>
+					
+</p>
+<div class="mediaobject">
+<img src="images\010-LayerExample.png"></div>
+<p>
+				
+</p>
+<p>The Example shows a layered model. The Layer Connections define e.g. that the 
+					<span class="emphasis"><em>ApplicationLayer</em></span> can only use the services of the 
+					<span class="emphasis"><em>ServiceLayer</em></span> and the 
+					<span class="emphasis"><em>CommunicationLayer</em></span>. Actors inside the 
+					<span class="emphasis"><em>ApplicationLayer</em></span> that implement an SAP for those services are connected directly to the implementation of the services. 
+					Layering and actor hierarchies with port to port connections can be mixed on every level of granularity. 
+				</p>
 </div>
 <div class="section" title="Run to Completion">
 <div class="titlepage">
@@ -639,7 +688,7 @@
 </div>
 </div>
 </div>
-<p>In todays software systems in most cases one or several of the following execution models are used:</p>
+<p>In todays embedded systems in most cases one or several of the following execution models are used:</p>
 <div class="section" title="message driven">
 <div class="titlepage">
 <div>
@@ -2515,7 +2564,7 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 </div>
 </div>
 </div>
-<table title="Actor Class Notation" frame="box" border="1" id="N1084C">
+<table title="Actor Class Notation" frame="box" border="1" id="N10887">
 <tr>
 							
 <td align="center">
@@ -2598,7 +2647,7 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 <span class="bold"><strong>Bindings</strong></span> connect Ports inside an ActorClass.
 					</p>
 <p>Example:</p>
-<table title="Actor Class Example" frame="box" border="1" id="N108CF">
+<table title="Actor Class Example" frame="box" border="1" id="N1090A">
 <tr>
 								
 <td align="center">
@@ -2845,7 +2894,7 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 						<span class="bold"><strong>Textual Notation:</strong></span> 
 						Ports that define an external interface of the ActorClass, are defined in the Interface (e.g. relay ports). Ports that define an internal interface are defined in the Structure (e.g. internal ports).
 					</p>
-<table title="Class Port Notation" frame="box" border="1" id="N1099B">
+<table title="Class Port Notation" frame="box" border="1" id="N109D6">
 <tr>
 								
 <td align="center">
@@ -2959,7 +3008,7 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 </div>
 </div>
 <p>These symbols can only appear on the border of an ActorReference symbol. Since the type of port is defined in the ActorClass, no textual notation for the Reference Ports exists.</p>
-<table title="Title" frame="box" border="1" id="N10A6C">
+<table title="Title" frame="box" border="1" id="N10AA7">
 <tr>
 								
 <td align="center">
@@ -3072,6 +3121,179 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 <p>
 				
 </p>
+</div>
+</div>
+<div class="section" title="Layering">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both">
+<a name="Layering2"></a>Layering</h2>
+</div>
+</div>
+</div>
+<div class="section" title="Description">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="Description5"></a>Description</h3>
+</div>
+</div>
+</div>
+<p>In addition to the Actor containment hierarchies, Layering provides another method to hierarchically structure a software system. Layering and actor hierarchies with port to port connections can be mixed on every level of granularity.</p>
+<div class="orderedlist">
+<ol class="orderedlist" type="1">
+<li class="listitem">
+<p>an ActorClass can define a Service Provision Point (SPP) to publish a specific service, defined by a ProtocolClass</p>
+</li>
+<li class="listitem">
+<p>an ActorClass can define a Service Access Point (SAP) if it needs a service, defined by a ProtocolClass</p>
+</li>
+<li class="listitem">
+<p>for a given Actor hierarchy, a LayerConnection defines which SAP will be satisfied by (connected to) which SPP</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="section" title="Notation">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="Notation5"></a>Notation</h3>
+</div>
+</div>
+</div>
+<table title="Title" frame="box" border="1" id="N10B68">
+<tr>
+							
+<td align="center">
+					<span class="bold"><strong>Description</strong></span></td>
+							<td align="center">
+					<span class="bold"><strong>Graphical Notation</strong></span></td>
+							<td align="center">
+					<span class="bold"><strong>Textual Notation</strong></span></td>
+						
+</tr>
+<tr>
+							
+<td>The Layer Connections in this model define which services are provided by the 
+					<span class="emphasis"><em>ServiceLayer</em></span>  (
+					<span class="emphasis"><em>digitalIO</em></span> and 
+					<span class="emphasis"><em>timer</em></span>)</td>
+							<td>
+					
+<div class="mediaobject">
+<img src="images\040-LayeringModel.png"></div>
+</td>
+							<td>
+					
+<div class="mediaobject">
+<img src="images\040-LayeringModelTextual.png"></div>
+</td>
+						
+</tr>
+<tr>
+							
+<td>The implementation of the services (SPPs) can be delegated to sub actors. In this case the actor 
+					<span class="emphasis"><em>ServiceLayer</em></span> relays (delegates) the implementation services 
+					<span class="emphasis"><em>digitalIO</em></span> and 
+					<span class="emphasis"><em>timer</em></span> to sub actors</td>
+							<td>
+					
+<div class="mediaobject">
+<img src="images\040-LayeringServiceLayer.png"></div>
+</td>
+							<td>
+					
+<div class="mediaobject">
+<img src="images\040-LayeringServiceLayerTextual.png"></div>
+</td>
+						
+</tr>
+<tr>
+							
+<td>Every Actor inside the 
+					<span class="emphasis"><em>ApplicationLayer</em></span> that contains an SAP with the same Protocol as 
+					<span class="emphasis"><em>timer</em></span> or 
+					<span class="emphasis"><em>digitalIO</em></span> will be connected to the specified SPP</td>
+							<td>
+					
+<div class="mediaobject">
+<img src="images\040-LayeringApplicationLayer.png"></div>
+</td>
+							<td>
+					
+<div class="mediaobject">
+<img src="images\040-LayeringApplicationLayerTextual.png"></div>
+</td>
+						
+</tr>
+</table>
+<p>
+				
+</p>
+</div>
+</div>
+<div class="section" title="Finite State Machine">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both">
+<a name="FiniteStateMachine2"></a>Finite State Machine</h2>
+</div>
+</div>
+</div>
+<div class="section" title="Description">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="Description6"></a>Description</h3>
+</div>
+</div>
+</div>
+</div>
+<div class="section" title="Motivation">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="Motivation4"></a>Motivation</h3>
+</div>
+</div>
+</div>
+</div>
+<div class="section" title="Notation">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="Notation6"></a>Notation</h3>
+</div>
+</div>
+</div>
+</div>
+<div class="section" title="Examples">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="Examples"></a>Examples</h3>
+</div>
+</div>
+</div>
+</div>
+<div class="section" title="Details">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="Details2"></a>Details</h3>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>

@@ -29,8 +29,34 @@
 </div>
 </div>
 </div>
-<p>TODO: Screenshot of Actor with Port and another with a Protocol</p>
 <p>The basic elements of ROOM are the actors with their ports and protocols. The protocol provides a formal interface description. The port is an interaction point where the actor interacts with its outside world. Each port has exactly one protocol attached. The sum of all ports builds up the complete interface of an actor. Each port can receive messages, with or without data, which are defined in the attached protocol. Each message will be handled by the actors behavior (state machine) or will be delegated to the actors internal structure.</p>
+<table title="Actor and Protocol Example" id="N100E7">
+<tr>
+							
+<td>
+					
+<div class="mediaobject">
+<img src="images\040-ActorClass.png"></div>
+</td>
+							<td>
+					
+<div class="mediaobject">
+<img src="images\040-ProtocolClassTextualNotation.png"></div>
+</td>
+						
+</tr>
+<tr>
+							
+<td align="center">
+					<span class="bold"><strong>Actor with Subactors</strong></span></td>
+							<td align="center">
+					<span class="bold"><strong>Protocol Definition</strong></span></td>
+						
+</tr>
+</table>
+<p>
+				
+</p>
 <p>The actor provides access protection for its own attributes (including complex types (classical objects)), including concurrency protection. An actor has neither public attributes nor public operations. The only interaction with the outside world takes place via interface ports. This ensures a high degree of reusability on actor level and provides an effective and safe programming model to the developer. </p>
 <p>Receiving a message via a port will trigger the internal state machine. A transition will be executed depending on the message and the current state. Within this transition, detail level code will be executed and response messages can be sent.</p>
 <p>
@@ -91,9 +117,22 @@
 					<span class="bold"><strong>SAP</strong></span>) and Service Provision Points (
 					<span class="bold"><strong>SPP</strong></span>).
 				</p>
-<p>TODO: Screenshot of Timing Service</p>
-<p>The Actor that provides a service implements an SPP and the client of that service implements an SAP. The Layer Connection connects all SAPs of a specific Protocol within an Actor hierarchy with an SPP that implements the service.</p>
-<p>From the Actors point of view, SAP and SPP behave almost like regular ports.</p>
+<p>The Actor that provides a service implements an SPP and the client of that service implements an SAP. The Layer Connection connects all SAPs of a specific Protocol within an Actor hierarchy with an SPP that implements the service. From the Actors point of view, SAPs and SPPs behave almost like regular ports.</p>
+<p>
+					
+</p>
+<div class="mediaobject">
+<img src="images\010-LayerExample.png"></div>
+<p>
+				
+</p>
+<p>The Example shows a layered model. The Layer Connections define e.g. that the 
+					<span class="emphasis"><em>ApplicationLayer</em></span> can only use the services of the 
+					<span class="emphasis"><em>ServiceLayer</em></span> and the 
+					<span class="emphasis"><em>CommunicationLayer</em></span>. Actors inside the 
+					<span class="emphasis"><em>ApplicationLayer</em></span> that implement an SAP for those services are connected directly to the implementation of the services. 
+					Layering and actor hierarchies with port to port connections can be mixed on every level of granularity. 
+				</p>
 </div>
 <div class="section" title="Run to Completion">
 <div class="titlepage">

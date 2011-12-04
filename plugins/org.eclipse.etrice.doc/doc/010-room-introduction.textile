@@ -73,9 +73,18 @@ h2. Basic Concepts
 
 h3. Actor, Port, Protocol
 
-TODO: Screenshot of Actor with Port and another with a Protocol
-
 The basic elements of ROOM are the actors with their ports and protocols. The protocol provides a formal interface description. The port is an interaction point where the actor interacts with its outside world. Each port has exactly one protocol attached. The sum of all ports builds up the complete interface of an actor. Each port can receive messages, with or without data, which are defined in the attached protocol. Each message will be handled by the actors behavior (state machine) or will be delegated to the actors internal structure.
+
+<table title="Actor and Protocol Example">
+	<tr>
+		<td>!images\040-ActorClass.png!</td>
+		<td>!images\040-ProtocolClassTextualNotation.png!</td>
+	</tr>
+	<tr>
+		<td align="center">*Actor with Subactors*</td>
+		<td align="center">*Protocol Definition*</td>
+	</tr>
+</table>
 
 The actor provides access protection for its own attributes (including complex types (classical objects)), including concurrency protection. An actor has neither public attributes nor public operations. The only interaction with the outside world takes place via interface ports. This ensures a high degree of reusability on actor level and provides an effective and safe programming model to the developer. 
 
@@ -109,11 +118,12 @@ h3. Layering
 Layering is another well known form of abstraction to reduce complexity in the structure of systems. ROOM is probably the only language that supports Layering directly as language feature.
 Layering can be expressed in ROOM by Actors with specialized Ports, called Service Access Points (*SAP*) and Service Provision Points (*SPP*).
 
-TODO: Screenshot of Timing Service
+The Actor that provides a service implements an SPP and the client of that service implements an SAP. The Layer Connection connects all SAPs of a specific Protocol within an Actor hierarchy with an SPP that implements the service. From the Actors point of view, SAPs and SPPs behave almost like regular ports.
 
-The Actor that provides a service implements an SPP and the client of that service implements an SAP. The Layer Connection connects all SAPs of a specific Protocol within an Actor hierarchy with an SPP that implements the service.
+!images\010-LayerExample.png!
 
-From the Actors point of view, SAP and SPP behave almost like regular ports.
+The Example shows a layered model. The Layer Connections define e.g. that the _ApplicationLayer_ can only use the services of the _ServiceLayer_ and the _CommunicationLayer_. Actors inside the _ApplicationLayer_ that implement an SAP for those services are connected directly to the implementation of the services. 
+Layering and actor hierarchies with port to port connections can be mixed on every level of granularity. 
 
 h3. Run to Completion
 
@@ -144,7 +154,7 @@ h3. Execution Methods
 
 h3. Execution Models
 
-In todays software systems in most cases one or several of the following execution models are used:
+In todays embedded systems in most cases one or several of the following execution models are used:
 
 h4. message driven
 

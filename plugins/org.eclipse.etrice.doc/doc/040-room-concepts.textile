@@ -221,3 +221,48 @@ Example: DataClass using other DataClasses:
 
 !images\040-DataClass2.png!
 
+h2. Layering
+
+h3. Description
+
+In addition to the Actor containment hierarchies, Layering provides another method to hierarchically structure a software system. Layering and actor hierarchies with port to port connections can be mixed on every level of granularity.
+# an ActorClass can define a Service Provision Point (SPP) to publish a specific service, defined by a ProtocolClass
+# an ActorClass can define a Service Access Point (SAP) if it needs a service, defined by a ProtocolClass
+# for a given Actor hierarchy, a LayerConnection defines which SAP will be satisfied by (connected to) which SPP
+
+h3. Notation
+
+<table title="Title" frame="box" border="1">
+	<tr>
+		<td align="center">*Description*</td>
+		<td align="center">*Graphical Notation*</td>
+		<td align="center">*Textual Notation*</td>
+	</tr>
+	<tr>
+		<td>The Layer Connections in this model define which services are provided by the _ServiceLayer_  (_digitalIO_ and _timer_)</td>
+		<td>!images\040-LayeringModel.png!</td>
+		<td>!images\040-LayeringModelTextual.png!</td>
+	</tr>
+	<tr>
+		<td>The implementation of the services (SPPs) can be delegated to sub actors. In this case the actor _ServiceLayer_ relays (delegates) the implementation services _digitalIO_ and _timer_ to sub actors</td>
+		<td>!images\040-LayeringServiceLayer.png!</td>
+		<td>!images\040-LayeringServiceLayerTextual.png!</td>
+	</tr>
+	<tr>
+		<td>Every Actor inside the _ApplicationLayer_ that contains an SAP with the same Protocol as _timer_ or _digitalIO_ will be connected to the specified SPP</td>
+		<td>!images\040-LayeringApplicationLayer.png!</td>
+		<td>!images\040-LayeringApplicationLayerTextual.png!</td>
+	</tr>
+</table>
+
+h2. Finite State Machine
+
+h3. Description
+
+h3. Motivation
+
+h3. Notation
+
+h3. Examples
+
+h3. Details
