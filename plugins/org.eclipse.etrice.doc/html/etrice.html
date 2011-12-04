@@ -186,7 +186,7 @@
 <span class="section"><a href="#Layering2">Layering</a></span>
 </dt>
 <dt>
-<span class="section"><a href="#FiniteStateMachine2">Finite State Machine</a></span>
+<span class="section"><a href="#FiniteStateMachine">Finite State Machine</a></span>
 </dt>
 </dl>
 </dd>
@@ -203,11 +203,11 @@
 </dt>
 <dt>8.2. <a href="#N1090A"></a>
 </dt>
-<dt>8.3. <a href="#N109D6"></a>
+<dt>8.3. <a href="#N109E1"></a>
 </dt>
-<dt>8.4. <a href="#N10AA7"></a>
+<dt>8.4. <a href="#N10AB2"></a>
 </dt>
-<dt>8.5. <a href="#N10B68"></a>
+<dt>8.5. <a href="#N10B73"></a>
 </dt>
 </dl>
 </div>
@@ -2679,7 +2679,7 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 <li class="listitem">
 <p>
 								
-<span class="emphasis"><em>ActorClass1</em></span> contains two ActorReferences
+<span class="emphasis"><em>ActorClass1</em></span> contains two ActorReferences (of ActorClass2 and ActorClass3)
 							</p>
 </li>
 <li class="listitem">
@@ -2703,6 +2703,15 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 <p>
 								
 <span class="emphasis"><em>port4</em></span> is a relay port and connects external Actors to contained ActorReferences. This port can not be accessed by the behavior of the ActorClass.
+							</p>
+</li>
+<li class="listitem">
+<p>
+								
+<span class="emphasis"><em>port5</em></span> through 
+								<span class="emphasis"><em>port9</em></span> are Ports of contained ActorReferences. 
+								<span class="emphasis"><em>port8</em></span> and 
+								<span class="emphasis"><em>port9</em></span> can communicate without interference with the containing ActorClass.
 							</p>
 </li>
 <li class="listitem">
@@ -2755,16 +2764,6 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 <p>
 					
 </p>
-</div>
-<div class="section" title="Finite State Machine">
-<div class="titlepage">
-<div>
-<div>
-<h4 class="title">
-<a name="FiniteStateMachine"></a>Finite State Machine</h4>
-</div>
-</div>
-</div>
 </div>
 </div>
 </div>
@@ -2894,7 +2893,7 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 						<span class="bold"><strong>Textual Notation:</strong></span> 
 						Ports that define an external interface of the ActorClass, are defined in the Interface (e.g. relay ports). Ports that define an internal interface are defined in the Structure (e.g. internal ports).
 					</p>
-<table title="Class Port Notation" frame="box" border="1" id="N109D6">
+<table title="Class Port Notation" frame="box" border="1" id="N109E1">
 <tr>
 								
 <td align="center">
@@ -3008,7 +3007,7 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 </div>
 </div>
 <p>These symbols can only appear on the border of an ActorReference symbol. Since the type of port is defined in the ActorClass, no textual notation for the Reference Ports exists.</p>
-<table title="Title" frame="box" border="1" id="N10AA7">
+<table title="Title" frame="box" border="1" id="N10AB2">
 <tr>
 								
 <td align="center">
@@ -3165,7 +3164,7 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 </div>
 </div>
 </div>
-<table title="Title" frame="box" border="1" id="N10B68">
+<table title="Title" frame="box" border="1" id="N10B73">
 <tr>
 							
 <td align="center">
@@ -3241,7 +3240,7 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 <div>
 <div>
 <h2 class="title" style="clear: both">
-<a name="FiniteStateMachine2"></a>Finite State Machine</h2>
+<a name="FiniteStateMachine"></a>Finite State Machine</h2>
 </div>
 </div>
 </div>

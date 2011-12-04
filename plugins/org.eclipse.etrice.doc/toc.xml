@@ -76,7 +76,6 @@
 <topic href="help/ROOMConcepts.html#ActorClassesActorReferencesPortsandBindings" label="Actor Classes, Actor References, Ports and Bindings"></topic>
 <topic href="help/ROOMConcepts.html#Attributes" label="Attributes"></topic>
 <topic href="help/ROOMConcepts.html#Operations" label="Operations"></topic>
-<topic href="help/ROOMConcepts.html#FiniteStateMachine" label="Finite State Machine"></topic>
 </topic>
 </topic>
 <topic href="help/Protocols.html" label="Protocols">
@@ -100,12 +99,12 @@
 <topic href="help/Layering2.html#Description5" label="Description"></topic>
 <topic href="help/Layering2.html#Notation5" label="Notation"></topic>
 </topic>
-<topic href="help/FiniteStateMachine2.html" label="Finite State Machine">
-<topic href="help/FiniteStateMachine2.html#Description6" label="Description"></topic>
-<topic href="help/FiniteStateMachine2.html#Motivation4" label="Motivation"></topic>
-<topic href="help/FiniteStateMachine2.html#Notation6" label="Notation"></topic>
-<topic href="help/FiniteStateMachine2.html#Examples" label="Examples"></topic>
-<topic href="help/FiniteStateMachine2.html#Details2" label="Details"></topic>
+<topic href="help/FiniteStateMachine.html" label="Finite State Machine">
+<topic href="help/FiniteStateMachine.html#Description6" label="Description"></topic>
+<topic href="help/FiniteStateMachine.html#Motivation4" label="Motivation"></topic>
+<topic href="help/FiniteStateMachine.html#Notation6" label="Notation"></topic>
+<topic href="help/FiniteStateMachine.html#Examples" label="Examples"></topic>
+<topic href="help/FiniteStateMachine.html#Details2" label="Details"></topic>
 </topic>
 </topic>
 </toc>

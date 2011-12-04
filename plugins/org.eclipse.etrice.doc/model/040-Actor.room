@@ -22,6 +22,7 @@ RoomModel Actor {
 			Binding port2 and ActorRef_A.port5
 			Binding port3 and ActorRef_B.port6
 			Binding ActorRef_B.port7 and port4
+			Binding ActorRef_A.port8 and ActorRef_B.port9
 		}
 		Behavior { }
 	}
@@ -30,14 +31,10 @@ RoomModel Actor {
 		Interface {
 			Port port5: ProtocolClass1
 			conjugated Port port8: ProtocolClass1
-			Port port9: ProtocolClass1
-			Port port10: ProtocolClass1
 		}
 		Structure {
 			external Port port5
 			external Port port8
-			external Port port9
-			external Port port10
 		}
 		Behavior { }
 	}

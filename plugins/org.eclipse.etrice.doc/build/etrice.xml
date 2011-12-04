@@ -1757,7 +1757,7 @@ carLights.setState(TrafficLight3.OFF);
 					<itemizedlist>
 						<listitem>
 							<para>
-								<emphasis>ActorClass1</emphasis> contains two ActorReferences
+								<emphasis>ActorClass1</emphasis> contains two ActorReferences (of ActorClass2 and ActorClass3)
 							</para>
 						</listitem>
 						<listitem>
@@ -1778,6 +1778,14 @@ carLights.setState(TrafficLight3.OFF);
 						<listitem>
 							<para>
 								<emphasis>port4</emphasis> is a relay port and connects external Actors to contained ActorReferences. This port can not be accessed by the behavior of the ActorClass.
+							</para>
+						</listitem>
+						<listitem>
+							<para>
+								<emphasis>port5</emphasis> through 
+								<emphasis>port9</emphasis> are Ports of contained ActorReferences. 
+								<emphasis>port8</emphasis> and 
+								<emphasis>port9</emphasis> can communicate without interference with the containing ActorClass.
 							</para>
 						</listitem>
 						<listitem>
@@ -1812,9 +1820,6 @@ carLights.setState(TrafficLight3.OFF);
 							</imageobject>
 						</mediaobject>
 					</para>
-				</section>
-				<section id="FiniteStateMachine">
-					<title>Finite State Machine</title>
 				</section>
 			</section>
 		</section>
@@ -2141,7 +2146,7 @@ carLights.setState(TrafficLight3.OFF);
 				</para>
 			</section>
 		</section>
-		<section id="FiniteStateMachine2">
+		<section id="FiniteStateMachine">
 			<title>Finite State Machine</title>
 			<section id="Description6">
 				<title>Description</title>

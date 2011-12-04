@@ -61,11 +61,11 @@ Example:
 	</tr>
 </table> 
 
-
-* _ActorClass1_ contains two ActorReferences
+* _ActorClass1_ contains two ActorReferences (of ActorClass2 and ActorClass3)
 * _port1_ is a *External End Port*. Since it connects external Actors with the behavior of the ActorClass, it is defined in the *Interface* section and the *Structure* section of the ActorClass.
 * _port2_ and _port3_ are *Internal End Ports* and can only be connected to the ports of contained ActorReferences. Internal End Ports connect the Behavior of an ActorClass with its contained ActorReferences.
 * _port4_ is a relay port and connects external Actors to contained ActorReferences. This port can not be accessed by the behavior of the ActorClass.
+* _port5_ through _port9_ are Ports of contained ActorReferences. _port8_ and _port9_ can communicate without interference with the containing ActorClass.
 * *Bindings* can connect ports of the ActorClass and its contained ActorReferences. 
 
 h4.  Attributes
@@ -83,8 +83,6 @@ Operations are part of the Behavior of an ActorClass.  Arguments and return valu
 Example:
 
 !images\040-ActorClassOperations.png!
-
-h4. Finite State Machine
 
 h2. Protocols
 
