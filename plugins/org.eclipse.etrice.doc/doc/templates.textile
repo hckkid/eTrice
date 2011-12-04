@@ -9,3 +9,18 @@ h4. Notation
 h4. Examples
 
 h4. Details
+
+
+
+<table title="Title" frame="box" border="1">
+	<tr>
+		<td align="center">*Element*</td>
+		<td align="center">*Graphical Notation*</td>
+		<td align="center">*Textual Notation*</td>
+	</tr>
+	<tr>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+<table>

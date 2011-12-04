@@ -162,7 +162,7 @@
 				<para>The actor provides access protection for its own attributes (including complex types (classical objects)), including concurrency protection. An actor has neither public attributes nor public operations. The only interaction with the outside world takes place via interface ports. This ensures a high degree of reusability on actor level and provides an effective and safe programming model to the developer. </para>
 				<para>Receiving a message via a port will trigger the internal state machine. A transition will be executed depending on the message and the current state. Within this transition, detail level code will be executed and response messages can be sent.</para>
 				<para>
-					<emphasis role="bold">video: receiving a message</emphasis>:http://eclipse.org/etrice/images/010-room-introduction01.avi
+					<ulink url="http://eclipse.org/etrice/images/010-room-introduction01.avi">video: receiving a message</ulink>
 				</para>
 				<para>With this model, a complex behavior can be divided into many relatively simple, linked actors. To put it the other way round: The complex behavior will be provided by a network of relatively simple components which are communicating with each other via well defined interfaces.</para>
 			</section>
@@ -415,7 +415,7 @@
 				<emphasis>Setting up the workspace</emphasis>.
 			</para>
 			<para>
-				<emphasis role="bold">video hello world:</emphasis> http://eclipse.org/etrice/images/015-HelloWorld01.avi
+				<ulink url="http://eclipse.org/etrice/images/015-HelloWorld01.avi">video hello world</ulink>
 			</para>
 		</section>
 		<section id="Createanewmodelfromscratch">
@@ -1606,393 +1606,419 @@ carLights.setState(TrafficLight3.OFF);
 	</chapter>
 	<chapter id="ROOMConcepts">
 		<title>ROOM Concepts</title>
-		<section id="MainConcepts">
-			<title>Main Concepts</title>
-			<section id="Actors">
-				<title>Actors</title>
-				<section id="Description">
-					<title>Description</title>
-					<para>The actor is the basic structural building block for building systems with ROOM. An actor can be refined hierarchically and thus can be of arbitrarily large scope. Ports define the interface of an actor. An Actor can also have a behavior usually defined by a finite state machine.</para>
-				</section>
-				<section id="Motivation">
-					<title>Motivation</title>
-					<itemizedlist>
-						<listitem>
-							<para>Actors enable the construction of hierarchical structures with composition and layering</para>
-						</listitem>
-						<listitem>
-							<para>Actors have their own logical thread of execution</para>
-						</listitem>
-						<listitem>
-							<para>Actors can be freely deployed</para>
-						</listitem>
-						<listitem>
-							<para>Actors define potentially reusable blocks</para>
-						</listitem>
-					</itemizedlist>
-				</section>
-				<section id="Notation">
-					<title>Notation</title>
-					<table cellspacing="2" frame="box" border="1">
+		<para>This chapter gives an overview over the ROOM language elements and their textual and graphical notation.
+			The formal ROOM grammar based on XText (EBNF) you can find here: 
+			<ulink url="http://git.eclipse.org/c/etrice/org.eclipse.etrice.git/tree/plugins/org.eclipse.etrice.core.room/src/org/eclipse/etrice/core/Room.xtext">ROOM Grammar</ulink>
+		</para>
+		<section id="Actors">
+			<title>Actors</title>
+			<section id="Description">
+				<title>Description</title>
+				<para>The actor is the basic structural building block for building systems with ROOM. An actor can be refined hierarchically and thus can be of arbitrarily large scope. Ports define the interface of an actor. An Actor can also have a behavior usually defined by a finite state machine.</para>
+			</section>
+			<section id="Motivation">
+				<title>Motivation</title>
+				<itemizedlist>
+					<listitem>
+						<para>Actors enable the construction of hierarchical structures with composition and layering</para>
+					</listitem>
+					<listitem>
+						<para>Actors have their own logical thread of execution</para>
+					</listitem>
+					<listitem>
+						<para>Actors can be freely deployed</para>
+					</listitem>
+					<listitem>
+						<para>Actors define potentially reusable blocks</para>
+					</listitem>
+				</itemizedlist>
+			</section>
+			<section id="Notation">
+				<title>Notation</title>
+				<para><table title="Actor Class Notation" frame="box" border="1">
 						<tr>
-							<td>
-								<emphasis role="bold">Element</emphasis>
-							</td>
-							<td>
-								<emphasis role="bold">Graphical Notation</emphasis>
-							</td>
-							<td>
-								<emphasis role="bold">Textual Notation</emphasis>
-							</td>
+							<td align="center">
+					<emphasis role="bold">Element</emphasis></td>
+							<td align="center">
+					<emphasis role="bold">Graphical Notation</emphasis></td>
+							<td align="center">
+					<emphasis role="bold">Textual Notation</emphasis></td>
 						</tr>
 						<tr>
 							<td>ActorClass</td>
 							<td>
-								<mediaobject>
-									<imageobject>
-										<imagedata fileref="images\040-ActorClassNotation.png"/>
-									</imageobject>
-								</mediaobject>
-							</td>
+					<mediaobject>
+						<imageobject>
+							<imagedata fileref="images\040-ActorClassNotation.png"/>
+						</imageobject>
+					</mediaobject></td>
 							<td>
-								<mediaobject>
-									<imageobject>
-										<imagedata fileref="images\040-ActorClassTextualNotation.png"/>
-									</imageobject>
-								</mediaobject>	
-							</td>
+					<mediaobject>
+						<imageobject>
+							<imagedata fileref="images\040-ActorClassTextualNotation.png"/>
+						</imageobject>
+					</mediaobject></td>
 						</tr>
 						<tr>
 							<td>ActorRef</td>
 							<td>
-								<mediaobject>
-									<imageobject>
-										<imagedata fileref="images\040-ActorReferenceNotation.png"/>
-									</imageobject>
-								</mediaobject>
-							</td>
+					<mediaobject>
+						<imageobject>
+							<imagedata fileref="images\040-ActorReferenceNotation.png"/>
+						</imageobject>
+					</mediaobject></td>
 							<td>
-								<mediaobject>
-									<imageobject>
-										<imagedata fileref="images\040-ActorReferenceTextualNotation.png"/>
-									</imageobject>
-								</mediaobject>
-							</td>
+					<mediaobject>
+						<imageobject>
+							<imagedata fileref="images\040-ActorReferenceTextualNotation.png"/>
+						</imageobject>
+					</mediaobject></td>
 						</tr>
-					</table>
-				</section>
-				<section id="Details">
-					<title>Details</title>
-					<section id="ActorClassesActorReferencesPortsandBindings">
-						<title>Actor Classes, Actor References, Ports and Bindings</title>
-						<para>An 
-							<emphasis role="bold">ActorClass</emphasis> defines the type (or blueprint) of an actor. Hierarchies are built by ActorClasses that contain 
-							<emphasis role="bold">ActorReferences</emphasis> which have another ActorClass as type. The interface of an ActorClass is always defined by Ports.
-						</para>
-						<para>
-							<emphasis role="bold">External Ports</emphasis> define the external interface of an actor and are defined in the 
-							<emphasis role="bold">Interface</emphasis> section of the ActorClass.
-						</para>
-						<para>
-							<emphasis role="bold">Internal Ports</emphasis> define the internal interface of an actor and are defined in the 
-							<emphasis role="bold">Structure</emphasis> section of the ActorClass.
-						</para>
-						<para>
-							<emphasis role="bold">Bindings</emphasis> connect Ports inside an ActorClass.
-						</para>
-						<para>Example:</para>
-						<table cellspacing="2" frame="box" border="1">
-							<tr>
-								<td>
-									<emphasis role="bold">Graphical Notation</emphasis>
-								</td>
-								<td>
-									<emphasis role="bold">Textual Notation</emphasis>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<mediaobject>
-										<imageobject>
-											<imagedata fileref="images\040-ActorClass.png"/>
-										</imageobject>
-									</mediaobject>
-								</td>
-								<td>
-									<mediaobject>
-										<imageobject>
-											<imagedata fileref="images\040-ActorClassExampleTextualNotation.png"/>
-										</imageobject>
-									</mediaobject>
-								</td>
-							</tr>
-						</table>
-						<itemizedlist>
-							<listitem>
-								<para>
-									<emphasis>ActorClass1</emphasis> contains two ActorReferences
-								</para>
-							</listitem>
-							<listitem>
-								<para>
-									<emphasis>port1</emphasis> is a 
-									<emphasis role="bold">External End Port</emphasis>. Since it connects external Actors with the behavior of the ActorClass, it is defined in the 
-									<emphasis role="bold">Interface</emphasis> section and the 
-									<emphasis role="bold">Structure</emphasis> section of the ActorClass.
-								</para>
-							</listitem>
-							<listitem>
-								<para>
-									<emphasis>port2</emphasis> and 
-									<emphasis>port3</emphasis> are 
-									<emphasis role="bold">Internal End Ports</emphasis> and can only be connected to the ports of contained ActorReferences. Internal End Ports connect the Behavior of an ActorClass with its contained ActorReferences.
-								</para>
-							</listitem>
-							<listitem>
-								<para>
-									<emphasis>port4</emphasis> is a relay port and connects outside Actors to contained ActorReferences. This port can not be accessed by the behavior of the ActorClass.
-								</para>
-							</listitem>
-							<listitem>
-								<para>
-									<emphasis role="bold">Bindings</emphasis> can connect ports of the ActorClass and its contained ActorReferences. 
-								</para>
-							</listitem>
-						</itemizedlist>
-					</section>
-					<section id="Attributes">
-						<title>Attributes</title>
-					</section>
-					<section id="Operations">
-						<title>Operations</title>
-					</section>
-					<section id="FiniteStateMachine">
-						<title>Finite State Machine</title>
-					</section>
-				</section>
+</table>					 
+				</para>
 			</section>
-			<section id="Protocols">
-				<title>Protocols</title>
-				<section id="Description2">
-					<title>Description</title>
-					<para>A ProtocolClass defines a set of incoming and outgoing messages that can be exchanged between two ports.
-						The exact semantics of a message is defined by the execution model.</para>
-				</section>
-				<section id="Motivation2">
-					<title>Motivation</title>
+			<section id="Details">
+				<title>Details</title>
+				<section id="ActorClassesActorReferencesPortsandBindings">
+					<title>Actor Classes, Actor References, Ports and Bindings</title>
+					<para>An 
+						<emphasis role="bold">ActorClass</emphasis> defines the type (or blueprint) of an actor. Hierarchies are built by ActorClasses that contain 
+						<emphasis role="bold">ActorReferences</emphasis> which have another ActorClass as type. The interface of an ActorClass is always defined by Ports. The ActorClass can also contain Attributes, Operations and a finite state machine. 
+					</para>
+					<para>
+						<emphasis role="bold">External Ports</emphasis> define the external interface of an actor and are defined in the 
+						<emphasis role="bold">Interface</emphasis> section of the ActorClass.
+					</para>
+					<para>
+						<emphasis role="bold">Internal Ports</emphasis> define the internal interface of an actor and are defined in the 
+						<emphasis role="bold">Structure</emphasis> section of the ActorClass.
+					</para>
+					<para>
+						<emphasis role="bold">Bindings</emphasis> connect Ports inside an ActorClass.
+					</para>
+					<para>Example:</para>
+					<para><table title="Actor Class Example" frame="box" border="1">
+							<tr>
+								<td align="center">
+						<emphasis role="bold">Graphical Notation</emphasis></td>
+								<td align="center">
+						<emphasis role="bold">Textual Notation</emphasis></td>
+							</tr>
+							<tr>
+								<td>
+						<mediaobject>
+							<imageobject>
+								<imagedata fileref="images\040-ActorClass.png"/>
+							</imageobject>
+						</mediaobject></td>
+								<td>
+						<mediaobject>
+							<imageobject>
+								<imagedata fileref="images\040-ActorClassExampleTextualNotation.png"/>
+							</imageobject>
+						</mediaobject></td>
+							</tr>
+</table>						 
+					</para>
 					<itemizedlist>
 						<listitem>
-							<para>ProtocolClasses provide a reusable interface specification for ports</para>
+							<para>
+								<emphasis>ActorClass1</emphasis> contains two ActorReferences
+							</para>
 						</listitem>
 						<listitem>
-							<para>ProtocolClasses can optionally specify valid message exchange sequences</para>
+							<para>
+								<emphasis>port1</emphasis> is a 
+								<emphasis role="bold">External End Port</emphasis>. Since it connects external Actors with the behavior of the ActorClass, it is defined in the 
+								<emphasis role="bold">Interface</emphasis> section and the 
+								<emphasis role="bold">Structure</emphasis> section of the ActorClass.
+							</para>
+						</listitem>
+						<listitem>
+							<para>
+								<emphasis>port2</emphasis> and 
+								<emphasis>port3</emphasis> are 
+								<emphasis role="bold">Internal End Ports</emphasis> and can only be connected to the ports of contained ActorReferences. Internal End Ports connect the Behavior of an ActorClass with its contained ActorReferences.
+							</para>
+						</listitem>
+						<listitem>
+							<para>
+								<emphasis>port4</emphasis> is a relay port and connects external Actors to contained ActorReferences. This port can not be accessed by the behavior of the ActorClass.
+							</para>
+						</listitem>
+						<listitem>
+							<para>
+								<emphasis role="bold">Bindings</emphasis> can connect ports of the ActorClass and its contained ActorReferences. 
+							</para>
 						</listitem>
 					</itemizedlist>
 				</section>
-				<section id="Notation2">
-					<title>Notation</title>
-					<para>ProtocolClasses have only textual notation. 
-						The example defines a ProtocolClass with 2 incoming and two outgoing messages. Messages can have data attached. The data can be of a primitive type (e.g. int32, float64, ...) or a DataClass.</para>
+				<section id="Attributes">
+					<title>Attributes</title>
+					<para>Attributes are part of the Structure of an ActorClass. They can be of a PrimitiveType or a DataClass.</para>
+					<para>Example:</para>
 					<para>
 						<mediaobject>
 							<imageobject>
-								<imagedata fileref="images\040-ProtocolClassTextualNotation.png"/>
+								<imagedata fileref="images\040-ActorClassAttributes.png"/>
 							</imageobject>
 						</mediaobject>
 					</para>
 				</section>
+				<section id="Operations">
+					<title>Operations</title>
+					<para>Operations are part of the Behavior of an ActorClass.  Arguments and return values can be of a PrimitiveType or a DataClass. DataClasses can be passed by value (implicit) or by reference (keyword 
+						<emphasis role="bold">ref</emphasis>).
+					</para>
+					<para>Example:</para>
+					<para>
+						<mediaobject>
+							<imageobject>
+								<imagedata fileref="images\040-ActorClassOperations.png"/>
+							</imageobject>
+						</mediaobject>
+					</para>
+				</section>
+				<section id="FiniteStateMachine">
+					<title>Finite State Machine</title>
+				</section>
 			</section>
-			<section id="Ports">
-				<title>Ports</title>
-				<section id="Description3">
-					<title>Description</title>
-					<para>Ports are the only interfaces of actors. A port has always a protocol assigned. 
-						Service Access Points (SAP) and Service Provision Points (SPP) are specialized ports that are used to define layering.</para>
-				</section>
-				<section id="Motivation3">
-					<title>Motivation</title>
-					<itemizedlist>
-						<listitem>
-							<para>Ports decouple interface definition (Protocols) from interface usage</para>
-						</listitem>
-						<listitem>
-							<para>Ports decouple the logical interface from the transport </para>
-						</listitem>
-					</itemizedlist>
-				</section>
-				<section id="Notation3">
-					<title>Notation</title>
-					<section id="ClassPorts">
-						<title>Class Ports</title>
-						<para>These symbols can only appear on the border of an actor class symbol. 
+		</section>
+		<section id="Protocols">
+			<title>Protocols</title>
+			<section id="Description2">
+				<title>Description</title>
+				<para>A ProtocolClass defines a set of incoming and outgoing messages that can be exchanged between two ports.
+					The exact semantics of a message is defined by the execution model.</para>
+			</section>
+			<section id="Motivation2">
+				<title>Motivation</title>
+				<itemizedlist>
+					<listitem>
+						<para>ProtocolClasses provide a reusable interface specification for ports</para>
+					</listitem>
+					<listitem>
+						<para>ProtocolClasses can optionally specify valid message exchange sequences</para>
+					</listitem>
+				</itemizedlist>
+			</section>
+			<section id="Notation2">
+				<title>Notation</title>
+				<para>ProtocolClasses have only textual notation. 
+					The example defines a ProtocolClass with 2 incoming and two outgoing messages. Messages can have data attached. The data can be of a primitive type (e.g. int32, float64, ...) or a DataClass.</para>
+				<para>
+					<mediaobject>
+						<imageobject>
+							<imagedata fileref="images\040-ProtocolClassTextualNotation.png"/>
+						</imageobject>
+					</mediaobject>
+				</para>
+			</section>
+		</section>
+		<section id="Ports">
+			<title>Ports</title>
+			<section id="Description3">
+				<title>Description</title>
+				<para>Ports are the only interfaces of actors. A port has always a protocol assigned. 
+					Service Access Points (SAP) and Service Provision Points (SPP) are specialized ports that are used to define layering.</para>
+			</section>
+			<section id="Motivation3">
+				<title>Motivation</title>
+				<itemizedlist>
+					<listitem>
+						<para>Ports decouple interface definition (Protocols) from interface usage</para>
+					</listitem>
+					<listitem>
+						<para>Ports decouple the logical interface from the transport </para>
+					</listitem>
+				</itemizedlist>
+			</section>
+			<section id="Notation3">
+				<title>Notation</title>
+				<section id="ClassPorts">
+					<title>Class Ports</title>
+					<para>These symbols can only appear on the border of an actor class symbol. 
 
-							<emphasis role="bold">Textual Notation:</emphasis> 
-							Ports that define an external interface of the ActorClass, are defined in the Interface (e.g. relay ports). Ports that define an internal interface are defined in the Structure (e.g. internal ports). An   
-						</para>
-						<table cellspacing="2" frame="box" border="1">
+						<emphasis role="bold">Textual Notation:</emphasis> 
+						Ports that define an external interface of the ActorClass, are defined in the Interface (e.g. relay ports). Ports that define an internal interface are defined in the Structure (e.g. internal ports).
+					</para>
+					<para><table title="Class Port Notation" frame="box" border="1">
 							<tr>
-								<td>
-									<emphasis role="bold">Element</emphasis>
-								</td>
-								<td>
-									<emphasis role="bold">Graphical Notation</emphasis>
-								</td>
-								<td>
-									<emphasis role="bold">Textual Notation</emphasis>
-								</td>
+								<td align="center">
+						<emphasis role="bold">Element</emphasis></td>
+								<td align="center">
+						<emphasis role="bold">Graphical Notation</emphasis></td>
+								<td align="center">
+						<emphasis role="bold">Textual Notation</emphasis></td>
 							</tr>
 							<tr>
 								<td>Class End Port</td>
-								<td>
-									<mediaobject>
-										<imageobject>
-											<imagedata fileref="images\040-ClassEndPort.png"/>
-										</imageobject>
-									</mediaobject>
-								</td>
+								<td align="center">
+						<mediaobject>
+							<imageobject>
+								<imagedata fileref="images\040-ClassEndPort.png"/>
+							</imageobject>
+						</mediaobject></td>
+								<td></td>
 							</tr>
 							<tr>
 								<td>Conjugated Class End Port</td>
-								<td>
-									<mediaobject>
-										<imageobject>
-											<imagedata fileref="images\040-ConjugatedClassEndPort.png"/>
-										</imageobject>
-									</mediaobject>
-								</td>
+								<td align="center">
+						<mediaobject>
+							<imageobject>
+								<imagedata fileref="images\040-ConjugatedClassEndPort.png"/>
+							</imageobject>
+						</mediaobject></td>
+								<td></td>
 							</tr>
 							<tr>
 								<td>Class Relay Port</td>
-								<td>
-									<mediaobject>
-										<imageobject>
-											<imagedata fileref="images\040-ClassRelayPort.png"/>
-										</imageobject>
-									</mediaobject>
-								</td>
+								<td align="center">
+						<mediaobject>
+							<imageobject>
+								<imagedata fileref="images\040-ClassRelayPort.png"/>
+							</imageobject>
+						</mediaobject></td>
+								<td></td>
 							</tr>
 							<tr>
 								<td>Conjugated Class Relay Port</td>
-								<td>
-									<mediaobject>
-										<imageobject>
-											<imagedata fileref="images\040-ConjugatedClassRelayPort.png"/>
-										</imageobject>
-									</mediaobject>
-								</td>
+								<td align="center">
+						<mediaobject>
+							<imageobject>
+								<imagedata fileref="images\040-ConjugatedClassRelayPort.png"/>
+							</imageobject>
+						</mediaobject></td>
+								<td></td>
 							</tr>
 							<tr>
 								<td>Replicated Class End Port</td>
-								<td>
-									<mediaobject>
-										<imageobject>
-											<imagedata fileref="images\040-ReplicatedClassEndPort.png"/>
-										</imageobject>
-									</mediaobject>
-								</td>
+								<td align="center">
+						<mediaobject>
+							<imageobject>
+								<imagedata fileref="images\040-ReplicatedClassEndPort.png"/>
+							</imageobject>
+						</mediaobject></td>
+								<td></td>
 							</tr>
 							<tr>
 								<td>Conjugated Replicated Class End Port</td>
-								<td>
-									<mediaobject>
-										<imageobject>
-											<imagedata fileref="images\040-ConjugatedReplicatedClassEndPort.png"/>
-										</imageobject>
-									</mediaobject>
-								</td>
+								<td align="center">
+						<mediaobject>
+							<imageobject>
+								<imagedata fileref="images\040-ConjugatedReplicatedClassEndPort.png"/>
+							</imageobject>
+						</mediaobject></td>
+								<td></td>
 							</tr>
 							<tr>
 								<td>Replicated Class Relay Port</td>
-								<td>
-									<mediaobject>
-										<imageobject>
-											<imagedata fileref="images\040-ReplicatedClassRelayPort.png"/>
-										</imageobject>
-									</mediaobject>
-								</td>
+								<td align="center">
+						<mediaobject>
+							<imageobject>
+								<imagedata fileref="images\040-ReplicatedClassRelayPort.png"/>
+							</imageobject>
+						</mediaobject></td>
+								<td></td>
 							</tr>
 							<tr>
 								<td>Conjugated Replicated Class Relay Port</td>
-								<td>
-									<mediaobject>
-										<imageobject>
-											<imagedata fileref="images\040-ConjugatedReplicatedClassRelayPort.png"/>
-										</imageobject>
-									</mediaobject>
-								</td>
+								<td align="center">
+						<mediaobject>
+							<imageobject>
+								<imagedata fileref="images\040-ConjugatedReplicatedClassRelayPort.png"/>
+							</imageobject>
+						</mediaobject></td>
+								<td></td>
 							</tr>
-						</table>
-					</section>
-					<section id="ReferencePorts">
-						<title>Reference Ports</title>
-						<para>These symbols can only appear on the border of an ActorReference symbol. Since the type of port is defined in the ActorClass, no textual notation exists.</para>
-						<table cellspacing="2" frame="box" border="1">
+</table>
+					</para>
+				</section>
+				<section id="ReferencePorts">
+					<title>Reference Ports</title>
+					<para>These symbols can only appear on the border of an ActorReference symbol. Since the type of port is defined in the ActorClass, no textual notation for the Reference Ports exists.</para>
+					<para><table title="Title" frame="box" border="1">
 							<tr>
-								<td>
-									<emphasis role="bold">Element</emphasis>
-								</td>
-								<td>
-									<emphasis role="bold">Graphical Notation</emphasis>
-								</td>
-								<td>
-									<emphasis role="bold">Textual Notation</emphasis>
-								</td>
+								<td align="center">
+						<emphasis role="bold">Element</emphasis></td>
+								<td align="center">
+						<emphasis role="bold">Graphical Notation</emphasis></td>
+								<td align="center">
+						<emphasis role="bold">Textual Notation</emphasis></td>
 							</tr>
 							<tr>
 								<td>Reference Port</td>
-								<td>
-									<mediaobject>
-										<imageobject>
-											<imagedata fileref="images\040-ReferencePort.png"/>
-										</imageobject>
-									</mediaobject>
-								</td>
-								<td>
-									<emphasis>implicit</emphasis> 
-								</td>
+								<td align="center">
+						<mediaobject>
+							<imageobject>
+								<imagedata fileref="images\040-ReferencePort.png"/>
+							</imageobject>
+						</mediaobject></td>
+								<td align="center">
+						<emphasis>implicit</emphasis></td>
 							</tr>
 							<tr>
 								<td>Conjugated Reference Port</td>
-								<td>
-									<mediaobject>
-										<imageobject>
-											<imagedata fileref="images\040-ConjugatedReferencePort.png"/>
-										</imageobject>
-									</mediaobject>
-								</td>
-								<td>
-									<emphasis>implicit</emphasis> 
-								</td>
+								<td align="center">
+						<mediaobject>
+							<imageobject>
+								<imagedata fileref="images\040-ConjugatedReferencePort.png"/>
+							</imageobject>
+						</mediaobject></td>
+								<td align="center">
+						<emphasis>implicit</emphasis></td>
 							</tr>
 							<tr>
 								<td>Replicated Reference Port</td>
-								<td>
-									<mediaobject>
-										<imageobject>
-											<imagedata fileref="images\040-ReplicatedReferencePort.png"/>
-										</imageobject>
-									</mediaobject>
-								</td>
-								<td>
-									<emphasis>implicit</emphasis> 
-								</td>
+								<td align="center">
+						<mediaobject>
+							<imageobject>
+								<imagedata fileref="images\040-ReplicatedReferencePort.png"/>
+							</imageobject>
+						</mediaobject></td>
+								<td align="center">
+						<emphasis>implicit</emphasis></td>
 							</tr>
 							<tr>
 								<td>Conjugated Replicated Reference Port</td>
-								<td>
-									<mediaobject>
-										<imageobject>
-											<imagedata fileref="images\040-ConjugatedReplicatedReferencePort.png"/>
-										</imageobject>
-									</mediaobject>
-								</td>
-								<td>
-									<emphasis>implicit</emphasis> 
-								</td>
+								<td align="center">
+						<mediaobject>
+							<imageobject>
+								<imagedata fileref="images\040-ConjugatedReplicatedReferencePort.png"/>
+							</imageobject>
+						</mediaobject></td>
+								<td align="center">
+						<emphasis>implicit</emphasis></td>
 							</tr>
-						</table>
-					</section>
+</table>
+					</para>
 				</section>
+			</section>
+		</section>
+		<section id="DataClass">
+			<title>DataClass</title>
+			<section id="Description4">
+				<title>Description</title>
+				<para>The DataClass enables the modeling of hierarchical complex datatypes and operations on them. The DataClass is the equivalent to a Class in languages like Java or C++, but has less features. The content of a DataClass can always be sent via message between actors (defined as message data in ProtocolClass).</para>
+			</section>
+			<section id="Notation4">
+				<title>Notation</title>
+				<para>Example: DataClass using PrimitiveTypes</para>
+				<para>
+					<mediaobject>
+						<imageobject>
+							<imagedata fileref="images\040-DataClass1.png"/>
+						</imageobject>
+					</mediaobject>
+				</para>
+				<para>Example: DataClass using other DataClasses:</para>
+				<para>
+					<mediaobject>
+						<imageobject>
+							<imagedata fileref="images\040-DataClass2.png"/>
+						</imageobject>
+					</mediaobject>
+				</para>
 			</section>
 		</section>
 	</chapter>

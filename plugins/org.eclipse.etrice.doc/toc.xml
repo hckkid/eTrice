@@ -68,7 +68,6 @@
 <topic href="help/Whydoesitworkandwhyisitsafe.html" label="Why does it work and why is it safe?"></topic>
 </topic>
 <topic href="help/ROOMConcepts.html" label="ROOM Concepts">
-<topic href="help/ROOMConcepts.html#MainConcepts" label="Main Concepts">
 <topic href="help/ROOMConcepts.html#Actors" label="Actors">
 <topic href="help/ROOMConcepts.html#Description" label="Description"></topic>
 <topic href="help/ROOMConcepts.html#Motivation" label="Motivation"></topic>
@@ -80,19 +79,22 @@
 <topic href="help/ROOMConcepts.html#FiniteStateMachine" label="Finite State Machine"></topic>
 </topic>
 </topic>
-<topic href="help/ROOMConcepts.html#Protocols" label="Protocols">
-<topic href="help/ROOMConcepts.html#Description2" label="Description"></topic>
-<topic href="help/ROOMConcepts.html#Motivation2" label="Motivation"></topic>
-<topic href="help/ROOMConcepts.html#Notation2" label="Notation"></topic>
+<topic href="help/Protocols.html" label="Protocols">
+<topic href="help/Protocols.html#Description2" label="Description"></topic>
+<topic href="help/Protocols.html#Motivation2" label="Motivation"></topic>
+<topic href="help/Protocols.html#Notation2" label="Notation"></topic>
 </topic>
-<topic href="help/ROOMConcepts.html#Ports" label="Ports">
-<topic href="help/ROOMConcepts.html#Description3" label="Description"></topic>
-<topic href="help/ROOMConcepts.html#Motivation3" label="Motivation"></topic>
-<topic href="help/ROOMConcepts.html#Notation3" label="Notation">
-<topic href="help/ROOMConcepts.html#ClassPorts" label="Class Ports"></topic>
-<topic href="help/ROOMConcepts.html#ReferencePorts" label="Reference Ports"></topic>
+<topic href="help/Ports.html" label="Ports">
+<topic href="help/Ports.html#Description3" label="Description"></topic>
+<topic href="help/Ports.html#Motivation3" label="Motivation"></topic>
+<topic href="help/Ports.html#Notation3" label="Notation">
+<topic href="help/Ports.html#ClassPorts" label="Class Ports"></topic>
+<topic href="help/Ports.html#ReferencePorts" label="Reference Ports"></topic>
 </topic>
 </topic>
+<topic href="help/DataClass.html" label="DataClass">
+<topic href="help/DataClass.html#Description4" label="Description"></topic>
+<topic href="help/DataClass.html#Notation4" label="Notation"></topic>
 </topic>
 </topic>
 </toc>

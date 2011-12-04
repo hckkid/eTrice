@@ -171,7 +171,16 @@
 <dd>
 <dl>
 <dt>
-<span class="section"><a href="#MainConcepts">Main Concepts</a></span>
+<span class="section"><a href="#Actors">Actors</a></span>
+</dt>
+<dt>
+<span class="section"><a href="#Protocols">Protocols</a></span>
+</dt>
+<dt>
+<span class="section"><a href="#Ports">Ports</a></span>
+</dt>
+<dt>
+<span class="section"><a href="#DataClass">DataClass</a></span>
 </dt>
 </dl>
 </dd>
@@ -182,13 +191,13 @@
 <b>List of Tables</b>
 </p>
 <dl>
-<dt>8.1. <a href="#N10849"></a>
+<dt>8.1. <a href="#N1084C"></a>
 </dt>
-<dt>8.2. <a href="#N108CE"></a>
+<dt>8.2. <a href="#N108CF"></a>
 </dt>
-<dt>8.3. <a href="#N10980"></a>
+<dt>8.3. <a href="#N1099B"></a>
 </dt>
-<dt>8.4. <a href="#N10A2F"></a>
+<dt>8.4. <a href="#N10A6C"></a>
 </dt>
 </dl>
 </div>
@@ -461,8 +470,9 @@
 <p>Receiving a message via a port will trigger the internal state machine. A transition will be executed depending on the message and the current state. Within this transition, detail level code will be executed and response messages can be sent.</p>
 <p>
 					
-<span class="bold"><strong>video: receiving a message</strong></span>:http://eclipse.org/etrice/images/010-room-introduction01.avi
-				</p>
+<a class="ulink" href="http://eclipse.org/etrice/images/010-room-introduction01.avi" target="_new">video: receiving a message</a>
+				
+</p>
 <p>With this model, a complex behavior can be divided into many relatively simple, linked actors. To put it the other way round: The complex behavior will be provided by a network of relatively simple components which are communicating with each other via well defined interfaces.</p>
 </div>
 <div class="section" title="Hierarchy in Structure and Behavior">
@@ -831,8 +841,9 @@
 			</p>
 <p>
 				
-<span class="bold"><strong>video hello world:</strong></span> http://eclipse.org/etrice/images/015-HelloWorld01.avi
-			</p>
+<a class="ulink" href="http://eclipse.org/etrice/images/015-HelloWorld01.avi" target="_new">video hello world</a>
+			
+</p>
 </div>
 <div class="section" title="Create a new model from scratch">
 <div class="titlepage">
@@ -2444,21 +2455,17 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 </div>
 </div>
 </div>
-<div class="section" title="Main Concepts">
-<div class="titlepage">
-<div>
-<div>
-<h2 class="title" style="clear: both">
-<a name="MainConcepts"></a>Main Concepts</h2>
-</div>
-</div>
-</div>
+<p>This chapter gives an overview over the ROOM language elements and their textual and graphical notation.
+			The formal ROOM grammar based on XText (EBNF) you can find here: 
+			<a class="ulink" href="http://git.eclipse.org/c/etrice/org.eclipse.etrice.git/tree/plugins/org.eclipse.etrice.core.room/src/org/eclipse/etrice/core/Room.xtext" target="_new">ROOM Grammar</a>
+		
+</p>
 <div class="section" title="Actors">
 <div class="titlepage">
 <div>
 <div>
-<h3 class="title">
-<a name="Actors"></a>Actors</h3>
+<h2 class="title" style="clear: both">
+<a name="Actors"></a>Actors</h2>
 </div>
 </div>
 </div>
@@ -2466,8 +2473,8 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 <div class="titlepage">
 <div>
 <div>
-<h4 class="title">
-<a name="Description"></a>Description</h4>
+<h3 class="title">
+<a name="Description"></a>Description</h3>
 </div>
 </div>
 </div>
@@ -2477,8 +2484,8 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 <div class="titlepage">
 <div>
 <div>
-<h4 class="title">
-<a name="Motivation"></a>Motivation</h4>
+<h3 class="title">
+<a name="Motivation"></a>Motivation</h3>
 </div>
 </div>
 </div>
@@ -2503,39 +2510,34 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 <div class="titlepage">
 <div>
 <div>
-<h4 class="title">
-<a name="Notation"></a>Notation</h4>
+<h3 class="title">
+<a name="Notation"></a>Notation</h3>
 </div>
 </div>
 </div>
-<table cellspacing="2" frame="box" border="1" id="N10849">
+<table title="Actor Class Notation" frame="box" border="1" id="N1084C">
 <tr>
 							
-<td>
-								<span class="bold"><strong>Element</strong></span>
-							</td>
-							<td>
-								<span class="bold"><strong>Graphical Notation</strong></span>
-							</td>
-							<td>
-								<span class="bold"><strong>Textual Notation</strong></span>
-							</td>
+<td align="center">
+					<span class="bold"><strong>Element</strong></span></td>
+							<td align="center">
+					<span class="bold"><strong>Graphical Notation</strong></span></td>
+							<td align="center">
+					<span class="bold"><strong>Textual Notation</strong></span></td>
 						
 </tr>
 <tr>
 							
 <td>ActorClass</td>
 							<td>
-								
+					
 <div class="mediaobject">
 <img src="images\040-ActorClassNotation.png"></div>
-							
 </td>
 							<td>
-								
+					
 <div class="mediaobject">
-<img src="images\040-ActorClassTextualNotation.png"></div>	
-							
+<img src="images\040-ActorClassTextualNotation.png"></div>
 </td>
 						
 </tr>
@@ -2543,27 +2545,28 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 							
 <td>ActorRef</td>
 							<td>
-								
+					
 <div class="mediaobject">
 <img src="images\040-ActorReferenceNotation.png"></div>
-							
 </td>
 							<td>
-								
+					
 <div class="mediaobject">
 <img src="images\040-ActorReferenceTextualNotation.png"></div>
-							
 </td>
 						
 </tr>
 </table>
+<p>					 
+				
+</p>
 </div>
 <div class="section" title="Details">
 <div class="titlepage">
 <div>
 <div>
-<h4 class="title">
-<a name="Details"></a>Details</h4>
+<h3 class="title">
+<a name="Details"></a>Details</h3>
 </div>
 </div>
 </div>
@@ -2571,94 +2574,93 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 <div class="titlepage">
 <div>
 <div>
-<h5 class="title">
-<a name="ActorClassesActorReferencesPortsandBindings"></a>Actor Classes, Actor References, Ports and Bindings</h5>
+<h4 class="title">
+<a name="ActorClassesActorReferencesPortsandBindings"></a>Actor Classes, Actor References, Ports and Bindings</h4>
 </div>
 </div>
 </div>
 <p>An 
-							<span class="bold"><strong>ActorClass</strong></span> defines the type (or blueprint) of an actor. Hierarchies are built by ActorClasses that contain 
-							<span class="bold"><strong>ActorReferences</strong></span> which have another ActorClass as type. The interface of an ActorClass is always defined by Ports.
-						</p>
+						<span class="bold"><strong>ActorClass</strong></span> defines the type (or blueprint) of an actor. Hierarchies are built by ActorClasses that contain 
+						<span class="bold"><strong>ActorReferences</strong></span> which have another ActorClass as type. The interface of an ActorClass is always defined by Ports. The ActorClass can also contain Attributes, Operations and a finite state machine. 
+					</p>
 <p>
-							
+						
 <span class="bold"><strong>External Ports</strong></span> define the external interface of an actor and are defined in the 
-							<span class="bold"><strong>Interface</strong></span> section of the ActorClass.
-						</p>
+						<span class="bold"><strong>Interface</strong></span> section of the ActorClass.
+					</p>
 <p>
-							
+						
 <span class="bold"><strong>Internal Ports</strong></span> define the internal interface of an actor and are defined in the 
-							<span class="bold"><strong>Structure</strong></span> section of the ActorClass.
-						</p>
+						<span class="bold"><strong>Structure</strong></span> section of the ActorClass.
+					</p>
 <p>
-							
+						
 <span class="bold"><strong>Bindings</strong></span> connect Ports inside an ActorClass.
-						</p>
+					</p>
 <p>Example:</p>
-<table cellspacing="2" frame="box" border="1" id="N108CE">
+<table title="Actor Class Example" frame="box" border="1" id="N108CF">
 <tr>
 								
-<td>
-									<span class="bold"><strong>Graphical Notation</strong></span>
-								</td>
-								<td>
-									<span class="bold"><strong>Textual Notation</strong></span>
-								</td>
+<td align="center">
+						<span class="bold"><strong>Graphical Notation</strong></span></td>
+								<td align="center">
+						<span class="bold"><strong>Textual Notation</strong></span></td>
 							
 </tr>
 <tr>
 								
 <td>
-									
+						
 <div class="mediaobject">
 <img src="images\040-ActorClass.png"></div>
-								
 </td>
 								<td>
-									
+						
 <div class="mediaobject">
 <img src="images\040-ActorClassExampleTextualNotation.png"></div>
-								
 </td>
 							
 </tr>
 </table>
+<p>						 
+					
+</p>
 <div class="itemizedlist">
 <ul class="itemizedlist" type="disc">
 <li class="listitem">
 <p>
-									
+								
 <span class="emphasis"><em>ActorClass1</em></span> contains two ActorReferences
-								</p>
+							</p>
 </li>
 <li class="listitem">
 <p>
-									
+								
 <span class="emphasis"><em>port1</em></span> is a 
-									<span class="bold"><strong>External End Port</strong></span>. Since it connects external Actors with the behavior of the ActorClass, it is defined in the 
-									<span class="bold"><strong>Interface</strong></span> section and the 
-									<span class="bold"><strong>Structure</strong></span> section of the ActorClass.
-								</p>
+								<span class="bold"><strong>External End Port</strong></span>. Since it connects external Actors with the behavior of the ActorClass, it is defined in the 
+								<span class="bold"><strong>Interface</strong></span> section and the 
+								<span class="bold"><strong>Structure</strong></span> section of the ActorClass.
+							</p>
 </li>
 <li class="listitem">
 <p>
-									
+								
 <span class="emphasis"><em>port2</em></span> and 
-									<span class="emphasis"><em>port3</em></span> are 
-									<span class="bold"><strong>Internal End Ports</strong></span> and can only be connected to the ports of contained ActorReferences. Internal End Ports connect the Behavior of an ActorClass with its contained ActorReferences.
-								</p>
+								<span class="emphasis"><em>port3</em></span> are 
+								<span class="bold"><strong>Internal End Ports</strong></span> and can only be connected to the ports of contained ActorReferences. Internal End Ports connect the Behavior of an ActorClass with its contained ActorReferences.
+							</p>
 </li>
 <li class="listitem">
 <p>
-									
-<span class="emphasis"><em>port4</em></span> is a relay port and connects outside Actors to contained ActorReferences. This port can not be accessed by the behavior of the ActorClass.
-								</p>
+								
+<span class="emphasis"><em>port4</em></span> is a relay port and connects external Actors to contained ActorReferences. This port can not be accessed by the behavior of the ActorClass.
+							</p>
 </li>
 <li class="listitem">
 <p>
-									
+								
 <span class="bold"><strong>Bindings</strong></span> can connect ports of the ActorClass and its contained ActorReferences. 
-								</p>
+							</p>
 </li>
 </ul>
 </div>
@@ -2667,28 +2669,50 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 <div class="titlepage">
 <div>
 <div>
-<h5 class="title">
-<a name="Attributes"></a>Attributes</h5>
+<h4 class="title">
+<a name="Attributes"></a>Attributes</h4>
 </div>
 </div>
 </div>
+<p>Attributes are part of the Structure of an ActorClass. They can be of a PrimitiveType or a DataClass.</p>
+<p>Example:</p>
+<p>
+						
+</p>
+<div class="mediaobject">
+<img src="images\040-ActorClassAttributes.png"></div>
+<p>
+					
+</p>
 </div>
 <div class="section" title="Operations">
 <div class="titlepage">
 <div>
 <div>
-<h5 class="title">
-<a name="Operations"></a>Operations</h5>
+<h4 class="title">
+<a name="Operations"></a>Operations</h4>
 </div>
 </div>
 </div>
+<p>Operations are part of the Behavior of an ActorClass.  Arguments and return values can be of a PrimitiveType or a DataClass. DataClasses can be passed by value (implicit) or by reference (keyword 
+						<span class="bold"><strong>ref</strong></span>).
+					</p>
+<p>Example:</p>
+<p>
+						
+</p>
+<div class="mediaobject">
+<img src="images\040-ActorClassOperations.png"></div>
+<p>
+					
+</p>
 </div>
 <div class="section" title="Finite State Machine">
 <div class="titlepage">
 <div>
 <div>
-<h5 class="title">
-<a name="FiniteStateMachine"></a>Finite State Machine</h5>
+<h4 class="title">
+<a name="FiniteStateMachine"></a>Finite State Machine</h4>
 </div>
 </div>
 </div>
@@ -2699,8 +2723,8 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 <div class="titlepage">
 <div>
 <div>
-<h3 class="title">
-<a name="Protocols"></a>Protocols</h3>
+<h2 class="title" style="clear: both">
+<a name="Protocols"></a>Protocols</h2>
 </div>
 </div>
 </div>
@@ -2708,20 +2732,20 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 <div class="titlepage">
 <div>
 <div>
-<h4 class="title">
-<a name="Description2"></a>Description</h4>
+<h3 class="title">
+<a name="Description2"></a>Description</h3>
 </div>
 </div>
 </div>
 <p>A ProtocolClass defines a set of incoming and outgoing messages that can be exchanged between two ports.
-						The exact semantics of a message is defined by the execution model.</p>
+					The exact semantics of a message is defined by the execution model.</p>
 </div>
 <div class="section" title="Motivation">
 <div class="titlepage">
 <div>
 <div>
-<h4 class="title">
-<a name="Motivation2"></a>Motivation</h4>
+<h3 class="title">
+<a name="Motivation2"></a>Motivation</h3>
 </div>
 </div>
 </div>
@@ -2740,20 +2764,20 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 <div class="titlepage">
 <div>
 <div>
-<h4 class="title">
-<a name="Notation2"></a>Notation</h4>
+<h3 class="title">
+<a name="Notation2"></a>Notation</h3>
 </div>
 </div>
 </div>
 <p>ProtocolClasses have only textual notation. 
-						The example defines a ProtocolClass with 2 incoming and two outgoing messages. Messages can have data attached. The data can be of a primitive type (e.g. int32, float64, ...) or a DataClass.</p>
+					The example defines a ProtocolClass with 2 incoming and two outgoing messages. Messages can have data attached. The data can be of a primitive type (e.g. int32, float64, ...) or a DataClass.</p>
 <p>
-						
+					
 </p>
 <div class="mediaobject">
 <img src="images\040-ProtocolClassTextualNotation.png"></div>
 <p>
-					
+				
 </p>
 </div>
 </div>
@@ -2761,8 +2785,8 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 <div class="titlepage">
 <div>
 <div>
-<h3 class="title">
-<a name="Ports"></a>Ports</h3>
+<h2 class="title" style="clear: both">
+<a name="Ports"></a>Ports</h2>
 </div>
 </div>
 </div>
@@ -2770,20 +2794,20 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 <div class="titlepage">
 <div>
 <div>
-<h4 class="title">
-<a name="Description3"></a>Description</h4>
+<h3 class="title">
+<a name="Description3"></a>Description</h3>
 </div>
 </div>
 </div>
 <p>Ports are the only interfaces of actors. A port has always a protocol assigned. 
-						Service Access Points (SAP) and Service Provision Points (SPP) are specialized ports that are used to define layering.</p>
+					Service Access Points (SAP) and Service Provision Points (SPP) are specialized ports that are used to define layering.</p>
 </div>
 <div class="section" title="Motivation">
 <div class="titlepage">
 <div>
 <div>
-<h4 class="title">
-<a name="Motivation3"></a>Motivation</h4>
+<h3 class="title">
+<a name="Motivation3"></a>Motivation</h3>
 </div>
 </div>
 </div>
@@ -2802,8 +2826,8 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 <div class="titlepage">
 <div>
 <div>
-<h4 class="title">
-<a name="Notation3"></a>Notation</h4>
+<h3 class="title">
+<a name="Notation3"></a>Notation</h3>
 </div>
 </div>
 </div>
@@ -2811,203 +2835,243 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 <div class="titlepage">
 <div>
 <div>
-<h5 class="title">
-<a name="ClassPorts"></a>Class Ports</h5>
+<h4 class="title">
+<a name="ClassPorts"></a>Class Ports</h4>
 </div>
 </div>
 </div>
 <p>These symbols can only appear on the border of an actor class symbol. 
 
-							<span class="bold"><strong>Textual Notation:</strong></span> 
-							Ports that define an external interface of the ActorClass, are defined in the Interface (e.g. relay ports). Ports that define an internal interface are defined in the Structure (e.g. internal ports). An   
-						</p>
-<table cellspacing="2" frame="box" border="1" id="N10980">
+						<span class="bold"><strong>Textual Notation:</strong></span> 
+						Ports that define an external interface of the ActorClass, are defined in the Interface (e.g. relay ports). Ports that define an internal interface are defined in the Structure (e.g. internal ports).
+					</p>
+<table title="Class Port Notation" frame="box" border="1" id="N1099B">
 <tr>
 								
-<td>
-									<span class="bold"><strong>Element</strong></span>
-								</td>
-								<td>
-									<span class="bold"><strong>Graphical Notation</strong></span>
-								</td>
-								<td>
-									<span class="bold"><strong>Textual Notation</strong></span>
-								</td>
+<td align="center">
+						<span class="bold"><strong>Element</strong></span></td>
+								<td align="center">
+						<span class="bold"><strong>Graphical Notation</strong></span></td>
+								<td align="center">
+						<span class="bold"><strong>Textual Notation</strong></span></td>
 							
 </tr>
 <tr>
 								
 <td>Class End Port</td>
-								<td>
-									
+								<td align="center">
+						
 <div class="mediaobject">
 <img src="images\040-ClassEndPort.png"></div>
-								
 </td>
+								<td></td>
 							
 </tr>
 <tr>
 								
 <td>Conjugated Class End Port</td>
-								<td>
-									
+								<td align="center">
+						
 <div class="mediaobject">
 <img src="images\040-ConjugatedClassEndPort.png"></div>
-								
 </td>
+								<td></td>
 							
 </tr>
 <tr>
 								
 <td>Class Relay Port</td>
-								<td>
-									
+								<td align="center">
+						
 <div class="mediaobject">
 <img src="images\040-ClassRelayPort.png"></div>
-								
 </td>
+								<td></td>
 							
 </tr>
 <tr>
 								
 <td>Conjugated Class Relay Port</td>
-								<td>
-									
+								<td align="center">
+						
 <div class="mediaobject">
 <img src="images\040-ConjugatedClassRelayPort.png"></div>
-								
 </td>
+								<td></td>
 							
 </tr>
 <tr>
 								
 <td>Replicated Class End Port</td>
-								<td>
-									
+								<td align="center">
+						
 <div class="mediaobject">
 <img src="images\040-ReplicatedClassEndPort.png"></div>
-								
 </td>
+								<td></td>
 							
 </tr>
 <tr>
 								
 <td>Conjugated Replicated Class End Port</td>
-								<td>
-									
+								<td align="center">
+						
 <div class="mediaobject">
 <img src="images\040-ConjugatedReplicatedClassEndPort.png"></div>
-								
 </td>
+								<td></td>
 							
 </tr>
 <tr>
 								
 <td>Replicated Class Relay Port</td>
-								<td>
-									
+								<td align="center">
+						
 <div class="mediaobject">
 <img src="images\040-ReplicatedClassRelayPort.png"></div>
-								
 </td>
+								<td></td>
 							
 </tr>
 <tr>
 								
 <td>Conjugated Replicated Class Relay Port</td>
-								<td>
-									
+								<td align="center">
+						
 <div class="mediaobject">
 <img src="images\040-ConjugatedReplicatedClassRelayPort.png"></div>
-								
 </td>
+								<td></td>
 							
 </tr>
 </table>
+<p>
+					
+</p>
 </div>
 <div class="section" title="Reference Ports">
 <div class="titlepage">
 <div>
 <div>
-<h5 class="title">
-<a name="ReferencePorts"></a>Reference Ports</h5>
+<h4 class="title">
+<a name="ReferencePorts"></a>Reference Ports</h4>
 </div>
 </div>
 </div>
-<p>These symbols can only appear on the border of an ActorReference symbol. Since the type of port is defined in the ActorClass, no textual notation exists.</p>
-<table cellspacing="2" frame="box" border="1" id="N10A2F">
+<p>These symbols can only appear on the border of an ActorReference symbol. Since the type of port is defined in the ActorClass, no textual notation for the Reference Ports exists.</p>
+<table title="Title" frame="box" border="1" id="N10A6C">
 <tr>
 								
-<td>
-									<span class="bold"><strong>Element</strong></span>
-								</td>
-								<td>
-									<span class="bold"><strong>Graphical Notation</strong></span>
-								</td>
-								<td>
-									<span class="bold"><strong>Textual Notation</strong></span>
-								</td>
+<td align="center">
+						<span class="bold"><strong>Element</strong></span></td>
+								<td align="center">
+						<span class="bold"><strong>Graphical Notation</strong></span></td>
+								<td align="center">
+						<span class="bold"><strong>Textual Notation</strong></span></td>
 							
 </tr>
 <tr>
 								
 <td>Reference Port</td>
-								<td>
-									
+								<td align="center">
+						
 <div class="mediaobject">
 <img src="images\040-ReferencePort.png"></div>
-								
 </td>
-								<td>
-									<span class="emphasis"><em>implicit</em></span> 
-								</td>
+								<td align="center">
+						<span class="emphasis"><em>implicit</em></span></td>
 							
 </tr>
 <tr>
 								
 <td>Conjugated Reference Port</td>
-								<td>
-									
+								<td align="center">
+						
 <div class="mediaobject">
 <img src="images\040-ConjugatedReferencePort.png"></div>
-								
 </td>
-								<td>
-									<span class="emphasis"><em>implicit</em></span> 
-								</td>
+								<td align="center">
+						<span class="emphasis"><em>implicit</em></span></td>
 							
 </tr>
 <tr>
 								
 <td>Replicated Reference Port</td>
-								<td>
-									
+								<td align="center">
+						
 <div class="mediaobject">
 <img src="images\040-ReplicatedReferencePort.png"></div>
-								
 </td>
-								<td>
-									<span class="emphasis"><em>implicit</em></span> 
-								</td>
+								<td align="center">
+						<span class="emphasis"><em>implicit</em></span></td>
 							
 </tr>
 <tr>
 								
 <td>Conjugated Replicated Reference Port</td>
-								<td>
-									
+								<td align="center">
+						
 <div class="mediaobject">
 <img src="images\040-ConjugatedReplicatedReferencePort.png"></div>
-								
 </td>
-								<td>
-									<span class="emphasis"><em>implicit</em></span> 
-								</td>
+								<td align="center">
+						<span class="emphasis"><em>implicit</em></span></td>
 							
 </tr>
 </table>
+<p>
+					
+</p>
 </div>
 </div>
+</div>
+<div class="section" title="DataClass">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both">
+<a name="DataClass"></a>DataClass</h2>
+</div>
+</div>
+</div>
+<div class="section" title="Description">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="Description4"></a>Description</h3>
+</div>
+</div>
+</div>
+<p>The DataClass enables the modeling of hierarchical complex datatypes and operations on them. The DataClass is the equivalent to a Class in languages like Java or C++, but has less features. The content of a DataClass can always be sent via message between actors (defined as message data in ProtocolClass).</p>
+</div>
+<div class="section" title="Notation">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="Notation4"></a>Notation</h3>
+</div>
+</div>
+</div>
+<p>Example: DataClass using PrimitiveTypes</p>
+<p>
+					
+</p>
+<div class="mediaobject">
+<img src="images\040-DataClass1.png"></div>
+<p>
+				
+</p>
+<p>Example: DataClass using other DataClasses:</p>
+<p>
+					
+</p>
+<div class="mediaobject">
+<img src="images\040-DataClass2.png"></div>
+<p>
+				
+</p>
 </div>
 </div>
 </div>
