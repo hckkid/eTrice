@@ -417,17 +417,17 @@ public class ExpandedActorClassImpl extends ActorClassImpl implements ExpandedAc
 			int idx = sg.getChPoints().indexOf(cp);
 			
 			if (data==null) {
-				validationError(getName()+": ChoicePoint is not connected!", cp, RoomPackage.eINSTANCE.getStateGraph_ChPoints(), idx);
+				validationError(getName()+": ChoicePoint is not connected!", sg, RoomPackage.eINSTANCE.getStateGraph_ChPoints(), idx);
 			}
 			else {
 				if (data.getInTrans().size()!=1)
-					validationError(getName()+": ChoicePoint has "+data.getInTrans().size()+" incoming transitions!", cp, RoomPackage.eINSTANCE.getStateGraph_ChPoints(), idx);
+					validationError(getName()+": ChoicePoint has "+data.getInTrans().size()+" incoming transitions!", sg, RoomPackage.eINSTANCE.getStateGraph_ChPoints(), idx);
 				if (data.getOutTrans().size()<2)
-					validationError(getName()+": ChoicePoint should have 2 or more branches but has "+data.getOutTrans().size(), cp, RoomPackage.eINSTANCE.getStateGraph_ChPoints(), idx);
+					validationError(getName()+": ChoicePoint should have 2 or more branches but has "+data.getOutTrans().size(), sg, RoomPackage.eINSTANCE.getStateGraph_ChPoints(), idx);
 				if (getDefaultBranch(data.getOutTrans())==null)
-					validationError(getName()+": ChoicePoint has no default branch!", cp, RoomPackage.eINSTANCE.getStateGraph_ChPoints(), idx);
+					validationError(getName()+": ChoicePoint has no default branch!", sg, RoomPackage.eINSTANCE.getStateGraph_ChPoints(), idx);
 				if (!data.getLoopTransitions().isEmpty())
-					validationError(getName()+": ChoicePoint is connected to itself!", cp, RoomPackage.eINSTANCE.getStateGraph_ChPoints(), idx);
+					validationError(getName()+": ChoicePoint is connected to itself!", sg, RoomPackage.eINSTANCE.getStateGraph_ChPoints(), idx);
 			}
 		}
 		
@@ -437,32 +437,32 @@ public class ExpandedActorClassImpl extends ActorClassImpl implements ExpandedAc
 			
 			if (data==null) {
 				if (!getActorClass(tp).isAbstract())
-					validationError(getName()+": TrPoint is not connected", tp, RoomPackage.eINSTANCE.getStateGraph_TrPoints(), idx);
+					validationError(getName()+": TrPoint is not connected", sg, RoomPackage.eINSTANCE.getStateGraph_TrPoints(), idx);
 			}
 			else {
 				if ((tp instanceof EntryPoint)||(tp instanceof ExitPoint)) {
 					// non-abstract classes must have incoming transitions for entry and exit points
 					if (!isAbstract() && data.getInTrans().isEmpty())
-						validationError(getName()+": TrPoint has no incoming transition!", tp, RoomPackage.eINSTANCE.getStateGraph_TrPoints(), idx);
+						validationError(getName()+": TrPoint has no incoming transition!", sg, RoomPackage.eINSTANCE.getStateGraph_TrPoints(), idx);
 					
 					if (getActorClass(tp).isAbstract()) {
 						// transition points inherited from abstract base classes
 						// (of from abstract classes themselves) must not have more than one outgoing transition
 						if (data.getOutTrans().size()>1)
-							validationError(getName()+": TrPoint must have at most one outgoing transition!", tp, RoomPackage.eINSTANCE.getStateGraph_TrPoints(), idx);
+							validationError(getName()+": TrPoint must have at most one outgoing transition!", sg, RoomPackage.eINSTANCE.getStateGraph_TrPoints(), idx);
 					}
 					else {
 						// non-abstract or non-inherited transition points must have one outgoing transition
 						if (data.getOutTrans().size()!=1)
-							validationError(getName()+": TrPoint must have exactly one outgoing transition!", tp, RoomPackage.eINSTANCE.getStateGraph_TrPoints(), idx);
+							validationError(getName()+": TrPoint must have exactly one outgoing transition!", sg, RoomPackage.eINSTANCE.getStateGraph_TrPoints(), idx);
 					}
 					
 					if (!data.getLoopTransitions().isEmpty())
-						validationError(getName()+": TrPoint must have no self transitions!", tp, RoomPackage.eINSTANCE.getStateGraph_TrPoints(), idx);
+						validationError(getName()+": TrPoint must have no self transitions!", sg, RoomPackage.eINSTANCE.getStateGraph_TrPoints(), idx);
 				}
 				else if (tp instanceof TransitionPoint) {
 					if (data.getOutTrans().size()<data.getLoopTransitions().size())
-						validationError(getName()+": TrPoint must have no incoming transitions!", tp, RoomPackage.eINSTANCE.getStateGraph_TrPoints(), idx);
+						validationError(getName()+": TrPoint must have no incoming transitions!", sg, RoomPackage.eINSTANCE.getStateGraph_TrPoints(), idx);
 				}
 			}
 		}
@@ -744,7 +744,7 @@ public class ExpandedActorClassImpl extends ActorClassImpl implements ExpandedAc
 			// from the second transition in the chain on we have:
 			if (next instanceof TriggeredTransition) {
 				int idx = ((StateGraph)next.eContainer()).getTransitions().indexOf(next);
-				validationError("Segments following the triggering transition can have no triggers!\n", next, RoomPackage.eINSTANCE.getStateGraph_Transitions(), idx);
+				validationError("Segments following the triggering transition can have no triggers!\n", next.eContainer(), RoomPackage.eINSTANCE.getStateGraph_Transitions(), idx);
 			}
 			
 			collectChainTransitions(tc, next);
