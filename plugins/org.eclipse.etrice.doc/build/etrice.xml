@@ -368,11 +368,11 @@
 		</para>
 		<para>Open the 
 			<emphasis>eTrice</emphasis> tab and select 
-			<emphasis>eTrice Java ModelLib</emphasis>
+			<emphasis>eTrice Java Runtime</emphasis>
 		</para>
 		<para>Press 
 			<emphasis>Next</emphasis> and 
-			<emphasis>Finish</emphasis> to install the Modellib into your workspace.
+			<emphasis>Finish</emphasis> to install the Runtime into your workspace.
 		</para>
 		<para>
 			<mediaobject>
@@ -382,8 +382,8 @@
 			</mediaobject>
 		</para>
 		<para>Do the same steps for 
-			<emphasis>eTrice Java Runtime</emphasis> and 
-			<emphasis>eTrice Java Tutorials</emphasis>. The resulting workspace should look like this:
+			<emphasis>eTrice Java Modellib</emphasis> and 
+			<emphasis>eTrice Java Tutorials</emphasis>. To avoid temporary error markers you should keep the proposed order of installation. The resulting workspace should look like this:
 		</para>
 		<para>
 			<mediaobject>

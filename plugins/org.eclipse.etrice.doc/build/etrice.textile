@@ -219,13 +219,13 @@ From the _File_ menu select _File->New->Project_
 
 !images/013-SetupWorkspace02.png!
 
-Open the _eTrice_ tab and select _eTrice Java ModelLib_
+Open the _eTrice_ tab and select _eTrice Java Runtime_
 
-Press _Next_ and _Finish_ to install the Modellib into your workspace.
+Press _Next_ and _Finish_ to install the Runtime into your workspace.
 
 !images/013-SetupWorkspace03.png!
 
-Do the same steps for _eTrice Java Runtime_ and _eTrice Java Tutorials_. The resulting workspace should look like this:
+Do the same steps for _eTrice Java Modellib_ and _eTrice Java Tutorials_. To avoid temporary error markers you should keep the proposed order of installation. The resulting workspace should look like this:
 
 !images/013-SetupWorkspace04.png!
 
