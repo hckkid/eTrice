@@ -1060,8 +1060,13 @@ h3. Notation
 h4. Class Ports
 
 These symbols can only appear on the border of an actor class symbol. 
-*Textual Notation:* 
-Ports that define an external interface of the ActorClass, are defined in the Interface (e.g. relay ports). Ports that define an internal interface are defined in the Structure (e.g. internal ports).
+
+Ports that define an external interface of the ActorClass, are defined in the Interface. Ports that define an internal interface are defined in the Structure (e.g. internal ports).
+* *External End Ports* are defined in the Interface and the Structure
+* *Internal End Ports* are only defined in the Structure
+* *Relay Ports* are only defined in the Interface
+* *End Ports* are always connected to the internal behavior of the ActorClass
+* *Replicated Ports* can be defined with a fixed replication factor ( e.g. _Port port18 [ 5 ]: ProtocolClass1_ ) or a variable replication factor (e.g. _Port port18[ * ]: ProtocolClass1_ )
 
 <table title="Class Port Notation" frame="box" border="1">
 	<tr>
@@ -1072,42 +1077,70 @@ Ports that define an external interface of the ActorClass, are defined in the In
 	<tr>
 		<td>Class End Port</td>
 		<td align="center">!images\040-ClassEndPort.png!</td>
-		<td></td>
+		<td>
+			*External Class End Port:*
+			!images\040-ClassEndPortTextual.png!
+			*Internal Class End Port:*
+			!images\040-ClassEndPortInternalTextual.png!
+		</td>
 	</tr>
 	<tr>
 		<td>Conjugated Class End Port</td>
 		<td align="center">!images\040-ConjugatedClassEndPort.png!</td>
-		<td></td>
+		<td>
+			*External Conjugated Class End Port:*
+			!images\040-ConjugatedClassEndPortTextual.png!
+			*Internal Conjugated Class End Port:*
+			!images\040-ConjugatedClassEndPortInternalTextual.png!
+		</td>
 	</tr>
 	<tr>
 		<td>Class Relay Port</td>
 		<td align="center">!images\040-ClassRelayPort.png!</td>
-		<td></td>
+		<td>
+			!images\040-ClassRelayPortTextual.png!
+		</td>
 	</tr>
 	<tr>
 		<td>Conjugated Class Relay Port</td>
 		<td align="center">!images\040-ConjugatedClassRelayPort.png!</td>
-		<td></td>
+		<td>
+			!images\040-ConjugatedClassRelayPortTextual.png!
+		</td>
 	</tr>
 	<tr>
 		<td>Replicated Class End Port</td>
 		<td align="center">!images\040-ReplicatedClassEndPort.png!</td>
-		<td></td>
+		<td>
+			*External Replicated Class End Port:*
+			!images\040-ReplicatedClassEndPortTextual.png!
+			*Internal Replicated Class End Port:*
+			!images\040-ReplicatedClassEndPortInternalTextual.png!
+		</td>
 	</tr>
 	<tr>
 		<td>Conjugated Replicated Class End Port</td>
 		<td align="center">!images\040-ConjugatedReplicatedClassEndPort.png!</td>
-		<td></td>
+		<td>
+			*External Conjugated Replicated Class End Port:*
+			!images\040-ConjugatedReplicatedClassEndPortTextual.png!
+			*Internal Conjugated Replicated Class End Port:*
+			!images\040-ConjugatedReplicatedClassEndPortInternalTextual.png!
+		</td>
 	</tr>
 	<tr>
 		<td>Replicated Class Relay Port</td>
 		<td align="center">!images\040-ReplicatedClassRelayPort.png!</td>
-		<td></td>
+		<td>
+			!images\040-ReplicatedClassRelayPortTextual.png!
+		</td>
 	</tr>
 	<tr>
 		<td>Conjugated Replicated Class Relay Port</td>
 		<td align="center">!images\040-ConjugatedReplicatedClassRelayPort.png!</td>
-		<td></td>
+		<td>
+			!images\040-ConjugatedReplicatedClassRelayPortTextual.png!
+		</td>
 	</tr>
 </table>
 

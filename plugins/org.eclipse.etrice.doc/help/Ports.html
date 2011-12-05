@@ -70,12 +70,45 @@
 </div>
 </div>
 </div>
-<p>These symbols can only appear on the border of an actor class symbol. 
-
-						<span class="bold"><strong>Textual Notation:</strong></span> 
-						Ports that define an external interface of the ActorClass, are defined in the Interface (e.g. relay ports). Ports that define an internal interface are defined in the Structure (e.g. internal ports).
-					</p>
-<table title="Class Port Notation" frame="box" border="1" id="N109E1">
+<p>These symbols can only appear on the border of an actor class symbol. </p>
+<p>Ports that define an external interface of the ActorClass, are defined in the Interface. Ports that define an internal interface are defined in the Structure (e.g. internal ports).</p>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="disc">
+<li class="listitem">
+<p>
+								
+<span class="bold"><strong>External End Ports</strong></span> are defined in the Interface and the Structure
+							</p>
+</li>
+<li class="listitem">
+<p>
+								
+<span class="bold"><strong>Internal End Ports</strong></span> are only defined in the Structure
+							</p>
+</li>
+<li class="listitem">
+<p>
+								
+<span class="bold"><strong>Relay Ports</strong></span> are only defined in the Interface
+							</p>
+</li>
+<li class="listitem">
+<p>
+								
+<span class="bold"><strong>End Ports</strong></span> are always connected to the internal behavior of the ActorClass
+							</p>
+</li>
+<li class="listitem">
+<p>
+								
+<span class="bold"><strong>Replicated Ports</strong></span> can be defined with a fixed replication factor ( e.g. 
+								<span class="emphasis"><em>Port port18 [ 5 ]: ProtocolClass1</em></span> ) or a variable replication factor (e.g. 
+								<span class="emphasis"><em>Port port18[ * ]: ProtocolClass1</em></span> )
+							</p>
+</li>
+</ul>
+</div>
+<table title="Class Port Notation" frame="box" border="1" id="N10A09">
 <tr>
 								
 <td align="center">
@@ -94,7 +127,22 @@
 <div class="mediaobject">
 <img src="images\040-ClassEndPort.png"></div>
 </td>
-								<td></td>
+								<td>
+									
+						<span class="bold"><strong>External Class End Port:</strong></span>
+									
+						
+<div class="mediaobject">
+<img src="images\040-ClassEndPortTextual.png"></div>
+									
+						
+<span class="bold"><strong>Internal Class End Port:</strong></span>
+									
+						
+<div class="mediaobject">
+<img src="images\040-ClassEndPortInternalTextual.png"></div>
+								
+</td>
 							
 </tr>
 <tr>
@@ -105,7 +153,22 @@
 <div class="mediaobject">
 <img src="images\040-ConjugatedClassEndPort.png"></div>
 </td>
-								<td></td>
+								<td>
+									
+						<span class="bold"><strong>External Conjugated Class End Port:</strong></span>
+									
+						
+<div class="mediaobject">
+<img src="images\040-ConjugatedClassEndPortTextual.png"></div>
+									
+						
+<span class="bold"><strong>Internal Conjugated Class End Port:</strong></span>
+									
+						
+<div class="mediaobject">
+<img src="images\040-ConjugatedClassEndPortInternalTextual.png"></div>
+								
+</td>
 							
 </tr>
 <tr>
@@ -116,7 +179,13 @@
 <div class="mediaobject">
 <img src="images\040-ClassRelayPort.png"></div>
 </td>
-								<td></td>
+								<td>
+									
+						
+<div class="mediaobject">
+<img src="images\040-ClassRelayPortTextual.png"></div>
+								
+</td>
 							
 </tr>
 <tr>
@@ -127,7 +196,13 @@
 <div class="mediaobject">
 <img src="images\040-ConjugatedClassRelayPort.png"></div>
 </td>
-								<td></td>
+								<td>
+									
+						
+<div class="mediaobject">
+<img src="images\040-ConjugatedClassRelayPortTextual.png"></div>
+								
+</td>
 							
 </tr>
 <tr>
@@ -138,7 +213,22 @@
 <div class="mediaobject">
 <img src="images\040-ReplicatedClassEndPort.png"></div>
 </td>
-								<td></td>
+								<td>
+									
+						<span class="bold"><strong>External Replicated Class End Port:</strong></span>
+									
+						
+<div class="mediaobject">
+<img src="images\040-ReplicatedClassEndPortTextual.png"></div>
+									
+						
+<span class="bold"><strong>Internal Replicated Class End Port:</strong></span>
+									
+						
+<div class="mediaobject">
+<img src="images\040-ReplicatedClassEndPortInternalTextual.png"></div>
+								
+</td>
 							
 </tr>
 <tr>
@@ -149,7 +239,22 @@
 <div class="mediaobject">
 <img src="images\040-ConjugatedReplicatedClassEndPort.png"></div>
 </td>
-								<td></td>
+								<td>
+									
+						<span class="bold"><strong>External Conjugated Replicated Class End Port:</strong></span>
+									
+						
+<div class="mediaobject">
+<img src="images\040-ConjugatedReplicatedClassEndPortTextual.png"></div>
+									
+						
+<span class="bold"><strong>Internal Conjugated Replicated Class End Port:</strong></span>
+									
+						
+<div class="mediaobject">
+<img src="images\040-ConjugatedReplicatedClassEndPortInternalTextual.png"></div>
+								
+</td>
 							
 </tr>
 <tr>
@@ -160,7 +265,13 @@
 <div class="mediaobject">
 <img src="images\040-ReplicatedClassRelayPort.png"></div>
 </td>
-								<td></td>
+								<td>
+									
+						
+<div class="mediaobject">
+<img src="images\040-ReplicatedClassRelayPortTextual.png"></div>
+								
+</td>
 							
 </tr>
 <tr>
@@ -171,7 +282,13 @@
 <div class="mediaobject">
 <img src="images\040-ConjugatedReplicatedClassRelayPort.png"></div>
 </td>
-								<td></td>
+								<td>
+									
+						
+<div class="mediaobject">
+<img src="images\040-ConjugatedReplicatedClassRelayPortTextual.png"></div>
+								
+</td>
 							
 </tr>
 </table>
@@ -189,7 +306,7 @@
 </div>
 </div>
 <p>These symbols can only appear on the border of an ActorReference symbol. Since the type of port is defined in the ActorClass, no textual notation for the Reference Ports exists.</p>
-<table title="Title" frame="box" border="1" id="N10AB2">
+<table title="Title" frame="box" border="1" id="N10B3E">
 <tr>
 								
 <td align="center">

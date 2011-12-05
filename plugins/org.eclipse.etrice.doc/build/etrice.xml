@@ -1876,11 +1876,37 @@ carLights.setState(TrafficLight3.OFF);
 				<title>Notation</title>
 				<section id="ClassPorts">
 					<title>Class Ports</title>
-					<para>These symbols can only appear on the border of an actor class symbol. 
-
-						<emphasis role="bold">Textual Notation:</emphasis> 
-						Ports that define an external interface of the ActorClass, are defined in the Interface (e.g. relay ports). Ports that define an internal interface are defined in the Structure (e.g. internal ports).
-					</para>
+					<para>These symbols can only appear on the border of an actor class symbol. </para>
+					<para>Ports that define an external interface of the ActorClass, are defined in the Interface. Ports that define an internal interface are defined in the Structure (e.g. internal ports).</para>
+					<itemizedlist>
+						<listitem>
+							<para>
+								<emphasis role="bold">External End Ports</emphasis> are defined in the Interface and the Structure
+							</para>
+						</listitem>
+						<listitem>
+							<para>
+								<emphasis role="bold">Internal End Ports</emphasis> are only defined in the Structure
+							</para>
+						</listitem>
+						<listitem>
+							<para>
+								<emphasis role="bold">Relay Ports</emphasis> are only defined in the Interface
+							</para>
+						</listitem>
+						<listitem>
+							<para>
+								<emphasis role="bold">End Ports</emphasis> are always connected to the internal behavior of the ActorClass
+							</para>
+						</listitem>
+						<listitem>
+							<para>
+								<emphasis role="bold">Replicated Ports</emphasis> can be defined with a fixed replication factor ( e.g. 
+								<emphasis>Port port18 [ 5 ]: ProtocolClass1</emphasis> ) or a variable replication factor (e.g. 
+								<emphasis>Port port18[ * ]: ProtocolClass1</emphasis> )
+							</para>
+						</listitem>
+					</itemizedlist>
 					<para><table title="Class Port Notation" frame="box" border="1">
 							<tr>
 								<td align="center">
@@ -1898,7 +1924,24 @@ carLights.setState(TrafficLight3.OFF);
 								<imagedata fileref="images\040-ClassEndPort.png"/>
 							</imageobject>
 						</mediaobject></td>
-								<td></td>
+								<td>
+									
+						<emphasis role="bold">External Class End Port:</emphasis>
+									
+						<mediaobject>
+							<imageobject>
+								<imagedata fileref="images\040-ClassEndPortTextual.png"/>
+							</imageobject>
+						</mediaobject>
+									
+						<emphasis role="bold">Internal Class End Port:</emphasis>
+									
+						<mediaobject>
+							<imageobject>
+								<imagedata fileref="images\040-ClassEndPortInternalTextual.png"/>
+							</imageobject>
+						</mediaobject>
+								</td>
 							</tr>
 							<tr>
 								<td>Conjugated Class End Port</td>
@@ -1908,7 +1951,24 @@ carLights.setState(TrafficLight3.OFF);
 								<imagedata fileref="images\040-ConjugatedClassEndPort.png"/>
 							</imageobject>
 						</mediaobject></td>
-								<td></td>
+								<td>
+									
+						<emphasis role="bold">External Conjugated Class End Port:</emphasis>
+									
+						<mediaobject>
+							<imageobject>
+								<imagedata fileref="images\040-ConjugatedClassEndPortTextual.png"/>
+							</imageobject>
+						</mediaobject>
+									
+						<emphasis role="bold">Internal Conjugated Class End Port:</emphasis>
+									
+						<mediaobject>
+							<imageobject>
+								<imagedata fileref="images\040-ConjugatedClassEndPortInternalTextual.png"/>
+							</imageobject>
+						</mediaobject>
+								</td>
 							</tr>
 							<tr>
 								<td>Class Relay Port</td>
@@ -1918,7 +1978,14 @@ carLights.setState(TrafficLight3.OFF);
 								<imagedata fileref="images\040-ClassRelayPort.png"/>
 							</imageobject>
 						</mediaobject></td>
-								<td></td>
+								<td>
+									
+						<mediaobject>
+							<imageobject>
+								<imagedata fileref="images\040-ClassRelayPortTextual.png"/>
+							</imageobject>
+						</mediaobject>
+								</td>
 							</tr>
 							<tr>
 								<td>Conjugated Class Relay Port</td>
@@ -1928,7 +1995,14 @@ carLights.setState(TrafficLight3.OFF);
 								<imagedata fileref="images\040-ConjugatedClassRelayPort.png"/>
 							</imageobject>
 						</mediaobject></td>
-								<td></td>
+								<td>
+									
+						<mediaobject>
+							<imageobject>
+								<imagedata fileref="images\040-ConjugatedClassRelayPortTextual.png"/>
+							</imageobject>
+						</mediaobject>
+								</td>
 							</tr>
 							<tr>
 								<td>Replicated Class End Port</td>
@@ -1938,7 +2012,24 @@ carLights.setState(TrafficLight3.OFF);
 								<imagedata fileref="images\040-ReplicatedClassEndPort.png"/>
 							</imageobject>
 						</mediaobject></td>
-								<td></td>
+								<td>
+									
+						<emphasis role="bold">External Replicated Class End Port:</emphasis>
+									
+						<mediaobject>
+							<imageobject>
+								<imagedata fileref="images\040-ReplicatedClassEndPortTextual.png"/>
+							</imageobject>
+						</mediaobject>
+									
+						<emphasis role="bold">Internal Replicated Class End Port:</emphasis>
+									
+						<mediaobject>
+							<imageobject>
+								<imagedata fileref="images\040-ReplicatedClassEndPortInternalTextual.png"/>
+							</imageobject>
+						</mediaobject>
+								</td>
 							</tr>
 							<tr>
 								<td>Conjugated Replicated Class End Port</td>
@@ -1948,7 +2039,24 @@ carLights.setState(TrafficLight3.OFF);
 								<imagedata fileref="images\040-ConjugatedReplicatedClassEndPort.png"/>
 							</imageobject>
 						</mediaobject></td>
-								<td></td>
+								<td>
+									
+						<emphasis role="bold">External Conjugated Replicated Class End Port:</emphasis>
+									
+						<mediaobject>
+							<imageobject>
+								<imagedata fileref="images\040-ConjugatedReplicatedClassEndPortTextual.png"/>
+							</imageobject>
+						</mediaobject>
+									
+						<emphasis role="bold">Internal Conjugated Replicated Class End Port:</emphasis>
+									
+						<mediaobject>
+							<imageobject>
+								<imagedata fileref="images\040-ConjugatedReplicatedClassEndPortInternalTextual.png"/>
+							</imageobject>
+						</mediaobject>
+								</td>
 							</tr>
 							<tr>
 								<td>Replicated Class Relay Port</td>
@@ -1958,7 +2066,14 @@ carLights.setState(TrafficLight3.OFF);
 								<imagedata fileref="images\040-ReplicatedClassRelayPort.png"/>
 							</imageobject>
 						</mediaobject></td>
-								<td></td>
+								<td>
+									
+						<mediaobject>
+							<imageobject>
+								<imagedata fileref="images\040-ReplicatedClassRelayPortTextual.png"/>
+							</imageobject>
+						</mediaobject>
+								</td>
 							</tr>
 							<tr>
 								<td>Conjugated Replicated Class Relay Port</td>
@@ -1968,7 +2083,14 @@ carLights.setState(TrafficLight3.OFF);
 								<imagedata fileref="images\040-ConjugatedReplicatedClassRelayPort.png"/>
 							</imageobject>
 						</mediaobject></td>
-								<td></td>
+								<td>
+									
+						<mediaobject>
+							<imageobject>
+								<imagedata fileref="images\040-ConjugatedReplicatedClassRelayPortTextual.png"/>
+							</imageobject>
+						</mediaobject>
+								</td>
 							</tr>
 </table>
 					</para>
