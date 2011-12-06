@@ -1641,7 +1641,7 @@ carLights.setState(TrafficLight3.OFF);
 	<chapter id="ROOMConcepts">
 		<title>ROOM Concepts</title>
 		<para>This chapter gives an overview over the ROOM language elements and their textual and graphical notation.
-			The formal ROOM grammar based on XText (EBNF) you can find here: 
+			The formal ROOM grammar based on Xtext (EBNF) you can find here: 
 			<ulink url="http://git.eclipse.org/c/etrice/org.eclipse.etrice.git/tree/plugins/org.eclipse.etrice.core.room/src/org/eclipse/etrice/core/Room.xtext">ROOM Grammar</ulink>
 		</para>
 		<section id="Actors">
@@ -1654,7 +1654,7 @@ carLights.setState(TrafficLight3.OFF);
 				<title>Motivation</title>
 				<itemizedlist>
 					<listitem>
-						<para>Actors enable the construction of hierarchical structures with composition and layering</para>
+						<para>Actors enable the construction of hierarchical structures by composition and layering</para>
 					</listitem>
 					<listitem>
 						<para>Actors have their own logical thread of execution</para>
@@ -1669,7 +1669,7 @@ carLights.setState(TrafficLight3.OFF);
 			</section>
 			<section id="Notation">
 				<title>Notation</title>
-				<para><table title="Actor Class Notation" frame="box" border="1">
+				<para><table title="Actor Class Notation" frame="box" border="2" cellpadding="3" cellspacing="0" >
 						<tr>
 							<td align="center">
 					<emphasis role="bold">Element</emphasis></td>
@@ -1731,7 +1731,7 @@ carLights.setState(TrafficLight3.OFF);
 						<emphasis role="bold">Bindings</emphasis> connect Ports inside an ActorClass.
 					</para>
 					<para>Example:</para>
-					<para><table title="Actor Class Example" frame="box" border="1">
+					<para><table title="Actor Class Example" frame="box" border="2" cellpadding="3" cellspacing="0" >
 							<tr>
 								<td align="center">
 						<emphasis role="bold">Graphical Notation</emphasis></td>
@@ -1877,7 +1877,10 @@ carLights.setState(TrafficLight3.OFF);
 				<section id="ClassPorts">
 					<title>Class Ports</title>
 					<para>These symbols can only appear on the border of an actor class symbol. </para>
-					<para>Ports that define an external interface of the ActorClass, are defined in the Interface. Ports that define an internal interface are defined in the Structure (e.g. internal ports).</para>
+					<para>Ports that define an external interface of the ActorClass, are defined in the 
+						<emphasis>Interface</emphasis>. Ports that define an internal interface are defined in the 
+						<emphasis>Structure</emphasis> (e.g. internal ports).
+					</para>
 					<itemizedlist>
 						<listitem>
 							<para>
@@ -1907,7 +1910,7 @@ carLights.setState(TrafficLight3.OFF);
 							</para>
 						</listitem>
 					</itemizedlist>
-					<para><table title="Class Port Notation" frame="box" border="1">
+					<para><table title="Class Port Notation" frame="box" border="2" cellpadding="3" cellspacing="0">
 							<tr>
 								<td align="center">
 						<emphasis role="bold">Element</emphasis></td>
@@ -2098,7 +2101,7 @@ carLights.setState(TrafficLight3.OFF);
 				<section id="ReferencePorts">
 					<title>Reference Ports</title>
 					<para>These symbols can only appear on the border of an ActorReference symbol. Since the type of port is defined in the ActorClass, no textual notation for the Reference Ports exists.</para>
-					<para><table title="Title" frame="box" border="1">
+					<para><table title="Title" frame="box" border="2" cellpadding="3" cellspacing="0">
 							<tr>
 								<td align="center">
 						<emphasis role="bold">Element</emphasis></td>
@@ -2201,7 +2204,7 @@ carLights.setState(TrafficLight3.OFF);
 			</section>
 			<section id="Notation5">
 				<title>Notation</title>
-				<para><table title="Title" frame="box" border="1">
+				<para><table title="Title" frame="box" border="2" cellpadding="3" cellspacing="0">
 						<tr>
 							<td align="center">
 					<emphasis role="bold">Description</emphasis></td>

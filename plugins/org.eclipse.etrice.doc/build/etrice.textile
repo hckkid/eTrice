@@ -941,7 +941,7 @@ This method is synchronized. That means, regardless who sends the message, the q
 h1. ROOM Concepts
 
 This chapter gives an overview over the ROOM language elements and their textual and graphical notation.
-The formal ROOM grammar based on XText (EBNF) you can find here: "ROOM Grammar":http://git.eclipse.org/c/etrice/org.eclipse.etrice.git/tree/plugins/org.eclipse.etrice.core.room/src/org/eclipse/etrice/core/Room.xtext
+The formal ROOM grammar based on Xtext (EBNF) you can find here: "ROOM Grammar":http://git.eclipse.org/c/etrice/org.eclipse.etrice.git/tree/plugins/org.eclipse.etrice.core.room/src/org/eclipse/etrice/core/Room.xtext
 
 h2. Actors
 
@@ -951,14 +951,14 @@ The actor is the basic structural building block for building systems with ROOM.
 
 h3. Motivation
 
-* Actors enable the construction of hierarchical structures with composition and layering
+* Actors enable the construction of hierarchical structures by composition and layering
 * Actors have their own logical thread of execution
 * Actors can be freely deployed
 * Actors define potentially reusable blocks
 
 h3. Notation
 
-<table title="Actor Class Notation" frame="box" border="1">
+<table title="Actor Class Notation" frame="box" border="2" cellpadding="3" cellspacing="0" >
 	<tr>
 		<td align="center">*Element*</td>
 		<td align="center">*Graphical Notation*</td>
@@ -990,7 +990,7 @@ An *ActorClass* defines the type (or blueprint) of an actor. Hierarchies are bui
 
 Example:
 
-<table title="Actor Class Example" frame="box" border="1">
+<table title="Actor Class Example" frame="box" border="2" cellpadding="3" cellspacing="0" >
 	<tr>
 		<td align="center">*Graphical Notation*</td>
 		<td align="center">*Textual Notation*</td>
@@ -1061,14 +1061,14 @@ h4. Class Ports
 
 These symbols can only appear on the border of an actor class symbol. 
 
-Ports that define an external interface of the ActorClass, are defined in the Interface. Ports that define an internal interface are defined in the Structure (e.g. internal ports).
+Ports that define an external interface of the ActorClass, are defined in the _Interface_. Ports that define an internal interface are defined in the _Structure_ (e.g. internal ports).
 * *External End Ports* are defined in the Interface and the Structure
 * *Internal End Ports* are only defined in the Structure
 * *Relay Ports* are only defined in the Interface
 * *End Ports* are always connected to the internal behavior of the ActorClass
 * *Replicated Ports* can be defined with a fixed replication factor ( e.g. _Port port18 [ 5 ]: ProtocolClass1_ ) or a variable replication factor (e.g. _Port port18[ * ]: ProtocolClass1_ )
 
-<table title="Class Port Notation" frame="box" border="1">
+<table title="Class Port Notation" frame="box" border="2" cellpadding="3" cellspacing="0">
 	<tr>
 		<td align="center">*Element*</td>
 		<td align="center">*Graphical Notation*</td>
@@ -1148,7 +1148,7 @@ h4. Reference Ports
 
 These symbols can only appear on the border of an ActorReference symbol. Since the type of port is defined in the ActorClass, no textual notation for the Reference Ports exists.
 
-<table title="Title" frame="box" border="1">
+<table title="Title" frame="box" border="2" cellpadding="3" cellspacing="0">
 	<tr>
 		<td align="center">*Element*</td>
 		<td align="center">*Graphical Notation*</td>
@@ -1203,7 +1203,7 @@ In addition to the Actor containment hierarchies, Layering provides another meth
 
 h3. Notation
 
-<table title="Title" frame="box" border="1">
+<table title="Title" frame="box" border="2" cellpadding="3" cellspacing="0">
 	<tr>
 		<td align="center">*Description*</td>
 		<td align="center">*Graphical Notation*</td>
