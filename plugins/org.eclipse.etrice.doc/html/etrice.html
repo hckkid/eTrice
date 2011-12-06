@@ -30,13 +30,7 @@
 <span class="section"><a href="#WhatiseTrice">What is eTrice?</a></span>
 </dt>
 <dt>
-<span class="section"><a href="#WhoshoulduseeTrice">Who should use eTrice?</a></span>
-</dt>
-<dt>
-<span class="section"><a href="#HowDoesItWork">How Does It Work?</a></span>
-</dt>
-<dt>
-<span class="section"><a href="#WhoisBehindeTrice">Who is Behind eTrice?</a></span>
+<span class="section"><a href="#ReductionofComplexity">Reduction of Complexity</a></span>
 </dt>
 </dl>
 </dd>
@@ -197,17 +191,19 @@
 <b>List of Tables</b>
 </p>
 <dl>
-<dt>2.1. <a href="#N100E7"></a>
+<dt>2.1. <a href="#N10113"></a>
 </dt>
-<dt>8.1. <a href="#N10887"></a>
+<dt>8.1. <a href="#N108B3"></a>
 </dt>
-<dt>8.2. <a href="#N1090C"></a>
+<dt>8.2. <a href="#N10938"></a>
 </dt>
-<dt>8.3. <a href="#N10A13"></a>
+<dt>8.3. <a href="#N109F4"></a>
 </dt>
-<dt>8.4. <a href="#N10B4A"></a>
+<dt>8.4. <a href="#N10A8F"></a>
 </dt>
-<dt>8.5. <a href="#N10C0D"></a>
+<dt>8.5. <a href="#N10BC7"></a>
+</dt>
+<dt>8.6. <a href="#N10C8A"></a>
 </dt>
 </dl>
 </div>
@@ -232,39 +228,95 @@
 <p>eTrice provides an implementation of the ROOM modeling language (Real Time Object Oriented Modeling) together with editors, code generators for Java, C++ and C code and exemplary target middleware.</p>
 <p>The model is defined in textual form (Xtext) with graphical editors (Graphiti) for the structural and behavioral (i.e. state machine) parts.  </p>
 </div>
-<div class="section" title="Who should use eTrice?">
+<div class="section" title="Reduction of Complexity">
 <div class="titlepage">
 <div>
 <div>
 <h2 class="title" style="clear: both">
-<a name="WhoshoulduseeTrice"></a>Who should use eTrice?</h2>
+<a name="ReductionofComplexity"></a>Reduction of Complexity</h2>
 </div>
 </div>
 </div>
-<p>Basically everyone who develops eventdriven realtime or embedded systems. </p>
-<p>If you have other ideas how to use it, tell us!</p>
+<p>eTrice is all about the reduction of complexity:</p>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="disc">
+<li class="listitem">
+<p>structural complexity</p>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="circle">
+<li class="listitem">
+<p>by explicit modeling of hierarchical Actor containment and layering</p>
+</li>
+</ul>
 </div>
-<div class="section" title="How Does It Work?">
-<div class="titlepage">
-<div>
-<div>
-<h2 class="title" style="clear: both">
-<a name="HowDoesItWork"></a>How Does It Work?</h2>
+</li>
+<li class="listitem">
+<p>behavioral complexity</p>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="circle">
+<li class="listitem">
+<p>by hierachical statemachines</p>
+</li>
+</ul>
 </div>
+</li>
+<li class="listitem">
+<p>teamwork complexity</p>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="circle">
+<li class="listitem">
+<p>because loosely coupled Actors provide a natural way to structure team work</p>
+</li>
+<li class="listitem">
+<p>since textual model notation allows simple branching and merging</p>
+</li>
+</ul>
 </div>
+</li>
+<li class="listitem">
+<p>complexity of concurrent &amp; distributed systems</p>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="circle">
+<li class="listitem">
+<p>because loosely coupled Actors are deployable to threads, processes, nodes</p>
+</li>
+</ul>
 </div>
-<p>TODO</p>
+</li>
+<li class="listitem">
+<p>complexity of variant handling and reuse (e.g. for product lines)</p>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="circle">
+<li class="listitem">
+<p>by composition of existing Actors to new structures</p>
+</li>
+<li class="listitem">
+<p>since Protocols and Ports make Actors replaceable</p>
+</li>
+<li class="listitem">
+<p>by inheritance for structure, behavior and Protocols</p>
+</li>
+<li class="listitem">
+<p>by making use of model level libraries</p>
+</li>
+</ul>
 </div>
-<div class="section" title="Who is Behind eTrice?">
-<div class="titlepage">
-<div>
-<div>
-<h2 class="title" style="clear: both">
-<a name="WhoisBehindeTrice"></a>Who is Behind eTrice?</h2>
+</li>
+<li class="listitem">
+<p>complexity of debugging</p>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="circle">
+<li class="listitem">
+<p>model level debugging: state machine animation, data inspection and manipulation, message injection, generated message sequence charts</p>
+</li>
+<li class="listitem">
+<p>model checking easier for model than for code (detect errors before they occur)</p>
+</li>
+</ul>
 </div>
+</li>
+</ul>
 </div>
-</div>
-<p>TODO</p>
 </div>
 </div>
 <div class="chapter" title="Chapter&nbsp;2.&nbsp;Introduction to the ROOM Language">
@@ -475,7 +527,7 @@
 </div>
 </div>
 <p>The basic elements of ROOM are the actors with their ports and protocols. The protocol provides a formal interface description. The port is an interaction point where the actor interacts with its outside world. Each port has exactly one protocol attached. The sum of all ports builds up the complete interface of an actor. Each port can receive messages, with or without data, which are defined in the attached protocol. Each message will be handled by the actors behavior (state machine) or will be delegated to the actors internal structure.</p>
-<table title="Actor and Protocol Example" id="N100E7">
+<table title="Actor and Protocol Example" id="N10113">
 <tr>
 							
 <td>
@@ -2564,7 +2616,7 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 </div>
 </div>
 </div>
-<table title="Actor Class Notation" frame="box" border="2" cellpadding="3" cellspacing="0" id="N10887">
+<table title="Actor Class Notation" frame="box" border="2" cellpadding="3" cellspacing="0" id="N108B3">
 <tr>
 							
 <td align="center">
@@ -2647,7 +2699,7 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 <span class="bold"><strong>Bindings</strong></span> connect Ports inside an ActorClass.
 					</p>
 <p>Example:</p>
-<table title="Actor Class Example" frame="box" border="2" cellpadding="3" cellspacing="0" id="N1090C">
+<table title="Actor Class Example" frame="box" border="2" cellpadding="3" cellspacing="0" id="N10938">
 <tr>
 								
 <td align="center">
@@ -2838,6 +2890,38 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 </div>
 </div>
 </div>
+<p>here is a line</p>
+<table border="1" cellpadding="3" cellspacing="0" width="60%" id="N109F4">
+<tr>
+				    
+<th width="50%">Element</th>
+				    <th>Graphical Notation</th>
+				    <th>Textual Notation</th>
+				  
+</tr>
+<tr>
+				    
+<td width="50%">Berlin</td>
+				    <td>Hamburg</td>
+				    <td>M&amp;uuml;nchen</td>
+				  
+</tr>
+<tr>
+				    
+<td>Milj&amp;ouml;h</td>
+				    <td>Kiez</td>
+				    <td>Bierdampf</td>
+				  
+</tr>
+<tr>
+				    
+<td>Buletten</td>
+				    <td>Frikadellen</td>
+				    <td>Fleischpflanzerl</td>
+				  
+</tr>
+</table>
+<p>end of table</p>
 <div class="section" title="Description">
 <div class="titlepage">
 <div>
@@ -2929,12 +3013,12 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 </li>
 </ul>
 </div>
-<table title="Class Port Notation" frame="box" border="2" cellpadding="3" cellspacing="0" id="N10A13">
+<table title="Class Port Notation" frame="box" border="2" cellpadding="3" cellspacing="0" id="N10A8F">
 <tr>
 								
 <td align="center">
 						<span class="bold"><strong>Element</strong></span></td>
-								<td align="center">
+								<td align="center" width="15%">
 						<span class="bold"><strong>Graphical Notation</strong></span></td>
 								<td align="center">
 						<span class="bold"><strong>Textual Notation</strong></span></td>
@@ -3127,7 +3211,7 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 </div>
 </div>
 <p>These symbols can only appear on the border of an ActorReference symbol. Since the type of port is defined in the ActorClass, no textual notation for the Reference Ports exists.</p>
-<table title="Title" frame="box" border="2" cellpadding="3" cellspacing="0" id="N10B4A">
+<table title="Title" frame="box" border="2" cellpadding="3" cellspacing="0" id="N10BC7">
 <tr>
 								
 <td align="center">
@@ -3284,7 +3368,7 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 </div>
 </div>
 </div>
-<table title="Title" frame="box" border="2" cellpadding="3" cellspacing="0" id="N10C0D">
+<table title="Title" frame="box" border="2" cellpadding="3" cellspacing="0" id="N10C8A">
 <tr>
 							
 <td align="center">

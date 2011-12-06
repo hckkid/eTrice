@@ -1,9 +1,7 @@
 <toc topic="help/index.html" label="eTrice User Guide">
 <topic href="help/eTriceOverview.html" label="eTrice Overview">
 <topic href="help/eTriceOverview.html#WhatiseTrice" label="What is eTrice?"></topic>
-<topic href="help/WhoshoulduseeTrice.html" label="Who should use eTrice?"></topic>
-<topic href="help/HowDoesItWork.html" label="How Does It Work?"></topic>
-<topic href="help/WhoisBehindeTrice.html" label="Who is Behind eTrice?"></topic>
+<topic href="help/ReductionofComplexity.html" label="Reduction of Complexity"></topic>
 </topic>
 <topic href="help/IntroductiontotheROOMLanguage.html" label="Introduction to the ROOM Language">
 <topic href="help/IntroductiontotheROOMLanguage.html#ScopeofROOM" label="Scope of ROOM">
