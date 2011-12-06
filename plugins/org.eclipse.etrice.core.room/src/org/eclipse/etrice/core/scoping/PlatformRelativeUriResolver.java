@@ -12,6 +12,8 @@
 
 package org.eclipse.etrice.core.scoping;
 
+import java.io.File;
+
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.Path;
@@ -50,6 +52,9 @@ public class PlatformRelativeUriResolver extends ImportUriResolver {
 				base = base.appendSegment("");
 				uri = uri.resolve(base);
 				resolve = uri.toString();
+				File file = new File(uri.toFileString());
+				if (file.isDirectory())
+					return "path/to/directory";
 			}
 		}
 		return resolve;
