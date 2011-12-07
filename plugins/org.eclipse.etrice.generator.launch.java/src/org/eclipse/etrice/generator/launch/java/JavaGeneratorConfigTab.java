@@ -73,6 +73,18 @@ public class JavaGeneratorConfigTab extends AbstractLaunchConfigurationTab {
 		
 		libButton = createCheckButton(mainComposite, "generate all classes as library");
 		libButton.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, false, false, 2, 1));
+		libButton.addSelectionListener(new SelectionListener() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				setDirty(true);
+				updateLaunchConfigurationDialog();
+			}
+			
+			@Override
+			public void widgetDefaultSelected(SelectionEvent e) {
+				widgetSelected(e);
+			}
+		});
 
 		saveGenModel = createCheckButton(mainComposite, "save generator model");
 		saveGenModel.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, false, false, 2, 1));
