@@ -97,12 +97,17 @@
 <topic href="help/Layering2.html#Description5" label="Description"></topic>
 <topic href="help/Layering2.html#Notation5" label="Notation"></topic>
 </topic>
-<topic href="help/FiniteStateMachine.html" label="Finite State Machine">
-<topic href="help/FiniteStateMachine.html#Description6" label="Description"></topic>
-<topic href="help/FiniteStateMachine.html#Motivation4" label="Motivation"></topic>
-<topic href="help/FiniteStateMachine.html#Notation6" label="Notation"></topic>
-<topic href="help/FiniteStateMachine.html#Examples" label="Examples"></topic>
-<topic href="help/FiniteStateMachine.html#Details2" label="Details"></topic>
+<topic href="help/FiniteStateMachines.html" label="Finite State Machines">
+<topic href="help/FiniteStateMachines.html#Description6" label="Description"></topic>
+<topic href="help/FiniteStateMachines.html#Motivation4" label="Motivation"></topic>
+<topic href="help/FiniteStateMachines.html#Notation6" label="Notation">
+<topic href="help/FiniteStateMachines.html#FlatFiniteStateMachine" label="Flat Finite State Machine"></topic>
+<topic href="help/FiniteStateMachines.html#HierarchicalFiniteStateMachine" label="Hierarchical Finite State Machine"></topic>
+</topic>
+<topic href="help/FiniteStateMachines.html#Examples" label="Examples">
+<topic href="help/FiniteStateMachines.html#Exampleofaflatfinitestatemachine" label="Example of a flat finite state machine:"></topic>
+<topic href="help/FiniteStateMachines.html#Exampleofahierarchicalfinitestatemachine" label="Example of a hierarchical finite state machine:"></topic>
+</topic>
 </topic>
 </topic>
 </toc>

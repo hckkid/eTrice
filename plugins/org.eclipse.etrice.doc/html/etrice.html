@@ -180,7 +180,7 @@
 <span class="section"><a href="#Layering2">Layering</a></span>
 </dt>
 <dt>
-<span class="section"><a href="#FiniteStateMachine">Finite State Machine</a></span>
+<span class="section"><a href="#FiniteStateMachines">Finite State Machines</a></span>
 </dt>
 </dl>
 </dd>
@@ -204,6 +204,10 @@
 <dt>8.5. <a href="#N10BC7"></a>
 </dt>
 <dt>8.6. <a href="#N10C8A"></a>
+</dt>
+<dt>8.7. <a href="#N10D3A"></a>
+</dt>
+<dt>8.8. <a href="#N10DF9"></a>
 </dt>
 </dl>
 </div>
@@ -3439,12 +3443,12 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 </p>
 </div>
 </div>
-<div class="section" title="Finite State Machine">
+<div class="section" title="Finite State Machines">
 <div class="titlepage">
 <div>
 <div>
 <h2 class="title" style="clear: both">
-<a name="FiniteStateMachine"></a>Finite State Machine</h2>
+<a name="FiniteStateMachines"></a>Finite State Machines</h2>
 </div>
 </div>
 </div>
@@ -3457,6 +3461,16 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 </div>
 </div>
 </div>
+<p>Definition from 
+					<a class="ulink" href="http://en.wikipedia.org/wiki/Finite-state_machine" target="_new">Wikipedia</a>:
+				</p>
+<div class="blockquote">
+<blockquote class="blockquote">
+<p>
+						A finite-state machine (FSM) or finite-state automaton (plural: automata), or simply a state machine, is a mathematical model used to design computer programs and digital logic circuits. It is conceived as an abstract machine that can be in one of a finite number of states. The machine is in only one state at a time; the state it is in at any given time is called the current state. It can change from one state to another when initiated by a triggering event or condition, this is called a transition. A particular FSM is defined by a list of the possible states it can transition to from each state, and the triggering condition for each transition.</p>
+</blockquote>
+</div>
+<p>In ROOM each actor class can implement its behavior using a state machine. Events occurring at the end ports of an actor will be forwarded to and processed by the state machine. Events possibly trigger state transitions.</p>
 </div>
 <div class="section" title="Motivation">
 <div class="titlepage">
@@ -3467,6 +3481,8 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 </div>
 </div>
 </div>
+<p>For event driven systems a finite state machine is ideal for processing the stream of events. Typically during processing new events are produced which are sent to peer actors.</p>
+<p>We distinguish flat and hierarchical state machines.</p>
 </div>
 <div class="section" title="Notation">
 <div class="titlepage">
@@ -3476,6 +3492,203 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 <a name="Notation6"></a>Notation</h3>
 </div>
 </div>
+</div>
+<div class="section" title="Flat Finite State Machine">
+<div class="titlepage">
+<div>
+<div>
+<h4 class="title">
+<a name="FlatFiniteStateMachine"></a>Flat Finite State Machine</h4>
+</div>
+</div>
+</div>
+<p>The simpler flat finite state machines are composed of the following elements:</p>
+<table title="Title" frame="box" border="2" cellpadding="3" cellspacing="0" id="N10D3A">
+<tr>
+								
+<td align="center">
+						<span class="bold"><strong>Description</strong></span></td>
+								<td align="center">
+						<span class="bold"><strong>Graphical Notation</strong></span></td>
+								<td align="center">
+						<span class="bold"><strong>Textual Notation</strong></span></td>
+							
+</tr>
+<tr>
+								
+<td>State</td>
+								<td>
+						
+<div class="mediaobject">
+<img src="images/040-State.jpg"></div>
+</td>
+								<td>
+						
+<div class="mediaobject">
+<img src="images/040-StateTextual.jpg"></div>
+</td>
+							
+</tr>
+<tr>
+								
+<td>InitialPoint</td>
+								<td>
+						
+<div class="mediaobject">
+<img src="images/040-InitialPoint.jpg"></div>
+</td>
+								<td>
+						<span class="emphasis"><em>implicit</em></span></td>
+							
+</tr>
+<tr>
+								
+<td>TransitionPoint</td>
+								<td>
+						
+<div class="mediaobject">
+<img src="images/040-TransitionPoint.jpg"></div>
+</td>
+								<td>
+						
+<div class="mediaobject">
+<img src="images/040-TransitionPointTextual.jpg"></div>
+</td>
+							
+</tr>
+<tr>
+								
+<td>ChoicePoint</td>
+								<td>
+						
+<div class="mediaobject">
+<img src="images/040-ChoicePoint.jpg"></div>
+</td>
+								<td>
+						
+<div class="mediaobject">
+<img src="images/040-ChoicePointTextual.jpg"></div>
+</td>
+							
+</tr>
+<tr>
+								
+<td>Initial Transition</td>
+								<td>
+						
+<div class="mediaobject">
+<img src="images/040-InitialTransition.jpg"></div>
+</td>
+								<td>
+						
+<div class="mediaobject">
+<img src="images/040-InitialTransitionTextual.jpg"></div>
+</td>
+							
+</tr>
+<tr>
+								
+<td>Triggered Transition</td>
+								<td>
+						
+<div class="mediaobject">
+<img src="images/040-TriggeredTransition.jpg"></div>
+</td>
+								<td>
+						
+<div class="mediaobject">
+<img src="images/040-TriggeredTransitionTextual.jpg"></div>
+</td>
+							
+</tr>
+</table>
+<p>
+					
+</p>
+</div>
+<div class="section" title="Hierarchical Finite State Machine">
+<div class="titlepage">
+<div>
+<div>
+<h4 class="title">
+<a name="HierarchicalFiniteStateMachine"></a>Hierarchical Finite State Machine</h4>
+</div>
+</div>
+</div>
+<p>The hierarchical finite state machine adds the notion of a sub state machine nested in a state.
+						A few modeling elements are added to the set listed above:</p>
+<table title="Title" frame="box" border="2" cellpadding="3" cellspacing="0" id="N10DF9">
+<tr>
+								
+<td align="center">
+						<span class="bold"><strong>Description</strong></span></td>
+								<td align="center">
+						<span class="bold"><strong>Graphical Notation</strong></span></td>
+								<td align="center">
+						<span class="bold"><strong>Textual Notation</strong></span></td>
+							
+</tr>
+<tr>
+								
+<td>State with sub state machine</td>
+								<td>Parent State
+								
+						<div class="mediaobject">
+<img src="images/040-StateWithSubFSM.jpg"></div>
+								Sub state machine
+								
+						<div class="mediaobject">
+<img src="images/040-SubFSM.jpg"></div>
+</td>
+								<td>
+						
+<div class="mediaobject">
+<img src="images/040-StateWithSubFSMTextual.jpg"></div>
+</td>
+							
+</tr>
+<tr>
+								
+<td>Entry Point</td>
+								<td>In sub state machine
+								
+						<div class="mediaobject">
+<img src="images/040-EntryPoint.jpg"></div>
+								On parent state
+								
+						<div class="mediaobject">
+<img src="images/040-EntryPointRef.jpg"></div>
+</td>
+								<td>
+						
+<div class="mediaobject">
+<img src="images/040-EntryPointTextual.jpg"></div>
+</td>
+							
+</tr>
+<tr>
+								
+<td>Exit Point</td>
+								<td>In sub state machine
+								
+						<div class="mediaobject">
+<img src="images/040-ExitPoint.jpg"></div>
+								On parent state
+								
+						<div class="mediaobject">
+<img src="images/040-ExitPointRef.jpg"></div>
+</td>
+								<td>
+						
+<div class="mediaobject">
+<img src="images/040-ExitPointTextual.jpg"></div>
+</td>
+							
+</tr>
+</table>
+<p>
+					
+</p>
 </div>
 </div>
 <div class="section" title="Examples">
@@ -3487,15 +3700,57 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 </div>
 </div>
 </div>
-</div>
-<div class="section" title="Details">
+<div class="section" title="Example of a flat finite state machine:">
 <div class="titlepage">
 <div>
 <div>
-<h3 class="title">
-<a name="Details2"></a>Details</h3>
+<h4 class="title">
+<a name="Exampleofaflatfinitestatemachine"></a>Example of a flat finite state machine:</h4>
 </div>
 </div>
+</div>
+<p>
+						
+</p>
+<div class="mediaobject">
+<img src="images/040-FlatFSM.jpg"></div>
+<p>
+					
+</p>
+</div>
+<div class="section" title="Example of a hierarchical finite state machine:">
+<div class="titlepage">
+<div>
+<div>
+<h4 class="title">
+<a name="Exampleofahierarchicalfinitestatemachine"></a>Example of a hierarchical finite state machine:</h4>
+</div>
+</div>
+</div>
+<p>Top level
+
+						</p>
+<div class="mediaobject">
+<img src="images/040-HierarchicalFSMTop.jpg"></div>
+<p>
+					
+</p>
+<p>Sub state machine of Initializing
+
+						</p>
+<div class="mediaobject">
+<img src="images/040-HierarchicalFSMInitializing.jpg"></div>
+<p>
+					
+</p>
+<p>Sub state machine of Running
+
+						</p>
+<div class="mediaobject">
+<img src="images/040-HierarchicalFSMRunning.jpg"></div>
+<p>
+					
+</p>
 </div>
 </div>
 </div>

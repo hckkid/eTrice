@@ -1262,14 +1262,119 @@ h3. Notation
 	</tr>
 </table>
 
-h2. Finite State Machine
+h2. Finite State Machines
 
 h3. Description
 
+Definition from "Wikipedia":http://en.wikipedia.org/wiki/Finite-state_machine:
+
+bq. 
+A finite-state machine (FSM) or finite-state automaton (plural: automata), or simply a state machine, is a mathematical model used to design computer programs and digital logic circuits. It is conceived as an abstract machine that can be in one of a finite number of states. The machine is in only one state at a time; the state it is in at any given time is called the current state. It can change from one state to another when initiated by a triggering event or condition, this is called a transition. A particular FSM is defined by a list of the possible states it can transition to from each state, and the triggering condition for each transition.
+
+In ROOM each actor class can implement its behavior using a state machine. Events occurring at the end ports of an actor will be forwarded to and processed by the state machine. Events possibly trigger state transitions.
+
 h3. Motivation
+
+For event driven systems a finite state machine is ideal for processing the stream of events. Typically during processing new events are produced which are sent to peer actors.
+
+We distinguish flat and hierarchical state machines.
 
 h3. Notation
 
+h4. Flat Finite State Machine
+
+The simpler flat finite state machines are composed of the following elements:
+
+<table title="Title" frame="box" border="2" cellpadding="3" cellspacing="0">
+	<tr>
+		<td align="center">*Description*</td>
+		<td align="center">*Graphical Notation*</td>
+		<td align="center">*Textual Notation*</td>
+	</tr>
+	<tr>
+		<td>State</td>
+		<td>!images/040-State.jpg!</td>
+		<td>!images/040-StateTextual.jpg!</td>
+	</tr>
+	<tr>
+		<td>InitialPoint</td>
+		<td>!images/040-InitialPoint.jpg!</td>
+		<td>_implicit_</td>
+	</tr>
+	<tr>
+		<td>TransitionPoint</td>
+		<td>!images/040-TransitionPoint.jpg!</td>
+		<td>!images/040-TransitionPointTextual.jpg!</td>
+	</tr>
+	<tr>
+		<td>ChoicePoint</td>
+		<td>!images/040-ChoicePoint.jpg!</td>
+		<td>!images/040-ChoicePointTextual.jpg!</td>
+	</tr>
+	<tr>
+		<td>Initial Transition</td>
+		<td>!images/040-InitialTransition.jpg!</td>
+		<td>!images/040-InitialTransitionTextual.jpg!</td>
+	</tr>
+	<tr>
+		<td>Triggered Transition</td>
+		<td>!images/040-TriggeredTransition.jpg!</td>
+		<td>!images/040-TriggeredTransitionTextual.jpg!</td>
+	</tr>
+</table>
+
+h4. Hierarchical Finite State Machine
+
+The hierarchical finite state machine adds the notion of a sub state machine nested in a state.
+A few modeling elements are added to the set listed above:
+
+<table title="Title" frame="box" border="2" cellpadding="3" cellspacing="0">
+	<tr>
+		<td align="center">*Description*</td>
+		<td align="center">*Graphical Notation*</td>
+		<td align="center">*Textual Notation*</td>
+	</tr>
+	<tr>
+		<td>State with sub state machine</td>
+		<td>Parent State
+		!images/040-StateWithSubFSM.jpg!
+		Sub state machine
+		!images/040-SubFSM.jpg!</td>
+		<td>!images/040-StateWithSubFSMTextual.jpg!</td>
+	</tr>
+	<tr>
+		<td>Entry Point</td>
+		<td>In sub state machine
+		!images/040-EntryPoint.jpg!
+		On parent state
+		!images/040-EntryPointRef.jpg!</td>
+		<td>!images/040-EntryPointTextual.jpg!</td>
+	</tr>
+	<tr>
+		<td>Exit Point</td>
+		<td>In sub state machine
+		!images/040-ExitPoint.jpg!
+		On parent state
+		!images/040-ExitPointRef.jpg!</td>
+		<td>!images/040-ExitPointTextual.jpg!</td>
+	</tr>
+</table>
+
 h3. Examples
 
-h3. Details
+h4. Example of a flat finite state machine:
+
+!images/040-FlatFSM.jpg!
+
+h4. Example of a hierarchical finite state machine:
+
+Top level
+!images/040-HierarchicalFSMTop.jpg!
+
+Sub state machine of Initializing
+!images/040-HierarchicalFSMInitializing.jpg!
+
+Sub state machine of Running
+!images/040-HierarchicalFSMRunning.jpg!
+
+

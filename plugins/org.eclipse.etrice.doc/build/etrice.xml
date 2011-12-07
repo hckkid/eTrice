@@ -2351,22 +2351,252 @@ carLights.setState(TrafficLight3.OFF);
 				</para>
 			</section>
 		</section>
-		<section id="FiniteStateMachine">
-			<title>Finite State Machine</title>
+		<section id="FiniteStateMachines">
+			<title>Finite State Machines</title>
 			<section id="Description6">
 				<title>Description</title>
+				<para>Definition from 
+					<ulink url="http://en.wikipedia.org/wiki/Finite-state_machine">Wikipedia</ulink>:
+				</para>
+				<blockquote>
+					<para>
+						A finite-state machine (FSM) or finite-state automaton (plural: automata), or simply a state machine, is a mathematical model used to design computer programs and digital logic circuits. It is conceived as an abstract machine that can be in one of a finite number of states. The machine is in only one state at a time; the state it is in at any given time is called the current state. It can change from one state to another when initiated by a triggering event or condition, this is called a transition. A particular FSM is defined by a list of the possible states it can transition to from each state, and the triggering condition for each transition.</para>
+				</blockquote>
+				<para>In ROOM each actor class can implement its behavior using a state machine. Events occurring at the end ports of an actor will be forwarded to and processed by the state machine. Events possibly trigger state transitions.</para>
 			</section>
 			<section id="Motivation4">
 				<title>Motivation</title>
+				<para>For event driven systems a finite state machine is ideal for processing the stream of events. Typically during processing new events are produced which are sent to peer actors.</para>
+				<para>We distinguish flat and hierarchical state machines.</para>
 			</section>
 			<section id="Notation6">
 				<title>Notation</title>
+				<section id="FlatFiniteStateMachine">
+					<title>Flat Finite State Machine</title>
+					<para>The simpler flat finite state machines are composed of the following elements:</para>
+					<para><table title="Title" frame="box" border="2" cellpadding="3" cellspacing="0">
+							<tr>
+								<td align="center">
+						<emphasis role="bold">Description</emphasis></td>
+								<td align="center">
+						<emphasis role="bold">Graphical Notation</emphasis></td>
+								<td align="center">
+						<emphasis role="bold">Textual Notation</emphasis></td>
+							</tr>
+							<tr>
+								<td>State</td>
+								<td>
+						<mediaobject>
+							<imageobject>
+								<imagedata fileref="images/040-State.jpg"/>
+							</imageobject>
+						</mediaobject></td>
+								<td>
+						<mediaobject>
+							<imageobject>
+								<imagedata fileref="images/040-StateTextual.jpg"/>
+							</imageobject>
+						</mediaobject></td>
+							</tr>
+							<tr>
+								<td>InitialPoint</td>
+								<td>
+						<mediaobject>
+							<imageobject>
+								<imagedata fileref="images/040-InitialPoint.jpg"/>
+							</imageobject>
+						</mediaobject></td>
+								<td>
+						<emphasis>implicit</emphasis></td>
+							</tr>
+							<tr>
+								<td>TransitionPoint</td>
+								<td>
+						<mediaobject>
+							<imageobject>
+								<imagedata fileref="images/040-TransitionPoint.jpg"/>
+							</imageobject>
+						</mediaobject></td>
+								<td>
+						<mediaobject>
+							<imageobject>
+								<imagedata fileref="images/040-TransitionPointTextual.jpg"/>
+							</imageobject>
+						</mediaobject></td>
+							</tr>
+							<tr>
+								<td>ChoicePoint</td>
+								<td>
+						<mediaobject>
+							<imageobject>
+								<imagedata fileref="images/040-ChoicePoint.jpg"/>
+							</imageobject>
+						</mediaobject></td>
+								<td>
+						<mediaobject>
+							<imageobject>
+								<imagedata fileref="images/040-ChoicePointTextual.jpg"/>
+							</imageobject>
+						</mediaobject></td>
+							</tr>
+							<tr>
+								<td>Initial Transition</td>
+								<td>
+						<mediaobject>
+							<imageobject>
+								<imagedata fileref="images/040-InitialTransition.jpg"/>
+							</imageobject>
+						</mediaobject></td>
+								<td>
+						<mediaobject>
+							<imageobject>
+								<imagedata fileref="images/040-InitialTransitionTextual.jpg"/>
+							</imageobject>
+						</mediaobject></td>
+							</tr>
+							<tr>
+								<td>Triggered Transition</td>
+								<td>
+						<mediaobject>
+							<imageobject>
+								<imagedata fileref="images/040-TriggeredTransition.jpg"/>
+							</imageobject>
+						</mediaobject></td>
+								<td>
+						<mediaobject>
+							<imageobject>
+								<imagedata fileref="images/040-TriggeredTransitionTextual.jpg"/>
+							</imageobject>
+						</mediaobject></td>
+							</tr>
+</table>
+					</para>
+				</section>
+				<section id="HierarchicalFiniteStateMachine">
+					<title>Hierarchical Finite State Machine</title>
+					<para>The hierarchical finite state machine adds the notion of a sub state machine nested in a state.
+						A few modeling elements are added to the set listed above:</para>
+					<para><table title="Title" frame="box" border="2" cellpadding="3" cellspacing="0">
+							<tr>
+								<td align="center">
+						<emphasis role="bold">Description</emphasis></td>
+								<td align="center">
+						<emphasis role="bold">Graphical Notation</emphasis></td>
+								<td align="center">
+						<emphasis role="bold">Textual Notation</emphasis></td>
+							</tr>
+							<tr>
+								<td>State with sub state machine</td>
+								<td>Parent State
+								
+						<mediaobject>
+							<imageobject>
+								<imagedata fileref="images/040-StateWithSubFSM.jpg"/>
+							</imageobject>
+						</mediaobject>
+								Sub state machine
+								
+						<mediaobject>
+							<imageobject>
+								<imagedata fileref="images/040-SubFSM.jpg"/>
+							</imageobject>
+						</mediaobject></td>
+								<td>
+						<mediaobject>
+							<imageobject>
+								<imagedata fileref="images/040-StateWithSubFSMTextual.jpg"/>
+							</imageobject>
+						</mediaobject></td>
+							</tr>
+							<tr>
+								<td>Entry Point</td>
+								<td>In sub state machine
+								
+						<mediaobject>
+							<imageobject>
+								<imagedata fileref="images/040-EntryPoint.jpg"/>
+							</imageobject>
+						</mediaobject>
+								On parent state
+								
+						<mediaobject>
+							<imageobject>
+								<imagedata fileref="images/040-EntryPointRef.jpg"/>
+							</imageobject>
+						</mediaobject></td>
+								<td>
+						<mediaobject>
+							<imageobject>
+								<imagedata fileref="images/040-EntryPointTextual.jpg"/>
+							</imageobject>
+						</mediaobject></td>
+							</tr>
+							<tr>
+								<td>Exit Point</td>
+								<td>In sub state machine
+								
+						<mediaobject>
+							<imageobject>
+								<imagedata fileref="images/040-ExitPoint.jpg"/>
+							</imageobject>
+						</mediaobject>
+								On parent state
+								
+						<mediaobject>
+							<imageobject>
+								<imagedata fileref="images/040-ExitPointRef.jpg"/>
+							</imageobject>
+						</mediaobject></td>
+								<td>
+						<mediaobject>
+							<imageobject>
+								<imagedata fileref="images/040-ExitPointTextual.jpg"/>
+							</imageobject>
+						</mediaobject></td>
+							</tr>
+</table>
+					</para>
+				</section>
 			</section>
 			<section id="Examples">
 				<title>Examples</title>
-			</section>
-			<section id="Details2">
-				<title>Details</title>
+				<section id="Exampleofaflatfinitestatemachine">
+					<title>Example of a flat finite state machine:</title>
+					<para>
+						<mediaobject>
+							<imageobject>
+								<imagedata fileref="images/040-FlatFSM.jpg"/>
+							</imageobject>
+						</mediaobject>
+					</para>
+				</section>
+				<section id="Exampleofahierarchicalfinitestatemachine">
+					<title>Example of a hierarchical finite state machine:</title>
+					<para>Top level
+
+						<mediaobject>
+							<imageobject>
+								<imagedata fileref="images/040-HierarchicalFSMTop.jpg"/>
+							</imageobject>
+						</mediaobject>
+					</para>
+					<para>Sub state machine of Initializing
+
+						<mediaobject>
+							<imageobject>
+								<imagedata fileref="images/040-HierarchicalFSMInitializing.jpg"/>
+							</imageobject>
+						</mediaobject>
+					</para>
+					<para>Sub state machine of Running
+
+						<mediaobject>
+							<imageobject>
+								<imagedata fileref="images/040-HierarchicalFSMRunning.jpg"/>
+							</imageobject>
+						</mediaobject>
+					</para>
+				</section>
 			</section>
 		</section>
 	</chapter>
