@@ -96,8 +96,10 @@ import org.eclipse.ui.PlatformUI;
 
 public class TrPointSupport {
 	
-	public static final int ITEM_SIZE = StateGraphSupport.MARGIN;
-	public static final int ITEM_SIZE_SMALL = StateSupport.MARGIN/2;
+	public static final int ITEM_SIZE = StateGraphSupport.MARGIN/2;
+	public static final int ITEM_SIZE_SMALL = (int) (StateSupport.MARGIN*0.375);
+	public static final int MARGIN = StateGraphSupport.MARGIN;
+	public static final int MARGIN_SMALL = StateSupport.MARGIN;
 
 	protected static final int LINE_WIDTH = 2;
 	public static final IColorConstant DARK_COLOR = new ColorConstant(0, 0, 0);
@@ -232,7 +234,7 @@ public class TrPointSupport {
 				boolean subtp = (bo instanceof State);
 				boolean inherited = subtp?SupportUtil.isInherited(getDiagram(), (State)bo):SupportUtil.isInherited(tp, parentShape);
 	
-				int margin = subtp?StateSupport.MARGIN:StateGraphSupport.MARGIN;
+				int margin = subtp?MARGIN_SMALL:MARGIN;
 				int size = subtp?ITEM_SIZE_SMALL:ITEM_SIZE;
 
 				// CONTAINER SHAPE WITH RECTANGLE
@@ -305,7 +307,7 @@ public class TrPointSupport {
 					label.setBackground(dark);
 					label.setHorizontalAlignment(Orientation.ALIGNMENT_CENTER);
 					label.setVerticalAlignment(Orientation.ALIGNMENT_CENTER);
-					gaService.setLocationAndSize(label, 0, 3*margin/2, 2*margin, margin/2);
+					gaService.setLocationAndSize(label, 0, margin+size/2, 2*margin, margin/2);
 					adjustLabel(label, x, y, width, margin, size);
 				}
 
@@ -396,7 +398,7 @@ public class TrPointSupport {
 				ContainerShape shapeToMove = (ContainerShape) context.getShape();
 				boolean subtp = isSubTP(context.getPictogramElement());
 				
-				int margin = subtp?StateSupport.MARGIN:StateGraphSupport.MARGIN;
+				int margin = subtp?MARGIN_SMALL:MARGIN;
 				int size = subtp?ITEM_SIZE_SMALL:ITEM_SIZE;
 	
 				int x = context.getX();
@@ -747,7 +749,7 @@ public class TrPointSupport {
 				ContainerShape containerShape,
 				GraphicsAlgorithm invisibleRectangle, Color darkColor, Color brightColor) {
 
-			int margin = subtp?StateSupport.MARGIN:StateGraphSupport.MARGIN;
+			int margin = subtp?MARGIN_SMALL:MARGIN;
 			int size = subtp?ITEM_SIZE_SMALL:ITEM_SIZE;
 			int line = subtp?LINE_WIDTH/2:LINE_WIDTH;
 			

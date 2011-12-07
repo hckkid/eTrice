@@ -67,8 +67,7 @@ import org.eclipse.graphiti.util.IColorConstant;
 
 public class InitialPointSupport {
 	
-	public static final int ITEM_SIZE = StateGraphSupport.MARGIN;
-	public static final int ITEM_SIZE_SMALL = StateSupport.MARGIN;
+	public static final int ITEM_SIZE = StateGraphSupport.MARGIN/2;
 
 	protected static final int LINE_WIDTH = 2;
 	protected static final IColorConstant DARK_COLOR = new ColorConstant(0, 0, 0);
