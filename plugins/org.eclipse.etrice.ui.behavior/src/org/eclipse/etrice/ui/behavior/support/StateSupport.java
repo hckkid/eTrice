@@ -103,7 +103,7 @@ public class StateSupport {
 	public static final int DEFAULT_SIZE_Y = 30;
 	public static final int MIN_SIZE_X = 60;
 	public static final int MIN_SIZE_Y = 30;
-	public static final int MARGIN = 20;
+	public static final int MARGIN = 30;
 	public static final int CORNER_WIDTH = 20;
 	public static final int HINT_CORNER_WIDTH = 5;
 	private static final int TEXT_MARGIN = 10;

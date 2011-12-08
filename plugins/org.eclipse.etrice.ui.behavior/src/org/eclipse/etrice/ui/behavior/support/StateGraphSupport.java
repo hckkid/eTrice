@@ -75,7 +75,7 @@ import org.eclipse.graphiti.util.IColorConstant;
 
 public class StateGraphSupport {
 	
-	public static final int MARGIN = 20;
+	public static final int MARGIN = 40;
 	
 	private static final int CORNER_SIZE = 20;
 	private static final int LINE_WIDTH = 4;
