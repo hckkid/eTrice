@@ -93,8 +93,6 @@
 	<target name="tune-html" description="cleaning up html after build">
 		<!-- deleting the list-of-tables -->
 		
-		<copy file="${basedir}/html/etrice.html" tofile="${basedir}/html/etricenew.html" />
-		
 		<replaceregexp file="${basedir}/html${file.separator}${document.name}.html"
 				match="&lt;div class=&quot;list-of-tables&quot;&gt;.*?&lt;/div&gt;"
 				replace=" " 
