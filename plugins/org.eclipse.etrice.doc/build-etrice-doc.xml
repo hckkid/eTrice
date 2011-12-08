@@ -90,14 +90,19 @@
 		</wikitext-to-docbook>
 	</target>
 
-	<target name="tune-docbook" description="adding better formatting for tables">
-		<!-- simple find and replace for xml tags such as <informaltable> -->
-		<!--
-		<replace file="${build.dir}/etrice.xml" token="&lt;informaltable&gt;" value="&lt;table cellspacing=&quot;2&quot; frame=&quot;box&quot; border=&quot;1&quot;&gt;" />
-		<replace file="${build.dir}/etrice.xml" token="&lt;/informaltable&gt;" value="&lt;/table&gt;" />
-		-->
+	<target name="tune-html" description="cleaning up html after build">
+		<!-- deleting the list-of-tables -->
+		
+		<copy file="${basedir}/html/etrice.html" tofile="${basedir}/html/etricenew.html" />
+		
+		<replaceregexp file="${basedir}/html${file.separator}${document.name}.html"
+				match="&lt;div class=&quot;list-of-tables&quot;&gt;.*?&lt;/div&gt;"
+				replace=" " 
+				flags="s"/>
+		
 	</target>
 
+	
 	<!--
 		DocBook Toolchain
 	-->
@@ -128,8 +133,8 @@
 	<target name="build-doc" depends="init, install-wikitext, get-docbook-xsl, get-fop">
 		<echo>Building Output...</echo>
 		<antcall target="wikitext2docbook" />
-		<antcall target="tune-docbook" />
 		<antcall target="docbook2html" />
+		<antcall target="tune-html" />  
 		<antcall target="docbook2eclipsehelp" />
 		<antcall target="docbook2pdf" />
 		<!--
