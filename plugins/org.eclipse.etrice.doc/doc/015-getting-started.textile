@@ -35,16 +35,16 @@ The resulting model code should look like this:
 bc.. 
 RoomModel HelloWorld {
 
-	LogicalSystem System_HelloWorld {
-		SubSystemRef subsystem : SubSystem_HelloWorld
-	}
+    LogicalSystem System_HelloWorld {
+        SubSystemRef subsystem : SubSystem_HelloWorld
+    }
 
-	SubSystemClass SubSystem_HelloWorld {
-		ActorRef application : HelloWorldTop
-	}
+    SubSystemClass SubSystem_HelloWorld {
+        ActorRef application : HelloWorldTop
+    }
 
-	ActorClass HelloWorldTop {
-	}
+    ActorClass HelloWorldTop {
+    }
 } 
 bq. 
 
@@ -82,11 +82,11 @@ Save the diagram and inspect the model file. Note that the textual representatio
 
 h2. Build and run the model
 
-Now the model is finished and source code can be generated. The project wizard has created a launch configuration that is responsible for generating the source code. From _HelloWorld/_ right click _gen_HelloWorld.launch_ and run it as gen_HelloWorld. All model files in the model directory will be generated.
+Now the model is finished and source code can be generated. The project wizard has created a launch configuration that is responsible for generating the source code. From _HelloWorld/_ right click *gen_HelloWorld.launch* and run it as gen_HelloWorld. All model files in the model directory will be generated.
 
 !images/015-HelloWorld06.png!
 
-The code will be generated to the src-gen directory. The main function will be contained in _SubSystem_HelloWorldRunner.java_. Select this file and run it as Java application.
+The code will be generated to the src-gen directory. The main function will be contained in *SubSystem_HelloWorldRunner.java*. Select this file and run it as Java application.
 
 !images/015-HelloWorld07.png!
 

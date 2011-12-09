@@ -38,15 +38,14 @@
 <div class="literallayout">
 <p>
 <code class="code">RoomModel&nbsp;Blinky&nbsp;{<br>
-	
-<br>
-	import&nbsp;room.basic.service.timing.*&nbsp;from&nbsp;"../../org.eclipse.etrice.modellib/models/TimingService.room"&nbsp;<br>
-	
-<br>
-	LogicalSystem&nbsp;System_Blinky&nbsp;{<br>
-		SubSystemRef&nbsp;subsystem:&nbsp;SubSystem_Blinky<br>
-	}<br>
-...	&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;import&nbsp;room.basic.service.timing.*&nbsp;from&nbsp;"../../org.eclipse.etrice.modellib/models/TimingService.room"&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;LogicalSystem&nbsp;System_Blinky&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SubSystemRef&nbsp;subsystem:&nbsp;SubSystem_Blinky<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+}<br>
+...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
 
 </code>
 </p>
@@ -57,10 +56,12 @@
 </blockquote>
 </div>
 <p>Make sure that the path fits to your folder structure.  </p>
-<p>Now it can be used within the model. Right click to _SubSystem_Blinky_ within the outline view. Select 
+<p>Now it can be used within the model. Right click to 
+				<span class="bold"><strong>SubSystem_Blinky</strong></span> within the outline view. Select 
 				<span class="emphasis"><em>Edit Structure</em></span>. The 
 				<span class="emphasis"><em>application</em></span> is already referenced in the subsystem. Drag and Drop an 
-				<span class="emphasis"><em>ActorRef</em></span> to the _SubSystem_Blinky_ and name it 
+				<span class="emphasis"><em>ActorRef</em></span> to the 
+				<span class="bold"><strong>SubSystem_Blinky</strong></span> and name it 
 				<span class="emphasis"><em>timingService</em></span>. From the actor class drop down list select 
 				<span class="emphasis"><em>room.basic.service.timing.ATimingService</em></span>. Draw a 
 				<span class="emphasis"><em>LayerConnection</em></span> from 

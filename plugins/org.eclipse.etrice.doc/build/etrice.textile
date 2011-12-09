@@ -12,9 +12,9 @@ h2. Reduction of Complexity
 eTrice is all about the reduction of complexity:
 
 * structural complexity
-** by explicit modeling of hierarchical Actor containment and layering
+** by explicit modeling of hierarchical Actor containment, layering and inheritance
 * behavioral complexity
-** by hierachical statemachines
+** by hierachical statemachines with inheritance
 * teamwork complexity
 ** because loosely coupled Actors provide a natural way to structure team work
 ** since textual model notation allows simple branching and merging
@@ -240,11 +240,11 @@ Do the same steps for _eTrice Java Modellib_ and _eTrice Java Tutorials_. To avo
 
 Now workspace is set up and you can perform the tutorials or start with your work.
 
-The tutorial models are available in the _org.eclipse.etrice.tutorials_ project. All tutorials are ready to generate and run without any changes. To start the code generator simply run _gen_org.eclipse.etrice.tutorials.launch_ as _gen_org.eclipse.etrice.tutorials.launch_: 
+The tutorial models are available in the _org.eclipse.etrice.tutorials_ project. All tutorials are ready to generate and run without any changes. To start the code generator simply run *gen_org.eclipse.etrice.tutorials.launch* as *gen_org.eclipse.etrice.tutorials.launch*: 
 
 !images/013-SetupWorkspace05.png!
 
-After generation for each tutorial a java file called _SubSystem_ModelnameRunner.java_ is generated. To run the model simply run this file as a java application:
+After generation for each tutorial a java file called *SubSystem_ModelnameRunner.java* is generated. To run the model simply run this file as a java application:
 
 !images/013-SetupWorkspace06.png!
 
@@ -291,16 +291,16 @@ The resulting model code should look like this:
 bc.. 
 RoomModel HelloWorld {
 
-	LogicalSystem System_HelloWorld {
-		SubSystemRef subsystem : SubSystem_HelloWorld
-	}
+    LogicalSystem System_HelloWorld {
+        SubSystemRef subsystem : SubSystem_HelloWorld
+    }
 
-	SubSystemClass SubSystem_HelloWorld {
-		ActorRef application : HelloWorldTop
-	}
+    SubSystemClass SubSystem_HelloWorld {
+        ActorRef application : HelloWorldTop
+    }
 
-	ActorClass HelloWorldTop {
-	}
+    ActorClass HelloWorldTop {
+    }
 } 
 bq. 
 
@@ -338,11 +338,11 @@ Save the diagram and inspect the model file. Note that the textual representatio
 
 h2. Build and run the model
 
-Now the model is finished and source code can be generated. The project wizard has created a launch configuration that is responsible for generating the source code. From _HelloWorld/_ right click _gen_HelloWorld.launch_ and run it as gen_HelloWorld. All model files in the model directory will be generated.
+Now the model is finished and source code can be generated. The project wizard has created a launch configuration that is responsible for generating the source code. From _HelloWorld/_ right click *gen_HelloWorld.launch* and run it as gen_HelloWorld. All model files in the model directory will be generated.
 
 !images/015-HelloWorld06.png!
 
-The code will be generated to the src-gen directory. The main function will be contained in _SubSystem_HelloWorldRunner.java_. Select this file and run it as Java application.
+The code will be generated to the src-gen directory. The main function will be contained in *SubSystem_HelloWorldRunner.java*. Select this file and run it as Java application.
 
 !images/015-HelloWorld07.png!
 
@@ -404,16 +404,16 @@ Open the _Blinky.room_ file and copy the following code into the file or use con
 bc.. 
 RoomModel Blinky {
 
-	LogicalSystem System_Blinky {
-		SubSystemRef subsystem : SubSystem_Blinky
-	}
+    LogicalSystem System_Blinky {
+        SubSystemRef subsystem : SubSystem_Blinky
+    }
 
-	SubSystemClass SubSystem_Blinky {
-		ActorRef application : BlinkyTop
-	}
+    SubSystemClass SubSystem_Blinky {
+        ActorRef application : BlinkyTop
+    }
 
-	ActorClass BlinkyTop {
-	}
+    ActorClass BlinkyTop {
+    }
 }
 bq. 
 
@@ -457,18 +457,19 @@ After the build path is set up return to the model and navigate the cursor at th
 
 bc.. 
 RoomModel Blinky {
-	
-	import room.basic.service.timing.* from "../../org.eclipse.etrice.modellib/models/TimingService.room" 
-	
-	LogicalSystem System_Blinky {
-		SubSystemRef subsystem: SubSystem_Blinky
-	}
-...	 
+    
+    import room.basic.service.timing.* from "../../org.eclipse.etrice.modellib/models/TimingService.room" 
+    
+    LogicalSystem System_Blinky {
+        SubSystemRef subsystem: SubSystem_Blinky
+    }
+}
+...     
 bq. 
 
 Make sure that the path fits to your folder structure.  
 
-Now it can be used within the model. Right click to _SubSystem_Blinky_ within the outline view. Select _Edit Structure_. The _application_ is already referenced in the subsystem. Drag and Drop an _ActorRef_ to the _SubSystem_Blinky_ and name it _timingService_. From the actor class drop down list select _room.basic.service.timing.ATimingService_. Draw a _LayerConnection_ from _application_ to each service provision point (SPP) of the _timingService_. The resulting structure should look like this:
+Now it can be used within the model. Right click to *SubSystem_Blinky* within the outline view. Select _Edit Structure_. The _application_ is already referenced in the subsystem. Drag and Drop an _ActorRef_ to the *SubSystem_Blinky* and name it _timingService_. From the actor class drop down list select _room.basic.service.timing.ATimingService_. Draw a _LayerConnection_ from _application_ to each service provision point (SPP) of the _timingService_. The resulting structure should look like this:
 
 !images/020-Blinky06.png! 
 
@@ -623,15 +624,15 @@ Open the _SendingData.room_ file and copy the following code into the file or us
 
 bc.. 
 RoomModel SendingData {
-		LogicalSystem SendingData_LogSystem {
-			SubSystemRef SendingDataAppl:SendingData_SubSystem 
-		}
-		SubSystemClass SendingData_SubSystem {
-			ActorRef SendigDataTopRef:SendingDataTop 
-		}
-		ActorClass SendingDataTop {
-		}
-	}
+    LogicalSystem SendingData_LogSystem {
+        SubSystemRef SendingDataAppl:SendingData_SubSystem 
+    }
+    SubSystemClass SendingData_SubSystem {
+        ActorRef SendigDataTopRef:SendingDataTop 
+    }
+    ActorClass SendingDataTop {
+    }
+}
 bq. 
 
 h2. Add a data class
@@ -644,12 +645,12 @@ Select _DataClass - data class skeleton_ and name it _DemoData_.
 Remove the operations and add the following Attributes:
 
 bc.. 
-	DataClass DemoData {
-		Attribute int32Val: int32 = "4711"
-		Attribute int8Array [ 10 ]: int8 = "{1,2,3,4,5,6,7,8,9,10}"
-		Attribute float64Val: float64 = "0.0"
-		Attribute stringVal: string = "\"empty\""
-	}
+DataClass DemoData {
+    Attribute int32Val: int32 = "4711"
+    Attribute int8Array [ 10 ]: int8 = "{1,2,3,4,5,6,7,8,9,10}"
+    Attribute float64Val: float64 = "0.0"
+    Attribute stringVal: string = "\"empty\""
+}
 bq. 
 
 Save the model and visit the outline view.
@@ -661,15 +662,15 @@ With the help of _Content Assist_ create a _ProtocolClass_ and name it _PingPong
 
 bc.. 
 ProtocolClass PingPongProtocol {
-					incoming {
-						Message ping(data: DemoData)
-						Message pingSimple(data:int32)
-					}
-					outgoing {
-						Message pong(data: DemoData)
-						Message pongSimple(data:int32)
-					}
-				}		
+    incoming {
+        Message ping(data: DemoData)
+        Message pingSimple(data:int32)
+    }
+    outgoing {
+        Message pong(data: DemoData)
+        Message pongSimple(data:int32)
+    }
+}    
 bq. 
 
 h2. Create MrPing and MrPong Actors
@@ -679,45 +680,45 @@ With the help of _Content Assist_ create two new actor classes and name them _Mr
 bc.. 
 RoomModel SendingData {
 
-	LogicalSystem SendingData_LogSystem {
-		SubSystemRef SendingDataAppl: SendingData_SubSystem
-	}
+    LogicalSystem SendingData_LogSystem {
+        SubSystemRef SendingDataAppl: SendingData_SubSystem
+    }
 
-	SubSystemClass SendingData_SubSystem {
-		ActorRef SendigDataTopRef: SendingDataTop
-	}
+    SubSystemClass SendingData_SubSystem {
+        ActorRef SendigDataTopRef: SendingDataTop
+    }
 
-	ActorClass SendingDataTop { }
+    ActorClass SendingDataTop { }
 
-	DataClass DemoData {
-		Attribute int32Val: int32 = "4711"
-		Attribute int8Array [ 10 ]: int8 = "{1,2,3,4,5,6,7,8,9,10}"
-		Attribute float64Val: float64 = "0.0"
-		Attribute stringVal: string = "\"empty\""
-	}
+    DataClass DemoData {
+        Attribute int32Val: int32 = "4711"
+        Attribute int8Array [ 10 ]: int8 = "{1,2,3,4,5,6,7,8,9,10}"
+        Attribute float64Val: float64 = "0.0"
+        Attribute stringVal: string = "\"empty\""
+    }
 
-	ProtocolClass PingPongProtocol {
-		incoming {
-			Message ping(data: DemoData)
-			Message pingSimple(data: int32)
-		}
-		outgoing {
-			Message pong(data: DemoData)
-			Message pongSimple(data: int32)
-		}
-	}
+    ProtocolClass PingPongProtocol {
+        incoming {
+            Message ping(data: DemoData)
+            Message pingSimple(data: int32)
+        }
+        outgoing {
+            Message pong(data: DemoData)
+            Message pongSimple(data: int32)
+        }
+    }
 
-	ActorClass MrPing {
-		Interface { }
-		Structure { }
-		Behavior { }
-	}
+    ActorClass MrPing {
+        Interface { }
+        Structure { }
+        Behavior { }
+    }
 
-	ActorClass MrPong {
-		Interface { }
-		Structure { }
-		Behavior { }
-	}
+    ActorClass MrPong {
+        Interface { }
+        Structure { }
+        Behavior { }
+    }
 } 
 
 bq.  
@@ -762,13 +763,13 @@ Fill in the following code:
 
 bc.. 
 Operation printData(d: DemoData) : void {
-			"System.out.printf(\"d.int32Val: %d\\n\",d.int32Val);"
-			"System.out.printf(\"d.float64Val: %f\\n\",d.float64Val);"
-			"System.out.printf(\"d.int8Array: \");"
-			"for(int i = 0; i<d.int8Array.length; i++) {"
-			"System.out.printf(\"%d \",d.int8Array[i]);}"
-			"System.out.printf(\"\\nd.stringVal: %s\\n\",d.stringVal);"
-		}
+            "System.out.printf(\"d.int32Val: %d\\n\",d.int32Val);"
+            "System.out.printf(\"d.float64Val: %f\\n\",d.float64Val);"
+            "System.out.printf(\"d.int8Array: \");"
+            "for(int i = 0; i<d.int8Array.length; i++) {"
+            "System.out.printf(\"%d \",d.int8Array[i]);}"
+            "System.out.printf(\"\\nd.stringVal: %s\\n\",d.stringVal);"
+}
 bq. 
 
 For MrPing create the following state machine:
@@ -804,7 +805,7 @@ The model is finished now and can be found in /org.eclipse.etrice.tutorials/mode
 
 h2. Generate and run the model
 
-Generate the code by right click to _gen_SendingData.launch_ and run it as _gen_SendingData_. Run the model. 
+Generate the code by right click to *gen_SendingData.launch* and run it as *gen_SendingData*. Run the model. 
 The output should look like this:
 
 bq.. 
@@ -933,13 +934,13 @@ The tutorial shows that it is generally possible to use every port from outside 
 The only remaining question is: Why is it safe and does not violate the *run to completion* semantic. To answer this question, take a look at the _MessageService.java_ from the runtime environment. There you will find the receive method which puts each message into the queue. 
 
 bc.. 
-	@Override
-	public synchronized void receive(Message msg) {
-		if (msg!=null) {
-			messageQueue.push(msg);
-			notifyAll(); // wake up thread to compute message
-		}
-	}
+    @Override
+    public synchronized void receive(Message msg) {
+        if (msg!=null) {
+            messageQueue.push(msg);
+            notifyAll(); // wake up thread to compute message
+        }
+    }
 bq. 
 
 This method is synchronized. That means, regardless who sends the message, the queue is secured. If we later on (e.g. for performance reasons in C/C++) distinguish between internal and external senders (same thread or not), care must be taken to use the external (secure) queue.
@@ -1053,33 +1054,6 @@ The example defines a ProtocolClass with 2 incoming and two outgoing messages. M
 !images\040-ProtocolClassTextualNotation.png!
 
 h2. Ports
-
-here is a line
-
-<table border="1" cellpadding="3" cellspacing="0" width="60%">
-  <tr>
-    <th width="50%">Element</th>
-    <th>Graphical Notation</th>
-    <th>Textual Notation</th>
-  </tr>
-  <tr>
-    <td width="50%">Berlin</td>
-    <td>Hamburg</td>
-    <td>M&uuml;nchen</td>
-  </tr>
-  <tr>
-    <td>Milj&ouml;h</td>
-    <td>Kiez</td>
-    <td>Bierdampf</td>
-  </tr>
-  <tr>
-    <td>Buletten</td>
-    <td>Frikadellen</td>
-    <td>Fleischpflanzerl</td>
-  </tr>
-</table>
-
-end of table
 
 h3. Description
 

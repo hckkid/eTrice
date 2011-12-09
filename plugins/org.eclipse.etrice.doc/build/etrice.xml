@@ -16,7 +16,7 @@
 					<para>structural complexity</para>
 					<itemizedlist>
 						<listitem>
-							<para>by explicit modeling of hierarchical Actor containment and layering</para>
+							<para>by explicit modeling of hierarchical Actor containment, layering and inheritance</para>
 						</listitem>
 					</itemizedlist>
 				</listitem>
@@ -24,7 +24,7 @@
 					<para>behavioral complexity</para>
 					<itemizedlist>
 						<listitem>
-							<para>by hierachical statemachines</para>
+							<para>by hierachical statemachines with inheritance</para>
 						</listitem>
 					</itemizedlist>
 				</listitem>
@@ -450,7 +450,9 @@
 		</para>
 		<para>Now workspace is set up and you can perform the tutorials or start with your work.</para>
 		<para>The tutorial models are available in the 
-			<emphasis>org.eclipse.etrice.tutorials</emphasis> project. All tutorials are ready to generate and run without any changes. To start the code generator simply run _gen_org.eclipse.etrice.tutorials.launch_ as _gen_org.eclipse.etrice.tutorials.launch_: 
+			<emphasis>org.eclipse.etrice.tutorials</emphasis> project. All tutorials are ready to generate and run without any changes. To start the code generator simply run 
+			<emphasis role="bold">gen_org.eclipse.etrice.tutorials.launch</emphasis> as 
+			<emphasis role="bold">gen_org.eclipse.etrice.tutorials.launch</emphasis>: 
 		</para>
 		<para>
 			<mediaobject>
@@ -459,7 +461,9 @@
 				</imageobject>
 			</mediaobject>
 		</para>
-		<para>After generation for each tutorial a java file called _SubSystem_ModelnameRunner.java_ is generated. To run the model simply run this file as a java application:</para>
+		<para>After generation for each tutorial a java file called 
+			<emphasis role="bold">SubSystem_ModelnameRunner.java</emphasis> is generated. To run the model simply run this file as a java application:
+		</para>
 		<para>
 			<mediaobject>
 				<imageobject>
@@ -545,16 +549,16 @@
 			<para>The resulting model code should look like this:</para>
 			<literallayout><code>RoomModel HelloWorld {
 
-	LogicalSystem System_HelloWorld {
-		SubSystemRef subsystem : SubSystem_HelloWorld
-	}
+    LogicalSystem System_HelloWorld {
+        SubSystemRef subsystem : SubSystem_HelloWorld
+    }
 
-	SubSystemClass SubSystem_HelloWorld {
-		ActorRef application : HelloWorldTop
-	}
+    SubSystemClass SubSystem_HelloWorld {
+        ActorRef application : HelloWorldTop
+    }
 
-	ActorClass HelloWorldTop {
-	}
+    ActorClass HelloWorldTop {
+    }
 } 
 </code></literallayout>
 			<blockquote>
@@ -637,7 +641,8 @@
 		<section id="Buildandrunthemodel">
 			<title>Build and run the model</title>
 			<para>Now the model is finished and source code can be generated. The project wizard has created a launch configuration that is responsible for generating the source code. From 
-				<emphasis>HelloWorld/</emphasis> right click _gen_HelloWorld.launch_ and run it as gen_HelloWorld. All model files in the model directory will be generated.
+				<emphasis>HelloWorld/</emphasis> right click 
+				<emphasis role="bold">gen_HelloWorld.launch</emphasis> and run it as gen_HelloWorld. All model files in the model directory will be generated.
 			</para>
 			<para>
 				<mediaobject>
@@ -646,7 +651,9 @@
 					</imageobject>
 				</mediaobject>
 			</para>
-			<para>The code will be generated to the src-gen directory. The main function will be contained in _SubSystem_HelloWorldRunner.java_. Select this file and run it as Java application.</para>
+			<para>The code will be generated to the src-gen directory. The main function will be contained in 
+				<emphasis role="bold">SubSystem_HelloWorldRunner.java</emphasis>. Select this file and run it as Java application.
+			</para>
 			<para>
 				<mediaobject>
 					<imageobject>
@@ -750,16 +757,16 @@
 			</para>
 			<literallayout><code>RoomModel Blinky {
 
-	LogicalSystem System_Blinky {
-		SubSystemRef subsystem : SubSystem_Blinky
-	}
+    LogicalSystem System_Blinky {
+        SubSystemRef subsystem : SubSystem_Blinky
+    }
 
-	SubSystemClass SubSystem_Blinky {
-		ActorRef application : BlinkyTop
-	}
+    SubSystemClass SubSystem_Blinky {
+        ActorRef application : BlinkyTop
+    }
 
-	ActorClass BlinkyTop {
-	}
+    ActorClass BlinkyTop {
+    }
 }
 </code></literallayout>
 			<blockquote>
@@ -835,22 +842,25 @@
 			</para>
 			<para>After the build path is set up return to the model and navigate the cursor at the beginning of the model and import the timing service: </para>
 			<literallayout><code>RoomModel Blinky {
-	
-	import room.basic.service.timing.* from "../../org.eclipse.etrice.modellib/models/TimingService.room" 
-	
-	LogicalSystem System_Blinky {
-		SubSystemRef subsystem: SubSystem_Blinky
-	}
-...	 
+    
+    import room.basic.service.timing.* from "../../org.eclipse.etrice.modellib/models/TimingService.room" 
+    
+    LogicalSystem System_Blinky {
+        SubSystemRef subsystem: SubSystem_Blinky
+    }
+}
+...     
 </code></literallayout>
 			<blockquote>
 				<para></para>
 			</blockquote>
 			<para>Make sure that the path fits to your folder structure.  </para>
-			<para>Now it can be used within the model. Right click to _SubSystem_Blinky_ within the outline view. Select 
+			<para>Now it can be used within the model. Right click to 
+				<emphasis role="bold">SubSystem_Blinky</emphasis> within the outline view. Select 
 				<emphasis>Edit Structure</emphasis>. The 
 				<emphasis>application</emphasis> is already referenced in the subsystem. Drag and Drop an 
-				<emphasis>ActorRef</emphasis> to the _SubSystem_Blinky_ and name it 
+				<emphasis>ActorRef</emphasis> to the 
+				<emphasis role="bold">SubSystem_Blinky</emphasis> and name it 
 				<emphasis>timingService</emphasis>. From the actor class drop down list select 
 				<emphasis>room.basic.service.timing.ATimingService</emphasis>. Draw a 
 				<emphasis>LayerConnection</emphasis> from 
@@ -1164,15 +1174,15 @@ carLights.setState(TrafficLight3.OFF);
 				<emphasis>SendingData.room</emphasis> file and copy the following code into the file or use content assist to create the model.
 			</para>
 			<literallayout><code>RoomModel SendingData {
-		LogicalSystem SendingData_LogSystem {
-			SubSystemRef SendingDataAppl:SendingData_SubSystem 
-		}
-		SubSystemClass SendingData_SubSystem {
-			ActorRef SendigDataTopRef:SendingDataTop 
-		}
-		ActorClass SendingDataTop {
-		}
-	}
+    LogicalSystem SendingData_LogSystem {
+        SubSystemRef SendingDataAppl:SendingData_SubSystem 
+    }
+    SubSystemClass SendingData_SubSystem {
+        ActorRef SendigDataTopRef:SendingDataTop 
+    }
+    ActorClass SendingDataTop {
+    }
+}
 </code></literallayout>
 			<blockquote>
 				<para></para>
@@ -1195,12 +1205,12 @@ carLights.setState(TrafficLight3.OFF);
 				<emphasis>DemoData</emphasis>.
 				Remove the operations and add the following Attributes:
 			</para>
-			<literallayout><code>	DataClass DemoData {
-		Attribute int32Val: int32 = "4711"
-		Attribute int8Array [ 10 ]: int8 = "{1,2,3,4,5,6,7,8,9,10}"
-		Attribute float64Val: float64 = "0.0"
-		Attribute stringVal: string = "\"empty\""
-	}
+			<literallayout><code>DataClass DemoData {
+    Attribute int32Val: int32 = "4711"
+    Attribute int8Array [ 10 ]: int8 = "{1,2,3,4,5,6,7,8,9,10}"
+    Attribute float64Val: float64 = "0.0"
+    Attribute stringVal: string = "\"empty\""
+}
 </code></literallayout>
 			<blockquote>
 				<para></para>
@@ -1216,15 +1226,15 @@ carLights.setState(TrafficLight3.OFF);
 				<emphasis>PingPongProtocol</emphasis>. Create the following messages:
 			</para>
 			<literallayout><code>ProtocolClass PingPongProtocol {
-					incoming {
-						Message ping(data: DemoData)
-						Message pingSimple(data:int32)
-					}
-					outgoing {
-						Message pong(data: DemoData)
-						Message pongSimple(data:int32)
-					}
-				}		
+    incoming {
+        Message ping(data: DemoData)
+        Message pingSimple(data:int32)
+    }
+    outgoing {
+        Message pong(data: DemoData)
+        Message pongSimple(data:int32)
+    }
+}    
 </code></literallayout>
 			<blockquote>
 				<para></para>
@@ -1239,45 +1249,45 @@ carLights.setState(TrafficLight3.OFF);
 			</para>
 			<literallayout><code>RoomModel SendingData {
 
-	LogicalSystem SendingData_LogSystem {
-		SubSystemRef SendingDataAppl: SendingData_SubSystem
-	}
+    LogicalSystem SendingData_LogSystem {
+        SubSystemRef SendingDataAppl: SendingData_SubSystem
+    }
 
-	SubSystemClass SendingData_SubSystem {
-		ActorRef SendigDataTopRef: SendingDataTop
-	}
+    SubSystemClass SendingData_SubSystem {
+        ActorRef SendigDataTopRef: SendingDataTop
+    }
 
-	ActorClass SendingDataTop { }
+    ActorClass SendingDataTop { }
 
-	DataClass DemoData {
-		Attribute int32Val: int32 = "4711"
-		Attribute int8Array [ 10 ]: int8 = "{1,2,3,4,5,6,7,8,9,10}"
-		Attribute float64Val: float64 = "0.0"
-		Attribute stringVal: string = "\"empty\""
-	}
+    DataClass DemoData {
+        Attribute int32Val: int32 = "4711"
+        Attribute int8Array [ 10 ]: int8 = "{1,2,3,4,5,6,7,8,9,10}"
+        Attribute float64Val: float64 = "0.0"
+        Attribute stringVal: string = "\"empty\""
+    }
 
-	ProtocolClass PingPongProtocol {
-		incoming {
-			Message ping(data: DemoData)
-			Message pingSimple(data: int32)
-		}
-		outgoing {
-			Message pong(data: DemoData)
-			Message pongSimple(data: int32)
-		}
-	}
+    ProtocolClass PingPongProtocol {
+        incoming {
+            Message ping(data: DemoData)
+            Message pingSimple(data: int32)
+        }
+        outgoing {
+            Message pong(data: DemoData)
+            Message pongSimple(data: int32)
+        }
+    }
 
-	ActorClass MrPing {
-		Interface { }
-		Structure { }
-		Behavior { }
-	}
+    ActorClass MrPing {
+        Interface { }
+        Structure { }
+        Behavior { }
+    }
 
-	ActorClass MrPong {
-		Interface { }
-		Structure { }
-		Behavior { }
-	}
+    ActorClass MrPong {
+        Interface { }
+        Structure { }
+        Behavior { }
+    }
 } 
 
 </code></literallayout>
@@ -1361,13 +1371,13 @@ carLights.setState(TrafficLight3.OFF);
 				</para>
 				<para>Fill in the following code:</para>
 				<literallayout><code>Operation printData(d: DemoData) : void {
-			"System.out.printf(\"d.int32Val: %d\\n\",d.int32Val);"
-			"System.out.printf(\"d.float64Val: %f\\n\",d.float64Val);"
-			"System.out.printf(\"d.int8Array: \");"
-			"for(int i = 0; i&lt;d.int8Array.length; i++) {"
-			"System.out.printf(\"%d \",d.int8Array[i]);}"
-			"System.out.printf(\"\\nd.stringVal: %s\\n\",d.stringVal);"
-		}
+            "System.out.printf(\"d.int32Val: %d\\n\",d.int32Val);"
+            "System.out.printf(\"d.float64Val: %f\\n\",d.float64Val);"
+            "System.out.printf(\"d.int8Array: \");"
+            "for(int i = 0; i&lt;d.int8Array.length; i++) {"
+            "System.out.printf(\"%d \",d.int8Array[i]);}"
+            "System.out.printf(\"\\nd.stringVal: %s\\n\",d.stringVal);"
+}
 </code></literallayout>
 				<blockquote>
 					<para></para>
@@ -1438,8 +1448,11 @@ carLights.setState(TrafficLight3.OFF);
 		</section>
 		<section id="Generateandrunthemodel">
 			<title>Generate and run the model</title>
-			<para>Generate the code by right click to _gen_SendingData.launch_ and run it as _gen_SendingData_. Run the model. 
-				The output should look like this:</para>
+			<para>Generate the code by right click to 
+				<emphasis role="bold">gen_SendingData.launch</emphasis> and run it as 
+				<emphasis role="bold">gen_SendingData</emphasis>. Run the model. 
+				The output should look like this:
+			</para>
 			<blockquote>
 				<para>
 					type &#8218;quit’ to exit
@@ -1680,13 +1693,13 @@ carLights.setState(TrafficLight3.OFF);
 				<emphasis role="bold">run to completion</emphasis> semantic. To answer this question, take a look at the 
 				<emphasis>MessageService.java</emphasis> from the runtime environment. There you will find the receive method which puts each message into the queue. 
 			</para>
-			<literallayout><code>	@Override
-	public synchronized void receive(Message msg) {
-		if (msg!=null) {
-			messageQueue.push(msg);
-			notifyAll(); // wake up thread to compute message
-		}
-	}
+			<literallayout><code>    @Override
+    public synchronized void receive(Message msg) {
+        if (msg!=null) {
+            messageQueue.push(msg);
+            notifyAll(); // wake up thread to compute message
+        }
+    }
 </code></literallayout>
 			<blockquote>
 				<para></para>
@@ -1912,30 +1925,6 @@ carLights.setState(TrafficLight3.OFF);
 		</section>
 		<section id="Ports">
 			<title>Ports</title>
-			<para>here is a line</para>
-			<para><table border="1" cellpadding="3" cellspacing="0" width="60%">
-				  <tr>
-				    <th width="50%">Element</th>
-				    <th>Graphical Notation</th>
-				    <th>Textual Notation</th>
-				  </tr>
-				  <tr>
-				    <td width="50%">Berlin</td>
-				    <td>Hamburg</td>
-				    <td>M&amp;uuml;nchen</td>
-				  </tr>
-				  <tr>
-				    <td>Milj&amp;ouml;h</td>
-				    <td>Kiez</td>
-				    <td>Bierdampf</td>
-				  </tr>
-				  <tr>
-				    <td>Buletten</td>
-				    <td>Frikadellen</td>
-				    <td>Fleischpflanzerl</td>
-				  </tr>
-</table></para>
-			<para>end of table</para>
 			<section id="Description3">
 				<title>Description</title>
 				<para>Ports are the only interfaces of actors. A port has always a protocol assigned. 

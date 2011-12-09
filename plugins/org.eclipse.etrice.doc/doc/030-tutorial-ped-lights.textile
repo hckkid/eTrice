@@ -61,13 +61,13 @@ The tutorial shows that it is generally possible to use every port from outside 
 The only remaining question is: Why is it safe and does not violate the *run to completion* semantic. To answer this question, take a look at the _MessageService.java_ from the runtime environment. There you will find the receive method which puts each message into the queue. 
 
 bc.. 
-	@Override
-	public synchronized void receive(Message msg) {
-		if (msg!=null) {
-			messageQueue.push(msg);
-			notifyAll(); // wake up thread to compute message
-		}
-	}
+    @Override
+    public synchronized void receive(Message msg) {
+        if (msg!=null) {
+            messageQueue.push(msg);
+            notifyAll(); // wake up thread to compute message
+        }
+    }
 bq. 
 
 This method is synchronized. That means, regardless who sends the message, the queue is secured. If we later on (e.g. for performance reasons in C/C++) distinguish between internal and external senders (same thread or not), care must be taken to use the external (secure) queue.

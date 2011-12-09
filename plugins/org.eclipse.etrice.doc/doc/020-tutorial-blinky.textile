@@ -38,16 +38,16 @@ Open the _Blinky.room_ file and copy the following code into the file or use con
 bc.. 
 RoomModel Blinky {
 
-	LogicalSystem System_Blinky {
-		SubSystemRef subsystem : SubSystem_Blinky
-	}
+    LogicalSystem System_Blinky {
+        SubSystemRef subsystem : SubSystem_Blinky
+    }
 
-	SubSystemClass SubSystem_Blinky {
-		ActorRef application : BlinkyTop
-	}
+    SubSystemClass SubSystem_Blinky {
+        ActorRef application : BlinkyTop
+    }
 
-	ActorClass BlinkyTop {
-	}
+    ActorClass BlinkyTop {
+    }
 }
 bq. 
 
@@ -91,18 +91,19 @@ After the build path is set up return to the model and navigate the cursor at th
 
 bc.. 
 RoomModel Blinky {
-	
-	import room.basic.service.timing.* from "../../org.eclipse.etrice.modellib/models/TimingService.room" 
-	
-	LogicalSystem System_Blinky {
-		SubSystemRef subsystem: SubSystem_Blinky
-	}
-...	 
+    
+    import room.basic.service.timing.* from "../../org.eclipse.etrice.modellib/models/TimingService.room" 
+    
+    LogicalSystem System_Blinky {
+        SubSystemRef subsystem: SubSystem_Blinky
+    }
+}
+...     
 bq. 
 
 Make sure that the path fits to your folder structure.  
 
-Now it can be used within the model. Right click to _SubSystem_Blinky_ within the outline view. Select _Edit Structure_. The _application_ is already referenced in the subsystem. Drag and Drop an _ActorRef_ to the _SubSystem_Blinky_ and name it _timingService_. From the actor class drop down list select _room.basic.service.timing.ATimingService_. Draw a _LayerConnection_ from _application_ to each service provision point (SPP) of the _timingService_. The resulting structure should look like this:
+Now it can be used within the model. Right click to *SubSystem_Blinky* within the outline view. Select _Edit Structure_. The _application_ is already referenced in the subsystem. Drag and Drop an _ActorRef_ to the *SubSystem_Blinky* and name it _timingService_. From the actor class drop down list select _room.basic.service.timing.ATimingService_. Draw a _LayerConnection_ from _application_ to each service provision point (SPP) of the _timingService_. The resulting structure should look like this:
 
 !images/020-Blinky06.png! 
 

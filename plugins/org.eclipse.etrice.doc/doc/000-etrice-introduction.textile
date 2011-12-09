@@ -12,9 +12,9 @@ h2. Reduction of Complexity
 eTrice is all about the reduction of complexity:
 
 * structural complexity
-** by explicit modeling of hierarchical Actor containment and layering
+** by explicit modeling of hierarchical Actor containment, layering and inheritance
 * behavioral complexity
-** by hierachical statemachines
+** by hierachical statemachines with inheritance
 * teamwork complexity
 ** because loosely coupled Actors provide a natural way to structure team work
 ** since textual model notation allows simple branching and merging

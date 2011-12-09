@@ -27,13 +27,13 @@
 			</p>
 <div class="literallayout">
 <p>
-<code class="code">	@Override<br>
-	public&nbsp;synchronized&nbsp;void&nbsp;receive(Message&nbsp;msg)&nbsp;{<br>
-		if&nbsp;(msg!=null)&nbsp;{<br>
-			messageQueue.push(msg);<br>
-			notifyAll();&nbsp;//&nbsp;wake&nbsp;up&nbsp;thread&nbsp;to&nbsp;compute&nbsp;message<br>
-		}<br>
-	}<br>
+<code class="code">&nbsp;&nbsp;&nbsp;&nbsp;@Override<br>
+&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;synchronized&nbsp;void&nbsp;receive(Message&nbsp;msg)&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(msg!=null)&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;messageQueue.push(msg);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;notifyAll();&nbsp;//&nbsp;wake&nbsp;up&nbsp;thread&nbsp;to&nbsp;compute&nbsp;message<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
 
 </code>
 </p>

@@ -23,15 +23,15 @@ Open the _SendingData.room_ file and copy the following code into the file or us
 
 bc.. 
 RoomModel SendingData {
-		LogicalSystem SendingData_LogSystem {
-			SubSystemRef SendingDataAppl:SendingData_SubSystem 
-		}
-		SubSystemClass SendingData_SubSystem {
-			ActorRef SendigDataTopRef:SendingDataTop 
-		}
-		ActorClass SendingDataTop {
-		}
-	}
+    LogicalSystem SendingData_LogSystem {
+        SubSystemRef SendingDataAppl:SendingData_SubSystem 
+    }
+    SubSystemClass SendingData_SubSystem {
+        ActorRef SendigDataTopRef:SendingDataTop 
+    }
+    ActorClass SendingDataTop {
+    }
+}
 bq. 
 
 h2. Add a data class
@@ -44,12 +44,12 @@ Select _DataClass - data class skeleton_ and name it _DemoData_.
 Remove the operations and add the following Attributes:
 
 bc.. 
-	DataClass DemoData {
-		Attribute int32Val: int32 = "4711"
-		Attribute int8Array [ 10 ]: int8 = "{1,2,3,4,5,6,7,8,9,10}"
-		Attribute float64Val: float64 = "0.0"
-		Attribute stringVal: string = "\"empty\""
-	}
+DataClass DemoData {
+    Attribute int32Val: int32 = "4711"
+    Attribute int8Array [ 10 ]: int8 = "{1,2,3,4,5,6,7,8,9,10}"
+    Attribute float64Val: float64 = "0.0"
+    Attribute stringVal: string = "\"empty\""
+}
 bq. 
 
 Save the model and visit the outline view.
@@ -61,15 +61,15 @@ With the help of _Content Assist_ create a _ProtocolClass_ and name it _PingPong
 
 bc.. 
 ProtocolClass PingPongProtocol {
-					incoming {
-						Message ping(data: DemoData)
-						Message pingSimple(data:int32)
-					}
-					outgoing {
-						Message pong(data: DemoData)
-						Message pongSimple(data:int32)
-					}
-				}		
+    incoming {
+        Message ping(data: DemoData)
+        Message pingSimple(data:int32)
+    }
+    outgoing {
+        Message pong(data: DemoData)
+        Message pongSimple(data:int32)
+    }
+}    
 bq. 
 
 h2. Create MrPing and MrPong Actors
@@ -79,45 +79,45 @@ With the help of _Content Assist_ create two new actor classes and name them _Mr
 bc.. 
 RoomModel SendingData {
 
-	LogicalSystem SendingData_LogSystem {
-		SubSystemRef SendingDataAppl: SendingData_SubSystem
-	}
+    LogicalSystem SendingData_LogSystem {
+        SubSystemRef SendingDataAppl: SendingData_SubSystem
+    }
 
-	SubSystemClass SendingData_SubSystem {
-		ActorRef SendigDataTopRef: SendingDataTop
-	}
+    SubSystemClass SendingData_SubSystem {
+        ActorRef SendigDataTopRef: SendingDataTop
+    }
 
-	ActorClass SendingDataTop { }
+    ActorClass SendingDataTop { }
 
-	DataClass DemoData {
-		Attribute int32Val: int32 = "4711"
-		Attribute int8Array [ 10 ]: int8 = "{1,2,3,4,5,6,7,8,9,10}"
-		Attribute float64Val: float64 = "0.0"
-		Attribute stringVal: string = "\"empty\""
-	}
+    DataClass DemoData {
+        Attribute int32Val: int32 = "4711"
+        Attribute int8Array [ 10 ]: int8 = "{1,2,3,4,5,6,7,8,9,10}"
+        Attribute float64Val: float64 = "0.0"
+        Attribute stringVal: string = "\"empty\""
+    }
 
-	ProtocolClass PingPongProtocol {
-		incoming {
-			Message ping(data: DemoData)
-			Message pingSimple(data: int32)
-		}
-		outgoing {
-			Message pong(data: DemoData)
-			Message pongSimple(data: int32)
-		}
-	}
+    ProtocolClass PingPongProtocol {
+        incoming {
+            Message ping(data: DemoData)
+            Message pingSimple(data: int32)
+        }
+        outgoing {
+            Message pong(data: DemoData)
+            Message pongSimple(data: int32)
+        }
+    }
 
-	ActorClass MrPing {
-		Interface { }
-		Structure { }
-		Behavior { }
-	}
+    ActorClass MrPing {
+        Interface { }
+        Structure { }
+        Behavior { }
+    }
 
-	ActorClass MrPong {
-		Interface { }
-		Structure { }
-		Behavior { }
-	}
+    ActorClass MrPong {
+        Interface { }
+        Structure { }
+        Behavior { }
+    }
 } 
 
 bq.  
@@ -162,13 +162,13 @@ Fill in the following code:
 
 bc.. 
 Operation printData(d: DemoData) : void {
-			"System.out.printf(\"d.int32Val: %d\\n\",d.int32Val);"
-			"System.out.printf(\"d.float64Val: %f\\n\",d.float64Val);"
-			"System.out.printf(\"d.int8Array: \");"
-			"for(int i = 0; i<d.int8Array.length; i++) {"
-			"System.out.printf(\"%d \",d.int8Array[i]);}"
-			"System.out.printf(\"\\nd.stringVal: %s\\n\",d.stringVal);"
-		}
+            "System.out.printf(\"d.int32Val: %d\\n\",d.int32Val);"
+            "System.out.printf(\"d.float64Val: %f\\n\",d.float64Val);"
+            "System.out.printf(\"d.int8Array: \");"
+            "for(int i = 0; i<d.int8Array.length; i++) {"
+            "System.out.printf(\"%d \",d.int8Array[i]);}"
+            "System.out.printf(\"\\nd.stringVal: %s\\n\",d.stringVal);"
+}
 bq. 
 
 For MrPing create the following state machine:
@@ -204,7 +204,7 @@ The model is finished now and can be found in /org.eclipse.etrice.tutorials/mode
 
 h2. Generate and run the model
 
-Generate the code by right click to _gen_SendingData.launch_ and run it as _gen_SendingData_. Run the model. 
+Generate the code by right click to *gen_SendingData.launch* and run it as *gen_SendingData*. Run the model. 
 The output should look like this:
 
 bq.. 

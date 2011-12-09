@@ -27,11 +27,11 @@ Do the same steps for _eTrice Java Modellib_ and _eTrice Java Tutorials_. To avo
 
 Now workspace is set up and you can perform the tutorials or start with your work.
 
-The tutorial models are available in the _org.eclipse.etrice.tutorials_ project. All tutorials are ready to generate and run without any changes. To start the code generator simply run _gen_org.eclipse.etrice.tutorials.launch_ as _gen_org.eclipse.etrice.tutorials.launch_: 
+The tutorial models are available in the _org.eclipse.etrice.tutorials_ project. All tutorials are ready to generate and run without any changes. To start the code generator simply run *gen_org.eclipse.etrice.tutorials.launch* as *gen_org.eclipse.etrice.tutorials.launch*: 
 
 !images/013-SetupWorkspace05.png!
 
-After generation for each tutorial a java file called _SubSystem_ModelnameRunner.java_ is generated. To run the model simply run this file as a java application:
+After generation for each tutorial a java file called *SubSystem_ModelnameRunner.java* is generated. To run the model simply run this file as a java application:
 
 !images/013-SetupWorkspace06.png!
 

@@ -105,33 +105,6 @@ The example defines a ProtocolClass with 2 incoming and two outgoing messages. M
 
 h2. Ports
 
-here is a line
-
-<table border="1" cellpadding="3" cellspacing="0" width="60%">
-  <tr>
-    <th width="50%">Element</th>
-    <th>Graphical Notation</th>
-    <th>Textual Notation</th>
-  </tr>
-  <tr>
-    <td width="50%">Berlin</td>
-    <td>Hamburg</td>
-    <td>M&uuml;nchen</td>
-  </tr>
-  <tr>
-    <td>Milj&ouml;h</td>
-    <td>Kiez</td>
-    <td>Bierdampf</td>
-  </tr>
-  <tr>
-    <td>Buletten</td>
-    <td>Frikadellen</td>
-    <td>Fleischpflanzerl</td>
-  </tr>
-</table>
-
-end of table
-
 h3. Description
 
 Ports are the only interfaces of actors. A port has always a protocol assigned. 
