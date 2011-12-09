@@ -892,7 +892,7 @@
 				<emphasis>ControlPort</emphasis> and select 
 				<emphasis>BlinkyControlProtocol</emphasis> from the drop down list. Uncheck 
 				<emphasis>Conjugated</emphasis> and 
-				<emphasis>Is Relay Port</emphasis>. Klick 
+				<emphasis>Is Relay Port</emphasis>. Click 
 				<emphasis>ok</emphasis>. The resulting structure should look like this:
 			</para>
 			<para>
@@ -936,7 +936,7 @@
 		</section>
 		<section id="ImplementtheBehavior">
 			<title>Implement the Behavior</title>
-			<para>The application should switch on and off the LED for 5 seconds in a 1 second interval, than stop blinking for 5 seconds and start again. To implement this behavior we will implement two FSMs. One for the 1 second interval and one for the 5 second interval. The 1 second blinking should be implemented in 
+			<para>The application should switch on and off the LED for 5 seconds in a 1 second interval, then stop blinking for 5 seconds and start again. To implement this behavior we will implement two FSMs. One for the 1 second interval and one for the 5 second interval. The 1 second blinking should be implemented in 
 				<emphasis>Blinky</emphasis>. The 5 second interval should be implemented in 
 				<emphasis>BlinkyController</emphasis>. First implement the Controller.
 			</para>

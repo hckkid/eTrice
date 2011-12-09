@@ -485,7 +485,7 @@ The resulting code should look like this:
 
 h2. Finish the model structure
 
-From the outline view right click to _Blinky_ and select _Edit Structure_. Drag and Drop an _Interface Port_ to the boarder of the _Blinky_ actor. Note that an interface port is not possible inside the actor. Name the port _ControlPort_ and select _BlinkyControlProtocol_ from the drop down list. Uncheck _Conjugated_ and _Is Relay Port_. Klick _ok_. The resulting structure should look like this:
+From the outline view right click to _Blinky_ and select _Edit Structure_. Drag and Drop an _Interface Port_ to the boarder of the _Blinky_ actor. Note that an interface port is not possible inside the actor. Name the port _ControlPort_ and select _BlinkyControlProtocol_ from the drop down list. Uncheck _Conjugated_ and _Is Relay Port_. Click _ok_. The resulting structure should look like this:
 
 
 !images/020-Blinky04.png!
@@ -503,7 +503,7 @@ Drag and Drop an _ActorRef_ inside the _BlinkyTop_ actor. Name it _blinky_. From
 
 h2. Implement the Behavior
 
-The application should switch on and off the LED for 5 seconds in a 1 second interval, than stop blinking for 5 seconds and start again. To implement this behavior we will implement two FSMs. One for the 1 second interval and one for the 5 second interval. The 1 second blinking should be implemented in _Blinky_. The 5 second interval should be implemented in _BlinkyController_. First implement the Controller.
+The application should switch on and off the LED for 5 seconds in a 1 second interval, then stop blinking for 5 seconds and start again. To implement this behavior we will implement two FSMs. One for the 1 second interval and one for the 5 second interval. The 1 second blinking should be implemented in _Blinky_. The 5 second interval should be implemented in _BlinkyController_. First implement the Controller.
 
 Right click to _BlinkyController_ and select _Edit Behavior_.
 Drag and Drop the _Initial Point_ and two _States_ into the top state. Name the states _on_ and _off_. 
