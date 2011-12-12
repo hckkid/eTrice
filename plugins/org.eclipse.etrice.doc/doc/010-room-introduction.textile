@@ -77,8 +77,8 @@ The basic elements of ROOM are the actors with their ports and protocols. The pr
 
 <table title="Actor and Protocol Example">
 	<tr>
-		<td>!images\040-ActorClass.png!</td>
-		<td>!images\040-ProtocolClassTextualNotation.png!</td>
+		<td>!images/040-ActorClass.png!</td>
+		<td>!images/040-ProtocolClassTextualNotation.png!</td>
 	</tr>
 	<tr>
 		<td align="center">*Actor with Subactors*</td>
@@ -102,10 +102,10 @@ ROOM provides two types of hierarchy. Behavioral hierarchy and structural hierar
 The actor's behavior will be described with a state machine. A state in turn may contain sub states. This is another possibility to focus on an abstraction level. Take the simple FSM from the blinky actor from the blinky tutorial. 
    
 Top level:
-!images\020-Blinky15.png!
+!images/020-Blinky15.png!
 
 _blinking_ Sub machine:
-!images\020-Blinky151.png!
+!images/020-Blinky151.png!
 
 From an abstract point of view there is a state _blinking_. But a simple LED is not able to blink autonomously. Therefore you have to add more details to your model to make a LED blinking, but for the current work it is not of interest how the blinking is realized. This will be done in the next lower level of the hierarchy. 
 
@@ -120,7 +120,7 @@ Layering can be expressed in ROOM by Actors with specialized Ports, called Servi
 
 The Actor that provides a service implements an SPP and the client of that service implements an SAP. The Layer Connection connects all SAPs of a specific Protocol within an Actor hierarchy with an SPP that implements the service. From the Actors point of view, SAPs and SPPs behave almost like regular ports.
 
-!images\010-LayerExample.png!
+!images/010-LayerExample.png!
 
 The Example shows a layered model. The Layer Connections define e.g. that the _ApplicationLayer_ can only use the services of the _ServiceLayer_ and the _CommunicationLayer_. Actors inside the _ApplicationLayer_ that implement an SAP for those services are connected directly to the implementation of the services. 
 Layering and actor hierarchies with port to port connections can be mixed on every level of granularity. 

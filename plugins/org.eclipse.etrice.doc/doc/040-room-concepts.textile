@@ -26,13 +26,13 @@ h3. Notation
 	</tr>
 	<tr>
 		<td>ActorClass</td>
-		<td>!images\040-ActorClassNotation.png!</td>
-		<td>!images\040-ActorClassTextualNotation.png!</td>
+		<td>!images/040-ActorClassNotation.png!</td>
+		<td>!images/040-ActorClassTextualNotation.png!</td>
 	</tr>
 	<tr>
 		<td>ActorRef</td>
-		<td>!images\040-ActorReferenceNotation.png!</td>
-		<td>!images\040-ActorReferenceTextualNotation.png!</td>
+		<td>!images/040-ActorReferenceNotation.png!</td>
+		<td>!images/040-ActorReferenceTextualNotation.png!</td>
 	</tr>
 </table> 
 
@@ -56,8 +56,8 @@ Example:
 		<td align="center">*Textual Notation*</td>
 	</tr>
 	<tr>
-		<td>!images\040-ActorClass.png!</td>
-		<td>!images\040-ActorClassExampleTextualNotation.png!</td>
+		<td>!images/040-ActorClass.png!</td>
+		<td>!images/040-ActorClassExampleTextualNotation.png!</td>
 	</tr>
 </table> 
 
@@ -74,7 +74,7 @@ Attributes are part of the Structure of an ActorClass. They can be of a Primitiv
 
 Example:
 
-!images\040-ActorClassAttributes.png!
+!images/040-ActorClassAttributes.png!
 
 h4.  Operations
 
@@ -82,7 +82,7 @@ Operations are part of the Behavior of an ActorClass.  Arguments and return valu
 
 Example:
 
-!images\040-ActorClassOperations.png!
+!images/040-ActorClassOperations.png!
 
 h2. Protocols
 
@@ -101,7 +101,7 @@ h3. Notation
 ProtocolClasses have only textual notation. 
 The example defines a ProtocolClass with 2 incoming and two outgoing messages. Messages can have data attached. The data can be of a primitive type (e.g. int32, float64, ...) or a DataClass.
 
-!images\040-ProtocolClassTextualNotation.png!
+!images/040-ProtocolClassTextualNotation.png!
 
 h2. Ports
 
@@ -136,70 +136,70 @@ Ports that define an external interface of the ActorClass, are defined in the _I
 	</tr>
 	<tr>
 		<td>Class End Port</td>
-		<td align="center">!images\040-ClassEndPort.png!</td>
+		<td align="center">!images/040-ClassEndPort.png!</td>
 		<td>
 			*External Class End Port:*
-			!images\040-ClassEndPortTextual.png!
+			!images/040-ClassEndPortTextual.png!
 			*Internal Class End Port:*
-			!images\040-ClassEndPortInternalTextual.png!
+			!images/040-ClassEndPortInternalTextual.png!
 		</td>
 	</tr>
 	<tr>
 		<td>Conjugated Class End Port</td>
-		<td align="center">!images\040-ConjugatedClassEndPort.png!</td>
+		<td align="center">!images/040-ConjugatedClassEndPort.png!</td>
 		<td>
 			*External Conjugated Class End Port:*
-			!images\040-ConjugatedClassEndPortTextual.png!
+			!images/040-ConjugatedClassEndPortTextual.png!
 			*Internal Conjugated Class End Port:*
-			!images\040-ConjugatedClassEndPortInternalTextual.png!
+			!images/040-ConjugatedClassEndPortInternalTextual.png!
 		</td>
 	</tr>
 	<tr>
 		<td>Class Relay Port</td>
-		<td align="center">!images\040-ClassRelayPort.png!</td>
+		<td align="center">!images/040-ClassRelayPort.png!</td>
 		<td>
-			!images\040-ClassRelayPortTextual.png!
+			!images/040-ClassRelayPortTextual.png!
 		</td>
 	</tr>
 	<tr>
 		<td>Conjugated Class Relay Port</td>
-		<td align="center">!images\040-ConjugatedClassRelayPort.png!</td>
+		<td align="center">!images/040-ConjugatedClassRelayPort.png!</td>
 		<td>
-			!images\040-ConjugatedClassRelayPortTextual.png!
+			!images/040-ConjugatedClassRelayPortTextual.png!
 		</td>
 	</tr>
 	<tr>
 		<td>Replicated Class End Port</td>
-		<td align="center">!images\040-ReplicatedClassEndPort.png!</td>
+		<td align="center">!images/040-ReplicatedClassEndPort.png!</td>
 		<td>
 			*External Replicated Class End Port:*
-			!images\040-ReplicatedClassEndPortTextual.png!
+			!images/040-ReplicatedClassEndPortTextual.png!
 			*Internal Replicated Class End Port:*
-			!images\040-ReplicatedClassEndPortInternalTextual.png!
+			!images/040-ReplicatedClassEndPortInternalTextual.png!
 		</td>
 	</tr>
 	<tr>
 		<td>Conjugated Replicated Class End Port</td>
-		<td align="center">!images\040-ConjugatedReplicatedClassEndPort.png!</td>
+		<td align="center">!images/040-ConjugatedReplicatedClassEndPort.png!</td>
 		<td>
 			*External Conjugated Replicated Class End Port:*
-			!images\040-ConjugatedReplicatedClassEndPortTextual.png!
+			!images/040-ConjugatedReplicatedClassEndPortTextual.png!
 			*Internal Conjugated Replicated Class End Port:*
-			!images\040-ConjugatedReplicatedClassEndPortInternalTextual.png!
+			!images/040-ConjugatedReplicatedClassEndPortInternalTextual.png!
 		</td>
 	</tr>
 	<tr>
 		<td>Replicated Class Relay Port</td>
-		<td align="center">!images\040-ReplicatedClassRelayPort.png!</td>
+		<td align="center">!images/040-ReplicatedClassRelayPort.png!</td>
 		<td>
-			!images\040-ReplicatedClassRelayPortTextual.png!
+			!images/040-ReplicatedClassRelayPortTextual.png!
 		</td>
 	</tr>
 	<tr>
 		<td>Conjugated Replicated Class Relay Port</td>
-		<td align="center">!images\040-ConjugatedReplicatedClassRelayPort.png!</td>
+		<td align="center">!images/040-ConjugatedReplicatedClassRelayPort.png!</td>
 		<td>
-			!images\040-ConjugatedReplicatedClassRelayPortTextual.png!
+			!images/040-ConjugatedReplicatedClassRelayPortTextual.png!
 		</td>
 	</tr>
 </table>
@@ -216,22 +216,22 @@ These symbols can only appear on the border of an ActorReference symbol. Since t
 	</tr>
 	<tr>
 		<td>Reference Port</td>
-		<td align="center">!images\040-ReferencePort.png!</td>
+		<td align="center">!images/040-ReferencePort.png!</td>
 		<td align="center">_implicit_</td>
 	</tr>
 	<tr>
 		<td>Conjugated Reference Port</td>
-		<td align="center">!images\040-ConjugatedReferencePort.png!</td>
+		<td align="center">!images/040-ConjugatedReferencePort.png!</td>
 		<td align="center">_implicit_</td>
 	</tr>
 	<tr>
 		<td>Replicated Reference Port</td>
-		<td align="center">!images\040-ReplicatedReferencePort.png!</td>
+		<td align="center">!images/040-ReplicatedReferencePort.png!</td>
 		<td align="center">_implicit_</td>
 	</tr>
 	<tr>
 		<td>Conjugated Replicated Reference Port</td>
-		<td align="center">!images\040-ConjugatedReplicatedReferencePort.png!</td>
+		<td align="center">!images/040-ConjugatedReplicatedReferencePort.png!</td>
 		<td align="center">_implicit_</td>
 	</tr>
 </table>
@@ -246,11 +246,11 @@ h3. Notation
   
 Example: DataClass using PrimitiveTypes
 
-!images\040-DataClass1.png!
+!images/040-DataClass1.png!
 
 Example: DataClass using other DataClasses:
 
-!images\040-DataClass2.png!
+!images/040-DataClass2.png!
 
 h2. Layering
 
@@ -271,18 +271,18 @@ h3. Notation
 	</tr>
 	<tr>
 		<td>The Layer Connections in this model define which services are provided by the _ServiceLayer_  (_digitalIO_ and _timer_)</td>
-		<td>!images\040-LayeringModel.png!</td>
-		<td>!images\040-LayeringModelTextual.png!</td>
+		<td>!images/040-LayeringModel.png!</td>
+		<td>!images/040-LayeringModelTextual.png!</td>
 	</tr>
 	<tr>
 		<td>The implementation of the services (SPPs) can be delegated to sub actors. In this case the actor _ServiceLayer_ relays (delegates) the implementation services _digitalIO_ and _timer_ to sub actors</td>
-		<td>!images\040-LayeringServiceLayer.png!</td>
-		<td>!images\040-LayeringServiceLayerTextual.png!</td>
+		<td>!images/040-LayeringServiceLayer.png!</td>
+		<td>!images/040-LayeringServiceLayerTextual.png!</td>
 	</tr>
 	<tr>
 		<td>Every Actor inside the _ApplicationLayer_ that contains an SAP with the same Protocol as _timer_ or _digitalIO_ will be connected to the specified SPP</td>
-		<td>!images\040-LayeringApplicationLayer.png!</td>
-		<td>!images\040-LayeringApplicationLayerTextual.png!</td>
+		<td>!images/040-LayeringApplicationLayer.png!</td>
+		<td>!images/040-LayeringApplicationLayerTextual.png!</td>
 	</tr>
 </table>
 
