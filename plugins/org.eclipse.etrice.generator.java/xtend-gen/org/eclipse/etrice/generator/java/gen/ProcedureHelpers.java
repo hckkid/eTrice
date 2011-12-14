@@ -1,6 +1,7 @@
 package org.eclipse.etrice.generator.java.gen;
 
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.etrice.core.room.ActorClass;
@@ -20,8 +21,8 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 
 @SuppressWarnings("all")
+@Singleton
 public class ProcedureHelpers {
-  
   @Inject
   private StdExtensions stdExt;
   
@@ -38,7 +39,7 @@ public class ProcedureHelpers {
     _builder.newLineIfNotEmpty();
     {
       EList<ExternalPort> _extPorts_1 = ac.getExtPorts();
-      for(ExternalPort ep : _extPorts_1) {
+      for(final ExternalPort ep : _extPorts_1) {
         _builder.append("public ");
         Port _ifport = ep.getIfport();
         ProtocolClass _protocol = _ifport.getProtocol();
@@ -73,7 +74,7 @@ public class ProcedureHelpers {
         _builder.append("\t");
         {
           EList<String> _commands = dc.getCommands();
-          for(String command : _commands) {
+          for(final String command : _commands) {
             _builder.append("\t");
             _builder.append(command, "	");
             _builder.newLineIfNotEmpty();
@@ -92,7 +93,7 @@ public class ProcedureHelpers {
     _builder.append("//--------------------- attributes");
     _builder.newLine();
     {
-      for(Attribute attribute : attribs) {
+      for(final Attribute attribute : attribs) {
         {
           int _size = attribute.getSize();
           boolean _operator_equals = ObjectExtensions.operator_equals(((Integer)_size), ((Integer)0));
@@ -105,7 +106,8 @@ public class ProcedureHelpers {
               if (_operator_notEquals) {
                 Type _type_1 = attribute.getType();
                 String _ext_1 = _type_1.getExt();
-                _builder.append(_ext_1, "");} else {
+                _builder.append(_ext_1, "");
+              } else {
                 Type _type_2 = attribute.getType();
                 String _typeName = this.stdExt.typeName(_type_2);
                 _builder.append(_typeName, "");
@@ -114,7 +116,8 @@ public class ProcedureHelpers {
             _builder.append(" ");
             String _name = attribute.getName();
             _builder.append(_name, "");
-            _builder.append(";");} else {
+            _builder.append(";");
+          } else {
             _builder.append("protected ");
             Type _type_3 = attribute.getType();
             String _typeName_1 = this.stdExt.typeName(_type_3);
@@ -133,7 +136,8 @@ public class ProcedureHelpers {
                 _builder.append("[");
                 int _size_1 = attribute.getSize();
                 _builder.append(_size_1, "");
-                _builder.append("];");} else {
+                _builder.append("];");
+              } else {
                 _builder.append(" = ");
                 String _defaultValueLiteral_1 = attribute.getDefaultValueLiteral();
                 _builder.append(_defaultValueLiteral_1, "");
@@ -153,7 +157,7 @@ public class ProcedureHelpers {
     _builder.append("//--------------------- attribute setters and getters");
     _builder.newLine();
     {
-      for(Attribute attribute : attribs) {
+      for(final Attribute attribute : attribs) {
         _builder.append("public void set");
         String _name = attribute.getName();
         String _firstUpper = StringExtensions.toFirstUpper(_name);
@@ -167,7 +171,8 @@ public class ProcedureHelpers {
             _builder.append(" ");
             Type _type_1 = attribute.getType();
             String _ext_1 = _type_1.getExt();
-            _builder.append(_ext_1, "");} else {
+            _builder.append(_ext_1, "");
+          } else {
             Type _type_2 = attribute.getType();
             String _typeName = this.stdExt.typeName(_type_2);
             _builder.append(_typeName, "");
@@ -205,7 +210,8 @@ public class ProcedureHelpers {
             _builder.append(" ");
             Type _type_4 = attribute.getType();
             String _ext_3 = _type_4.getExt();
-            _builder.append(_ext_3, "");} else {
+            _builder.append(_ext_3, "");
+          } else {
             Type _type_5 = attribute.getType();
             String _typeName_1 = this.stdExt.typeName(_type_5);
             _builder.append(_typeName_1, "");
@@ -242,13 +248,14 @@ public class ProcedureHelpers {
     _builder.append("//--------------------- operations");
     _builder.newLine();
     {
-      for(Operation operation : operations) {
+      for(final Operation operation : operations) {
         _builder.append("public ");
         {
           FreeType _returntype = operation.getReturntype();
           boolean _operator_equals = ObjectExtensions.operator_equals(_returntype, null);
           if (_operator_equals) {
-            _builder.append("void");} else {
+            _builder.append("void");
+          } else {
             FreeType _returntype_1 = operation.getReturntype();
             String _freeTypeName = this.stdExt.freeTypeName(_returntype_1);
             _builder.append(_freeTypeName, "");
@@ -261,7 +268,7 @@ public class ProcedureHelpers {
         {
           EList<FreeTypedID> _arguments = operation.getArguments();
           boolean hasAnyElements = false;
-          for(FreeTypedID argument : _arguments) {
+          for(final FreeTypedID argument : _arguments) {
             if (!hasAnyElements) {
               hasAnyElements = true;
             } else {
@@ -281,7 +288,7 @@ public class ProcedureHelpers {
         {
           DetailCode _detailCode = operation.getDetailCode();
           EList<String> _commands = _detailCode.getCommands();
-          for(String command : _commands) {
+          for(final String command : _commands) {
             _builder.append("\t");
             _builder.append(command, "	");
             _builder.newLineIfNotEmpty();

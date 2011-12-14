@@ -1,6 +1,7 @@
 package org.eclipse.etrice.generator.java.gen;
 
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.etrice.core.room.Attribute;
@@ -26,8 +27,8 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 
 @SuppressWarnings("all")
+@Singleton
 public class ProtocolClassGen {
-  
   @Inject
   private JavaIoFileSystemAccess fileAccess;
   
@@ -42,7 +43,7 @@ public class ProtocolClassGen {
   
   public void doGenerate(final Root root) {
     EList<ProtocolClass> _usedProtocolClasses = root.getUsedProtocolClasses();
-    for (ProtocolClass pc : _usedProtocolClasses) {
+    for (final ProtocolClass pc : _usedProtocolClasses) {
       {
         String _generationTargetPath = this.stdExt.getGenerationTargetPath(pc);
         String _path = this.stdExt.getPath(pc);
@@ -91,7 +92,7 @@ public class ProtocolClassGen {
     EList<RoomModel> models = _referencedModels;
     _builder.newLineIfNotEmpty();
     {
-      for(RoomModel model : models) {
+      for(final RoomModel model : models) {
         _builder.append("import ");
         String _name = model.getName();
         _builder.append(_name, "");
@@ -122,7 +123,7 @@ public class ProtocolClassGen {
     _builder.newLine();
     {
       List<Message> _allOutgoingMessages = this.stdExt.getAllOutgoingMessages(pc);
-      for(Message message : _allOutgoingMessages) {
+      for(final Message message : _allOutgoingMessages) {
         _builder.append("\t");
         _builder.append("public static final int OUT_");
         String _name_2 = message.getName();
@@ -141,7 +142,7 @@ public class ProtocolClassGen {
     _builder.newLine();
     {
       List<Message> _allIncomingMessages = this.stdExt.getAllIncomingMessages(pc);
-      for(Message message_1 : _allIncomingMessages) {
+      for(final Message message_1 : _allIncomingMessages) {
         _builder.append("\t");
         _builder.append("public static final int IN_");
         String _name_3 = message_1.getName();
@@ -183,7 +184,7 @@ public class ProtocolClassGen {
     _builder.append("private static String messageStrings[] = {\"MIN\", ");
     {
       List<Message> _allOutgoingMessages_4 = this.stdExt.getAllOutgoingMessages(pc);
-      for(Message m : _allOutgoingMessages_4) {
+      for(final Message m : _allOutgoingMessages_4) {
         _builder.append("\"");
         String _name_4 = m.getName();
         _builder.append(_name_4, "	");
@@ -193,7 +194,7 @@ public class ProtocolClassGen {
     _builder.append(" ");
     {
       List<Message> _allIncomingMessages_3 = this.stdExt.getAllIncomingMessages(pc);
-      for(Message m_1 : _allIncomingMessages_3) {
+      for(final Message m_1 : _allIncomingMessages_3) {
         _builder.append("\"");
         String _name_5 = m_1.getName();
         _builder.append(_name_5, "	");
@@ -345,7 +346,7 @@ public class ProtocolClassGen {
         _builder.newLine();
         {
           List<MessageHandler> _receiveHandlers = this.stdExt.getReceiveHandlers(pc, conj);
-          for(MessageHandler hdlr : _receiveHandlers) {
+          for(final MessageHandler hdlr : _receiveHandlers) {
             _builder.append("\t\t\t\t");
             _builder.append("\t");
             _builder.append("case ");
@@ -361,7 +362,7 @@ public class ProtocolClassGen {
             {
               DetailCode _detailCode = hdlr.getDetailCode();
               EList<String> _commands = _detailCode.getCommands();
-              for(String command : _commands) {
+              for(final String command : _commands) {
                 _builder.append("\t\t\t\t");
                 _builder.append("\t");
                 _builder.append("\t");
@@ -434,7 +435,7 @@ public class ProtocolClassGen {
     _builder.newLine();
     {
       List<Message> _outgoing = this.stdExt.getOutgoing(pc, conj);
-      for(Message m : _outgoing) {
+      for(final Message m : _outgoing) {
         _builder.append("\t");
         StringConcatenation _sendMessage = this.sendMessage(m, conj);
         _builder.append(_sendMessage, "	");
@@ -539,7 +540,7 @@ public class ProtocolClassGen {
         _builder.newLine();
         {
           List<Message> _allIncomingMessages = this.stdExt.getAllIncomingMessages(pc);
-          for(Message m_1 : _allIncomingMessages) {
+          for(final Message m_1 : _allIncomingMessages) {
             _builder.append("\t");
             StringConcatenation _messageSignature = this.messageSignature(m_1);
             _builder.append(_messageSignature, "	");
@@ -564,13 +565,14 @@ public class ProtocolClassGen {
             _builder.append("}");
             _builder.newLine();
           }
-        }} else {
+        }
+      } else {
         _builder.append("\t");
         _builder.append("// outgoing messages");
         _builder.newLine();
         {
           List<Message> _allOutgoingMessages = this.stdExt.getAllOutgoingMessages(pc);
-          for(Message m_2 : _allOutgoingMessages) {
+          for(final Message m_2 : _allOutgoingMessages) {
             _builder.append("\t");
             StringConcatenation _messageSignature_1 = this.messageSignature(m_2);
             _builder.append(_messageSignature_1, "	");
@@ -615,21 +617,22 @@ public class ProtocolClassGen {
         _builder.append("\t");
         {
           List<Message> _allOutgoingMessages_1 = this.stdExt.getAllOutgoingMessages(pc);
-          for(Message m_3 : _allOutgoingMessages_1) {
+          for(final Message m_3 : _allOutgoingMessages_1) {
             _builder.append(" ");
             StringConcatenation _messageSignature_2 = this.messageSignature(m_3);
             _builder.append(_messageSignature_2, "	");
             _builder.append(";");
             _builder.newLineIfNotEmpty();
           }
-        }} else {
+        }
+      } else {
         _builder.append("\t");
         _builder.append("// incoming messages");
         _builder.newLine();
         _builder.append("\t");
         {
           List<Message> _allIncomingMessages_1 = this.stdExt.getAllIncomingMessages(pc);
-          for(Message m_4 : _allIncomingMessages_1) {
+          for(final Message m_4 : _allIncomingMessages_1) {
             _builder.append(" ");
             StringConcatenation _messageSignature_3 = this.messageSignature(m_4);
             _builder.append(_messageSignature_3, "	");
@@ -713,12 +716,13 @@ public class ProtocolClassGen {
         {
           DetailCode _detailCode = hdlr.getDetailCode();
           EList<String> _commands = _detailCode.getCommands();
-          for(String command : _commands) {
+          for(final String command : _commands) {
             _builder.append("\t");
             _builder.append(command, "	");
             _builder.newLineIfNotEmpty();
           }
-        }} else {
+        }
+      } else {
         _builder.append("\t");
         _builder.append("if (messageStrings[ ");
         _builder.append(dir, "	");
@@ -757,7 +761,8 @@ public class ProtocolClassGen {
             _builder.append(_name_2, "	");
             _builder.append("));");
             _builder.newLineIfNotEmpty();
-            _builder.append("\t");} else {
+            _builder.append("\t");
+          } else {
             _builder.append("getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), ");
             _builder.append(dir, "	");
             _builder.append("_");

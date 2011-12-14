@@ -1,6 +1,7 @@
 package org.eclipse.etrice.generator.java.gen;
 
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 import java.io.File;
 import java.util.HashSet;
 import java.util.Set;
@@ -16,8 +17,8 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 
 @SuppressWarnings("all")
+@Singleton
 public class PrepareFileSystem {
-  
   @Inject
   private StdExtensions stdExt;
   
@@ -28,20 +29,19 @@ public class PrepareFileSystem {
   private ILogger logger;
   
   public void prepare(final Resource resource) {
-    {
       HashSet<String> _hashSet = new HashSet<String>();
       Set<String> pathes = _hashSet;
       EList<EObject> _contents = resource.getContents();
-      for (EObject e : _contents) {
-        if ((e instanceof org.eclipse.etrice.generator.etricegen.Root)) {
+      for (final EObject e : _contents) {
+        if ((e instanceof Root)) {
           EList<RoomModel> _usedRoomModels = ((Root) e).getUsedRoomModels();
-          for (RoomModel mdl : _usedRoomModels) {
+          for (final RoomModel mdl : _usedRoomModels) {
             String _generationTargetPath = this.stdExt.getGenerationTargetPath(mdl);
             pathes.add(_generationTargetPath);
           }
         }
       }
-      for (String path : pathes) {
+      for (final String path : pathes) {
         {
           String _operator_plus = StringExtensions.operator_plus("clearing ", path);
           this.logger.logInfo(_operator_plus);
@@ -53,7 +53,6 @@ public class PrepareFileSystem {
           this.fileAccess.generateFile("readme.txt", _readmeText);
         }
       }
-    }
   }
   
   public void eraseContents(final File f) {
@@ -62,7 +61,7 @@ public class PrepareFileSystem {
       {
         File[] _listFiles = f.listFiles();
         File[] children = _listFiles;
-        for (File child : children) {
+        for (final File child : children) {
           {
             this.eraseContents(child);
             child.delete();

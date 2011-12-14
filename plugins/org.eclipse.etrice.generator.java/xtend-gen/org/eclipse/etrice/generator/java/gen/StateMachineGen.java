@@ -1,6 +1,7 @@
 package org.eclipse.etrice.generator.java.gen;
 
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.etrice.core.room.ActorClass;
@@ -9,6 +10,7 @@ import org.eclipse.etrice.core.room.Guard;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.MessageFromIf;
+import org.eclipse.etrice.core.room.NonInitialTransition;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.StateMachine;
@@ -28,13 +30,10 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 
 @SuppressWarnings("all")
+@Singleton
 public class StateMachineGen {
-  
   @Inject
   private StdExtensions stdExt;
-  
-  @Inject
-  private RoomNameProv nameProvider;
   
   @Inject
   private JavaGenerator javaGen;
@@ -58,9 +57,9 @@ public class StateMachineGen {
     List<State> baseStates = _baseStateList;
     _builder.newLineIfNotEmpty();
     {
-      for(State state : baseStates) {
+      for(final State state : baseStates) {
         _builder.append("protected static final int ");
-        String _stateId = this.nameProvider.getStateId(state);
+        String _stateId = this.stdExt.getStateId(state);
         _builder.append(_stateId, "");
         _builder.append(" = ");
         int _indexOf = baseStates.indexOf(state);
@@ -76,14 +75,14 @@ public class StateMachineGen {
     {
       List<State> _allBaseStates = this.stdExt.getAllBaseStates(ac);
       boolean hasAnyElements = false;
-      for(State state_1 : _allBaseStates) {
+      for(final State state_1 : _allBaseStates) {
         if (!hasAnyElements) {
           hasAnyElements = true;
         } else {
           _builder.appendImmediate(",", "	");
         }
         _builder.append("\"");
-        String _statePathName = this.nameProvider.getStatePathName(state_1);
+        String _statePathName = this.stdExt.getStatePathName(state_1);
         _builder.append(_statePathName, "	");
         _builder.append("\"");
         _builder.newLineIfNotEmpty();
@@ -108,7 +107,7 @@ public class StateMachineGen {
     _builder.append("protected int history[] = {NO_STATE,NO_STATE");
     {
       List<State> _allBaseStates_1 = this.stdExt.getAllBaseStates(ac);
-      for(State state_2 : _allBaseStates_1) {
+      for(final State state_2 : _allBaseStates_1) {
         _builder.append(",NO_STATE");
       }
     }
@@ -127,9 +126,9 @@ public class StateMachineGen {
     _builder.append("// transition chains");
     _builder.newLine();
     {
-      for(TransitionChain tc : chains) {
+      for(final TransitionChain tc : chains) {
         _builder.append("protected static final int ");
-        String _chainId = this.nameProvider.getChainId(tc);
+        String _chainId = this.stdExt.getChainId(tc);
         _builder.append(_chainId, "");
         _builder.append(" = ");
         int _indexOf_1 = chains.indexOf(tc);
@@ -147,7 +146,7 @@ public class StateMachineGen {
     _builder.append("// triggers for FSM");
     _builder.newLine();
     {
-      for(MessageFromIf mif : triggers) {
+      for(final MessageFromIf mif : triggers) {
         _builder.append("protected static final int ");
         String _triggerCodeName = xpac.getTriggerCodeName(mif);
         _builder.append(_triggerCodeName, "");
@@ -195,10 +194,10 @@ public class StateMachineGen {
     {
       StateMachine _stateMachine_1 = xpac.getStateMachine();
       List<State> _leafStateList = this.stdExt.getLeafStateList(_stateMachine_1);
-      for(State state_3 : _leafStateList) {
+      for(final State state_3 : _leafStateList) {
         _builder.append("\t\t\t");
         _builder.append("case ");
-        String _stateId_1 = this.nameProvider.getStateId(state_3);
+        String _stateId_1 = this.stdExt.getStateId(state_3);
         _builder.append(_stateId_1, "			");
         _builder.append(":");
         _builder.newLineIfNotEmpty();
@@ -216,7 +215,7 @@ public class StateMachineGen {
             _builder.append("switch(trigger) {");
             _builder.newLine();
             {
-              for(ActiveTrigger at : atlist) {
+              for(final ActiveTrigger at : atlist) {
                 _builder.append("\t\t\t");
                 _builder.append("\t");
                 _builder.append("case ");
@@ -246,7 +245,7 @@ public class StateMachineGen {
                 {
                   EList<TriggeredTransition> _transitions = at.getTransitions();
                   boolean hasAnyElements_1 = false;
-                  for(TriggeredTransition tt : _transitions) {
+                  for(final TriggeredTransition tt : _transitions) {
                     if (!hasAnyElements_1) {
                       hasAnyElements_1 = true;
                     } else {
@@ -276,7 +275,7 @@ public class StateMachineGen {
                     _builder.append("\t");
                     _builder.append("\t");
                     _builder.append("chain = ");
-                    String _chainId_1 = this.nameProvider.getChainId(chain);
+                    String _chainId_1 = this.stdExt.getChainId(chain);
                     _builder.append(_chainId_1, "						");
                     _builder.append(";");
                     _builder.newLineIfNotEmpty();
@@ -407,7 +406,7 @@ public class StateMachineGen {
     _builder.append("\t");
     _builder.append("int chain = ");
     TransitionChain _chain_1 = xpac.getChain(initt);
-    String _chainId_2 = this.nameProvider.getChainId(_chain_1);
+    String _chainId_2 = this.stdExt.getChainId(_chain_1);
     _builder.append(_chainId_2, "	");
     _builder.append(";");
     _builder.newLineIfNotEmpty();
@@ -454,10 +453,10 @@ public class StateMachineGen {
     {
       StateMachine _stateMachine_3 = xpac.getStateMachine();
       List<State> _baseStateList_1 = this.stdExt.getBaseStateList(_stateMachine_3);
-      for(State state_4 : _baseStateList_1) {
+      for(final State state_4 : _baseStateList_1) {
         _builder.append("\t\t\t");
         _builder.append("case ");
-        String _stateId_2 = this.nameProvider.getStateId(state_4);
+        String _stateId_2 = this.stdExt.getStateId(state_4);
         _builder.append(_stateId_2, "			");
         _builder.append(":");
         _builder.newLineIfNotEmpty();
@@ -467,7 +466,7 @@ public class StateMachineGen {
           boolean _hasExitCode = this.stdExt.hasExitCode(state_4);
           if (_hasExitCode) {
             _builder.append("if (!handler) ");
-            String _exitCodeOperationName = this.nameProvider.getExitCodeOperationName(state_4);
+            String _exitCodeOperationName = RoomNameProv.getExitCodeOperationName(state_4);
             _builder.append(_exitCodeOperationName, "				");
             _builder.append("();");
           }
@@ -476,17 +475,17 @@ public class StateMachineGen {
         _builder.append("\t\t\t");
         _builder.append("\t");
         _builder.append("history[");
-        String _parentStateId = this.nameProvider.getParentStateId(state_4);
+        String _parentStateId = RoomNameProv.getParentStateId(state_4);
         _builder.append(_parentStateId, "				");
         _builder.append("] = ");
-        String _stateId_3 = this.nameProvider.getStateId(state_4);
+        String _stateId_3 = this.stdExt.getStateId(state_4);
         _builder.append(_stateId_3, "				");
         _builder.append(";");
         _builder.newLineIfNotEmpty();
         _builder.append("\t\t\t");
         _builder.append("\t");
         _builder.append("current = ");
-        String _parentStateId_1 = this.nameProvider.getParentStateId(state_4);
+        String _parentStateId_1 = RoomNameProv.getParentStateId(state_4);
         _builder.append(_parentStateId_1, "				");
         _builder.append(";");
         _builder.newLineIfNotEmpty();
@@ -534,10 +533,10 @@ public class StateMachineGen {
     EList<TransitionChain> allchains = _transitionChains_1;
     _builder.newLineIfNotEmpty();
     {
-      for(TransitionChain tc_1 : allchains) {
+      for(final TransitionChain tc_1 : allchains) {
         _builder.append("\t\t");
         _builder.append("case ");
-        String _chainId_3 = this.nameProvider.getChainId(tc_1);
+        String _chainId_3 = this.stdExt.getChainId(tc_1);
         _builder.append(_chainId_3, "		");
         _builder.append(":");
         _builder.newLineIfNotEmpty();
@@ -590,10 +589,10 @@ public class StateMachineGen {
     {
       StateMachine _stateMachine_4 = xpac.getStateMachine();
       List<State> _baseStateList_2 = this.stdExt.getBaseStateList(_stateMachine_4);
-      for(State state_5 : _baseStateList_2) {
+      for(final State state_5 : _baseStateList_2) {
         _builder.append("\t\t\t");
         _builder.append("case ");
-        String _stateId_4 = this.nameProvider.getStateId(state_5);
+        String _stateId_4 = this.stdExt.getStateId(state_5);
         _builder.append(_stateId_4, "			");
         _builder.append(":");
         _builder.newLineIfNotEmpty();
@@ -603,7 +602,7 @@ public class StateMachineGen {
           boolean _hasEntryCode = this.stdExt.hasEntryCode(state_5);
           if (_hasEntryCode) {
             _builder.append("if (!(skip_entry || handler)) ");
-            String _entryCodeOperationName = this.nameProvider.getEntryCodeOperationName(state_5);
+            String _entryCodeOperationName = RoomNameProv.getEntryCodeOperationName(state_5);
             _builder.append(_entryCodeOperationName, "				");
             _builder.append("();");
           }
@@ -619,10 +618,11 @@ public class StateMachineGen {
             _builder.append("\t\t\t");
             _builder.append("\t");
             _builder.append("return ");
-            String _stateId_5 = this.nameProvider.getStateId(state_5);
+            String _stateId_5 = this.stdExt.getStateId(state_5);
             _builder.append(_stateId_5, "				");
             _builder.append(";");
-            _builder.newLineIfNotEmpty();} else {
+            _builder.newLineIfNotEmpty();
+          } else {
             _builder.append("\t\t\t");
             _builder.append("\t");
             _builder.append("// state has a sub graph");
@@ -638,7 +638,7 @@ public class StateMachineGen {
                 _builder.append("\t\t\t");
                 _builder.append("\t");
                 _builder.append("if (history[");
-                String _stateId_6 = this.nameProvider.getStateId(state_5);
+                String _stateId_6 = this.stdExt.getStateId(state_5);
                 _builder.append(_stateId_6, "				");
                 _builder.append("]==NO_STATE) {");
                 _builder.newLineIfNotEmpty();
@@ -654,7 +654,7 @@ public class StateMachineGen {
                 _builder.append("\t");
                 _builder.append("state = executeTransitionChain(");
                 TransitionChain _chain_2 = xpac.getChain(sub_initt);
-                String _chainId_4 = this.nameProvider.getChainId(_chain_2);
+                String _chainId_4 = this.stdExt.getChainId(_chain_2);
                 _builder.append(_chainId_4, "					");
                 _builder.append(", null, null);");
                 _builder.newLineIfNotEmpty();
@@ -670,14 +670,15 @@ public class StateMachineGen {
                 _builder.append("\t");
                 _builder.append("\t");
                 _builder.append("state = history[");
-                String _stateId_7 = this.nameProvider.getStateId(state_5);
+                String _stateId_7 = this.stdExt.getStateId(state_5);
                 _builder.append(_stateId_7, "					");
                 _builder.append("];");
                 _builder.newLineIfNotEmpty();
                 _builder.append("\t\t\t");
                 _builder.append("\t");
                 _builder.append("}");
-                _builder.newLine();} else {
+                _builder.newLine();
+              } else {
                 _builder.append("\t\t\t");
                 _builder.append("\t");
                 _builder.append("// without init transition");
@@ -685,7 +686,7 @@ public class StateMachineGen {
                 _builder.append("\t\t\t");
                 _builder.append("\t");
                 _builder.append("state = history[");
-                String _stateId_8 = this.nameProvider.getStateId(state_5);
+                String _stateId_8 = this.stdExt.getStateId(state_5);
                 _builder.append(_stateId_8, "				");
                 _builder.append("];");
                 _builder.newLineIfNotEmpty();
@@ -728,7 +729,7 @@ public class StateMachineGen {
     {
       StateMachine _stateMachine_5 = xpac.getStateMachine();
       List<State> _stateList = this.stdExt.getStateList(_stateMachine_5);
-      for(State state_6 : _stateList) {
+      for(final State state_6 : _stateList) {
         {
           boolean _isOwnObject = xpac.isOwnObject(state_6);
           if (_isOwnObject) {
@@ -736,7 +737,7 @@ public class StateMachineGen {
               boolean _hasEntryCode_1 = this.stdExt.hasEntryCode(state_6);
               if (_hasEntryCode_1) {
                 _builder.append("protected void ");
-                String _entryCodeOperationName_1 = this.nameProvider.getEntryCodeOperationName(state_6);
+                String _entryCodeOperationName_1 = RoomNameProv.getEntryCodeOperationName(state_6);
                 _builder.append(_entryCodeOperationName_1, "");
                 _builder.append("() {");
                 _builder.newLineIfNotEmpty();
@@ -752,7 +753,7 @@ public class StateMachineGen {
               boolean _hasExitCode_1 = this.stdExt.hasExitCode(state_6);
               if (_hasExitCode_1) {
                 _builder.append("protected void ");
-                String _exitCodeOperationName_1 = this.nameProvider.getExitCodeOperationName(state_6);
+                String _exitCodeOperationName_1 = RoomNameProv.getExitCodeOperationName(state_6);
                 _builder.append(_exitCodeOperationName_1, "");
                 _builder.append("() {");
                 _builder.newLineIfNotEmpty();
@@ -774,7 +775,7 @@ public class StateMachineGen {
     {
       StateMachine _stateMachine_6 = xpac.getStateMachine();
       List<Transition> _transitionList = this.stdExt.getTransitionList(_stateMachine_6);
-      for(Transition tr : _transitionList) {
+      for(final Transition tr : _transitionList) {
         {
           boolean _operator_and = false;
           boolean _isOwnObject_1 = xpac.isOwnObject(tr);
@@ -786,11 +787,11 @@ public class StateMachineGen {
           }
           if (_operator_and) {
             _builder.append("protected void ");
-            String _actionCodeOperationName = this.nameProvider.getActionCodeOperationName(tr);
+            String _actionCodeOperationName = RoomNameProv.getActionCodeOperationName(tr);
             _builder.append(_actionCodeOperationName, "");
             _builder.append("(");
             {
-              if ((tr instanceof org.eclipse.etrice.core.room.NonInitialTransition)) {
+              if ((tr instanceof NonInitialTransition)) {
                 _builder.append("InterfaceItemBase ifitem");
                 String _argumentList = this.javaGen.getArgumentList(xpac, tr);
                 _builder.append(_argumentList, "");
@@ -854,17 +855,10 @@ public class StateMachineGen {
   }
   
   public StringConcatenation guard(final Transition tt, final String trigger, final ExpandedActorClass ac) {
-    if ((tt instanceof TriggeredTransition)
-         && (trigger instanceof String)
-         && (ac instanceof ExpandedActorClass)) {
-      return _guard((TriggeredTransition)tt, (String)trigger, (ExpandedActorClass)ac);
-    } else if ((tt instanceof Transition)
-         && (trigger instanceof String)
-         && (ac instanceof ExpandedActorClass)) {
-      return _guard((Transition)tt, (String)trigger, (ExpandedActorClass)ac);
+    if (tt instanceof TriggeredTransition) {
+      return _guard((TriggeredTransition)tt, trigger, ac);
     } else {
-      throw new IllegalArgumentException("Unhandled parameter types: " +
-        java.util.Arrays.<Object>asList(tt, trigger, ac).toString());
+      return _guard(tt, trigger, ac);
     }
   }
 }

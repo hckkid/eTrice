@@ -1,6 +1,7 @@
 package org.eclipse.etrice.generator.java.gen;
 
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -16,8 +17,8 @@ import org.eclipse.xtext.generator.IGenerator;
 import org.eclipse.xtext.xbase.lib.BooleanExtensions;
 
 @SuppressWarnings("all")
+@Singleton
 public class MainGen implements IGenerator {
-  
   @Inject
   private DataClassGen dataClassGen;
   
@@ -37,19 +38,16 @@ public class MainGen implements IGenerator {
   private PrepareFileSystem prepFS;
   
   public void doGenerate(final Resource resource, final IFileSystemAccess fsa) {
-    {
       this.prepFS.prepare(resource);
       EList<EObject> _contents = resource.getContents();
-      for (EObject e : _contents) {
-        if ((e instanceof org.eclipse.etrice.generator.etricegen.Root)) {
+      for (final EObject e : _contents) {
+        if ((e instanceof Root)) {
           this.doGenerate(((Root) e));
         }
       }
-    }
   }
   
   public void doGenerate(final Root e) {
-    {
       this.dataClassGen.doGenerate(e);
       this.protocolClassGen.doGenerate(e);
       this.actorClassGen.doGenerate(e);
@@ -59,6 +57,5 @@ public class MainGen implements IGenerator {
       if (_operator_not) {
         this.subsystemRunnerGen.doGenerate(e);
       }
-    }
   }
 }

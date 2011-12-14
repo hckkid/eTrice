@@ -1,6 +1,7 @@
 package org.eclipse.etrice.generator.java.gen;
 
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.DataClass;
@@ -19,8 +20,8 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 
 @SuppressWarnings("all")
+@Singleton
 public class DataClassGen {
-  
   @Inject
   private JavaIoFileSystemAccess fileAccess;
   
@@ -35,7 +36,7 @@ public class DataClassGen {
   
   public void doGenerate(final Root root) {
     EList<DataClass> _usedDataClasses = root.getUsedDataClasses();
-    for (DataClass dc : _usedDataClasses) {
+    for (final DataClass dc : _usedDataClasses) {
       {
         String _generationTargetPath = this.stdExt.getGenerationTargetPath(dc);
         String _path = this.stdExt.getPath(dc);
@@ -67,7 +68,7 @@ public class DataClassGen {
     EList<RoomModel> models = _referencedModels;
     _builder.newLineIfNotEmpty();
     {
-      for(RoomModel model : models) {
+      for(final RoomModel model : models) {
         _builder.append("import ");
         String _name = model.getName();
         _builder.append(_name, "");
@@ -85,7 +86,7 @@ public class DataClassGen {
         _builder.newLine();
         {
           EList<Import> _imports_1 = dc.getImports();
-          for(Import imp : _imports_1) {
+          for(final Import imp : _imports_1) {
             _builder.append("import ");
             String _importedNamespace = imp.getImportedNamespace();
             _builder.append(_importedNamespace, "");
@@ -139,7 +140,7 @@ public class DataClassGen {
     _builder.newLineIfNotEmpty();
     {
       EList<Attribute> _attributes_2 = dc.getAttributes();
-      for(Attribute a : _attributes_2) {
+      for(final Attribute a : _attributes_2) {
         {
           String _defaultValueLiteral = a.getDefaultValueLiteral();
           boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(_defaultValueLiteral, null);
@@ -157,7 +158,8 @@ public class DataClassGen {
                 _builder.append(";");
               }
             }
-            _builder.newLineIfNotEmpty();} else {
+            _builder.newLineIfNotEmpty();
+          } else {
             Type _type = a.getType();
             DataClass _type_1 = _type.getType();
             boolean _operator_notEquals_2 = ObjectExtensions.operator_notEquals(_type_1, null);
@@ -201,7 +203,7 @@ public class DataClassGen {
     _builder.newLineIfNotEmpty();
     {
       EList<Attribute> _attributes_3 = dc.getAttributes();
-      for(Attribute a_1 : _attributes_3) {
+      for(final Attribute a_1 : _attributes_3) {
         {
           Type _type_4 = a_1.getType();
           DataClass _type_5 = _type_4.getType();
@@ -215,7 +217,8 @@ public class DataClassGen {
             String _name_11 = a_1.getName();
             _builder.append(_name_11, "		");
             _builder.append(".deepCopy();");
-            _builder.newLineIfNotEmpty();} else {
+            _builder.newLineIfNotEmpty();
+          } else {
             _builder.append("\t\t");
             {
               int _size_2 = a_1.getSize();
@@ -227,7 +230,8 @@ public class DataClassGen {
                 _builder.append(" = ");
                 String _name_13 = a_1.getName();
                 _builder.append(_name_13, "		");
-                _builder.append(";");} else {
+                _builder.append(";");
+              } else {
                 _builder.append("for (int i=0;i<");
                 int _size_3 = a_1.getSize();
                 _builder.append(_size_3, "		");

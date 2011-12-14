@@ -1,6 +1,7 @@
 package org.eclipse.etrice.generator.java.gen;
 
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.etrice.core.room.ActorClass;
@@ -32,8 +33,8 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 
 @SuppressWarnings("all")
+@Singleton
 public class ActorClassGen {
-  
   @Inject
   private JavaIoFileSystemAccess fileAccess;
   
@@ -51,7 +52,7 @@ public class ActorClassGen {
   
   public void doGenerate(final Root root) {
     EList<ExpandedActorClass> _xpActorClasses = root.getXpActorClasses();
-    for (ExpandedActorClass xpac : _xpActorClasses) {
+    for (final ExpandedActorClass xpac : _xpActorClasses) {
       {
         ActorClass _actorClass = xpac.getActorClass();
         String _generationTargetPath = this.stdExt.getGenerationTargetPath(_actorClass);
@@ -100,7 +101,7 @@ public class ActorClassGen {
     _builder.newLine();
     {
       EList<RoomModel> _referencedModels = root.getReferencedModels(ac);
-      for(RoomModel model : _referencedModels) {
+      for(final RoomModel model : _referencedModels) {
         _builder.append("import ");
         String _name = model.getName();
         _builder.append(_name, "");
@@ -111,7 +112,7 @@ public class ActorClassGen {
     _builder.newLine();
     {
       EList<ProtocolClass> _referencedProtocols = root.getReferencedProtocols(ac);
-      for(ProtocolClass pc : _referencedProtocols) {
+      for(final ProtocolClass pc : _referencedProtocols) {
         _builder.append("import ");
         String _package_1 = this.stdExt.getPackage(pc);
         _builder.append(_package_1, "");
@@ -146,7 +147,8 @@ public class ActorClassGen {
       if (_operator_notEquals) {
         ActorClass _base_1 = ac.getBase();
         String _name_3 = _base_1.getName();
-        _builder.append(_name_3, "");} else {
+        _builder.append(_name_3, "");
+      } else {
         _builder.append("ActorClassBase");
       }
     }
@@ -165,7 +167,7 @@ public class ActorClassGen {
     _builder.newLine();
     {
       List<Port> _endPorts = this.stdExt.getEndPorts(ac);
-      for(Port ep : _endPorts) {
+      for(final Port ep : _endPorts) {
         _builder.append("\t");
         _builder.append("protected ");
         String _portClassName = this.stdExt.getPortClassName(ep);
@@ -182,7 +184,7 @@ public class ActorClassGen {
     _builder.newLine();
     {
       EList<SAPRef> _strSAPs = ac.getStrSAPs();
-      for(SAPRef sap : _strSAPs) {
+      for(final SAPRef sap : _strSAPs) {
         _builder.append("\t");
         _builder.append("protected ");
         String _portClassName_1 = this.stdExt.getPortClassName(sap);
@@ -199,7 +201,7 @@ public class ActorClassGen {
     _builder.newLine();
     {
       EList<ServiceImplementation> _serviceImplementations = ac.getServiceImplementations();
-      for(ServiceImplementation svc : _serviceImplementations) {
+      for(final ServiceImplementation svc : _serviceImplementations) {
         _builder.append("\t");
         _builder.append("protected ");
         String _portClassName_2 = this.stdExt.getPortClassName(svc);
@@ -218,7 +220,7 @@ public class ActorClassGen {
     _builder.newLine();
     {
       List<Port> _endPorts_1 = this.stdExt.getEndPorts(ac);
-      for(Port ep_1 : _endPorts_1) {
+      for(final Port ep_1 : _endPorts_1) {
         _builder.append("\t");
         _builder.append("protected static final int IFITEM_");
         String _name_7 = ep_1.getName();
@@ -233,7 +235,7 @@ public class ActorClassGen {
     }
     {
       EList<SAPRef> _strSAPs_1 = ac.getStrSAPs();
-      for(SAPRef sap_1 : _strSAPs_1) {
+      for(final SAPRef sap_1 : _strSAPs_1) {
         _builder.append("\t");
         _builder.append("protected static final int IFITEM_");
         String _name_8 = sap_1.getName();
@@ -248,7 +250,7 @@ public class ActorClassGen {
     }
     {
       EList<ServiceImplementation> _serviceImplementations_1 = ac.getServiceImplementations();
-      for(ServiceImplementation svc_1 : _serviceImplementations_1) {
+      for(final ServiceImplementation svc_1 : _serviceImplementations_1) {
         _builder.append("\t");
         _builder.append("protected static final int IFITEM_");
         SPPRef _spp_1 = svc_1.getSpp();
@@ -291,7 +293,8 @@ public class ActorClassGen {
       if (_operator_equals) {
         _builder.append("\t\t");
         _builder.append("super(parent, name, port_addr[0][0], peer_addr[0][0]);");
-        _builder.newLine();} else {
+        _builder.newLine();
+      } else {
         _builder.append("\t\t");
         _builder.append("super(parent, name, port_addr, peer_addr);");
         _builder.newLine();
@@ -310,7 +313,7 @@ public class ActorClassGen {
     _builder.newLine();
     {
       EList<Attribute> _attributes_1 = ac.getAttributes();
-      for(Attribute a : _attributes_1) {
+      for(final Attribute a : _attributes_1) {
         {
           String _defaultValueLiteral = a.getDefaultValueLiteral();
           boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(_defaultValueLiteral, null);
@@ -322,7 +325,8 @@ public class ActorClassGen {
             String _defaultValueLiteral_1 = a.getDefaultValueLiteral();
             _builder.append(_defaultValueLiteral_1, "		");
             _builder.append(";");
-            _builder.newLineIfNotEmpty();} else {
+            _builder.newLineIfNotEmpty();
+          } else {
             Type _type = a.getType();
             DataClass _type_1 = _type.getType();
             boolean _operator_notEquals_2 = ObjectExtensions.operator_notEquals(_type_1, null);
@@ -348,7 +352,7 @@ public class ActorClassGen {
     _builder.newLine();
     {
       List<Port> _endPorts_2 = this.stdExt.getEndPorts(ac);
-      for(Port ep_2 : _endPorts_2) {
+      for(final Port ep_2 : _endPorts_2) {
         _builder.append("\t\t");
         String _name_15 = ep_2.getName();
         _builder.append(_name_15, "		");
@@ -400,7 +404,7 @@ public class ActorClassGen {
     _builder.newLine();
     {
       EList<SAPRef> _strSAPs_2 = ac.getStrSAPs();
-      for(SAPRef sap_2 : _strSAPs_2) {
+      for(final SAPRef sap_2 : _strSAPs_2) {
         _builder.append("\t\t");
         String _name_20 = sap_2.getName();
         _builder.append(_name_20, "		");
@@ -428,7 +432,7 @@ public class ActorClassGen {
     _builder.newLine();
     {
       EList<ServiceImplementation> _serviceImplementations_2 = ac.getServiceImplementations();
-      for(ServiceImplementation svc_2 : _serviceImplementations_2) {
+      for(final ServiceImplementation svc_2 : _serviceImplementations_2) {
         _builder.append("\t\t");
         SPPRef _spp_3 = svc_2.getSpp();
         String _name_25 = _spp_3.getName();
@@ -520,7 +524,8 @@ public class ActorClassGen {
         _builder.append("\t");
         StringConcatenation _genStateMachine = this.stateMachineGen.genStateMachine(xpac, ac);
         _builder.append(_genStateMachine, "	");
-        _builder.newLineIfNotEmpty();} else {
+        _builder.newLineIfNotEmpty();
+      } else {
         boolean _hasStateMachine = xpac.hasStateMachine();
         boolean _operator_not_1 = BooleanExtensions.operator_not(_hasStateMachine);
         if (_operator_not_1) {

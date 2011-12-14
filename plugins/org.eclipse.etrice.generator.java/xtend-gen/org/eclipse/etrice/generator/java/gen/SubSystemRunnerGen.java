@@ -1,6 +1,7 @@
 package org.eclipse.etrice.generator.java.gen;
 
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.generator.etricegen.Root;
@@ -11,8 +12,8 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 
 @SuppressWarnings("all")
+@Singleton
 public class SubSystemRunnerGen {
-  
   @Inject
   private JavaIoFileSystemAccess fileAccess;
   
@@ -21,7 +22,7 @@ public class SubSystemRunnerGen {
   
   public void doGenerate(final Root root) {
     EList<SubSystemInstance> _subSystemInstances = root.getSubSystemInstances();
-    for (SubSystemInstance sc : _subSystemInstances) {
+    for (final SubSystemInstance sc : _subSystemInstances) {
       {
         SubSystemClass _subSystemClass = sc.getSubSystemClass();
         String _generationTargetPath = this.stdExt.getGenerationTargetPath(_subSystemClass);

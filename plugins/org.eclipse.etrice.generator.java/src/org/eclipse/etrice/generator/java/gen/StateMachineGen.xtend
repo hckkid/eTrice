@@ -12,22 +12,21 @@
 
 package org.eclipse.etrice.generator.java.gen
 
-import org.eclipse.xtext.generator.IFileSystemAccess
-import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 import com.google.inject.Inject
-import java.util.*
+import com.google.inject.Singleton
+import java.util.List
+import org.eclipse.etrice.core.room.ActorClass
+import org.eclipse.etrice.core.room.NonInitialTransition
+import org.eclipse.etrice.core.room.Transition
+import org.eclipse.etrice.core.room.TriggeredTransition
+import org.eclipse.etrice.generator.etricegen.ExpandedActorClass
+import org.eclipse.etrice.generator.etricegen.TransitionChain
+import static extension org.eclipse.etrice.generator.extensions.RoomNameProv.*
 
-import static extension org.eclipse.xtext.xtend2.lib.ResourceExtensions.*
-import static extension org.eclipse.xtext.xtend2.lib.*
-
-import org.eclipse.etrice.core.room.*
-import org.eclipse.etrice.generator.etricegen.*
-import org.eclipse.etrice.generator.extensions.RoomNameProv
-
+@Singleton
 class StateMachineGen {
 	
 	@Inject extension StdExtensions stdExt
-	@Inject extension RoomNameProv nameProvider
 	@Inject JavaGenerator javaGen
 	
 	def genStateMachine(ExpandedActorClass xpac, ActorClass ac) {'''

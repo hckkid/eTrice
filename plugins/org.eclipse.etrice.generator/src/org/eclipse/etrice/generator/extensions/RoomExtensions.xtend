@@ -16,18 +16,34 @@
 
 package org.eclipse.etrice.generator.extensions
 
-import org.eclipse.etrice.core.room.*
-import org.eclipse.etrice.generator.etricegen.*
-import org.eclipse.emf.ecore.*
-import java.util.*
-import java.io.File
-
-import static extension org.eclipse.xtend.util.stdlib.naming
-import static extension org.eclipse.xtext.xtend2.lib.ResourceExtensions.*
-import static extension org.eclipse.xtext.xtend2.lib.*
-
 import com.google.inject.Inject
+import com.google.inject.Singleton
+import java.io.File
+import java.util.ArrayList
+import java.util.List
+import org.eclipse.emf.ecore.EObject
+import org.eclipse.etrice.core.room.ActorClass
+import org.eclipse.etrice.core.room.BaseState
+import org.eclipse.etrice.core.room.ExternalPort
+import org.eclipse.etrice.core.room.InitialTransition
+import org.eclipse.etrice.core.room.Message
+import org.eclipse.etrice.core.room.MessageHandler
+import org.eclipse.etrice.core.room.Port
+import org.eclipse.etrice.core.room.PortClass
+import org.eclipse.etrice.core.room.ProtocolClass
+import org.eclipse.etrice.core.room.RefinedState
+import org.eclipse.etrice.core.room.SAPRef
+import org.eclipse.etrice.core.room.ServiceImplementation
+import org.eclipse.etrice.core.room.State
+import org.eclipse.etrice.core.room.StateGraph
+import org.eclipse.etrice.core.room.Transition
+import org.eclipse.etrice.core.room.Trigger
+import org.eclipse.etrice.generator.etricegen.ActiveTrigger
+import org.eclipse.etrice.generator.etricegen.ExpandedActorClass
+import org.eclipse.etrice.generator.etricegen.TransitionChain
+import static extension org.eclipse.etrice.generator.extensions.RoomNameProv.*
 
+@Singleton
 class RoomExtensions {
 
 	// for the time being we need a delegate to the static methods of the RoomNameProvider
@@ -314,15 +330,15 @@ class RoomExtensions {
 	}
 
 	def String getStateId(State s) {
-		return nameProvider.getStateId(s)
+		return getStateId(s)
 	}
 
 	def String getStatePathName(State s) {
-		return nameProvider.getStatePathName(s);
+		return getStatePathName(s);
 	}
 	
 	def String getChainId(TransitionChain t) {
-		return nameProvider.getChainId(t)
+		return getChainId(t)
 	}
 	
 	def boolean hasGuard(Trigger tr) {

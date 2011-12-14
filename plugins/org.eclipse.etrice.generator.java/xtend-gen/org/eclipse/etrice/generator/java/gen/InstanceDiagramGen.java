@@ -1,6 +1,7 @@
 package org.eclipse.etrice.generator.java.gen;
 
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.room.ActorClass;
@@ -17,8 +18,8 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 
 @SuppressWarnings("all")
+@Singleton
 public class InstanceDiagramGen implements IRoomGenerator {
-  
   @Inject
   private JavaIoFileSystemAccess fileAccess;
   
@@ -30,7 +31,7 @@ public class InstanceDiagramGen implements IRoomGenerator {
   
   public void doGenerate(final Root root) {
     EList<SubSystemInstance> _subSystemInstances = root.getSubSystemInstances();
-    for (SubSystemInstance sc : _subSystemInstances) {
+    for (final SubSystemInstance sc : _subSystemInstances) {
       {
         SubSystemClass _subSystemClass = sc.getSubSystemClass();
         String _generationTargetPath = this.stdExt.getGenerationTargetPath(_subSystemClass);
@@ -82,7 +83,7 @@ public class InstanceDiagramGen implements IRoomGenerator {
     _builder.newLineIfNotEmpty();
     {
       EList<ActorInstance> _instances = ssc.getInstances();
-      for(ActorInstance ai : _instances) {
+      for(final ActorInstance ai : _instances) {
         _builder.append("\t");
         StringConcatenation _instance = this.instance(ai);
         _builder.append(_instance, "	");
@@ -122,7 +123,7 @@ public class InstanceDiagramGen implements IRoomGenerator {
     _builder.newLineIfNotEmpty();
     {
       EList<ActorInstance> _instances = ai.getInstances();
-      for(ActorInstance sub_ai : _instances) {
+      for(final ActorInstance sub_ai : _instances) {
         StringConcatenation _instance = this.instance(sub_ai);
         _builder.append(_instance, "");
         _builder.newLineIfNotEmpty();

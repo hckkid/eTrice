@@ -1,6 +1,7 @@
 package org.eclipse.etrice.generator.java.gen;
 
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.FreeType;
@@ -18,8 +19,8 @@ import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 @SuppressWarnings("all")
+@Singleton
 public class StdExtensions extends RoomExtensions {
-  
   @Inject
   private JavaGenerator javaGen;
   
@@ -53,55 +54,55 @@ public class StdExtensions extends RoomExtensions {
     final String __valOfSwitchOver = _string;
     boolean matched = false;
     if (!matched) {
-      if (org.eclipse.xtext.xbase.lib.ObjectExtensions.operator_equals(__valOfSwitchOver,"uint8")) {
+      if (ObjectExtensions.operator_equals(__valOfSwitchOver,"uint8")) {
         matched=true;
         _switchResult = "undefined_type";
       }
     }
     if (!matched) {
-      if (org.eclipse.xtext.xbase.lib.ObjectExtensions.operator_equals(__valOfSwitchOver,"uint16")) {
+      if (ObjectExtensions.operator_equals(__valOfSwitchOver,"uint16")) {
         matched=true;
         _switchResult = "undefined_type";
       }
     }
     if (!matched) {
-      if (org.eclipse.xtext.xbase.lib.ObjectExtensions.operator_equals(__valOfSwitchOver,"uint32")) {
+      if (ObjectExtensions.operator_equals(__valOfSwitchOver,"uint32")) {
         matched=true;
         _switchResult = "undefined_type";
       }
     }
     if (!matched) {
-      if (org.eclipse.xtext.xbase.lib.ObjectExtensions.operator_equals(__valOfSwitchOver,"int8")) {
+      if (ObjectExtensions.operator_equals(__valOfSwitchOver,"int8")) {
         matched=true;
         _switchResult = "byte";
       }
     }
     if (!matched) {
-      if (org.eclipse.xtext.xbase.lib.ObjectExtensions.operator_equals(__valOfSwitchOver,"int16")) {
+      if (ObjectExtensions.operator_equals(__valOfSwitchOver,"int16")) {
         matched=true;
         _switchResult = "short";
       }
     }
     if (!matched) {
-      if (org.eclipse.xtext.xbase.lib.ObjectExtensions.operator_equals(__valOfSwitchOver,"int32")) {
+      if (ObjectExtensions.operator_equals(__valOfSwitchOver,"int32")) {
         matched=true;
         _switchResult = "int";
       }
     }
     if (!matched) {
-      if (org.eclipse.xtext.xbase.lib.ObjectExtensions.operator_equals(__valOfSwitchOver,"float32")) {
+      if (ObjectExtensions.operator_equals(__valOfSwitchOver,"float32")) {
         matched=true;
         _switchResult = "float";
       }
     }
     if (!matched) {
-      if (org.eclipse.xtext.xbase.lib.ObjectExtensions.operator_equals(__valOfSwitchOver,"float64")) {
+      if (ObjectExtensions.operator_equals(__valOfSwitchOver,"float64")) {
         matched=true;
         _switchResult = "double";
       }
     }
     if (!matched) {
-      if (org.eclipse.xtext.xbase.lib.ObjectExtensions.operator_equals(__valOfSwitchOver,"string")) {
+      if (ObjectExtensions.operator_equals(__valOfSwitchOver,"string")) {
         matched=true;
         _switchResult = "String";
       }
@@ -119,55 +120,55 @@ public class StdExtensions extends RoomExtensions {
     final String __valOfSwitchOver = _string;
     boolean matched = false;
     if (!matched) {
-      if (org.eclipse.xtext.xbase.lib.ObjectExtensions.operator_equals(__valOfSwitchOver,"uint8")) {
+      if (ObjectExtensions.operator_equals(__valOfSwitchOver,"uint8")) {
         matched=true;
         _switchResult = "undefined_type";
       }
     }
     if (!matched) {
-      if (org.eclipse.xtext.xbase.lib.ObjectExtensions.operator_equals(__valOfSwitchOver,"uint16")) {
+      if (ObjectExtensions.operator_equals(__valOfSwitchOver,"uint16")) {
         matched=true;
         _switchResult = "undefined_type";
       }
     }
     if (!matched) {
-      if (org.eclipse.xtext.xbase.lib.ObjectExtensions.operator_equals(__valOfSwitchOver,"uint32")) {
+      if (ObjectExtensions.operator_equals(__valOfSwitchOver,"uint32")) {
         matched=true;
         _switchResult = "undefined_type";
       }
     }
     if (!matched) {
-      if (org.eclipse.xtext.xbase.lib.ObjectExtensions.operator_equals(__valOfSwitchOver,"int8")) {
+      if (ObjectExtensions.operator_equals(__valOfSwitchOver,"int8")) {
         matched=true;
         _switchResult = "Byte";
       }
     }
     if (!matched) {
-      if (org.eclipse.xtext.xbase.lib.ObjectExtensions.operator_equals(__valOfSwitchOver,"int16")) {
+      if (ObjectExtensions.operator_equals(__valOfSwitchOver,"int16")) {
         matched=true;
         _switchResult = "Short";
       }
     }
     if (!matched) {
-      if (org.eclipse.xtext.xbase.lib.ObjectExtensions.operator_equals(__valOfSwitchOver,"int32")) {
+      if (ObjectExtensions.operator_equals(__valOfSwitchOver,"int32")) {
         matched=true;
         _switchResult = "Integer";
       }
     }
     if (!matched) {
-      if (org.eclipse.xtext.xbase.lib.ObjectExtensions.operator_equals(__valOfSwitchOver,"float32")) {
+      if (ObjectExtensions.operator_equals(__valOfSwitchOver,"float32")) {
         matched=true;
         _switchResult = "Float";
       }
     }
     if (!matched) {
-      if (org.eclipse.xtext.xbase.lib.ObjectExtensions.operator_equals(__valOfSwitchOver,"float64")) {
+      if (ObjectExtensions.operator_equals(__valOfSwitchOver,"float64")) {
         matched=true;
         _switchResult = "Double";
       }
     }
     if (!matched) {
-      if (org.eclipse.xtext.xbase.lib.ObjectExtensions.operator_equals(__valOfSwitchOver,"string")) {
+      if (ObjectExtensions.operator_equals(__valOfSwitchOver,"string")) {
         matched=true;
         _switchResult = "String";
       }
@@ -232,55 +233,55 @@ public class StdExtensions extends RoomExtensions {
     final String __valOfSwitchOver = _string;
     boolean matched = false;
     if (!matched) {
-      if (org.eclipse.xtext.xbase.lib.ObjectExtensions.operator_equals(__valOfSwitchOver,"uint8")) {
+      if (ObjectExtensions.operator_equals(__valOfSwitchOver,"uint8")) {
         matched=true;
         _switchResult = "0";
       }
     }
     if (!matched) {
-      if (org.eclipse.xtext.xbase.lib.ObjectExtensions.operator_equals(__valOfSwitchOver,"uint16")) {
+      if (ObjectExtensions.operator_equals(__valOfSwitchOver,"uint16")) {
         matched=true;
         _switchResult = "0";
       }
     }
     if (!matched) {
-      if (org.eclipse.xtext.xbase.lib.ObjectExtensions.operator_equals(__valOfSwitchOver,"uint32")) {
+      if (ObjectExtensions.operator_equals(__valOfSwitchOver,"uint32")) {
         matched=true;
         _switchResult = "0";
       }
     }
     if (!matched) {
-      if (org.eclipse.xtext.xbase.lib.ObjectExtensions.operator_equals(__valOfSwitchOver,"int8")) {
+      if (ObjectExtensions.operator_equals(__valOfSwitchOver,"int8")) {
         matched=true;
         _switchResult = "0";
       }
     }
     if (!matched) {
-      if (org.eclipse.xtext.xbase.lib.ObjectExtensions.operator_equals(__valOfSwitchOver,"int16")) {
+      if (ObjectExtensions.operator_equals(__valOfSwitchOver,"int16")) {
         matched=true;
         _switchResult = "0";
       }
     }
     if (!matched) {
-      if (org.eclipse.xtext.xbase.lib.ObjectExtensions.operator_equals(__valOfSwitchOver,"int32")) {
+      if (ObjectExtensions.operator_equals(__valOfSwitchOver,"int32")) {
         matched=true;
         _switchResult = "0";
       }
     }
     if (!matched) {
-      if (org.eclipse.xtext.xbase.lib.ObjectExtensions.operator_equals(__valOfSwitchOver,"float32")) {
+      if (ObjectExtensions.operator_equals(__valOfSwitchOver,"float32")) {
         matched=true;
         _switchResult = "0.0";
       }
     }
     if (!matched) {
-      if (org.eclipse.xtext.xbase.lib.ObjectExtensions.operator_equals(__valOfSwitchOver,"float64")) {
+      if (ObjectExtensions.operator_equals(__valOfSwitchOver,"float64")) {
         matched=true;
         _switchResult = "0.0";
       }
     }
     if (!matched) {
-      if (org.eclipse.xtext.xbase.lib.ObjectExtensions.operator_equals(__valOfSwitchOver,"string")) {
+      if (ObjectExtensions.operator_equals(__valOfSwitchOver,"string")) {
         matched=true;
         _switchResult = "\"\"";
       }

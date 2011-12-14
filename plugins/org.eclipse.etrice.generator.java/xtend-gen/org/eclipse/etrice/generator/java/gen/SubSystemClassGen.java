@@ -1,6 +1,7 @@
 package org.eclipse.etrice.generator.java.gen;
 
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.room.ActorClass;
@@ -13,6 +14,7 @@ import org.eclipse.etrice.generator.base.Indexed;
 import org.eclipse.etrice.generator.etricegen.ActorInstance;
 import org.eclipse.etrice.generator.etricegen.InterfaceItemInstance;
 import org.eclipse.etrice.generator.etricegen.Root;
+import org.eclipse.etrice.generator.etricegen.ServiceImplInstance;
 import org.eclipse.etrice.generator.etricegen.SubSystemInstance;
 import org.eclipse.etrice.generator.java.gen.ProcedureHelpers;
 import org.eclipse.etrice.generator.java.gen.StdExtensions;
@@ -24,8 +26,8 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 
 @SuppressWarnings("all")
+@Singleton
 public class SubSystemClassGen {
-  
   @Inject
   private JavaIoFileSystemAccess fileAccess;
   
@@ -40,7 +42,7 @@ public class SubSystemClassGen {
   
   public void doGenerate(final Root root) {
     EList<SubSystemInstance> _subSystemInstances = root.getSubSystemInstances();
-    for (SubSystemInstance ssi : _subSystemInstances) {
+    for (final SubSystemInstance ssi : _subSystemInstances) {
       {
         SubSystemClass _subSystemClass = ssi.getSubSystemClass();
         String _generationTargetPath = this.stdExt.getGenerationTargetPath(_subSystemClass);
@@ -93,7 +95,7 @@ public class SubSystemClassGen {
     EList<RoomModel> models = _referencedModels;
     _builder.newLineIfNotEmpty();
     {
-      for(RoomModel model : models) {
+      for(final RoomModel model : models) {
         _builder.append("import ");
         String _name = model.getName();
         _builder.append(_name, "");
@@ -159,7 +161,7 @@ public class SubSystemClassGen {
     _builder.newLine();
     {
       EList<LogicalThread> _threads = cc.getThreads();
-      for(LogicalThread thread : _threads) {
+      for(final LogicalThread thread : _threads) {
         _builder.append("\t\t");
         _builder.append("RTServices.getInstance().getMsgSvcCtrl().addMsgSvc(new MessageService(this, new Address(0, ");
         EList<LogicalThread> _threads_1 = cc.getThreads();
@@ -196,7 +198,7 @@ public class SubSystemClassGen {
       EList<ActorInstance> _allContainedInstances = comp.getAllContainedInstances();
       int _maxObjId = comp.getMaxObjId();
       Iterable<Indexed<ActorInstance>> _indexed = Indexed.<ActorInstance>indexed(_allContainedInstances, _maxObjId);
-      for(Indexed<ActorInstance> ai : _indexed) {
+      for(final Indexed<ActorInstance> ai : _indexed) {
         _builder.append("\t\t");
         _builder.append("Address addr_item_SystemPort_");
         EList<ActorInstance> _allContainedInstances_1 = comp.getAllContainedInstances();
@@ -214,7 +216,7 @@ public class SubSystemClassGen {
     _builder.newLine();
     {
       EList<ActorInstance> _allContainedInstances_2 = comp.getAllContainedInstances();
-      for(ActorInstance ai_1 : _allContainedInstances_2) {
+      for(final ActorInstance ai_1 : _allContainedInstances_2) {
         _builder.append("\t\t");
         _builder.append("// actor instance ");
         String _path = ai_1.getPath();
@@ -244,21 +246,21 @@ public class SubSystemClassGen {
         _builder.newLineIfNotEmpty();
         {
           EList<InterfaceItemInstance> _orderedIfItemInstances = ai_1.getOrderedIfItemInstances();
-          for(InterfaceItemInstance pi : _orderedIfItemInstances) {
+          for(final InterfaceItemInstance pi : _orderedIfItemInstances) {
             {
               boolean _operator_or = false;
-              if ((pi instanceof org.eclipse.etrice.generator.etricegen.ServiceImplInstance)) {
+              if ((pi instanceof ServiceImplInstance)) {
                 _operator_or = true;
               } else {
                 EList<InterfaceItemInstance> _peers = pi.getPeers();
                 int _size = _peers.size();
                 boolean _operator_greaterThan = ComparableExtensions.<Integer>operator_greaterThan(((Integer)_size), ((Integer)1));
-                _operator_or = BooleanExtensions.operator_or((pi instanceof org.eclipse.etrice.generator.etricegen.ServiceImplInstance), _operator_greaterThan);
+                _operator_or = BooleanExtensions.operator_or((pi instanceof ServiceImplInstance), _operator_greaterThan);
               }
               if (_operator_or) {
                 {
                   EList<InterfaceItemInstance> _peers_1 = pi.getPeers();
-                  for(InterfaceItemInstance peer : _peers_1) {
+                  for(final InterfaceItemInstance peer : _peers_1) {
                     _builder.append("\t\t");
                     EList<InterfaceItemInstance> _peers_2 = pi.getPeers();
                     int _indexOf_2 = _peers_2.indexOf(peer);
@@ -281,7 +283,8 @@ public class SubSystemClassGen {
                     _builder.append(");");
                     _builder.newLineIfNotEmpty();
                   }
-                }} else {
+                }
+              } else {
                 _builder.append("\t\t");
                 _builder.append("Address addr_item_");
                 String _path_4 = pi.getPath();
@@ -314,7 +317,7 @@ public class SubSystemClassGen {
     _builder.newLineIfNotEmpty();
     {
       EList<ActorInstance> _allContainedInstances_4 = comp.getAllContainedInstances();
-      for(ActorInstance ai_2 : _allContainedInstances_4) {
+      for(final ActorInstance ai_2 : _allContainedInstances_4) {
         _builder.append("\t\t");
         _builder.append("instances[");
         EList<ActorInstance> _allContainedInstances_5 = comp.getAllContainedInstances();
@@ -328,11 +331,12 @@ public class SubSystemClassGen {
         _builder.newLineIfNotEmpty();
         {
           EObject _eContainer = ai_2.eContainer();
-          if ((_eContainer instanceof org.eclipse.etrice.generator.etricegen.SubSystemInstance)) {
+          if ((_eContainer instanceof SubSystemInstance)) {
             _builder.append("\t\t");
             _builder.append("\t");
             _builder.append("this,");
-            _builder.newLine();} else {
+            _builder.newLine();
+          } else {
             _builder.append("\t\t");
             _builder.append("\t");
             _builder.append("instances[");
@@ -374,7 +378,7 @@ public class SubSystemClassGen {
         {
           EList<InterfaceItemInstance> _orderedIfItemInstances_2 = ai_2.getOrderedIfItemInstances();
           boolean hasAnyElements = false;
-          for(InterfaceItemInstance pi_1 : _orderedIfItemInstances_2) {
+          for(final InterfaceItemInstance pi_1 : _orderedIfItemInstances_2) {
             if (!hasAnyElements) {
               hasAnyElements = true;
             } else {
@@ -386,19 +390,19 @@ public class SubSystemClassGen {
             _builder.newLine();
             {
               boolean _operator_or_1 = false;
-              if ((pi_1 instanceof org.eclipse.etrice.generator.etricegen.ServiceImplInstance)) {
+              if ((pi_1 instanceof ServiceImplInstance)) {
                 _operator_or_1 = true;
               } else {
                 EList<InterfaceItemInstance> _peers_3 = pi_1.getPeers();
                 int _size_2 = _peers_3.size();
                 boolean _operator_greaterThan_1 = ComparableExtensions.<Integer>operator_greaterThan(((Integer)_size_2), ((Integer)1));
-                _operator_or_1 = BooleanExtensions.operator_or((pi_1 instanceof org.eclipse.etrice.generator.etricegen.ServiceImplInstance), _operator_greaterThan_1);
+                _operator_or_1 = BooleanExtensions.operator_or((pi_1 instanceof ServiceImplInstance), _operator_greaterThan_1);
               }
               if (_operator_or_1) {
                 {
                   EList<InterfaceItemInstance> _peers_4 = pi_1.getPeers();
                   boolean hasAnyElements_1 = false;
-                  for(InterfaceItemInstance peer_1 : _peers_4) {
+                  for(final InterfaceItemInstance peer_1 : _peers_4) {
                     if (!hasAnyElements_1) {
                       hasAnyElements_1 = true;
                     } else {
@@ -417,7 +421,8 @@ public class SubSystemClassGen {
                     _builder.append(_indexOf_5, "				");
                     _builder.newLineIfNotEmpty();
                   }
-                }} else {
+                }
+              } else {
                 _builder.append("\t\t");
                 _builder.append("\t");
                 _builder.append("\t");
@@ -461,7 +466,7 @@ public class SubSystemClassGen {
         {
           EList<InterfaceItemInstance> _orderedIfItemInstances_4 = ai_2.getOrderedIfItemInstances();
           boolean hasAnyElements_2 = false;
-          for(InterfaceItemInstance pi_2 : _orderedIfItemInstances_4) {
+          for(final InterfaceItemInstance pi_2 : _orderedIfItemInstances_4) {
             if (!hasAnyElements_2) {
               hasAnyElements_2 = true;
             } else {
@@ -473,7 +478,7 @@ public class SubSystemClassGen {
             _builder.newLine();
             {
               boolean _operator_and = false;
-              boolean _operator_not_2 = BooleanExtensions.operator_not((pi_2 instanceof org.eclipse.etrice.generator.etricegen.ServiceImplInstance));
+              boolean _operator_not_2 = BooleanExtensions.operator_not((pi_2 instanceof ServiceImplInstance));
               if (!_operator_not_2) {
                 _operator_and = false;
               } else {
@@ -486,11 +491,12 @@ public class SubSystemClassGen {
                 _builder.append("\t\t");
                 _builder.append("\t");
                 _builder.append("null");
-                _builder.newLine();} else {
+                _builder.newLine();
+              } else {
                 {
                   EList<InterfaceItemInstance> _peers_7 = pi_2.getPeers();
                   boolean hasAnyElements_3 = false;
-                  for(InterfaceItemInstance pp : _peers_7) {
+                  for(final InterfaceItemInstance pp : _peers_7) {
                     if (!hasAnyElements_3) {
                       hasAnyElements_3 = true;
                     } else {
@@ -498,13 +504,13 @@ public class SubSystemClassGen {
                     }
                     {
                       boolean _operator_or_2 = false;
-                      if ((pp instanceof org.eclipse.etrice.generator.etricegen.ServiceImplInstance)) {
+                      if ((pp instanceof ServiceImplInstance)) {
                         _operator_or_2 = true;
                       } else {
                         EList<InterfaceItemInstance> _peers_8 = pp.getPeers();
                         int _size_3 = _peers_8.size();
                         boolean _operator_greaterThan_2 = ComparableExtensions.<Integer>operator_greaterThan(((Integer)_size_3), ((Integer)1));
-                        _operator_or_2 = BooleanExtensions.operator_or((pp instanceof org.eclipse.etrice.generator.etricegen.ServiceImplInstance), _operator_greaterThan_2);
+                        _operator_or_2 = BooleanExtensions.operator_or((pp instanceof ServiceImplInstance), _operator_greaterThan_2);
                       }
                       if (_operator_or_2) {
                         _builder.append("\t\t");
@@ -518,7 +524,8 @@ public class SubSystemClassGen {
                         EList<InterfaceItemInstance> _peers_9 = pp.getPeers();
                         int _indexOf_7 = _peers_9.indexOf(pi_2);
                         _builder.append(_indexOf_7, "					");
-                        _builder.newLineIfNotEmpty();} else {
+                        _builder.newLineIfNotEmpty();
+                      } else {
                         _builder.append("\t\t");
                         _builder.append("\t\t");
                         _builder.append("\t");
@@ -567,7 +574,7 @@ public class SubSystemClassGen {
     {
       EList<ActorInstance> _allContainedInstances_8 = comp.getAllContainedInstances();
       boolean hasAnyElements_4 = false;
-      for(ActorInstance ai_3 : _allContainedInstances_8) {
+      for(final ActorInstance ai_3 : _allContainedInstances_8) {
         if (!hasAnyElements_4) {
           hasAnyElements_4 = true;
         } else {
@@ -593,7 +600,7 @@ public class SubSystemClassGen {
     {
       EList<ActorInstance> _allContainedInstances_10 = comp.getAllContainedInstances();
       boolean hasAnyElements_5 = false;
-      for(ActorInstance ai_4 : _allContainedInstances_10) {
+      for(final ActorInstance ai_4 : _allContainedInstances_10) {
         if (!hasAnyElements_5) {
           hasAnyElements_5 = true;
         } else {

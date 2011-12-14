@@ -24,45 +24,45 @@ import org.eclipse.etrice.generator.etricegen.TransitionChain;
  */
 public class RoomNameProv {
 	
-	public String getActionCodeOperationName(Transition t) {
+	public static String getActionCodeOperationName(Transition t) {
 		return "action_"+RoomNameProvider.getFullPath(t);
 	}
 	
-	public String getEntryCodeOperationName(State s) {
+	public static String getEntryCodeOperationName(State s) {
 		return "entry_"+getStatePathName(s);
 	}
 	
-	public String getExitCodeOperationName(State s) {
+	public static String getExitCodeOperationName(State s) {
 		return "exit_"+getStatePathName(s);
 	}
 	
-	public String getChainId(TransitionChain tc) {
+	public static String getChainId(TransitionChain tc) {
 		return "CHAIN_"+RoomNameProvider.getFullPath(tc.getTransition());
 	}
 	
-	public boolean isTopLevel(StateGraphNode s) {
+	public static boolean isTopLevel(StateGraphNode s) {
 		return !(s.eContainer().eContainer() instanceof State);
 	}
 	
-	public State getParentState(StateGraphNode s) {
+	public static State getParentState(StateGraphNode s) {
 		if (isTopLevel(s))
 			return null;
 		else
 			return (State) s.eContainer().eContainer();
 	}
 	
-	public String getStatePathName(State s) {
+	public static String getStatePathName(State s) {
 		return RoomNameProvider.getFullPath(s);
 	}
 	
-	public String getStateId(State s) {
+	public static String getStateId(State s) {
 		if (s==null)
 			return "STATE_"+RoomNameProvider.getStateName(s);
 		else
 			return "STATE_"+RoomNameProvider.getFullPath(s);
 	}
 	
-	public String getParentStateId(State s) {
+	public static String getParentStateId(State s) {
 		return getStateId(getParentState(s));
 	}
 

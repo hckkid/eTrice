@@ -18,19 +18,20 @@
 package org.eclipse.etrice.generator.java.gen
 
 import com.google.inject.Inject
-import java.util.*
-import java.io.File
-
-import org.eclipse.etrice.core.room.*
-import org.eclipse.etrice.generator.etricegen.*
+import com.google.inject.Singleton
+import org.eclipse.etrice.core.room.FreeType
+import org.eclipse.etrice.core.room.Message
+import org.eclipse.etrice.core.room.PrimitiveType
+import org.eclipse.etrice.core.room.RoomClass
+import org.eclipse.etrice.core.room.RoomModel
+import org.eclipse.etrice.core.room.Type
+import org.eclipse.etrice.core.room.TypedID
+import org.eclipse.etrice.generator.etricegen.ExpandedActorClass
+import org.eclipse.etrice.generator.etricegen.TransitionChain
 import org.eclipse.etrice.generator.extensions.RoomExtensions
-import org.eclipse.emf.ecore.*
-
-import static extension org.eclipse.xtend.util.stdlib.naming
-import static extension org.eclipse.xtext.xtend2.lib.ResourceExtensions.*
-import static extension org.eclipse.xtext.xtend2.lib.*
 
 
+@Singleton
 class StdExtensions extends RoomExtensions {
 
 	@Inject JavaGenerator javaGen

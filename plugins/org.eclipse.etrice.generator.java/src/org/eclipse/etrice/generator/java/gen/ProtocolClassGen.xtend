@@ -12,17 +12,15 @@
 
 package org.eclipse.etrice.generator.java.gen
 
-import org.eclipse.xtext.generator.IFileSystemAccess
-import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 import com.google.inject.Inject
-
-import static extension org.eclipse.xtext.xtend2.lib.ResourceExtensions.*
-import static extension org.eclipse.xtext.xtend2.lib.*
-
-import org.eclipse.etrice.core.room.*
-import org.eclipse.etrice.generator.etricegen.*
+import com.google.inject.Singleton
+import org.eclipse.etrice.core.room.Message
+import org.eclipse.etrice.core.room.ProtocolClass
 import org.eclipse.etrice.generator.base.ILogger
+import org.eclipse.etrice.generator.etricegen.Root
+import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 
+@Singleton
 class ProtocolClassGen {
 
 	@Inject extension JavaIoFileSystemAccess fileAccess

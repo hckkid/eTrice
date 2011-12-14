@@ -12,20 +12,17 @@
 
 package org.eclipse.etrice.generator.java.gen
 
-import org.eclipse.emf.ecore.resource.Resource
-import org.eclipse.xtext.generator.IGenerator
-import org.eclipse.xtext.generator.IFileSystemAccess
-import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 import com.google.inject.Inject
-import java.util.*
+import com.google.inject.Singleton
 import java.io.File
-
-import org.eclipse.emf.ecore.*
-
-import org.eclipse.etrice.core.room.*
-import org.eclipse.etrice.generator.etricegen.*
+import java.util.HashSet
+import java.util.Set
+import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.etrice.generator.base.ILogger
+import org.eclipse.etrice.generator.etricegen.Root
+import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 
+@Singleton
 class PrepareFileSystem {
 	
 	@Inject extension StdExtensions stdExt
