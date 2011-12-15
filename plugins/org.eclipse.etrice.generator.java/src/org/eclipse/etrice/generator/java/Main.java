@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.etrice.generator.base.AbstractGenerator;
 import org.eclipse.etrice.generator.etricegen.Root;
 import org.eclipse.etrice.generator.java.gen.InstanceDiagramGen;
+import org.eclipse.etrice.generator.java.gen.Validator;
 import org.eclipse.etrice.generator.java.setup.GeneratorModule;
 import org.eclipse.xtext.generator.IGenerator;
 
@@ -51,6 +52,9 @@ public class Main extends AbstractGenerator {
 
 	@Inject
 	protected InstanceDiagramGen instanceDiagramGenerator;
+	
+	@Inject
+	private Validator validator;
 	
 	public void runGenerator(String[] args) {
 		if (args.length == 0) {
@@ -96,6 +100,9 @@ public class Main extends AbstractGenerator {
 
 		Root genModel = createGeneratorModel(rs, asLibrary, genModelPath);
 		if (genModel==null)
+			return false;
+		
+		if (!validator.validate(genModel))
 			return false;
 		
 		logger.logInfo("-- starting code generation");
