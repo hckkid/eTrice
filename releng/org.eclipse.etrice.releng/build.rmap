@@ -9,46 +9,46 @@
   <rm:locator searchPathRef="orbit"/>
   <rm:searchPath name="releng">
     <rm:provider componentTypes="buckminster,osgi.bundle,eclipse.feature" readerType="local">
-      <rm:uri format="{0}/../../etrice_local_repo/releng/{1}">
-        <bc:propertyRef key="workspace.root"/>
+      <rm:uri format="{0}/releng/{1}">
+        <bc:propertyRef key="etrice.repo"/>
         <bc:propertyRef key="buckminster.component"/>
       </rm:uri>
     </rm:provider>
     <rm:provider componentTypes="eclipse.feature" readerType="local">
-      <rm:uri format="{0}/../../etrice_local_repo/features/{1}">
-        <bc:propertyRef key="workspace.root"/>
+      <rm:uri format="{0}/features/{1}">
+        <bc:propertyRef key="etrice.repo"/>
         <bc:propertyRef key="buckminster.component"/>
       </rm:uri>
     </rm:provider>
   </rm:searchPath>
   <rm:searchPath name="sources">
     <rm:provider componentTypes="osgi.bundle" readerType="local">
-      <rm:uri format="{0}/../../etrice_local_repo/plugins/{1}">
-        <bc:propertyRef key="workspace.root"/>
+      <rm:uri format="{0}/plugins/{1}">
+        <bc:propertyRef key="etrice.repo"/>
         <bc:propertyRef key="buckminster.component"/>
       </rm:uri>
     </rm:provider>
     <rm:provider componentTypes="buckminster,osgi.bundle" readerType="local">
-      <rm:uri format="{0}/../../etrice_local_repo/examples/{1}">
-        <bc:propertyRef key="workspace.root"/>
+      <rm:uri format="{0}/examples/{1}">
+        <bc:propertyRef key="etrice.repo"/>
         <bc:propertyRef key="buckminster.component"/>
       </rm:uri>
     </rm:provider>
     <rm:provider componentTypes="eclipse.feature" readerType="local">
-      <rm:uri format="{0}/../../etrice_local_repo/features/{1}">
-        <bc:propertyRef key="workspace.root"/>
+      <rm:uri format="{0}/features/{1}">
+        <bc:propertyRef key="etrice.repo"/>
         <bc:propertyRef key="buckminster.component"/>
       </rm:uri>
     </rm:provider>
     <rm:provider componentTypes="osgi.bundle,buckminster" readerType="local">
-      <rm:uri format="{0}/../../etrice_local_repo/tests/{1}">
-        <bc:propertyRef key="workspace.root"/>
+      <rm:uri format="{0}/tests/{1}">
+        <bc:propertyRef key="etrice.repo"/>
         <bc:propertyRef key="buckminster.component"/>
       </rm:uri>
     </rm:provider>
     <rm:provider componentTypes="osgi.bundle,buckminster" readerType="local">
-      <rm:uri format="{0}/../../etrice_local_repo/runtime/{1}">
-        <bc:propertyRef key="workspace.root"/>
+      <rm:uri format="{0}/runtime/{1}">
+        <bc:propertyRef key="etrice.repo"/>
         <bc:propertyRef key="buckminster.component"/>
       </rm:uri>
     </rm:provider>
