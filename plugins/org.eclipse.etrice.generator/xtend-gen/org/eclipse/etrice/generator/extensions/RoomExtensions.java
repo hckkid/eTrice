@@ -553,18 +553,18 @@ public class RoomExtensions {
   }
   
   public String getStateId(final State s) {
-    String _stateId = this.getStateId(s);
-    return _stateId;
+    String _genStateId = RoomNameProv.getGenStateId(s);
+    return _genStateId;
   }
   
   public String getStatePathName(final State s) {
-    String _statePathName = this.getStatePathName(s);
-    return _statePathName;
+    String _genStatePathName = RoomNameProv.getGenStatePathName(s);
+    return _genStatePathName;
   }
   
   public String getChainId(final TransitionChain t) {
-    String _chainId = this.getChainId(t);
-    return _chainId;
+    String _genChainId = RoomNameProv.getGenChainId(t);
+    return _genChainId;
   }
   
   public boolean hasGuard(final Trigger tr) {
