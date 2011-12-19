@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde version="3.6"?>
 
-<target name="eTrice development" sequenceNumber="10">
+<target name="eTrice development" sequenceNumber="15">
 <locations>
-<location path="${eTriceTargetInstallationPath}\eclipse-modeling-indigo-win32\eclipse" type="Directory"/>
+<location path="${eTriceTargetInstallationPath}" type="Directory"/>
 </locations>
 <environment>
 <os>win32</os>
