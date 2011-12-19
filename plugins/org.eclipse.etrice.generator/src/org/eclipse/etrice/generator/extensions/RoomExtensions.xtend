@@ -330,15 +330,15 @@ class RoomExtensions {
 	}
 
 	def String getStateId(State s) {
-		return getStateId(s)
+		return getGenStateId(s)
 	}
 
 	def String getStatePathName(State s) {
-		return getStatePathName(s);
+		return getGenStatePathName(s);
 	}
 	
 	def String getChainId(TransitionChain t) {
-		return getChainId(t)
+		return getGenChainId(t)
 	}
 	
 	def boolean hasGuard(Trigger tr) {

@@ -29,14 +29,14 @@ public class RoomNameProv {
 	}
 	
 	public static String getEntryCodeOperationName(State s) {
-		return "entry_"+getStatePathName(s);
+		return "entry_"+getGenStatePathName(s);
 	}
 	
 	public static String getExitCodeOperationName(State s) {
-		return "exit_"+getStatePathName(s);
+		return "exit_"+getGenStatePathName(s);
 	}
 	
-	public static String getChainId(TransitionChain tc) {
+	public static String getGenChainId(TransitionChain tc) {
 		return "CHAIN_"+RoomNameProvider.getFullPath(tc.getTransition());
 	}
 	
@@ -51,11 +51,11 @@ public class RoomNameProv {
 			return (State) s.eContainer().eContainer();
 	}
 	
-	public static String getStatePathName(State s) {
+	public static String getGenStatePathName(State s) {
 		return RoomNameProvider.getFullPath(s);
 	}
 	
-	public static String getStateId(State s) {
+	public static String getGenStateId(State s) {
 		if (s==null)
 			return "STATE_"+RoomNameProvider.getStateName(s);
 		else
@@ -63,7 +63,7 @@ public class RoomNameProv {
 	}
 	
 	public static String getParentStateId(State s) {
-		return getStateId(getParentState(s));
+		return getGenStateId(getParentState(s));
 	}
 
 }
