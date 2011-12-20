@@ -10,7 +10,7 @@
  * 
  *******************************************************************************/
 
-package org.eclipse.etrice.generator.java.gen
+package org.eclipse.etrice.generator.doc.gen
 
 import com.google.inject.Inject
 import com.google.inject.Singleton
@@ -22,15 +22,13 @@ import org.eclipse.etrice.generator.etricegen.Root
 import org.eclipse.etrice.generator.etricegen.StructureInstance
 import org.eclipse.etrice.generator.etricegen.SubSystemInstance
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess
-
-import org.eclipse.etrice.generator.extensions.LanguageExtensions
-
+import org.eclipse.etrice.generator.extensions.RoomExtensions
 
 @Singleton
 class InstanceDiagramGen implements IRoomGenerator {
 
 	@Inject extension JavaIoFileSystemAccess fileAccess
-	@Inject extension LanguageExtensions languageExt
+	@Inject extension RoomExtensions roomExt
 	@Inject ILogger logger
 	
 	override doGenerate(Root root) {
@@ -43,12 +41,12 @@ class InstanceDiagramGen implements IRoomGenerator {
 		}
 	}
 	
-	def generate(Root root, SubSystemInstance ssc, SubSystemClass cc) {'''
-		digraph «ssc.name» {
+	def generate(Root root, SubSystemInstance ssi, SubSystemClass ssc) {'''
+		digraph «ssi.name» {
 			rankdir=LR;
 			node [shape=box];
-			«cc.path.getPathName()» [label="«cc.name»\n(«ssc.name»)" style=filled color=yellow];
-			«FOR ai : ssc.instances»
+			«ssi.path.getPathName()» [label="«ssc.name»\n(«ssi.name»)" style=filled color=yellow];
+			«FOR ai : ssi.instances»
 				«instance(ai)»
 			«ENDFOR»
 		}

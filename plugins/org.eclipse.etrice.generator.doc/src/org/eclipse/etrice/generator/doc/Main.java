@@ -10,17 +10,16 @@
  * 
  *******************************************************************************/
 
-package org.eclipse.etrice.generator.java;
+package org.eclipse.etrice.generator.doc;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.etrice.generator.base.AbstractGenerator;
+import org.eclipse.etrice.generator.doc.setup.GeneratorModule;
 import org.eclipse.etrice.generator.etricegen.Root;
-import org.eclipse.etrice.generator.doc.gen.InstanceDiagramGen;  // TODO: fix import
-import org.eclipse.etrice.generator.java.gen.Validator;
-import org.eclipse.etrice.generator.java.setup.GeneratorModule;
+import org.eclipse.etrice.generator.doc.gen.InstanceDiagramGen;
 import org.eclipse.xtext.generator.IGenerator;
 
 import com.google.inject.Inject;
@@ -51,11 +50,9 @@ public class Main extends AbstractGenerator {
 	private IGenerator mainGenerator;
 
 	@Inject
-	protected InstanceDiagramGen instanceDiagramGenerator; 
+	protected InstanceDiagramGen instanceDiagramGenerator;
 	
-	@Inject
-	private Validator validator;
-	
+
 	public void runGenerator(String[] args) {
 		if (args.length == 0) {
 			logger.logError(Main.class.getName()+" - aborting: no arguments!", null);
@@ -102,13 +99,10 @@ public class Main extends AbstractGenerator {
 		if (genModel==null)
 			return false;
 		
-		if (!validator.validate(genModel))
-			return false;
-		
+	
 		logger.logInfo("-- starting code generation");
-		fileAccess.setOutputPath("src-gen/");
+		fileAccess.setOutputPath("doc-gen/");
 		mainGenerator.doGenerate(genModel.eResource(), fileAccess);
-		
 		if (genInstDiag) {
 			instanceDiagramGenerator.doGenerate(genModel);
 		}

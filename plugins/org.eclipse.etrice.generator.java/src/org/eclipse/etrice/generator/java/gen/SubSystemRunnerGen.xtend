@@ -18,14 +18,13 @@ import org.eclipse.etrice.core.room.SubSystemClass
 import org.eclipse.etrice.generator.etricegen.Root
 import org.eclipse.etrice.generator.etricegen.SubSystemInstance
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess
-
-import org.eclipse.etrice.generator.extensions.LanguageExtensions
+import org.eclipse.etrice.generator.extensions.RoomExtensions
 
 @Singleton
 class SubSystemRunnerGen {
 
 	@Inject extension JavaIoFileSystemAccess fileAccess
-	@Inject extension LanguageExtensions languageExt
+	@Inject extension RoomExtensions roomExt
 	
 	def doGenerate(Root root) {
 		for (sc: root.subSystemInstances) {

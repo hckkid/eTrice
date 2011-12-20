@@ -24,6 +24,8 @@ import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.PortClass;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RefinedState;
+import org.eclipse.etrice.core.room.RoomClass;
+import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.SAPRef;
 import org.eclipse.etrice.core.room.SPPRef;
 import org.eclipse.etrice.core.room.ServiceImplementation;
@@ -85,6 +87,24 @@ public class RoomExtensions {
         String _fileString = _uRI.toFileString();
         return _fileString;
       }
+  }
+  
+  public String getPackage(final RoomClass rc) {
+    EObject _eContainer = rc.eContainer();
+    String _name = ((RoomModel) _eContainer).getName();
+    return _name;
+  }
+  
+  public String getPathFromPackage(final String packageName) {
+    String _replaceAll = packageName.replaceAll("\\.", "/");
+    String _operator_plus = StringExtensions.operator_plus(_replaceAll, "/");
+    return _operator_plus;
+  }
+  
+  public String getPath(final RoomClass rc) {
+    String _package = this.getPackage(rc);
+    String _pathFromPackage = this.getPathFromPackage(_package);
+    return _pathFromPackage;
   }
   
   public String getProjectPath(final EObject e) {

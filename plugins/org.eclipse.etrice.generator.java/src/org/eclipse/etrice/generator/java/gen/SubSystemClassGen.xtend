@@ -20,17 +20,17 @@ import org.eclipse.etrice.generator.etricegen.Root
 import org.eclipse.etrice.generator.etricegen.ServiceImplInstance
 import org.eclipse.etrice.generator.etricegen.SubSystemInstance
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess
+import org.eclipse.etrice.generator.extensions.RoomExtensions
 
 import static extension org.eclipse.etrice.generator.base.Indexed.*
 
-import org.eclipse.etrice.generator.extensions.LanguageExtensions
 
 @Singleton
 class SubSystemClassGen {
 	
 	@Inject extension JavaIoFileSystemAccess fileAccess
 	@Inject extension JavaExtensions stdExt
-	@Inject extension LanguageExtensions languageExt
+	@Inject extension RoomExtensions roomExt
 	@Inject extension ProcedureHelpers helpers
 	@Inject ILogger logger
 	

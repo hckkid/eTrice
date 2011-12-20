@@ -10,7 +10,7 @@
  * 
  *******************************************************************************/
 
-package org.eclipse.etrice.generator.java.gen
+package org.eclipse.etrice.generator.extensions
 
 import com.google.inject.Inject
 import com.google.inject.Singleton
@@ -21,13 +21,12 @@ import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.etrice.generator.base.ILogger
 import org.eclipse.etrice.generator.etricegen.Root
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess
-
-import org.eclipse.etrice.generator.extensions.LanguageExtensions
+import org.eclipse.etrice.generator.extensions.RoomExtensions
 
 @Singleton
 class PrepareFileSystem {
 	
-	@Inject extension LanguageExtensions languageExt
+	@Inject extension RoomExtensions roomExt
 	@Inject extension JavaIoFileSystemAccess fileAccess
 	@Inject ILogger logger
 	

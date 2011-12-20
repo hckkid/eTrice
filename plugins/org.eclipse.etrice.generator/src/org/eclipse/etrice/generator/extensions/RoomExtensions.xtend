@@ -38,9 +38,12 @@ import org.eclipse.etrice.core.room.State
 import org.eclipse.etrice.core.room.StateGraph
 import org.eclipse.etrice.core.room.Transition
 import org.eclipse.etrice.core.room.Trigger
+import org.eclipse.etrice.core.room.RoomClass
+import org.eclipse.etrice.core.room.RoomModel
 import org.eclipse.etrice.generator.etricegen.ActiveTrigger
 import org.eclipse.etrice.generator.etricegen.ExpandedActorClass
 import org.eclipse.etrice.generator.etricegen.TransitionChain
+
 import static extension org.eclipse.etrice.generator.extensions.RoomNameProv.*
 
 @Singleton
@@ -85,6 +88,22 @@ class RoomExtensions {
 		}
 	}
 
+
+	//-------------------------------------------------------
+	// packages and pathes
+	
+	def String getPackage(RoomClass rc) {
+		return (rc.eContainer as RoomModel).name
+	}
+	
+	def String getPathFromPackage(String packageName) {
+		return packageName.replaceAll("\\.", "/") + "/"
+	}
+	
+	def String getPath(RoomClass rc) {
+		getPathFromPackage(getPackage(rc))
+	}
+	
 	// a directory is a eclipse project if it contains a ".project" file
 	def String getProjectPath(EObject e) {
 		var res = e.eResource;

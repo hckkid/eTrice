@@ -11,7 +11,7 @@ import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.Type;
 import org.eclipse.etrice.generator.base.ILogger;
 import org.eclipse.etrice.generator.etricegen.Root;
-import org.eclipse.etrice.generator.extensions.LanguageExtensions;
+import org.eclipse.etrice.generator.extensions.RoomExtensions;
 import org.eclipse.etrice.generator.java.gen.JavaExtensions;
 import org.eclipse.etrice.generator.java.gen.ProcedureHelpers;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
@@ -30,7 +30,7 @@ public class DataClassGen {
   private JavaExtensions stdExt;
   
   @Inject
-  private LanguageExtensions languageExt;
+  private RoomExtensions roomExt;
   
   @Inject
   private ProcedureHelpers helpers;
@@ -42,8 +42,8 @@ public class DataClassGen {
     EList<DataClass> _usedDataClasses = root.getUsedDataClasses();
     for (final DataClass dc : _usedDataClasses) {
       {
-        String _generationTargetPath = this.languageExt.getGenerationTargetPath(dc);
-        String _path = this.languageExt.getPath(dc);
+        String _generationTargetPath = this.roomExt.getGenerationTargetPath(dc);
+        String _path = this.roomExt.getPath(dc);
         String _operator_plus = StringExtensions.operator_plus(_generationTargetPath, _path);
         String path = _operator_plus;
         String _javaFileName = this.stdExt.getJavaFileName(dc);
@@ -63,7 +63,7 @@ public class DataClassGen {
   public StringConcatenation generate(final Root root, final DataClass dc) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package ");
-    String _package = this.languageExt.getPackage(dc);
+    String _package = this.roomExt.getPackage(dc);
     _builder.append(_package, "");
     _builder.append(";");
     _builder.newLineIfNotEmpty();

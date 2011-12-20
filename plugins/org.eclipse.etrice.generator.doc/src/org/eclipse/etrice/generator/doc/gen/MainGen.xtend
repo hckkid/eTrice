@@ -10,7 +10,7 @@
  * 
  *******************************************************************************/
 
-package org.eclipse.etrice.generator.java.gen
+package org.eclipse.etrice.generator.doc.gen
 
 import com.google.inject.Inject
 import com.google.inject.Singleton
@@ -20,14 +20,11 @@ import org.eclipse.xtext.generator.IFileSystemAccess
 import org.eclipse.xtext.generator.IGenerator
 import org.eclipse.etrice.generator.extensions.PrepareFileSystem
 
+
 @Singleton
 class MainGen implements IGenerator {
 	
-	@Inject DataClassGen dataClassGen
-	@Inject ProtocolClassGen protocolClassGen
-	@Inject ActorClassGen actorClassGen
-	@Inject SubSystemClassGen subsystemClassGen
-	@Inject SubSystemRunnerGen subsystemRunnerGen
+	@Inject InstanceDiagramGen instanceDiagramGen
 	@Inject PrepareFileSystem prepFS
 	
 	override void doGenerate(Resource resource, IFileSystemAccess fsa) {
@@ -40,13 +37,6 @@ class MainGen implements IGenerator {
 	}
 	
 	def void doGenerate(Root e) {
-		dataClassGen.doGenerate(e);
-		protocolClassGen.doGenerate(e);
-		actorClassGen.doGenerate(e);
-		subsystemClassGen.doGenerate(e);
-		
-		if (!e.library) {
-			subsystemRunnerGen.doGenerate(e);
-		}
+		instanceDiagramGen.doGenerate(e);
 	}
 }

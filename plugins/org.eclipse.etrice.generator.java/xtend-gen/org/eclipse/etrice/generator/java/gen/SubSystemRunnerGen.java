@@ -6,7 +6,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.generator.etricegen.Root;
 import org.eclipse.etrice.generator.etricegen.SubSystemInstance;
-import org.eclipse.etrice.generator.extensions.LanguageExtensions;
+import org.eclipse.etrice.generator.extensions.RoomExtensions;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xtend2.lib.StringConcatenation;
@@ -18,16 +18,16 @@ public class SubSystemRunnerGen {
   private JavaIoFileSystemAccess fileAccess;
   
   @Inject
-  private LanguageExtensions languageExt;
+  private RoomExtensions roomExt;
   
   public void doGenerate(final Root root) {
     EList<SubSystemInstance> _subSystemInstances = root.getSubSystemInstances();
     for (final SubSystemInstance sc : _subSystemInstances) {
       {
         SubSystemClass _subSystemClass = sc.getSubSystemClass();
-        String _generationTargetPath = this.languageExt.getGenerationTargetPath(_subSystemClass);
+        String _generationTargetPath = this.roomExt.getGenerationTargetPath(_subSystemClass);
         SubSystemClass _subSystemClass_1 = sc.getSubSystemClass();
-        String _path = this.languageExt.getPath(_subSystemClass_1);
+        String _path = this.roomExt.getPath(_subSystemClass_1);
         String _operator_plus = StringExtensions.operator_plus(_generationTargetPath, _path);
         this.fileAccess.setOutputPath(_operator_plus);
         String _name = sc.getName();
@@ -65,7 +65,7 @@ public class SubSystemRunnerGen {
     _builder.newLine();
     _builder.newLine();
     _builder.append("package ");
-    String _package = this.languageExt.getPackage(cc);
+    String _package = this.roomExt.getPackage(cc);
     _builder.append(_package, "");
     _builder.append(";");
     _builder.newLineIfNotEmpty();
