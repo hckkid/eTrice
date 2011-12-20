@@ -89,6 +89,7 @@ http://www.eclipse.org/legal/epl-v10.html
       <import plugin="org.eclipse.jdt.ui" version="3.7.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.jdt.core" version="3.7.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.core.variables" version="3.2.500" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.etrice.generator.doc" version="0.1.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.etrice.generator.java" version="0.1.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.etrice.generator.launch" version="0.1.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.debug.core"/>
@@ -118,6 +119,13 @@ http://www.eclipse.org/legal/epl-v10.html
 
    <plugin
          id="org.eclipse.etrice.generator"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.etrice.generator.doc"
          download-size="0"
          install-size="0"
          version="0.0.0"
