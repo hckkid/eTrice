@@ -23,10 +23,13 @@ import org.eclipse.etrice.generator.etricegen.ExpandedActorClass
 import org.eclipse.etrice.generator.etricegen.TransitionChain
 import static extension org.eclipse.etrice.generator.extensions.RoomNameProv.*
 
+import org.eclipse.etrice.generator.extensions.LanguageExtensions
+
 @Singleton
 class StateMachineGen {
 	
-	@Inject extension StdExtensions stdExt
+	@Inject extension JavaExtensions stdExt
+	@Inject extension LanguageExtensions languageExt
 	@Inject JavaGenerator javaGen
 	
 	def genStateMachine(ExpandedActorClass xpac, ActorClass ac) {'''

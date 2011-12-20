@@ -23,18 +23,21 @@ import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 
 import static extension org.eclipse.etrice.generator.base.Indexed.*
 
+import org.eclipse.etrice.generator.extensions.LanguageExtensions
+
 @Singleton
 class SubSystemClassGen {
 	
 	@Inject extension JavaIoFileSystemAccess fileAccess
-	@Inject extension StdExtensions stdExt
+	@Inject extension JavaExtensions stdExt
+	@Inject extension LanguageExtensions languageExt
 	@Inject extension ProcedureHelpers helpers
 	@Inject ILogger logger
 	
 	def doGenerate(Root root) {
 		for (ssi: root.subSystemInstances) {
 			var path = ssi.subSystemClass.generationTargetPath+ssi.subSystemClass.getPath
-			var file = ssi.subSystemClass.fileName
+			var file = ssi.subSystemClass.getJavaFileName
 			logger.logInfo("generating SubSystemClass implementation: '"+file+"' in '"+path+"'")
 			fileAccess.setOutputPath(path)
 			fileAccess.generateFile(file, root.generate(ssi, ssi.subSystemClass))

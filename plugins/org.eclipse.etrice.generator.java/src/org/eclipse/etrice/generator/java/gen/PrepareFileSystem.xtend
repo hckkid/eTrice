@@ -22,10 +22,12 @@ import org.eclipse.etrice.generator.base.ILogger
 import org.eclipse.etrice.generator.etricegen.Root
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 
+import org.eclipse.etrice.generator.extensions.LanguageExtensions
+
 @Singleton
 class PrepareFileSystem {
 	
-	@Inject extension StdExtensions stdExt
+	@Inject extension LanguageExtensions languageExt
 	@Inject extension JavaIoFileSystemAccess fileAccess
 	@Inject ILogger logger
 	

@@ -22,9 +22,10 @@ import org.eclipse.etrice.core.room.TypedID;
 import org.eclipse.etrice.generator.base.ILogger;
 import org.eclipse.etrice.generator.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.generator.etricegen.Root;
+import org.eclipse.etrice.generator.extensions.LanguageExtensions;
+import org.eclipse.etrice.generator.java.gen.JavaExtensions;
 import org.eclipse.etrice.generator.java.gen.ProcedureHelpers;
 import org.eclipse.etrice.generator.java.gen.StateMachineGen;
-import org.eclipse.etrice.generator.java.gen.StdExtensions;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
 import org.eclipse.xtext.xbase.lib.BooleanExtensions;
 import org.eclipse.xtext.xbase.lib.IntegerExtensions;
@@ -39,7 +40,10 @@ public class ActorClassGen {
   private JavaIoFileSystemAccess fileAccess;
   
   @Inject
-  private StdExtensions stdExt;
+  private JavaExtensions stdExt;
+  
+  @Inject
+  private LanguageExtensions languageExt;
   
   @Inject
   private ProcedureHelpers helpers;
@@ -55,14 +59,14 @@ public class ActorClassGen {
     for (final ExpandedActorClass xpac : _xpActorClasses) {
       {
         ActorClass _actorClass = xpac.getActorClass();
-        String _generationTargetPath = this.stdExt.getGenerationTargetPath(_actorClass);
+        String _generationTargetPath = this.languageExt.getGenerationTargetPath(_actorClass);
         ActorClass _actorClass_1 = xpac.getActorClass();
-        String _path = this.stdExt.getPath(_actorClass_1);
+        String _path = this.languageExt.getPath(_actorClass_1);
         String _operator_plus = StringExtensions.operator_plus(_generationTargetPath, _path);
         String path = _operator_plus;
         ActorClass _actorClass_2 = xpac.getActorClass();
-        String _fileName = this.stdExt.getFileName(_actorClass_2);
-        String file = _fileName;
+        String _javaFileName = this.stdExt.getJavaFileName(_actorClass_2);
+        String file = _javaFileName;
         String _operator_plus_1 = StringExtensions.operator_plus("generating ActorClass implementation \'", file);
         String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, "\' in \'");
         String _operator_plus_3 = StringExtensions.operator_plus(_operator_plus_2, path);
@@ -79,7 +83,7 @@ public class ActorClassGen {
   public StringConcatenation generate(final Root root, final ExpandedActorClass xpac, final ActorClass ac) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package ");
-    String _package = this.stdExt.getPackage(ac);
+    String _package = this.languageExt.getPackage(ac);
     _builder.append(_package, "");
     _builder.append(";");
     _builder.newLineIfNotEmpty();
@@ -114,7 +118,7 @@ public class ActorClassGen {
       EList<ProtocolClass> _referencedProtocols = root.getReferencedProtocols(ac);
       for(final ProtocolClass pc : _referencedProtocols) {
         _builder.append("import ");
-        String _package_1 = this.stdExt.getPackage(pc);
+        String _package_1 = this.languageExt.getPackage(pc);
         _builder.append(_package_1, "");
         _builder.append(".");
         String _name_1 = pc.getName();
@@ -166,11 +170,11 @@ public class ActorClassGen {
     _builder.append("//--------------------- ports");
     _builder.newLine();
     {
-      List<Port> _endPorts = this.stdExt.getEndPorts(ac);
+      List<Port> _endPorts = this.languageExt.getEndPorts(ac);
       for(final Port ep : _endPorts) {
         _builder.append("\t");
         _builder.append("protected ");
-        String _portClassName = this.stdExt.getPortClassName(ep);
+        String _portClassName = this.languageExt.getPortClassName(ep);
         _builder.append(_portClassName, "	");
         _builder.append(" ");
         String _name_4 = ep.getName();
@@ -187,7 +191,7 @@ public class ActorClassGen {
       for(final SAPRef sap : _strSAPs) {
         _builder.append("\t");
         _builder.append("protected ");
-        String _portClassName_1 = this.stdExt.getPortClassName(sap);
+        String _portClassName_1 = this.languageExt.getPortClassName(sap);
         _builder.append(_portClassName_1, "	");
         _builder.append(" ");
         String _name_5 = sap.getName();
@@ -204,7 +208,7 @@ public class ActorClassGen {
       for(final ServiceImplementation svc : _serviceImplementations) {
         _builder.append("\t");
         _builder.append("protected ");
-        String _portClassName_2 = this.stdExt.getPortClassName(svc);
+        String _portClassName_2 = this.languageExt.getPortClassName(svc);
         _builder.append(_portClassName_2, "	");
         _builder.append(" ");
         SPPRef _spp = svc.getSpp();
@@ -219,7 +223,7 @@ public class ActorClassGen {
     _builder.append("//--------------------- interface item IDs");
     _builder.newLine();
     {
-      List<Port> _endPorts_1 = this.stdExt.getEndPorts(ac);
+      List<Port> _endPorts_1 = this.languageExt.getEndPorts(ac);
       for(final Port ep_1 : _endPorts_1) {
         _builder.append("\t");
         _builder.append("protected static final int IFITEM_");
@@ -351,13 +355,13 @@ public class ActorClassGen {
     _builder.append("// own ports");
     _builder.newLine();
     {
-      List<Port> _endPorts_2 = this.stdExt.getEndPorts(ac);
+      List<Port> _endPorts_2 = this.languageExt.getEndPorts(ac);
       for(final Port ep_2 : _endPorts_2) {
         _builder.append("\t\t");
         String _name_15 = ep_2.getName();
         _builder.append(_name_15, "		");
         _builder.append(" = new ");
-        String _portClassName_3 = this.stdExt.getPortClassName(ep_2);
+        String _portClassName_3 = this.languageExt.getPortClassName(ep_2);
         _builder.append(_portClassName_3, "		");
         _builder.append("(this, \"");
         String _name_16 = ep_2.getName();
@@ -409,7 +413,7 @@ public class ActorClassGen {
         String _name_20 = sap_2.getName();
         _builder.append(_name_20, "		");
         _builder.append(" = new ");
-        String _portClassName_4 = this.stdExt.getPortClassName(sap_2);
+        String _portClassName_4 = this.languageExt.getPortClassName(sap_2);
         _builder.append(_portClassName_4, "		");
         _builder.append("(this, \"");
         String _name_21 = sap_2.getName();
@@ -438,7 +442,7 @@ public class ActorClassGen {
         String _name_25 = _spp_3.getName();
         _builder.append(_name_25, "		");
         _builder.append(" = new ");
-        String _portClassName_5 = this.stdExt.getPortClassName(svc_2);
+        String _portClassName_5 = this.languageExt.getPortClassName(svc_2);
         _builder.append(_portClassName_5, "		");
         _builder.append("(this, \"");
         SPPRef _spp_4 = svc_2.getSpp();
@@ -490,7 +494,7 @@ public class ActorClassGen {
     _builder.newLine();
     _builder.newLine();
     {
-      boolean _overridesStop = this.stdExt.overridesStop(ac);
+      boolean _overridesStop = this.languageExt.overridesStop(ac);
       boolean _operator_not = BooleanExtensions.operator_not(_overridesStop);
       if (_operator_not) {
         _builder.append("\t");

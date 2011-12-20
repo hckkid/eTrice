@@ -11,8 +11,9 @@ import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.Type;
 import org.eclipse.etrice.generator.base.ILogger;
 import org.eclipse.etrice.generator.etricegen.Root;
+import org.eclipse.etrice.generator.extensions.LanguageExtensions;
+import org.eclipse.etrice.generator.java.gen.JavaExtensions;
 import org.eclipse.etrice.generator.java.gen.ProcedureHelpers;
-import org.eclipse.etrice.generator.java.gen.StdExtensions;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
 import org.eclipse.xtext.xbase.lib.ComparableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
@@ -26,7 +27,10 @@ public class DataClassGen {
   private JavaIoFileSystemAccess fileAccess;
   
   @Inject
-  private StdExtensions stdExt;
+  private JavaExtensions stdExt;
+  
+  @Inject
+  private LanguageExtensions languageExt;
   
   @Inject
   private ProcedureHelpers helpers;
@@ -38,12 +42,12 @@ public class DataClassGen {
     EList<DataClass> _usedDataClasses = root.getUsedDataClasses();
     for (final DataClass dc : _usedDataClasses) {
       {
-        String _generationTargetPath = this.stdExt.getGenerationTargetPath(dc);
-        String _path = this.stdExt.getPath(dc);
+        String _generationTargetPath = this.languageExt.getGenerationTargetPath(dc);
+        String _path = this.languageExt.getPath(dc);
         String _operator_plus = StringExtensions.operator_plus(_generationTargetPath, _path);
         String path = _operator_plus;
-        String _fileName = this.stdExt.getFileName(dc);
-        String file = _fileName;
+        String _javaFileName = this.stdExt.getJavaFileName(dc);
+        String file = _javaFileName;
         String _operator_plus_1 = StringExtensions.operator_plus("generating DataClass implementation \'", file);
         String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, "\' in \'");
         String _operator_plus_3 = StringExtensions.operator_plus(_operator_plus_2, path);
@@ -59,7 +63,7 @@ public class DataClassGen {
   public StringConcatenation generate(final Root root, final DataClass dc) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package ");
-    String _package = this.stdExt.getPackage(dc);
+    String _package = this.languageExt.getPackage(dc);
     _builder.append(_package, "");
     _builder.append(";");
     _builder.newLineIfNotEmpty();

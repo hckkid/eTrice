@@ -23,7 +23,7 @@ import org.eclipse.etrice.core.room.Operation
 @Singleton
 class ProcedureHelpers {
 
-	@Inject extension StdExtensions stdExt
+	@Inject extension JavaExtensions stdExt
 
 	def ActorClassPortIF(ActorClass ac) {'''
 		«IF ac.extPorts.size > 0»implements«ENDIF»

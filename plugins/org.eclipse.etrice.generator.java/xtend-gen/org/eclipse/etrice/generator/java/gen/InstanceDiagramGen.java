@@ -12,7 +12,7 @@ import org.eclipse.etrice.generator.etricegen.ActorInstance;
 import org.eclipse.etrice.generator.etricegen.Root;
 import org.eclipse.etrice.generator.etricegen.StructureInstance;
 import org.eclipse.etrice.generator.etricegen.SubSystemInstance;
-import org.eclipse.etrice.generator.java.gen.StdExtensions;
+import org.eclipse.etrice.generator.extensions.LanguageExtensions;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xtend2.lib.StringConcatenation;
@@ -24,7 +24,7 @@ public class InstanceDiagramGen implements IRoomGenerator {
   private JavaIoFileSystemAccess fileAccess;
   
   @Inject
-  private StdExtensions stdExt;
+  private LanguageExtensions languageExt;
   
   @Inject
   private ILogger logger;
@@ -34,9 +34,9 @@ public class InstanceDiagramGen implements IRoomGenerator {
     for (final SubSystemInstance sc : _subSystemInstances) {
       {
         SubSystemClass _subSystemClass = sc.getSubSystemClass();
-        String _generationTargetPath = this.stdExt.getGenerationTargetPath(_subSystemClass);
+        String _generationTargetPath = this.languageExt.getGenerationTargetPath(_subSystemClass);
         SubSystemClass _subSystemClass_1 = sc.getSubSystemClass();
-        String _path = this.stdExt.getPath(_subSystemClass_1);
+        String _path = this.languageExt.getPath(_subSystemClass_1);
         String _operator_plus = StringExtensions.operator_plus(_generationTargetPath, _path);
         String path = _operator_plus;
         SubSystemClass _subSystemClass_2 = sc.getSubSystemClass();
@@ -70,8 +70,8 @@ public class InstanceDiagramGen implements IRoomGenerator {
     _builder.append("node [shape=box];");
     _builder.newLine();
     _builder.append("\t");
-    String _path = this.stdExt.getPath(cc);
-    String _pathName = this.stdExt.getPathName(_path);
+    String _path = this.languageExt.getPath(cc);
+    String _pathName = this.languageExt.getPathName(_path);
     _builder.append(_pathName, "	");
     _builder.append(" [label=\"");
     String _name_1 = cc.getName();
@@ -101,7 +101,7 @@ public class InstanceDiagramGen implements IRoomGenerator {
     StructureInstance parent = ((StructureInstance) _eContainer);
     _builder.newLineIfNotEmpty();
     String _path = ai.getPath();
-    String _pathName = this.stdExt.getPathName(_path);
+    String _pathName = this.languageExt.getPathName(_path);
     _builder.append(_pathName, "");
     _builder.append(" [label=\"");
     String _name = ai.getName();
@@ -113,11 +113,11 @@ public class InstanceDiagramGen implements IRoomGenerator {
     _builder.append(")\"];");
     _builder.newLineIfNotEmpty();
     String _path_1 = parent.getPath();
-    String _pathName_1 = this.stdExt.getPathName(_path_1);
+    String _pathName_1 = this.languageExt.getPathName(_path_1);
     _builder.append(_pathName_1, "");
     _builder.append(" -> ");
     String _path_2 = ai.getPath();
-    String _pathName_2 = this.stdExt.getPathName(_path_2);
+    String _pathName_2 = this.languageExt.getPathName(_path_2);
     _builder.append(_pathName_2, "");
     _builder.append(";  ");
     _builder.newLineIfNotEmpty();

@@ -21,11 +21,15 @@ import org.eclipse.etrice.generator.etricegen.ExpandedActorClass
 import org.eclipse.etrice.generator.etricegen.Root
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 
+import org.eclipse.etrice.generator.extensions.LanguageExtensions
+
 @Singleton
 class ActorClassGen {
 	
 	@Inject extension JavaIoFileSystemAccess fileAccess
-	@Inject extension StdExtensions stdExt
+	@Inject extension JavaExtensions stdExt
+	@Inject extension LanguageExtensions languageExt
+	
 	@Inject extension ProcedureHelpers helpers
 	@Inject extension StateMachineGen stateMachineGen
 	@Inject ILogger logger
@@ -33,7 +37,7 @@ class ActorClassGen {
 	def doGenerate(Root root) {
 		for (xpac: root.xpActorClasses) {
 			var path = xpac.actorClass.generationTargetPath+xpac.actorClass.getPath
-			var file = xpac.actorClass.getFileName
+			var file = xpac.actorClass.getJavaFileName
 			logger.logInfo("generating ActorClass implementation '"+file+"' in '"+path+"'")
 			fileAccess.setOutputPath(path)
 			fileAccess.generateFile(file, root.generate(xpac, xpac.actorClass))

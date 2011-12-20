@@ -20,18 +20,21 @@ import org.eclipse.etrice.generator.base.ILogger
 import org.eclipse.etrice.generator.etricegen.Root
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 
+import org.eclipse.etrice.generator.extensions.LanguageExtensions
+
 @Singleton
 class ProtocolClassGen {
 
 	@Inject extension JavaIoFileSystemAccess fileAccess
-	@Inject extension StdExtensions stdExt
+	@Inject extension JavaExtensions stdExt
+	@Inject extension LanguageExtensions languageExt
 	@Inject extension ProcedureHelpers helpers
 	@Inject ILogger logger
 	
 	def doGenerate(Root root) {
 		for (pc: root.usedProtocolClasses) {
 			var path = pc.generationTargetPath+pc.getPath
-			var file = pc.getFileName
+			var file = pc.getJavaFileName
 			logger.logInfo("generating ProtocolClass implementation '"+file+"' in '"+path+"'")
 			fileAccess.setOutputPath(path)
 			fileAccess.generateFile(file, root.generate(pc))

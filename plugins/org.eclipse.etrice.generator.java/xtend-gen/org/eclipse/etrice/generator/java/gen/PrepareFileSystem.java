@@ -11,7 +11,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.generator.base.ILogger;
 import org.eclipse.etrice.generator.etricegen.Root;
-import org.eclipse.etrice.generator.java.gen.StdExtensions;
+import org.eclipse.etrice.generator.extensions.LanguageExtensions;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xtend2.lib.StringConcatenation;
@@ -20,7 +20,7 @@ import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 @Singleton
 public class PrepareFileSystem {
   @Inject
-  private StdExtensions stdExt;
+  private LanguageExtensions languageExt;
   
   @Inject
   private JavaIoFileSystemAccess fileAccess;
@@ -36,7 +36,7 @@ public class PrepareFileSystem {
         if ((e instanceof Root)) {
           EList<RoomModel> _usedRoomModels = ((Root) e).getUsedRoomModels();
           for (final RoomModel mdl : _usedRoomModels) {
-            String _generationTargetPath = this.stdExt.getGenerationTargetPath(mdl);
+            String _generationTargetPath = this.languageExt.getGenerationTargetPath(mdl);
             pathes.add(_generationTargetPath);
           }
         }

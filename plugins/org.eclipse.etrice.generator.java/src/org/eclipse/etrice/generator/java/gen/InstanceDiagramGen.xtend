@@ -23,11 +23,14 @@ import org.eclipse.etrice.generator.etricegen.StructureInstance
 import org.eclipse.etrice.generator.etricegen.SubSystemInstance
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 
+import org.eclipse.etrice.generator.extensions.LanguageExtensions
+
+
 @Singleton
 class InstanceDiagramGen implements IRoomGenerator {
 
 	@Inject extension JavaIoFileSystemAccess fileAccess
-	@Inject extension StdExtensions stdExt
+	@Inject extension LanguageExtensions languageExt
 	@Inject ILogger logger
 	
 	override doGenerate(Root root) {

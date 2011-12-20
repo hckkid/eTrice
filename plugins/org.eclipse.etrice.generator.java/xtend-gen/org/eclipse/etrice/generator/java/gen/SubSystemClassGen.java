@@ -16,8 +16,9 @@ import org.eclipse.etrice.generator.etricegen.InterfaceItemInstance;
 import org.eclipse.etrice.generator.etricegen.Root;
 import org.eclipse.etrice.generator.etricegen.ServiceImplInstance;
 import org.eclipse.etrice.generator.etricegen.SubSystemInstance;
+import org.eclipse.etrice.generator.extensions.LanguageExtensions;
+import org.eclipse.etrice.generator.java.gen.JavaExtensions;
 import org.eclipse.etrice.generator.java.gen.ProcedureHelpers;
-import org.eclipse.etrice.generator.java.gen.StdExtensions;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
 import org.eclipse.xtext.xbase.lib.BooleanExtensions;
 import org.eclipse.xtext.xbase.lib.ComparableExtensions;
@@ -32,7 +33,10 @@ public class SubSystemClassGen {
   private JavaIoFileSystemAccess fileAccess;
   
   @Inject
-  private StdExtensions stdExt;
+  private JavaExtensions stdExt;
+  
+  @Inject
+  private LanguageExtensions languageExt;
   
   @Inject
   private ProcedureHelpers helpers;
@@ -45,14 +49,14 @@ public class SubSystemClassGen {
     for (final SubSystemInstance ssi : _subSystemInstances) {
       {
         SubSystemClass _subSystemClass = ssi.getSubSystemClass();
-        String _generationTargetPath = this.stdExt.getGenerationTargetPath(_subSystemClass);
+        String _generationTargetPath = this.languageExt.getGenerationTargetPath(_subSystemClass);
         SubSystemClass _subSystemClass_1 = ssi.getSubSystemClass();
-        String _path = this.stdExt.getPath(_subSystemClass_1);
+        String _path = this.languageExt.getPath(_subSystemClass_1);
         String _operator_plus = StringExtensions.operator_plus(_generationTargetPath, _path);
         String path = _operator_plus;
         SubSystemClass _subSystemClass_2 = ssi.getSubSystemClass();
-        String _fileName = this.stdExt.getFileName(_subSystemClass_2);
-        String file = _fileName;
+        String _javaFileName = this.stdExt.getJavaFileName(_subSystemClass_2);
+        String file = _javaFileName;
         String _operator_plus_1 = StringExtensions.operator_plus("generating SubSystemClass implementation: \'", file);
         String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, "\' in \'");
         String _operator_plus_3 = StringExtensions.operator_plus(_operator_plus_2, path);
@@ -69,7 +73,7 @@ public class SubSystemClassGen {
   public StringConcatenation generate(final Root root, final SubSystemInstance comp, final SubSystemClass cc) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package ");
-    String _package = this.stdExt.getPackage(cc);
+    String _package = this.languageExt.getPackage(cc);
     _builder.append(_package, "");
     _builder.append(";");
     _builder.newLineIfNotEmpty();
@@ -229,7 +233,7 @@ public class SubSystemClassGen {
         _builder.append("\t\t");
         _builder.append("Address addr_item_");
         String _path_1 = ai_1.getPath();
-        String _pathName = this.stdExt.getPathName(_path_1);
+        String _pathName = this.languageExt.getPathName(_path_1);
         _builder.append(_pathName, "		");
         _builder.append(" = new Address(0,");
         int _threadId = ai_1.getThreadId();
@@ -269,7 +273,7 @@ public class SubSystemClassGen {
                     _builder.append("\t\t");
                     _builder.append("Address addr_item_");
                     String _path_3 = pi.getPath();
-                    String _pathName_1 = this.stdExt.getPathName(_path_3);
+                    String _pathName_1 = this.languageExt.getPathName(_path_3);
                     _builder.append(_pathName_1, "		");
                     _builder.append("_");
                     _builder.append(i, "		");
@@ -288,7 +292,7 @@ public class SubSystemClassGen {
                 _builder.append("\t\t");
                 _builder.append("Address addr_item_");
                 String _path_4 = pi.getPath();
-                String _pathName_2 = this.stdExt.getPathName(_path_4);
+                String _pathName_2 = this.languageExt.getPathName(_path_4);
                 _builder.append(_pathName_2, "		");
                 _builder.append(" = new Address(0,");
                 int _threadId_2 = ai_1.getThreadId();
@@ -363,7 +367,7 @@ public class SubSystemClassGen {
         _builder.append("\t");
         _builder.append("new Address[][] {{addr_item_");
         String _path_5 = ai_2.getPath();
-        String _pathName_3 = this.stdExt.getPathName(_path_5);
+        String _pathName_3 = this.languageExt.getPathName(_path_5);
         _builder.append(_pathName_3, "			");
         _builder.append("}");
         {
@@ -413,7 +417,7 @@ public class SubSystemClassGen {
                     _builder.append("\t");
                     _builder.append("addr_item_");
                     String _path_6 = pi_1.getPath();
-                    String _pathName_4 = this.stdExt.getPathName(_path_6);
+                    String _pathName_4 = this.languageExt.getPathName(_path_6);
                     _builder.append(_pathName_4, "				");
                     _builder.append("_");
                     EList<InterfaceItemInstance> _peers_5 = pi_1.getPeers();
@@ -428,7 +432,7 @@ public class SubSystemClassGen {
                 _builder.append("\t");
                 _builder.append("addr_item_");
                 String _path_7 = pi_1.getPath();
-                String _pathName_5 = this.stdExt.getPathName(_path_7);
+                String _pathName_5 = this.languageExt.getPathName(_path_7);
                 _builder.append(_pathName_5, "				");
                 _builder.newLineIfNotEmpty();
               }
@@ -518,7 +522,7 @@ public class SubSystemClassGen {
                         _builder.append("\t");
                         _builder.append("addr_item_");
                         String _path_8 = pp.getPath();
-                        String _pathName_6 = this.stdExt.getPathName(_path_8);
+                        String _pathName_6 = this.languageExt.getPathName(_path_8);
                         _builder.append(_pathName_6, "					");
                         _builder.append("_");
                         EList<InterfaceItemInstance> _peers_9 = pp.getPeers();
@@ -531,7 +535,7 @@ public class SubSystemClassGen {
                         _builder.append("\t");
                         _builder.append("addr_item_");
                         String _path_9 = pp.getPath();
-                        String _pathName_7 = this.stdExt.getPathName(_path_9);
+                        String _pathName_7 = this.languageExt.getPathName(_path_9);
                         _builder.append(_pathName_7, "					");
                         _builder.newLineIfNotEmpty();
                       }
@@ -609,7 +613,7 @@ public class SubSystemClassGen {
         _builder.append("\t\t\t\t\t");
         _builder.append("addr_item_");
         String _path_10 = ai_4.getPath();
-        String _pathName_8 = this.stdExt.getPathName(_path_10);
+        String _pathName_8 = this.languageExt.getPathName(_path_10);
         _builder.append(_pathName_8, "					");
         _builder.newLineIfNotEmpty();
       }
