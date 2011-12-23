@@ -7,15 +7,15 @@
  * 
  * CONTRIBUTORS:
  * 		Henrik Rentz-Reichert (initial contribution)
+ * 		Thomas Schuetz (refactoring, adapted for other target languages)
  * 
  *******************************************************************************/
 
-package org.eclipse.etrice.generator.java.gen
+package org.eclipse.etrice.generator.generic
 
 import com.google.inject.Inject
 import com.google.inject.Singleton
 import java.util.List
-import org.eclipse.etrice.core.room.ActorClass
 import org.eclipse.etrice.core.room.Attribute
 import org.eclipse.etrice.core.room.DetailCode
 import org.eclipse.etrice.core.room.Operation
@@ -23,20 +23,15 @@ import org.eclipse.etrice.core.room.Operation
 @Singleton
 class ProcedureHelpers {
 
-	@Inject extension JavaExtensions stdExt
+	@Inject 
+	extension ILanguageExtension languageExt
 
-	def ActorClassPortIF(ActorClass ac) {'''
-		«IF ac.extPorts.size > 0»implements«ENDIF»
-		«FOR ep : ac.extPorts»public «ep.ifport.protocol.name»«IF ep.ifport.conjugated==true»Conj«ENDIF»Port «ep.ifport.name» = null; 
-		«ENDFOR»
-	'''
-	}
-	
 	def UserCode(DetailCode dc) {'''
 		«IF dc!=null»
-		//--------------------- begin user code
+			//--------------------- begin user code
 			«FOR command : dc.commands»	«command»
-			«ENDFOR»//--------------------- end user code
+			«ENDFOR»
+			//--------------------- end user code
 		«ENDIF»
 	'''
 	}

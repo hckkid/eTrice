@@ -5,17 +5,16 @@ import com.google.inject.Singleton;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.DataClass;
-import org.eclipse.etrice.core.room.Import;
+import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.Operation;
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.Type;
 import org.eclipse.etrice.generator.base.ILogger;
 import org.eclipse.etrice.generator.etricegen.Root;
 import org.eclipse.etrice.generator.extensions.RoomExtensions;
+import org.eclipse.etrice.generator.generic.ProcedureHelpers;
 import org.eclipse.etrice.generator.java.gen.JavaExtensions;
-import org.eclipse.etrice.generator.java.gen.ProcedureHelpers;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
-import org.eclipse.xtext.xbase.lib.ComparableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xtend2.lib.StringConcatenation;
@@ -81,25 +80,11 @@ public class DataClassGen {
       }
     }
     _builder.newLine();
-    {
-      EList<Import> _imports = dc.getImports();
-      int _size = _imports.size();
-      boolean _operator_greaterThan = ComparableExtensions.<Integer>operator_greaterThan(((Integer)_size), ((Integer)0));
-      if (_operator_greaterThan) {
-        _builder.append("// user imports");
-        _builder.newLine();
-        {
-          EList<Import> _imports_1 = dc.getImports();
-          for(final Import imp : _imports_1) {
-            _builder.append("import ");
-            String _importedNamespace = imp.getImportedNamespace();
-            _builder.append(_importedNamespace, "");
-            _builder.append(".*;");
-            _builder.newLineIfNotEmpty();
-          }
-        }
-      }
-    }
+    DetailCode _userCode1 = dc.getUserCode1();
+    StringConcatenation _UserCode = this.helpers.UserCode(_userCode1);
+    _builder.append(_UserCode, "");
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
     _builder.newLine();
     _builder.append("public class ");
     String _name_1 = dc.getName();
@@ -116,6 +101,15 @@ public class DataClassGen {
     }
     _builder.append(" {");
     _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    DetailCode _userCode2 = dc.getUserCode2();
+    StringConcatenation _UserCode_1 = this.helpers.UserCode(_userCode2);
+    _builder.append(_UserCode_1, "	");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.newLine();
     _builder.append("\t");
     EList<Attribute> _attributes = dc.getAttributes();
     StringConcatenation _Attributes = this.helpers.Attributes(_attributes);
@@ -151,8 +145,8 @@ public class DataClassGen {
           if (_operator_notEquals_1) {
             _builder.append("\t\t");
             {
-              int _size_1 = a.getSize();
-              boolean _operator_equals = ObjectExtensions.operator_equals(((Integer)_size_1), ((Integer)0));
+              int _size = a.getSize();
+              boolean _operator_equals = ObjectExtensions.operator_equals(((Integer)_size), ((Integer)0));
               if (_operator_equals) {
                 String _name_4 = a.getName();
                 _builder.append(_name_4, "		");
@@ -225,8 +219,8 @@ public class DataClassGen {
           } else {
             _builder.append("\t\t");
             {
-              int _size_2 = a_1.getSize();
-              boolean _operator_equals_1 = ObjectExtensions.operator_equals(((Integer)_size_2), ((Integer)0));
+              int _size_1 = a_1.getSize();
+              boolean _operator_equals_1 = ObjectExtensions.operator_equals(((Integer)_size_1), ((Integer)0));
               if (_operator_equals_1) {
                 _builder.append("copy.");
                 String _name_12 = a_1.getName();
@@ -237,8 +231,8 @@ public class DataClassGen {
                 _builder.append(";");
               } else {
                 _builder.append("for (int i=0;i<");
-                int _size_3 = a_1.getSize();
-                _builder.append(_size_3, "		");
+                int _size_2 = a_1.getSize();
+                _builder.append(_size_2, "		");
                 _builder.append(";i++){copy.");
                 String _name_14 = a_1.getName();
                 _builder.append(_name_14, "		");

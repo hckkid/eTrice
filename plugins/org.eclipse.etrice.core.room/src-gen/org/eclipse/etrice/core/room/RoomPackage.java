@@ -318,13 +318,22 @@ public interface RoomPackage extends EPackage
   int ACTOR_CONTAINER_CLASS__USER_CODE2 = STRUCTURE_CLASS_FEATURE_COUNT + 2;
 
   /**
+   * The feature id for the '<em><b>User Code3</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ACTOR_CONTAINER_CLASS__USER_CODE3 = STRUCTURE_CLASS_FEATURE_COUNT + 3;
+
+  /**
    * The feature id for the '<em><b>Actor Refs</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ACTOR_CONTAINER_CLASS__ACTOR_REFS = STRUCTURE_CLASS_FEATURE_COUNT + 3;
+  int ACTOR_CONTAINER_CLASS__ACTOR_REFS = STRUCTURE_CLASS_FEATURE_COUNT + 4;
 
   /**
    * The number of structural features of the '<em>Actor Container Class</em>' class.
@@ -333,7 +342,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ACTOR_CONTAINER_CLASS_FEATURE_COUNT = STRUCTURE_CLASS_FEATURE_COUNT + 4;
+  int ACTOR_CONTAINER_CLASS_FEATURE_COUNT = STRUCTURE_CLASS_FEATURE_COUNT + 5;
 
   /**
    * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.TypedIDImpl <em>Typed ID</em>}' class.
@@ -585,13 +594,31 @@ public interface RoomPackage extends EPackage
   int DATA_CLASS__BASE = ROOM_CLASS_FEATURE_COUNT + 0;
 
   /**
-   * The feature id for the '<em><b>Imports</b></em>' containment reference list.
+   * The feature id for the '<em><b>User Code1</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int DATA_CLASS__IMPORTS = ROOM_CLASS_FEATURE_COUNT + 1;
+  int DATA_CLASS__USER_CODE1 = ROOM_CLASS_FEATURE_COUNT + 1;
+
+  /**
+   * The feature id for the '<em><b>User Code2</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int DATA_CLASS__USER_CODE2 = ROOM_CLASS_FEATURE_COUNT + 2;
+
+  /**
+   * The feature id for the '<em><b>User Code3</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int DATA_CLASS__USER_CODE3 = ROOM_CLASS_FEATURE_COUNT + 3;
 
   /**
    * The feature id for the '<em><b>Attributes</b></em>' containment reference list.
@@ -600,7 +627,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int DATA_CLASS__ATTRIBUTES = ROOM_CLASS_FEATURE_COUNT + 2;
+  int DATA_CLASS__ATTRIBUTES = ROOM_CLASS_FEATURE_COUNT + 4;
 
   /**
    * The feature id for the '<em><b>Operations</b></em>' containment reference list.
@@ -609,7 +636,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int DATA_CLASS__OPERATIONS = ROOM_CLASS_FEATURE_COUNT + 3;
+  int DATA_CLASS__OPERATIONS = ROOM_CLASS_FEATURE_COUNT + 5;
 
   /**
    * The number of structural features of the '<em>Data Class</em>' class.
@@ -618,7 +645,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int DATA_CLASS_FEATURE_COUNT = ROOM_CLASS_FEATURE_COUNT + 4;
+  int DATA_CLASS_FEATURE_COUNT = ROOM_CLASS_FEATURE_COUNT + 6;
 
   /**
    * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.AttributeImpl <em>Attribute</em>}' class.
@@ -804,13 +831,22 @@ public interface RoomPackage extends EPackage
   int PROTOCOL_CLASS__USER_CODE2 = ROOM_CLASS_FEATURE_COUNT + 2;
 
   /**
+   * The feature id for the '<em><b>User Code3</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PROTOCOL_CLASS__USER_CODE3 = ROOM_CLASS_FEATURE_COUNT + 3;
+
+  /**
    * The feature id for the '<em><b>Incoming Messages</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int PROTOCOL_CLASS__INCOMING_MESSAGES = ROOM_CLASS_FEATURE_COUNT + 3;
+  int PROTOCOL_CLASS__INCOMING_MESSAGES = ROOM_CLASS_FEATURE_COUNT + 4;
 
   /**
    * The feature id for the '<em><b>Outgoing Messages</b></em>' containment reference list.
@@ -819,7 +855,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int PROTOCOL_CLASS__OUTGOING_MESSAGES = ROOM_CLASS_FEATURE_COUNT + 4;
+  int PROTOCOL_CLASS__OUTGOING_MESSAGES = ROOM_CLASS_FEATURE_COUNT + 5;
 
   /**
    * The feature id for the '<em><b>Regular</b></em>' containment reference.
@@ -828,7 +864,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int PROTOCOL_CLASS__REGULAR = ROOM_CLASS_FEATURE_COUNT + 5;
+  int PROTOCOL_CLASS__REGULAR = ROOM_CLASS_FEATURE_COUNT + 6;
 
   /**
    * The feature id for the '<em><b>Conjugate</b></em>' containment reference.
@@ -837,7 +873,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int PROTOCOL_CLASS__CONJUGATE = ROOM_CLASS_FEATURE_COUNT + 6;
+  int PROTOCOL_CLASS__CONJUGATE = ROOM_CLASS_FEATURE_COUNT + 7;
 
   /**
    * The feature id for the '<em><b>Semantics</b></em>' containment reference.
@@ -846,7 +882,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int PROTOCOL_CLASS__SEMANTICS = ROOM_CLASS_FEATURE_COUNT + 7;
+  int PROTOCOL_CLASS__SEMANTICS = ROOM_CLASS_FEATURE_COUNT + 8;
 
   /**
    * The number of structural features of the '<em>Protocol Class</em>' class.
@@ -855,7 +891,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int PROTOCOL_CLASS_FEATURE_COUNT = ROOM_CLASS_FEATURE_COUNT + 8;
+  int PROTOCOL_CLASS_FEATURE_COUNT = ROOM_CLASS_FEATURE_COUNT + 9;
 
   /**
    * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.MessageImpl <em>Message</em>}' class.
@@ -1206,6 +1242,15 @@ public interface RoomPackage extends EPackage
    * @ordered
    */
   int ACTOR_CLASS__USER_CODE2 = ACTOR_CONTAINER_CLASS__USER_CODE2;
+
+  /**
+   * The feature id for the '<em><b>User Code3</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ACTOR_CLASS__USER_CODE3 = ACTOR_CONTAINER_CLASS__USER_CODE3;
 
   /**
    * The feature id for the '<em><b>Actor Refs</b></em>' containment reference list.
@@ -1792,6 +1837,15 @@ public interface RoomPackage extends EPackage
    * @ordered
    */
   int SUB_SYSTEM_CLASS__USER_CODE2 = ACTOR_CONTAINER_CLASS__USER_CODE2;
+
+  /**
+   * The feature id for the '<em><b>User Code3</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SUB_SYSTEM_CLASS__USER_CODE3 = ACTOR_CONTAINER_CLASS__USER_CODE3;
 
   /**
    * The feature id for the '<em><b>Actor Refs</b></em>' containment reference list.
@@ -3835,6 +3889,17 @@ public interface RoomPackage extends EPackage
   EReference getActorContainerClass_UserCode2();
 
   /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.etrice.core.room.ActorContainerClass#getUserCode3 <em>User Code3</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>User Code3</em>'.
+   * @see org.eclipse.etrice.core.room.ActorContainerClass#getUserCode3()
+   * @see #getActorContainerClass()
+   * @generated
+   */
+  EReference getActorContainerClass_UserCode3();
+
+  /**
    * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.room.ActorContainerClass#getActorRefs <em>Actor Refs</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -4016,15 +4081,37 @@ public interface RoomPackage extends EPackage
   EReference getDataClass_Base();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.room.DataClass#getImports <em>Imports</em>}'.
+   * Returns the meta object for the containment reference '{@link org.eclipse.etrice.core.room.DataClass#getUserCode1 <em>User Code1</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Imports</em>'.
-   * @see org.eclipse.etrice.core.room.DataClass#getImports()
+   * @return the meta object for the containment reference '<em>User Code1</em>'.
+   * @see org.eclipse.etrice.core.room.DataClass#getUserCode1()
    * @see #getDataClass()
    * @generated
    */
-  EReference getDataClass_Imports();
+  EReference getDataClass_UserCode1();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.etrice.core.room.DataClass#getUserCode2 <em>User Code2</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>User Code2</em>'.
+   * @see org.eclipse.etrice.core.room.DataClass#getUserCode2()
+   * @see #getDataClass()
+   * @generated
+   */
+  EReference getDataClass_UserCode2();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.etrice.core.room.DataClass#getUserCode3 <em>User Code3</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>User Code3</em>'.
+   * @see org.eclipse.etrice.core.room.DataClass#getUserCode3()
+   * @see #getDataClass()
+   * @generated
+   */
+  EReference getDataClass_UserCode3();
 
   /**
    * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.room.DataClass#getAttributes <em>Attributes</em>}'.
@@ -4220,6 +4307,17 @@ public interface RoomPackage extends EPackage
    * @generated
    */
   EReference getProtocolClass_UserCode2();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.etrice.core.room.ProtocolClass#getUserCode3 <em>User Code3</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>User Code3</em>'.
+   * @see org.eclipse.etrice.core.room.ProtocolClass#getUserCode3()
+   * @see #getProtocolClass()
+   * @generated
+   */
+  EReference getProtocolClass_UserCode3();
 
   /**
    * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.room.ProtocolClass#getIncomingMessages <em>Incoming Messages</em>}'.
@@ -6125,6 +6223,14 @@ public interface RoomPackage extends EPackage
     EReference ACTOR_CONTAINER_CLASS__USER_CODE2 = eINSTANCE.getActorContainerClass_UserCode2();
 
     /**
+     * The meta object literal for the '<em><b>User Code3</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ACTOR_CONTAINER_CLASS__USER_CODE3 = eINSTANCE.getActorContainerClass_UserCode3();
+
+    /**
      * The meta object literal for the '<em><b>Actor Refs</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -6273,12 +6379,28 @@ public interface RoomPackage extends EPackage
     EReference DATA_CLASS__BASE = eINSTANCE.getDataClass_Base();
 
     /**
-     * The meta object literal for the '<em><b>Imports</b></em>' containment reference list feature.
+     * The meta object literal for the '<em><b>User Code1</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference DATA_CLASS__IMPORTS = eINSTANCE.getDataClass_Imports();
+    EReference DATA_CLASS__USER_CODE1 = eINSTANCE.getDataClass_UserCode1();
+
+    /**
+     * The meta object literal for the '<em><b>User Code2</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference DATA_CLASS__USER_CODE2 = eINSTANCE.getDataClass_UserCode2();
+
+    /**
+     * The meta object literal for the '<em><b>User Code3</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference DATA_CLASS__USER_CODE3 = eINSTANCE.getDataClass_UserCode3();
 
     /**
      * The meta object literal for the '<em><b>Attributes</b></em>' containment reference list feature.
@@ -6429,6 +6551,14 @@ public interface RoomPackage extends EPackage
      * @generated
      */
     EReference PROTOCOL_CLASS__USER_CODE2 = eINSTANCE.getProtocolClass_UserCode2();
+
+    /**
+     * The meta object literal for the '<em><b>User Code3</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference PROTOCOL_CLASS__USER_CODE3 = eINSTANCE.getProtocolClass_UserCode3();
 
     /**
      * The meta object literal for the '<em><b>Incoming Messages</b></em>' containment reference list feature.

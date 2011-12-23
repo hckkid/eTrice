@@ -19,6 +19,7 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.eclipse.etrice.core.room.ProtocolClass#getBase <em>Base</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.ProtocolClass#getUserCode1 <em>User Code1</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.ProtocolClass#getUserCode2 <em>User Code2</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.ProtocolClass#getUserCode3 <em>User Code3</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.ProtocolClass#getIncomingMessages <em>Incoming Messages</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.ProtocolClass#getOutgoingMessages <em>Outgoing Messages</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.ProtocolClass#getRegular <em>Regular</em>}</li>
@@ -110,6 +111,32 @@ public interface ProtocolClass extends RoomClass
    * @generated
    */
   void setUserCode2(DetailCode value);
+
+  /**
+   * Returns the value of the '<em><b>User Code3</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>User Code3</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>User Code3</em>' containment reference.
+   * @see #setUserCode3(DetailCode)
+   * @see org.eclipse.etrice.core.room.RoomPackage#getProtocolClass_UserCode3()
+   * @model containment="true"
+   * @generated
+   */
+  DetailCode getUserCode3();
+
+  /**
+   * Sets the value of the '{@link org.eclipse.etrice.core.room.ProtocolClass#getUserCode3 <em>User Code3</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>User Code3</em>' containment reference.
+   * @see #getUserCode3()
+   * @generated
+   */
+  void setUserCode3(DetailCode value);
 
   /**
    * Returns the value of the '<em><b>Incoming Messages</b></em>' containment reference list.

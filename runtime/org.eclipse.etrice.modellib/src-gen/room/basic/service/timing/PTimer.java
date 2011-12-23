@@ -8,8 +8,8 @@ import org.eclipse.etrice.runtime.java.modelbase.*;
 import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
 
 //--------------------- begin user code
-		import java.util.TimerTask;
-	//--------------------- end user code
+	import java.util.TimerTask;
+//--------------------- end user code
 
 
 public class PTimer {
@@ -26,41 +26,41 @@ public class PTimer {
 	public static final int MSG_MAX = 4;  
 
 	//--------------------- begin user code
-			static protected class FireTimerTask extends TimerTask {
-			
-						private int time;
-						private int id;
-						private PTimerPort port;
-			
-						public FireTimerTask(int time, int id, PTimerPort port) {
-							this.time = time;
-							this.id = id;
-							this.port = port;
-						}
-			
-						@Override
-						public void run() {
-							port.timer(id);
-						}
-						
-						public int getTime() {
-							return time;
-						}
-						
-						public int getId() {
-							return id;
-						}
+		static protected class FireTimerTask extends TimerTask {
+		
+					private int time;
+					private int id;
+					private PTimerPort port;
+		
+					public FireTimerTask(int time, int id, PTimerPort port) {
+						this.time = time;
+						this.id = id;
+						this.port = port;
+					}
+		
+					@Override
+					public void run() {
+						port.timer(id);
 					}
 					
-					static protected class TimerData {
-						int time;
-						int id;
-						public TimerData(int time, int id) {
-							this.time = time;
-							this.id = id;
-						}
+					public int getTime() {
+						return time;
 					}
-		//--------------------- end user code
+					
+					public int getId() {
+						return id;
+					}
+				}
+				
+				static protected class TimerData {
+					int time;
+					int id;
+					public TimerData(int time, int id) {
+						this.time = time;
+						this.id = id;
+					}
+				}
+	//--------------------- end user code
 
 	private static String messageStrings[] = {"MIN", "timerTick", "Start","Kill","MAX"};
 
@@ -78,10 +78,10 @@ public class PTimer {
 	// port class
 	static public class PTimerPort extends PortBase {
 		//--------------------- begin user code
-				private FireTimerTask task = null;
-							
-							public TimerTask getTask() { return task; }
-			//--------------------- end user code
+			private FireTimerTask task = null;
+						
+						public TimerTask getTask() { return task; }
+		//--------------------- end user code
 		// constructors
 		public PTimerPort(IEventReceiver actor, String name, int localId, Address addr, Address peerAddress) {
 			super(actor, name, localId, 0, addr, peerAddress);
@@ -205,9 +205,9 @@ public class PTimer {
 	// port class
 	static public class PTimerConjPort extends PortBase {
 		//--------------------- begin user code
-				private int currentId = 0;
-							private boolean active = false;
-			//--------------------- end user code
+			private int currentId = 0;
+						private boolean active = false;
+		//--------------------- end user code
 		// constructors
 		public PTimerConjPort(IEventReceiver actor, String name, int localId, Address addr, Address peerAddress) {
 			super(actor, name, localId, 0, addr, peerAddress);

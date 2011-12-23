@@ -12,8 +12,8 @@ import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
 import org.eclipse.etrice.integration.tests.p_HFSM.*;
 
 //--------------------- begin user code
-		import org.eclipse.etrice.runtime.java.messaging.RTServices;
-	//--------------------- end user code
+	import org.eclipse.etrice.runtime.java.messaging.RTServices;
+//--------------------- end user code
 
 
 public class a_HFSM_Tester extends ActorClassBase {

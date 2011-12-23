@@ -20,6 +20,8 @@ import org.eclipse.etrice.generator.base.ILogger
 import org.eclipse.etrice.generator.etricegen.Root
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 import org.eclipse.etrice.generator.extensions.RoomExtensions
+import org.eclipse.etrice.generator.generic.ProcedureHelpers
+
 
 @Singleton
 class DataClassGen {
@@ -50,22 +52,23 @@ class DataClassGen {
 	}
 	
 	def generateHeaderFile(Root root, DataClass dc) {'''
-		package «dc.getPackage()»;
+		TODO: includes for C-Headers instead of Java imports
 		
 		«var models = root.getReferencedModels(dc)»
-		«FOR model : models»import «model.name».*;
+		«FOR model : models»//import «model.name».*;
 		«ENDFOR»
 		
-		«IF dc.imports.size>0»
-		// user imports
-		«FOR imp : dc.imports»import «imp.importedNamespace».*;
-		«ENDFOR»«ENDIF»
+		«helpers.UserCode(dc.userCode1)»
+				
 		
-		public class «dc.name»«IF dc.base!=null» extends «dc.base.name»«ENDIF» {
+		typedef struct «dc.name»«IF dc.base!=null» /* extends -> inheritance not implemented yet */ «dc.base.name»«ENDIF»  {
+		
+		«helpers.UserCode(dc.userCode2)»
+		
 			«helpers.Attributes(dc.attributes)»
 			«helpers.AttributeSettersGetters(dc.attributes)»
 			«helpers.Operations(dc.operations)»
-			
+		
 			// default constructor
 			public «dc.name»() {
 				«FOR a : dc.attributes»
@@ -90,10 +93,16 @@ class DataClassGen {
 				return copy;
 			}
 		};
-	'''
+		'''
 	}
 	
 	def generateSourceFile(Root root, DataClass dc) {'''
+		#include "«dc.getCHeaderFileName»";
+		
+		
+		«helpers.UserCode(dc.userCode3)»
+		
+		// TODO
 	'''}
 	
 	

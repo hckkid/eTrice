@@ -13,17 +13,17 @@ import room.basic.service.timing.PTimeout.*;
 import room.basic.service.timing.PTimer.*;
 
 //--------------------- begin user code
-		import java.util.Timer;
-	//--------------------- end user code
+	import java.util.Timer;
+//--------------------- end user code
 
 
 public class ATimingService extends ActorClassBase {
 
 	//--------------------- begin user code
-			private Timer timerService = null;
-			private int taskCount = 0;
-			private static final int PURGE_LIMIT = 1000;
-		//--------------------- end user code
+		private Timer timerService = null;
+		private int taskCount = 0;
+		private static final int PURGE_LIMIT = 1000;
+	//--------------------- end user code
 	
 	//--------------------- ports
 	//--------------------- saps

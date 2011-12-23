@@ -2,7 +2,10 @@ package org.eclipse.etrice.integration.SendingDataByValueTest;
 
 
 
+
 public class PingPongDataDeep {
+	
+	
 	//--------------------- attributes
 	protected byte i8Val;protected short i16Val;protected int i32Val;protected char charVal;protected float f32Val;protected double f64Val;protected String stringVal;protected int[] arrayFromInt32 =new int[10];
 	//--------------------- attribute setters and getters

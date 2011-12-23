@@ -22,6 +22,7 @@ import org.eclipse.etrice.generator.etricegen.Root
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 
 import org.eclipse.etrice.generator.extensions.RoomExtensions
+import org.eclipse.etrice.generator.generic.ProcedureHelpers
 
 @Singleton
 class ActorClassGen {

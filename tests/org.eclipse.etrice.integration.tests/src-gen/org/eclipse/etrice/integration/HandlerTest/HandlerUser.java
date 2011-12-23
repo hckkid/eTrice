@@ -12,16 +12,16 @@ import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
 import org.eclipse.etrice.integration.HandlerTest.TestProtocol.*;
 
 //--------------------- begin user code
-		import org.eclipse.etrice.integration.tests.helpers.*;
-		import org.eclipse.etrice.runtime.java.messaging.RTServices;
-	//--------------------- end user code
+	import org.eclipse.etrice.integration.tests.helpers.*;
+	import org.eclipse.etrice.runtime.java.messaging.RTServices;
+//--------------------- end user code
 
 
 public class HandlerUser extends ActorClassBase {
 
 	//--------------------- begin user code
-			private CRC16Generator crcGen = new CRC16Generator();
-		//--------------------- end user code
+		private CRC16Generator crcGen = new CRC16Generator();
+	//--------------------- end user code
 	
 	//--------------------- ports
 	protected TestProtocolPort TestPort1 = null;

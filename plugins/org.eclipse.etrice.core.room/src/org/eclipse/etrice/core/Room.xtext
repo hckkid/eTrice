@@ -74,7 +74,9 @@ FreeType: prim=PrimitiveType | (type=ID (ref?='ref')?);
 // TODOHRR: define detail level language?
 DataClass:
 	'DataClass' name=ID (docu=Documentation)? ('extends' base=[DataClass|FQN])? '{'
-		(imports+=Import)*
+		('usercode1' userCode1=DetailCode)?
+		('usercode2' userCode2=DetailCode)?
+		('usercode3' userCode3=DetailCode)?
 		attributes+=Attribute+
 		operations+=Operation*
 	'}';
@@ -97,6 +99,7 @@ ProtocolClass:
 	'ProtocolClass' name=ID (docu=Documentation)? ('extends' base=[ProtocolClass|FQN])? '{'
 		('usercode1' userCode1=DetailCode)?
 		('usercode2' userCode2=DetailCode)?
+		('usercode3' userCode3=DetailCode)?
 		'incoming' '{' incomingMessages+=Message* '}'
 		'outgoing' '{' outgoingMessages+=Message* '}'
 		('regular' 'PortClass' regular=PortClass)?
@@ -155,6 +158,7 @@ ActorClass:
 		('Structure' (structureDocu=Documentation)? '{'
 			('usercode1' userCode1=DetailCode)?
 			('usercode2' userCode2=DetailCode)?
+			('usercode3' userCode3=DetailCode)?
 			(intPorts+=Port |
 			extPorts+=ExternalPort)*
 			serviceImplementations+=ServiceImplementation*
@@ -203,6 +207,7 @@ SubSystemClass:
 	'SubSystemClass' name=ID (docu=Documentation)? '{'
 		('usercode1' userCode1=DetailCode)?
 		('usercode2' userCode2=DetailCode)?
+		('usercode3' userCode3=DetailCode)?
 		relayPorts+=Port*
 		ifSPPs+=SPPRef*
 		actorRefs+=ActorRef*

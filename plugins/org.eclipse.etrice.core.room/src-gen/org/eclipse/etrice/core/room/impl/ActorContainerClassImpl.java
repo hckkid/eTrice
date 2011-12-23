@@ -37,6 +37,7 @@ import org.eclipse.etrice.core.room.SPPRef;
  *   <li>{@link org.eclipse.etrice.core.room.impl.ActorContainerClassImpl#getIfSPPs <em>If SP Ps</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ActorContainerClassImpl#getUserCode1 <em>User Code1</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ActorContainerClassImpl#getUserCode2 <em>User Code2</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.impl.ActorContainerClassImpl#getUserCode3 <em>User Code3</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ActorContainerClassImpl#getActorRefs <em>Actor Refs</em>}</li>
  * </ul>
  * </p>
@@ -74,6 +75,16 @@ public class ActorContainerClassImpl extends StructureClassImpl implements Actor
    * @ordered
    */
   protected DetailCode userCode2;
+
+  /**
+   * The cached value of the '{@link #getUserCode3() <em>User Code3</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getUserCode3()
+   * @generated
+   * @ordered
+   */
+  protected DetailCode userCode3;
 
   /**
    * The cached value of the '{@link #getActorRefs() <em>Actor Refs</em>}' containment reference list.
@@ -221,6 +232,54 @@ public class ActorContainerClassImpl extends StructureClassImpl implements Actor
    * <!-- end-user-doc -->
    * @generated
    */
+  public DetailCode getUserCode3()
+  {
+    return userCode3;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetUserCode3(DetailCode newUserCode3, NotificationChain msgs)
+  {
+    DetailCode oldUserCode3 = userCode3;
+    userCode3 = newUserCode3;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RoomPackage.ACTOR_CONTAINER_CLASS__USER_CODE3, oldUserCode3, newUserCode3);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setUserCode3(DetailCode newUserCode3)
+  {
+    if (newUserCode3 != userCode3)
+    {
+      NotificationChain msgs = null;
+      if (userCode3 != null)
+        msgs = ((InternalEObject)userCode3).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RoomPackage.ACTOR_CONTAINER_CLASS__USER_CODE3, null, msgs);
+      if (newUserCode3 != null)
+        msgs = ((InternalEObject)newUserCode3).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RoomPackage.ACTOR_CONTAINER_CLASS__USER_CODE3, null, msgs);
+      msgs = basicSetUserCode3(newUserCode3, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.ACTOR_CONTAINER_CLASS__USER_CODE3, newUserCode3, newUserCode3));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EList<ActorRef> getActorRefs()
   {
     if (actorRefs == null)
@@ -246,6 +305,8 @@ public class ActorContainerClassImpl extends StructureClassImpl implements Actor
         return basicSetUserCode1(null, msgs);
       case RoomPackage.ACTOR_CONTAINER_CLASS__USER_CODE2:
         return basicSetUserCode2(null, msgs);
+      case RoomPackage.ACTOR_CONTAINER_CLASS__USER_CODE3:
+        return basicSetUserCode3(null, msgs);
       case RoomPackage.ACTOR_CONTAINER_CLASS__ACTOR_REFS:
         return ((InternalEList<?>)getActorRefs()).basicRemove(otherEnd, msgs);
     }
@@ -268,6 +329,8 @@ public class ActorContainerClassImpl extends StructureClassImpl implements Actor
         return getUserCode1();
       case RoomPackage.ACTOR_CONTAINER_CLASS__USER_CODE2:
         return getUserCode2();
+      case RoomPackage.ACTOR_CONTAINER_CLASS__USER_CODE3:
+        return getUserCode3();
       case RoomPackage.ACTOR_CONTAINER_CLASS__ACTOR_REFS:
         return getActorRefs();
     }
@@ -294,6 +357,9 @@ public class ActorContainerClassImpl extends StructureClassImpl implements Actor
         return;
       case RoomPackage.ACTOR_CONTAINER_CLASS__USER_CODE2:
         setUserCode2((DetailCode)newValue);
+        return;
+      case RoomPackage.ACTOR_CONTAINER_CLASS__USER_CODE3:
+        setUserCode3((DetailCode)newValue);
         return;
       case RoomPackage.ACTOR_CONTAINER_CLASS__ACTOR_REFS:
         getActorRefs().clear();
@@ -322,6 +388,9 @@ public class ActorContainerClassImpl extends StructureClassImpl implements Actor
       case RoomPackage.ACTOR_CONTAINER_CLASS__USER_CODE2:
         setUserCode2((DetailCode)null);
         return;
+      case RoomPackage.ACTOR_CONTAINER_CLASS__USER_CODE3:
+        setUserCode3((DetailCode)null);
+        return;
       case RoomPackage.ACTOR_CONTAINER_CLASS__ACTOR_REFS:
         getActorRefs().clear();
         return;
@@ -345,6 +414,8 @@ public class ActorContainerClassImpl extends StructureClassImpl implements Actor
         return userCode1 != null;
       case RoomPackage.ACTOR_CONTAINER_CLASS__USER_CODE2:
         return userCode2 != null;
+      case RoomPackage.ACTOR_CONTAINER_CLASS__USER_CODE3:
+        return userCode3 != null;
       case RoomPackage.ACTOR_CONTAINER_CLASS__ACTOR_REFS:
         return actorRefs != null && !actorRefs.isEmpty();
     }

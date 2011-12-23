@@ -14,8 +14,8 @@ import room.basic.service.timing.PTimeout.*;
 import org.eclipse.etrice.integration.PingPongThreadTest.PingPongProtocol.*;
 
 //--------------------- begin user code
-		import org.eclipse.etrice.runtime.java.messaging.RTServices;
-	//--------------------- end user code
+	import org.eclipse.etrice.runtime.java.messaging.RTServices;
+//--------------------- end user code
 
 
 public class MrPingActor extends ActorClassBase {

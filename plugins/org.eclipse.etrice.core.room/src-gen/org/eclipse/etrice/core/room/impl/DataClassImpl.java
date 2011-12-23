@@ -23,7 +23,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.DataClass;
-import org.eclipse.etrice.core.room.Import;
+import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.Operation;
 import org.eclipse.etrice.core.room.RoomPackage;
 
@@ -35,7 +35,9 @@ import org.eclipse.etrice.core.room.RoomPackage;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.room.impl.DataClassImpl#getBase <em>Base</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.room.impl.DataClassImpl#getImports <em>Imports</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.impl.DataClassImpl#getUserCode1 <em>User Code1</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.impl.DataClassImpl#getUserCode2 <em>User Code2</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.impl.DataClassImpl#getUserCode3 <em>User Code3</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.DataClassImpl#getAttributes <em>Attributes</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.DataClassImpl#getOperations <em>Operations</em>}</li>
  * </ul>
@@ -56,14 +58,34 @@ public class DataClassImpl extends RoomClassImpl implements DataClass
   protected DataClass base;
 
   /**
-   * The cached value of the '{@link #getImports() <em>Imports</em>}' containment reference list.
+   * The cached value of the '{@link #getUserCode1() <em>User Code1</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getImports()
+   * @see #getUserCode1()
    * @generated
    * @ordered
    */
-  protected EList<Import> imports;
+  protected DetailCode userCode1;
+
+  /**
+   * The cached value of the '{@link #getUserCode2() <em>User Code2</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getUserCode2()
+   * @generated
+   * @ordered
+   */
+  protected DetailCode userCode2;
+
+  /**
+   * The cached value of the '{@link #getUserCode3() <em>User Code3</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getUserCode3()
+   * @generated
+   * @ordered
+   */
+  protected DetailCode userCode3;
 
   /**
    * The cached value of the '{@link #getAttributes() <em>Attributes</em>}' containment reference list.
@@ -154,13 +176,143 @@ public class DataClassImpl extends RoomClassImpl implements DataClass
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<Import> getImports()
+  public DetailCode getUserCode1()
   {
-    if (imports == null)
+    return userCode1;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetUserCode1(DetailCode newUserCode1, NotificationChain msgs)
+  {
+    DetailCode oldUserCode1 = userCode1;
+    userCode1 = newUserCode1;
+    if (eNotificationRequired())
     {
-      imports = new EObjectContainmentEList<Import>(Import.class, this, RoomPackage.DATA_CLASS__IMPORTS);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RoomPackage.DATA_CLASS__USER_CODE1, oldUserCode1, newUserCode1);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
     }
-    return imports;
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setUserCode1(DetailCode newUserCode1)
+  {
+    if (newUserCode1 != userCode1)
+    {
+      NotificationChain msgs = null;
+      if (userCode1 != null)
+        msgs = ((InternalEObject)userCode1).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RoomPackage.DATA_CLASS__USER_CODE1, null, msgs);
+      if (newUserCode1 != null)
+        msgs = ((InternalEObject)newUserCode1).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RoomPackage.DATA_CLASS__USER_CODE1, null, msgs);
+      msgs = basicSetUserCode1(newUserCode1, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.DATA_CLASS__USER_CODE1, newUserCode1, newUserCode1));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public DetailCode getUserCode2()
+  {
+    return userCode2;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetUserCode2(DetailCode newUserCode2, NotificationChain msgs)
+  {
+    DetailCode oldUserCode2 = userCode2;
+    userCode2 = newUserCode2;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RoomPackage.DATA_CLASS__USER_CODE2, oldUserCode2, newUserCode2);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setUserCode2(DetailCode newUserCode2)
+  {
+    if (newUserCode2 != userCode2)
+    {
+      NotificationChain msgs = null;
+      if (userCode2 != null)
+        msgs = ((InternalEObject)userCode2).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RoomPackage.DATA_CLASS__USER_CODE2, null, msgs);
+      if (newUserCode2 != null)
+        msgs = ((InternalEObject)newUserCode2).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RoomPackage.DATA_CLASS__USER_CODE2, null, msgs);
+      msgs = basicSetUserCode2(newUserCode2, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.DATA_CLASS__USER_CODE2, newUserCode2, newUserCode2));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public DetailCode getUserCode3()
+  {
+    return userCode3;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetUserCode3(DetailCode newUserCode3, NotificationChain msgs)
+  {
+    DetailCode oldUserCode3 = userCode3;
+    userCode3 = newUserCode3;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RoomPackage.DATA_CLASS__USER_CODE3, oldUserCode3, newUserCode3);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setUserCode3(DetailCode newUserCode3)
+  {
+    if (newUserCode3 != userCode3)
+    {
+      NotificationChain msgs = null;
+      if (userCode3 != null)
+        msgs = ((InternalEObject)userCode3).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RoomPackage.DATA_CLASS__USER_CODE3, null, msgs);
+      if (newUserCode3 != null)
+        msgs = ((InternalEObject)newUserCode3).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RoomPackage.DATA_CLASS__USER_CODE3, null, msgs);
+      msgs = basicSetUserCode3(newUserCode3, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.DATA_CLASS__USER_CODE3, newUserCode3, newUserCode3));
   }
 
   /**
@@ -201,8 +353,12 @@ public class DataClassImpl extends RoomClassImpl implements DataClass
   {
     switch (featureID)
     {
-      case RoomPackage.DATA_CLASS__IMPORTS:
-        return ((InternalEList<?>)getImports()).basicRemove(otherEnd, msgs);
+      case RoomPackage.DATA_CLASS__USER_CODE1:
+        return basicSetUserCode1(null, msgs);
+      case RoomPackage.DATA_CLASS__USER_CODE2:
+        return basicSetUserCode2(null, msgs);
+      case RoomPackage.DATA_CLASS__USER_CODE3:
+        return basicSetUserCode3(null, msgs);
       case RoomPackage.DATA_CLASS__ATTRIBUTES:
         return ((InternalEList<?>)getAttributes()).basicRemove(otherEnd, msgs);
       case RoomPackage.DATA_CLASS__OPERATIONS:
@@ -224,8 +380,12 @@ public class DataClassImpl extends RoomClassImpl implements DataClass
       case RoomPackage.DATA_CLASS__BASE:
         if (resolve) return getBase();
         return basicGetBase();
-      case RoomPackage.DATA_CLASS__IMPORTS:
-        return getImports();
+      case RoomPackage.DATA_CLASS__USER_CODE1:
+        return getUserCode1();
+      case RoomPackage.DATA_CLASS__USER_CODE2:
+        return getUserCode2();
+      case RoomPackage.DATA_CLASS__USER_CODE3:
+        return getUserCode3();
       case RoomPackage.DATA_CLASS__ATTRIBUTES:
         return getAttributes();
       case RoomPackage.DATA_CLASS__OPERATIONS:
@@ -248,9 +408,14 @@ public class DataClassImpl extends RoomClassImpl implements DataClass
       case RoomPackage.DATA_CLASS__BASE:
         setBase((DataClass)newValue);
         return;
-      case RoomPackage.DATA_CLASS__IMPORTS:
-        getImports().clear();
-        getImports().addAll((Collection<? extends Import>)newValue);
+      case RoomPackage.DATA_CLASS__USER_CODE1:
+        setUserCode1((DetailCode)newValue);
+        return;
+      case RoomPackage.DATA_CLASS__USER_CODE2:
+        setUserCode2((DetailCode)newValue);
+        return;
+      case RoomPackage.DATA_CLASS__USER_CODE3:
+        setUserCode3((DetailCode)newValue);
         return;
       case RoomPackage.DATA_CLASS__ATTRIBUTES:
         getAttributes().clear();
@@ -277,8 +442,14 @@ public class DataClassImpl extends RoomClassImpl implements DataClass
       case RoomPackage.DATA_CLASS__BASE:
         setBase((DataClass)null);
         return;
-      case RoomPackage.DATA_CLASS__IMPORTS:
-        getImports().clear();
+      case RoomPackage.DATA_CLASS__USER_CODE1:
+        setUserCode1((DetailCode)null);
+        return;
+      case RoomPackage.DATA_CLASS__USER_CODE2:
+        setUserCode2((DetailCode)null);
+        return;
+      case RoomPackage.DATA_CLASS__USER_CODE3:
+        setUserCode3((DetailCode)null);
         return;
       case RoomPackage.DATA_CLASS__ATTRIBUTES:
         getAttributes().clear();
@@ -302,8 +473,12 @@ public class DataClassImpl extends RoomClassImpl implements DataClass
     {
       case RoomPackage.DATA_CLASS__BASE:
         return base != null;
-      case RoomPackage.DATA_CLASS__IMPORTS:
-        return imports != null && !imports.isEmpty();
+      case RoomPackage.DATA_CLASS__USER_CODE1:
+        return userCode1 != null;
+      case RoomPackage.DATA_CLASS__USER_CODE2:
+        return userCode2 != null;
+      case RoomPackage.DATA_CLASS__USER_CODE3:
+        return userCode3 != null;
       case RoomPackage.DATA_CLASS__ATTRIBUTES:
         return attributes != null && !attributes.isEmpty();
       case RoomPackage.DATA_CLASS__OPERATIONS:

@@ -38,6 +38,7 @@ import org.eclipse.etrice.core.room.RoomPackage;
  *   <li>{@link org.eclipse.etrice.core.room.impl.ProtocolClassImpl#getBase <em>Base</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ProtocolClassImpl#getUserCode1 <em>User Code1</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ProtocolClassImpl#getUserCode2 <em>User Code2</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.impl.ProtocolClassImpl#getUserCode3 <em>User Code3</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ProtocolClassImpl#getIncomingMessages <em>Incoming Messages</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ProtocolClassImpl#getOutgoingMessages <em>Outgoing Messages</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ProtocolClassImpl#getRegular <em>Regular</em>}</li>
@@ -79,6 +80,16 @@ public class ProtocolClassImpl extends RoomClassImpl implements ProtocolClass
    * @ordered
    */
   protected DetailCode userCode2;
+
+  /**
+   * The cached value of the '{@link #getUserCode3() <em>User Code3</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getUserCode3()
+   * @generated
+   * @ordered
+   */
+  protected DetailCode userCode3;
 
   /**
    * The cached value of the '{@link #getIncomingMessages() <em>Incoming Messages</em>}' containment reference list.
@@ -295,6 +306,54 @@ public class ProtocolClassImpl extends RoomClassImpl implements ProtocolClass
    * <!-- end-user-doc -->
    * @generated
    */
+  public DetailCode getUserCode3()
+  {
+    return userCode3;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetUserCode3(DetailCode newUserCode3, NotificationChain msgs)
+  {
+    DetailCode oldUserCode3 = userCode3;
+    userCode3 = newUserCode3;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RoomPackage.PROTOCOL_CLASS__USER_CODE3, oldUserCode3, newUserCode3);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setUserCode3(DetailCode newUserCode3)
+  {
+    if (newUserCode3 != userCode3)
+    {
+      NotificationChain msgs = null;
+      if (userCode3 != null)
+        msgs = ((InternalEObject)userCode3).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RoomPackage.PROTOCOL_CLASS__USER_CODE3, null, msgs);
+      if (newUserCode3 != null)
+        msgs = ((InternalEObject)newUserCode3).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RoomPackage.PROTOCOL_CLASS__USER_CODE3, null, msgs);
+      msgs = basicSetUserCode3(newUserCode3, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.PROTOCOL_CLASS__USER_CODE3, newUserCode3, newUserCode3));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EList<Message> getIncomingMessages()
   {
     if (incomingMessages == null)
@@ -476,6 +535,8 @@ public class ProtocolClassImpl extends RoomClassImpl implements ProtocolClass
         return basicSetUserCode1(null, msgs);
       case RoomPackage.PROTOCOL_CLASS__USER_CODE2:
         return basicSetUserCode2(null, msgs);
+      case RoomPackage.PROTOCOL_CLASS__USER_CODE3:
+        return basicSetUserCode3(null, msgs);
       case RoomPackage.PROTOCOL_CLASS__INCOMING_MESSAGES:
         return ((InternalEList<?>)getIncomingMessages()).basicRemove(otherEnd, msgs);
       case RoomPackage.PROTOCOL_CLASS__OUTGOING_MESSAGES:
@@ -507,6 +568,8 @@ public class ProtocolClassImpl extends RoomClassImpl implements ProtocolClass
         return getUserCode1();
       case RoomPackage.PROTOCOL_CLASS__USER_CODE2:
         return getUserCode2();
+      case RoomPackage.PROTOCOL_CLASS__USER_CODE3:
+        return getUserCode3();
       case RoomPackage.PROTOCOL_CLASS__INCOMING_MESSAGES:
         return getIncomingMessages();
       case RoomPackage.PROTOCOL_CLASS__OUTGOING_MESSAGES:
@@ -540,6 +603,9 @@ public class ProtocolClassImpl extends RoomClassImpl implements ProtocolClass
         return;
       case RoomPackage.PROTOCOL_CLASS__USER_CODE2:
         setUserCode2((DetailCode)newValue);
+        return;
+      case RoomPackage.PROTOCOL_CLASS__USER_CODE3:
+        setUserCode3((DetailCode)newValue);
         return;
       case RoomPackage.PROTOCOL_CLASS__INCOMING_MESSAGES:
         getIncomingMessages().clear();
@@ -581,6 +647,9 @@ public class ProtocolClassImpl extends RoomClassImpl implements ProtocolClass
       case RoomPackage.PROTOCOL_CLASS__USER_CODE2:
         setUserCode2((DetailCode)null);
         return;
+      case RoomPackage.PROTOCOL_CLASS__USER_CODE3:
+        setUserCode3((DetailCode)null);
+        return;
       case RoomPackage.PROTOCOL_CLASS__INCOMING_MESSAGES:
         getIncomingMessages().clear();
         return;
@@ -616,6 +685,8 @@ public class ProtocolClassImpl extends RoomClassImpl implements ProtocolClass
         return userCode1 != null;
       case RoomPackage.PROTOCOL_CLASS__USER_CODE2:
         return userCode2 != null;
+      case RoomPackage.PROTOCOL_CLASS__USER_CODE3:
+        return userCode3 != null;
       case RoomPackage.PROTOCOL_CLASS__INCOMING_MESSAGES:
         return incomingMessages != null && !incomingMessages.isEmpty();
       case RoomPackage.PROTOCOL_CLASS__OUTGOING_MESSAGES:

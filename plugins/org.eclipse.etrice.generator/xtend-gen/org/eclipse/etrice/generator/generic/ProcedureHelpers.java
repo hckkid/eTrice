@@ -1,21 +1,16 @@
-package org.eclipse.etrice.generator.c.gen;
+package org.eclipse.etrice.generator.generic;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.DetailCode;
-import org.eclipse.etrice.core.room.ExternalPort;
 import org.eclipse.etrice.core.room.FreeType;
 import org.eclipse.etrice.core.room.FreeTypedID;
 import org.eclipse.etrice.core.room.Operation;
-import org.eclipse.etrice.core.room.Port;
-import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.Type;
-import org.eclipse.etrice.generator.c.gen.CExtensions;
-import org.eclipse.xtext.xbase.lib.ComparableExtensions;
+import org.eclipse.etrice.generator.generic.ILanguageExtension;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xtend2.lib.StringConcatenation;
@@ -24,45 +19,7 @@ import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 @Singleton
 public class ProcedureHelpers {
   @Inject
-  private CExtensions stdExt;
-  
-  public StringConcatenation ActorClassPortIF(final ActorClass ac) {
-    StringConcatenation _builder = new StringConcatenation();
-    {
-      EList<ExternalPort> _extPorts = ac.getExtPorts();
-      int _size = _extPorts.size();
-      boolean _operator_greaterThan = ComparableExtensions.<Integer>operator_greaterThan(((Integer)_size), ((Integer)0));
-      if (_operator_greaterThan) {
-        _builder.append("implements");
-      }
-    }
-    _builder.newLineIfNotEmpty();
-    {
-      EList<ExternalPort> _extPorts_1 = ac.getExtPorts();
-      for(final ExternalPort ep : _extPorts_1) {
-        _builder.append("public ");
-        Port _ifport = ep.getIfport();
-        ProtocolClass _protocol = _ifport.getProtocol();
-        String _name = _protocol.getName();
-        _builder.append(_name, "");
-        {
-          Port _ifport_1 = ep.getIfport();
-          boolean _isConjugated = _ifport_1.isConjugated();
-          boolean _operator_equals = ObjectExtensions.operator_equals(((Boolean)_isConjugated), ((Boolean)true));
-          if (_operator_equals) {
-            _builder.append("Conj");
-          }
-        }
-        _builder.append("Port ");
-        Port _ifport_2 = ep.getIfport();
-        String _name_1 = _ifport_2.getName();
-        _builder.append(_name_1, "");
-        _builder.append(" = null; ");
-        _builder.newLineIfNotEmpty();
-      }
-    }
-    return _builder;
-  }
+  private ILanguageExtension languageExt;
   
   public StringConcatenation UserCode(final DetailCode dc) {
     StringConcatenation _builder = new StringConcatenation();
@@ -71,18 +28,16 @@ public class ProcedureHelpers {
       if (_operator_notEquals) {
         _builder.append("//--------------------- begin user code");
         _builder.newLine();
-        _builder.append("\t");
         {
           EList<String> _commands = dc.getCommands();
           for(final String command : _commands) {
             _builder.append("\t");
-            _builder.append(command, "	");
+            _builder.append(command, "");
             _builder.newLineIfNotEmpty();
-            _builder.append("\t");
           }
         }
         _builder.append("//--------------------- end user code");
-        _builder.newLineIfNotEmpty();
+        _builder.newLine();
       }
     }
     return _builder;
@@ -109,7 +64,7 @@ public class ProcedureHelpers {
                 _builder.append(_ext_1, "");
               } else {
                 Type _type_2 = attribute.getType();
-                String _typeName = this.stdExt.typeName(_type_2);
+                String _typeName = this.languageExt.typeName(_type_2);
                 _builder.append(_typeName, "");
               }
             }
@@ -120,7 +75,7 @@ public class ProcedureHelpers {
           } else {
             _builder.append("protected ");
             Type _type_3 = attribute.getType();
-            String _typeName_1 = this.stdExt.typeName(_type_3);
+            String _typeName_1 = this.languageExt.typeName(_type_3);
             _builder.append(_typeName_1, "");
             _builder.append("[] ");
             String _name_1 = attribute.getName();
@@ -131,7 +86,7 @@ public class ProcedureHelpers {
               if (_operator_equals_1) {
                 _builder.append(" =new ");
                 Type _type_4 = attribute.getType();
-                String _typeName_2 = this.stdExt.typeName(_type_4);
+                String _typeName_2 = this.languageExt.typeName(_type_4);
                 _builder.append(_typeName_2, "");
                 _builder.append("[");
                 int _size_1 = attribute.getSize();
@@ -174,7 +129,7 @@ public class ProcedureHelpers {
             _builder.append(_ext_1, "");
           } else {
             Type _type_2 = attribute.getType();
-            String _typeName = this.stdExt.typeName(_type_2);
+            String _typeName = this.languageExt.typeName(_type_2);
             _builder.append(_typeName, "");
           }
         }
@@ -213,7 +168,7 @@ public class ProcedureHelpers {
             _builder.append(_ext_3, "");
           } else {
             Type _type_5 = attribute.getType();
-            String _typeName_1 = this.stdExt.typeName(_type_5);
+            String _typeName_1 = this.languageExt.typeName(_type_5);
             _builder.append(_typeName_1, "");
           }
         }
@@ -257,7 +212,7 @@ public class ProcedureHelpers {
             _builder.append("void");
           } else {
             FreeType _returntype_1 = operation.getReturntype();
-            String _freeTypeName = this.stdExt.freeTypeName(_returntype_1);
+            String _freeTypeName = this.languageExt.freeTypeName(_returntype_1);
             _builder.append(_freeTypeName, "");
           }
         }
@@ -275,7 +230,7 @@ public class ProcedureHelpers {
               _builder.appendImmediate(", ", "");
             }
             FreeType _type = argument.getType();
-            String _freeTypeName_1 = this.stdExt.freeTypeName(_type);
+            String _freeTypeName_1 = this.languageExt.freeTypeName(_type);
             _builder.append(_freeTypeName_1, "");
             _builder.append(" ");
             String _name_1 = argument.getName();

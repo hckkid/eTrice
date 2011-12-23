@@ -21,6 +21,8 @@ import org.eclipse.etrice.generator.etricegen.ServiceImplInstance
 import org.eclipse.etrice.generator.etricegen.SubSystemInstance
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 import org.eclipse.etrice.generator.extensions.RoomExtensions
+import org.eclipse.etrice.generator.generic.ProcedureHelpers
+
 
 import static extension org.eclipse.etrice.generator.base.Indexed.*
 
