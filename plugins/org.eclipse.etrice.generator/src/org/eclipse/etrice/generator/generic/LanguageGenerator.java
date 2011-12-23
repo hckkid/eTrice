@@ -10,7 +10,7 @@
  * 
  *******************************************************************************/
 
-package org.eclipse.etrice.generator.java.gen;
+package org.eclipse.etrice.generator.generic;
 
 import org.eclipse.etrice.core.room.InitialTransition;
 import org.eclipse.etrice.core.room.Message;
@@ -23,10 +23,10 @@ import org.eclipse.etrice.core.room.TypedID;
 import org.eclipse.etrice.generator.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.generator.etricegen.TransitionChain;
 
-public class JavaGenerator {
+public class LanguageGenerator {
 
 	public String getExecuteChain(ExpandedActorClass ac, TransitionChain tc) {
-		JavaTransitionChainVisitor tcv = new JavaTransitionChainVisitor(ac, tc);
+		LanguageTransitionChainVisitor tcv = new LanguageTransitionChainVisitor(ac, tc);
 		return tc.genExecuteChain(tcv);
 	}
 

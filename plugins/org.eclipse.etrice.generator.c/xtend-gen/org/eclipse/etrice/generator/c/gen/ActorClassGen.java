@@ -1,4 +1,4 @@
-package org.eclipse.etrice.generator.java.gen;
+package org.eclipse.etrice.generator.c.gen;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -20,12 +20,12 @@ import org.eclipse.etrice.core.room.StateMachine;
 import org.eclipse.etrice.core.room.Type;
 import org.eclipse.etrice.core.room.TypedID;
 import org.eclipse.etrice.generator.base.ILogger;
+import org.eclipse.etrice.generator.c.gen.CExtensions;
+import org.eclipse.etrice.generator.c.gen.ProcedureHelpers;
+import org.eclipse.etrice.generator.c.gen.StateMachineGen;
 import org.eclipse.etrice.generator.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.generator.etricegen.Root;
 import org.eclipse.etrice.generator.extensions.RoomExtensions;
-import org.eclipse.etrice.generator.java.gen.JavaExtensions;
-import org.eclipse.etrice.generator.java.gen.ProcedureHelpers;
-import org.eclipse.etrice.generator.java.gen.StateMachineGen;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
 import org.eclipse.xtext.xbase.lib.BooleanExtensions;
 import org.eclipse.xtext.xbase.lib.IntegerExtensions;
@@ -40,7 +40,7 @@ public class ActorClassGen {
   private JavaIoFileSystemAccess fileAccess;
   
   @Inject
-  private JavaExtensions stdExt;
+  private CExtensions stdExt;
   
   @Inject
   private RoomExtensions roomExt;
@@ -65,8 +65,8 @@ public class ActorClassGen {
         String _operator_plus = StringExtensions.operator_plus(_generationTargetPath, _path);
         String path = _operator_plus;
         ActorClass _actorClass_2 = xpac.getActorClass();
-        String _javaFileName = this.stdExt.getJavaFileName(_actorClass_2);
-        String file = _javaFileName;
+        String _cHeaderFileName = this.stdExt.getCHeaderFileName(_actorClass_2);
+        String file = _cHeaderFileName;
         String _operator_plus_1 = StringExtensions.operator_plus("generating ActorClass implementation \'", file);
         String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, "\' in \'");
         String _operator_plus_3 = StringExtensions.operator_plus(_operator_plus_2, path);

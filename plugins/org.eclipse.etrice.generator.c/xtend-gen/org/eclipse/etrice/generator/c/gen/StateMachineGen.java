@@ -1,4 +1,4 @@
-package org.eclipse.etrice.generator.java.gen;
+package org.eclipse.etrice.generator.c.gen;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -17,13 +17,13 @@ import org.eclipse.etrice.core.room.StateMachine;
 import org.eclipse.etrice.core.room.Transition;
 import org.eclipse.etrice.core.room.Trigger;
 import org.eclipse.etrice.core.room.TriggeredTransition;
+import org.eclipse.etrice.generator.c.gen.CExtensions;
 import org.eclipse.etrice.generator.etricegen.ActiveTrigger;
 import org.eclipse.etrice.generator.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.generator.etricegen.TransitionChain;
 import org.eclipse.etrice.generator.extensions.RoomExtensions;
 import org.eclipse.etrice.generator.extensions.RoomNameProv;
 import org.eclipse.etrice.generator.generic.LanguageGenerator;
-import org.eclipse.etrice.generator.java.gen.JavaExtensions;
 import org.eclipse.xtext.xbase.lib.BooleanExtensions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IntegerExtensions;
@@ -34,7 +34,7 @@ import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 @Singleton
 public class StateMachineGen {
   @Inject
-  private JavaExtensions stdExt;
+  private CExtensions stdExt;
   
   @Inject
   private RoomExtensions roomExt;

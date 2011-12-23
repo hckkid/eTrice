@@ -1,4 +1,4 @@
-package org.eclipse.etrice.generator.java.gen;
+package org.eclipse.etrice.generator.c.gen;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -18,74 +18,13 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 @SuppressWarnings("all")
 @Singleton
-public class JavaExtensions implements ILanguageExtension {
+public class CExtensions implements ILanguageExtension {
   @Inject
   private LanguageGenerator languageGen;
   
   public String toType(final PrimitiveType prim) {
-    String _switchResult = null;
     String _string = prim.toString();
-    final String __valOfSwitchOver = _string;
-    boolean matched = false;
-    if (!matched) {
-      if (ObjectExtensions.operator_equals(__valOfSwitchOver,"uint8")) {
-        matched=true;
-        _switchResult = "undefined_type";
-      }
-    }
-    if (!matched) {
-      if (ObjectExtensions.operator_equals(__valOfSwitchOver,"uint16")) {
-        matched=true;
-        _switchResult = "undefined_type";
-      }
-    }
-    if (!matched) {
-      if (ObjectExtensions.operator_equals(__valOfSwitchOver,"uint32")) {
-        matched=true;
-        _switchResult = "undefined_type";
-      }
-    }
-    if (!matched) {
-      if (ObjectExtensions.operator_equals(__valOfSwitchOver,"int8")) {
-        matched=true;
-        _switchResult = "byte";
-      }
-    }
-    if (!matched) {
-      if (ObjectExtensions.operator_equals(__valOfSwitchOver,"int16")) {
-        matched=true;
-        _switchResult = "short";
-      }
-    }
-    if (!matched) {
-      if (ObjectExtensions.operator_equals(__valOfSwitchOver,"int32")) {
-        matched=true;
-        _switchResult = "int";
-      }
-    }
-    if (!matched) {
-      if (ObjectExtensions.operator_equals(__valOfSwitchOver,"float32")) {
-        matched=true;
-        _switchResult = "float";
-      }
-    }
-    if (!matched) {
-      if (ObjectExtensions.operator_equals(__valOfSwitchOver,"float64")) {
-        matched=true;
-        _switchResult = "double";
-      }
-    }
-    if (!matched) {
-      if (ObjectExtensions.operator_equals(__valOfSwitchOver,"string")) {
-        matched=true;
-        _switchResult = "String";
-      }
-    }
-    if (!matched) {
-      String _string_1 = prim.toString();
-      _switchResult = _string_1;
-    }
-    return _switchResult;
+    return _string;
   }
   
   public String typeName(final Type type) {
@@ -209,9 +148,15 @@ public class JavaExtensions implements ILanguageExtension {
     return _typedData;
   }
   
-  public String getJavaFileName(final RoomClass rc) {
+  public String getCHeaderFileName(final RoomClass rc) {
     String _name = rc.getName();
-    String _operator_plus = StringExtensions.operator_plus(_name, ".java");
+    String _operator_plus = StringExtensions.operator_plus(_name, ".h");
+    return _operator_plus;
+  }
+  
+  public String getCSourceFileName(final RoomClass rc) {
+    String _name = rc.getName();
+    String _operator_plus = StringExtensions.operator_plus(_name, ".c");
     return _operator_plus;
   }
   

@@ -10,7 +10,7 @@
  * 
  *******************************************************************************/
 
-package org.eclipse.etrice.generator.java.gen;
+package org.eclipse.etrice.generator.generic;
 
 import org.eclipse.etrice.core.room.CPBranchTransition;
 import org.eclipse.etrice.core.room.ContinuationTransition;
@@ -24,14 +24,14 @@ import org.eclipse.etrice.generator.etricegen.ITransitionChainVisitor;
 import org.eclipse.etrice.generator.etricegen.TransitionChain;
 import org.eclipse.etrice.generator.extensions.Extensions;
 
-public class JavaTransitionChainVisitor implements ITransitionChainVisitor {
+public class LanguageTransitionChainVisitor implements ITransitionChainVisitor {
 
 	private ExpandedActorClass ac;
-	private JavaGenerator javaGen = new JavaGenerator();
+	private LanguageGenerator javaGen = new LanguageGenerator();
 	private String typedData = "";
 	private String dataArg = "";
 
-	JavaTransitionChainVisitor(ExpandedActorClass ac, TransitionChain tc) {
+	LanguageTransitionChainVisitor(ExpandedActorClass ac, TransitionChain tc) {
 		this.ac = ac;
 		
 		if (tc.getTransition() instanceof TriggeredTransition) {

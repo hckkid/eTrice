@@ -1,4 +1,4 @@
-package org.eclipse.etrice.generator.java.gen;
+package org.eclipse.etrice.generator.c.gen;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -14,7 +14,7 @@ import org.eclipse.etrice.core.room.Operation;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.Type;
-import org.eclipse.etrice.generator.java.gen.JavaExtensions;
+import org.eclipse.etrice.generator.c.gen.CExtensions;
 import org.eclipse.xtext.xbase.lib.ComparableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
@@ -24,7 +24,7 @@ import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 @Singleton
 public class ProcedureHelpers {
   @Inject
-  private JavaExtensions stdExt;
+  private CExtensions stdExt;
   
   public StringConcatenation ActorClassPortIF(final ActorClass ac) {
     StringConcatenation _builder = new StringConcatenation();

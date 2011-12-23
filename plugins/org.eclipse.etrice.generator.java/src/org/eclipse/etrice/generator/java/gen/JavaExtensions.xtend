@@ -27,23 +27,21 @@ import org.eclipse.etrice.core.room.Type
 import org.eclipse.etrice.core.room.TypedID
 import org.eclipse.etrice.generator.etricegen.ExpandedActorClass
 import org.eclipse.etrice.generator.etricegen.TransitionChain
+import org.eclipse.etrice.generator.generic.ILanguageExtension
 
 
 @Singleton
-class JavaExtensions {
+class JavaExtensions implements ILanguageExtension {
 
-	@Inject JavaGenerator javaGen
+	@Inject org.eclipse.etrice.generator.generic.LanguageGenerator languageGen
 	
 
-	def String getJavaFileName(RoomClass rc) {
-		return rc.name+".java";
-	}
-	
+
 	//-------------------------------------------------------
 	// Java types
 	
 	// type names for Type class (distinguish Primitive and DataClass)
-	def String toJavaType(PrimitiveType prim) {
+	override String toType(PrimitiveType prim) {
 		return switch(prim.toString()) {
 			case 'uint8': 'undefined_type'
 			case 'uint16': 'undefined_type'
@@ -57,41 +55,21 @@ class JavaExtensions {
 			default: prim.toString()
 		}
 	}
-	def String toJavaObjectType(PrimitiveType prim) {
-		return switch(prim.toString()) {
-			case 'uint8': 'undefined_type'
-			case 'uint16': 'undefined_type'
-			case 'uint32': 'undefined_type'
-			case 'int8': 'Byte'
-			case 'int16': 'Short'
-			case 'int32': 'Integer'
-			case 'float32': 'Float'
-			case 'float64': 'Double'
-			case 'string': 'String'
-			default: prim.toString()
-		}
-	}
-	def String typeName(Type type) {
+	override String typeName(Type type) {
 		if (type.type!=null)
 			return type.type.name
 		else
-			type.prim.toJavaType
+			type.prim.toType
 	}
-	def String freeTypeName(FreeType type) {
+	override String freeTypeName(FreeType type) {
 		if (type.type!=null)
 			return type.type
 		else
-			type.prim.toJavaType
-	}
-	def String typeObjectName(Type type) {
-		if (type.type!=null)
-			return type.type.name
-		else
-			type.prim.toJavaObjectType()
+			type.prim.toType
 	}
 
 	// default values for data
-	def String defaultValue(PrimitiveType prim) {
+	override String defaultValue(PrimitiveType prim) {
 		return switch(prim.toString()) {
 			case 'uint8': '0'
 			case 'uint16': '0'
@@ -105,21 +83,27 @@ class JavaExtensions {
 			default: prim.toString()
 		};
 	}
-	def String defaultValue(TypedID a) {
+	override String defaultValue(TypedID a) {
 		if (a.type.type!=null)
 			return "new "+a.type.type.name+"()"
 		else
 			return a.type.prim.defaultValue
 	}
 
-	def String getTypedDataDefinition(Message m) {
-		return javaGen.getTypedData(m)
+	override String getTypedDataDefinition(Message m) {
+		return languageGen.getTypedData(m)
+	}
+
+	// Specific 
+
+	def String getJavaFileName(RoomClass rc) {
+		return rc.name+".java";
 	}
 
 	//-------------------------------------------------------
 	// transition chain visitor
 		
 	def String getExecuteChainCode(ExpandedActorClass ac, TransitionChain tc) {
-		return javaGen.getExecuteChain(ac, tc)
+		return languageGen.getExecuteChain(ac, tc)
 	}
 }

@@ -29,8 +29,8 @@ class StateMachineGen {
 	
 	@Inject extension JavaExtensions stdExt
 	@Inject extension RoomExtensions roomExt
-	@Inject JavaGenerator javaGen
-	
+	@Inject org.eclipse.etrice.generator.generic.LanguageGenerator languageGen
+
 	def genStateMachine(ExpandedActorClass xpac, ActorClass ac) {'''
 		//******************************************
 		// START of generated code for FSM
@@ -230,7 +230,7 @@ class StateMachineGen {
 		//*** Action Codes
 		«FOR tr : xpac.stateMachine.getTransitionList()»
 			«IF xpac.isOwnObject(tr) && tr.hasActionCode()»
-				protected void «tr.getActionCodeOperationName()»(«IF tr instanceof NonInitialTransition»InterfaceItemBase ifitem«javaGen.getArgumentList(xpac, tr)»«ENDIF») {
+				protected void «tr.getActionCodeOperationName()»(«IF tr instanceof NonInitialTransition»InterfaceItemBase ifitem«languageGen.getArgumentList(xpac, tr)»«ENDIF») {
 					«xpac.getActionCode(tr)»
 				}
 			«ENDIF»

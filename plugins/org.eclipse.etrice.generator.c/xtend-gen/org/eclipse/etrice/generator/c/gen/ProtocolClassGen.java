@@ -1,4 +1,4 @@
-package org.eclipse.etrice.generator.java.gen;
+package org.eclipse.etrice.generator.c.gen;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -16,10 +16,10 @@ import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.Type;
 import org.eclipse.etrice.core.room.TypedID;
 import org.eclipse.etrice.generator.base.ILogger;
+import org.eclipse.etrice.generator.c.gen.CExtensions;
+import org.eclipse.etrice.generator.c.gen.ProcedureHelpers;
 import org.eclipse.etrice.generator.etricegen.Root;
 import org.eclipse.etrice.generator.extensions.RoomExtensions;
-import org.eclipse.etrice.generator.java.gen.JavaExtensions;
-import org.eclipse.etrice.generator.java.gen.ProcedureHelpers;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
 import org.eclipse.xtext.xbase.lib.BooleanExtensions;
 import org.eclipse.xtext.xbase.lib.IntegerExtensions;
@@ -34,7 +34,7 @@ public class ProtocolClassGen {
   private JavaIoFileSystemAccess fileAccess;
   
   @Inject
-  private JavaExtensions stdExt;
+  private CExtensions stdExt;
   
   @Inject
   private RoomExtensions roomExt;
@@ -53,8 +53,8 @@ public class ProtocolClassGen {
         String _path = this.roomExt.getPath(pc);
         String _operator_plus = StringExtensions.operator_plus(_generationTargetPath, _path);
         String path = _operator_plus;
-        String _javaFileName = this.stdExt.getJavaFileName(pc);
-        String file = _javaFileName;
+        String _cHeaderFileName = this.stdExt.getCHeaderFileName(pc);
+        String file = _cHeaderFileName;
         String _operator_plus_1 = StringExtensions.operator_plus("generating ProtocolClass implementation \'", file);
         String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, "\' in \'");
         String _operator_plus_3 = StringExtensions.operator_plus(_operator_plus_2, path);
