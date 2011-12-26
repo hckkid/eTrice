@@ -1403,6 +1403,15 @@ public interface ETriceGenPackage extends EPackage {
 	int EXPANDED_ACTOR_CLASS__USER_CODE2 = RoomPackage.ACTOR_CLASS__USER_CODE2;
 
 	/**
+	 * The feature id for the '<em><b>User Code3</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPANDED_ACTOR_CLASS__USER_CODE3 = RoomPackage.ACTOR_CLASS__USER_CODE3;
+
+	/**
 	 * The feature id for the '<em><b>Actor Refs</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

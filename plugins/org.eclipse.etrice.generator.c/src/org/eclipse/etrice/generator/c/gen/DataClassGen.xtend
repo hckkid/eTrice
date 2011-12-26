@@ -52,57 +52,55 @@ class DataClassGen {
 	}
 	
 	def generateHeaderFile(Root root, DataClass dc) {'''
-		TODO: includes for C-Headers instead of Java imports
+		#ifndef _«dc.name»_H_
+		#define _«dc.name»_H_
 		
-		«var models = root.getReferencedModels(dc)»
-		«FOR model : models»//import «model.name».*;
+		#include "../../src/datatypes.h"
+
+		/* TODO: includes only for used DataClasses, also for other models */
+		«FOR dataClass : root.getReferencedDataClasses(dc)»«IF dataClass.name != dc.name»#include "«dataClass.name».h"«ENDIF»
 		«ENDFOR»
 		
 		«helpers.UserCode(dc.userCode1)»
 				
+		typedef struct {
 		
-		typedef struct «dc.name»«IF dc.base!=null» /* extends -> inheritance not implemented yet */ «dc.base.name»«ENDIF»  {
-		
-		«helpers.UserCode(dc.userCode2)»
-		
+			«helpers.UserCode(dc.userCode2)»
+
 			«helpers.Attributes(dc.attributes)»
-			«helpers.AttributeSettersGetters(dc.attributes)»
-			«helpers.Operations(dc.operations)»
-		
-			// default constructor
-			public «dc.name»() {
-				«FOR a : dc.attributes»
-					«IF a.defaultValueLiteral!=null»
-						«IF a.size==0»«a.name» = «a.defaultValueLiteral»;«ENDIF»
-					«ELSEIF a.type.type!=null»
-						«a.name» = new «a.type.type.name»();
-					«ENDIF»
-				«ENDFOR»
-			}
 			
-			// deep copy
-			public «dc.name» deepCopy() {
-				«dc.name» copy = new «dc.name»();
-				«FOR a : dc.attributes»
-					«IF a.type.type!=null»
-						copy.«a.name» = «a.name».deepCopy();
-					«ELSE»
-						«IF a.size==0»copy.«a.name» = «a.name»;«ELSE»for (int i=0;i<«a.size»;i++){copy.«a.name»[i]=«a.name»[i];}«ENDIF»
-					«ENDIF»
-				«ENDFOR»
-				return copy;
-			}
-		};
+		} «dc.name»«IF dc.base!=null» /* extends -> inheritance not implemented yet */ «dc.base.name»«ENDIF»;
+		
+		// TODO: do we need setters and getters for C and C++ ?
+		
+		«helpers.OperationsDeclaration(dc.operations, dc.name)»
+		
+		// deep copy
+		void «dc.name»_deepCopy(«dc.name»* source, «dc.name»* target);
+		
+		#endif /* _«dc.name»_H_ */
+		
 		'''
 	}
 	
 	def generateSourceFile(Root root, DataClass dc) {'''
-		#include "«dc.getCHeaderFileName»";
+		#include "«dc.getCHeaderFileName»"
 		
 		
 		«helpers.UserCode(dc.userCode3)»
 		
-		// TODO
+		// TODO: do we need setters and getters for C and C++ ?
+		
+		«helpers.OperationsImplementation(dc.operations, dc.name)»
+		
+		#include <string.h>
+		
+		// deep copy
+		void «dc.name»_deepCopy(«dc.name»* source, «dc.name»* target) {
+			memcpy(target, source, sizeof(«dc.name»));
+		}
+		
+		
 	'''}
 	
 	

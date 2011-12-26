@@ -151,7 +151,7 @@ class ProtocolClassGen {
 		
 			«IF pclass!=null»
 				«helpers.Attributes(pclass.attributes)»
-				«helpers.Operations(pclass.operations)»
+				«helpers.OperationsImplementation(pclass.operations, name)»
 			«ENDIF»
 			
 			// sent messages

@@ -86,6 +86,23 @@ class CExtensions implements ILanguageExtension {
 		return languageGen.getTypedData(m)
 	}
 
+	// in C no access levels can be defined
+	override String accessLevelPrivate(){""}
+	override String accessLevelProtected(){""}
+	override String accessLevelPublic(){""}
+	
+	override String memberAccess(){"self->"}
+	override String selfPointer(String classname, int argumentCount){
+		if (argumentCount>0){
+			classname+"* self, "
+		}
+		else {
+			classname+"* self"
+		}
+	}
+
+	override String operationScope(String classname, boolean isDeclaration){classname+"_"}
+
 	//****  C-Specific
 	
 	// used

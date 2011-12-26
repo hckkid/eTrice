@@ -135,13 +135,13 @@ public class PTimeout {
 	
 		//--------------------- attributes
 		//--------------------- operations
-		public void timeout (Integer id){
-				//regular PortClass Operation timeout
-							DebuggingService.getInstance().addMessageAsyncOut(getAddress(),
-									getPeerAddress(), messageStrings[OUT_timeoutTick]);
-				
-							getPeerMsgReceiver().receive(
-									new EventWithDataMessage(getPeerAddress(), OUT_timeoutTick, id));
+		protected void timeout (Integer id){
+			//regular PortClass Operation timeout
+						DebuggingService.getInstance().addMessageAsyncOut(getAddress(),
+								getPeerAddress(), messageStrings[OUT_timeoutTick]);
+			
+						getPeerMsgReceiver().receive(
+								new EventWithDataMessage(getPeerAddress(), OUT_timeoutTick, id));
 		}
 		
 		// sent messages

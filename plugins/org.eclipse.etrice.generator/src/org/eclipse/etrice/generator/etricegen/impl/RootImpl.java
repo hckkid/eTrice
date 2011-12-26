@@ -715,5 +715,14 @@ public class RootImpl extends EObjectImpl implements Root {
 				dataClasses.add(attr.getType().getType());
 		}
 	}
+	
+	// TODO: is this the correct place?
+	public HashSet<DataClass> getReferencedDataClasses(DataClass cls){
+		HashSet<DataClass> dataClasses = new  HashSet<DataClass>();
+		getAttributeDataClasses(dataClasses, cls.getAttributes());
+		getOperationDataClasses(dataClasses, cls.getOperations());
+		return dataClasses;
+	}
+
 
 } //RootImpl

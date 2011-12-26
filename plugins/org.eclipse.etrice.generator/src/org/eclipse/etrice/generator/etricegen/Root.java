@@ -6,6 +6,8 @@
  */
 package org.eclipse.etrice.generator.etricegen;
 
+import java.util.HashSet;
+
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.ProtocolClass;
@@ -211,5 +213,7 @@ public interface Root extends EObject {
 	 * @generated
 	 */
 	EList<ProtocolClass> getReferencedProtocols(ActorClass cls);
+	
+	HashSet<DataClass> getReferencedDataClasses(DataClass cls);
 
 } // Root

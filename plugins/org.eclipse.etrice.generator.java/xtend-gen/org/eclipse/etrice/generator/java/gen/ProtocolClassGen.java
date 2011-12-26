@@ -427,8 +427,8 @@ public class ProtocolClassGen {
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
         EList<Operation> _operations = pclass.getOperations();
-        StringConcatenation _Operations = this.helpers.Operations(_operations);
-        _builder.append(_Operations, "	");
+        StringConcatenation _OperationsImplementation = this.helpers.OperationsImplementation(_operations, name);
+        _builder.append(_OperationsImplementation, "	");
         _builder.newLineIfNotEmpty();
       }
     }

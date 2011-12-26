@@ -49,13 +49,9 @@ public class MainGen implements IGenerator {
   
   public void doGenerate(final Root e) {
       this.dataClassGen.doGenerate(e);
-      this.protocolClassGen.doGenerate(e);
-      this.actorClassGen.doGenerate(e);
-      this.subsystemClassGen.doGenerate(e);
       boolean _isLibrary = e.isLibrary();
       boolean _operator_not = BooleanExtensions.operator_not(_isLibrary);
       if (_operator_not) {
-        this.subsystemRunnerGen.doGenerate(e);
       }
   }
 }

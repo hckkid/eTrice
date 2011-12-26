@@ -13,6 +13,7 @@ import org.eclipse.etrice.generator.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.generator.etricegen.TransitionChain;
 import org.eclipse.etrice.generator.generic.ILanguageExtension;
 import org.eclipse.etrice.generator.generic.LanguageGenerator;
+import org.eclipse.xtext.xbase.lib.ComparableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 
@@ -146,6 +147,40 @@ public class CExtensions implements ILanguageExtension {
   public String getTypedDataDefinition(final Message m) {
     String _typedData = this.languageGen.getTypedData(m);
     return _typedData;
+  }
+  
+  public String accessLevelPrivate() {
+    return "";
+  }
+  
+  public String accessLevelProtected() {
+    return "";
+  }
+  
+  public String accessLevelPublic() {
+    return "";
+  }
+  
+  public String memberAccess() {
+    return "self->";
+  }
+  
+  public String selfPointer(final String classname, final int argumentCount) {
+    String _xifexpression = null;
+    boolean _operator_greaterThan = ComparableExtensions.<Integer>operator_greaterThan(((Integer)argumentCount), ((Integer)0));
+    if (_operator_greaterThan) {
+      String _operator_plus = StringExtensions.operator_plus(classname, "* self, ");
+      _xifexpression = _operator_plus;
+    } else {
+      String _operator_plus_1 = StringExtensions.operator_plus(classname, "* self");
+      _xifexpression = _operator_plus_1;
+    }
+    return _xifexpression;
+  }
+  
+  public String operationScope(final String classname, final boolean isDeclaration) {
+    String _operator_plus = StringExtensions.operator_plus(classname, "_");
+    return _operator_plus;
   }
   
   public String getCHeaderFileName(final RoomClass rc) {

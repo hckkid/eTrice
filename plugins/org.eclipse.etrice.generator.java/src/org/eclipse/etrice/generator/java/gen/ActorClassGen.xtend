@@ -94,7 +94,7 @@ class ActorClassGen {
 			«ENDFOR»
 			
 			«helpers.Attributes(ac.attributes)»
-			«helpers.Operations(ac.operations)»
+			«helpers.OperationsImplementation(ac.operations, ac.name)»
 		
 			//--------------------- construction
 			public «ac.name»(IRTObject parent, String name, Address[][] port_addr, Address[][] peer_addr){

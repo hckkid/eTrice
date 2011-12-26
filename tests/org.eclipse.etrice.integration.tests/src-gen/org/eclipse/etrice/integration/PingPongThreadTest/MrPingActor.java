@@ -36,7 +36,8 @@ public class MrPingActor extends ActorClassBase {
 	protected static final int IFITEM_timer = 4;
 	
 	//--------------------- attributes
-	protected int count;protected int pongCount;
+	protected int count;
+	protected int pongCount;
 	//--------------------- operations
 
 	//--------------------- construction

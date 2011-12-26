@@ -26,8 +26,8 @@ public class MrPong extends ActorClassBase {
 	
 	//--------------------- attributes
 	//--------------------- operations
-	public void printData (PingPongData d){
-			System.out.printf("\n");
+	protected void printData (PingPongData d){
+		System.out.printf("\n");
 		System.out.printf("i8Val: %d \n",d.getI8Val());
 		System.out.printf("i16Val: %d \n",d.getI16Val());
 		System.out.printf("i32Val: %d \n",d.getI32Val());

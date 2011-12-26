@@ -36,32 +36,65 @@ class ProcedureHelpers {
 	'''
 	}
 	
+	// Attributes 
 	def Attributes(List<Attribute> attribs) {'''
 		//--------------------- attributes
-		«FOR attribute : attribs»«IF attribute.size==0»protected «IF attribute.type.ext != null»«attribute.type.ext»«ELSE»«attribute.type.typeName()»«ENDIF» «attribute.name»;«ELSE»protected «attribute.type.typeName()»[] «attribute.name»«IF attribute.defaultValueLiteral==null» =new «attribute.type.typeName()»[«attribute.size»];«ELSE» = «attribute.defaultValueLiteral»;«ENDIF»
-		«ENDIF» 
+		«FOR attribute : attribs»
+			«IF attribute.size==0»«languageExt.accessLevelProtected()»«IF attribute.type.ext != null»«attribute.type.ext»«ELSE»«attribute.type.typeName()»«ENDIF» «attribute.name»;
+			«ELSE»«languageExt.accessLevelProtected()»«attribute.type.typeName()»[] «attribute.name»«IF attribute.defaultValueLiteral==null» =new «attribute.type.typeName()»[«attribute.size»];«ELSE» = «attribute.defaultValueLiteral»;«ENDIF»
+			«ENDIF» 
 		«ENDFOR»
 	'''
 	}
 
-	def AttributeSettersGetters(List<Attribute> attribs) {'''
+	// Attribute setters & getters
+	def AttributeSettersGettersDeclaration(List<Attribute> attribs, String classname) {'''
 		//--------------------- attribute setters and getters
-		«FOR attribute : attribs»public void set«attribute.name.toFirstUpper()» («IF attribute.type.ext != null» «attribute.type.ext»«ELSE»«attribute.type.typeName()»«ENDIF»«IF attribute.size!=0»[]«ENDIF» «attribute.name») {
-			 this.«attribute.name» = «attribute.name»;
+		«FOR attribute : attribs»
+			«SetterHeader(attribute, classname)»;
+			«GetterHeader(attribute, classname)»;
+		«ENDFOR»
+	'''
+	}
+	
+	def AttributeSettersGettersImplementation(List<Attribute> attribs, String classname) {'''
+		//--------------------- attribute setters and getters
+		«FOR attribute : attribs»«SetterHeader(attribute, classname)» {
+			 «languageExt.memberAccess()»«attribute.name» = «attribute.name»;
 		}
-		public «IF attribute.type.ext != null» «attribute.type.ext»«ELSE»«attribute.type.typeName()»«ENDIF»«IF attribute.size!=0»[]«ENDIF» get«attribute.name.toFirstUpper()» () {
-			return «attribute.name»;
+		«GetterHeader(attribute, classname)» {
+			return «languageExt.memberAccess()»«attribute.name»;
 		}«ENDFOR»
 	'''
 	}
+	
+	def private SetterHeader(Attribute attribute, String classname){'''
+		«languageExt.accessLevelPublic()»void set«attribute.name.toFirstUpper()» («languageExt.selfPointer(classname, 1)»«IF attribute.type.ext != null» «attribute.type.ext»«ELSE»«attribute.type.typeName()»«ENDIF»«IF attribute.size!=0»[]«ENDIF» «attribute.name»)'''
+	}
+	def private GetterHeader(Attribute attribute, String classname){'''
+		«languageExt.accessLevelPublic()»«IF attribute.type.ext != null» «attribute.type.ext»«ELSE»«attribute.type.typeName()»«ENDIF»«IF attribute.size!=0»[]«ENDIF» get«attribute.name.toFirstUpper()» («languageExt.selfPointer(classname, 0)»)'''
+	}
 
-	def Operations(List<Operation> operations) {'''
+	
+	// Operations
+	def OperationsDeclaration(List<Operation> operations, String classname) {'''
 		//--------------------- operations
-		«FOR operation : operations»public «IF operation.returntype==null»void«ELSE»«operation.returntype.freeTypeName()»«ENDIF» «operation.name» («FOR argument : operation.arguments SEPARATOR ", "»«argument.type.freeTypeName()» «argument.name»«ENDFOR»){
-			«FOR command : operation.detailCode.commands»	«command»
+		«FOR operation : operations»«OperationHeader(operation, classname, true)»;
+		«ENDFOR»
+		'''
+	}
+
+	def OperationsImplementation(List<Operation> operations, String classname) {'''
+		//--------------------- operations
+		«FOR operation : operations»«OperationHeader(operation, classname, false)»{
+		«FOR command : operation.detailCode.commands»	«command»
 			«ENDFOR»
 		}«ENDFOR»
 		'''
+	}
+	
+	def private OperationHeader(Operation operation, String classname, boolean isDeclaration) {'''
+		«languageExt.accessLevelProtected()»«IF operation.returntype==null»void«ELSE»«operation.returntype.freeTypeName()»«ENDIF» «languageExt.operationScope(classname, isDeclaration)»«operation.name» («languageExt.selfPointer(classname, operation.arguments.size)»«FOR argument : operation.arguments SEPARATOR ", "»«argument.type.freeTypeName()» «argument.name»«ENDFOR»)'''
 	}
 	
 }

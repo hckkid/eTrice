@@ -135,13 +135,13 @@ public class PTimer {
 	
 		//--------------------- attributes
 		//--------------------- operations
-		public void timer (Integer id){
-				//regular PortClass Operation timer
-							DebuggingService.getInstance().addMessageAsyncOut(getAddress(),
-									getPeerAddress(), messageStrings[OUT_timerTick]);
-				
-							getPeerMsgReceiver().receive(
-									new EventWithDataMessage(getPeerAddress(), OUT_timerTick, id));
+		protected void timer (Integer id){
+			//regular PortClass Operation timer
+						DebuggingService.getInstance().addMessageAsyncOut(getAddress(),
+								getPeerAddress(), messageStrings[OUT_timerTick]);
+			
+						getPeerMsgReceiver().receive(
+								new EventWithDataMessage(getPeerAddress(), OUT_timerTick, id));
 		}
 		
 		// sent messages

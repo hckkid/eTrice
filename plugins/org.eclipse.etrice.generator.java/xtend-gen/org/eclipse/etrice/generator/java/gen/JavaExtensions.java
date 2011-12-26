@@ -209,6 +209,30 @@ public class JavaExtensions implements ILanguageExtension {
     return _typedData;
   }
   
+  public String accessLevelPrivate() {
+    return "private ";
+  }
+  
+  public String accessLevelProtected() {
+    return "protected ";
+  }
+  
+  public String accessLevelPublic() {
+    return "public ";
+  }
+  
+  public String memberAccess() {
+    return "this.";
+  }
+  
+  public String selfPointer(final String classname, final int argumentCount) {
+    return "";
+  }
+  
+  public String operationScope(final String classname, final boolean isDeclaration) {
+    return "";
+  }
+  
   public String getJavaFileName(final RoomClass rc) {
     String _name = rc.getName();
     String _operator_plus = StringExtensions.operator_plus(_name, ".java");

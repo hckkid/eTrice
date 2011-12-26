@@ -94,7 +94,16 @@ class JavaExtensions implements ILanguageExtension {
 		return languageGen.getTypedData(m)
 	}
 
-	// Specific 
+	override String accessLevelPrivate(){"private "}
+	override String accessLevelProtected(){"protected "}
+	override String accessLevelPublic(){"public "}
+
+	override String memberAccess(){"this."}
+	override String selfPointer(String classname, int argumentCount){""} 
+
+	override String operationScope(String classname, boolean isDeclaration){""}
+
+	// only for Java
 
 	def String getJavaFileName(RoomClass rc) {
 		return rc.name+".java";
