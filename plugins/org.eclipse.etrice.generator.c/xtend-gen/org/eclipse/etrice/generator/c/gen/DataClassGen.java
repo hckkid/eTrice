@@ -182,6 +182,8 @@ public class DataClassGen {
     _builder.append("\"");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
+    _builder.append("#include <string.h>");
+    _builder.newLine();
     _builder.newLine();
     DetailCode _userCode3 = dc.getUserCode3();
     StringConcatenation _UserCode = this.helpers.UserCode(_userCode3);
@@ -196,9 +198,6 @@ public class DataClassGen {
     StringConcatenation _OperationsImplementation = this.helpers.OperationsImplementation(_operations, _name);
     _builder.append(_OperationsImplementation, "");
     _builder.newLineIfNotEmpty();
-    _builder.newLine();
-    _builder.append("#include <string.h>");
-    _builder.newLine();
     _builder.newLine();
     _builder.append("// deep copy");
     _builder.newLine();

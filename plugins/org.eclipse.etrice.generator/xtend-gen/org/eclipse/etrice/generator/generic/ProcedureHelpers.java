@@ -282,9 +282,9 @@ public class ProcedureHelpers {
           }
         }
         _builder.append("}");
+        _builder.newLine();
       }
     }
-    _builder.newLineIfNotEmpty();
     return _builder;
   }
   

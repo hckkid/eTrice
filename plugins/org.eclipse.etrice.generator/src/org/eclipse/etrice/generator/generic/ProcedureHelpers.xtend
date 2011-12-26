@@ -89,7 +89,8 @@ class ProcedureHelpers {
 		«FOR operation : operations»«OperationHeader(operation, classname, false)»{
 		«FOR command : operation.detailCode.commands»	«command»
 			«ENDFOR»
-		}«ENDFOR»
+		}
+		«ENDFOR»
 		'''
 	}
 	

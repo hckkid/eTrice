@@ -86,14 +86,13 @@ class DataClassGen {
 	def generateSourceFile(Root root, DataClass dc) {'''
 		#include "«dc.getCHeaderFileName»"
 		
+		#include <string.h>
 		
 		«helpers.UserCode(dc.userCode3)»
 		
 		// TODO: do we need setters and getters for C and C++ ?
 		
 		«helpers.OperationsImplementation(dc.operations, dc.name)»
-		
-		#include <string.h>
 		
 		// deep copy
 		void «dc.name»_deepCopy(«dc.name»* source, «dc.name»* target) {
