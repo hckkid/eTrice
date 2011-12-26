@@ -290,8 +290,8 @@ public class ProcedureHelpers {
   
   private StringConcatenation OperationHeader(final Operation operation, final String classname, final boolean isDeclaration) {
     StringConcatenation _builder = new StringConcatenation();
-    String _accessLevelProtected = this.languageExt.accessLevelProtected();
-    _builder.append(_accessLevelProtected, "");
+    String _accessLevelPublic = this.languageExt.accessLevelPublic();
+    _builder.append(_accessLevelPublic, "");
     {
       FreeType _returntype = operation.getReturntype();
       boolean _operator_equals = ObjectExtensions.operator_equals(_returntype, null);

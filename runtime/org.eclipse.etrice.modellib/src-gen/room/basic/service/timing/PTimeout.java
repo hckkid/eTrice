@@ -135,7 +135,7 @@ public class PTimeout {
 	
 		//--------------------- attributes
 		//--------------------- operations
-		protected void timeout (Integer id){
+		public void timeout (Integer id){
 			//regular PortClass Operation timeout
 						DebuggingService.getInstance().addMessageAsyncOut(getAddress(),
 								getPeerAddress(), messageStrings[OUT_timeoutTick]);

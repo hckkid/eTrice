@@ -94,7 +94,7 @@ class ProcedureHelpers {
 	}
 	
 	def private OperationHeader(Operation operation, String classname, boolean isDeclaration) {'''
-		«languageExt.accessLevelProtected()»«IF operation.returntype==null»void«ELSE»«operation.returntype.freeTypeName()»«ENDIF» «languageExt.operationScope(classname, isDeclaration)»«operation.name» («languageExt.selfPointer(classname, operation.arguments.size)»«FOR argument : operation.arguments SEPARATOR ", "»«argument.type.freeTypeName()» «argument.name»«ENDFOR»)'''
+		«languageExt.accessLevelPublic()»«IF operation.returntype==null»void«ELSE»«operation.returntype.freeTypeName()»«ENDIF» «languageExt.operationScope(classname, isDeclaration)»«operation.name» («languageExt.selfPointer(classname, operation.arguments.size)»«FOR argument : operation.arguments SEPARATOR ", "»«argument.type.freeTypeName()» «argument.name»«ENDFOR»)'''
 	}
 	
 }

@@ -135,7 +135,7 @@ public class PTimer {
 	
 		//--------------------- attributes
 		//--------------------- operations
-		protected void timer (Integer id){
+		public void timer (Integer id){
 			//regular PortClass Operation timer
 						DebuggingService.getInstance().addMessageAsyncOut(getAddress(),
 								getPeerAddress(), messageStrings[OUT_timerTick]);

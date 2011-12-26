@@ -35,7 +35,7 @@ public class MrPing extends ActorClassBase {
 	protected int[] i32Array =new int[10];
 	protected PingPongData data;
 	//--------------------- operations
-	protected void printData (PingPongData d){
+	public void printData (PingPongData d){
 		System.out.printf("MrPing:\n");
 		System.out.printf("i8Val: %d \n",d.getI8Val());
 		System.out.printf("i16Val: %d \n",d.getI16Val());
