@@ -1,0 +1,9 @@
+<testsuite name="testGeneratedDataClass" tests="0" failures="0" errors="0" time="0">
+	<testcase name="Attr1" classname="none" time="0.0000"/>
+	<testcase name="ComplexAttr.Attr1" classname="none" time="0.0000"/>
+	<testcase name="ComplexAttr.Attr2" classname="none" time="0.0000"/>
+	<testcase name="ComplexAttr.Attr3" classname="none" time="0.0000"/>
+	<testcase name="Attr3" classname="none" time="0.0000"/>
+	<testcase name="Operation DataClass1_MultiplyWithAttr1" classname="none" time="0.0000"/>
+	<testcase name="Operation DataClass1_MultiplyWithAttr3" classname="none" time="0.0000"/>
+</testsuite>
