@@ -731,6 +731,30 @@ public class RootImpl extends EObjectImpl implements Root {
 		return dataClasses;
 	}
 
+	public HashSet<DataClass> getReferencedDataClasses(ProtocolClass pc){
+		HashSet<DataClass> dataClasses = new  HashSet<DataClass>();
+		getMessageDataClasses(dataClasses, pc.getIncomingMessages());
+		getMessageDataClasses(dataClasses, pc.getOutgoingMessages());
+		return dataClasses;
+	}
+	
+	private void getMessageDataClasses(HashSet<DataClass> dataClasses, EList<Message> messages) {
+		for (Message message : messages) {
+			if (message.getData()!=null) {
+				if (message.getData().getType().getType()!=null) {
+					DataClass dc = (DataClass) message.getData().getType().getType();
+	//				TODO: other types are completely ignored				
+	//				Type	: prim=PrimitiveType | (type=[DataClass|FQN] (ref?='ref')?) | (ext=FQN 'ext' (ref?='ref')?);
+	//				FreeType: prim=PrimitiveType | (type=ID (ref?='ref')?);
+	
+					if (dc!=null)
+						dataClasses.add(dc);
+				}
+			}
+		}
+	}
+
+
 	
 	
 } //RootImpl

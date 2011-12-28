@@ -65,7 +65,7 @@ public class PTimer {
 	private static String messageStrings[] = {"MIN", "timerTick", "Start","Kill","MAX"};
 
 	public String getMessageString(int msg_id) {
-		if (msg_id<0 || msg_id>MSG_MAX+1){
+		if (msg_id<MSG_MIN || msg_id>MSG_MAX+1){
 			// id out of range
 			return "Message ID out of range";
 		}

@@ -61,22 +61,19 @@ class ActorClassGen {
 		
 		package «ac.getPackage»;
 		
-		import org.eclipse.etrice.runtime.java.messaging.Address;
-		import org.eclipse.etrice.runtime.java.messaging.IRTObject;
-		import org.eclipse.etrice.runtime.java.messaging.IMessageReceiver;
-		import org.eclipse.etrice.runtime.java.modelbase.ActorClassBase;
-		import org.eclipse.etrice.runtime.java.modelbase.SubSystemClassBase;
-		import org.eclipse.etrice.runtime.java.modelbase.InterfaceItemBase;
-		import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
+«««		import org.eclipse.etrice.runtime.java.messaging.Address;
+«««		import org.eclipse.etrice.runtime.java.messaging.IRTObject;
+«««		import org.eclipse.etrice.runtime.java.messaging.IMessageReceiver;
+«««		import org.eclipse.etrice.runtime.java.modelbase.ActorClassBase;
+«««		import org.eclipse.etrice.runtime.java.modelbase.SubSystemClassBase;
+«««		import org.eclipse.etrice.runtime.java.modelbase.InterfaceItemBase;
+«««		import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
 		
 		
-		«FOR dataClass : root.getReferencedDataClasses(ac)»«IF dataClass.name != ac.name»#include "«dataClass.name».h"«ENDIF»
+		«FOR dataClass : root.getReferencedDataClasses(ac)»#include "«dataClass.name».h"
 		«ENDFOR»
 		
-		«FOR model : root.getReferencedModels(ac)»import «model.name».*;
-		«ENDFOR»
-		
-		«FOR pc : root.getReferencedProtocolClasses(ac)»import «pc.^package».«pc.name».*;
+		«FOR pc : root.getReferencedProtocolClasses(ac)»#include "«pc.name».h"
 		«ENDFOR»
 		
 		«helpers.UserCode(ac.userCode1)»

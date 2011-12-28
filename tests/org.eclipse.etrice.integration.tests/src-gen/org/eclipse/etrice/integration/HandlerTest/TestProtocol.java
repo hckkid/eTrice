@@ -29,7 +29,7 @@ public class TestProtocol {
 	private static String messageStrings[] = {"MIN",  "msg1","msg2","msg3","msg4","msg5","msg6","MAX"};
 
 	public String getMessageString(int msg_id) {
-		if (msg_id<0 || msg_id>MSG_MAX+1){
+		if (msg_id<MSG_MIN || msg_id>MSG_MAX+1){
 			// id out of range
 			return "Message ID out of range";
 		}

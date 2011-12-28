@@ -58,7 +58,7 @@ public class p_HFSM {
 	private static String messageStrings[] = {"MIN", "init_action","s1_entry","s1_exit","s2_entry","s2_exit","s3_entry","s3_exit","s4_entry","s4_exit","s2s1_entry","s2s1_exit","s2s2_entry","s2s2_exit","s1_m1_s2_action","s2_m1_s2s1_action","s2s1_m2_s2s2_action","s2s2_m3_action","s2_m4_s4_action","s2_m5_s2_action","s2_m6_s2_action","s2__s3_action","s2_m7_s2_action","top_s8_top_action","top_s9_top_action","top_reset_s2_action", "m1","m2","m3","m4","m5","m6","reset","m7","m8","m9","MAX"};
 
 	public String getMessageString(int msg_id) {
-		if (msg_id<0 || msg_id>MSG_MAX+1){
+		if (msg_id<MSG_MIN || msg_id>MSG_MAX+1){
 			// id out of range
 			return "Message ID out of range";
 		}

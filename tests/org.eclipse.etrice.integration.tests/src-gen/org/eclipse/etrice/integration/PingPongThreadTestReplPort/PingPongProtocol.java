@@ -25,7 +25,7 @@ public class PingPongProtocol {
 	private static String messageStrings[] = {"MIN", "pong", "ping","MAX"};
 
 	public String getMessageString(int msg_id) {
-		if (msg_id<0 || msg_id>MSG_MAX+1){
+		if (msg_id<MSG_MIN || msg_id>MSG_MAX+1){
 			// id out of range
 			return "Message ID out of range";
 		}

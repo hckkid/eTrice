@@ -129,9 +129,11 @@ public class ProtocolClassGen {
       List<Message> _allOutgoingMessages = this.roomExt.getAllOutgoingMessages(pc);
       for(final Message message : _allOutgoingMessages) {
         _builder.append("\t");
-        _builder.append("public static final int OUT_");
-        String _name_2 = message.getName();
-        _builder.append(_name_2, "	");
+        _builder.append("public static final int ");
+        String _name_2 = pc.getName();
+        String _name_3 = message.getName();
+        String _outMessageId = this.stdExt.outMessageId(_name_2, _name_3);
+        _builder.append(_outMessageId, "	");
         _builder.append(" = ");
         List<Message> _allOutgoingMessages_1 = this.roomExt.getAllOutgoingMessages(pc);
         int _indexOf = _allOutgoingMessages_1.indexOf(message);
@@ -148,9 +150,11 @@ public class ProtocolClassGen {
       List<Message> _allIncomingMessages = this.roomExt.getAllIncomingMessages(pc);
       for(final Message message_1 : _allIncomingMessages) {
         _builder.append("\t");
-        _builder.append("public static final int IN_");
-        String _name_3 = message_1.getName();
-        _builder.append(_name_3, "	");
+        _builder.append("public static final int ");
+        String _name_4 = pc.getName();
+        String _name_5 = message_1.getName();
+        String _inMessageId = this.stdExt.inMessageId(_name_4, _name_5);
+        _builder.append(_inMessageId, "	");
         _builder.append(" = ");
         List<Message> _allIncomingMessages_1 = this.roomExt.getAllIncomingMessages(pc);
         int _indexOf_1 = _allIncomingMessages_1.indexOf(message_1);
@@ -190,8 +194,8 @@ public class ProtocolClassGen {
       List<Message> _allOutgoingMessages_4 = this.roomExt.getAllOutgoingMessages(pc);
       for(final Message m : _allOutgoingMessages_4) {
         _builder.append("\"");
-        String _name_4 = m.getName();
-        _builder.append(_name_4, "	");
+        String _name_6 = m.getName();
+        _builder.append(_name_6, "	");
         _builder.append("\",");
       }
     }
@@ -200,8 +204,8 @@ public class ProtocolClassGen {
       List<Message> _allIncomingMessages_3 = this.roomExt.getAllIncomingMessages(pc);
       for(final Message m_1 : _allIncomingMessages_3) {
         _builder.append("\"");
-        String _name_5 = m_1.getName();
-        _builder.append(_name_5, "	");
+        String _name_7 = m_1.getName();
+        _builder.append(_name_7, "	");
         _builder.append("\",");
       }
     }
@@ -212,7 +216,7 @@ public class ProtocolClassGen {
     _builder.append("public String getMessageString(int msg_id) {");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("if (msg_id<0 || msg_id>MSG_MAX+1){");
+    _builder.append("if (msg_id<MSG_MIN || msg_id>MSG_MAX+1){");
     _builder.newLine();
     _builder.append("\t\t\t");
     _builder.append("// id out of range");

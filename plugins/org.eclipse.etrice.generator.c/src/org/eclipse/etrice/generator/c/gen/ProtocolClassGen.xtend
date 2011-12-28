@@ -36,64 +36,90 @@ class ProtocolClassGen {
 	def doGenerate(Root root) {
 		for (pc: root.usedProtocolClasses) {
 			var path = pc.generationTargetPath+pc.getPath
-			var file = pc.getCHeaderFileName
-			logger.logInfo("generating ProtocolClass implementation '"+file+"' in '"+path+"'")
+
+			logger.logInfo("generating ProtocolClass header '"+pc.getCHeaderFileName+"' in '"+path+"'")
 			fileAccess.setOutputPath(path)
-			fileAccess.generateFile(file, root.generate(pc))
+			fileAccess.generateFile(pc.getCHeaderFileName, root.generateHeaderFile(pc))
+
+			logger.logInfo("generating ProtocolClass source '"+pc.getCSourceFileName+"' in '"+path+"'")
+			fileAccess.setOutputPath(path)
+			fileAccess.generateFile(pc.getCSourceFileName, root.generateSourceFile(pc))
+
 		}
 	}
+
 	
-	def generate(Root root, ProtocolClass pc) {'''
-		package «pc.getPackage()»;
+	def generateHeaderFile(Root root, ProtocolClass pc) {'''
+		#ifndef _«pc.name»_H_
+		#define _«pc.name»_H_
 		
-		import java.util.ArrayList;
+		#include "datatypes.h"
 		
-		import org.eclipse.etrice.runtime.java.messaging.Address;
-		import org.eclipse.etrice.runtime.java.messaging.Message;
-		import org.eclipse.etrice.runtime.java.modelbase.*;
-		import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
+«««		import org.eclipse.etrice.runtime.java.messaging.Address;
+«««		import org.eclipse.etrice.runtime.java.messaging.Message;
+«««		import org.eclipse.etrice.runtime.java.modelbase.*;
+«««		import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
 		
 		«helpers.UserCode(pc.userCode1)»
 		
-		«var models = root.getReferencedModels(pc)»
-		«FOR model : models»import «model.name».*;
+		«FOR dataClass : root.getReferencedDataClasses(pc)»#include "«pc.name».h"
 		«ENDFOR»
 		
-		public class «pc.name» {
-			// message IDs
-			// TODO: separate class for message IDs: class MSG{public static volatile int MSG_MIN = 0; ...} -> better structure
-			// error if msgID <= MSG_MIN
-			public static final int MSG_MIN = 0;   
-			//IDs for outgoing messages
-			«FOR message : pc.getAllOutgoingMessages()»
-				public static final int OUT_«message.name» = «pc.getAllOutgoingMessages().indexOf(message)+1»;
-			«ENDFOR»
-			//IDs for incoming messages
-			«FOR message : pc.getAllIncomingMessages()»
-				public static final int IN_«message.name» = «pc.getAllIncomingMessages().indexOf(message)+pc.getAllOutgoingMessages().size+1»;
-			«ENDFOR»
-			//error if msgID >= MSG_MAX
-			public static final int MSG_MAX = «pc.getAllOutgoingMessages().size + pc.getAllIncomingMessages().size+1»;  
-		
+		typedef struct {
+
 			«helpers.UserCode(pc.userCode2)»
-		
-			private static String messageStrings[] = {"MIN", «FOR m : pc.getAllOutgoingMessages()»"«m.name»",«ENDFOR» «FOR m : pc.getAllIncomingMessages()»"«m.name»",«ENDFOR»"MAX"};
-		
-			public String getMessageString(int msg_id) {
-				if (msg_id<0 || msg_id>MSG_MAX+1){
-					// id out of range
-					return "Message ID out of range";
-				}
-				else{
-					return messageStrings[msg_id];
-				}
+
+		} «pc.name»;
+
+		/* message IDs */
+		enum {
+			MSG_«pc.name»_MIN = 0, 
+			/* IDs for outgoing messages */
+			«FOR message : pc.getAllOutgoingMessages()»
+				«outMessageId(pc.name, message.name)» = «pc.getAllOutgoingMessages().indexOf(message)+1»,
+			«ENDFOR»
+			/* IDs for incoming messages */
+			«FOR message : pc.getAllIncomingMessages()»
+				«inMessageId(pc.name, message.name)» = «pc.getAllIncomingMessages().indexOf(message)+pc.getAllOutgoingMessages().size+1»,
+			«ENDFOR»
+			/* error if msgID >= MSG_MAX */
+			MSG_«pc.name»_MAX = «pc.getAllOutgoingMessages().size + pc.getAllIncomingMessages().size+1»
+		};
+
+
+		/* message names as strings for debugging (generate MSC) */
+		/* TODO: make this optional or different for smaller footprint */
+		static char «pc.name»_messageStrings[][] = {"MIN", «FOR m : pc.getAllOutgoingMessages()»"«m.name»",«ENDFOR»«FOR m : pc.getAllIncomingMessages()»"«m.name»", «ENDFOR»"MAX"};
+
+		char* «pc.name»_getMessageString(int msg_id) {
+			if (msg_id<MSG_«pc.name»_MIN || msg_id>MSG_«pc.name»_MAX+1){
+				/* id out of range */
+				return "Message ID out of range";
 			}
-		
-			«portClass(pc, false)»
-			«portClass(pc, true)»
+			else{
+				return «pc.name»_messageStrings[msg_id];
+			}
 		}
+
+
+«««		
+«««		
+«««		
+«««			«portClass(pc, false)»
+«««			«portClass(pc, true)»
+«««		}
+		
+		
+		#endif /* _«pc.name»_H_ */
+		
 	'''
 	}
+	
+	def generateSourceFile(Root root, ProtocolClass pc) {'''
+		#include "«pc.getCHeaderFileName»"
+	'''
+	}
+	
 	
 	def portClass(ProtocolClass pc, Boolean conj) {'''
 		«var name = pc.getPortClassName(conj)»

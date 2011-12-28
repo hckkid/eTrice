@@ -165,6 +165,8 @@ RoomModel cGenRef {
 	ProtocolClass CommunicationProtocol {
 		incoming {
 			Message sendData(data: int32)
+			Message sendData2(data: DataClass1)
+			
 		}
 		outgoing {
 			Message receivedData()

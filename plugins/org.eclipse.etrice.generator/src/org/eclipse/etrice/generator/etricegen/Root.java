@@ -217,5 +217,7 @@ public interface Root extends EObject {
 	// TODO: is this the right place ?
 	HashSet<DataClass> getReferencedDataClasses(DataClass cls);
 	HashSet<DataClass> getReferencedDataClasses(ActorClass cls);
+	HashSet<DataClass> getReferencedDataClasses(ProtocolClass pc);
 
+	
 } // Root

@@ -243,4 +243,14 @@ public class JavaExtensions implements ILanguageExtension {
     String _executeChain = this.languageGen.getExecuteChain(ac, tc);
     return _executeChain;
   }
+  
+  public String outMessageId(final String classname, final String messagename) {
+    String _operator_plus = StringExtensions.operator_plus("OUT_", messagename);
+    return _operator_plus;
+  }
+  
+  public String inMessageId(final String classname, final String messagename) {
+    String _operator_plus = StringExtensions.operator_plus("IN_", messagename);
+    return _operator_plus;
+  }
 }

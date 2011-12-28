@@ -89,17 +89,10 @@ public class DataClassGen {
     {
       HashSet<DataClass> _referencedDataClasses = root.getReferencedDataClasses(dc);
       for(final DataClass dataClass : _referencedDataClasses) {
-        {
-          String _name_2 = dataClass.getName();
-          String _name_3 = dc.getName();
-          boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_name_2, _name_3);
-          if (_operator_notEquals) {
-            _builder.append("#include \"");
-            String _name_4 = dataClass.getName();
-            _builder.append(_name_4, "");
-            _builder.append(".h\"");
-          }
-        }
+        _builder.append("#include \"");
+        String _name_2 = dataClass.getName();
+        _builder.append(_name_2, "");
+        _builder.append(".h\"");
         _builder.newLineIfNotEmpty();
       }
     }
@@ -123,16 +116,16 @@ public class DataClassGen {
     _builder.append(_Attributes, "	");
     _builder.newLineIfNotEmpty();
     _builder.append("} ");
-    String _name_5 = dc.getName();
-    _builder.append(_name_5, "");
+    String _name_3 = dc.getName();
+    _builder.append(_name_3, "");
     {
       DataClass _base = dc.getBase();
-      boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(_base, null);
-      if (_operator_notEquals_1) {
+      boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_base, null);
+      if (_operator_notEquals) {
         _builder.append(" /* extends -> inheritance not implemented yet */ ");
         DataClass _base_1 = dc.getBase();
-        String _name_6 = _base_1.getName();
-        _builder.append(_name_6, "");
+        String _name_4 = _base_1.getName();
+        _builder.append(_name_4, "");
       }
     }
     _builder.append(";");
@@ -142,28 +135,28 @@ public class DataClassGen {
     _builder.newLine();
     _builder.newLine();
     EList<Operation> _operations = dc.getOperations();
-    String _name_7 = dc.getName();
-    StringConcatenation _OperationsDeclaration = this.helpers.OperationsDeclaration(_operations, _name_7);
+    String _name_5 = dc.getName();
+    StringConcatenation _OperationsDeclaration = this.helpers.OperationsDeclaration(_operations, _name_5);
     _builder.append(_OperationsDeclaration, "");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("// deep copy");
     _builder.newLine();
     _builder.append("void ");
+    String _name_6 = dc.getName();
+    _builder.append(_name_6, "");
+    _builder.append("_deepCopy(");
+    String _name_7 = dc.getName();
+    _builder.append(_name_7, "");
+    _builder.append("* source, ");
     String _name_8 = dc.getName();
     _builder.append(_name_8, "");
-    _builder.append("_deepCopy(");
-    String _name_9 = dc.getName();
-    _builder.append(_name_9, "");
-    _builder.append("* source, ");
-    String _name_10 = dc.getName();
-    _builder.append(_name_10, "");
     _builder.append("* target);");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("#endif /* _");
-    String _name_11 = dc.getName();
-    _builder.append(_name_11, "");
+    String _name_9 = dc.getName();
+    _builder.append(_name_9, "");
     _builder.append("_H_ */");
     _builder.newLineIfNotEmpty();
     _builder.newLine();

@@ -56,4 +56,8 @@ public interface ILanguageExtension{
 	 */
 	String operationScope(String classname, boolean isDeclaration);
 	
+	String outMessageId(String classname, String messagename);
+	String inMessageId(String classname, String messagename);
+	
+	
 }

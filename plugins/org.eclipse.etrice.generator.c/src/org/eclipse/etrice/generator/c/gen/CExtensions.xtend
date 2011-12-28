@@ -103,6 +103,15 @@ class CExtensions implements ILanguageExtension {
 
 	override String operationScope(String classname, boolean isDeclaration){classname+"_"}
 
+	override String outMessageId(String classname, String messagename){
+		return "OUT_"+classname+"_"+messagename;
+	}
+	
+	override String inMessageId(String classname, String messagename){
+		return "IN_"+classname+"_"+messagename;
+	}
+
+
 	//****  C-Specific
 	
 	// used

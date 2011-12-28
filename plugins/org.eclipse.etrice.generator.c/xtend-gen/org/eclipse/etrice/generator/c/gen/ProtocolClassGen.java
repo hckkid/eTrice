@@ -2,6 +2,7 @@ package org.eclipse.etrice.generator.c.gen;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import java.util.HashSet;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.etrice.core.room.Attribute;
@@ -12,7 +13,6 @@ import org.eclipse.etrice.core.room.MessageHandler;
 import org.eclipse.etrice.core.room.Operation;
 import org.eclipse.etrice.core.room.PortClass;
 import org.eclipse.etrice.core.room.ProtocolClass;
-import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.Type;
 import org.eclipse.etrice.core.room.TypedID;
 import org.eclipse.etrice.generator.base.ILogger;
@@ -54,37 +54,44 @@ public class ProtocolClassGen {
         String _operator_plus = StringExtensions.operator_plus(_generationTargetPath, _path);
         String path = _operator_plus;
         String _cHeaderFileName = this.stdExt.getCHeaderFileName(pc);
-        String file = _cHeaderFileName;
-        String _operator_plus_1 = StringExtensions.operator_plus("generating ProtocolClass implementation \'", file);
+        String _operator_plus_1 = StringExtensions.operator_plus("generating ProtocolClass header \'", _cHeaderFileName);
         String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, "\' in \'");
         String _operator_plus_3 = StringExtensions.operator_plus(_operator_plus_2, path);
         String _operator_plus_4 = StringExtensions.operator_plus(_operator_plus_3, "\'");
         this.logger.logInfo(_operator_plus_4);
         this.fileAccess.setOutputPath(path);
-        StringConcatenation _generate = this.generate(root, pc);
-        this.fileAccess.generateFile(file, _generate);
+        String _cHeaderFileName_1 = this.stdExt.getCHeaderFileName(pc);
+        StringConcatenation _generateHeaderFile = this.generateHeaderFile(root, pc);
+        this.fileAccess.generateFile(_cHeaderFileName_1, _generateHeaderFile);
+        String _cSourceFileName = this.stdExt.getCSourceFileName(pc);
+        String _operator_plus_5 = StringExtensions.operator_plus("generating ProtocolClass source \'", _cSourceFileName);
+        String _operator_plus_6 = StringExtensions.operator_plus(_operator_plus_5, "\' in \'");
+        String _operator_plus_7 = StringExtensions.operator_plus(_operator_plus_6, path);
+        String _operator_plus_8 = StringExtensions.operator_plus(_operator_plus_7, "\'");
+        this.logger.logInfo(_operator_plus_8);
+        this.fileAccess.setOutputPath(path);
+        String _cSourceFileName_1 = this.stdExt.getCSourceFileName(pc);
+        StringConcatenation _generateSourceFile = this.generateSourceFile(root, pc);
+        this.fileAccess.generateFile(_cSourceFileName_1, _generateSourceFile);
       }
     }
   }
   
-  public StringConcatenation generate(final Root root, final ProtocolClass pc) {
+  public StringConcatenation generateHeaderFile(final Root root, final ProtocolClass pc) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("package ");
-    String _package = this.roomExt.getPackage(pc);
-    _builder.append(_package, "");
-    _builder.append(";");
+    _builder.append("#ifndef _");
+    String _name = pc.getName();
+    _builder.append(_name, "");
+    _builder.append("_H_");
+    _builder.newLineIfNotEmpty();
+    _builder.append("#define _");
+    String _name_1 = pc.getName();
+    _builder.append(_name_1, "");
+    _builder.append("_H_");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
-    _builder.append("import java.util.ArrayList;");
+    _builder.append("#include \"datatypes.h\"");
     _builder.newLine();
-    _builder.newLine();
-    _builder.append("import org.eclipse.etrice.runtime.java.messaging.Address;");
-    _builder.newLine();
-    _builder.append("import org.eclipse.etrice.runtime.java.messaging.Message;");
-    _builder.newLine();
-    _builder.append("import org.eclipse.etrice.runtime.java.modelbase.*;");
-    _builder.newLine();
-    _builder.append("import org.eclipse.etrice.runtime.java.debugging.DebuggingService;");
     _builder.newLine();
     _builder.newLine();
     DetailCode _userCode1 = pc.getUserCode1();
@@ -92,65 +99,73 @@ public class ProtocolClassGen {
     _builder.append(_UserCode, "");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
-    EList<RoomModel> _referencedModels = root.getReferencedModels(pc);
-    EList<RoomModel> models = _referencedModels;
-    _builder.newLineIfNotEmpty();
     {
-      for(final RoomModel model : models) {
-        _builder.append("import ");
-        String _name = model.getName();
-        _builder.append(_name, "");
-        _builder.append(".*;");
+      HashSet<DataClass> _referencedDataClasses = root.getReferencedDataClasses(pc);
+      for(final DataClass dataClass : _referencedDataClasses) {
+        _builder.append("#include \"");
+        String _name_2 = pc.getName();
+        _builder.append(_name_2, "");
+        _builder.append(".h\"");
         _builder.newLineIfNotEmpty();
       }
     }
     _builder.newLine();
-    _builder.append("public class ");
-    String _name_1 = pc.getName();
-    _builder.append(_name_1, "");
-    _builder.append(" {");
+    _builder.append("typedef struct {");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t");
+    DetailCode _userCode2 = pc.getUserCode2();
+    StringConcatenation _UserCode_1 = this.helpers.UserCode(_userCode2);
+    _builder.append(_UserCode_1, "	");
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    _builder.append("} ");
+    String _name_3 = pc.getName();
+    _builder.append(_name_3, "");
+    _builder.append(";");
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    _builder.append("/* message IDs */");
+    _builder.newLine();
+    _builder.append("enum {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("MSG_");
+    String _name_4 = pc.getName();
+    _builder.append(_name_4, "	");
+    _builder.append("_MIN = 0, ");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
-    _builder.append("// message IDs");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("// TODO: separate class for message IDs: class MSG{public static volatile int MSG_MIN = 0; ...} -> better structure");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("// error if msgID <= MSG_MIN");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("public static final int MSG_MIN = 0;   ");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("//IDs for outgoing messages");
+    _builder.append("/* IDs for outgoing messages */");
     _builder.newLine();
     {
       List<Message> _allOutgoingMessages = this.roomExt.getAllOutgoingMessages(pc);
       for(final Message message : _allOutgoingMessages) {
         _builder.append("\t");
-        _builder.append("public static final int OUT_");
-        String _name_2 = message.getName();
-        _builder.append(_name_2, "	");
+        String _name_5 = pc.getName();
+        String _name_6 = message.getName();
+        String _outMessageId = this.stdExt.outMessageId(_name_5, _name_6);
+        _builder.append(_outMessageId, "	");
         _builder.append(" = ");
         List<Message> _allOutgoingMessages_1 = this.roomExt.getAllOutgoingMessages(pc);
         int _indexOf = _allOutgoingMessages_1.indexOf(message);
         int _operator_plus = IntegerExtensions.operator_plus(((Integer)_indexOf), ((Integer)1));
         _builder.append(_operator_plus, "	");
-        _builder.append(";");
+        _builder.append(",");
         _builder.newLineIfNotEmpty();
       }
     }
     _builder.append("\t");
-    _builder.append("//IDs for incoming messages");
+    _builder.append("/* IDs for incoming messages */");
     _builder.newLine();
     {
       List<Message> _allIncomingMessages = this.roomExt.getAllIncomingMessages(pc);
       for(final Message message_1 : _allIncomingMessages) {
         _builder.append("\t");
-        _builder.append("public static final int IN_");
-        String _name_3 = message_1.getName();
-        _builder.append(_name_3, "	");
+        String _name_7 = pc.getName();
+        String _name_8 = message_1.getName();
+        String _inMessageId = this.stdExt.inMessageId(_name_7, _name_8);
+        _builder.append(_inMessageId, "	");
         _builder.append(" = ");
         List<Message> _allIncomingMessages_1 = this.roomExt.getAllIncomingMessages(pc);
         int _indexOf_1 = _allIncomingMessages_1.indexOf(message_1);
@@ -159,15 +174,18 @@ public class ProtocolClassGen {
         int _operator_plus_1 = IntegerExtensions.operator_plus(((Integer)_indexOf_1), ((Integer)_size));
         int _operator_plus_2 = IntegerExtensions.operator_plus(((Integer)_operator_plus_1), ((Integer)1));
         _builder.append(_operator_plus_2, "	");
-        _builder.append(";");
+        _builder.append(",");
         _builder.newLineIfNotEmpty();
       }
     }
     _builder.append("\t");
-    _builder.append("//error if msgID >= MSG_MAX");
+    _builder.append("/* error if msgID >= MSG_MAX */");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("public static final int MSG_MAX = ");
+    _builder.append("MSG_");
+    String _name_9 = pc.getName();
+    _builder.append(_name_9, "	");
+    _builder.append("_MAX = ");
     List<Message> _allOutgoingMessages_3 = this.roomExt.getAllOutgoingMessages(pc);
     int _size_1 = _allOutgoingMessages_3.size();
     List<Message> _allIncomingMessages_2 = this.roomExt.getAllIncomingMessages(pc);
@@ -175,77 +193,97 @@ public class ProtocolClassGen {
     int _operator_plus_3 = IntegerExtensions.operator_plus(((Integer)_size_1), ((Integer)_size_2));
     int _operator_plus_4 = IntegerExtensions.operator_plus(((Integer)_operator_plus_3), ((Integer)1));
     _builder.append(_operator_plus_4, "	");
-    _builder.append(";  ");
     _builder.newLineIfNotEmpty();
+    _builder.append("};");
     _builder.newLine();
-    _builder.append("\t");
-    DetailCode _userCode2 = pc.getUserCode2();
-    StringConcatenation _UserCode_1 = this.helpers.UserCode(_userCode2);
-    _builder.append(_UserCode_1, "	");
-    _builder.newLineIfNotEmpty();
     _builder.newLine();
-    _builder.append("\t");
-    _builder.append("private static String messageStrings[] = {\"MIN\", ");
+    _builder.newLine();
+    _builder.append("/* message names as strings for debugging (generate MSC) */");
+    _builder.newLine();
+    _builder.append("/* TODO: make this optional or different for smaller footprint */");
+    _builder.newLine();
+    _builder.append("static char ");
+    String _name_10 = pc.getName();
+    _builder.append(_name_10, "");
+    _builder.append("_messageStrings[][] = {\"MIN\", ");
     {
       List<Message> _allOutgoingMessages_4 = this.roomExt.getAllOutgoingMessages(pc);
       for(final Message m : _allOutgoingMessages_4) {
         _builder.append("\"");
-        String _name_4 = m.getName();
-        _builder.append(_name_4, "	");
+        String _name_11 = m.getName();
+        _builder.append(_name_11, "");
         _builder.append("\",");
       }
     }
-    _builder.append(" ");
     {
       List<Message> _allIncomingMessages_3 = this.roomExt.getAllIncomingMessages(pc);
       for(final Message m_1 : _allIncomingMessages_3) {
         _builder.append("\"");
-        String _name_5 = m_1.getName();
-        _builder.append(_name_5, "	");
-        _builder.append("\",");
+        String _name_12 = m_1.getName();
+        _builder.append(_name_12, "");
+        _builder.append("\", ");
       }
     }
     _builder.append("\"MAX\"};");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
+    _builder.append("char* ");
+    String _name_13 = pc.getName();
+    _builder.append(_name_13, "");
+    _builder.append("_getMessageString(int msg_id) {");
+    _builder.newLineIfNotEmpty();
     _builder.append("\t");
-    _builder.append("public String getMessageString(int msg_id) {");
+    _builder.append("if (msg_id<MSG_");
+    String _name_14 = pc.getName();
+    _builder.append(_name_14, "	");
+    _builder.append("_MIN || msg_id>MSG_");
+    String _name_15 = pc.getName();
+    _builder.append(_name_15, "	");
+    _builder.append("_MAX+1){");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t\t");
+    _builder.append("/* id out of range */");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("if (msg_id<0 || msg_id>MSG_MAX+1){");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("// id out of range");
-    _builder.newLine();
-    _builder.append("\t\t\t");
     _builder.append("return \"Message ID out of range\";");
     _builder.newLine();
-    _builder.append("\t\t");
+    _builder.append("\t");
     _builder.append("}");
     _builder.newLine();
-    _builder.append("\t\t");
+    _builder.append("\t");
     _builder.append("else{");
     _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("return messageStrings[msg_id];");
-    _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("\t");
-    StringConcatenation _portClass = this.portClass(pc, ((Boolean)false));
-    _builder.append(_portClass, "	");
+    _builder.append("return ");
+    String _name_16 = pc.getName();
+    _builder.append(_name_16, "		");
+    _builder.append("_messageStrings[msg_id];");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
-    StringConcatenation _portClass_1 = this.portClass(pc, ((Boolean)true));
-    _builder.append(_portClass_1, "	");
-    _builder.newLineIfNotEmpty();
     _builder.append("}");
     _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.newLine();
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("#endif /* _");
+    String _name_17 = pc.getName();
+    _builder.append(_name_17, "");
+    _builder.append("_H_ */");
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    return _builder;
+  }
+  
+  public StringConcatenation generateSourceFile(final Root root, final ProtocolClass pc) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("#include \"");
+    String _cHeaderFileName = this.stdExt.getCHeaderFileName(pc);
+    _builder.append(_cHeaderFileName, "");
+    _builder.append("\"");
+    _builder.newLineIfNotEmpty();
     return _builder;
   }
   

@@ -183,6 +183,20 @@ public class CExtensions implements ILanguageExtension {
     return _operator_plus;
   }
   
+  public String outMessageId(final String classname, final String messagename) {
+    String _operator_plus = StringExtensions.operator_plus("OUT_", classname);
+    String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, "_");
+    String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, messagename);
+    return _operator_plus_2;
+  }
+  
+  public String inMessageId(final String classname, final String messagename) {
+    String _operator_plus = StringExtensions.operator_plus("IN_", classname);
+    String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, "_");
+    String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, messagename);
+    return _operator_plus_2;
+  }
+  
   public String getCHeaderFileName(final RoomClass rc) {
     String _name = rc.getName();
     String _operator_plus = StringExtensions.operator_plus(_name, ".h");

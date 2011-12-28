@@ -56,7 +56,7 @@ class DataClassGen {
 		#include "datatypes.h"
 
 		/* TODO: includes only for used DataClasses, also for other models */
-		«FOR dataClass : root.getReferencedDataClasses(dc)»«IF dataClass.name != dc.name»#include "«dataClass.name».h"«ENDIF»
+		«FOR dataClass : root.getReferencedDataClasses(dc)»#include "«dataClass.name».h"
 		«ENDFOR»
 		
 		«helpers.UserCode(dc.userCode1)»

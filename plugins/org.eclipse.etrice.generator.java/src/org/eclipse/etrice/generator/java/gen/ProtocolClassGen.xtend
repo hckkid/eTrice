@@ -66,11 +66,11 @@ class ProtocolClassGen {
 			public static final int MSG_MIN = 0;   
 			//IDs for outgoing messages
 			«FOR message : pc.getAllOutgoingMessages()»
-				public static final int OUT_«message.name» = «pc.getAllOutgoingMessages().indexOf(message)+1»;
+				public static final int «outMessageId(pc.name, message.name)» = «pc.getAllOutgoingMessages().indexOf(message)+1»;
 			«ENDFOR»
 			//IDs for incoming messages
 			«FOR message : pc.getAllIncomingMessages()»
-				public static final int IN_«message.name» = «pc.getAllIncomingMessages().indexOf(message)+pc.getAllOutgoingMessages().size+1»;
+				public static final int «inMessageId(pc.name, message.name)» = «pc.getAllIncomingMessages().indexOf(message)+pc.getAllOutgoingMessages().size+1»;
 			«ENDFOR»
 			//error if msgID >= MSG_MAX
 			public static final int MSG_MAX = «pc.getAllOutgoingMessages().size + pc.getAllIncomingMessages().size+1»;  
@@ -80,7 +80,7 @@ class ProtocolClassGen {
 			private static String messageStrings[] = {"MIN", «FOR m : pc.getAllOutgoingMessages()»"«m.name»",«ENDFOR» «FOR m : pc.getAllIncomingMessages()»"«m.name»",«ENDFOR»"MAX"};
 		
 			public String getMessageString(int msg_id) {
-				if (msg_id<0 || msg_id>MSG_MAX+1){
+				if (msg_id<MSG_MIN || msg_id>MSG_MAX+1){
 					// id out of range
 					return "Message ID out of range";
 				}

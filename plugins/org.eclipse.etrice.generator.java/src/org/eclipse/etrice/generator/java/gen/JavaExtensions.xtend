@@ -115,4 +115,13 @@ class JavaExtensions implements ILanguageExtension {
 	def String getExecuteChainCode(ExpandedActorClass ac, TransitionChain tc) {
 		return languageGen.getExecuteChain(ac, tc)
 	}
+	
+	override String outMessageId(String classname, String messagename){
+		return "OUT_"+messagename;
+	}
+	
+	override String inMessageId(String classname, String messagename){
+		return "IN_"+messagename;
+	}
+	
 }
