@@ -37,16 +37,14 @@ class DataClassGen {
 			var path = dc.generationTargetPath+dc.getPath
 
 			// header file
-			var headerFile = dc.getCHeaderFileName
-			logger.logInfo("generating DataClass header '"+headerFile+"' in '"+path+"'")
+			logger.logInfo("generating DataClass header '"+dc.getCHeaderFileName+"' in '"+path+"'")
 			fileAccess.setOutputPath(path)
-			fileAccess.generateFile(headerFile, root.generateHeaderFile(dc))
+			fileAccess.generateFile(dc.getCHeaderFileName, root.generateHeaderFile(dc))
 			
-			// header file
-			var sourceFile = dc.getCSourceFileName
-			logger.logInfo("generating DataClass source '"+headerFile+"' in '"+path+"'")
+			// source file
+			logger.logInfo("generating DataClass source '"+dc.getCSourceFileName+"' in '"+path+"'")
 			fileAccess.setOutputPath(path)
-			fileAccess.generateFile(sourceFile, root.generateSourceFile(dc))
+			fileAccess.generateFile(dc.getCSourceFileName, root.generateSourceFile(dc))
 			
 		}
 	}
@@ -55,7 +53,7 @@ class DataClassGen {
 		#ifndef _«dc.name»_H_
 		#define _«dc.name»_H_
 		
-		#include "../../src/datatypes.h"
+		#include "datatypes.h"
 
 		/* TODO: includes only for used DataClasses, also for other models */
 		«FOR dataClass : root.getReferencedDataClasses(dc)»«IF dataClass.name != dc.name»#include "«dataClass.name».h"«ENDIF»
@@ -64,11 +62,8 @@ class DataClassGen {
 		«helpers.UserCode(dc.userCode1)»
 				
 		typedef struct {
-		
 			«helpers.UserCode(dc.userCode2)»
-
 			«helpers.Attributes(dc.attributes)»
-			
 		} «dc.name»«IF dc.base!=null» /* extends -> inheritance not implemented yet */ «dc.base.name»«ENDIF»;
 		
 		// TODO: do we need setters and getters for C and C++ ?

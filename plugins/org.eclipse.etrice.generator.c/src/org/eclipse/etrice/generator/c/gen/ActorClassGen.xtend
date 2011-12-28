@@ -7,6 +7,7 @@
  * 
  * CONTRIBUTORS:
  * 		Henrik Rentz-Reichert (initial contribution)
+ * 		Thomas Schuetz (changed for C code generator)
  * 
  *******************************************************************************/
 
@@ -39,14 +40,25 @@ class ActorClassGen {
 	def doGenerate(Root root) {
 		for (xpac: root.xpActorClasses) {
 			var path = xpac.actorClass.generationTargetPath+xpac.actorClass.getPath
-			var file = xpac.actorClass.getCHeaderFileName  
-			logger.logInfo("generating ActorClass implementation '"+file+"' in '"+path+"'")
+			
+			// header file
+			logger.logInfo("generating ActorClass header '"+xpac.actorClass.getCHeaderFileName+"' in '"+path+"'")
 			fileAccess.setOutputPath(path)
-			fileAccess.generateFile(file, root.generate(xpac, xpac.actorClass))
+			fileAccess.generateFile(xpac.actorClass.getCHeaderFileName, root.generateHeaderFile(xpac, xpac.actorClass))
+
+			// header file
+			logger.logInfo("generating ActorClass header '"+xpac.actorClass.getCSourceFileName +"' in '"+path+"'")
+			fileAccess.setOutputPath(path)
+			fileAccess.generateFile(xpac.actorClass.getCSourceFileName , root.generateSourceFile(xpac, xpac.actorClass))
 		}
 	}
 	
-	def generate(Root root, ExpandedActorClass xpac, ActorClass ac) {'''
+	def generateHeaderFile(Root root, ExpandedActorClass xpac, ActorClass ac) {'''
+		#ifndef _«xpac.name»_H_
+		#define _«xpac.name»_H_
+		
+		#include "datatypes.h"
+		
 		package «ac.getPackage»;
 		
 		import org.eclipse.etrice.runtime.java.messaging.Address;
@@ -57,10 +69,14 @@ class ActorClassGen {
 		import org.eclipse.etrice.runtime.java.modelbase.InterfaceItemBase;
 		import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
 		
+		
+		«FOR dataClass : root.getReferencedDataClasses(ac)»«IF dataClass.name != ac.name»#include "«dataClass.name».h"«ENDIF»
+		«ENDFOR»
+		
 		«FOR model : root.getReferencedModels(ac)»import «model.name».*;
 		«ENDFOR»
 		
-		«FOR pc : root.getReferencedProtocols(ac)»import «pc.^package».«pc.name».*;
+		«FOR pc : root.getReferencedProtocolClasses(ac)»import «pc.^package».«pc.name».*;
 		«ENDFOR»
 		
 		«helpers.UserCode(ac.userCode1)»
@@ -163,6 +179,15 @@ class ActorClassGen {
 				}
 			«ENDIF»
 		};
+		
+		#endif /* _«xpac.name»_H_ */
+		
+	'''
+	}
+	
+	def generateSourceFile(Root root, ExpandedActorClass xpac, ActorClass ac) {'''
+	#include "«xpac.getCHeaderFileName»"
+	
 	'''
 	}
 	

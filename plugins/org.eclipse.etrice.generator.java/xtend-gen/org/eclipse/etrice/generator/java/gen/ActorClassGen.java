@@ -115,8 +115,8 @@ public class ActorClassGen {
     }
     _builder.newLine();
     {
-      EList<ProtocolClass> _referencedProtocols = root.getReferencedProtocols(ac);
-      for(final ProtocolClass pc : _referencedProtocols) {
+      EList<ProtocolClass> _referencedProtocolClasses = root.getReferencedProtocolClasses(ac);
+      for(final ProtocolClass pc : _referencedProtocolClasses) {
         _builder.append("import ");
         String _package_1 = this.roomExt.getPackage(pc);
         _builder.append(_package_1, "");

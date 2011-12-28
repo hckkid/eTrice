@@ -341,7 +341,7 @@ public class RootImpl extends EObjectImpl implements Root {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public EList<ProtocolClass> getReferencedProtocols(ActorClass cls) {
+	public EList<ProtocolClass> getReferencedProtocolClasses(ActorClass cls) {
 
 		if (cls instanceof ExpandedActorClass)
 			cls = ((ExpandedActorClass)cls).getActorClass();
@@ -724,5 +724,13 @@ public class RootImpl extends EObjectImpl implements Root {
 		return dataClasses;
 	}
 
+	public HashSet<DataClass> getReferencedDataClasses(ActorClass cls){
+		HashSet<DataClass> dataClasses = new  HashSet<DataClass>();
+		getAttributeDataClasses(dataClasses, cls.getAttributes());
+		getOperationDataClasses(dataClasses, cls.getOperations());
+		return dataClasses;
+	}
 
+	
+	
 } //RootImpl

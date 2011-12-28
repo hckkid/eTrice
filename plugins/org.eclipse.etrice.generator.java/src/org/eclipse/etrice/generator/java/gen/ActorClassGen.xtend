@@ -59,7 +59,7 @@ class ActorClassGen {
 		«FOR model : root.getReferencedModels(ac)»import «model.name».*;
 		«ENDFOR»
 		
-		«FOR pc : root.getReferencedProtocols(ac)»import «pc.^package».«pc.name».*;
+		«FOR pc : root.getReferencedProtocolClasses(ac)»import «pc.^package».«pc.name».*;
 		«ENDFOR»
 		
 		«helpers.UserCode(ac.userCode1)»

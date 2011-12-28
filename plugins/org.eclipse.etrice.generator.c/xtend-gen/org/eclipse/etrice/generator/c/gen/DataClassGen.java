@@ -45,25 +45,25 @@ public class DataClassGen {
         String _operator_plus = StringExtensions.operator_plus(_generationTargetPath, _path);
         String path = _operator_plus;
         String _cHeaderFileName = this.stdExt.getCHeaderFileName(dc);
-        String headerFile = _cHeaderFileName;
-        String _operator_plus_1 = StringExtensions.operator_plus("generating DataClass header \'", headerFile);
+        String _operator_plus_1 = StringExtensions.operator_plus("generating DataClass header \'", _cHeaderFileName);
         String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, "\' in \'");
         String _operator_plus_3 = StringExtensions.operator_plus(_operator_plus_2, path);
         String _operator_plus_4 = StringExtensions.operator_plus(_operator_plus_3, "\'");
         this.logger.logInfo(_operator_plus_4);
         this.fileAccess.setOutputPath(path);
+        String _cHeaderFileName_1 = this.stdExt.getCHeaderFileName(dc);
         StringConcatenation _generateHeaderFile = this.generateHeaderFile(root, dc);
-        this.fileAccess.generateFile(headerFile, _generateHeaderFile);
+        this.fileAccess.generateFile(_cHeaderFileName_1, _generateHeaderFile);
         String _cSourceFileName = this.stdExt.getCSourceFileName(dc);
-        String sourceFile = _cSourceFileName;
-        String _operator_plus_5 = StringExtensions.operator_plus("generating DataClass source \'", headerFile);
+        String _operator_plus_5 = StringExtensions.operator_plus("generating DataClass source \'", _cSourceFileName);
         String _operator_plus_6 = StringExtensions.operator_plus(_operator_plus_5, "\' in \'");
         String _operator_plus_7 = StringExtensions.operator_plus(_operator_plus_6, path);
         String _operator_plus_8 = StringExtensions.operator_plus(_operator_plus_7, "\'");
         this.logger.logInfo(_operator_plus_8);
         this.fileAccess.setOutputPath(path);
+        String _cSourceFileName_1 = this.stdExt.getCSourceFileName(dc);
         StringConcatenation _generateSourceFile = this.generateSourceFile(root, dc);
-        this.fileAccess.generateFile(sourceFile, _generateSourceFile);
+        this.fileAccess.generateFile(_cSourceFileName_1, _generateSourceFile);
       }
     }
   }
@@ -81,7 +81,7 @@ public class DataClassGen {
     _builder.append("_H_");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
-    _builder.append("#include \"../../src/datatypes.h\"");
+    _builder.append("#include \"datatypes.h\"");
     _builder.newLine();
     _builder.newLine();
     _builder.append("/* TODO: includes only for used DataClasses, also for other models */");
@@ -112,20 +112,16 @@ public class DataClassGen {
     _builder.newLine();
     _builder.append("typedef struct {");
     _builder.newLine();
-    _builder.newLine();
     _builder.append("\t");
     DetailCode _userCode2 = dc.getUserCode2();
     StringConcatenation _UserCode_1 = this.helpers.UserCode(_userCode2);
     _builder.append(_UserCode_1, "	");
     _builder.newLineIfNotEmpty();
-    _builder.newLine();
     _builder.append("\t");
     EList<Attribute> _attributes = dc.getAttributes();
     StringConcatenation _Attributes = this.helpers.Attributes(_attributes);
     _builder.append(_Attributes, "	");
     _builder.newLineIfNotEmpty();
-    _builder.append("\t");
-    _builder.newLine();
     _builder.append("} ");
     String _name_5 = dc.getName();
     _builder.append(_name_5, "");
