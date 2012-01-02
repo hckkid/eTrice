@@ -5,12 +5,10 @@ import com.google.inject.Singleton;
 import java.util.HashSet;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.MessageHandler;
-import org.eclipse.etrice.core.room.Operation;
 import org.eclipse.etrice.core.room.PortClass;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.Type;
@@ -103,7 +101,7 @@ public class ProtocolClassGen {
       HashSet<DataClass> _referencedDataClasses = root.getReferencedDataClasses(pc);
       for(final DataClass dataClass : _referencedDataClasses) {
         _builder.append("#include \"");
-        String _name_2 = pc.getName();
+        String _name_2 = dataClass.getName();
         _builder.append(_name_2, "");
         _builder.append(".h\"");
         _builder.newLineIfNotEmpty();
@@ -197,80 +195,31 @@ public class ProtocolClassGen {
     _builder.append("};");
     _builder.newLine();
     _builder.newLine();
+    _builder.append("/*--------------------- port classes */");
     _builder.newLine();
-    _builder.append("/* message names as strings for debugging (generate MSC) */");
+    StringConcatenation _portClassHeader = this.portClassHeader(pc, ((Boolean)false));
+    _builder.append(_portClassHeader, "");
+    _builder.newLineIfNotEmpty();
+    StringConcatenation _portClassHeader_1 = this.portClassHeader(pc, ((Boolean)true));
+    _builder.append(_portClassHeader_1, "");
+    _builder.newLineIfNotEmpty();
     _builder.newLine();
-    _builder.append("/* TODO: make this optional or different for smaller footprint */");
+    _builder.append("/*--------------------- debug helpers */");
     _builder.newLine();
-    _builder.append("static char ");
+    _builder.newLine();
+    _builder.append("/* get message string for message id */");
+    _builder.newLine();
+    _builder.append("const char* ");
     String _name_10 = pc.getName();
     _builder.append(_name_10, "");
-    _builder.append("_messageStrings[][] = {\"MIN\", ");
-    {
-      List<Message> _allOutgoingMessages_4 = this.roomExt.getAllOutgoingMessages(pc);
-      for(final Message m : _allOutgoingMessages_4) {
-        _builder.append("\"");
-        String _name_11 = m.getName();
-        _builder.append(_name_11, "");
-        _builder.append("\",");
-      }
-    }
-    {
-      List<Message> _allIncomingMessages_3 = this.roomExt.getAllIncomingMessages(pc);
-      for(final Message m_1 : _allIncomingMessages_3) {
-        _builder.append("\"");
-        String _name_12 = m_1.getName();
-        _builder.append(_name_12, "");
-        _builder.append("\", ");
-      }
-    }
-    _builder.append("\"MAX\"};");
+    _builder.append("_getMessageString(int msg_id);");
     _builder.newLineIfNotEmpty();
-    _builder.newLine();
-    _builder.append("char* ");
-    String _name_13 = pc.getName();
-    _builder.append(_name_13, "");
-    _builder.append("_getMessageString(int msg_id) {");
-    _builder.newLineIfNotEmpty();
-    _builder.append("\t");
-    _builder.append("if (msg_id<MSG_");
-    String _name_14 = pc.getName();
-    _builder.append(_name_14, "	");
-    _builder.append("_MIN || msg_id>MSG_");
-    String _name_15 = pc.getName();
-    _builder.append(_name_15, "	");
-    _builder.append("_MAX+1){");
-    _builder.newLineIfNotEmpty();
-    _builder.append("\t\t");
-    _builder.append("/* id out of range */");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("return \"Message ID out of range\";");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("else{");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("return ");
-    String _name_16 = pc.getName();
-    _builder.append(_name_16, "		");
-    _builder.append("_messageStrings[msg_id];");
-    _builder.newLineIfNotEmpty();
-    _builder.append("\t");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("}");
-    _builder.newLine();
-    _builder.newLine();
     _builder.newLine();
     _builder.newLine();
     _builder.newLine();
     _builder.append("#endif /* _");
-    String _name_17 = pc.getName();
-    _builder.append(_name_17, "");
+    String _name_11 = pc.getName();
+    _builder.append(_name_11, "");
     _builder.append("_H_ */");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
@@ -284,6 +233,21 @@ public class ProtocolClassGen {
     _builder.append(_cHeaderFileName, "");
     _builder.append("\"");
     _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    _builder.append("/*--------------------- port classes */");
+    _builder.newLine();
+    StringConcatenation _portClassSource = this.portClassSource(pc, ((Boolean)false));
+    _builder.append(_portClassSource, "");
+    _builder.newLineIfNotEmpty();
+    StringConcatenation _portClassSource_1 = this.portClassSource(pc, ((Boolean)true));
+    _builder.append(_portClassSource_1, "");
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    _builder.append("/*--------------------- debug helpers */");
+    _builder.newLine();
+    StringConcatenation _generateDebugHelpersImplementation = this.generateDebugHelpersImplementation(root, pc);
+    _builder.append(_generateDebugHelpersImplementation, "");
+    _builder.newLineIfNotEmpty();
     return _builder;
   }
   
@@ -296,395 +260,21 @@ public class ProtocolClassGen {
     PortClass pclass = _portClass;
     _builder.newLineIfNotEmpty();
     _builder.newLine();
-    _builder.append("// port class");
     _builder.newLine();
-    _builder.append("static public class ");
-    _builder.append(name, "");
-    _builder.append(" extends PortBase {");
-    _builder.newLineIfNotEmpty();
-    {
-      boolean _operator_notEquals = ObjectExtensions.operator_notEquals(pclass, null);
-      if (_operator_notEquals) {
-        _builder.append("\t");
-        DetailCode _userCode = pclass.getUserCode();
-        StringConcatenation _UserCode = this.helpers.UserCode(_userCode);
-        _builder.append(_UserCode, "	");
-        _builder.newLineIfNotEmpty();
-      }
-    }
-    _builder.append("\t");
-    _builder.append("// constructors");
     _builder.newLine();
-    _builder.append("\t");
-    _builder.append("public ");
-    _builder.append(name, "	");
-    _builder.append("(IEventReceiver actor, String name, int localId, Address addr, Address peerAddress) {");
-    _builder.newLineIfNotEmpty();
+    return _builder;
+  }
+  
+  public StringConcatenation portClassHeader(final ProtocolClass pc, final Boolean conj) {
+    StringConcatenation _builder = new StringConcatenation();
     _builder.append("\t\t");
-    _builder.append("super(actor, name, localId, 0, addr, peerAddress);");
     _builder.newLine();
+    return _builder;
+  }
+  
+  public StringConcatenation portClassSource(final ProtocolClass pc, final Boolean conj) {
+    StringConcatenation _builder = new StringConcatenation();
     _builder.append("\t\t");
-    _builder.append("DebuggingService.getInstance().addPortInstance(this);");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("public ");
-    _builder.append(name, "	");
-    _builder.append("(IEventReceiver actor, String name, int localId, int idx, Address addr, Address peerAddress) {");
-    _builder.newLineIfNotEmpty();
-    _builder.append("\t\t");
-    _builder.append("super(actor, name, localId, idx, addr, peerAddress);");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("DebuggingService.getInstance().addPortInstance(this);");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("@Override");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("public void receive(Message m) {");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("if (!(m instanceof EventMessage))");
-    _builder.newLine();
-    _builder.append("\t\t\t\t");
-    _builder.append("return;");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("EventMessage msg = (EventMessage) m;");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("if (msg.getEvtId() <= 0 || msg.getEvtId() >= MSG_MAX)");
-    _builder.newLine();
-    _builder.append("\t\t\t\t");
-    _builder.append("System.out.println(\"unknown\");");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("else {");
-    _builder.newLine();
-    _builder.append("\t\t\t\t");
-    _builder.append("if (messageStrings[msg.getEvtId()] != \"timerTick\"){");
-    _builder.newLine();
-    _builder.append("\t\t\t\t\t");
-    _builder.append("// TODOTS: model switch for activation");
-    _builder.newLine();
-    _builder.append("\t\t\t\t\t");
-    _builder.append("DebuggingService.getInstance().addMessageAsyncIn(getPeerAddress(), getAddress(), messageStrings[msg.getEvtId()]);");
-    _builder.newLine();
-    _builder.append("\t\t\t\t");
-    _builder.append("}");
-    _builder.newLine();
-    {
-      boolean _handlesReceive = this.roomExt.handlesReceive(pc, conj);
-      if (_handlesReceive) {
-        _builder.append("\t\t\t\t");
-        _builder.append("switch (msg.getEvtId()) {");
-        _builder.newLine();
-        {
-          List<MessageHandler> _receiveHandlers = this.roomExt.getReceiveHandlers(pc, conj);
-          for(final MessageHandler hdlr : _receiveHandlers) {
-            _builder.append("\t\t\t\t");
-            _builder.append("\t");
-            _builder.append("case ");
-            Message _msg = hdlr.getMsg();
-            String _codeName = this.roomExt.getCodeName(_msg);
-            _builder.append(_codeName, "					");
-            _builder.append(":");
-            _builder.newLineIfNotEmpty();
-            _builder.append("\t\t\t\t");
-            _builder.append("\t");
-            _builder.append("{");
-            _builder.newLine();
-            {
-              DetailCode _detailCode = hdlr.getDetailCode();
-              EList<String> _commands = _detailCode.getCommands();
-              for(final String command : _commands) {
-                _builder.append("\t\t\t\t");
-                _builder.append("\t");
-                _builder.append("\t");
-                _builder.append(command, "						");
-                _builder.newLineIfNotEmpty();
-              }
-            }
-            _builder.append("\t\t\t\t");
-            _builder.append("\t");
-            _builder.append("}");
-            _builder.newLine();
-            _builder.append("\t\t\t\t");
-            _builder.append("\t");
-            _builder.append("break;");
-            _builder.newLine();
-          }
-        }
-        _builder.append("\t\t\t\t");
-        _builder.append("\t");
-        _builder.append("default:");
-        _builder.newLine();
-      }
-    }
-    _builder.append("\t\t\t\t\t");
-    _builder.append("if (msg instanceof EventWithDataMessage)");
-    _builder.newLine();
-    _builder.append("\t\t\t\t\t\t");
-    _builder.append("getActor().receiveEvent(this, msg.getEvtId(), ((EventWithDataMessage)msg).getData());");
-    _builder.newLine();
-    _builder.append("\t\t\t\t\t");
-    _builder.append("else");
-    _builder.newLine();
-    _builder.append("\t\t\t\t\t\t");
-    _builder.append("getActor().receiveEvent(this, msg.getEvtId(), null);");
-    _builder.newLine();
-    {
-      boolean _handlesReceive_1 = this.roomExt.handlesReceive(pc, conj);
-      if (_handlesReceive_1) {
-        _builder.append("\t\t\t\t");
-        _builder.append("}");
-        _builder.newLine();
-      }
-    }
-    _builder.append("\t\t\t");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.newLine();
-    {
-      boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(pclass, null);
-      if (_operator_notEquals_1) {
-        _builder.append("\t");
-        EList<Attribute> _attributes = pclass.getAttributes();
-        StringConcatenation _Attributes = this.helpers.Attributes(_attributes);
-        _builder.append(_Attributes, "	");
-        _builder.newLineIfNotEmpty();
-        _builder.append("\t");
-        EList<Operation> _operations = pclass.getOperations();
-        StringConcatenation _OperationsDeclaration = this.helpers.OperationsDeclaration(_operations, name);
-        _builder.append(_OperationsDeclaration, "	");
-        _builder.newLineIfNotEmpty();
-      }
-    }
-    _builder.append("\t");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("// sent messages");
-    _builder.newLine();
-    {
-      List<Message> _outgoing = this.roomExt.getOutgoing(pc, conj);
-      for(final Message m : _outgoing) {
-        _builder.append("\t");
-        StringConcatenation _sendMessage = this.sendMessage(m, conj);
-        _builder.append(_sendMessage, "	");
-        _builder.newLineIfNotEmpty();
-      }
-    }
-    _builder.append("}");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("// replicated port class");
-    _builder.newLine();
-    _builder.append("static public class ");
-    _builder.append(name, "");
-    _builder.append("Repl {");
-    _builder.newLineIfNotEmpty();
-    _builder.append("\t");
-    _builder.append("private ArrayList<");
-    _builder.append(name, "	");
-    _builder.append("> ports;");
-    _builder.newLineIfNotEmpty();
-    _builder.append("\t");
-    _builder.append("private int replication;");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("public ");
-    _builder.append(name, "	");
-    _builder.append("Repl(IEventReceiver actor, String name, int localId, Address[] addr,");
-    _builder.newLineIfNotEmpty();
-    _builder.append("\t\t\t");
-    _builder.append("Address[] peerAddress) {");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("replication = addr.length;");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("ports = new ArrayList<");
-    String _name = pc.getName();
-    _builder.append(_name, "		");
-    _builder.append(".");
-    _builder.append(name, "		");
-    _builder.append(">(replication);");
-    _builder.newLineIfNotEmpty();
-    _builder.append("\t\t");
-    _builder.append("for (int i=0; i<replication; ++i) {");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("ports.add(new ");
-    _builder.append(name, "			");
-    _builder.append("(");
-    _builder.newLineIfNotEmpty();
-    _builder.append("\t\t\t\t\t");
-    _builder.append("actor, name+i, localId, i, addr[i], peerAddress[i]));");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("public int getReplication() {");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("return replication;");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("public int getIndexOf(InterfaceItemBase ifitem){");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("return ifitem.getIdx();");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("public ");
-    _builder.append(name, "	");
-    _builder.append(" get(int i) {");
-    _builder.newLineIfNotEmpty();
-    _builder.append("\t\t");
-    _builder.append("return ports.get(i);");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.newLine();
-    {
-      if (conj) {
-        _builder.append("\t");
-        _builder.append("// incoming messages");
-        _builder.newLine();
-        {
-          List<Message> _allIncomingMessages = this.roomExt.getAllIncomingMessages(pc);
-          for(final Message m_1 : _allIncomingMessages) {
-            _builder.append("\t");
-            StringConcatenation _messageSignature = this.messageSignature(m_1);
-            _builder.append(_messageSignature, "	");
-            _builder.append("{");
-            _builder.newLineIfNotEmpty();
-            _builder.append("\t");
-            _builder.append("\t");
-            _builder.append("for (int i=0; i<replication; ++i) {");
-            _builder.newLine();
-            _builder.append("\t");
-            _builder.append("\t\t");
-            _builder.append("ports.get(i).");
-            StringConcatenation _messageCall = this.messageCall(m_1);
-            _builder.append(_messageCall, "			");
-            _builder.append(";");
-            _builder.newLineIfNotEmpty();
-            _builder.append("\t");
-            _builder.append("\t");
-            _builder.append("}");
-            _builder.newLine();
-            _builder.append("\t");
-            _builder.append("}");
-            _builder.newLine();
-          }
-        }
-      } else {
-        _builder.append("\t");
-        _builder.append("// outgoing messages");
-        _builder.newLine();
-        {
-          List<Message> _allOutgoingMessages = this.roomExt.getAllOutgoingMessages(pc);
-          for(final Message m_2 : _allOutgoingMessages) {
-            _builder.append("\t");
-            StringConcatenation _messageSignature_1 = this.messageSignature(m_2);
-            _builder.append(_messageSignature_1, "	");
-            _builder.append("{");
-            _builder.newLineIfNotEmpty();
-            _builder.append("\t");
-            _builder.append("\t");
-            _builder.append("for (int i=0; i<replication; ++i) {");
-            _builder.newLine();
-            _builder.append("\t");
-            _builder.append("\t\t");
-            _builder.append("ports.get(i).");
-            StringConcatenation _messageCall_1 = this.messageCall(m_2);
-            _builder.append(_messageCall_1, "			");
-            _builder.append(";");
-            _builder.newLineIfNotEmpty();
-            _builder.append("\t");
-            _builder.append("\t");
-            _builder.append("}");
-            _builder.newLine();
-            _builder.append("\t");
-            _builder.append("}");
-            _builder.newLine();
-          }
-        }
-      }
-    }
-    _builder.append("}");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("// interface for port class");
-    _builder.newLine();
-    _builder.append("public interface I");
-    _builder.append(name, "");
-    _builder.append("{");
-    _builder.newLineIfNotEmpty();
-    {
-      if (conj) {
-        _builder.append("\t");
-        _builder.append("// outgoing messages");
-        _builder.newLine();
-        _builder.append("\t");
-        {
-          List<Message> _allOutgoingMessages_1 = this.roomExt.getAllOutgoingMessages(pc);
-          for(final Message m_3 : _allOutgoingMessages_1) {
-            _builder.append(" ");
-            StringConcatenation _messageSignature_2 = this.messageSignature(m_3);
-            _builder.append(_messageSignature_2, "	");
-            _builder.append(";");
-            _builder.newLineIfNotEmpty();
-          }
-        }
-      } else {
-        _builder.append("\t");
-        _builder.append("// incoming messages");
-        _builder.newLine();
-        _builder.append("\t");
-        {
-          List<Message> _allIncomingMessages_1 = this.roomExt.getAllIncomingMessages(pc);
-          for(final Message m_4 : _allIncomingMessages_1) {
-            _builder.append(" ");
-            StringConcatenation _messageSignature_3 = this.messageSignature(m_4);
-            _builder.append(_messageSignature_3, "	");
-            _builder.append(";");
-            _builder.newLineIfNotEmpty();
-          }
-        }
-      }
-    }
-    _builder.append("}");
     _builder.newLine();
     return _builder;
   }
@@ -839,6 +429,78 @@ public class ProtocolClassGen {
         }
       }
     }
+    _builder.append("}");
+    _builder.newLine();
+    return _builder;
+  }
+  
+  public StringConcatenation generateDebugHelpersImplementation(final Root root, final ProtocolClass pc) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.newLine();
+    _builder.append("/* TODO: make this optional or different for smaller footprint */");
+    _builder.newLine();
+    _builder.append("/* message names as strings for debugging (generate MSC) */");
+    _builder.newLine();
+    _builder.append("static const char* ");
+    String _name = pc.getName();
+    _builder.append(_name, "");
+    _builder.append("_messageStrings[] = {\"MIN\", ");
+    {
+      List<Message> _allOutgoingMessages = this.roomExt.getAllOutgoingMessages(pc);
+      for(final Message m : _allOutgoingMessages) {
+        _builder.append("\"");
+        String _name_1 = m.getName();
+        _builder.append(_name_1, "");
+        _builder.append("\",");
+      }
+    }
+    {
+      List<Message> _allIncomingMessages = this.roomExt.getAllIncomingMessages(pc);
+      for(final Message m_1 : _allIncomingMessages) {
+        _builder.append("\"");
+        String _name_2 = m_1.getName();
+        _builder.append(_name_2, "");
+        _builder.append("\", ");
+      }
+    }
+    _builder.append("\"MAX\"};");
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    _builder.append("const char* ");
+    String _name_3 = pc.getName();
+    _builder.append(_name_3, "");
+    _builder.append("_getMessageString(int msg_id) {");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.append("if (msg_id<MSG_");
+    String _name_4 = pc.getName();
+    _builder.append(_name_4, "	");
+    _builder.append("_MIN || msg_id>MSG_");
+    String _name_5 = pc.getName();
+    _builder.append(_name_5, "	");
+    _builder.append("_MAX+1){");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t\t");
+    _builder.append("/* id out of range */");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("return \"Message ID out of range\";");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("else{");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("return ");
+    String _name_6 = pc.getName();
+    _builder.append(_name_6, "		");
+    _builder.append("_messageStrings[msg_id];");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
     _builder.append("}");
     _builder.newLine();
     return _builder;

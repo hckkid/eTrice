@@ -16,10 +16,13 @@
 void RUnit_open(const char *testSuiteName) {
 	RUnit_passCount = 0;
 	RUnit_failCount = 0;
-	printf("************* TEST START **************\n");
+	printf("************* TEST START (%s) **************\n", testSuiteName);
+
+	char filename[256];
+	sprintf(filename, "%s.xml", testSuiteName);
 
 	if (RUnit_reportfile == NULL) {
-		RUnit_reportfile = fopen("report.xml", "w+");
+		RUnit_reportfile = fopen(filename, "w+");
 		if (RUnit_reportfile != NULL) {
 			fprintf(
 					RUnit_reportfile,

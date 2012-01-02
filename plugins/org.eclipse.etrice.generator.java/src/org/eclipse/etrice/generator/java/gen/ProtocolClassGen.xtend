@@ -208,18 +208,18 @@ class ProtocolClassGen {
 			«ENDIF»
 		}
 		
-		// interface for port class
-		public interface I«name»{
-			«IF conj»
-			// outgoing messages
-			«FOR m : pc.getAllOutgoingMessages()» «messageSignature(m)»;
-			«ENDFOR»
-			«ELSE»
-			// incoming messages
-			«FOR m : pc.getAllIncomingMessages()» «messageSignature(m)»;
-			«ENDFOR»
-			«ENDIF»
-		}
+«««		// interface for port class
+«««		public interface I«name»{
+«««			«IF conj»
+«««			// outgoing messages
+«««			«FOR m : pc.getAllOutgoingMessages()» «messageSignature(m)»;
+«««			«ENDFOR»
+«««			«ELSE»
+«««			// incoming messages
+«««			«FOR m : pc.getAllIncomingMessages()» «messageSignature(m)»;
+«««			«ENDFOR»
+«««			«ENDIF»
+«««		}
 	'''
 	}
 

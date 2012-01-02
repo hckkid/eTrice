@@ -103,20 +103,6 @@ public class TestProtocol {
 		// outgoing messages
 	}
 	
-	// interface for port class
-	public interface ITestProtocolPort{
-		// incoming messages
-		 public void msg1 ()
-		;
-	 public void msg2 ()
-		;
-	 public void msg3 ()
-		;
-	 public void msg4 ()
-		;
-	 public void msg5 ()
-		;
-	}
 	
 	// port class
 	static public class TestProtocolConjPort extends PortBase {
@@ -263,8 +249,4 @@ public class TestProtocol {
 		}
 	}
 	
-	// interface for port class
-	public interface ITestProtocolConjPort{
-		// outgoing messages
-		}
 }

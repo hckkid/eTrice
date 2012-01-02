@@ -1,5 +1,17 @@
 RoomModel cGenRef {
 
+	ProtocolClass CommunicationProtocol {
+		incoming {
+			Message sendData(data: int32)
+			Message sendData2(data: DataClass1)
+			
+		}
+		outgoing {
+			Message receivedData()
+		}
+	}
+	
+
 	DataClass DataClass1 {
 		usercode1 {"// usercode1"}
 		usercode2 {"// usercode2"}
@@ -162,15 +174,5 @@ RoomModel cGenRef {
 		}
 	}
 
-	ProtocolClass CommunicationProtocol {
-		incoming {
-			Message sendData(data: int32)
-			Message sendData2(data: DataClass1)
-			
-		}
-		outgoing {
-			Message receivedData()
-		}
-	}
 
 }

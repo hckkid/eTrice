@@ -533,30 +533,6 @@ public class p_HFSM {
 		}
 	}
 	
-	// interface for port class
-	public interface Ip_HFSMPort{
-		// incoming messages
-		 public void m1 ()
-		;
-	 public void m2 ()
-		;
-	 public void m3 ()
-		;
-	 public void m4 ()
-		;
-	 public void m5 ()
-		;
-	 public void m6 ()
-		;
-	 public void reset ()
-		;
-	 public void m7 ()
-		;
-	 public void m8 ()
-		;
-	 public void m9 ()
-		;
-	}
 	
 	// port class
 	static public class p_HFSMConjPort extends PortBase {
@@ -783,58 +759,4 @@ public class p_HFSM {
 		}
 	}
 	
-	// interface for port class
-	public interface Ip_HFSMConjPort{
-		// outgoing messages
-		 public void init_action ()
-		;
-	 public void s1_entry ()
-		;
-	 public void s1_exit ()
-		;
-	 public void s2_entry ()
-		;
-	 public void s2_exit ()
-		;
-	 public void s3_entry ()
-		;
-	 public void s3_exit ()
-		;
-	 public void s4_entry ()
-		;
-	 public void s4_exit ()
-		;
-	 public void s2s1_entry ()
-		;
-	 public void s2s1_exit ()
-		;
-	 public void s2s2_entry ()
-		;
-	 public void s2s2_exit ()
-		;
-	 public void s1_m1_s2_action ()
-		;
-	 public void s2_m1_s2s1_action ()
-		;
-	 public void s2s1_m2_s2s2_action ()
-		;
-	 public void s2s2_m3_action ()
-		;
-	 public void s2_m4_s4_action ()
-		;
-	 public void s2_m5_s2_action ()
-		;
-	 public void s2_m6_s2_action ()
-		;
-	 public void s2__s3_action ()
-		;
-	 public void s2_m7_s2_action ()
-		;
-	 public void top_s8_top_action ()
-		;
-	 public void top_s9_top_action ()
-		;
-	 public void top_reset_s2_action ()
-		;
-	}
 }

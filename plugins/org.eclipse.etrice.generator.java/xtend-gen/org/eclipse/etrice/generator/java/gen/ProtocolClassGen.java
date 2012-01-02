@@ -611,47 +611,6 @@ public class ProtocolClassGen {
     _builder.append("}");
     _builder.newLine();
     _builder.newLine();
-    _builder.append("// interface for port class");
-    _builder.newLine();
-    _builder.append("public interface I");
-    _builder.append(name, "");
-    _builder.append("{");
-    _builder.newLineIfNotEmpty();
-    {
-      if (conj) {
-        _builder.append("\t");
-        _builder.append("// outgoing messages");
-        _builder.newLine();
-        _builder.append("\t");
-        {
-          List<Message> _allOutgoingMessages_1 = this.roomExt.getAllOutgoingMessages(pc);
-          for(final Message m_3 : _allOutgoingMessages_1) {
-            _builder.append(" ");
-            StringConcatenation _messageSignature_2 = this.messageSignature(m_3);
-            _builder.append(_messageSignature_2, "	");
-            _builder.append(";");
-            _builder.newLineIfNotEmpty();
-          }
-        }
-      } else {
-        _builder.append("\t");
-        _builder.append("// incoming messages");
-        _builder.newLine();
-        _builder.append("\t");
-        {
-          List<Message> _allIncomingMessages_1 = this.roomExt.getAllIncomingMessages(pc);
-          for(final Message m_4 : _allIncomingMessages_1) {
-            _builder.append(" ");
-            StringConcatenation _messageSignature_3 = this.messageSignature(m_4);
-            _builder.append(_messageSignature_3, "	");
-            _builder.append(";");
-            _builder.newLineIfNotEmpty();
-          }
-        }
-      }
-    }
-    _builder.append("}");
-    _builder.newLine();
     return _builder;
   }
   

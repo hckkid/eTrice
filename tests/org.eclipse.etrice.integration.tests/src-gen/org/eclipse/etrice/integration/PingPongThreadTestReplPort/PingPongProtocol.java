@@ -116,12 +116,6 @@ public class PingPongProtocol {
 		}
 	}
 	
-	// interface for port class
-	public interface IPingPongProtocolPort{
-		// incoming messages
-		 public void ping ()
-		;
-	}
 	
 	// port class
 	static public class PingPongProtocolConjPort extends PortBase {
@@ -204,10 +198,4 @@ public class PingPongProtocol {
 		}
 	}
 	
-	// interface for port class
-	public interface IPingPongProtocolConjPort{
-		// outgoing messages
-		 public void pong ()
-		;
-	}
 }
