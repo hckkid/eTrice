@@ -256,14 +256,14 @@ public class RoomLabelProvider extends DefaultEObjectLabelProvider {
 	}
 	
 	String text(Attribute attr) {
-		String type = attr.getType()!=null? (" : "+RoomHelpers.getName(attr.getType())):"";
+		String type = attr.getType()!=null? (" : "+attr.getType().getName()):"";
 		String value = (attr.getDefaultValueLiteral()!=null && !attr.getDefaultValueLiteral().isEmpty())?
 				(" = "+attr.getDefaultValueLiteral()) : "";
 		return "Attr "+attr.getName()+type+value;
 	}
 	
 	String text(Operation op) {
-		String rt = op.getReturntype()!=null? ": "+RoomHelpers.getName(op.getReturntype()):"";
+		String rt = op.getReturntype()!=null? ": "+op.getReturntype().getName():"";
 		String signature = RoomHelpers.getSignature(op);
 		return op.getName()+signature+rt;
 	}
@@ -271,7 +271,7 @@ public class RoomLabelProvider extends DefaultEObjectLabelProvider {
 	String text(Message m) {
 		String signature = "";
 		if (m.getData()!=null)
-			signature = m.getData().getName()+":"+RoomHelpers.getName(m.getData().getType());
+			signature = m.getData().getName()+":"+m.getData().getType().getName();
 		signature = "("+signature+")";
 		return m.getName()+signature;
 	}

@@ -107,40 +107,46 @@ public class RoomSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case RoomPackage.TYPED_ID:
+      case RoomPackage.VAR_DECL:
       {
-        TypedID typedID = (TypedID)theEObject;
-        T result = caseTypedID(typedID);
+        VarDecl varDecl = (VarDecl)theEObject;
+        T result = caseVarDecl(varDecl);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case RoomPackage.FREE_TYPED_ID:
+      case RoomPackage.DATA_TYPE:
       {
-        FreeTypedID freeTypedID = (FreeTypedID)theEObject;
-        T result = caseFreeTypedID(freeTypedID);
+        DataType dataType = (DataType)theEObject;
+        T result = caseDataType(dataType);
+        if (result == null) result = caseRoomClass(dataType);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case RoomPackage.BASIC_TYPE:
+      case RoomPackage.COMPLEX_TYPE:
       {
-        BasicType basicType = (BasicType)theEObject;
-        T result = caseBasicType(basicType);
+        ComplexType complexType = (ComplexType)theEObject;
+        T result = caseComplexType(complexType);
+        if (result == null) result = caseDataType(complexType);
+        if (result == null) result = caseRoomClass(complexType);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case RoomPackage.TYPE:
+      case RoomPackage.PRIMITIVE_TYPE:
       {
-        Type type = (Type)theEObject;
-        T result = caseType(type);
-        if (result == null) result = caseBasicType(type);
+        PrimitiveType primitiveType = (PrimitiveType)theEObject;
+        T result = casePrimitiveType(primitiveType);
+        if (result == null) result = caseDataType(primitiveType);
+        if (result == null) result = caseRoomClass(primitiveType);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case RoomPackage.FREE_TYPE:
+      case RoomPackage.EXTERNAL_TYPE:
       {
-        FreeType freeType = (FreeType)theEObject;
-        T result = caseFreeType(freeType);
-        if (result == null) result = caseBasicType(freeType);
+        ExternalType externalType = (ExternalType)theEObject;
+        T result = caseExternalType(externalType);
+        if (result == null) result = caseComplexType(externalType);
+        if (result == null) result = caseDataType(externalType);
+        if (result == null) result = caseRoomClass(externalType);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -148,6 +154,8 @@ public class RoomSwitch<T> extends Switch<T>
       {
         DataClass dataClass = (DataClass)theEObject;
         T result = caseDataClass(dataClass);
+        if (result == null) result = caseComplexType(dataClass);
+        if (result == null) result = caseDataType(dataClass);
         if (result == null) result = caseRoomClass(dataClass);
         if (result == null) result = defaultCase(theEObject);
         return result;
@@ -206,22 +214,6 @@ public class RoomSwitch<T> extends Switch<T>
       {
         SemanticsRule semanticsRule = (SemanticsRule)theEObject;
         T result = caseSemanticsRule(semanticsRule);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case RoomPackage.SEMANTICS_IN_RULE:
-      {
-        SemanticsInRule semanticsInRule = (SemanticsInRule)theEObject;
-        T result = caseSemanticsInRule(semanticsInRule);
-        if (result == null) result = caseSemanticsRule(semanticsInRule);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case RoomPackage.SEMANTICS_OUT_RULE:
-      {
-        SemanticsOutRule semanticsOutRule = (SemanticsOutRule)theEObject;
-        T result = caseSemanticsOutRule(semanticsOutRule);
-        if (result == null) result = caseSemanticsRule(semanticsOutRule);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -732,81 +724,81 @@ public class RoomSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Typed ID</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Var Decl</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Typed ID</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Var Decl</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseTypedID(TypedID object)
+  public T caseVarDecl(VarDecl object)
   {
     return null;
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Free Typed ID</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Data Type</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Free Typed ID</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Data Type</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseFreeTypedID(FreeTypedID object)
+  public T caseDataType(DataType object)
   {
     return null;
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Basic Type</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Complex Type</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Basic Type</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Complex Type</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseBasicType(BasicType object)
+  public T caseComplexType(ComplexType object)
   {
     return null;
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Type</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Primitive Type</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Type</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Primitive Type</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseType(Type object)
+  public T casePrimitiveType(PrimitiveType object)
   {
     return null;
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Free Type</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>External Type</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Free Type</em>'.
+   * @return the result of interpreting the object as an instance of '<em>External Type</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseFreeType(FreeType object)
+  public T caseExternalType(ExternalType object)
   {
     return null;
   }
@@ -951,38 +943,6 @@ public class RoomSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseSemanticsRule(SemanticsRule object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Semantics In Rule</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Semantics In Rule</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseSemanticsInRule(SemanticsInRule object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Semantics Out Rule</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Semantics Out Rule</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseSemanticsOutRule(SemanticsOutRule object)
   {
     return null;
   }

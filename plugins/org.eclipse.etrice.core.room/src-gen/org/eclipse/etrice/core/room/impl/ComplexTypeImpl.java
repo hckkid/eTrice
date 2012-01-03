@@ -8,26 +8,26 @@ package org.eclipse.etrice.core.room.impl;
 
 import org.eclipse.emf.ecore.EClass;
 
+import org.eclipse.etrice.core.room.ComplexType;
 import org.eclipse.etrice.core.room.RoomPackage;
-import org.eclipse.etrice.core.room.SemanticsInRule;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Semantics In Rule</b></em>'.
+ * An implementation of the model object '<em><b>Complex Type</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * </p>
  *
  * @generated
  */
-public class SemanticsInRuleImpl extends SemanticsRuleImpl implements SemanticsInRule
+public class ComplexTypeImpl extends DataTypeImpl implements ComplexType
 {
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected SemanticsInRuleImpl()
+  protected ComplexTypeImpl()
   {
     super();
   }
@@ -40,7 +40,7 @@ public class SemanticsInRuleImpl extends SemanticsRuleImpl implements SemanticsI
   @Override
   protected EClass eStaticClass()
   {
-    return RoomPackage.Literals.SEMANTICS_IN_RULE;
+    return RoomPackage.Literals.COMPLEX_TYPE;
   }
 
-} //SemanticsInRuleImpl
+} //ComplexTypeImpl

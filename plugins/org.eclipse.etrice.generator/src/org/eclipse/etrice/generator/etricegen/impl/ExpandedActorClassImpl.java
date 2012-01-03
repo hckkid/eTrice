@@ -65,7 +65,7 @@ import org.eclipse.etrice.core.room.TrPoint;
 import org.eclipse.etrice.core.room.TrPointTerminal;
 import org.eclipse.etrice.core.room.TransitionPoint;
 import org.eclipse.etrice.core.room.TriggeredTransition;
-import org.eclipse.etrice.core.room.TypedID;
+import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.generator.etricegen.ActiveTrigger;
 import org.eclipse.etrice.generator.etricegen.ETriceGenFactory;
 import org.eclipse.etrice.generator.etricegen.ETriceGenPackage;
@@ -683,7 +683,7 @@ public class ExpandedActorClassImpl extends ActorClassImpl implements ExpandedAc
 		tc.setTransition(t);
 		
 		if (t instanceof TriggeredTransition) {
-			TypedID data = null;
+			VarDecl data = null;
 			boolean first = true;
 			for (Trigger tr : ((TriggeredTransition)t).getTriggers()) {
 				for (MessageFromIf mif : tr.getMsgFromIfPairs()) {
@@ -697,10 +697,8 @@ public class ExpandedActorClassImpl extends ActorClassImpl implements ExpandedAc
 								validationError("If one MessageFromIf has data all have to have data for a given transition!", t, RoomPackage.eINSTANCE.getTriggeredTransition_Triggers());
 							}
 							else {
-								TypedID a = mif.getMessage().getData();
-								if (data.getType().getPrim()!=a.getType().getPrim())
-									validationError("The data types of all MessageFromIf have to be the same!", t, RoomPackage.eINSTANCE.getTriggeredTransition_Triggers());
-								if (data.getType().getType()!=a.getType().getType())
+								VarDecl a = mif.getMessage().getData();
+								if (data.getType()!=a.getType())
 									validationError("The data types of all MessageFromIf have to be the same!", t, RoomPackage.eINSTANCE.getTriggeredTransition_Triggers());
 							}
 						}

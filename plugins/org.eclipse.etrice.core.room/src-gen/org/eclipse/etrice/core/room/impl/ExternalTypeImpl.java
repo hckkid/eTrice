@@ -12,50 +12,50 @@ import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import org.eclipse.etrice.core.room.FreeType;
+import org.eclipse.etrice.core.room.ExternalType;
 import org.eclipse.etrice.core.room.RoomPackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Free Type</b></em>'.
+ * An implementation of the model object '<em><b>External Type</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.etrice.core.room.impl.FreeTypeImpl#getType <em>Type</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.impl.ExternalTypeImpl#getTargetName <em>Target Name</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class FreeTypeImpl extends BasicTypeImpl implements FreeType
+public class ExternalTypeImpl extends ComplexTypeImpl implements ExternalType
 {
   /**
-   * The default value of the '{@link #getType() <em>Type</em>}' attribute.
+   * The default value of the '{@link #getTargetName() <em>Target Name</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getType()
+   * @see #getTargetName()
    * @generated
    * @ordered
    */
-  protected static final String TYPE_EDEFAULT = null;
+  protected static final String TARGET_NAME_EDEFAULT = null;
 
   /**
-   * The cached value of the '{@link #getType() <em>Type</em>}' attribute.
+   * The cached value of the '{@link #getTargetName() <em>Target Name</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getType()
+   * @see #getTargetName()
    * @generated
    * @ordered
    */
-  protected String type = TYPE_EDEFAULT;
+  protected String targetName = TARGET_NAME_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected FreeTypeImpl()
+  protected ExternalTypeImpl()
   {
     super();
   }
@@ -68,7 +68,7 @@ public class FreeTypeImpl extends BasicTypeImpl implements FreeType
   @Override
   protected EClass eStaticClass()
   {
-    return RoomPackage.Literals.FREE_TYPE;
+    return RoomPackage.Literals.EXTERNAL_TYPE;
   }
 
   /**
@@ -76,9 +76,9 @@ public class FreeTypeImpl extends BasicTypeImpl implements FreeType
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getType()
+  public String getTargetName()
   {
-    return type;
+    return targetName;
   }
 
   /**
@@ -86,12 +86,12 @@ public class FreeTypeImpl extends BasicTypeImpl implements FreeType
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setType(String newType)
+  public void setTargetName(String newTargetName)
   {
-    String oldType = type;
-    type = newType;
+    String oldTargetName = targetName;
+    targetName = newTargetName;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.FREE_TYPE__TYPE, oldType, type));
+      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.EXTERNAL_TYPE__TARGET_NAME, oldTargetName, targetName));
   }
 
   /**
@@ -104,8 +104,8 @@ public class FreeTypeImpl extends BasicTypeImpl implements FreeType
   {
     switch (featureID)
     {
-      case RoomPackage.FREE_TYPE__TYPE:
-        return getType();
+      case RoomPackage.EXTERNAL_TYPE__TARGET_NAME:
+        return getTargetName();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -120,8 +120,8 @@ public class FreeTypeImpl extends BasicTypeImpl implements FreeType
   {
     switch (featureID)
     {
-      case RoomPackage.FREE_TYPE__TYPE:
-        setType((String)newValue);
+      case RoomPackage.EXTERNAL_TYPE__TARGET_NAME:
+        setTargetName((String)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -137,8 +137,8 @@ public class FreeTypeImpl extends BasicTypeImpl implements FreeType
   {
     switch (featureID)
     {
-      case RoomPackage.FREE_TYPE__TYPE:
-        setType(TYPE_EDEFAULT);
+      case RoomPackage.EXTERNAL_TYPE__TARGET_NAME:
+        setTargetName(TARGET_NAME_EDEFAULT);
         return;
     }
     super.eUnset(featureID);
@@ -154,8 +154,8 @@ public class FreeTypeImpl extends BasicTypeImpl implements FreeType
   {
     switch (featureID)
     {
-      case RoomPackage.FREE_TYPE__TYPE:
-        return TYPE_EDEFAULT == null ? type != null : !TYPE_EDEFAULT.equals(type);
+      case RoomPackage.EXTERNAL_TYPE__TARGET_NAME:
+        return TARGET_NAME_EDEFAULT == null ? targetName != null : !TARGET_NAME_EDEFAULT.equals(targetName);
     }
     return super.eIsSet(featureID);
   }
@@ -171,10 +171,10 @@ public class FreeTypeImpl extends BasicTypeImpl implements FreeType
     if (eIsProxy()) return super.toString();
 
     StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (type: ");
-    result.append(type);
+    result.append(" (targetName: ");
+    result.append(targetName);
     result.append(')');
     return result.toString();
   }
 
-} //FreeTypeImpl
+} //ExternalTypeImpl

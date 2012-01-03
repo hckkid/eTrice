@@ -8,26 +8,26 @@ package org.eclipse.etrice.core.room.impl;
 
 import org.eclipse.emf.ecore.EClass;
 
+import org.eclipse.etrice.core.room.DataType;
 import org.eclipse.etrice.core.room.RoomPackage;
-import org.eclipse.etrice.core.room.SemanticsOutRule;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Semantics Out Rule</b></em>'.
+ * An implementation of the model object '<em><b>Data Type</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * </p>
  *
  * @generated
  */
-public class SemanticsOutRuleImpl extends SemanticsRuleImpl implements SemanticsOutRule
+public class DataTypeImpl extends RoomClassImpl implements DataType
 {
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected SemanticsOutRuleImpl()
+  protected DataTypeImpl()
   {
     super();
   }
@@ -40,7 +40,7 @@ public class SemanticsOutRuleImpl extends SemanticsRuleImpl implements Semantics
   @Override
   protected EClass eStaticClass()
   {
-    return RoomPackage.Literals.SEMANTICS_OUT_RULE;
+    return RoomPackage.Literals.DATA_TYPE;
   }
 
-} //SemanticsOutRuleImpl
+} //DataTypeImpl

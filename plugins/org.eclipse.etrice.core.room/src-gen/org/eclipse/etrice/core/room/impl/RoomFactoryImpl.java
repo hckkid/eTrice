@@ -7,7 +7,6 @@
 package org.eclipse.etrice.core.room.impl;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 
@@ -73,11 +72,11 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
       case RoomPackage.ROOM_CLASS: return createRoomClass();
       case RoomPackage.STRUCTURE_CLASS: return createStructureClass();
       case RoomPackage.ACTOR_CONTAINER_CLASS: return createActorContainerClass();
-      case RoomPackage.TYPED_ID: return createTypedID();
-      case RoomPackage.FREE_TYPED_ID: return createFreeTypedID();
-      case RoomPackage.BASIC_TYPE: return createBasicType();
-      case RoomPackage.TYPE: return createType();
-      case RoomPackage.FREE_TYPE: return createFreeType();
+      case RoomPackage.VAR_DECL: return createVarDecl();
+      case RoomPackage.DATA_TYPE: return createDataType();
+      case RoomPackage.COMPLEX_TYPE: return createComplexType();
+      case RoomPackage.PRIMITIVE_TYPE: return createPrimitiveType();
+      case RoomPackage.EXTERNAL_TYPE: return createExternalType();
       case RoomPackage.DATA_CLASS: return createDataClass();
       case RoomPackage.ATTRIBUTE: return createAttribute();
       case RoomPackage.OPERATION: return createOperation();
@@ -87,8 +86,6 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
       case RoomPackage.MESSAGE_HANDLER: return createMessageHandler();
       case RoomPackage.PROTOCOL_SEMANTICS: return createProtocolSemantics();
       case RoomPackage.SEMANTICS_RULE: return createSemanticsRule();
-      case RoomPackage.SEMANTICS_IN_RULE: return createSemanticsInRule();
-      case RoomPackage.SEMANTICS_OUT_RULE: return createSemanticsOutRule();
       case RoomPackage.ACTOR_CLASS: return createActorClass();
       case RoomPackage.INTERFACE_ITEM: return createInterfaceItem();
       case RoomPackage.PORT: return createPort();
@@ -153,40 +150,6 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-  public Object createFromString(EDataType eDataType, String initialValue)
-  {
-    switch (eDataType.getClassifierID())
-    {
-      case RoomPackage.PRIMITIVE_TYPE:
-        return createPrimitiveTypeFromString(eDataType, initialValue);
-      default:
-        throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
-    }
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String convertToString(EDataType eDataType, Object instanceValue)
-  {
-    switch (eDataType.getClassifierID())
-    {
-      case RoomPackage.PRIMITIVE_TYPE:
-        return convertPrimitiveTypeToString(eDataType, instanceValue);
-      default:
-        throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
-    }
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public RoomModel createRoomModel()
   {
     RoomModelImpl roomModel = new RoomModelImpl();
@@ -231,10 +194,10 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public TypedID createTypedID()
+  public VarDecl createVarDecl()
   {
-    TypedIDImpl typedID = new TypedIDImpl();
-    return typedID;
+    VarDeclImpl varDecl = new VarDeclImpl();
+    return varDecl;
   }
 
   /**
@@ -242,10 +205,10 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public FreeTypedID createFreeTypedID()
+  public DataType createDataType()
   {
-    FreeTypedIDImpl freeTypedID = new FreeTypedIDImpl();
-    return freeTypedID;
+    DataTypeImpl dataType = new DataTypeImpl();
+    return dataType;
   }
 
   /**
@@ -253,10 +216,10 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public BasicType createBasicType()
+  public ComplexType createComplexType()
   {
-    BasicTypeImpl basicType = new BasicTypeImpl();
-    return basicType;
+    ComplexTypeImpl complexType = new ComplexTypeImpl();
+    return complexType;
   }
 
   /**
@@ -264,10 +227,10 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public Type createType()
+  public PrimitiveType createPrimitiveType()
   {
-    TypeImpl type = new TypeImpl();
-    return type;
+    PrimitiveTypeImpl primitiveType = new PrimitiveTypeImpl();
+    return primitiveType;
   }
 
   /**
@@ -275,10 +238,10 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public FreeType createFreeType()
+  public ExternalType createExternalType()
   {
-    FreeTypeImpl freeType = new FreeTypeImpl();
-    return freeType;
+    ExternalTypeImpl externalType = new ExternalTypeImpl();
+    return externalType;
   }
 
   /**
@@ -378,28 +341,6 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
   {
     SemanticsRuleImpl semanticsRule = new SemanticsRuleImpl();
     return semanticsRule;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public SemanticsInRule createSemanticsInRule()
-  {
-    SemanticsInRuleImpl semanticsInRule = new SemanticsInRuleImpl();
-    return semanticsInRule;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public SemanticsOutRule createSemanticsOutRule()
-  {
-    SemanticsOutRuleImpl semanticsOutRule = new SemanticsOutRuleImpl();
-    return semanticsOutRule;
   }
 
   /**
@@ -994,28 +935,6 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
   {
     PlainStateGraphImpl plainStateGraph = new PlainStateGraphImpl();
     return plainStateGraph;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public PrimitiveType createPrimitiveTypeFromString(EDataType eDataType, String initialValue)
-  {
-    PrimitiveType result = PrimitiveType.get(initialValue);
-    if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
-    return result;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public String convertPrimitiveTypeToString(EDataType eDataType, Object instanceValue)
-  {
-    return instanceValue == null ? null : instanceValue.toString();
   }
 
   /**

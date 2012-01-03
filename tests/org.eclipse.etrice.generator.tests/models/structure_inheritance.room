@@ -1,5 +1,7 @@
 RoomModel structure_inherit {
 
+	PrimitiveType int32 -> int32 (Integer) default "0"
+
 	ProtocolClass PTimer {
 		incoming {
 			Message start (time_ms : int32)

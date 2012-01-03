@@ -30,7 +30,6 @@ import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.DataClass;
-import org.eclipse.etrice.core.room.FreeTypedID;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.Operation;
@@ -39,7 +38,7 @@ import org.eclipse.etrice.core.room.RoomClass;
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.ServiceImplementation;
 import org.eclipse.etrice.core.room.SubSystemClass;
-import org.eclipse.etrice.core.room.TypedID;
+import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.generator.etricegen.ActorInstance;
 import org.eclipse.etrice.generator.etricegen.ETriceGenPackage;
 import org.eclipse.etrice.generator.etricegen.ExpandedActorClass;
@@ -635,10 +634,12 @@ public class RootImpl extends EObjectImpl implements Root {
 		// add data classes used by protocols
 		for (ProtocolClass pc : protocolClasses) {
 			for (Message m : pc.getIncomingMessages()) {
-				getTypedIdDataClasses(dataClasses, m.getData());
+				if (m.getData()!=null)
+					getVarDeclDataClasses(dataClasses, Collections.singleton(m.getData()));
 			}
 			for (Message m : pc.getOutgoingMessages()) {
-				getTypedIdDataClasses(dataClasses, m.getData());
+				if (m.getData()!=null)
+					getVarDeclDataClasses(dataClasses, Collections.singleton(m.getData()));
 			}
 		}
 		
@@ -688,34 +689,26 @@ public class RootImpl extends EObjectImpl implements Root {
 				if (dc!=null)
 					dataClasses.add(dc);
 			}
-			getFreeTypedIdDataClasses(dataClasses, op.getArguments());
+			getVarDeclDataClasses(dataClasses, op.getArguments());
 		}
 	}
 
-	private void getTypedIdDataClasses(HashSet<DataClass> dataClasses, TypedID data) {
-		if (data!=null) {
-			if (data.getType().getType()!=null)
-				dataClasses.add(data.getType().getType());
-		}
-	}
-
-	private void getFreeTypedIdDataClasses(HashSet<DataClass> dataClasses,
-			EList<FreeTypedID> arguments) {
-		for (FreeTypedID tid : arguments) {
+	private void getVarDeclDataClasses(HashSet<DataClass> dataClasses, Collection<VarDecl> decls) {
+		for (VarDecl tid : decls) {
 			DataClass dc = name2dc.get(tid.getType());
 			if (dc!=null)
 				dataClasses.add(dc);
 		}
 	}
 
-	private void getAttributeDataClasses(HashSet<DataClass> dataClasses,
-			EList<Attribute> attributes) {
+	private void getAttributeDataClasses(HashSet<DataClass> dataClasses, Collection<Attribute> attributes) {
 		for (Attribute attr : attributes) {
-			if (attr.getType().getType()!=null)
-				dataClasses.add(attr.getType().getType());
+			DataClass dc = name2dc.get(attr.getType());
+			if (dc!=null)
+				dataClasses.add(dc);
 		}
 	}
-	
+
 	// TODO: is this the correct place?
 	public HashSet<DataClass> getReferencedDataClasses(DataClass cls){
 		HashSet<DataClass> dataClasses = new  HashSet<DataClass>();
@@ -741,11 +734,9 @@ public class RootImpl extends EObjectImpl implements Root {
 	private void getMessageDataClasses(HashSet<DataClass> dataClasses, EList<Message> messages) {
 		for (Message message : messages) {
 			if (message.getData()!=null) {
-				if (message.getData().getType().getType()!=null) {
-					DataClass dc = (DataClass) message.getData().getType().getType();
+				if (message.getData().getType() instanceof DataClass) {
+					DataClass dc = (DataClass) message.getData().getType();
 	//				TODO: other types are completely ignored				
-	//				Type	: prim=PrimitiveType | (type=[DataClass|FQN] (ref?='ref')?) | (ext=FQN 'ext' (ref?='ref')?);
-	//				FreeType: prim=PrimitiveType | (type=ID (ref?='ref')?);
 	
 					if (dc!=null)
 						dataClasses.add(dc);
@@ -754,7 +745,4 @@ public class RootImpl extends EObjectImpl implements Root {
 		}
 	}
 
-
-	
-	
 } //RootImpl

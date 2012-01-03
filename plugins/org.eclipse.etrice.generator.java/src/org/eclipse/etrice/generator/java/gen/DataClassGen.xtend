@@ -15,11 +15,13 @@ package org.eclipse.etrice.generator.java.gen
 import com.google.inject.Inject
 import com.google.inject.Singleton
 import org.eclipse.etrice.core.room.DataClass
+import org.eclipse.etrice.core.room.ComplexType
 import org.eclipse.etrice.generator.base.ILogger
 import org.eclipse.etrice.generator.etricegen.Root
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 import org.eclipse.etrice.generator.extensions.RoomExtensions
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
+import org.eclipse.etrice.generator.generic.TypeHelpers
 
 
 @Singleton
@@ -29,6 +31,7 @@ class DataClassGen {
 	@Inject extension JavaExtensions stdExt
 	@Inject extension RoomExtensions roomExt
 	@Inject extension ProcedureHelpers helpers
+	@Inject extension TypeHelpers typeHelpers
 	@Inject ILogger logger
 	
 	def doGenerate(Root root) {
@@ -61,23 +64,29 @@ class DataClassGen {
 			
 			// default constructor
 			public «dc.name»() {
-				«FOR a : dc.attributes»
-					«IF a.defaultValueLiteral!=null»
-						«IF a.size==0»«a.name» = «a.defaultValueLiteral»;«ENDIF»
-					«ELSEIF a.type.type!=null»
-						«a.name» = new «a.type.type.name»();
-					«ENDIF»
-				«ENDFOR»
+				«dc.attributes.attributeInitialization»
 			}
 			
 			// deep copy
 			public «dc.name» deepCopy() {
 				«dc.name» copy = new «dc.name»();
 				«FOR a : dc.attributes»
-					«IF a.type.type!=null»
-						copy.«a.name» = «a.name».deepCopy();
+					«IF a.type instanceof ComplexType»
+						«IF a.size==0»
+							copy.«a.name» = «a.name».deepCopy();
+						«ELSE»
+							for (int i=0;i<«a.size»;i++){
+								copy.«a.name»[i] = «a.name»[i].deepCopy();
+							}
+						«ENDIF»
 					«ELSE»
-						«IF a.size==0»copy.«a.name» = «a.name»;«ELSE»for (int i=0;i<«a.size»;i++){copy.«a.name»[i]=«a.name»[i];}«ENDIF»
+						«IF a.size==0»
+							copy.«a.name» = «a.name»;
+						«ELSE»
+							for (int i=0;i<«a.size»;i++){
+								copy.«a.name»[i] = «a.name»[i];
+							}
+						«ENDIF»
 					«ENDIF»
 				«ENDFOR»
 				return copy;

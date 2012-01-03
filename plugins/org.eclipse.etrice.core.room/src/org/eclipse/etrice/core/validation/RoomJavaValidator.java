@@ -20,6 +20,7 @@ import org.eclipse.etrice.core.room.ActorInstancePath;
 import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.Binding;
 import org.eclipse.etrice.core.room.DataClass;
+import org.eclipse.etrice.core.room.ExternalType;
 import org.eclipse.etrice.core.room.InitialTransition;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.LayerConnection;
@@ -29,6 +30,7 @@ import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RoomClass;
 import org.eclipse.etrice.core.room.RoomPackage;
+import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.StateMachine;
 import org.eclipse.etrice.core.room.SubSystemClass;
@@ -43,6 +45,9 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 
 	@Check
 	public void checkTypeNameStartsWithCapital(RoomClass type) {
+		if (type instanceof PrimitiveType || type instanceof ExternalType)
+			return;
+		
 		if (!Character.isUpperCase(type.getName().charAt(0))) {
 			warning("Name should start with a capital", RoomPackage.eINSTANCE.getRoomClass_Name());
 		}

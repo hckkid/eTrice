@@ -39,8 +39,7 @@ import org.eclipse.etrice.core.room.RelaySAPoint;
 import org.eclipse.etrice.core.room.SAPRef;
 import org.eclipse.etrice.core.room.SPPRef;
 import org.eclipse.etrice.core.room.SPPoint;
-import org.eclipse.etrice.core.room.SemanticsInRule;
-import org.eclipse.etrice.core.room.SemanticsOutRule;
+import org.eclipse.etrice.core.room.SemanticsRule;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.StateTerminal;
@@ -110,21 +109,6 @@ public class RoomScopeProvider extends AbstractDeclarativeScopeProvider {
 			ctx = ctx.eContainer();
 		if (ctx instanceof ActorContainerClass)
 			return (ActorContainerClass) ctx;
-		
-		return null;
-	}
-	
-	/**
-	 * first container of type {@link ProtocolClass}
-	 * @param obj
-	 * @return ActorClass container
-	 */
-	private ProtocolClass getProtocolClass(EObject obj) {
-		EObject ctx = obj.eContainer();
-		while (!(ctx instanceof ProtocolClass) && ctx.eContainer()!=null)
-			ctx = ctx.eContainer();
-		if (ctx instanceof ProtocolClass)
-			return (ProtocolClass) ctx;
 		
 		return null;
 	}
@@ -562,32 +546,15 @@ public class RoomScopeProvider extends AbstractDeclarativeScopeProvider {
 	 * @param ref - not used
 	 * @return a list of scopes
 	 */
-	public IScope scope_SemanticsInRule_msg(SemanticsInRule sr, EReference ref) {
+	public IScope scope_SemanticsRule_msg(SemanticsRule sr, EReference ref) {
 		final List<IEObjectDescription> scopes = new ArrayList<IEObjectDescription>();
 		
-		ProtocolClass pc = getProtocolClass(sr);
+		ProtocolClass pc = RoomHelpers.getProtocolClass(sr);
 		LinkedList<ProtocolClass> classes = getBaseClasses(pc);
 		for (ProtocolClass bpc : classes) {
 			for (Message m : bpc.getIncomingMessages()) {
 				scopes.add(EObjectDescription.create(m.getName(), m));
 			}
-		}
-		
-		return new SimpleScope(IScope.NULLSCOPE, scopes);
-	}
-	
-	/**
-	 * returns a flat list of Message scopes for a {@link SemanticsInRule}
-	 * @param sr - the semantics rule for incoming messages
-	 * @param ref - not used
-	 * @return a list of scopes
-	 */
-	public IScope scope_SemanticsOutRule_msg(SemanticsOutRule sr, EReference ref) {
-		final List<IEObjectDescription> scopes = new ArrayList<IEObjectDescription>();
-		
-		ProtocolClass pc = getProtocolClass(sr);
-		LinkedList<ProtocolClass> classes = getBaseClasses(pc);
-		for (ProtocolClass bpc : classes) {
 			for (Message m : bpc.getOutgoingMessages()) {
 				scopes.add(EObjectDescription.create(m.getName(), m));
 			}
@@ -703,7 +670,7 @@ public class RoomScopeProvider extends AbstractDeclarativeScopeProvider {
 	public IScope scope_MessageHandler_msg(MessageHandler handler, EReference ref) {
 		final List<IEObjectDescription> scopes = new ArrayList<IEObjectDescription>();
 		
-		ProtocolClass pc = getProtocolClass(handler);
+		ProtocolClass pc = RoomHelpers.getProtocolClass(handler);
 		if (pc!=null) {
 			for (Message m : pc.getIncomingMessages()) {
 				scopes.add(EObjectDescription.create(m.getName(), m));

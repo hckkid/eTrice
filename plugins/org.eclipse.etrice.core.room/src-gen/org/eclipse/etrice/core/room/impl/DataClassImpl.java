@@ -45,7 +45,7 @@ import org.eclipse.etrice.core.room.RoomPackage;
  *
  * @generated
  */
-public class DataClassImpl extends RoomClassImpl implements DataClass
+public class DataClassImpl extends ComplexTypeImpl implements DataClass
 {
   /**
    * The cached value of the '{@link #getBase() <em>Base</em>}' reference.

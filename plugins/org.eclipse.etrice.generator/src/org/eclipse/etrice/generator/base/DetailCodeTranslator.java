@@ -117,6 +117,12 @@ public class DetailCodeTranslator {
 								ArrayList<String> args = getArgs(text, curr);
 								if (args!=null) {
 									if (argsMatching(msg, args)) {
+										// recursively apply this algorithm to each argument
+										for (int i=0; i<args.size(); ++i) {
+											StringBuilder transArg = new StringBuilder();
+											translateText(args.remove(i), transArg);
+											args.add(i, transArg.toString());
+										}
 										String orig = text.substring(last, curr.pos);
 										translated = provider.getInterfaceItemMessageText(item, msg, args, orig);
 									}
