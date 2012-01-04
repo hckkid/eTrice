@@ -55,98 +55,59 @@ public class RoomFormatter extends AbstractDeclarativeFormatter {
 			c.setNoSpace().before(k);
 		}
 		
-		//"import"
+		for (Keyword k: f.findKeywords(":")) {
+			c.setNoSpace().before(k);
+		}
+		
+		for (Keyword k: f.findKeywords(".")) {
+			c.setNoSpace().around(k);
+		}
+
+		for (Keyword k: f.findKeywords("entry", "exit", "StateMachine", "subgraph", "action", "cond", "regular", "conjugated",
+				"incoming", "outgoing", "Structure", "Behavior", "Interface", "usercode", "usercode1", "usercode2")) {
+			c.setLinewrap().before(k);
+		}
+		
 		c.setLinewrap(2).around(f.getImportRule());
 		
 		
 		// classes
-		
-		//"LogicalSystem"
 		c.setLinewrap(2).around(f.getLogicalSystemRule());
-		
-		//"SubSystemClass"
 		c.setLinewrap(2).around(f.getSubSystemClassRule());
-		
-		//"ActorClass"
 		c.setLinewrap(2).around(f.getActorClassRule());
-
-		//"DataClass"
 		c.setLinewrap(2).around(f.getDataClassRule());
-		
-		//"ProtocolClass"
+		c.setLinewrap().around(f.getPrimitiveTypeRule());
+		c.setLinewrap().around(f.getExternalTypeRule());
 		c.setLinewrap(2).around(f.getProtocolClassRule());
 		
-		//"SubSystemRef"
-		c.setLinewrap().around(f.getSubSystemRefRule());
-		
-		
 		// structure classes
-		
-		//"ActorRef"
 		c.setLinewrap().around(f.getActorRefRule());
-		
-		//"LayerConnection"
+		c.setLinewrap().around(f.getSubSystemRefRule());
 		c.setLinewrap().around(f.getLayerConnectionRule());
 		
 		//"Interface"
 		//c.setLinewrap().before(f.getActorClassAccess().getInterfaceKeyword_5_0());
 		
-		//"Port"
 		c.setLinewrap().around(f.getPortRule());
-		
-		//"ExternalPort"
 		c.setLinewrap().around(f.getExternalPortRule());
-		
-		//":"
-		for (Keyword k: f.findKeywords(":")) {
-			c.setNoSpace().before(k);
-		}
-		
-		//"LogicalThread"
 		c.setLinewrap().around(f.getLogicalThreadRule());
-
-		//commands+=STRING+
 		c.setLinewrap().around(f.getDetailCodeAccess().getCommandsAssignment_1());
-		
-		//bindings+=Binding*
 		c.setLinewrap().around(f.getBindingRule());
-		
-		//"."
-		for (Keyword k: f.findKeywords(".")) {
-			c.setNoSpace().around(k);
-		}
+		c.setLinewrap().around(f.getSAPRefRule());
+		c.setLinewrap().around(f.getSPPRefRule());
+		c.setLinewrap().around(f.getAttributeRule());
+		c.setLinewrap().around(f.getOperationRule());
 
 		// state graph items
 		c.setLinewrap().around(f.getStateRule());
 		c.setLinewrap().around(f.getTrPointRule());
 		c.setLinewrap().around(f.getChoicePointRule());
 		c.setLinewrap().around(f.getTransitionRule());
-
-		//"SAP"
-		c.setLinewrap().around(f.getSAPRefRule());
-
-		//"SPP"
-		c.setLinewrap().around(f.getSPPRefRule());
-		
-		//"Attribute"
-		c.setLinewrap().around(f.getAttributeRule());
-		
-		for (Keyword k: f.findKeywords("entry", "exit", "StateMachine", "subgraph", "action", "cond", "regular", "conjugated",
-				"incoming", "outgoing", "Structure", "Behavior", "Interface", "usercode", "usercode1", "usercode2")) {
-			c.setLinewrap().before(k);
-		}
-
-		//"triggers"
 		c.setLinewrap().around(f.getTriggerRule());
 
-		// messages
-		c.setLinewrap().around(f.getMessageRule());
-
-		// operation
-		c.setLinewrap().around(f.getOperationRule());
-		
-		// protocol related
+		// protocol
 		c.setLinewrap().after(f.getPortClassRule());
+		c.setLinewrap().around(f.getMessageRule());
 		c.setLinewrap().around(f.getMessageHandlerRule());
 		c.setLinewrap().around(f.getProtocolSemanticsRule());
 		c.setLinewrap().around(f.getSemanticsRuleRule());
