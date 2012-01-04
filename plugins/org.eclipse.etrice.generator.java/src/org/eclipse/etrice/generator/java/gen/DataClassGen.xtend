@@ -59,7 +59,9 @@ class DataClassGen {
 			«helpers.UserCode(dc.userCode2)»
 			
 			«helpers.Attributes(dc.attributes)»
+			
 			«helpers.AttributeSettersGettersImplementation(dc.attributes, dc.name)»
+			
 			«helpers.OperationsImplementation(dc.operations, dc.name)»
 			
 			// default constructor

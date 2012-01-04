@@ -11,6 +11,8 @@ import org.eclipse.etrice.core.room.Operation;
 import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.generator.generic.ILanguageExtension;
 import org.eclipse.etrice.generator.generic.TypeHelpers;
+import org.eclipse.xtext.xbase.lib.ComparableExtensions;
+import org.eclipse.xtext.xbase.lib.IntegerExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xtend2.lib.StringConcatenation;
@@ -59,21 +61,20 @@ public class ProcedureHelpers {
             String _accessLevelProtected = this.languageExt.accessLevelProtected();
             _builder.append(_accessLevelProtected, "");
             DataType _type = attribute.getType();
-            String _name = _type.getName();
-            _builder.append(_name, "");
+            String _typeName = this._typeHelpers.typeName(_type);
+            _builder.append(_typeName, "");
             _builder.append(" ");
-            String _name_1 = attribute.getName();
-            _builder.append(_name_1, "");
+            String _name = attribute.getName();
+            _builder.append(_name, "");
+            _builder.append(" = ");
             {
               String _defaultValueLiteral = attribute.getDefaultValueLiteral();
               boolean _operator_equals_1 = ObjectExtensions.operator_equals(_defaultValueLiteral, null);
               if (_operator_equals_1) {
-                _builder.append(" = ");
                 DataType _type_1 = attribute.getType();
                 String _defaultValue = this._typeHelpers.defaultValue(_type_1);
                 _builder.append(_defaultValue, "");
               } else {
-                _builder.append(" = ");
                 String _defaultValueLiteral_1 = attribute.getDefaultValueLiteral();
                 _builder.append(_defaultValueLiteral_1, "");
               }
@@ -84,36 +85,60 @@ public class ProcedureHelpers {
             String _accessLevelProtected_1 = this.languageExt.accessLevelProtected();
             _builder.append(_accessLevelProtected_1, "");
             DataType _type_2 = attribute.getType();
-            String _name_2 = _type_2.getName();
-            _builder.append(_name_2, "");
+            String _typeName_1 = this._typeHelpers.typeName(_type_2);
+            _builder.append(_typeName_1, "");
             _builder.append("[] ");
-            String _name_3 = attribute.getName();
-            _builder.append(_name_3, "");
-            {
-              String _defaultValueLiteral_2 = attribute.getDefaultValueLiteral();
-              boolean _operator_equals_2 = ObjectExtensions.operator_equals(_defaultValueLiteral_2, null);
-              if (_operator_equals_2) {
-                _builder.append(" = ");
-                DataType _type_3 = attribute.getType();
-                String _defaultValue_1 = this._typeHelpers.defaultValue(_type_3);
-                _builder.append(_defaultValue_1, "");
-                _builder.append("[");
-                int _size_1 = attribute.getSize();
-                _builder.append(_size_1, "");
-                _builder.append("];");
-              } else {
-                _builder.append(" = ");
-                String _defaultValueLiteral_3 = attribute.getDefaultValueLiteral();
-                _builder.append(_defaultValueLiteral_3, "");
-                _builder.append(";");
-              }
-            }
+            String _name_1 = attribute.getName();
+            _builder.append(_name_1, "");
+            _builder.append(" = ");
+            String _arrayInitializer = this.arrayInitializer(attribute);
+            _builder.append(_arrayInitializer, "");
+            _builder.append(";");
             _builder.newLineIfNotEmpty();
           }
         }
       }
     }
     return _builder;
+  }
+  
+  public String arrayInitializer(final Attribute att) {
+      String result = "{";
+      int i = 0;
+      String _xifexpression = null;
+      String _defaultValueLiteral = att.getDefaultValueLiteral();
+      boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_defaultValueLiteral, null);
+      if (_operator_notEquals) {
+        String _defaultValueLiteral_1 = att.getDefaultValueLiteral();
+        _xifexpression = _defaultValueLiteral_1;
+      } else {
+        DataType _type = att.getType();
+        String _defaultValue = this._typeHelpers.defaultValue(_type);
+        _xifexpression = _defaultValue;
+      }
+      String dflt = _xifexpression;
+      int _size = att.getSize();
+      boolean _operator_lessThan = ComparableExtensions.<Integer>operator_lessThan(((Integer)i), ((Integer)_size));
+      Boolean _xwhileexpression = _operator_lessThan;
+      while (_xwhileexpression) {
+        {
+          String _operator_plus = StringExtensions.operator_plus(result, dflt);
+          result = _operator_plus;
+          int _operator_plus_1 = IntegerExtensions.operator_plus(((Integer)i), ((Integer)1));
+          i = _operator_plus_1;
+          int _size_1 = att.getSize();
+          boolean _operator_lessThan_1 = ComparableExtensions.<Integer>operator_lessThan(((Integer)i), ((Integer)_size_1));
+          if (_operator_lessThan_1) {
+            String _operator_plus_2 = StringExtensions.operator_plus(result, ", ");
+            result = _operator_plus_2;
+          }
+        }
+        int _size_2 = att.getSize();
+        boolean _operator_lessThan_2 = ComparableExtensions.<Integer>operator_lessThan(((Integer)i), ((Integer)_size_2));
+        _xwhileexpression = _operator_lessThan_2;
+      }
+      String _operator_plus_3 = StringExtensions.operator_plus(result, "}");
+      return _operator_plus_3;
   }
   
   public StringConcatenation attributeInitialization(final List<Attribute> attribs) {
@@ -149,6 +174,7 @@ public class ProcedureHelpers {
                 _builder.append("[i] = ");
                 String _defaultValueLiteral_2 = a.getDefaultValueLiteral();
                 _builder.append(_defaultValueLiteral_2, "	");
+                _builder.append(";");
                 _builder.newLineIfNotEmpty();
                 _builder.append("}");
                 _builder.newLine();
@@ -180,6 +206,7 @@ public class ProcedureHelpers {
                 DataType _type_1 = a.getType();
                 String _defaultValue_1 = this._typeHelpers.defaultValue(_type_1);
                 _builder.append(_defaultValue_1, "	");
+                _builder.append(";");
                 _builder.newLineIfNotEmpty();
                 _builder.append("}");
                 _builder.newLine();
@@ -246,9 +273,9 @@ public class ProcedureHelpers {
         _builder.append(";");
         _builder.newLineIfNotEmpty();
         _builder.append("}");
+        _builder.newLine();
       }
     }
-    _builder.newLineIfNotEmpty();
     return _builder;
   }
   
@@ -264,8 +291,8 @@ public class ProcedureHelpers {
     String _selfPointer = this.languageExt.selfPointer(classname, 1);
     _builder.append(_selfPointer, "");
     DataType _type = attribute.getType();
-    String _name_1 = _type.getName();
-    _builder.append(_name_1, "");
+    String _typeName = this._typeHelpers.typeName(_type);
+    _builder.append(_typeName, "");
     {
       int _size = attribute.getSize();
       boolean _operator_notEquals = ObjectExtensions.operator_notEquals(((Integer)_size), ((Integer)0));
@@ -274,8 +301,8 @@ public class ProcedureHelpers {
       }
     }
     _builder.append(" ");
-    String _name_2 = attribute.getName();
-    _builder.append(_name_2, "");
+    String _name_1 = attribute.getName();
+    _builder.append(_name_1, "");
     _builder.append(")");
     return _builder;
   }
@@ -285,8 +312,8 @@ public class ProcedureHelpers {
     String _accessLevelPublic = this.languageExt.accessLevelPublic();
     _builder.append(_accessLevelPublic, "");
     DataType _type = attribute.getType();
-    String _name = _type.getName();
-    _builder.append(_name, "");
+    String _typeName = this._typeHelpers.typeName(_type);
+    _builder.append(_typeName, "");
     {
       int _size = attribute.getSize();
       boolean _operator_notEquals = ObjectExtensions.operator_notEquals(((Integer)_size), ((Integer)0));
@@ -295,8 +322,8 @@ public class ProcedureHelpers {
       }
     }
     _builder.append(" get");
-    String _name_1 = attribute.getName();
-    String _firstUpper = StringExtensions.toFirstUpper(_name_1);
+    String _name = attribute.getName();
+    String _firstUpper = StringExtensions.toFirstUpper(_name);
     _builder.append(_firstUpper, "");
     _builder.append(" (");
     String _selfPointer = this.languageExt.selfPointer(classname, 0);
@@ -357,16 +384,16 @@ public class ProcedureHelpers {
         _builder.append("void");
       } else {
         DataType _returntype_1 = operation.getReturntype();
-        String _name = _returntype_1.getName();
-        _builder.append(_name, "");
+        String _typeName = this._typeHelpers.typeName(_returntype_1);
+        _builder.append(_typeName, "");
       }
     }
     _builder.append(" ");
     String _operationScope = this.languageExt.operationScope(classname, isDeclaration);
     _builder.append(_operationScope, "");
-    String _name_1 = operation.getName();
-    _builder.append(_name_1, "");
-    _builder.append(" (");
+    String _name = operation.getName();
+    _builder.append(_name, "");
+    _builder.append("(");
     EList<VarDecl> _arguments = operation.getArguments();
     int _size = _arguments.size();
     String _selfPointer = this.languageExt.selfPointer(classname, _size);
@@ -381,11 +408,11 @@ public class ProcedureHelpers {
           _builder.appendImmediate(", ", "");
         }
         DataType _type = argument.getType();
-        String _name_2 = _type.getName();
-        _builder.append(_name_2, "");
+        String _typeName_1 = this._typeHelpers.typeName(_type);
+        _builder.append(_typeName_1, "");
         _builder.append(" ");
-        String _name_3 = argument.getName();
-        _builder.append(_name_3, "");
+        String _name_1 = argument.getName();
+        _builder.append(_name_1, "");
       }
     }
     _builder.append(")");

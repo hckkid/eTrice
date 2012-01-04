@@ -245,7 +245,7 @@ public class StateMachineGen {
                   if (needData) {
                     _builder.append("{ ");
                     Message _msg = at.getMsg();
-                    String _typedDataDefinition = this._typeHelpers.getTypedDataDefinition(_msg);
+                    String _typedDataDefinition = this.stdExt.getTypedDataDefinition(_msg);
                     _builder.append(_typedDataDefinition, "					");
                   }
                 }

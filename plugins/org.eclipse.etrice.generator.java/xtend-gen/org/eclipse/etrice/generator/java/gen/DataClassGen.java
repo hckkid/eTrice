@@ -121,11 +121,15 @@ public class DataClassGen {
     _builder.append(_Attributes, "	");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
     EList<Attribute> _attributes_1 = dc.getAttributes();
     String _name_3 = dc.getName();
     StringConcatenation _AttributeSettersGettersImplementation = this.helpers.AttributeSettersGettersImplementation(_attributes_1, _name_3);
     _builder.append(_AttributeSettersGettersImplementation, "	");
     _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.newLine();
     _builder.append("\t");
     EList<Operation> _operations = dc.getOperations();
     String _name_4 = dc.getName();
