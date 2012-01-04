@@ -72,6 +72,19 @@
         </page>
     </extension>
     <extension
+            point="org.eclipse.ui.propertyPages">
+        <page
+            class="org.eclipse.etrice.core.ui.RoomExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+            id="org.eclipse.etrice.core.Room"
+            name="Room">
+            <keywordReference id="org.eclipse.etrice.core.ui.keyword_Room"/>
+            <enabledWhen>
+	            <adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+	        <filter name="projectNature" value="org.eclipse.xtext.ui.shared.xtextNature"/>
+        </page>
+    </extension>
+    <extension
         point="org.eclipse.ui.keywords">
         <keyword
             id="org.eclipse.etrice.core.ui.keyword_Room"
@@ -182,7 +195,7 @@
    	<!-- Rename Refactoring -->
 	<extension point="org.eclipse.ui.handlers">
 		<handler 
-			class="org.eclipse.etrice.core.ui.RoomExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring.ui.RenameElementHandler"
+			class="org.eclipse.etrice.core.ui.RoomExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring.ui.IRenameElementHandler"
 			commandId="org.eclipse.xtext.ui.refactoring.RenameElement">
 			<activeWhen>
 				<reference
@@ -204,6 +217,15 @@
          </command>
       </menuContribution>
    </extension>
+   <extension point="org.eclipse.ui.preferencePages">
+	    <page
+	        category="org.eclipse.etrice.core.Room"
+	        class="org.eclipse.etrice.core.ui.RoomExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring.ui.RefactoringPreferencePage"
+	        id="org.eclipse.etrice.core.Room.refactoring"
+	        name="Refactoring">
+	        <keywordReference id="org.eclipse.etrice.core.ui.keyword_Room"/>
+	    </page>
+	</extension>
 
   <extension point="org.eclipse.compare.contentViewers">
     <viewer id="org.eclipse.etrice.core.Room.compare.contentViewers"
