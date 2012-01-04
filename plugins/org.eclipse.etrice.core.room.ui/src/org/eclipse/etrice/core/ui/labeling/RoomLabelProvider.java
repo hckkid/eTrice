@@ -19,11 +19,13 @@ import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.BaseState;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.ExternalPort;
+import org.eclipse.etrice.core.room.ExternalType;
 import org.eclipse.etrice.core.room.Import;
 import org.eclipse.etrice.core.room.LogicalSystem;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.Operation;
 import org.eclipse.etrice.core.room.Port;
+import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RefinedState;
 import org.eclipse.etrice.core.room.RoomModel;
@@ -77,6 +79,18 @@ public class RoomLabelProvider extends DefaultEObjectLabelProvider {
 	
 	String image(DataClass dc) {
 		return "DataClass.gif";
+	}
+	
+	String image(PrimitiveType pt) {
+		return "PrimitiveType.gif";
+	}
+	
+	String image(ExternalType et) {
+		return "ExternalType.gif";
+	}
+	
+	String image(Attribute a) {
+		return "Attribute.gif";
 	}
 
 	String image(ProtocolClass pc) {
@@ -187,6 +201,14 @@ public class RoomLabelProvider extends DefaultEObjectLabelProvider {
 	String text(DataClass dc) {
 		String base = dc.getBase()!=null? " extends "+dc.getBase().getName():"";
 		return dc.getName()+base;
+	}
+	
+	String text(PrimitiveType pt) {
+		return pt.getName()+" -> "+pt.getTargetName();
+	}
+	
+	String text(ExternalType et) {
+		return et.getName()+" -> "+et.getTargetName();
 	}
 	
 	String text(ProtocolClass pc) {
