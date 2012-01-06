@@ -987,7 +987,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 		EOperation op = addEOperation(rootEClass, theRoomPackage.getRoomModel(), "getReferencedModels", 0, -1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theRoomPackage.getRoomClass(), "cls", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(rootEClass, theRoomPackage.getProtocolClass(), "getReferencedProtocols", 0, -1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(rootEClass, theRoomPackage.getProtocolClass(), "getReferencedProtocolClasses", 0, -1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theRoomPackage.getActorClass(), "cls", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(instanceBaseEClass, InstanceBase.class, "InstanceBase", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

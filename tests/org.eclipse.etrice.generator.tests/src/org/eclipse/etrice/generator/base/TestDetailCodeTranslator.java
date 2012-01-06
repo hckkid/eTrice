@@ -26,18 +26,16 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.DetailCode;
-import org.eclipse.etrice.core.room.FreeType;
-import org.eclipse.etrice.core.room.FreeTypedID;
+import org.eclipse.etrice.core.room.ExternalType;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.Operation;
 import org.eclipse.etrice.core.room.Port;
-import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RoomFactory;
 import org.eclipse.etrice.core.room.RoomModel;
-import org.eclipse.etrice.core.room.Type;
-import org.eclipse.etrice.core.room.TypedID;
+import org.eclipse.etrice.core.room.PrimitiveType;
+import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.generator.InstanceTestsActivator;
 import org.eclipse.etrice.generator.base.DetailCodeTranslator.ITranslationProvider;
@@ -102,10 +100,13 @@ public class TestDetailCodeTranslator {
 		out1.setName("out1");
 		Message out2 = RoomFactory.eINSTANCE.createMessage();
 		out2.setName("out2");
-		TypedID typedID = RoomFactory.eINSTANCE.createTypedID();
+		VarDecl typedID = RoomFactory.eINSTANCE.createVarDecl();
 		typedID.setName("param");
-		Type type = RoomFactory.eINSTANCE.createType();
-		type.setPrim(PrimitiveType.INT32);
+		PrimitiveType type = RoomFactory.eINSTANCE.createPrimitiveType();
+		type.setName("int32");
+		type.setCastName("Integer");
+		type.setTargetName("int32");
+		type.setDefaultValueLiteral("0");
 		typedID.setType(type);
 		out2.setData(typedID);
 		pc.getOutgoingMessages().add(out1);
@@ -134,20 +135,22 @@ public class TestDetailCodeTranslator {
 		
 		Operation op1 = RoomFactory.eINSTANCE.createOperation();
 		op1.setName("bar1");
-		FreeTypedID param1 = RoomFactory.eINSTANCE.createFreeTypedID();
+		VarDecl param1 = RoomFactory.eINSTANCE.createVarDecl();
 		param1.setName("param");
-		FreeType ft = RoomFactory.eINSTANCE.createFreeType();
-		ft.setPrim(PrimitiveType.INT16);
+		ExternalType ft = RoomFactory.eINSTANCE.createExternalType();
+		ft.setName("MyType");
+		ft.setTargetName("MyType");
 		param1.setType(ft);
 		op1.getArguments().add(param1);
 		ac.getOperations().add(op1);
 		
 		Operation op2 = RoomFactory.eINSTANCE.createOperation();
 		op2.setName("bar2");
-		FreeTypedID param2 = RoomFactory.eINSTANCE.createFreeTypedID();
+		VarDecl param2 = RoomFactory.eINSTANCE.createVarDecl();
 		param2.setName("param");
-		ft.setPrim(PrimitiveType.INT32);
-		param2.setType(EcoreUtil.copy(ft));
+		ExternalType ft2 = EcoreUtil.copy(ft);
+		ft2.setName("MyOtherType");
+		param2.setType(ft2);
 		op2.getArguments().add(EcoreUtil.copy(param1));
 		op2.getArguments().add(param2);
 		ac.getOperations().add(op2);
@@ -257,6 +260,16 @@ public class TestDetailCodeTranslator {
 		String result = translator.translateDetailCode(dc);
 		
 		assertEquals("port.message(data) replacement", ">fct.out2(123/4 /*comment*/)<;", result);
+	}
+	
+	@Test
+	public void testPortMsgDataRecursive() {
+		DetailCode dc = RoomFactory.eINSTANCE.createDetailCode();
+		dc.getCommands().add("fct.out2(value);");
+		
+		String result = translator.translateDetailCode(dc);
+		
+		assertEquals("port.message(attrib) recursive replacement", ">fct.out2(>value<)<;", result);
 	}
 	
 	@Test

@@ -18,7 +18,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.etrice.core.room.Documentation;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.RoomPackage;
-import org.eclipse.etrice.core.room.TypedID;
+import org.eclipse.etrice.core.room.VarDecl;
 
 /**
  * <!-- begin-user-doc -->
@@ -65,7 +65,7 @@ public class MessageImpl extends MinimalEObjectImpl.Container implements Message
    * @generated
    * @ordered
    */
-  protected TypedID data;
+  protected VarDecl data;
 
   /**
    * The cached value of the '{@link #getDocu() <em>Docu</em>}' containment reference.
@@ -126,7 +126,7 @@ public class MessageImpl extends MinimalEObjectImpl.Container implements Message
    * <!-- end-user-doc -->
    * @generated
    */
-  public TypedID getData()
+  public VarDecl getData()
   {
     return data;
   }
@@ -136,9 +136,9 @@ public class MessageImpl extends MinimalEObjectImpl.Container implements Message
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetData(TypedID newData, NotificationChain msgs)
+  public NotificationChain basicSetData(VarDecl newData, NotificationChain msgs)
   {
-    TypedID oldData = data;
+    VarDecl oldData = data;
     data = newData;
     if (eNotificationRequired())
     {
@@ -153,7 +153,7 @@ public class MessageImpl extends MinimalEObjectImpl.Container implements Message
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setData(TypedID newData)
+  public void setData(VarDecl newData)
   {
     if (newData != data)
     {
@@ -269,7 +269,7 @@ public class MessageImpl extends MinimalEObjectImpl.Container implements Message
         setName((String)newValue);
         return;
       case RoomPackage.MESSAGE__DATA:
-        setData((TypedID)newValue);
+        setData((VarDecl)newValue);
         return;
       case RoomPackage.MESSAGE__DOCU:
         setDocu((Documentation)newValue);
@@ -292,7 +292,7 @@ public class MessageImpl extends MinimalEObjectImpl.Container implements Message
         setName(NAME_EDEFAULT);
         return;
       case RoomPackage.MESSAGE__DATA:
-        setData((TypedID)null);
+        setData((VarDecl)null);
         return;
       case RoomPackage.MESSAGE__DOCU:
         setDocu((Documentation)null);

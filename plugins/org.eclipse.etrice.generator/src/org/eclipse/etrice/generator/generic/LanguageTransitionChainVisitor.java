@@ -18,7 +18,7 @@ import org.eclipse.etrice.core.room.InitialTransition;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.Transition;
 import org.eclipse.etrice.core.room.TriggeredTransition;
-import org.eclipse.etrice.core.room.TypedID;
+import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.generator.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.generator.etricegen.ITransitionChainVisitor;
 import org.eclipse.etrice.generator.etricegen.TransitionChain;
@@ -36,7 +36,7 @@ public class LanguageTransitionChainVisitor implements ITransitionChainVisitor {
 		
 		if (tc.getTransition() instanceof TriggeredTransition) {
 			// we rely on the previous checking during the generator model creation
-			TypedID data = ((TriggeredTransition)tc.getTransition()).getTriggers().get(0).getMsgFromIfPairs().get(0).getMessage().getData();
+			VarDecl data = ((TriggeredTransition)tc.getTransition()).getTriggers().get(0).getMsgFromIfPairs().get(0).getMessage().getData();
 			
 			String[] result = javaGen.getArglistAndTypedData(data);
 			dataArg = result[0];

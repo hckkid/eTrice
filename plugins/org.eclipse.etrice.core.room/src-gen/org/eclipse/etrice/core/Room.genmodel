@@ -9,24 +9,12 @@
     editorPluginID="org.eclipse.etrice.core.room.editor">
   <genPackages prefix="Room" basePackage="org.eclipse.etrice.core" disposableProviderFactory="true"
       ecorePackage="Room.ecore#/">
-    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Room.ecore#//PrimitiveType">
-      <genEnumLiterals ecoreEnumLiteral="Room.ecore#//PrimitiveType/void"/>
-      <genEnumLiterals ecoreEnumLiteral="Room.ecore#//PrimitiveType/int8"/>
-      <genEnumLiterals ecoreEnumLiteral="Room.ecore#//PrimitiveType/int16"/>
-      <genEnumLiterals ecoreEnumLiteral="Room.ecore#//PrimitiveType/int32"/>
-      <genEnumLiterals ecoreEnumLiteral="Room.ecore#//PrimitiveType/uint8"/>
-      <genEnumLiterals ecoreEnumLiteral="Room.ecore#//PrimitiveType/uint16"/>
-      <genEnumLiterals ecoreEnumLiteral="Room.ecore#//PrimitiveType/uint32"/>
-      <genEnumLiterals ecoreEnumLiteral="Room.ecore#//PrimitiveType/float32"/>
-      <genEnumLiterals ecoreEnumLiteral="Room.ecore#//PrimitiveType/float64"/>
-      <genEnumLiterals ecoreEnumLiteral="Room.ecore#//PrimitiveType/boolean"/>
-      <genEnumLiterals ecoreEnumLiteral="Room.ecore#//PrimitiveType/string"/>
-      <genEnumLiterals ecoreEnumLiteral="Room.ecore#//PrimitiveType/char"/>
-    </genEnums>
     <genClasses ecoreClass="Room.ecore#//RoomModel">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//RoomModel/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//RoomModel/docu"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//RoomModel/imports"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//RoomModel/primitiveTypes"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//RoomModel/externalTypes"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//RoomModel/dataClasses"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//RoomModel/protocolClasses"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//RoomModel/actorClasses"/>
@@ -48,24 +36,20 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//ActorContainerClass/userCode3"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//ActorContainerClass/actorRefs"/>
     </genClasses>
-    <genClasses ecoreClass="Room.ecore#//TypedID">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//TypedID/name"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//TypedID/type"/>
+    <genClasses ecoreClass="Room.ecore#//VarDecl">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//VarDecl/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//VarDecl/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//VarDecl/ref"/>
     </genClasses>
-    <genClasses ecoreClass="Room.ecore#//FreeTypedID">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//FreeTypedID/name"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//FreeTypedID/type"/>
+    <genClasses ecoreClass="Room.ecore#//DataType"/>
+    <genClasses ecoreClass="Room.ecore#//ComplexType"/>
+    <genClasses ecoreClass="Room.ecore#//PrimitiveType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//PrimitiveType/targetName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//PrimitiveType/castName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//PrimitiveType/defaultValueLiteral"/>
     </genClasses>
-    <genClasses ecoreClass="Room.ecore#//BasicType">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//BasicType/prim"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//BasicType/ref"/>
-    </genClasses>
-    <genClasses ecoreClass="Room.ecore#//Type">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//Type/type"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//Type/ext"/>
-    </genClasses>
-    <genClasses ecoreClass="Room.ecore#//FreeType">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//FreeType/type"/>
+    <genClasses ecoreClass="Room.ecore#//ExternalType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//ExternalType/targetName"/>
     </genClasses>
     <genClasses ecoreClass="Room.ecore#//DataClass">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//DataClass/base"/>
@@ -78,14 +62,16 @@
     <genClasses ecoreClass="Room.ecore#//Attribute">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//Attribute/name"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//Attribute/size"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//Attribute/type"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//Attribute/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//Attribute/ref"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//Attribute/defaultValueLiteral"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//Attribute/docu"/>
     </genClasses>
     <genClasses ecoreClass="Room.ecore#//Operation">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//Operation/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//Operation/arguments"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//Operation/returntype"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//Operation/returntype"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//Operation/ref"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//Operation/docu"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//Operation/detailCode"/>
     </genClasses>
@@ -122,8 +108,6 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//SemanticsRule/msg"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//SemanticsRule/followUps"/>
     </genClasses>
-    <genClasses ecoreClass="Room.ecore#//SemanticsInRule"/>
-    <genClasses ecoreClass="Room.ecore#//SemanticsOutRule"/>
     <genClasses ecoreClass="Room.ecore#//ActorClass">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//ActorClass/abstract"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//ActorClass/base"/>

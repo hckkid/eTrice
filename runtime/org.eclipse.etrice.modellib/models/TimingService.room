@@ -1,5 +1,9 @@
 RoomModel room.basic.service.timing {
 
+	import room.basic.types.java.* from "JavaTypes.room"
+
+	ExternalType Integer -> Integer
+	
 	ActorClass ATimingService {
 		Interface {
 			SPP timer: PTimer

@@ -193,14 +193,6 @@ public class PTimer {
 		}
 	}
 	
-	// interface for port class
-	public interface IPTimerPort{
-		// incoming messages
-		 public void Start (int time_ms)
-		;
-	 public void Kill ()
-		;
-	}
 	
 	// port class
 	static public class PTimerConjPort extends PortBase {
@@ -327,10 +319,4 @@ public class PTimer {
 		}
 	}
 	
-	// interface for port class
-	public interface IPTimerConjPort{
-		// outgoing messages
-		 public void timerTick ()
-		;
-	}
 }

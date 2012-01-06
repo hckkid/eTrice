@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.eclipse.etrice.core.room.Operation#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.Operation#getArguments <em>Arguments</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.Operation#getReturntype <em>Returntype</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.Operation#isRef <em>Ref</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.Operation#getDocu <em>Docu</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.Operation#getDetailCode <em>Detail Code</em>}</li>
  * </ul>
@@ -60,7 +61,7 @@ public interface Operation extends EObject
 
   /**
    * Returns the value of the '<em><b>Arguments</b></em>' containment reference list.
-   * The list contents are of type {@link org.eclipse.etrice.core.room.FreeTypedID}.
+   * The list contents are of type {@link org.eclipse.etrice.core.room.VarDecl}.
    * <!-- begin-user-doc -->
    * <p>
    * If the meaning of the '<em>Arguments</em>' containment reference list isn't clear,
@@ -72,33 +73,59 @@ public interface Operation extends EObject
    * @model containment="true"
    * @generated
    */
-  EList<FreeTypedID> getArguments();
+  EList<VarDecl> getArguments();
 
   /**
-   * Returns the value of the '<em><b>Returntype</b></em>' containment reference.
+   * Returns the value of the '<em><b>Returntype</b></em>' reference.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Returntype</em>' containment reference isn't clear,
+   * If the meaning of the '<em>Returntype</em>' reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Returntype</em>' containment reference.
-   * @see #setReturntype(FreeType)
+   * @return the value of the '<em>Returntype</em>' reference.
+   * @see #setReturntype(DataType)
    * @see org.eclipse.etrice.core.room.RoomPackage#getOperation_Returntype()
-   * @model containment="true"
+   * @model
    * @generated
    */
-  FreeType getReturntype();
+  DataType getReturntype();
 
   /**
-   * Sets the value of the '{@link org.eclipse.etrice.core.room.Operation#getReturntype <em>Returntype</em>}' containment reference.
+   * Sets the value of the '{@link org.eclipse.etrice.core.room.Operation#getReturntype <em>Returntype</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Returntype</em>' containment reference.
+   * @param value the new value of the '<em>Returntype</em>' reference.
    * @see #getReturntype()
    * @generated
    */
-  void setReturntype(FreeType value);
+  void setReturntype(DataType value);
+
+  /**
+   * Returns the value of the '<em><b>Ref</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Ref</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Ref</em>' attribute.
+   * @see #setRef(boolean)
+   * @see org.eclipse.etrice.core.room.RoomPackage#getOperation_Ref()
+   * @model
+   * @generated
+   */
+  boolean isRef();
+
+  /**
+   * Sets the value of the '{@link org.eclipse.etrice.core.room.Operation#isRef <em>Ref</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Ref</em>' attribute.
+   * @see #isRef()
+   * @generated
+   */
+  void setRef(boolean value);
 
   /**
    * Returns the value of the '<em><b>Docu</b></em>' containment reference.

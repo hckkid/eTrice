@@ -193,14 +193,6 @@ public class PTimeout {
 		}
 	}
 	
-	// interface for port class
-	public interface IPTimeoutPort{
-		// incoming messages
-		 public void Start (int time_ms)
-		;
-	 public void Kill ()
-		;
-	}
 	
 	// port class
 	static public class PTimeoutConjPort extends PortBase {
@@ -328,10 +320,4 @@ public class PTimeout {
 		}
 	}
 	
-	// interface for port class
-	public interface IPTimeoutConjPort{
-		// outgoing messages
-		 public void timeoutTick ()
-		;
-	}
 }

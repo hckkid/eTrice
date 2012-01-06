@@ -9,6 +9,10 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="imports" upperBound="-1"
         eType="#//Import" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="primitiveTypes" upperBound="-1"
+        eType="#//PrimitiveType" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="externalTypes" upperBound="-1"
+        eType="#//ExternalType" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="dataClasses" upperBound="-1"
         eType="#//DataClass" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="protocolClasses" upperBound="-1"
@@ -43,41 +47,22 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="actorRefs" upperBound="-1"
         eType="#//ActorRef" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EEnum" name="PrimitiveType">
-    <eLiterals name="void" literal="void"/>
-    <eLiterals name="int8" value="1" literal="int8"/>
-    <eLiterals name="int16" value="2" literal="int16"/>
-    <eLiterals name="int32" value="3" literal="int32"/>
-    <eLiterals name="uint8" value="4" literal="uint8"/>
-    <eLiterals name="uint16" value="5" literal="uint16"/>
-    <eLiterals name="uint32" value="6" literal="uint32"/>
-    <eLiterals name="float32" value="7" literal="float32"/>
-    <eLiterals name="float64" value="8" literal="float64"/>
-    <eLiterals name="boolean" value="9" literal="boolean"/>
-    <eLiterals name="string" value="10" literal="string"/>
-    <eLiterals name="char" value="11" literal="char"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="TypedID">
+  <eClassifiers xsi:type="ecore:EClass" name="VarDecl">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//Type" containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="FreeTypedID">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//FreeType"
-        containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="BasicType">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="prim" eType="#//PrimitiveType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//DataType"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="ref" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Type" eSuperTypes="#//BasicType">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//DataClass"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ext" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DataType" eSuperTypes="#//RoomClass"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ComplexType" eSuperTypes="#//DataType"/>
+  <eClassifiers xsi:type="ecore:EClass" name="PrimitiveType" eSuperTypes="#//DataType">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="targetName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="castName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="defaultValueLiteral" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="FreeType" eSuperTypes="#//BasicType">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ExternalType" eSuperTypes="#//ComplexType">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="targetName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="DataClass" eSuperTypes="#//RoomClass">
+  <eClassifiers xsi:type="ecore:EClass" name="DataClass" eSuperTypes="#//ComplexType">
     <eStructuralFeatures xsi:type="ecore:EReference" name="base" eType="#//DataClass"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="userCode1" eType="#//DetailCode"
         containment="true"/>
@@ -93,7 +78,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="Attribute">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="size" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//Type" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//DataType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ref" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="defaultValueLiteral" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="docu" eType="#//Documentation"
         containment="true"/>
@@ -101,9 +87,9 @@
   <eClassifiers xsi:type="ecore:EClass" name="Operation">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="arguments" upperBound="-1"
-        eType="#//FreeTypedID" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="returntype" eType="#//FreeType"
-        containment="true"/>
+        eType="#//VarDecl" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="returntype" eType="#//DataType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ref" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="docu" eType="#//Documentation"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="detailCode" eType="#//DetailCode"
@@ -130,7 +116,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Message">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="data" eType="#//TypedID"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="data" eType="#//VarDecl"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="docu" eType="#//Documentation"
         containment="true"/>
@@ -159,8 +145,6 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="followUps" upperBound="-1"
         eType="#//SemanticsRule" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="SemanticsInRule" eSuperTypes="#//SemanticsRule"/>
-  <eClassifiers xsi:type="ecore:EClass" name="SemanticsOutRule" eSuperTypes="#//SemanticsRule"/>
   <eClassifiers xsi:type="ecore:EClass" name="ActorClass" eSuperTypes="#//ActorContainerClass">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="abstract" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="base" eType="#//ActorClass"/>

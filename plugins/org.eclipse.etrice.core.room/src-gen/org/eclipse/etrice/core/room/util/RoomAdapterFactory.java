@@ -99,29 +99,29 @@ public class RoomAdapterFactory extends AdapterFactoryImpl
         return createActorContainerClassAdapter();
       }
       @Override
-      public Adapter caseTypedID(TypedID object)
+      public Adapter caseVarDecl(VarDecl object)
       {
-        return createTypedIDAdapter();
+        return createVarDeclAdapter();
       }
       @Override
-      public Adapter caseFreeTypedID(FreeTypedID object)
+      public Adapter caseDataType(DataType object)
       {
-        return createFreeTypedIDAdapter();
+        return createDataTypeAdapter();
       }
       @Override
-      public Adapter caseBasicType(BasicType object)
+      public Adapter caseComplexType(ComplexType object)
       {
-        return createBasicTypeAdapter();
+        return createComplexTypeAdapter();
       }
       @Override
-      public Adapter caseType(Type object)
+      public Adapter casePrimitiveType(PrimitiveType object)
       {
-        return createTypeAdapter();
+        return createPrimitiveTypeAdapter();
       }
       @Override
-      public Adapter caseFreeType(FreeType object)
+      public Adapter caseExternalType(ExternalType object)
       {
-        return createFreeTypeAdapter();
+        return createExternalTypeAdapter();
       }
       @Override
       public Adapter caseDataClass(DataClass object)
@@ -167,16 +167,6 @@ public class RoomAdapterFactory extends AdapterFactoryImpl
       public Adapter caseSemanticsRule(SemanticsRule object)
       {
         return createSemanticsRuleAdapter();
-      }
-      @Override
-      public Adapter caseSemanticsInRule(SemanticsInRule object)
-      {
-        return createSemanticsInRuleAdapter();
-      }
-      @Override
-      public Adapter caseSemanticsOutRule(SemanticsOutRule object)
-      {
-        return createSemanticsOutRuleAdapter();
       }
       @Override
       public Adapter caseActorClass(ActorClass object)
@@ -531,76 +521,76 @@ public class RoomAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.TypedID <em>Typed ID</em>}'.
+   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.VarDecl <em>Var Decl</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.eclipse.etrice.core.room.TypedID
+   * @see org.eclipse.etrice.core.room.VarDecl
    * @generated
    */
-  public Adapter createTypedIDAdapter()
+  public Adapter createVarDeclAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.FreeTypedID <em>Free Typed ID</em>}'.
+   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.DataType <em>Data Type</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.eclipse.etrice.core.room.FreeTypedID
+   * @see org.eclipse.etrice.core.room.DataType
    * @generated
    */
-  public Adapter createFreeTypedIDAdapter()
+  public Adapter createDataTypeAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.BasicType <em>Basic Type</em>}'.
+   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.ComplexType <em>Complex Type</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.eclipse.etrice.core.room.BasicType
+   * @see org.eclipse.etrice.core.room.ComplexType
    * @generated
    */
-  public Adapter createBasicTypeAdapter()
+  public Adapter createComplexTypeAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.Type <em>Type</em>}'.
+   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.PrimitiveType <em>Primitive Type</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.eclipse.etrice.core.room.Type
+   * @see org.eclipse.etrice.core.room.PrimitiveType
    * @generated
    */
-  public Adapter createTypeAdapter()
+  public Adapter createPrimitiveTypeAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.FreeType <em>Free Type</em>}'.
+   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.ExternalType <em>External Type</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.eclipse.etrice.core.room.FreeType
+   * @see org.eclipse.etrice.core.room.ExternalType
    * @generated
    */
-  public Adapter createFreeTypeAdapter()
+  public Adapter createExternalTypeAdapter()
   {
     return null;
   }
@@ -736,36 +726,6 @@ public class RoomAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createSemanticsRuleAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.SemanticsInRule <em>Semantics In Rule</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.etrice.core.room.SemanticsInRule
-   * @generated
-   */
-  public Adapter createSemanticsInRuleAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.SemanticsOutRule <em>Semantics Out Rule</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.etrice.core.room.SemanticsOutRule
-   * @generated
-   */
-  public Adapter createSemanticsOutRuleAdapter()
   {
     return null;
   }

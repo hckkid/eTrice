@@ -1,19 +1,29 @@
-/*
- * SSRunner.c
+/*******************************************************************************
+ * Copyright (c) 2011 protos software gmbh (http://www.protos.de).
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
  *
- *  Created on: 21.12.2011
- *      Author: tschuetz
- */
+ * CONTRIBUTORS:
+ * 		Thomas Schuetz (initial contribution)
+ *
+ *******************************************************************************/
 
 #include <stdio.h>
 #include "../src-gen/cGenRef/DataClass1.h"
 #include "RUnit.h"
+#include "RMessage.h"
+#include "test/TestMessage.h"
+#include "test/TestRMessageQueue.h"
+#include "test/TestRMessageService.h"
 
-void testDataClassDeepCopy(void);
 
+
+void runTestCases(void);
 
 int main(void){
-	testDataClassDeepCopy();
+	runTestCases();
 	return 0;
 }
 
@@ -41,4 +51,10 @@ void testDataClassDeepCopy(void){
 	RUnit_close();
 }
 
+void runTestCases(void){
+	testDataClassDeepCopy();
+	TestMessage_runSuite();
+	TestMessageQueue_runSuite();
+	TestRMessageService_runSuite();
+}
 

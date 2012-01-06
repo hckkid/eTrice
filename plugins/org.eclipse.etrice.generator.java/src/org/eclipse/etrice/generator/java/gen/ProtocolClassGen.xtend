@@ -208,48 +208,51 @@ class ProtocolClassGen {
 			«ENDIF»
 		}
 		
-		// interface for port class
-		public interface I«name»{
-			«IF conj»
-			// outgoing messages
-			«FOR m : pc.getAllOutgoingMessages()» «messageSignature(m)»;
-			«ENDFOR»
-			«ELSE»
-			// incoming messages
-			«FOR m : pc.getAllIncomingMessages()» «messageSignature(m)»;
-			«ENDFOR»
-			«ENDIF»
-		}
+«««		// interface for port class
+«««		public interface I«name»{
+«««			«IF conj»
+«««			// outgoing messages
+«««			«FOR m : pc.getAllOutgoingMessages()» «messageSignature(m)»;
+«««			«ENDFOR»
+«««			«ELSE»
+«««			// incoming messages
+«««			«FOR m : pc.getAllIncomingMessages()» «messageSignature(m)»;
+«««			«ENDFOR»
+«««			«ENDIF»
+«««		}
 	'''
 	}
 
-	def messageSignature(Message m) {'''
-	public void «m.name» («IF m.data!=null»«m.data.type.typeName()» «m.data.name»«ENDIF»)
+	def messageSignature(Message m) {
+	'''
+		public void «m.name» («IF m.data!=null»«m.data.type.name» «m.data.name»«ENDIF»)
 	'''
 	}
 
-	def messageCall(Message m) {'''
-	«m.name»(«IF m.data!=null» «m.data.name»«ENDIF»)
+	def messageCall(Message m) {
+	'''
+		«m.name»(«IF m.data!=null» «m.data.name»«ENDIF»)
 	'''}
 	
-	def sendMessage(Message m, boolean conj) {'''
-	«var dir = if (conj) "IN" else "OUT"»
-	«var hdlr = m.getSendHandler(conj)»
-	«messageSignature(m)»{
-		«IF hdlr!=null»
-			«FOR command : hdlr.detailCode.commands»	«command»
-			«ENDFOR»
-		«ELSE»
-			if (messageStrings[ «dir»_«m.name»] != "timerTick"){
-				// TODOTS: model switch for activation
-			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[«dir»_«m.name»]);
-			}
-			if (getPeerAddress()!=null)
-			«IF m.data==null»getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), «dir»_«m.name»));
-			«ELSE»getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), «dir»_«m.name», «m.data.name»«IF (!m.data.type.ref && m.data.type.type!=null)».deepCopy()«ENDIF»));
+	def sendMessage(Message m, boolean conj) {
+	'''
+		«var dir = if (conj) "IN" else "OUT"»
+		«var hdlr = m.getSendHandler(conj)»
+		«messageSignature(m)»{
+			«IF hdlr!=null»
+				«FOR command : hdlr.detailCode.commands»	«command»
+				«ENDFOR»
+			«ELSE»
+				if (messageStrings[ «dir»_«m.name»] != "timerTick"){
+					// TODOTS: model switch for activation
+				DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[«dir»_«m.name»]);
+				}
+				if (getPeerAddress()!=null)
+					«IF m.data==null»getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), «dir»_«m.name»));
+					«ELSE»getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), «dir»_«m.name», «m.data.name»«IF (!m.data.ref)».deepCopy()«ENDIF»));
+				«ENDIF»
 			«ENDIF»
-		«ENDIF»
-	}
+		}
 	'''
 	}
 }

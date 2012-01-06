@@ -11,10 +11,9 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.BaseState;
+import org.eclipse.etrice.core.room.DataType;
 import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.ExternalPort;
-import org.eclipse.etrice.core.room.FreeType;
-import org.eclipse.etrice.core.room.FreeTypedID;
 import org.eclipse.etrice.core.room.Guard;
 import org.eclipse.etrice.core.room.InitialTransition;
 import org.eclipse.etrice.core.room.Message;
@@ -35,6 +34,7 @@ import org.eclipse.etrice.core.room.StateMachine;
 import org.eclipse.etrice.core.room.Transition;
 import org.eclipse.etrice.core.room.Trigger;
 import org.eclipse.etrice.core.room.TriggeredTransition;
+import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.generator.etricegen.ActiveTrigger;
 import org.eclipse.etrice.generator.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.generator.etricegen.TransitionChain;
@@ -505,14 +505,14 @@ public class RoomExtensions {
           if (!_operator_equals) {
             _operator_and_1 = false;
           } else {
-            EList<FreeTypedID> _arguments = e.getArguments();
+            EList<VarDecl> _arguments = e.getArguments();
             boolean _isEmpty = _arguments.isEmpty();
             _operator_and_1 = BooleanExtensions.operator_and(_operator_equals, _isEmpty);
           }
           if (!_operator_and_1) {
             _operator_and = false;
           } else {
-            FreeType _returntype = e.getReturntype();
+            DataType _returntype = e.getReturntype();
             boolean _operator_equals_1 = ObjectExtensions.operator_equals(_returntype, null);
             _operator_and = BooleanExtensions.operator_and(_operator_and_1, _operator_equals_1);
           }

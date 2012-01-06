@@ -171,7 +171,7 @@ public class PortMessageSelectionDialog extends FormDialog {
 				if (element instanceof MsgItemPair) {
 					Message msg = ((MsgItemPair) element).msg;
 					if (msg.getData()!=null)
-						return msg.getData().getName()+" : "+RoomHelpers.getName(msg.getData().getType());
+						return msg.getData().getName()+" : "+msg.getData().getType().getName();
 				}
 				break;
 			}
