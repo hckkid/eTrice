@@ -1144,7 +1144,12 @@ ruleOperation returns [EObject current=null]
     {
     	newLeafNode(otherlv_7, grammarAccess.getOperationAccess().getColonKeyword_5_0());
     }
-(
+(	otherlv_8='void' 
+    {
+    	newLeafNode(otherlv_8, grammarAccess.getOperationAccess().getVoidKeyword_5_1_0());
+    }
+
+    |((
 (
 		{
 			if ($current==null) {
@@ -1152,7 +1157,7 @@ ruleOperation returns [EObject current=null]
 	        }
         }
 		{ 
-	        newCompositeNode(grammarAccess.getOperationAccess().getReturntypeDataTypeCrossReference_5_1_0()); 
+	        newCompositeNode(grammarAccess.getOperationAccess().getReturntypeDataTypeCrossReference_5_1_1_0_0()); 
 	    }
 		ruleFQN		{ 
 	        afterParserOrEnumRuleCall();
@@ -1161,9 +1166,9 @@ ruleOperation returns [EObject current=null]
 )
 )(
 (
-		lv_ref_9_0=	'ref' 
+		lv_ref_10_0=	'ref' 
     {
-        newLeafNode(lv_ref_9_0, grammarAccess.getOperationAccess().getRefRefKeyword_5_2_0());
+        newLeafNode(lv_ref_10_0, grammarAccess.getOperationAccess().getRefRefKeyword_5_1_1_1_0());
     }
  
 	    {
@@ -1174,19 +1179,19 @@ ruleOperation returns [EObject current=null]
 	    }
 
 )
-)?)?(
+)?)))?(
 (
 		{ 
 	        newCompositeNode(grammarAccess.getOperationAccess().getDocuDocumentationParserRuleCall_6_0()); 
 	    }
-		lv_docu_10_0=ruleDocumentation		{
+		lv_docu_11_0=ruleDocumentation		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getOperationRule());
 	        }
        		set(
        			$current, 
        			"docu",
-        		lv_docu_10_0, 
+        		lv_docu_11_0, 
         		"Documentation");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -1197,14 +1202,14 @@ ruleOperation returns [EObject current=null]
 		{ 
 	        newCompositeNode(grammarAccess.getOperationAccess().getDetailCodeDetailCodeParserRuleCall_7_0()); 
 	    }
-		lv_detailCode_11_0=ruleDetailCode		{
+		lv_detailCode_12_0=ruleDetailCode		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getOperationRule());
 	        }
        		set(
        			$current, 
        			"detailCode",
-        		lv_detailCode_11_0, 
+        		lv_detailCode_12_0, 
         		"DetailCode");
 	        afterParserOrEnumRuleCall();
 	    }

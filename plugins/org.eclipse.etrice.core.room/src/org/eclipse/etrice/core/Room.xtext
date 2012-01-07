@@ -71,7 +71,7 @@ Attribute:
 	'Attribute' name=ID (size=MULTIPLICITY)? ':' type=[DataType|FQN] (ref?='ref')? ('=' defaultValueLiteral=STRING)? (docu=Documentation)?;
 
 Operation:
-	'Operation' name=ID '(' (arguments+=VarDecl (',' arguments+=VarDecl)*)? ')' (':' returntype=[DataType|FQN] (ref?='ref')?)?
+	'Operation' name=ID '(' (arguments+=VarDecl (',' arguments+=VarDecl)*)? ')' (':' ('void' | (returntype=[DataType|FQN] (ref?='ref')?)))?
 		(docu=Documentation)?
 		detailCode=DetailCode
 	;

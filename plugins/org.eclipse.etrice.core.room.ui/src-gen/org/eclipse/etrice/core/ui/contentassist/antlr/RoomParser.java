@@ -43,6 +43,7 @@ public class RoomParser extends AbstractContentAssistParser {
 					put(grammarAccess.getActorContainerClassAccess().getAlternatives(), "rule__ActorContainerClass__Alternatives");
 					put(grammarAccess.getDataTypeAccess().getAlternatives(), "rule__DataType__Alternatives");
 					put(grammarAccess.getComplexTypeAccess().getAlternatives(), "rule__ComplexType__Alternatives");
+					put(grammarAccess.getOperationAccess().getAlternatives_5_1(), "rule__Operation__Alternatives_5_1");
 					put(grammarAccess.getPortClassAccess().getAlternatives_2(), "rule__PortClass__Alternatives_2");
 					put(grammarAccess.getSemanticsRuleAccess().getAlternatives_1_1(), "rule__SemanticsRule__Alternatives_1_1");
 					put(grammarAccess.getActorClassAccess().getAlternatives_7_6(), "rule__ActorClass__Alternatives_7_6");
@@ -76,6 +77,7 @@ public class RoomParser extends AbstractContentAssistParser {
 					put(grammarAccess.getOperationAccess().getGroup_3(), "rule__Operation__Group_3__0");
 					put(grammarAccess.getOperationAccess().getGroup_3_1(), "rule__Operation__Group_3_1__0");
 					put(grammarAccess.getOperationAccess().getGroup_5(), "rule__Operation__Group_5__0");
+					put(grammarAccess.getOperationAccess().getGroup_5_1_1(), "rule__Operation__Group_5_1_1__0");
 					put(grammarAccess.getProtocolClassAccess().getGroup(), "rule__ProtocolClass__Group__0");
 					put(grammarAccess.getProtocolClassAccess().getGroup_3(), "rule__ProtocolClass__Group_3__0");
 					put(grammarAccess.getProtocolClassAccess().getGroup_5(), "rule__ProtocolClass__Group_5__0");
@@ -209,8 +211,8 @@ public class RoomParser extends AbstractContentAssistParser {
 					put(grammarAccess.getOperationAccess().getNameAssignment_1(), "rule__Operation__NameAssignment_1");
 					put(grammarAccess.getOperationAccess().getArgumentsAssignment_3_0(), "rule__Operation__ArgumentsAssignment_3_0");
 					put(grammarAccess.getOperationAccess().getArgumentsAssignment_3_1_1(), "rule__Operation__ArgumentsAssignment_3_1_1");
-					put(grammarAccess.getOperationAccess().getReturntypeAssignment_5_1(), "rule__Operation__ReturntypeAssignment_5_1");
-					put(grammarAccess.getOperationAccess().getRefAssignment_5_2(), "rule__Operation__RefAssignment_5_2");
+					put(grammarAccess.getOperationAccess().getReturntypeAssignment_5_1_1_0(), "rule__Operation__ReturntypeAssignment_5_1_1_0");
+					put(grammarAccess.getOperationAccess().getRefAssignment_5_1_1_1(), "rule__Operation__RefAssignment_5_1_1_1");
 					put(grammarAccess.getOperationAccess().getDocuAssignment_6(), "rule__Operation__DocuAssignment_6");
 					put(grammarAccess.getOperationAccess().getDetailCodeAssignment_7(), "rule__Operation__DetailCodeAssignment_7");
 					put(grammarAccess.getProtocolClassAccess().getNameAssignment_1(), "rule__ProtocolClass__NameAssignment_1");

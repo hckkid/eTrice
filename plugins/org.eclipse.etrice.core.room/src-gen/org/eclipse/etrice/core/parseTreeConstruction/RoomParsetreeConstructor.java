@@ -3070,13 +3070,13 @@ protected class Attribute_DocuAssignment_7 extends AssignmentToken  {
 /************ begin Rule Operation ****************
  *
  * Operation:
- * 	"Operation" name=ID "(" (arguments+=VarDecl ("," arguments+=VarDecl)*)? ")" (":" returntype=[DataType|FQN]
- * 	ref?="ref"?)? docu=Documentation? detailCode=DetailCode;
+ * 	"Operation" name=ID "(" (arguments+=VarDecl ("," arguments+=VarDecl)*)? ")" (":" ("void" | returntype=[DataType|FQN]
+ * 	ref?="ref"?))? docu=Documentation? detailCode=DetailCode;
  *
  **/
 
-// "Operation" name=ID "(" (arguments+=VarDecl ("," arguments+=VarDecl)*)? ")" (":" returntype=[DataType|FQN] ref?="ref"?)?
-// docu=Documentation? detailCode=DetailCode
+// "Operation" name=ID "(" (arguments+=VarDecl ("," arguments+=VarDecl)*)? ")" (":" ("void" | returntype=[DataType|FQN]
+// ref?="ref"?))? docu=Documentation? detailCode=DetailCode
 protected class Operation_Group extends GroupToken {
 	
 	public Operation_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3367,7 +3367,7 @@ protected class Operation_RightParenthesisKeyword_4 extends KeywordToken  {
 
 }
 
-// (":" returntype=[DataType|FQN] ref?="ref"?)?
+// (":" ("void" | returntype=[DataType|FQN] ref?="ref"?))?
 protected class Operation_Group_5 extends GroupToken {
 	
 	public Operation_Group_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3382,8 +3382,7 @@ protected class Operation_Group_5 extends GroupToken {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Operation_RefAssignment_5_2(lastRuleCallOrigin, this, 0, inst);
-			case 1: return new Operation_ReturntypeAssignment_5_1(lastRuleCallOrigin, this, 1, inst);
+			case 0: return new Operation_Alternatives_5_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -3412,16 +3411,61 @@ protected class Operation_ColonKeyword_5_0 extends KeywordToken  {
 
 }
 
-// returntype=[DataType|FQN]
-protected class Operation_ReturntypeAssignment_5_1 extends AssignmentToken  {
+// "void" | returntype=[DataType|FQN] ref?="ref"?
+protected class Operation_Alternatives_5_1 extends AlternativesToken {
+
+	public Operation_Alternatives_5_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
 	
-	public Operation_ReturntypeAssignment_5_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	@Override
+	public Alternatives getGrammarElement() {
+		return grammarAccess.getOperationAccess().getAlternatives_5_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new Operation_Group_5_1_1(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// returntype=[DataType|FQN] ref?="ref"?
+protected class Operation_Group_5_1_1 extends GroupToken {
+	
+	public Operation_Group_5_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getOperationAccess().getGroup_5_1_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new Operation_RefAssignment_5_1_1_1(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new Operation_ReturntypeAssignment_5_1_1_0(lastRuleCallOrigin, this, 1, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// returntype=[DataType|FQN]
+protected class Operation_ReturntypeAssignment_5_1_1_0 extends AssignmentToken  {
+	
+	public Operation_ReturntypeAssignment_5_1_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getOperationAccess().getReturntypeAssignment_5_1();
+		return grammarAccess.getOperationAccess().getReturntypeAssignment_5_1_1_0();
 	}
 
     @Override
@@ -3438,9 +3482,9 @@ protected class Operation_ReturntypeAssignment_5_1 extends AssignmentToken  {
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("returntype");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getOperationAccess().getReturntypeDataTypeCrossReference_5_1_0().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getOperationAccess().getReturntypeDataTypeCrossReference_5_1_1_0_0().getType().getClassifier())) {
 				type = AssignmentType.CROSS_REFERENCE;
-				element = grammarAccess.getOperationAccess().getReturntypeDataTypeCrossReference_5_1_0(); 
+				element = grammarAccess.getOperationAccess().getReturntypeDataTypeCrossReference_5_1_1_0_0(); 
 				return obj;
 			}
 		}
@@ -3450,21 +3494,21 @@ protected class Operation_ReturntypeAssignment_5_1 extends AssignmentToken  {
 }
 
 // ref?="ref"?
-protected class Operation_RefAssignment_5_2 extends AssignmentToken  {
+protected class Operation_RefAssignment_5_1_1_1 extends AssignmentToken  {
 	
-	public Operation_RefAssignment_5_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public Operation_RefAssignment_5_1_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getOperationAccess().getRefAssignment_5_2();
+		return grammarAccess.getOperationAccess().getRefAssignment_5_1_1_1();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Operation_ReturntypeAssignment_5_1(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new Operation_ReturntypeAssignment_5_1_1_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -3475,13 +3519,15 @@ protected class Operation_RefAssignment_5_2 extends AssignmentToken  {
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("ref");
 		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
 			type = AssignmentType.KEYWORD;
-			element = grammarAccess.getOperationAccess().getRefRefKeyword_5_2_0();
+			element = grammarAccess.getOperationAccess().getRefRefKeyword_5_1_1_1_0();
 			return obj;
 		}
 		return null;
 	}
 
 }
+
+
 
 
 // docu=Documentation?

@@ -9,9 +9,12 @@ import org.eclipse.etrice.core.room.DataType;
 import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.Operation;
 import org.eclipse.etrice.core.room.VarDecl;
+import org.eclipse.etrice.generator.base.ILogger;
 import org.eclipse.etrice.generator.generic.ILanguageExtension;
 import org.eclipse.etrice.generator.generic.TypeHelpers;
+import org.eclipse.xtext.xbase.lib.BooleanExtensions;
 import org.eclipse.xtext.xbase.lib.ComparableExtensions;
+import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.IntegerExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
@@ -25,6 +28,9 @@ public class ProcedureHelpers {
   
   @Inject
   private TypeHelpers _typeHelpers;
+  
+  @Inject
+  private ILogger logger;
   
   public StringConcatenation UserCode(final DetailCode dc) {
     StringConcatenation _builder = new StringConcatenation();
@@ -103,8 +109,6 @@ public class ProcedureHelpers {
   }
   
   public String arrayInitializer(final Attribute att) {
-      String result = "{";
-      int i = 0;
       String _xifexpression = null;
       String _defaultValueLiteral = att.getDefaultValueLiteral();
       boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_defaultValueLiteral, null);
@@ -117,28 +121,51 @@ public class ProcedureHelpers {
         _xifexpression = _defaultValue;
       }
       String dflt = _xifexpression;
-      int _size = att.getSize();
-      boolean _operator_lessThan = ComparableExtensions.<Integer>operator_lessThan(((Integer)i), ((Integer)_size));
+      boolean _startsWith = dflt.startsWith("{");
+      if (_startsWith) {
+        {
+          String[] _split = dflt.split(",");
+          int _size = ((List<String>)Conversions.doWrapArray(_split)).size();
+          int _size_1 = att.getSize();
+          boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(((Integer)_size), ((Integer)_size_1));
+          if (_operator_notEquals_1) {
+            String _name = att.getName();
+            String _operator_plus = StringExtensions.operator_plus("WARNING: array size determined by initializer differs from attribute size (", _name);
+            String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, "[");
+            int _size_2 = att.getSize();
+            String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, ((Integer)_size_2));
+            String _operator_plus_3 = StringExtensions.operator_plus(_operator_plus_2, "] <-> ");
+            String _operator_plus_4 = StringExtensions.operator_plus(_operator_plus_3, dflt);
+            String _operator_plus_5 = StringExtensions.operator_plus(_operator_plus_4, ")");
+            this.logger.logInfo(_operator_plus_5);
+          }
+          return dflt;
+        }
+      }
+      String result = "{";
+      int i = 0;
+      int _size_3 = att.getSize();
+      boolean _operator_lessThan = ComparableExtensions.<Integer>operator_lessThan(((Integer)i), ((Integer)_size_3));
       Boolean _xwhileexpression = _operator_lessThan;
       while (_xwhileexpression) {
         {
-          String _operator_plus = StringExtensions.operator_plus(result, dflt);
-          result = _operator_plus;
-          int _operator_plus_1 = IntegerExtensions.operator_plus(((Integer)i), ((Integer)1));
-          i = _operator_plus_1;
-          int _size_1 = att.getSize();
-          boolean _operator_lessThan_1 = ComparableExtensions.<Integer>operator_lessThan(((Integer)i), ((Integer)_size_1));
+          String _operator_plus_6 = StringExtensions.operator_plus(result, dflt);
+          result = _operator_plus_6;
+          int _operator_plus_7 = IntegerExtensions.operator_plus(((Integer)i), ((Integer)1));
+          i = _operator_plus_7;
+          int _size_4 = att.getSize();
+          boolean _operator_lessThan_1 = ComparableExtensions.<Integer>operator_lessThan(((Integer)i), ((Integer)_size_4));
           if (_operator_lessThan_1) {
-            String _operator_plus_2 = StringExtensions.operator_plus(result, ", ");
-            result = _operator_plus_2;
+            String _operator_plus_8 = StringExtensions.operator_plus(result, ", ");
+            result = _operator_plus_8;
           }
         }
-        int _size_2 = att.getSize();
-        boolean _operator_lessThan_2 = ComparableExtensions.<Integer>operator_lessThan(((Integer)i), ((Integer)_size_2));
+        int _size_5 = att.getSize();
+        boolean _operator_lessThan_2 = ComparableExtensions.<Integer>operator_lessThan(((Integer)i), ((Integer)_size_5));
         _xwhileexpression = _operator_lessThan_2;
       }
-      String _operator_plus_3 = StringExtensions.operator_plus(result, "}");
-      return _operator_plus_3;
+      String _operator_plus_9 = StringExtensions.operator_plus(result, "}");
+      return _operator_plus_9;
   }
   
   public StringConcatenation attributeInitialization(final List<Attribute> attribs) {
@@ -163,21 +190,26 @@ public class ProcedureHelpers {
                 _builder.append(";");
                 _builder.newLineIfNotEmpty();
               } else {
-                _builder.append("for (int i=0;i<");
-                int _size_1 = a.getSize();
-                _builder.append(_size_1, "");
-                _builder.append(";i++){");
-                _builder.newLineIfNotEmpty();
-                _builder.append("\t");
-                String _name_1 = a.getName();
-                _builder.append(_name_1, "	");
-                _builder.append("[i] = ");
                 String _defaultValueLiteral_2 = a.getDefaultValueLiteral();
-                _builder.append(_defaultValueLiteral_2, "	");
-                _builder.append(";");
-                _builder.newLineIfNotEmpty();
-                _builder.append("}");
-                _builder.newLine();
+                boolean _startsWith = _defaultValueLiteral_2.startsWith("{");
+                boolean _operator_not = BooleanExtensions.operator_not(_startsWith);
+                if (_operator_not) {
+                  _builder.append("for (int i=0;i<");
+                  int _size_1 = a.getSize();
+                  _builder.append(_size_1, "");
+                  _builder.append(";i++){");
+                  _builder.newLineIfNotEmpty();
+                  _builder.append("\t");
+                  String _name_1 = a.getName();
+                  _builder.append(_name_1, "	");
+                  _builder.append("[i] = ");
+                  String _defaultValueLiteral_3 = a.getDefaultValueLiteral();
+                  _builder.append(_defaultValueLiteral_3, "	");
+                  _builder.append(";");
+                  _builder.newLineIfNotEmpty();
+                  _builder.append("}");
+                  _builder.newLine();
+                }
               }
             }
           } else {
@@ -355,7 +387,7 @@ public class ProcedureHelpers {
       for(final Operation operation : operations) {
         StringConcatenation _OperationHeader = this.OperationHeader(operation, classname, false);
         _builder.append(_OperationHeader, "");
-        _builder.append("{");
+        _builder.append(" {");
         _builder.newLineIfNotEmpty();
         {
           DetailCode _detailCode = operation.getDetailCode();
