@@ -1,5 +1,7 @@
-RoomModel ALogService {
-
+RoomModel room.basic.service.logging {
+	
+	import room.basic.types.java.* from "JavaTypes.room"
+	
 	ActorClass ALogService {
 		Interface {
 			SPP log: Log
