@@ -274,16 +274,21 @@
         <elements xsi:type="xtext:Keyword" value=")"/>
         <elements xsi:type="xtext:Group" cardinality="?">
           <elements xsi:type="xtext:Keyword" value=":"/>
-          <elements xsi:type="xtext:Assignment" feature="returntype" operator="=">
-            <terminal xsi:type="xtext:CrossReference">
-              <type metamodel="/0/@metamodelDeclarations.1">
-                <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//DataType"/>
-              </type>
-              <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.73"/>
-            </terminal>
-          </elements>
-          <elements xsi:type="xtext:Assignment" cardinality="?" feature="ref" operator="?=">
-            <terminal xsi:type="xtext:Keyword" value="ref"/>
+          <elements xsi:type="xtext:Alternatives">
+            <elements xsi:type="xtext:Keyword" value="void"/>
+            <elements xsi:type="xtext:Group">
+              <elements xsi:type="xtext:Assignment" feature="returntype" operator="=">
+                <terminal xsi:type="xtext:CrossReference">
+                  <type metamodel="/0/@metamodelDeclarations.1">
+                    <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//DataType"/>
+                  </type>
+                  <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.73"/>
+                </terminal>
+              </elements>
+              <elements xsi:type="xtext:Assignment" cardinality="?" feature="ref" operator="?=">
+                <terminal xsi:type="xtext:Keyword" value="ref"/>
+              </elements>
+            </elements>
           </elements>
         </elements>
         <elements xsi:type="xtext:Assignment" cardinality="?" feature="docu" operator="=">

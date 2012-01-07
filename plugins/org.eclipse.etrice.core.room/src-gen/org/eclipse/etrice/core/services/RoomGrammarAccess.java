@@ -633,23 +633,26 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightParenthesisKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		private final Group cGroup_5 = (Group)cGroup.eContents().get(5);
 		private final Keyword cColonKeyword_5_0 = (Keyword)cGroup_5.eContents().get(0);
-		private final Assignment cReturntypeAssignment_5_1 = (Assignment)cGroup_5.eContents().get(1);
-		private final CrossReference cReturntypeDataTypeCrossReference_5_1_0 = (CrossReference)cReturntypeAssignment_5_1.eContents().get(0);
-		private final RuleCall cReturntypeDataTypeFQNParserRuleCall_5_1_0_1 = (RuleCall)cReturntypeDataTypeCrossReference_5_1_0.eContents().get(1);
-		private final Assignment cRefAssignment_5_2 = (Assignment)cGroup_5.eContents().get(2);
-		private final Keyword cRefRefKeyword_5_2_0 = (Keyword)cRefAssignment_5_2.eContents().get(0);
+		private final Alternatives cAlternatives_5_1 = (Alternatives)cGroup_5.eContents().get(1);
+		private final Keyword cVoidKeyword_5_1_0 = (Keyword)cAlternatives_5_1.eContents().get(0);
+		private final Group cGroup_5_1_1 = (Group)cAlternatives_5_1.eContents().get(1);
+		private final Assignment cReturntypeAssignment_5_1_1_0 = (Assignment)cGroup_5_1_1.eContents().get(0);
+		private final CrossReference cReturntypeDataTypeCrossReference_5_1_1_0_0 = (CrossReference)cReturntypeAssignment_5_1_1_0.eContents().get(0);
+		private final RuleCall cReturntypeDataTypeFQNParserRuleCall_5_1_1_0_0_1 = (RuleCall)cReturntypeDataTypeCrossReference_5_1_1_0_0.eContents().get(1);
+		private final Assignment cRefAssignment_5_1_1_1 = (Assignment)cGroup_5_1_1.eContents().get(1);
+		private final Keyword cRefRefKeyword_5_1_1_1_0 = (Keyword)cRefAssignment_5_1_1_1.eContents().get(0);
 		private final Assignment cDocuAssignment_6 = (Assignment)cGroup.eContents().get(6);
 		private final RuleCall cDocuDocumentationParserRuleCall_6_0 = (RuleCall)cDocuAssignment_6.eContents().get(0);
 		private final Assignment cDetailCodeAssignment_7 = (Assignment)cGroup.eContents().get(7);
 		private final RuleCall cDetailCodeDetailCodeParserRuleCall_7_0 = (RuleCall)cDetailCodeAssignment_7.eContents().get(0);
 		
 		//Operation:
-		//	"Operation" name=ID "(" (arguments+=VarDecl ("," arguments+=VarDecl)*)? ")" (":" returntype=[DataType|FQN]
-		//	ref?="ref"?)? docu=Documentation? detailCode=DetailCode;
+		//	"Operation" name=ID "(" (arguments+=VarDecl ("," arguments+=VarDecl)*)? ")" (":" ("void" | returntype=[DataType|FQN]
+		//	ref?="ref"?))? docu=Documentation? detailCode=DetailCode;
 		public ParserRule getRule() { return rule; }
 
-		//"Operation" name=ID "(" (arguments+=VarDecl ("," arguments+=VarDecl)*)? ")" (":" returntype=[DataType|FQN] ref?="ref"?)?
-		//docu=Documentation? detailCode=DetailCode
+		//"Operation" name=ID "(" (arguments+=VarDecl ("," arguments+=VarDecl)*)? ")" (":" ("void" | returntype=[DataType|FQN]
+		//ref?="ref"?))? docu=Documentation? detailCode=DetailCode
 		public Group getGroup() { return cGroup; }
 
 		//"Operation"
@@ -688,26 +691,35 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		//")"
 		public Keyword getRightParenthesisKeyword_4() { return cRightParenthesisKeyword_4; }
 
-		//(":" returntype=[DataType|FQN] ref?="ref"?)?
+		//(":" ("void" | returntype=[DataType|FQN] ref?="ref"?))?
 		public Group getGroup_5() { return cGroup_5; }
 
 		//":"
 		public Keyword getColonKeyword_5_0() { return cColonKeyword_5_0; }
 
+		//"void" | returntype=[DataType|FQN] ref?="ref"?
+		public Alternatives getAlternatives_5_1() { return cAlternatives_5_1; }
+
+		//"void"
+		public Keyword getVoidKeyword_5_1_0() { return cVoidKeyword_5_1_0; }
+
+		//returntype=[DataType|FQN] ref?="ref"?
+		public Group getGroup_5_1_1() { return cGroup_5_1_1; }
+
 		//returntype=[DataType|FQN]
-		public Assignment getReturntypeAssignment_5_1() { return cReturntypeAssignment_5_1; }
+		public Assignment getReturntypeAssignment_5_1_1_0() { return cReturntypeAssignment_5_1_1_0; }
 
 		//[DataType|FQN]
-		public CrossReference getReturntypeDataTypeCrossReference_5_1_0() { return cReturntypeDataTypeCrossReference_5_1_0; }
+		public CrossReference getReturntypeDataTypeCrossReference_5_1_1_0_0() { return cReturntypeDataTypeCrossReference_5_1_1_0_0; }
 
 		//FQN
-		public RuleCall getReturntypeDataTypeFQNParserRuleCall_5_1_0_1() { return cReturntypeDataTypeFQNParserRuleCall_5_1_0_1; }
+		public RuleCall getReturntypeDataTypeFQNParserRuleCall_5_1_1_0_0_1() { return cReturntypeDataTypeFQNParserRuleCall_5_1_1_0_0_1; }
 
 		//ref?="ref"?
-		public Assignment getRefAssignment_5_2() { return cRefAssignment_5_2; }
+		public Assignment getRefAssignment_5_1_1_1() { return cRefAssignment_5_1_1_1; }
 
 		//"ref"
-		public Keyword getRefRefKeyword_5_2_0() { return cRefRefKeyword_5_2_0; }
+		public Keyword getRefRefKeyword_5_1_1_1_0() { return cRefRefKeyword_5_1_1_1_0; }
 
 		//docu=Documentation?
 		public Assignment getDocuAssignment_6() { return cDocuAssignment_6; }
@@ -4281,8 +4293,8 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Operation:
-	//	"Operation" name=ID "(" (arguments+=VarDecl ("," arguments+=VarDecl)*)? ")" (":" returntype=[DataType|FQN]
-	//	ref?="ref"?)? docu=Documentation? detailCode=DetailCode;
+	//	"Operation" name=ID "(" (arguments+=VarDecl ("," arguments+=VarDecl)*)? ")" (":" ("void" | returntype=[DataType|FQN]
+	//	ref?="ref"?))? docu=Documentation? detailCode=DetailCode;
 	public OperationElements getOperationAccess() {
 		return (pOperation != null) ? pOperation : (pOperation = new OperationElements());
 	}
