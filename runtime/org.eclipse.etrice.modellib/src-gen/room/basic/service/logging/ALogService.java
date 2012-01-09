@@ -1,4 +1,4 @@
-package room.basic.service.timing;
+package room.basic.service.logging;
 
 import org.eclipse.etrice.runtime.java.messaging.Address;
 import org.eclipse.etrice.runtime.java.messaging.IRTObject;
@@ -9,52 +9,51 @@ import org.eclipse.etrice.runtime.java.modelbase.InterfaceItemBase;
 import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
 
 
-import room.basic.service.timing.PTimeout.*;
-import room.basic.service.timing.PTimer.*;
+import room.basic.service.logging.Log.*;
 
 //--------------------- begin user code
-	import java.util.Timer;
+	import java.io.*;
+	import java.util.*;
 //--------------------- end user code
 
 
-public class ATimingService extends ActorClassBase {
+public class ALogService extends ActorClassBase {
 
 	//--------------------- begin user code
-		private Timer timerService = null;
-		private int taskCount = 0;
-		private static final int PURGE_LIMIT = 1000;
+		FileOutputStream file = null;
+		PrintStream p = null;
+		static long tStart = System.currentTimeMillis();
 	//--------------------- end user code
 	
 	//--------------------- ports
 	//--------------------- saps
 	//--------------------- services
-	protected PTimerPortRepl timer = null;
-	protected PTimeoutPortRepl timeout = null;
+	protected LogPortRepl log = null;
 
 	//--------------------- interface item IDs
-	protected static final int IFITEM_timer = 1;
-	protected static final int IFITEM_timeout = 2;
+	protected static final int IFITEM_log = 1;
 	
 	//--------------------- attributes
 	//--------------------- operations
-	public void stop() {
-		System.out.println(toString() + "::stop()");
-		timerService.cancel();
-		timerService = null;
+	public void destroyUser() {
+		if (p!= null) {
+		p.flush();
+		p.close();
+		p=null;
+		}
 	}
 
 	//--------------------- construction
-	public ATimingService(IRTObject parent, String name, Address[][] port_addr, Address[][] peer_addr){
+	public ALogService(IRTObject parent, String name, Address[][] port_addr, Address[][] peer_addr){
 		super(parent, name, port_addr[0][0], peer_addr[0][0]);
-		setClassName("ATimingService");
+		setClassName("ALogService");
 		
 		// initialize attributes
 
 		// own ports
 		// own saps
 		// own service implementations
-		timer = new PTimerPortRepl(this, "timer", IFITEM_timer, port_addr[IFITEM_timer], peer_addr[IFITEM_timer]); 
-		timeout = new PTimeoutPortRepl(this, "timeout", IFITEM_timeout, port_addr[IFITEM_timeout], peer_addr[IFITEM_timeout]); 
+		log = new LogPortRepl(this, "log", IFITEM_log, port_addr[IFITEM_log], peer_addr[IFITEM_log]); 
 	}
 	
 
@@ -67,6 +66,9 @@ public class ATimingService extends ActorClassBase {
 		startUser();
 	}
 
+	public void stop(){
+		stopUser();
+	}
 	
 	public void destroy(){
 		destroyUser();
@@ -77,8 +79,10 @@ public class ATimingService extends ActorClassBase {
 	//******************************************
 	
 	// State IDs for FSM
-	protected static final int STATE_Operational = 2;
-		protected static final String stateStrings[] = {"<no state>","<top>","Operational"
+	protected static final int STATE_closed = 2;
+	protected static final int STATE_opened = 3;
+		protected static final String stateStrings[] = {"<no state>","<top>","closed",
+			"opened"
 			};
 	
 	// history
@@ -87,20 +91,18 @@ public class ATimingService extends ActorClassBase {
 	//		for (int i = 0; i < history.length; i++) {
 	//			history[i] = NO_STATE;
 	//		}
-	protected int history[] = {NO_STATE,NO_STATE,NO_STATE};
+	protected int history[] = {NO_STATE,NO_STATE,NO_STATE,NO_STATE};
 	
 	// transition chains
-	protected static final int CHAIN_TRANS_INITIAL_TO__Operational = 1;
-	protected static final int CHAIN_TRANS_Operational_TO_Operational_BY_Killtimeout_tr2 = 2;
-	protected static final int CHAIN_TRANS_Operational_TO_Operational_BY_Killtimer_tr4 = 3;
-	protected static final int CHAIN_TRANS_Operational_TO_Operational_BY_Starttimeout_tr1 = 4;
-	protected static final int CHAIN_TRANS_Operational_TO_Operational_BY_Starttimer_tr3 = 5;
+	protected static final int CHAIN_TRANS_INITIAL_TO__closed = 1;
+	protected static final int CHAIN_TRANS_closed_TO_opened_BY_openlog = 2;
+	protected static final int CHAIN_TRANS_opened_TO_closed_BY_closelog = 3;
+	protected static final int CHAIN_TRANS_opened_TO_opened_BY_internalLoglog_tr1 = 4;
 	
 	// triggers for FSM
-	protected static final int TRIG_timeout__Kill = IFITEM_timeout + EVT_SHIFT*PTimeout.IN_Kill;
-	protected static final int TRIG_timeout__Start = IFITEM_timeout + EVT_SHIFT*PTimeout.IN_Start;
-	protected static final int TRIG_timer__Kill = IFITEM_timer + EVT_SHIFT*PTimer.IN_Kill;
-	protected static final int TRIG_timer__Start = IFITEM_timer + EVT_SHIFT*PTimer.IN_Start;
+	protected static final int TRIG_log__close = IFITEM_log + EVT_SHIFT*Log.IN_close;
+	protected static final int TRIG_log__internalLog = IFITEM_log + EVT_SHIFT*Log.IN_internalLog;
+	protected static final int TRIG_log__open = IFITEM_log + EVT_SHIFT*Log.IN_open;
 	
 	// receiveEvent contains the main implementation of the FSM
 	@Override
@@ -113,29 +115,27 @@ public class ATimingService extends ActorClassBase {
 		
 		if (!handleSystemEvent(ifitem, evt, generic_data)) {
 			switch (state) {
-				case STATE_Operational:
+				case STATE_closed:
 					switch(trigger) {
-					case TRIG_timeout__Start:
+					case TRIG_log__open:
 						{
-							chain = CHAIN_TRANS_Operational_TO_Operational_BY_Starttimeout_tr1;
+							chain = CHAIN_TRANS_closed_TO_opened_BY_openlog;
 							catching_state = STATE_TOP;
 						}
 					break;
-					case TRIG_timeout__Kill:
+					}
+					break;
+				case STATE_opened:
+					switch(trigger) {
+					case TRIG_log__close:
 						{
-							chain = CHAIN_TRANS_Operational_TO_Operational_BY_Killtimeout_tr2;
+							chain = CHAIN_TRANS_opened_TO_closed_BY_closelog;
 							catching_state = STATE_TOP;
 						}
 					break;
-					case TRIG_timer__Start:
+					case TRIG_log__internalLog:
 						{
-							chain = CHAIN_TRANS_Operational_TO_Operational_BY_Starttimer_tr3;
-							catching_state = STATE_TOP;
-						}
-					break;
-					case TRIG_timer__Kill:
-						{
-							chain = CHAIN_TRANS_Operational_TO_Operational_BY_Killtimer_tr4;
+							chain = CHAIN_TRANS_opened_TO_opened_BY_internalLoglog_tr1;
 							catching_state = STATE_TOP;
 						}
 					break;
@@ -162,7 +162,7 @@ public class ATimingService extends ActorClassBase {
 	
 	@Override
 	public void executeInitTransition() {
-		int chain = CHAIN_TRANS_INITIAL_TO__Operational;
+		int chain = CHAIN_TRANS_INITIAL_TO__closed;
 		int next = executeTransitionChain(chain, null, null);
 		next = enterHistory(next, false, false);
 		setState(next);
@@ -178,8 +178,12 @@ public class ATimingService extends ActorClassBase {
 	private void exitTo(int current, int to, boolean handler) {
 		while (current!=to) {
 			switch (current) {
-				case STATE_Operational:
-					history[STATE_TOP] = STATE_Operational;
+				case STATE_closed:
+					history[STATE_TOP] = STATE_closed;
+					current = STATE_TOP;
+					break;
+				case STATE_opened:
+					history[STATE_TOP] = STATE_opened;
 					current = STATE_TOP;
 					break;
 			}
@@ -194,30 +198,26 @@ public class ATimingService extends ActorClassBase {
 	 */
 	private int executeTransitionChain(int chain, InterfaceItemBase ifitem, Object generic_data) {
 		switch (chain) {
-			case CHAIN_TRANS_INITIAL_TO__Operational:
+			case CHAIN_TRANS_INITIAL_TO__closed:
 			{
-				action_TRANS_INITIAL_TO__Operational();
-				return STATE_Operational;
+				return STATE_closed;
 			}
-			case CHAIN_TRANS_Operational_TO_Operational_BY_Starttimeout_tr1:
+			case CHAIN_TRANS_closed_TO_opened_BY_openlog:
 			{
-				int time_ms = (Integer) generic_data;
-				action_TRANS_Operational_TO_Operational_BY_Starttimeout_tr1(ifitem, time_ms);
-				return STATE_Operational;
+				String fileName = (String) generic_data;
+				action_TRANS_closed_TO_opened_BY_openlog(ifitem, fileName);
+				return STATE_opened;
 			}
-			case CHAIN_TRANS_Operational_TO_Operational_BY_Killtimeout_tr2:
+			case CHAIN_TRANS_opened_TO_closed_BY_closelog:
 			{
-				return STATE_Operational;
+				action_TRANS_opened_TO_closed_BY_closelog(ifitem);
+				return STATE_closed;
 			}
-			case CHAIN_TRANS_Operational_TO_Operational_BY_Starttimer_tr3:
+			case CHAIN_TRANS_opened_TO_opened_BY_internalLoglog_tr1:
 			{
-				int time_ms = (Integer) generic_data;
-				action_TRANS_Operational_TO_Operational_BY_Starttimer_tr3(ifitem, time_ms);
-				return STATE_Operational;
-			}
-			case CHAIN_TRANS_Operational_TO_Operational_BY_Killtimer_tr4:
-			{
-				return STATE_Operational;
+				InternalLogData data = (InternalLogData) generic_data;
+				action_TRANS_opened_TO_opened_BY_internalLoglog_tr1(ifitem, data);
+				return STATE_opened;
 			}
 		}
 		return NO_STATE;
@@ -231,10 +231,12 @@ public class ATimingService extends ActorClassBase {
 	private int enterHistory(int state, boolean handler, boolean skip_entry) {
 		while (true) {
 			switch (state) {
-				case STATE_Operational:
-					if (!(skip_entry || handler)) entry_Operational();
+				case STATE_closed:
 					// in leaf state: return state id
-					return STATE_Operational;
+					return STATE_closed;
+				case STATE_opened:
+					// in leaf state: return state id
+					return STATE_opened;
 				case STATE_TOP:
 					state = history[STATE_TOP];
 					break;
@@ -245,25 +247,31 @@ public class ATimingService extends ActorClassBase {
 	}
 	
 	//*** Entry and Exit Codes
-	protected void entry_Operational() {
-		// prepare
-	}
 	
 	//*** Action Codes
-	protected void action_TRANS_INITIAL_TO__Operational() {
-		timerService = new Timer();
+	protected void action_TRANS_closed_TO_opened_BY_openlog(InterfaceItemBase ifitem, String fileName) {
+		Date d=new Date(tStart);
+		try{
+		file=new FileOutputStream(fileName);
+		p=new PrintStream(file);
+		p.println("Log opened at "+ d.toString());
+		p.println("--------------------------------------------------");
+		} catch (Exception e){
+		System.out.println("Log file not opened !");
+		}
 	}
-	protected void action_TRANS_Operational_TO_Operational_BY_Starttimeout_tr1(InterfaceItemBase ifitem, int time_ms) {
-		// start timeout
-		taskCount++;
-		if (taskCount>PURGE_LIMIT) timerService.purge();
-		timerService.schedule(((PTimeoutPort)ifitem).getTask(), time_ms);
+	protected void action_TRANS_opened_TO_closed_BY_closelog(InterfaceItemBase ifitem) {
+		p.flush();
+		p.close();
+		p=null;
 	}
-	protected void action_TRANS_Operational_TO_Operational_BY_Starttimer_tr3(InterfaceItemBase ifitem, int time_ms) {
-		// start timer
-		taskCount++;
-		if (taskCount>PURGE_LIMIT) timerService.purge();
-		timerService.scheduleAtFixedRate(((PTimerPort)ifitem).getTask(), time_ms, time_ms);
+	protected void action_TRANS_opened_TO_opened_BY_internalLoglog_tr1(InterfaceItemBase ifitem, InternalLogData data) {
+		long s = Long.valueOf(data.timeStamp);
+		p.println("Timestamp: " + Long.toString(s-tStart) + "ms");
+		p.println("SenderInstance: "+ data.sender);
+		p.println("UserString: " + data.userString);
+		p.println("--------------------------------------------------");
+		System.out.printf(data.userString);
 	}
 		 
 	//******************************************
