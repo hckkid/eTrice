@@ -64,6 +64,7 @@ public class LanguageGenerator {
 		String typeName = data.getType().getName();
 		String castTypeName = typeName;
 		if (data.getType() instanceof PrimitiveType) {
+			typeName = ((PrimitiveType)data.getType()).getTargetName();
 			String ct = ((PrimitiveType)data.getType()).getCastName();
 			if (ct!=null && !ct.isEmpty())
 				castTypeName = ct;

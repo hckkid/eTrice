@@ -16,12 +16,14 @@ import com.google.inject.Inject
 import com.google.inject.Singleton
 import org.eclipse.etrice.core.room.Message
 import org.eclipse.etrice.core.room.ProtocolClass
+import org.eclipse.etrice.core.room.PrimitiveType
 import org.eclipse.etrice.generator.base.ILogger
 import org.eclipse.etrice.generator.etricegen.Root
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 
 import org.eclipse.etrice.generator.extensions.RoomExtensions
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
+import org.eclipse.etrice.generator.generic.TypeHelpers
 
 
 @Singleton
@@ -31,6 +33,7 @@ class ProtocolClassGen {
 	@Inject extension JavaExtensions stdExt
 	@Inject extension RoomExtensions roomExt
 	@Inject extension ProcedureHelpers helpers
+	@Inject extension TypeHelpers
 	@Inject ILogger logger
 	
 	def doGenerate(Root root) {
@@ -225,7 +228,7 @@ class ProtocolClassGen {
 
 	def messageSignature(Message m) {
 	'''
-		public void «m.name» («IF m.data!=null»«m.data.type.name» «m.data.name»«ENDIF»)
+		public void «m.name» («IF m.data!=null»«m.data.type.typeName» «m.data.name»«ENDIF»)
 	'''
 	}
 
@@ -249,7 +252,7 @@ class ProtocolClassGen {
 				}
 				if (getPeerAddress()!=null)
 					«IF m.data==null»getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), «dir»_«m.name»));
-					«ELSE»getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), «dir»_«m.name», «m.data.name»«IF (!m.data.ref)».deepCopy()«ENDIF»));
+					«ELSE»getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), «dir»_«m.name», «m.data.name»«IF (!m.data.ref && !(m.data.type instanceof PrimitiveType))».deepCopy()«ENDIF»));
 				«ENDIF»
 			«ENDIF»
 		}

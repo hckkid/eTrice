@@ -11,6 +11,7 @@ import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.MessageHandler;
 import org.eclipse.etrice.core.room.Operation;
 import org.eclipse.etrice.core.room.PortClass;
+import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.VarDecl;
@@ -18,6 +19,7 @@ import org.eclipse.etrice.generator.base.ILogger;
 import org.eclipse.etrice.generator.etricegen.Root;
 import org.eclipse.etrice.generator.extensions.RoomExtensions;
 import org.eclipse.etrice.generator.generic.ProcedureHelpers;
+import org.eclipse.etrice.generator.generic.TypeHelpers;
 import org.eclipse.etrice.generator.java.gen.JavaExtensions;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
 import org.eclipse.xtext.xbase.lib.BooleanExtensions;
@@ -40,6 +42,9 @@ public class ProtocolClassGen {
   
   @Inject
   private ProcedureHelpers helpers;
+  
+  @Inject
+  private TypeHelpers _typeHelpers;
   
   @Inject
   private ILogger logger;
@@ -625,12 +630,12 @@ public class ProtocolClassGen {
       if (_operator_notEquals) {
         VarDecl _data_1 = m.getData();
         DataType _type = _data_1.getType();
-        String _name_1 = _type.getName();
-        _builder.append(_name_1, "");
+        String _typeName = this._typeHelpers.typeName(_type);
+        _builder.append(_typeName, "");
         _builder.append(" ");
         VarDecl _data_2 = m.getData();
-        String _name_2 = _data_2.getName();
-        _builder.append(_name_2, "");
+        String _name_1 = _data_2.getName();
+        _builder.append(_name_1, "");
       }
     }
     _builder.append(")");
@@ -741,10 +746,19 @@ public class ProtocolClassGen {
             String _name_4 = _data_1.getName();
             _builder.append(_name_4, "		");
             {
+              boolean _operator_and = false;
               VarDecl _data_2 = m.getData();
               boolean _isRef = _data_2.isRef();
               boolean _operator_not = BooleanExtensions.operator_not(_isRef);
-              if (_operator_not) {
+              if (!_operator_not) {
+                _operator_and = false;
+              } else {
+                VarDecl _data_3 = m.getData();
+                DataType _type = _data_3.getType();
+                boolean _operator_not_1 = BooleanExtensions.operator_not((_type instanceof PrimitiveType));
+                _operator_and = BooleanExtensions.operator_and(_operator_not, _operator_not_1);
+              }
+              if (_operator_and) {
                 _builder.append(".deepCopy()");
               }
             }
