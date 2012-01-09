@@ -49,12 +49,23 @@ public class DSocketConfiguration {
 	
 	// default constructor
 	public DSocketConfiguration() {
+		super();
 		// initialize attributes
 		serverName = "";
 		portNumber = 0;
 		protocol = 0;
 		checkCookie = false;
 		mode = 0;
+	}
+	
+	// constructor using fields
+	public DSocketConfiguration(String serverName, int portNumber, int protocol, boolean checkCookie, int mode) {
+		super();
+		this.serverName = serverName;
+		this.portNumber = portNumber;
+		this.protocol = protocol;
+		this.checkCookie = checkCookie;
+		this.mode = mode;
 	}
 	
 	// deep copy

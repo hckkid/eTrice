@@ -19,12 +19,13 @@ public class Log {
 	public static final int IN_open = 1;
 	public static final int IN_setLogLevel = 2;
 	public static final int IN_close = 3;
-	public static final int IN_internalLog = 4;
+	public static final int IN_log = 4;
+	public static final int IN_internalLog = 5;
 	//error if msgID >= MSG_MAX
-	public static final int MSG_MAX = 5;  
+	public static final int MSG_MAX = 6;  
 
 
-	private static String messageStrings[] = {"MIN",  "open","setLogLevel","close","internalLog","MAX"};
+	private static String messageStrings[] = {"MIN",  "open","setLogLevel","close","log","internalLog","MAX"};
 
 	public String getMessageString(int msg_id) {
 		if (msg_id<MSG_MIN || msg_id>MSG_MAX+1){
@@ -143,21 +144,9 @@ public class Log {
 	
 		//--------------------- attributes
 		//--------------------- operations
-		public void log(int logLevel, String userString) {
-			long s;
-			if (logLevel>this.logLevel){
-			d.userString=userString;
-			s=System.currentTimeMillis();
-			d.timeStamp=Long.toString(s);
-			d.sender=getInstancePath();
-			if (getPeerAddress()!=null)
-			getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), IN_internalLog, d));
-			}
-		}
 		
 		// sent messages
-		public void open (String fileName)
-		{
+		public void open(String fileName) {
 			if (messageStrings[ IN_open] != "timerTick"){
 				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_open]);
@@ -165,13 +154,11 @@ public class Log {
 			if (getPeerAddress()!=null)
 				getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), IN_open, fileName));
 		}
-		public void setLogLevel (int l)
-		{
+		public void setLogLevel(int l) {
 				logLevel=l;
 			if (logLevel > LOG_LEVEL_HIGH) logLevel=LOG_LEVEL_HIGH;
 		}
-		public void close ()
-		{
+		public void close() {
 			if (messageStrings[ IN_close] != "timerTick"){
 				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_close]);
@@ -179,9 +166,30 @@ public class Log {
 			if (getPeerAddress()!=null)
 				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), IN_close));
 				}
-		public void internalLog (InternalLogData data)
-		{
-				System.out.printf("\ndon´t use the internalLog messages !\n");
+		public void log(LogData data) {
+				long s;
+			if (data.logLevel>this.logLevel){
+			d.userString=data.userString;
+			s=System.currentTimeMillis();
+			d.timeStamp=Long.toString(s);
+			d.sender=getInstancePath();
+			if (getPeerAddress()!=null)
+			getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), IN_internalLog, d));
+			}
+		}
+		public void log(int logLevel, String userString) {
+			log(new LogData(logLevel, userString));
+		}
+		public void internalLog(InternalLogData data) {
+			if (messageStrings[ IN_internalLog] != "timerTick"){
+				// TODOTS: model switch for activation
+			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_internalLog]);
+			}
+			if (getPeerAddress()!=null)
+				getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), IN_internalLog, data.deepCopy()));
+		}
+		public void internalLog(String userString, String sender, String timeStamp) {
+			internalLog(new InternalLogData(userString, sender, timeStamp));
 		}
 	}
 	
@@ -213,32 +221,29 @@ public class Log {
 		}
 		
 		// incoming messages
-		public void open (String fileName)
-		{
+		public void open(String fileName){
 			for (int i=0; i<replication; ++i) {
-				ports.get(i).open( fileName)
-				;
+				ports.get(i).open( fileName);
 			}
 		}
-		public void setLogLevel (int l)
-		{
+		public void setLogLevel(int l){
 			for (int i=0; i<replication; ++i) {
-				ports.get(i).setLogLevel( l)
-				;
+				ports.get(i).setLogLevel( l);
 			}
 		}
-		public void close ()
-		{
+		public void close(){
 			for (int i=0; i<replication; ++i) {
-				ports.get(i).close()
-				;
+				ports.get(i).close();
 			}
 		}
-		public void internalLog (InternalLogData data)
-		{
+		public void log(LogData data){
 			for (int i=0; i<replication; ++i) {
-				ports.get(i).internalLog( data)
-				;
+				ports.get(i).log( data);
+			}
+		}
+		public void internalLog(InternalLogData data){
+			for (int i=0; i<replication; ++i) {
+				ports.get(i).internalLog( data);
 			}
 		}
 	}

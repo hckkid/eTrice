@@ -77,9 +77,11 @@ RoomModel room.basic.service.logging {
 			Message open(fileName: string)
 			Message setLogLevel(l: int32)
 			Message close()
+			Message log(data: LogData)
 			Message internalLog(data: InternalLogData)
 		}
-		outgoing { } conjugate PortClass {
+		outgoing { }
+		conjugate PortClass {
 			usercode {
 				"public static final int LOG_LEVEL_LOW = 1;"
 				"public static final int LOG_LEVEL_MEDIUM = 2;"
@@ -91,13 +93,10 @@ RoomModel room.basic.service.logging {
 				"logLevel=l;"
 				"if (logLevel > LOG_LEVEL_HIGH) logLevel=LOG_LEVEL_HIGH;"
 			}
-			handle internalLog{
-				"System.out.printf(\"\\ndon´t use the internalLog messages !\\n\");"
-			}
-			Operation log(logLevel:int32, userString:string){
+			handle log {
 				"long s;"
-				"if (logLevel>this.logLevel){"
-				"d.userString=userString;"
+				"if (data.logLevel>this.logLevel){"
+				"d.userString=data.userString;"
 				"s=System.currentTimeMillis();"
 				"d.timeStamp=Long.toString(s);"
 				"d.sender=getInstancePath();"
@@ -108,10 +107,15 @@ RoomModel room.basic.service.logging {
 		}
 	}
 
-	DataClass InternalLogData {
-		Attribute timeStamp:string
-		Attribute sender: string
+	DataClass LogData {
+		Attribute logLevel: int32
 		Attribute userString: string
+	}
+
+	DataClass InternalLogData {
+		Attribute userString: string
+		Attribute sender: string
+		Attribute timeStamp: string
 	}
 
 }

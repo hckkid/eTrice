@@ -28,9 +28,17 @@ public class DSocketData {
 	
 	// default constructor
 	public DSocketData() {
+		super();
 		// initialize attributes
 		size = 0;
 		data = "";
+	}
+	
+	// constructor using fields
+	public DSocketData(int size, String data) {
+		super();
+		this.size = size;
+		this.data = data;
 	}
 	
 	// deep copy
