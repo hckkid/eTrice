@@ -17,6 +17,7 @@ import com.google.inject.Singleton
 import org.eclipse.etrice.core.room.Message
 import org.eclipse.etrice.core.room.ProtocolClass
 import org.eclipse.etrice.core.room.PrimitiveType
+import org.eclipse.etrice.core.room.DataClass
 import org.eclipse.etrice.generator.base.ILogger
 import org.eclipse.etrice.generator.etricegen.Root
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess
@@ -227,35 +228,42 @@ class ProtocolClassGen {
 	}
 
 	def messageSignature(Message m) {
-	'''
-		public void «m.name» («IF m.data!=null»«m.data.type.typeName» «m.data.name»«ENDIF»)
-	'''
+		'''public void «m.name»(«IF m.data!=null»«m.data.type.typeName» «m.data.name»«ENDIF»)'''
+	}
+
+	def messageSignatureExplicit(Message m) {
+		var dc = (m.data.type as DataClass)
+		'''public void «m.name»(«IF dc.base!=null»«dc.base.typeName» _super, «ENDIF»«FOR a : dc.attributes SEPARATOR ", "»«a.type.typeName» «a.name»«ENDFOR»)'''
 	}
 
 	def messageCall(Message m) {
-	'''
-		«m.name»(«IF m.data!=null» «m.data.name»«ENDIF»)
-	'''}
+		'''«m.name»(«IF m.data!=null» «m.data.name»«ENDIF»)'''
+	}
 	
 	def sendMessage(Message m, boolean conj) {
-	'''
-		«var dir = if (conj) "IN" else "OUT"»
-		«var hdlr = m.getSendHandler(conj)»
-		«messageSignature(m)»{
-			«IF hdlr!=null»
-				«FOR command : hdlr.detailCode.commands»	«command»
-				«ENDFOR»
-			«ELSE»
-				if (messageStrings[ «dir»_«m.name»] != "timerTick"){
-					// TODOTS: model switch for activation
-				DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[«dir»_«m.name»]);
-				}
-				if (getPeerAddress()!=null)
-					«IF m.data==null»getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), «dir»_«m.name»));
-					«ELSE»getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), «dir»_«m.name», «m.data.name»«IF (!m.data.ref && !(m.data.type instanceof PrimitiveType))».deepCopy()«ENDIF»));
+		var dir = if (conj) "IN" else "OUT"
+		var hdlr = m.getSendHandler(conj)
+		'''
+			«messageSignature(m)» {
+				«IF hdlr!=null»
+					«FOR command : hdlr.detailCode.commands»	«command»
+					«ENDFOR»
+				«ELSE»
+					if (messageStrings[ «dir»_«m.name»] != "timerTick"){
+						// TODOTS: model switch for activation
+					DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[«dir»_«m.name»]);
+					}
+					if (getPeerAddress()!=null)
+						«IF m.data==null»getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), «dir»_«m.name»));
+						«ELSE»getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), «dir»_«m.name», «m.data.name»«IF (!m.data.ref && !(m.data.type instanceof PrimitiveType))».deepCopy()«ENDIF»));
+					«ENDIF»
 				«ENDIF»
+			}
+			«IF m.data!=null && m.data.type instanceof DataClass»
+				«messageSignatureExplicit(m)» {
+					«m.name»(new «m.data.type.name»(«IF (m.data.type as DataClass).base!=null»_super, «ENDIF»«FOR a : (m.data.type as DataClass).attributes SEPARATOR ", "»«a.name»«ENDFOR»));
+				}
 			«ENDIF»
-		}
-	'''
+		'''
 	}
 }
