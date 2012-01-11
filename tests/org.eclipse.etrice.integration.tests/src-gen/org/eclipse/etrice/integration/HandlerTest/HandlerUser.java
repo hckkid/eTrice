@@ -32,7 +32,7 @@ public class HandlerUser extends ActorClassBase {
 	protected static final int IFITEM_TestPort1 = 1;
 	
 	//--------------------- attributes
-	protected int counter;
+	protected int counter = 0;
 	//--------------------- operations
 
 	//--------------------- construction
@@ -41,6 +41,7 @@ public class HandlerUser extends ActorClassBase {
 		setClassName("HandlerUser");
 		
 		// initialize attributes
+		counter = 0;
 
 		// own ports
 		TestPort1 = new TestProtocolPort(this, "TestPort1", IFITEM_TestPort1, 0, port_addr[IFITEM_TestPort1][0], peer_addr[IFITEM_TestPort1][0]); 

@@ -7,66 +7,77 @@ public class PingPongData {
 	
 	
 	//--------------------- attributes
-	protected byte i8Val;
-	protected short i16Val;
-	protected int i32Val;
-	protected char charVal;
-	protected float f32Val;
-	protected double f64Val;
-	protected String stringVal;
+	protected byte i8Val = 34;
+	protected short i16Val = 24;
+	protected int i32Val = 12;
+	protected char charVal = 'c';
+	protected float f32Val = 4711.0815f;
+	protected double f64Val = 47114711.08150815;
+	protected String stringVal = "Du alter Depp !";
 	protected int[] arrayFromInt32 = {1,2,3,4,5};
-	protected PingPongDataDeep ownType;
+	protected PingPongDataDeep ownType = new PingPongDataDeep();
+	
 	//--------------------- attribute setters and getters
 	public void setI8Val (byte i8Val) {
 		 this.i8Val = i8Val;
 	}
 	public byte getI8Val () {
 		return this.i8Val;
-	}public void setI16Val (short i16Val) {
+	}
+	public void setI16Val (short i16Val) {
 		 this.i16Val = i16Val;
 	}
 	public short getI16Val () {
 		return this.i16Val;
-	}public void setI32Val (int i32Val) {
+	}
+	public void setI32Val (int i32Val) {
 		 this.i32Val = i32Val;
 	}
 	public int getI32Val () {
 		return this.i32Val;
-	}public void setCharVal (char charVal) {
+	}
+	public void setCharVal (char charVal) {
 		 this.charVal = charVal;
 	}
 	public char getCharVal () {
 		return this.charVal;
-	}public void setF32Val (float f32Val) {
+	}
+	public void setF32Val (float f32Val) {
 		 this.f32Val = f32Val;
 	}
 	public float getF32Val () {
 		return this.f32Val;
-	}public void setF64Val (double f64Val) {
+	}
+	public void setF64Val (double f64Val) {
 		 this.f64Val = f64Val;
 	}
 	public double getF64Val () {
 		return this.f64Val;
-	}public void setStringVal (String stringVal) {
+	}
+	public void setStringVal (String stringVal) {
 		 this.stringVal = stringVal;
 	}
 	public String getStringVal () {
 		return this.stringVal;
-	}public void setArrayFromInt32 (int[] arrayFromInt32) {
+	}
+	public void setArrayFromInt32 (int[] arrayFromInt32) {
 		 this.arrayFromInt32 = arrayFromInt32;
 	}
 	public int[] getArrayFromInt32 () {
 		return this.arrayFromInt32;
-	}public void setOwnType (PingPongDataDeep ownType) {
+	}
+	public void setOwnType (PingPongDataDeep ownType) {
 		 this.ownType = ownType;
 	}
 	public PingPongDataDeep getOwnType () {
 		return this.ownType;
 	}
+	
 	//--------------------- operations
 	
 	// default constructor
 	public PingPongData() {
+		// initialize attributes
 		i8Val = 34;
 		i16Val = 24;
 		i32Val = 12;
@@ -87,7 +98,9 @@ public class PingPongData {
 		copy.f32Val = f32Val;
 		copy.f64Val = f64Val;
 		copy.stringVal = stringVal;
-		for (int i=0;i<5;i++){copy.arrayFromInt32[i]=arrayFromInt32[i];}
+		for (int i=0;i<5;i++){
+			copy.arrayFromInt32[i] = arrayFromInt32[i];
+		}
 		copy.ownType = ownType.deepCopy();
 		return copy;
 	}
