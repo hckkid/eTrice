@@ -14,9 +14,9 @@
 #include "../src-gen/cGenRef/DataClass1.h"
 #include "RUnit.h"
 #include "RMessage.h"
-#include "test/TestMessage.h"
-#include "test/TestRMessageQueue.h"
-#include "test/TestRMessageService.h"
+#include "test/TestEtMessage.h"
+#include "test/TestEtMessageQueue.h"
+#include "test/TestEtMessageService.h"
 
 
 
@@ -58,9 +58,9 @@ void runTestCases(void){
 	RUnit_open("tmp/testlog","TestMessageService");
 
 	testDataClassDeepCopy();
-	TestMessage_runSuite();
-	TestMessageQueue_runSuite();
-	TestRMessageService_runSuite();
+	TestEtMessage_runSuite();
+	TestEtMessageQueue_runSuite();
+	TestEtMessageService_runSuite();
 
 	RUnit_close();
 }

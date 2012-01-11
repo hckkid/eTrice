@@ -10,9 +10,12 @@
  *
  *******************************************************************************/
 
-#ifndef TESTRMESSAGEQUEUE_H_
-#define TESTRMESSAGEQUEUE_H_
+#ifndef _TESTRMESSAGESERVICE_H_
+#define _TESTRMESSAGESERVICE_H_
 
-void TestMessageQueue_runSuite(void);
+#include "RMessageService.h"
 
-#endif /* TESTRMESSAGEQUEUE_H_ */
+void TestEtMessageService_runSuite(void);
+
+
+#endif /* _TESTRMESSAGESERVICE_H_ */

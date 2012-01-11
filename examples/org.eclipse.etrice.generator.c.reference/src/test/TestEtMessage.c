@@ -10,7 +10,7 @@
  *
  *******************************************************************************/
 
-#include "TestMessage.h"
+#include "TestEtMessage.h"
 
 #include <stddef.h>
 #include "RUnit.h"
@@ -18,7 +18,7 @@
 
 
 
-void TestMessage_testBasicMessage(void){
+void TestEtMessage_testBasicMessage(void){
 	RUnit_openTestCase("TestMessage_testBasicMessage");
 
 	RMessage msg1 = {(RMessage*)1234567, 123,456,};
@@ -40,9 +40,9 @@ void TestMessage_testBasicMessage(void){
 }
 
 
-void TestMessage_runSuite(void){
+void TestEtMessage_runSuite(void){
 	RUnit_openTestSuite("TestMessage");
-	TestMessage_testBasicMessage();
+	TestEtMessage_testBasicMessage();
 	RUnit_closeTestSuite();
 }
 

@@ -10,11 +10,11 @@
  *
  *******************************************************************************/
 
-#include "TestRMessageQueue.h"
+#include "TestEtMessageQueue.h"
 #include "RUnit.h"
 #include "RMessageQueue.h"
 
-void testPushPop(void){
+void TestEtMessageQueue_testPushPop(void){
 	RUnit_openTestCase("testPushPop");
 
 	RMessage msg1 = {NULL, 123, 456};
@@ -54,7 +54,7 @@ void testPushPop(void){
 
 #define MAX 1000
 
-void testMassiveMessaging(void){
+void TestEtMessageQueue_testMassiveMessaging(void){
 	RUnit_openTestCase("MassiveMessaging");
 
 	RMessage msgArray[MAX];
@@ -97,9 +97,9 @@ void testMassiveMessaging(void){
 	RUnit_closeTestCase();
 }
 
-void TestMessageQueue_runSuite(void){
+void TestEtMessageQueue_runSuite(void){
 	RUnit_openTestSuite("TestRMessageQueue");
-	testPushPop();
-	testMassiveMessaging();
+	TestEtMessageQueue_testPushPop();
+	TestEtMessageQueue_testMassiveMessaging();
 	RUnit_closeTestSuite();
 }

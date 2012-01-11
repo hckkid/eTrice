@@ -10,12 +10,12 @@
  *
  *******************************************************************************/
 
-#include "TestRMessageService.h"
+#include "TestEtMessageService.h"
 #include "RUnit.h"
 #include "RMessageService.h"
 
 
-void testRMessageService_init(void){
+void TestEtMessageService_init(void){
 	RUnit_openTestCase("testRMessageService_init");
 
 	RMessageService msgService;
@@ -35,7 +35,7 @@ void testRMessageService_init(void){
 	RUnit_closeTestCase();
 }
 
-void testRMessageService_GetPushPopReturn(void){
+void TestEtMessageService_GetPushPopReturn(void){
 	RUnit_openTestCase("testRMessageService_GetPushPopReturn");
 
 	RMessageService msgService;
@@ -83,7 +83,7 @@ void testRMessageService_GetPushPopReturn(void){
 	RUnit_closeTestCase();
 }
 
-void testRMessageService_GetReturn(void){
+void TestEtMessageService_GetReturn(void){
 	RUnit_openTestCase("testRMessageService_GetReturn");
 
 	RMessageService msgService;
@@ -113,10 +113,10 @@ void testRMessageService_GetReturn(void){
 	RUnit_closeTestCase();
 }
 
-void TestRMessageService_runSuite(void){
+void TestEtMessageService_runSuite(void){
 	RUnit_openTestSuite("TestRMessageService");
-	testRMessageService_init();
-	testRMessageService_GetPushPopReturn();
-	testRMessageService_GetReturn();
+	TestEtMessageService_init();
+	TestEtMessageService_GetPushPopReturn();
+	TestEtMessageService_GetReturn();
 	RUnit_closeTestSuite();
 }
