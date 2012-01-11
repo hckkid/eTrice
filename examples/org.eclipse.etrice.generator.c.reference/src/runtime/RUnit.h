@@ -17,56 +17,37 @@
 #include <stdio.h>
 #include <time.h>
 
-//*** global variables
-// file handling
-static FILE* RUnit_reportfile = NULL;
 
-// counters
-static int32 RUnit_passCount = 0;
-static int32 RUnit_failCount = 0;
-
-// time measuring
-static clock_t RUnit_startTime = 0;
-static clock_t RUnit_currentTime = 0;
-
-
-// forward declarations
-void RUnit_open(const char *testSuiteName);
+// open / close
+void RUnit_open(char* testResultPath, char* testFileName);
 void RUnit_close(void);
-void RUnit_writeTestLog(const char *testcase, boool result, const char *resulttext);
+void RUnit_openTestSuite(char* testSuiteName);
+void RUnit_closeTestSuite(void);
+void RUnit_openTestCase(char* testCaseName);
+void RUnit_closeTestCase(void);
 
+/* boolean values */
+void EXPECT_TRUE(const char* testcase, etBool condition);
+void EXPECT_FALSE(const char* testcase, etBool condition);
 
-void EXPECT_TRUE(const char* testcase, boool condition);
-void EXPECT_FALSE(const char* testcase, boool condition);
+/* signed integer values */
+void EXPECT_EQUAL_INT8(const char* testcase, etInt8 expected, etInt8 actual);
+void EXPECT_EQUAL_INT16(const char* testcase, etInt16 expected, etInt16 actual);
+void EXPECT_EQUAL_INT32(const char* testcase, etInt32 expected, etInt32 actual);
 
-//void EXPECT_EQUAL(const char* testcase, int8 expected, int8 actual);
-//void EXPECT_EQUAL(const char* testcase, int16 expected, int16 actual);
-//void EXPECT_EQUAL(const char* testcase, int32 expected, int32 actual);
-//void EXPECT_EQUAL(const char* testcase, uint8 expected, uint8 actual);
-//void EXPECT_EQUAL(const char* testcase, uint16 expected, uint16 actual);
-//void EXPECT_EQUAL(const char* testcase, uint32 expected, uint32 actual);
+/* unsigned integer values */
+void EXPECT_EQUAL_UINT8(const char* testcase, etUInt8 expected, etUInt8 actual);
+void EXPECT_EQUAL_UINT16(const char* testcase, etUInt16 expected, etUInt16 actual);
+void EXPECT_EQUAL_UINT32(const char* testcase, etUInt32 expected, etUInt32 actual);
 
+/* float values */
+void EXPECT_EQUAL_FLOAT32(const char* testcase, etFloat32 expected, etFloat32 actual, etFloat32 precision);
+void EXPECT_EQUAL_FLOAT64(const char* testcase, etFloat64 expected, etFloat64 actual, etFloat64 precision);
 
-#define EXPECT_EQUAL_INT(testcase, expected, actual) \
-	if (expected != actual) { \
-		char testresult[256]; \
-		sprintf(testresult, "expected=%ld, actual=%ld", expected, actual); \
-		RUnit_writeTestLog(testcase, FALSE, testresult); \
-	} \
-	else { \
-		RUnit_writeTestLog(testcase, TRUE, ""); \
-	}
+/* Pointers */
+#define EXPECT_EQUAL_PTR(testcase, expected, actual) \
+	expect_equal_void_ptr(testcase, (const void*) expected, (const void*) actual);
 
-#define FLOAT_PRECISION 0.0001
-
-#define EXPECT_EQUAL_FLOAT(testcase, expected, actual) \
-	if (expected-actual < -FLOAT_PRECISION || expected-actual > FLOAT_PRECISION) { \
-		char testresult[256]; \
-		sprintf(testresult, "expected=%f, actual=%f", expected, actual); \
-		RUnit_writeTestLog(testcase, FALSE, testresult); \
-	} \
-	else { \
-		RUnit_writeTestLog(testcase, TRUE, ""); \
-	}
+void expect_equal_void_ptr(const char* testcase, const void* expected, const void* actual);
 
 #endif /* _RUNIT_H_ */

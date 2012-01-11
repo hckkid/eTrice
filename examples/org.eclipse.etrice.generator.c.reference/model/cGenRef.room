@@ -1,40 +1,5 @@
 RoomModel cGenRef {
 
-	ProtocolClass CommunicationProtocol {
-		incoming {
-			Message sendData(data: int32)
-			Message sendData2(data: DataClass1)
-			
-		}
-		outgoing {
-			Message receivedData()
-		}
-	}
-	
-
-	DataClass DataClass1 {
-		usercode1 {"// usercode1"}
-		usercode2 {"// usercode2"}
-		usercode3 {"// usercode3"}
-		Attribute Attr1: int32
-		Attribute ComplexAttr: DataClass2 
-		Attribute Attr3: float32
-		
-		Operation MultiplyWithAttr1(value: int32): int32 {
-			"return self->Attr1*value;"
-		}
-		Operation MultiplyWithAttr3(value: float32): float32 {
-			"return self->Attr3*value;"
-		}
-	}
-
-	DataClass DataClass2 {
-		Attribute Attr1: int32
-		Attribute Attr2: float32
-		Attribute Attr3: int32
-		Operation Operation1(): void {"/*nothing to do*/"}
-	}
-
 	SubSystemClass SS {
 		ActorRef Receiver: Receiver
 		ActorRef Sender: Sender
@@ -174,5 +139,39 @@ RoomModel cGenRef {
 		}
 	}
 
+	ProtocolClass CommunicationProtocol {
+		incoming {
+			Message sendData(data: int32)
+			Message sendData2(data: DataClass1)
+			
+		}
+		outgoing {
+			Message receivedData()
+		}
+	}
+	
+
+	DataClass DataClass1 {
+		usercode1 {"// usercode1"}
+		usercode2 {"// usercode2"}
+		usercode3 {"// usercode3"}
+		Attribute Attr1: int32
+		Attribute ComplexAttr: DataClass2 
+		Attribute Attr3: float32
+		
+		Operation MultiplyWithAttr1(value: int32): int32 {
+			"return self->Attr1*value;"
+		}
+		Operation MultiplyWithAttr3(value: float32): float32 {
+			"return self->Attr3*value;"
+		}
+	}
+
+	DataClass DataClass2 {
+		Attribute Attr1: int32
+		Attribute Attr2: float32
+		Attribute Attr3: int32
+		Operation Operation1(): void {"/*nothing to do*/"}
+	}
 
 }

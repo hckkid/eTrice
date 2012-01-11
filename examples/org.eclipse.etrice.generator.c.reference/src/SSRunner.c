@@ -28,7 +28,9 @@ int main(void){
 }
 
 void testDataClassDeepCopy(void){
-	RUnit_open("testGeneratedDataClass");
+	RUnit_openTestSuite("testGeneratedDataClass");
+	RUnit_openTestCase("testDataClassDeepCopy");
+
 
 	DataClass1 d, e;
 	d.Attr1 = 123;
@@ -39,22 +41,27 @@ void testDataClassDeepCopy(void){
 
 	DataClass1_deepCopy(&d,&e);
 
-	EXPECT_EQUAL_INT("Attr1", 123, e.Attr1);
-	EXPECT_EQUAL_INT("ComplexAttr.Attr1", 456, e.ComplexAttr.Attr1);
-	EXPECT_EQUAL_FLOAT("ComplexAttr.Attr2", 789.123, e.ComplexAttr.Attr2);
-	EXPECT_EQUAL_INT("ComplexAttr.Attr3", 789, e.ComplexAttr.Attr3);
-	EXPECT_EQUAL_FLOAT("Attr3", 321.123, e.Attr3);
+	EXPECT_EQUAL_INT32("Attr1", 123, e.Attr1);
+	EXPECT_EQUAL_INT32("ComplexAttr.Attr1", 456, e.ComplexAttr.Attr1);
+	EXPECT_EQUAL_FLOAT32("ComplexAttr.Attr2", 789.123, e.ComplexAttr.Attr2, 0.001);
+	EXPECT_EQUAL_INT32("ComplexAttr.Attr3", 789, e.ComplexAttr.Attr3);
+	EXPECT_EQUAL_FLOAT32("Attr3", 321.123, e.Attr3, 0.0001);
 
-	EXPECT_EQUAL_INT("Operation DataClass1_MultiplyWithAttr1", 246, DataClass1_MultiplyWithAttr1(&d, 2));
-	EXPECT_EQUAL_FLOAT("Operation DataClass1_MultiplyWithAttr3", 642.246, DataClass1_MultiplyWithAttr3(&d, 2));
+	EXPECT_EQUAL_INT32("Operation DataClass1_MultiplyWithAttr1", 246, DataClass1_MultiplyWithAttr1(&d, 2));
+	EXPECT_EQUAL_FLOAT32("Operation DataClass1_MultiplyWithAttr3", 642.246, DataClass1_MultiplyWithAttr3(&d, 2), 0.0001);
 
-	RUnit_close();
+	RUnit_closeTestCase();
+	RUnit_closeTestSuite();
 }
 
 void runTestCases(void){
+	RUnit_open("tmp/testlog","TestMessageService");
+
 	testDataClassDeepCopy();
 	TestMessage_runSuite();
 	TestMessageQueue_runSuite();
 	TestRMessageService_runSuite();
+
+	RUnit_close();
 }
 
