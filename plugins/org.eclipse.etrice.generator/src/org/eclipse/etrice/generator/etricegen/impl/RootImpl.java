@@ -694,8 +694,8 @@ public class RootImpl extends EObjectImpl implements Root {
 	}
 
 	private void getVarDeclDataClasses(HashSet<DataClass> dataClasses, Collection<VarDecl> decls) {
-		for (VarDecl tid : decls) {
-			DataClass dc = name2dc.get(tid.getType());
+		for (VarDecl vd : decls) {
+			DataClass dc = name2dc.get(vd.getType().getName());
 			if (dc!=null)
 				dataClasses.add(dc);
 		}
@@ -703,7 +703,7 @@ public class RootImpl extends EObjectImpl implements Root {
 
 	private void getAttributeDataClasses(HashSet<DataClass> dataClasses, Collection<Attribute> attributes) {
 		for (Attribute attr : attributes) {
-			DataClass dc = name2dc.get(attr.getType());
+			DataClass dc = name2dc.get(attr.getType().getName());
 			if (dc!=null)
 				dataClasses.add(dc);
 		}
