@@ -29,7 +29,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface DataClass extends RoomClass
+public interface DataClass extends ComplexType
 {
   /**
    * Returns the value of the '<em><b>Base</b></em>' reference.

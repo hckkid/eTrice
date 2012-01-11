@@ -1,5 +1,7 @@
 RoomModel org.eclipse.etrice.modellib.Socket {
 
+	import room.basic.types.java.* from "JavaTypes.room"
+
 	ActorClass SocketClient {
 		Interface {
 			Port fct: PSocket

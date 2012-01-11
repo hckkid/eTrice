@@ -5,20 +5,21 @@ import com.google.inject.Singleton;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.etrice.core.room.Attribute;
-import org.eclipse.etrice.core.room.DataClass;
+import org.eclipse.etrice.core.room.DataType;
 import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.MessageHandler;
 import org.eclipse.etrice.core.room.Operation;
 import org.eclipse.etrice.core.room.PortClass;
+import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RoomModel;
-import org.eclipse.etrice.core.room.Type;
-import org.eclipse.etrice.core.room.TypedID;
+import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.generator.base.ILogger;
 import org.eclipse.etrice.generator.etricegen.Root;
 import org.eclipse.etrice.generator.extensions.RoomExtensions;
 import org.eclipse.etrice.generator.generic.ProcedureHelpers;
+import org.eclipse.etrice.generator.generic.TypeHelpers;
 import org.eclipse.etrice.generator.java.gen.JavaExtensions;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
 import org.eclipse.xtext.xbase.lib.BooleanExtensions;
@@ -41,6 +42,9 @@ public class ProtocolClassGen {
   
   @Inject
   private ProcedureHelpers helpers;
+  
+  @Inject
+  private TypeHelpers _typeHelpers;
   
   @Inject
   private ILogger logger;
@@ -621,15 +625,15 @@ public class ProtocolClassGen {
     _builder.append(_name, "");
     _builder.append(" (");
     {
-      TypedID _data = m.getData();
+      VarDecl _data = m.getData();
       boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_data, null);
       if (_operator_notEquals) {
-        TypedID _data_1 = m.getData();
-        Type _type = _data_1.getType();
-        String _typeName = this.stdExt.typeName(_type);
+        VarDecl _data_1 = m.getData();
+        DataType _type = _data_1.getType();
+        String _typeName = this._typeHelpers.typeName(_type);
         _builder.append(_typeName, "");
         _builder.append(" ");
-        TypedID _data_2 = m.getData();
+        VarDecl _data_2 = m.getData();
         String _name_1 = _data_2.getName();
         _builder.append(_name_1, "");
       }
@@ -645,11 +649,11 @@ public class ProtocolClassGen {
     _builder.append(_name, "");
     _builder.append("(");
     {
-      TypedID _data = m.getData();
+      VarDecl _data = m.getData();
       boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_data, null);
       if (_operator_notEquals) {
         _builder.append(" ");
-        TypedID _data_1 = m.getData();
+        VarDecl _data_1 = m.getData();
         String _name_1 = _data_1.getName();
         _builder.append(_name_1, "");
       }
@@ -717,42 +721,42 @@ public class ProtocolClassGen {
         _builder.append("if (getPeerAddress()!=null)");
         _builder.newLine();
         _builder.append("\t");
+        _builder.append("\t");
         {
-          TypedID _data = m.getData();
+          VarDecl _data = m.getData();
           boolean _operator_equals = ObjectExtensions.operator_equals(_data, null);
           if (_operator_equals) {
             _builder.append("getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), ");
-            _builder.append(dir, "	");
+            _builder.append(dir, "		");
             _builder.append("_");
             String _name_2 = m.getName();
-            _builder.append(_name_2, "	");
+            _builder.append(_name_2, "		");
             _builder.append("));");
             _builder.newLineIfNotEmpty();
             _builder.append("\t");
+            _builder.append("\t");
           } else {
             _builder.append("getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), ");
-            _builder.append(dir, "	");
+            _builder.append(dir, "		");
             _builder.append("_");
             String _name_3 = m.getName();
-            _builder.append(_name_3, "	");
+            _builder.append(_name_3, "		");
             _builder.append(", ");
-            TypedID _data_1 = m.getData();
+            VarDecl _data_1 = m.getData();
             String _name_4 = _data_1.getName();
-            _builder.append(_name_4, "	");
+            _builder.append(_name_4, "		");
             {
               boolean _operator_and = false;
-              TypedID _data_2 = m.getData();
-              Type _type = _data_2.getType();
-              boolean _isRef = _type.isRef();
+              VarDecl _data_2 = m.getData();
+              boolean _isRef = _data_2.isRef();
               boolean _operator_not = BooleanExtensions.operator_not(_isRef);
               if (!_operator_not) {
                 _operator_and = false;
               } else {
-                TypedID _data_3 = m.getData();
-                Type _type_1 = _data_3.getType();
-                DataClass _type_2 = _type_1.getType();
-                boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(_type_2, null);
-                _operator_and = BooleanExtensions.operator_and(_operator_not, _operator_notEquals_1);
+                VarDecl _data_3 = m.getData();
+                DataType _type = _data_3.getType();
+                boolean _operator_not_1 = BooleanExtensions.operator_not((_type instanceof PrimitiveType));
+                _operator_and = BooleanExtensions.operator_and(_operator_not, _operator_not_1);
               }
               if (_operator_and) {
                 _builder.append(".deepCopy()");

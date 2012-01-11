@@ -95,6 +95,8 @@ public class RoomFragmentProvider implements IFragmentProvider {
 		}
 		
 		private String caseSAPointShort(SAPoint sapt) {
+			if (sapt==null)
+				return "null";
 			if (sapt instanceof RefSAPoint)
 				return ((RefSAPoint) sapt).getRef().getName();
 			else if (sapt instanceof RelaySAPoint)

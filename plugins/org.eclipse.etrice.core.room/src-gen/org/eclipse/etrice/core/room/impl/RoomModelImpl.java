@@ -25,8 +25,10 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.Documentation;
+import org.eclipse.etrice.core.room.ExternalType;
 import org.eclipse.etrice.core.room.Import;
 import org.eclipse.etrice.core.room.LogicalSystem;
+import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.RoomPackage;
@@ -42,6 +44,8 @@ import org.eclipse.etrice.core.room.SubSystemClass;
  *   <li>{@link org.eclipse.etrice.core.room.impl.RoomModelImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.RoomModelImpl#getDocu <em>Docu</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.RoomModelImpl#getImports <em>Imports</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.impl.RoomModelImpl#getPrimitiveTypes <em>Primitive Types</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.impl.RoomModelImpl#getExternalTypes <em>External Types</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.RoomModelImpl#getDataClasses <em>Data Classes</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.RoomModelImpl#getProtocolClasses <em>Protocol Classes</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.RoomModelImpl#getActorClasses <em>Actor Classes</em>}</li>
@@ -93,6 +97,26 @@ public class RoomModelImpl extends MinimalEObjectImpl.Container implements RoomM
    * @ordered
    */
   protected EList<Import> imports;
+
+  /**
+   * The cached value of the '{@link #getPrimitiveTypes() <em>Primitive Types</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getPrimitiveTypes()
+   * @generated
+   * @ordered
+   */
+  protected EList<PrimitiveType> primitiveTypes;
+
+  /**
+   * The cached value of the '{@link #getExternalTypes() <em>External Types</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getExternalTypes()
+   * @generated
+   * @ordered
+   */
+  protected EList<ExternalType> externalTypes;
 
   /**
    * The cached value of the '{@link #getDataClasses() <em>Data Classes</em>}' containment reference list.
@@ -255,6 +279,34 @@ public class RoomModelImpl extends MinimalEObjectImpl.Container implements RoomM
    * <!-- end-user-doc -->
    * @generated
    */
+  public EList<PrimitiveType> getPrimitiveTypes()
+  {
+    if (primitiveTypes == null)
+    {
+      primitiveTypes = new EObjectContainmentEList<PrimitiveType>(PrimitiveType.class, this, RoomPackage.ROOM_MODEL__PRIMITIVE_TYPES);
+    }
+    return primitiveTypes;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EList<ExternalType> getExternalTypes()
+  {
+    if (externalTypes == null)
+    {
+      externalTypes = new EObjectContainmentEList<ExternalType>(ExternalType.class, this, RoomPackage.ROOM_MODEL__EXTERNAL_TYPES);
+    }
+    return externalTypes;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EList<DataClass> getDataClasses()
   {
     if (dataClasses == null)
@@ -334,6 +386,10 @@ public class RoomModelImpl extends MinimalEObjectImpl.Container implements RoomM
         return basicSetDocu(null, msgs);
       case RoomPackage.ROOM_MODEL__IMPORTS:
         return ((InternalEList<?>)getImports()).basicRemove(otherEnd, msgs);
+      case RoomPackage.ROOM_MODEL__PRIMITIVE_TYPES:
+        return ((InternalEList<?>)getPrimitiveTypes()).basicRemove(otherEnd, msgs);
+      case RoomPackage.ROOM_MODEL__EXTERNAL_TYPES:
+        return ((InternalEList<?>)getExternalTypes()).basicRemove(otherEnd, msgs);
       case RoomPackage.ROOM_MODEL__DATA_CLASSES:
         return ((InternalEList<?>)getDataClasses()).basicRemove(otherEnd, msgs);
       case RoomPackage.ROOM_MODEL__PROTOCOL_CLASSES:
@@ -364,6 +420,10 @@ public class RoomModelImpl extends MinimalEObjectImpl.Container implements RoomM
         return getDocu();
       case RoomPackage.ROOM_MODEL__IMPORTS:
         return getImports();
+      case RoomPackage.ROOM_MODEL__PRIMITIVE_TYPES:
+        return getPrimitiveTypes();
+      case RoomPackage.ROOM_MODEL__EXTERNAL_TYPES:
+        return getExternalTypes();
       case RoomPackage.ROOM_MODEL__DATA_CLASSES:
         return getDataClasses();
       case RoomPackage.ROOM_MODEL__PROTOCOL_CLASSES:
@@ -398,6 +458,14 @@ public class RoomModelImpl extends MinimalEObjectImpl.Container implements RoomM
       case RoomPackage.ROOM_MODEL__IMPORTS:
         getImports().clear();
         getImports().addAll((Collection<? extends Import>)newValue);
+        return;
+      case RoomPackage.ROOM_MODEL__PRIMITIVE_TYPES:
+        getPrimitiveTypes().clear();
+        getPrimitiveTypes().addAll((Collection<? extends PrimitiveType>)newValue);
+        return;
+      case RoomPackage.ROOM_MODEL__EXTERNAL_TYPES:
+        getExternalTypes().clear();
+        getExternalTypes().addAll((Collection<? extends ExternalType>)newValue);
         return;
       case RoomPackage.ROOM_MODEL__DATA_CLASSES:
         getDataClasses().clear();
@@ -442,6 +510,12 @@ public class RoomModelImpl extends MinimalEObjectImpl.Container implements RoomM
       case RoomPackage.ROOM_MODEL__IMPORTS:
         getImports().clear();
         return;
+      case RoomPackage.ROOM_MODEL__PRIMITIVE_TYPES:
+        getPrimitiveTypes().clear();
+        return;
+      case RoomPackage.ROOM_MODEL__EXTERNAL_TYPES:
+        getExternalTypes().clear();
+        return;
       case RoomPackage.ROOM_MODEL__DATA_CLASSES:
         getDataClasses().clear();
         return;
@@ -477,6 +551,10 @@ public class RoomModelImpl extends MinimalEObjectImpl.Container implements RoomM
         return docu != null;
       case RoomPackage.ROOM_MODEL__IMPORTS:
         return imports != null && !imports.isEmpty();
+      case RoomPackage.ROOM_MODEL__PRIMITIVE_TYPES:
+        return primitiveTypes != null && !primitiveTypes.isEmpty();
+      case RoomPackage.ROOM_MODEL__EXTERNAL_TYPES:
+        return externalTypes != null && !externalTypes.isEmpty();
       case RoomPackage.ROOM_MODEL__DATA_CLASSES:
         return dataClasses != null && !dataClasses.isEmpty();
       case RoomPackage.ROOM_MODEL__PROTOCOL_CLASSES:

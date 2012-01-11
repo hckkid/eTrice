@@ -23,6 +23,7 @@ import org.eclipse.etrice.generator.etricegen.TransitionChain;
 import org.eclipse.etrice.generator.extensions.RoomExtensions;
 import org.eclipse.etrice.generator.extensions.RoomNameProv;
 import org.eclipse.etrice.generator.generic.LanguageGenerator;
+import org.eclipse.etrice.generator.generic.TypeHelpers;
 import org.eclipse.etrice.generator.java.gen.JavaExtensions;
 import org.eclipse.xtext.xbase.lib.BooleanExtensions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -38,6 +39,9 @@ public class StateMachineGen {
   
   @Inject
   private RoomExtensions roomExt;
+  
+  @Inject
+  private TypeHelpers _typeHelpers;
   
   @Inject
   private LanguageGenerator languageGen;
@@ -241,7 +245,7 @@ public class StateMachineGen {
                   if (needData) {
                     _builder.append("{ ");
                     Message _msg = at.getMsg();
-                    String _typedDataDefinition = this.stdExt.getTypedDataDefinition(_msg);
+                    String _typedDataDefinition = this._typeHelpers.getTypedDataDefinition(_msg);
                     _builder.append(_typedDataDefinition, "					");
                   }
                 }

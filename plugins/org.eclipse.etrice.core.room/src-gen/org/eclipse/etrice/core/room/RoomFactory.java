@@ -63,49 +63,49 @@ public interface RoomFactory extends EFactory
   ActorContainerClass createActorContainerClass();
 
   /**
-   * Returns a new object of class '<em>Typed ID</em>'.
+   * Returns a new object of class '<em>Var Decl</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Typed ID</em>'.
+   * @return a new object of class '<em>Var Decl</em>'.
    * @generated
    */
-  TypedID createTypedID();
+  VarDecl createVarDecl();
 
   /**
-   * Returns a new object of class '<em>Free Typed ID</em>'.
+   * Returns a new object of class '<em>Data Type</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Free Typed ID</em>'.
+   * @return a new object of class '<em>Data Type</em>'.
    * @generated
    */
-  FreeTypedID createFreeTypedID();
+  DataType createDataType();
 
   /**
-   * Returns a new object of class '<em>Basic Type</em>'.
+   * Returns a new object of class '<em>Complex Type</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Basic Type</em>'.
+   * @return a new object of class '<em>Complex Type</em>'.
    * @generated
    */
-  BasicType createBasicType();
+  ComplexType createComplexType();
 
   /**
-   * Returns a new object of class '<em>Type</em>'.
+   * Returns a new object of class '<em>Primitive Type</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Type</em>'.
+   * @return a new object of class '<em>Primitive Type</em>'.
    * @generated
    */
-  Type createType();
+  PrimitiveType createPrimitiveType();
 
   /**
-   * Returns a new object of class '<em>Free Type</em>'.
+   * Returns a new object of class '<em>External Type</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Free Type</em>'.
+   * @return a new object of class '<em>External Type</em>'.
    * @generated
    */
-  FreeType createFreeType();
+  ExternalType createExternalType();
 
   /**
    * Returns a new object of class '<em>Data Class</em>'.
@@ -187,24 +187,6 @@ public interface RoomFactory extends EFactory
    * @generated
    */
   SemanticsRule createSemanticsRule();
-
-  /**
-   * Returns a new object of class '<em>Semantics In Rule</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Semantics In Rule</em>'.
-   * @generated
-   */
-  SemanticsInRule createSemanticsInRule();
-
-  /**
-   * Returns a new object of class '<em>Semantics Out Rule</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Semantics Out Rule</em>'.
-   * @generated
-   */
-  SemanticsOutRule createSemanticsOutRule();
 
   /**
    * Returns a new object of class '<em>Actor Class</em>'.

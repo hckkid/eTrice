@@ -135,7 +135,7 @@ public class PTimeout {
 	
 		//--------------------- attributes
 		//--------------------- operations
-		public void timeout (Integer id){
+		public void timeout(Integer id) {
 			//regular PortClass Operation timeout
 						DebuggingService.getInstance().addMessageAsyncOut(getAddress(),
 								getPeerAddress(), messageStrings[OUT_timeoutTick]);
@@ -152,8 +152,8 @@ public class PTimeout {
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_timeoutTick]);
 			}
 			if (getPeerAddress()!=null)
-			getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_timeoutTick));
-			}
+				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_timeoutTick));
+				}
 	}
 	
 	// replicated port class

@@ -135,7 +135,7 @@ public class PTimer {
 	
 		//--------------------- attributes
 		//--------------------- operations
-		public void timer (Integer id){
+		public void timer(Integer id) {
 			//regular PortClass Operation timer
 						DebuggingService.getInstance().addMessageAsyncOut(getAddress(),
 								getPeerAddress(), messageStrings[OUT_timerTick]);
@@ -152,8 +152,8 @@ public class PTimer {
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_timerTick]);
 			}
 			if (getPeerAddress()!=null)
-			getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_timerTick));
-			}
+				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_timerTick));
+				}
 	}
 	
 	// replicated port class

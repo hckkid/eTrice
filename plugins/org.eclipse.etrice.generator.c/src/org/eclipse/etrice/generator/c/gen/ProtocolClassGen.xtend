@@ -249,7 +249,7 @@ class ProtocolClassGen {
 	
 
 	def messageSignature(Message m) {'''
-	public void «m.name» («IF m.data!=null»«m.data.type.typeName()» «m.data.name»«ENDIF»)
+		public void «m.name» («IF m.data!=null»«m.data.type.name» «m.data.name»«ENDIF»)
 	'''
 	}
 
@@ -270,8 +270,8 @@ class ProtocolClassGen {
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[«dir»_«m.name»]);
 			}
 			if (getPeerAddress()!=null)
-			«IF m.data==null»getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), «dir»_«m.name»));
-			«ELSE»getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), «dir»_«m.name», «m.data.name»«IF (!m.data.type.ref && m.data.type.type!=null)».deepCopy()«ENDIF»));
+				«IF m.data==null»getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), «dir»_«m.name»));
+				«ELSE»getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), «dir»_«m.name», «m.data.name»«IF (!m.data.ref)».deepCopy()«ENDIF»));
 			«ENDIF»
 		«ENDIF»
 	}

@@ -13,7 +13,7 @@
 /**
  * @author Henrik Rentz-Reichert and Thomas Schuetz
  *
- * XText Grammar for ROOM models 
+ * Xtext Grammar for ROOM models 
  * this grammar is the base for the ROOM tool eTrice
  * 
  */
@@ -28,6 +28,8 @@ RoomModel :
 'RoomModel' name=FQN (docu=Documentation)? '{'
 	(imports+=Import)*
 	(
+		primitiveTypes+=PrimitiveType	|
+		externalTypes+=ExternalType	|
 		dataClasses+=DataClass	|
 		protocolClasses+=ProtocolClass |
 		actorClasses+=ActorClass  |
@@ -37,39 +39,22 @@ RoomModel :
 	'}'
 ;
 
-RoomClass: DataClass | ProtocolClass | StructureClass;
+RoomClass: DataType | ProtocolClass | StructureClass;
 StructureClass: ActorContainerClass | LogicalSystem;
 ActorContainerClass: ActorClass | SubSystemClass;
 
 // **************************************************************
 // data class
 
-// cf. decision DSL2: fixed size data types
-// convert appropriately for Java and issue an error if size not available
-enum PrimitiveType: 
-	void = 'void' |
-	int8 = 'int8' |
-	int16 = 'int16' |
-	int32 = 'int32' |
-	uint8 = 'uint8' |
-	uint16 = 'uint16' |
-	uint32 = 'uint32' |
-	float32 = 'float32' |
-	float64 = 'float64' |
-	boolean = 'boolean' |
-	string = 'string' |
-	char = 'char';
-	
-	
-TypedID:
-	name=ID ':' type=Type;
-FreeTypedID:
-	name=ID ':' type=FreeType;	
-		
-BasicType: Type | FreeType;
+VarDecl:
+	name=ID ':' type=[DataType|FQN] (ref?='ref')?;
 
-Type	: prim=PrimitiveType | (type=[DataClass|FQN] (ref?='ref')?) | (ext=FQN 'ext' (ref?='ref')?);
-FreeType: prim=PrimitiveType | (type=ID (ref?='ref')?);
+DataType: PrimitiveType | ComplexType;
+ComplexType: DataClass | ExternalType;
+
+PrimitiveType: 'PrimitiveType' name=ID '->' targetName=FQN ('(' castName=FQN ')')? 'default' defaultValueLiteral=STRING (docu=Documentation)?;
+
+ExternalType: 'ExternalType' name=ID '->' targetName=FQN (docu=Documentation)?;
 
 // TODOHRR: define detail level language?
 DataClass:
@@ -83,11 +68,10 @@ DataClass:
 	
 	
 Attribute:
-	'Attribute' name=ID ('[' size=INT ']')? ':' type=Type ('=' defaultValueLiteral=STRING)? (docu=Documentation)?;
+	'Attribute' name=ID (size=MULTIPLICITY)? ':' type=[DataType|FQN] (ref?='ref')? ('=' defaultValueLiteral=STRING)? (docu=Documentation)?;
 
-// TODOHRR: pass arguments and return value by value/reference
 Operation:
-	'Operation' name=ID '(' (arguments+=FreeTypedID (',' arguments+=FreeTypedID)*)? ')' (':' returntype=FreeType)?
+	'Operation' name=ID '(' (arguments+=VarDecl (',' arguments+=VarDecl)*)? ')' (':' ('void' | (returntype=[DataType|FQN] (ref?='ref')?)))?
 		(docu=Documentation)?
 		detailCode=DetailCode
 	;
@@ -108,7 +92,7 @@ ProtocolClass:
 	'}';
 	
 Message:
-	'Message' name=ID '(' (data=TypedID)? ')'
+	'Message' name=ID '(' (data=VarDecl)? ')'
 	(docu=Documentation)?;
 
 PortClass:
@@ -125,19 +109,20 @@ MessageHandler:
 	;
 
 ProtocolSemantics:
+	{ProtocolSemantics}
 	'semantics' '{'
-		rules+=SemanticsRule+
+		rules+=SemanticsRule*
 	'}';
 
-SemanticsRule: SemanticsInRule | SemanticsOutRule;
-
-SemanticsInRule: 'in' msg=[Message|ID] '->' '{'
-		followUps+=SemanticsRule*
-	'}';
-
-SemanticsOutRule: 'out' msg=[Message|ID] '->' '{'
-		followUps+=SemanticsRule*
-	'}';
+SemanticsRule: msg=[Message|ID]
+	('->'
+		(
+			followUps+=SemanticsRule
+			|
+			('(' followUps+=SemanticsRule (',' followUps+=SemanticsRule)+ ')')
+		)
+	)?
+;
 
 // **************************************************************
 // actor class
@@ -183,7 +168,6 @@ ExternalPort:
 	'external' 'Port' ifport=[Port|ID] ;
 
 SAPRef:
-	// we omitted the SAP type (Timing/Frame/Exception)
 	'SAP' name=ID ':' protocol=[ProtocolClass|FQN] ;
 
 SPPRef:
@@ -380,14 +364,6 @@ SubStateTrPointTerminal:
 	trPoint=[TrPoint|ID] 'of' state=[BaseState|ID];
 ChoicepointTerminal:
 	'cp' cp=[ChoicePoint|ID];
-
-//TransitionSource: TransitionTerminal|ChoicePointCaseRef|ChoicePointDefaultRef;
-//TransitionSource: TransitionTerminal|ChoicePointRef;
-//TransitionDest: TransitionTerminal|ChoicePointRef;
-
-//ChoicePointCaseRef: 'cp' cp=[ChoicePoint|ID] 'case' case=[ChoicePointCase|ID];
-//ChoicePointDefaultRef: 'cp' cp=[ChoicePoint|ID] 'default';
-//ChoicePointRef: 'cp' cp=[ChoicePoint|ID];
 
 Trigger:
 		'<' msgFromIfPairs+=MessageFromIf ('|' msgFromIfPairs+=MessageFromIf)*

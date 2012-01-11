@@ -37,7 +37,7 @@ public class ATimingService extends ActorClassBase {
 	
 	//--------------------- attributes
 	//--------------------- operations
-	public void stop (){
+	public void stop() {
 		System.out.println(toString() + "::stop()");
 		timerService.cancel();
 		timerService = null;

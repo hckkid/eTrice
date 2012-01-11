@@ -19,11 +19,13 @@ import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.BaseState;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.ExternalPort;
+import org.eclipse.etrice.core.room.ExternalType;
 import org.eclipse.etrice.core.room.Import;
 import org.eclipse.etrice.core.room.LogicalSystem;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.Operation;
 import org.eclipse.etrice.core.room.Port;
+import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RefinedState;
 import org.eclipse.etrice.core.room.RoomModel;
@@ -77,6 +79,18 @@ public class RoomLabelProvider extends DefaultEObjectLabelProvider {
 	
 	String image(DataClass dc) {
 		return "DataClass.gif";
+	}
+	
+	String image(PrimitiveType pt) {
+		return "PrimitiveType.gif";
+	}
+	
+	String image(ExternalType et) {
+		return "ExternalType.gif";
+	}
+	
+	String image(Attribute a) {
+		return "Attribute.gif";
 	}
 
 	String image(ProtocolClass pc) {
@@ -189,6 +203,14 @@ public class RoomLabelProvider extends DefaultEObjectLabelProvider {
 		return dc.getName()+base;
 	}
 	
+	String text(PrimitiveType pt) {
+		return pt.getName()+" -> "+pt.getTargetName();
+	}
+	
+	String text(ExternalType et) {
+		return et.getName()+" -> "+et.getTargetName();
+	}
+	
 	String text(ProtocolClass pc) {
 		String base = pc.getBase()!=null? " extends "+pc.getBase().getName():"";
 		return pc.getName()+base;
@@ -256,14 +278,14 @@ public class RoomLabelProvider extends DefaultEObjectLabelProvider {
 	}
 	
 	String text(Attribute attr) {
-		String type = attr.getType()!=null? (" : "+RoomHelpers.getName(attr.getType())):"";
+		String type = attr.getType()!=null? (" : "+attr.getType().getName()):"";
 		String value = (attr.getDefaultValueLiteral()!=null && !attr.getDefaultValueLiteral().isEmpty())?
 				(" = "+attr.getDefaultValueLiteral()) : "";
 		return "Attr "+attr.getName()+type+value;
 	}
 	
 	String text(Operation op) {
-		String rt = op.getReturntype()!=null? ": "+RoomHelpers.getName(op.getReturntype()):"";
+		String rt = op.getReturntype()!=null? ": "+op.getReturntype().getName():"";
 		String signature = RoomHelpers.getSignature(op);
 		return op.getName()+signature+rt;
 	}
@@ -271,7 +293,7 @@ public class RoomLabelProvider extends DefaultEObjectLabelProvider {
 	String text(Message m) {
 		String signature = "";
 		if (m.getData()!=null)
-			signature = m.getData().getName()+":"+RoomHelpers.getName(m.getData().getType());
+			signature = m.getData().getName()+":"+m.getData().getType().getName();
 		signature = "("+signature+")";
 		return m.getName()+signature;
 	}

@@ -24,6 +24,7 @@ import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 
 import org.eclipse.etrice.generator.extensions.RoomExtensions
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
+import org.eclipse.etrice.generator.generic.TypeHelpers
 
 
 @Singleton
@@ -34,6 +35,7 @@ class ActorClassGen {
 	@Inject extension RoomExtensions roomExt
 	
 	@Inject extension ProcedureHelpers helpers
+	@Inject extension TypeHelpers
 	@Inject extension StateMachineGen stateMachineGen
 	@Inject ILogger logger
 	
@@ -119,14 +121,7 @@ class ActorClassGen {
 				«ENDIF»
 				setClassName("«ac.name»");
 				
-				// initialize attributes
-				«FOR a : ac.attributes »
-					«IF a.defaultValueLiteral!=null»
-						«a.name» = «a.defaultValueLiteral»;
-					«ELSEIF a.type.type!=null»
-						«a.name» = new «a.type.type.name»();
-					«ENDIF»
-				«ENDFOR»
+				«ac.attributes.attributeInitialization»
 		
 				// own ports
 				«FOR ep : ac.getEndPorts()»
