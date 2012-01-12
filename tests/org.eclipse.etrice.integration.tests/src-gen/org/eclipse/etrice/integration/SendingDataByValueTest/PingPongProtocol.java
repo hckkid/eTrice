@@ -70,8 +70,7 @@ public class PingPongProtocol {
 	
 		
 		// sent messages
-		public void pong (PingPongData p)
-		{
+		public void pong(PingPongData p) {
 			if (messageStrings[ OUT_pong] != "timerTick"){
 				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_pong]);
@@ -79,8 +78,10 @@ public class PingPongProtocol {
 			if (getPeerAddress()!=null)
 				getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), OUT_pong, p.deepCopy()));
 		}
-		public void pongSimple (int p)
-		{
+		public void pong(byte i8Val, short i16Val, int i32Val, char charVal, float f32Val, double f64Val, String stringVal, int[] arrayFromInt32, PingPongDataDeep ownType) {
+			pong(new PingPongData(i8Val, i16Val, i32Val, charVal, f32Val, f64Val, stringVal, arrayFromInt32, ownType));
+		}
+		public void pongSimple(int p) {
 			if (messageStrings[ OUT_pongSimple] != "timerTick"){
 				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_pongSimple]);
@@ -118,18 +119,14 @@ public class PingPongProtocol {
 		}
 		
 		// outgoing messages
-		public void pong (PingPongData p)
-		{
+		public void pong(PingPongData p){
 			for (int i=0; i<replication; ++i) {
-				ports.get(i).pong( p)
-				;
+				ports.get(i).pong( p);
 			}
 		}
-		public void pongSimple (int p)
-		{
+		public void pongSimple(int p){
 			for (int i=0; i<replication; ++i) {
-				ports.get(i).pongSimple( p)
-				;
+				ports.get(i).pongSimple( p);
 			}
 		}
 	}
@@ -168,8 +165,7 @@ public class PingPongProtocol {
 	
 		
 		// sent messages
-		public void ping (PingPongData p)
-		{
+		public void ping(PingPongData p) {
 			if (messageStrings[ IN_ping] != "timerTick"){
 				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_ping]);
@@ -177,8 +173,10 @@ public class PingPongProtocol {
 			if (getPeerAddress()!=null)
 				getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), IN_ping, p.deepCopy()));
 		}
-		public void pingSimple (int p)
-		{
+		public void ping(byte i8Val, short i16Val, int i32Val, char charVal, float f32Val, double f64Val, String stringVal, int[] arrayFromInt32, PingPongDataDeep ownType) {
+			ping(new PingPongData(i8Val, i16Val, i32Val, charVal, f32Val, f64Val, stringVal, arrayFromInt32, ownType));
+		}
+		public void pingSimple(int p) {
 			if (messageStrings[ IN_pingSimple] != "timerTick"){
 				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_pingSimple]);
@@ -216,18 +214,14 @@ public class PingPongProtocol {
 		}
 		
 		// incoming messages
-		public void ping (PingPongData p)
-		{
+		public void ping(PingPongData p){
 			for (int i=0; i<replication; ++i) {
-				ports.get(i).ping( p)
-				;
+				ports.get(i).ping( p);
 			}
 		}
-		public void pingSimple (int p)
-		{
+		public void pingSimple(int p){
 			for (int i=0; i<replication; ++i) {
-				ports.get(i).pingSimple( p)
-				;
+				ports.get(i).pingSimple( p);
 			}
 		}
 	}

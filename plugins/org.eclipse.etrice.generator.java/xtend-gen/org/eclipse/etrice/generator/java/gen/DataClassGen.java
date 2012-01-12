@@ -17,6 +17,7 @@ import org.eclipse.etrice.generator.generic.ProcedureHelpers;
 import org.eclipse.etrice.generator.generic.TypeHelpers;
 import org.eclipse.etrice.generator.java.gen.JavaExtensions;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
+import org.eclipse.xtext.xbase.lib.ComparableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xtend2.lib.StringConcatenation;
@@ -190,6 +191,13 @@ public class DataClassGen {
         DataType _type = a.getType();
         String _typeName = this.typeHelpers.typeName(_type);
         _builder.append(_typeName, "	");
+        {
+          int _size = a.getSize();
+          boolean _operator_greaterThan = ComparableExtensions.<Integer>operator_greaterThan(((Integer)_size), ((Integer)1));
+          if (_operator_greaterThan) {
+            _builder.append("[]");
+          }
+        }
         _builder.append(" ");
         String _name_8 = a.getName();
         _builder.append(_name_8, "	");
@@ -264,8 +272,8 @@ public class DataClassGen {
           DataType _type_1 = a_3.getType();
           if ((_type_1 instanceof ComplexType)) {
             {
-              int _size = a_3.getSize();
-              boolean _operator_equals = ObjectExtensions.operator_equals(((Integer)_size), ((Integer)0));
+              int _size_1 = a_3.getSize();
+              boolean _operator_equals = ObjectExtensions.operator_equals(((Integer)_size_1), ((Integer)0));
               if (_operator_equals) {
                 _builder.append("\t\t");
                 _builder.append("copy.");
@@ -279,8 +287,8 @@ public class DataClassGen {
               } else {
                 _builder.append("\t\t");
                 _builder.append("for (int i=0;i<");
-                int _size_1 = a_3.getSize();
-                _builder.append(_size_1, "		");
+                int _size_2 = a_3.getSize();
+                _builder.append(_size_2, "		");
                 _builder.append(";i++){");
                 _builder.newLineIfNotEmpty();
                 _builder.append("\t\t");
@@ -300,8 +308,8 @@ public class DataClassGen {
             }
           } else {
             {
-              int _size_2 = a_3.getSize();
-              boolean _operator_equals_1 = ObjectExtensions.operator_equals(((Integer)_size_2), ((Integer)0));
+              int _size_3 = a_3.getSize();
+              boolean _operator_equals_1 = ObjectExtensions.operator_equals(((Integer)_size_3), ((Integer)0));
               if (_operator_equals_1) {
                 _builder.append("\t\t");
                 _builder.append("copy.");
@@ -315,8 +323,8 @@ public class DataClassGen {
               } else {
                 _builder.append("\t\t");
                 _builder.append("for (int i=0;i<");
-                int _size_3 = a_3.getSize();
-                _builder.append(_size_3, "		");
+                int _size_4 = a_3.getSize();
+                _builder.append(_size_4, "		");
                 _builder.append(";i++){");
                 _builder.newLineIfNotEmpty();
                 _builder.append("\t\t");

@@ -24,6 +24,7 @@ import org.eclipse.etrice.generator.generic.TypeHelpers;
 import org.eclipse.etrice.generator.java.gen.JavaExtensions;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
 import org.eclipse.xtext.xbase.lib.BooleanExtensions;
+import org.eclipse.xtext.xbase.lib.ComparableExtensions;
 import org.eclipse.xtext.xbase.lib.IntegerExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
@@ -684,6 +685,13 @@ public class ProtocolClassGen {
           DataType _type_1 = a.getType();
           String _typeName_1 = this._typeHelpers.typeName(_type_1);
           _builder.append(_typeName_1, "");
+          {
+            int _size = a.getSize();
+            boolean _operator_greaterThan = ComparableExtensions.<Integer>operator_greaterThan(((Integer)_size), ((Integer)1));
+            if (_operator_greaterThan) {
+              _builder.append("[]");
+            }
+          }
           _builder.append(" ");
           String _name_1 = a.getName();
           _builder.append(_name_1, "");

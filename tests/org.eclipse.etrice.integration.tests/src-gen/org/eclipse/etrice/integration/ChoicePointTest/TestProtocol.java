@@ -137,8 +137,7 @@ public class TestProtocol {
 	
 		
 		// sent messages
-		public void msg1 ()
-		{
+		public void msg1() {
 			if (messageStrings[ IN_msg1] != "timerTick"){
 				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_msg1]);
@@ -146,8 +145,7 @@ public class TestProtocol {
 			if (getPeerAddress()!=null)
 				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), IN_msg1));
 				}
-		public void msg2 ()
-		{
+		public void msg2() {
 			if (messageStrings[ IN_msg2] != "timerTick"){
 				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_msg2]);
@@ -155,8 +153,7 @@ public class TestProtocol {
 			if (getPeerAddress()!=null)
 				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), IN_msg2));
 				}
-		public void msg3 ()
-		{
+		public void msg3() {
 			if (messageStrings[ IN_msg3] != "timerTick"){
 				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_msg3]);
@@ -164,8 +161,7 @@ public class TestProtocol {
 			if (getPeerAddress()!=null)
 				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), IN_msg3));
 				}
-		public void msg4 ()
-		{
+		public void msg4() {
 			if (messageStrings[ IN_msg4] != "timerTick"){
 				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_msg4]);
@@ -173,8 +169,7 @@ public class TestProtocol {
 			if (getPeerAddress()!=null)
 				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), IN_msg4));
 				}
-		public void msg5 ()
-		{
+		public void msg5() {
 			if (messageStrings[ IN_msg5] != "timerTick"){
 				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_msg5]);
@@ -212,39 +207,29 @@ public class TestProtocol {
 		}
 		
 		// incoming messages
-		public void msg1 ()
-		{
+		public void msg1(){
 			for (int i=0; i<replication; ++i) {
-				ports.get(i).msg1()
-				;
+				ports.get(i).msg1();
 			}
 		}
-		public void msg2 ()
-		{
+		public void msg2(){
 			for (int i=0; i<replication; ++i) {
-				ports.get(i).msg2()
-				;
+				ports.get(i).msg2();
 			}
 		}
-		public void msg3 ()
-		{
+		public void msg3(){
 			for (int i=0; i<replication; ++i) {
-				ports.get(i).msg3()
-				;
+				ports.get(i).msg3();
 			}
 		}
-		public void msg4 ()
-		{
+		public void msg4(){
 			for (int i=0; i<replication; ++i) {
-				ports.get(i).msg4()
-				;
+				ports.get(i).msg4();
 			}
 		}
-		public void msg5 ()
-		{
+		public void msg5(){
 			for (int i=0; i<replication; ++i) {
-				ports.get(i).msg5()
-				;
+				ports.get(i).msg5();
 			}
 		}
 	}

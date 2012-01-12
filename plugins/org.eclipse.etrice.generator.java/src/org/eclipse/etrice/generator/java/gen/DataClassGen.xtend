@@ -71,7 +71,7 @@ class DataClassGen {
 			}
 			
 			// constructor using fields
-			public «dc.name»(«IF dc.base!=null»«dc.base.name» _super, «ENDIF»«FOR a : dc.attributes SEPARATOR ", "»«a.type.typeName» «a.name»«ENDFOR») {
+			public «dc.name»(«IF dc.base!=null»«dc.base.name» _super, «ENDIF»«FOR a : dc.attributes SEPARATOR ", "»«a.type.typeName»«IF a.size>1»[]«ENDIF» «a.name»«ENDFOR») {
 				super();
 				«IF dc.base!=null»
 					«FOR a : dc.base.attributes»

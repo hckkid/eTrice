@@ -233,7 +233,7 @@ class ProtocolClassGen {
 
 	def messageSignatureExplicit(Message m) {
 		var dc = (m.data.type as DataClass)
-		'''public void «m.name»(«IF dc.base!=null»«dc.base.typeName» _super, «ENDIF»«FOR a : dc.attributes SEPARATOR ", "»«a.type.typeName» «a.name»«ENDFOR»)'''
+		'''public void «m.name»(«IF dc.base!=null»«dc.base.typeName» _super, «ENDIF»«FOR a : dc.attributes SEPARATOR ", "»«a.type.typeName»«IF a.size>1»[]«ENDIF» «a.name»«ENDFOR»)'''
 	}
 
 	def messageCall(Message m) {
