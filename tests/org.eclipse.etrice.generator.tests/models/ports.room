@@ -1,8 +1,7 @@
 RoomModel base {
 	ProtocolClass PTest {
 		incoming {
-		}
-		outgoing {
+			Message msg()
 		}
 	}
 	
