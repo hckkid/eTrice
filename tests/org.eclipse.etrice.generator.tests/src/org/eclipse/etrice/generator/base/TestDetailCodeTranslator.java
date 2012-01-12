@@ -31,10 +31,10 @@ import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.Operation;
 import org.eclipse.etrice.core.room.Port;
+import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RoomFactory;
 import org.eclipse.etrice.core.room.RoomModel;
-import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.generator.InstanceTestsActivator;
@@ -54,6 +54,11 @@ public class TestDetailCodeTranslator {
 	 *
 	 */
 	private final class TestTranslationProvider implements ITranslationProvider {
+		
+		@Override
+		public boolean translateMembers() {
+			return true;
+		}
 		
 		@Override
 		public String getAttributeText(Attribute att, String orig) {
@@ -82,6 +87,16 @@ public class TestDetailCodeTranslator {
 			}
 			int end = args.isEmpty()? result.length():result.length()-2;
 			return result.substring(0, end);
+		}
+
+		@Override
+		public boolean translateTags() {
+			return true;
+		}
+
+		@Override
+		public String translateTag(String tag, DetailCode code) {
+			return ">"+tag+"<";
 		}
 	}
 
@@ -399,5 +414,15 @@ public class TestDetailCodeTranslator {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	@Test
+	public void testTags() {
+		DetailCode dc = RoomFactory.eINSTANCE.createDetailCode();
+		dc.getCommands().add("log(\"my message\", \"<|location|>\");");
+		
+		String result = translator.translateDetailCode(dc);
+		
+		assertEquals("large file", "log(\"my message\", \">location<\");", result);
 	}
 }

@@ -30,11 +30,18 @@ import org.eclipse.etrice.core.room.util.RoomHelpers;
  */
 public class DetailCodeTranslator {
 
+	public static final String TAG_START = "<|";
+	public static final String TAG_END = "|>";
+	
 	public static interface ITranslationProvider {
+		boolean translateMembers();
 		String getAttributeText(Attribute att, String orig);
 		String getOperationText(Operation op, ArrayList<String> args, String orig);
 		String getInterfaceItemMessageText(InterfaceItem item, Message msg, ArrayList<String> args, String orig);
 		String getInterfaceItemMessageValue(InterfaceItem item, Message msg, String orig);
+
+		boolean translateTags();
+		String translateTag(String tag, DetailCode code);
 	}
 
 	private static class Position {
@@ -64,13 +71,19 @@ public class DetailCodeTranslator {
 			text.append(line+"\n");
 		}
 
-		StringBuilder result = new StringBuilder();
-		translateText(text.substring(0, text.length()-1), result);
+		String result = text.substring(0, text.length()-1);
 		
-		return result.toString();
+		if (provider.translateMembers())
+			result = translateText(result);
+		
+		if (provider.translateTags())
+			result = translateTags(result, code);
+		
+		return result;
 	}
 	
-	private void translateText(String text, StringBuilder result) {
+	private String translateText(String text) {
+		StringBuilder result = new StringBuilder();
 		Position curr = new Position();
 		int last = 0;
 		
@@ -100,9 +113,8 @@ public class DetailCodeTranslator {
 						if (args!=null && operation.getArguments().size()==args.size()) {
 							// recursively apply this algorithm to each argument
 							for (int i=0; i<args.size(); ++i) {
-								StringBuilder transArg = new StringBuilder();
-								translateText(args.remove(i), transArg);
-								args.add(i, transArg.toString());
+								String transArg = translateText(args.remove(i));
+								args.add(i, transArg);
 							}
 							String orig = text.substring(last, curr.pos);
 							translated = provider.getOperationText(operation, args, orig);
@@ -119,9 +131,8 @@ public class DetailCodeTranslator {
 									if (argsMatching(msg, args)) {
 										// recursively apply this algorithm to each argument
 										for (int i=0; i<args.size(); ++i) {
-											StringBuilder transArg = new StringBuilder();
-											translateText(args.remove(i), transArg);
-											args.add(i, transArg.toString());
+											String transArg = translateText(args.remove(i));
+											args.add(i, transArg);
 										}
 										String orig = text.substring(last, curr.pos);
 										translated = provider.getInterfaceItemMessageText(item, msg, args, orig);
@@ -149,6 +160,8 @@ public class DetailCodeTranslator {
 					last = appendParsed(text, curr, last, result);
 			}
 		}
+		
+		return result.toString();
 	}
 
 	/**
@@ -332,5 +345,27 @@ public class DetailCodeTranslator {
 		for (Operation operation : operations) {
 			name2op.put(operation.getName(), operation);
 		}
+	}
+
+	private String translateTags(String text, DetailCode code) {
+		StringBuilder result = new StringBuilder();
+		
+		int last = 0;
+		int next = text.indexOf(TAG_START, last);
+		while (next>=0) {
+			result.append(text.substring(last, next));
+			last = next+TAG_START.length();
+			next = text.indexOf(TAG_END, last);
+			if (next<0)
+				break;
+			
+			String tag = text.substring(last, next);
+			result.append(provider.translateTag(tag, code));
+			last = next+TAG_END.length();
+			
+			next = text.indexOf(TAG_START, last);
+		}
+		result.append(text.substring(last));
+		return result.toString();
 	}
 }
