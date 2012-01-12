@@ -174,6 +174,22 @@ public class RoomSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case RoomPackage.STANDARD_OPERATION:
+      {
+        StandardOperation standardOperation = (StandardOperation)theEObject;
+        T result = caseStandardOperation(standardOperation);
+        if (result == null) result = caseOperation(standardOperation);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case RoomPackage.PORT_OPERATION:
+      {
+        PortOperation portOperation = (PortOperation)theEObject;
+        T result = casePortOperation(portOperation);
+        if (result == null) result = caseOperation(portOperation);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case RoomPackage.PROTOCOL_CLASS:
       {
         ProtocolClass protocolClass = (ProtocolClass)theEObject;
@@ -847,6 +863,38 @@ public class RoomSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseOperation(Operation object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Standard Operation</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Standard Operation</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseStandardOperation(StandardOperation object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Port Operation</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Port Operation</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T casePortOperation(PortOperation object)
   {
     return null;
   }

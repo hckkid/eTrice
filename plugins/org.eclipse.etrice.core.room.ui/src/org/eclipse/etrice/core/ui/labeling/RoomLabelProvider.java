@@ -25,6 +25,7 @@ import org.eclipse.etrice.core.room.LogicalSystem;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.Operation;
 import org.eclipse.etrice.core.room.Port;
+import org.eclipse.etrice.core.room.PortOperation;
 import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RefinedState;
@@ -138,11 +139,17 @@ public class RoomLabelProvider extends DefaultEObjectLabelProvider {
 	}
 
 	String image(Message state) {
-		return "Message.gif";
+		if (state.isPriv())
+			return "MessagePrivate.gif";
+		else
+			return "Message.gif";
 	}
 
 	String image(Operation op) {
-		return "Operation.gif";
+		if (op instanceof PortOperation && ((PortOperation) op).getSendsMsg()!=null)
+			return "OperationMsg.gif";
+		else
+			return "Operation.gif";
 	}
 	
 	String image(Port p) {
@@ -287,6 +294,8 @@ public class RoomLabelProvider extends DefaultEObjectLabelProvider {
 	String text(Operation op) {
 		String rt = op.getReturntype()!=null? ": "+op.getReturntype().getName():"";
 		String signature = RoomHelpers.getSignature(op);
+		if (op instanceof PortOperation && ((PortOperation) op).getSendsMsg()!=null)
+			rt = " sends "+((PortOperation) op).getSendsMsg().getName();
 		return op.getName()+signature+rt;
 	}
 	

@@ -75,7 +75,7 @@ public interface PortClass extends EObject
 
   /**
    * Returns the value of the '<em><b>Operations</b></em>' containment reference list.
-   * The list contents are of type {@link org.eclipse.etrice.core.room.Operation}.
+   * The list contents are of type {@link org.eclipse.etrice.core.room.PortOperation}.
    * <!-- begin-user-doc -->
    * <p>
    * If the meaning of the '<em>Operations</em>' containment reference list isn't clear,
@@ -87,7 +87,7 @@ public interface PortClass extends EObject
    * @model containment="true"
    * @generated
    */
-  EList<Operation> getOperations();
+  EList<PortOperation> getOperations();
 
   /**
    * Returns the value of the '<em><b>Msg Handlers</b></em>' containment reference list.

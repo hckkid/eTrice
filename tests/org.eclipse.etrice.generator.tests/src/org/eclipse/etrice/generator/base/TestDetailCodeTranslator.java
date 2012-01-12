@@ -35,6 +35,7 @@ import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RoomFactory;
 import org.eclipse.etrice.core.room.RoomModel;
+import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.generator.InstanceTestsActivator;
@@ -144,11 +145,11 @@ public class TestDetailCodeTranslator {
 		attr.setType(EcoreUtil.copy(type));
 		ac.getAttributes().add(attr);
 
-		Operation op0 = RoomFactory.eINSTANCE.createOperation();
+		StandardOperation op0 = RoomFactory.eINSTANCE.createStandardOperation();
 		op0.setName("bar0");
 		ac.getOperations().add(op0);
 		
-		Operation op1 = RoomFactory.eINSTANCE.createOperation();
+		StandardOperation op1 = RoomFactory.eINSTANCE.createStandardOperation();
 		op1.setName("bar1");
 		VarDecl param1 = RoomFactory.eINSTANCE.createVarDecl();
 		param1.setName("param");
@@ -159,7 +160,7 @@ public class TestDetailCodeTranslator {
 		op1.getArguments().add(param1);
 		ac.getOperations().add(op1);
 		
-		Operation op2 = RoomFactory.eINSTANCE.createOperation();
+		StandardOperation op2 = RoomFactory.eINSTANCE.createStandardOperation();
 		op2.setName("bar2");
 		VarDecl param2 = RoomFactory.eINSTANCE.createVarDecl();
 		param2.setName("param");

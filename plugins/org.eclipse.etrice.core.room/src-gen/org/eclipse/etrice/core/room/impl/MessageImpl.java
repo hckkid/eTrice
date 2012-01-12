@@ -27,6 +27,7 @@ import org.eclipse.etrice.core.room.VarDecl;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link org.eclipse.etrice.core.room.impl.MessageImpl#isPriv <em>Priv</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.MessageImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.MessageImpl#getData <em>Data</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.MessageImpl#getDocu <em>Docu</em>}</li>
@@ -37,6 +38,26 @@ import org.eclipse.etrice.core.room.VarDecl;
  */
 public class MessageImpl extends MinimalEObjectImpl.Container implements Message
 {
+  /**
+   * The default value of the '{@link #isPriv() <em>Priv</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #isPriv()
+   * @generated
+   * @ordered
+   */
+  protected static final boolean PRIV_EDEFAULT = false;
+
+  /**
+   * The cached value of the '{@link #isPriv() <em>Priv</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #isPriv()
+   * @generated
+   * @ordered
+   */
+  protected boolean priv = PRIV_EDEFAULT;
+
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
@@ -96,6 +117,29 @@ public class MessageImpl extends MinimalEObjectImpl.Container implements Message
   protected EClass eStaticClass()
   {
     return RoomPackage.Literals.MESSAGE;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public boolean isPriv()
+  {
+    return priv;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setPriv(boolean newPriv)
+  {
+    boolean oldPriv = priv;
+    priv = newPriv;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.MESSAGE__PRIV, oldPriv, priv));
   }
 
   /**
@@ -245,6 +289,8 @@ public class MessageImpl extends MinimalEObjectImpl.Container implements Message
   {
     switch (featureID)
     {
+      case RoomPackage.MESSAGE__PRIV:
+        return isPriv();
       case RoomPackage.MESSAGE__NAME:
         return getName();
       case RoomPackage.MESSAGE__DATA:
@@ -265,6 +311,9 @@ public class MessageImpl extends MinimalEObjectImpl.Container implements Message
   {
     switch (featureID)
     {
+      case RoomPackage.MESSAGE__PRIV:
+        setPriv((Boolean)newValue);
+        return;
       case RoomPackage.MESSAGE__NAME:
         setName((String)newValue);
         return;
@@ -288,6 +337,9 @@ public class MessageImpl extends MinimalEObjectImpl.Container implements Message
   {
     switch (featureID)
     {
+      case RoomPackage.MESSAGE__PRIV:
+        setPriv(PRIV_EDEFAULT);
+        return;
       case RoomPackage.MESSAGE__NAME:
         setName(NAME_EDEFAULT);
         return;
@@ -311,6 +363,8 @@ public class MessageImpl extends MinimalEObjectImpl.Container implements Message
   {
     switch (featureID)
     {
+      case RoomPackage.MESSAGE__PRIV:
+        return priv != PRIV_EDEFAULT;
       case RoomPackage.MESSAGE__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
       case RoomPackage.MESSAGE__DATA:
@@ -332,7 +386,9 @@ public class MessageImpl extends MinimalEObjectImpl.Container implements Message
     if (eIsProxy()) return super.toString();
 
     StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (name: ");
+    result.append(" (priv: ");
+    result.append(priv);
+    result.append(", name: ");
     result.append(name);
     result.append(')');
     return result.toString();

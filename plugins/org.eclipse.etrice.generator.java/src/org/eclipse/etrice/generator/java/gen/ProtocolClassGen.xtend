@@ -228,7 +228,7 @@ class ProtocolClassGen {
 	}
 
 	def messageSignature(Message m) {
-		'''public void «m.name»(«IF m.data!=null»«m.data.type.typeName» «m.data.name»«ENDIF»)'''
+		'''«IF m.priv»private«ELSE»public«ENDIF» void «m.name»(«IF m.data!=null»«m.data.type.typeName» «m.data.name»«ENDIF»)'''
 	}
 
 	def messageSignatureExplicit(Message m) {

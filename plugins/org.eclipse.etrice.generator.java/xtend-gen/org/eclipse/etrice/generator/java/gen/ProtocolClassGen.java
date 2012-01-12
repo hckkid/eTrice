@@ -10,8 +10,8 @@ import org.eclipse.etrice.core.room.DataType;
 import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.MessageHandler;
-import org.eclipse.etrice.core.room.Operation;
 import org.eclipse.etrice.core.room.PortClass;
+import org.eclipse.etrice.core.room.PortOperation;
 import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RoomModel;
@@ -435,7 +435,7 @@ public class ProtocolClassGen {
         _builder.append(_Attributes, "	");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
-        EList<Operation> _operations = pclass.getOperations();
+        EList<PortOperation> _operations = pclass.getOperations();
         StringConcatenation _OperationsImplementation = this.helpers.OperationsImplementation(_operations, name);
         _builder.append(_OperationsImplementation, "	");
         _builder.newLineIfNotEmpty();
@@ -621,7 +621,15 @@ public class ProtocolClassGen {
   
   public StringConcatenation messageSignature(final Message m) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("public void ");
+    {
+      boolean _isPriv = m.isPriv();
+      if (_isPriv) {
+        _builder.append("private");
+      } else {
+        _builder.append("public");
+      }
+    }
+    _builder.append(" void ");
     String _name = m.getName();
     _builder.append(_name, "");
     _builder.append("(");

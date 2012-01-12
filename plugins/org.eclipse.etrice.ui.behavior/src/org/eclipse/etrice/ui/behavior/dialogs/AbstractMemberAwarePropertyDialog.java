@@ -19,6 +19,7 @@ import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.Operation;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.ui.behavior.dialogs.PortMessageSelectionDialog.MsgItemPair;
+import org.eclipse.etrice.ui.behavior.dialogs.PortMessageSelectionDialog.OperationItemPair;
 import org.eclipse.etrice.ui.common.dialogs.AbstractPropertyDialog;
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.SWT;
@@ -160,14 +161,21 @@ public abstract class AbstractMemberAwarePropertyDialog extends AbstractProperty
 		boolean receiveOnly = recvOnly.contains(lastTextField);
 		PortMessageSelectionDialog dlg = new PortMessageSelectionDialog(getShell(), ac, receiveOnly);
 		if (dlg.open()==Window.OK) {
-			if (dlg.getMsgItemPair()!=null) {
-				MsgItemPair pair = dlg.getMsgItemPair();
-				if (pair.out) {
-					String data = pair.msg.getData()!=null? pair.msg.getData().getName() : "";
-					insertText(pair.item.getName()+"."+pair.msg.getName()+"("+data+")");
+			if (dlg.getMethodItemPair()!=null) {
+				if (dlg.getMethodItemPair() instanceof MsgItemPair) {
+					MsgItemPair pair = (MsgItemPair) dlg.getMethodItemPair();
+					if (pair.out) {
+						String data = pair.msg.getData()!=null? pair.msg.getData().getName() : "";
+						insertText(pair.item.getName()+"."+pair.msg.getName()+"("+data+")");
+					}
+					else
+						insertText(pair.item.getName()+"."+pair.msg.getName());
 				}
-				else
-					insertText(pair.item.getName()+"."+pair.msg.getName());
+				if (dlg.getMethodItemPair() instanceof OperationItemPair) {
+					OperationItemPair pair = (OperationItemPair) dlg.getMethodItemPair();
+					String arglist = RoomHelpers.getArguments(pair.op);
+					insertText(pair.item.getName()+"."+pair.op.getName()+arglist);
+				}
 			}
 		}
 	}

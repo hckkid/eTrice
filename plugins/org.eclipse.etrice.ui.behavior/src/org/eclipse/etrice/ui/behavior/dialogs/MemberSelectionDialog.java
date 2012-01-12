@@ -16,6 +16,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.Operation;
+import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.core.ui.RoomUiModule;
 import org.eclipse.etrice.ui.behavior.Activator;
@@ -66,7 +67,7 @@ public class MemberSelectionDialog extends FormDialog {
 		@Override
 		public Object[] getElements(Object inputElement) {
 			EList<Attribute> attributes = ac.getAttributes();
-			EList<Operation> operations = ac.getOperations();
+			EList<StandardOperation> operations = ac.getOperations();
 			
 			Object[] elements = new Object[attributes.size()+operations.size()];
 			System.arraycopy(attributes.toArray(), 0, elements, 0, attributes.size());

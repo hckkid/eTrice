@@ -8,8 +8,8 @@ import org.eclipse.etrice.core.room.ComplexType;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.DataType;
 import org.eclipse.etrice.core.room.DetailCode;
-import org.eclipse.etrice.core.room.Operation;
 import org.eclipse.etrice.core.room.RoomModel;
+import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.generator.base.ILogger;
 import org.eclipse.etrice.generator.etricegen.Root;
 import org.eclipse.etrice.generator.extensions.RoomExtensions;
@@ -131,7 +131,7 @@ public class DataClassGen {
     _builder.append("\t");
     _builder.newLine();
     _builder.append("\t");
-    EList<Operation> _operations = dc.getOperations();
+    EList<StandardOperation> _operations = dc.getOperations();
     String _name_4 = dc.getName();
     StringConcatenation _OperationsImplementation = this.helpers.OperationsImplementation(_operations, _name_4);
     _builder.append(_OperationsImplementation, "	");

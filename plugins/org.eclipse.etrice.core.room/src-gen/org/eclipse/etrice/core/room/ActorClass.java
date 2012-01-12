@@ -256,7 +256,7 @@ public interface ActorClass extends ActorContainerClass
 
   /**
    * Returns the value of the '<em><b>Operations</b></em>' containment reference list.
-   * The list contents are of type {@link org.eclipse.etrice.core.room.Operation}.
+   * The list contents are of type {@link org.eclipse.etrice.core.room.StandardOperation}.
    * <!-- begin-user-doc -->
    * <p>
    * If the meaning of the '<em>Operations</em>' containment reference list isn't clear,
@@ -268,7 +268,7 @@ public interface ActorClass extends ActorContainerClass
    * @model containment="true"
    * @generated
    */
-  EList<Operation> getOperations();
+  EList<StandardOperation> getOperations();
 
   /**
    * Returns the value of the '<em><b>State Machine</b></em>' containment reference.

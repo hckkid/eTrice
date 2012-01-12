@@ -32,6 +32,8 @@ import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.MessageFromIf;
 import org.eclipse.etrice.core.room.MessageHandler;
 import org.eclipse.etrice.core.room.Port;
+import org.eclipse.etrice.core.room.PortClass;
+import org.eclipse.etrice.core.room.PortOperation;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RefSAPoint;
 import org.eclipse.etrice.core.room.RefinedState;
@@ -678,6 +680,25 @@ public class RoomScopeProvider extends AbstractDeclarativeScopeProvider {
 			for (Message m : pc.getOutgoingMessages()) {
 				scopes.add(EObjectDescription.create(m.getName(), m));
 			}
+		}
+		
+		return new SimpleScope(IScope.NULLSCOPE, scopes);
+	}
+
+	public IScope scope_PortOperation_sendsMsg(PortOperation op, EReference ref) {
+		final List<IEObjectDescription> scopes = new ArrayList<IEObjectDescription>();
+		
+		PortClass pcls = (PortClass) op.eContainer();
+		ProtocolClass pc = RoomHelpers.getProtocolClass(op);
+		if (pc!=null) {
+			if (pcls==pc.getConjugate())
+				for (Message m : pc.getIncomingMessages()) {
+					scopes.add(EObjectDescription.create(m.getName(), m));
+				}
+			else
+				for (Message m : pc.getOutgoingMessages()) {
+					scopes.add(EObjectDescription.create(m.getName(), m));
+				}
 		}
 		
 		return new SimpleScope(IScope.NULLSCOPE, scopes);

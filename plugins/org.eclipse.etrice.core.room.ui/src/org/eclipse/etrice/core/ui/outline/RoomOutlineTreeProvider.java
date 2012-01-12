@@ -19,6 +19,7 @@ import org.eclipse.etrice.core.room.ExternalPort;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.Operation;
 import org.eclipse.etrice.core.room.Port;
+import org.eclipse.etrice.core.room.PortOperation;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.SAPRef;
 import org.eclipse.etrice.core.room.SPPRef;
@@ -41,6 +42,8 @@ public class RoomOutlineTreeProvider extends DefaultOutlineTreeProvider {
 	private static final String INTERFACE_LABEL = "Interface";
 	private static final Object INCOMING_LABEL = "incoming";
 	private static final Object OUTGOING_LABEL = "outgoing";
+	private static final Object REG_PORT_CLASS_LABEL = "regular port class";
+	private static final Object CONJ_PORT_CLASS_LABEL = "conjugated port class";
 	
 	protected boolean _isLeaf(ActorClass ac) {
 		if (ac.getIfPorts().size()>0 || ac.getIfSPPs().size()>0) {
@@ -141,6 +144,10 @@ public class RoomOutlineTreeProvider extends DefaultOutlineTreeProvider {
 		if (pc.getOutgoingMessages().size()>0) {
 			new ExtraOutlineNode(pc, parentNode, OUTGOING_LABEL);
 		}
+		if (pc.getRegular()!=null)
+			new ExtraOutlineNode(pc, parentNode, REG_PORT_CLASS_LABEL);
+		if (pc.getConjugate()!=null)
+			new ExtraOutlineNode(pc, parentNode, CONJ_PORT_CLASS_LABEL);
 	}	
 	
 	protected void _createChildren(ExtraOutlineNode parentNode, ProtocolClass pc) {
@@ -149,9 +156,25 @@ public class RoomOutlineTreeProvider extends DefaultOutlineTreeProvider {
 				createNode(parentNode, m);
 			}
 		}
-		if (parentNode.getText().equals(OUTGOING_LABEL)) {
+		else if (parentNode.getText().equals(OUTGOING_LABEL)) {
 			for (Message m : pc.getOutgoingMessages()) {
 				createNode(parentNode, m);
+			}
+		}
+		else if (parentNode.getText().equals(REG_PORT_CLASS_LABEL)) {
+			for (Attribute att : pc.getRegular().getAttributes()) {
+				createNode(parentNode, att);
+			}
+			for (PortOperation op : pc.getRegular().getOperations()) {
+				createNode(parentNode, op);
+			}
+		}
+		else if (parentNode.getText().equals(CONJ_PORT_CLASS_LABEL)) {
+			for (Attribute att : pc.getConjugate().getAttributes()) {
+				createNode(parentNode, att);
+			}
+			for (PortOperation op : pc.getConjugate().getOperations()) {
+				createNode(parentNode, op);
 			}
 		}
 	}

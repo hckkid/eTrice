@@ -212,6 +212,12 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 			error("multiplicity must be -1 or positive", RoomPackage.eINSTANCE.getPort_Multiplicity());
 	}
 	
+	@Check
+	public void checkProtocol(ProtocolClass pc) {
+		if (pc.getIncomingMessages().isEmpty() && pc.getOutgoingMessages().isEmpty())
+			error("at least one message (incoming or outgoing) must be defined", RoomPackage.Literals.PROTOCOL_CLASS__INCOMING_MESSAGES);
+	}
+	
 	private void error(Result result) {
 		error(result.getMsg(), result.getSource(), result.getFeature(), result.getIndex());
 	}

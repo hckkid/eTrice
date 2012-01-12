@@ -63,18 +63,26 @@ DataClass:
 		('usercode2' userCode2=DetailCode)?
 		('usercode3' userCode3=DetailCode)?
 		attributes+=Attribute+
-		operations+=Operation*
+		operations+=StandardOperation*
 	'}';
 	
 	
 Attribute:
 	'Attribute' name=ID (size=MULTIPLICITY)? ':' type=[DataType|FQN] (ref?='ref')? ('=' defaultValueLiteral=STRING)? (docu=Documentation)?;
 
-Operation:
+Operation: StandardOperation | PortOperation; 
+
+StandardOperation:
 	'Operation' name=ID '(' (arguments+=VarDecl (',' arguments+=VarDecl)*)? ')' (':' ('void' | (returntype=[DataType|FQN] (ref?='ref')?)))?
 		(docu=Documentation)?
 		detailCode=DetailCode
-	;
+;
+
+PortOperation:
+    'Operation' name=ID '(' (arguments+=VarDecl (',' arguments+=VarDecl)*)? ')' ( (':' ('void' | (returntype=[DataType|FQN] (ref?='ref')?))) | ('sends' sendsMsg=[Message|ID]) )?
+            (docu=Documentation)?
+            detailCode=DetailCode
+; 
 
 // **************************************************************
 // protocol class
@@ -84,22 +92,22 @@ ProtocolClass:
 		('usercode1' userCode1=DetailCode)?
 		('usercode2' userCode2=DetailCode)?
 		('usercode3' userCode3=DetailCode)?
-		'incoming' '{' incomingMessages+=Message* '}'
-		'outgoing' '{' outgoingMessages+=Message* '}'
+		('incoming' '{' incomingMessages+=Message* '}')?
+		('outgoing' '{' outgoingMessages+=Message* '}')?
 		('regular' 'PortClass' regular=PortClass)?
 		('conjugate' 'PortClass' conjugate=PortClass)?
 		(semantics=ProtocolSemantics)?
 	'}';
 	
 Message:
-	'Message' name=ID '(' (data=VarDecl)? ')'
+	(priv?='private')? 'Message' name=ID '(' (data=VarDecl)? ')'
 	(docu=Documentation)?;
 
 PortClass:
 	'{'
 		('usercode' userCode=DetailCode)?
 		(attributes+=Attribute |
-		operations+=Operation |
+		operations+=PortOperation |
 		msgHandlers+=MessageHandler)+
 	'}';
 
@@ -155,7 +163,7 @@ ActorClass:
 		'}')?
 		('Behavior' (behaviorDocu=Documentation)? '{'
 			annotations+=Annotation*
-			operations+=Operation*
+			operations+=StandardOperation*
 			(stateMachine=StateMachine)?
 		'}')?
 	'}';

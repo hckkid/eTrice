@@ -19,6 +19,8 @@ import java.util.List;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.Message;
+import org.eclipse.etrice.core.room.PortClass;
+import org.eclipse.etrice.core.room.PortOperation;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.core.ui.RoomUiModule;
 import org.eclipse.etrice.ui.behavior.Activator;
@@ -57,22 +59,38 @@ import com.google.inject.Injector;
  */
 public class PortMessageSelectionDialog extends FormDialog {
 
-	public static class MsgItemPair {
-		Message msg;
+	public static class MethodItemPair {
 		InterfaceItem item;
+
+		public MethodItemPair(InterfaceItem item) {
+			super();
+			this.item = item;
+		}
+	}
+	
+	public static class MsgItemPair extends MethodItemPair {
+		Message msg;
 		boolean out;
 		
-		public MsgItemPair(Message msg, InterfaceItem item, boolean out) {
-			super();
+		public MsgItemPair(InterfaceItem item, Message msg, boolean out) {
+			super(item);
 			this.msg = msg;
-			this.item = item;
 			this.out = out;
+		}
+	}
+	
+	public static class OperationItemPair extends MethodItemPair {
+		PortOperation op;
+		
+		public OperationItemPair(InterfaceItem item, PortOperation op) {
+			super(item);
+			this.op = op;
 		}
 	}
 	
 	private class PortMessageContentProvider implements ITreeContentProvider {
 
-		private HashMap<InterfaceItem, ArrayList<MsgItemPair>> msg2item;
+		private HashMap<InterfaceItem, ArrayList<MethodItemPair>> item2pairs;
 		
 		@Override
 		public void dispose() {
@@ -80,23 +98,31 @@ public class PortMessageSelectionDialog extends FormDialog {
 
 		@Override
 		public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
-			msg2item = new HashMap<InterfaceItem, ArrayList<MsgItemPair>>();
+			item2pairs = new HashMap<InterfaceItem, ArrayList<MethodItemPair>>();
 			List<InterfaceItem> items = RoomHelpers.getAllInterfaceItems(ac);
 			for (InterfaceItem item : items) {
-				ArrayList<MsgItemPair> pairs = new ArrayList<MsgItemPair>();
+				ArrayList<MethodItemPair> pairs = new ArrayList<MethodItemPair>();
 				List<Message> out = RoomHelpers.getMessageList(item, true);
 				if (!recvOnly) {
 					for (Message msg : out) {
-						pairs.add(new MsgItemPair(msg, item, true));
+						if (!msg.isPriv())
+							pairs.add(new MsgItemPair(item, msg, true));
 					}
 				}
 				if (ac.getStateMachine().isDataDriven()) {
 					List<Message> in = RoomHelpers.getMessageList(item, false);
 					for (Message msg : in) {
-						pairs.add(new MsgItemPair(msg, item, false));
+						if (!msg.isPriv())
+							pairs.add(new MsgItemPair(item, msg, false));
 					}
 				}
-				msg2item.put(item, pairs);
+				PortClass pcls = RoomHelpers.getPortClass(item);
+				if (pcls!=null) {
+					for (PortOperation op : pcls.getOperations()) {
+						pairs.add(new OperationItemPair(item, op));
+					}
+				}
+				item2pairs.put(item, pairs);
 			}
 		}
 
@@ -108,7 +134,7 @@ public class PortMessageSelectionDialog extends FormDialog {
 		@Override
 		public Object[] getChildren(Object element) {
 			if (element instanceof InterfaceItem) {
-				ArrayList<MsgItemPair> list = msg2item.get(element);
+				ArrayList<MethodItemPair> list = item2pairs.get(element);
 				return list.toArray();
 			}
 			return null;
@@ -145,6 +171,13 @@ public class PortMessageSelectionDialog extends FormDialog {
 			if (columnIndex==0) {
 				if (element instanceof MsgItemPair)
 					element = ((MsgItemPair) element).msg;
+				else if (element instanceof OperationItemPair) {
+					PortOperation op = ((OperationItemPair) element).op;
+					if (op.getSendsMsg()!=null)
+						element = op.getSendsMsg();
+					else
+						element = op;
+				}
 				return labelProvider.getImage(element);
 			}
 			
@@ -162,16 +195,26 @@ public class PortMessageSelectionDialog extends FormDialog {
 					return ((InterfaceItem) element).getName();
 				else if (element instanceof MsgItemPair)
 					return ((MsgItemPair) element).msg.getName();
+				else if (element instanceof OperationItemPair)
+					return ((OperationItemPair) element).op.getName();
 				break;
 			case 1:
 				if (element instanceof MsgItemPair)
 					return ((MsgItemPair) element).out? "send" : "recv";
+				else if (element instanceof OperationItemPair) {
+					if (((OperationItemPair) element).op.getSendsMsg()!=null)
+						return "send";
+				}
 				break;
 			case 2:
 				if (element instanceof MsgItemPair) {
 					Message msg = ((MsgItemPair) element).msg;
 					if (msg.getData()!=null)
 						return msg.getData().getName()+" : "+msg.getData().getType().getName();
+				}
+				else if (element instanceof OperationItemPair) {
+					String sig = RoomHelpers.getSignature(((OperationItemPair) element).op);
+					return sig.substring(1, sig.length()-1);	// omit round brackets
 				}
 				break;
 			}
@@ -192,7 +235,7 @@ public class PortMessageSelectionDialog extends FormDialog {
 	private ActorClass ac;
 	private boolean recvOnly;
 	private TreeViewer viewer;
-	private MsgItemPair selected = null;
+	private MethodItemPair selected = null;
 
 	@Inject
 	ILabelProvider labelProvider;
@@ -252,7 +295,7 @@ public class PortMessageSelectionDialog extends FormDialog {
 				if (ok!=null) {
 					if (event.getSelection() instanceof IStructuredSelection) {
 						Object element = ((IStructuredSelection) event.getSelection()).getFirstElement();
-						ok.setEnabled(element instanceof MsgItemPair);
+						ok.setEnabled(element instanceof MethodItemPair);
 					}
 				}
 			}
@@ -272,14 +315,14 @@ public class PortMessageSelectionDialog extends FormDialog {
 		ISelection selection = viewer.getSelection();
 		if (selection instanceof IStructuredSelection) {
 			Object element = ((IStructuredSelection) selection).getFirstElement();
-			if (element instanceof MsgItemPair) {
-				selected = (MsgItemPair) element;
+			if (element instanceof MethodItemPair) {
+				selected = (MethodItemPair) element;
 			}
 		}
 		super.okPressed();
 	}
 
-	public MsgItemPair getMsgItemPair() {
+	public MethodItemPair getMethodItemPair() {
 		return selected;
 	}
 }
