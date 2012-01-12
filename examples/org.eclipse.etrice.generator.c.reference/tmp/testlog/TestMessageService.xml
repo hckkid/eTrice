@@ -1,5 +1,5 @@
 <testsuites name="TestMessageService" tests="0" failures="0" errors="0" time="0">
-	<testsuite name="testGeneratedDataClass" tests="0" failures="0" errors="0" time="0">
+	<testsuite name="TestDataClass" tests="0" failures="0" errors="0" time="0">
 		<testcase name="testDataClassDeepCopy" time="0"/>
 	</testsuite>
 	<testsuite name="TestMessage" tests="0" failures="0" errors="0" time="0">
