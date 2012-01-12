@@ -75,7 +75,6 @@ RoomModel room.basic.service.logging {
 	ProtocolClass Log {
 		incoming {
 			Message open(fileName: string)
-			Message setLogLevel(l: int32)
 			Message close()
 			private Message internalLog(data: InternalLogData)
 		}
@@ -88,7 +87,7 @@ RoomModel room.basic.service.logging {
 				"static int logLevel=0;"
 				"InternalLogData d = new InternalLogData();"
 			}
-			handle setLogLevel {
+			Operation setLogLevel(l: int32) {
 				"logLevel=l;"
 				"if (logLevel > LOG_LEVEL_HIGH) logLevel=LOG_LEVEL_HIGH;"
 			}

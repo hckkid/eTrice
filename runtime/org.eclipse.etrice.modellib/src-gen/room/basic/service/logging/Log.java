@@ -17,14 +17,13 @@ public class Log {
 	//IDs for outgoing messages
 	//IDs for incoming messages
 	public static final int IN_open = 1;
-	public static final int IN_setLogLevel = 2;
-	public static final int IN_close = 3;
-	public static final int IN_internalLog = 4;
+	public static final int IN_close = 2;
+	public static final int IN_internalLog = 3;
 	//error if msgID >= MSG_MAX
-	public static final int MSG_MAX = 5;  
+	public static final int MSG_MAX = 4;  
 
 
-	private static String messageStrings[] = {"MIN",  "open","setLogLevel","close","internalLog","MAX"};
+	private static String messageStrings[] = {"MIN",  "open","close","internalLog","MAX"};
 
 	public String getMessageString(int msg_id) {
 		if (msg_id<MSG_MIN || msg_id>MSG_MAX+1){
@@ -143,6 +142,10 @@ public class Log {
 	
 		//--------------------- attributes
 		//--------------------- operations
+		public void setLogLevel(int l) {
+			logLevel=l;
+			if (logLevel > LOG_LEVEL_HIGH) logLevel=LOG_LEVEL_HIGH;
+		}
 		public void log(int logLevel, String userString) {
 			long s;
 			if (logLevel>this.logLevel){
@@ -163,10 +166,6 @@ public class Log {
 			}
 			if (getPeerAddress()!=null)
 				getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), IN_open, fileName));
-		}
-		public void setLogLevel(int l) {
-				logLevel=l;
-			if (logLevel > LOG_LEVEL_HIGH) logLevel=LOG_LEVEL_HIGH;
 		}
 		public void close() {
 			if (messageStrings[ IN_close] != "timerTick"){
@@ -220,11 +219,6 @@ public class Log {
 		public void open(String fileName){
 			for (int i=0; i<replication; ++i) {
 				ports.get(i).open( fileName);
-			}
-		}
-		public void setLogLevel(int l){
-			for (int i=0; i<replication; ++i) {
-				ports.get(i).setLogLevel( l);
 			}
 		}
 		public void close(){
