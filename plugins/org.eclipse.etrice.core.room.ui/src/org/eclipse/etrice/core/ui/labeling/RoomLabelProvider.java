@@ -291,12 +291,17 @@ public class RoomLabelProvider extends DefaultEObjectLabelProvider {
 		return "Attr "+attr.getName()+type+value;
 	}
 	
-	String text(Operation op) {
+	StyledString text(Operation op) {
 		String rt = op.getReturntype()!=null? ": "+op.getReturntype().getName():"";
 		String signature = RoomHelpers.getSignature(op);
 		if (op instanceof PortOperation && ((PortOperation) op).getSendsMsg()!=null)
 			rt = " sends "+((PortOperation) op).getSendsMsg().getName();
-		return op.getName()+signature+rt;
+		StyledString result = new StyledString(op.getName()+signature+rt);
+		int pos = result.toString().indexOf(" sends ");
+		if (pos>=0)
+			result.setStyle(pos+1, 5, getKeywordStyler());
+
+		return result;
 	}
 	
 	String text(Message m) {
