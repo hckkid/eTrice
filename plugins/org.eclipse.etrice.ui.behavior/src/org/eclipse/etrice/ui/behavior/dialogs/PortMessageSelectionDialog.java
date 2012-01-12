@@ -119,7 +119,12 @@ public class PortMessageSelectionDialog extends FormDialog {
 				PortClass pcls = RoomHelpers.getPortClass(item);
 				if (pcls!=null) {
 					for (PortOperation op : pcls.getOperations()) {
-						pairs.add(new OperationItemPair(item, op));
+						if (op.getSendsMsg()!=null)
+							pairs.add(new OperationItemPair(item, op));
+					}
+					for (PortOperation op : pcls.getOperations()) {
+						if (op.getSendsMsg()==null)
+							pairs.add(new OperationItemPair(item, op));
 					}
 				}
 				item2pairs.put(item, pairs);
@@ -204,6 +209,8 @@ public class PortMessageSelectionDialog extends FormDialog {
 				else if (element instanceof OperationItemPair) {
 					if (((OperationItemPair) element).op.getSendsMsg()!=null)
 						return "send";
+					else
+						return "n/a";
 				}
 				break;
 			case 2:
@@ -267,7 +274,7 @@ public class PortMessageSelectionDialog extends FormDialog {
 		viewer = new TreeViewer(body, SWT.FULL_SELECTION | SWT.BORDER | SWT.H_SCROLL);
 		
 		TreeColumn col0 = new TreeColumn(viewer.getTree(), SWT.NONE);
-		col0.setText("interface item/message");
+		col0.setText("interface item/msg or op");
 		TreeColumn col1 = new TreeColumn(viewer.getTree(), SWT.NONE);
 		col1.setText("direction");
 		TreeColumn col2 = new TreeColumn(viewer.getTree(), SWT.NONE);
