@@ -178,10 +178,7 @@ public class PortMessageSelectionDialog extends FormDialog {
 					element = ((MsgItemPair) element).msg;
 				else if (element instanceof OperationItemPair) {
 					PortOperation op = ((OperationItemPair) element).op;
-					if (op.getSendsMsg()!=null)
-						element = op.getSendsMsg();
-					else
-						element = op;
+					element = op;
 				}
 				return labelProvider.getImage(element);
 			}
@@ -200,8 +197,13 @@ public class PortMessageSelectionDialog extends FormDialog {
 					return ((InterfaceItem) element).getName();
 				else if (element instanceof MsgItemPair)
 					return ((MsgItemPair) element).msg.getName();
-				else if (element instanceof OperationItemPair)
-					return ((OperationItemPair) element).op.getName();
+				else if (element instanceof OperationItemPair) {
+					PortOperation op = ((OperationItemPair) element).op;
+					String add = "";
+					if (op.getSendsMsg()!=null)
+						add = " sends "+op.getSendsMsg().getName();
+					return op.getName()+add;
+				}
 				break;
 			case 1:
 				if (element instanceof MsgItemPair)
