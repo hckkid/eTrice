@@ -32,10 +32,10 @@ public class MrPing extends ActorClassBase {
 	protected static final int IFITEM_PingPongPort = 1;
 	
 	//--------------------- attributes
-	protected int[] i32Array =new int[10];
-	protected PingPongData data;
+	protected int[] i32Array = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+	protected PingPongData data = new PingPongData();
 	//--------------------- operations
-	public void printData (PingPongData d){
+	public void printData(PingPongData d) {
 		System.out.printf("MrPing:\n");
 		System.out.printf("i8Val: %d \n",d.getI8Val());
 		System.out.printf("i16Val: %d \n",d.getI16Val());
@@ -54,6 +54,9 @@ public class MrPing extends ActorClassBase {
 		setClassName("MrPing");
 		
 		// initialize attributes
+		for (int i=0;i<10;i++){
+			i32Array[i] = 0;
+		}
 		data = new PingPongData();
 
 		// own ports

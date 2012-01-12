@@ -75,8 +75,8 @@ public class PingPongProtocol {
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_pong]);
 			}
 			if (getPeerAddress()!=null)
-			getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_pong));
-			}
+				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_pong));
+				}
 	}
 	
 	// replicated port class
@@ -157,8 +157,8 @@ public class PingPongProtocol {
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_ping]);
 			}
 			if (getPeerAddress()!=null)
-			getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), IN_ping));
-			}
+				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), IN_ping));
+				}
 	}
 	
 	// replicated port class

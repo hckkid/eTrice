@@ -108,8 +108,8 @@ public class p_HFSM {
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_init_action]);
 			}
 			if (getPeerAddress()!=null)
-			getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_init_action));
-			}
+				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_init_action));
+				}
 		public void s1_entry ()
 		{
 			if (messageStrings[ OUT_s1_entry] != "timerTick"){
@@ -117,8 +117,8 @@ public class p_HFSM {
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_s1_entry]);
 			}
 			if (getPeerAddress()!=null)
-			getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_s1_entry));
-			}
+				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_s1_entry));
+				}
 		public void s1_exit ()
 		{
 			if (messageStrings[ OUT_s1_exit] != "timerTick"){
@@ -126,8 +126,8 @@ public class p_HFSM {
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_s1_exit]);
 			}
 			if (getPeerAddress()!=null)
-			getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_s1_exit));
-			}
+				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_s1_exit));
+				}
 		public void s2_entry ()
 		{
 			if (messageStrings[ OUT_s2_entry] != "timerTick"){
@@ -135,8 +135,8 @@ public class p_HFSM {
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_s2_entry]);
 			}
 			if (getPeerAddress()!=null)
-			getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_s2_entry));
-			}
+				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_s2_entry));
+				}
 		public void s2_exit ()
 		{
 			if (messageStrings[ OUT_s2_exit] != "timerTick"){
@@ -144,8 +144,8 @@ public class p_HFSM {
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_s2_exit]);
 			}
 			if (getPeerAddress()!=null)
-			getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_s2_exit));
-			}
+				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_s2_exit));
+				}
 		public void s3_entry ()
 		{
 			if (messageStrings[ OUT_s3_entry] != "timerTick"){
@@ -153,8 +153,8 @@ public class p_HFSM {
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_s3_entry]);
 			}
 			if (getPeerAddress()!=null)
-			getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_s3_entry));
-			}
+				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_s3_entry));
+				}
 		public void s3_exit ()
 		{
 			if (messageStrings[ OUT_s3_exit] != "timerTick"){
@@ -162,8 +162,8 @@ public class p_HFSM {
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_s3_exit]);
 			}
 			if (getPeerAddress()!=null)
-			getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_s3_exit));
-			}
+				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_s3_exit));
+				}
 		public void s4_entry ()
 		{
 			if (messageStrings[ OUT_s4_entry] != "timerTick"){
@@ -171,8 +171,8 @@ public class p_HFSM {
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_s4_entry]);
 			}
 			if (getPeerAddress()!=null)
-			getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_s4_entry));
-			}
+				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_s4_entry));
+				}
 		public void s4_exit ()
 		{
 			if (messageStrings[ OUT_s4_exit] != "timerTick"){
@@ -180,8 +180,8 @@ public class p_HFSM {
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_s4_exit]);
 			}
 			if (getPeerAddress()!=null)
-			getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_s4_exit));
-			}
+				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_s4_exit));
+				}
 		public void s2s1_entry ()
 		{
 			if (messageStrings[ OUT_s2s1_entry] != "timerTick"){
@@ -189,8 +189,8 @@ public class p_HFSM {
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_s2s1_entry]);
 			}
 			if (getPeerAddress()!=null)
-			getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_s2s1_entry));
-			}
+				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_s2s1_entry));
+				}
 		public void s2s1_exit ()
 		{
 			if (messageStrings[ OUT_s2s1_exit] != "timerTick"){
@@ -198,8 +198,8 @@ public class p_HFSM {
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_s2s1_exit]);
 			}
 			if (getPeerAddress()!=null)
-			getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_s2s1_exit));
-			}
+				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_s2s1_exit));
+				}
 		public void s2s2_entry ()
 		{
 			if (messageStrings[ OUT_s2s2_entry] != "timerTick"){
@@ -207,8 +207,8 @@ public class p_HFSM {
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_s2s2_entry]);
 			}
 			if (getPeerAddress()!=null)
-			getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_s2s2_entry));
-			}
+				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_s2s2_entry));
+				}
 		public void s2s2_exit ()
 		{
 			if (messageStrings[ OUT_s2s2_exit] != "timerTick"){
@@ -216,8 +216,8 @@ public class p_HFSM {
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_s2s2_exit]);
 			}
 			if (getPeerAddress()!=null)
-			getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_s2s2_exit));
-			}
+				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_s2s2_exit));
+				}
 		public void s1_m1_s2_action ()
 		{
 			if (messageStrings[ OUT_s1_m1_s2_action] != "timerTick"){
@@ -225,8 +225,8 @@ public class p_HFSM {
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_s1_m1_s2_action]);
 			}
 			if (getPeerAddress()!=null)
-			getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_s1_m1_s2_action));
-			}
+				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_s1_m1_s2_action));
+				}
 		public void s2_m1_s2s1_action ()
 		{
 			if (messageStrings[ OUT_s2_m1_s2s1_action] != "timerTick"){
@@ -234,8 +234,8 @@ public class p_HFSM {
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_s2_m1_s2s1_action]);
 			}
 			if (getPeerAddress()!=null)
-			getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_s2_m1_s2s1_action));
-			}
+				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_s2_m1_s2s1_action));
+				}
 		public void s2s1_m2_s2s2_action ()
 		{
 			if (messageStrings[ OUT_s2s1_m2_s2s2_action] != "timerTick"){
@@ -243,8 +243,8 @@ public class p_HFSM {
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_s2s1_m2_s2s2_action]);
 			}
 			if (getPeerAddress()!=null)
-			getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_s2s1_m2_s2s2_action));
-			}
+				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_s2s1_m2_s2s2_action));
+				}
 		public void s2s2_m3_action ()
 		{
 			if (messageStrings[ OUT_s2s2_m3_action] != "timerTick"){
@@ -252,8 +252,8 @@ public class p_HFSM {
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_s2s2_m3_action]);
 			}
 			if (getPeerAddress()!=null)
-			getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_s2s2_m3_action));
-			}
+				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_s2s2_m3_action));
+				}
 		public void s2_m4_s4_action ()
 		{
 			if (messageStrings[ OUT_s2_m4_s4_action] != "timerTick"){
@@ -261,8 +261,8 @@ public class p_HFSM {
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_s2_m4_s4_action]);
 			}
 			if (getPeerAddress()!=null)
-			getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_s2_m4_s4_action));
-			}
+				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_s2_m4_s4_action));
+				}
 		public void s2_m5_s2_action ()
 		{
 			if (messageStrings[ OUT_s2_m5_s2_action] != "timerTick"){
@@ -270,8 +270,8 @@ public class p_HFSM {
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_s2_m5_s2_action]);
 			}
 			if (getPeerAddress()!=null)
-			getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_s2_m5_s2_action));
-			}
+				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_s2_m5_s2_action));
+				}
 		public void s2_m6_s2_action ()
 		{
 			if (messageStrings[ OUT_s2_m6_s2_action] != "timerTick"){
@@ -279,8 +279,8 @@ public class p_HFSM {
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_s2_m6_s2_action]);
 			}
 			if (getPeerAddress()!=null)
-			getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_s2_m6_s2_action));
-			}
+				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_s2_m6_s2_action));
+				}
 		public void s2__s3_action ()
 		{
 			if (messageStrings[ OUT_s2__s3_action] != "timerTick"){
@@ -288,8 +288,8 @@ public class p_HFSM {
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_s2__s3_action]);
 			}
 			if (getPeerAddress()!=null)
-			getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_s2__s3_action));
-			}
+				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_s2__s3_action));
+				}
 		public void s2_m7_s2_action ()
 		{
 			if (messageStrings[ OUT_s2_m7_s2_action] != "timerTick"){
@@ -297,8 +297,8 @@ public class p_HFSM {
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_s2_m7_s2_action]);
 			}
 			if (getPeerAddress()!=null)
-			getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_s2_m7_s2_action));
-			}
+				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_s2_m7_s2_action));
+				}
 		public void top_s8_top_action ()
 		{
 			if (messageStrings[ OUT_top_s8_top_action] != "timerTick"){
@@ -306,8 +306,8 @@ public class p_HFSM {
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_top_s8_top_action]);
 			}
 			if (getPeerAddress()!=null)
-			getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_top_s8_top_action));
-			}
+				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_top_s8_top_action));
+				}
 		public void top_s9_top_action ()
 		{
 			if (messageStrings[ OUT_top_s9_top_action] != "timerTick"){
@@ -315,8 +315,8 @@ public class p_HFSM {
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_top_s9_top_action]);
 			}
 			if (getPeerAddress()!=null)
-			getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_top_s9_top_action));
-			}
+				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_top_s9_top_action));
+				}
 		public void top_reset_s2_action ()
 		{
 			if (messageStrings[ OUT_top_reset_s2_action] != "timerTick"){
@@ -324,8 +324,8 @@ public class p_HFSM {
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_top_reset_s2_action]);
 			}
 			if (getPeerAddress()!=null)
-			getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_top_reset_s2_action));
-			}
+				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_top_reset_s2_action));
+				}
 	}
 	
 	// replicated port class
@@ -574,8 +574,8 @@ public class p_HFSM {
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_m1]);
 			}
 			if (getPeerAddress()!=null)
-			getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), IN_m1));
-			}
+				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), IN_m1));
+				}
 		public void m2 ()
 		{
 			if (messageStrings[ IN_m2] != "timerTick"){
@@ -583,8 +583,8 @@ public class p_HFSM {
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_m2]);
 			}
 			if (getPeerAddress()!=null)
-			getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), IN_m2));
-			}
+				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), IN_m2));
+				}
 		public void m3 ()
 		{
 			if (messageStrings[ IN_m3] != "timerTick"){
@@ -592,8 +592,8 @@ public class p_HFSM {
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_m3]);
 			}
 			if (getPeerAddress()!=null)
-			getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), IN_m3));
-			}
+				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), IN_m3));
+				}
 		public void m4 ()
 		{
 			if (messageStrings[ IN_m4] != "timerTick"){
@@ -601,8 +601,8 @@ public class p_HFSM {
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_m4]);
 			}
 			if (getPeerAddress()!=null)
-			getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), IN_m4));
-			}
+				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), IN_m4));
+				}
 		public void m5 ()
 		{
 			if (messageStrings[ IN_m5] != "timerTick"){
@@ -610,8 +610,8 @@ public class p_HFSM {
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_m5]);
 			}
 			if (getPeerAddress()!=null)
-			getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), IN_m5));
-			}
+				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), IN_m5));
+				}
 		public void m6 ()
 		{
 			if (messageStrings[ IN_m6] != "timerTick"){
@@ -619,8 +619,8 @@ public class p_HFSM {
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_m6]);
 			}
 			if (getPeerAddress()!=null)
-			getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), IN_m6));
-			}
+				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), IN_m6));
+				}
 		public void reset ()
 		{
 			if (messageStrings[ IN_reset] != "timerTick"){
@@ -628,8 +628,8 @@ public class p_HFSM {
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_reset]);
 			}
 			if (getPeerAddress()!=null)
-			getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), IN_reset));
-			}
+				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), IN_reset));
+				}
 		public void m7 ()
 		{
 			if (messageStrings[ IN_m7] != "timerTick"){
@@ -637,8 +637,8 @@ public class p_HFSM {
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_m7]);
 			}
 			if (getPeerAddress()!=null)
-			getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), IN_m7));
-			}
+				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), IN_m7));
+				}
 		public void m8 ()
 		{
 			if (messageStrings[ IN_m8] != "timerTick"){
@@ -646,8 +646,8 @@ public class p_HFSM {
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_m8]);
 			}
 			if (getPeerAddress()!=null)
-			getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), IN_m8));
-			}
+				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), IN_m8));
+				}
 		public void m9 ()
 		{
 			if (messageStrings[ IN_m9] != "timerTick"){
@@ -655,8 +655,8 @@ public class p_HFSM {
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_m9]);
 			}
 			if (getPeerAddress()!=null)
-			getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), IN_m9));
-			}
+				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), IN_m9));
+				}
 	}
 	
 	// replicated port class

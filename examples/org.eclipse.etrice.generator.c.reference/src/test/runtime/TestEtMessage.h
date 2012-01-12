@@ -10,11 +10,11 @@
  *
  *******************************************************************************/
 
-#ifndef TESTMESSAGE_H_
-#define TESTMESSAGE_H_
+#ifndef _TESTMESSAGE_H_
+#define _TESTMESSAGE_H_
 
 
-void TestMessage_runSuite(void);
+void TestEtMessage_runSuite(void);
 
 
-#endif /* TESTMESSAGE_H_ */
+#endif /* _TESTMESSAGE_H_ */

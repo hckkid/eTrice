@@ -145,7 +145,7 @@ public class TestProtocol {
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_msg1]);
 			}
 			if (getPeerAddress()!=null)
-			getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), IN_msg1, p1));
+				getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), IN_msg1, p1));
 		}
 		public void msg2 (int p1)
 		{
@@ -154,7 +154,7 @@ public class TestProtocol {
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_msg2]);
 			}
 			if (getPeerAddress()!=null)
-			getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), IN_msg2, p1));
+				getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), IN_msg2, p1));
 		}
 		public void msg3 ()
 		{
@@ -163,8 +163,8 @@ public class TestProtocol {
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_msg3]);
 			}
 			if (getPeerAddress()!=null)
-			getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), IN_msg3));
-			}
+				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), IN_msg3));
+				}
 		public void msg4 ()
 		{
 			if (messageStrings[ IN_msg4] != "timerTick"){
@@ -172,8 +172,8 @@ public class TestProtocol {
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_msg4]);
 			}
 			if (getPeerAddress()!=null)
-			getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), IN_msg4));
-			}
+				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), IN_msg4));
+				}
 		public void msg5 (int p1)
 		{
 			if (messageStrings[ IN_msg5] != "timerTick"){
@@ -181,7 +181,7 @@ public class TestProtocol {
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_msg5]);
 			}
 			if (getPeerAddress()!=null)
-			getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), IN_msg5, p1));
+				getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), IN_msg5, p1));
 		}
 		public void msg6 (int p1)
 		{
@@ -190,7 +190,7 @@ public class TestProtocol {
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_msg6]);
 			}
 			if (getPeerAddress()!=null)
-			getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), IN_msg6, p1));
+				getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), IN_msg6, p1));
 		}
 	}
 	

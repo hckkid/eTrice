@@ -77,7 +77,7 @@ public class PingPongProtocol {
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_pong]);
 			}
 			if (getPeerAddress()!=null)
-			getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), OUT_pong, p.deepCopy()));
+				getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), OUT_pong, p.deepCopy()));
 		}
 		public void pongSimple (int p)
 		{
@@ -86,7 +86,7 @@ public class PingPongProtocol {
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_pongSimple]);
 			}
 			if (getPeerAddress()!=null)
-			getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), OUT_pongSimple, p));
+				getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), OUT_pongSimple, p));
 		}
 	}
 	
@@ -175,7 +175,7 @@ public class PingPongProtocol {
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_ping]);
 			}
 			if (getPeerAddress()!=null)
-			getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), IN_ping, p.deepCopy()));
+				getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), IN_ping, p.deepCopy()));
 		}
 		public void pingSimple (int p)
 		{
@@ -184,7 +184,7 @@ public class PingPongProtocol {
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_pingSimple]);
 			}
 			if (getPeerAddress()!=null)
-			getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), IN_pingSimple, p));
+				getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), IN_pingSimple, p));
 		}
 	}
 	

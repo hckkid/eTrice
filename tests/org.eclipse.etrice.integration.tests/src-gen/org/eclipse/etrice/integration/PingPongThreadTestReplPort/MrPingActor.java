@@ -32,8 +32,8 @@ public class MrPingActor extends ActorClassBase {
 	protected static final int IFITEM_timer = 2;
 	
 	//--------------------- attributes
-	protected int count;
-	protected int pongCount;
+	protected int count = 0;
+	protected int pongCount = 0;
 	//--------------------- operations
 
 	//--------------------- construction
@@ -42,6 +42,8 @@ public class MrPingActor extends ActorClassBase {
 		setClassName("MrPingActor");
 		
 		// initialize attributes
+		count = 0;
+		pongCount = 0;
 
 		// own ports
 		PingPongPort = new PingPongProtocolConjPortRepl(this, "PingPongPort", IFITEM_PingPongPort, port_addr[IFITEM_PingPongPort], peer_addr[IFITEM_PingPongPort]); 

@@ -10,12 +10,27 @@
  *
  *******************************************************************************/
 
-#ifndef TESTRMESSAGESERVICE_H_
-#define TESTRMESSAGESERVICE_H_
+#include <stdio.h>
 
-#include "RMessageService.h"
+#include "RUnit.h"
 
-void TestRMessageService_runSuite(void);
+#include "test/generator/RunCGeneratorTestcases.h"
+#include "test/runtime/RunCRuntimeTestcases.h"
+
+void runTestCases(void);
+
+int main(void){
+	runTestCases();
+	return 0;
+}
 
 
-#endif /* TESTRMESSAGESERVICE_H_ */
+void runTestCases(void){
+	RUnit_open("tmp/testlog","TestMessageService");
+
+	RunCGeneratorTestcases();
+	RunCRuntimeTestcases();
+
+	RUnit_close();
+}
+

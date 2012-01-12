@@ -13,15 +13,23 @@
 #ifndef _DATATYPES_H_
 #define _DATATYPES_H_
 
+/*
+ * typedefs for platform specific datatypes
+ *
+ * */
+
 /* unsigned integer datatypes */
 typedef unsigned char uint8;
 typedef unsigned short int uint16;
 typedef unsigned long uint32;
+typedef unsigned long long uint64;
 
 /* signed integer datatypes */
 typedef char int8;
 typedef short int int16;
 typedef long int32;
+typedef long long int64;
+
 
 /* float datatypes */
 typedef float float32;
@@ -36,5 +44,22 @@ typedef char boool;  /* TODO: bool, Bool, Boolean, and boolean are already defin
 	#define FALSE 0
 #endif
 
+/*
+ * typedefs for Runtime and Testing
+ *
+ * */
+
+typedef uint8 etInt8;
+typedef int16 etInt16;
+typedef int32 etInt32;
+
+typedef uint8 etUInt8;
+typedef uint16 etUInt16;
+typedef uint32 etUInt32;
+
+typedef boool etBool;
+
+typedef float32 etFloat32;
+typedef float64 etFloat64;
 
 #endif /* _DATATYPES_H_ */

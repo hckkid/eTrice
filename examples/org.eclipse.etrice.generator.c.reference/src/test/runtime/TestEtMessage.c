@@ -10,7 +10,7 @@
  *
  *******************************************************************************/
 
-#include "TestMessage.h"
+#include "TestEtMessage.h"
 
 #include <stddef.h>
 #include "RUnit.h"
@@ -18,30 +18,31 @@
 
 
 
-void TestMessage_testBasicMessage(void){
+void TestEtMessage_testBasicMessage(void){
+	RUnit_openTestCase("TestMessage_testBasicMessage");
 
 	RMessage msg1 = {(RMessage*)1234567, 123,456,};
 	RMessage msg2 = {NULL, 222,333};
 
 	// basic checks -> detects structure changes that would cause problems for generated code
-	EXPECT_EQUAL_INT("Message.next", 1234567,msg1.next);
-	EXPECT_EQUAL_INT("Message.address", 123,msg1.address);
-	EXPECT_EQUAL_INT("Message.evtID", 456,msg1.evtID);
+	EXPECT_EQUAL_PTR("Message.next", 1234567, msg1.next);
+	EXPECT_EQUAL_INT16("Message.address", 123, msg1.address);
+	EXPECT_EQUAL_INT16("Message.evtID", 456, msg1.evtID);
 
 	// build pointer ring
 	msg1.next = &msg2;
 	msg2.next = &msg1;
 
-	EXPECT_EQUAL_INT("msg1.NextMsg", msg2.evtID, msg1.next->evtID);
-	EXPECT_EQUAL_INT("msg2.NextMsg", msg1.evtID, msg2.next->evtID);
+	EXPECT_EQUAL_INT16("msg1.NextMsg", msg2.evtID, msg1.next->evtID);
+	EXPECT_EQUAL_INT16("msg2.NextMsg", msg1.evtID, msg2.next->evtID);
 
-
+	RUnit_closeTestCase();
 }
 
 
-void TestMessage_runSuite(void){
-	RUnit_open("testMessage");
-	TestMessage_testBasicMessage();
-	RUnit_close();
+void TestEtMessage_runSuite(void){
+	RUnit_openTestSuite("TestMessage");
+	TestEtMessage_testBasicMessage();
+	RUnit_closeTestSuite();
 }
 
