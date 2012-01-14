@@ -27,12 +27,12 @@ void TestEtMessageQueue_testPushPop(void){
 	RMessageQueue_push(&queue1, &msg2);
 
 	EXPECT_EQUAL_INT16("RMessageQueue.size before", 2,queue1.size);
-	EXPECT_EQUAL_INT16("RMessageQueue.highWaterMark before", 2,queue1.highWaterMark);
+	EXPECT_EQUAL_INT16("RMessageQueue.highWaterMark before", 2, queue1.highWaterMark);
 
 	RMessage* rcvMsg1 = RMessageQueue_pop(&queue1);
 	RMessage* rcvMsg2 = RMessageQueue_pop(&queue1);
 
-	EXPECT_EQUAL_INT16("RMessageQueue.size after", 0,queue1.size);
+	EXPECT_EQUAL_INT16("RMessageQueue.size after", 0,(int32)queue1.size);
 	EXPECT_EQUAL_INT16("RMessageQueue.highWaterMark after", 2,queue1.highWaterMark);
 
 	EXPECT_EQUAL_INT16("rcvMsg1->address", 123, rcvMsg1->address);
@@ -64,7 +64,7 @@ void TestEtMessageQueue_testMassiveMessaging(void){
 	RMessageQueue queue1;
 	RMessageQueue_init(&queue1);
 
-	int32 i;
+	int16 i;
 	for(i=0; i<MAX; i++){
 		//RMessage_init(&msgArray[i]);
 		msgArray[i].address = i;
