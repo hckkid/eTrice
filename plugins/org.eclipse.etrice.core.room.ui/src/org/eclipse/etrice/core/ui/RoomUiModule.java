@@ -12,11 +12,12 @@
 
 package org.eclipse.etrice.core.ui;
 
+import org.eclipse.etrice.core.ui.contentassist.ImportAwareHyperlinkHelper;
 import org.eclipse.etrice.core.ui.internal.RoomActivator;
+import org.eclipse.etrice.core.ui.outline.RoomOutlinePage;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
-
-import org.eclipse.etrice.core.ui.outline.RoomOutlinePage;
+import org.eclipse.xtext.ui.editor.hyperlinking.IHyperlinkHelper;
 
 import com.google.inject.Injector;
 
@@ -44,5 +45,9 @@ public class RoomUiModule extends org.eclipse.etrice.core.ui.AbstractRoomUiModul
 	
 	public static Injector getInjector() {
 		return RoomActivator.getInstance().getInjector("org.eclipse.etrice.core.Room");
+	}
+
+	public Class<? extends IHyperlinkHelper> bindIHyperlinkHelper() {
+		return ImportAwareHyperlinkHelper.class;
 	}
 }
