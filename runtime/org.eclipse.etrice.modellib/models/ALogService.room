@@ -58,8 +58,7 @@ RoomModel room.basic.service.logging {
 						<internalLog: log>
 					}
 					action {
-						"long s = Long.valueOf(data.timeStamp);"
-						"p.println(\"Timestamp: \" + Long.toString(s-tStart) + \"ms\");"
+						"p.println(\"Timestamp: \" + Long.toString(data.timeStamp-tStart) + \"ms\");"
 						"p.println(\"SenderInstance: \"+ data.sender);"
 						"p.println(\"UserString: \" + data.userString);"
 						"p.println(\"--------------------------------------------------\");"
@@ -95,8 +94,7 @@ RoomModel room.basic.service.logging {
 				"long s;"
 				"if (logLevel>this.logLevel){"
 				"d.userString=userString;"
-				"s=System.currentTimeMillis();"
-				"d.timeStamp=Long.toString(s);"
+				"d.timeStamp=System.currentTimeMillis();"
 				"d.sender=getInstancePath();"
 				"if (getPeerAddress()!=null)"
 				"getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), IN_internalLog, d));"
@@ -105,15 +103,10 @@ RoomModel room.basic.service.logging {
 		}
 	}
 
-	DataClass LogData {
-		Attribute logLevel: int32
-		Attribute userString: string
-	}
-
 	DataClass InternalLogData {
 		Attribute userString: string
 		Attribute sender: string
-		Attribute timeStamp: string
+		Attribute timeStamp: int64
 	}
 
 }
