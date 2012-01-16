@@ -32,7 +32,7 @@ public class CPUser extends ActorClassBase {
 	protected static final int IFITEM_TestPort1 = 1;
 	
 	//--------------------- attributes
-	protected int counter = 0;
+	protected int counter;
 	//--------------------- operations
 
 	//--------------------- construction

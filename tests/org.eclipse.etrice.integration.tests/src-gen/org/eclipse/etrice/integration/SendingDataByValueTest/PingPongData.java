@@ -7,15 +7,15 @@ public class PingPongData {
 	
 	
 	//--------------------- attributes
-	protected byte i8Val = 34;
-	protected short i16Val = 24;
-	protected int i32Val = 12;
-	protected char charVal = 'c';
-	protected float f32Val = 4711.0815f;
-	protected double f64Val = 47114711.08150815;
-	protected String stringVal = "Du alter Depp !";
-	protected int[] arrayFromInt32 = {1,2,3,4,5};
-	protected PingPongDataDeep ownType = new PingPongDataDeep();
+	protected byte i8Val;
+	protected short i16Val;
+	protected int i32Val;
+	protected char charVal;
+	protected float f32Val;
+	protected double f64Val;
+	protected String stringVal;
+	protected int[] arrayFromInt32;
+	protected PingPongDataDeep ownType;
 	
 	//--------------------- attribute setters and getters
 	public void setI8Val (byte i8Val) {
