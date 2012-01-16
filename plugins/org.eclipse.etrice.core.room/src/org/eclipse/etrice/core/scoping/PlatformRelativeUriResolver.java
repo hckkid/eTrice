@@ -39,23 +39,32 @@ public class PlatformRelativeUriResolver extends ImportUriResolver {
 		if (resolve==null || resolve.trim().isEmpty())
 			return null;
 		
-		if (object.eResource()!=null && object.eResource().getURI()!=null) {
-			URI uri = URI.createURI(resolve);
-			if (uri.isRelative()) {
-				URI base = object.eResource().getURI().trimSegments(1);
-				if (base.isPlatformResource()) {
-					IFolder folder = ResourcesPlugin.getWorkspace().getRoot().getFolder(new Path(base.toPlatformString(true)));
-					// URI.resolve expects a trailing separator for some reason...
-					String abs = folder.getRawLocationURI().toString();
-					base = URI.createURI(abs);
-				}
-				base = base.appendSegment("");
-				uri = uri.resolve(base);
-				resolve = uri.toString();
-				File file = new File(uri.toFileString());
-				if (file.isDirectory())
-					return "path/to/directory";
+		URI baseUri = object.eResource().getURI();
+		if (object.eResource()!=null && baseUri!=null) {
+			resolve = resolveUriAgainstBase(resolve, baseUri);
+		}
+		return resolve;
+	}
+
+	public static String resolveUriAgainstBase(String resolve, URI baseUri) {
+		if (resolve==null || resolve.trim().isEmpty())
+			return null;
+
+		URI uri = URI.createURI(resolve);
+		if (uri.isRelative()) {
+			URI base = baseUri.trimSegments(1);
+			if (base.isPlatformResource()) {
+				IFolder folder = ResourcesPlugin.getWorkspace().getRoot().getFolder(new Path(base.toPlatformString(true)));
+				// URI.resolve expects a trailing separator for some reason...
+				String abs = folder.getRawLocationURI().toString();
+				base = URI.createURI(abs);
 			}
+			base = base.appendSegment("");
+			uri = uri.resolve(base);
+			resolve = uri.toString();
+			File file = new File(uri.toFileString());
+			if (file.isDirectory())
+				return "path/to/directory";
 		}
 		return resolve;
 	}

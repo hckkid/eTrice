@@ -26,6 +26,7 @@ import org.eclipse.etrice.core.room.CPBranchTransition;
 import org.eclipse.etrice.core.room.ChoicePoint;
 import org.eclipse.etrice.core.room.ChoicepointTerminal;
 import org.eclipse.etrice.core.room.ContinuationTransition;
+import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.GuardedTransition;
 import org.eclipse.etrice.core.room.InitialTransition;
 import org.eclipse.etrice.core.room.LogicalSystem;
@@ -455,5 +456,38 @@ public class RoomNameProvider {
 		}
 		
 		return "not_unique";
+	}
+	
+	public static String getDetailCodeLocation(DetailCode code) {
+		if (code.eContainer() instanceof Transition) {
+			Transition tr = (Transition) code.eContainer();
+			String where = "?";
+			if (code==tr.getAction())
+				where = "action";
+			else if (tr instanceof CPBranchTransition)
+				where = "condition";
+			else if (tr instanceof GuardedTransition)
+				where = "guard";
+			return "transition "+tr.getName()+": "+RoomNameProvider.getTransitionName(tr)+" "+where+" code";
+		}
+		else if (code.eContainer() instanceof Trigger) {
+			Transition tr = (Transition) code.eContainer().eContainer();
+			return "transition "+tr.getName()+": "+RoomNameProvider.getTransitionName(tr)+" trigger guard";
+		}
+		else if (code.eContainer() instanceof State) {
+			State state = (State) code.eContainer();
+			String where = "?";
+			if (code==state.getEntryCode())
+				where = "entry";
+			else if (code==state.getEntryCode())
+				where = "exit";
+			else
+				where = "do";
+			return "state "+RoomNameProvider.getStatePathName(state)+" "+where+" code";
+		}
+		else {
+			assert(false): "unexpected detaild code location";
+			return "???";
+		}
 	}
 }

@@ -129,14 +129,14 @@ class ProcedureHelpers {
 
 	
 	// Operations
-	def OperationsDeclaration(List<Operation> operations, String classname) {'''
+	def OperationsDeclaration(List<? extends Operation> operations, String classname) {'''
 		//--------------------- operations
 		«FOR operation : operations»«OperationHeader(operation, classname, true)»;
 		«ENDFOR»
 		'''
 	}
 
-	def OperationsImplementation(List<Operation> operations, String classname) {'''
+	def OperationsImplementation(List<? extends Operation> operations, String classname) {'''
 		//--------------------- operations
 		«FOR operation : operations»«OperationHeader(operation, classname, false)» {
 		«FOR command : operation.detailCode.commands»	«command»

@@ -32,6 +32,7 @@ import org.eclipse.etrice.core.room.LogicalSystem;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.Operation;
 import org.eclipse.etrice.core.room.Port;
+import org.eclipse.etrice.core.room.PortClass;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RefinedState;
 import org.eclipse.etrice.core.room.RoomPackage;
@@ -585,6 +586,28 @@ public class RoomHelpers {
 		
 		return outgoing? protocol.getOutgoingMessages():protocol.getIncomingMessages();
 	}
+	
+	public static PortClass getPortClass(InterfaceItem item) {
+		ProtocolClass protocol = null;
+		boolean conjugated = false;
+		if (item instanceof Port) {
+			protocol = ((Port) item).getProtocol();
+			conjugated = ((Port) item).isConjugated();
+		}
+		else if (item instanceof SAPRef) {
+			protocol = ((SAPRef)item).getProtocol();
+			conjugated = true;
+		}
+		else if (item instanceof SPPRef) {
+			protocol = ((SPPRef)item).getProtocol();
+		}
+		else {
+			assert(false): "unexpected sub type";
+			return null;
+		}
+		
+		return conjugated? protocol.getConjugate():protocol.getRegular();
+	}
 
 	public static String getSignature(Operation op) {
 		String signature = "";
@@ -593,6 +616,18 @@ public class RoomHelpers {
 				signature = arg.getName()+": "+arg.getType().getName();
 			else
 				signature += ", "+arg.getName()+": "+arg.getType().getName();
+		}
+		signature = "("+signature+")";
+		return signature;
+	}
+
+	public static String getArguments(Operation op) {
+		String signature = "";
+		for (VarDecl arg : op.getArguments()) {
+			if (signature.isEmpty())
+				signature = arg.getName();
+			else
+				signature += ", "+arg.getName();
 		}
 		signature = "("+signature+")";
 		return signature;

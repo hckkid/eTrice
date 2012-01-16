@@ -31,10 +31,11 @@ import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.Operation;
 import org.eclipse.etrice.core.room.Port;
+import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RoomFactory;
 import org.eclipse.etrice.core.room.RoomModel;
-import org.eclipse.etrice.core.room.PrimitiveType;
+import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.generator.InstanceTestsActivator;
@@ -54,6 +55,11 @@ public class TestDetailCodeTranslator {
 	 *
 	 */
 	private final class TestTranslationProvider implements ITranslationProvider {
+		
+		@Override
+		public boolean translateMembers() {
+			return true;
+		}
 		
 		@Override
 		public String getAttributeText(Attribute att, String orig) {
@@ -82,6 +88,16 @@ public class TestDetailCodeTranslator {
 			}
 			int end = args.isEmpty()? result.length():result.length()-2;
 			return result.substring(0, end);
+		}
+
+		@Override
+		public boolean translateTags() {
+			return true;
+		}
+
+		@Override
+		public String translateTag(String tag, DetailCode code) {
+			return ">"+tag+"<";
 		}
 	}
 
@@ -129,11 +145,11 @@ public class TestDetailCodeTranslator {
 		attr.setType(EcoreUtil.copy(type));
 		ac.getAttributes().add(attr);
 
-		Operation op0 = RoomFactory.eINSTANCE.createOperation();
+		StandardOperation op0 = RoomFactory.eINSTANCE.createStandardOperation();
 		op0.setName("bar0");
 		ac.getOperations().add(op0);
 		
-		Operation op1 = RoomFactory.eINSTANCE.createOperation();
+		StandardOperation op1 = RoomFactory.eINSTANCE.createStandardOperation();
 		op1.setName("bar1");
 		VarDecl param1 = RoomFactory.eINSTANCE.createVarDecl();
 		param1.setName("param");
@@ -144,7 +160,7 @@ public class TestDetailCodeTranslator {
 		op1.getArguments().add(param1);
 		ac.getOperations().add(op1);
 		
-		Operation op2 = RoomFactory.eINSTANCE.createOperation();
+		StandardOperation op2 = RoomFactory.eINSTANCE.createStandardOperation();
 		op2.setName("bar2");
 		VarDecl param2 = RoomFactory.eINSTANCE.createVarDecl();
 		param2.setName("param");
@@ -399,5 +415,15 @@ public class TestDetailCodeTranslator {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	@Test
+	public void testTags() {
+		DetailCode dc = RoomFactory.eINSTANCE.createDetailCode();
+		dc.getCommands().add("log(\"my message\", \"<|location|>\");");
+		
+		String result = translator.translateDetailCode(dc);
+		
+		assertEquals("large file", "log(\"my message\", \">location<\");", result);
 	}
 }

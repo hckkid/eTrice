@@ -24,8 +24,8 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.DetailCode;
-import org.eclipse.etrice.core.room.Operation;
 import org.eclipse.etrice.core.room.RoomPackage;
+import org.eclipse.etrice.core.room.StandardOperation;
 
 /**
  * <!-- begin-user-doc -->
@@ -105,7 +105,7 @@ public class DataClassImpl extends ComplexTypeImpl implements DataClass
    * @generated
    * @ordered
    */
-  protected EList<Operation> operations;
+  protected EList<StandardOperation> operations;
 
   /**
    * <!-- begin-user-doc -->
@@ -334,11 +334,11 @@ public class DataClassImpl extends ComplexTypeImpl implements DataClass
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<Operation> getOperations()
+  public EList<StandardOperation> getOperations()
   {
     if (operations == null)
     {
-      operations = new EObjectContainmentEList<Operation>(Operation.class, this, RoomPackage.DATA_CLASS__OPERATIONS);
+      operations = new EObjectContainmentEList<StandardOperation>(StandardOperation.class, this, RoomPackage.DATA_CLASS__OPERATIONS);
     }
     return operations;
   }
@@ -423,7 +423,7 @@ public class DataClassImpl extends ComplexTypeImpl implements DataClass
         return;
       case RoomPackage.DATA_CLASS__OPERATIONS:
         getOperations().clear();
-        getOperations().addAll((Collection<? extends Operation>)newValue);
+        getOperations().addAll((Collection<? extends StandardOperation>)newValue);
         return;
     }
     super.eSet(featureID, newValue);

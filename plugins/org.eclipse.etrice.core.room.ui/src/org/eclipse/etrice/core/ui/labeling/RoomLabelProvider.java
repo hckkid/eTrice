@@ -25,6 +25,7 @@ import org.eclipse.etrice.core.room.LogicalSystem;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.Operation;
 import org.eclipse.etrice.core.room.Port;
+import org.eclipse.etrice.core.room.PortOperation;
 import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RefinedState;
@@ -138,11 +139,17 @@ public class RoomLabelProvider extends DefaultEObjectLabelProvider {
 	}
 
 	String image(Message state) {
-		return "Message.gif";
+		if (state.isPriv())
+			return "MessagePrivate.gif";
+		else
+			return "Message.gif";
 	}
 
 	String image(Operation op) {
-		return "Operation.gif";
+		if (op instanceof PortOperation && ((PortOperation) op).getSendsMsg()!=null)
+			return "OperationMsg.gif";
+		else
+			return "Operation.gif";
 	}
 	
 	String image(Port p) {
@@ -284,10 +291,17 @@ public class RoomLabelProvider extends DefaultEObjectLabelProvider {
 		return "Attr "+attr.getName()+type+value;
 	}
 	
-	String text(Operation op) {
+	StyledString text(Operation op) {
 		String rt = op.getReturntype()!=null? ": "+op.getReturntype().getName():"";
 		String signature = RoomHelpers.getSignature(op);
-		return op.getName()+signature+rt;
+		if (op instanceof PortOperation && ((PortOperation) op).getSendsMsg()!=null)
+			rt = " sends "+((PortOperation) op).getSendsMsg().getName();
+		StyledString result = new StyledString(op.getName()+signature+rt);
+		int pos = result.toString().indexOf(" sends ");
+		if (pos>=0)
+			result.setStyle(pos+1, 5, getKeywordStyler());
+
+		return result;
 	}
 	
 	String text(Message m) {

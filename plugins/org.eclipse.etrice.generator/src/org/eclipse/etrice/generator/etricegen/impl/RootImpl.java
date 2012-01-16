@@ -641,6 +641,15 @@ public class RootImpl extends EObjectImpl implements Root {
 				if (m.getData()!=null)
 					getVarDeclDataClasses(dataClasses, Collections.singleton(m.getData()));
 			}
+			
+			if (pc.getRegular()!=null) {
+				getAttributeDataClasses(dataClasses, pc.getRegular().getAttributes());
+				getOperationDataClasses(dataClasses, pc.getRegular().getOperations());
+			}
+			if (pc.getConjugate()!=null) {
+				getAttributeDataClasses(dataClasses, pc.getConjugate().getAttributes());
+				getOperationDataClasses(dataClasses, pc.getConjugate().getOperations());
+			}
 		}
 		
 		// add data class base classes and data class attribute and operation classes
@@ -681,8 +690,7 @@ public class RootImpl extends EObjectImpl implements Root {
 		}
 	}
 
-	private void getOperationDataClasses(HashSet<DataClass> dataClasses,
-			EList<Operation> operations) {
+	private void getOperationDataClasses(HashSet<DataClass> dataClasses, EList<? extends Operation> operations) {
 		for (Operation op : operations) {
 			if (op.getReturntype()!=null) {
 				DataClass dc = name2dc.get(op.getReturntype());

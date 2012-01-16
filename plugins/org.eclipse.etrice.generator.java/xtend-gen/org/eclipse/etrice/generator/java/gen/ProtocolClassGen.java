@@ -5,12 +5,13 @@ import com.google.inject.Singleton;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.etrice.core.room.Attribute;
+import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.DataType;
 import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.MessageHandler;
-import org.eclipse.etrice.core.room.Operation;
 import org.eclipse.etrice.core.room.PortClass;
+import org.eclipse.etrice.core.room.PortOperation;
 import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RoomModel;
@@ -23,6 +24,7 @@ import org.eclipse.etrice.generator.generic.TypeHelpers;
 import org.eclipse.etrice.generator.java.gen.JavaExtensions;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
 import org.eclipse.xtext.xbase.lib.BooleanExtensions;
+import org.eclipse.xtext.xbase.lib.ComparableExtensions;
 import org.eclipse.xtext.xbase.lib.IntegerExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
@@ -434,7 +436,7 @@ public class ProtocolClassGen {
         _builder.append(_Attributes, "	");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
-        EList<Operation> _operations = pclass.getOperations();
+        EList<PortOperation> _operations = pclass.getOperations();
         StringConcatenation _OperationsImplementation = this.helpers.OperationsImplementation(_operations, name);
         _builder.append(_OperationsImplementation, "	");
         _builder.newLineIfNotEmpty();
@@ -620,10 +622,18 @@ public class ProtocolClassGen {
   
   public StringConcatenation messageSignature(final Message m) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("public void ");
+    {
+      boolean _isPriv = m.isPriv();
+      if (_isPriv) {
+        _builder.append("private");
+      } else {
+        _builder.append("public");
+      }
+    }
+    _builder.append(" void ");
     String _name = m.getName();
     _builder.append(_name, "");
-    _builder.append(" (");
+    _builder.append("(");
     {
       VarDecl _data = m.getData();
       boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_data, null);
@@ -639,8 +649,58 @@ public class ProtocolClassGen {
       }
     }
     _builder.append(")");
-    _builder.newLineIfNotEmpty();
     return _builder;
+  }
+  
+  public StringConcatenation messageSignatureExplicit(final Message m) {
+    StringConcatenation _xblockexpression = null;
+    {
+      VarDecl _data = m.getData();
+      DataType _type = _data.getType();
+      DataClass dc = ((DataClass) _type);
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("public void ");
+      String _name = m.getName();
+      _builder.append(_name, "");
+      _builder.append("(");
+      {
+        DataClass _base = dc.getBase();
+        boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_base, null);
+        if (_operator_notEquals) {
+          DataClass _base_1 = dc.getBase();
+          String _typeName = this._typeHelpers.typeName(_base_1);
+          _builder.append(_typeName, "");
+          _builder.append(" _super, ");
+        }
+      }
+      {
+        EList<Attribute> _attributes = dc.getAttributes();
+        boolean hasAnyElements = false;
+        for(final Attribute a : _attributes) {
+          if (!hasAnyElements) {
+            hasAnyElements = true;
+          } else {
+            _builder.appendImmediate(", ", "");
+          }
+          DataType _type_1 = a.getType();
+          String _typeName_1 = this._typeHelpers.typeName(_type_1);
+          _builder.append(_typeName_1, "");
+          {
+            int _size = a.getSize();
+            boolean _operator_greaterThan = ComparableExtensions.<Integer>operator_greaterThan(((Integer)_size), ((Integer)1));
+            if (_operator_greaterThan) {
+              _builder.append("[]");
+            }
+          }
+          _builder.append(" ");
+          String _name_1 = a.getName();
+          _builder.append(_name_1, "");
+        }
+      }
+      _builder.append(")");
+      _xblockexpression = (_builder);
+    }
+    return _xblockexpression;
   }
   
   public StringConcatenation messageCall(final Message m) {
@@ -659,117 +719,173 @@ public class ProtocolClassGen {
       }
     }
     _builder.append(")");
-    _builder.newLineIfNotEmpty();
     return _builder;
   }
   
   public StringConcatenation sendMessage(final Message m, final boolean conj) {
-    StringConcatenation _builder = new StringConcatenation();
-    String _xifexpression = null;
-    if (conj) {
-      _xifexpression = "IN";
-    } else {
-      _xifexpression = "OUT";
-    }
-    String dir = _xifexpression;
-    _builder.newLineIfNotEmpty();
-    MessageHandler _sendHandler = this.roomExt.getSendHandler(m, conj);
-    MessageHandler hdlr = _sendHandler;
-    _builder.newLineIfNotEmpty();
-    StringConcatenation _messageSignature = this.messageSignature(m);
-    _builder.append(_messageSignature, "");
-    _builder.append("{");
-    _builder.newLineIfNotEmpty();
+    StringConcatenation _xblockexpression = null;
     {
-      boolean _operator_notEquals = ObjectExtensions.operator_notEquals(hdlr, null);
-      if (_operator_notEquals) {
-        _builder.append("\t");
-        {
-          DetailCode _detailCode = hdlr.getDetailCode();
-          EList<String> _commands = _detailCode.getCommands();
-          for(final String command : _commands) {
-            _builder.append("\t");
-            _builder.append(command, "	");
-            _builder.newLineIfNotEmpty();
-          }
-        }
+      String _xifexpression = null;
+      if (conj) {
+        _xifexpression = "IN";
       } else {
-        _builder.append("\t");
-        _builder.append("if (messageStrings[ ");
-        _builder.append(dir, "	");
-        _builder.append("_");
-        String _name = m.getName();
-        _builder.append(_name, "	");
-        _builder.append("] != \"timerTick\"){");
-        _builder.newLineIfNotEmpty();
-        _builder.append("\t");
-        _builder.append("\t");
-        _builder.append("// TODOTS: model switch for activation");
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.append("DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[");
-        _builder.append(dir, "	");
-        _builder.append("_");
-        String _name_1 = m.getName();
-        _builder.append(_name_1, "	");
-        _builder.append("]);");
-        _builder.newLineIfNotEmpty();
-        _builder.append("\t");
-        _builder.append("}");
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.append("if (getPeerAddress()!=null)");
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.append("\t");
-        {
-          VarDecl _data = m.getData();
-          boolean _operator_equals = ObjectExtensions.operator_equals(_data, null);
-          if (_operator_equals) {
-            _builder.append("getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), ");
-            _builder.append(dir, "		");
-            _builder.append("_");
-            String _name_2 = m.getName();
-            _builder.append(_name_2, "		");
-            _builder.append("));");
-            _builder.newLineIfNotEmpty();
-            _builder.append("\t");
-            _builder.append("\t");
-          } else {
-            _builder.append("getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), ");
-            _builder.append(dir, "		");
-            _builder.append("_");
-            String _name_3 = m.getName();
-            _builder.append(_name_3, "		");
-            _builder.append(", ");
-            VarDecl _data_1 = m.getData();
-            String _name_4 = _data_1.getName();
-            _builder.append(_name_4, "		");
-            {
-              boolean _operator_and = false;
-              VarDecl _data_2 = m.getData();
-              boolean _isRef = _data_2.isRef();
-              boolean _operator_not = BooleanExtensions.operator_not(_isRef);
-              if (!_operator_not) {
-                _operator_and = false;
-              } else {
-                VarDecl _data_3 = m.getData();
-                DataType _type = _data_3.getType();
-                boolean _operator_not_1 = BooleanExtensions.operator_not((_type instanceof PrimitiveType));
-                _operator_and = BooleanExtensions.operator_and(_operator_not, _operator_not_1);
-              }
-              if (_operator_and) {
-                _builder.append(".deepCopy()");
-              }
+        _xifexpression = "OUT";
+      }
+      String dir = _xifexpression;
+      MessageHandler _sendHandler = this.roomExt.getSendHandler(m, conj);
+      MessageHandler hdlr = _sendHandler;
+      StringConcatenation _builder = new StringConcatenation();
+      StringConcatenation _messageSignature = this.messageSignature(m);
+      _builder.append(_messageSignature, "");
+      _builder.append(" {");
+      _builder.newLineIfNotEmpty();
+      {
+        boolean _operator_notEquals = ObjectExtensions.operator_notEquals(hdlr, null);
+        if (_operator_notEquals) {
+          _builder.append("\t");
+          {
+            DetailCode _detailCode = hdlr.getDetailCode();
+            EList<String> _commands = _detailCode.getCommands();
+            for(final String command : _commands) {
+              _builder.append("\t");
+              _builder.append(command, "	");
+              _builder.newLineIfNotEmpty();
             }
-            _builder.append("));");
-            _builder.newLineIfNotEmpty();
+          }
+        } else {
+          _builder.append("\t");
+          _builder.append("if (messageStrings[ ");
+          _builder.append(dir, "	");
+          _builder.append("_");
+          String _name = m.getName();
+          _builder.append(_name, "	");
+          _builder.append("] != \"timerTick\"){");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t");
+          _builder.append("\t");
+          _builder.append("// TODOTS: model switch for activation");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[");
+          _builder.append(dir, "	");
+          _builder.append("_");
+          String _name_1 = m.getName();
+          _builder.append(_name_1, "	");
+          _builder.append("]);");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t");
+          _builder.append("}");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("if (getPeerAddress()!=null)");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("\t");
+          {
+            VarDecl _data = m.getData();
+            boolean _operator_equals = ObjectExtensions.operator_equals(_data, null);
+            if (_operator_equals) {
+              _builder.append("getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), ");
+              _builder.append(dir, "		");
+              _builder.append("_");
+              String _name_2 = m.getName();
+              _builder.append(_name_2, "		");
+              _builder.append("));");
+              _builder.newLineIfNotEmpty();
+              _builder.append("\t");
+              _builder.append("\t");
+            } else {
+              _builder.append("getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), ");
+              _builder.append(dir, "		");
+              _builder.append("_");
+              String _name_3 = m.getName();
+              _builder.append(_name_3, "		");
+              _builder.append(", ");
+              VarDecl _data_1 = m.getData();
+              String _name_4 = _data_1.getName();
+              _builder.append(_name_4, "		");
+              {
+                boolean _operator_and = false;
+                VarDecl _data_2 = m.getData();
+                boolean _isRef = _data_2.isRef();
+                boolean _operator_not = BooleanExtensions.operator_not(_isRef);
+                if (!_operator_not) {
+                  _operator_and = false;
+                } else {
+                  VarDecl _data_3 = m.getData();
+                  DataType _type = _data_3.getType();
+                  boolean _operator_not_1 = BooleanExtensions.operator_not((_type instanceof PrimitiveType));
+                  _operator_and = BooleanExtensions.operator_and(_operator_not, _operator_not_1);
+                }
+                if (_operator_and) {
+                  _builder.append(".deepCopy()");
+                }
+              }
+              _builder.append("));");
+              _builder.newLineIfNotEmpty();
+            }
           }
         }
       }
+      _builder.append("}");
+      _builder.newLine();
+      {
+        boolean _operator_and_1 = false;
+        VarDecl _data_4 = m.getData();
+        boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(_data_4, null);
+        if (!_operator_notEquals_1) {
+          _operator_and_1 = false;
+        } else {
+          VarDecl _data_5 = m.getData();
+          DataType _type_1 = _data_5.getType();
+          _operator_and_1 = BooleanExtensions.operator_and(_operator_notEquals_1, (_type_1 instanceof DataClass));
+        }
+        if (_operator_and_1) {
+          StringConcatenation _messageSignatureExplicit = this.messageSignatureExplicit(m);
+          _builder.append(_messageSignatureExplicit, "");
+          _builder.append(" {");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t");
+          String _name_5 = m.getName();
+          _builder.append(_name_5, "	");
+          _builder.append("(new ");
+          VarDecl _data_6 = m.getData();
+          DataType _type_2 = _data_6.getType();
+          String _name_6 = _type_2.getName();
+          _builder.append(_name_6, "	");
+          _builder.append("(");
+          {
+            VarDecl _data_7 = m.getData();
+            DataType _type_3 = _data_7.getType();
+            DataClass _base = ((DataClass) _type_3).getBase();
+            boolean _operator_notEquals_2 = ObjectExtensions.operator_notEquals(_base, null);
+            if (_operator_notEquals_2) {
+              _builder.append("_super, ");
+            }
+          }
+          {
+            VarDecl _data_8 = m.getData();
+            DataType _type_4 = _data_8.getType();
+            EList<Attribute> _attributes = ((DataClass) _type_4).getAttributes();
+            boolean hasAnyElements = false;
+            for(final Attribute a : _attributes) {
+              if (!hasAnyElements) {
+                hasAnyElements = true;
+              } else {
+                _builder.appendImmediate(", ", "	");
+              }
+              String _name_7 = a.getName();
+              _builder.append(_name_7, "	");
+            }
+          }
+          _builder.append("));");
+          _builder.newLineIfNotEmpty();
+          _builder.append("}");
+          _builder.newLine();
+        }
+      }
+      _xblockexpression = (_builder);
     }
-    _builder.append("}");
-    _builder.newLine();
-    return _builder;
+    return _xblockexpression;
   }
 }

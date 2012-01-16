@@ -101,8 +101,7 @@ public class p_HFSM {
 	
 		
 		// sent messages
-		public void init_action ()
-		{
+		public void init_action() {
 			if (messageStrings[ OUT_init_action] != "timerTick"){
 				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_init_action]);
@@ -110,8 +109,7 @@ public class p_HFSM {
 			if (getPeerAddress()!=null)
 				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_init_action));
 				}
-		public void s1_entry ()
-		{
+		public void s1_entry() {
 			if (messageStrings[ OUT_s1_entry] != "timerTick"){
 				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_s1_entry]);
@@ -119,8 +117,7 @@ public class p_HFSM {
 			if (getPeerAddress()!=null)
 				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_s1_entry));
 				}
-		public void s1_exit ()
-		{
+		public void s1_exit() {
 			if (messageStrings[ OUT_s1_exit] != "timerTick"){
 				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_s1_exit]);
@@ -128,8 +125,7 @@ public class p_HFSM {
 			if (getPeerAddress()!=null)
 				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_s1_exit));
 				}
-		public void s2_entry ()
-		{
+		public void s2_entry() {
 			if (messageStrings[ OUT_s2_entry] != "timerTick"){
 				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_s2_entry]);
@@ -137,8 +133,7 @@ public class p_HFSM {
 			if (getPeerAddress()!=null)
 				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_s2_entry));
 				}
-		public void s2_exit ()
-		{
+		public void s2_exit() {
 			if (messageStrings[ OUT_s2_exit] != "timerTick"){
 				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_s2_exit]);
@@ -146,8 +141,7 @@ public class p_HFSM {
 			if (getPeerAddress()!=null)
 				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_s2_exit));
 				}
-		public void s3_entry ()
-		{
+		public void s3_entry() {
 			if (messageStrings[ OUT_s3_entry] != "timerTick"){
 				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_s3_entry]);
@@ -155,8 +149,7 @@ public class p_HFSM {
 			if (getPeerAddress()!=null)
 				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_s3_entry));
 				}
-		public void s3_exit ()
-		{
+		public void s3_exit() {
 			if (messageStrings[ OUT_s3_exit] != "timerTick"){
 				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_s3_exit]);
@@ -164,8 +157,7 @@ public class p_HFSM {
 			if (getPeerAddress()!=null)
 				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_s3_exit));
 				}
-		public void s4_entry ()
-		{
+		public void s4_entry() {
 			if (messageStrings[ OUT_s4_entry] != "timerTick"){
 				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_s4_entry]);
@@ -173,8 +165,7 @@ public class p_HFSM {
 			if (getPeerAddress()!=null)
 				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_s4_entry));
 				}
-		public void s4_exit ()
-		{
+		public void s4_exit() {
 			if (messageStrings[ OUT_s4_exit] != "timerTick"){
 				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_s4_exit]);
@@ -182,8 +173,7 @@ public class p_HFSM {
 			if (getPeerAddress()!=null)
 				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_s4_exit));
 				}
-		public void s2s1_entry ()
-		{
+		public void s2s1_entry() {
 			if (messageStrings[ OUT_s2s1_entry] != "timerTick"){
 				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_s2s1_entry]);
@@ -191,8 +181,7 @@ public class p_HFSM {
 			if (getPeerAddress()!=null)
 				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_s2s1_entry));
 				}
-		public void s2s1_exit ()
-		{
+		public void s2s1_exit() {
 			if (messageStrings[ OUT_s2s1_exit] != "timerTick"){
 				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_s2s1_exit]);
@@ -200,8 +189,7 @@ public class p_HFSM {
 			if (getPeerAddress()!=null)
 				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_s2s1_exit));
 				}
-		public void s2s2_entry ()
-		{
+		public void s2s2_entry() {
 			if (messageStrings[ OUT_s2s2_entry] != "timerTick"){
 				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_s2s2_entry]);
@@ -209,8 +197,7 @@ public class p_HFSM {
 			if (getPeerAddress()!=null)
 				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_s2s2_entry));
 				}
-		public void s2s2_exit ()
-		{
+		public void s2s2_exit() {
 			if (messageStrings[ OUT_s2s2_exit] != "timerTick"){
 				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_s2s2_exit]);
@@ -218,8 +205,7 @@ public class p_HFSM {
 			if (getPeerAddress()!=null)
 				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_s2s2_exit));
 				}
-		public void s1_m1_s2_action ()
-		{
+		public void s1_m1_s2_action() {
 			if (messageStrings[ OUT_s1_m1_s2_action] != "timerTick"){
 				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_s1_m1_s2_action]);
@@ -227,8 +213,7 @@ public class p_HFSM {
 			if (getPeerAddress()!=null)
 				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_s1_m1_s2_action));
 				}
-		public void s2_m1_s2s1_action ()
-		{
+		public void s2_m1_s2s1_action() {
 			if (messageStrings[ OUT_s2_m1_s2s1_action] != "timerTick"){
 				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_s2_m1_s2s1_action]);
@@ -236,8 +221,7 @@ public class p_HFSM {
 			if (getPeerAddress()!=null)
 				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_s2_m1_s2s1_action));
 				}
-		public void s2s1_m2_s2s2_action ()
-		{
+		public void s2s1_m2_s2s2_action() {
 			if (messageStrings[ OUT_s2s1_m2_s2s2_action] != "timerTick"){
 				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_s2s1_m2_s2s2_action]);
@@ -245,8 +229,7 @@ public class p_HFSM {
 			if (getPeerAddress()!=null)
 				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_s2s1_m2_s2s2_action));
 				}
-		public void s2s2_m3_action ()
-		{
+		public void s2s2_m3_action() {
 			if (messageStrings[ OUT_s2s2_m3_action] != "timerTick"){
 				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_s2s2_m3_action]);
@@ -254,8 +237,7 @@ public class p_HFSM {
 			if (getPeerAddress()!=null)
 				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_s2s2_m3_action));
 				}
-		public void s2_m4_s4_action ()
-		{
+		public void s2_m4_s4_action() {
 			if (messageStrings[ OUT_s2_m4_s4_action] != "timerTick"){
 				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_s2_m4_s4_action]);
@@ -263,8 +245,7 @@ public class p_HFSM {
 			if (getPeerAddress()!=null)
 				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_s2_m4_s4_action));
 				}
-		public void s2_m5_s2_action ()
-		{
+		public void s2_m5_s2_action() {
 			if (messageStrings[ OUT_s2_m5_s2_action] != "timerTick"){
 				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_s2_m5_s2_action]);
@@ -272,8 +253,7 @@ public class p_HFSM {
 			if (getPeerAddress()!=null)
 				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_s2_m5_s2_action));
 				}
-		public void s2_m6_s2_action ()
-		{
+		public void s2_m6_s2_action() {
 			if (messageStrings[ OUT_s2_m6_s2_action] != "timerTick"){
 				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_s2_m6_s2_action]);
@@ -281,8 +261,7 @@ public class p_HFSM {
 			if (getPeerAddress()!=null)
 				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_s2_m6_s2_action));
 				}
-		public void s2__s3_action ()
-		{
+		public void s2__s3_action() {
 			if (messageStrings[ OUT_s2__s3_action] != "timerTick"){
 				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_s2__s3_action]);
@@ -290,8 +269,7 @@ public class p_HFSM {
 			if (getPeerAddress()!=null)
 				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_s2__s3_action));
 				}
-		public void s2_m7_s2_action ()
-		{
+		public void s2_m7_s2_action() {
 			if (messageStrings[ OUT_s2_m7_s2_action] != "timerTick"){
 				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_s2_m7_s2_action]);
@@ -299,8 +277,7 @@ public class p_HFSM {
 			if (getPeerAddress()!=null)
 				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_s2_m7_s2_action));
 				}
-		public void top_s8_top_action ()
-		{
+		public void top_s8_top_action() {
 			if (messageStrings[ OUT_top_s8_top_action] != "timerTick"){
 				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_top_s8_top_action]);
@@ -308,8 +285,7 @@ public class p_HFSM {
 			if (getPeerAddress()!=null)
 				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_top_s8_top_action));
 				}
-		public void top_s9_top_action ()
-		{
+		public void top_s9_top_action() {
 			if (messageStrings[ OUT_top_s9_top_action] != "timerTick"){
 				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_top_s9_top_action]);
@@ -317,8 +293,7 @@ public class p_HFSM {
 			if (getPeerAddress()!=null)
 				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_top_s9_top_action));
 				}
-		public void top_reset_s2_action ()
-		{
+		public void top_reset_s2_action() {
 			if (messageStrings[ OUT_top_reset_s2_action] != "timerTick"){
 				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_top_reset_s2_action]);
@@ -356,179 +331,129 @@ public class p_HFSM {
 		}
 		
 		// outgoing messages
-		public void init_action ()
-		{
+		public void init_action(){
 			for (int i=0; i<replication; ++i) {
-				ports.get(i).init_action()
-				;
+				ports.get(i).init_action();
 			}
 		}
-		public void s1_entry ()
-		{
+		public void s1_entry(){
 			for (int i=0; i<replication; ++i) {
-				ports.get(i).s1_entry()
-				;
+				ports.get(i).s1_entry();
 			}
 		}
-		public void s1_exit ()
-		{
+		public void s1_exit(){
 			for (int i=0; i<replication; ++i) {
-				ports.get(i).s1_exit()
-				;
+				ports.get(i).s1_exit();
 			}
 		}
-		public void s2_entry ()
-		{
+		public void s2_entry(){
 			for (int i=0; i<replication; ++i) {
-				ports.get(i).s2_entry()
-				;
+				ports.get(i).s2_entry();
 			}
 		}
-		public void s2_exit ()
-		{
+		public void s2_exit(){
 			for (int i=0; i<replication; ++i) {
-				ports.get(i).s2_exit()
-				;
+				ports.get(i).s2_exit();
 			}
 		}
-		public void s3_entry ()
-		{
+		public void s3_entry(){
 			for (int i=0; i<replication; ++i) {
-				ports.get(i).s3_entry()
-				;
+				ports.get(i).s3_entry();
 			}
 		}
-		public void s3_exit ()
-		{
+		public void s3_exit(){
 			for (int i=0; i<replication; ++i) {
-				ports.get(i).s3_exit()
-				;
+				ports.get(i).s3_exit();
 			}
 		}
-		public void s4_entry ()
-		{
+		public void s4_entry(){
 			for (int i=0; i<replication; ++i) {
-				ports.get(i).s4_entry()
-				;
+				ports.get(i).s4_entry();
 			}
 		}
-		public void s4_exit ()
-		{
+		public void s4_exit(){
 			for (int i=0; i<replication; ++i) {
-				ports.get(i).s4_exit()
-				;
+				ports.get(i).s4_exit();
 			}
 		}
-		public void s2s1_entry ()
-		{
+		public void s2s1_entry(){
 			for (int i=0; i<replication; ++i) {
-				ports.get(i).s2s1_entry()
-				;
+				ports.get(i).s2s1_entry();
 			}
 		}
-		public void s2s1_exit ()
-		{
+		public void s2s1_exit(){
 			for (int i=0; i<replication; ++i) {
-				ports.get(i).s2s1_exit()
-				;
+				ports.get(i).s2s1_exit();
 			}
 		}
-		public void s2s2_entry ()
-		{
+		public void s2s2_entry(){
 			for (int i=0; i<replication; ++i) {
-				ports.get(i).s2s2_entry()
-				;
+				ports.get(i).s2s2_entry();
 			}
 		}
-		public void s2s2_exit ()
-		{
+		public void s2s2_exit(){
 			for (int i=0; i<replication; ++i) {
-				ports.get(i).s2s2_exit()
-				;
+				ports.get(i).s2s2_exit();
 			}
 		}
-		public void s1_m1_s2_action ()
-		{
+		public void s1_m1_s2_action(){
 			for (int i=0; i<replication; ++i) {
-				ports.get(i).s1_m1_s2_action()
-				;
+				ports.get(i).s1_m1_s2_action();
 			}
 		}
-		public void s2_m1_s2s1_action ()
-		{
+		public void s2_m1_s2s1_action(){
 			for (int i=0; i<replication; ++i) {
-				ports.get(i).s2_m1_s2s1_action()
-				;
+				ports.get(i).s2_m1_s2s1_action();
 			}
 		}
-		public void s2s1_m2_s2s2_action ()
-		{
+		public void s2s1_m2_s2s2_action(){
 			for (int i=0; i<replication; ++i) {
-				ports.get(i).s2s1_m2_s2s2_action()
-				;
+				ports.get(i).s2s1_m2_s2s2_action();
 			}
 		}
-		public void s2s2_m3_action ()
-		{
+		public void s2s2_m3_action(){
 			for (int i=0; i<replication; ++i) {
-				ports.get(i).s2s2_m3_action()
-				;
+				ports.get(i).s2s2_m3_action();
 			}
 		}
-		public void s2_m4_s4_action ()
-		{
+		public void s2_m4_s4_action(){
 			for (int i=0; i<replication; ++i) {
-				ports.get(i).s2_m4_s4_action()
-				;
+				ports.get(i).s2_m4_s4_action();
 			}
 		}
-		public void s2_m5_s2_action ()
-		{
+		public void s2_m5_s2_action(){
 			for (int i=0; i<replication; ++i) {
-				ports.get(i).s2_m5_s2_action()
-				;
+				ports.get(i).s2_m5_s2_action();
 			}
 		}
-		public void s2_m6_s2_action ()
-		{
+		public void s2_m6_s2_action(){
 			for (int i=0; i<replication; ++i) {
-				ports.get(i).s2_m6_s2_action()
-				;
+				ports.get(i).s2_m6_s2_action();
 			}
 		}
-		public void s2__s3_action ()
-		{
+		public void s2__s3_action(){
 			for (int i=0; i<replication; ++i) {
-				ports.get(i).s2__s3_action()
-				;
+				ports.get(i).s2__s3_action();
 			}
 		}
-		public void s2_m7_s2_action ()
-		{
+		public void s2_m7_s2_action(){
 			for (int i=0; i<replication; ++i) {
-				ports.get(i).s2_m7_s2_action()
-				;
+				ports.get(i).s2_m7_s2_action();
 			}
 		}
-		public void top_s8_top_action ()
-		{
+		public void top_s8_top_action(){
 			for (int i=0; i<replication; ++i) {
-				ports.get(i).top_s8_top_action()
-				;
+				ports.get(i).top_s8_top_action();
 			}
 		}
-		public void top_s9_top_action ()
-		{
+		public void top_s9_top_action(){
 			for (int i=0; i<replication; ++i) {
-				ports.get(i).top_s9_top_action()
-				;
+				ports.get(i).top_s9_top_action();
 			}
 		}
-		public void top_reset_s2_action ()
-		{
+		public void top_reset_s2_action(){
 			for (int i=0; i<replication; ++i) {
-				ports.get(i).top_reset_s2_action()
-				;
+				ports.get(i).top_reset_s2_action();
 			}
 		}
 	}
@@ -567,8 +492,7 @@ public class p_HFSM {
 	
 		
 		// sent messages
-		public void m1 ()
-		{
+		public void m1() {
 			if (messageStrings[ IN_m1] != "timerTick"){
 				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_m1]);
@@ -576,8 +500,7 @@ public class p_HFSM {
 			if (getPeerAddress()!=null)
 				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), IN_m1));
 				}
-		public void m2 ()
-		{
+		public void m2() {
 			if (messageStrings[ IN_m2] != "timerTick"){
 				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_m2]);
@@ -585,8 +508,7 @@ public class p_HFSM {
 			if (getPeerAddress()!=null)
 				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), IN_m2));
 				}
-		public void m3 ()
-		{
+		public void m3() {
 			if (messageStrings[ IN_m3] != "timerTick"){
 				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_m3]);
@@ -594,8 +516,7 @@ public class p_HFSM {
 			if (getPeerAddress()!=null)
 				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), IN_m3));
 				}
-		public void m4 ()
-		{
+		public void m4() {
 			if (messageStrings[ IN_m4] != "timerTick"){
 				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_m4]);
@@ -603,8 +524,7 @@ public class p_HFSM {
 			if (getPeerAddress()!=null)
 				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), IN_m4));
 				}
-		public void m5 ()
-		{
+		public void m5() {
 			if (messageStrings[ IN_m5] != "timerTick"){
 				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_m5]);
@@ -612,8 +532,7 @@ public class p_HFSM {
 			if (getPeerAddress()!=null)
 				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), IN_m5));
 				}
-		public void m6 ()
-		{
+		public void m6() {
 			if (messageStrings[ IN_m6] != "timerTick"){
 				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_m6]);
@@ -621,8 +540,7 @@ public class p_HFSM {
 			if (getPeerAddress()!=null)
 				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), IN_m6));
 				}
-		public void reset ()
-		{
+		public void reset() {
 			if (messageStrings[ IN_reset] != "timerTick"){
 				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_reset]);
@@ -630,8 +548,7 @@ public class p_HFSM {
 			if (getPeerAddress()!=null)
 				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), IN_reset));
 				}
-		public void m7 ()
-		{
+		public void m7() {
 			if (messageStrings[ IN_m7] != "timerTick"){
 				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_m7]);
@@ -639,8 +556,7 @@ public class p_HFSM {
 			if (getPeerAddress()!=null)
 				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), IN_m7));
 				}
-		public void m8 ()
-		{
+		public void m8() {
 			if (messageStrings[ IN_m8] != "timerTick"){
 				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_m8]);
@@ -648,8 +564,7 @@ public class p_HFSM {
 			if (getPeerAddress()!=null)
 				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), IN_m8));
 				}
-		public void m9 ()
-		{
+		public void m9() {
 			if (messageStrings[ IN_m9] != "timerTick"){
 				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_m9]);
@@ -687,74 +602,54 @@ public class p_HFSM {
 		}
 		
 		// incoming messages
-		public void m1 ()
-		{
+		public void m1(){
 			for (int i=0; i<replication; ++i) {
-				ports.get(i).m1()
-				;
+				ports.get(i).m1();
 			}
 		}
-		public void m2 ()
-		{
+		public void m2(){
 			for (int i=0; i<replication; ++i) {
-				ports.get(i).m2()
-				;
+				ports.get(i).m2();
 			}
 		}
-		public void m3 ()
-		{
+		public void m3(){
 			for (int i=0; i<replication; ++i) {
-				ports.get(i).m3()
-				;
+				ports.get(i).m3();
 			}
 		}
-		public void m4 ()
-		{
+		public void m4(){
 			for (int i=0; i<replication; ++i) {
-				ports.get(i).m4()
-				;
+				ports.get(i).m4();
 			}
 		}
-		public void m5 ()
-		{
+		public void m5(){
 			for (int i=0; i<replication; ++i) {
-				ports.get(i).m5()
-				;
+				ports.get(i).m5();
 			}
 		}
-		public void m6 ()
-		{
+		public void m6(){
 			for (int i=0; i<replication; ++i) {
-				ports.get(i).m6()
-				;
+				ports.get(i).m6();
 			}
 		}
-		public void reset ()
-		{
+		public void reset(){
 			for (int i=0; i<replication; ++i) {
-				ports.get(i).reset()
-				;
+				ports.get(i).reset();
 			}
 		}
-		public void m7 ()
-		{
+		public void m7(){
 			for (int i=0; i<replication; ++i) {
-				ports.get(i).m7()
-				;
+				ports.get(i).m7();
 			}
 		}
-		public void m8 ()
-		{
+		public void m8(){
 			for (int i=0; i<replication; ++i) {
-				ports.get(i).m8()
-				;
+				ports.get(i).m8();
 			}
 		}
-		public void m9 ()
-		{
+		public void m9(){
 			for (int i=0; i<replication; ++i) {
-				ports.get(i).m9()
-				;
+				ports.get(i).m9();
 			}
 		}
 	}

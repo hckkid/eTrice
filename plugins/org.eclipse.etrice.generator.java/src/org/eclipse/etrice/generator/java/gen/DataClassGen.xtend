@@ -66,7 +66,21 @@ class DataClassGen {
 			
 			// default constructor
 			public «dc.name»() {
+				super();
 				«dc.attributes.attributeInitialization»
+			}
+			
+			// constructor using fields
+			public «dc.name»(«IF dc.base!=null»«dc.base.name» _super, «ENDIF»«FOR a : dc.attributes SEPARATOR ", "»«a.type.typeName»«IF a.size>1»[]«ENDIF» «a.name»«ENDFOR») {
+				super();
+				«IF dc.base!=null»
+					«FOR a : dc.base.attributes»
+						this.«a.name» = _super.«a.name»;
+					«ENDFOR»
+				«ENDIF»
+				«FOR a : dc.attributes»
+					this.«a.name» = «a.name»;
+				«ENDFOR»
 			}
 			
 			// deep copy

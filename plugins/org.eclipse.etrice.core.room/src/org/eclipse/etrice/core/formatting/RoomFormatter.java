@@ -106,7 +106,7 @@ public class RoomFormatter extends AbstractDeclarativeFormatter {
 		c.setLinewrap().around(f.getTriggerRule());
 
 		// protocol
-		c.setLinewrap().after(f.getPortClassRule());
+		c.setLinewrap().around(f.getPortClassRule());
 		c.setLinewrap().around(f.getMessageRule());
 		c.setLinewrap().around(f.getMessageHandlerRule());
 		c.setLinewrap().around(f.getProtocolSemanticsRule());

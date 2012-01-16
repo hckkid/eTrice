@@ -80,6 +80,8 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
       case RoomPackage.DATA_CLASS: return createDataClass();
       case RoomPackage.ATTRIBUTE: return createAttribute();
       case RoomPackage.OPERATION: return createOperation();
+      case RoomPackage.STANDARD_OPERATION: return createStandardOperation();
+      case RoomPackage.PORT_OPERATION: return createPortOperation();
       case RoomPackage.PROTOCOL_CLASS: return createProtocolClass();
       case RoomPackage.MESSAGE: return createMessage();
       case RoomPackage.PORT_CLASS: return createPortClass();
@@ -275,6 +277,28 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
   {
     OperationImpl operation = new OperationImpl();
     return operation;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public StandardOperation createStandardOperation()
+  {
+    StandardOperationImpl standardOperation = new StandardOperationImpl();
+    return standardOperation;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public PortOperation createPortOperation()
+  {
+    PortOperationImpl portOperation = new PortOperationImpl();
+    return portOperation;
   }
 
   /**

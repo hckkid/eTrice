@@ -25,8 +25,8 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.MessageHandler;
-import org.eclipse.etrice.core.room.Operation;
 import org.eclipse.etrice.core.room.PortClass;
+import org.eclipse.etrice.core.room.PortOperation;
 import org.eclipse.etrice.core.room.RoomPackage;
 
 /**
@@ -75,7 +75,7 @@ public class PortClassImpl extends MinimalEObjectImpl.Container implements PortC
    * @generated
    * @ordered
    */
-  protected EList<Operation> operations;
+  protected EList<PortOperation> operations;
 
   /**
    * The cached value of the '{@link #getMsgHandlers() <em>Msg Handlers</em>}' containment reference list.
@@ -175,11 +175,11 @@ public class PortClassImpl extends MinimalEObjectImpl.Container implements PortC
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<Operation> getOperations()
+  public EList<PortOperation> getOperations()
   {
     if (operations == null)
     {
-      operations = new EObjectContainmentEList<Operation>(Operation.class, this, RoomPackage.PORT_CLASS__OPERATIONS);
+      operations = new EObjectContainmentEList<PortOperation>(PortOperation.class, this, RoomPackage.PORT_CLASS__OPERATIONS);
     }
     return operations;
   }
@@ -262,7 +262,7 @@ public class PortClassImpl extends MinimalEObjectImpl.Container implements PortC
         return;
       case RoomPackage.PORT_CLASS__OPERATIONS:
         getOperations().clear();
-        getOperations().addAll((Collection<? extends Operation>)newValue);
+        getOperations().addAll((Collection<? extends PortOperation>)newValue);
         return;
       case RoomPackage.PORT_CLASS__MSG_HANDLERS:
         getMsgHandlers().clear();

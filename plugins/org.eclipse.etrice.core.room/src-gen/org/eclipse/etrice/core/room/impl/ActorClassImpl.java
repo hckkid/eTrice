@@ -26,11 +26,11 @@ import org.eclipse.etrice.core.room.Annotation;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.Documentation;
 import org.eclipse.etrice.core.room.ExternalPort;
-import org.eclipse.etrice.core.room.Operation;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.etrice.core.room.SAPRef;
 import org.eclipse.etrice.core.room.ServiceImplementation;
+import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.StateMachine;
 
 /**
@@ -188,7 +188,7 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
    * @generated
    * @ordered
    */
-  protected EList<Operation> operations;
+  protected EList<StandardOperation> operations;
 
   /**
    * The cached value of the '{@link #getStateMachine() <em>State Machine</em>}' containment reference.
@@ -486,11 +486,11 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<Operation> getOperations()
+  public EList<StandardOperation> getOperations()
   {
     if (operations == null)
     {
-      operations = new EObjectContainmentEList<Operation>(Operation.class, this, RoomPackage.ACTOR_CLASS__OPERATIONS);
+      operations = new EObjectContainmentEList<StandardOperation>(StandardOperation.class, this, RoomPackage.ACTOR_CLASS__OPERATIONS);
     }
     return operations;
   }
@@ -673,7 +673,7 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
         return;
       case RoomPackage.ACTOR_CLASS__OPERATIONS:
         getOperations().clear();
-        getOperations().addAll((Collection<? extends Operation>)newValue);
+        getOperations().addAll((Collection<? extends StandardOperation>)newValue);
         return;
       case RoomPackage.ACTOR_CLASS__STATE_MACHINE:
         setStateMachine((StateMachine)newValue);

@@ -58,8 +58,7 @@ RoomModel room.basic.service.logging {
 						<internalLog: log>
 					}
 					action {
-						"long s = Long.valueOf(data.timeStamp);"
-						"p.println(\"Timestamp: \" + Long.toString(s-tStart) + \"ms\");"
+						"p.println(\"Timestamp: \" + Long.toString(data.timeStamp-tStart) + \"ms\");"
 						"p.println(\"SenderInstance: \"+ data.sender);"
 						"p.println(\"UserString: \" + data.userString);"
 						"p.println(\"--------------------------------------------------\");"
@@ -75,11 +74,11 @@ RoomModel room.basic.service.logging {
 	ProtocolClass Log {
 		incoming {
 			Message open(fileName: string)
-			Message setLogLevel(l: int32)
 			Message close()
-			Message internalLog(data: InternalLogData)
+			private Message internalLog(data: InternalLogData)
 		}
-		outgoing { } conjugate PortClass {
+
+		conjugate PortClass {
 			usercode {
 				"public static final int LOG_LEVEL_LOW = 1;"
 				"public static final int LOG_LEVEL_MEDIUM = 2;"
@@ -87,19 +86,15 @@ RoomModel room.basic.service.logging {
 				"static int logLevel=0;"
 				"InternalLogData d = new InternalLogData();"
 			}
-			handle setLogLevel {
+			Operation setLogLevel(l: int32) {
 				"logLevel=l;"
 				"if (logLevel > LOG_LEVEL_HIGH) logLevel=LOG_LEVEL_HIGH;"
 			}
-			handle internalLog{
-				"System.out.printf(\"\\ndon´t use the internalLog messages !\\n\");"
-			}
-			Operation log(logLevel:int32, userString:string){
+			Operation log(logLevel: int32, userString: string) sends internalLog {
 				"long s;"
 				"if (logLevel>this.logLevel){"
 				"d.userString=userString;"
-				"s=System.currentTimeMillis();"
-				"d.timeStamp=Long.toString(s);"
+				"d.timeStamp=System.currentTimeMillis();"
 				"d.sender=getInstancePath();"
 				"if (getPeerAddress()!=null)"
 				"getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), IN_internalLog, d));"
@@ -109,9 +104,9 @@ RoomModel room.basic.service.logging {
 	}
 
 	DataClass InternalLogData {
-		Attribute timeStamp:string
-		Attribute sender: string
 		Attribute userString: string
+		Attribute sender: string
+		Attribute timeStamp: int64
 	}
 
 }

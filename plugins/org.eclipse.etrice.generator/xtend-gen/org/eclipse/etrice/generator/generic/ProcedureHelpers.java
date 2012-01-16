@@ -364,7 +364,7 @@ public class ProcedureHelpers {
     return _builder;
   }
   
-  public StringConcatenation OperationsDeclaration(final List<Operation> operations, final String classname) {
+  public StringConcatenation OperationsDeclaration(final List<? extends Operation> operations, final String classname) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("//--------------------- operations");
     _builder.newLine();
@@ -379,7 +379,7 @@ public class ProcedureHelpers {
     return _builder;
   }
   
-  public StringConcatenation OperationsImplementation(final List<Operation> operations, final String classname) {
+  public StringConcatenation OperationsImplementation(final List<? extends Operation> operations, final String classname) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("//--------------------- operations");
     _builder.newLine();

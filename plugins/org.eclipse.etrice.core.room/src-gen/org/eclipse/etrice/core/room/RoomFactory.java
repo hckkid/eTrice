@@ -135,6 +135,24 @@ public interface RoomFactory extends EFactory
   Operation createOperation();
 
   /**
+   * Returns a new object of class '<em>Standard Operation</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Standard Operation</em>'.
+   * @generated
+   */
+  StandardOperation createStandardOperation();
+
+  /**
+   * Returns a new object of class '<em>Port Operation</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Port Operation</em>'.
+   * @generated
+   */
+  PortOperation createPortOperation();
+
+  /**
    * Returns a new object of class '<em>Protocol Class</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

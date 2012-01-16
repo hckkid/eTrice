@@ -7,7 +7,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.DetailCode;
-import org.eclipse.etrice.core.room.Operation;
+import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.generator.base.ILogger;
 import org.eclipse.etrice.generator.c.gen.CExtensions;
 import org.eclipse.etrice.generator.etricegen.Root;
@@ -134,7 +134,7 @@ public class DataClassGen {
     _builder.append("// TODO: do we need setters and getters for C and C++ ?");
     _builder.newLine();
     _builder.newLine();
-    EList<Operation> _operations = dc.getOperations();
+    EList<StandardOperation> _operations = dc.getOperations();
     String _name_5 = dc.getName();
     StringConcatenation _OperationsDeclaration = this.helpers.OperationsDeclaration(_operations, _name_5);
     _builder.append(_OperationsDeclaration, "");
@@ -182,7 +182,7 @@ public class DataClassGen {
     _builder.append("// TODO: do we need setters and getters for C and C++ ?");
     _builder.newLine();
     _builder.newLine();
-    EList<Operation> _operations = dc.getOperations();
+    EList<StandardOperation> _operations = dc.getOperations();
     String _name = dc.getName();
     StringConcatenation _OperationsImplementation = this.helpers.OperationsImplementation(_operations, _name);
     _builder.append(_OperationsImplementation, "");

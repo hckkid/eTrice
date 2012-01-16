@@ -145,8 +145,7 @@ public class PTimeout {
 		}
 		
 		// sent messages
-		public void timeoutTick ()
-		{
+		public void timeoutTick() {
 			if (messageStrings[ OUT_timeoutTick] != "timerTick"){
 				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_timeoutTick]);
@@ -184,11 +183,9 @@ public class PTimeout {
 		}
 		
 		// outgoing messages
-		public void timeoutTick ()
-		{
+		public void timeoutTick(){
 			for (int i=0; i<replication; ++i) {
-				ports.get(i).timeoutTick()
-				;
+				ports.get(i).timeoutTick();
 			}
 		}
 	}
@@ -247,8 +244,7 @@ public class PTimeout {
 		//--------------------- operations
 		
 		// sent messages
-		public void Start (int time_ms)
-		{
+		public void Start(int time_ms) {
 				//conjugate PortClass handle start
 							if (active)
 								return;
@@ -262,8 +258,7 @@ public class PTimeout {
 											new EventWithDataMessage(getPeerAddress(),
 													IN_Start, new TimeoutData(time_ms, ++currentId)));
 		}
-		public void Kill ()
-		{
+		public void Kill() {
 				//conjugate PortClass kill
 							DebuggingService.getInstance().addMessageAsyncOut(getAddress(),
 									getPeerAddress(), messageStrings[IN_Kill]);
@@ -304,18 +299,14 @@ public class PTimeout {
 		}
 		
 		// incoming messages
-		public void Start (int time_ms)
-		{
+		public void Start(int time_ms){
 			for (int i=0; i<replication; ++i) {
-				ports.get(i).Start( time_ms)
-				;
+				ports.get(i).Start( time_ms);
 			}
 		}
-		public void Kill ()
-		{
+		public void Kill(){
 			for (int i=0; i<replication; ++i) {
-				ports.get(i).Kill()
-				;
+				ports.get(i).Kill();
 			}
 		}
 	}

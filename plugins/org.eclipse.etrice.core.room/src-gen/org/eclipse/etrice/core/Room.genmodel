@@ -75,6 +75,10 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//Operation/docu"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//Operation/detailCode"/>
     </genClasses>
+    <genClasses ecoreClass="Room.ecore#//StandardOperation"/>
+    <genClasses ecoreClass="Room.ecore#//PortOperation">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//PortOperation/sendsMsg"/>
+    </genClasses>
     <genClasses ecoreClass="Room.ecore#//ProtocolClass">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//ProtocolClass/base"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//ProtocolClass/userCode1"/>
@@ -87,6 +91,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//ProtocolClass/semantics"/>
     </genClasses>
     <genClasses ecoreClass="Room.ecore#//Message">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//Message/priv"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//Message/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//Message/data"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//Message/docu"/>

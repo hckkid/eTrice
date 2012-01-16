@@ -70,6 +70,7 @@ public class PingPongDataDeep {
 	
 	// default constructor
 	public PingPongDataDeep() {
+		super();
 		// initialize attributes
 		i8Val = 0;
 		i16Val = 0;
@@ -81,6 +82,19 @@ public class PingPongDataDeep {
 		for (int i=0;i<10;i++){
 			arrayFromInt32[i] = 0;
 		}
+	}
+	
+	// constructor using fields
+	public PingPongDataDeep(byte i8Val, short i16Val, int i32Val, char charVal, float f32Val, double f64Val, String stringVal, int[] arrayFromInt32) {
+		super();
+		this.i8Val = i8Val;
+		this.i16Val = i16Val;
+		this.i32Val = i32Val;
+		this.charVal = charVal;
+		this.f32Val = f32Val;
+		this.f64Val = f64Val;
+		this.stringVal = stringVal;
+		this.arrayFromInt32 = arrayFromInt32;
 	}
 	
 	// deep copy

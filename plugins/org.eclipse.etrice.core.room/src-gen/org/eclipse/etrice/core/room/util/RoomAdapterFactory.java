@@ -139,6 +139,16 @@ public class RoomAdapterFactory extends AdapterFactoryImpl
         return createOperationAdapter();
       }
       @Override
+      public Adapter caseStandardOperation(StandardOperation object)
+      {
+        return createStandardOperationAdapter();
+      }
+      @Override
+      public Adapter casePortOperation(PortOperation object)
+      {
+        return createPortOperationAdapter();
+      }
+      @Override
       public Adapter caseProtocolClass(ProtocolClass object)
       {
         return createProtocolClassAdapter();
@@ -636,6 +646,36 @@ public class RoomAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createOperationAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.StandardOperation <em>Standard Operation</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.etrice.core.room.StandardOperation
+   * @generated
+   */
+  public Adapter createStandardOperationAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.PortOperation <em>Port Operation</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.etrice.core.room.PortOperation
+   * @generated
+   */
+  public Adapter createPortOperationAdapter()
   {
     return null;
   }

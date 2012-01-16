@@ -68,8 +68,7 @@ public class PingPongProtocol {
 	
 		
 		// sent messages
-		public void pong ()
-		{
+		public void pong() {
 			if (messageStrings[ OUT_pong] != "timerTick"){
 				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_pong]);
@@ -107,11 +106,9 @@ public class PingPongProtocol {
 		}
 		
 		// outgoing messages
-		public void pong ()
-		{
+		public void pong(){
 			for (int i=0; i<replication; ++i) {
-				ports.get(i).pong()
-				;
+				ports.get(i).pong();
 			}
 		}
 	}
@@ -150,8 +147,7 @@ public class PingPongProtocol {
 	
 		
 		// sent messages
-		public void ping ()
-		{
+		public void ping() {
 			if (messageStrings[ IN_ping] != "timerTick"){
 				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_ping]);
@@ -189,11 +185,9 @@ public class PingPongProtocol {
 		}
 		
 		// incoming messages
-		public void ping ()
-		{
+		public void ping(){
 			for (int i=0; i<replication; ++i) {
-				ports.get(i).ping()
-				;
+				ports.get(i).ping();
 			}
 		}
 	}

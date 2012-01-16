@@ -74,8 +74,7 @@ public class PSocket {
 	
 		
 		// sent messages
-		public void connected ()
-		{
+		public void connected() {
 			if (messageStrings[ OUT_connected] != "timerTick"){
 				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_connected]);
@@ -83,8 +82,7 @@ public class PSocket {
 			if (getPeerAddress()!=null)
 				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_connected));
 				}
-		public void disconnected ()
-		{
+		public void disconnected() {
 			if (messageStrings[ OUT_disconnected] != "timerTick"){
 				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_disconnected]);
@@ -92,8 +90,7 @@ public class PSocket {
 			if (getPeerAddress()!=null)
 				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_disconnected));
 				}
-		public void receivedData ()
-		{
+		public void receivedData() {
 			if (messageStrings[ OUT_receivedData] != "timerTick"){
 				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_receivedData]);
@@ -101,8 +98,7 @@ public class PSocket {
 			if (getPeerAddress()!=null)
 				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_receivedData));
 				}
-		public void sentData ()
-		{
+		public void sentData() {
 			if (messageStrings[ OUT_sentData] != "timerTick"){
 				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_sentData]);
@@ -110,8 +106,7 @@ public class PSocket {
 			if (getPeerAddress()!=null)
 				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_sentData));
 				}
-		public void error ()
-		{
+		public void error() {
 			if (messageStrings[ OUT_error] != "timerTick"){
 				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_error]);
@@ -149,39 +144,29 @@ public class PSocket {
 		}
 		
 		// outgoing messages
-		public void connected ()
-		{
+		public void connected(){
 			for (int i=0; i<replication; ++i) {
-				ports.get(i).connected()
-				;
+				ports.get(i).connected();
 			}
 		}
-		public void disconnected ()
-		{
+		public void disconnected(){
 			for (int i=0; i<replication; ++i) {
-				ports.get(i).disconnected()
-				;
+				ports.get(i).disconnected();
 			}
 		}
-		public void receivedData ()
-		{
+		public void receivedData(){
 			for (int i=0; i<replication; ++i) {
-				ports.get(i).receivedData()
-				;
+				ports.get(i).receivedData();
 			}
 		}
-		public void sentData ()
-		{
+		public void sentData(){
 			for (int i=0; i<replication; ++i) {
-				ports.get(i).sentData()
-				;
+				ports.get(i).sentData();
 			}
 		}
-		public void error ()
-		{
+		public void error(){
 			for (int i=0; i<replication; ++i) {
-				ports.get(i).error()
-				;
+				ports.get(i).error();
 			}
 		}
 	}
@@ -220,8 +205,7 @@ public class PSocket {
 	
 		
 		// sent messages
-		public void connect (DSocketConfiguration config)
-		{
+		public void connect(DSocketConfiguration config) {
 			if (messageStrings[ IN_connect] != "timerTick"){
 				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_connect]);
@@ -229,8 +213,10 @@ public class PSocket {
 			if (getPeerAddress()!=null)
 				getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), IN_connect, config.deepCopy()));
 		}
-		public void disconnect ()
-		{
+		public void connect(String serverName, int portNumber, int protocol, boolean checkCookie, int mode) {
+			connect(new DSocketConfiguration(serverName, portNumber, protocol, checkCookie, mode));
+		}
+		public void disconnect() {
 			if (messageStrings[ IN_disconnect] != "timerTick"){
 				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_disconnect]);
@@ -238,14 +224,16 @@ public class PSocket {
 			if (getPeerAddress()!=null)
 				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), IN_disconnect));
 				}
-		public void sendData (DSocketData data)
-		{
+		public void sendData(DSocketData data) {
 			if (messageStrings[ IN_sendData] != "timerTick"){
 				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_sendData]);
 			}
 			if (getPeerAddress()!=null)
 				getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), IN_sendData, data.deepCopy()));
+		}
+		public void sendData(int size, String data) {
+			sendData(new DSocketData(size, data));
 		}
 	}
 	
@@ -277,25 +265,19 @@ public class PSocket {
 		}
 		
 		// incoming messages
-		public void connect (DSocketConfiguration config)
-		{
+		public void connect(DSocketConfiguration config){
 			for (int i=0; i<replication; ++i) {
-				ports.get(i).connect( config)
-				;
+				ports.get(i).connect( config);
 			}
 		}
-		public void disconnect ()
-		{
+		public void disconnect(){
 			for (int i=0; i<replication; ++i) {
-				ports.get(i).disconnect()
-				;
+				ports.get(i).disconnect();
 			}
 		}
-		public void sendData (DSocketData data)
-		{
+		public void sendData(DSocketData data){
 			for (int i=0; i<replication; ++i) {
-				ports.get(i).sendData( data)
-				;
+				ports.get(i).sendData( data);
 			}
 		}
 	}

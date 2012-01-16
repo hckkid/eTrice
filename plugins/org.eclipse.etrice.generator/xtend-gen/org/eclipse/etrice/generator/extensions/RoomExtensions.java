@@ -18,7 +18,6 @@ import org.eclipse.etrice.core.room.Guard;
 import org.eclipse.etrice.core.room.InitialTransition;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.MessageHandler;
-import org.eclipse.etrice.core.room.Operation;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.PortClass;
 import org.eclipse.etrice.core.room.ProtocolClass;
@@ -28,6 +27,7 @@ import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.SAPRef;
 import org.eclipse.etrice.core.room.SPPRef;
 import org.eclipse.etrice.core.room.ServiceImplementation;
+import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.StateMachine;
@@ -495,9 +495,9 @@ public class RoomExtensions {
   
   public boolean overridesStop(final ActorClass ac) {
     boolean _operator_or = false;
-    EList<Operation> _operations = ac.getOperations();
-    final Function1<Operation,Boolean> _function = new Function1<Operation,Boolean>() {
-        public Boolean apply(final Operation e) {
+    EList<StandardOperation> _operations = ac.getOperations();
+    final Function1<StandardOperation,Boolean> _function = new Function1<StandardOperation,Boolean>() {
+        public Boolean apply(final StandardOperation e) {
           boolean _operator_and = false;
           boolean _operator_and_1 = false;
           String _name = e.getName();
@@ -519,7 +519,7 @@ public class RoomExtensions {
           return ((Boolean)_operator_and);
         }
       };
-    boolean _exists = IterableExtensions.<Operation>exists(_operations, _function);
+    boolean _exists = IterableExtensions.<StandardOperation>exists(_operations, _function);
     if (_exists) {
       _operator_or = true;
     } else {
