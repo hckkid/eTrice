@@ -6,13 +6,13 @@
 	<testsuite name="TestMessage" tests="0" failures="0" errors="0" time="0">
 		<testcase name="TestEtMessage_testBasicMessage" time="0"/>
 	</testsuite>
-	<testsuite name="TestRMessageQueue" tests="0" failures="0" errors="0" time="0">
-		<testcase name="testPushPop" time="0"/>
-		<testcase name="MassiveMessaging" time="0"/>
+	<testsuite name="TestetMessageQueue" tests="0" failures="0" errors="0" time="0">
+		<testcase name="TestEtMessageQueue_testPushPop" time="0"/>
+		<testcase name="TestEtMessageQueue_testMassiveMessaging" time="0"/>
 	</testsuite>
-	<testsuite name="TestRMessageService" tests="0" failures="0" errors="0" time="0">
-		<testcase name="testRMessageService_init" time="0"/>
-		<testcase name="testRMessageService_GetPushPopReturn" time="0"/>
-		<testcase name="testRMessageService_GetReturn" time="0"/>
+	<testsuite name="TestEtMessageService" tests="0" failures="0" errors="0" time="0">
+		<testcase name="TestEtMessageService_init" time="0"/>
+		<testcase name="TestEtMessageService_GetPushPopReturn" time="0"/>
+		<testcase name="TestEtMessageService_GetReturn" time="0"/>
 	</testsuite>
 </testsuites>

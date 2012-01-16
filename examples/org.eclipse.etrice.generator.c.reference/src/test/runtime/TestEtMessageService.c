@@ -18,8 +18,8 @@
 void TestEtMessageService_init(void){
 
 	etMessageService msgService;
-	int16 max = 6;
-	int16 blockSize = 32;
+	uint16 max = 6;
+	uint16 blockSize = 32;
 
 	uint8 msgBuffer[max*blockSize];
 
@@ -36,8 +36,8 @@ void TestEtMessageService_init(void){
 void TestEtMessageService_GetPushPopReturn(void){
 
 	etMessageService msgService;
-	int16 max = 6;
-	int16 blockSize = 32;
+	uint16 max = 6;
+	uint16 blockSize = 32;
 	uint8 msgBuffer[max*blockSize];
 
 	etMessageService_init(&msgService, msgBuffer, max, blockSize);
@@ -82,8 +82,8 @@ void TestEtMessageService_GetPushPopReturn(void){
 void TestEtMessageService_GetReturn(void){
 
 	etMessageService msgService;
-	int16 max = 2;
-	int16 blockSize = 32;
+	uint16 max = 2;
+	uint16 blockSize = 32;
 	uint8 msgBuffer[max*blockSize];
 
 	etMessageService_init(&msgService, msgBuffer, max, blockSize);
@@ -108,9 +108,9 @@ void TestEtMessageService_GetReturn(void){
 }
 
 void TestEtMessageService_runSuite(void){
-	RUnit_openTestSuite("TestEtMessageService");
+	etUnit_openTestSuite("TestEtMessageService");
 	ADD_TESTCASE(TestEtMessageService_init);
 	ADD_TESTCASE(TestEtMessageService_GetPushPopReturn);
 	ADD_TESTCASE(TestEtMessageService_GetReturn);
-	RUnit_closeTestSuite();
+	etUnit_closeTestSuite();
 }

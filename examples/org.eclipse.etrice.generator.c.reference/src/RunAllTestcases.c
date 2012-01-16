@@ -26,11 +26,11 @@ int main(void){
 
 
 void runTestCases(void){
-	RUnit_open("tmp/testlog","TestMessageService");
+	etUnit_open("tmp/testlog","TestMessageService");
 
 	RunCGeneratorTestcases();
 	RunCRuntimeTestcases();
 
-	RUnit_close();
+	etUnit_close();
 }
 

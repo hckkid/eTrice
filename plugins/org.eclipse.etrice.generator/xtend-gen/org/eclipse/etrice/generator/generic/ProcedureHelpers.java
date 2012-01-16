@@ -72,33 +72,17 @@ public class ProcedureHelpers {
             _builder.append(" ");
             String _name = attribute.getName();
             _builder.append(_name, "");
-            _builder.append(" = ");
-            {
-              String _defaultValueLiteral = attribute.getDefaultValueLiteral();
-              boolean _operator_equals_1 = ObjectExtensions.operator_equals(_defaultValueLiteral, null);
-              if (_operator_equals_1) {
-                DataType _type_1 = attribute.getType();
-                String _defaultValue = this._typeHelpers.defaultValue(_type_1);
-                _builder.append(_defaultValue, "");
-              } else {
-                String _defaultValueLiteral_1 = attribute.getDefaultValueLiteral();
-                _builder.append(_defaultValueLiteral_1, "");
-              }
-            }
             _builder.append(";");
             _builder.newLineIfNotEmpty();
           } else {
             String _accessLevelProtected_1 = this.languageExt.accessLevelProtected();
             _builder.append(_accessLevelProtected_1, "");
-            DataType _type_2 = attribute.getType();
-            String _typeName_1 = this._typeHelpers.typeName(_type_2);
+            DataType _type_1 = attribute.getType();
+            String _typeName_1 = this._typeHelpers.typeName(_type_1);
             _builder.append(_typeName_1, "");
             _builder.append("[] ");
             String _name_1 = attribute.getName();
             _builder.append(_name_1, "");
-            _builder.append(" = ");
-            String _arrayInitializer = this.arrayInitializer(attribute);
-            _builder.append(_arrayInitializer, "");
             _builder.append(";");
             _builder.newLineIfNotEmpty();
           }

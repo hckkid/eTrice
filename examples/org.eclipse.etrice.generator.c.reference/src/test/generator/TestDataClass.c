@@ -8,7 +8,7 @@
 
 #include "TestDataClass.h"
 
-#include "RUnit.h"
+#include "etUnit.h"
 
 #include "../../../src-gen/cGenRef/DataClass1.h"
 
@@ -47,8 +47,8 @@ void TestDataClass_testDataClassDeepCopy(void){
 }
 
 void TestDataClass_runSuite(void){
-	RUnit_openTestSuite("TestDataClass");
+	etUnit_openTestSuite("TestDataClass");
 	ADD_TESTCASE(TestDataClass_Operations);
 	ADD_TESTCASE(TestDataClass_testDataClassDeepCopy);
-	RUnit_closeTestSuite();
+	etUnit_closeTestSuite();
 }

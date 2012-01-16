@@ -38,8 +38,8 @@ void TestEtMessage_testBasicMessage(void){
 }
 
 void TestEtMessage_runSuite(void){
-	RUnit_openTestSuite("TestMessage");
+	etUnit_openTestSuite("TestMessage");
 	ADD_TESTCASE(TestEtMessage_testBasicMessage);
-	RUnit_closeTestSuite();
+	etUnit_closeTestSuite();
 }
 

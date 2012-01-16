@@ -94,8 +94,8 @@ void TestEtMessageQueue_testMassiveMessaging(void){
 }
 
 void TestEtMessageQueue_runSuite(void){
-	RUnit_openTestSuite("TestetMessageQueue");
+	etUnit_openTestSuite("TestetMessageQueue");
 	ADD_TESTCASE(TestEtMessageQueue_testPushPop);
 	ADD_TESTCASE(TestEtMessageQueue_testMassiveMessaging);
-	RUnit_closeTestSuite();
+	etUnit_closeTestSuite();
 }

@@ -44,9 +44,9 @@ class ProcedureHelpers {
 		//--------------------- attributes
 		«FOR attribute : attribs»
 			«IF attribute.size==0»
-				«languageExt.accessLevelProtected()»«attribute.type.typeName» «attribute.name» = «IF attribute.defaultValueLiteral==null»«attribute.type.defaultValue»«ELSE»«attribute.defaultValueLiteral»«ENDIF»;
+				«languageExt.accessLevelProtected()»«attribute.type.typeName» «attribute.name»;
 			«ELSE»
-				«languageExt.accessLevelProtected()»«attribute.type.typeName»[] «attribute.name» = «attribute.arrayInitializer»;
+				«languageExt.accessLevelProtected()»«attribute.type.typeName»[] «attribute.name»;
 			«ENDIF» 
 		«ENDFOR»
 	'''
