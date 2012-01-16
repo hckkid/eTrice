@@ -1,14 +1,14 @@
 <testsuites name="TestMessageService" tests="0" failures="0" errors="0" time="0">
 	<testsuite name="TestDataClass" tests="0" failures="0" errors="0" time="0">
-		<testcase name="Operations" time="0"/>
-		<testcase name="testDataClassDeepCopy" time="0"/>
+		<testcase name="TestDataClass_Operations" time="0"/>
+		<testcase name="TestDataClass_testDataClassDeepCopy" time="0"/>
 	</testsuite>
 	<testsuite name="TestMessage" tests="0" failures="0" errors="0" time="0">
-		<testcase name="TestMessage_testBasicMessage" time="0"/>
+		<testcase name="TestEtMessage_testBasicMessage" time="0"/>
 	</testsuite>
 	<testsuite name="TestRMessageQueue" tests="0" failures="0" errors="0" time="0">
 		<testcase name="testPushPop" time="0"/>
-		<testcase name="MassiveMessaging" time="1"/>
+		<testcase name="MassiveMessaging" time="0"/>
 	</testsuite>
 	<testsuite name="TestRMessageService" tests="0" failures="0" errors="0" time="0">
 		<testcase name="testRMessageService_init" time="0"/>

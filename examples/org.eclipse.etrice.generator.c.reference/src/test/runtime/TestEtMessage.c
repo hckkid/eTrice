@@ -19,7 +19,6 @@
 
 
 void TestEtMessage_testBasicMessage(void){
-	RUnit_openTestCase("TestMessage_testBasicMessage");
 
 	RMessage msg1 = {(RMessage*)1234567, 123,456,};
 	RMessage msg2 = {NULL, 222,333};
@@ -36,13 +35,11 @@ void TestEtMessage_testBasicMessage(void){
 	EXPECT_EQUAL_INT16("msg1.NextMsg", msg2.evtID, msg1.next->evtID);
 	EXPECT_EQUAL_INT16("msg2.NextMsg", msg1.evtID, msg2.next->evtID);
 
-	RUnit_closeTestCase();
 }
-
 
 void TestEtMessage_runSuite(void){
 	RUnit_openTestSuite("TestMessage");
-	TestEtMessage_testBasicMessage();
+	ADD_TESTCASE(TestEtMessage_testBasicMessage);
 	RUnit_closeTestSuite();
 }
 

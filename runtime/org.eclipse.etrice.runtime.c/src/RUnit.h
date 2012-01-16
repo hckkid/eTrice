@@ -50,4 +50,12 @@ void EXPECT_EQUAL_FLOAT64(const char* testcase, etFloat64 expected, etFloat64 ac
 
 void expect_equal_void_ptr(const char* testcase, const void* expected, const void* actual);
 
+/* Helpers for adding testcases */
+
+#define ADD_TESTCASE(testcase) \
+	RUnit_openTestCase(#testcase); \
+	testcase(); \
+	RUnit_closeTestCase();
+
+
 #endif /* _RUNIT_H_ */

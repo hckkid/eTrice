@@ -13,7 +13,6 @@
 #include "../../../src-gen/cGenRef/DataClass1.h"
 
 void TestDataClass_Operations(void){
-	RUnit_openTestCase("Operations");
 
 	DataClass1 d;
 	d.Attr1 = 123;
@@ -25,13 +24,10 @@ void TestDataClass_Operations(void){
 	EXPECT_EQUAL_INT32("Operation DataClass1_MultiplyWithAttr1", 246, DataClass1_MultiplyWithAttr1(&d, 2));
 	EXPECT_EQUAL_FLOAT32("Operation DataClass1_MultiplyWithAttr3", (float32)642.246, DataClass1_MultiplyWithAttr3(&d, 2), (float32)0.0001);
 
-	RUnit_closeTestCase();
 }
 
 
 void TestDataClass_testDataClassDeepCopy(void){
-	RUnit_openTestCase("testDataClassDeepCopy");
-
 
 	DataClass1 d, e;
 	d.Attr1 = 123;
@@ -48,13 +44,11 @@ void TestDataClass_testDataClassDeepCopy(void){
 	EXPECT_EQUAL_INT32("ComplexAttr.Attr3", 789, e.ComplexAttr.Attr3);
 	EXPECT_EQUAL_FLOAT32("Attr3", (float32)321.123, e.Attr3, (float32)0.0001);
 
-
-	RUnit_closeTestCase();
 }
 
 void TestDataClass_runSuite(void){
 	RUnit_openTestSuite("TestDataClass");
-	TestDataClass_Operations();
-	TestDataClass_testDataClassDeepCopy();
+	ADD_TESTCASE(TestDataClass_Operations);
+	ADD_TESTCASE(TestDataClass_testDataClassDeepCopy);
 	RUnit_closeTestSuite();
 }
