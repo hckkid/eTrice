@@ -10,21 +10,21 @@
  *
  *******************************************************************************/
 
-#ifndef _RUNIT_H_
-#define _RUNIT_H_
+#ifndef _ETUNIT_H_
+#define _ETUNIT_H_
 
-#include "datatypes.h"
+#include "etDatatypes.h"
 #include <stdio.h>
 #include <time.h>
 
 
 // open / close
-void RUnit_open(char* testResultPath, char* testFileName);
-void RUnit_close(void);
-void RUnit_openTestSuite(char* testSuiteName);
-void RUnit_closeTestSuite(void);
-void RUnit_openTestCase(char* testCaseName);
-void RUnit_closeTestCase(void);
+void etUnit_open(char* testResultPath, char* testFileName);
+void etUnit_close(void);
+void etUnit_openTestSuite(char* testSuiteName);
+void etUnit_closeTestSuite(void);
+void etUnit_openTestCase(char* testCaseName);
+void etUnit_closeTestCase(void);
 
 /* boolean values */
 void EXPECT_TRUE(const char* testcase, etBool condition);
@@ -53,9 +53,9 @@ void expect_equal_void_ptr(const char* testcase, const void* expected, const voi
 /* Helpers for adding testcases */
 
 #define ADD_TESTCASE(testcase) \
-	RUnit_openTestCase(#testcase); \
+	etUnit_openTestCase(#testcase); \
 	testcase(); \
-	RUnit_closeTestCase();
+	etUnit_closeTestCase();
 
 
-#endif /* _RUNIT_H_ */
+#endif /* _ETUNIT_H_ */

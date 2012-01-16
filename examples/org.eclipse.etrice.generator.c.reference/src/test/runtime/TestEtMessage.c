@@ -13,15 +13,15 @@
 #include "TestEtMessage.h"
 
 #include <stddef.h>
-#include "RUnit.h"
-#include "RMessage.h"
+#include "etUnit.h"
+#include "etMessage.h"
 
 
 
 void TestEtMessage_testBasicMessage(void){
 
-	RMessage msg1 = {(RMessage*)1234567, 123,456,};
-	RMessage msg2 = {NULL, 222,333};
+	etMessage msg1 = {(etMessage*)1234567, 123,456,};
+	etMessage msg2 = {NULL, 222,333};
 
 	// basic checks -> detects structure changes that would cause problems for generated code
 	EXPECT_EQUAL_PTR("Message.next", 1234567, msg1.next);

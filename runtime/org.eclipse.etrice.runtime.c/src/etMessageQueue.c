@@ -10,9 +10,9 @@
  *
  *******************************************************************************/
 
-#include "RMessageQueue.h"
+#include "etMessageQueue.h"
 
-void RMessageQueue_init(RMessageQueue* self){
+void etMessageQueue_init(etMessageQueue* self){
 	self->first = NULL;
 	self->last = NULL;
 	self->highWaterMark = 0;
@@ -20,7 +20,7 @@ void RMessageQueue_init(RMessageQueue* self){
 }
 
 
-void RMessageQueue_push(RMessageQueue* self, RMessage* msg){
+void etMessageQueue_push(etMessageQueue* self, etMessage* msg){
 	// TODO: optimize queue for concurrent push / pop
 	if (self->first == NULL) {
 		/*no message in queue*/
@@ -37,8 +37,8 @@ void RMessageQueue_push(RMessageQueue* self, RMessage* msg){
 		self->highWaterMark++;
 }
 
-RMessage* RMessageQueue_pop(RMessageQueue* self){
-	RMessage* pop_msg = self->first;
+etMessage* etMessageQueue_pop(etMessageQueue* self){
+	etMessage* pop_msg = self->first;
 	if(self->first == NULL){
 		/*no message in queue*/
 		return NULL;
@@ -58,22 +58,22 @@ RMessage* RMessageQueue_pop(RMessageQueue* self){
 	return pop_msg;
 }
 
-int16 RMessageQueue_getSize(RMessageQueue* self) {
+etInt16 etMessageQueue_getSize(etMessageQueue* self) {
 	return self->size;
 }
 
-RMessage* RMessageQueue_getFirst(RMessageQueue* self){
+etMessage* etMessageQueue_getFirst(etMessageQueue* self){
 	return self->first;
 }
 
-RMessage* RMessageQueue_getLast(RMessageQueue* self){
+etMessage* etMessageQueue_getLast(etMessageQueue* self){
 	return self->last;
 }
 
-boool RMessageQueue_isNotEmpty(RMessageQueue* self){
+etBool etMessageQueue_isNotEmpty(etMessageQueue* self){
 	return self->last != NULL;
 }
 
-int16 RMessageQueue_getHightWaterMark(RMessageQueue* self) {
+etInt16 etMessageQueue_getHightWaterMark(etMessageQueue* self) {
 	return self->highWaterMark;
 }

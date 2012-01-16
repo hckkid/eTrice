@@ -10,34 +10,34 @@
  *
  *******************************************************************************/
 
-#include "RUnit.h"
+#include "etUnit.h"
 #include <string.h>
 
 /*** member variables */
 
 /* file handling */
-static FILE* RUnit_reportfile = NULL;
+static FILE* etUnit_reportfile = NULL;
 
 /* names */
-static char* RUnit_TestFileName = NULL;
-static char* RUnit_TestResultPath = NULL;
+static char* etUnit_TestFileName = NULL;
+static char* etUnit_TestResultPath = NULL;
 
-static char* RUnit_TestSuiteName = NULL;
-static char* RUnit_TestCaseName = NULL;
+static char* etUnit_TestSuiteName = NULL;
+static char* etUnit_TestCaseName = NULL;
 
 /* counters */
-static etInt32 RUnit_passCount = 0;
-static etInt32 RUnit_failCount = 0;
+static etInt32 etUnit_passCount = 0;
+static etInt32 etUnit_failCount = 0;
 
-static boool etUnit_testcaseSuccess = TRUE;
+static etBool etUnit_testcaseSuccess = TRUE;
 
 #define ETUNIT_FAILURE_TEXT_LEN 256
 
 static char etUnit_failureText[ETUNIT_FAILURE_TEXT_LEN];
 
 /* time measuring */
-static clock_t RUnit_startTime = 0;
-static clock_t RUnit_currentTime = 0;
+static clock_t etUnit_startTime = 0;
+static clock_t etUnit_currentTime = 0;
 
 /*  */
 
@@ -45,88 +45,88 @@ static clock_t RUnit_currentTime = 0;
 void expect_equal_int(const char* message, etInt32 expected, etInt32 actual);
 void expect_equal_uint(const char* message, etUInt32 expected, etUInt32 actual);
 void expect_equal_float(const char* message, float64 expected, float64 actual, float64 precision);
-void RUnit_writeTestLog(const char *testcase, boool result, const char *resulttext);
-void etUnit_handleExpect(boool result, const char *resulttext);
+void etUnit_writeTestLog(const char *testcase, etBool result, const char *resulttext);
+void etUnit_handleExpect(etBool result, const char *resulttext);
 
 /* public functions */
 
-void RUnit_open(char* testResultPath, char* testFileName) {
-	RUnit_passCount = 0;
-	RUnit_failCount = 0;
+void etUnit_open(char* testResultPath, char* testFileName) {
+	etUnit_passCount = 0;
+	etUnit_failCount = 0;
 	strcpy(etUnit_failureText,"");
 
-	RUnit_TestFileName = testFileName;
-	RUnit_TestResultPath = testResultPath;
+	etUnit_TestFileName = testFileName;
+	etUnit_TestResultPath = testResultPath;
 
-	printf("************* TEST START (%s) **************\n", RUnit_TestFileName);
+	printf("************* TEST START (%s) **************\n", etUnit_TestFileName);
 
 	char filename[ETUNIT_FAILURE_TEXT_LEN];
-	sprintf(filename, "%s/%s.xml", RUnit_TestResultPath, RUnit_TestFileName);
+	sprintf(filename, "%s/%s.xml", etUnit_TestResultPath, etUnit_TestFileName);
 
-	if (RUnit_reportfile == NULL) {
-		RUnit_reportfile = fopen(filename, "w+");
-		if (RUnit_reportfile != NULL) {
-			fprintf(RUnit_reportfile, "<testsuites name=\"%s\" tests=\"0\" failures=\"0\" errors=\"0\" time=\"0\">\n",
-					RUnit_TestFileName);
+	if (etUnit_reportfile == NULL) {
+		etUnit_reportfile = fopen(filename, "w+");
+		if (etUnit_reportfile != NULL) {
+			fprintf(etUnit_reportfile, "<testsuites name=\"%s\" tests=\"0\" failures=\"0\" errors=\"0\" time=\"0\">\n",
+					etUnit_TestFileName);
 		} else {
-			printf("Unable to open file %s/%s.xml\n", RUnit_TestResultPath, RUnit_TestFileName);
+			printf("Unable to open file %s/%s.xml\n", etUnit_TestResultPath, etUnit_TestFileName);
 		}
 	}
 	// prepare time measurement
-	RUnit_startTime = clock();
-	RUnit_currentTime = clock();
-	printf("Start Time: %ld\n", RUnit_startTime);
+	etUnit_startTime = clock();
+	etUnit_currentTime = clock();
+	printf("Start Time: %ld\n", etUnit_startTime);
 
 }
 
-void RUnit_close(void) {
+void etUnit_close(void) {
 	printf("\n");
-	if (RUnit_failCount > 0) {
+	if (etUnit_failCount > 0) {
 		printf("************* TEST FAILED *************\n");
 	} else {
 		printf("************* TEST PASSED *************\n");
 	}
-	printf("Number of Tests: %ld\n", RUnit_failCount + RUnit_passCount);
-	printf("Failed: %ld\n", RUnit_failCount);
-	printf("Passed: %ld\n", RUnit_passCount);
-	printf("Total Time: %ld\n", clock() - RUnit_startTime);
+	printf("Number of Tests: %ld\n", etUnit_failCount + etUnit_passCount);
+	printf("Failed: %ld\n", etUnit_failCount);
+	printf("Passed: %ld\n", etUnit_passCount);
+	printf("Total Time: %ld\n", clock() - etUnit_startTime);
 	printf("End Time: %ld, CLOCKS_PER_SEC: %ld\n", clock(), CLOCKS_PER_SEC);
 	printf("***************************************\n");
 
-	if (RUnit_reportfile != NULL) {
-		fprintf(RUnit_reportfile, "</testsuites>\n");
-		fclose(RUnit_reportfile);
-		RUnit_reportfile = NULL;
+	if (etUnit_reportfile != NULL) {
+		fprintf(etUnit_reportfile, "</testsuites>\n");
+		fclose(etUnit_reportfile);
+		etUnit_reportfile = NULL;
 	}
 }
 
-void RUnit_openTestSuite(char* testSuiteName) {
-	RUnit_TestSuiteName = testSuiteName;
-	if (RUnit_reportfile != NULL) {
-		fprintf(RUnit_reportfile, "\t<testsuite name=\"%s\" tests=\"0\" failures=\"0\" errors=\"0\" time=\"0\">\n",
-				RUnit_TestSuiteName);
+void etUnit_openTestSuite(char* testSuiteName) {
+	etUnit_TestSuiteName = testSuiteName;
+	if (etUnit_reportfile != NULL) {
+		fprintf(etUnit_reportfile, "\t<testsuite name=\"%s\" tests=\"0\" failures=\"0\" errors=\"0\" time=\"0\">\n",
+				etUnit_TestSuiteName);
 	}
 }
 
-void RUnit_closeTestSuite(void) {
-	if (RUnit_reportfile != NULL) {
-		fprintf(RUnit_reportfile, "\t</testsuite>\n");
+void etUnit_closeTestSuite(void) {
+	if (etUnit_reportfile != NULL) {
+		fprintf(etUnit_reportfile, "\t</testsuite>\n");
 	}
 }
 
-void RUnit_openTestCase(char* testCaseName) {
-	RUnit_TestCaseName = testCaseName;
+void etUnit_openTestCase(char* testCaseName) {
+	etUnit_TestCaseName = testCaseName;
 	etUnit_testcaseSuccess = TRUE;
 	strcpy(etUnit_failureText,"");
 }
 
-void RUnit_closeTestCase(void) {
-	if (RUnit_reportfile != NULL && RUnit_TestSuiteName != NULL) {
-		RUnit_writeTestLog(RUnit_TestCaseName, etUnit_testcaseSuccess, etUnit_failureText);
+void etUnit_closeTestCase(void) {
+	if (etUnit_reportfile != NULL && etUnit_TestSuiteName != NULL) {
+		etUnit_writeTestLog(etUnit_TestCaseName, etUnit_testcaseSuccess, etUnit_failureText);
 	}
 }
 
-void EXPECT_TRUE(const char* message, boool condition) {
+void EXPECT_TRUE(const char* message, etBool condition) {
 	if (condition == FALSE) {
 		char testresult[ETUNIT_FAILURE_TEXT_LEN];
 		sprintf(testresult, "%s: *** EXPECT_TRUE == FALSE", message);
@@ -136,7 +136,7 @@ void EXPECT_TRUE(const char* message, boool condition) {
 	}
 }
 
-void EXPECT_FALSE(const char* message, boool condition) {
+void EXPECT_FALSE(const char* message, etBool condition) {
 	if (condition == TRUE) {
 		char testresult[ETUNIT_FAILURE_TEXT_LEN];
 		sprintf(testresult, "%s: EXPECT_FALSE == TRUE", message);
@@ -226,7 +226,7 @@ void expect_equal_void_ptr(const char* message, const void* expected, const void
 
 //_________
 
-void etUnit_handleExpect(boool result, const char *resulttext){
+void etUnit_handleExpect(etBool result, const char *resulttext){
 	if (result == TRUE) {
 		/* nothing to do because no failure */
 	}
@@ -242,7 +242,7 @@ void etUnit_handleExpect(boool result, const char *resulttext){
 	}
 }
 
-void RUnit_buildTestLogXML(char* xml, const char *testcase, boool result, const char *resulttext, clock_t time) {
+void etUnit_buildTestLogXML(char* xml, const char *testcase, etBool result, const char *resulttext, clock_t time) {
 	if (result == TRUE) {
 		sprintf(xml, "\t\t<testcase name=\"%s\" time=\"%ld\"/>\n", testcase, time);
 	} else {
@@ -253,25 +253,25 @@ void RUnit_buildTestLogXML(char* xml, const char *testcase, boool result, const 
 	}
 }
 
-void RUnit_writeTestLog(const char *testcase, boool result, const char *resulttext) {
+void etUnit_writeTestLog(const char *testcase, etBool result, const char *resulttext) {
 	char writeBuffer[ETUNIT_FAILURE_TEXT_LEN];
 
 	// counting
 	if (result == TRUE) {
-		RUnit_passCount++;
+		etUnit_passCount++;
 		printf("PASS: %s: %s\n", testcase, resulttext);
 	} else {
-		RUnit_failCount++;
+		etUnit_failCount++;
 		printf("FAIL: %s: %s\n", testcase, resulttext);
 	}
 
-	clock_t time = clock() - RUnit_currentTime;
-	RUnit_currentTime = clock();
+	clock_t time = clock() - etUnit_currentTime;
+	etUnit_currentTime = clock();
 
 	// writing to file
-	if (RUnit_reportfile != NULL) {
-		RUnit_buildTestLogXML(writeBuffer, testcase, result, resulttext, time);
-		fprintf(RUnit_reportfile, writeBuffer);
+	if (etUnit_reportfile != NULL) {
+		etUnit_buildTestLogXML(writeBuffer, testcase, result, resulttext, time);
+		fprintf(etUnit_reportfile, writeBuffer);
 	}
 }
 

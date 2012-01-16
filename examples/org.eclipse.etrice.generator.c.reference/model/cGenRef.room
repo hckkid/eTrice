@@ -1,5 +1,6 @@
 RoomModel cGenRef {
-
+	import room.basic.types.c.* from "CTypes.room"
+	
 	SubSystemClass SS {
 		ActorRef Receiver: Receiver
 		ActorRef Sender: Sender

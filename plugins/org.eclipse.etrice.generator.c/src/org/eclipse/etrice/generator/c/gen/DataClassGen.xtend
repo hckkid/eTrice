@@ -53,7 +53,7 @@ class DataClassGen {
 		#ifndef _«dc.name»_H_
 		#define _«dc.name»_H_
 		
-		#include "datatypes.h"
+		#include "etDatatypes.h"
 
 		/* TODO: includes only for used DataClasses, also for other models */
 		«FOR dataClass : root.getReferencedDataClasses(dc)»

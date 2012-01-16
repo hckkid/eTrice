@@ -12,7 +12,7 @@
 
 #include <stdio.h>
 
-#include "RUnit.h"
+#include "etUnit.h"
 
 #include "test/generator/RunCGeneratorTestcases.h"
 #include "test/runtime/RunCRuntimeTestcases.h"
