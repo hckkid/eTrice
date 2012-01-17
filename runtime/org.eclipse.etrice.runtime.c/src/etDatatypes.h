@@ -18,6 +18,8 @@
  *
  * */
 
+#include <stdio.h>
+
 /* unsigned integer datatypes */
 typedef unsigned char uint8;
 typedef unsigned short int uint16;
@@ -45,11 +47,11 @@ typedef char boolean;  /* TODO: bool, Bool, Boolean, and boolean are already def
 #endif
 
 /*
- * typedefs for Runtime and Testing
+ * typedefs for eTrice Runtime and Testing
  *
  * */
 
-typedef uint8 etInt8;
+typedef int8 etInt8;
 typedef int16 etInt16;
 typedef int32 etInt32;
 
@@ -61,5 +63,7 @@ typedef boolean etBool;
 
 typedef float32 etFloat32;
 typedef float64 etFloat64;
+
+typedef FILE* etFileHandle;
 
 #endif /* _DATATYPES_H_ */

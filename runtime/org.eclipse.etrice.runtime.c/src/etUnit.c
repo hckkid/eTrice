@@ -12,6 +12,9 @@
 
 #include "etUnit.h"
 #include <string.h>
+#include <time.h>
+#include "etLogger.h"
+
 
 /*** member variables */
 
@@ -28,6 +31,8 @@ static char* etUnit_TestCaseName = NULL;
 /* counters */
 static etInt32 etUnit_passCount = 0;
 static etInt32 etUnit_failCount = 0;
+static etInt32 etUnit_passCountTotal = 0;
+static etInt32 etUnit_failCountTotal = 0;
 
 static etBool etUnit_testcaseSuccess = TRUE;
 
@@ -39,12 +44,10 @@ static char etUnit_failureText[ETUNIT_FAILURE_TEXT_LEN];
 static clock_t etUnit_startTime = 0;
 static clock_t etUnit_currentTime = 0;
 
-/*  */
-
 /* forward declarations of private functions */
 void expect_equal_int(const char* message, etInt32 expected, etInt32 actual);
 void expect_equal_uint(const char* message, etUInt32 expected, etUInt32 actual);
-void expect_equal_float(const char* message, float64 expected, float64 actual, float64 precision);
+void expect_equal_float(const char* message, etFloat64 expected, etFloat64 actual, etFloat64 precision);
 void etUnit_writeTestLog(const char *testcase, etBool result, const char *resulttext);
 void etUnit_handleExpect(etBool result, const char *resulttext);
 
@@ -58,44 +61,49 @@ void etUnit_open(char* testResultPath, char* testFileName) {
 	etUnit_TestFileName = testFileName;
 	etUnit_TestResultPath = testResultPath;
 
-	printf("************* TEST START (%s) **************\n", etUnit_TestFileName);
+	etLogger_logInfoF("************* TEST START (%s) **************", etUnit_TestFileName);
 
 	char filename[ETUNIT_FAILURE_TEXT_LEN];
 	sprintf(filename, "%s/%s.xml", etUnit_TestResultPath, etUnit_TestFileName);
 
 	if (etUnit_reportfile == NULL) {
-		etUnit_reportfile = fopen(filename, "w+");
+		etUnit_reportfile = etLogger_fopen(filename, "w+");
 		if (etUnit_reportfile != NULL) {
-			fprintf(etUnit_reportfile, "<testsuites name=\"%s\" tests=\"0\" failures=\"0\" errors=\"0\" time=\"0\">\n",
-					etUnit_TestFileName);
+			etLogger_fprintf(etUnit_reportfile, "<testsuites name=\"%s\" tests=\"0\" failures=\"0\" errors=\"0\" time=\"0\">\n", etUnit_TestFileName);
 		} else {
-			printf("Unable to open file %s/%s.xml\n", etUnit_TestResultPath, etUnit_TestFileName);
+			etLogger_logErrorF("Unable to open file %s/%s.xml", etUnit_TestResultPath, etUnit_TestFileName);
 		}
 	}
 	// prepare time measurement
 	etUnit_startTime = clock();
 	etUnit_currentTime = clock();
-	printf("Start Time: %ld\n", etUnit_startTime);
+	etLogger_logInfoF("Start Time: %ld", etUnit_startTime);
 
 }
 
 void etUnit_close(void) {
-	printf("\n");
+	etLogger_logInfoF("");
 	if (etUnit_failCount > 0) {
-		printf("************* TEST FAILED *************\n");
+		etLogger_logInfoF("************* TEST FAILED *************");
 	} else {
-		printf("************* TEST PASSED *************\n");
+		etLogger_logInfoF("************* TEST PASSED *************");
 	}
-	printf("Number of Tests: %ld\n", etUnit_failCount + etUnit_passCount);
-	printf("Failed: %ld\n", etUnit_failCount);
-	printf("Passed: %ld\n", etUnit_passCount);
-	printf("Total Time: %ld\n", clock() - etUnit_startTime);
-	printf("End Time: %ld, CLOCKS_PER_SEC: %ld\n", clock(), CLOCKS_PER_SEC);
-	printf("***************************************\n");
+	etLogger_logInfoF("Number of Tests: %ld", etUnit_failCount + etUnit_passCount);
+	etLogger_logInfoF("Failed: %ld", etUnit_failCount);
+	etLogger_logInfoF("Passed: %ld", etUnit_passCount);
+	etLogger_logInfoF("Time: %ld", clock() - etUnit_startTime);
+	etLogger_logInfoF("End Time: %ld[ms]", (clock() / 1000) * CLOCKS_PER_SEC );
+	etLogger_logInfoF("***************************************");
+	if (etUnit_failCountTotal > 0) {
+		etLogger_logInfoF("   ******* %d TEST(S) FAILED *****", etUnit_failCountTotal);
+	} else {
+		etLogger_logInfoF("   ******* ALL TESTS PASSED ******");
+	}
+	etLogger_logInfoF("***************************************");
 
 	if (etUnit_reportfile != NULL) {
-		fprintf(etUnit_reportfile, "</testsuites>\n");
-		fclose(etUnit_reportfile);
+		etLogger_fprintf(etUnit_reportfile, "</testsuites>\n");
+		etLogger_fclose(etUnit_reportfile);
 		etUnit_reportfile = NULL;
 	}
 }
@@ -103,14 +111,14 @@ void etUnit_close(void) {
 void etUnit_openTestSuite(char* testSuiteName) {
 	etUnit_TestSuiteName = testSuiteName;
 	if (etUnit_reportfile != NULL) {
-		fprintf(etUnit_reportfile, "\t<testsuite name=\"%s\" tests=\"0\" failures=\"0\" errors=\"0\" time=\"0\">\n",
+		etLogger_fprintf(etUnit_reportfile, "\t<testsuite name=\"%s\" tests=\"0\" failures=\"0\" errors=\"0\" time=\"0\">\n",
 				etUnit_TestSuiteName);
 	}
 }
 
 void etUnit_closeTestSuite(void) {
 	if (etUnit_reportfile != NULL) {
-		fprintf(etUnit_reportfile, "\t</testsuite>\n");
+		etLogger_fprintf(etUnit_reportfile, "\t</testsuite>\n");
 	}
 }
 
@@ -124,6 +132,18 @@ void etUnit_closeTestCase(void) {
 	if (etUnit_reportfile != NULL && etUnit_TestSuiteName != NULL) {
 		etUnit_writeTestLog(etUnit_TestCaseName, etUnit_testcaseSuccess, etUnit_failureText);
 	}
+}
+
+void etUnit_openAll(char* testResultPath, char* testFileName, char* testSuiteName, char* testCaseName){
+	etUnit_open(testResultPath, testFileName);
+	etUnit_openTestSuite(testSuiteName);
+	etUnit_openTestCase(testCaseName);
+}
+
+void etUnit_closeAll(void){
+	etUnit_closeTestCase();
+	etUnit_closeTestSuite();
+	etUnit_close();
 }
 
 void EXPECT_TRUE(const char* message, etBool condition) {
@@ -171,14 +191,53 @@ void EXPECT_EQUAL_UINT32(const char* message, etUInt32 expected, etUInt32 actual
 }
 
 
-void EXPECT_EQUAL_FLOAT32(const char* message, float32 expected, float32 actual, float32 precision) {
-	expect_equal_float(message, (float64) expected, (float64) actual, (float64) precision);
+void EXPECT_EQUAL_FLOAT32(const char* message, etFloat32 expected, etFloat32 actual, etFloat32 precision) {
+	expect_equal_float(message, (etFloat64) expected, (etFloat64) actual, (etFloat64) precision);
 }
 
-void EXPECT_EQUAL_FLOAT64(const char* message, float64 expected, float64 actual, float64 precision) {
-	expect_equal_float(message, (float64) expected, (float64) actual, (float64) precision);
+void EXPECT_EQUAL_FLOAT64(const char* message, etFloat64 expected, etFloat64 actual, etFloat64 precision) {
+	expect_equal_float(message, (etFloat64) expected, (etFloat64) actual, (etFloat64) precision);
 }
 
+/* order */
+static etInt16 etUnit_orderCurrentIndex = 0;
+static etInt16 etUnit_orderSize = 0;
+static etInt16* etUnit_orderList = NULL;
+
+void EXPECT_ORDER_START(etInt16* list, etInt16 size){
+	etUnit_orderCurrentIndex = 0;
+	etUnit_orderSize = size;
+	etUnit_orderList = list;
+}
+
+void EXPECT_ORDER(const char* message, etInt16 identifier){
+	if (etUnit_orderCurrentIndex < etUnit_orderSize) {
+		if (etUnit_orderList[etUnit_orderCurrentIndex] != identifier){
+			char testresult[ETUNIT_FAILURE_TEXT_LEN];
+			sprintf(testresult, "EXPECT_ORDER %s: index=%d, expected=%d, actual=%d", message, etUnit_orderCurrentIndex, identifier, etUnit_orderList[etUnit_orderCurrentIndex]);
+			etUnit_handleExpect(FALSE, testresult);
+		}
+		else {
+			etUnit_handleExpect(TRUE, "");
+			etUnit_orderCurrentIndex++;
+		}
+	}
+	else {
+		char testresult[ETUNIT_FAILURE_TEXT_LEN];
+		sprintf(testresult, "EXPECT_ORDER: index(%d) is too big in %s", etUnit_orderCurrentIndex, message);
+		etUnit_handleExpect(FALSE, testresult);
+		etLogger_logInfoF("EXPECT_ORDER: index too big in %s", message);
+	}
+}
+
+void EXPECT_ORDER_END(const char* message, etInt16 identifier){
+	EXPECT_ORDER(message, identifier);
+	if (etUnit_orderCurrentIndex != etUnit_orderSize){
+		char testresult[ETUNIT_FAILURE_TEXT_LEN];
+		sprintf(testresult, "EXPECT_ORDER_END %s: wrong index at the end: expected=%d, actual=%d", message, etUnit_orderSize, etUnit_orderCurrentIndex);
+		etUnit_handleExpect(FALSE, testresult);
+	}
+}
 
 /* private functions */
 
@@ -203,7 +262,7 @@ void expect_equal_uint(const char* message, etUInt32 expected, etUInt32 actual) 
 }
 
 
-void expect_equal_float(const char* message, float64 expected, float64 actual, float64 precision) {
+void expect_equal_float(const char* message, etFloat64 expected, etFloat64 actual, etFloat64 precision) {
 	if (expected - actual < -precision || expected - actual > precision) {
 		char testresult[ETUNIT_FAILURE_TEXT_LEN];
 		sprintf(testresult, "%s: expected=%lf, actual=%lf", message, expected, actual);
@@ -259,10 +318,12 @@ void etUnit_writeTestLog(const char *testcase, etBool result, const char *result
 	// counting
 	if (result == TRUE) {
 		etUnit_passCount++;
-		printf("PASS: %s: %s\n", testcase, resulttext);
+		etUnit_passCountTotal++;
+		etLogger_logInfoF("PASS: %s %s", testcase, resulttext);
 	} else {
 		etUnit_failCount++;
-		printf("FAIL: %s: %s\n", testcase, resulttext);
+		etUnit_failCountTotal++;
+		etLogger_logInfoF("FAIL: %s : %s", testcase, resulttext);
 	}
 
 	clock_t time = clock() - etUnit_currentTime;
@@ -271,7 +332,7 @@ void etUnit_writeTestLog(const char *testcase, etBool result, const char *result
 	// writing to file
 	if (etUnit_reportfile != NULL) {
 		etUnit_buildTestLogXML(writeBuffer, testcase, result, resulttext, time);
-		fprintf(etUnit_reportfile, writeBuffer);
+		etLogger_fprintf(etUnit_reportfile, writeBuffer);
 	}
 }
 

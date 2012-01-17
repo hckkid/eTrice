@@ -12,8 +12,6 @@
 
 #include <stdio.h>
 
-#include "etUnit.h"
-
 #include "test/generator/RunCGeneratorTestcases.h"
 #include "test/runtime/RunCRuntimeTestcases.h"
 
@@ -26,11 +24,7 @@ int main(void){
 
 
 void runTestCases(void){
-	etUnit_open("tmp/testlog","TestMessageService");
-
 	RunCGeneratorTestcases();
 	RunCRuntimeTestcases();
-
-	etUnit_close();
 }
 

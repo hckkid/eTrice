@@ -12,15 +12,15 @@
 
 
 /*
- * RunCGeneratorTestcases.h
+ * TestEtUnit.h
  *
- *  Created on: 12.01.2012
+ *  Created on: 16.01.2012
  *      Author: tschuetz
  */
 
-#ifndef _RUNCGENERATORTESTCASES_H_
-#define _RUNCGENERATORTESTCASES_H_
+#ifndef _TESTETUNIT_H_
+#define _TESTETUNIT_H_
 
-void RunCGeneratorTestcases(void);
+void TestEtUnit_runSuite(void);
 
-#endif /* _RUNCGENERATORTESTCASES_H_ */
+#endif /* _TESTETUNIT_H_ */

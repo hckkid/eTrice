@@ -14,17 +14,20 @@
 #define _ETUNIT_H_
 
 #include "etDatatypes.h"
-#include <stdio.h>
-#include <time.h>
 
 
-// open / close
+/* open / close */
 void etUnit_open(char* testResultPath, char* testFileName);
 void etUnit_close(void);
 void etUnit_openTestSuite(char* testSuiteName);
 void etUnit_closeTestSuite(void);
 void etUnit_openTestCase(char* testCaseName);
 void etUnit_closeTestCase(void);
+
+/* functions for more convenience for model and generator tests */
+
+void etUnit_openAll(char* testResultPath, char* testFileName, char* testSuiteName, char* testCaseName);
+void etUnit_closeAll(void);
 
 /* boolean values */
 void EXPECT_TRUE(const char* testcase, etBool condition);
@@ -49,6 +52,12 @@ void EXPECT_EQUAL_FLOAT64(const char* testcase, etFloat64 expected, etFloat64 ac
 	expect_equal_void_ptr(testcase, (const void*) expected, (const void*) actual);
 
 void expect_equal_void_ptr(const char* testcase, const void* expected, const void* actual);
+
+/* more specialized functions */
+void EXPECT_ORDER_START(etInt16* list, etInt16 size);
+void EXPECT_ORDER(const char* message, etInt16 identifier);
+void EXPECT_ORDER_END(const char* message, etInt16 identifier);
+
 
 /* Helpers for adding testcases */
 

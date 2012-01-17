@@ -25,14 +25,14 @@ void TestEtMessageQueue_testPushPop(void){
 	etMessageQueue_push(&queue1, &msg1);
 	etMessageQueue_push(&queue1, &msg2);
 
-	EXPECT_EQUAL_INT16("etMessageQueue.size before", 2,queue1.size);
+	EXPECT_EQUAL_INT16("etMessageQueue.size before", 2, queue1.size);
 	EXPECT_EQUAL_INT16("etMessageQueue.highWaterMark before", 2, queue1.highWaterMark);
 
 	etMessage* rcvMsg1 = etMessageQueue_pop(&queue1);
 	etMessage* rcvMsg2 = etMessageQueue_pop(&queue1);
 
-	EXPECT_EQUAL_INT16("etMessageQueue.size after", 0,(int32)queue1.size);
-	EXPECT_EQUAL_INT16("etMessageQueue.highWaterMark after", 2,queue1.highWaterMark);
+	EXPECT_EQUAL_INT16("etMessageQueue.size after", 0, queue1.size);
+	EXPECT_EQUAL_INT16("etMessageQueue.highWaterMark after", 2, queue1.highWaterMark);
 
 	EXPECT_EQUAL_INT16("rcvMsg1->address", 123, rcvMsg1->address);
 	EXPECT_EQUAL_INT16("rcvMsg1->evtID", 456, rcvMsg1->evtID);
@@ -55,8 +55,6 @@ void TestEtMessageQueue_testPushPop(void){
 void TestEtMessageQueue_testMassiveMessaging(void){
 
 	etMessage msgArray[MAX];
-	printf("sizeof(etMessage):%d\n", sizeof(etMessage));
-	printf("size(msgArray):%d\n", sizeof(msgArray));
 
 	etMessageQueue queue1;
 	etMessageQueue_init(&queue1);
@@ -94,7 +92,7 @@ void TestEtMessageQueue_testMassiveMessaging(void){
 }
 
 void TestEtMessageQueue_runSuite(void){
-	etUnit_openTestSuite("TestetMessageQueue");
+	etUnit_openTestSuite("TestEtMessageQueue");
 	ADD_TESTCASE(TestEtMessageQueue_testPushPop);
 	ADD_TESTCASE(TestEtMessageQueue_testMassiveMessaging);
 	etUnit_closeTestSuite();
