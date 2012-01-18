@@ -74,7 +74,7 @@ void etUnit_open(char* testResultPath, char* testFileName) {
 			etLogger_logErrorF("Unable to open file %s/%s.xml", etUnit_TestResultPath, etUnit_TestFileName);
 		}
 	}
-	// prepare time measurement
+	/* prepare time measurement */
 	etUnit_startTime = clock();
 	etUnit_currentTime = clock();
 	etLogger_logInfoF("Start Time: %ld", etUnit_startTime);
