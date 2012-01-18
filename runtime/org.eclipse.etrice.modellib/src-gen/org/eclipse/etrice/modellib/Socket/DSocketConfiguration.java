@@ -7,11 +7,11 @@ public class DSocketConfiguration {
 	
 	
 	//--------------------- attributes
-	protected String serverName = "";
-	protected int portNumber = 0;
-	protected int protocol = 0;
-	protected boolean checkCookie = false;
-	protected int mode = 0;
+	protected String serverName;
+	protected int portNumber;
+	protected int protocol;
+	protected boolean checkCookie;
+	protected int mode;
 	
 	//--------------------- attribute setters and getters
 	public void setServerName (String serverName) {

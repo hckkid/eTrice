@@ -54,6 +54,7 @@ public class MrPing extends ActorClassBase {
 		setClassName("MrPing");
 		
 		// initialize attributes
+		i32Array = new int[10];
 		for (int i=0;i<10;i++){
 			i32Array[i] = 0;
 		}

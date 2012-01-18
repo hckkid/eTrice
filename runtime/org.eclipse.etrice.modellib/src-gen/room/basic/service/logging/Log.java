@@ -150,8 +150,7 @@ public class Log {
 			long s;
 			if (logLevel>this.logLevel){
 			d.userString=userString;
-			s=System.currentTimeMillis();
-			d.timeStamp=Long.toString(s);
+			d.timeStamp=System.currentTimeMillis();
 			d.sender=getInstancePath();
 			if (getPeerAddress()!=null)
 			getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), IN_internalLog, d));
@@ -183,7 +182,7 @@ public class Log {
 			if (getPeerAddress()!=null)
 				getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), IN_internalLog, data.deepCopy()));
 		}
-		public void internalLog(String userString, String sender, String timeStamp) {
+		public void internalLog(String userString, String sender, long timeStamp) {
 			internalLog(new InternalLogData(userString, sender, timeStamp));
 		}
 	}

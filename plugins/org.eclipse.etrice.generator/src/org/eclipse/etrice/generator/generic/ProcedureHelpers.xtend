@@ -80,7 +80,10 @@ class ProcedureHelpers {
 				«IF a.defaultValueLiteral!=null»
 					«IF a.size==0»
 						«a.name» = «a.defaultValueLiteral»;
-					«ELSEIF !a.defaultValueLiteral.startsWith("{")»
+					«ELSEIF a.defaultValueLiteral.startsWith("{")»
+							«a.name» = new «a.type.typeName»[] «a.defaultValueLiteral»;
+					«ELSE»
+						«a.name» = new «a.type.typeName»[«a.size»];
 						for (int i=0;i<«a.size»;i++){
 							«a.name»[i] = «a.defaultValueLiteral»;
 						}
@@ -89,6 +92,7 @@ class ProcedureHelpers {
 					«IF a.size==0»
 						«a.name» = «a.type.defaultValue»;
 					«ELSE»
+						«a.name» = new «a.type.typeName»[«a.size»];
 						for (int i=0;i<«a.size»;i++){
 							«a.name»[i] = «a.type.defaultValue»;
 						}

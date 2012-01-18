@@ -12,7 +12,6 @@ import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.generator.base.ILogger;
 import org.eclipse.etrice.generator.generic.ILanguageExtension;
 import org.eclipse.etrice.generator.generic.TypeHelpers;
-import org.eclipse.xtext.xbase.lib.BooleanExtensions;
 import org.eclipse.xtext.xbase.lib.ComparableExtensions;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.IntegerExtensions;
@@ -176,19 +175,41 @@ public class ProcedureHelpers {
               } else {
                 String _defaultValueLiteral_2 = a.getDefaultValueLiteral();
                 boolean _startsWith = _defaultValueLiteral_2.startsWith("{");
-                boolean _operator_not = BooleanExtensions.operator_not(_startsWith);
-                if (_operator_not) {
-                  _builder.append("for (int i=0;i<");
+                if (_startsWith) {
+                  String _name_1 = a.getName();
+                  _builder.append(_name_1, "");
+                  _builder.append(" = new ");
+                  DataType _type = a.getType();
+                  String _typeName = this._typeHelpers.typeName(_type);
+                  _builder.append(_typeName, "");
+                  _builder.append("[] ");
+                  String _defaultValueLiteral_3 = a.getDefaultValueLiteral();
+                  _builder.append(_defaultValueLiteral_3, "");
+                  _builder.append(";");
+                  _builder.newLineIfNotEmpty();
+                } else {
+                  String _name_2 = a.getName();
+                  _builder.append(_name_2, "");
+                  _builder.append(" = new ");
+                  DataType _type_1 = a.getType();
+                  String _typeName_1 = this._typeHelpers.typeName(_type_1);
+                  _builder.append(_typeName_1, "");
+                  _builder.append("[");
                   int _size_1 = a.getSize();
                   _builder.append(_size_1, "");
+                  _builder.append("];");
+                  _builder.newLineIfNotEmpty();
+                  _builder.append("for (int i=0;i<");
+                  int _size_2 = a.getSize();
+                  _builder.append(_size_2, "");
                   _builder.append(";i++){");
                   _builder.newLineIfNotEmpty();
                   _builder.append("\t");
-                  String _name_1 = a.getName();
-                  _builder.append(_name_1, "	");
+                  String _name_3 = a.getName();
+                  _builder.append(_name_3, "	");
                   _builder.append("[i] = ");
-                  String _defaultValueLiteral_3 = a.getDefaultValueLiteral();
-                  _builder.append(_defaultValueLiteral_3, "	");
+                  String _defaultValueLiteral_4 = a.getDefaultValueLiteral();
+                  _builder.append(_defaultValueLiteral_4, "	");
                   _builder.append(";");
                   _builder.newLineIfNotEmpty();
                   _builder.append("}");
@@ -198,29 +219,40 @@ public class ProcedureHelpers {
             }
           } else {
             {
-              int _size_2 = a.getSize();
-              boolean _operator_equals_1 = ObjectExtensions.operator_equals(((Integer)_size_2), ((Integer)0));
+              int _size_3 = a.getSize();
+              boolean _operator_equals_1 = ObjectExtensions.operator_equals(((Integer)_size_3), ((Integer)0));
               if (_operator_equals_1) {
-                String _name_2 = a.getName();
-                _builder.append(_name_2, "");
+                String _name_4 = a.getName();
+                _builder.append(_name_4, "");
                 _builder.append(" = ");
-                DataType _type = a.getType();
-                String _defaultValue = this._typeHelpers.defaultValue(_type);
+                DataType _type_2 = a.getType();
+                String _defaultValue = this._typeHelpers.defaultValue(_type_2);
                 _builder.append(_defaultValue, "");
                 _builder.append(";");
                 _builder.newLineIfNotEmpty();
               } else {
+                String _name_5 = a.getName();
+                _builder.append(_name_5, "");
+                _builder.append(" = new ");
+                DataType _type_3 = a.getType();
+                String _typeName_2 = this._typeHelpers.typeName(_type_3);
+                _builder.append(_typeName_2, "");
+                _builder.append("[");
+                int _size_4 = a.getSize();
+                _builder.append(_size_4, "");
+                _builder.append("];");
+                _builder.newLineIfNotEmpty();
                 _builder.append("for (int i=0;i<");
-                int _size_3 = a.getSize();
-                _builder.append(_size_3, "");
+                int _size_5 = a.getSize();
+                _builder.append(_size_5, "");
                 _builder.append(";i++){");
                 _builder.newLineIfNotEmpty();
                 _builder.append("\t");
-                String _name_3 = a.getName();
-                _builder.append(_name_3, "	");
+                String _name_6 = a.getName();
+                _builder.append(_name_6, "	");
                 _builder.append("[i] = ");
-                DataType _type_1 = a.getType();
-                String _defaultValue_1 = this._typeHelpers.defaultValue(_type_1);
+                DataType _type_4 = a.getType();
+                String _defaultValue_1 = this._typeHelpers.defaultValue(_type_4);
                 _builder.append(_defaultValue_1, "	");
                 _builder.append(";");
                 _builder.newLineIfNotEmpty();

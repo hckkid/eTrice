@@ -266,8 +266,7 @@ public class ALogService extends ActorClassBase {
 		p=null;
 	}
 	protected void action_TRANS_opened_TO_opened_BY_internalLoglog_tr1(InterfaceItemBase ifitem, InternalLogData data) {
-		long s = Long.valueOf(data.timeStamp);
-		p.println("Timestamp: " + Long.toString(s-tStart) + "ms");
+		p.println("Timestamp: " + Long.toString(data.timeStamp-tStart) + "ms");
 		p.println("SenderInstance: "+ data.sender);
 		p.println("UserString: " + data.userString);
 		p.println("--------------------------------------------------");
