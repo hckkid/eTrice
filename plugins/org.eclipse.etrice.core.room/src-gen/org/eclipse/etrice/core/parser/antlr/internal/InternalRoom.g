@@ -6569,7 +6569,7 @@ ruleFQN returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
 
 
 
-RULE_MULTIPLICITY : '[' ('*'|('0'..'9')+) ']';
+RULE_MULTIPLICITY : '[' (' '|'\t')* ('*'|('0'..'9')+) (' '|'\t')* ']';
 
 RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 

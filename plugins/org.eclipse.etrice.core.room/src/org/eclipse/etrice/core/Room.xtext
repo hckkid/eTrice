@@ -411,4 +411,4 @@ ImportedFQN:
 FQN:
 	ID ('.' ID)*;
 
-terminal MULTIPLICITY returns ecore::EInt : '[' ('*' | ('0'..'9')+) ']';
+terminal MULTIPLICITY returns ecore::EInt : '[' (' '|'\t')* ('*' | ('0'..'9')+) (' '|'\t')* ']';
