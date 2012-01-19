@@ -130,6 +130,10 @@ class ProcedureHelpers {
 	def private GetterHeader(Attribute attribute, String classname){'''
 		«languageExt.accessLevelPublic()»«attribute.type.typeName»«IF attribute.size!=0»[]«ENDIF» get«attribute.name.toFirstUpper()» («languageExt.selfPointer(classname, 0)»)'''
 	}
+	
+	def argList(List<Attribute> attributes) {
+		'''«FOR a : attributes SEPARATOR ", "»«a.type.typeName»«IF a.size>1»[]«ENDIF» «a.name»«ENDFOR»'''
+	}
 
 	
 	// Operations

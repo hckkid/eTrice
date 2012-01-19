@@ -14,6 +14,8 @@ package org.eclipse.etrice.generator.java.gen
 
 import com.google.inject.Inject
 import com.google.inject.Singleton
+import java.util.List
+import org.eclipse.etrice.core.room.Attribute
 import org.eclipse.etrice.core.room.DataClass
 import org.eclipse.etrice.core.room.ComplexType
 import org.eclipse.etrice.generator.base.ILogger
@@ -67,17 +69,18 @@ class DataClassGen {
 			// default constructor
 			public «dc.name»() {
 				super();
+				
 				«dc.attributes.attributeInitialization»
 			}
 			
 			// constructor using fields
-			public «dc.name»(«IF dc.base!=null»«dc.base.name» _super, «ENDIF»«FOR a : dc.attributes SEPARATOR ", "»«a.type.typeName»«IF a.size>1»[]«ENDIF» «a.name»«ENDFOR») {
-				super();
+			public «dc.name»(«dc.argList») {
 				«IF dc.base!=null»
-					«FOR a : dc.base.attributes»
-						this.«a.name» = _super.«a.name»;
-					«ENDFOR»
+				super(«dc.base.paramList»);
+				«ELSE»
+				super();
 				«ENDIF»
+				
 				«FOR a : dc.attributes»
 					this.«a.name» = «a.name»;
 				«ENDFOR»
@@ -86,28 +89,72 @@ class DataClassGen {
 			// deep copy
 			public «dc.name» deepCopy() {
 				«dc.name» copy = new «dc.name»();
-				«FOR a : dc.attributes»
-					«IF a.type instanceof ComplexType»
-						«IF a.size==0»
-							copy.«a.name» = «a.name».deepCopy();
-						«ELSE»
-							for (int i=0;i<«a.size»;i++){
-								copy.«a.name»[i] = «a.name»[i].deepCopy();
-							}
-						«ENDIF»
-					«ELSE»
-						«IF a.size==0»
-							copy.«a.name» = «a.name»;
-						«ELSE»
-							for (int i=0;i<«a.size»;i++){
-								copy.«a.name»[i] = «a.name»[i];
-							}
-						«ENDIF»
-					«ENDIF»
-				«ENDFOR»
+				«deepCopy(dc)»
 				return copy;
 			}
 		};
 	'''
+	}
+	
+	def paramList(DataClass _dc) {
+		var result = ""
+		var dc = _dc
+		while (dc!=null) {
+			result = dc.attributes.paramList.toString + result
+			dc = dc.base
+			if (dc!=null)
+				result = ", "+result
+		}
+		return result
+	}
+	
+	def paramList(List<Attribute> attributes) {
+		'''«FOR a: attributes SEPARATOR ", "»«a.name»«ENDFOR»'''
+	}
+	
+	def argList(DataClass _dc) {
+		var result = ""
+		var dc = _dc
+		while (dc!=null) {
+			result = dc.attributes.argList.toString + result
+			dc = dc.base
+			if (dc!=null)
+				result = ", "+result
+		}
+		return result
+	}
+	
+	def deepCopy(DataClass _dc) {
+		var result = ""
+		var dc = _dc
+		while (dc!=null) {
+			result = deepCopy(dc.attributes).toString + result
+			dc = dc.base
+		}
+		return result
+	}
+	
+	def deepCopy(List<Attribute> attributes) {
+		'''
+		«FOR a : attributes»
+			«IF a.type instanceof ComplexType»
+				«IF a.size==0»
+					copy.«a.name» = «a.name».deepCopy();
+				«ELSE»
+					for (int i=0;i<«a.size»;i++){
+						copy.«a.name»[i] = «a.name»[i].deepCopy();
+					}
+				«ENDIF»
+			«ELSE»
+				«IF a.size==0»
+					copy.«a.name» = «a.name»;
+				«ELSE»
+					for (int i=0;i<«a.size»;i++){
+						copy.«a.name»[i] = «a.name»[i];
+					}
+				«ENDIF»
+			«ENDIF»
+		«ENDFOR»
+		'''
 	}
 }

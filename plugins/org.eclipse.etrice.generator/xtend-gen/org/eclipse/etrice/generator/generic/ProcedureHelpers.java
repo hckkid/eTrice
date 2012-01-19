@@ -380,6 +380,34 @@ public class ProcedureHelpers {
     return _builder;
   }
   
+  public StringConcatenation argList(final List<Attribute> attributes) {
+    StringConcatenation _builder = new StringConcatenation();
+    {
+      boolean hasAnyElements = false;
+      for(final Attribute a : attributes) {
+        if (!hasAnyElements) {
+          hasAnyElements = true;
+        } else {
+          _builder.appendImmediate(", ", "");
+        }
+        DataType _type = a.getType();
+        String _typeName = this._typeHelpers.typeName(_type);
+        _builder.append(_typeName, "");
+        {
+          int _size = a.getSize();
+          boolean _operator_greaterThan = ComparableExtensions.<Integer>operator_greaterThan(((Integer)_size), ((Integer)1));
+          if (_operator_greaterThan) {
+            _builder.append("[]");
+          }
+        }
+        _builder.append(" ");
+        String _name = a.getName();
+        _builder.append(_name, "");
+      }
+    }
+    return _builder;
+  }
+  
   public StringConcatenation OperationsDeclaration(final List<? extends Operation> operations, final String classname) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("//--------------------- operations");

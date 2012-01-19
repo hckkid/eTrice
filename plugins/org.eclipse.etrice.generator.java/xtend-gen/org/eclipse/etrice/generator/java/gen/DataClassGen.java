@@ -2,6 +2,7 @@ package org.eclipse.etrice.generator.java.gen;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.ComplexType;
@@ -17,7 +18,6 @@ import org.eclipse.etrice.generator.generic.ProcedureHelpers;
 import org.eclipse.etrice.generator.generic.TypeHelpers;
 import org.eclipse.etrice.generator.java.gen.JavaExtensions;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
-import org.eclipse.xtext.xbase.lib.ComparableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xtend2.lib.StringConcatenation;
@@ -152,6 +152,8 @@ public class DataClassGen {
     _builder.append("super();");
     _builder.newLine();
     _builder.append("\t\t");
+    _builder.newLine();
+    _builder.append("\t\t");
     EList<Attribute> _attributes_2 = dc.getAttributes();
     StringConcatenation _attributeInitialization = this.helpers.attributeInitialization(_attributes_2);
     _builder.append(_attributeInitialization, "		");
@@ -169,76 +171,39 @@ public class DataClassGen {
     String _name_6 = dc.getName();
     _builder.append(_name_6, "	");
     _builder.append("(");
+    String _argList = this.argList(dc);
+    _builder.append(_argList, "	");
+    _builder.append(") {");
+    _builder.newLineIfNotEmpty();
     {
       DataClass _base_2 = dc.getBase();
       boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(_base_2, null);
       if (_operator_notEquals_1) {
+        _builder.append("\t\t");
+        _builder.append("super(");
         DataClass _base_3 = dc.getBase();
-        String _name_7 = _base_3.getName();
-        _builder.append(_name_7, "	");
-        _builder.append(" _super, ");
+        String _paramList = this.paramList(_base_3);
+        _builder.append(_paramList, "		");
+        _builder.append(");");
+        _builder.newLineIfNotEmpty();
+      } else {
+        _builder.append("\t\t");
+        _builder.append("super();");
+        _builder.newLine();
       }
     }
-    {
-      EList<Attribute> _attributes_3 = dc.getAttributes();
-      boolean hasAnyElements = false;
-      for(final Attribute a : _attributes_3) {
-        if (!hasAnyElements) {
-          hasAnyElements = true;
-        } else {
-          _builder.appendImmediate(", ", "	");
-        }
-        DataType _type = a.getType();
-        String _typeName = this.typeHelpers.typeName(_type);
-        _builder.append(_typeName, "	");
-        {
-          int _size = a.getSize();
-          boolean _operator_greaterThan = ComparableExtensions.<Integer>operator_greaterThan(((Integer)_size), ((Integer)1));
-          if (_operator_greaterThan) {
-            _builder.append("[]");
-          }
-        }
-        _builder.append(" ");
-        String _name_8 = a.getName();
-        _builder.append(_name_8, "	");
-      }
-    }
-    _builder.append(") {");
-    _builder.newLineIfNotEmpty();
     _builder.append("\t\t");
-    _builder.append("super();");
     _builder.newLine();
     {
-      DataClass _base_4 = dc.getBase();
-      boolean _operator_notEquals_2 = ObjectExtensions.operator_notEquals(_base_4, null);
-      if (_operator_notEquals_2) {
-        {
-          DataClass _base_5 = dc.getBase();
-          EList<Attribute> _attributes_4 = _base_5.getAttributes();
-          for(final Attribute a_1 : _attributes_4) {
-            _builder.append("\t\t");
-            _builder.append("this.");
-            String _name_9 = a_1.getName();
-            _builder.append(_name_9, "		");
-            _builder.append(" = _super.");
-            String _name_10 = a_1.getName();
-            _builder.append(_name_10, "		");
-            _builder.append(";");
-            _builder.newLineIfNotEmpty();
-          }
-        }
-      }
-    }
-    {
-      EList<Attribute> _attributes_5 = dc.getAttributes();
-      for(final Attribute a_2 : _attributes_5) {
+      EList<Attribute> _attributes_3 = dc.getAttributes();
+      for(final Attribute a : _attributes_3) {
         _builder.append("\t\t");
         _builder.append("this.");
-        String _name_11 = a_2.getName();
-        _builder.append(_name_11, "		");
+        String _name_7 = a.getName();
+        _builder.append(_name_7, "		");
         _builder.append(" = ");
-        String _name_12 = a_2.getName();
-        _builder.append(_name_12, "		");
+        String _name_8 = a.getName();
+        _builder.append(_name_8, "		");
         _builder.append(";");
         _builder.newLineIfNotEmpty();
       }
@@ -253,99 +218,22 @@ public class DataClassGen {
     _builder.newLine();
     _builder.append("\t");
     _builder.append("public ");
-    String _name_13 = dc.getName();
-    _builder.append(_name_13, "	");
+    String _name_9 = dc.getName();
+    _builder.append(_name_9, "	");
     _builder.append(" deepCopy() {");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t");
-    String _name_14 = dc.getName();
-    _builder.append(_name_14, "		");
+    String _name_10 = dc.getName();
+    _builder.append(_name_10, "		");
     _builder.append(" copy = new ");
-    String _name_15 = dc.getName();
-    _builder.append(_name_15, "		");
+    String _name_11 = dc.getName();
+    _builder.append(_name_11, "		");
     _builder.append("();");
     _builder.newLineIfNotEmpty();
-    {
-      EList<Attribute> _attributes_6 = dc.getAttributes();
-      for(final Attribute a_3 : _attributes_6) {
-        {
-          DataType _type_1 = a_3.getType();
-          if ((_type_1 instanceof ComplexType)) {
-            {
-              int _size_1 = a_3.getSize();
-              boolean _operator_equals = ObjectExtensions.operator_equals(((Integer)_size_1), ((Integer)0));
-              if (_operator_equals) {
-                _builder.append("\t\t");
-                _builder.append("copy.");
-                String _name_16 = a_3.getName();
-                _builder.append(_name_16, "		");
-                _builder.append(" = ");
-                String _name_17 = a_3.getName();
-                _builder.append(_name_17, "		");
-                _builder.append(".deepCopy();");
-                _builder.newLineIfNotEmpty();
-              } else {
-                _builder.append("\t\t");
-                _builder.append("for (int i=0;i<");
-                int _size_2 = a_3.getSize();
-                _builder.append(_size_2, "		");
-                _builder.append(";i++){");
-                _builder.newLineIfNotEmpty();
-                _builder.append("\t\t");
-                _builder.append("\t");
-                _builder.append("copy.");
-                String _name_18 = a_3.getName();
-                _builder.append(_name_18, "			");
-                _builder.append("[i] = ");
-                String _name_19 = a_3.getName();
-                _builder.append(_name_19, "			");
-                _builder.append("[i].deepCopy();");
-                _builder.newLineIfNotEmpty();
-                _builder.append("\t\t");
-                _builder.append("}");
-                _builder.newLine();
-              }
-            }
-          } else {
-            {
-              int _size_3 = a_3.getSize();
-              boolean _operator_equals_1 = ObjectExtensions.operator_equals(((Integer)_size_3), ((Integer)0));
-              if (_operator_equals_1) {
-                _builder.append("\t\t");
-                _builder.append("copy.");
-                String _name_20 = a_3.getName();
-                _builder.append(_name_20, "		");
-                _builder.append(" = ");
-                String _name_21 = a_3.getName();
-                _builder.append(_name_21, "		");
-                _builder.append(";");
-                _builder.newLineIfNotEmpty();
-              } else {
-                _builder.append("\t\t");
-                _builder.append("for (int i=0;i<");
-                int _size_4 = a_3.getSize();
-                _builder.append(_size_4, "		");
-                _builder.append(";i++){");
-                _builder.newLineIfNotEmpty();
-                _builder.append("\t\t");
-                _builder.append("\t");
-                _builder.append("copy.");
-                String _name_22 = a_3.getName();
-                _builder.append(_name_22, "			");
-                _builder.append("[i] = ");
-                String _name_23 = a_3.getName();
-                _builder.append(_name_23, "			");
-                _builder.append("[i];");
-                _builder.newLineIfNotEmpty();
-                _builder.append("\t\t");
-                _builder.append("}");
-                _builder.newLine();
-              }
-            }
-          }
-        }
-      }
-    }
+    _builder.append("\t\t");
+    String _deepCopy = this.deepCopy(dc);
+    _builder.append(_deepCopy, "		");
+    _builder.newLineIfNotEmpty();
     _builder.append("\t\t");
     _builder.append("return copy;");
     _builder.newLine();
@@ -354,6 +242,173 @@ public class DataClassGen {
     _builder.newLine();
     _builder.append("};");
     _builder.newLine();
+    return _builder;
+  }
+  
+  public String paramList(final DataClass _dc) {
+      String result = "";
+      DataClass dc = _dc;
+      boolean _operator_notEquals = ObjectExtensions.operator_notEquals(dc, null);
+      Boolean _xwhileexpression = _operator_notEquals;
+      while (_xwhileexpression) {
+        {
+          EList<Attribute> _attributes = dc.getAttributes();
+          StringConcatenation _paramList = this.paramList(_attributes);
+          String _string = _paramList.toString();
+          String _operator_plus = StringExtensions.operator_plus(_string, result);
+          result = _operator_plus;
+          DataClass _base = dc.getBase();
+          dc = _base;
+          boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(dc, null);
+          if (_operator_notEquals_1) {
+            String _operator_plus_1 = StringExtensions.operator_plus(", ", result);
+            result = _operator_plus_1;
+          }
+        }
+        boolean _operator_notEquals_2 = ObjectExtensions.operator_notEquals(dc, null);
+        _xwhileexpression = _operator_notEquals_2;
+      }
+      return result;
+  }
+  
+  public StringConcatenation paramList(final List<Attribute> attributes) {
+    StringConcatenation _builder = new StringConcatenation();
+    {
+      boolean hasAnyElements = false;
+      for(final Attribute a : attributes) {
+        if (!hasAnyElements) {
+          hasAnyElements = true;
+        } else {
+          _builder.appendImmediate(", ", "");
+        }
+        String _name = a.getName();
+        _builder.append(_name, "");
+      }
+    }
+    return _builder;
+  }
+  
+  public String argList(final DataClass _dc) {
+      String result = "";
+      DataClass dc = _dc;
+      boolean _operator_notEquals = ObjectExtensions.operator_notEquals(dc, null);
+      Boolean _xwhileexpression = _operator_notEquals;
+      while (_xwhileexpression) {
+        {
+          EList<Attribute> _attributes = dc.getAttributes();
+          StringConcatenation _argList = this.helpers.argList(_attributes);
+          String _string = _argList.toString();
+          String _operator_plus = StringExtensions.operator_plus(_string, result);
+          result = _operator_plus;
+          DataClass _base = dc.getBase();
+          dc = _base;
+          boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(dc, null);
+          if (_operator_notEquals_1) {
+            String _operator_plus_1 = StringExtensions.operator_plus(", ", result);
+            result = _operator_plus_1;
+          }
+        }
+        boolean _operator_notEquals_2 = ObjectExtensions.operator_notEquals(dc, null);
+        _xwhileexpression = _operator_notEquals_2;
+      }
+      return result;
+  }
+  
+  public String deepCopy(final DataClass _dc) {
+      String result = "";
+      DataClass dc = _dc;
+      boolean _operator_notEquals = ObjectExtensions.operator_notEquals(dc, null);
+      Boolean _xwhileexpression = _operator_notEquals;
+      while (_xwhileexpression) {
+        {
+          EList<Attribute> _attributes = dc.getAttributes();
+          StringConcatenation _deepCopy = this.deepCopy(_attributes);
+          String _string = _deepCopy.toString();
+          String _operator_plus = StringExtensions.operator_plus(_string, result);
+          result = _operator_plus;
+          DataClass _base = dc.getBase();
+          dc = _base;
+        }
+        boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(dc, null);
+        _xwhileexpression = _operator_notEquals_1;
+      }
+      return result;
+  }
+  
+  public StringConcatenation deepCopy(final List<Attribute> attributes) {
+    StringConcatenation _builder = new StringConcatenation();
+    {
+      for(final Attribute a : attributes) {
+        {
+          DataType _type = a.getType();
+          if ((_type instanceof ComplexType)) {
+            {
+              int _size = a.getSize();
+              boolean _operator_equals = ObjectExtensions.operator_equals(((Integer)_size), ((Integer)0));
+              if (_operator_equals) {
+                _builder.append("copy.");
+                String _name = a.getName();
+                _builder.append(_name, "");
+                _builder.append(" = ");
+                String _name_1 = a.getName();
+                _builder.append(_name_1, "");
+                _builder.append(".deepCopy();");
+                _builder.newLineIfNotEmpty();
+              } else {
+                _builder.append("for (int i=0;i<");
+                int _size_1 = a.getSize();
+                _builder.append(_size_1, "");
+                _builder.append(";i++){");
+                _builder.newLineIfNotEmpty();
+                _builder.append("\t");
+                _builder.append("copy.");
+                String _name_2 = a.getName();
+                _builder.append(_name_2, "	");
+                _builder.append("[i] = ");
+                String _name_3 = a.getName();
+                _builder.append(_name_3, "	");
+                _builder.append("[i].deepCopy();");
+                _builder.newLineIfNotEmpty();
+                _builder.append("}");
+                _builder.newLine();
+              }
+            }
+          } else {
+            {
+              int _size_2 = a.getSize();
+              boolean _operator_equals_1 = ObjectExtensions.operator_equals(((Integer)_size_2), ((Integer)0));
+              if (_operator_equals_1) {
+                _builder.append("copy.");
+                String _name_4 = a.getName();
+                _builder.append(_name_4, "");
+                _builder.append(" = ");
+                String _name_5 = a.getName();
+                _builder.append(_name_5, "");
+                _builder.append(";");
+                _builder.newLineIfNotEmpty();
+              } else {
+                _builder.append("for (int i=0;i<");
+                int _size_3 = a.getSize();
+                _builder.append(_size_3, "");
+                _builder.append(";i++){");
+                _builder.newLineIfNotEmpty();
+                _builder.append("\t");
+                _builder.append("copy.");
+                String _name_6 = a.getName();
+                _builder.append(_name_6, "	");
+                _builder.append("[i] = ");
+                String _name_7 = a.getName();
+                _builder.append(_name_7, "	");
+                _builder.append("[i];");
+                _builder.newLineIfNotEmpty();
+                _builder.append("}");
+                _builder.newLine();
+              }
+            }
+          }
+        }
+      }
+    }
     return _builder;
   }
 }
