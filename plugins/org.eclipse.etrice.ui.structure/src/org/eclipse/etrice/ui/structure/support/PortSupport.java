@@ -386,8 +386,9 @@ public class PortSupport extends InterfaceItemSupport {
 			// we clear the figure and rebuild it
 			GraphicsAlgorithm invisibleRect = pe.getGraphicsAlgorithm();
 			invisibleRect.getGraphicsAlgorithmChildren().clear();
-			
-			createPortFigure(port, false, container, invisibleRect, dark, bright);
+
+			boolean refport = isRefItem(pe);
+			createPortFigure(port, refport, container, invisibleRect, dark, bright);
 			
 			GraphicsAlgorithm ga = container.getChildren().get(0).getGraphicsAlgorithm();
 			if (ga instanceof Text) {
