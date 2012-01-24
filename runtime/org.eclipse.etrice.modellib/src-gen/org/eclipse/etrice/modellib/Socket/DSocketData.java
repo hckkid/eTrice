@@ -7,8 +7,8 @@ public class DSocketData {
 	
 	
 	//--------------------- attributes
-	protected int size = 0;
-	protected String data = "";
+	protected int size;
+	protected String data;
 	
 	//--------------------- attribute setters and getters
 	public void setSize (int size) {

@@ -13,16 +13,15 @@
 #include "TestEtMessage.h"
 
 #include <stddef.h>
-#include "RUnit.h"
-#include "RMessage.h"
+#include "etUnit.h"
+#include "etMessage.h"
 
 
 
 void TestEtMessage_testBasicMessage(void){
-	RUnit_openTestCase("TestMessage_testBasicMessage");
 
-	RMessage msg1 = {(RMessage*)1234567, 123,456,};
-	RMessage msg2 = {NULL, 222,333};
+	etMessage msg1 = {(etMessage*)1234567, 123,456,};
+	etMessage msg2 = {NULL, 222,333};
 
 	// basic checks -> detects structure changes that would cause problems for generated code
 	EXPECT_EQUAL_PTR("Message.next", 1234567, msg1.next);
@@ -36,13 +35,11 @@ void TestEtMessage_testBasicMessage(void){
 	EXPECT_EQUAL_INT16("msg1.NextMsg", msg2.evtID, msg1.next->evtID);
 	EXPECT_EQUAL_INT16("msg2.NextMsg", msg1.evtID, msg2.next->evtID);
 
-	RUnit_closeTestCase();
 }
 
-
 void TestEtMessage_runSuite(void){
-	RUnit_openTestSuite("TestMessage");
-	TestEtMessage_testBasicMessage();
-	RUnit_closeTestSuite();
+	etUnit_openTestSuite("TestMessage");
+	ADD_TESTCASE(TestEtMessage_testBasicMessage);
+	etUnit_closeTestSuite();
 }
 

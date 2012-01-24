@@ -1,3 +1,16 @@
+/*******************************************************************************
+ * Copyright (c) 2011 protos software gmbh (http://www.protos.de).
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * CONTRIBUTORS:
+ * 		Thomas Schuetz (initial contribution)
+ *
+ *******************************************************************************/
+
+
 /*
  * TestDataClass.c
  *
@@ -8,13 +21,26 @@
 
 #include "TestDataClass.h"
 
-#include "RUnit.h"
+#include "etUnit.h"
 
 #include "../../../src-gen/cGenRef/DataClass1.h"
 
-void TestDataClass_testDataClassDeepCopy(void){
-	RUnit_openTestCase("testDataClassDeepCopy");
+void TestDataClass_Operations(void){
 
+	DataClass1 d;
+	d.Attr1 = 123;
+	d.ComplexAttr.Attr1 = 456;
+	d.ComplexAttr.Attr2 = (float32)789.123;
+	d.ComplexAttr.Attr3 = 789;
+	d.Attr3 = (float32)321.123;
+
+	EXPECT_EQUAL_INT32("Operation DataClass1_MultiplyWithAttr1", 246, DataClass1_MultiplyWithAttr1(&d, 2));
+	EXPECT_EQUAL_FLOAT32("Operation DataClass1_MultiplyWithAttr3", (float32)642.246, DataClass1_MultiplyWithAttr3(&d, 2), (float32)0.0001);
+
+}
+
+
+void TestDataClass_testDataClassDeepCopy(void){
 
 	DataClass1 d, e;
 	d.Attr1 = 123;
@@ -31,15 +57,11 @@ void TestDataClass_testDataClassDeepCopy(void){
 	EXPECT_EQUAL_INT32("ComplexAttr.Attr3", 789, e.ComplexAttr.Attr3);
 	EXPECT_EQUAL_FLOAT32("Attr3", (float32)321.123, e.Attr3, (float32)0.0001);
 
-	EXPECT_EQUAL_INT32("Operation DataClass1_MultiplyWithAttr1", 246, DataClass1_MultiplyWithAttr1(&d, 2));
-	EXPECT_EQUAL_FLOAT32("Operation DataClass1_MultiplyWithAttr3", (float32)642.246, DataClass1_MultiplyWithAttr3(&d, 2), (float32)0.0001);
-
-	RUnit_closeTestCase();
 }
 
 void TestDataClass_runSuite(void){
-	RUnit_openTestSuite("TestDataClass");
-	TestDataClass_testDataClassDeepCopy();
-	RUnit_closeTestSuite();
-
+	etUnit_openTestSuite("TestDataClass");
+	ADD_TESTCASE(TestDataClass_Operations);
+	ADD_TESTCASE(TestDataClass_testDataClassDeepCopy);
+	etUnit_closeTestSuite();
 }

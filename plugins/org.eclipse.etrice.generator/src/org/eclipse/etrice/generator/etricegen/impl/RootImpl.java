@@ -744,8 +744,6 @@ public class RootImpl extends EObjectImpl implements Root {
 			if (message.getData()!=null) {
 				if (message.getData().getType() instanceof DataClass) {
 					DataClass dc = (DataClass) message.getData().getType();
-	//				TODO: other types are completely ignored				
-	
 					if (dc!=null)
 						dataClasses.add(dc);
 				}

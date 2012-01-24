@@ -6,7 +6,7 @@
 // TODO: do we need setters and getters for C and C++ ?
 
 //--------------------- operations
-void DataClass2_Operation1 (DataClass2* self){
+void DataClass2_Operation1(DataClass2* self) {
 	/*nothing to do*/
 }
 

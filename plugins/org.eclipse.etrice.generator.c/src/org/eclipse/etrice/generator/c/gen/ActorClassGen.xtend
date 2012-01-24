@@ -59,7 +59,7 @@ class ActorClassGen {
 		#ifndef _«xpac.name»_H_
 		#define _«xpac.name»_H_
 		
-		#include "datatypes.h"
+		#include "etDatatypes.h"
 		
 		package «ac.getPackage»;
 		

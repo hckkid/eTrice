@@ -1,7 +1,7 @@
 #ifndef _DataClass2_H_
 #define _DataClass2_H_
 
-#include "datatypes.h"
+#include "etDatatypes.h"
 
 /* TODO: includes only for used DataClasses, also for other models */
 
@@ -16,7 +16,7 @@ typedef struct {
 // TODO: do we need setters and getters for C and C++ ?
 
 //--------------------- operations
-void DataClass2_Operation1 (DataClass2* self);
+void DataClass2_Operation1(DataClass2* self);
 
 // deep copy
 void DataClass2_deepCopy(DataClass2* source, DataClass2* target);

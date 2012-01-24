@@ -10,13 +10,15 @@
  *
  *******************************************************************************/
 
-#ifndef _DATATYPES_H_
-#define _DATATYPES_H_
+#ifndef _ETDATATYPES_H_
+#define _ETDATATYPES_H_
 
 /*
  * typedefs for platform specific datatypes
  *
  * */
+
+#include <stdio.h>
 
 /* unsigned integer datatypes */
 typedef unsigned char uint8;
@@ -36,7 +38,7 @@ typedef float float32;
 typedef double float64;
 
 /* boolean datatypes and values */
-typedef char boool;  /* TODO: bool, Bool, Boolean, and boolean are already defined in some platforms*/
+typedef char boolean;  /* TODO: bool, Bool, Boolean, and boolean are already defined in some platforms*/
 #ifndef TRUE
 	#define TRUE 1
 #endif
@@ -45,11 +47,11 @@ typedef char boool;  /* TODO: bool, Bool, Boolean, and boolean are already defin
 #endif
 
 /*
- * typedefs for Runtime and Testing
+ * typedefs for eTrice Runtime and Testing
  *
  * */
 
-typedef uint8 etInt8;
+typedef int8 etInt8;
 typedef int16 etInt16;
 typedef int32 etInt32;
 
@@ -57,9 +59,11 @@ typedef uint8 etUInt8;
 typedef uint16 etUInt16;
 typedef uint32 etUInt32;
 
-typedef boool etBool;
+typedef boolean etBool;
 
 typedef float32 etFloat32;
 typedef float64 etFloat64;
+
+typedef FILE* etFileHandle;
 
 #endif /* _DATATYPES_H_ */

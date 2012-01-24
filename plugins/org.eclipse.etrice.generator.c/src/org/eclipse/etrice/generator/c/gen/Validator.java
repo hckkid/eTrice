@@ -12,13 +12,7 @@
 
 package org.eclipse.etrice.generator.c.gen;
 
-import org.eclipse.emf.common.util.TreeIterator;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.etrice.core.room.RoomModel;
-import org.eclipse.etrice.generator.base.ILogger;
 import org.eclipse.etrice.generator.etricegen.Root;
-
-import com.google.inject.Inject;
 
 /**
  * @author Henrik Rentz-Reichert
@@ -26,25 +20,7 @@ import com.google.inject.Inject;
  */
 public class Validator {
 
-	@Inject
-	private ILogger logger;
-
 	public boolean validate(Root genModel) {
-		int errorCount = 0;
-		for (RoomModel mdl : genModel.getUsedRoomModels()) {
-			TreeIterator<EObject> it = mdl.eAllContents();
-			while (it.hasNext()) {
-				//EObject obj = it.next();
-				
-				// currently unused
-			}
-		}
-		
-		if (errorCount>0) {
-			logger.logError("Java generator detected "+errorCount+" error(s) - terminating", null);
-			return false;
-		}
-		
 		return true;
 	}
 }

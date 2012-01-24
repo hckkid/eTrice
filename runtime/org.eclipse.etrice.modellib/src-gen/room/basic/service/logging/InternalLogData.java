@@ -7,9 +7,9 @@ public class InternalLogData {
 	
 	
 	//--------------------- attributes
-	protected String userString = "";
-	protected String sender = "";
-	protected String timeStamp = "";
+	protected String userString;
+	protected String sender;
+	protected long timeStamp;
 	
 	//--------------------- attribute setters and getters
 	public void setUserString (String userString) {
@@ -24,10 +24,10 @@ public class InternalLogData {
 	public String getSender () {
 		return this.sender;
 	}
-	public void setTimeStamp (String timeStamp) {
+	public void setTimeStamp (long timeStamp) {
 		 this.timeStamp = timeStamp;
 	}
-	public String getTimeStamp () {
+	public long getTimeStamp () {
 		return this.timeStamp;
 	}
 	
@@ -39,11 +39,11 @@ public class InternalLogData {
 		// initialize attributes
 		userString = "";
 		sender = "";
-		timeStamp = "";
+		timeStamp = 0;
 	}
 	
 	// constructor using fields
-	public InternalLogData(String userString, String sender, String timeStamp) {
+	public InternalLogData(String userString, String sender, long timeStamp) {
 		super();
 		this.userString = userString;
 		this.sender = sender;

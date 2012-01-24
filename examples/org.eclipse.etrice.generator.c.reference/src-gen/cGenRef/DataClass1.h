@@ -1,7 +1,7 @@
 #ifndef _DataClass1_H_
 #define _DataClass1_H_
 
-#include "datatypes.h"
+#include "etDatatypes.h"
 
 /* TODO: includes only for used DataClasses, also for other models */
 #include "DataClass2.h"
@@ -23,8 +23,8 @@ typedef struct {
 // TODO: do we need setters and getters for C and C++ ?
 
 //--------------------- operations
-int32 DataClass1_MultiplyWithAttr1 (DataClass1* self, int32 value);
-float32 DataClass1_MultiplyWithAttr3 (DataClass1* self, float32 value);
+int32 DataClass1_MultiplyWithAttr1(DataClass1* self, int32 value);
+float32 DataClass1_MultiplyWithAttr3(DataClass1* self, float32 value);
 
 // deep copy
 void DataClass1_deepCopy(DataClass1* source, DataClass1* target);

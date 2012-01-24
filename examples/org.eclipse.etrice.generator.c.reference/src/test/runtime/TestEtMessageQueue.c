@@ -11,29 +11,28 @@
  *******************************************************************************/
 
 #include "TestEtMessageQueue.h"
-#include "RUnit.h"
-#include "RMessageQueue.h"
+#include "etUnit.h"
+#include "etMessageQueue.h"
 
 void TestEtMessageQueue_testPushPop(void){
-	RUnit_openTestCase("testPushPop");
 
-	RMessage msg1 = {NULL, 123, 456};
-	RMessage msg2 = {NULL, 222, 333};
+	etMessage msg1 = {NULL, 123, 456};
+	etMessage msg2 = {NULL, 222, 333};
 
-	RMessageQueue queue1;
-	RMessageQueue_init(&queue1);
+	etMessageQueue queue1;
+	etMessageQueue_init(&queue1);
 
-	RMessageQueue_push(&queue1, &msg1);
-	RMessageQueue_push(&queue1, &msg2);
+	etMessageQueue_push(&queue1, &msg1);
+	etMessageQueue_push(&queue1, &msg2);
 
-	EXPECT_EQUAL_INT16("RMessageQueue.size before", 2,queue1.size);
-	EXPECT_EQUAL_INT16("RMessageQueue.highWaterMark before", 2,queue1.highWaterMark);
+	EXPECT_EQUAL_INT16("etMessageQueue.size before", 2, queue1.size);
+	EXPECT_EQUAL_INT16("etMessageQueue.highWaterMark before", 2, queue1.highWaterMark);
 
-	RMessage* rcvMsg1 = RMessageQueue_pop(&queue1);
-	RMessage* rcvMsg2 = RMessageQueue_pop(&queue1);
+	etMessage* rcvMsg1 = etMessageQueue_pop(&queue1);
+	etMessage* rcvMsg2 = etMessageQueue_pop(&queue1);
 
-	EXPECT_EQUAL_INT16("RMessageQueue.size after", 0,queue1.size);
-	EXPECT_EQUAL_INT16("RMessageQueue.highWaterMark after", 2,queue1.highWaterMark);
+	EXPECT_EQUAL_INT16("etMessageQueue.size after", 0, queue1.size);
+	EXPECT_EQUAL_INT16("etMessageQueue.highWaterMark after", 2, queue1.highWaterMark);
 
 	EXPECT_EQUAL_INT16("rcvMsg1->address", 123, rcvMsg1->address);
 	EXPECT_EQUAL_INT16("rcvMsg1->evtID", 456, rcvMsg1->evtID);
@@ -43,30 +42,26 @@ void TestEtMessageQueue_testPushPop(void){
 	EXPECT_EQUAL_INT16("rcvMsg2->evtID", 333, rcvMsg2->evtID);
 	EXPECT_EQUAL_PTR("rcvMsg2->next", NULL, rcvMsg2->next);
 
-	EXPECT_EQUAL_PTR("RMessageQueue->first", NULL, queue1.first);
-	EXPECT_EQUAL_PTR("RMessageQueue->last", NULL, queue1.last);
+	EXPECT_EQUAL_PTR("etMessageQueue->first", NULL, queue1.first);
+	EXPECT_EQUAL_PTR("etMessageQueue->last", NULL, queue1.last);
 
-	RMessage* rcvMsg3 = RMessageQueue_pop(&queue1);
-	EXPECT_EQUAL_PTR("RMessageQueue_pop if empty", NULL, rcvMsg3);
+	etMessage* rcvMsg3 = etMessageQueue_pop(&queue1);
+	EXPECT_EQUAL_PTR("etMessageQueue_pop if empty", NULL, rcvMsg3);
 
-	RUnit_closeTestCase();
 }
 
 #define MAX 1000
 
 void TestEtMessageQueue_testMassiveMessaging(void){
-	RUnit_openTestCase("MassiveMessaging");
 
-	RMessage msgArray[MAX];
-	printf("sizeof(RMessage):%d\n", sizeof(RMessage));
-	printf("size(msgArray):%d\n", sizeof(msgArray));
+	etMessage msgArray[MAX];
 
-	RMessageQueue queue1;
-	RMessageQueue_init(&queue1);
+	etMessageQueue queue1;
+	etMessageQueue_init(&queue1);
 
-	int32 i;
+	int16 i;
 	for(i=0; i<MAX; i++){
-		//RMessage_init(&msgArray[i]);
+		//etMessage_init(&msgArray[i]);
 		msgArray[i].address = i;
 		msgArray[i].evtID = i;
 	}
@@ -74,10 +69,10 @@ void TestEtMessageQueue_testMassiveMessaging(void){
 	int j;
 	for(j=0; j<3; j++){
 		for (i=0; i<MAX; i++){
-			RMessageQueue_push(&queue1, &(msgArray[i]));
+			etMessageQueue_push(&queue1, &(msgArray[i]));
 		}
 		for (i=0; i<MAX; i++){
-			RMessage* msg = RMessageQueue_pop(&queue1);
+			etMessage* msg = etMessageQueue_pop(&queue1);
 			// EXPECTS are hidden to avoid too many testcases in log
 			if (msg == NULL){
 				EXPECT_FALSE("msg == NULL", TRUE);
@@ -94,12 +89,11 @@ void TestEtMessageQueue_testMassiveMessaging(void){
 		}
 		EXPECT_EQUAL_INT32("i==MAX", MAX, i);
 	}
-	RUnit_closeTestCase();
 }
 
 void TestEtMessageQueue_runSuite(void){
-	RUnit_openTestSuite("TestRMessageQueue");
-	TestEtMessageQueue_testPushPop();
-	TestEtMessageQueue_testMassiveMessaging();
-	RUnit_closeTestSuite();
+	etUnit_openTestSuite("TestEtMessageQueue");
+	ADD_TESTCASE(TestEtMessageQueue_testPushPop);
+	ADD_TESTCASE(TestEtMessageQueue_testMassiveMessaging);
+	etUnit_closeTestSuite();
 }

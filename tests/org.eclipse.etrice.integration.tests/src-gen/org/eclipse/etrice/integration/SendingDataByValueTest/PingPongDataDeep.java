@@ -7,14 +7,14 @@ public class PingPongDataDeep {
 	
 	
 	//--------------------- attributes
-	protected byte i8Val = 0;
-	protected short i16Val = 0;
-	protected int i32Val = 0;
-	protected char charVal = 0;
-	protected float f32Val = 0;
-	protected double f64Val = 0;
-	protected String stringVal = "";
-	protected int[] arrayFromInt32 = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+	protected byte i8Val;
+	protected short i16Val;
+	protected int i32Val;
+	protected char charVal;
+	protected float f32Val;
+	protected double f64Val;
+	protected String stringVal;
+	protected int[] arrayFromInt32;
 	
 	//--------------------- attribute setters and getters
 	public void setI8Val (byte i8Val) {
@@ -79,6 +79,7 @@ public class PingPongDataDeep {
 		f32Val = 0;
 		f64Val = 0;
 		stringVal = "";
+		arrayFromInt32 = new int[10];
 		for (int i=0;i<10;i++){
 			arrayFromInt32[i] = 0;
 		}

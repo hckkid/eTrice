@@ -44,9 +44,9 @@ class ProcedureHelpers {
 		//--------------------- attributes
 		«FOR attribute : attribs»
 			«IF attribute.size==0»
-				«languageExt.accessLevelProtected()»«attribute.type.typeName» «attribute.name» = «IF attribute.defaultValueLiteral==null»«attribute.type.defaultValue»«ELSE»«attribute.defaultValueLiteral»«ENDIF»;
+				«languageExt.accessLevelProtected()»«attribute.type.typeName» «attribute.name»;
 			«ELSE»
-				«languageExt.accessLevelProtected()»«attribute.type.typeName»[] «attribute.name» = «attribute.arrayInitializer»;
+				«languageExt.accessLevelProtected()»«attribute.type.typeName»[] «attribute.name»;
 			«ENDIF» 
 		«ENDFOR»
 	'''
@@ -80,7 +80,10 @@ class ProcedureHelpers {
 				«IF a.defaultValueLiteral!=null»
 					«IF a.size==0»
 						«a.name» = «a.defaultValueLiteral»;
-					«ELSEIF !a.defaultValueLiteral.startsWith("{")»
+					«ELSEIF a.defaultValueLiteral.startsWith("{")»
+							«a.name» = new «a.type.typeName»[] «a.defaultValueLiteral»;
+					«ELSE»
+						«a.name» = new «a.type.typeName»[«a.size»];
 						for (int i=0;i<«a.size»;i++){
 							«a.name»[i] = «a.defaultValueLiteral»;
 						}
@@ -89,6 +92,7 @@ class ProcedureHelpers {
 					«IF a.size==0»
 						«a.name» = «a.type.defaultValue»;
 					«ELSE»
+						«a.name» = new «a.type.typeName»[«a.size»];
 						for (int i=0;i<«a.size»;i++){
 							«a.name»[i] = «a.type.defaultValue»;
 						}
@@ -125,6 +129,10 @@ class ProcedureHelpers {
 	}
 	def private GetterHeader(Attribute attribute, String classname){'''
 		«languageExt.accessLevelPublic()»«attribute.type.typeName»«IF attribute.size!=0»[]«ENDIF» get«attribute.name.toFirstUpper()» («languageExt.selfPointer(classname, 0)»)'''
+	}
+	
+	def argList(List<Attribute> attributes) {
+		'''«FOR a : attributes SEPARATOR ", "»«a.type.typeName»«IF a.size>1»[]«ENDIF» «a.name»«ENDFOR»'''
 	}
 
 	

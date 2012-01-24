@@ -10,12 +10,17 @@
  *
  *******************************************************************************/
 
-#include "RMessage.h"
+#ifndef _ETMESSAGE_H_
+#define _ETMESSAGE_H_
 
-#include <stddef.h>
+#include "etDatatypes.h"
 
-void RMessage_init(RMessage* self){
-	self->next = NULL;
-	self->address = 0;
-	self->evtID = 0;
-}
+typedef struct etMessage{
+	struct etMessage* next;
+	etInt16 address;
+	etInt16 evtID;
+} etMessage;
+
+void etMessage_init(etMessage* self);
+
+#endif /* _ETMESSAGE_H_ */

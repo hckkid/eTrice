@@ -81,7 +81,7 @@ public class DataClassGen {
     _builder.append("_H_");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
-    _builder.append("#include \"datatypes.h\"");
+    _builder.append("#include \"etDatatypes.h\"");
     _builder.newLine();
     _builder.newLine();
     _builder.append("/* TODO: includes only for used DataClasses, also for other models */");

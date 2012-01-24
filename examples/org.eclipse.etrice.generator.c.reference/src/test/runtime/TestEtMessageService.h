@@ -13,7 +13,7 @@
 #ifndef _TESTRMESSAGESERVICE_H_
 #define _TESTRMESSAGESERVICE_H_
 
-#include "RMessageService.h"
+#include "etMessageService.h"
 
 void TestEtMessageService_runSuite(void);
 

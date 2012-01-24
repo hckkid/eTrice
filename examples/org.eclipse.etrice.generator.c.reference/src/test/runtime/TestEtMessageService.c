@@ -11,20 +11,19 @@
  *******************************************************************************/
 
 #include "TestEtMessageService.h"
-#include "RUnit.h"
-#include "RMessageService.h"
+#include "etUnit.h"
+#include "etMessageService.h"
 
 
 void TestEtMessageService_init(void){
-	RUnit_openTestCase("testRMessageService_init");
 
-	RMessageService msgService;
-	int16 max = 6;
-	int16 blockSize = 32;
+	etMessageService msgService;
+	uint16 max = 6;
+	uint16 blockSize = 32;
 
 	uint8 msgBuffer[max*blockSize];
 
-	RMessageService_init(&msgService, msgBuffer, max, blockSize);
+	etMessageService_init(&msgService, msgBuffer, max, blockSize);
 
 	EXPECT_EQUAL_PTR("msgService.messagePool.first", msgBuffer, msgService.messagePool.first);
 	EXPECT_EQUAL_PTR("msgService.messagePool in between", &msgBuffer[3*blockSize], msgService.messagePool.first->next->next->next);
@@ -32,22 +31,20 @@ void TestEtMessageService_init(void){
 	EXPECT_EQUAL_PTR("msgService.messagePool.last(2)", &msgBuffer[5*blockSize], msgService.messagePool.last);
 	EXPECT_EQUAL_PTR("msgService.messagePool.last.next", 0, msgService.messagePool.last->next);
 
-	RUnit_closeTestCase();
 }
 
 void TestEtMessageService_GetPushPopReturn(void){
-	RUnit_openTestCase("testRMessageService_GetPushPopReturn");
 
-	RMessageService msgService;
-	int16 max = 6;
-	int16 blockSize = 32;
+	etMessageService msgService;
+	uint16 max = 6;
+	uint16 blockSize = 32;
 	uint8 msgBuffer[max*blockSize];
 
-	RMessageService_init(&msgService, msgBuffer, max, blockSize);
+	etMessageService_init(&msgService, msgBuffer, max, blockSize);
 
 	// get messages from pool
-	RMessage* msg1 = RMessageService_getMessageBuffer(&msgService, sizeof(RMessage));
-	RMessage* msg2 = RMessageService_getMessageBuffer(&msgService, sizeof(RMessage));
+	etMessage* msg1 = etMessageService_getMessageBuffer(&msgService, sizeof(etMessage));
+	etMessage* msg2 = etMessageService_getMessageBuffer(&msgService, sizeof(etMessage));
 
 	EXPECT_EQUAL_INT16("msgService.messagePool.size", 4, msgService.messagePool.size);
 
@@ -58,14 +55,14 @@ void TestEtMessageService_GetPushPopReturn(void){
 	msg2->evtID = 222;
 
 	// push messages to queue
-	RMessageService_pushMessage(&msgService, msg2);
-	RMessageService_pushMessage(&msgService, msg1);
+	etMessageService_pushMessage(&msgService, msg2);
+	etMessageService_pushMessage(&msgService, msg1);
 
 	EXPECT_EQUAL_INT16("msgService.messageQueue.size", 2, msgService.messageQueue.size);
 
 	// pop messages from queue
-	RMessage* rcvMsg1 = RMessageService_popMessage(&msgService);
-	RMessage* rcvMsg2 = RMessageService_popMessage(&msgService);
+	etMessage* rcvMsg1 = etMessageService_popMessage(&msgService);
+	etMessage* rcvMsg2 = etMessageService_popMessage(&msgService);
 
 	EXPECT_EQUAL_INT16("msgService.messageQueue.size",0, msgService.messageQueue.size);
 
@@ -75,48 +72,45 @@ void TestEtMessageService_GetPushPopReturn(void){
 	EXPECT_EQUAL_INT16("msgService.popMessage", 11, rcvMsg2->address);
 	EXPECT_EQUAL_INT16("msgService.popMessage", 111, rcvMsg2->evtID);
 
-	RMessageService_returnMessageBuffer(&msgService, rcvMsg1);
-	RMessageService_returnMessageBuffer(&msgService, rcvMsg2);
+	etMessageService_returnMessageBuffer(&msgService, rcvMsg1);
+	etMessageService_returnMessageBuffer(&msgService, rcvMsg2);
 
 	EXPECT_EQUAL_INT16("msgService.messagePool.size", 6, msgService.messagePool.size);
 
-	RUnit_closeTestCase();
 }
 
 void TestEtMessageService_GetReturn(void){
-	RUnit_openTestCase("testRMessageService_GetReturn");
 
-	RMessageService msgService;
-	int16 max = 2;
-	int16 blockSize = 32;
+	etMessageService msgService;
+	uint16 max = 2;
+	uint16 blockSize = 32;
 	uint8 msgBuffer[max*blockSize];
 
-	RMessageService_init(&msgService, msgBuffer, max, blockSize);
+	etMessageService_init(&msgService, msgBuffer, max, blockSize);
 
 	// get on message too much from pool
-	RMessage* msg1 = RMessageService_getMessageBuffer(&msgService, sizeof(RMessage));
-	RMessage* msg2 = RMessageService_getMessageBuffer(&msgService, sizeof(RMessage));
-	RMessage* msg3 = RMessageService_getMessageBuffer(&msgService, sizeof(RMessage));
+	etMessage* msg1 = etMessageService_getMessageBuffer(&msgService, sizeof(etMessage));
+	etMessage* msg2 = etMessageService_getMessageBuffer(&msgService, sizeof(etMessage));
+	etMessage* msg3 = etMessageService_getMessageBuffer(&msgService, sizeof(etMessage));
 	EXPECT_TRUE("msgService getMessageBuffer", msg1!=NULL);
 	EXPECT_TRUE("msgService getMessageBuffer", msg2!=NULL);
 	EXPECT_EQUAL_PTR("msgService getMessageBuffer", msg3, NULL);
 
 	// return messages
-	RMessageService_returnMessageBuffer(&msgService, msg1);
-	RMessageService_returnMessageBuffer(&msgService, msg2);
+	etMessageService_returnMessageBuffer(&msgService, msg1);
+	etMessageService_returnMessageBuffer(&msgService, msg2);
 	EXPECT_EQUAL_INT16("msgService.messagePool.size", 2, msgService.messagePool.size);
 
 	// get message bigger than blocksize
-	RMessage* msg4 = RMessageService_getMessageBuffer(&msgService, 33);
+	etMessage* msg4 = etMessageService_getMessageBuffer(&msgService, 33);
 	EXPECT_EQUAL_PTR("msgService getMessageBuffer", msg4, NULL);
 
-	RUnit_closeTestCase();
 }
 
 void TestEtMessageService_runSuite(void){
-	RUnit_openTestSuite("TestRMessageService");
-	TestEtMessageService_init();
-	TestEtMessageService_GetPushPopReturn();
-	TestEtMessageService_GetReturn();
-	RUnit_closeTestSuite();
+	etUnit_openTestSuite("TestEtMessageService");
+	ADD_TESTCASE(TestEtMessageService_init);
+	ADD_TESTCASE(TestEtMessageService_GetPushPopReturn);
+	ADD_TESTCASE(TestEtMessageService_GetReturn);
+	etUnit_closeTestSuite();
 }

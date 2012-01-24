@@ -54,7 +54,7 @@ class ProtocolClassGen {
 		#ifndef _«pc.name»_H_
 		#define _«pc.name»_H_
 		
-		#include "datatypes.h"
+		#include "etDatatypes.h"
 		
 «««		import org.eclipse.etrice.runtime.java.messaging.Address;
 «««		import org.eclipse.etrice.runtime.java.messaging.Message;
