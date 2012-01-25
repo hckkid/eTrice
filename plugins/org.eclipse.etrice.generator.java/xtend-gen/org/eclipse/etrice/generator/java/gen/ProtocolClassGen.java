@@ -14,6 +14,7 @@ import org.eclipse.etrice.core.room.PortClass;
 import org.eclipse.etrice.core.room.PortOperation;
 import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.ProtocolClass;
+import org.eclipse.etrice.core.room.RefableType;
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.generator.base.ILogger;
@@ -639,7 +640,8 @@ public class ProtocolClassGen {
       boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_data, null);
       if (_operator_notEquals) {
         VarDecl _data_1 = m.getData();
-        DataType _type = _data_1.getType();
+        RefableType _refType = _data_1.getRefType();
+        DataType _type = _refType.getType();
         String _typeName = this._typeHelpers.typeName(_type);
         _builder.append(_typeName, "");
         _builder.append(" ");
@@ -656,7 +658,8 @@ public class ProtocolClassGen {
     StringConcatenation _xblockexpression = null;
     {
       VarDecl _data = m.getData();
-      DataType _type = _data.getType();
+      RefableType _refType = _data.getRefType();
+      DataType _type = _refType.getType();
       DataClass dc = ((DataClass) _type);
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("public void ");
@@ -682,7 +685,8 @@ public class ProtocolClassGen {
           } else {
             _builder.appendImmediate(", ", "");
           }
-          DataType _type_1 = a.getType();
+          RefableType _refType_1 = a.getRefType();
+          DataType _type_1 = _refType_1.getType();
           String _typeName_1 = this._typeHelpers.typeName(_type_1);
           _builder.append(_typeName_1, "");
           {
@@ -807,13 +811,15 @@ public class ProtocolClassGen {
               {
                 boolean _operator_and = false;
                 VarDecl _data_2 = m.getData();
-                boolean _isRef = _data_2.isRef();
+                RefableType _refType = _data_2.getRefType();
+                boolean _isRef = _refType.isRef();
                 boolean _operator_not = BooleanExtensions.operator_not(_isRef);
                 if (!_operator_not) {
                   _operator_and = false;
                 } else {
                   VarDecl _data_3 = m.getData();
-                  DataType _type = _data_3.getType();
+                  RefableType _refType_1 = _data_3.getRefType();
+                  DataType _type = _refType_1.getType();
                   boolean _operator_not_1 = BooleanExtensions.operator_not((_type instanceof PrimitiveType));
                   _operator_and = BooleanExtensions.operator_and(_operator_not, _operator_not_1);
                 }
@@ -837,7 +843,8 @@ public class ProtocolClassGen {
           _operator_and_1 = false;
         } else {
           VarDecl _data_5 = m.getData();
-          DataType _type_1 = _data_5.getType();
+          RefableType _refType_2 = _data_5.getRefType();
+          DataType _type_1 = _refType_2.getType();
           _operator_and_1 = BooleanExtensions.operator_and(_operator_notEquals_1, (_type_1 instanceof DataClass));
         }
         if (_operator_and_1) {
@@ -850,13 +857,15 @@ public class ProtocolClassGen {
           _builder.append(_name_5, "	");
           _builder.append("(new ");
           VarDecl _data_6 = m.getData();
-          DataType _type_2 = _data_6.getType();
+          RefableType _refType_3 = _data_6.getRefType();
+          DataType _type_2 = _refType_3.getType();
           String _name_6 = _type_2.getName();
           _builder.append(_name_6, "	");
           _builder.append("(");
           {
             VarDecl _data_7 = m.getData();
-            DataType _type_3 = _data_7.getType();
+            RefableType _refType_4 = _data_7.getRefType();
+            DataType _type_3 = _refType_4.getType();
             DataClass _base = ((DataClass) _type_3).getBase();
             boolean _operator_notEquals_2 = ObjectExtensions.operator_notEquals(_base, null);
             if (_operator_notEquals_2) {
@@ -865,7 +874,8 @@ public class ProtocolClassGen {
           }
           {
             VarDecl _data_8 = m.getData();
-            DataType _type_4 = _data_8.getType();
+            RefableType _refType_5 = _data_8.getRefType();
+            DataType _type_4 = _refType_5.getType();
             EList<Attribute> _attributes = ((DataClass) _type_4).getAttributes();
             boolean hasAnyElements = false;
             for(final Attribute a : _attributes) {

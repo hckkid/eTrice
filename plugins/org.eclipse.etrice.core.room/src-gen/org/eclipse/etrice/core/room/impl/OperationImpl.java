@@ -22,10 +22,10 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import org.eclipse.etrice.core.room.DataType;
 import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.Documentation;
 import org.eclipse.etrice.core.room.Operation;
+import org.eclipse.etrice.core.room.RefableType;
 import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.etrice.core.room.VarDecl;
 
@@ -39,7 +39,6 @@ import org.eclipse.etrice.core.room.VarDecl;
  *   <li>{@link org.eclipse.etrice.core.room.impl.OperationImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.OperationImpl#getArguments <em>Arguments</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.OperationImpl#getReturntype <em>Returntype</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.room.impl.OperationImpl#isRef <em>Ref</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.OperationImpl#getDocu <em>Docu</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.OperationImpl#getDetailCode <em>Detail Code</em>}</li>
  * </ul>
@@ -80,34 +79,14 @@ public class OperationImpl extends MinimalEObjectImpl.Container implements Opera
   protected EList<VarDecl> arguments;
 
   /**
-   * The cached value of the '{@link #getReturntype() <em>Returntype</em>}' reference.
+   * The cached value of the '{@link #getReturntype() <em>Returntype</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getReturntype()
    * @generated
    * @ordered
    */
-  protected DataType returntype;
-
-  /**
-   * The default value of the '{@link #isRef() <em>Ref</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #isRef()
-   * @generated
-   * @ordered
-   */
-  protected static final boolean REF_EDEFAULT = false;
-
-  /**
-   * The cached value of the '{@link #isRef() <em>Ref</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #isRef()
-   * @generated
-   * @ordered
-   */
-  protected boolean ref = REF_EDEFAULT;
+  protected RefableType returntype;
 
   /**
    * The cached value of the '{@link #getDocu() <em>Docu</em>}' containment reference.
@@ -192,27 +171,7 @@ public class OperationImpl extends MinimalEObjectImpl.Container implements Opera
    * <!-- end-user-doc -->
    * @generated
    */
-  public DataType getReturntype()
-  {
-    if (returntype != null && returntype.eIsProxy())
-    {
-      InternalEObject oldReturntype = (InternalEObject)returntype;
-      returntype = (DataType)eResolveProxy(oldReturntype);
-      if (returntype != oldReturntype)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RoomPackage.OPERATION__RETURNTYPE, oldReturntype, returntype));
-      }
-    }
-    return returntype;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public DataType basicGetReturntype()
+  public RefableType getReturntype()
   {
     return returntype;
   }
@@ -222,12 +181,16 @@ public class OperationImpl extends MinimalEObjectImpl.Container implements Opera
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setReturntype(DataType newReturntype)
+  public NotificationChain basicSetReturntype(RefableType newReturntype, NotificationChain msgs)
   {
-    DataType oldReturntype = returntype;
+    RefableType oldReturntype = returntype;
     returntype = newReturntype;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.OPERATION__RETURNTYPE, oldReturntype, returntype));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RoomPackage.OPERATION__RETURNTYPE, oldReturntype, newReturntype);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
   }
 
   /**
@@ -235,22 +198,20 @@ public class OperationImpl extends MinimalEObjectImpl.Container implements Opera
    * <!-- end-user-doc -->
    * @generated
    */
-  public boolean isRef()
+  public void setReturntype(RefableType newReturntype)
   {
-    return ref;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setRef(boolean newRef)
-  {
-    boolean oldRef = ref;
-    ref = newRef;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.OPERATION__REF, oldRef, ref));
+    if (newReturntype != returntype)
+    {
+      NotificationChain msgs = null;
+      if (returntype != null)
+        msgs = ((InternalEObject)returntype).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RoomPackage.OPERATION__RETURNTYPE, null, msgs);
+      if (newReturntype != null)
+        msgs = ((InternalEObject)newReturntype).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RoomPackage.OPERATION__RETURNTYPE, null, msgs);
+      msgs = basicSetReturntype(newReturntype, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.OPERATION__RETURNTYPE, newReturntype, newReturntype));
   }
 
   /**
@@ -361,6 +322,8 @@ public class OperationImpl extends MinimalEObjectImpl.Container implements Opera
     {
       case RoomPackage.OPERATION__ARGUMENTS:
         return ((InternalEList<?>)getArguments()).basicRemove(otherEnd, msgs);
+      case RoomPackage.OPERATION__RETURNTYPE:
+        return basicSetReturntype(null, msgs);
       case RoomPackage.OPERATION__DOCU:
         return basicSetDocu(null, msgs);
       case RoomPackage.OPERATION__DETAIL_CODE:
@@ -384,10 +347,7 @@ public class OperationImpl extends MinimalEObjectImpl.Container implements Opera
       case RoomPackage.OPERATION__ARGUMENTS:
         return getArguments();
       case RoomPackage.OPERATION__RETURNTYPE:
-        if (resolve) return getReturntype();
-        return basicGetReturntype();
-      case RoomPackage.OPERATION__REF:
-        return isRef();
+        return getReturntype();
       case RoomPackage.OPERATION__DOCU:
         return getDocu();
       case RoomPackage.OPERATION__DETAIL_CODE:
@@ -415,10 +375,7 @@ public class OperationImpl extends MinimalEObjectImpl.Container implements Opera
         getArguments().addAll((Collection<? extends VarDecl>)newValue);
         return;
       case RoomPackage.OPERATION__RETURNTYPE:
-        setReturntype((DataType)newValue);
-        return;
-      case RoomPackage.OPERATION__REF:
-        setRef((Boolean)newValue);
+        setReturntype((RefableType)newValue);
         return;
       case RoomPackage.OPERATION__DOCU:
         setDocu((Documentation)newValue);
@@ -447,10 +404,7 @@ public class OperationImpl extends MinimalEObjectImpl.Container implements Opera
         getArguments().clear();
         return;
       case RoomPackage.OPERATION__RETURNTYPE:
-        setReturntype((DataType)null);
-        return;
-      case RoomPackage.OPERATION__REF:
-        setRef(REF_EDEFAULT);
+        setReturntype((RefableType)null);
         return;
       case RoomPackage.OPERATION__DOCU:
         setDocu((Documentation)null);
@@ -478,8 +432,6 @@ public class OperationImpl extends MinimalEObjectImpl.Container implements Opera
         return arguments != null && !arguments.isEmpty();
       case RoomPackage.OPERATION__RETURNTYPE:
         return returntype != null;
-      case RoomPackage.OPERATION__REF:
-        return ref != REF_EDEFAULT;
       case RoomPackage.OPERATION__DOCU:
         return docu != null;
       case RoomPackage.OPERATION__DETAIL_CODE:
@@ -501,8 +453,6 @@ public class OperationImpl extends MinimalEObjectImpl.Container implements Opera
     StringBuffer result = new StringBuffer(super.toString());
     result.append(" (name: ");
     result.append(name);
-    result.append(", ref: ");
-    result.append(ref);
     result.append(')');
     return result.toString();
   }

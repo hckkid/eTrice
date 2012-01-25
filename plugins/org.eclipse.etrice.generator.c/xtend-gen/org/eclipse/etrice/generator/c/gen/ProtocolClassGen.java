@@ -11,6 +11,7 @@ import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.PortClass;
 import org.eclipse.etrice.core.room.ProtocolClass;
+import org.eclipse.etrice.core.room.RefableType;
 import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.generator.base.ILogger;
 import org.eclipse.etrice.generator.c.gen.CExtensions;
@@ -307,7 +308,8 @@ public class ProtocolClassGen {
       boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_data, null);
       if (_operator_notEquals) {
         VarDecl _data_1 = m.getData();
-        DataType _type = _data_1.getType();
+        RefableType _refType = _data_1.getRefType();
+        DataType _type = _refType.getType();
         String _name_2 = _type.getName();
         _builder.append(_name_2, "");
         _builder.append(" ");

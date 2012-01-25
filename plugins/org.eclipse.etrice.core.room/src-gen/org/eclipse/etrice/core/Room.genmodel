@@ -38,8 +38,11 @@
     </genClasses>
     <genClasses ecoreClass="Room.ecore#//VarDecl">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//VarDecl/name"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//VarDecl/type"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//VarDecl/ref"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//VarDecl/refType"/>
+    </genClasses>
+    <genClasses ecoreClass="Room.ecore#//RefableType">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//RefableType/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//RefableType/ref"/>
     </genClasses>
     <genClasses ecoreClass="Room.ecore#//DataType"/>
     <genClasses ecoreClass="Room.ecore#//ComplexType"/>
@@ -62,16 +65,14 @@
     <genClasses ecoreClass="Room.ecore#//Attribute">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//Attribute/name"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//Attribute/size"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//Attribute/type"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//Attribute/ref"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//Attribute/refType"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//Attribute/defaultValueLiteral"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//Attribute/docu"/>
     </genClasses>
     <genClasses ecoreClass="Room.ecore#//Operation">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//Operation/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//Operation/arguments"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//Operation/returntype"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//Operation/ref"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//Operation/returntype"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//Operation/docu"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//Operation/detailCode"/>
     </genClasses>

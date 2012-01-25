@@ -254,7 +254,7 @@ class ProtocolClassGen {
 	
 
 	def messageSignature(ProtocolClass pc, Message m) {'''
-		void «pc.name»_«m.name» («IF m.data!=null»«m.data.type.name» «m.data.name»«ENDIF»)
+		void «pc.name»_«m.name» («IF m.data!=null»«m.data.refType.type.name» «m.data.name»«ENDIF»)
 	'''
 	}
 

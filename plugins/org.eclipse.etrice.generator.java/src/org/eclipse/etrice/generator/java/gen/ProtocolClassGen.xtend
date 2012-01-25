@@ -228,12 +228,12 @@ class ProtocolClassGen {
 	}
 
 	def messageSignature(Message m) {
-		'''«IF m.priv»private«ELSE»public«ENDIF» void «m.name»(«IF m.data!=null»«m.data.type.typeName» «m.data.name»«ENDIF»)'''
+		'''«IF m.priv»private«ELSE»public«ENDIF» void «m.name»(«IF m.data!=null»«m.data.refType.type.typeName» «m.data.name»«ENDIF»)'''
 	}
 
 	def messageSignatureExplicit(Message m) {
-		var dc = (m.data.type as DataClass)
-		'''public void «m.name»(«IF dc.base!=null»«dc.base.typeName» _super, «ENDIF»«FOR a : dc.attributes SEPARATOR ", "»«a.type.typeName»«IF a.size>1»[]«ENDIF» «a.name»«ENDFOR»)'''
+		var dc = (m.data.refType.type as DataClass)
+		'''public void «m.name»(«IF dc.base!=null»«dc.base.typeName» _super, «ENDIF»«FOR a : dc.attributes SEPARATOR ", "»«a.refType.type.typeName»«IF a.size>1»[]«ENDIF» «a.name»«ENDFOR»)'''
 	}
 
 	def messageCall(Message m) {
@@ -255,13 +255,13 @@ class ProtocolClassGen {
 					}
 					if (getPeerAddress()!=null)
 						«IF m.data==null»getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), «dir»_«m.name»));
-						«ELSE»getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), «dir»_«m.name», «m.data.name»«IF (!m.data.ref && !(m.data.type instanceof PrimitiveType))».deepCopy()«ENDIF»));
+						«ELSE»getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), «dir»_«m.name», «m.data.name»«IF (!m.data.refType.ref && !(m.data.refType.type instanceof PrimitiveType))».deepCopy()«ENDIF»));
 					«ENDIF»
 				«ENDIF»
 			}
-			«IF m.data!=null && m.data.type instanceof DataClass»
+			«IF m.data!=null && m.data.refType.type instanceof DataClass»
 				«messageSignatureExplicit(m)» {
-					«m.name»(new «m.data.type.name»(«IF (m.data.type as DataClass).base!=null»_super, «ENDIF»«FOR a : (m.data.type as DataClass).attributes SEPARATOR ", "»«a.name»«ENDFOR»));
+					«m.name»(new «m.data.refType.type.name»(«IF (m.data.refType.type as DataClass).base!=null»_super, «ENDIF»«FOR a : (m.data.refType.type as DataClass).attributes SEPARATOR ", "»«a.name»«ENDFOR»));
 				}
 			«ENDIF»
 		'''

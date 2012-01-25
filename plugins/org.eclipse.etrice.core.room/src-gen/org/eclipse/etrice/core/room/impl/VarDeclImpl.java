@@ -7,6 +7,7 @@
 package org.eclipse.etrice.core.room.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -14,7 +15,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.eclipse.etrice.core.room.DataType;
+import org.eclipse.etrice.core.room.RefableType;
 import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.etrice.core.room.VarDecl;
 
@@ -26,8 +27,7 @@ import org.eclipse.etrice.core.room.VarDecl;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.room.impl.VarDeclImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.room.impl.VarDeclImpl#getType <em>Type</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.room.impl.VarDeclImpl#isRef <em>Ref</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.impl.VarDeclImpl#getRefType <em>Ref Type</em>}</li>
  * </ul>
  * </p>
  *
@@ -56,34 +56,14 @@ public class VarDeclImpl extends MinimalEObjectImpl.Container implements VarDecl
   protected String name = NAME_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getType() <em>Type</em>}' reference.
+   * The cached value of the '{@link #getRefType() <em>Ref Type</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getType()
+   * @see #getRefType()
    * @generated
    * @ordered
    */
-  protected DataType type;
-
-  /**
-   * The default value of the '{@link #isRef() <em>Ref</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #isRef()
-   * @generated
-   * @ordered
-   */
-  protected static final boolean REF_EDEFAULT = false;
-
-  /**
-   * The cached value of the '{@link #isRef() <em>Ref</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #isRef()
-   * @generated
-   * @ordered
-   */
-  protected boolean ref = REF_EDEFAULT;
+  protected RefableType refType;
 
   /**
    * <!-- begin-user-doc -->
@@ -134,19 +114,26 @@ public class VarDeclImpl extends MinimalEObjectImpl.Container implements VarDecl
    * <!-- end-user-doc -->
    * @generated
    */
-  public DataType getType()
+  public RefableType getRefType()
   {
-    if (type != null && type.eIsProxy())
+    return refType;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetRefType(RefableType newRefType, NotificationChain msgs)
+  {
+    RefableType oldRefType = refType;
+    refType = newRefType;
+    if (eNotificationRequired())
     {
-      InternalEObject oldType = (InternalEObject)type;
-      type = (DataType)eResolveProxy(oldType);
-      if (type != oldType)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RoomPackage.VAR_DECL__TYPE, oldType, type));
-      }
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RoomPackage.VAR_DECL__REF_TYPE, oldRefType, newRefType);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
     }
-    return type;
+    return msgs;
   }
 
   /**
@@ -154,9 +141,20 @@ public class VarDeclImpl extends MinimalEObjectImpl.Container implements VarDecl
    * <!-- end-user-doc -->
    * @generated
    */
-  public DataType basicGetType()
+  public void setRefType(RefableType newRefType)
   {
-    return type;
+    if (newRefType != refType)
+    {
+      NotificationChain msgs = null;
+      if (refType != null)
+        msgs = ((InternalEObject)refType).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RoomPackage.VAR_DECL__REF_TYPE, null, msgs);
+      if (newRefType != null)
+        msgs = ((InternalEObject)newRefType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RoomPackage.VAR_DECL__REF_TYPE, null, msgs);
+      msgs = basicSetRefType(newRefType, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.VAR_DECL__REF_TYPE, newRefType, newRefType));
   }
 
   /**
@@ -164,35 +162,15 @@ public class VarDeclImpl extends MinimalEObjectImpl.Container implements VarDecl
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setType(DataType newType)
+  @Override
+  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
-    DataType oldType = type;
-    type = newType;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.VAR_DECL__TYPE, oldType, type));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public boolean isRef()
-  {
-    return ref;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setRef(boolean newRef)
-  {
-    boolean oldRef = ref;
-    ref = newRef;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.VAR_DECL__REF, oldRef, ref));
+    switch (featureID)
+    {
+      case RoomPackage.VAR_DECL__REF_TYPE:
+        return basicSetRefType(null, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
   }
 
   /**
@@ -207,11 +185,8 @@ public class VarDeclImpl extends MinimalEObjectImpl.Container implements VarDecl
     {
       case RoomPackage.VAR_DECL__NAME:
         return getName();
-      case RoomPackage.VAR_DECL__TYPE:
-        if (resolve) return getType();
-        return basicGetType();
-      case RoomPackage.VAR_DECL__REF:
-        return isRef();
+      case RoomPackage.VAR_DECL__REF_TYPE:
+        return getRefType();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -229,11 +204,8 @@ public class VarDeclImpl extends MinimalEObjectImpl.Container implements VarDecl
       case RoomPackage.VAR_DECL__NAME:
         setName((String)newValue);
         return;
-      case RoomPackage.VAR_DECL__TYPE:
-        setType((DataType)newValue);
-        return;
-      case RoomPackage.VAR_DECL__REF:
-        setRef((Boolean)newValue);
+      case RoomPackage.VAR_DECL__REF_TYPE:
+        setRefType((RefableType)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -252,11 +224,8 @@ public class VarDeclImpl extends MinimalEObjectImpl.Container implements VarDecl
       case RoomPackage.VAR_DECL__NAME:
         setName(NAME_EDEFAULT);
         return;
-      case RoomPackage.VAR_DECL__TYPE:
-        setType((DataType)null);
-        return;
-      case RoomPackage.VAR_DECL__REF:
-        setRef(REF_EDEFAULT);
+      case RoomPackage.VAR_DECL__REF_TYPE:
+        setRefType((RefableType)null);
         return;
     }
     super.eUnset(featureID);
@@ -274,10 +243,8 @@ public class VarDeclImpl extends MinimalEObjectImpl.Container implements VarDecl
     {
       case RoomPackage.VAR_DECL__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-      case RoomPackage.VAR_DECL__TYPE:
-        return type != null;
-      case RoomPackage.VAR_DECL__REF:
-        return ref != REF_EDEFAULT;
+      case RoomPackage.VAR_DECL__REF_TYPE:
+        return refType != null;
     }
     return super.eIsSet(featureID);
   }
@@ -295,8 +262,6 @@ public class VarDeclImpl extends MinimalEObjectImpl.Container implements VarDecl
     StringBuffer result = new StringBuffer(super.toString());
     result.append(" (name: ");
     result.append(name);
-    result.append(", ref: ");
-    result.append(ref);
     result.append(')');
     return result.toString();
   }

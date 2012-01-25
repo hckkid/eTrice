@@ -58,6 +58,7 @@ import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.ProtocolSemantics;
 import org.eclipse.etrice.core.room.RefSAPoint;
+import org.eclipse.etrice.core.room.RefableType;
 import org.eclipse.etrice.core.room.RefinedState;
 import org.eclipse.etrice.core.room.RelaySAPoint;
 import org.eclipse.etrice.core.room.RoomClass;
@@ -132,6 +133,13 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * @generated
    */
   private EClass varDeclEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass refableTypeEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -934,7 +942,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getVarDecl_Type()
+  public EReference getVarDecl_RefType()
   {
     return (EReference)varDeclEClass.getEStructuralFeatures().get(1);
   }
@@ -944,9 +952,29 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getVarDecl_Ref()
+  public EClass getRefableType()
   {
-    return (EAttribute)varDeclEClass.getEStructuralFeatures().get(2);
+    return refableTypeEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getRefableType_Type()
+  {
+    return (EReference)refableTypeEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getRefableType_Ref()
+  {
+    return (EAttribute)refableTypeEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -1134,7 +1162,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getAttribute_Type()
+  public EReference getAttribute_RefType()
   {
     return (EReference)attributeEClass.getEStructuralFeatures().get(2);
   }
@@ -1144,7 +1172,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getAttribute_Ref()
+  public EAttribute getAttribute_DefaultValueLiteral()
   {
     return (EAttribute)attributeEClass.getEStructuralFeatures().get(3);
   }
@@ -1154,19 +1182,9 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getAttribute_DefaultValueLiteral()
-  {
-    return (EAttribute)attributeEClass.getEStructuralFeatures().get(4);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EReference getAttribute_Docu()
   {
-    return (EReference)attributeEClass.getEStructuralFeatures().get(5);
+    return (EReference)attributeEClass.getEStructuralFeatures().get(4);
   }
 
   /**
@@ -1214,19 +1232,9 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getOperation_Ref()
-  {
-    return (EAttribute)operationEClass.getEStructuralFeatures().get(3);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EReference getOperation_Docu()
   {
-    return (EReference)operationEClass.getEStructuralFeatures().get(4);
+    return (EReference)operationEClass.getEStructuralFeatures().get(3);
   }
 
   /**
@@ -1236,7 +1244,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    */
   public EReference getOperation_DetailCode()
   {
-    return (EReference)operationEClass.getEStructuralFeatures().get(5);
+    return (EReference)operationEClass.getEStructuralFeatures().get(4);
   }
 
   /**
@@ -2978,8 +2986,11 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
 
     varDeclEClass = createEClass(VAR_DECL);
     createEAttribute(varDeclEClass, VAR_DECL__NAME);
-    createEReference(varDeclEClass, VAR_DECL__TYPE);
-    createEAttribute(varDeclEClass, VAR_DECL__REF);
+    createEReference(varDeclEClass, VAR_DECL__REF_TYPE);
+
+    refableTypeEClass = createEClass(REFABLE_TYPE);
+    createEReference(refableTypeEClass, REFABLE_TYPE__TYPE);
+    createEAttribute(refableTypeEClass, REFABLE_TYPE__REF);
 
     dataTypeEClass = createEClass(DATA_TYPE);
 
@@ -3004,8 +3015,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
     attributeEClass = createEClass(ATTRIBUTE);
     createEAttribute(attributeEClass, ATTRIBUTE__NAME);
     createEAttribute(attributeEClass, ATTRIBUTE__SIZE);
-    createEReference(attributeEClass, ATTRIBUTE__TYPE);
-    createEAttribute(attributeEClass, ATTRIBUTE__REF);
+    createEReference(attributeEClass, ATTRIBUTE__REF_TYPE);
     createEAttribute(attributeEClass, ATTRIBUTE__DEFAULT_VALUE_LITERAL);
     createEReference(attributeEClass, ATTRIBUTE__DOCU);
 
@@ -3013,7 +3023,6 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
     createEAttribute(operationEClass, OPERATION__NAME);
     createEReference(operationEClass, OPERATION__ARGUMENTS);
     createEReference(operationEClass, OPERATION__RETURNTYPE);
-    createEAttribute(operationEClass, OPERATION__REF);
     createEReference(operationEClass, OPERATION__DOCU);
     createEReference(operationEClass, OPERATION__DETAIL_CODE);
 
@@ -3350,8 +3359,11 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
 
     initEClass(varDeclEClass, VarDecl.class, "VarDecl", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getVarDecl_Name(), ecorePackage.getEString(), "name", null, 0, 1, VarDecl.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getVarDecl_Type(), this.getDataType(), null, "type", null, 0, 1, VarDecl.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getVarDecl_Ref(), ecorePackage.getEBoolean(), "ref", null, 0, 1, VarDecl.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getVarDecl_RefType(), this.getRefableType(), null, "refType", null, 0, 1, VarDecl.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(refableTypeEClass, RefableType.class, "RefableType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getRefableType_Type(), this.getDataType(), null, "type", null, 0, 1, RefableType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getRefableType_Ref(), ecorePackage.getEBoolean(), "ref", null, 0, 1, RefableType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(dataTypeEClass, DataType.class, "DataType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -3376,16 +3388,14 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
     initEClass(attributeEClass, Attribute.class, "Attribute", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getAttribute_Name(), ecorePackage.getEString(), "name", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getAttribute_Size(), ecorePackage.getEInt(), "size", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getAttribute_Type(), this.getDataType(), null, "type", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getAttribute_Ref(), ecorePackage.getEBoolean(), "ref", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getAttribute_RefType(), this.getRefableType(), null, "refType", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getAttribute_DefaultValueLiteral(), ecorePackage.getEString(), "defaultValueLiteral", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getAttribute_Docu(), this.getDocumentation(), null, "docu", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(operationEClass, Operation.class, "Operation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getOperation_Name(), ecorePackage.getEString(), "name", null, 0, 1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getOperation_Arguments(), this.getVarDecl(), null, "arguments", null, 0, -1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getOperation_Returntype(), this.getDataType(), null, "returntype", null, 0, 1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getOperation_Ref(), ecorePackage.getEBoolean(), "ref", null, 0, 1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getOperation_Returntype(), this.getRefableType(), null, "returntype", null, 0, 1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getOperation_Docu(), this.getDocumentation(), null, "docu", null, 0, 1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getOperation_DetailCode(), this.getDetailCode(), null, "detailCode", null, 0, 1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 

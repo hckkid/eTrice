@@ -18,8 +18,7 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.room.Attribute#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.Attribute#getSize <em>Size</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.room.Attribute#getType <em>Type</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.room.Attribute#isRef <em>Ref</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.Attribute#getRefType <em>Ref Type</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.Attribute#getDefaultValueLiteral <em>Default Value Literal</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.Attribute#getDocu <em>Docu</em>}</li>
  * </ul>
@@ -84,56 +83,30 @@ public interface Attribute extends EObject
   void setSize(int value);
 
   /**
-   * Returns the value of the '<em><b>Type</b></em>' reference.
+   * Returns the value of the '<em><b>Ref Type</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Type</em>' reference isn't clear,
+   * If the meaning of the '<em>Ref Type</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Type</em>' reference.
-   * @see #setType(DataType)
-   * @see org.eclipse.etrice.core.room.RoomPackage#getAttribute_Type()
-   * @model
+   * @return the value of the '<em>Ref Type</em>' containment reference.
+   * @see #setRefType(RefableType)
+   * @see org.eclipse.etrice.core.room.RoomPackage#getAttribute_RefType()
+   * @model containment="true"
    * @generated
    */
-  DataType getType();
+  RefableType getRefType();
 
   /**
-   * Sets the value of the '{@link org.eclipse.etrice.core.room.Attribute#getType <em>Type</em>}' reference.
+   * Sets the value of the '{@link org.eclipse.etrice.core.room.Attribute#getRefType <em>Ref Type</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Type</em>' reference.
-   * @see #getType()
+   * @param value the new value of the '<em>Ref Type</em>' containment reference.
+   * @see #getRefType()
    * @generated
    */
-  void setType(DataType value);
-
-  /**
-   * Returns the value of the '<em><b>Ref</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Ref</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Ref</em>' attribute.
-   * @see #setRef(boolean)
-   * @see org.eclipse.etrice.core.room.RoomPackage#getAttribute_Ref()
-   * @model
-   * @generated
-   */
-  boolean isRef();
-
-  /**
-   * Sets the value of the '{@link org.eclipse.etrice.core.room.Attribute#isRef <em>Ref</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Ref</em>' attribute.
-   * @see #isRef()
-   * @generated
-   */
-  void setRef(boolean value);
+  void setRefType(RefableType value);
 
   /**
    * Returns the value of the '<em><b>Default Value Literal</b></em>' attribute.

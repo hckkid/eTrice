@@ -698,8 +698,10 @@ public class ExpandedActorClassImpl extends ActorClassImpl implements ExpandedAc
 							}
 							else {
 								VarDecl a = mif.getMessage().getData();
-								if (data.getType()!=a.getType())
+								if (data.getRefType().getType()!=a.getRefType().getType())
 									validationError("The data types of all MessageFromIf have to be the same!", t, RoomPackage.eINSTANCE.getTriggeredTransition_Triggers());
+								if (data.getRefType().isRef() !=a.getRefType().isRef())
+									validationError("The data types of all MessageFromIf have to be the same ref type!", t, RoomPackage.eINSTANCE.getTriggeredTransition_Triggers());
 							}
 						}
 						else {

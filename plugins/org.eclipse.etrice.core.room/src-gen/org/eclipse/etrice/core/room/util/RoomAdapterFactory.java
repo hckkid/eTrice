@@ -104,6 +104,11 @@ public class RoomAdapterFactory extends AdapterFactoryImpl
         return createVarDeclAdapter();
       }
       @Override
+      public Adapter caseRefableType(RefableType object)
+      {
+        return createRefableTypeAdapter();
+      }
+      @Override
       public Adapter caseDataType(DataType object)
       {
         return createDataTypeAdapter();
@@ -541,6 +546,21 @@ public class RoomAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createVarDeclAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.RefableType <em>Refable Type</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.etrice.core.room.RefableType
+   * @generated
+   */
+  public Adapter createRefableTypeAdapter()
   {
     return null;
   }
