@@ -9,7 +9,6 @@ import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.DataType;
 import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.Message;
-import org.eclipse.etrice.core.room.MessageHandler;
 import org.eclipse.etrice.core.room.PortClass;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.VarDecl;
@@ -19,7 +18,6 @@ import org.eclipse.etrice.generator.etricegen.Root;
 import org.eclipse.etrice.generator.extensions.RoomExtensions;
 import org.eclipse.etrice.generator.generic.ProcedureHelpers;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
-import org.eclipse.xtext.xbase.lib.BooleanExtensions;
 import org.eclipse.xtext.xbase.lib.IntegerExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
@@ -91,7 +89,6 @@ public class ProtocolClassGen {
     _builder.append("#include \"etDatatypes.h\"");
     _builder.newLine();
     _builder.newLine();
-    _builder.newLine();
     DetailCode _userCode1 = pc.getUserCode1();
     StringConcatenation _UserCode = this.helpers.UserCode(_userCode1);
     _builder.append(_UserCode, "");
@@ -111,11 +108,6 @@ public class ProtocolClassGen {
     _builder.append("typedef struct {");
     _builder.newLine();
     _builder.newLine();
-    _builder.append("\t");
-    DetailCode _userCode2 = pc.getUserCode2();
-    StringConcatenation _UserCode_1 = this.helpers.UserCode(_userCode2);
-    _builder.append(_UserCode_1, "	");
-    _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("} ");
     String _name_3 = pc.getName();
@@ -128,10 +120,9 @@ public class ProtocolClassGen {
     _builder.append("enum {");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("MSG_");
     String _name_4 = pc.getName();
     _builder.append(_name_4, "	");
-    _builder.append("_MIN = 0, ");
+    _builder.append("_MSG_MIN = 0, ");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
     _builder.append("/* IDs for outgoing messages */");
@@ -180,10 +171,9 @@ public class ProtocolClassGen {
     _builder.append("/* error if msgID >= MSG_MAX */");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("MSG_");
     String _name_9 = pc.getName();
     _builder.append(_name_9, "	");
-    _builder.append("_MAX = ");
+    _builder.append("_MSG_MAX = ");
     List<Message> _allOutgoingMessages_3 = this.roomExt.getAllOutgoingMessages(pc);
     int _size_1 = _allOutgoingMessages_3.size();
     List<Message> _allIncomingMessages_2 = this.roomExt.getAllIncomingMessages(pc);
@@ -215,6 +205,10 @@ public class ProtocolClassGen {
     _builder.append("_getMessageString(int msg_id);");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
+    DetailCode _userCode2 = pc.getUserCode2();
+    StringConcatenation _UserCode_1 = this.helpers.UserCode(_userCode2);
+    _builder.append(_UserCode_1, "");
+    _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.newLine();
     _builder.append("#endif /* _");
@@ -253,6 +247,42 @@ public class ProtocolClassGen {
   
   public StringConcatenation portClass(final ProtocolClass pc, final Boolean conj) {
     StringConcatenation _builder = new StringConcatenation();
+    _builder.append("\t\t");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.newLine();
+    return _builder;
+  }
+  
+  public StringConcatenation portClassHeader(final ProtocolClass pc, final Boolean conj) {
+    StringConcatenation _builder = new StringConcatenation();
+    String _portClassName = this.roomExt.getPortClassName(pc, conj);
+    String portClassName = _portClassName;
+    _builder.newLineIfNotEmpty();
+    PortClass _portClass = this.roomExt.getPortClass(pc, conj);
+    PortClass pClass = _portClass;
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    _builder.append("typedef etPort ");
+    _builder.append(portClassName, "");
+    _builder.append(";");
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    StringConcatenation _ClassOperationSignature = this.helpers.ClassOperationSignature(portClassName, "MyOperation1", "int a, int b", "void", true);
+    _builder.append(_ClassOperationSignature, "");
+    _builder.newLineIfNotEmpty();
+    StringConcatenation _ClassOperationSignature_1 = this.helpers.ClassOperationSignature(portClassName, "MyOperation2", "", "int", false);
+    _builder.append(_ClassOperationSignature_1, "");
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    _builder.newLine();
+    return _builder;
+  }
+  
+  public StringConcatenation portClassSource(final ProtocolClass pc, final Boolean conj) {
+    StringConcatenation _builder = new StringConcatenation();
     String _portClassName = this.roomExt.getPortClassName(pc, conj);
     String name = _portClassName;
     _builder.newLineIfNotEmpty();
@@ -260,30 +290,17 @@ public class ProtocolClassGen {
     PortClass pclass = _portClass;
     _builder.newLineIfNotEmpty();
     _builder.newLine();
-    _builder.newLine();
-    _builder.newLine();
     return _builder;
   }
   
-  public StringConcatenation portClassHeader(final ProtocolClass pc, final Boolean conj) {
+  public StringConcatenation messageSignature(final ProtocolClass pc, final Message m) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("\t\t");
-    _builder.newLine();
-    return _builder;
-  }
-  
-  public StringConcatenation portClassSource(final ProtocolClass pc, final Boolean conj) {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("\t\t");
-    _builder.newLine();
-    return _builder;
-  }
-  
-  public StringConcatenation messageSignature(final Message m) {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("public void ");
-    String _name = m.getName();
+    _builder.append("void ");
+    String _name = pc.getName();
     _builder.append(_name, "");
+    _builder.append("_");
+    String _name_1 = m.getName();
+    _builder.append(_name_1, "");
     _builder.append(" (");
     {
       VarDecl _data = m.getData();
@@ -291,12 +308,12 @@ public class ProtocolClassGen {
       if (_operator_notEquals) {
         VarDecl _data_1 = m.getData();
         DataType _type = _data_1.getType();
-        String _name_1 = _type.getName();
-        _builder.append(_name_1, "");
+        String _name_2 = _type.getName();
+        _builder.append(_name_2, "");
         _builder.append(" ");
         VarDecl _data_2 = m.getData();
-        String _name_2 = _data_2.getName();
-        _builder.append(_name_2, "");
+        String _name_3 = _data_2.getName();
+        _builder.append(_name_3, "");
       }
     }
     _builder.append(")");
@@ -321,107 +338,6 @@ public class ProtocolClassGen {
     }
     _builder.append(")");
     _builder.newLineIfNotEmpty();
-    return _builder;
-  }
-  
-  public StringConcatenation sendMessage(final Message m, final boolean conj) {
-    StringConcatenation _builder = new StringConcatenation();
-    String _xifexpression = null;
-    if (conj) {
-      _xifexpression = "IN";
-    } else {
-      _xifexpression = "OUT";
-    }
-    String dir = _xifexpression;
-    _builder.newLineIfNotEmpty();
-    MessageHandler _sendHandler = this.roomExt.getSendHandler(m, conj);
-    MessageHandler hdlr = _sendHandler;
-    _builder.newLineIfNotEmpty();
-    StringConcatenation _messageSignature = this.messageSignature(m);
-    _builder.append(_messageSignature, "");
-    _builder.append("{");
-    _builder.newLineIfNotEmpty();
-    {
-      boolean _operator_notEquals = ObjectExtensions.operator_notEquals(hdlr, null);
-      if (_operator_notEquals) {
-        _builder.append("\t");
-        {
-          DetailCode _detailCode = hdlr.getDetailCode();
-          EList<String> _commands = _detailCode.getCommands();
-          for(final String command : _commands) {
-            _builder.append("\t");
-            _builder.append(command, "	");
-            _builder.newLineIfNotEmpty();
-          }
-        }
-      } else {
-        _builder.append("\t");
-        _builder.append("if (messageStrings[ ");
-        _builder.append(dir, "	");
-        _builder.append("_");
-        String _name = m.getName();
-        _builder.append(_name, "	");
-        _builder.append("] != \"timerTick\"){");
-        _builder.newLineIfNotEmpty();
-        _builder.append("\t");
-        _builder.append("\t");
-        _builder.append("// TODOTS: model switch for activation");
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.append("DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[");
-        _builder.append(dir, "	");
-        _builder.append("_");
-        String _name_1 = m.getName();
-        _builder.append(_name_1, "	");
-        _builder.append("]);");
-        _builder.newLineIfNotEmpty();
-        _builder.append("\t");
-        _builder.append("}");
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.append("if (getPeerAddress()!=null)");
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.append("\t");
-        {
-          VarDecl _data = m.getData();
-          boolean _operator_equals = ObjectExtensions.operator_equals(_data, null);
-          if (_operator_equals) {
-            _builder.append("getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), ");
-            _builder.append(dir, "		");
-            _builder.append("_");
-            String _name_2 = m.getName();
-            _builder.append(_name_2, "		");
-            _builder.append("));");
-            _builder.newLineIfNotEmpty();
-            _builder.append("\t");
-            _builder.append("\t");
-          } else {
-            _builder.append("getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), ");
-            _builder.append(dir, "		");
-            _builder.append("_");
-            String _name_3 = m.getName();
-            _builder.append(_name_3, "		");
-            _builder.append(", ");
-            VarDecl _data_1 = m.getData();
-            String _name_4 = _data_1.getName();
-            _builder.append(_name_4, "		");
-            {
-              VarDecl _data_2 = m.getData();
-              boolean _isRef = _data_2.isRef();
-              boolean _operator_not = BooleanExtensions.operator_not(_isRef);
-              if (_operator_not) {
-                _builder.append(".deepCopy()");
-              }
-            }
-            _builder.append("));");
-            _builder.newLineIfNotEmpty();
-          }
-        }
-      }
-    }
-    _builder.append("}");
-    _builder.newLine();
     return _builder;
   }
   
@@ -463,13 +379,13 @@ public class ProtocolClassGen {
     _builder.append("_getMessageString(int msg_id) {");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
-    _builder.append("if (msg_id<MSG_");
+    _builder.append("if (msg_id<");
     String _name_4 = pc.getName();
     _builder.append(_name_4, "	");
-    _builder.append("_MIN || msg_id>MSG_");
+    _builder.append("_MSG_MIN || msg_id>");
     String _name_5 = pc.getName();
     _builder.append(_name_5, "	");
-    _builder.append("_MAX+1){");
+    _builder.append("_MSG_MAX+1){");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t");
     _builder.append("/* id out of range */");

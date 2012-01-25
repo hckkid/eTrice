@@ -17,6 +17,9 @@
 
 void runTestCases(void);
 
+#include "test/experiments/test.h"
+void runROMTest(void);
+
 int main(void){
 	runTestCases();
 	return 0;
@@ -26,5 +29,16 @@ int main(void){
 void runTestCases(void){
 	RunCGeneratorTestcases();
 	RunCRuntimeTestcases();
+	runROMTest();
+}
+
+void runROMTest(void){
+
+	if (Actor1.constData == &Actor1_const){
+		printf("OK\n");
+	}
+	if (Actor1_const.actor == &Actor1){
+		printf("OK\n");
+	}
 }
 

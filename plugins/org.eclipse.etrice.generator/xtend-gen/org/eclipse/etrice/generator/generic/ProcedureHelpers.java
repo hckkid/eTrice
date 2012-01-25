@@ -354,8 +354,8 @@ public class ProcedureHelpers {
     _builder.newLine();
     {
       for(final Operation operation : operations) {
-        StringConcatenation _OperationHeader = this.OperationHeader(operation, classname, true);
-        _builder.append(_OperationHeader, "");
+        StringConcatenation _OperationSignature = this.OperationSignature(operation, classname, true);
+        _builder.append(_OperationSignature, "");
         _builder.append(";");
         _builder.newLineIfNotEmpty();
       }
@@ -369,8 +369,8 @@ public class ProcedureHelpers {
     _builder.newLine();
     {
       for(final Operation operation : operations) {
-        StringConcatenation _OperationHeader = this.OperationHeader(operation, classname, false);
-        _builder.append(_OperationHeader, "");
+        StringConcatenation _OperationSignature = this.OperationSignature(operation, classname, false);
+        _builder.append(_OperationSignature, "");
         _builder.append(" {");
         _builder.newLineIfNotEmpty();
         {
@@ -389,7 +389,7 @@ public class ProcedureHelpers {
     return _builder;
   }
   
-  private StringConcatenation OperationHeader(final Operation operation, final String classname, final boolean isDeclaration) {
+  private StringConcatenation OperationSignature(final Operation operation, final String classname, final boolean isDeclaration) {
     StringConcatenation _builder = new StringConcatenation();
     String _accessLevelPublic = this.languageExt.accessLevelPublic();
     _builder.append(_accessLevelPublic, "");
@@ -414,23 +414,58 @@ public class ProcedureHelpers {
     int _size = _arguments.size();
     String _selfPointer = this.languageExt.selfPointer(classname, _size);
     _builder.append(_selfPointer, "");
+    EList<VarDecl> _arguments_1 = operation.getArguments();
+    StringConcatenation _BuildArgumentList = this.BuildArgumentList(_arguments_1);
+    _builder.append(_BuildArgumentList, "");
+    _builder.append(")");
+    return _builder;
+  }
+  
+  /**
+   * builds comma separated argument list as string from EList<VarDecl> arguments
+   */
+  private StringConcatenation BuildArgumentList(final EList<VarDecl> arguments) {
+    StringConcatenation _builder = new StringConcatenation();
     {
-      EList<VarDecl> _arguments_1 = operation.getArguments();
       boolean hasAnyElements = false;
-      for(final VarDecl argument : _arguments_1) {
+      for(final VarDecl argument : arguments) {
         if (!hasAnyElements) {
           hasAnyElements = true;
         } else {
           _builder.appendImmediate(", ", "");
         }
         DataType _type = argument.getType();
-        String _typeName_1 = this._typeHelpers.typeName(_type);
-        _builder.append(_typeName_1, "");
+        String _typeName = this._typeHelpers.typeName(_type);
+        _builder.append(_typeName, "");
         _builder.append(" ");
-        String _name_1 = argument.getName();
-        _builder.append(_name_1, "");
+        String _name = argument.getName();
+        _builder.append(_name, "");
       }
     }
+    return _builder;
+  }
+  
+  public StringConcatenation ClassOperationSignature(final String classname, final String operationname, final String argumentList, final String returnType, final boolean isDeclaration) {
+    StringConcatenation _builder = new StringConcatenation();
+    String _accessLevelPublic = this.languageExt.accessLevelPublic();
+    _builder.append(_accessLevelPublic, "");
+    {
+      boolean _operator_equals = ObjectExtensions.operator_equals(returnType, "");
+      if (_operator_equals) {
+        _builder.append("void");
+      } else {
+        _builder.append(returnType, "");
+      }
+    }
+    _builder.append(" ");
+    String _operationScope = this.languageExt.operationScope(classname, isDeclaration);
+    _builder.append(_operationScope, "");
+    _builder.append(operationname, "");
+    _builder.append("(");
+    int _length = argumentList.length();
+    String _selfPointer = this.languageExt.selfPointer(classname, _length);
+    _builder.append(_selfPointer, "");
+    _builder.append(argumentList, "");
     _builder.append(")");
     return _builder;
   }

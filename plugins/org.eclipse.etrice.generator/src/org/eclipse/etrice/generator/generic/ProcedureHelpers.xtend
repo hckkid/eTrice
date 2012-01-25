@@ -20,6 +20,9 @@ import org.eclipse.etrice.core.room.Attribute
 import org.eclipse.etrice.core.room.DetailCode
 import org.eclipse.etrice.core.room.Operation
 import org.eclipse.etrice.generator.base.ILogger
+import org.eclipse.etrice.core.room.VarDecl
+import org.eclipse.emf.common.util.EList
+
 
 
 @Singleton
@@ -131,14 +134,14 @@ class ProcedureHelpers {
 	// Operations
 	def OperationsDeclaration(List<? extends Operation> operations, String classname) {'''
 		//--------------------- operations
-		«FOR operation : operations»«OperationHeader(operation, classname, true)»;
+		«FOR operation : operations»«OperationSignature(operation, classname, true)»;
 		«ENDFOR»
 		'''
 	}
 
 	def OperationsImplementation(List<? extends Operation> operations, String classname) {'''
 		//--------------------- operations
-		«FOR operation : operations»«OperationHeader(operation, classname, false)» {
+		«FOR operation : operations»«OperationSignature(operation, classname, false)» {
 		«FOR command : operation.detailCode.commands»	«command»
 			«ENDFOR»
 		}
@@ -146,8 +149,22 @@ class ProcedureHelpers {
 		'''
 	}
 	
-	def private OperationHeader(Operation operation, String classname, boolean isDeclaration) {'''
-		«languageExt.accessLevelPublic()»«IF operation.returntype==null»void«ELSE»«operation.returntype.typeName»«ENDIF» «languageExt.operationScope(classname, isDeclaration)»«operation.name»(«languageExt.selfPointer(classname, operation.arguments.size)»«FOR argument : operation.arguments SEPARATOR ", "»«argument.type.typeName» «argument.name»«ENDFOR»)'''
+	
+	def private OperationSignature(Operation operation, String classname, boolean isDeclaration) {'''
+«««		«ClassOperationSignature(classname, operation.name, BuildArgumentList(operation.arguments), if(operation.returntype==null)"void"else operation.returntype.typeName, isDeclaration)»
+		«languageExt.accessLevelPublic()»«IF operation.returntype==null»void«ELSE»«operation.returntype.typeName»«ENDIF» «languageExt.operationScope(classname, isDeclaration)»«operation.name»(«languageExt.selfPointer(classname, operation.arguments.size)»«BuildArgumentList(operation.arguments)»)'''
+	}
+
+	/*
+	 * builds comma separated argument list as string from EList<VarDecl> arguments
+	 */
+	def private BuildArgumentList(EList<VarDecl> arguments){
+		'''«FOR argument : arguments SEPARATOR ", "»«argument.type.typeName» «argument.name»«ENDFOR»'''
+	}
+	
+//	def ClassFunctionSignature(String classname, String functionname, EList<VarDecl> arguments, ){
+	def ClassOperationSignature(String classname, String operationname, String argumentList, String returnType, boolean isDeclaration){'''
+		«languageExt.accessLevelPublic()»«IF returnType==""»void«ELSE»«returnType»«ENDIF» «languageExt.operationScope(classname, isDeclaration)»«operationname»(«languageExt.selfPointer(classname, argumentList.length)»«argumentList»)'''
 	}
 	
 }
