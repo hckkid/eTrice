@@ -288,7 +288,8 @@ public class RoomLabelProvider extends DefaultEObjectLabelProvider {
 		String type = attr.getType()!=null? (" : "+attr.getType().getName()):"";
 		String value = (attr.getDefaultValueLiteral()!=null && !attr.getDefaultValueLiteral().isEmpty())?
 				(" = "+attr.getDefaultValueLiteral()) : "";
-		return "Attr "+attr.getName()+type+value;
+		String mult = attr.getSize()>1? ("["+attr.getSize()+"]") : "";
+		return "Attr "+attr.getName()+mult+type+value;
 	}
 	
 	StyledString text(Operation op) {

@@ -86,6 +86,7 @@ public class PingPongData {
 		f32Val = 4711.0815f;
 		f64Val = 47114711.08150815;
 		stringVal = "Du alter Depp !";
+		arrayFromInt32 = new int[] {1,2,3,4,5};
 		ownType = new PingPongDataDeep();
 	}
 	

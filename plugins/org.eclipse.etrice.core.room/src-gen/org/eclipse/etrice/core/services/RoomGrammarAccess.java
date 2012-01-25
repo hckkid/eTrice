@@ -5209,7 +5209,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//terminal MULTIPLICITY returns ecore::EInt:
-	//	"[" ("*" | "0".."9"+) "]";
+	//	"[" (" " | "\t")* ("*" | "0".."9"+) (" " | "\t")* "]";
 	public TerminalRule getMULTIPLICITYRule() {
 		return (tMULTIPLICITY != null) ? tMULTIPLICITY : (tMULTIPLICITY = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "MULTIPLICITY"));
 	} 

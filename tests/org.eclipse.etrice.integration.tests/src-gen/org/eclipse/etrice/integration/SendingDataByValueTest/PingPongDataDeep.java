@@ -79,6 +79,7 @@ public class PingPongDataDeep {
 		f32Val = 0;
 		f64Val = 0;
 		stringVal = "";
+		arrayFromInt32 = new int[10];
 		for (int i=0;i<10;i++){
 			arrayFromInt32[i] = 0;
 		}

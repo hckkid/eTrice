@@ -72,6 +72,12 @@ RoomModel room.basic.service.logging {
 	}
 
 	ProtocolClass Log {
+		usercode2 {
+				"public static final int LOG_LEVEL_LOW = 1;"
+				"public static final int LOG_LEVEL_MEDIUM = 2;"
+				"public static final int LOG_LEVEL_HIGH = 3;"
+		}
+		
 		incoming {
 			Message open(fileName: string)
 			Message close()
@@ -80,9 +86,6 @@ RoomModel room.basic.service.logging {
 
 		conjugate PortClass {
 			usercode {
-				"public static final int LOG_LEVEL_LOW = 1;"
-				"public static final int LOG_LEVEL_MEDIUM = 2;"
-				"public static final int LOG_LEVEL_HIGH = 3;"
 				"static int logLevel=0;"
 				"InternalLogData d = new InternalLogData();"
 			}

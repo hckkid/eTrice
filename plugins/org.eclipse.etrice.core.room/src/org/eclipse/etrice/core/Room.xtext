@@ -411,4 +411,6 @@ ImportedFQN:
 FQN:
 	ID ('.' ID)*;
 
-terminal MULTIPLICITY returns ecore::EInt : '[' ('*' | ('0'..'9')+) ']';
+// with white space inside the brackets like in [ 3 ] the INT terminal will match and we get an error
+// [ * ] works though
+terminal MULTIPLICITY returns ecore::EInt : '[' (' '|'\t')* ('*' | ('0'..'9')+) (' '|'\t')* ']';
