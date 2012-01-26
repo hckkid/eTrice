@@ -402,13 +402,52 @@ ruleVarDecl returns [EObject current=null]
     }
 (
 (
+		{ 
+	        newCompositeNode(grammarAccess.getVarDeclAccess().getRefTypeRefableTypeParserRuleCall_2_0()); 
+	    }
+		lv_refType_2_0=ruleRefableType		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getVarDeclRule());
+	        }
+       		set(
+       			$current, 
+       			"refType",
+        		lv_refType_2_0, 
+        		"RefableType");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+))
+;
+
+
+
+
+
+// Entry rule entryRuleRefableType
+entryRuleRefableType returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getRefableTypeRule()); }
+	 iv_ruleRefableType=ruleRefableType 
+	 { $current=$iv_ruleRefableType.current; } 
+	 EOF 
+;
+
+// Rule RefableType
+ruleRefableType returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+((
+(
 		{
 			if ($current==null) {
-	            $current = createModelElement(grammarAccess.getVarDeclRule());
+	            $current = createModelElement(grammarAccess.getRefableTypeRule());
 	        }
         }
 		{ 
-	        newCompositeNode(grammarAccess.getVarDeclAccess().getTypeDataTypeCrossReference_2_0()); 
+	        newCompositeNode(grammarAccess.getRefableTypeAccess().getTypeDataTypeCrossReference_0_0()); 
 	    }
 		ruleFQN		{ 
 	        afterParserOrEnumRuleCall();
@@ -417,14 +456,14 @@ ruleVarDecl returns [EObject current=null]
 )
 )(
 (
-		lv_ref_3_0=	'ref' 
+		lv_ref_1_0=	'ref' 
     {
-        newLeafNode(lv_ref_3_0, grammarAccess.getVarDeclAccess().getRefRefKeyword_3_0());
+        newLeafNode(lv_ref_1_0, grammarAccess.getRefableTypeAccess().getRefRefKeyword_1_0());
     }
  
 	    {
 	        if ($current==null) {
-	            $current = createModelElement(grammarAccess.getVarDeclRule());
+	            $current = createModelElement(grammarAccess.getRefableTypeRule());
 	        }
        		setWithLastConsumed($current, "ref", true, "ref");
 	    }
@@ -981,43 +1020,31 @@ ruleAttribute returns [EObject current=null]
     }
 (
 (
-		{
-			if ($current==null) {
-	            $current = createModelElement(grammarAccess.getAttributeRule());
-	        }
-        }
 		{ 
-	        newCompositeNode(grammarAccess.getAttributeAccess().getTypeDataTypeCrossReference_4_0()); 
+	        newCompositeNode(grammarAccess.getAttributeAccess().getRefTypeRefableTypeParserRuleCall_4_0()); 
 	    }
-		ruleFQN		{ 
+		lv_refType_4_0=ruleRefableType		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getAttributeRule());
+	        }
+       		set(
+       			$current, 
+       			"refType",
+        		lv_refType_4_0, 
+        		"RefableType");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-)(
-(
-		lv_ref_5_0=	'ref' 
+)(	otherlv_5='=' 
     {
-        newLeafNode(lv_ref_5_0, grammarAccess.getAttributeAccess().getRefRefKeyword_5_0());
-    }
- 
-	    {
-	        if ($current==null) {
-	            $current = createModelElement(grammarAccess.getAttributeRule());
-	        }
-       		setWithLastConsumed($current, "ref", true, "ref");
-	    }
-
-)
-)?(	otherlv_6='=' 
-    {
-    	newLeafNode(otherlv_6, grammarAccess.getAttributeAccess().getEqualsSignKeyword_6_0());
+    	newLeafNode(otherlv_5, grammarAccess.getAttributeAccess().getEqualsSignKeyword_5_0());
     }
 (
 (
-		lv_defaultValueLiteral_7_0=RULE_STRING
+		lv_defaultValueLiteral_6_0=RULE_STRING
 		{
-			newLeafNode(lv_defaultValueLiteral_7_0, grammarAccess.getAttributeAccess().getDefaultValueLiteralSTRINGTerminalRuleCall_6_1_0()); 
+			newLeafNode(lv_defaultValueLiteral_6_0, grammarAccess.getAttributeAccess().getDefaultValueLiteralSTRINGTerminalRuleCall_5_1_0()); 
 		}
 		{
 	        if ($current==null) {
@@ -1026,7 +1053,7 @@ ruleAttribute returns [EObject current=null]
        		setWithLastConsumed(
        			$current, 
        			"defaultValueLiteral",
-        		lv_defaultValueLiteral_7_0, 
+        		lv_defaultValueLiteral_6_0, 
         		"STRING");
 	    }
 
@@ -1034,16 +1061,16 @@ ruleAttribute returns [EObject current=null]
 ))?(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getAttributeAccess().getDocuDocumentationParserRuleCall_7_0()); 
+	        newCompositeNode(grammarAccess.getAttributeAccess().getDocuDocumentationParserRuleCall_6_0()); 
 	    }
-		lv_docu_8_0=ruleDocumentation		{
+		lv_docu_7_0=ruleDocumentation		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getAttributeRule());
 	        }
        		set(
        			$current, 
        			"docu",
-        		lv_docu_8_0, 
+        		lv_docu_7_0, 
         		"Documentation");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -1151,49 +1178,37 @@ ruleStandardOperation returns [EObject current=null]
     	newLeafNode(otherlv_8, grammarAccess.getStandardOperationAccess().getVoidKeyword_5_1_0());
     }
 
-    |((
+    |(
 (
-		{
-			if ($current==null) {
-	            $current = createModelElement(grammarAccess.getStandardOperationRule());
-	        }
-        }
 		{ 
-	        newCompositeNode(grammarAccess.getStandardOperationAccess().getReturntypeDataTypeCrossReference_5_1_1_0_0()); 
+	        newCompositeNode(grammarAccess.getStandardOperationAccess().getReturntypeRefableTypeParserRuleCall_5_1_1_0()); 
 	    }
-		ruleFQN		{ 
+		lv_returntype_9_0=ruleRefableType		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getStandardOperationRule());
+	        }
+       		set(
+       			$current, 
+       			"returntype",
+        		lv_returntype_9_0, 
+        		"RefableType");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-)(
-(
-		lv_ref_10_0=	'ref' 
-    {
-        newLeafNode(lv_ref_10_0, grammarAccess.getStandardOperationAccess().getRefRefKeyword_5_1_1_1_0());
-    }
- 
-	    {
-	        if ($current==null) {
-	            $current = createModelElement(grammarAccess.getStandardOperationRule());
-	        }
-       		setWithLastConsumed($current, "ref", true, "ref");
-	    }
-
-)
-)?)))?(
+)))?(
 (
 		{ 
 	        newCompositeNode(grammarAccess.getStandardOperationAccess().getDocuDocumentationParserRuleCall_6_0()); 
 	    }
-		lv_docu_11_0=ruleDocumentation		{
+		lv_docu_10_0=ruleDocumentation		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getStandardOperationRule());
 	        }
        		set(
        			$current, 
        			"docu",
-        		lv_docu_11_0, 
+        		lv_docu_10_0, 
         		"Documentation");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -1204,14 +1219,14 @@ ruleStandardOperation returns [EObject current=null]
 		{ 
 	        newCompositeNode(grammarAccess.getStandardOperationAccess().getDetailCodeDetailCodeParserRuleCall_7_0()); 
 	    }
-		lv_detailCode_12_0=ruleDetailCode		{
+		lv_detailCode_11_0=ruleDetailCode		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getStandardOperationRule());
 	        }
        		set(
        			$current, 
        			"detailCode",
-        		lv_detailCode_12_0, 
+        		lv_detailCode_11_0, 
         		"DetailCode");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -1317,40 +1332,28 @@ rulePortOperation returns [EObject current=null]
     	newLeafNode(otherlv_8, grammarAccess.getPortOperationAccess().getVoidKeyword_5_0_1_0());
     }
 
-    |((
+    |(
 (
-		{
-			if ($current==null) {
-	            $current = createModelElement(grammarAccess.getPortOperationRule());
-	        }
-        }
 		{ 
-	        newCompositeNode(grammarAccess.getPortOperationAccess().getReturntypeDataTypeCrossReference_5_0_1_1_0_0()); 
+	        newCompositeNode(grammarAccess.getPortOperationAccess().getReturntypeRefableTypeParserRuleCall_5_0_1_1_0()); 
 	    }
-		ruleFQN		{ 
+		lv_returntype_9_0=ruleRefableType		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getPortOperationRule());
+	        }
+       		set(
+       			$current, 
+       			"returntype",
+        		lv_returntype_9_0, 
+        		"RefableType");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-)(
-(
-		lv_ref_10_0=	'ref' 
+)))
+    |(	otherlv_10='sends' 
     {
-        newLeafNode(lv_ref_10_0, grammarAccess.getPortOperationAccess().getRefRefKeyword_5_0_1_1_1_0());
-    }
- 
-	    {
-	        if ($current==null) {
-	            $current = createModelElement(grammarAccess.getPortOperationRule());
-	        }
-       		setWithLastConsumed($current, "ref", true, "ref");
-	    }
-
-)
-)?)))
-    |(	otherlv_11='sends' 
-    {
-    	newLeafNode(otherlv_11, grammarAccess.getPortOperationAccess().getSendsKeyword_5_1_0());
+    	newLeafNode(otherlv_10, grammarAccess.getPortOperationAccess().getSendsKeyword_5_1_0());
     }
 (
 (
@@ -1359,9 +1362,9 @@ rulePortOperation returns [EObject current=null]
 	            $current = createModelElement(grammarAccess.getPortOperationRule());
 	        }
         }
-	otherlv_12=RULE_ID
+	otherlv_11=RULE_ID
 	{
-		newLeafNode(otherlv_12, grammarAccess.getPortOperationAccess().getSendsMsgMessageCrossReference_5_1_1_0()); 
+		newLeafNode(otherlv_11, grammarAccess.getPortOperationAccess().getSendsMsgMessageCrossReference_5_1_1_0()); 
 	}
 
 )
@@ -1370,14 +1373,14 @@ rulePortOperation returns [EObject current=null]
 		{ 
 	        newCompositeNode(grammarAccess.getPortOperationAccess().getDocuDocumentationParserRuleCall_6_0()); 
 	    }
-		lv_docu_13_0=ruleDocumentation		{
+		lv_docu_12_0=ruleDocumentation		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getPortOperationRule());
 	        }
        		set(
        			$current, 
        			"docu",
-        		lv_docu_13_0, 
+        		lv_docu_12_0, 
         		"Documentation");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -1388,14 +1391,14 @@ rulePortOperation returns [EObject current=null]
 		{ 
 	        newCompositeNode(grammarAccess.getPortOperationAccess().getDetailCodeDetailCodeParserRuleCall_7_0()); 
 	    }
-		lv_detailCode_14_0=ruleDetailCode		{
+		lv_detailCode_13_0=ruleDetailCode		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getPortOperationRule());
 	        }
        		set(
        			$current, 
        			"detailCode",
-        		lv_detailCode_14_0, 
+        		lv_detailCode_13_0, 
         		"DetailCode");
 	        afterParserOrEnumRuleCall();
 	    }

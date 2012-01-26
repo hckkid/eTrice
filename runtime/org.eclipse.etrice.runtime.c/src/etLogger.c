@@ -24,18 +24,15 @@
 
 
 void etLogger_logError(const char* message){
-	printf("ERROR:   %s", message);
-	printf("\n");
+	printf("ERROR:   %s\n", message);
 }
 
 void etLogger_logWarning(const char* message){
-	printf("WARNING: %s", message);
-	printf("\n");
+	printf("WARNING: %s\n", message);
 }
 
 void etLogger_logInfo(const char* message){
-	printf("INFO:    %s", message);
-	printf("\n");
+	printf("INFO:    %s\n", message);
 }
 
 void etLogger_logErrorF(const char* format, ... ){
@@ -78,5 +75,4 @@ void etLogger_fprintf(etFileHandle file, const char* format, ... ){
 	va_start( arglist, format );
 	vfprintf(file, format, arglist );
 	va_end( arglist );
-
 }

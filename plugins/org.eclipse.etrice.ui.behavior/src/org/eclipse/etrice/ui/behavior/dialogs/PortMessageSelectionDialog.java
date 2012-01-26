@@ -219,7 +219,7 @@ public class PortMessageSelectionDialog extends FormDialog {
 				if (element instanceof MsgItemPair) {
 					Message msg = ((MsgItemPair) element).msg;
 					if (msg.getData()!=null)
-						return msg.getData().getName()+" : "+msg.getData().getType().getName();
+						return msg.getData().getName()+" : "+msg.getData().getRefType().getType().getName();
 				}
 				else if (element instanceof OperationItemPair) {
 					String sig = RoomHelpers.getSignature(((OperationItemPair) element).op);

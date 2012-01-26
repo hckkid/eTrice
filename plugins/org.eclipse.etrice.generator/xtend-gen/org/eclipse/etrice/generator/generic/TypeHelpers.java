@@ -6,6 +6,7 @@ import org.eclipse.etrice.core.room.DataType;
 import org.eclipse.etrice.core.room.ExternalType;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.PrimitiveType;
+import org.eclipse.etrice.core.room.RefableType;
 import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.generator.generic.LanguageGenerator;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
@@ -51,7 +52,8 @@ public class TypeHelpers {
   }
   
   public String defaultValue(final VarDecl a) {
-    DataType _type = a.getType();
+    RefableType _refType = a.getRefType();
+    DataType _type = _refType.getType();
     String _defaultValue = this.defaultValue(_type);
     return _defaultValue;
   }

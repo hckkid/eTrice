@@ -56,20 +56,24 @@ public class CExtensions implements ILanguageExtension {
     return _operator_plus;
   }
   
+  /**
+   * TODO: unify OUT and in an add for loop (also for Java)
+   */
   public String outMessageId(final String classname, final String messagename) {
-    String _operator_plus = StringExtensions.operator_plus("OUT_", classname);
-    String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, "_");
-    String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, messagename);
-    return _operator_plus_2;
+    String _operator_plus = StringExtensions.operator_plus(classname, "_OUT_");
+    String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, messagename);
+    return _operator_plus_1;
   }
   
   public String inMessageId(final String classname, final String messagename) {
-    String _operator_plus = StringExtensions.operator_plus("IN_", classname);
-    String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, "_");
-    String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, messagename);
-    return _operator_plus_2;
+    String _operator_plus = StringExtensions.operator_plus(classname, "_IN_");
+    String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, messagename);
+    return _operator_plus_1;
   }
   
+  /**
+   * TODO: move specific code elsewhere
+   */
   public String getCHeaderFileName(final RoomClass rc) {
     String _name = rc.getName();
     String _operator_plus = StringExtensions.operator_plus(_name, ".h");

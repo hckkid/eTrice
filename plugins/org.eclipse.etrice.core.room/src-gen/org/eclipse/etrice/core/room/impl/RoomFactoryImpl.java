@@ -73,6 +73,7 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
       case RoomPackage.STRUCTURE_CLASS: return createStructureClass();
       case RoomPackage.ACTOR_CONTAINER_CLASS: return createActorContainerClass();
       case RoomPackage.VAR_DECL: return createVarDecl();
+      case RoomPackage.REFABLE_TYPE: return createRefableType();
       case RoomPackage.DATA_TYPE: return createDataType();
       case RoomPackage.COMPLEX_TYPE: return createComplexType();
       case RoomPackage.PRIMITIVE_TYPE: return createPrimitiveType();
@@ -200,6 +201,17 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
   {
     VarDeclImpl varDecl = new VarDeclImpl();
     return varDecl;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public RefableType createRefableType()
+  {
+    RefableTypeImpl refableType = new RefableTypeImpl();
+    return refableType;
   }
 
   /**

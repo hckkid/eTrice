@@ -36,75 +36,76 @@ protected class ThisRootNode extends RootToken {
 			case 2: return new StructureClass_Alternatives(this, this, 2, inst);
 			case 3: return new ActorContainerClass_Alternatives(this, this, 3, inst);
 			case 4: return new VarDecl_Group(this, this, 4, inst);
-			case 5: return new DataType_Alternatives(this, this, 5, inst);
-			case 6: return new ComplexType_Alternatives(this, this, 6, inst);
-			case 7: return new PrimitiveType_Group(this, this, 7, inst);
-			case 8: return new ExternalType_Group(this, this, 8, inst);
-			case 9: return new DataClass_Group(this, this, 9, inst);
-			case 10: return new Attribute_Group(this, this, 10, inst);
-			case 11: return new Operation_Alternatives(this, this, 11, inst);
-			case 12: return new StandardOperation_Group(this, this, 12, inst);
-			case 13: return new PortOperation_Group(this, this, 13, inst);
-			case 14: return new ProtocolClass_Group(this, this, 14, inst);
-			case 15: return new Message_Group(this, this, 15, inst);
-			case 16: return new PortClass_Group(this, this, 16, inst);
-			case 17: return new MessageHandler_Group(this, this, 17, inst);
-			case 18: return new ProtocolSemantics_Group(this, this, 18, inst);
-			case 19: return new SemanticsRule_Group(this, this, 19, inst);
-			case 20: return new ActorClass_Group(this, this, 20, inst);
-			case 21: return new InterfaceItem_Alternatives(this, this, 21, inst);
-			case 22: return new Port_Group(this, this, 22, inst);
-			case 23: return new ExternalPort_Group(this, this, 23, inst);
-			case 24: return new SAPRef_Group(this, this, 24, inst);
-			case 25: return new SPPRef_Group(this, this, 25, inst);
-			case 26: return new ServiceImplementation_Group(this, this, 26, inst);
-			case 27: return new LogicalSystem_Group(this, this, 27, inst);
-			case 28: return new ActorContainerRef_Alternatives(this, this, 28, inst);
-			case 29: return new SubSystemRef_Group(this, this, 29, inst);
-			case 30: return new SubSystemClass_Group(this, this, 30, inst);
-			case 31: return new LogicalThread_Group(this, this, 31, inst);
-			case 32: return new ActorInstancePath_Group(this, this, 32, inst);
-			case 33: return new Binding_Group(this, this, 33, inst);
-			case 34: return new BindingEndPoint_Group(this, this, 34, inst);
-			case 35: return new LayerConnection_Group(this, this, 35, inst);
-			case 36: return new SAPoint_Alternatives(this, this, 36, inst);
-			case 37: return new RefSAPoint_Group(this, this, 37, inst);
-			case 38: return new RelaySAPoint_Group(this, this, 38, inst);
-			case 39: return new SPPoint_Group(this, this, 39, inst);
-			case 40: return new ActorRef_Group(this, this, 40, inst);
-			case 41: return new StateGraphNode_Alternatives(this, this, 41, inst);
-			case 42: return new StateGraphItem_Alternatives(this, this, 42, inst);
-			case 43: return new State_Alternatives(this, this, 43, inst);
-			case 44: return new StateGraph_Alternatives(this, this, 44, inst);
-			case 45: return new PlainStateGraph_Group(this, this, 45, inst);
-			case 46: return new StateMachine_Group(this, this, 46, inst);
-			case 47: return new BaseState_Group(this, this, 47, inst);
-			case 48: return new RefinedState_Group(this, this, 48, inst);
-			case 49: return new DetailCode_Group(this, this, 49, inst);
-			case 50: return new TrPoint_Alternatives(this, this, 50, inst);
-			case 51: return new TransitionPoint_Group(this, this, 51, inst);
-			case 52: return new EntryPoint_Group(this, this, 52, inst);
-			case 53: return new ExitPoint_Group(this, this, 53, inst);
-			case 54: return new ChoicePoint_Group(this, this, 54, inst);
-			case 55: return new Transition_Alternatives(this, this, 55, inst);
-			case 56: return new NonInitialTransition_Alternatives(this, this, 56, inst);
-			case 57: return new InitialTransition_Group(this, this, 57, inst);
-			case 58: return new ContinuationTransition_Group(this, this, 58, inst);
-			case 59: return new TriggeredTransition_Group(this, this, 59, inst);
-			case 60: return new GuardedTransition_Group(this, this, 60, inst);
-			case 61: return new CPBranchTransition_Group(this, this, 61, inst);
-			case 62: return new TransitionTerminal_Alternatives(this, this, 62, inst);
-			case 63: return new StateTerminal_StateAssignment(this, this, 63, inst);
-			case 64: return new TrPointTerminal_Group(this, this, 64, inst);
-			case 65: return new SubStateTrPointTerminal_Group(this, this, 65, inst);
-			case 66: return new ChoicepointTerminal_Group(this, this, 66, inst);
-			case 67: return new Trigger_Group(this, this, 67, inst);
-			case 68: return new MessageFromIf_Group(this, this, 68, inst);
-			case 69: return new Guard_Group(this, this, 69, inst);
-			case 70: return new Documentation_Group(this, this, 70, inst);
-			case 71: return new Annotation_Group(this, this, 71, inst);
-			case 72: return new KeyValue_Group(this, this, 72, inst);
-			case 73: return new Import_Group(this, this, 73, inst);
+			case 5: return new RefableType_Group(this, this, 5, inst);
+			case 6: return new DataType_Alternatives(this, this, 6, inst);
+			case 7: return new ComplexType_Alternatives(this, this, 7, inst);
+			case 8: return new PrimitiveType_Group(this, this, 8, inst);
+			case 9: return new ExternalType_Group(this, this, 9, inst);
+			case 10: return new DataClass_Group(this, this, 10, inst);
+			case 11: return new Attribute_Group(this, this, 11, inst);
+			case 12: return new Operation_Alternatives(this, this, 12, inst);
+			case 13: return new StandardOperation_Group(this, this, 13, inst);
+			case 14: return new PortOperation_Group(this, this, 14, inst);
+			case 15: return new ProtocolClass_Group(this, this, 15, inst);
+			case 16: return new Message_Group(this, this, 16, inst);
+			case 17: return new PortClass_Group(this, this, 17, inst);
+			case 18: return new MessageHandler_Group(this, this, 18, inst);
+			case 19: return new ProtocolSemantics_Group(this, this, 19, inst);
+			case 20: return new SemanticsRule_Group(this, this, 20, inst);
+			case 21: return new ActorClass_Group(this, this, 21, inst);
+			case 22: return new InterfaceItem_Alternatives(this, this, 22, inst);
+			case 23: return new Port_Group(this, this, 23, inst);
+			case 24: return new ExternalPort_Group(this, this, 24, inst);
+			case 25: return new SAPRef_Group(this, this, 25, inst);
+			case 26: return new SPPRef_Group(this, this, 26, inst);
+			case 27: return new ServiceImplementation_Group(this, this, 27, inst);
+			case 28: return new LogicalSystem_Group(this, this, 28, inst);
+			case 29: return new ActorContainerRef_Alternatives(this, this, 29, inst);
+			case 30: return new SubSystemRef_Group(this, this, 30, inst);
+			case 31: return new SubSystemClass_Group(this, this, 31, inst);
+			case 32: return new LogicalThread_Group(this, this, 32, inst);
+			case 33: return new ActorInstancePath_Group(this, this, 33, inst);
+			case 34: return new Binding_Group(this, this, 34, inst);
+			case 35: return new BindingEndPoint_Group(this, this, 35, inst);
+			case 36: return new LayerConnection_Group(this, this, 36, inst);
+			case 37: return new SAPoint_Alternatives(this, this, 37, inst);
+			case 38: return new RefSAPoint_Group(this, this, 38, inst);
+			case 39: return new RelaySAPoint_Group(this, this, 39, inst);
+			case 40: return new SPPoint_Group(this, this, 40, inst);
+			case 41: return new ActorRef_Group(this, this, 41, inst);
+			case 42: return new StateGraphNode_Alternatives(this, this, 42, inst);
+			case 43: return new StateGraphItem_Alternatives(this, this, 43, inst);
+			case 44: return new State_Alternatives(this, this, 44, inst);
+			case 45: return new StateGraph_Alternatives(this, this, 45, inst);
+			case 46: return new PlainStateGraph_Group(this, this, 46, inst);
+			case 47: return new StateMachine_Group(this, this, 47, inst);
+			case 48: return new BaseState_Group(this, this, 48, inst);
+			case 49: return new RefinedState_Group(this, this, 49, inst);
+			case 50: return new DetailCode_Group(this, this, 50, inst);
+			case 51: return new TrPoint_Alternatives(this, this, 51, inst);
+			case 52: return new TransitionPoint_Group(this, this, 52, inst);
+			case 53: return new EntryPoint_Group(this, this, 53, inst);
+			case 54: return new ExitPoint_Group(this, this, 54, inst);
+			case 55: return new ChoicePoint_Group(this, this, 55, inst);
+			case 56: return new Transition_Alternatives(this, this, 56, inst);
+			case 57: return new NonInitialTransition_Alternatives(this, this, 57, inst);
+			case 58: return new InitialTransition_Group(this, this, 58, inst);
+			case 59: return new ContinuationTransition_Group(this, this, 59, inst);
+			case 60: return new TriggeredTransition_Group(this, this, 60, inst);
+			case 61: return new GuardedTransition_Group(this, this, 61, inst);
+			case 62: return new CPBranchTransition_Group(this, this, 62, inst);
+			case 63: return new TransitionTerminal_Alternatives(this, this, 63, inst);
+			case 64: return new StateTerminal_StateAssignment(this, this, 64, inst);
+			case 65: return new TrPointTerminal_Group(this, this, 65, inst);
+			case 66: return new SubStateTrPointTerminal_Group(this, this, 66, inst);
+			case 67: return new ChoicepointTerminal_Group(this, this, 67, inst);
+			case 68: return new Trigger_Group(this, this, 68, inst);
+			case 69: return new MessageFromIf_Group(this, this, 69, inst);
+			case 70: return new Guard_Group(this, this, 70, inst);
+			case 71: return new Documentation_Group(this, this, 71, inst);
+			case 72: return new Annotation_Group(this, this, 72, inst);
+			case 73: return new KeyValue_Group(this, this, 73, inst);
+			case 74: return new Import_Group(this, this, 74, inst);
 			default: return null;
 		}	
 	}	
@@ -1113,11 +1114,11 @@ protected class ActorContainerClass_SubSystemClassParserRuleCall_1 extends RuleC
  * // data class
  * 
  * VarDecl:
- * 	name=ID ":" type=[DataType|FQN] ref?="ref"?;
+ * 	name=ID ":" refType=RefableType;
  *
  **/
 
-// name=ID ":" type=[DataType|FQN] ref?="ref"?
+// name=ID ":" refType=RefableType
 protected class VarDecl_Group extends GroupToken {
 	
 	public VarDecl_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1132,8 +1133,7 @@ protected class VarDecl_Group extends GroupToken {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new VarDecl_RefAssignment_3(lastRuleCallOrigin, this, 0, inst);
-			case 1: return new VarDecl_TypeAssignment_2(lastRuleCallOrigin, this, 1, inst);
+			case 0: return new VarDecl_RefTypeAssignment_2(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -1202,23 +1202,109 @@ protected class VarDecl_ColonKeyword_1 extends KeywordToken  {
 
 }
 
-// type=[DataType|FQN]
-protected class VarDecl_TypeAssignment_2 extends AssignmentToken  {
+// refType=RefableType
+protected class VarDecl_RefTypeAssignment_2 extends AssignmentToken  {
 	
-	public VarDecl_TypeAssignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public VarDecl_RefTypeAssignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getVarDeclAccess().getTypeAssignment_2();
+		return grammarAccess.getVarDeclAccess().getRefTypeAssignment_2();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new VarDecl_ColonKeyword_1(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new RefableType_Group(this, this, 0, inst);
 			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("refType",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("refType");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getRefableTypeRule().getType().getClassifier())) {
+				type = AssignmentType.PARSER_RULE_CALL;
+				element = grammarAccess.getVarDeclAccess().getRefTypeRefableTypeParserRuleCall_2_0(); 
+				consumed = obj;
+				return param;
+			}
+		}
+		return null;
+	}
+
+    @Override
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
+		switch(index) {
+			case 0: return new VarDecl_ColonKeyword_1(lastRuleCallOrigin, next, actIndex, consumed);
+			default: return null;
+		}	
+	}	
+}
+
+
+/************ end Rule VarDecl ****************/
+
+
+/************ begin Rule RefableType ****************
+ *
+ * RefableType:
+ * 	type=[DataType|FQN] ref?="ref"?;
+ *
+ **/
+
+// type=[DataType|FQN] ref?="ref"?
+protected class RefableType_Group extends GroupToken {
+	
+	public RefableType_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getRefableTypeAccess().getGroup();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new RefableType_RefAssignment_1(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new RefableType_TypeAssignment_0(lastRuleCallOrigin, this, 1, inst);
+			default: return null;
+		}	
+	}
+
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getRefableTypeRule().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
+	}
+
+}
+
+// type=[DataType|FQN]
+protected class RefableType_TypeAssignment_0 extends AssignmentToken  {
+	
+	public RefableType_TypeAssignment_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getRefableTypeAccess().getTypeAssignment_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
 		}	
 	}
 
@@ -1228,9 +1314,9 @@ protected class VarDecl_TypeAssignment_2 extends AssignmentToken  {
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("type");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getVarDeclAccess().getTypeDataTypeCrossReference_2_0().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getRefableTypeAccess().getTypeDataTypeCrossReference_0_0().getType().getClassifier())) {
 				type = AssignmentType.CROSS_REFERENCE;
-				element = grammarAccess.getVarDeclAccess().getTypeDataTypeCrossReference_2_0(); 
+				element = grammarAccess.getRefableTypeAccess().getTypeDataTypeCrossReference_0_0(); 
 				return obj;
 			}
 		}
@@ -1240,21 +1326,21 @@ protected class VarDecl_TypeAssignment_2 extends AssignmentToken  {
 }
 
 // ref?="ref"?
-protected class VarDecl_RefAssignment_3 extends AssignmentToken  {
+protected class RefableType_RefAssignment_1 extends AssignmentToken  {
 	
-	public VarDecl_RefAssignment_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public RefableType_RefAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getVarDeclAccess().getRefAssignment_3();
+		return grammarAccess.getRefableTypeAccess().getRefAssignment_1();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new VarDecl_TypeAssignment_2(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new RefableType_TypeAssignment_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -1265,7 +1351,7 @@ protected class VarDecl_RefAssignment_3 extends AssignmentToken  {
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("ref");
 		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
 			type = AssignmentType.KEYWORD;
-			element = grammarAccess.getVarDeclAccess().getRefRefKeyword_3_0();
+			element = grammarAccess.getRefableTypeAccess().getRefRefKeyword_1_0();
 			return obj;
 		}
 		return null;
@@ -1274,7 +1360,7 @@ protected class VarDecl_RefAssignment_3 extends AssignmentToken  {
 }
 
 
-/************ end Rule VarDecl ****************/
+/************ end Rule RefableType ****************/
 
 
 /************ begin Rule DataType ****************
@@ -2716,13 +2802,11 @@ protected class DataClass_RightCurlyBracketKeyword_10 extends KeywordToken  {
 /************ begin Rule Attribute ****************
  *
  * Attribute:
- * 	"Attribute" name=ID size=MULTIPLICITY? ":" type=[DataType|FQN] ref?="ref"? ("=" defaultValueLiteral=STRING)?
- * 	docu=Documentation?;
+ * 	"Attribute" name=ID size=MULTIPLICITY? ":" refType=RefableType ("=" defaultValueLiteral=STRING)? docu=Documentation?;
  *
  **/
 
-// "Attribute" name=ID size=MULTIPLICITY? ":" type=[DataType|FQN] ref?="ref"? ("=" defaultValueLiteral=STRING)?
-// docu=Documentation?
+// "Attribute" name=ID size=MULTIPLICITY? ":" refType=RefableType ("=" defaultValueLiteral=STRING)? docu=Documentation?
 protected class Attribute_Group extends GroupToken {
 	
 	public Attribute_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2737,10 +2821,9 @@ protected class Attribute_Group extends GroupToken {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Attribute_DocuAssignment_7(lastRuleCallOrigin, this, 0, inst);
-			case 1: return new Attribute_Group_6(lastRuleCallOrigin, this, 1, inst);
-			case 2: return new Attribute_RefAssignment_5(lastRuleCallOrigin, this, 2, inst);
-			case 3: return new Attribute_TypeAssignment_4(lastRuleCallOrigin, this, 3, inst);
+			case 0: return new Attribute_DocuAssignment_6(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new Attribute_Group_5(lastRuleCallOrigin, this, 1, inst);
+			case 2: return new Attribute_RefTypeAssignment_4(lastRuleCallOrigin, this, 2, inst);
 			default: return null;
 		}	
 	}
@@ -2866,93 +2949,68 @@ protected class Attribute_ColonKeyword_3 extends KeywordToken  {
 
 }
 
-// type=[DataType|FQN]
-protected class Attribute_TypeAssignment_4 extends AssignmentToken  {
+// refType=RefableType
+protected class Attribute_RefTypeAssignment_4 extends AssignmentToken  {
 	
-	public Attribute_TypeAssignment_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public Attribute_RefTypeAssignment_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getAttributeAccess().getTypeAssignment_4();
+		return grammarAccess.getAttributeAccess().getRefTypeAssignment_4();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Attribute_ColonKeyword_3(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new RefableType_Group(this, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
 	public IEObjectConsumer tryConsume() {
-		if((value = eObjectConsumer.getConsumable("type",true)) == null) return null;
-		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("type");
-		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
+		if((value = eObjectConsumer.getConsumable("refType",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("refType");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getAttributeAccess().getTypeDataTypeCrossReference_4_0().getType().getClassifier())) {
-				type = AssignmentType.CROSS_REFERENCE;
-				element = grammarAccess.getAttributeAccess().getTypeDataTypeCrossReference_4_0(); 
-				return obj;
+			if(param.isInstanceOf(grammarAccess.getRefableTypeRule().getType().getClassifier())) {
+				type = AssignmentType.PARSER_RULE_CALL;
+				element = grammarAccess.getAttributeAccess().getRefTypeRefableTypeParserRuleCall_4_0(); 
+				consumed = obj;
+				return param;
 			}
 		}
 		return null;
 	}
 
-}
-
-// ref?="ref"?
-protected class Attribute_RefAssignment_5 extends AssignmentToken  {
-	
-	public Attribute_RefAssignment_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
-		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
-	}
-	
-	@Override
-	public Assignment getGrammarElement() {
-		return grammarAccess.getAttributeAccess().getRefAssignment_5();
-	}
-
     @Override
-	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new Attribute_TypeAssignment_4(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new Attribute_ColonKeyword_3(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
-	}
-
-    @Override	
-	public IEObjectConsumer tryConsume() {
-		if((value = eObjectConsumer.getConsumable("ref",false)) == null) return null;
-		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("ref");
-		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
-			type = AssignmentType.KEYWORD;
-			element = grammarAccess.getAttributeAccess().getRefRefKeyword_5_0();
-			return obj;
-		}
-		return null;
-	}
-
+	}	
 }
 
 // ("=" defaultValueLiteral=STRING)?
-protected class Attribute_Group_6 extends GroupToken {
+protected class Attribute_Group_5 extends GroupToken {
 	
-	public Attribute_Group_6(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public Attribute_Group_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Group getGrammarElement() {
-		return grammarAccess.getAttributeAccess().getGroup_6();
+		return grammarAccess.getAttributeAccess().getGroup_5();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Attribute_DefaultValueLiteralAssignment_6_1(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new Attribute_DefaultValueLiteralAssignment_5_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -2960,22 +3018,21 @@ protected class Attribute_Group_6 extends GroupToken {
 }
 
 // "="
-protected class Attribute_EqualsSignKeyword_6_0 extends KeywordToken  {
+protected class Attribute_EqualsSignKeyword_5_0 extends KeywordToken  {
 	
-	public Attribute_EqualsSignKeyword_6_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public Attribute_EqualsSignKeyword_5_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Keyword getGrammarElement() {
-		return grammarAccess.getAttributeAccess().getEqualsSignKeyword_6_0();
+		return grammarAccess.getAttributeAccess().getEqualsSignKeyword_5_0();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Attribute_RefAssignment_5(lastRuleCallOrigin, this, 0, inst);
-			case 1: return new Attribute_TypeAssignment_4(lastRuleCallOrigin, this, 1, inst);
+			case 0: return new Attribute_RefTypeAssignment_4(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -2983,21 +3040,21 @@ protected class Attribute_EqualsSignKeyword_6_0 extends KeywordToken  {
 }
 
 // defaultValueLiteral=STRING
-protected class Attribute_DefaultValueLiteralAssignment_6_1 extends AssignmentToken  {
+protected class Attribute_DefaultValueLiteralAssignment_5_1 extends AssignmentToken  {
 	
-	public Attribute_DefaultValueLiteralAssignment_6_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public Attribute_DefaultValueLiteralAssignment_5_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getAttributeAccess().getDefaultValueLiteralAssignment_6_1();
+		return grammarAccess.getAttributeAccess().getDefaultValueLiteralAssignment_5_1();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Attribute_EqualsSignKeyword_6_0(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new Attribute_EqualsSignKeyword_5_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -3006,9 +3063,9 @@ protected class Attribute_DefaultValueLiteralAssignment_6_1 extends AssignmentTo
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("defaultValueLiteral",false)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("defaultValueLiteral");
-		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getAttributeAccess().getDefaultValueLiteralSTRINGTerminalRuleCall_6_1_0(), value, null)) {
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getAttributeAccess().getDefaultValueLiteralSTRINGTerminalRuleCall_5_1_0(), value, null)) {
 			type = AssignmentType.TERMINAL_RULE_CALL;
-			element = grammarAccess.getAttributeAccess().getDefaultValueLiteralSTRINGTerminalRuleCall_6_1_0();
+			element = grammarAccess.getAttributeAccess().getDefaultValueLiteralSTRINGTerminalRuleCall_5_1_0();
 			return obj;
 		}
 		return null;
@@ -3018,15 +3075,15 @@ protected class Attribute_DefaultValueLiteralAssignment_6_1 extends AssignmentTo
 
 
 // docu=Documentation?
-protected class Attribute_DocuAssignment_7 extends AssignmentToken  {
+protected class Attribute_DocuAssignment_6 extends AssignmentToken  {
 	
-	public Attribute_DocuAssignment_7(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public Attribute_DocuAssignment_6(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getAttributeAccess().getDocuAssignment_7();
+		return grammarAccess.getAttributeAccess().getDocuAssignment_6();
 	}
 
     @Override
@@ -3045,7 +3102,7 @@ protected class Attribute_DocuAssignment_7 extends AssignmentToken  {
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getDocumentationRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getAttributeAccess().getDocuDocumentationParserRuleCall_7_0(); 
+				element = grammarAccess.getAttributeAccess().getDocuDocumentationParserRuleCall_6_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -3057,9 +3114,8 @@ protected class Attribute_DocuAssignment_7 extends AssignmentToken  {
 	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new Attribute_Group_6(lastRuleCallOrigin, next, actIndex, consumed);
-			case 1: return new Attribute_RefAssignment_5(lastRuleCallOrigin, next, actIndex, consumed);
-			case 2: return new Attribute_TypeAssignment_4(lastRuleCallOrigin, next, actIndex, consumed);
+			case 0: return new Attribute_Group_5(lastRuleCallOrigin, next, actIndex, consumed);
+			case 1: return new Attribute_RefTypeAssignment_4(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -3186,13 +3242,13 @@ protected class Operation_PortOperationParserRuleCall_1 extends RuleCallToken {
 /************ begin Rule StandardOperation ****************
  *
  * StandardOperation:
- * 	"Operation" name=ID "(" (arguments+=VarDecl ("," arguments+=VarDecl)*)? ")" (":" ("void" | returntype=[DataType|FQN]
- * 	ref?="ref"?))? docu=Documentation? detailCode=DetailCode;
+ * 	"Operation" name=ID "(" (arguments+=VarDecl ("," arguments+=VarDecl)*)? ")" (":" ("void" | returntype=RefableType))?
+ * 	docu=Documentation? detailCode=DetailCode;
  *
  **/
 
-// "Operation" name=ID "(" (arguments+=VarDecl ("," arguments+=VarDecl)*)? ")" (":" ("void" | returntype=[DataType|FQN]
-// ref?="ref"?))? docu=Documentation? detailCode=DetailCode
+// "Operation" name=ID "(" (arguments+=VarDecl ("," arguments+=VarDecl)*)? ")" (":" ("void" | returntype=RefableType))?
+// docu=Documentation? detailCode=DetailCode
 protected class StandardOperation_Group extends GroupToken {
 	
 	public StandardOperation_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3483,7 +3539,7 @@ protected class StandardOperation_RightParenthesisKeyword_4 extends KeywordToken
 
 }
 
-// (":" ("void" | returntype=[DataType|FQN] ref?="ref"?))?
+// (":" ("void" | returntype=RefableType))?
 protected class StandardOperation_Group_5 extends GroupToken {
 	
 	public StandardOperation_Group_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3527,7 +3583,7 @@ protected class StandardOperation_ColonKeyword_5_0 extends KeywordToken  {
 
 }
 
-// "void" | returntype=[DataType|FQN] ref?="ref"?
+// "void" | returntype=RefableType
 protected class StandardOperation_Alternatives_5_1 extends AlternativesToken {
 
 	public StandardOperation_Alternatives_5_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3542,52 +3598,29 @@ protected class StandardOperation_Alternatives_5_1 extends AlternativesToken {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new StandardOperation_Group_5_1_1(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new StandardOperation_ReturntypeAssignment_5_1_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
 }
 
-// returntype=[DataType|FQN] ref?="ref"?
-protected class StandardOperation_Group_5_1_1 extends GroupToken {
+// returntype=RefableType
+protected class StandardOperation_ReturntypeAssignment_5_1_1 extends AssignmentToken  {
 	
-	public StandardOperation_Group_5_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
-		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
-	}
-	
-	@Override
-	public Group getGrammarElement() {
-		return grammarAccess.getStandardOperationAccess().getGroup_5_1_1();
-	}
-
-    @Override
-	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
-		switch(index) {
-			case 0: return new StandardOperation_RefAssignment_5_1_1_1(lastRuleCallOrigin, this, 0, inst);
-			case 1: return new StandardOperation_ReturntypeAssignment_5_1_1_0(lastRuleCallOrigin, this, 1, inst);
-			default: return null;
-		}	
-	}
-
-}
-
-// returntype=[DataType|FQN]
-protected class StandardOperation_ReturntypeAssignment_5_1_1_0 extends AssignmentToken  {
-	
-	public StandardOperation_ReturntypeAssignment_5_1_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public StandardOperation_ReturntypeAssignment_5_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getStandardOperationAccess().getReturntypeAssignment_5_1_1_0();
+		return grammarAccess.getStandardOperationAccess().getReturntypeAssignment_5_1_1();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new StandardOperation_ColonKeyword_5_0(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new RefableType_Group(this, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -3596,53 +3629,27 @@ protected class StandardOperation_ReturntypeAssignment_5_1_1_0 extends Assignmen
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("returntype",true)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("returntype");
-		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getStandardOperationAccess().getReturntypeDataTypeCrossReference_5_1_1_0_0().getType().getClassifier())) {
-				type = AssignmentType.CROSS_REFERENCE;
-				element = grammarAccess.getStandardOperationAccess().getReturntypeDataTypeCrossReference_5_1_1_0_0(); 
-				return obj;
+			if(param.isInstanceOf(grammarAccess.getRefableTypeRule().getType().getClassifier())) {
+				type = AssignmentType.PARSER_RULE_CALL;
+				element = grammarAccess.getStandardOperationAccess().getReturntypeRefableTypeParserRuleCall_5_1_1_0(); 
+				consumed = obj;
+				return param;
 			}
 		}
 		return null;
 	}
 
-}
-
-// ref?="ref"?
-protected class StandardOperation_RefAssignment_5_1_1_1 extends AssignmentToken  {
-	
-	public StandardOperation_RefAssignment_5_1_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
-		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
-	}
-	
-	@Override
-	public Assignment getGrammarElement() {
-		return grammarAccess.getStandardOperationAccess().getRefAssignment_5_1_1_1();
-	}
-
     @Override
-	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new StandardOperation_ReturntypeAssignment_5_1_1_0(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new StandardOperation_ColonKeyword_5_0(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
-	}
-
-    @Override	
-	public IEObjectConsumer tryConsume() {
-		if((value = eObjectConsumer.getConsumable("ref",false)) == null) return null;
-		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("ref");
-		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
-			type = AssignmentType.KEYWORD;
-			element = grammarAccess.getStandardOperationAccess().getRefRefKeyword_5_1_1_1_0();
-			return obj;
-		}
-		return null;
-	}
-
+	}	
 }
-
 
 
 
@@ -3748,13 +3755,13 @@ protected class StandardOperation_DetailCodeAssignment_7 extends AssignmentToken
 /************ begin Rule PortOperation ****************
  *
  * PortOperation:
- * 	"Operation" name=ID "(" (arguments+=VarDecl ("," arguments+=VarDecl)*)? ")" (":" ("void" | returntype=[DataType|FQN]
- * 	ref?="ref"?) | "sends" sendsMsg=[Message])? docu=Documentation? detailCode=DetailCode;
+ * 	"Operation" name=ID "(" (arguments+=VarDecl ("," arguments+=VarDecl)*)? ")" (":" ("void" | returntype=RefableType) |
+ * 	"sends" sendsMsg=[Message])? docu=Documentation? detailCode=DetailCode;
  *
  **/
 
-// "Operation" name=ID "(" (arguments+=VarDecl ("," arguments+=VarDecl)*)? ")" (":" ("void" | returntype=[DataType|FQN]
-// ref?="ref"?) | "sends" sendsMsg=[Message])? docu=Documentation? detailCode=DetailCode
+// "Operation" name=ID "(" (arguments+=VarDecl ("," arguments+=VarDecl)*)? ")" (":" ("void" | returntype=RefableType) |
+// "sends" sendsMsg=[Message])? docu=Documentation? detailCode=DetailCode
 protected class PortOperation_Group extends GroupToken {
 	
 	public PortOperation_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4045,7 +4052,7 @@ protected class PortOperation_RightParenthesisKeyword_4 extends KeywordToken  {
 
 }
 
-// (":" ("void" | returntype=[DataType|FQN] ref?="ref"?) | "sends" sendsMsg=[Message])?
+// (":" ("void" | returntype=RefableType) | "sends" sendsMsg=[Message])?
 protected class PortOperation_Alternatives_5 extends AlternativesToken {
 
 	public PortOperation_Alternatives_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4068,7 +4075,7 @@ protected class PortOperation_Alternatives_5 extends AlternativesToken {
 
 }
 
-// ":" ("void" | returntype=[DataType|FQN] ref?="ref"?)
+// ":" ("void" | returntype=RefableType)
 protected class PortOperation_Group_5_0 extends GroupToken {
 	
 	public PortOperation_Group_5_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4112,7 +4119,7 @@ protected class PortOperation_ColonKeyword_5_0_0 extends KeywordToken  {
 
 }
 
-// "void" | returntype=[DataType|FQN] ref?="ref"?
+// "void" | returntype=RefableType
 protected class PortOperation_Alternatives_5_0_1 extends AlternativesToken {
 
 	public PortOperation_Alternatives_5_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4127,52 +4134,29 @@ protected class PortOperation_Alternatives_5_0_1 extends AlternativesToken {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new PortOperation_Group_5_0_1_1(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new PortOperation_ReturntypeAssignment_5_0_1_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
 }
 
-// returntype=[DataType|FQN] ref?="ref"?
-protected class PortOperation_Group_5_0_1_1 extends GroupToken {
+// returntype=RefableType
+protected class PortOperation_ReturntypeAssignment_5_0_1_1 extends AssignmentToken  {
 	
-	public PortOperation_Group_5_0_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
-		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
-	}
-	
-	@Override
-	public Group getGrammarElement() {
-		return grammarAccess.getPortOperationAccess().getGroup_5_0_1_1();
-	}
-
-    @Override
-	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
-		switch(index) {
-			case 0: return new PortOperation_RefAssignment_5_0_1_1_1(lastRuleCallOrigin, this, 0, inst);
-			case 1: return new PortOperation_ReturntypeAssignment_5_0_1_1_0(lastRuleCallOrigin, this, 1, inst);
-			default: return null;
-		}	
-	}
-
-}
-
-// returntype=[DataType|FQN]
-protected class PortOperation_ReturntypeAssignment_5_0_1_1_0 extends AssignmentToken  {
-	
-	public PortOperation_ReturntypeAssignment_5_0_1_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public PortOperation_ReturntypeAssignment_5_0_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getPortOperationAccess().getReturntypeAssignment_5_0_1_1_0();
+		return grammarAccess.getPortOperationAccess().getReturntypeAssignment_5_0_1_1();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new PortOperation_ColonKeyword_5_0_0(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new RefableType_Group(this, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -4181,53 +4165,27 @@ protected class PortOperation_ReturntypeAssignment_5_0_1_1_0 extends AssignmentT
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("returntype",true)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("returntype");
-		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getPortOperationAccess().getReturntypeDataTypeCrossReference_5_0_1_1_0_0().getType().getClassifier())) {
-				type = AssignmentType.CROSS_REFERENCE;
-				element = grammarAccess.getPortOperationAccess().getReturntypeDataTypeCrossReference_5_0_1_1_0_0(); 
-				return obj;
+			if(param.isInstanceOf(grammarAccess.getRefableTypeRule().getType().getClassifier())) {
+				type = AssignmentType.PARSER_RULE_CALL;
+				element = grammarAccess.getPortOperationAccess().getReturntypeRefableTypeParserRuleCall_5_0_1_1_0(); 
+				consumed = obj;
+				return param;
 			}
 		}
 		return null;
 	}
 
-}
-
-// ref?="ref"?
-protected class PortOperation_RefAssignment_5_0_1_1_1 extends AssignmentToken  {
-	
-	public PortOperation_RefAssignment_5_0_1_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
-		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
-	}
-	
-	@Override
-	public Assignment getGrammarElement() {
-		return grammarAccess.getPortOperationAccess().getRefAssignment_5_0_1_1_1();
-	}
-
     @Override
-	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new PortOperation_ReturntypeAssignment_5_0_1_1_0(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new PortOperation_ColonKeyword_5_0_0(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
-	}
-
-    @Override	
-	public IEObjectConsumer tryConsume() {
-		if((value = eObjectConsumer.getConsumable("ref",false)) == null) return null;
-		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("ref");
-		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
-			type = AssignmentType.KEYWORD;
-			element = grammarAccess.getPortOperationAccess().getRefRefKeyword_5_0_1_1_1_0();
-			return obj;
-		}
-		return null;
-	}
-
+	}	
 }
-
 
 
 

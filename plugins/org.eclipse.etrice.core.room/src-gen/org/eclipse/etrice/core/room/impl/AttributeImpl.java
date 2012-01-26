@@ -16,8 +16,8 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.etrice.core.room.Attribute;
-import org.eclipse.etrice.core.room.DataType;
 import org.eclipse.etrice.core.room.Documentation;
+import org.eclipse.etrice.core.room.RefableType;
 import org.eclipse.etrice.core.room.RoomPackage;
 
 /**
@@ -29,8 +29,7 @@ import org.eclipse.etrice.core.room.RoomPackage;
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.room.impl.AttributeImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.AttributeImpl#getSize <em>Size</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.room.impl.AttributeImpl#getType <em>Type</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.room.impl.AttributeImpl#isRef <em>Ref</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.impl.AttributeImpl#getRefType <em>Ref Type</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.AttributeImpl#getDefaultValueLiteral <em>Default Value Literal</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.AttributeImpl#getDocu <em>Docu</em>}</li>
  * </ul>
@@ -81,34 +80,14 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
   protected int size = SIZE_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getType() <em>Type</em>}' reference.
+   * The cached value of the '{@link #getRefType() <em>Ref Type</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getType()
+   * @see #getRefType()
    * @generated
    * @ordered
    */
-  protected DataType type;
-
-  /**
-   * The default value of the '{@link #isRef() <em>Ref</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #isRef()
-   * @generated
-   * @ordered
-   */
-  protected static final boolean REF_EDEFAULT = false;
-
-  /**
-   * The cached value of the '{@link #isRef() <em>Ref</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #isRef()
-   * @generated
-   * @ordered
-   */
-  protected boolean ref = REF_EDEFAULT;
+  protected RefableType refType;
 
   /**
    * The default value of the '{@link #getDefaultValueLiteral() <em>Default Value Literal</em>}' attribute.
@@ -212,19 +191,26 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
    * <!-- end-user-doc -->
    * @generated
    */
-  public DataType getType()
+  public RefableType getRefType()
   {
-    if (type != null && type.eIsProxy())
+    return refType;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetRefType(RefableType newRefType, NotificationChain msgs)
+  {
+    RefableType oldRefType = refType;
+    refType = newRefType;
+    if (eNotificationRequired())
     {
-      InternalEObject oldType = (InternalEObject)type;
-      type = (DataType)eResolveProxy(oldType);
-      if (type != oldType)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RoomPackage.ATTRIBUTE__TYPE, oldType, type));
-      }
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RoomPackage.ATTRIBUTE__REF_TYPE, oldRefType, newRefType);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
     }
-    return type;
+    return msgs;
   }
 
   /**
@@ -232,45 +218,20 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
    * <!-- end-user-doc -->
    * @generated
    */
-  public DataType basicGetType()
+  public void setRefType(RefableType newRefType)
   {
-    return type;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setType(DataType newType)
-  {
-    DataType oldType = type;
-    type = newType;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.ATTRIBUTE__TYPE, oldType, type));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public boolean isRef()
-  {
-    return ref;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setRef(boolean newRef)
-  {
-    boolean oldRef = ref;
-    ref = newRef;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.ATTRIBUTE__REF, oldRef, ref));
+    if (newRefType != refType)
+    {
+      NotificationChain msgs = null;
+      if (refType != null)
+        msgs = ((InternalEObject)refType).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RoomPackage.ATTRIBUTE__REF_TYPE, null, msgs);
+      if (newRefType != null)
+        msgs = ((InternalEObject)newRefType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RoomPackage.ATTRIBUTE__REF_TYPE, null, msgs);
+      msgs = basicSetRefType(newRefType, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.ATTRIBUTE__REF_TYPE, newRefType, newRefType));
   }
 
   /**
@@ -354,6 +315,8 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
   {
     switch (featureID)
     {
+      case RoomPackage.ATTRIBUTE__REF_TYPE:
+        return basicSetRefType(null, msgs);
       case RoomPackage.ATTRIBUTE__DOCU:
         return basicSetDocu(null, msgs);
     }
@@ -374,11 +337,8 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
         return getName();
       case RoomPackage.ATTRIBUTE__SIZE:
         return getSize();
-      case RoomPackage.ATTRIBUTE__TYPE:
-        if (resolve) return getType();
-        return basicGetType();
-      case RoomPackage.ATTRIBUTE__REF:
-        return isRef();
+      case RoomPackage.ATTRIBUTE__REF_TYPE:
+        return getRefType();
       case RoomPackage.ATTRIBUTE__DEFAULT_VALUE_LITERAL:
         return getDefaultValueLiteral();
       case RoomPackage.ATTRIBUTE__DOCU:
@@ -403,11 +363,8 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
       case RoomPackage.ATTRIBUTE__SIZE:
         setSize((Integer)newValue);
         return;
-      case RoomPackage.ATTRIBUTE__TYPE:
-        setType((DataType)newValue);
-        return;
-      case RoomPackage.ATTRIBUTE__REF:
-        setRef((Boolean)newValue);
+      case RoomPackage.ATTRIBUTE__REF_TYPE:
+        setRefType((RefableType)newValue);
         return;
       case RoomPackage.ATTRIBUTE__DEFAULT_VALUE_LITERAL:
         setDefaultValueLiteral((String)newValue);
@@ -435,11 +392,8 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
       case RoomPackage.ATTRIBUTE__SIZE:
         setSize(SIZE_EDEFAULT);
         return;
-      case RoomPackage.ATTRIBUTE__TYPE:
-        setType((DataType)null);
-        return;
-      case RoomPackage.ATTRIBUTE__REF:
-        setRef(REF_EDEFAULT);
+      case RoomPackage.ATTRIBUTE__REF_TYPE:
+        setRefType((RefableType)null);
         return;
       case RoomPackage.ATTRIBUTE__DEFAULT_VALUE_LITERAL:
         setDefaultValueLiteral(DEFAULT_VALUE_LITERAL_EDEFAULT);
@@ -465,10 +419,8 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
       case RoomPackage.ATTRIBUTE__SIZE:
         return size != SIZE_EDEFAULT;
-      case RoomPackage.ATTRIBUTE__TYPE:
-        return type != null;
-      case RoomPackage.ATTRIBUTE__REF:
-        return ref != REF_EDEFAULT;
+      case RoomPackage.ATTRIBUTE__REF_TYPE:
+        return refType != null;
       case RoomPackage.ATTRIBUTE__DEFAULT_VALUE_LITERAL:
         return DEFAULT_VALUE_LITERAL_EDEFAULT == null ? defaultValueLiteral != null : !DEFAULT_VALUE_LITERAL_EDEFAULT.equals(defaultValueLiteral);
       case RoomPackage.ATTRIBUTE__DOCU:
@@ -492,8 +444,6 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
     result.append(name);
     result.append(", size: ");
     result.append(size);
-    result.append(", ref: ");
-    result.append(ref);
     result.append(", defaultValueLiteral: ");
     result.append(defaultValueLiteral);
     result.append(')');

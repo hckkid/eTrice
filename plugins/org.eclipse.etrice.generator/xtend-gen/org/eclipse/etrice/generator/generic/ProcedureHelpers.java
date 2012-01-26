@@ -8,6 +8,7 @@ import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.DataType;
 import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.Operation;
+import org.eclipse.etrice.core.room.RefableType;
 import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.generator.base.ILogger;
 import org.eclipse.etrice.generator.generic.ILanguageExtension;
@@ -53,6 +54,9 @@ public class ProcedureHelpers {
     return _builder;
   }
   
+  /**
+   * TODO: add ref type
+   */
   public StringConcatenation Attributes(final List<Attribute> attribs) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("//--------------------- attributes");
@@ -65,7 +69,8 @@ public class ProcedureHelpers {
           if (_operator_equals) {
             String _accessLevelProtected = this.languageExt.accessLevelProtected();
             _builder.append(_accessLevelProtected, "");
-            DataType _type = attribute.getType();
+            RefableType _refType = attribute.getRefType();
+            DataType _type = _refType.getType();
             String _typeName = this._typeHelpers.typeName(_type);
             _builder.append(_typeName, "");
             _builder.append(" ");
@@ -76,7 +81,8 @@ public class ProcedureHelpers {
           } else {
             String _accessLevelProtected_1 = this.languageExt.accessLevelProtected();
             _builder.append(_accessLevelProtected_1, "");
-            DataType _type_1 = attribute.getType();
+            RefableType _refType_1 = attribute.getRefType();
+            DataType _type_1 = _refType_1.getType();
             String _typeName_1 = this._typeHelpers.typeName(_type_1);
             _builder.append(_typeName_1, "");
             _builder.append("[] ");
@@ -99,7 +105,8 @@ public class ProcedureHelpers {
         String _defaultValueLiteral_1 = att.getDefaultValueLiteral();
         _xifexpression = _defaultValueLiteral_1;
       } else {
-        DataType _type = att.getType();
+        RefableType _refType = att.getRefType();
+        DataType _type = _refType.getType();
         String _defaultValue = this._typeHelpers.defaultValue(_type);
         _xifexpression = _defaultValue;
       }
@@ -179,7 +186,8 @@ public class ProcedureHelpers {
                   String _name_1 = a.getName();
                   _builder.append(_name_1, "");
                   _builder.append(" = new ");
-                  DataType _type = a.getType();
+                  RefableType _refType = a.getRefType();
+                  DataType _type = _refType.getType();
                   String _typeName = this._typeHelpers.typeName(_type);
                   _builder.append(_typeName, "");
                   _builder.append("[] ");
@@ -191,7 +199,8 @@ public class ProcedureHelpers {
                   String _name_2 = a.getName();
                   _builder.append(_name_2, "");
                   _builder.append(" = new ");
-                  DataType _type_1 = a.getType();
+                  RefableType _refType_1 = a.getRefType();
+                  DataType _type_1 = _refType_1.getType();
                   String _typeName_1 = this._typeHelpers.typeName(_type_1);
                   _builder.append(_typeName_1, "");
                   _builder.append("[");
@@ -225,7 +234,8 @@ public class ProcedureHelpers {
                 String _name_4 = a.getName();
                 _builder.append(_name_4, "");
                 _builder.append(" = ");
-                DataType _type_2 = a.getType();
+                RefableType _refType_2 = a.getRefType();
+                DataType _type_2 = _refType_2.getType();
                 String _defaultValue = this._typeHelpers.defaultValue(_type_2);
                 _builder.append(_defaultValue, "");
                 _builder.append(";");
@@ -234,7 +244,8 @@ public class ProcedureHelpers {
                 String _name_5 = a.getName();
                 _builder.append(_name_5, "");
                 _builder.append(" = new ");
-                DataType _type_3 = a.getType();
+                RefableType _refType_3 = a.getRefType();
+                DataType _type_3 = _refType_3.getType();
                 String _typeName_2 = this._typeHelpers.typeName(_type_3);
                 _builder.append(_typeName_2, "");
                 _builder.append("[");
@@ -251,7 +262,8 @@ public class ProcedureHelpers {
                 String _name_6 = a.getName();
                 _builder.append(_name_6, "	");
                 _builder.append("[i] = ");
-                DataType _type_4 = a.getType();
+                RefableType _refType_4 = a.getRefType();
+                DataType _type_4 = _refType_4.getType();
                 String _defaultValue_1 = this._typeHelpers.defaultValue(_type_4);
                 _builder.append(_defaultValue_1, "	");
                 _builder.append(";");
@@ -338,7 +350,8 @@ public class ProcedureHelpers {
     _builder.append(" (");
     String _selfPointer = this.languageExt.selfPointer(classname, 1);
     _builder.append(_selfPointer, "");
-    DataType _type = attribute.getType();
+    RefableType _refType = attribute.getRefType();
+    DataType _type = _refType.getType();
     String _typeName = this._typeHelpers.typeName(_type);
     _builder.append(_typeName, "");
     {
@@ -359,7 +372,8 @@ public class ProcedureHelpers {
     StringConcatenation _builder = new StringConcatenation();
     String _accessLevelPublic = this.languageExt.accessLevelPublic();
     _builder.append(_accessLevelPublic, "");
-    DataType _type = attribute.getType();
+    RefableType _refType = attribute.getRefType();
+    DataType _type = _refType.getType();
     String _typeName = this._typeHelpers.typeName(_type);
     _builder.append(_typeName, "");
     {
@@ -390,7 +404,8 @@ public class ProcedureHelpers {
         } else {
           _builder.appendImmediate(", ", "");
         }
-        DataType _type = a.getType();
+        RefableType _refType = a.getRefType();
+        DataType _type = _refType.getType();
         String _typeName = this._typeHelpers.typeName(_type);
         _builder.append(_typeName, "");
         {
@@ -414,8 +429,8 @@ public class ProcedureHelpers {
     _builder.newLine();
     {
       for(final Operation operation : operations) {
-        StringConcatenation _OperationHeader = this.OperationHeader(operation, classname, true);
-        _builder.append(_OperationHeader, "");
+        StringConcatenation _OperationSignature = this.OperationSignature(operation, classname, true);
+        _builder.append(_OperationSignature, "");
         _builder.append(";");
         _builder.newLineIfNotEmpty();
       }
@@ -429,8 +444,8 @@ public class ProcedureHelpers {
     _builder.newLine();
     {
       for(final Operation operation : operations) {
-        StringConcatenation _OperationHeader = this.OperationHeader(operation, classname, false);
-        _builder.append(_OperationHeader, "");
+        StringConcatenation _OperationSignature = this.OperationSignature(operation, classname, false);
+        _builder.append(_OperationSignature, "");
         _builder.append(" {");
         _builder.newLineIfNotEmpty();
         {
@@ -449,48 +464,74 @@ public class ProcedureHelpers {
     return _builder;
   }
   
-  private StringConcatenation OperationHeader(final Operation operation, final String classname, final boolean isDeclaration) {
-    StringConcatenation _builder = new StringConcatenation();
-    String _accessLevelPublic = this.languageExt.accessLevelPublic();
-    _builder.append(_accessLevelPublic, "");
-    {
-      DataType _returntype = operation.getReturntype();
-      boolean _operator_equals = ObjectExtensions.operator_equals(_returntype, null);
-      if (_operator_equals) {
-        _builder.append("void");
-      } else {
-        DataType _returntype_1 = operation.getReturntype();
-        String _typeName = this._typeHelpers.typeName(_returntype_1);
-        _builder.append(_typeName, "");
-      }
-    }
-    _builder.append(" ");
-    String _operationScope = this.languageExt.operationScope(classname, isDeclaration);
-    _builder.append(_operationScope, "");
+  private StringConcatenation OperationSignature(final Operation operation, final String classname, final boolean isDeclaration) {
     String _name = operation.getName();
-    _builder.append(_name, "");
-    _builder.append("(");
     EList<VarDecl> _arguments = operation.getArguments();
-    int _size = _arguments.size();
-    String _selfPointer = this.languageExt.selfPointer(classname, _size);
-    _builder.append(_selfPointer, "");
+    StringConcatenation _BuildArgumentList = this.BuildArgumentList(_arguments);
+    String _string = _BuildArgumentList.toString();
+    RefableType _returntype = operation.getReturntype();
+    String _DataTypeToString = this.DataTypeToString(_returntype);
+    StringConcatenation _ClassOperationSignature = this.ClassOperationSignature(classname, _name, _string, _DataTypeToString, isDeclaration);
+    return _ClassOperationSignature;
+  }
+  
+  private String DataTypeToString(final RefableType type) {
+    boolean _operator_equals = ObjectExtensions.operator_equals(type, null);
+    if (_operator_equals) {
+      return "void";
+    } else {
+      DataType _type = type.getType();
+      String _typeName = this._typeHelpers.typeName(_type);
+      return _typeName;
+    }
+  }
+  
+  /**
+   * builds comma separated argument list as string from EList<VarDecl> arguments
+   */
+  private StringConcatenation BuildArgumentList(final EList<VarDecl> arguments) {
+    StringConcatenation _builder = new StringConcatenation();
     {
-      EList<VarDecl> _arguments_1 = operation.getArguments();
       boolean hasAnyElements = false;
-      for(final VarDecl argument : _arguments_1) {
+      for(final VarDecl argument : arguments) {
         if (!hasAnyElements) {
           hasAnyElements = true;
         } else {
           _builder.appendImmediate(", ", "");
         }
-        DataType _type = argument.getType();
-        String _typeName_1 = this._typeHelpers.typeName(_type);
-        _builder.append(_typeName_1, "");
+        RefableType _refType = argument.getRefType();
+        DataType _type = _refType.getType();
+        String _typeName = this._typeHelpers.typeName(_type);
+        _builder.append(_typeName, "");
         _builder.append(" ");
-        String _name_1 = argument.getName();
-        _builder.append(_name_1, "");
+        String _name = argument.getName();
+        _builder.append(_name, "");
       }
     }
+    return _builder;
+  }
+  
+  public StringConcatenation ClassOperationSignature(final String classname, final String operationname, final String argumentList, final String returnType, final boolean isDeclaration) {
+    StringConcatenation _builder = new StringConcatenation();
+    String _accessLevelPublic = this.languageExt.accessLevelPublic();
+    _builder.append(_accessLevelPublic, "");
+    {
+      boolean _operator_equals = ObjectExtensions.operator_equals(returnType, "");
+      if (_operator_equals) {
+        _builder.append("void");
+      } else {
+        _builder.append(returnType, "");
+      }
+    }
+    _builder.append(" ");
+    String _operationScope = this.languageExt.operationScope(classname, isDeclaration);
+    _builder.append(_operationScope, "");
+    _builder.append(operationname, "");
+    _builder.append("(");
+    int _length = argumentList.length();
+    String _selfPointer = this.languageExt.selfPointer(classname, _length);
+    _builder.append(_selfPointer, "");
+    _builder.append(argumentList, "");
     _builder.append(")");
     return _builder;
   }

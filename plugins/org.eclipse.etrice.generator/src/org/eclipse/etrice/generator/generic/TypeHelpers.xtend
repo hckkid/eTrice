@@ -52,7 +52,7 @@ class TypeHelpers {
 	}
 
 	def String defaultValue(VarDecl a) {
-		return defaultValue(a.type)
+		return defaultValue(a.refType.type)
 	}
 
 	def String getTypedDataDefinition(Message m) {

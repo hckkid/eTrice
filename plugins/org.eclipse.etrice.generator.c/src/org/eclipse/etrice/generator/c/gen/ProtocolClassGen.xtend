@@ -56,11 +56,6 @@ class ProtocolClassGen {
 		
 		#include "etDatatypes.h"
 		
-«««		import org.eclipse.etrice.runtime.java.messaging.Address;
-«««		import org.eclipse.etrice.runtime.java.messaging.Message;
-«««		import org.eclipse.etrice.runtime.java.modelbase.*;
-«««		import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
-		
 		«helpers.UserCode(pc.userCode1)»
 		
 		«FOR dataClass : root.getReferencedDataClasses(pc)»#include "«dataClass.name».h"
@@ -68,13 +63,12 @@ class ProtocolClassGen {
 		
 		typedef struct {
 
-			«helpers.UserCode(pc.userCode2)»
 
 		} «pc.name»;
 
 		/* message IDs */
 		enum {
-			MSG_«pc.name»_MIN = 0, 
+			«pc.name»_MSG_MIN = 0, 
 			/* IDs for outgoing messages */
 			«FOR message : pc.getAllOutgoingMessages()»
 				«outMessageId(pc.name, message.name)» = «pc.getAllOutgoingMessages().indexOf(message)+1»,
@@ -84,7 +78,7 @@ class ProtocolClassGen {
 				«inMessageId(pc.name, message.name)» = «pc.getAllIncomingMessages().indexOf(message)+pc.getAllOutgoingMessages().size+1»,
 			«ENDFOR»
 			/* error if msgID >= MSG_MAX */
-			MSG_«pc.name»_MAX = «pc.getAllOutgoingMessages().size + pc.getAllIncomingMessages().size+1»
+			«pc.name»_MSG_MAX = «pc.getAllOutgoingMessages().size + pc.getAllIncomingMessages().size+1»
 		};
 
 		/*--------------------- port classes */
@@ -98,6 +92,7 @@ class ProtocolClassGen {
 		/* get message string for message id */
 		const char* «pc.name»_getMessageString(int msg_id);
 
+		«helpers.UserCode(pc.userCode2)»
 		
 		
 		#endif /* _«pc.name»_H_ */
@@ -120,8 +115,8 @@ class ProtocolClassGen {
 	
 	
 	def portClass(ProtocolClass pc, Boolean conj) {'''
-		«var name = pc.getPortClassName(conj)»
-		«var pclass = pc.getPortClass(conj)»
+«««		«var name = pc.getPortClassName(conj)»
+«««		«var pclass = pc.getPortClass(conj)»
 		
 «««		// port class
 «««		static public class «name» extends PortBase {
@@ -237,19 +232,29 @@ class ProtocolClassGen {
 
 	def portClassHeader(ProtocolClass pc, Boolean conj){
 		'''
+		«var portClassName = pc.getPortClassName(conj)»
+		«var pClass = pc.getPortClass(conj)»
+		
+		typedef etPort «portClassName»;
+		
+		«ClassOperationSignature(portClassName, "MyOperation1", "int a, int b", "void", true)»
+		«ClassOperationSignature(portClassName, "MyOperation2", "", "int", false)»
+		
 		
 		'''
 	}
 	
 	def portClassSource(ProtocolClass pc, Boolean conj){
 		'''
+		«var name = pc.getPortClassName(conj)»
+		«var pclass = pc.getPortClass(conj)»
 		
 		'''
 	}
 	
 
-	def messageSignature(Message m) {'''
-		public void «m.name» («IF m.data!=null»«m.data.type.name» «m.data.name»«ENDIF»)
+	def messageSignature(ProtocolClass pc, Message m) {'''
+		void «pc.name»_«m.name» («IF m.data!=null»«m.data.refType.type.name» «m.data.name»«ENDIF»)
 	'''
 	}
 
@@ -257,26 +262,17 @@ class ProtocolClassGen {
 	«m.name»(«IF m.data!=null» «m.data.name»«ENDIF»)
 	'''}
 	
-	def sendMessage(Message m, boolean conj) {'''
-	«var dir = if (conj) "IN" else "OUT"»
-	«var hdlr = m.getSendHandler(conj)»
-	«messageSignature(m)»{
-		«IF hdlr!=null»
-			«FOR command : hdlr.detailCode.commands»	«command»
-			«ENDFOR»
-		«ELSE»
-			if (messageStrings[ «dir»_«m.name»] != "timerTick"){
-				// TODOTS: model switch for activation
-			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[«dir»_«m.name»]);
-			}
-			if (getPeerAddress()!=null)
-				«IF m.data==null»getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), «dir»_«m.name»));
-				«ELSE»getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), «dir»_«m.name», «m.data.name»«IF (!m.data.ref)».deepCopy()«ENDIF»));
-			«ENDIF»
-		«ENDIF»
-	}
-	'''
-	}
+//	def sendMessage(Message m, boolean conj) {'''
+//	«var dir = if (conj) "IN" else "OUT"»
+//	«var hdlr = m.getSendHandler(conj)»
+//	«messageSignature(m)»{
+//		if (getPeerAddress()!=null)
+//				«IF m.data==null»getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), «dir»_«m.name»));
+//				«ELSE»getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), «dir»_«m.name», «m.data.name»«IF (!m.data.ref)».deepCopy()«ENDIF»));
+//			«ENDIF»
+//	}
+//	'''
+//	}
 	
 	def generateDebugHelpersImplementation(Root root, ProtocolClass pc){'''
 		
@@ -285,7 +281,7 @@ class ProtocolClassGen {
 		static const char* «pc.name»_messageStrings[] = {"MIN", «FOR m : pc.getAllOutgoingMessages()»"«m.name»",«ENDFOR»«FOR m : pc.getAllIncomingMessages()»"«m.name»", «ENDFOR»"MAX"};
 
 		const char* «pc.name»_getMessageString(int msg_id) {
-			if (msg_id<MSG_«pc.name»_MIN || msg_id>MSG_«pc.name»_MAX+1){
+			if (msg_id<«pc.name»_MSG_MIN || msg_id>«pc.name»_MSG_MAX+1){
 				/* id out of range */
 				return "Message ID out of range";
 			}

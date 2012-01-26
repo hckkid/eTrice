@@ -94,9 +94,9 @@ public class MemberSelectionDialog extends FormDialog {
 			switch (columnIndex) {
 			case 0:
 				if (element instanceof Attribute)
-					return ((Attribute) element).getType().getName();
+					return ((Attribute) element).getRefType().getType().getName();
 				else if (element instanceof Operation)
-					return ((Operation) element).getReturntype()==null ? "void":((Operation) element).getReturntype().getName();
+					return ((Operation) element).getReturntype()==null ? "void":((Operation) element).getReturntype().getType().getName();
 				break;
 			case 1:
 				if (element instanceof Attribute)

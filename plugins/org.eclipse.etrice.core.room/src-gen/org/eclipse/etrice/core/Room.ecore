@@ -49,6 +49,10 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="VarDecl">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="refType" eType="#//RefableType"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RefableType">
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//DataType"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="ref" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
@@ -78,8 +82,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="Attribute">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="size" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//DataType"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ref" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="refType" eType="#//RefableType"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="defaultValueLiteral" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="docu" eType="#//Documentation"
         containment="true"/>
@@ -88,8 +92,8 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="arguments" upperBound="-1"
         eType="#//VarDecl" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="returntype" eType="#//DataType"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ref" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="returntype" eType="#//RefableType"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="docu" eType="#//Documentation"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="detailCode" eType="#//DetailCode"

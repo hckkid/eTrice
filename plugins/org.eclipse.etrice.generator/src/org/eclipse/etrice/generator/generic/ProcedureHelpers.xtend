@@ -19,7 +19,13 @@ import java.util.List
 import org.eclipse.etrice.core.room.Attribute
 import org.eclipse.etrice.core.room.DetailCode
 import org.eclipse.etrice.core.room.Operation
+import org.eclipse.etrice.core.room.DataType
+import org.eclipse.etrice.core.room.VarDecl
+
 import org.eclipse.etrice.generator.base.ILogger
+import org.eclipse.emf.common.util.EList
+import org.eclipse.etrice.core.room.RefableType
+
 
 
 @Singleton
@@ -40,20 +46,21 @@ class ProcedureHelpers {
 	}
 	
 	// Attributes 
+	/* TODO: add ref type */
 	def Attributes(List<Attribute> attribs) {'''
 		//--------------------- attributes
 		«FOR attribute : attribs»
 			«IF attribute.size==0»
-				«languageExt.accessLevelProtected()»«attribute.type.typeName» «attribute.name»;
+				«languageExt.accessLevelProtected()»«attribute.refType.type.typeName» «attribute.name»;
 			«ELSE»
-				«languageExt.accessLevelProtected()»«attribute.type.typeName»[] «attribute.name»;
+				«languageExt.accessLevelProtected()»«attribute.refType.type.typeName»[] «attribute.name»;
 			«ENDIF» 
 		«ENDFOR»
 	'''
 	}
 
 	def arrayInitializer(Attribute att) {
-		var dflt = if (att.defaultValueLiteral!=null) att.defaultValueLiteral else att.type.defaultValue
+		var dflt = if (att.defaultValueLiteral!=null) att.defaultValueLiteral else att.refType.type.defaultValue
 
 		if (dflt.startsWith("{")) {
 			if (dflt.split(",").size!=att.size)
@@ -81,20 +88,20 @@ class ProcedureHelpers {
 					«IF a.size==0»
 						«a.name» = «a.defaultValueLiteral»;
 					«ELSEIF a.defaultValueLiteral.startsWith("{")»
-							«a.name» = new «a.type.typeName»[] «a.defaultValueLiteral»;
+							«a.name» = new «a.refType.type.typeName»[] «a.defaultValueLiteral»;
 					«ELSE»
-						«a.name» = new «a.type.typeName»[«a.size»];
+						«a.name» = new «a.refType.type.typeName»[«a.size»];
 						for (int i=0;i<«a.size»;i++){
 							«a.name»[i] = «a.defaultValueLiteral»;
 						}
 					«ENDIF»
 				«ELSE»
 					«IF a.size==0»
-						«a.name» = «a.type.defaultValue»;
+						«a.name» = «a.refType.type.defaultValue»;
 					«ELSE»
-						«a.name» = new «a.type.typeName»[«a.size»];
+						«a.name» = new «a.refType.type.typeName»[«a.size»];
 						for (int i=0;i<«a.size»;i++){
-							«a.name»[i] = «a.type.defaultValue»;
+							«a.name»[i] = «a.refType.type.defaultValue»;
 						}
 					«ENDIF»
 				«ENDIF»
@@ -125,28 +132,28 @@ class ProcedureHelpers {
 	}
 	
 	def private SetterHeader(Attribute attribute, String classname){'''
-		«languageExt.accessLevelPublic()»void set«attribute.name.toFirstUpper()» («languageExt.selfPointer(classname, 1)»«attribute.type.typeName»«IF attribute.size!=0»[]«ENDIF» «attribute.name»)'''
+		«languageExt.accessLevelPublic()»void set«attribute.name.toFirstUpper()» («languageExt.selfPointer(classname, 1)»«attribute.refType.type.typeName»«IF attribute.size!=0»[]«ENDIF» «attribute.name»)'''
 	}
 	def private GetterHeader(Attribute attribute, String classname){'''
-		«languageExt.accessLevelPublic()»«attribute.type.typeName»«IF attribute.size!=0»[]«ENDIF» get«attribute.name.toFirstUpper()» («languageExt.selfPointer(classname, 0)»)'''
+		«languageExt.accessLevelPublic()»«attribute.refType.type.typeName»«IF attribute.size!=0»[]«ENDIF» get«attribute.name.toFirstUpper()» («languageExt.selfPointer(classname, 0)»)'''
 	}
 	
 	def argList(List<Attribute> attributes) {
-		'''«FOR a : attributes SEPARATOR ", "»«a.type.typeName»«IF a.size>1»[]«ENDIF» «a.name»«ENDFOR»'''
+		'''«FOR a : attributes SEPARATOR ", "»«a.refType.type.typeName»«IF a.size>1»[]«ENDIF» «a.name»«ENDFOR»'''
 	}
 
 	
 	// Operations
 	def OperationsDeclaration(List<? extends Operation> operations, String classname) {'''
 		//--------------------- operations
-		«FOR operation : operations»«OperationHeader(operation, classname, true)»;
+		«FOR operation : operations»«OperationSignature(operation, classname, true)»;
 		«ENDFOR»
 		'''
 	}
 
 	def OperationsImplementation(List<? extends Operation> operations, String classname) {'''
 		//--------------------- operations
-		«FOR operation : operations»«OperationHeader(operation, classname, false)» {
+		«FOR operation : operations»«OperationSignature(operation, classname, false)» {
 		«FOR command : operation.detailCode.commands»	«command»
 			«ENDFOR»
 		}
@@ -154,8 +161,29 @@ class ProcedureHelpers {
 		'''
 	}
 	
-	def private OperationHeader(Operation operation, String classname, boolean isDeclaration) {'''
-		«languageExt.accessLevelPublic()»«IF operation.returntype==null»void«ELSE»«operation.returntype.typeName»«ENDIF» «languageExt.operationScope(classname, isDeclaration)»«operation.name»(«languageExt.selfPointer(classname, operation.arguments.size)»«FOR argument : operation.arguments SEPARATOR ", "»«argument.type.typeName» «argument.name»«ENDFOR»)'''
+	
+	def private OperationSignature(Operation operation, String classname, boolean isDeclaration) {
+		ClassOperationSignature(classname, operation.name, BuildArgumentList(operation.arguments).toString, DataTypeToString(operation.returntype), isDeclaration);
+	}
+
+	def private DataTypeToString(RefableType type){
+		
+		if(type==null)
+			return "void"
+		else 
+			return type.type.typeName
+	}
+
+	/*
+	 * builds comma separated argument list as string from EList<VarDecl> arguments
+	 */
+	def private BuildArgumentList(EList<VarDecl> arguments){
+		'''«FOR argument : arguments SEPARATOR ", "»«argument.refType.type.typeName» «argument.name»«ENDFOR»'''
+	}
+	
+//	def ClassFunctionSignature(String classname, String functionname, EList<VarDecl> arguments, ){
+	def ClassOperationSignature(String classname, String operationname, String argumentList, String returnType, boolean isDeclaration){'''
+		«languageExt.accessLevelPublic()»«IF returnType==""»void«ELSE»«returnType»«ENDIF» «languageExt.operationScope(classname, isDeclaration)»«operationname»(«languageExt.selfPointer(classname, argumentList.length)»«argumentList»)'''
 	}
 	
 }

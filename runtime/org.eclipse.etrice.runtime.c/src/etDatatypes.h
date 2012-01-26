@@ -66,4 +66,6 @@ typedef float64 etFloat64;
 
 typedef FILE* etFileHandle;
 
+typedef int8 etAddressId;
+
 #endif /* _DATATYPES_H_ */
