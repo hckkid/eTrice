@@ -1,10 +1,6 @@
 
 
 
-typedef struct etPort {
-
-} etPort;
-
 typedef struct MyActor MyActor;
 
 typedef struct MyActor_const {

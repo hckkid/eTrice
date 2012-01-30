@@ -25,17 +25,17 @@ enum {
 
 /*--------------------- port classes */
 
-typedef etPort CommunicationProtocolPort;
+typedef struct etPort CommunicationProtocolPort;
 
-void CommunicationProtocolPort_MyOperation1(CommunicationProtocolPort* self, int a, int b)
-int CommunicationProtocolPort_MyOperation2(CommunicationProtocolPort* self)
+void CommunicationProtocolPort_MyOperation1(CommunicationProtocolPort* self, int a, int b);
+int CommunicationProtocolPort_MyOperation2(CommunicationProtocolPort* self);
 
 
 
-typedef etPort CommunicationProtocolConjPort;
+typedef struct etPort CommunicationProtocolConjPort;
 
-void CommunicationProtocolConjPort_MyOperation1(CommunicationProtocolConjPort* self, int a, int b)
-int CommunicationProtocolConjPort_MyOperation2(CommunicationProtocolConjPort* self)
+void CommunicationProtocolConjPort_MyOperation1(CommunicationProtocolConjPort* self, int a, int b);
+int CommunicationProtocolConjPort_MyOperation2(CommunicationProtocolConjPort* self);
 
 
 

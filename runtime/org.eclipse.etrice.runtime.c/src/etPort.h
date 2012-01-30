@@ -34,7 +34,7 @@ typedef struct {
 }
 etPort;
 
-void etPort_receive(etMessage* msg);
+void etPort_receive(etPort* self, etMessage* msg);
 
 
 
