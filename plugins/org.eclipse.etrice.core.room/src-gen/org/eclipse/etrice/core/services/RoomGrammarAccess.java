@@ -560,8 +560,11 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cAttributeKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
-		private final Assignment cSizeAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cSizeMULTIPLICITYTerminalRuleCall_2_0 = (RuleCall)cSizeAssignment_2.eContents().get(0);
+		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
+		private final Keyword cLeftSquareBracketKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
+		private final Assignment cSizeAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
+		private final RuleCall cSizeINTTerminalRuleCall_2_1_0 = (RuleCall)cSizeAssignment_2_1.eContents().get(0);
+		private final Keyword cRightSquareBracketKeyword_2_2 = (Keyword)cGroup_2.eContents().get(2);
 		private final Keyword cColonKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		private final Assignment cRefTypeAssignment_4 = (Assignment)cGroup.eContents().get(4);
 		private final RuleCall cRefTypeRefableTypeParserRuleCall_4_0 = (RuleCall)cRefTypeAssignment_4.eContents().get(0);
@@ -573,10 +576,10 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cDocuDocumentationParserRuleCall_6_0 = (RuleCall)cDocuAssignment_6.eContents().get(0);
 		
 		//Attribute:
-		//	"Attribute" name=ID size=MULTIPLICITY? ":" refType=RefableType ("=" defaultValueLiteral=STRING)? docu=Documentation?;
+		//	"Attribute" name=ID ("[" size=INT "]")? ":" refType=RefableType ("=" defaultValueLiteral=STRING)? docu=Documentation?;
 		public ParserRule getRule() { return rule; }
 
-		//"Attribute" name=ID size=MULTIPLICITY? ":" refType=RefableType ("=" defaultValueLiteral=STRING)? docu=Documentation?
+		//"Attribute" name=ID ("[" size=INT "]")? ":" refType=RefableType ("=" defaultValueLiteral=STRING)? docu=Documentation?
 		public Group getGroup() { return cGroup; }
 
 		//"Attribute"
@@ -588,11 +591,20 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 
-		//size=MULTIPLICITY?
-		public Assignment getSizeAssignment_2() { return cSizeAssignment_2; }
+		//("[" size=INT "]")?
+		public Group getGroup_2() { return cGroup_2; }
 
-		//MULTIPLICITY
-		public RuleCall getSizeMULTIPLICITYTerminalRuleCall_2_0() { return cSizeMULTIPLICITYTerminalRuleCall_2_0; }
+		//"["
+		public Keyword getLeftSquareBracketKeyword_2_0() { return cLeftSquareBracketKeyword_2_0; }
+
+		//size=INT
+		public Assignment getSizeAssignment_2_1() { return cSizeAssignment_2_1; }
+
+		//INT
+		public RuleCall getSizeINTTerminalRuleCall_2_1_0() { return cSizeINTTerminalRuleCall_2_1_0; }
+
+		//"]"
+		public Keyword getRightSquareBracketKeyword_2_2() { return cRightSquareBracketKeyword_2_2; }
 
 		//":"
 		public Keyword getColonKeyword_3() { return cColonKeyword_3; }
@@ -4448,7 +4460,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Attribute:
-	//	"Attribute" name=ID size=MULTIPLICITY? ":" refType=RefableType ("=" defaultValueLiteral=STRING)? docu=Documentation?;
+	//	"Attribute" name=ID ("[" size=INT "]")? ":" refType=RefableType ("=" defaultValueLiteral=STRING)? docu=Documentation?;
 	public AttributeElements getAttributeAccess() {
 		return (pAttribute != null) ? pAttribute : (pAttribute = new AttributeElements());
 	}
@@ -5197,7 +5209,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//// [ * ] works though
 	//
 	//terminal MULTIPLICITY returns ecore::EInt:
-	//	"[" (" " | "\t")* ("*" | "0".."9"+) (" " | "\t")* "]";
+	//	"[" ("*" | "0".."9"+) "]";
 	public TerminalRule getMULTIPLICITYRule() {
 		return (tMULTIPLICITY != null) ? tMULTIPLICITY : (tMULTIPLICITY = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "MULTIPLICITY"));
 	} 

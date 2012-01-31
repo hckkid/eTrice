@@ -70,7 +70,7 @@ DataClass:
 	
 	
 Attribute:
-	'Attribute' name=ID (size=MULTIPLICITY)? ':' refType=RefableType ('=' defaultValueLiteral=STRING)? (docu=Documentation)?;
+	'Attribute' name=ID ('[' size=INT ']')? ':' refType=RefableType ('=' defaultValueLiteral=STRING)? (docu=Documentation)?;
 
 Operation: StandardOperation | PortOperation; 
 
@@ -415,4 +415,4 @@ FQN:
 
 // with white space inside the brackets like in [ 3 ] the INT terminal will match and we get an error
 // [ * ] works though
-terminal MULTIPLICITY returns ecore::EInt : '[' (' '|'\t')* ('*' | ('0'..'9')+) (' '|'\t')* ']';
+terminal MULTIPLICITY returns ecore::EInt : '[' ('*' | ('0'..'9')+) ']';

@@ -23,6 +23,8 @@ import org.eclipse.etrice.core.room.ActorContainerRef;
 import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.Binding;
 import org.eclipse.etrice.core.room.BindingEndPoint;
+import org.eclipse.etrice.core.room.ChoicePoint;
+import org.eclipse.etrice.core.room.ChoicepointTerminal;
 import org.eclipse.etrice.core.room.ContinuationTransition;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.EntryPoint;
@@ -511,12 +513,37 @@ public class ValidationUtil {
 		if (tgt instanceof TrPointTerminal) {
 			if (((TrPointTerminal) tgt).getTrPoint() instanceof EntryPoint)
 				return Result.error("entry point can not be transition target", tgt, RoomPackage.eINSTANCE.getTrPointTerminal_TrPoint(), 0);
+
+			TrPoint tgtTP = ((TrPointTerminal) tgt).getTrPoint();
 			if (((TrPointTerminal) tgt).getTrPoint() instanceof TransitionPoint) {
 				if (src instanceof TrPointTerminal) {
 					TrPoint srcTP = ((TrPointTerminal)src).getTrPoint();
-					TrPoint tgtTP = ((TrPointTerminal) tgt).getTrPoint();
 					if (srcTP!=tgtTP)
 						return Result.error("transition point can only be target of self transition", tgt, RoomPackage.eINSTANCE.getTrPointTerminal_TrPoint(), 0);
+				}
+				else if (src instanceof ChoicepointTerminal) {
+					ChoicePoint cp = ((ChoicepointTerminal) src).getCp();
+					while (cp!=null) {
+						for (Transition tr : sg.getTransitions()) {
+							if (tr.getTo() instanceof ChoicepointTerminal)
+								if (((ChoicepointTerminal)tr.getTo()).getCp()==cp) {
+									if (tr instanceof NonInitialTransition) {
+										if (((NonInitialTransition) tr).getFrom() instanceof TrPointTerminal) {
+											TrPoint srcTP = ((TrPointTerminal)((NonInitialTransition) tr).getFrom()).getTrPoint();
+											if (srcTP!=tgtTP)
+												return Result.error("transition point can only be target of self transition", tgt, RoomPackage.eINSTANCE.getTrPointTerminal_TrPoint(), 0);
+											else
+												return Result.ok();
+										}
+										else if (((NonInitialTransition) tr).getFrom() instanceof ChoicepointTerminal) {
+											cp = ((ChoicepointTerminal)((NonInitialTransition) tr).getFrom()).getCp();
+											break;
+										}
+									}
+								}
+						}
+					}
+					return Result.error("transition point can only be target of self transition", tgt, RoomPackage.eINSTANCE.getTrPointTerminal_TrPoint(), 0);
 				}
 				else {
 					return Result.error("transition point can only be target of self transition", tgt, RoomPackage.eINSTANCE.getTrPointTerminal_TrPoint(), 0);
