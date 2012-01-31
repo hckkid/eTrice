@@ -996,11 +996,15 @@ ruleAttribute returns [EObject current=null]
 	    }
 
 )
-)(
+)(	otherlv_2='[' 
+    {
+    	newLeafNode(otherlv_2, grammarAccess.getAttributeAccess().getLeftSquareBracketKeyword_2_0());
+    }
 (
-		lv_size_2_0=RULE_MULTIPLICITY
+(
+		lv_size_3_0=RULE_INT
 		{
-			newLeafNode(lv_size_2_0, grammarAccess.getAttributeAccess().getSizeMULTIPLICITYTerminalRuleCall_2_0()); 
+			newLeafNode(lv_size_3_0, grammarAccess.getAttributeAccess().getSizeINTTerminalRuleCall_2_1_0()); 
 		}
 		{
 	        if ($current==null) {
@@ -1009,42 +1013,46 @@ ruleAttribute returns [EObject current=null]
        		setWithLastConsumed(
        			$current, 
        			"size",
-        		lv_size_2_0, 
-        		"MULTIPLICITY");
+        		lv_size_3_0, 
+        		"INT");
 	    }
 
 )
-)?	otherlv_3=':' 
+)	otherlv_4=']' 
     {
-    	newLeafNode(otherlv_3, grammarAccess.getAttributeAccess().getColonKeyword_3());
+    	newLeafNode(otherlv_4, grammarAccess.getAttributeAccess().getRightSquareBracketKeyword_2_2());
+    }
+)?	otherlv_5=':' 
+    {
+    	newLeafNode(otherlv_5, grammarAccess.getAttributeAccess().getColonKeyword_3());
     }
 (
 (
 		{ 
 	        newCompositeNode(grammarAccess.getAttributeAccess().getRefTypeRefableTypeParserRuleCall_4_0()); 
 	    }
-		lv_refType_4_0=ruleRefableType		{
+		lv_refType_6_0=ruleRefableType		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getAttributeRule());
 	        }
        		set(
        			$current, 
        			"refType",
-        		lv_refType_4_0, 
+        		lv_refType_6_0, 
         		"RefableType");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-)(	otherlv_5='=' 
+)(	otherlv_7='=' 
     {
-    	newLeafNode(otherlv_5, grammarAccess.getAttributeAccess().getEqualsSignKeyword_5_0());
+    	newLeafNode(otherlv_7, grammarAccess.getAttributeAccess().getEqualsSignKeyword_5_0());
     }
 (
 (
-		lv_defaultValueLiteral_6_0=RULE_STRING
+		lv_defaultValueLiteral_8_0=RULE_STRING
 		{
-			newLeafNode(lv_defaultValueLiteral_6_0, grammarAccess.getAttributeAccess().getDefaultValueLiteralSTRINGTerminalRuleCall_5_1_0()); 
+			newLeafNode(lv_defaultValueLiteral_8_0, grammarAccess.getAttributeAccess().getDefaultValueLiteralSTRINGTerminalRuleCall_5_1_0()); 
 		}
 		{
 	        if ($current==null) {
@@ -1053,7 +1061,7 @@ ruleAttribute returns [EObject current=null]
        		setWithLastConsumed(
        			$current, 
        			"defaultValueLiteral",
-        		lv_defaultValueLiteral_6_0, 
+        		lv_defaultValueLiteral_8_0, 
         		"STRING");
 	    }
 
@@ -1063,14 +1071,14 @@ ruleAttribute returns [EObject current=null]
 		{ 
 	        newCompositeNode(grammarAccess.getAttributeAccess().getDocuDocumentationParserRuleCall_6_0()); 
 	    }
-		lv_docu_7_0=ruleDocumentation		{
+		lv_docu_9_0=ruleDocumentation		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getAttributeRule());
 	        }
        		set(
        			$current, 
        			"docu",
-        		lv_docu_7_0, 
+        		lv_docu_9_0, 
         		"Documentation");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -6572,7 +6580,7 @@ ruleFQN returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
 
 
 
-RULE_MULTIPLICITY : '[' (' '|'\t')* ('*'|('0'..'9')+) (' '|'\t')* ']';
+RULE_MULTIPLICITY : '[' ('*'|('0'..'9')+) ']';
 
 RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
