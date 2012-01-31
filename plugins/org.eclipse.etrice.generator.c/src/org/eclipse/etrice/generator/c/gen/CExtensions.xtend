@@ -80,6 +80,21 @@ class CExtensions implements ILanguageExtension {
 		return rc.name+".c";
 	}
 
+	def getIncludeGuardString(String filename){
+		'''_«filename.toUpperCase»_H_'''
+	}
+
+	def generateIncludeGuardBegin(String filename){'''
+		#ifndef «filename.getIncludeGuardString»
+		#define «filename.getIncludeGuardString»
+		'''
+	}
+
+	def generateIncludeGuardEnd(String filename){'''
+		#endif /* «filename.getIncludeGuardString» */
+		'''
+	}
+
 	//-------------------------------------------------------
 	// transition chain visitor
 		

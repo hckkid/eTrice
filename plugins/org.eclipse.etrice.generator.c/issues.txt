@@ -1,4 +1,6 @@
 Issues for codegenerators:
 
+- unify all include guards
+- unify all generated sourcefile documentation
 
 
