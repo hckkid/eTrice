@@ -18,6 +18,7 @@ import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorContainerClass;
 import org.eclipse.etrice.core.room.ActorInstancePath;
 import org.eclipse.etrice.core.room.ActorRef;
+import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.Binding;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.ExternalType;
@@ -74,6 +75,26 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 			error("Base classes are circular", RoomPackage.eINSTANCE.getActorClass_Base());
 	}
 
+	@Check
+	public void checkAttributeNotCircular(Attribute att) {
+		if (att.eContainer() instanceof ActorClass)
+			// no circle possible
+			return;
+		
+		if (!(att.eContainer() instanceof DataClass)) {
+			assert(false): "unexpected parent class";
+			return;
+		}
+		
+		DataClass dc = (DataClass) att.eContainer();
+		while (dc!=null) {
+			if (att.getRefType().getType()==dc)
+				error("Attribute type must not refer to own class or a super class", RoomPackage.Literals.ATTRIBUTE__REF_TYPE);
+			
+			dc = dc.getBase();
+		}
+	}
+	
 	@Check
 	public void checkBaseClassesNotCircular(ProtocolClass pc) {
 		if (pc==null)
