@@ -25,11 +25,13 @@ import org.eclipse.etrice.core.room.Binding;
 import org.eclipse.etrice.core.room.BindingEndPoint;
 import org.eclipse.etrice.core.room.ChoicePoint;
 import org.eclipse.etrice.core.room.DataClass;
+import org.eclipse.etrice.core.room.ExternalType;
 import org.eclipse.etrice.core.room.InitialTransition;
 import org.eclipse.etrice.core.room.LayerConnection;
 import org.eclipse.etrice.core.room.LogicalSystem;
 import org.eclipse.etrice.core.room.NonInitialTransition;
 import org.eclipse.etrice.core.room.Port;
+import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RefSAPoint;
 import org.eclipse.etrice.core.room.RelaySAPoint;
@@ -305,6 +307,12 @@ public class RoomFragmentProvider implements IFragmentProvider {
 		
 		RoomClass rc = getRoomClass(model, className);
 		if (type.equals(RoomPackage.eINSTANCE.getDataClass().getName())) {
+			return rc;
+		}
+		else if (type.equals(RoomPackage.eINSTANCE.getPrimitiveType().getName())) {
+			return rc;
+		}
+		else if (type.equals(RoomPackage.eINSTANCE.getExternalType().getName())) {
 			return rc;
 		}
 		else if (type.equals(RoomPackage.eINSTANCE.getProtocolClass().getName())) {
@@ -729,6 +737,14 @@ public class RoomFragmentProvider implements IFragmentProvider {
 		for (DataClass dc : model.getDataClasses()) {
 			if (dc.getName().equals(className))
 				return dc;
+		}
+		for (ExternalType et : model.getExternalTypes()) {
+			if (et.getName().equals(className))
+				return et;
+		}
+		for (PrimitiveType pt : model.getPrimitiveTypes()) {
+			if (pt.getName().equals(className))
+				return pt;
 		}
 		for (ProtocolClass pc : model.getProtocolClasses()) {
 			if (pc.getName().equals(className))
