@@ -48,7 +48,7 @@ public class GlobalNonPlatformURIEditorOpener extends GlobalURIEditorOpener {
 		if (files.length!=0) {
 			String pluri = files[0].toString();
 			// the pluri starts with L/ which we have to omit for URI.createPlatformResourceURI
-			uri = URI.createPlatformResourceURI(pluri.substring(2), true);
+			uri = URI.createPlatformResourceURI(pluri.substring(2), true).appendFragment(uri.fragment());
 		}
 		return uri;
 	}
