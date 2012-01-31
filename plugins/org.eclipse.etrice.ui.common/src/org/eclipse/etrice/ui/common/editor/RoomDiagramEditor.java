@@ -23,6 +23,7 @@ import org.eclipse.graphiti.ui.editor.DiagramEditor;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.serializer.ISerializer;
 import org.eclipse.xtext.util.CancelIndicator;
@@ -105,8 +106,16 @@ public class RoomDiagramEditor extends DiagramEditor {
 						}
 					});
 					if (!result.isEmpty()) {
-						MessageDialog.openError(Display.getDefault().getActiveShell(), "ERROR", "Internal error: model is invalid, can't save");
-						return;
+						boolean error = false;
+						for (Issue issue : result) {
+							if (issue.isSyntaxError() || issue.getSeverity()==Severity.ERROR) {
+								error = true;
+							}
+						}
+						if (error) {
+							MessageDialog.openError(Display.getDefault().getActiveShell(), "ERROR", "Internal error: model is invalid, can't save");
+							return;
+						}
 					}
 				}
 			}
