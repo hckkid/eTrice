@@ -7,6 +7,9 @@
 
 #include "SubSys.h"
 
+/* include instances for all classes */
+#include "SubSys_Inst.h"
+
 #include "etLogger.h"
 
 /* data for SubSysten SubSys */
@@ -18,6 +21,10 @@ static SubSys SubSysInst = {"SubSys"};
 
 void SubSys_init(void){
 	etLogger_logInfoF("%s_init", SubSysInst.name);
+	
+	/* initialization of all message services */
+	etMessageService_init(&msgService_Thread1, msgBuffer_Thread1, MESSAGE_POOL_MAX, MESSAGE_BLOCK_SIZE);
+	
 }
 
 void SubSys_start(void){

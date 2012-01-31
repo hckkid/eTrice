@@ -31,8 +31,7 @@ typedef struct {
 	etAddressId address;
 	/* thread ID from msg service: msgService->threadId */
 	#endif
-}
-etPort;
+} etPort;
 
 void etPort_receive(etPort* self, etMessage* msg);
 
