@@ -13,7 +13,11 @@
 
 package org.eclipse.etrice.core.validation;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorContainerClass;
 import org.eclipse.etrice.core.room.ActorInstancePath;
@@ -22,6 +26,7 @@ import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.Binding;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.ExternalType;
+import org.eclipse.etrice.core.room.Import;
 import org.eclipse.etrice.core.room.InitialTransition;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.LayerConnection;
@@ -30,6 +35,7 @@ import org.eclipse.etrice.core.room.NonInitialTransition;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RoomClass;
+import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.StateGraph;
@@ -38,12 +44,56 @@ import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.core.room.TrPoint;
 import org.eclipse.etrice.core.room.Transition;
 import org.eclipse.etrice.core.validation.ValidationUtil.Result;
+import org.eclipse.xtext.scoping.impl.ImportUriResolver;
 import org.eclipse.xtext.validation.Check;
+
+import com.google.inject.Inject;
 
  
 
 public class RoomJavaValidator extends AbstractRoomJavaValidator {
 
+	@Inject ImportUriResolver importUriResolver;
+	
+	@Check
+	public void checkImportedNamespace(Import imp) {
+		if (imp.getImportedNamespace()==null)
+			return;
+		
+		if (imp.getImportURI()==null)
+			return;
+		
+		String uriString = importUriResolver.resolve(imp);
+		
+		URI uri = URI.createURI(uriString);
+		ResourceSet rs = new ResourceSetImpl();
+
+		try {
+			Resource res = rs.getResource(uri, true);
+			if (res==null)
+				return;
+			
+			if (res.getContents().isEmpty()) {
+				error("referenced model is empty", RoomPackage.Literals.IMPORT__IMPORT_URI);
+				return;
+			}
+			
+			if (!(res.getContents().get(0) instanceof RoomModel)) {
+				error("referenced model is no ROOM model", RoomPackage.Literals.IMPORT__IMPORT_URI);
+				return;
+			}
+			
+			RoomModel model = (RoomModel) res.getContents().get(0);
+			if (!imp.getImportedNamespace().equals(model.getName()+".*")) {
+				error("the imported namespace should be '"+model.getName()+".*'", RoomPackage.Literals.IMPORT__IMPORTED_NAMESPACE);
+			}
+		}
+		catch (RuntimeException re) {
+			// ignore
+			return;
+		}
+	}
+	
 	@Check
 	public void checkTypeNameStartsWithCapital(RoomClass type) {
 		if (type instanceof PrimitiveType || type instanceof ExternalType)
