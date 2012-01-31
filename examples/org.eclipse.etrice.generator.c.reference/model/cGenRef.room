@@ -122,6 +122,25 @@ RoomModel cGenRef {
 		}
 	}
 
+	ActorClass SenderManual {
+		Interface {
+			
+		}
+		Structure {
+		}
+		Behavior {
+		}
+	}
+	ActorClass ReceiverManual {
+		Interface {
+			
+		}
+		Structure {
+		}
+		Behavior {
+		}
+	}		
+
 	ActorClass Sender {
 		Interface {
 			conjugated Port dataOut: CommunicationProtocol
