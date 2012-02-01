@@ -209,7 +209,7 @@ public class ActorClassGen {
     _builder.append("void ");
     String _name_12 = xpac.getName();
     _builder.append(_name_12, "");
-    _builder.append("_ReceiveMessage(void* self, etInt16 localId, const etMessage*);");
+    _builder.append("_ReceiveMessage(void* self, etInt16 localId, const etMessage* msg);");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.newLine();
@@ -255,6 +255,9 @@ public class ActorClassGen {
     _builder.append("\"");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
+    _builder.append("#include \"etLogger.h\"");
+    _builder.newLine();
+    _builder.newLine();
     DetailCode _userCode3 = xpac.getUserCode3();
     StringConcatenation _UserCode = this.helpers.UserCode(_userCode3);
     _builder.append(_UserCode, "");
@@ -263,7 +266,7 @@ public class ActorClassGen {
     _builder.append("void ");
     String _name_1 = xpac.getName();
     _builder.append(_name_1, "");
-    _builder.append("_ReceiveMessage(void* self, etInt16 localId, const etMessage*){");
+    _builder.append("_ReceiveMessage(void* self, etInt16 localId, const etMessage* msg){");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
     _builder.append("etLogger_logInfoF(\"");

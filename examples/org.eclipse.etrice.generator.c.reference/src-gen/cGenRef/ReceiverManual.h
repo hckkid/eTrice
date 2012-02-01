@@ -29,7 +29,7 @@ struct ReceiverManual {
 	const ReceiverManual_const* constData;
 };
 
-void ReceiverManual_ReceiveMessage(void* self, etInt16 localId, const etMessage*);
+void ReceiverManual_ReceiveMessage(void* self, etInt16 localId, const etMessage* msg);
 
 
 

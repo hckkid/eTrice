@@ -456,9 +456,13 @@ public class SubSystemClassGen {
             String _path_4 = ai_1.getPath();
             String _pathName_4 = this.roomExt.getPathName(_path_4);
             _builder.append(_pathName_4, "	");
-            _builder.append(", NULL, &msgService_Thread1, 1, 123} /* Port ");
-            String _name_5 = port.getName();
+            _builder.append(", ");
+            ActorClass _actorClass_3 = ai_1.getActorClass();
+            String _name_5 = _actorClass_3.getName();
             _builder.append(_name_5, "	");
+            _builder.append("_ReceiveMessage, &msgService_Thread1, 1, 123} /* Port ");
+            String _name_6 = port.getName();
+            _builder.append(_name_6, "	");
             _builder.append(" */");
             _builder.newLineIfNotEmpty();
           }
@@ -468,9 +472,9 @@ public class SubSystemClassGen {
         _builder.append("};");
         _builder.newLine();
         _builder.append("static ");
-        ActorClass _actorClass_3 = ai_1.getActorClass();
-        String _name_6 = _actorClass_3.getName();
-        _builder.append(_name_6, "");
+        ActorClass _actorClass_4 = ai_1.getActorClass();
+        String _name_7 = _actorClass_4.getName();
+        _builder.append(_name_7, "");
         _builder.append(" ");
         String _path_5 = ai_1.getPath();
         String _pathName_5 = this.roomExt.getPathName(_path_5);

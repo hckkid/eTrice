@@ -182,7 +182,7 @@ class SubSystemClassGen {
 				&«ai.path.getPathName()»,
 				/* Ports: {myActor, etReceiveMessage, msgService, peerAddress, localId} */
 				«FOR port : ai.actorClass.endPorts»
-				{&«ai.path.getPathName()», NULL, &msgService_Thread1, 1, 123} /* Port «port.name» */
+				{&«ai.path.getPathName()», «ai.actorClass.name»_ReceiveMessage, &msgService_Thread1, 1, 123} /* Port «port.name» */
 				«ENDFOR»
 				
 			};

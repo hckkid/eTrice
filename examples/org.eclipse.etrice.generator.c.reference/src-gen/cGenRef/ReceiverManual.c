@@ -7,8 +7,10 @@
 
 #include "ReceiverManual.h"
 
+#include "etLogger.h"
 
-void ReceiverManual_ReceiveMessage(void* self, etInt16 localId, const etMessage*){
+
+void ReceiverManual_ReceiveMessage(void* self, etInt16 localId, const etMessage* msg){
 	etLogger_logInfoF("ReceiverManual_ReceiveMessage");
 }
 

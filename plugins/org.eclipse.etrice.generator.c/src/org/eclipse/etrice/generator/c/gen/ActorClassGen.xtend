@@ -92,7 +92,7 @@ class ActorClassGen {
 			const «xpac.name»_const* constData;
 		};
 
-		void «xpac.name»_ReceiveMessage(void* self, etInt16 localId, const etMessage*);
+		void «xpac.name»_ReceiveMessage(void* self, etInt16 localId, const etMessage* msg);
 		
 
 «««		public «IF ac.abstract»abstract «ENDIF»class «ac.name» extends «IF ac.base!=null»«ac.base.name»«ELSE»ActorClassBase«ENDIF» {
@@ -204,9 +204,11 @@ class ActorClassGen {
 
 		#include "«xpac.getCHeaderFileName»"
 		
+		#include "etLogger.h"
+		
 		«helpers.UserCode(xpac.userCode3)»
 		
-		void «xpac.name»_ReceiveMessage(void* self, etInt16 localId, const etMessage*){
+		void «xpac.name»_ReceiveMessage(void* self, etInt16 localId, const etMessage* msg){
 			etLogger_logInfoF("«xpac.name»_ReceiveMessage");
 		}
 		

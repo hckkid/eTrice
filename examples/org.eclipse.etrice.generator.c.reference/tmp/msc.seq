@@ -1,0 +1,4 @@
+main ==> Class1 f
+Class1 ==> Class2 ff
+Class1 <== Class2
+main <== Class1

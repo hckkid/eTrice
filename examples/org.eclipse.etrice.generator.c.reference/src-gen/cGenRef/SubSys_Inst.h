@@ -36,7 +36,7 @@ static SenderManual _SubSys_Sender;
 static const ReceiverManual_const _SubSys_Receiver_const = {
 	&_SubSys_Receiver,
 	/* Ports: {myActor, etReceiveMessage, msgService, peerAddress, localId} */
-	{&_SubSys_Receiver, NULL, &msgService_Thread1, 1, 123} /* Port dataIn */
+	{&_SubSys_Receiver, ReceiverManual_ReceiveMessage, &msgService_Thread1, 1, 123} /* Port dataIn */
 	
 };
 static ReceiverManual _SubSys_Receiver = {&_SubSys_Receiver_const};
@@ -45,7 +45,7 @@ static ReceiverManual _SubSys_Receiver = {&_SubSys_Receiver_const};
 static const SenderManual_const _SubSys_Sender_const = {
 	&_SubSys_Sender,
 	/* Ports: {myActor, etReceiveMessage, msgService, peerAddress, localId} */
-	{&_SubSys_Sender, NULL, &msgService_Thread1, 1, 123} /* Port dataOut */
+	{&_SubSys_Sender, SenderManual_ReceiveMessage, &msgService_Thread1, 1, 123} /* Port dataOut */
 	
 };
 static SenderManual _SubSys_Sender = {&_SubSys_Sender_const};
