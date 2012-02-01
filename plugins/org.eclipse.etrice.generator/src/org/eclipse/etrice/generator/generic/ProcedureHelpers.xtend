@@ -19,7 +19,6 @@ import java.util.List
 import org.eclipse.etrice.core.room.Attribute
 import org.eclipse.etrice.core.room.DetailCode
 import org.eclipse.etrice.core.room.Operation
-import org.eclipse.etrice.core.room.DataType
 import org.eclipse.etrice.core.room.VarDecl
 
 import org.eclipse.etrice.generator.base.ILogger

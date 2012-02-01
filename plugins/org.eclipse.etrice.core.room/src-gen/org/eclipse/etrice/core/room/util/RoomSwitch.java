@@ -433,14 +433,6 @@ public class RoomSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case RoomPackage.STATE_MACHINE:
-      {
-        StateMachine stateMachine = (StateMachine)theEObject;
-        T result = caseStateMachine(stateMachine);
-        if (result == null) result = caseStateGraph(stateMachine);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
       case RoomPackage.BASE_STATE:
       {
         BaseState baseState = (BaseState)theEObject;
@@ -667,14 +659,6 @@ public class RoomSwitch<T> extends Switch<T>
       {
         Import import_ = (Import)theEObject;
         T result = caseImport(import_);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case RoomPackage.PLAIN_STATE_GRAPH:
-      {
-        PlainStateGraph plainStateGraph = (PlainStateGraph)theEObject;
-        T result = casePlainStateGraph(plainStateGraph);
-        if (result == null) result = caseStateGraph(plainStateGraph);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -1419,22 +1403,6 @@ public class RoomSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>State Machine</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>State Machine</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseStateMachine(StateMachine object)
-  {
-    return null;
-  }
-
-  /**
    * Returns the result of interpreting the object as an instance of '<em>Base State</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -1862,22 +1830,6 @@ public class RoomSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseImport(Import object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Plain State Graph</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Plain State Graph</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T casePlainStateGraph(PlainStateGraph object)
   {
     return null;
   }

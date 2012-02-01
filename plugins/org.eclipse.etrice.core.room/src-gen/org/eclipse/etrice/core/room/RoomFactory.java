@@ -441,15 +441,6 @@ public interface RoomFactory extends EFactory
   StateGraph createStateGraph();
 
   /**
-   * Returns a new object of class '<em>State Machine</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>State Machine</em>'.
-   * @generated
-   */
-  StateMachine createStateMachine();
-
-  /**
    * Returns a new object of class '<em>Base State</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -691,15 +682,6 @@ public interface RoomFactory extends EFactory
    * @generated
    */
   Import createImport();
-
-  /**
-   * Returns a new object of class '<em>Plain State Graph</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Plain State Graph</em>'.
-   * @generated
-   */
-  PlainStateGraph createPlainStateGraph();
 
   /**
    * Returns the package supported by this factory.

@@ -7,6 +7,7 @@
 package org.eclipse.etrice.core.room.impl;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 
@@ -114,7 +115,6 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
       case RoomPackage.STATE_GRAPH_ITEM: return createStateGraphItem();
       case RoomPackage.STATE: return createState();
       case RoomPackage.STATE_GRAPH: return createStateGraph();
-      case RoomPackage.STATE_MACHINE: return createStateMachine();
       case RoomPackage.BASE_STATE: return createBaseState();
       case RoomPackage.REFINED_STATE: return createRefinedState();
       case RoomPackage.DETAIL_CODE: return createDetailCode();
@@ -142,9 +142,42 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
       case RoomPackage.ANNOTATION: return createAnnotation();
       case RoomPackage.KEY_VALUE: return createKeyValue();
       case RoomPackage.IMPORT: return createImport();
-      case RoomPackage.PLAIN_STATE_GRAPH: return createPlainStateGraph();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+    }
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Object createFromString(EDataType eDataType, String initialValue)
+  {
+    switch (eDataType.getClassifierID())
+    {
+      case RoomPackage.EXECUTION_MODEL:
+        return createExecutionModelFromString(eDataType, initialValue);
+      default:
+        throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
+    }
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String convertToString(EDataType eDataType, Object instanceValue)
+  {
+    switch (eDataType.getClassifierID())
+    {
+      case RoomPackage.EXECUTION_MODEL:
+        return convertExecutionModelToString(eDataType, instanceValue);
+      default:
+        throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
     }
   }
 
@@ -659,17 +692,6 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public StateMachine createStateMachine()
-  {
-    StateMachineImpl stateMachine = new StateMachineImpl();
-    return stateMachine;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public BaseState createBaseState()
   {
     BaseStateImpl baseState = new BaseStateImpl();
@@ -967,10 +989,21 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public PlainStateGraph createPlainStateGraph()
+  public ExecutionModel createExecutionModelFromString(EDataType eDataType, String initialValue)
   {
-    PlainStateGraphImpl plainStateGraph = new PlainStateGraphImpl();
-    return plainStateGraph;
+    ExecutionModel result = ExecutionModel.get(initialValue);
+    if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+    return result;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public String convertExecutionModelToString(EDataType eDataType, Object instanceValue)
+  {
+    return instanceValue == null ? null : instanceValue.toString();
   }
 
   /**

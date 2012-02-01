@@ -519,7 +519,7 @@ public class StateSupport {
 						s = rs;
 					}
 
-					s.setSubgraph(RoomFactory.eINSTANCE.createPlainStateGraph());
+					s.setSubgraph(RoomFactory.eINSTANCE.createStateGraph());
 
 					AddContext addContext = new AddContext();
 					addContext.setNewObject(s.getSubgraph());

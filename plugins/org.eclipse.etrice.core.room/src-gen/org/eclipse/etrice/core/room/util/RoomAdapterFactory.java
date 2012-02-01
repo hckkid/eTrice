@@ -309,11 +309,6 @@ public class RoomAdapterFactory extends AdapterFactoryImpl
         return createStateGraphAdapter();
       }
       @Override
-      public Adapter caseStateMachine(StateMachine object)
-      {
-        return createStateMachineAdapter();
-      }
-      @Override
       public Adapter caseBaseState(BaseState object)
       {
         return createBaseStateAdapter();
@@ -447,11 +442,6 @@ public class RoomAdapterFactory extends AdapterFactoryImpl
       public Adapter caseImport(Import object)
       {
         return createImportAdapter();
-      }
-      @Override
-      public Adapter casePlainStateGraph(PlainStateGraph object)
-      {
-        return createPlainStateGraphAdapter();
       }
       @Override
       public Adapter defaultCase(EObject object)
@@ -1166,21 +1156,6 @@ public class RoomAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.StateMachine <em>State Machine</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.etrice.core.room.StateMachine
-   * @generated
-   */
-  public Adapter createStateMachineAdapter()
-  {
-    return null;
-  }
-
-  /**
    * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.BaseState <em>Base State</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -1581,21 +1556,6 @@ public class RoomAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createImportAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.PlainStateGraph <em>Plain State Graph</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.etrice.core.room.PlainStateGraph
-   * @generated
-   */
-  public Adapter createPlainStateGraphAdapter()
   {
     return null;
   }

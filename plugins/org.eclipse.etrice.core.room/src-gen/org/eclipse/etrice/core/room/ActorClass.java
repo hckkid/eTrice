@@ -17,6 +17,7 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.room.ActorClass#isAbstract <em>Abstract</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.ActorClass#getExecModel <em>Exec Model</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.ActorClass#getBase <em>Base</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.ActorClass#getIfPorts <em>If Ports</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.ActorClass#getStructureDocu <em>Structure Docu</em>}</li>
@@ -63,6 +64,35 @@ public interface ActorClass extends ActorContainerClass
    * @generated
    */
   void setAbstract(boolean value);
+
+  /**
+   * Returns the value of the '<em><b>Exec Model</b></em>' attribute.
+   * The literals are from the enumeration {@link org.eclipse.etrice.core.room.ExecutionModel}.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Exec Model</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Exec Model</em>' attribute.
+   * @see org.eclipse.etrice.core.room.ExecutionModel
+   * @see #setExecModel(ExecutionModel)
+   * @see org.eclipse.etrice.core.room.RoomPackage#getActorClass_ExecModel()
+   * @model
+   * @generated
+   */
+  ExecutionModel getExecModel();
+
+  /**
+   * Sets the value of the '{@link org.eclipse.etrice.core.room.ActorClass#getExecModel <em>Exec Model</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Exec Model</em>' attribute.
+   * @see org.eclipse.etrice.core.room.ExecutionModel
+   * @see #getExecModel()
+   * @generated
+   */
+  void setExecModel(ExecutionModel value);
 
   /**
    * Returns the value of the '<em><b>Base</b></em>' reference.
@@ -279,12 +309,12 @@ public interface ActorClass extends ActorContainerClass
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>State Machine</em>' containment reference.
-   * @see #setStateMachine(StateMachine)
+   * @see #setStateMachine(StateGraph)
    * @see org.eclipse.etrice.core.room.RoomPackage#getActorClass_StateMachine()
    * @model containment="true"
    * @generated
    */
-  StateMachine getStateMachine();
+  StateGraph getStateMachine();
 
   /**
    * Sets the value of the '{@link org.eclipse.etrice.core.room.ActorClass#getStateMachine <em>State Machine</em>}' containment reference.
@@ -294,6 +324,6 @@ public interface ActorClass extends ActorContainerClass
    * @see #getStateMachine()
    * @generated
    */
-  void setStateMachine(StateMachine value);
+  void setStateMachine(StateGraph value);
 
 } // ActorClass

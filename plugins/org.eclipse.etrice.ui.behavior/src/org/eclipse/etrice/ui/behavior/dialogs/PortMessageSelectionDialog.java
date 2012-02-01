@@ -17,6 +17,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.eclipse.etrice.core.room.ActorClass;
+import org.eclipse.etrice.core.room.ExecutionModel;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.PortClass;
@@ -109,7 +110,7 @@ public class PortMessageSelectionDialog extends FormDialog {
 							pairs.add(new MsgItemPair(item, msg, true));
 					}
 				}
-				if (ac.getStateMachine().isDataDriven()) {
+				if (ac.getExecModel()==ExecutionModel.DATA_DRIVEN) {
 					List<Message> in = RoomHelpers.getMessageList(item, false);
 					for (Message msg : in) {
 						if (!msg.isPriv())
@@ -159,7 +160,7 @@ public class PortMessageSelectionDialog extends FormDialog {
 				if (!RoomHelpers.getMessageList(((InterfaceItem)element), true).isEmpty())
 					return true;
 				
-				if (ac.getStateMachine().isDataDriven())
+				if (ac.getExecModel()==ExecutionModel.DATA_DRIVEN)
 					if (!RoomHelpers.getMessageList(((InterfaceItem)element), false).isEmpty())
 						return true;
 			}

@@ -30,7 +30,6 @@ import org.eclipse.etrice.core.room.ServiceImplementation;
 import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraph;
-import org.eclipse.etrice.core.room.StateMachine;
 import org.eclipse.etrice.core.room.Transition;
 import org.eclipse.etrice.core.room.Trigger;
 import org.eclipse.etrice.core.room.TriggeredTransition;
@@ -479,13 +478,13 @@ public class RoomExtensions {
     ActorClass _base = ac.getBase();
     boolean _operator_equals = ObjectExtensions.operator_equals(_base, null);
     if (_operator_equals) {
-      StateMachine _stateMachine = ac.getStateMachine();
+      StateGraph _stateMachine = ac.getStateMachine();
       List<State> _baseStateList = this.getBaseStateList(_stateMachine);
       return _baseStateList;
     } else {
       ActorClass _base_1 = ac.getBase();
       List<State> _allBaseStates = this.getAllBaseStates(_base_1);
-      StateMachine _stateMachine_1 = ac.getStateMachine();
+      StateGraph _stateMachine_1 = ac.getStateMachine();
       List<State> _baseStateList_1 = this.getBaseStateList(_stateMachine_1);
       List<State> _union = this.<State>union(_allBaseStates, _baseStateList_1);
       _xifexpression = _union;
@@ -545,7 +544,7 @@ public class RoomExtensions {
       return 0;
     } else {
       ActorClass _base_1 = ac.getBase();
-      StateMachine _stateMachine = _base_1.getStateMachine();
+      StateGraph _stateMachine = _base_1.getStateMachine();
       List<State> _stateList = this.getStateList(_stateMachine);
       int _size = _stateList.size();
       ActorClass _base_2 = ac.getBase();
@@ -562,7 +561,7 @@ public class RoomExtensions {
       return 0;
     } else {
       ActorClass _base_1 = ac.getBase();
-      StateMachine _stateMachine = _base_1.getStateMachine();
+      StateGraph _stateMachine = _base_1.getStateMachine();
       List<State> _baseStateList = this.getBaseStateList(_stateMachine);
       int _size = _baseStateList.size();
       ActorClass _base_2 = ac.getBase();

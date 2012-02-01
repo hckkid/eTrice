@@ -28,6 +28,7 @@ import org.eclipse.etrice.core.room.ChoicepointTerminal;
 import org.eclipse.etrice.core.room.ContinuationTransition;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.EntryPoint;
+import org.eclipse.etrice.core.room.ExecutionModel;
 import org.eclipse.etrice.core.room.ExitPoint;
 import org.eclipse.etrice.core.room.ExternalPort;
 import org.eclipse.etrice.core.room.GuardedTransition;
@@ -240,7 +241,7 @@ public class ValidationUtil {
 	}
 	
 	public static Result isConnectable(Port port, ActorContainerRef ref, StructureClass acc, Binding exclude) {
-		if (!isMultiplyConnectable(port) && isConnected(port, ref, acc, exclude))
+		if (!isMultipleConnectable(port) && isConnected(port, ref, acc, exclude))
 			return Result.error("port with multiplicity 1 is already connected");
 
 		if (acc instanceof ActorClass) {
@@ -254,12 +255,12 @@ public class ValidationUtil {
 			return Result.ok();
 	}
 	
-	public static boolean isMultiplyConnectable(Port port) {
+	public static boolean isMultipleConnectable(Port port) {
 		if (port.isReplicated())
 			return true;
 		
 		ActorClass ac = RoomHelpers.getActorClass(port);
-		if (ac.getStateMachine()!=null && ac.getStateMachine().isDataDriven())
+		if (ac.getExecModel()==ExecutionModel.DATA_DRIVEN)
 			return true;
 		
 		return false;
@@ -737,7 +738,7 @@ public class ValidationUtil {
 	 */
 	public static Result checkTransition(Transition tr) {
 		ActorClass ac = RoomHelpers.getActorClass(tr);
-		if (ac.getStateMachine().isDataDriven()) {
+		if (ac.getExecModel()==ExecutionModel.DATA_DRIVEN) {
 			if (tr instanceof TriggeredTransition)
 				return Result.error("data driven state machine must not contain triggered transition",
 						tr.eContainer(),
@@ -778,7 +779,7 @@ public class ValidationUtil {
 	public static Result checkState(State state) {
 		if (state.getDoCode()!=null) {
 			ActorClass ac = RoomHelpers.getActorClass(state);
-			if (!ac.getStateMachine().isDataDriven()) {
+			if (ac.getExecModel()!=ExecutionModel.DATA_DRIVEN) {
 				return Result.error("only data driven state machines may have 'do' action code",
 						state,
 						RoomPackage.eINSTANCE.getState_DoCode());

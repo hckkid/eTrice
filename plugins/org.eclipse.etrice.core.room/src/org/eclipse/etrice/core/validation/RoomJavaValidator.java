@@ -25,6 +25,7 @@ import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.Binding;
 import org.eclipse.etrice.core.room.DataClass;
+import org.eclipse.etrice.core.room.ExecutionModel;
 import org.eclipse.etrice.core.room.ExternalType;
 import org.eclipse.etrice.core.room.Import;
 import org.eclipse.etrice.core.room.InitialTransition;
@@ -39,7 +40,6 @@ import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.StateGraph;
-import org.eclipse.etrice.core.room.StateMachine;
 import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.core.room.TrPoint;
 import org.eclipse.etrice.core.room.Transition;
@@ -166,22 +166,14 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 	}
 	
 	@Check
-	public void checkStateMachineTypeConsistent(StateMachine sm) {
-		ActorClass ac = (ActorClass) sm.eContainer();
-		boolean first = true;
-		boolean dataDriven = false;
-		do {
-			if (ac.getStateMachine()!=null) {
-				if (first) {
-					first = false;
-					dataDriven = ac.getStateMachine().isDataDriven();
-				}
-				else if (dataDriven!=ac.getStateMachine().isDataDriven())
-					error("data_driven attribute not consistent in inheritance hierarchy", RoomPackage.eINSTANCE.getStateMachine_DataDriven());
-			}
+	public void checkExecModelConsistent(ActorClass ac) {
+		ExecutionModel dataDriven = ac.getExecModel();
+		while (ac.getBase()!=null) {
 			ac = ac.getBase();
+
+			if (dataDriven!=ac.getExecModel())
+				error("data_driven attribute not consistent in inheritance hierarchy", RoomPackage.eINSTANCE.getActorClass_ExecModel());
 		}
-		while (ac!=null);
 	}
 	
 	private SubSystemClass getSubSystemClass(EObject obj) {
