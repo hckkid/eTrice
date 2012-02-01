@@ -240,7 +240,7 @@ public class ValidationUtil {
 	}
 	
 	public static Result isConnectable(Port port, ActorContainerRef ref, StructureClass acc, Binding exclude) {
-		if (!port.isReplicated() && isConnected(port, ref, acc, exclude))
+		if (!isMultiplyConnectable(port) && isConnected(port, ref, acc, exclude))
 			return Result.error("port with multiplicity 1 is already connected");
 
 		if (acc instanceof ActorClass) {
@@ -252,6 +252,17 @@ public class ValidationUtil {
 		}
 		else
 			return Result.ok();
+	}
+	
+	public static boolean isMultiplyConnectable(Port port) {
+		if (port.isReplicated())
+			return true;
+		
+		ActorClass ac = RoomHelpers.getActorClass(port);
+		if (ac.getStateMachine()!=null && ac.getStateMachine().isDataDriven())
+			return true;
+		
+		return false;
 	}
 
 	public static Result isValid(Binding bind) {

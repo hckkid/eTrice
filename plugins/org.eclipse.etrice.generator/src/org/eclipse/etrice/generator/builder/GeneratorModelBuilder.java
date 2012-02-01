@@ -19,6 +19,7 @@ import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorContainerClass;
@@ -762,33 +763,37 @@ public class GeneratorModelBuilder {
 			EObject obj = it.next();
 			if (obj instanceof ActorInstance) {
 				ActorInstance ai = (ActorInstance) obj;
-				for (PortInstance pi : ai.getPorts()) {
-					if (pi.getKind()!=PortKind.RELAY) {
-						if (pi.getBindings().size()>pi.getPort().getMultiplicity() && pi.getPort().getMultiplicity()!=-1) {
-							EStructuralFeature feature = null;
-							int idx = IDiagnostician.INSIGNIFICANT_INDEX;
-							if (pi.getPort().eContainer() instanceof ActorClass) {
-								ActorClass ac = (ActorClass) pi.getPort().eContainer();
-								idx = ac.getIfPorts().indexOf(pi.getPort());
-								if (idx>=0) {
-									feature = RoomPackage.eINSTANCE.getActorClass_IfPorts();
-								}
-								else {
+				ActorClass ac = ai.getActorClass();
+				if (ac.getStateMachine()==null || !ac.getStateMachine().isDataDriven()) {
+					for (PortInstance pi : ai.getPorts()) {
+						if (pi.getKind()!=PortKind.RELAY) {
+							if (pi.getBindings().size()>pi.getPort().getMultiplicity() && pi.getPort().getMultiplicity()!=-1) {
+								EStructuralFeature feature = RoomPackage.eINSTANCE.getActorClass_IfPorts();
+								int idx = ac.getIfPorts().indexOf(pi.getPort());
+								if (idx<0) {
 									feature = RoomPackage.eINSTANCE.getActorClass_IntPorts();
 									idx = ac.getIntPorts().indexOf(pi.getPort());
 								}
+								diagnostician.error("number of peers ("+pi.getBindings().size()
+										+ ") of port '"+pi.getName()
+										+"' exceeds multiplicity "+pi.getPort().getMultiplicity()
+										+" in instance "+ai.getPath(), ac, feature, idx);
 							}
-							else if (pi.getPort().eContainer() instanceof SubSystemClass) {
-								SubSystemClass ssc = (SubSystemClass) pi.getPort().eContainer();
-								feature = RoomPackage.eINSTANCE.getSubSystemClass_RelayPorts();
-								idx = ssc.getRelayPorts().indexOf(pi.getPort());
-							}
-							diagnostician.error("number of peers "+pi.getBindings().size()
-									+ " of port "+pi.getName()
-									+" exceeds multiplicity "+pi.getPort().getMultiplicity()
-									+" in instance "+ai.getPath(), pi, feature, idx);
 						}
 					}
+				}
+			}
+			else if (obj instanceof SubSystemInstance) {
+				SubSystemInstance ssi = (SubSystemInstance) obj;
+				SubSystemClass ssc = ssi.getSubSystemClass();
+				for (PortInstance pi : ssi.getPorts()) {
+					EReference feature = RoomPackage.eINSTANCE.getSubSystemClass_RelayPorts();
+					int idx = ssc.getRelayPorts().indexOf(pi.getPort());
+					
+					diagnostician.error("number of peers ("+pi.getBindings().size()
+							+ ") of port '"+pi.getName()
+							+"' exceeds multiplicity "+pi.getPort().getMultiplicity()
+							+" in instance "+ssi.getPath(), ssc, feature, idx);
 				}
 			}
 		}

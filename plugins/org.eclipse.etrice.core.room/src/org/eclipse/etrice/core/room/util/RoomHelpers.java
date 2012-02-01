@@ -469,6 +469,16 @@ public class RoomHelpers {
 		return null;
 	}
 	
+	public static ActorClass getActorClass(EObject obj) {
+		EObject parent = obj;
+		while (parent!=null) {
+			parent = parent.eContainer();
+			if (parent instanceof ActorClass)
+				return (ActorClass) parent;
+		}
+		return null;
+	}
+	
 	/**
 	 * first container of type {@link ProtocolClass}
 	 * @param obj
