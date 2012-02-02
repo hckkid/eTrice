@@ -69,426 +69,650 @@ main <== SubSys
 main ==> SubSys run
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService ==> etMessageService popMessage
 etMessageService ==> etMessageQueue pop
 etMessageService <== etMessageQueue
 etMessageService <== etMessageService
+etMessageService ==> MsgDispatcher_Thread1 receiveMessage
+MsgDispatcher_Thread1 ==> etPort receive
+etPort ==> SenderManual ReceiveMessage
+etPort <== SenderManual
+MsgDispatcher_Thread1 <== etPort
+etMessageService <== MsgDispatcher_Thread1
 etMessageService ==> etMessageService returnMessageBuffer
 etMessageService ==> etMessageQueue push
 etMessageService <== etMessageQueue
 etMessageService <== etMessageService
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService ==> etMessageService popMessage
 etMessageService ==> etMessageQueue pop
 etMessageService <== etMessageQueue
 etMessageService <== etMessageService
+etMessageService ==> MsgDispatcher_Thread1 receiveMessage
+MsgDispatcher_Thread1 ==> etPort receive
+etPort ==> ReceiverManual ReceiveMessage
+etPort <== ReceiverManual
+MsgDispatcher_Thread1 <== etPort
+etMessageService <== MsgDispatcher_Thread1
 etMessageService ==> etMessageService returnMessageBuffer
 etMessageService ==> etMessageQueue push
 etMessageService <== etMessageQueue
 etMessageService <== etMessageService
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService ==> etMessageService popMessage
 etMessageService ==> etMessageQueue pop
 etMessageService <== etMessageQueue
 etMessageService <== etMessageService
+etMessageService ==> MsgDispatcher_Thread1 receiveMessage
+MsgDispatcher_Thread1 ==> etPort receive
+etPort ==> ReceiverManual ReceiveMessage
+etPort <== ReceiverManual
+MsgDispatcher_Thread1 <== etPort
+etMessageService <== MsgDispatcher_Thread1
 etMessageService ==> etMessageService returnMessageBuffer
 etMessageService ==> etMessageQueue push
 etMessageService <== etMessageQueue
 etMessageService <== etMessageService
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 main <== SubSys

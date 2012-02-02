@@ -9,6 +9,7 @@
 
 /* include instances for all classes */
 #include "SubSys_Inst.h"
+#include "SubSys_Disp.h"
 
 #include "etLogger.h"
 #include "etMSCLogger.h"
@@ -28,7 +29,7 @@ void SubSys_init(void){
 	etLogger_logInfoF("%s_init", SubSysInst.name);
 	
 	/* initialization of all message services */
-	etMessageService_init(&msgService_Thread1, msgBuffer_Thread1, MESSAGE_POOL_MAX, MESSAGE_BLOCK_SIZE);
+	etMessageService_init(&msgService_Thread1, msgBuffer_Thread1, MESSAGE_POOL_MAX, MESSAGE_BLOCK_SIZE, MsgDispatcher_Thread1_receiveMessage);
 	
 	/* init all actors */
 	SubSys_initActorInstances();

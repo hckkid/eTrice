@@ -18,7 +18,6 @@ import com.google.inject.Singleton
 import org.eclipse.etrice.core.room.SubSystemClass
 import org.eclipse.etrice.generator.base.ILogger
 import org.eclipse.etrice.generator.etricegen.Root
-import org.eclipse.etrice.generator.etricegen.ServiceImplInstance
 import org.eclipse.etrice.generator.etricegen.SubSystemInstance
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 import org.eclipse.etrice.generator.extensions.RoomExtensions
@@ -103,6 +102,7 @@ class SubSystemClassGen {
 
 		/* include instances for all classes */
 		#include "«ssc.getInstSourceFileName»"
+		#include "«ssc.getDispSourceFileName»"
 
 		#include "etLogger.h"
 		#include "etMSCLogger.h"
@@ -122,7 +122,7 @@ class SubSystemClassGen {
 			etLogger_logInfoF("%s_init", «ssc.name»Inst.name);
 			
 			/* initialization of all message services */
-			etMessageService_init(&msgService_Thread1, msgBuffer_Thread1, MESSAGE_POOL_MAX, MESSAGE_BLOCK_SIZE);
+			etMessageService_init(&msgService_Thread1, msgBuffer_Thread1, MESSAGE_POOL_MAX, MESSAGE_BLOCK_SIZE, MsgDispatcher_Thread1_receiveMessage);
 			
 			/* init all actors */
 			«ssc.name»_initActorInstances();
@@ -211,8 +211,9 @@ class SubSystemClassGen {
 			static const «ai.actorClass.name»_const «ai.path.getPathName()»_const = {
 				&«ai.path.getPathName()»,
 				/* Ports: {myActor, etReceiveMessage, msgService, peerAddress, localId} */
-				«FOR port : ai.actorClass.endPorts»
-				{&«ai.path.getPathName()», «ai.actorClass.name»_ReceiveMessage, &msgService_Thread1, 1, 123} /* Port «port.name» */
+				«FOR pi : ai.ports»
+				/* TODO: not robust if not connected and not implemented for replication */
+				{&«ai.path.getPathName()», «ai.actorClass.name»_ReceiveMessage, &msgService_Thread1, «pi.peers.get(0).objId», 123} /* Port «pi.name» */
 				«ENDFOR»
 				
 			};
@@ -251,15 +252,17 @@ class SubSystemClassGen {
 
 		#include "etMessageReceiver.h"
 		#include "etLogger.h"
+		#include "etMSCLogger.h"
 		
-		void MsgService_Thread1_ReceiveMessage(const etMessage* msg){
+		void MsgDispatcher_Thread1_receiveMessage(const etMessage* msg){
+			ET_MSC_LOGGER_SYNC_ENTRY("MsgDispatcher_Thread1", "receiveMessage")
 			switch(msg->address){
 			
 				«FOR ai : ssi.allContainedInstances»
 					/* interface items of «ai.path» */
 					«FOR pi : ai.orderedIfItemInstances»
 						case «pi.objId»:
-							etPort_receive(&«ai.path»_const.«pi.name», msg);
+							etPort_receive(&«ai.path.pathName»_const.«pi.name», msg);
 							break;
 					«ENDFOR»
 				«ENDFOR»
@@ -268,6 +271,7 @@ class SubSystemClassGen {
 					etLogger_logErrorF("MessageService_Thread1_ReceiveMessage: address %d does not exist ", msg->address);
 					break;
 			}
+			ET_MSC_LOGGER_SYNC_EXIT
 		}
 		'''
 	}
