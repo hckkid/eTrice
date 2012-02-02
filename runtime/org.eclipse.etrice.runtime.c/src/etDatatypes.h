@@ -38,7 +38,7 @@ typedef float float32;
 typedef double float64;
 
 /* boolean datatypes and values */
-typedef char boolean;  /* TODO: bool, Bool, Boolean, and boolean are already defined in some platforms*/
+typedef char bool;  /* TODO: bool, Bool, Boolean, and boolean are already defined in some platforms*/
 #ifndef TRUE
 	#define TRUE 1
 #endif
@@ -59,7 +59,7 @@ typedef uint8 etUInt8;
 typedef uint16 etUInt16;
 typedef uint32 etUInt32;
 
-typedef boolean etBool;
+typedef bool etBool;
 
 typedef float32 etFloat32;
 typedef float64 etFloat64;

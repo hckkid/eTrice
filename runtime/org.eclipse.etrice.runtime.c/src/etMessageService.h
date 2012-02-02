@@ -18,16 +18,16 @@
 #include "etMessageQueue.h"
 
 
-typedef struct RBuffer{
+typedef struct etBuffer{
 	etUInt8 *buffer;
 	etUInt16 maxBlocks;
 	etUInt16 blockSize;
-} RBuffer;
+} etBuffer;
 
 typedef struct etMessageService {
 	etMessageQueue messageQueue;
 	etMessageQueue messagePool;
-	RBuffer messageBuffer;
+	etBuffer messageBuffer;
 } etMessageService;
 
 void etMessageService_init(etMessageService* self, etUInt8* buffer, etUInt16 maxBlocks, etUInt16 blockSize);

@@ -79,7 +79,7 @@ void etMessageService_returnMessageBuffer(etMessageService* self, etMessage* buf
 
 void etMessageService_deliverAllMessages(etMessageService* self){
 	ET_MSC_LOGGER_SYNC_ENTRY("etMessageService", "deliverAllMessages")
-	while (self->messageQueue.size > 0){
+	while (etMessageQueue_isNotEmpty(&self->messageQueue)){
 		etMessage* msg = etMessageService_popMessage(self);
 		etLogger_logInfoF("Message ID=%d, Address=%d", msg->evtID, msg->address);
 		etMessageService_returnMessageBuffer(self, msg);

@@ -84,6 +84,10 @@ class CExtensions implements ILanguageExtension {
 		return rc.name+"_Inst.h";
 	}
 
+	def String getDispSourceFileName(RoomClass rc) {
+		return rc.name+"_Disp.h";
+	}
+
 	def getIncludeGuardString(String filename){
 		'''_«filename.toUpperCase»_H_'''
 	}

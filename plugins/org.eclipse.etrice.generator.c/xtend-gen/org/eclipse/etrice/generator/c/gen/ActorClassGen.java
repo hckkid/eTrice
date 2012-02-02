@@ -1,16 +1,17 @@
-package org.eclipse.etrice.generator.java.gen;
+package org.eclipse.etrice.generator.c.gen;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import java.util.HashSet;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.Attribute;
+import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.ProtocolClass;
-import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.SAPRef;
 import org.eclipse.etrice.core.room.SPPRef;
 import org.eclipse.etrice.core.room.ServiceImplementation;
@@ -18,13 +19,13 @@ import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.generator.base.ILogger;
+import org.eclipse.etrice.generator.c.gen.CExtensions;
+import org.eclipse.etrice.generator.c.gen.StateMachineGen;
 import org.eclipse.etrice.generator.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.generator.etricegen.Root;
 import org.eclipse.etrice.generator.extensions.RoomExtensions;
 import org.eclipse.etrice.generator.generic.ProcedureHelpers;
 import org.eclipse.etrice.generator.generic.TypeHelpers;
-import org.eclipse.etrice.generator.java.gen.JavaExtensions;
-import org.eclipse.etrice.generator.java.gen.StateMachineGen;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
 import org.eclipse.xtext.xbase.lib.BooleanExtensions;
 import org.eclipse.xtext.xbase.lib.IntegerExtensions;
@@ -39,16 +40,16 @@ public class ActorClassGen {
   private JavaIoFileSystemAccess fileAccess;
   
   @Inject
-  private JavaExtensions stdExt;
+  private CExtensions stdExt;
   
   @Inject
   private RoomExtensions roomExt;
   
   @Inject
-  private TypeHelpers _typeHelpers;
+  private ProcedureHelpers helpers;
   
   @Inject
-  private ProcedureHelpers helpers;
+  private TypeHelpers _typeHelpers;
   
   @Inject
   private StateMachineGen stateMachineGen;
@@ -67,51 +68,66 @@ public class ActorClassGen {
         String _operator_plus = StringExtensions.operator_plus(_generationTargetPath, _path);
         String path = _operator_plus;
         ActorClass _actorClass_2 = xpac.getActorClass();
-        String _javaFileName = this.stdExt.getJavaFileName(_actorClass_2);
-        String file = _javaFileName;
-        String _operator_plus_1 = StringExtensions.operator_plus("generating ActorClass implementation \'", file);
+        String _cHeaderFileName = this.stdExt.getCHeaderFileName(_actorClass_2);
+        String _operator_plus_1 = StringExtensions.operator_plus("generating ActorClass header \'", _cHeaderFileName);
         String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, "\' in \'");
         String _operator_plus_3 = StringExtensions.operator_plus(_operator_plus_2, path);
         String _operator_plus_4 = StringExtensions.operator_plus(_operator_plus_3, "\'");
         this.logger.logInfo(_operator_plus_4);
         this.fileAccess.setOutputPath(path);
         ActorClass _actorClass_3 = xpac.getActorClass();
-        StringConcatenation _generate = this.generate(root, xpac, _actorClass_3);
-        this.fileAccess.generateFile(file, _generate);
+        String _cHeaderFileName_1 = this.stdExt.getCHeaderFileName(_actorClass_3);
+        ActorClass _actorClass_4 = xpac.getActorClass();
+        StringConcatenation _generateHeaderFile = this.generateHeaderFile(root, xpac, _actorClass_4);
+        this.fileAccess.generateFile(_cHeaderFileName_1, _generateHeaderFile);
+        ActorClass _actorClass_5 = xpac.getActorClass();
+        String _cSourceFileName = this.stdExt.getCSourceFileName(_actorClass_5);
+        String _operator_plus_5 = StringExtensions.operator_plus("generating ActorClass source \'", _cSourceFileName);
+        String _operator_plus_6 = StringExtensions.operator_plus(_operator_plus_5, "\' in \'");
+        String _operator_plus_7 = StringExtensions.operator_plus(_operator_plus_6, path);
+        String _operator_plus_8 = StringExtensions.operator_plus(_operator_plus_7, "\'");
+        this.logger.logInfo(_operator_plus_8);
+        this.fileAccess.setOutputPath(path);
+        ActorClass _actorClass_6 = xpac.getActorClass();
+        String _cSourceFileName_1 = this.stdExt.getCSourceFileName(_actorClass_6);
+        ActorClass _actorClass_7 = xpac.getActorClass();
+        StringConcatenation _generateSourceFile = this.generateSourceFile(root, xpac, _actorClass_7);
+        this.fileAccess.generateFile(_cSourceFileName_1, _generateSourceFile);
       }
     }
   }
   
-  public StringConcatenation generate(final Root root, final ExpandedActorClass xpac, final ActorClass ac) {
+  public StringConcatenation generateHeaderFile(final Root root, final ExpandedActorClass xpac, final ActorClass ac) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("package ");
+    _builder.append("#ifndef _");
+    String _name = xpac.getName();
+    _builder.append(_name, "");
+    _builder.append("_H_");
+    _builder.newLineIfNotEmpty();
+    _builder.append("#define _");
+    String _name_1 = xpac.getName();
+    _builder.append(_name_1, "");
+    _builder.append("_H_");
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    _builder.append("#include \"etDatatypes.h\"");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("//package ");
     String _package = this.roomExt.getPackage(ac);
     _builder.append(_package, "");
     _builder.append(";");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
-    _builder.append("import org.eclipse.etrice.runtime.java.messaging.Address;");
-    _builder.newLine();
-    _builder.append("import org.eclipse.etrice.runtime.java.messaging.IRTObject;");
-    _builder.newLine();
-    _builder.append("import org.eclipse.etrice.runtime.java.messaging.IMessageReceiver;");
-    _builder.newLine();
-    _builder.append("import org.eclipse.etrice.runtime.java.modelbase.ActorClassBase;");
-    _builder.newLine();
-    _builder.append("import org.eclipse.etrice.runtime.java.modelbase.SubSystemClassBase;");
-    _builder.newLine();
-    _builder.append("import org.eclipse.etrice.runtime.java.modelbase.InterfaceItemBase;");
-    _builder.newLine();
-    _builder.append("import org.eclipse.etrice.runtime.java.debugging.DebuggingService;");
     _builder.newLine();
     _builder.newLine();
     {
-      EList<RoomModel> _referencedModels = root.getReferencedModels(ac);
-      for(final RoomModel model : _referencedModels) {
-        _builder.append("import ");
-        String _name = model.getName();
-        _builder.append(_name, "");
-        _builder.append(".*;");
+      HashSet<DataClass> _referencedDataClasses = root.getReferencedDataClasses(ac);
+      for(final DataClass dataClass : _referencedDataClasses) {
+        _builder.append("#include \"");
+        String _name_2 = dataClass.getName();
+        _builder.append(_name_2, "");
+        _builder.append(".h\"");
         _builder.newLineIfNotEmpty();
       }
     }
@@ -119,13 +135,10 @@ public class ActorClassGen {
     {
       EList<ProtocolClass> _referencedProtocolClasses = root.getReferencedProtocolClasses(ac);
       for(final ProtocolClass pc : _referencedProtocolClasses) {
-        _builder.append("import ");
-        String _package_1 = this.roomExt.getPackage(pc);
-        _builder.append(_package_1, "");
-        _builder.append(".");
-        String _name_1 = pc.getName();
-        _builder.append(_name_1, "");
-        _builder.append(".*;");
+        _builder.append("#include \"");
+        String _name_3 = pc.getName();
+        _builder.append(_name_3, "");
+        _builder.append(".h\"");
         _builder.newLineIfNotEmpty();
       }
     }
@@ -144,16 +157,16 @@ public class ActorClassGen {
       }
     }
     _builder.append("class ");
-    String _name_2 = ac.getName();
-    _builder.append(_name_2, "");
+    String _name_4 = ac.getName();
+    _builder.append(_name_4, "");
     _builder.append(" extends ");
     {
       ActorClass _base = ac.getBase();
       boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_base, null);
       if (_operator_notEquals) {
         ActorClass _base_1 = ac.getBase();
-        String _name_3 = _base_1.getName();
-        _builder.append(_name_3, "");
+        String _name_5 = _base_1.getName();
+        _builder.append(_name_5, "");
       } else {
         _builder.append("ActorClassBase");
       }
@@ -179,8 +192,8 @@ public class ActorClassGen {
         String _portClassName = this.roomExt.getPortClassName(ep);
         _builder.append(_portClassName, "	");
         _builder.append(" ");
-        String _name_4 = ep.getName();
-        _builder.append(_name_4, "	");
+        String _name_6 = ep.getName();
+        _builder.append(_name_6, "	");
         _builder.append(" = null;");
         _builder.newLineIfNotEmpty();
       }
@@ -196,8 +209,8 @@ public class ActorClassGen {
         String _portClassName_1 = this.roomExt.getPortClassName(sap);
         _builder.append(_portClassName_1, "	");
         _builder.append(" ");
-        String _name_5 = sap.getName();
-        _builder.append(_name_5, "	");
+        String _name_7 = sap.getName();
+        _builder.append(_name_7, "	");
         _builder.append(" = null;");
         _builder.newLineIfNotEmpty();
       }
@@ -214,8 +227,8 @@ public class ActorClassGen {
         _builder.append(_portClassName_2, "	");
         _builder.append(" ");
         SPPRef _spp = svc.getSpp();
-        String _name_6 = _spp.getName();
-        _builder.append(_name_6, "	");
+        String _name_8 = _spp.getName();
+        _builder.append(_name_8, "	");
         _builder.append(" = null;");
         _builder.newLineIfNotEmpty();
       }
@@ -229,8 +242,8 @@ public class ActorClassGen {
       for(final Port ep_1 : _endPorts_1) {
         _builder.append("\t");
         _builder.append("protected static final int IFITEM_");
-        String _name_7 = ep_1.getName();
-        _builder.append(_name_7, "	");
+        String _name_9 = ep_1.getName();
+        _builder.append(_name_9, "	");
         _builder.append(" = ");
         int _interfaceItemLocalId = xpac.getInterfaceItemLocalId(ep_1);
         int _operator_plus = IntegerExtensions.operator_plus(((Integer)_interfaceItemLocalId), ((Integer)1));
@@ -244,8 +257,8 @@ public class ActorClassGen {
       for(final SAPRef sap_1 : _strSAPs_1) {
         _builder.append("\t");
         _builder.append("protected static final int IFITEM_");
-        String _name_8 = sap_1.getName();
-        _builder.append(_name_8, "	");
+        String _name_10 = sap_1.getName();
+        _builder.append(_name_10, "	");
         _builder.append(" = ");
         int _interfaceItemLocalId_1 = xpac.getInterfaceItemLocalId(sap_1);
         int _operator_plus_1 = IntegerExtensions.operator_plus(((Integer)_interfaceItemLocalId_1), ((Integer)1));
@@ -260,8 +273,8 @@ public class ActorClassGen {
         _builder.append("\t");
         _builder.append("protected static final int IFITEM_");
         SPPRef _spp_1 = svc_1.getSpp();
-        String _name_9 = _spp_1.getName();
-        _builder.append(_name_9, "	");
+        String _name_11 = _spp_1.getName();
+        _builder.append(_name_11, "	");
         _builder.append(" = ");
         SPPRef _spp_2 = svc_1.getSpp();
         int _interfaceItemLocalId_2 = xpac.getInterfaceItemLocalId(_spp_2);
@@ -280,9 +293,9 @@ public class ActorClassGen {
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
     EList<StandardOperation> _operations = ac.getOperations();
-    String _name_10 = ac.getName();
-    StringConcatenation _OperationsImplementation = this.helpers.OperationsImplementation(_operations, _name_10);
-    _builder.append(_OperationsImplementation, "	");
+    String _name_12 = ac.getName();
+    StringConcatenation _OperationsDeclaration = this.helpers.OperationsDeclaration(_operations, _name_12);
+    _builder.append(_OperationsDeclaration, "	");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("\t");
@@ -290,8 +303,8 @@ public class ActorClassGen {
     _builder.newLine();
     _builder.append("\t");
     _builder.append("public ");
-    String _name_11 = ac.getName();
-    _builder.append(_name_11, "	");
+    String _name_13 = ac.getName();
+    _builder.append(_name_13, "	");
     _builder.append("(IRTObject parent, String name, Address[][] port_addr, Address[][] peer_addr){");
     _builder.newLineIfNotEmpty();
     {
@@ -309,8 +322,8 @@ public class ActorClassGen {
     }
     _builder.append("\t\t");
     _builder.append("setClassName(\"");
-    String _name_12 = ac.getName();
-    _builder.append(_name_12, "		");
+    String _name_14 = ac.getName();
+    _builder.append(_name_14, "		");
     _builder.append("\");");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t");
@@ -328,17 +341,17 @@ public class ActorClassGen {
       List<Port> _endPorts_2 = this.roomExt.getEndPorts(ac);
       for(final Port ep_2 : _endPorts_2) {
         _builder.append("\t\t");
-        String _name_13 = ep_2.getName();
-        _builder.append(_name_13, "		");
+        String _name_15 = ep_2.getName();
+        _builder.append(_name_15, "		");
         _builder.append(" = new ");
         String _portClassName_3 = this.roomExt.getPortClassName(ep_2);
         _builder.append(_portClassName_3, "		");
         _builder.append("(this, \"");
-        String _name_14 = ep_2.getName();
-        _builder.append(_name_14, "		");
+        String _name_16 = ep_2.getName();
+        _builder.append(_name_16, "		");
         _builder.append("\", IFITEM_");
-        String _name_15 = ep_2.getName();
-        _builder.append(_name_15, "		");
+        String _name_17 = ep_2.getName();
+        _builder.append(_name_17, "		");
         _builder.append(", ");
         {
           int _multiplicity = ep_2.getMultiplicity();
@@ -348,8 +361,8 @@ public class ActorClassGen {
           }
         }
         _builder.append("port_addr[IFITEM_");
-        String _name_16 = ep_2.getName();
-        _builder.append(_name_16, "		");
+        String _name_18 = ep_2.getName();
+        _builder.append(_name_18, "		");
         _builder.append("]");
         {
           int _multiplicity_1 = ep_2.getMultiplicity();
@@ -359,8 +372,8 @@ public class ActorClassGen {
           }
         }
         _builder.append(", peer_addr[IFITEM_");
-        String _name_17 = ep_2.getName();
-        _builder.append(_name_17, "		");
+        String _name_19 = ep_2.getName();
+        _builder.append(_name_19, "		");
         _builder.append("]");
         {
           int _multiplicity_2 = ep_2.getMultiplicity();
@@ -380,23 +393,23 @@ public class ActorClassGen {
       EList<SAPRef> _strSAPs_2 = ac.getStrSAPs();
       for(final SAPRef sap_2 : _strSAPs_2) {
         _builder.append("\t\t");
-        String _name_18 = sap_2.getName();
-        _builder.append(_name_18, "		");
+        String _name_20 = sap_2.getName();
+        _builder.append(_name_20, "		");
         _builder.append(" = new ");
         String _portClassName_4 = this.roomExt.getPortClassName(sap_2);
         _builder.append(_portClassName_4, "		");
         _builder.append("(this, \"");
-        String _name_19 = sap_2.getName();
-        _builder.append(_name_19, "		");
-        _builder.append("\", IFITEM_");
-        String _name_20 = sap_2.getName();
-        _builder.append(_name_20, "		");
-        _builder.append(", 0, port_addr[IFITEM_");
         String _name_21 = sap_2.getName();
         _builder.append(_name_21, "		");
-        _builder.append("][0], peer_addr[IFITEM_");
+        _builder.append("\", IFITEM_");
         String _name_22 = sap_2.getName();
         _builder.append(_name_22, "		");
+        _builder.append(", 0, port_addr[IFITEM_");
+        String _name_23 = sap_2.getName();
+        _builder.append(_name_23, "		");
+        _builder.append("][0], peer_addr[IFITEM_");
+        String _name_24 = sap_2.getName();
+        _builder.append(_name_24, "		");
         _builder.append("][0]); ");
         _builder.newLineIfNotEmpty();
       }
@@ -409,27 +422,27 @@ public class ActorClassGen {
       for(final ServiceImplementation svc_2 : _serviceImplementations_2) {
         _builder.append("\t\t");
         SPPRef _spp_3 = svc_2.getSpp();
-        String _name_23 = _spp_3.getName();
-        _builder.append(_name_23, "		");
+        String _name_25 = _spp_3.getName();
+        _builder.append(_name_25, "		");
         _builder.append(" = new ");
         String _portClassName_5 = this.roomExt.getPortClassName(svc_2);
         _builder.append(_portClassName_5, "		");
         _builder.append("(this, \"");
         SPPRef _spp_4 = svc_2.getSpp();
-        String _name_24 = _spp_4.getName();
-        _builder.append(_name_24, "		");
+        String _name_26 = _spp_4.getName();
+        _builder.append(_name_26, "		");
         _builder.append("\", IFITEM_");
         SPPRef _spp_5 = svc_2.getSpp();
-        String _name_25 = _spp_5.getName();
-        _builder.append(_name_25, "		");
+        String _name_27 = _spp_5.getName();
+        _builder.append(_name_27, "		");
         _builder.append(", port_addr[IFITEM_");
         SPPRef _spp_6 = svc_2.getSpp();
-        String _name_26 = _spp_6.getName();
-        _builder.append(_name_26, "		");
+        String _name_28 = _spp_6.getName();
+        _builder.append(_name_28, "		");
         _builder.append("], peer_addr[IFITEM_");
         SPPRef _spp_7 = svc_2.getSpp();
-        String _name_27 = _spp_7.getName();
-        _builder.append(_name_27, "		");
+        String _name_29 = _spp_7.getName();
+        _builder.append(_name_29, "		");
         _builder.append("]); ");
         _builder.newLineIfNotEmpty();
       }
@@ -533,6 +546,24 @@ public class ActorClassGen {
       }
     }
     _builder.append("};");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("#endif /* _");
+    String _name_30 = xpac.getName();
+    _builder.append(_name_30, "");
+    _builder.append("_H_ */");
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    return _builder;
+  }
+  
+  public StringConcatenation generateSourceFile(final Root root, final ExpandedActorClass xpac, final ActorClass ac) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("#include \"");
+    String _cHeaderFileName = this.stdExt.getCHeaderFileName(xpac);
+    _builder.append(_cHeaderFileName, "");
+    _builder.append("\"");
+    _builder.newLineIfNotEmpty();
     _builder.newLine();
     return _builder;
   }

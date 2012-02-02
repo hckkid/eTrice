@@ -18,8 +18,8 @@ etMessageService msgService_Thread1;
 
 /* include all used ActorClasses */
 /* TODO: only include used Actor Classes for current SubSystem */
-#include "SenderManual.h"
 #include "ReceiverManual.h"
+#include "SenderManual.h"
 
 /* include all used ProtcolClasses */
 #include "CommunicationProtocol.h"
@@ -49,6 +49,8 @@ static const SenderManual_const _SubSys_Sender_const = {
 	
 };
 static SenderManual _SubSys_Sender = {&_SubSys_Sender_const};
+
+
 
 
 

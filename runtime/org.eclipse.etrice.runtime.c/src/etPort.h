@@ -22,7 +22,7 @@
 
 typedef struct {
 	void* myActor;
-	etReceiveMessage receiveMessageFunc;
+	etActorReceiveMessage receiveMessageFunc;
 	etMessageService* msgService;
 	etAddressId peerAddress;
 	etAddressId localId;
@@ -33,7 +33,7 @@ typedef struct {
 	#endif
 } etPort;
 
-void etPort_receive(etPort* self, etMessage* msg);
+void etPort_receive(const etPort* self, const etMessage* msg);
 
 
 
