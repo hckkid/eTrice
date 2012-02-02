@@ -11,14 +11,14 @@ struct MyActor {
 	const MyActor_const* constData;
 };
 
-static const MyActor Actor1;
-static const MyActor Actor2;
+static MyActor Actor1;
+static MyActor Actor2;
 
 static const MyActor_const Actor1_const = {&Actor1};
 static const MyActor_const Actor2_const = {&Actor2};
 
-static const MyActor Actor1 = {&Actor1_const};
-static const MyActor Actor2 = {&Actor2_const};;
+static MyActor Actor1 = {&Actor1_const};
+static MyActor Actor2 = {&Actor2_const};;
 
 
 //*****************************

@@ -2,8 +2,8 @@ RoomModel cGenRef {
 	import room.basic.types.c.* from "CTypes.room"
 	
 	SubSystemClass SubSys {
-		ActorRef Receiver: Receiver
-		ActorRef Sender: Sender
+		ActorRef Receiver: ReceiverManual
+		ActorRef Sender: SenderManual
 		Binding Sender.dataOut and Receiver.dataIn
 	}
 
@@ -124,20 +124,27 @@ RoomModel cGenRef {
 
 	ActorClass SenderManual {
 		Interface {
-			
+			conjugated Port dataOut: CommunicationProtocol
 		}
 		Structure {
+			external Port dataOut
+			Attribute attribute1: int32
+			Attribute attribute2: DataClass1
 		}
 		Behavior {
+			//@BehaviorManual
+			Operation operation1(argument1:int32, argument2: DataClass1 ref){""}
 		}
 	}
 	ActorClass ReceiverManual {
 		Interface {
-			
+			Port dataIn: CommunicationProtocol
 		}
 		Structure {
+			external Port dataIn
 		}
 		Behavior {
+			//@BehaviorManual
 		}
 	}		
 

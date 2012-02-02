@@ -9,6 +9,8 @@
 #include "SubSys.h"
 
 #include "etLogger.h"
+#include "etMSCLogger.h"
+
 
 /**
  * main function
@@ -18,6 +20,7 @@
 int main(void) {
 
 	etLogger_logInfo("***   T H E   B E G I N   ***");
+	ET_MSC_LOGGER_OPEN("main");
 
 	/* startup sequence  of lifecycle */
 	SubSys_init(); 		/* lifecycle init */
@@ -30,6 +33,7 @@ int main(void) {
 	SubSys_stop(); 		/* lifecycle stop */
 	SubSys_destroy(); 	/* lifecycle destroy */
 
+	ET_MSC_LOGGER_CLOSE
 	etLogger_logInfo("***   T H E   E N D   ***");
 
 	return 0;

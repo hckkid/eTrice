@@ -13,13 +13,13 @@
  * init -> start -> run (loop) -> stop -> destroy
  */
 
-void SubSys_init(void); // lifecycle init
-void SubSys_start(void); // lifecycle start
+void SubSys_init(void);		/* lifecycle init  	 */
+void SubSys_start(void);	/* lifecycle start 	 */
 
-void SubSys_run(void);
+void SubSys_run(void);		/* lifecycle run 	 */
 
-void SubSys_stop(void); // lifecycle stop
-void SubSys_destroy(void); // lifecycle destroy
+void SubSys_stop(void); 	/* lifecycle stop	 */
+void SubSys_destroy(void); 	/* lifecycle destroy */
 
 
 #endif /* _SUBSYS_H_ */

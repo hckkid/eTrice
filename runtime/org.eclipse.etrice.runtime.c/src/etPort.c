@@ -12,7 +12,11 @@
 
 #include "etPort.h"
 
+#include "etMSCLogger.h"
+
 void etPort_receive(etPort* self, etMessage* msg) {
+	ET_MSC_LOGGER_SYNC_ENTRY("etPort", "receive")
 	(self->receiveMessageFunc)(self->myActor, self->localId, msg);
+	ET_MSC_LOGGER_SYNC_EXIT
 }
 

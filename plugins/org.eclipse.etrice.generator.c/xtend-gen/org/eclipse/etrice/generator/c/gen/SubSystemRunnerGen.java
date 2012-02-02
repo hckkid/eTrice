@@ -73,6 +73,9 @@ public class SubSystemRunnerGen {
     _builder.newLine();
     _builder.append("#include \"etLogger.h\"");
     _builder.newLine();
+    _builder.append("#include \"etMSCLogger.h\"");
+    _builder.newLine();
+    _builder.newLine();
     _builder.newLine();
     _builder.append("/**");
     _builder.newLine();
@@ -91,6 +94,9 @@ public class SubSystemRunnerGen {
     _builder.newLine();
     _builder.append("\t");
     _builder.append("etLogger_logInfo(\"***   T H E   B E G I N   ***\");");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("ET_MSC_LOGGER_OPEN(\"main\");");
     _builder.newLine();
     _builder.newLine();
     _builder.append("\t");
@@ -129,6 +135,9 @@ public class SubSystemRunnerGen {
     _builder.append(_name_7, "	");
     _builder.append("_destroy(); \t/* lifecycle destroy */");
     _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("ET_MSC_LOGGER_CLOSE");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("etLogger_logInfo(\"***   T H E   E N D   ***\");");

@@ -12,10 +12,14 @@
 
 #include "etMessage.h"
 
+#include "etMSCLogger.h"
+
 #include <stddef.h>
 
 void etMessage_init(etMessage* self){
+	ET_MSC_LOGGER_SYNC_ENTRY("etMessage", "init")
 	self->next = NULL;
 	self->address = 0;
 	self->evtID = 0;
+	ET_MSC_LOGGER_SYNC_EXIT
 }
