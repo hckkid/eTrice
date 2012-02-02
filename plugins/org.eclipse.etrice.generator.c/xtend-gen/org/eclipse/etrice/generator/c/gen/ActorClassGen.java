@@ -6,8 +6,10 @@ import java.util.HashSet;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.etrice.core.room.ActorClass;
+import org.eclipse.etrice.core.room.Annotation;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.DetailCode;
+import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.generator.base.ILogger;
@@ -19,6 +21,10 @@ import org.eclipse.etrice.generator.extensions.RoomExtensions;
 import org.eclipse.etrice.generator.generic.ProcedureHelpers;
 import org.eclipse.etrice.generator.generic.TypeHelpers;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
+import org.eclipse.xtext.xbase.lib.BooleanExtensions;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 
@@ -69,21 +75,50 @@ public class ActorClassGen {
         ActorClass _actorClass_4 = xpac.getActorClass();
         StringConcatenation _generateHeaderFile = this.generateHeaderFile(root, xpac, _actorClass_4);
         this.fileAccess.generateFile(_cHeaderFileName_1, _generateHeaderFile);
-        ActorClass _actorClass_5 = xpac.getActorClass();
-        String _cSourceFileName = this.stdExt.getCSourceFileName(_actorClass_5);
-        String _operator_plus_5 = StringExtensions.operator_plus("generating ActorClass header \'", _cSourceFileName);
-        String _operator_plus_6 = StringExtensions.operator_plus(_operator_plus_5, "\' in \'");
-        String _operator_plus_7 = StringExtensions.operator_plus(_operator_plus_6, path);
-        String _operator_plus_8 = StringExtensions.operator_plus(_operator_plus_7, "\'");
-        this.logger.logInfo(_operator_plus_8);
-        this.fileAccess.setOutputPath(path);
-        ActorClass _actorClass_6 = xpac.getActorClass();
-        String _cSourceFileName_1 = this.stdExt.getCSourceFileName(_actorClass_6);
-        ActorClass _actorClass_7 = xpac.getActorClass();
-        StringConcatenation _generateSourceFile = this.generateSourceFile(root, xpac, _actorClass_7);
-        this.fileAccess.generateFile(_cSourceFileName_1, _generateSourceFile);
+        boolean _hasBehaviorAnnotation = this.hasBehaviorAnnotation(xpac, "BehaviorManual");
+        boolean _operator_equals = ObjectExtensions.operator_equals(((Boolean)_hasBehaviorAnnotation), ((Boolean)false));
+        if (_operator_equals) {
+          {
+            ActorClass _actorClass_5 = xpac.getActorClass();
+            String _cSourceFileName = this.stdExt.getCSourceFileName(_actorClass_5);
+            String _operator_plus_5 = StringExtensions.operator_plus("generating ActorClass header \'", _cSourceFileName);
+            String _operator_plus_6 = StringExtensions.operator_plus(_operator_plus_5, "\' in \'");
+            String _operator_plus_7 = StringExtensions.operator_plus(_operator_plus_6, path);
+            String _operator_plus_8 = StringExtensions.operator_plus(_operator_plus_7, "\'");
+            this.logger.logInfo(_operator_plus_8);
+            this.fileAccess.setOutputPath(path);
+            ActorClass _actorClass_6 = xpac.getActorClass();
+            String _cSourceFileName_1 = this.stdExt.getCSourceFileName(_actorClass_6);
+            ActorClass _actorClass_7 = xpac.getActorClass();
+            StringConcatenation _generateSourceFile = this.generateSourceFile(root, xpac, _actorClass_7);
+            this.fileAccess.generateFile(_cSourceFileName_1, _generateSourceFile);
+          }
+        }
       }
     }
+  }
+  
+  public boolean hasBehaviorAnnotation(final ExpandedActorClass xpac, final String annotation) {
+      ActorClass _actorClass = xpac.getActorClass();
+      EList<Annotation> _annotations = _actorClass.getAnnotations();
+      boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_annotations, null);
+      if (_operator_notEquals) {
+        ActorClass _actorClass_1 = xpac.getActorClass();
+        EList<Annotation> _annotations_1 = _actorClass_1.getAnnotations();
+        final Function1<Annotation,Boolean> _function = new Function1<Annotation,Boolean>() {
+            public Boolean apply(final Annotation e) {
+              String _name = e.getName();
+              boolean _operator_equals = ObjectExtensions.operator_equals(_name, annotation);
+              return ((Boolean)_operator_equals);
+            }
+          };
+        Annotation _findFirst = IterableExtensions.<Annotation>findFirst(_annotations_1, _function);
+        boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(_findFirst, null);
+        if (_operator_notEquals_1) {
+          return true;
+        }
+      }
+      return false;
   }
   
   public StringConcatenation generateHeaderFile(final Root root, final ExpandedActorClass xpac, final ActorClass ac) {
@@ -209,6 +244,15 @@ public class ActorClassGen {
     _builder.append("void ");
     String _name_12 = xpac.getName();
     _builder.append(_name_12, "");
+    _builder.append("_init(");
+    String _name_13 = xpac.getName();
+    _builder.append(_name_13, "");
+    _builder.append("* self);");
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    _builder.append("void ");
+    String _name_14 = xpac.getName();
+    _builder.append(_name_14, "");
     _builder.append("_ReceiveMessage(void* self, etInt16 localId, const etMessage* msg);");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
@@ -219,8 +263,8 @@ public class ActorClassGen {
     _builder.append(_UserCode_1, "");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
-    String _name_13 = xpac.getName();
-    StringConcatenation _generateIncludeGuardEnd = this.stdExt.generateIncludeGuardEnd(_name_13);
+    String _name_15 = xpac.getName();
+    StringConcatenation _generateIncludeGuardEnd = this.stdExt.generateIncludeGuardEnd(_name_15);
     _builder.append(_generateIncludeGuardEnd, "");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
@@ -258,6 +302,9 @@ public class ActorClassGen {
     _builder.append("#include \"etLogger.h\"");
     _builder.newLine();
     _builder.newLine();
+    _builder.append("#include \"etMSCLogger.h\"");
+    _builder.newLine();
+    _builder.newLine();
     DetailCode _userCode3 = xpac.getUserCode3();
     StringConcatenation _UserCode = this.helpers.UserCode(_userCode3);
     _builder.append(_UserCode, "");
@@ -266,14 +313,99 @@ public class ActorClassGen {
     _builder.append("void ");
     String _name_1 = xpac.getName();
     _builder.append(_name_1, "");
+    _builder.append("_init(");
+    String _name_2 = xpac.getName();
+    _builder.append(_name_2, "");
+    _builder.append("* self){");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.append("ET_MSC_LOGGER_SYNC_ENTRY(\"");
+    String _name_3 = xpac.getName();
+    _builder.append(_name_3, "	");
+    _builder.append("\", \"init\")");
+    _builder.newLineIfNotEmpty();
+    {
+      ActorClass _actorClass = xpac.getActorClass();
+      List<Port> _endPorts = this.roomExt.getEndPorts(_actorClass);
+      final Function1<Port,Boolean> _function = new Function1<Port,Boolean>() {
+          public Boolean apply(final Port e) {
+            boolean _isConjugated = e.isConjugated();
+            return ((Boolean)_isConjugated);
+          }
+        };
+      Iterable<Port> _filter = IterableExtensions.<Port>filter(_endPorts, _function);
+      for(final Port port : _filter) {
+        {
+          ProtocolClass _protocol = port.getProtocol();
+          EList<Message> _incomingMessages = _protocol.getIncomingMessages();
+          for(final Message message : _incomingMessages) {
+            _builder.append("\t");
+            String _portClassName = this.roomExt.getPortClassName(port);
+            _builder.append(_portClassName, "	");
+            _builder.append("_");
+            String _name_4 = message.getName();
+            _builder.append(_name_4, "	");
+            _builder.append("(&self->constData->");
+            String _name_5 = port.getName();
+            _builder.append(_name_5, "	");
+            _builder.append(");");
+            _builder.newLineIfNotEmpty();
+          }
+        }
+      }
+    }
+    {
+      ActorClass _actorClass_1 = xpac.getActorClass();
+      List<Port> _endPorts_1 = this.roomExt.getEndPorts(_actorClass_1);
+      final Function1<Port,Boolean> _function_1 = new Function1<Port,Boolean>() {
+          public Boolean apply(final Port e) {
+            boolean _isConjugated = e.isConjugated();
+            boolean _operator_not = BooleanExtensions.operator_not(_isConjugated);
+            return ((Boolean)_operator_not);
+          }
+        };
+      Iterable<Port> _filter_1 = IterableExtensions.<Port>filter(_endPorts_1, _function_1);
+      for(final Port port_1 : _filter_1) {
+        {
+          ProtocolClass _protocol_1 = port_1.getProtocol();
+          EList<Message> _outgoingMessages = _protocol_1.getOutgoingMessages();
+          for(final Message message_1 : _outgoingMessages) {
+            _builder.append("\t");
+            String _portClassName_1 = this.roomExt.getPortClassName(port_1);
+            _builder.append(_portClassName_1, "	");
+            _builder.append("_");
+            String _name_6 = message_1.getName();
+            _builder.append(_name_6, "	");
+            _builder.append("(&self->constData->");
+            String _name_7 = port_1.getName();
+            _builder.append(_name_7, "	");
+            _builder.append(");");
+            _builder.newLineIfNotEmpty();
+          }
+        }
+      }
+    }
+    _builder.append("\t");
+    _builder.append("ET_MSC_LOGGER_SYNC_EXIT");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("void ");
+    String _name_8 = xpac.getName();
+    _builder.append(_name_8, "");
     _builder.append("_ReceiveMessage(void* self, etInt16 localId, const etMessage* msg){");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
-    _builder.append("etLogger_logInfoF(\"");
-    String _name_2 = xpac.getName();
-    _builder.append(_name_2, "	");
-    _builder.append("_ReceiveMessage\");");
+    _builder.append("ET_MSC_LOGGER_SYNC_ENTRY(\"");
+    String _name_9 = xpac.getName();
+    _builder.append(_name_9, "	");
+    _builder.append("\", \"ReceiveMessage\")");
     _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.append("ET_MSC_LOGGER_SYNC_EXIT");
+    _builder.newLine();
     _builder.append("}");
     _builder.newLine();
     _builder.newLine();

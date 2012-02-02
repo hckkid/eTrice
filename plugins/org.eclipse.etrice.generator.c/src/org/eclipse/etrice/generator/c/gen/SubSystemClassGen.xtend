@@ -100,6 +100,8 @@ class SubSystemClassGen {
 		#include "«ssc.getInstSourceFileName»"
 
 		#include "etLogger.h"
+		#include "etMSCLogger.h"
+		
 		
 		/* data for SubSysten «ssc.name» */
 		typedef struct «ssc.name» {
@@ -108,33 +110,56 @@ class SubSystemClassGen {
 		
 		static «ssc.name» «ssc.name»Inst = {"«ssc.name»"};
 		
+		void «ssc.name»_initActorInstances(void);
+
 		void «ssc.name»_init(void){
+			ET_MSC_LOGGER_SYNC_ENTRY("SubSys", "init")
 			etLogger_logInfoF("%s_init", «ssc.name»Inst.name);
 			
 			/* initialization of all message services */
 			etMessageService_init(&msgService_Thread1, msgBuffer_Thread1, MESSAGE_POOL_MAX, MESSAGE_BLOCK_SIZE);
 			
+			/* init all actors */
+			«ssc.name»_initActorInstances();
+			
+			ET_MSC_LOGGER_SYNC_EXIT
 		}
 		
 		void «ssc.name»_start(void){
+			ET_MSC_LOGGER_SYNC_ENTRY("SubSys", "start")
 			etLogger_logInfoF("%s_start", «ssc.name»Inst.name);
+			ET_MSC_LOGGER_SYNC_EXIT
 		}
 		
 		void «ssc.name»_run(void){
+			ET_MSC_LOGGER_SYNC_ENTRY("SubSys", "run")
 			int32 i;
 			for (i=0; i<100; i++){
 				etLogger_logInfoF("%s Scheduler tick %d", «ssc.name»Inst.name, i);
+				etMessageService_execute(&msgService_Thread1);
 			}
+			ET_MSC_LOGGER_SYNC_EXIT
 		}
 		
 		void «ssc.name»_stop(void){
+			ET_MSC_LOGGER_SYNC_ENTRY("SubSys", "stop")
 			etLogger_logInfoF("%s_stop", «ssc.name»Inst.name);
+			ET_MSC_LOGGER_SYNC_EXIT
 		}
 		
 		void «ssc.name»_destroy(void){
+			ET_MSC_LOGGER_SYNC_ENTRY("SubSys", "destroy")
 			etLogger_logInfoF("%s_destroy", «ssc.name»Inst.name);
+			ET_MSC_LOGGER_SYNC_EXIT
 		}
 
+		void «ssc.name»_initActorInstances(void){
+			ET_MSC_LOGGER_SYNC_ENTRY("«ssc.name»", "initActorInstances")
+			«FOR ai : ssi.allContainedInstances»
+				«ai.actorClass.name»_init(&«ai.path.getPathName()»);
+			«ENDFOR»
+			ET_MSC_LOGGER_SYNC_EXIT
+		}
 		
 	'''
 	}

@@ -112,6 +112,8 @@ class ProtocolClassGen {
 
 		#include "«pc.getCHeaderFileName»"
 		
+		#include "etMSCLogger.h"
+		
 		/*--------------------- port classes */
 		«portClassSource(pc, false)»
 		«portClassSource(pc, true)»
@@ -246,6 +248,19 @@ class ProtocolClassGen {
 		
 		typedef etPort «portClassName»;
 		
+		«IF !conj»
+«««			send functions for outgoing messages
+			«FOR message : pc.getAllOutgoingMessages()»
+				void «portClassName»_«message.name»(const «portClassName»* self);
+			«ENDFOR»
+		«ELSE»
+«««			send functions for incoming messages
+			«FOR message : pc.getAllIncomingMessages()»
+				void «portClassName»_«message.name»(const «portClassName»* self);
+			«ENDFOR»
+		«ENDIF»
+		
+		
 «««		«ClassOperationSignature(portClassName, "MyOperation1", "int a, int b", "void", true)»
 «««		«ClassOperationSignature(portClassName, "MyOperation2", "", "int", false)»
 		
@@ -255,8 +270,35 @@ class ProtocolClassGen {
 	
 	def portClassSource(ProtocolClass pc, Boolean conj){
 		'''
-		«var name = pc.getPortClassName(conj)»
-		«var pclass = pc.getPortClass(conj)»
+		«var portClassName = pc.getPortClassName(conj)»
+		«var pClass = pc.getPortClass(conj)»
+		
+		«IF !conj»
+«««			send functions for outgoing messages
+			«FOR message : pc.getAllOutgoingMessages()»
+				void «portClassName»_«message.name»(const «portClassName»* self){
+					ET_MSC_LOGGER_SYNC_ENTRY("«portClassName»", "«message.name»")
+					etMessage* msg = etMessageService_getMessageBuffer(self->msgService, sizeof(etMessage));
+					msg->address = self->peerAddress;
+					msg->evtID = «outMessageId(pc.name, message.name)»;
+					etMessageService_pushMessage(self->msgService, msg);
+					ET_MSC_LOGGER_SYNC_EXIT
+				}
+			«ENDFOR»
+		«ELSE»
+«««			send functions for incoming messages
+			«FOR message : pc.getAllIncomingMessages()»
+				void «portClassName»_«message.name»(const «portClassName»* self){
+					ET_MSC_LOGGER_SYNC_ENTRY("«portClassName»", "«message.name»")
+					etMessage* msg = etMessageService_getMessageBuffer(self->msgService, sizeof(etMessage));
+					msg->address = self->peerAddress;
+					msg->evtID = «inMessageId(pc.name, message.name)»;
+					etMessageService_pushMessage(self->msgService, msg);
+					ET_MSC_LOGGER_SYNC_EXIT
+				}
+			«ENDFOR»
+		«ENDIF»
+		
 		
 		'''
 	}

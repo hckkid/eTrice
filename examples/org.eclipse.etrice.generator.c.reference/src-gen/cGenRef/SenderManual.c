@@ -9,8 +9,19 @@
 
 #include "etLogger.h"
 
+#include "etMSCLogger.h"
+
+
+void SenderManual_init(SenderManual* self){
+	ET_MSC_LOGGER_SYNC_ENTRY("SenderManual", "init")
+	CommunicationProtocolConjPort_sendData(&self->constData->dataOut);
+	CommunicationProtocolConjPort_sendData2(&self->constData->dataOut);
+	ET_MSC_LOGGER_SYNC_EXIT
+}
+
 
 void SenderManual_ReceiveMessage(void* self, etInt16 localId, const etMessage* msg){
-	etLogger_logInfoF("SenderManual_ReceiveMessage");
+	ET_MSC_LOGGER_SYNC_ENTRY("SenderManual", "ReceiveMessage")
+	ET_MSC_LOGGER_SYNC_EXIT
 }
 

@@ -30,10 +30,17 @@ enum {
 
 typedef etPort CommunicationProtocolPort;
 
+void CommunicationProtocolPort_receivedData(const CommunicationProtocolPort* self);
+
+
 
 
 
 typedef etPort CommunicationProtocolConjPort;
+
+void CommunicationProtocolConjPort_sendData(const CommunicationProtocolConjPort* self);
+void CommunicationProtocolConjPort_sendData2(const CommunicationProtocolConjPort* self);
+
 
 
 

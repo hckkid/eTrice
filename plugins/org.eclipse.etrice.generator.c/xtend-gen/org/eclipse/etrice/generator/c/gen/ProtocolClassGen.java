@@ -19,6 +19,7 @@ import org.eclipse.etrice.generator.etricegen.Root;
 import org.eclipse.etrice.generator.extensions.RoomExtensions;
 import org.eclipse.etrice.generator.generic.ProcedureHelpers;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
+import org.eclipse.xtext.xbase.lib.BooleanExtensions;
 import org.eclipse.xtext.xbase.lib.IntegerExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
@@ -254,6 +255,9 @@ public class ProtocolClassGen {
     _builder.append("\"");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
+    _builder.append("#include \"etMSCLogger.h\"");
+    _builder.newLine();
+    _builder.newLine();
     _builder.append("/*--------------------- port classes */");
     _builder.newLine();
     StringConcatenation _portClassSource = this.portClassSource(pc, ((Boolean)false));
@@ -296,6 +300,42 @@ public class ProtocolClassGen {
     _builder.append(";");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
+    {
+      boolean _operator_not = BooleanExtensions.operator_not(conj);
+      if (_operator_not) {
+        {
+          List<Message> _allOutgoingMessages = this.roomExt.getAllOutgoingMessages(pc);
+          for(final Message message : _allOutgoingMessages) {
+            _builder.append("void ");
+            _builder.append(portClassName, "");
+            _builder.append("_");
+            String _name = message.getName();
+            _builder.append(_name, "");
+            _builder.append("(const ");
+            _builder.append(portClassName, "");
+            _builder.append("* self);");
+            _builder.newLineIfNotEmpty();
+          }
+        }
+      } else {
+        {
+          List<Message> _allIncomingMessages = this.roomExt.getAllIncomingMessages(pc);
+          for(final Message message_1 : _allIncomingMessages) {
+            _builder.append("void ");
+            _builder.append(portClassName, "");
+            _builder.append("_");
+            String _name_1 = message_1.getName();
+            _builder.append(_name_1, "");
+            _builder.append("(const ");
+            _builder.append(portClassName, "");
+            _builder.append("* self);");
+            _builder.newLineIfNotEmpty();
+          }
+        }
+      }
+    }
+    _builder.newLine();
+    _builder.newLine();
     _builder.newLine();
     _builder.newLine();
     return _builder;
@@ -304,11 +344,107 @@ public class ProtocolClassGen {
   public StringConcatenation portClassSource(final ProtocolClass pc, final Boolean conj) {
     StringConcatenation _builder = new StringConcatenation();
     String _portClassName = this.roomExt.getPortClassName(pc, conj);
-    String name = _portClassName;
+    String portClassName = _portClassName;
     _builder.newLineIfNotEmpty();
     PortClass _portClass = this.roomExt.getPortClass(pc, conj);
-    PortClass pclass = _portClass;
+    PortClass pClass = _portClass;
     _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    {
+      boolean _operator_not = BooleanExtensions.operator_not(conj);
+      if (_operator_not) {
+        {
+          List<Message> _allOutgoingMessages = this.roomExt.getAllOutgoingMessages(pc);
+          for(final Message message : _allOutgoingMessages) {
+            _builder.append("void ");
+            _builder.append(portClassName, "");
+            _builder.append("_");
+            String _name = message.getName();
+            _builder.append(_name, "");
+            _builder.append("(const ");
+            _builder.append(portClassName, "");
+            _builder.append("* self){");
+            _builder.newLineIfNotEmpty();
+            _builder.append("\t");
+            _builder.append("ET_MSC_LOGGER_SYNC_ENTRY(\"");
+            _builder.append(portClassName, "	");
+            _builder.append("\", \"");
+            String _name_1 = message.getName();
+            _builder.append(_name_1, "	");
+            _builder.append("\")");
+            _builder.newLineIfNotEmpty();
+            _builder.append("\t");
+            _builder.append("etMessage* msg = etMessageService_getMessageBuffer(self->msgService, sizeof(etMessage));");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append("msg->address = self->peerAddress;");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append("msg->evtID = ");
+            String _name_2 = pc.getName();
+            String _name_3 = message.getName();
+            String _outMessageId = this.stdExt.outMessageId(_name_2, _name_3);
+            _builder.append(_outMessageId, "	");
+            _builder.append(";");
+            _builder.newLineIfNotEmpty();
+            _builder.append("\t");
+            _builder.append("etMessageService_pushMessage(self->msgService, msg);");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append("ET_MSC_LOGGER_SYNC_EXIT");
+            _builder.newLine();
+            _builder.append("}");
+            _builder.newLine();
+          }
+        }
+      } else {
+        {
+          List<Message> _allIncomingMessages = this.roomExt.getAllIncomingMessages(pc);
+          for(final Message message_1 : _allIncomingMessages) {
+            _builder.append("void ");
+            _builder.append(portClassName, "");
+            _builder.append("_");
+            String _name_4 = message_1.getName();
+            _builder.append(_name_4, "");
+            _builder.append("(const ");
+            _builder.append(portClassName, "");
+            _builder.append("* self){");
+            _builder.newLineIfNotEmpty();
+            _builder.append("\t");
+            _builder.append("ET_MSC_LOGGER_SYNC_ENTRY(\"");
+            _builder.append(portClassName, "	");
+            _builder.append("\", \"");
+            String _name_5 = message_1.getName();
+            _builder.append(_name_5, "	");
+            _builder.append("\")");
+            _builder.newLineIfNotEmpty();
+            _builder.append("\t");
+            _builder.append("etMessage* msg = etMessageService_getMessageBuffer(self->msgService, sizeof(etMessage));");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append("msg->address = self->peerAddress;");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append("msg->evtID = ");
+            String _name_6 = pc.getName();
+            String _name_7 = message_1.getName();
+            String _inMessageId = this.stdExt.inMessageId(_name_6, _name_7);
+            _builder.append(_inMessageId, "	");
+            _builder.append(";");
+            _builder.newLineIfNotEmpty();
+            _builder.append("\t");
+            _builder.append("etMessageService_pushMessage(self->msgService, msg);");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append("ET_MSC_LOGGER_SYNC_EXIT");
+            _builder.newLine();
+            _builder.append("}");
+            _builder.newLine();
+          }
+        }
+      }
+    }
+    _builder.newLine();
     _builder.newLine();
     return _builder;
   }

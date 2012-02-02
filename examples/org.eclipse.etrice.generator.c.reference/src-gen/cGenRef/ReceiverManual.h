@@ -29,6 +29,8 @@ struct ReceiverManual {
 	const ReceiverManual_const* constData;
 };
 
+void ReceiverManual_init(ReceiverManual* self);
+
 void ReceiverManual_ReceiveMessage(void* self, etInt16 localId, const etMessage* msg);
 
 

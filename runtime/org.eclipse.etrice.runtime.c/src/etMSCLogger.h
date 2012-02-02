@@ -40,11 +40,16 @@ void etMSCLogger_asyncIn(char* sourceName, char* messageName, char* targetName);
 		etMSCLogger_syncCall(sourceName, message, targetName); 	\
 		etMSCLogger_setObjectName(targetName);
 
-	#define ET_MSC_LOGGER_SYNC_EXIT() \
+	#define ET_MSC_LOGGER_SYNC_EXIT \
 		etMSCLogger_syncReturn(sourceName, targetName); \
 		etMSCLogger_setObjectName(sourceName);
 
 #else
+	#define ET_MSC_LOGGER_OPEN
+	#define ET_MSC_LOGGER_CLOSE
+
+	#define ET_MSC_LOGGER_SYNC_ENTRY(object, message)
+	#define ET_MSC_LOGGER_SYNC_EXIT
 #endif
 
 

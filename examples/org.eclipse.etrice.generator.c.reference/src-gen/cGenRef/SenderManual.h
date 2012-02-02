@@ -30,6 +30,8 @@ struct SenderManual {
 	const SenderManual_const* constData;
 };
 
+void SenderManual_init(SenderManual* self);
+
 void SenderManual_ReceiveMessage(void* self, etInt16 localId, const etMessage* msg);
 
 

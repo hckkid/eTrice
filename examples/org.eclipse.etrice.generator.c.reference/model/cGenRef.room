@@ -132,7 +132,7 @@ RoomModel cGenRef {
 			Attribute attribute2: DataClass1
 		}
 		Behavior {
-			@BehaviorManual
+			//@BehaviorManual
 			Operation operation1(argument1:int32, argument2: DataClass1 ref){""}
 		}
 	}
@@ -144,7 +144,7 @@ RoomModel cGenRef {
 			external Port dataIn
 		}
 		Behavior {
-			@BehaviorManual
+			//@BehaviorManual
 		}
 	}		
 

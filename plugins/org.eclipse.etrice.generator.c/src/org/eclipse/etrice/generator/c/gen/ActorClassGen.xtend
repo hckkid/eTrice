@@ -48,11 +48,22 @@ class ActorClassGen {
 			fileAccess.setOutputPath(path)
 			fileAccess.generateFile(xpac.actorClass.getCHeaderFileName, root.generateHeaderFile(xpac, xpac.actorClass))
 
-			// header file
-			logger.logInfo("generating ActorClass header '"+xpac.actorClass.getCSourceFileName +"' in '"+path+"'")
-			fileAccess.setOutputPath(path)
-			fileAccess.generateFile(xpac.actorClass.getCSourceFileName , root.generateSourceFile(xpac, xpac.actorClass))
+			// source file
+			if(hasBehaviorAnnotation(xpac, "BehaviorManual") == false){
+				logger.logInfo("generating ActorClass header '"+xpac.actorClass.getCSourceFileName +"' in '"+path+"'")
+				fileAccess.setOutputPath(path)
+				fileAccess.generateFile(xpac.actorClass.getCSourceFileName , root.generateSourceFile(xpac, xpac.actorClass))
+			}
 		}
+	}
+	
+	def hasBehaviorAnnotation(ExpandedActorClass xpac, String annotation) {
+		if (xpac.actorClass.annotations != null){
+			if(xpac.actorClass.annotations.findFirst(e|e.name == annotation) != null){
+				return true;
+			}
+		}
+		return false;		
 	}
 	
 	def generateHeaderFile(Root root, ExpandedActorClass xpac, ActorClass ac) {'''
@@ -91,6 +102,8 @@ class ActorClassGen {
 		struct «xpac.name» {
 			const «xpac.name»_const* constData;
 		};
+
+		void «xpac.name»_init(«xpac.name»* self);
 
 		void «xpac.name»_ReceiveMessage(void* self, etInt16 localId, const etMessage* msg);
 		
@@ -205,11 +218,30 @@ class ActorClassGen {
 		#include "«xpac.getCHeaderFileName»"
 		
 		#include "etLogger.h"
+
+		#include "etMSCLogger.h"
 		
 		«helpers.UserCode(xpac.userCode3)»
 		
+		void «xpac.name»_init(«xpac.name»* self){
+			ET_MSC_LOGGER_SYNC_ENTRY("«xpac.name»", "init")
+			«FOR port : xpac.actorClass.endPorts.filter(e|e.conjugated)»
+				«FOR message : port.protocol.incomingMessages»
+					«port.getPortClassName()»_«message.name»(&self->constData->«port.name»);
+				«ENDFOR»
+			«ENDFOR»
+			«FOR port : xpac.actorClass.endPorts.filter(e| !e.conjugated)»
+				«FOR message : port.protocol.outgoingMessages»
+					«port.getPortClassName()»_«message.name»(&self->constData->«port.name»);
+				«ENDFOR»
+			«ENDFOR»
+			ET_MSC_LOGGER_SYNC_EXIT
+		}
+		
+		
 		void «xpac.name»_ReceiveMessage(void* self, etInt16 localId, const etMessage* msg){
-			etLogger_logInfoF("«xpac.name»_ReceiveMessage");
+			ET_MSC_LOGGER_SYNC_ENTRY("«xpac.name»", "ReceiveMessage")
+			ET_MSC_LOGGER_SYNC_EXIT
 		}
 		
 		'''

@@ -7,7 +7,37 @@
 
 #include "CommunicationProtocol.h"
 
+#include "etMSCLogger.h"
+
 /*--------------------- port classes */
+
+void CommunicationProtocolPort_receivedData(const CommunicationProtocolPort* self){
+	ET_MSC_LOGGER_SYNC_ENTRY("CommunicationProtocolPort", "receivedData")
+	etMessage* msg = etMessageService_getMessageBuffer(self->msgService, sizeof(etMessage));
+	msg->address = self->peerAddress;
+	msg->evtID = CommunicationProtocol_OUT_receivedData;
+	etMessageService_pushMessage(self->msgService, msg);
+	ET_MSC_LOGGER_SYNC_EXIT
+}
+
+
+
+void CommunicationProtocolConjPort_sendData(const CommunicationProtocolConjPort* self){
+	ET_MSC_LOGGER_SYNC_ENTRY("CommunicationProtocolConjPort", "sendData")
+	etMessage* msg = etMessageService_getMessageBuffer(self->msgService, sizeof(etMessage));
+	msg->address = self->peerAddress;
+	msg->evtID = CommunicationProtocol_IN_sendData;
+	etMessageService_pushMessage(self->msgService, msg);
+	ET_MSC_LOGGER_SYNC_EXIT
+}
+void CommunicationProtocolConjPort_sendData2(const CommunicationProtocolConjPort* self){
+	ET_MSC_LOGGER_SYNC_ENTRY("CommunicationProtocolConjPort", "sendData2")
+	etMessage* msg = etMessageService_getMessageBuffer(self->msgService, sizeof(etMessage));
+	msg->address = self->peerAddress;
+	msg->evtID = CommunicationProtocol_IN_sendData2;
+	etMessageService_pushMessage(self->msgService, msg);
+	ET_MSC_LOGGER_SYNC_EXIT
+}
 
 
 

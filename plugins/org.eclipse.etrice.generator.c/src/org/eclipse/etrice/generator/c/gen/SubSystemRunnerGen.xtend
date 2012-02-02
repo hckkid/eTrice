@@ -46,6 +46,8 @@ class SubSystemRunnerGen {
 		#include "«ssi.name».h"
 
 		#include "etLogger.h"
+		#include "etMSCLogger.h"
+		
 		
 		/**
 		 * main function
@@ -55,6 +57,7 @@ class SubSystemRunnerGen {
 		int main(void) {
 		
 			etLogger_logInfo("***   T H E   B E G I N   ***");
+			ET_MSC_LOGGER_OPEN("main");
 		
 			/* startup sequence  of lifecycle */
 			«ssi.name»_init(); 		/* lifecycle init */
@@ -67,6 +70,7 @@ class SubSystemRunnerGen {
 			«ssi.name»_stop(); 		/* lifecycle stop */
 			«ssi.name»_destroy(); 	/* lifecycle destroy */
 		
+			ET_MSC_LOGGER_CLOSE
 			etLogger_logInfo("***   T H E   E N D   ***");
 		
 			return 0;

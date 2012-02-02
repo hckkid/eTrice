@@ -9,8 +9,18 @@
 
 #include "etLogger.h"
 
+#include "etMSCLogger.h"
+
+
+void ReceiverManual_init(ReceiverManual* self){
+	ET_MSC_LOGGER_SYNC_ENTRY("ReceiverManual", "init")
+	CommunicationProtocolPort_receivedData(&self->constData->dataIn);
+	ET_MSC_LOGGER_SYNC_EXIT
+}
+
 
 void ReceiverManual_ReceiveMessage(void* self, etInt16 localId, const etMessage* msg){
-	etLogger_logInfoF("ReceiverManual_ReceiveMessage");
+	ET_MSC_LOGGER_SYNC_ENTRY("ReceiverManual", "ReceiveMessage")
+	ET_MSC_LOGGER_SYNC_EXIT
 }
 
