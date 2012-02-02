@@ -43,15 +43,7 @@ public class ETricePreferencePage
 	
 	public void createFieldEditors() {
 		addLabel("");
-		addLabel("Behavior Editor");
-		addField(
-				new BooleanFieldEditor(
-					PreferenceConstants.DATA_DRIVEN_FSM,
-					"Create &data_driven StateMachine as default",
-					getFieldEditorParent()));
-
-		addLabel("");
-		addLabel("All Diagram Editors");
+		addLabel("Diagram Editors");
 		addField(
 				new BooleanFieldEditor(
 					PreferenceConstants.CONFIRM_DELETE,
