@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import org.eclipse.etrice.core.room.ActorClass;
+import org.eclipse.etrice.core.room.ActorCommunicationType;
 import org.eclipse.etrice.core.room.ActorContainerClass;
 import org.eclipse.etrice.core.room.ActorContainerRef;
 import org.eclipse.etrice.core.room.ActorInstancePath;
@@ -27,6 +28,7 @@ import org.eclipse.etrice.core.room.BindingEndPoint;
 import org.eclipse.etrice.core.room.CPBranchTransition;
 import org.eclipse.etrice.core.room.ChoicePoint;
 import org.eclipse.etrice.core.room.ChoicepointTerminal;
+import org.eclipse.etrice.core.room.CommunicationType;
 import org.eclipse.etrice.core.room.ComplexType;
 import org.eclipse.etrice.core.room.ContinuationTransition;
 import org.eclipse.etrice.core.room.DataClass;
@@ -34,7 +36,6 @@ import org.eclipse.etrice.core.room.DataType;
 import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.Documentation;
 import org.eclipse.etrice.core.room.EntryPoint;
-import org.eclipse.etrice.core.room.ExecutionModel;
 import org.eclipse.etrice.core.room.ExitPoint;
 import org.eclipse.etrice.core.room.ExternalPort;
 import org.eclipse.etrice.core.room.ExternalType;
@@ -615,7 +616,14 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  private EEnum executionModelEEnum = null;
+  private EEnum communicationTypeEEnum = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EEnum actorCommunicationTypeEEnum = null;
 
   /**
    * Creates an instance of the model <b>Package</b>, registered with
@@ -1285,9 +1293,9 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getProtocolClass_Base()
+  public EAttribute getProtocolClass_CommType()
   {
-    return (EReference)protocolClassEClass.getEStructuralFeatures().get(0);
+    return (EAttribute)protocolClassEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -1295,7 +1303,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getProtocolClass_UserCode1()
+  public EReference getProtocolClass_Base()
   {
     return (EReference)protocolClassEClass.getEStructuralFeatures().get(1);
   }
@@ -1305,7 +1313,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getProtocolClass_UserCode2()
+  public EReference getProtocolClass_UserCode1()
   {
     return (EReference)protocolClassEClass.getEStructuralFeatures().get(2);
   }
@@ -1315,7 +1323,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getProtocolClass_UserCode3()
+  public EReference getProtocolClass_UserCode2()
   {
     return (EReference)protocolClassEClass.getEStructuralFeatures().get(3);
   }
@@ -1325,7 +1333,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getProtocolClass_IncomingMessages()
+  public EReference getProtocolClass_UserCode3()
   {
     return (EReference)protocolClassEClass.getEStructuralFeatures().get(4);
   }
@@ -1335,7 +1343,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getProtocolClass_OutgoingMessages()
+  public EReference getProtocolClass_IncomingMessages()
   {
     return (EReference)protocolClassEClass.getEStructuralFeatures().get(5);
   }
@@ -1345,7 +1353,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getProtocolClass_Regular()
+  public EReference getProtocolClass_OutgoingMessages()
   {
     return (EReference)protocolClassEClass.getEStructuralFeatures().get(6);
   }
@@ -1355,7 +1363,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getProtocolClass_Conjugate()
+  public EReference getProtocolClass_Regular()
   {
     return (EReference)protocolClassEClass.getEStructuralFeatures().get(7);
   }
@@ -1365,9 +1373,19 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getProtocolClass_Semantics()
+  public EReference getProtocolClass_Conjugate()
   {
     return (EReference)protocolClassEClass.getEStructuralFeatures().get(8);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getProtocolClass_Semantics()
+  {
+    return (EReference)protocolClassEClass.getEStructuralFeatures().get(9);
   }
 
   /**
@@ -1575,7 +1593,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getActorClass_ExecModel()
+  public EAttribute getActorClass_CommType()
   {
     return (EAttribute)actorClassEClass.getEStructuralFeatures().get(1);
   }
@@ -2905,9 +2923,19 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EEnum getExecutionModel()
+  public EEnum getCommunicationType()
   {
-    return executionModelEEnum;
+    return communicationTypeEEnum;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EEnum getActorCommunicationType()
+  {
+    return actorCommunicationTypeEEnum;
   }
 
   /**
@@ -3015,6 +3043,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
     createEReference(portOperationEClass, PORT_OPERATION__SENDS_MSG);
 
     protocolClassEClass = createEClass(PROTOCOL_CLASS);
+    createEAttribute(protocolClassEClass, PROTOCOL_CLASS__COMM_TYPE);
     createEReference(protocolClassEClass, PROTOCOL_CLASS__BASE);
     createEReference(protocolClassEClass, PROTOCOL_CLASS__USER_CODE1);
     createEReference(protocolClassEClass, PROTOCOL_CLASS__USER_CODE2);
@@ -3050,7 +3079,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
 
     actorClassEClass = createEClass(ACTOR_CLASS);
     createEAttribute(actorClassEClass, ACTOR_CLASS__ABSTRACT);
-    createEAttribute(actorClassEClass, ACTOR_CLASS__EXEC_MODEL);
+    createEAttribute(actorClassEClass, ACTOR_CLASS__COMM_TYPE);
     createEReference(actorClassEClass, ACTOR_CLASS__BASE);
     createEReference(actorClassEClass, ACTOR_CLASS__IF_PORTS);
     createEReference(actorClassEClass, ACTOR_CLASS__STRUCTURE_DOCU);
@@ -3236,7 +3265,8 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
     createEAttribute(importEClass, IMPORT__IMPORT_URI);
 
     // Create enums
-    executionModelEEnum = createEEnum(EXECUTION_MODEL);
+    communicationTypeEEnum = createEEnum(COMMUNICATION_TYPE);
+    actorCommunicationTypeEEnum = createEEnum(ACTOR_COMMUNICATION_TYPE);
   }
 
   /**
@@ -3385,6 +3415,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
     initEReference(getPortOperation_SendsMsg(), this.getMessage(), null, "sendsMsg", null, 0, 1, PortOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(protocolClassEClass, ProtocolClass.class, "ProtocolClass", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getProtocolClass_CommType(), this.getCommunicationType(), "commType", null, 0, 1, ProtocolClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getProtocolClass_Base(), this.getProtocolClass(), null, "base", null, 0, 1, ProtocolClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getProtocolClass_UserCode1(), this.getDetailCode(), null, "userCode1", null, 0, 1, ProtocolClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getProtocolClass_UserCode2(), this.getDetailCode(), null, "userCode2", null, 0, 1, ProtocolClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3420,7 +3451,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
 
     initEClass(actorClassEClass, ActorClass.class, "ActorClass", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getActorClass_Abstract(), ecorePackage.getEBoolean(), "abstract", null, 0, 1, ActorClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getActorClass_ExecModel(), this.getExecutionModel(), "execModel", null, 0, 1, ActorClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getActorClass_CommType(), this.getActorCommunicationType(), "commType", null, 0, 1, ActorClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getActorClass_Base(), this.getActorClass(), null, "base", null, 0, 1, ActorClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getActorClass_IfPorts(), this.getPort(), null, "ifPorts", null, 0, -1, ActorClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getActorClass_StructureDocu(), this.getDocumentation(), null, "structureDocu", null, 0, 1, ActorClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3612,9 +3643,16 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
     initEAttribute(getImport_ImportURI(), ecorePackage.getEString(), "importURI", null, 0, 1, Import.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Initialize enums and add enum literals
-    initEEnum(executionModelEEnum, ExecutionModel.class, "ExecutionModel");
-    addEEnumLiteral(executionModelEEnum, ExecutionModel.EVENT_DRIVEN);
-    addEEnumLiteral(executionModelEEnum, ExecutionModel.DATA_DRIVEN);
+    initEEnum(communicationTypeEEnum, CommunicationType.class, "CommunicationType");
+    addEEnumLiteral(communicationTypeEEnum, CommunicationType.EVENT_DRIVEN);
+    addEEnumLiteral(communicationTypeEEnum, CommunicationType.DATA_DRIVEN);
+    addEEnumLiteral(communicationTypeEEnum, CommunicationType.SYNCHRONOUS);
+
+    initEEnum(actorCommunicationTypeEEnum, ActorCommunicationType.class, "ActorCommunicationType");
+    addEEnumLiteral(actorCommunicationTypeEEnum, ActorCommunicationType.EVENT_DRIVEN);
+    addEEnumLiteral(actorCommunicationTypeEEnum, ActorCommunicationType.DATA_DRIVEN);
+    addEEnumLiteral(actorCommunicationTypeEEnum, ActorCommunicationType.ASYNCHRONOUS);
+    addEEnumLiteral(actorCommunicationTypeEEnum, ActorCommunicationType.SYNCHRONOUS);
 
     // Create resource
     createResource(eNS_URI);

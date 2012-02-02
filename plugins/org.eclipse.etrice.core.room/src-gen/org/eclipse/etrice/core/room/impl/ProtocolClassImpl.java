@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
+import org.eclipse.etrice.core.room.CommunicationType;
 import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.PortClass;
@@ -35,6 +36,7 @@ import org.eclipse.etrice.core.room.RoomPackage;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link org.eclipse.etrice.core.room.impl.ProtocolClassImpl#getCommType <em>Comm Type</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ProtocolClassImpl#getBase <em>Base</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ProtocolClassImpl#getUserCode1 <em>User Code1</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ProtocolClassImpl#getUserCode2 <em>User Code2</em>}</li>
@@ -51,6 +53,26 @@ import org.eclipse.etrice.core.room.RoomPackage;
  */
 public class ProtocolClassImpl extends RoomClassImpl implements ProtocolClass
 {
+  /**
+   * The default value of the '{@link #getCommType() <em>Comm Type</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getCommType()
+   * @generated
+   * @ordered
+   */
+  protected static final CommunicationType COMM_TYPE_EDEFAULT = CommunicationType.EVENT_DRIVEN;
+
+  /**
+   * The cached value of the '{@link #getCommType() <em>Comm Type</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getCommType()
+   * @generated
+   * @ordered
+   */
+  protected CommunicationType commType = COMM_TYPE_EDEFAULT;
+
   /**
    * The cached value of the '{@link #getBase() <em>Base</em>}' reference.
    * <!-- begin-user-doc -->
@@ -160,6 +182,29 @@ public class ProtocolClassImpl extends RoomClassImpl implements ProtocolClass
   protected EClass eStaticClass()
   {
     return RoomPackage.Literals.PROTOCOL_CLASS;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public CommunicationType getCommType()
+  {
+    return commType;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setCommType(CommunicationType newCommType)
+  {
+    CommunicationType oldCommType = commType;
+    commType = newCommType == null ? COMM_TYPE_EDEFAULT : newCommType;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.PROTOCOL_CLASS__COMM_TYPE, oldCommType, commType));
   }
 
   /**
@@ -561,6 +606,8 @@ public class ProtocolClassImpl extends RoomClassImpl implements ProtocolClass
   {
     switch (featureID)
     {
+      case RoomPackage.PROTOCOL_CLASS__COMM_TYPE:
+        return getCommType();
       case RoomPackage.PROTOCOL_CLASS__BASE:
         if (resolve) return getBase();
         return basicGetBase();
@@ -595,6 +642,9 @@ public class ProtocolClassImpl extends RoomClassImpl implements ProtocolClass
   {
     switch (featureID)
     {
+      case RoomPackage.PROTOCOL_CLASS__COMM_TYPE:
+        setCommType((CommunicationType)newValue);
+        return;
       case RoomPackage.PROTOCOL_CLASS__BASE:
         setBase((ProtocolClass)newValue);
         return;
@@ -638,6 +688,9 @@ public class ProtocolClassImpl extends RoomClassImpl implements ProtocolClass
   {
     switch (featureID)
     {
+      case RoomPackage.PROTOCOL_CLASS__COMM_TYPE:
+        setCommType(COMM_TYPE_EDEFAULT);
+        return;
       case RoomPackage.PROTOCOL_CLASS__BASE:
         setBase((ProtocolClass)null);
         return;
@@ -679,6 +732,8 @@ public class ProtocolClassImpl extends RoomClassImpl implements ProtocolClass
   {
     switch (featureID)
     {
+      case RoomPackage.PROTOCOL_CLASS__COMM_TYPE:
+        return commType != COMM_TYPE_EDEFAULT;
       case RoomPackage.PROTOCOL_CLASS__BASE:
         return base != null;
       case RoomPackage.PROTOCOL_CLASS__USER_CODE1:
@@ -699,6 +754,23 @@ public class ProtocolClassImpl extends RoomClassImpl implements ProtocolClass
         return semantics != null;
     }
     return super.eIsSet(featureID);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String toString()
+  {
+    if (eIsProxy()) return super.toString();
+
+    StringBuffer result = new StringBuffer(super.toString());
+    result.append(" (commType: ");
+    result.append(commType);
+    result.append(')');
+    return result.toString();
   }
 
 } //ProtocolClassImpl

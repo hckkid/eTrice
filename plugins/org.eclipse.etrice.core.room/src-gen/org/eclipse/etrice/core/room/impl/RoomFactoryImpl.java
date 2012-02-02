@@ -157,8 +157,10 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
   {
     switch (eDataType.getClassifierID())
     {
-      case RoomPackage.EXECUTION_MODEL:
-        return createExecutionModelFromString(eDataType, initialValue);
+      case RoomPackage.COMMUNICATION_TYPE:
+        return createCommunicationTypeFromString(eDataType, initialValue);
+      case RoomPackage.ACTOR_COMMUNICATION_TYPE:
+        return createActorCommunicationTypeFromString(eDataType, initialValue);
       default:
         throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
     }
@@ -174,8 +176,10 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
   {
     switch (eDataType.getClassifierID())
     {
-      case RoomPackage.EXECUTION_MODEL:
-        return convertExecutionModelToString(eDataType, instanceValue);
+      case RoomPackage.COMMUNICATION_TYPE:
+        return convertCommunicationTypeToString(eDataType, instanceValue);
+      case RoomPackage.ACTOR_COMMUNICATION_TYPE:
+        return convertActorCommunicationTypeToString(eDataType, instanceValue);
       default:
         throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
     }
@@ -989,9 +993,9 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public ExecutionModel createExecutionModelFromString(EDataType eDataType, String initialValue)
+  public CommunicationType createCommunicationTypeFromString(EDataType eDataType, String initialValue)
   {
-    ExecutionModel result = ExecutionModel.get(initialValue);
+    CommunicationType result = CommunicationType.get(initialValue);
     if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
     return result;
   }
@@ -1001,7 +1005,29 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public String convertExecutionModelToString(EDataType eDataType, Object instanceValue)
+  public String convertCommunicationTypeToString(EDataType eDataType, Object instanceValue)
+  {
+    return instanceValue == null ? null : instanceValue.toString();
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ActorCommunicationType createActorCommunicationTypeFromString(EDataType eDataType, String initialValue)
+  {
+    ActorCommunicationType result = ActorCommunicationType.get(initialValue);
+    if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+    return result;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public String convertActorCommunicationTypeToString(EDataType eDataType, Object instanceValue)
   {
     return instanceValue == null ? null : instanceValue.toString();
   }

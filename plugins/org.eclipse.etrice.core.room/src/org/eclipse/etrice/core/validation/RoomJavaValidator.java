@@ -19,19 +19,21 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.etrice.core.room.ActorClass;
+import org.eclipse.etrice.core.room.ActorCommunicationType;
 import org.eclipse.etrice.core.room.ActorContainerClass;
 import org.eclipse.etrice.core.room.ActorInstancePath;
 import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.Binding;
+import org.eclipse.etrice.core.room.CommunicationType;
 import org.eclipse.etrice.core.room.DataClass;
-import org.eclipse.etrice.core.room.ExecutionModel;
 import org.eclipse.etrice.core.room.ExternalType;
 import org.eclipse.etrice.core.room.Import;
 import org.eclipse.etrice.core.room.InitialTransition;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.LayerConnection;
 import org.eclipse.etrice.core.room.LogicalSystem;
+import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.NonInitialTransition;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.ProtocolClass;
@@ -167,12 +169,12 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 	
 	@Check
 	public void checkExecModelConsistent(ActorClass ac) {
-		ExecutionModel dataDriven = ac.getExecModel();
+		ActorCommunicationType commType = ac.getCommType();
 		while (ac.getBase()!=null) {
 			ac = ac.getBase();
 
-			if (dataDriven!=ac.getExecModel())
-				error("data_driven attribute not consistent in inheritance hierarchy", RoomPackage.eINSTANCE.getActorClass_ExecModel());
+			if (commType!=ac.getCommType())
+				error("data_driven attribute not consistent in inheritance hierarchy", RoomPackage.eINSTANCE.getActorClass_CommType());
 		}
 	}
 	
@@ -277,8 +279,29 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 	
 	@Check
 	public void checkProtocol(ProtocolClass pc) {
-		if (pc.getIncomingMessages().isEmpty() && pc.getOutgoingMessages().isEmpty())
-			error("at least one message (incoming or outgoing) must be defined", RoomPackage.Literals.PROTOCOL_CLASS__INCOMING_MESSAGES);
+		switch (pc.getCommType()) {
+		case DATA_DRIVEN:
+			if (pc.getIncomingMessages().isEmpty())
+				error("at least one incoming message must be defined", RoomPackage.Literals.PROTOCOL_CLASS__INCOMING_MESSAGES);
+			if (!pc.getOutgoingMessages().isEmpty())
+				error("data driven protocols must have no outgoing messages", RoomPackage.Literals.PROTOCOL_CLASS__OUTGOING_MESSAGES);
+			break;
+		case EVENT_DRIVEN:
+			if (pc.getIncomingMessages().isEmpty() && pc.getOutgoingMessages().isEmpty())
+				error("at least one message (incoming or outgoing) must be defined", RoomPackage.Literals.PROTOCOL_CLASS__INCOMING_MESSAGES);
+			break;
+		case SYNCHRONOUS:
+			break;
+		default:
+		}
+	}
+	
+	@Check
+	public void checkMessage(Message msg) {
+		ProtocolClass pc = (ProtocolClass) msg.eContainer();
+		if (pc.getCommType()==CommunicationType.DATA_DRIVEN)
+			if (msg.getData()==null)
+				error("Messages of data driven protocols must carry data", RoomPackage.Literals.MESSAGE__DATA);
 	}
 	
 	private void error(Result result) {

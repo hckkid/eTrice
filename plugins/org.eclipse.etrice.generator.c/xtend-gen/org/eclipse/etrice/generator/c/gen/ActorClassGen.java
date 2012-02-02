@@ -16,7 +16,7 @@ import org.eclipse.etrice.core.room.SAPRef;
 import org.eclipse.etrice.core.room.SPPRef;
 import org.eclipse.etrice.core.room.ServiceImplementation;
 import org.eclipse.etrice.core.room.StandardOperation;
-import org.eclipse.etrice.core.room.StateMachine;
+import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.generator.base.ILogger;
 import org.eclipse.etrice.generator.c.gen.CExtensions;
@@ -505,7 +505,7 @@ public class ActorClassGen {
     _builder.newLine();
     _builder.newLine();
     {
-      StateMachine _stateMachine = ac.getStateMachine();
+      StateGraph _stateMachine = ac.getStateMachine();
       boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(_stateMachine, null);
       if (_operator_notEquals_1) {
         _builder.append("\t");

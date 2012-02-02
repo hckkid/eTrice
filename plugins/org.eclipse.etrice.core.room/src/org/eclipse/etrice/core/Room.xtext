@@ -89,7 +89,14 @@ PortOperation:
 // **************************************************************
 // protocol class
 
+enum CommunicationType:
+	EVENT_DRIVEN='eventdriven' |
+	DATA_DRIVEN='datadriven' |
+	SYNCHRONOUS='sync'
+;
+
 ProtocolClass:
+	(commType=CommunicationType)?
 	'ProtocolClass' name=ID (docu=Documentation)? ('extends' base=[ProtocolClass|FQN])? '{'
 		('usercode1' userCode1=DetailCode)?
 		('usercode2' userCode2=DetailCode)?
@@ -137,11 +144,13 @@ SemanticsRule: msg=[Message|ID]
 // **************************************************************
 // actor class
 
-enum ExecutionModel:
-	EVENT_DRIVEN='eventDriven' |
-	DATA_DRIVEN='dataDriven'
-	// SYNCHRONOUS='sync'
+enum ActorCommunicationType:
+	EVENT_DRIVEN='eventdriven' |
+	DATA_DRIVEN='datadriven' |
+	ASYNCHRONOUS='async' |
+	SYNCHRONOUS='sync'
 ;
+
 // some notes on ports
 //
 // in ROOM ports can be contained in the structure and/or the interface
@@ -150,7 +159,7 @@ enum ExecutionModel:
 // p in i and p in s ==> external end port
 // since double containment is not supported we decided to define external ports as reference to interface ports
 ActorClass:
-	(abstract?='abstract'? & execModel=ExecutionModel?)
+	(abstract?='abstract'? & commType=ActorCommunicationType?)
 	'ActorClass' name=ID (docu=Documentation)? ('extends' base=[ActorClass|FQN])? '{'
 		('Interface' '{'
 			ifPorts+=Port*
@@ -204,7 +213,6 @@ SubSystemRef:
 	'SubSystemRef' name=ID ':' type=[SubSystemClass|FQN] (docu=Documentation)?;
 
 SubSystemClass:
-	//	(execModel=ExecutionModel)?
 	'SubSystemClass' name=ID (docu=Documentation)? '{'
 		('usercode1' userCode1=DetailCode)?
 		('usercode2' userCode2=DetailCode)?

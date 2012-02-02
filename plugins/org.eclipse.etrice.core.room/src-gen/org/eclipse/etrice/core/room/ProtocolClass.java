@@ -16,6 +16,7 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
+ *   <li>{@link org.eclipse.etrice.core.room.ProtocolClass#getCommType <em>Comm Type</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.ProtocolClass#getBase <em>Base</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.ProtocolClass#getUserCode1 <em>User Code1</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.ProtocolClass#getUserCode2 <em>User Code2</em>}</li>
@@ -34,6 +35,35 @@ import org.eclipse.emf.common.util.EList;
  */
 public interface ProtocolClass extends RoomClass
 {
+  /**
+   * Returns the value of the '<em><b>Comm Type</b></em>' attribute.
+   * The literals are from the enumeration {@link org.eclipse.etrice.core.room.CommunicationType}.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Comm Type</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Comm Type</em>' attribute.
+   * @see org.eclipse.etrice.core.room.CommunicationType
+   * @see #setCommType(CommunicationType)
+   * @see org.eclipse.etrice.core.room.RoomPackage#getProtocolClass_CommType()
+   * @model
+   * @generated
+   */
+  CommunicationType getCommType();
+
+  /**
+   * Sets the value of the '{@link org.eclipse.etrice.core.room.ProtocolClass#getCommType <em>Comm Type</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Comm Type</em>' attribute.
+   * @see org.eclipse.etrice.core.room.CommunicationType
+   * @see #getCommType()
+   * @generated
+   */
+  void setCommType(CommunicationType value);
+
   /**
    * Returns the value of the '<em><b>Base</b></em>' reference.
    * <!-- begin-user-doc -->

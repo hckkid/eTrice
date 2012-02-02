@@ -27,7 +27,7 @@ import org.eclipse.etrice.core.room.ActorContainerRef;
 import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.Binding;
 import org.eclipse.etrice.core.room.BindingEndPoint;
-import org.eclipse.etrice.core.room.ExecutionModel;
+import org.eclipse.etrice.core.room.CommunicationType;
 import org.eclipse.etrice.core.room.ExternalPort;
 import org.eclipse.etrice.core.room.LayerConnection;
 import org.eclipse.etrice.core.room.Port;
@@ -765,8 +765,8 @@ public class GeneratorModelBuilder {
 			if (obj instanceof ActorInstance) {
 				ActorInstance ai = (ActorInstance) obj;
 				ActorClass ac = ai.getActorClass();
-				if (ac.getExecModel()!=ExecutionModel.DATA_DRIVEN) {
-					for (PortInstance pi : ai.getPorts()) {
+				for (PortInstance pi : ai.getPorts()) {
+					if (pi.getPort().getProtocol().getCommType()==CommunicationType.EVENT_DRIVEN) {
 						if (pi.getKind()!=PortKind.RELAY) {
 							if (pi.getBindings().size()>pi.getPort().getMultiplicity() && pi.getPort().getMultiplicity()!=-1) {
 								EStructuralFeature feature = RoomPackage.eINSTANCE.getActorClass_IfPorts();

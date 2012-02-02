@@ -1005,13 +1005,22 @@ public interface RoomPackage extends EPackage
   int PROTOCOL_CLASS__DOCU = ROOM_CLASS__DOCU;
 
   /**
+   * The feature id for the '<em><b>Comm Type</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PROTOCOL_CLASS__COMM_TYPE = ROOM_CLASS_FEATURE_COUNT + 0;
+
+  /**
    * The feature id for the '<em><b>Base</b></em>' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int PROTOCOL_CLASS__BASE = ROOM_CLASS_FEATURE_COUNT + 0;
+  int PROTOCOL_CLASS__BASE = ROOM_CLASS_FEATURE_COUNT + 1;
 
   /**
    * The feature id for the '<em><b>User Code1</b></em>' containment reference.
@@ -1020,7 +1029,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int PROTOCOL_CLASS__USER_CODE1 = ROOM_CLASS_FEATURE_COUNT + 1;
+  int PROTOCOL_CLASS__USER_CODE1 = ROOM_CLASS_FEATURE_COUNT + 2;
 
   /**
    * The feature id for the '<em><b>User Code2</b></em>' containment reference.
@@ -1029,7 +1038,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int PROTOCOL_CLASS__USER_CODE2 = ROOM_CLASS_FEATURE_COUNT + 2;
+  int PROTOCOL_CLASS__USER_CODE2 = ROOM_CLASS_FEATURE_COUNT + 3;
 
   /**
    * The feature id for the '<em><b>User Code3</b></em>' containment reference.
@@ -1038,7 +1047,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int PROTOCOL_CLASS__USER_CODE3 = ROOM_CLASS_FEATURE_COUNT + 3;
+  int PROTOCOL_CLASS__USER_CODE3 = ROOM_CLASS_FEATURE_COUNT + 4;
 
   /**
    * The feature id for the '<em><b>Incoming Messages</b></em>' containment reference list.
@@ -1047,7 +1056,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int PROTOCOL_CLASS__INCOMING_MESSAGES = ROOM_CLASS_FEATURE_COUNT + 4;
+  int PROTOCOL_CLASS__INCOMING_MESSAGES = ROOM_CLASS_FEATURE_COUNT + 5;
 
   /**
    * The feature id for the '<em><b>Outgoing Messages</b></em>' containment reference list.
@@ -1056,7 +1065,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int PROTOCOL_CLASS__OUTGOING_MESSAGES = ROOM_CLASS_FEATURE_COUNT + 5;
+  int PROTOCOL_CLASS__OUTGOING_MESSAGES = ROOM_CLASS_FEATURE_COUNT + 6;
 
   /**
    * The feature id for the '<em><b>Regular</b></em>' containment reference.
@@ -1065,7 +1074,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int PROTOCOL_CLASS__REGULAR = ROOM_CLASS_FEATURE_COUNT + 6;
+  int PROTOCOL_CLASS__REGULAR = ROOM_CLASS_FEATURE_COUNT + 7;
 
   /**
    * The feature id for the '<em><b>Conjugate</b></em>' containment reference.
@@ -1074,7 +1083,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int PROTOCOL_CLASS__CONJUGATE = ROOM_CLASS_FEATURE_COUNT + 7;
+  int PROTOCOL_CLASS__CONJUGATE = ROOM_CLASS_FEATURE_COUNT + 8;
 
   /**
    * The feature id for the '<em><b>Semantics</b></em>' containment reference.
@@ -1083,7 +1092,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int PROTOCOL_CLASS__SEMANTICS = ROOM_CLASS_FEATURE_COUNT + 8;
+  int PROTOCOL_CLASS__SEMANTICS = ROOM_CLASS_FEATURE_COUNT + 9;
 
   /**
    * The number of structural features of the '<em>Protocol Class</em>' class.
@@ -1092,7 +1101,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int PROTOCOL_CLASS_FEATURE_COUNT = ROOM_CLASS_FEATURE_COUNT + 9;
+  int PROTOCOL_CLASS_FEATURE_COUNT = ROOM_CLASS_FEATURE_COUNT + 10;
 
   /**
    * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.MessageImpl <em>Message</em>}' class.
@@ -1407,13 +1416,13 @@ public interface RoomPackage extends EPackage
   int ACTOR_CLASS__ABSTRACT = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 0;
 
   /**
-   * The feature id for the '<em><b>Exec Model</b></em>' attribute.
+   * The feature id for the '<em><b>Comm Type</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ACTOR_CLASS__EXEC_MODEL = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 1;
+  int ACTOR_CLASS__COMM_TYPE = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 1;
 
   /**
    * The feature id for the '<em><b>Base</b></em>' reference.
@@ -3699,14 +3708,24 @@ public interface RoomPackage extends EPackage
   int IMPORT_FEATURE_COUNT = 2;
 
   /**
-   * The meta object id for the '{@link org.eclipse.etrice.core.room.ExecutionModel <em>Execution Model</em>}' enum.
+   * The meta object id for the '{@link org.eclipse.etrice.core.room.CommunicationType <em>Communication Type</em>}' enum.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.eclipse.etrice.core.room.ExecutionModel
-   * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getExecutionModel()
+   * @see org.eclipse.etrice.core.room.CommunicationType
+   * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getCommunicationType()
    * @generated
    */
-  int EXECUTION_MODEL = 73;
+  int COMMUNICATION_TYPE = 73;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.etrice.core.room.ActorCommunicationType <em>Actor Communication Type</em>}' enum.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.etrice.core.room.ActorCommunicationType
+   * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getActorCommunicationType()
+   * @generated
+   */
+  int ACTOR_COMMUNICATION_TYPE = 74;
 
 
   /**
@@ -4354,6 +4373,17 @@ public interface RoomPackage extends EPackage
   EClass getProtocolClass();
 
   /**
+   * Returns the meta object for the attribute '{@link org.eclipse.etrice.core.room.ProtocolClass#getCommType <em>Comm Type</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Comm Type</em>'.
+   * @see org.eclipse.etrice.core.room.ProtocolClass#getCommType()
+   * @see #getProtocolClass()
+   * @generated
+   */
+  EAttribute getProtocolClass_CommType();
+
+  /**
    * Returns the meta object for the reference '{@link org.eclipse.etrice.core.room.ProtocolClass#getBase <em>Base</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -4667,15 +4697,15 @@ public interface RoomPackage extends EPackage
   EAttribute getActorClass_Abstract();
 
   /**
-   * Returns the meta object for the attribute '{@link org.eclipse.etrice.core.room.ActorClass#getExecModel <em>Exec Model</em>}'.
+   * Returns the meta object for the attribute '{@link org.eclipse.etrice.core.room.ActorClass#getCommType <em>Comm Type</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Exec Model</em>'.
-   * @see org.eclipse.etrice.core.room.ActorClass#getExecModel()
+   * @return the meta object for the attribute '<em>Comm Type</em>'.
+   * @see org.eclipse.etrice.core.room.ActorClass#getCommType()
    * @see #getActorClass()
    * @generated
    */
-  EAttribute getActorClass_ExecModel();
+  EAttribute getActorClass_CommType();
 
   /**
    * Returns the meta object for the reference '{@link org.eclipse.etrice.core.room.ActorClass#getBase <em>Base</em>}'.
@@ -6079,14 +6109,24 @@ public interface RoomPackage extends EPackage
   EAttribute getImport_ImportURI();
 
   /**
-   * Returns the meta object for enum '{@link org.eclipse.etrice.core.room.ExecutionModel <em>Execution Model</em>}'.
+   * Returns the meta object for enum '{@link org.eclipse.etrice.core.room.CommunicationType <em>Communication Type</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for enum '<em>Execution Model</em>'.
-   * @see org.eclipse.etrice.core.room.ExecutionModel
+   * @return the meta object for enum '<em>Communication Type</em>'.
+   * @see org.eclipse.etrice.core.room.CommunicationType
    * @generated
    */
-  EEnum getExecutionModel();
+  EEnum getCommunicationType();
+
+  /**
+   * Returns the meta object for enum '{@link org.eclipse.etrice.core.room.ActorCommunicationType <em>Actor Communication Type</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for enum '<em>Actor Communication Type</em>'.
+   * @see org.eclipse.etrice.core.room.ActorCommunicationType
+   * @generated
+   */
+  EEnum getActorCommunicationType();
 
   /**
    * Returns the factory that creates the instances of the model.
@@ -6624,6 +6664,14 @@ public interface RoomPackage extends EPackage
     EClass PROTOCOL_CLASS = eINSTANCE.getProtocolClass();
 
     /**
+     * The meta object literal for the '<em><b>Comm Type</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute PROTOCOL_CLASS__COMM_TYPE = eINSTANCE.getProtocolClass_CommType();
+
+    /**
      * The meta object literal for the '<em><b>Base</b></em>' reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -6868,12 +6916,12 @@ public interface RoomPackage extends EPackage
     EAttribute ACTOR_CLASS__ABSTRACT = eINSTANCE.getActorClass_Abstract();
 
     /**
-     * The meta object literal for the '<em><b>Exec Model</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>Comm Type</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute ACTOR_CLASS__EXEC_MODEL = eINSTANCE.getActorClass_ExecModel();
+    EAttribute ACTOR_CLASS__COMM_TYPE = eINSTANCE.getActorClass_CommType();
 
     /**
      * The meta object literal for the '<em><b>Base</b></em>' reference feature.
@@ -8034,14 +8082,24 @@ public interface RoomPackage extends EPackage
     EAttribute IMPORT__IMPORT_URI = eINSTANCE.getImport_ImportURI();
 
     /**
-     * The meta object literal for the '{@link org.eclipse.etrice.core.room.ExecutionModel <em>Execution Model</em>}' enum.
+     * The meta object literal for the '{@link org.eclipse.etrice.core.room.CommunicationType <em>Communication Type</em>}' enum.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.eclipse.etrice.core.room.ExecutionModel
-     * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getExecutionModel()
+     * @see org.eclipse.etrice.core.room.CommunicationType
+     * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getCommunicationType()
      * @generated
      */
-    EEnum EXECUTION_MODEL = eINSTANCE.getExecutionModel();
+    EEnum COMMUNICATION_TYPE = eINSTANCE.getCommunicationType();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.etrice.core.room.ActorCommunicationType <em>Actor Communication Type</em>}' enum.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.etrice.core.room.ActorCommunicationType
+     * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getActorCommunicationType()
+     * @generated
+     */
+    EEnum ACTOR_COMMUNICATION_TYPE = eINSTANCE.getActorCommunicationType();
 
   }
 

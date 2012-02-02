@@ -13,7 +13,6 @@ import org.eclipse.etrice.core.room.MessageFromIf;
 import org.eclipse.etrice.core.room.NonInitialTransition;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraph;
-import org.eclipse.etrice.core.room.StateMachine;
 import org.eclipse.etrice.core.room.Transition;
 import org.eclipse.etrice.core.room.Trigger;
 import org.eclipse.etrice.core.room.TriggeredTransition;
@@ -56,7 +55,7 @@ public class StateMachineGen {
     int _numberOfInheritedBaseStates = this.roomExt.getNumberOfInheritedBaseStates(ac);
     int offset = _numberOfInheritedBaseStates;
     _builder.newLineIfNotEmpty();
-    StateMachine _stateMachine = ac.getStateMachine();
+    StateGraph _stateMachine = ac.getStateMachine();
     List<State> _baseStateList = this.roomExt.getBaseStateList(_stateMachine);
     List<State> baseStates = _baseStateList;
     _builder.newLineIfNotEmpty();
@@ -196,7 +195,7 @@ public class StateMachineGen {
     _builder.append("switch (state) {");
     _builder.newLine();
     {
-      StateMachine _stateMachine_1 = xpac.getStateMachine();
+      StateGraph _stateMachine_1 = xpac.getStateMachine();
       List<State> _leafStateList = this.roomExt.getLeafStateList(_stateMachine_1);
       for(final State state_3 : _leafStateList) {
         _builder.append("\t\t\t");
@@ -403,7 +402,7 @@ public class StateMachineGen {
     _builder.append("public void executeInitTransition() {");
     _builder.newLine();
     _builder.append("\t");
-    StateMachine _stateMachine_2 = xpac.getStateMachine();
+    StateGraph _stateMachine_2 = xpac.getStateMachine();
     Transition _initTransition = this.roomExt.getInitTransition(_stateMachine_2);
     Transition initt = _initTransition;
     _builder.newLineIfNotEmpty();
@@ -455,7 +454,7 @@ public class StateMachineGen {
     _builder.append("switch (current) {");
     _builder.newLine();
     {
-      StateMachine _stateMachine_3 = xpac.getStateMachine();
+      StateGraph _stateMachine_3 = xpac.getStateMachine();
       List<State> _baseStateList_1 = this.roomExt.getBaseStateList(_stateMachine_3);
       for(final State state_4 : _baseStateList_1) {
         _builder.append("\t\t\t");
@@ -591,7 +590,7 @@ public class StateMachineGen {
     _builder.append("switch (state) {");
     _builder.newLine();
     {
-      StateMachine _stateMachine_4 = xpac.getStateMachine();
+      StateGraph _stateMachine_4 = xpac.getStateMachine();
       List<State> _baseStateList_2 = this.roomExt.getBaseStateList(_stateMachine_4);
       for(final State state_5 : _baseStateList_2) {
         _builder.append("\t\t\t");
@@ -731,7 +730,7 @@ public class StateMachineGen {
     _builder.append("//*** Entry and Exit Codes");
     _builder.newLine();
     {
-      StateMachine _stateMachine_5 = xpac.getStateMachine();
+      StateGraph _stateMachine_5 = xpac.getStateMachine();
       List<State> _stateList = this.roomExt.getStateList(_stateMachine_5);
       for(final State state_6 : _stateList) {
         {
@@ -777,7 +776,7 @@ public class StateMachineGen {
     _builder.append("//*** Action Codes");
     _builder.newLine();
     {
-      StateMachine _stateMachine_6 = xpac.getStateMachine();
+      StateGraph _stateMachine_6 = xpac.getStateMachine();
       List<Transition> _transitionList = this.roomExt.getTransitionList(_stateMachine_6);
       for(final Transition tr : _transitionList) {
         {

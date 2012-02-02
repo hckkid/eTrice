@@ -40,11 +40,11 @@ import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
 import org.eclipse.etrice.core.naming.RoomNameProvider;
 
+import org.eclipse.etrice.core.room.ActorCommunicationType;
 import org.eclipse.etrice.core.room.BaseState;
 import org.eclipse.etrice.core.room.ChoicePoint;
 import org.eclipse.etrice.core.room.ChoicepointTerminal;
 import org.eclipse.etrice.core.room.EntryPoint;
-import org.eclipse.etrice.core.room.ExecutionModel;
 import org.eclipse.etrice.core.room.ExitPoint;
 import org.eclipse.etrice.core.room.ExternalPort;
 import org.eclipse.etrice.core.room.GuardedTransition;
@@ -813,7 +813,7 @@ public class ExpandedActorClassImpl extends ActorClassImpl implements ExpandedAc
 		if (validator.isFailed())
 			return;
 		
-		if (getActorClass().getExecModel()==ExecutionModel.DATA_DRIVEN) {
+		if (getActorClass().getCommType()==ActorCommunicationType.DATA_DRIVEN) {
 			findGuardedTransitionChains(getStateMachine());
 		}
 		else {

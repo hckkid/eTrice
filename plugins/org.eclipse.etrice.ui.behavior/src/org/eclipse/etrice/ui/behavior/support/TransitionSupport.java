@@ -17,10 +17,10 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.room.ActorClass;
+import org.eclipse.etrice.core.room.ActorCommunicationType;
 import org.eclipse.etrice.core.room.ChoicepointTerminal;
 import org.eclipse.etrice.core.room.ContinuationTransition;
 import org.eclipse.etrice.core.room.EntryPoint;
-import org.eclipse.etrice.core.room.ExecutionModel;
 import org.eclipse.etrice.core.room.InitialTransition;
 import org.eclipse.etrice.core.room.NonInitialTransition;
 import org.eclipse.etrice.core.room.GuardedTransition;
@@ -179,7 +179,7 @@ public class TransitionSupport {
 						trans = t;
 					}
 					else {
-						NonInitialTransition t = ac.getExecModel()==ExecutionModel.DATA_DRIVEN? 
+						NonInitialTransition t = ac.getCommType()==ActorCommunicationType.DATA_DRIVEN? 
 								RoomFactory.eINSTANCE.createGuardedTransition() : RoomFactory.eINSTANCE.createTriggeredTransition();
 						t.setFrom(src);
 						t.setTo(dst);
@@ -399,7 +399,7 @@ public class TransitionSupport {
 				}
 				else {
 					ActorClass ac = SupportUtil.getActorClass(getDiagram());
-					NonInitialTransition t = ac.getExecModel()==ExecutionModel.DATA_DRIVEN?
+					NonInitialTransition t = ac.getCommType()==ActorCommunicationType.DATA_DRIVEN?
 						((orig instanceof GuardedTransition)?
 							(GuardedTransition)orig : RoomFactory.eINSTANCE.createGuardedTransition()
 						)

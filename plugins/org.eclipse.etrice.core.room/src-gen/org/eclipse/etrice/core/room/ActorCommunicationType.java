@@ -14,14 +14,14 @@ import org.eclipse.emf.common.util.Enumerator;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the literals of the enumeration '<em><b>Execution Model</b></em>',
+ * A representation of the literals of the enumeration '<em><b>Actor Communication Type</b></em>',
  * and utility methods for working with them.
  * <!-- end-user-doc -->
- * @see org.eclipse.etrice.core.room.RoomPackage#getExecutionModel()
+ * @see org.eclipse.etrice.core.room.RoomPackage#getActorCommunicationType()
  * @model
  * @generated
  */
-public enum ExecutionModel implements Enumerator
+public enum ActorCommunicationType implements Enumerator
 {
   /**
    * The '<em><b>EVENT DRIVEN</b></em>' literal object.
@@ -31,7 +31,7 @@ public enum ExecutionModel implements Enumerator
    * @generated
    * @ordered
    */
-  EVENT_DRIVEN(0, "EVENT_DRIVEN", "eventDriven"),
+  EVENT_DRIVEN(0, "EVENT_DRIVEN", "eventdriven"),
 
   /**
    * The '<em><b>DATA DRIVEN</b></em>' literal object.
@@ -41,7 +41,27 @@ public enum ExecutionModel implements Enumerator
    * @generated
    * @ordered
    */
-  DATA_DRIVEN(1, "DATA_DRIVEN", "dataDriven");
+  DATA_DRIVEN(1, "DATA_DRIVEN", "datadriven"),
+
+  /**
+   * The '<em><b>ASYNCHRONOUS</b></em>' literal object.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #ASYNCHRONOUS_VALUE
+   * @generated
+   * @ordered
+   */
+  ASYNCHRONOUS(2, "ASYNCHRONOUS", "async"),
+
+  /**
+   * The '<em><b>SYNCHRONOUS</b></em>' literal object.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #SYNCHRONOUS_VALUE
+   * @generated
+   * @ordered
+   */
+  SYNCHRONOUS(3, "SYNCHRONOUS", "sync");
 
   /**
    * The '<em><b>EVENT DRIVEN</b></em>' literal value.
@@ -52,7 +72,7 @@ public enum ExecutionModel implements Enumerator
    * </p>
    * <!-- end-user-doc -->
    * @see #EVENT_DRIVEN
-   * @model literal="eventDriven"
+   * @model literal="eventdriven"
    * @generated
    * @ordered
    */
@@ -67,44 +87,76 @@ public enum ExecutionModel implements Enumerator
    * </p>
    * <!-- end-user-doc -->
    * @see #DATA_DRIVEN
-   * @model literal="dataDriven"
+   * @model literal="datadriven"
    * @generated
    * @ordered
    */
   public static final int DATA_DRIVEN_VALUE = 1;
 
   /**
-   * An array of all the '<em><b>Execution Model</b></em>' enumerators.
+   * The '<em><b>ASYNCHRONOUS</b></em>' literal value.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of '<em><b>ASYNCHRONOUS</b></em>' literal object isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @see #ASYNCHRONOUS
+   * @model literal="async"
+   * @generated
+   * @ordered
+   */
+  public static final int ASYNCHRONOUS_VALUE = 2;
+
+  /**
+   * The '<em><b>SYNCHRONOUS</b></em>' literal value.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of '<em><b>SYNCHRONOUS</b></em>' literal object isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @see #SYNCHRONOUS
+   * @model literal="sync"
+   * @generated
+   * @ordered
+   */
+  public static final int SYNCHRONOUS_VALUE = 3;
+
+  /**
+   * An array of all the '<em><b>Actor Communication Type</b></em>' enumerators.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  private static final ExecutionModel[] VALUES_ARRAY =
-    new ExecutionModel[]
+  private static final ActorCommunicationType[] VALUES_ARRAY =
+    new ActorCommunicationType[]
     {
       EVENT_DRIVEN,
       DATA_DRIVEN,
+      ASYNCHRONOUS,
+      SYNCHRONOUS,
     };
 
   /**
-   * A public read-only list of all the '<em><b>Execution Model</b></em>' enumerators.
+   * A public read-only list of all the '<em><b>Actor Communication Type</b></em>' enumerators.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  public static final List<ExecutionModel> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
+  public static final List<ActorCommunicationType> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
 
   /**
-   * Returns the '<em><b>Execution Model</b></em>' literal with the specified literal value.
+   * Returns the '<em><b>Actor Communication Type</b></em>' literal with the specified literal value.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  public static ExecutionModel get(String literal)
+  public static ActorCommunicationType get(String literal)
   {
     for (int i = 0; i < VALUES_ARRAY.length; ++i)
     {
-      ExecutionModel result = VALUES_ARRAY[i];
+      ActorCommunicationType result = VALUES_ARRAY[i];
       if (result.toString().equals(literal))
       {
         return result;
@@ -114,16 +166,16 @@ public enum ExecutionModel implements Enumerator
   }
 
   /**
-   * Returns the '<em><b>Execution Model</b></em>' literal with the specified name.
+   * Returns the '<em><b>Actor Communication Type</b></em>' literal with the specified name.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  public static ExecutionModel getByName(String name)
+  public static ActorCommunicationType getByName(String name)
   {
     for (int i = 0; i < VALUES_ARRAY.length; ++i)
     {
-      ExecutionModel result = VALUES_ARRAY[i];
+      ActorCommunicationType result = VALUES_ARRAY[i];
       if (result.getName().equals(name))
       {
         return result;
@@ -133,17 +185,19 @@ public enum ExecutionModel implements Enumerator
   }
 
   /**
-   * Returns the '<em><b>Execution Model</b></em>' literal with the specified integer value.
+   * Returns the '<em><b>Actor Communication Type</b></em>' literal with the specified integer value.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  public static ExecutionModel get(int value)
+  public static ActorCommunicationType get(int value)
   {
     switch (value)
     {
       case EVENT_DRIVEN_VALUE: return EVENT_DRIVEN;
       case DATA_DRIVEN_VALUE: return DATA_DRIVEN;
+      case ASYNCHRONOUS_VALUE: return ASYNCHRONOUS;
+      case SYNCHRONOUS_VALUE: return SYNCHRONOUS;
     }
     return null;
   }
@@ -175,7 +229,7 @@ public enum ExecutionModel implements Enumerator
    * <!-- end-user-doc -->
    * @generated
    */
-  private ExecutionModel(int value, String name, String literal)
+  private ActorCommunicationType(int value, String name, String literal)
   {
     this.value = value;
     this.name = name;
@@ -224,4 +278,4 @@ public enum ExecutionModel implements Enumerator
     return literal;
   }
   
-} //ExecutionModel
+} //ActorCommunicationType
