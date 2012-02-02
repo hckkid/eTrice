@@ -76,6 +76,10 @@ public class RoomExtensions {
     return "/src-gen/";
   }
   
+  public String getDocGenerationPathSegment() {
+    return "/doc-gen/";
+  }
+  
   public String getModelPath(final EObject e) {
       Resource _eResource = e.eResource();
       Resource res = _eResource;
@@ -162,6 +166,13 @@ public class RoomExtensions {
     String _projectPath = this.getProjectPath(e);
     String _generationPathSegment = this.getGenerationPathSegment();
     String _operator_plus = StringExtensions.operator_plus(_projectPath, _generationPathSegment);
+    return _operator_plus;
+  }
+  
+  public String getDocGenerationTargetPath(final EObject e) {
+    String _projectPath = this.getProjectPath(e);
+    String _docGenerationPathSegment = this.getDocGenerationPathSegment();
+    String _operator_plus = StringExtensions.operator_plus(_projectPath, _docGenerationPathSegment);
     return _operator_plus;
   }
   

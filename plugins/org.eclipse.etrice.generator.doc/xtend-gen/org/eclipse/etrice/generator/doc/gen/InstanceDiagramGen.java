@@ -34,10 +34,10 @@ public class InstanceDiagramGen implements IRoomGenerator {
     for (final SubSystemInstance sc : _subSystemInstances) {
       {
         SubSystemClass _subSystemClass = sc.getSubSystemClass();
-        String _generationTargetPath = this.roomExt.getGenerationTargetPath(_subSystemClass);
+        String _docGenerationTargetPath = this.roomExt.getDocGenerationTargetPath(_subSystemClass);
         SubSystemClass _subSystemClass_1 = sc.getSubSystemClass();
         String _path = this.roomExt.getPath(_subSystemClass_1);
-        String _operator_plus = StringExtensions.operator_plus(_generationTargetPath, _path);
+        String _operator_plus = StringExtensions.operator_plus(_docGenerationTargetPath, _path);
         String path = _operator_plus;
         SubSystemClass _subSystemClass_2 = sc.getSubSystemClass();
         String _name = _subSystemClass_2.getName();

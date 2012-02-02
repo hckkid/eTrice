@@ -26,6 +26,7 @@ class MainGen implements IGenerator {
 	
 	@Inject InstanceDiagramGen instanceDiagramGen
 	@Inject PrepareFileSystem prepFS
+	@Inject DocGen docGen
 	
 	override void doGenerate(Resource resource, IFileSystemAccess fsa) {
 		prepFS.prepare(resource)
@@ -38,5 +39,6 @@ class MainGen implements IGenerator {
 	
 	def void doGenerate(Root e) {
 		instanceDiagramGen.doGenerate(e);
+		docGen.doGenerate(e);
 	}
 }
