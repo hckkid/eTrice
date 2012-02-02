@@ -27,7 +27,7 @@ public class MultiplicityConverter extends AbstractLexerBasedConverter<Integer> 
 	@Override
 	protected String toEscapedString(Integer value) {
 		if (value==-1)
-			return "*";
+			return "[*]";
 		return "["+value.toString()+"]";
 	}
 	
