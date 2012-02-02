@@ -38,6 +38,9 @@ public class ImportAwareHyperlinkHelper extends HyperlinkHelper {
 	@Inject
 	private Provider<XtextHyperlink> hyperlinkProvider;
 
+	@Inject
+	private PlatformRelativeUriResolver uriResolver;
+	
 	/* (non-Javadoc)
 	 * @see org.eclipse.xtext.ui.editor.hyperlinking.HyperlinkHelper#createHyperlinksByOffset(org.eclipse.xtext.resource.XtextResource, int, org.eclipse.xtext.ui.editor.hyperlinking.IHyperlinkAcceptor)
 	 */
@@ -56,7 +59,7 @@ public class ImportAwareHyperlinkHelper extends HyperlinkHelper {
 					
 					XtextHyperlink result = hyperlinkProvider.get();
 					result.setHyperlinkRegion(new Region(leaf.getOffset()+1, leaf.getLength()-2)); // omit ""
-					String uritext = PlatformRelativeUriResolver.resolveUriAgainstBase(text, resource.getURI());
+					String uritext = uriResolver.resolve(text, resource.getURI());
 					URI uri = URI.createURI(uritext);
 					result.setURI(uri);
 					result.setHyperlinkText(text);

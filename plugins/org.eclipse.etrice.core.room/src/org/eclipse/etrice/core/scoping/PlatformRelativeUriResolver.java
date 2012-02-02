@@ -43,12 +43,18 @@ public class PlatformRelativeUriResolver extends ImportUriResolver {
 		String resolve = super.resolve(object);
 		if (resolve==null || resolve.trim().isEmpty())
 			return null;
+
+		URI baseUri = object.eResource()==null? null:object.eResource().getURI();
+		resolve = resolve(resolve, baseUri);
 		
+		return resolve;
+	}
+
+	public String resolve(String resolve, URI baseUri) {
 		resolve = substituteEnvVars(resolve);
 		resolve = resolve.replaceAll("\\\\", "/");
 		
-		URI baseUri = object.eResource().getURI();
-		if (object.eResource()!=null && baseUri!=null) {
+		if (baseUri!=null) {
 			resolve = resolveUriAgainstBase(resolve, baseUri);
 		}
 		return resolve;
@@ -73,7 +79,7 @@ public class PlatformRelativeUriResolver extends ImportUriResolver {
 		return text;
 	}
 
-	public static String resolveUriAgainstBase(String resolve, URI baseUri) {
+	private String resolveUriAgainstBase(String resolve, URI baseUri) {
 		if (resolve==null || resolve.trim().isEmpty())
 			return null;
 
