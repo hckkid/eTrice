@@ -16,7 +16,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.etrice.core.RoomDefaultValues;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorContainerClass;
 import org.eclipse.etrice.core.room.ActorContainerRef;
@@ -369,8 +368,7 @@ public class RoomFragmentProvider implements IFragmentProvider {
 				return getTransition(rc, remainder);
 			}
 			else if (type.equals(RoomPackage.eINSTANCE.getStateGraph().getName())
-					|| type.equals(RoomPackage.eINSTANCE.getStateMachine().getName())
-					|| type.equals(RoomPackage.eINSTANCE.getPlainStateGraph().getName())) {
+					|| type.equals("StateMachine")) {
 				return getStateGraph(rc, remainder);
 			}
 		}
@@ -478,8 +476,7 @@ public class RoomFragmentProvider implements IFragmentProvider {
 		if (rc instanceof ActorClass) {
 			StateGraph sg = ((ActorClass) rc).getStateMachine();
 			if (sg==null) {
-				((ActorClass) rc).setStateMachine(RoomFactory.eINSTANCE.createStateMachine());
-				((ActorClass) rc).getStateMachine().setDataDriven(RoomDefaultValues.isUseDataDrivenStateMachine());
+				((ActorClass) rc).setStateMachine(RoomFactory.eINSTANCE.createStateGraph());
 				sg = ((ActorClass) rc).getStateMachine();
 			}
 			int begin = 0;

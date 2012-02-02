@@ -41,11 +41,22 @@ public class MultiplicityConverter extends AbstractLexerBasedConverter<Integer> 
 			throw new ValueConverterException("Couldn't convert empty string to integer.", node, null);
 		if (string.indexOf("*")>=0)
 			return -1;
+
+		// we have to find the substring containing the digits
+		int first = 0;
+		for (; first<string.length(); ++first)
+			if (Character.isDigit(string.charAt(first)))
+				break;
+		int last = first;
+		for (; last<string.length(); ++last)
+			if (!Character.isDigit(string.charAt(last)))
+				break;
+		String val = string.substring(first, last);
 		try {
-			int intValue = Integer.parseInt(string.substring(1, string.length()-1));
+			int intValue = Integer.parseInt(val);
 			return Integer.valueOf(intValue);
 		} catch (NumberFormatException e) {
-			throw new ValueConverterException("Couldn't convert '" + string + "' to integer.", node, e);
+			throw new ValueConverterException("Couldn't convert '" + val + "' to integer.", node, e);
 		}
 	}
 

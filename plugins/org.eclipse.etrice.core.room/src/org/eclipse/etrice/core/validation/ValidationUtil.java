@@ -18,6 +18,7 @@ import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.etrice.core.room.ActorClass;
+import org.eclipse.etrice.core.room.ActorCommunicationType;
 import org.eclipse.etrice.core.room.ActorContainerClass;
 import org.eclipse.etrice.core.room.ActorContainerRef;
 import org.eclipse.etrice.core.room.ActorRef;
@@ -25,6 +26,7 @@ import org.eclipse.etrice.core.room.Binding;
 import org.eclipse.etrice.core.room.BindingEndPoint;
 import org.eclipse.etrice.core.room.ChoicePoint;
 import org.eclipse.etrice.core.room.ChoicepointTerminal;
+import org.eclipse.etrice.core.room.CommunicationType;
 import org.eclipse.etrice.core.room.ContinuationTransition;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.EntryPoint;
@@ -240,7 +242,7 @@ public class ValidationUtil {
 	}
 	
 	public static Result isConnectable(Port port, ActorContainerRef ref, StructureClass acc, Binding exclude) {
-		if (!port.isReplicated() && isConnected(port, ref, acc, exclude))
+		if (!isMultipleConnectable(port) && isConnected(port, ref, acc, exclude))
 			return Result.error("port with multiplicity 1 is already connected");
 
 		if (acc instanceof ActorClass) {
@@ -252,6 +254,16 @@ public class ValidationUtil {
 		}
 		else
 			return Result.ok();
+	}
+	
+	public static boolean isMultipleConnectable(Port port) {
+		if (port.isReplicated())
+			return true;
+		
+		if (port.getProtocol().getCommType()==CommunicationType.DATA_DRIVEN)
+			return true;
+		
+		return false;
 	}
 
 	public static Result isValid(Binding bind) {
@@ -726,7 +738,7 @@ public class ValidationUtil {
 	 */
 	public static Result checkTransition(Transition tr) {
 		ActorClass ac = RoomHelpers.getActorClass(tr);
-		if (ac.getStateMachine().isDataDriven()) {
+		if (ac.getCommType()==ActorCommunicationType.DATA_DRIVEN) {
 			if (tr instanceof TriggeredTransition)
 				return Result.error("data driven state machine must not contain triggered transition",
 						tr.eContainer(),
@@ -767,8 +779,8 @@ public class ValidationUtil {
 	public static Result checkState(State state) {
 		if (state.getDoCode()!=null) {
 			ActorClass ac = RoomHelpers.getActorClass(state);
-			if (!ac.getStateMachine().isDataDriven()) {
-				return Result.error("only data driven state machines may have 'do' action code",
+			if (ac.getCommType()==ActorCommunicationType.EVENT_DRIVEN) {
+				return Result.error("event driven state machines must not have 'do' action code",
 						state,
 						RoomPackage.eINSTANCE.getState_DoCode());
 			}

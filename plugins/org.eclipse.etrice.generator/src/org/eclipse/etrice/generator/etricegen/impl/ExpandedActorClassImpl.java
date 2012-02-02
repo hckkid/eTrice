@@ -40,6 +40,7 @@ import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
 import org.eclipse.etrice.core.naming.RoomNameProvider;
 
+import org.eclipse.etrice.core.room.ActorCommunicationType;
 import org.eclipse.etrice.core.room.BaseState;
 import org.eclipse.etrice.core.room.ChoicePoint;
 import org.eclipse.etrice.core.room.ChoicepointTerminal;
@@ -58,7 +59,6 @@ import org.eclipse.etrice.core.room.SAPRef;
 import org.eclipse.etrice.core.room.SPPRef;
 import org.eclipse.etrice.core.room.ServiceImplementation;
 import org.eclipse.etrice.core.room.StateGraph;
-import org.eclipse.etrice.core.room.StateMachine;
 import org.eclipse.etrice.core.room.StateTerminal;
 import org.eclipse.etrice.core.room.SubStateTrPointTerminal;
 import org.eclipse.etrice.core.room.TrPoint;
@@ -247,9 +247,7 @@ public class ExpandedActorClassImpl extends ActorClassImpl implements ExpandedAc
 		all.remove(self);
 		
 		// now we move all base class state machine contents to our state machine
-		StateMachine sm = RoomFactory.eINSTANCE.createStateMachine();
-		if (orig.getStateMachine()!=null)
-			sm.setDataDriven(orig.getStateMachine().isDataDriven());
+		StateGraph sm = RoomFactory.eINSTANCE.createStateGraph();
 		setStateMachine(sm);
 		for (StateGraph sml : all) {
 			sm.getChPoints().addAll(sml.getChPoints());
@@ -815,7 +813,7 @@ public class ExpandedActorClassImpl extends ActorClassImpl implements ExpandedAc
 		if (validator.isFailed())
 			return;
 		
-		if (getStateMachine().isDataDriven()) {
+		if (getActorClass().getCommType()==ActorCommunicationType.DATA_DRIVEN) {
 			findGuardedTransitionChains(getStateMachine());
 		}
 		else {

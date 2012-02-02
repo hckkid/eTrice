@@ -89,7 +89,14 @@ PortOperation:
 // **************************************************************
 // protocol class
 
+enum CommunicationType:
+	EVENT_DRIVEN='eventdriven' |
+	DATA_DRIVEN='datadriven' |
+	SYNCHRONOUS='sync'
+;
+
 ProtocolClass:
+	(commType=CommunicationType)?
 	'ProtocolClass' name=ID (docu=Documentation)? ('extends' base=[ProtocolClass|FQN])? '{'
 		('usercode1' userCode1=DetailCode)?
 		('usercode2' userCode2=DetailCode)?
@@ -137,6 +144,13 @@ SemanticsRule: msg=[Message|ID]
 // **************************************************************
 // actor class
 
+enum ActorCommunicationType:
+	EVENT_DRIVEN='eventdriven' |
+	DATA_DRIVEN='datadriven' |
+	ASYNCHRONOUS='async' |
+	SYNCHRONOUS='sync'
+;
+
 // some notes on ports
 //
 // in ROOM ports can be contained in the structure and/or the interface
@@ -145,7 +159,8 @@ SemanticsRule: msg=[Message|ID]
 // p in i and p in s ==> external end port
 // since double containment is not supported we decided to define external ports as reference to interface ports
 ActorClass:
-	(abstract?='abstract')? 'ActorClass' name=ID (docu=Documentation)? ('extends' base=[ActorClass|FQN])? '{'
+	(abstract?='abstract'? & commType=ActorCommunicationType?)
+	'ActorClass' name=ID (docu=Documentation)? ('extends' base=[ActorClass|FQN])? '{'
 		('Interface' '{'
 			ifPorts+=Port*
 			ifSPPs+=SPPRef*
@@ -258,10 +273,8 @@ StateGraphItem: StateGraphNode | Transition;
 
 State: BaseState | RefinedState;
 
-StateGraph: PlainStateGraph | StateMachine;
-
-PlainStateGraph returns StateGraph:
-	{PlainStateGraph}
+StateGraph:
+	{StateGraph}
 	'{'
 		(
 			states+=State |
@@ -271,9 +284,9 @@ PlainStateGraph returns StateGraph:
 		)*
 	'}';
 
-StateMachine:
-	{StateMachine}
-	(dataDriven?='data_driven')? 'StateMachine' '{'
+StateMachine returns StateGraph:
+	{StateGraph}
+	'StateMachine' '{'
 		(
 			states+=State |
 			trPoints+=TrPoint |
@@ -289,7 +302,7 @@ BaseState:
 		('entry' entryCode=DetailCode)?
 		('exit' exitCode=DetailCode)?
 		('do' doCode=DetailCode)?
-		('subgraph' subgraph=PlainStateGraph)?
+		('subgraph' subgraph=StateGraph)?
 	'}')?;
 
 RefinedState:
@@ -408,11 +421,11 @@ Import :
 	'import' (importedNamespace=ImportedFQN 'from' | 'model') importURI=STRING;
 
 ImportedFQN:
-	FQN ('.' '*')?;
+	FQN ('.*')?;
 
 FQN:
 	ID ('.' ID)*;
 
-// with white space inside the brackets like in [ 3 ] the INT terminal will match and we get an error
-// [ * ] works though
-terminal MULTIPLICITY returns ecore::EInt : '[' ('*' | ('0'..'9')+) ']';
+// the following is a data type rule (accompanied by a value converter) and must not be a terminal rule
+// (because then the lexer already would find this in places where it is not expected, e.g. in an Attribute)
+MULTIPLICITY returns ecore::EInt : '[' ('*'|INT) ']';
