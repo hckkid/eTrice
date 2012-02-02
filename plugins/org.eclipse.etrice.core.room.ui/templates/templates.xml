@@ -17,7 +17,7 @@
 
 	<template autoinsert="true" context="org.eclipse.etrice.core.Room.ActorClass"
 		deleted="false" description="actor class skeleton" enabled="true"
-		id="actor_class" name="ActorClass">ActorClass ${ActorClassName} {&#13;
+		id="actor_class" name="ActorClass">${xx: Enum('ActorCommunicationType')}  ActorClass ${ActorClassName} {&#13;
 	Interface {&#13;
 		${cursor}
 	}&#13;
@@ -29,13 +29,12 @@
 
 	<template autoinsert="true" context="org.eclipse.etrice.core.Room.ProtocolClass"
 		deleted="false" description="protocol class skeleton" enabled="true"
-		id="protocol_class" name="ProtocolClass">ProtocolClass ${ProtocolClassName} {&#13;
+id="protocol_class" name="ProtocolClass">${xx: Enum('CommunicationType')}  ProtocolClass ${ProtocolClassName} {&#13;
 	incoming {&#13;
-		Message ${InMsg1}(${indata}:  ${intype:CrossReference('VarDecl.type')})
+		Message ${in1}(${data}:  ${type})
 		${cursor}
 	}&#13;
 	outgoing {&#13;
-		Message ${OutMsg1}(${outdata}: ${outtype:CrossReference('VarDecl.type')})
 	}&#13;
 }</template>
 
@@ -43,7 +42,7 @@
 		deleted="false" description="data class skeleton" enabled="true"
 		id="data_class" name="DataClass">DataClass ${DataClassName} {&#13;
 	Attribute ${Attr1}: ${atype:CrossReference('Attribute.type')}
-	Operation ${Operation1}(${Param1}: ${ptype:CrossReference('VarDecl.type')}): ${rtype:CrossReference('Operation.returntype')} {&#13;
+	Operation ${Operation1}(${par}: ${type}): ${rtype} {&#13;
 		"${UserCodeLine1}"&#13;
 		"${UserCodeLine2}"&#13;
 	}&#13;
@@ -57,20 +56,20 @@ ${cursor}</template>
 
 	<template autoinsert="true" context="org.eclipse.etrice.core.Room.Message"
 		deleted="false" description="Message with Data skeleton" enabled="true"
-		id="messageWithData" name="MessageWithData">Message ${name}(${param}: ${paramtype:CrossReference('VarDecl.type')})&#13;
+		id="messageWithData" name="MessageWithData">Message ${name}(${param}: ${paramtype})&#13;
 ${cursor}</template>
 
 	<template autoinsert="true" context="org.eclipse.etrice.core.Room.Attribute"
 		deleted="false" description="attribute skeleton" enabled="true"
-		id="attribute" name="Attribute">Attribute ${name}: ${type:CrossReference('Attribute.type')}&#13;
+		id="attribute" name="Attribute">Attribute ${name}: ${type}&#13;
 ${cursor}</template>
 
-	<template autoinsert="true" context="org.eclipse.etrice.core.Room.Operation"
+	<template autoinsert="true" context="org.eclipse.etrice.core.Room.kw_Operation"
 		deleted="false" description="operation skeleton" enabled="true"
-		id="operation" name="Operation">Operation ${name}(${param}: ${paramtype:CrossReference('VarDecl.type')}): ${rtype:CrossReference('Operation.returntype')} {&#13;
+		id="operation" name="Operation">Operation ${name}(${param}: ${paramtype}): ${rtype} {&#13;
 	"${UserCodeLine1}"&#13;
 	"${UserCodeLine2}"&#13;
-}
+}&#13;
 ${cursor}</template>
 
 	<template autoinsert="true" context="org.eclipse.etrice.core.Room.kw_State"
