@@ -93,6 +93,12 @@ public class CExtensions implements ILanguageExtension {
     return _operator_plus;
   }
   
+  public String getDispSourceFileName(final RoomClass rc) {
+    String _name = rc.getName();
+    String _operator_plus = StringExtensions.operator_plus(_name, "_Disp.h");
+    return _operator_plus;
+  }
+  
   public StringConcatenation getIncludeGuardString(final String filename) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("_");

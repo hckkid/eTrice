@@ -2,15 +2,15 @@ package org.eclipse.etrice.generator.c.gen;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.etrice.core.room.ActorClass;
-import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.generator.base.ILogger;
 import org.eclipse.etrice.generator.c.gen.CExtensions;
 import org.eclipse.etrice.generator.etricegen.ActorInstance;
+import org.eclipse.etrice.generator.etricegen.InterfaceItemInstance;
+import org.eclipse.etrice.generator.etricegen.PortInstance;
 import org.eclipse.etrice.generator.etricegen.Root;
 import org.eclipse.etrice.generator.etricegen.SubSystemInstance;
 import org.eclipse.etrice.generator.extensions.RoomExtensions;
@@ -83,6 +83,18 @@ public class SubSystemClassGen {
         SubSystemClass _subSystemClass_7 = ssi.getSubSystemClass();
         StringConcatenation _generateInstanceFile = this.generateInstanceFile(root, ssi, _subSystemClass_7);
         this.fileAccess.generateFile(file, _generateInstanceFile);
+        SubSystemClass _subSystemClass_8 = ssi.getSubSystemClass();
+        String _dispSourceFileName = this.stdExt.getDispSourceFileName(_subSystemClass_8);
+        file = _dispSourceFileName;
+        String _operator_plus_13 = StringExtensions.operator_plus("generating SubSystemClass dispatcher file: \'", file);
+        String _operator_plus_14 = StringExtensions.operator_plus(_operator_plus_13, "\' in \'");
+        String _operator_plus_15 = StringExtensions.operator_plus(_operator_plus_14, path);
+        String _operator_plus_16 = StringExtensions.operator_plus(_operator_plus_15, "\'");
+        this.logger.logInfo(_operator_plus_16);
+        this.fileAccess.setOutputPath(path);
+        SubSystemClass _subSystemClass_9 = ssi.getSubSystemClass();
+        StringConcatenation _generateDispatcherFile = this.generateDispatcherFile(root, ssi, _subSystemClass_9);
+        this.fileAccess.generateFile(file, _generateDispatcherFile);
       }
     }
   }
@@ -197,6 +209,11 @@ public class SubSystemClassGen {
     _builder.append(_instSourceFileName, "");
     _builder.append("\"");
     _builder.newLineIfNotEmpty();
+    _builder.append("#include \"");
+    String _dispSourceFileName = this.stdExt.getDispSourceFileName(ssc);
+    _builder.append(_dispSourceFileName, "");
+    _builder.append("\"");
+    _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("#include \"etLogger.h\"");
     _builder.newLine();
@@ -261,7 +278,7 @@ public class SubSystemClassGen {
     _builder.append("/* initialization of all message services */");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("etMessageService_init(&msgService_Thread1, msgBuffer_Thread1, MESSAGE_POOL_MAX, MESSAGE_BLOCK_SIZE);");
+    _builder.append("etMessageService_init(&msgService_Thread1, msgBuffer_Thread1, MESSAGE_POOL_MAX, MESSAGE_BLOCK_SIZE, MsgDispatcher_Thread1_receiveMessage);");
     _builder.newLine();
     _builder.append("\t");
     _builder.newLine();
@@ -531,20 +548,27 @@ public class SubSystemClassGen {
         _builder.append("/* Ports: {myActor, etReceiveMessage, msgService, peerAddress, localId} */");
         _builder.newLine();
         {
-          ActorClass _actorClass_2 = ai_1.getActorClass();
-          List<Port> _endPorts = this.roomExt.getEndPorts(_actorClass_2);
-          for(final Port port : _endPorts) {
+          EList<PortInstance> _ports = ai_1.getPorts();
+          for(final PortInstance pi : _ports) {
+            _builder.append("\t");
+            _builder.append("/* TODO: not robust if not connected and not implemented for replication */");
+            _builder.newLine();
             _builder.append("\t");
             _builder.append("{&");
             String _path_4 = ai_1.getPath();
             String _pathName_4 = this.roomExt.getPathName(_path_4);
             _builder.append(_pathName_4, "	");
             _builder.append(", ");
-            ActorClass _actorClass_3 = ai_1.getActorClass();
-            String _name_5 = _actorClass_3.getName();
+            ActorClass _actorClass_2 = ai_1.getActorClass();
+            String _name_5 = _actorClass_2.getName();
             _builder.append(_name_5, "	");
-            _builder.append("_ReceiveMessage, &msgService_Thread1, 1, 123} /* Port ");
-            String _name_6 = port.getName();
+            _builder.append("_ReceiveMessage, &msgService_Thread1, ");
+            EList<InterfaceItemInstance> _peers = pi.getPeers();
+            InterfaceItemInstance _get = _peers.get(0);
+            int _objId = _get.getObjId();
+            _builder.append(_objId, "	");
+            _builder.append(", 123} /* Port ");
+            String _name_6 = pi.getName();
             _builder.append(_name_6, "	");
             _builder.append(" */");
             _builder.newLineIfNotEmpty();
@@ -555,8 +579,8 @@ public class SubSystemClassGen {
         _builder.append("};");
         _builder.newLine();
         _builder.append("static ");
-        ActorClass _actorClass_4 = ai_1.getActorClass();
-        String _name_7 = _actorClass_4.getName();
+        ActorClass _actorClass_3 = ai_1.getActorClass();
+        String _name_7 = _actorClass_3.getName();
         _builder.append(_name_7, "");
         _builder.append(" ");
         String _path_5 = ai_1.getPath();
@@ -572,6 +596,105 @@ public class SubSystemClassGen {
     }
     _builder.newLine();
     _builder.newLine();
+    _builder.newLine();
+    _builder.newLine();
+    _builder.newLine();
+    return _builder;
+  }
+  
+  public StringConcatenation generateDispatcherFile(final Root root, final SubSystemInstance ssi, final SubSystemClass ssc) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("/**");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("* @author generated by eTrice");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("*");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("* Dispatcher File of SubSystemClass ");
+    String _name = ssc.getName();
+    _builder.append(_name, " ");
+    _builder.newLineIfNotEmpty();
+    _builder.append(" ");
+    _builder.append("* - one generated dispatcher for each MessageService (Thread)");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("*/");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("#include \"etMessageReceiver.h\"");
+    _builder.newLine();
+    _builder.append("#include \"etLogger.h\"");
+    _builder.newLine();
+    _builder.append("#include \"etMSCLogger.h\"");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("void MsgDispatcher_Thread1_receiveMessage(const etMessage* msg){");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("ET_MSC_LOGGER_SYNC_ENTRY(\"MsgDispatcher_Thread1\", \"receiveMessage\")");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("switch(msg->address){");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    {
+      EList<ActorInstance> _allContainedInstances = ssi.getAllContainedInstances();
+      for(final ActorInstance ai : _allContainedInstances) {
+        _builder.append("\t\t");
+        _builder.append("/* interface items of ");
+        String _path = ai.getPath();
+        _builder.append(_path, "		");
+        _builder.append(" */");
+        _builder.newLineIfNotEmpty();
+        {
+          EList<InterfaceItemInstance> _orderedIfItemInstances = ai.getOrderedIfItemInstances();
+          for(final InterfaceItemInstance pi : _orderedIfItemInstances) {
+            _builder.append("\t\t");
+            _builder.append("case ");
+            int _objId = pi.getObjId();
+            _builder.append(_objId, "		");
+            _builder.append(":");
+            _builder.newLineIfNotEmpty();
+            _builder.append("\t\t");
+            _builder.append("\t");
+            _builder.append("etPort_receive(&");
+            String _path_1 = ai.getPath();
+            String _pathName = this.roomExt.getPathName(_path_1);
+            _builder.append(_pathName, "			");
+            _builder.append("_const.");
+            String _name_1 = pi.getName();
+            _builder.append(_name_1, "			");
+            _builder.append(", msg);");
+            _builder.newLineIfNotEmpty();
+            _builder.append("\t\t");
+            _builder.append("\t");
+            _builder.append("break;");
+            _builder.newLine();
+          }
+        }
+      }
+    }
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("default:");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("etLogger_logErrorF(\"MessageService_Thread1_ReceiveMessage: address %d does not exist \", msg->address);");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("break;");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("ET_MSC_LOGGER_SYNC_EXIT");
+    _builder.newLine();
+    _builder.append("}");
     _builder.newLine();
     return _builder;
   }

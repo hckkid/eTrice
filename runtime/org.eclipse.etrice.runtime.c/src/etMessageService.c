@@ -17,11 +17,13 @@
 #include "etLogger.h"
 #include "etMSCLogger.h"
 
-void etMessageService_init(etMessageService* self, etUInt8* buffer, etUInt16 maxBlocks, etUInt16 blockSize){
+void etMessageService_init(etMessageService* self, etUInt8* buffer, etUInt16 maxBlocks, etUInt16 blockSize, etDispatcherReceiveMessage msgDispatcher){
 	ET_MSC_LOGGER_SYNC_ENTRY("etMessageService", "init")
 	self->messageBuffer.buffer = buffer;
 	self->messageBuffer.maxBlocks = maxBlocks;
 	self->messageBuffer.blockSize = blockSize;
+	self->msgDispatcher = msgDispatcher;
+
 	etMessageQueue_init(&self->messagePool);
 	etMessageQueue_init(&self->messageQueue);
 
@@ -79,9 +81,9 @@ void etMessageService_returnMessageBuffer(etMessageService* self, etMessage* buf
 
 void etMessageService_deliverAllMessages(etMessageService* self){
 	ET_MSC_LOGGER_SYNC_ENTRY("etMessageService", "deliverAllMessages")
-	while (self->messageQueue.size > 0){
+	while (etMessageQueue_isNotEmpty(&self->messageQueue)){
 		etMessage* msg = etMessageService_popMessage(self);
-		etLogger_logInfoF("Message ID=%d, Address=%d", msg->evtID, msg->address);
+		self->msgDispatcher(msg);
 		etMessageService_returnMessageBuffer(self, msg);
 	}
 	ET_MSC_LOGGER_SYNC_EXIT

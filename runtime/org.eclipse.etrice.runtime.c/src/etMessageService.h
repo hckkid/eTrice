@@ -16,21 +16,22 @@
 #include <stddef.h>
 #include "etDatatypes.h"
 #include "etMessageQueue.h"
+#include "etMessageReceiver.h"
 
-
-typedef struct RBuffer{
+typedef struct etBuffer{
 	etUInt8 *buffer;
 	etUInt16 maxBlocks;
 	etUInt16 blockSize;
-} RBuffer;
+} etBuffer;
 
 typedef struct etMessageService {
 	etMessageQueue messageQueue;
 	etMessageQueue messagePool;
-	RBuffer messageBuffer;
+	etBuffer messageBuffer;
+	etDispatcherReceiveMessage msgDispatcher;
 } etMessageService;
 
-void etMessageService_init(etMessageService* self, etUInt8* buffer, etUInt16 maxBlocks, etUInt16 blockSize);
+void etMessageService_init(etMessageService* self, etUInt8* buffer, etUInt16 maxBlocks, etUInt16 blockSize, etDispatcherReceiveMessage msgDispatcher);
 
 void etMessageService_initMessagePool(etMessageService* self);
 
