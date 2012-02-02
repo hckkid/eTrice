@@ -30,6 +30,7 @@ import org.eclipse.etrice.core.room.ServiceImplementation;
 import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraph;
+import org.eclipse.etrice.core.room.StateMachine;
 import org.eclipse.etrice.core.room.Transition;
 import org.eclipse.etrice.core.room.Trigger;
 import org.eclipse.etrice.core.room.TriggeredTransition;
@@ -73,6 +74,10 @@ public class RoomExtensions {
   
   public String getGenerationPathSegment() {
     return "/src-gen/";
+  }
+  
+  public String getDocGenerationPathSegment() {
+    return "/doc-gen/";
   }
   
   public String getModelPath(final EObject e) {
@@ -161,6 +166,13 @@ public class RoomExtensions {
     String _projectPath = this.getProjectPath(e);
     String _generationPathSegment = this.getGenerationPathSegment();
     String _operator_plus = StringExtensions.operator_plus(_projectPath, _generationPathSegment);
+    return _operator_plus;
+  }
+  
+  public String getDocGenerationTargetPath(final EObject e) {
+    String _projectPath = this.getProjectPath(e);
+    String _docGenerationPathSegment = this.getDocGenerationPathSegment();
+    String _operator_plus = StringExtensions.operator_plus(_projectPath, _docGenerationPathSegment);
     return _operator_plus;
   }
   
@@ -478,13 +490,13 @@ public class RoomExtensions {
     ActorClass _base = ac.getBase();
     boolean _operator_equals = ObjectExtensions.operator_equals(_base, null);
     if (_operator_equals) {
-      StateGraph _stateMachine = ac.getStateMachine();
+      StateMachine _stateMachine = ac.getStateMachine();
       List<State> _baseStateList = this.getBaseStateList(_stateMachine);
       return _baseStateList;
     } else {
       ActorClass _base_1 = ac.getBase();
       List<State> _allBaseStates = this.getAllBaseStates(_base_1);
-      StateGraph _stateMachine_1 = ac.getStateMachine();
+      StateMachine _stateMachine_1 = ac.getStateMachine();
       List<State> _baseStateList_1 = this.getBaseStateList(_stateMachine_1);
       List<State> _union = this.<State>union(_allBaseStates, _baseStateList_1);
       _xifexpression = _union;
@@ -544,7 +556,7 @@ public class RoomExtensions {
       return 0;
     } else {
       ActorClass _base_1 = ac.getBase();
-      StateGraph _stateMachine = _base_1.getStateMachine();
+      StateMachine _stateMachine = _base_1.getStateMachine();
       List<State> _stateList = this.getStateList(_stateMachine);
       int _size = _stateList.size();
       ActorClass _base_2 = ac.getBase();
@@ -561,7 +573,7 @@ public class RoomExtensions {
       return 0;
     } else {
       ActorClass _base_1 = ac.getBase();
-      StateGraph _stateMachine = _base_1.getStateMachine();
+      StateMachine _stateMachine = _base_1.getStateMachine();
       List<State> _baseStateList = this.getBaseStateList(_stateMachine);
       int _size = _baseStateList.size();
       ActorClass _base_2 = ac.getBase();
