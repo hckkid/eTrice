@@ -81,7 +81,10 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 			}
 			
 			if (!(res.getContents().get(0) instanceof RoomModel)) {
-				error("referenced model is no ROOM model", RoomPackage.Literals.IMPORT__IMPORT_URI);
+				if (uri.lastSegment().endsWith(".room"))
+					error("referenced model is no ROOM model (but has .room extension)", RoomPackage.Literals.IMPORT__IMPORT_URI);
+				else
+					warning("referenced model is no ROOM model", RoomPackage.Literals.IMPORT__IMPORT_URI);
 				return;
 			}
 			
@@ -91,7 +94,7 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 			}
 		}
 		catch (RuntimeException re) {
-			// ignore
+			warning("could not load referenced model", RoomPackage.Literals.IMPORT__IMPORT_URI);
 			return;
 		}
 	}
