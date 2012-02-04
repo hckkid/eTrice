@@ -27,7 +27,7 @@ RoomModel org.eclipse.etrice.integration.SendingDataByValueTest {
 			external Port PingPongPort
 		}
 		Behavior {
-			Operation printData(d: PingPongData): void {
+			Operation printData(d: PingPongData) {
 				"System.out.printf(\"\\n\");"
 				"System.out.printf(\"i8Val: %d \\n\",d.getI8Val());"
 				"System.out.printf(\"i16Val: %d \\n\",d.getI16Val());"
@@ -82,7 +82,7 @@ RoomModel org.eclipse.etrice.integration.SendingDataByValueTest {
 			Attribute data : PingPongData
 		}
 		Behavior {
-			Operation printData(d: PingPongData): void {
+			Operation printData(d: PingPongData) {
 				"System.out.printf(\"MrPing:\\n\");"
 				"System.out.printf(\"i8Val: %d \\n\",d.getI8Val());"
 				"System.out.printf(\"i16Val: %d \\n\",d.getI16Val());"
@@ -195,13 +195,6 @@ RoomModel org.eclipse.etrice.integration.SendingDataByValueTest {
 						"// send default values"
 						"PingPongPort.ping(data);"
 						""
-						"data.setI8Val((byte) 45);"
-						"data.setI16Val((short) 34);"
-						"data.setI32Val(80);"
-						"data.setF32Val((float)3.14);"
-						"data.setF64Val(7.12345);"
-						"data.setStringVal(\"Hase !\");"
-						""
 						"data.getOwnType().setI8Val((byte)10);"
 						"data.getOwnType().setI16Val((short)17);"
 						"data.getOwnType().setI32Val(4711);"
@@ -212,7 +205,9 @@ RoomModel org.eclipse.etrice.integration.SendingDataByValueTest {
 						"for (int i=0;i<intArray.length;i++) {intArray[i] = 10+i;}"
 						"data.getOwnType().setArrayFromInt32(intArray);"
 						""
-						"PingPongPort.ping(data);"
+						"// use convenient function"
+						"PingPongPort.ping((byte)45,(short)34,80,\\\'c\\\',(float)3.14,7.12345,\\\"Hase !\\\",intArray,data.getOwnType());\""
+						""
 						"crcGen.update(13);"
 					}
 				}
