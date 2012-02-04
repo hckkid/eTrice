@@ -56,17 +56,20 @@ class CExtensions implements ILanguageExtension {
 
 	override String operationScope(String classname, boolean isDeclaration){classname+"_"}
 
+	/* TODO: unify OUT and in an add for loop (also for Java) */
 	override String outMessageId(String classname, String messagename){
-		return "OUT_"+classname+"_"+messagename;
+		return classname+"_OUT_"+messagename;
 	}
 	
 	override String inMessageId(String classname, String messagename){
-		return "IN_"+classname+"_"+messagename;
+		return classname+"_IN_"+messagename;
 	}
 
 
+
+
 	//****  C-Specific
-	
+	/* TODO: move specific code elsewhere */	
 	// used
 	def String getCHeaderFileName(RoomClass rc) {
 		return rc.name+".h";
@@ -75,6 +78,29 @@ class CExtensions implements ILanguageExtension {
 	// used
 	def String getCSourceFileName(RoomClass rc) {
 		return rc.name+".c";
+	}
+
+	def String getInstSourceFileName(RoomClass rc) {
+		return rc.name+"_Inst.h";
+	}
+
+	def String getDispSourceFileName(RoomClass rc) {
+		return rc.name+"_Disp.h";
+	}
+
+	def getIncludeGuardString(String filename){
+		'''_«filename.toUpperCase»_H_'''
+	}
+
+	def generateIncludeGuardBegin(String filename){'''
+		#ifndef «filename.getIncludeGuardString»
+		#define «filename.getIncludeGuardString»
+		'''
+	}
+
+	def generateIncludeGuardEnd(String filename){'''
+		#endif /* «filename.getIncludeGuardString» */
+		'''
 	}
 
 	//-------------------------------------------------------

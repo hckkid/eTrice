@@ -9,6 +9,17 @@
     editorPluginID="org.eclipse.etrice.core.room.editor">
   <genPackages prefix="Room" basePackage="org.eclipse.etrice.core" disposableProviderFactory="true"
       ecorePackage="Room.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Room.ecore#//CommunicationType">
+      <genEnumLiterals ecoreEnumLiteral="Room.ecore#//CommunicationType/EVENT_DRIVEN"/>
+      <genEnumLiterals ecoreEnumLiteral="Room.ecore#//CommunicationType/DATA_DRIVEN"/>
+      <genEnumLiterals ecoreEnumLiteral="Room.ecore#//CommunicationType/SYNCHRONOUS"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Room.ecore#//ActorCommunicationType">
+      <genEnumLiterals ecoreEnumLiteral="Room.ecore#//ActorCommunicationType/EVENT_DRIVEN"/>
+      <genEnumLiterals ecoreEnumLiteral="Room.ecore#//ActorCommunicationType/DATA_DRIVEN"/>
+      <genEnumLiterals ecoreEnumLiteral="Room.ecore#//ActorCommunicationType/ASYNCHRONOUS"/>
+      <genEnumLiterals ecoreEnumLiteral="Room.ecore#//ActorCommunicationType/SYNCHRONOUS"/>
+    </genEnums>
     <genClasses ecoreClass="Room.ecore#//RoomModel">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//RoomModel/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//RoomModel/docu"/>
@@ -38,8 +49,11 @@
     </genClasses>
     <genClasses ecoreClass="Room.ecore#//VarDecl">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//VarDecl/name"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//VarDecl/type"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//VarDecl/ref"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//VarDecl/refType"/>
+    </genClasses>
+    <genClasses ecoreClass="Room.ecore#//RefableType">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//RefableType/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//RefableType/ref"/>
     </genClasses>
     <genClasses ecoreClass="Room.ecore#//DataType"/>
     <genClasses ecoreClass="Room.ecore#//ComplexType"/>
@@ -62,16 +76,14 @@
     <genClasses ecoreClass="Room.ecore#//Attribute">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//Attribute/name"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//Attribute/size"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//Attribute/type"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//Attribute/ref"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//Attribute/refType"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//Attribute/defaultValueLiteral"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//Attribute/docu"/>
     </genClasses>
     <genClasses ecoreClass="Room.ecore#//Operation">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//Operation/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//Operation/arguments"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//Operation/returntype"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//Operation/ref"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//Operation/returntype"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//Operation/docu"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//Operation/detailCode"/>
     </genClasses>
@@ -80,6 +92,7 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//PortOperation/sendsMsg"/>
     </genClasses>
     <genClasses ecoreClass="Room.ecore#//ProtocolClass">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//ProtocolClass/commType"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//ProtocolClass/base"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//ProtocolClass/userCode1"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//ProtocolClass/userCode2"/>
@@ -115,6 +128,7 @@
     </genClasses>
     <genClasses ecoreClass="Room.ecore#//ActorClass">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//ActorClass/abstract"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//ActorClass/commType"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//ActorClass/base"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//ActorClass/ifPorts"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//ActorClass/structureDocu"/>
@@ -212,9 +226,6 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//StateGraph/chPoints"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//StateGraph/transitions"/>
     </genClasses>
-    <genClasses ecoreClass="Room.ecore#//StateMachine">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//StateMachine/dataDriven"/>
-    </genClasses>
     <genClasses ecoreClass="Room.ecore#//BaseState">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//BaseState/name"/>
     </genClasses>
@@ -296,6 +307,5 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//Import/importedNamespace"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//Import/importURI"/>
     </genClasses>
-    <genClasses ecoreClass="Room.ecore#//PlainStateGraph"/>
   </genPackages>
 </genmodel:GenModel>

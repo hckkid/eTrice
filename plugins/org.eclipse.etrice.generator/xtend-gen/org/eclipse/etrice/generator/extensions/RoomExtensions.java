@@ -11,7 +11,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.BaseState;
-import org.eclipse.etrice.core.room.DataType;
 import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.ExternalPort;
 import org.eclipse.etrice.core.room.Guard;
@@ -21,6 +20,7 @@ import org.eclipse.etrice.core.room.MessageHandler;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.PortClass;
 import org.eclipse.etrice.core.room.ProtocolClass;
+import org.eclipse.etrice.core.room.RefableType;
 import org.eclipse.etrice.core.room.RefinedState;
 import org.eclipse.etrice.core.room.RoomClass;
 import org.eclipse.etrice.core.room.RoomModel;
@@ -30,7 +30,6 @@ import org.eclipse.etrice.core.room.ServiceImplementation;
 import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraph;
-import org.eclipse.etrice.core.room.StateMachine;
 import org.eclipse.etrice.core.room.Transition;
 import org.eclipse.etrice.core.room.Trigger;
 import org.eclipse.etrice.core.room.TriggeredTransition;
@@ -74,6 +73,10 @@ public class RoomExtensions {
   
   public String getGenerationPathSegment() {
     return "/src-gen/";
+  }
+  
+  public String getDocGenerationPathSegment() {
+    return "/doc-gen/";
   }
   
   public String getModelPath(final EObject e) {
@@ -162,6 +165,13 @@ public class RoomExtensions {
     String _projectPath = this.getProjectPath(e);
     String _generationPathSegment = this.getGenerationPathSegment();
     String _operator_plus = StringExtensions.operator_plus(_projectPath, _generationPathSegment);
+    return _operator_plus;
+  }
+  
+  public String getDocGenerationTargetPath(final EObject e) {
+    String _projectPath = this.getProjectPath(e);
+    String _docGenerationPathSegment = this.getDocGenerationPathSegment();
+    String _operator_plus = StringExtensions.operator_plus(_projectPath, _docGenerationPathSegment);
     return _operator_plus;
   }
   
@@ -479,13 +489,13 @@ public class RoomExtensions {
     ActorClass _base = ac.getBase();
     boolean _operator_equals = ObjectExtensions.operator_equals(_base, null);
     if (_operator_equals) {
-      StateMachine _stateMachine = ac.getStateMachine();
+      StateGraph _stateMachine = ac.getStateMachine();
       List<State> _baseStateList = this.getBaseStateList(_stateMachine);
       return _baseStateList;
     } else {
       ActorClass _base_1 = ac.getBase();
       List<State> _allBaseStates = this.getAllBaseStates(_base_1);
-      StateMachine _stateMachine_1 = ac.getStateMachine();
+      StateGraph _stateMachine_1 = ac.getStateMachine();
       List<State> _baseStateList_1 = this.getBaseStateList(_stateMachine_1);
       List<State> _union = this.<State>union(_allBaseStates, _baseStateList_1);
       _xifexpression = _union;
@@ -512,7 +522,7 @@ public class RoomExtensions {
           if (!_operator_and_1) {
             _operator_and = false;
           } else {
-            DataType _returntype = e.getReturntype();
+            RefableType _returntype = e.getReturntype();
             boolean _operator_equals_1 = ObjectExtensions.operator_equals(_returntype, null);
             _operator_and = BooleanExtensions.operator_and(_operator_and_1, _operator_equals_1);
           }
@@ -545,7 +555,7 @@ public class RoomExtensions {
       return 0;
     } else {
       ActorClass _base_1 = ac.getBase();
-      StateMachine _stateMachine = _base_1.getStateMachine();
+      StateGraph _stateMachine = _base_1.getStateMachine();
       List<State> _stateList = this.getStateList(_stateMachine);
       int _size = _stateList.size();
       ActorClass _base_2 = ac.getBase();
@@ -562,7 +572,7 @@ public class RoomExtensions {
       return 0;
     } else {
       ActorClass _base_1 = ac.getBase();
-      StateMachine _stateMachine = _base_1.getStateMachine();
+      StateGraph _stateMachine = _base_1.getStateMachine();
       List<State> _baseStateList = this.getBaseStateList(_stateMachine);
       int _size = _baseStateList.size();
       ActorClass _base_2 = ac.getBase();

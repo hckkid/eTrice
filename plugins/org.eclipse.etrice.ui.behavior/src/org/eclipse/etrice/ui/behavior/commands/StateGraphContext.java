@@ -31,7 +31,7 @@ class StateGraphContext {
 		
 		// the top level state graph is always the one of our actor class
 		if (ac.getStateMachine()==null || ac.getStateMachine().eIsProxy()) {
-			ac.setStateMachine(RoomFactory.eINSTANCE.createStateMachine());
+			ac.setStateMachine(RoomFactory.eINSTANCE.createStateGraph());
 		}
 		
 		// base classes in reverse order

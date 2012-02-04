@@ -61,11 +61,11 @@ public class LanguageGenerator {
 		if (data==null)
 			return new String[] {"", "", ""};
 		
-		String typeName = data.getType().getName();
+		String typeName = data.getRefType().getType().getName();
 		String castTypeName = typeName;
-		if (data.getType() instanceof PrimitiveType) {
-			typeName = ((PrimitiveType)data.getType()).getTargetName();
-			String ct = ((PrimitiveType)data.getType()).getCastName();
+		if (data.getRefType().getType() instanceof PrimitiveType) {
+			typeName = ((PrimitiveType)data.getRefType().getType()).getTargetName();
+			String ct = ((PrimitiveType)data.getRefType().getType()).getCastName();
 			if (ct!=null && !ct.isEmpty())
 				castTypeName = ct;
 		}

@@ -33,6 +33,7 @@ import org.eclipse.etrice.core.room.Operation;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.ProtocolClass;
+import org.eclipse.etrice.core.room.RefableType;
 import org.eclipse.etrice.core.room.RoomFactory;
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.StandardOperation;
@@ -123,7 +124,9 @@ public class TestDetailCodeTranslator {
 		type.setCastName("Integer");
 		type.setTargetName("int32");
 		type.setDefaultValueLiteral("0");
-		typedID.setType(type);
+		RefableType refType = RoomFactory.eINSTANCE.createRefableType();
+		refType.setType(type);
+		typedID.setRefType(refType);
 		out2.setData(typedID);
 		pc.getOutgoingMessages().add(out1);
 		pc.getOutgoingMessages().add(out2);
@@ -142,7 +145,7 @@ public class TestDetailCodeTranslator {
 		
 		Attribute attr = RoomFactory.eINSTANCE.createAttribute();
 		attr.setName("value");
-		attr.setType(EcoreUtil.copy(type));
+		attr.setRefType(EcoreUtil.copy(refType));
 		ac.getAttributes().add(attr);
 
 		StandardOperation op0 = RoomFactory.eINSTANCE.createStandardOperation();
@@ -156,7 +159,9 @@ public class TestDetailCodeTranslator {
 		ExternalType ft = RoomFactory.eINSTANCE.createExternalType();
 		ft.setName("MyType");
 		ft.setTargetName("MyType");
-		param1.setType(ft);
+		refType = RoomFactory.eINSTANCE.createRefableType();
+		refType.setType(ft);
+		param1.setRefType(refType);
 		op1.getArguments().add(param1);
 		ac.getOperations().add(op1);
 		
@@ -166,7 +171,9 @@ public class TestDetailCodeTranslator {
 		param2.setName("param");
 		ExternalType ft2 = EcoreUtil.copy(ft);
 		ft2.setName("MyOtherType");
-		param2.setType(ft2);
+		refType = RoomFactory.eINSTANCE.createRefableType();
+		refType.setType(ft2);
+		param2.setRefType(refType);
 		op2.getArguments().add(EcoreUtil.copy(param1));
 		op2.getArguments().add(param2);
 		ac.getOperations().add(op2);

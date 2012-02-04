@@ -7,6 +7,7 @@
 package org.eclipse.etrice.core.room.impl;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 
@@ -73,6 +74,7 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
       case RoomPackage.STRUCTURE_CLASS: return createStructureClass();
       case RoomPackage.ACTOR_CONTAINER_CLASS: return createActorContainerClass();
       case RoomPackage.VAR_DECL: return createVarDecl();
+      case RoomPackage.REFABLE_TYPE: return createRefableType();
       case RoomPackage.DATA_TYPE: return createDataType();
       case RoomPackage.COMPLEX_TYPE: return createComplexType();
       case RoomPackage.PRIMITIVE_TYPE: return createPrimitiveType();
@@ -113,7 +115,6 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
       case RoomPackage.STATE_GRAPH_ITEM: return createStateGraphItem();
       case RoomPackage.STATE: return createState();
       case RoomPackage.STATE_GRAPH: return createStateGraph();
-      case RoomPackage.STATE_MACHINE: return createStateMachine();
       case RoomPackage.BASE_STATE: return createBaseState();
       case RoomPackage.REFINED_STATE: return createRefinedState();
       case RoomPackage.DETAIL_CODE: return createDetailCode();
@@ -141,9 +142,46 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
       case RoomPackage.ANNOTATION: return createAnnotation();
       case RoomPackage.KEY_VALUE: return createKeyValue();
       case RoomPackage.IMPORT: return createImport();
-      case RoomPackage.PLAIN_STATE_GRAPH: return createPlainStateGraph();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+    }
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Object createFromString(EDataType eDataType, String initialValue)
+  {
+    switch (eDataType.getClassifierID())
+    {
+      case RoomPackage.COMMUNICATION_TYPE:
+        return createCommunicationTypeFromString(eDataType, initialValue);
+      case RoomPackage.ACTOR_COMMUNICATION_TYPE:
+        return createActorCommunicationTypeFromString(eDataType, initialValue);
+      default:
+        throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
+    }
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String convertToString(EDataType eDataType, Object instanceValue)
+  {
+    switch (eDataType.getClassifierID())
+    {
+      case RoomPackage.COMMUNICATION_TYPE:
+        return convertCommunicationTypeToString(eDataType, instanceValue);
+      case RoomPackage.ACTOR_COMMUNICATION_TYPE:
+        return convertActorCommunicationTypeToString(eDataType, instanceValue);
+      default:
+        throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
     }
   }
 
@@ -200,6 +238,17 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
   {
     VarDeclImpl varDecl = new VarDeclImpl();
     return varDecl;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public RefableType createRefableType()
+  {
+    RefableTypeImpl refableType = new RefableTypeImpl();
+    return refableType;
   }
 
   /**
@@ -647,17 +696,6 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public StateMachine createStateMachine()
-  {
-    StateMachineImpl stateMachine = new StateMachineImpl();
-    return stateMachine;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public BaseState createBaseState()
   {
     BaseStateImpl baseState = new BaseStateImpl();
@@ -955,10 +993,43 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public PlainStateGraph createPlainStateGraph()
+  public CommunicationType createCommunicationTypeFromString(EDataType eDataType, String initialValue)
   {
-    PlainStateGraphImpl plainStateGraph = new PlainStateGraphImpl();
-    return plainStateGraph;
+    CommunicationType result = CommunicationType.get(initialValue);
+    if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+    return result;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public String convertCommunicationTypeToString(EDataType eDataType, Object instanceValue)
+  {
+    return instanceValue == null ? null : instanceValue.toString();
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ActorCommunicationType createActorCommunicationTypeFromString(EDataType eDataType, String initialValue)
+  {
+    ActorCommunicationType result = ActorCommunicationType.get(initialValue);
+    if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+    return result;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public String convertActorCommunicationTypeToString(EDataType eDataType, Object instanceValue)
+  {
+    return instanceValue == null ? null : instanceValue.toString();
   }
 
   /**

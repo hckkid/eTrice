@@ -1,6 +1,6 @@
 RoomModel room.basic.types.c {
 
-	PrimitiveType boolean -> boolean (boolean) default "FALSE"
+	PrimitiveType bool -> bool (boolean) default "FALSE"
 	PrimitiveType char -> char (char) default "0"
 	PrimitiveType int8 -> int8 (int8) default "0"
 	PrimitiveType int16 -> int16 (int16) default "0"

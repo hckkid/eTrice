@@ -71,6 +71,7 @@ public class PingPongDataDeep {
 	// default constructor
 	public PingPongDataDeep() {
 		super();
+		
 		// initialize attributes
 		i8Val = 0;
 		i16Val = 0;
@@ -88,6 +89,7 @@ public class PingPongDataDeep {
 	// constructor using fields
 	public PingPongDataDeep(byte i8Val, short i16Val, int i32Val, char charVal, float f32Val, double f64Val, String stringVal, int[] arrayFromInt32) {
 		super();
+		
 		this.i8Val = i8Val;
 		this.i16Val = i16Val;
 		this.i32Val = i32Val;

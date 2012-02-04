@@ -137,7 +137,7 @@ class DataClassGen {
 	def deepCopy(List<Attribute> attributes) {
 		'''
 		«FOR a : attributes»
-			«IF a.type instanceof ComplexType»
+			«IF a.refType.type instanceof ComplexType»
 				«IF a.size==0»
 					copy.«a.name» = «a.name».deepCopy();
 				«ELSE»

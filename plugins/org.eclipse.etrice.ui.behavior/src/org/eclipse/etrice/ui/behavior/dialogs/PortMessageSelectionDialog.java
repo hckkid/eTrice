@@ -17,6 +17,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.eclipse.etrice.core.room.ActorClass;
+import org.eclipse.etrice.core.room.CommunicationType;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.PortClass;
@@ -109,7 +110,7 @@ public class PortMessageSelectionDialog extends FormDialog {
 							pairs.add(new MsgItemPair(item, msg, true));
 					}
 				}
-				if (ac.getStateMachine().isDataDriven()) {
+				if (item.getProtocol().getCommType()==CommunicationType.DATA_DRIVEN) {
 					List<Message> in = RoomHelpers.getMessageList(item, false);
 					for (Message msg : in) {
 						if (!msg.isPriv())
@@ -156,11 +157,12 @@ public class PortMessageSelectionDialog extends FormDialog {
 		@Override
 		public boolean hasChildren(Object element) {
 			if (element instanceof InterfaceItem) {
-				if (!RoomHelpers.getMessageList(((InterfaceItem)element), true).isEmpty())
+				InterfaceItem item = (InterfaceItem)element;
+				if (!RoomHelpers.getMessageList(item, true).isEmpty())
 					return true;
 				
-				if (ac.getStateMachine().isDataDriven())
-					if (!RoomHelpers.getMessageList(((InterfaceItem)element), false).isEmpty())
+				if (item.getProtocol().getCommType()==CommunicationType.DATA_DRIVEN)
+					if (!RoomHelpers.getMessageList(item, false).isEmpty())
 						return true;
 			}
 			
@@ -219,7 +221,7 @@ public class PortMessageSelectionDialog extends FormDialog {
 				if (element instanceof MsgItemPair) {
 					Message msg = ((MsgItemPair) element).msg;
 					if (msg.getData()!=null)
-						return msg.getData().getName()+" : "+msg.getData().getType().getName();
+						return msg.getData().getName()+" : "+msg.getData().getRefType().getType().getName();
 				}
 				else if (element instanceof OperationItemPair) {
 					String sig = RoomHelpers.getSignature(((OperationItemPair) element).op);

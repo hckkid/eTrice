@@ -5,6 +5,7 @@ import com.google.inject.Singleton;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.etrice.generator.doc.gen.DocGen;
 import org.eclipse.etrice.generator.doc.gen.InstanceDiagramGen;
 import org.eclipse.etrice.generator.etricegen.Root;
 import org.eclipse.etrice.generator.extensions.PrepareFileSystem;
@@ -20,6 +21,9 @@ public class MainGen implements IGenerator {
   @Inject
   private PrepareFileSystem prepFS;
   
+  @Inject
+  private DocGen docGen;
+  
   public void doGenerate(final Resource resource, final IFileSystemAccess fsa) {
       this.prepFS.prepare(resource);
       EList<EObject> _contents = resource.getContents();
@@ -31,6 +35,7 @@ public class MainGen implements IGenerator {
   }
   
   public void doGenerate(final Root e) {
-    this.instanceDiagramGen.doGenerate(e);
+      this.instanceDiagramGen.doGenerate(e);
+      this.docGen.doGenerate(e);
   }
 }

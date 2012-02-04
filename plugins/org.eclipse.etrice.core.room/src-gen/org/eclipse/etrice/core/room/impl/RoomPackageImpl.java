@@ -8,12 +8,14 @@ package org.eclipse.etrice.core.room.impl;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import org.eclipse.etrice.core.room.ActorClass;
+import org.eclipse.etrice.core.room.ActorCommunicationType;
 import org.eclipse.etrice.core.room.ActorContainerClass;
 import org.eclipse.etrice.core.room.ActorContainerRef;
 import org.eclipse.etrice.core.room.ActorInstancePath;
@@ -26,6 +28,7 @@ import org.eclipse.etrice.core.room.BindingEndPoint;
 import org.eclipse.etrice.core.room.CPBranchTransition;
 import org.eclipse.etrice.core.room.ChoicePoint;
 import org.eclipse.etrice.core.room.ChoicepointTerminal;
+import org.eclipse.etrice.core.room.CommunicationType;
 import org.eclipse.etrice.core.room.ComplexType;
 import org.eclipse.etrice.core.room.ContinuationTransition;
 import org.eclipse.etrice.core.room.DataClass;
@@ -50,7 +53,6 @@ import org.eclipse.etrice.core.room.MessageFromIf;
 import org.eclipse.etrice.core.room.MessageHandler;
 import org.eclipse.etrice.core.room.NonInitialTransition;
 import org.eclipse.etrice.core.room.Operation;
-import org.eclipse.etrice.core.room.PlainStateGraph;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.PortClass;
 import org.eclipse.etrice.core.room.PortOperation;
@@ -58,6 +60,7 @@ import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.ProtocolSemantics;
 import org.eclipse.etrice.core.room.RefSAPoint;
+import org.eclipse.etrice.core.room.RefableType;
 import org.eclipse.etrice.core.room.RefinedState;
 import org.eclipse.etrice.core.room.RelaySAPoint;
 import org.eclipse.etrice.core.room.RoomClass;
@@ -75,7 +78,6 @@ import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.StateGraphItem;
 import org.eclipse.etrice.core.room.StateGraphNode;
-import org.eclipse.etrice.core.room.StateMachine;
 import org.eclipse.etrice.core.room.StateTerminal;
 import org.eclipse.etrice.core.room.StructureClass;
 import org.eclipse.etrice.core.room.SubStateTrPointTerminal;
@@ -132,6 +134,13 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * @generated
    */
   private EClass varDeclEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass refableTypeEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -418,13 +427,6 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass stateMachineEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   private EClass baseStateEClass = null;
 
   /**
@@ -614,7 +616,14 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass plainStateGraphEClass = null;
+  private EEnum communicationTypeEEnum = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EEnum actorCommunicationTypeEEnum = null;
 
   /**
    * Creates an instance of the model <b>Package</b>, registered with
@@ -934,7 +943,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getVarDecl_Type()
+  public EReference getVarDecl_RefType()
   {
     return (EReference)varDeclEClass.getEStructuralFeatures().get(1);
   }
@@ -944,9 +953,29 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getVarDecl_Ref()
+  public EClass getRefableType()
   {
-    return (EAttribute)varDeclEClass.getEStructuralFeatures().get(2);
+    return refableTypeEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getRefableType_Type()
+  {
+    return (EReference)refableTypeEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getRefableType_Ref()
+  {
+    return (EAttribute)refableTypeEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -1134,7 +1163,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getAttribute_Type()
+  public EReference getAttribute_RefType()
   {
     return (EReference)attributeEClass.getEStructuralFeatures().get(2);
   }
@@ -1144,7 +1173,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getAttribute_Ref()
+  public EAttribute getAttribute_DefaultValueLiteral()
   {
     return (EAttribute)attributeEClass.getEStructuralFeatures().get(3);
   }
@@ -1154,19 +1183,9 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getAttribute_DefaultValueLiteral()
-  {
-    return (EAttribute)attributeEClass.getEStructuralFeatures().get(4);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EReference getAttribute_Docu()
   {
-    return (EReference)attributeEClass.getEStructuralFeatures().get(5);
+    return (EReference)attributeEClass.getEStructuralFeatures().get(4);
   }
 
   /**
@@ -1214,19 +1233,9 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getOperation_Ref()
-  {
-    return (EAttribute)operationEClass.getEStructuralFeatures().get(3);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EReference getOperation_Docu()
   {
-    return (EReference)operationEClass.getEStructuralFeatures().get(4);
+    return (EReference)operationEClass.getEStructuralFeatures().get(3);
   }
 
   /**
@@ -1236,7 +1245,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    */
   public EReference getOperation_DetailCode()
   {
-    return (EReference)operationEClass.getEStructuralFeatures().get(5);
+    return (EReference)operationEClass.getEStructuralFeatures().get(4);
   }
 
   /**
@@ -1284,9 +1293,9 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getProtocolClass_Base()
+  public EAttribute getProtocolClass_CommType()
   {
-    return (EReference)protocolClassEClass.getEStructuralFeatures().get(0);
+    return (EAttribute)protocolClassEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -1294,7 +1303,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getProtocolClass_UserCode1()
+  public EReference getProtocolClass_Base()
   {
     return (EReference)protocolClassEClass.getEStructuralFeatures().get(1);
   }
@@ -1304,7 +1313,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getProtocolClass_UserCode2()
+  public EReference getProtocolClass_UserCode1()
   {
     return (EReference)protocolClassEClass.getEStructuralFeatures().get(2);
   }
@@ -1314,7 +1323,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getProtocolClass_UserCode3()
+  public EReference getProtocolClass_UserCode2()
   {
     return (EReference)protocolClassEClass.getEStructuralFeatures().get(3);
   }
@@ -1324,7 +1333,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getProtocolClass_IncomingMessages()
+  public EReference getProtocolClass_UserCode3()
   {
     return (EReference)protocolClassEClass.getEStructuralFeatures().get(4);
   }
@@ -1334,7 +1343,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getProtocolClass_OutgoingMessages()
+  public EReference getProtocolClass_IncomingMessages()
   {
     return (EReference)protocolClassEClass.getEStructuralFeatures().get(5);
   }
@@ -1344,7 +1353,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getProtocolClass_Regular()
+  public EReference getProtocolClass_OutgoingMessages()
   {
     return (EReference)protocolClassEClass.getEStructuralFeatures().get(6);
   }
@@ -1354,7 +1363,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getProtocolClass_Conjugate()
+  public EReference getProtocolClass_Regular()
   {
     return (EReference)protocolClassEClass.getEStructuralFeatures().get(7);
   }
@@ -1364,9 +1373,19 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getProtocolClass_Semantics()
+  public EReference getProtocolClass_Conjugate()
   {
     return (EReference)protocolClassEClass.getEStructuralFeatures().get(8);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getProtocolClass_Semantics()
+  {
+    return (EReference)protocolClassEClass.getEStructuralFeatures().get(9);
   }
 
   /**
@@ -1574,9 +1593,9 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getActorClass_Base()
+  public EAttribute getActorClass_CommType()
   {
-    return (EReference)actorClassEClass.getEStructuralFeatures().get(1);
+    return (EAttribute)actorClassEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -1584,7 +1603,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getActorClass_IfPorts()
+  public EReference getActorClass_Base()
   {
     return (EReference)actorClassEClass.getEStructuralFeatures().get(2);
   }
@@ -1594,7 +1613,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getActorClass_StructureDocu()
+  public EReference getActorClass_IfPorts()
   {
     return (EReference)actorClassEClass.getEStructuralFeatures().get(3);
   }
@@ -1604,7 +1623,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getActorClass_IntPorts()
+  public EReference getActorClass_StructureDocu()
   {
     return (EReference)actorClassEClass.getEStructuralFeatures().get(4);
   }
@@ -1614,7 +1633,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getActorClass_ExtPorts()
+  public EReference getActorClass_IntPorts()
   {
     return (EReference)actorClassEClass.getEStructuralFeatures().get(5);
   }
@@ -1624,7 +1643,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getActorClass_ServiceImplementations()
+  public EReference getActorClass_ExtPorts()
   {
     return (EReference)actorClassEClass.getEStructuralFeatures().get(6);
   }
@@ -1634,7 +1653,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getActorClass_StrSAPs()
+  public EReference getActorClass_ServiceImplementations()
   {
     return (EReference)actorClassEClass.getEStructuralFeatures().get(7);
   }
@@ -1644,7 +1663,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getActorClass_Attributes()
+  public EReference getActorClass_StrSAPs()
   {
     return (EReference)actorClassEClass.getEStructuralFeatures().get(8);
   }
@@ -1654,7 +1673,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getActorClass_BehaviorDocu()
+  public EReference getActorClass_Attributes()
   {
     return (EReference)actorClassEClass.getEStructuralFeatures().get(9);
   }
@@ -1664,7 +1683,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getActorClass_Annotations()
+  public EReference getActorClass_BehaviorDocu()
   {
     return (EReference)actorClassEClass.getEStructuralFeatures().get(10);
   }
@@ -1674,7 +1693,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getActorClass_Operations()
+  public EReference getActorClass_Annotations()
   {
     return (EReference)actorClassEClass.getEStructuralFeatures().get(11);
   }
@@ -1684,9 +1703,19 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getActorClass_StateMachine()
+  public EReference getActorClass_Operations()
   {
     return (EReference)actorClassEClass.getEStructuralFeatures().get(12);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getActorClass_StateMachine()
+  {
+    return (EReference)actorClassEClass.getEStructuralFeatures().get(13);
   }
 
   /**
@@ -2304,26 +2333,6 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getStateMachine()
-  {
-    return stateMachineEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EAttribute getStateMachine_DataDriven()
-  {
-    return (EAttribute)stateMachineEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EClass getBaseState()
   {
     return baseStateEClass;
@@ -2914,9 +2923,19 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getPlainStateGraph()
+  public EEnum getCommunicationType()
   {
-    return plainStateGraphEClass;
+    return communicationTypeEEnum;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EEnum getActorCommunicationType()
+  {
+    return actorCommunicationTypeEEnum;
   }
 
   /**
@@ -2978,8 +2997,11 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
 
     varDeclEClass = createEClass(VAR_DECL);
     createEAttribute(varDeclEClass, VAR_DECL__NAME);
-    createEReference(varDeclEClass, VAR_DECL__TYPE);
-    createEAttribute(varDeclEClass, VAR_DECL__REF);
+    createEReference(varDeclEClass, VAR_DECL__REF_TYPE);
+
+    refableTypeEClass = createEClass(REFABLE_TYPE);
+    createEReference(refableTypeEClass, REFABLE_TYPE__TYPE);
+    createEAttribute(refableTypeEClass, REFABLE_TYPE__REF);
 
     dataTypeEClass = createEClass(DATA_TYPE);
 
@@ -3004,8 +3026,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
     attributeEClass = createEClass(ATTRIBUTE);
     createEAttribute(attributeEClass, ATTRIBUTE__NAME);
     createEAttribute(attributeEClass, ATTRIBUTE__SIZE);
-    createEReference(attributeEClass, ATTRIBUTE__TYPE);
-    createEAttribute(attributeEClass, ATTRIBUTE__REF);
+    createEReference(attributeEClass, ATTRIBUTE__REF_TYPE);
     createEAttribute(attributeEClass, ATTRIBUTE__DEFAULT_VALUE_LITERAL);
     createEReference(attributeEClass, ATTRIBUTE__DOCU);
 
@@ -3013,7 +3034,6 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
     createEAttribute(operationEClass, OPERATION__NAME);
     createEReference(operationEClass, OPERATION__ARGUMENTS);
     createEReference(operationEClass, OPERATION__RETURNTYPE);
-    createEAttribute(operationEClass, OPERATION__REF);
     createEReference(operationEClass, OPERATION__DOCU);
     createEReference(operationEClass, OPERATION__DETAIL_CODE);
 
@@ -3023,6 +3043,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
     createEReference(portOperationEClass, PORT_OPERATION__SENDS_MSG);
 
     protocolClassEClass = createEClass(PROTOCOL_CLASS);
+    createEAttribute(protocolClassEClass, PROTOCOL_CLASS__COMM_TYPE);
     createEReference(protocolClassEClass, PROTOCOL_CLASS__BASE);
     createEReference(protocolClassEClass, PROTOCOL_CLASS__USER_CODE1);
     createEReference(protocolClassEClass, PROTOCOL_CLASS__USER_CODE2);
@@ -3058,6 +3079,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
 
     actorClassEClass = createEClass(ACTOR_CLASS);
     createEAttribute(actorClassEClass, ACTOR_CLASS__ABSTRACT);
+    createEAttribute(actorClassEClass, ACTOR_CLASS__COMM_TYPE);
     createEReference(actorClassEClass, ACTOR_CLASS__BASE);
     createEReference(actorClassEClass, ACTOR_CLASS__IF_PORTS);
     createEReference(actorClassEClass, ACTOR_CLASS__STRUCTURE_DOCU);
@@ -3156,9 +3178,6 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
     createEReference(stateGraphEClass, STATE_GRAPH__CH_POINTS);
     createEReference(stateGraphEClass, STATE_GRAPH__TRANSITIONS);
 
-    stateMachineEClass = createEClass(STATE_MACHINE);
-    createEAttribute(stateMachineEClass, STATE_MACHINE__DATA_DRIVEN);
-
     baseStateEClass = createEClass(BASE_STATE);
     createEAttribute(baseStateEClass, BASE_STATE__NAME);
 
@@ -3245,7 +3264,9 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
     createEAttribute(importEClass, IMPORT__IMPORTED_NAMESPACE);
     createEAttribute(importEClass, IMPORT__IMPORT_URI);
 
-    plainStateGraphEClass = createEClass(PLAIN_STATE_GRAPH);
+    // Create enums
+    communicationTypeEEnum = createEEnum(COMMUNICATION_TYPE);
+    actorCommunicationTypeEEnum = createEEnum(ACTOR_COMMUNICATION_TYPE);
   }
 
   /**
@@ -3299,7 +3320,6 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
     actorRefEClass.getESuperTypes().add(this.getActorContainerRef());
     stateGraphNodeEClass.getESuperTypes().add(this.getStateGraphItem());
     stateEClass.getESuperTypes().add(this.getStateGraphNode());
-    stateMachineEClass.getESuperTypes().add(this.getStateGraph());
     baseStateEClass.getESuperTypes().add(this.getState());
     refinedStateEClass.getESuperTypes().add(this.getState());
     trPointEClass.getESuperTypes().add(this.getStateGraphNode());
@@ -3318,7 +3338,6 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
     trPointTerminalEClass.getESuperTypes().add(this.getTransitionTerminal());
     subStateTrPointTerminalEClass.getESuperTypes().add(this.getTransitionTerminal());
     choicepointTerminalEClass.getESuperTypes().add(this.getTransitionTerminal());
-    plainStateGraphEClass.getESuperTypes().add(this.getStateGraph());
 
     // Initialize classes and features; add operations and parameters
     initEClass(roomModelEClass, RoomModel.class, "RoomModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -3350,8 +3369,11 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
 
     initEClass(varDeclEClass, VarDecl.class, "VarDecl", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getVarDecl_Name(), ecorePackage.getEString(), "name", null, 0, 1, VarDecl.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getVarDecl_Type(), this.getDataType(), null, "type", null, 0, 1, VarDecl.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getVarDecl_Ref(), ecorePackage.getEBoolean(), "ref", null, 0, 1, VarDecl.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getVarDecl_RefType(), this.getRefableType(), null, "refType", null, 0, 1, VarDecl.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(refableTypeEClass, RefableType.class, "RefableType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getRefableType_Type(), this.getDataType(), null, "type", null, 0, 1, RefableType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getRefableType_Ref(), ecorePackage.getEBoolean(), "ref", null, 0, 1, RefableType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(dataTypeEClass, DataType.class, "DataType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -3376,16 +3398,14 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
     initEClass(attributeEClass, Attribute.class, "Attribute", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getAttribute_Name(), ecorePackage.getEString(), "name", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getAttribute_Size(), ecorePackage.getEInt(), "size", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getAttribute_Type(), this.getDataType(), null, "type", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getAttribute_Ref(), ecorePackage.getEBoolean(), "ref", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getAttribute_RefType(), this.getRefableType(), null, "refType", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getAttribute_DefaultValueLiteral(), ecorePackage.getEString(), "defaultValueLiteral", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getAttribute_Docu(), this.getDocumentation(), null, "docu", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(operationEClass, Operation.class, "Operation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getOperation_Name(), ecorePackage.getEString(), "name", null, 0, 1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getOperation_Arguments(), this.getVarDecl(), null, "arguments", null, 0, -1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getOperation_Returntype(), this.getDataType(), null, "returntype", null, 0, 1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getOperation_Ref(), ecorePackage.getEBoolean(), "ref", null, 0, 1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getOperation_Returntype(), this.getRefableType(), null, "returntype", null, 0, 1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getOperation_Docu(), this.getDocumentation(), null, "docu", null, 0, 1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getOperation_DetailCode(), this.getDetailCode(), null, "detailCode", null, 0, 1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -3395,6 +3415,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
     initEReference(getPortOperation_SendsMsg(), this.getMessage(), null, "sendsMsg", null, 0, 1, PortOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(protocolClassEClass, ProtocolClass.class, "ProtocolClass", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getProtocolClass_CommType(), this.getCommunicationType(), "commType", null, 0, 1, ProtocolClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getProtocolClass_Base(), this.getProtocolClass(), null, "base", null, 0, 1, ProtocolClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getProtocolClass_UserCode1(), this.getDetailCode(), null, "userCode1", null, 0, 1, ProtocolClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getProtocolClass_UserCode2(), this.getDetailCode(), null, "userCode2", null, 0, 1, ProtocolClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3430,6 +3451,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
 
     initEClass(actorClassEClass, ActorClass.class, "ActorClass", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getActorClass_Abstract(), ecorePackage.getEBoolean(), "abstract", null, 0, 1, ActorClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getActorClass_CommType(), this.getActorCommunicationType(), "commType", null, 0, 1, ActorClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getActorClass_Base(), this.getActorClass(), null, "base", null, 0, 1, ActorClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getActorClass_IfPorts(), this.getPort(), null, "ifPorts", null, 0, -1, ActorClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getActorClass_StructureDocu(), this.getDocumentation(), null, "structureDocu", null, 0, 1, ActorClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3441,7 +3463,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
     initEReference(getActorClass_BehaviorDocu(), this.getDocumentation(), null, "behaviorDocu", null, 0, 1, ActorClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getActorClass_Annotations(), this.getAnnotation(), null, "annotations", null, 0, -1, ActorClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getActorClass_Operations(), this.getStandardOperation(), null, "operations", null, 0, -1, ActorClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getActorClass_StateMachine(), this.getStateMachine(), null, "stateMachine", null, 0, 1, ActorClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getActorClass_StateMachine(), this.getStateGraph(), null, "stateMachine", null, 0, 1, ActorClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(interfaceItemEClass, InterfaceItem.class, "InterfaceItem", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getInterfaceItem_Name(), ecorePackage.getEString(), "name", null, 0, 1, InterfaceItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3534,9 +3556,6 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
     initEReference(getStateGraph_ChPoints(), this.getChoicePoint(), null, "chPoints", null, 0, -1, StateGraph.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getStateGraph_Transitions(), this.getTransition(), null, "transitions", null, 0, -1, StateGraph.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(stateMachineEClass, StateMachine.class, "StateMachine", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getStateMachine_DataDriven(), ecorePackage.getEBoolean(), "dataDriven", null, 0, 1, StateMachine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
     initEClass(baseStateEClass, BaseState.class, "BaseState", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getBaseState_Name(), ecorePackage.getEString(), "name", null, 0, 1, BaseState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -3623,7 +3642,17 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
     initEAttribute(getImport_ImportedNamespace(), ecorePackage.getEString(), "importedNamespace", null, 0, 1, Import.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getImport_ImportURI(), ecorePackage.getEString(), "importURI", null, 0, 1, Import.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(plainStateGraphEClass, PlainStateGraph.class, "PlainStateGraph", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    // Initialize enums and add enum literals
+    initEEnum(communicationTypeEEnum, CommunicationType.class, "CommunicationType");
+    addEEnumLiteral(communicationTypeEEnum, CommunicationType.EVENT_DRIVEN);
+    addEEnumLiteral(communicationTypeEEnum, CommunicationType.DATA_DRIVEN);
+    addEEnumLiteral(communicationTypeEEnum, CommunicationType.SYNCHRONOUS);
+
+    initEEnum(actorCommunicationTypeEEnum, ActorCommunicationType.class, "ActorCommunicationType");
+    addEEnumLiteral(actorCommunicationTypeEEnum, ActorCommunicationType.EVENT_DRIVEN);
+    addEEnumLiteral(actorCommunicationTypeEEnum, ActorCommunicationType.DATA_DRIVEN);
+    addEEnumLiteral(actorCommunicationTypeEEnum, ActorCommunicationType.ASYNCHRONOUS);
+    addEEnumLiteral(actorCommunicationTypeEEnum, ActorCommunicationType.SYNCHRONOUS);
 
     // Create resource
     createResource(eNS_URI);

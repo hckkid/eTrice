@@ -1,23 +1,30 @@
 RoomModel cGenRef {
 	import room.basic.types.c.* from "CTypes.room"
 	
-	SubSystemClass SS {
-		ActorRef Receiver: Receiver
-		ActorRef Sender: Sender
-		ActorRef Broadcast: Broadcast
-		ActorRef Receiver2: Receiver
-		ActorRef ref0: Broadcast
-		ActorRef ref1: Broadcast
-		ActorRef ref2: Receiver
-		ActorRef ref3: Receiver
-		Binding Sender.dataOut and Broadcast.dataIn
-		Binding Broadcast.dataOut and ref0.dataIn
-		Binding Broadcast.dataOut and ref1.dataIn
-		Binding Receiver.dataIn and ref0.dataOut
-		Binding Receiver2.dataIn and ref0.dataOut
-		Binding ref2.dataIn and ref1.dataOut
-		Binding ref3.dataIn and ref1.dataOut
+	SubSystemClass SubSys {
+		ActorRef Receiver: ReceiverManual
+		ActorRef Sender: SenderManual
+		Binding Sender.dataOut and Receiver.dataIn
 	}
+
+//	SubSystemClass SubSysSomewhatBigger {
+//		ActorRef Receiver: Receiver
+//		ActorRef Sender: Sender
+//		ActorRef Broadcast: Broadcast
+//		ActorRef Receiver2: Receiver
+//		ActorRef ref0: Broadcast
+//		ActorRef ref1: Broadcast
+//		ActorRef ref2: Receiver
+//		ActorRef ref3: Receiver
+//		Binding Sender.dataOut and Broadcast.dataIn
+//		Binding Broadcast.dataOut and ref0.dataIn
+//		Binding Broadcast.dataOut and ref1.dataIn
+//		Binding Receiver.dataIn and ref0.dataOut
+//		Binding Receiver2.dataIn and ref0.dataOut
+//		Binding ref2.dataIn and ref1.dataOut
+//		Binding ref3.dataIn and ref1.dataOut
+//	}
+
 
 	ActorClass Receiver {
 		Interface {
@@ -115,6 +122,32 @@ RoomModel cGenRef {
 		}
 	}
 
+	ActorClass SenderManual {
+		Interface {
+			conjugated Port dataOut: CommunicationProtocol
+		}
+		Structure {
+			external Port dataOut
+			Attribute attribute1: int32
+			Attribute attribute2: DataClass1
+		}
+		Behavior {
+			//@BehaviorManual
+			Operation operation1(argument1:int32, argument2: DataClass1 ref){""}
+		}
+	}
+	ActorClass ReceiverManual {
+		Interface {
+			Port dataIn: CommunicationProtocol
+		}
+		Structure {
+			external Port dataIn
+		}
+		Behavior {
+			//@BehaviorManual
+		}
+	}		
+
 	ActorClass Sender {
 		Interface {
 			conjugated Port dataOut: CommunicationProtocol
@@ -172,7 +205,7 @@ RoomModel cGenRef {
 		Attribute Attr1: int32
 		Attribute Attr2: float32
 		Attribute Attr3: int32
-		Operation Operation1(): void {"/*nothing to do*/"}
+		Operation Operation1() {"/*nothing to do*/"}
 	}
 
 }

@@ -78,6 +78,10 @@ class RoomExtensions {
 		return "/src-gen/"
 	}
 
+	def String getDocGenerationPathSegment() {
+		return "/doc-gen/"
+	}
+
 	def String getModelPath(EObject e) {
 		var res = e.eResource;
 		if (res==null) {
@@ -132,6 +136,10 @@ class RoomExtensions {
 	
 	def String getGenerationTargetPath(EObject e){
 		return getProjectPath(e)+getGenerationPathSegment();
+	}
+
+	def String getDocGenerationTargetPath(EObject e){
+		return getProjectPath(e)+getDocGenerationPathSegment();
 	}
 
 	def List<Port> getEndPorts(ActorClass ac) {

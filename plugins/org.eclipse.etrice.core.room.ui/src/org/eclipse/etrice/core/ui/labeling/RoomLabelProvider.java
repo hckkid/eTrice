@@ -285,7 +285,7 @@ public class RoomLabelProvider extends DefaultEObjectLabelProvider {
 	}
 	
 	String text(Attribute attr) {
-		String type = attr.getType()!=null? (" : "+attr.getType().getName()):"";
+		String type = attr.getRefType().getType()!=null? (" : "+attr.getRefType().getType().getName()):"";
 		String value = (attr.getDefaultValueLiteral()!=null && !attr.getDefaultValueLiteral().isEmpty())?
 				(" = "+attr.getDefaultValueLiteral()) : "";
 		String mult = attr.getSize()>1? ("["+attr.getSize()+"]") : "";
@@ -293,7 +293,9 @@ public class RoomLabelProvider extends DefaultEObjectLabelProvider {
 	}
 	
 	StyledString text(Operation op) {
-		String rt = op.getReturntype()!=null? ": "+op.getReturntype().getName():"";
+		/* TODO TS: create complete signature including return type and ref */
+
+		String rt = op.getReturntype()!=null? ": "+op.getReturntype().getType().getName():"";
 		String signature = RoomHelpers.getSignature(op);
 		if (op instanceof PortOperation && ((PortOperation) op).getSendsMsg()!=null)
 			rt = " sends "+((PortOperation) op).getSendsMsg().getName();
@@ -308,7 +310,7 @@ public class RoomLabelProvider extends DefaultEObjectLabelProvider {
 	String text(Message m) {
 		String signature = "";
 		if (m.getData()!=null)
-			signature = m.getData().getName()+":"+m.getData().getType().getName();
+			signature = m.getData().getName()+":"+m.getData().getRefType().getType().getName();
 		signature = "("+signature+")";
 		return m.getName()+signature;
 	}

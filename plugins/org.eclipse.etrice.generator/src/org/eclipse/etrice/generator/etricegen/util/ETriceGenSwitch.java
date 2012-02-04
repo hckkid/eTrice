@@ -13,7 +13,6 @@ import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorContainerClass;
 import org.eclipse.etrice.core.room.RoomClass;
 import org.eclipse.etrice.core.room.StructureClass;
-import org.eclipse.etrice.generator.etricegen.*;
 import org.eclipse.etrice.generator.etricegen.ActiveTrigger;
 import org.eclipse.etrice.generator.etricegen.ActorInstance;
 import org.eclipse.etrice.generator.etricegen.BindingInstance;

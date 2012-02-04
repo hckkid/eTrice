@@ -10,6 +10,7 @@ import org.eclipse.etrice.generator.generic.ILanguageExtension;
 import org.eclipse.etrice.generator.generic.LanguageGenerator;
 import org.eclipse.xtext.xbase.lib.ComparableExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
+import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 
 @SuppressWarnings("all")
 @Singleton
@@ -56,20 +57,24 @@ public class CExtensions implements ILanguageExtension {
     return _operator_plus;
   }
   
+  /**
+   * TODO: unify OUT and in an add for loop (also for Java)
+   */
   public String outMessageId(final String classname, final String messagename) {
-    String _operator_plus = StringExtensions.operator_plus("OUT_", classname);
-    String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, "_");
-    String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, messagename);
-    return _operator_plus_2;
+    String _operator_plus = StringExtensions.operator_plus(classname, "_OUT_");
+    String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, messagename);
+    return _operator_plus_1;
   }
   
   public String inMessageId(final String classname, final String messagename) {
-    String _operator_plus = StringExtensions.operator_plus("IN_", classname);
-    String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, "_");
-    String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, messagename);
-    return _operator_plus_2;
+    String _operator_plus = StringExtensions.operator_plus(classname, "_IN_");
+    String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, messagename);
+    return _operator_plus_1;
   }
   
+  /**
+   * TODO: move specific code elsewhere
+   */
   public String getCHeaderFileName(final RoomClass rc) {
     String _name = rc.getName();
     String _operator_plus = StringExtensions.operator_plus(_name, ".h");
@@ -80,6 +85,50 @@ public class CExtensions implements ILanguageExtension {
     String _name = rc.getName();
     String _operator_plus = StringExtensions.operator_plus(_name, ".c");
     return _operator_plus;
+  }
+  
+  public String getInstSourceFileName(final RoomClass rc) {
+    String _name = rc.getName();
+    String _operator_plus = StringExtensions.operator_plus(_name, "_Inst.h");
+    return _operator_plus;
+  }
+  
+  public String getDispSourceFileName(final RoomClass rc) {
+    String _name = rc.getName();
+    String _operator_plus = StringExtensions.operator_plus(_name, "_Disp.h");
+    return _operator_plus;
+  }
+  
+  public StringConcatenation getIncludeGuardString(final String filename) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("_");
+    String _upperCase = filename.toUpperCase();
+    _builder.append(_upperCase, "");
+    _builder.append("_H_");
+    return _builder;
+  }
+  
+  public StringConcatenation generateIncludeGuardBegin(final String filename) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("#ifndef ");
+    StringConcatenation _includeGuardString = this.getIncludeGuardString(filename);
+    _builder.append(_includeGuardString, "");
+    _builder.newLineIfNotEmpty();
+    _builder.append("#define ");
+    StringConcatenation _includeGuardString_1 = this.getIncludeGuardString(filename);
+    _builder.append(_includeGuardString_1, "");
+    _builder.newLineIfNotEmpty();
+    return _builder;
+  }
+  
+  public StringConcatenation generateIncludeGuardEnd(final String filename) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("#endif /* ");
+    StringConcatenation _includeGuardString = this.getIncludeGuardString(filename);
+    _builder.append(_includeGuardString, "");
+    _builder.append(" */");
+    _builder.newLineIfNotEmpty();
+    return _builder;
   }
   
   public String getExecuteChainCode(final ExpandedActorClass ac, final TransitionChain tc) {

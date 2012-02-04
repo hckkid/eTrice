@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipse.etrice.core.room.ActorClass;
+import org.eclipse.etrice.core.room.ActorCommunicationType;
 import org.eclipse.etrice.core.room.Annotation;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.Documentation;
@@ -31,7 +32,7 @@ import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.etrice.core.room.SAPRef;
 import org.eclipse.etrice.core.room.ServiceImplementation;
 import org.eclipse.etrice.core.room.StandardOperation;
-import org.eclipse.etrice.core.room.StateMachine;
+import org.eclipse.etrice.core.room.StateGraph;
 
 /**
  * <!-- begin-user-doc -->
@@ -41,6 +42,7 @@ import org.eclipse.etrice.core.room.StateMachine;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ActorClassImpl#isAbstract <em>Abstract</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.impl.ActorClassImpl#getCommType <em>Comm Type</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ActorClassImpl#getBase <em>Base</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ActorClassImpl#getIfPorts <em>If Ports</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ActorClassImpl#getStructureDocu <em>Structure Docu</em>}</li>
@@ -79,6 +81,26 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
    * @ordered
    */
   protected boolean abstract_ = ABSTRACT_EDEFAULT;
+
+  /**
+   * The default value of the '{@link #getCommType() <em>Comm Type</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getCommType()
+   * @generated
+   * @ordered
+   */
+  protected static final ActorCommunicationType COMM_TYPE_EDEFAULT = ActorCommunicationType.EVENT_DRIVEN;
+
+  /**
+   * The cached value of the '{@link #getCommType() <em>Comm Type</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getCommType()
+   * @generated
+   * @ordered
+   */
+  protected ActorCommunicationType commType = COMM_TYPE_EDEFAULT;
 
   /**
    * The cached value of the '{@link #getBase() <em>Base</em>}' reference.
@@ -198,7 +220,7 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
    * @generated
    * @ordered
    */
-  protected StateMachine stateMachine;
+  protected StateGraph stateMachine;
 
   /**
    * <!-- begin-user-doc -->
@@ -242,6 +264,29 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
     abstract_ = newAbstract;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.ACTOR_CLASS__ABSTRACT, oldAbstract, abstract_));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ActorCommunicationType getCommType()
+  {
+    return commType;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setCommType(ActorCommunicationType newCommType)
+  {
+    ActorCommunicationType oldCommType = commType;
+    commType = newCommType == null ? COMM_TYPE_EDEFAULT : newCommType;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.ACTOR_CLASS__COMM_TYPE, oldCommType, commType));
   }
 
   /**
@@ -500,7 +545,7 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
    * <!-- end-user-doc -->
    * @generated
    */
-  public StateMachine getStateMachine()
+  public StateGraph getStateMachine()
   {
     return stateMachine;
   }
@@ -510,9 +555,9 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetStateMachine(StateMachine newStateMachine, NotificationChain msgs)
+  public NotificationChain basicSetStateMachine(StateGraph newStateMachine, NotificationChain msgs)
   {
-    StateMachine oldStateMachine = stateMachine;
+    StateGraph oldStateMachine = stateMachine;
     stateMachine = newStateMachine;
     if (eNotificationRequired())
     {
@@ -527,7 +572,7 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setStateMachine(StateMachine newStateMachine)
+  public void setStateMachine(StateGraph newStateMachine)
   {
     if (newStateMachine != stateMachine)
     {
@@ -591,6 +636,8 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
     {
       case RoomPackage.ACTOR_CLASS__ABSTRACT:
         return isAbstract();
+      case RoomPackage.ACTOR_CLASS__COMM_TYPE:
+        return getCommType();
       case RoomPackage.ACTOR_CLASS__BASE:
         if (resolve) return getBase();
         return basicGetBase();
@@ -634,6 +681,9 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
       case RoomPackage.ACTOR_CLASS__ABSTRACT:
         setAbstract((Boolean)newValue);
         return;
+      case RoomPackage.ACTOR_CLASS__COMM_TYPE:
+        setCommType((ActorCommunicationType)newValue);
+        return;
       case RoomPackage.ACTOR_CLASS__BASE:
         setBase((ActorClass)newValue);
         return;
@@ -676,7 +726,7 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
         getOperations().addAll((Collection<? extends StandardOperation>)newValue);
         return;
       case RoomPackage.ACTOR_CLASS__STATE_MACHINE:
-        setStateMachine((StateMachine)newValue);
+        setStateMachine((StateGraph)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -694,6 +744,9 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
     {
       case RoomPackage.ACTOR_CLASS__ABSTRACT:
         setAbstract(ABSTRACT_EDEFAULT);
+        return;
+      case RoomPackage.ACTOR_CLASS__COMM_TYPE:
+        setCommType(COMM_TYPE_EDEFAULT);
         return;
       case RoomPackage.ACTOR_CLASS__BASE:
         setBase((ActorClass)null);
@@ -729,7 +782,7 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
         getOperations().clear();
         return;
       case RoomPackage.ACTOR_CLASS__STATE_MACHINE:
-        setStateMachine((StateMachine)null);
+        setStateMachine((StateGraph)null);
         return;
     }
     super.eUnset(featureID);
@@ -747,6 +800,8 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
     {
       case RoomPackage.ACTOR_CLASS__ABSTRACT:
         return abstract_ != ABSTRACT_EDEFAULT;
+      case RoomPackage.ACTOR_CLASS__COMM_TYPE:
+        return commType != COMM_TYPE_EDEFAULT;
       case RoomPackage.ACTOR_CLASS__BASE:
         return base != null;
       case RoomPackage.ACTOR_CLASS__IF_PORTS:
@@ -788,6 +843,8 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
     StringBuffer result = new StringBuffer(super.toString());
     result.append(" (abstract: ");
     result.append(abstract_);
+    result.append(", commType: ");
+    result.append(commType);
     result.append(')');
     return result.toString();
   }

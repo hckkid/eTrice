@@ -469,6 +469,16 @@ public class RoomHelpers {
 		return null;
 	}
 	
+	public static ActorClass getActorClass(EObject obj) {
+		EObject parent = obj;
+		while (parent!=null) {
+			parent = parent.eContainer();
+			if (parent instanceof ActorClass)
+				return (ActorClass) parent;
+		}
+		return null;
+	}
+	
 	/**
 	 * first container of type {@link ProtocolClass}
 	 * @param obj
@@ -610,12 +620,13 @@ public class RoomHelpers {
 	}
 
 	public static String getSignature(Operation op) {
+		/* TODO TS: create complete signature including return type and ref */
 		String signature = "";
 		for (VarDecl arg : op.getArguments()) {
 			if (signature.isEmpty())
-				signature = arg.getName()+": "+arg.getType().getName();
+				signature = arg.getName()+": "+arg.getRefType().getType().getName();
 			else
-				signature += ", "+arg.getName()+": "+arg.getType().getName();
+				signature += ", "+arg.getName()+": "+arg.getRefType().getType().getName();
 		}
 		signature = "("+signature+")";
 		return signature;

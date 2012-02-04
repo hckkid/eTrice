@@ -33,7 +33,7 @@ class InstanceDiagramGen implements IRoomGenerator {
 	
 	override doGenerate(Root root) {
 		for (sc: root.subSystemInstances) {
-			var path = sc.subSystemClass.generationTargetPath+sc.subSystemClass.getPath
+			var path = sc.subSystemClass.getDocGenerationTargetPath+sc.subSystemClass.getPath
 			var file = sc.subSystemClass.name+".dot"
 			logger.logInfo("generating instance diagram: '"+file+"' in '"+path+"'")
 			fileAccess.setOutputPath(path)

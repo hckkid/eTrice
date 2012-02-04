@@ -42,12 +42,12 @@ class MainGen implements IGenerator {
 	
 	def void doGenerate(Root e) {
 		dataClassGen.doGenerate(e);
-		//protocolClassGen.doGenerate(e);
-		//actorClassGen.doGenerate(e);
-		//subsystemClassGen.doGenerate(e);
+		protocolClassGen.doGenerate(e);
+		actorClassGen.doGenerate(e);
+		subsystemClassGen.doGenerate(e);
 		
 		if (!e.library) {
-			//subsystemRunnerGen.doGenerate(e);
+			subsystemRunnerGen.doGenerate(e);
 		}
 	}
 }

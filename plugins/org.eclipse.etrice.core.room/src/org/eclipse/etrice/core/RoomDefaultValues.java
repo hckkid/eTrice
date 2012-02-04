@@ -17,21 +17,21 @@ package org.eclipse.etrice.core;
  *
  */
 public class RoomDefaultValues {
-
-	private static boolean useDataDrivenStateMachine = false;
-
-	/**
-	 * @param useDataDrivenStateMachine the useDataDrivenStateMachine to set
-	 */
-	public static void setUseDataDrivenStateMachine(boolean useDataDrivenStateMachine) {
-		RoomDefaultValues.useDataDrivenStateMachine = useDataDrivenStateMachine;
-	}
-
-	/**
-	 * @return the useDataDrivenStateMachine
-	 */
-	public static boolean isUseDataDrivenStateMachine() {
-		return useDataDrivenStateMachine;
-	}
+//
+//	private static boolean useDataDrivenStateMachine = false;
+//
+//	/**
+//	 * @param useDataDrivenStateMachine the useDataDrivenStateMachine to set
+//	 */
+//	public static void setUseDataDrivenStateMachine(boolean useDataDrivenStateMachine) {
+//		RoomDefaultValues.useDataDrivenStateMachine = useDataDrivenStateMachine;
+//	}
+//
+//	/**
+//	 * @return the useDataDrivenStateMachine
+//	 */
+//	public static boolean isUseDataDrivenStateMachine() {
+//		return useDataDrivenStateMachine;
+//	}
 	
 }

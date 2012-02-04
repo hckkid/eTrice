@@ -9,6 +9,7 @@ import org.eclipse.etrice.core.room.ComplexType;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.DataType;
 import org.eclipse.etrice.core.room.DetailCode;
+import org.eclipse.etrice.core.room.RefableType;
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.generator.base.ILogger;
@@ -340,7 +341,8 @@ public class DataClassGen {
     {
       for(final Attribute a : attributes) {
         {
-          DataType _type = a.getType();
+          RefableType _refType = a.getRefType();
+          DataType _type = _refType.getType();
           if ((_type instanceof ComplexType)) {
             {
               int _size = a.getSize();

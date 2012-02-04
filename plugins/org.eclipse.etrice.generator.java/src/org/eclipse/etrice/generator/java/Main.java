@@ -51,7 +51,8 @@ public class Main extends AbstractGenerator {
 	private IGenerator mainGenerator;
 
 	@Inject
-	protected InstanceDiagramGen instanceDiagramGenerator; 
+	protected org.eclipse.etrice.generator.doc.gen.MainGen mainDocGenerator; 
+	
 	
 	@Inject
 	private Validator validator;
@@ -110,7 +111,7 @@ public class Main extends AbstractGenerator {
 		mainGenerator.doGenerate(genModel.eResource(), fileAccess);
 		
 		if (genInstDiag) {
-			instanceDiagramGenerator.doGenerate(genModel);
+			mainDocGenerator.doGenerate(genModel);
 		}
 		logger.logInfo("-- finished code generation");
 		

@@ -703,7 +703,7 @@ public class RootImpl extends EObjectImpl implements Root {
 
 	private void getVarDeclDataClasses(HashSet<DataClass> dataClasses, Collection<VarDecl> decls) {
 		for (VarDecl vd : decls) {
-			DataClass dc = name2dc.get(vd.getType().getName());
+			DataClass dc = name2dc.get(vd.getRefType().getType().getName());
 			if (dc!=null)
 				dataClasses.add(dc);
 		}
@@ -711,7 +711,7 @@ public class RootImpl extends EObjectImpl implements Root {
 
 	private void getAttributeDataClasses(HashSet<DataClass> dataClasses, Collection<Attribute> attributes) {
 		for (Attribute attr : attributes) {
-			DataClass dc = name2dc.get(attr.getType().getName());
+			DataClass dc = name2dc.get(attr.getRefType().getType().getName());
 			if (dc!=null)
 				dataClasses.add(dc);
 		}
@@ -742,8 +742,8 @@ public class RootImpl extends EObjectImpl implements Root {
 	private void getMessageDataClasses(HashSet<DataClass> dataClasses, EList<Message> messages) {
 		for (Message message : messages) {
 			if (message.getData()!=null) {
-				if (message.getData().getType() instanceof DataClass) {
-					DataClass dc = (DataClass) message.getData().getType();
+				if (message.getData().getRefType().getType() instanceof DataClass) {
+					DataClass dc = (DataClass) message.getData().getRefType().getType();
 					if (dc!=null)
 						dataClasses.add(dc);
 				}

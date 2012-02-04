@@ -6,6 +6,7 @@ import org.eclipse.core.databinding.validation.ValidationStatus;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.etrice.core.room.ActorClass;
+import org.eclipse.etrice.core.room.ActorCommunicationType;
 import org.eclipse.etrice.core.room.BaseState;
 import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.etrice.core.room.State;
@@ -91,7 +92,7 @@ public class StatePropertyDialog extends AbstractMemberAwarePropertyDialog {
 		}
 		
 		ActorClass ac = RoomHelpers.getActorClass(state);
-		if (ac.getStateMachine().isDataDriven())
+		if (ac.getCommType()!=ActorCommunicationType.EVENT_DRIVEN)
 		{
 			Text dotxt = createText(body, "&Do Code:", state, RoomPackage.eINSTANCE.getState_DoCode(), null, s2m, m2s, true);
 			configureMemberAware(dotxt, true, true);

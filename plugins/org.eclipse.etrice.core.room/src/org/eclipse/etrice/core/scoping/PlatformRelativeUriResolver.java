@@ -13,6 +13,9 @@
 package org.eclipse.etrice.core.scoping;
 
 import java.io.File;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -30,6 +33,8 @@ import org.eclipse.xtext.scoping.impl.ImportUriResolver;
  */
 public class PlatformRelativeUriResolver extends ImportUriResolver {
 
+	private Map<String, String> env = System.getenv();
+	
 	/* (non-Javadoc)
 	 * @see org.eclipse.xtext.scoping.impl.ImportUriResolver#resolve(org.eclipse.emf.ecore.EObject)
 	 */
@@ -38,15 +43,43 @@ public class PlatformRelativeUriResolver extends ImportUriResolver {
 		String resolve = super.resolve(object);
 		if (resolve==null || resolve.trim().isEmpty())
 			return null;
+
+		URI baseUri = object.eResource()==null? null:object.eResource().getURI();
+		resolve = resolve(resolve, baseUri);
 		
-		URI baseUri = object.eResource().getURI();
-		if (object.eResource()!=null && baseUri!=null) {
+		return resolve;
+	}
+
+	public String resolve(String resolve, URI baseUri) {
+		resolve = substituteEnvVars(resolve);
+		resolve = resolve.replaceAll("\\\\", "/");
+		
+		if (baseUri!=null) {
 			resolve = resolveUriAgainstBase(resolve, baseUri);
 		}
 		return resolve;
 	}
 
-	public static String resolveUriAgainstBase(String resolve, URI baseUri) {
+	public String substituteEnvVars(String text) {
+		String pattern = "\\$\\{([A-Za-z0-9_]+)\\}";
+		Pattern expr = Pattern.compile(pattern);
+		Matcher matcher = expr.matcher(text);
+		while (matcher.find()) {
+		    String envValue = env.get(matcher.group(1));
+		    if (envValue == null) {
+		        envValue = "";
+		    }
+		    else {
+		        envValue = envValue.replace("\\", "\\\\");
+		    }
+		    Pattern subexpr = Pattern.compile(Pattern.quote(matcher.group(0)));
+		    text = subexpr.matcher(text).replaceAll(envValue);
+		}
+
+		return text;
+	}
+
+	private String resolveUriAgainstBase(String resolve, URI baseUri) {
 		if (resolve==null || resolve.trim().isEmpty())
 			return null;
 
