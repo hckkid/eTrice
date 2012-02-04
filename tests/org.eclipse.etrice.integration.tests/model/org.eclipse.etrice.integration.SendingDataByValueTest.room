@@ -78,7 +78,7 @@ RoomModel org.eclipse.etrice.integration.SendingDataByValueTest {
 				"private CRC16Generator crcGen = new CRC16Generator();"
 			}
 			external Port PingPongPort
-			Attribute i32Array[ 10 ] : int32
+			Attribute i32Array[10] : int32
 			Attribute data : PingPongData
 		}
 		Behavior {
@@ -286,7 +286,7 @@ RoomModel org.eclipse.etrice.integration.SendingDataByValueTest {
 		Attribute f32Val: float32 = "4711.0815f"
 		Attribute f64Val: float64 = "47114711.08150815"
 		Attribute stringVal: string = "\"Du alter Depp !\""
-		Attribute arrayFromInt32[ 5 ]: int32 = "{1,2,3,4,5}"
+		Attribute arrayFromInt32[5]: int32 = "{1,2,3,4,5}"
 		Attribute ownType: PingPongDataDeep
 	}
 
@@ -298,7 +298,7 @@ RoomModel org.eclipse.etrice.integration.SendingDataByValueTest {
 		Attribute f32Val: float32
 		Attribute f64Val: float64
 		Attribute stringVal: string
-		Attribute arrayFromInt32[ 10 ]: int32
+		Attribute arrayFromInt32[10]: int32
 	}
 
 }
