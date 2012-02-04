@@ -206,7 +206,7 @@ RoomModel org.eclipse.etrice.integration.SendingDataByValueTest {
 						"data.getOwnType().setArrayFromInt32(intArray);"
 						""
 						"// use convenient function"
-						"PingPongPort.ping((byte)45,(short)34,80,\\\'c\\\',(float)3.14,7.12345,\\\"Hase !\\\",intArray,data.getOwnType());\""
+						"PingPongPort.ping((byte)45,(short)34,80,\'c\',(float)3.14,7.12345,\"Hase !\",intArray,data.getOwnType());"
 						""
 						"crcGen.update(13);"
 					}
