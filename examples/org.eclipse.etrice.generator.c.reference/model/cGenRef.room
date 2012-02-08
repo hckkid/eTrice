@@ -39,7 +39,7 @@ RoomModel cGenRef {
 				Transition init: initial -> Idle { }
 				Transition tr0: Idle -> DataReceived {
 					triggers {
-						<sendData: dataIn>
+						<inMessage1: dataIn>
 					}
 					action {
 						"dataIn.receivedData();"
@@ -65,7 +65,7 @@ RoomModel cGenRef {
 				Transition init: initial -> Idle { }
 				Transition tr0: Idle -> tp0 of Sending {
 					triggers {
-						<sendData: dataIn>
+						<inMessage1: dataIn>
 					}
 					action {
 						"//dataOut.get(0).sendData(data);"
@@ -84,28 +84,28 @@ RoomModel cGenRef {
 						Transition tr0: my tp0 -> WaitingForReceived
 						Transition tr1: WaitingForReceived -> ReceivedOne {
 							triggers {
-								<receivedData: dataOut guard {
+								<outMessage1: dataOut guard {
 									"true"
 								}>
 							}
 						}
 						Transition tr2: WaitingForReceived -> ReceivedTheOther {
 							triggers {
-								<receivedData: dataOut guard {
+								<outMessage1: dataOut guard {
 									"false"
 								}>
 							}
 						}
 						Transition tr3: ReceivedOne -> my tp1 {
 							triggers {
-								<receivedData: dataOut guard {
+								<outMessage1: dataOut guard {
 									"true"
 								}>
 							}
 						}
 						Transition tr4: ReceivedTheOther -> my tp1 {
 							triggers {
-								<receivedData: dataOut guard {
+								<outMessage1: dataOut guard {
 									"false"
 								}>
 							}
@@ -160,7 +160,7 @@ RoomModel cGenRef {
 				Transition init: initial -> SendingData { }
 				Transition tr0: SendingData -> Done {
 					triggers {
-						<receivedData: dataOut>
+						<outMessage1: dataOut>
 					}
 				}
 				State SendingData {
@@ -175,12 +175,14 @@ RoomModel cGenRef {
 
 	ProtocolClass CommunicationProtocol {
 		incoming {
-			Message sendData(data: int32)
-			Message sendData2(data: DataClass1)
+			Message inMessage1(data: int32)
+			Message inMessage2(data: DataClass1)
 			
 		}
 		outgoing {
-			Message receivedData()
+			Message outMessage1()
+			Message outMessage2()
+			Message outMessage123456789()
 		}
 	}
 	

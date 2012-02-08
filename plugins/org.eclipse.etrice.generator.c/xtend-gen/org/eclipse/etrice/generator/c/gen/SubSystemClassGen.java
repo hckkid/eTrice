@@ -499,7 +499,7 @@ public class SubSystemClassGen {
     _builder.append("/* declarations of all ActorClass instances (const and variable structs) */");
     _builder.newLine();
     _builder.newLine();
-    _builder.append("/* forward declaration of varible actor structs */");
+    _builder.append("/* forward declaration of variable actor structs */");
     _builder.newLine();
     {
       EList<ActorInstance> _allContainedInstances = ssi.getAllContainedInstances();
@@ -631,7 +631,7 @@ public class SubSystemClassGen {
     _builder.append("#include \"etMSCLogger.h\"");
     _builder.newLine();
     _builder.newLine();
-    _builder.append("void MsgDispatcher_Thread1_receiveMessage(const etMessage* msg){");
+    _builder.append("static void MsgDispatcher_Thread1_receiveMessage(const etMessage* msg){");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("ET_MSC_LOGGER_SYNC_ENTRY(\"MsgDispatcher_Thread1\", \"receiveMessage\")");

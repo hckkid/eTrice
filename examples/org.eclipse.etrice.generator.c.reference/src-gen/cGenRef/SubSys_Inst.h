@@ -18,8 +18,8 @@ etMessageService msgService_Thread1;
 
 /* include all used ActorClasses */
 /* TODO: only include used Actor Classes for current SubSystem */
-#include "ReceiverManual.h"
 #include "SenderManual.h"
+#include "ReceiverManual.h"
 
 /* include all used ProtcolClasses */
 #include "CommunicationProtocol.h"
@@ -27,7 +27,7 @@ etMessageService msgService_Thread1;
 
 /* declarations of all ActorClass instances (const and variable structs) */
 
-/* forward declaration of varible actor structs */
+/* forward declaration of variable actor structs */
 static ReceiverManual _SubSys_Receiver;
 static SenderManual _SubSys_Sender;
 

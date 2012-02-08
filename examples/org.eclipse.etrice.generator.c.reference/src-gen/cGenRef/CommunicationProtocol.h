@@ -18,19 +18,23 @@
 enum {
 	CommunicationProtocol_MSG_MIN = 0, 
 	/* IDs for outgoing messages */
-	CommunicationProtocol_OUT_receivedData = 1,
+	CommunicationProtocol_OUT_outMessage1 = 1,
+	CommunicationProtocol_OUT_outMessage2 = 2,
+	CommunicationProtocol_OUT_outMessage123456789 = 3,
 	/* IDs for incoming messages */
-	CommunicationProtocol_IN_sendData = 2,
-	CommunicationProtocol_IN_sendData2 = 3,
+	CommunicationProtocol_IN_inMessage1 = 4,
+	CommunicationProtocol_IN_inMessage2 = 5,
 	/* error if msgID >= MSG_MAX */
-	CommunicationProtocol_MSG_MAX = 4
+	CommunicationProtocol_MSG_MAX = 6
 };
 
 /*--------------------- port classes */
 
 typedef etPort CommunicationProtocolPort;
 
-void CommunicationProtocolPort_receivedData(const CommunicationProtocolPort* self);
+void CommunicationProtocolPort_outMessage1(const CommunicationProtocolPort* self);
+void CommunicationProtocolPort_outMessage2(const CommunicationProtocolPort* self);
+void CommunicationProtocolPort_outMessage123456789(const CommunicationProtocolPort* self);
 
 
 
@@ -38,8 +42,8 @@ void CommunicationProtocolPort_receivedData(const CommunicationProtocolPort* sel
 
 typedef etPort CommunicationProtocolConjPort;
 
-void CommunicationProtocolConjPort_sendData(const CommunicationProtocolConjPort* self);
-void CommunicationProtocolConjPort_sendData2(const CommunicationProtocolConjPort* self);
+void CommunicationProtocolConjPort_inMessage1(const CommunicationProtocolConjPort* self);
+void CommunicationProtocolConjPort_inMessage2(const CommunicationProtocolConjPort* self);
 
 
 

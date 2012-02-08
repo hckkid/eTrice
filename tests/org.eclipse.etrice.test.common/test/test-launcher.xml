@@ -1,0 +1,6 @@
+<testsuite name="test-launcher">
+	<testcase name="CheckCounter for org.eclipse.etrice.generator.c.tests.exe"/>
+	<testcase name="Check tmp/testlog/TestCGenerator.xml"/>
+	<testcase name="Check tmp/testlog/TestCRuntime.xml"/>
+	<testcase name="Check tmp/testlog/TestEtUnitSpecial.xml"/>
+</testsuite>

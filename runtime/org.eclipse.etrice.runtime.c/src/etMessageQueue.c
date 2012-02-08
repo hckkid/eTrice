@@ -69,31 +69,31 @@ etMessage* etMessageQueue_pop(etMessageQueue* self){
 }
 
 etInt16 etMessageQueue_getSize(etMessageQueue* self) {
-	ET_MSC_LOGGER_SYNC_ENTRY("etMessageQueue", "init")
+	ET_MSC_LOGGER_SYNC_ENTRY("etMessageQueue", "getSize")
 	ET_MSC_LOGGER_SYNC_EXIT
 	return self->size;
 }
 
 etMessage* etMessageQueue_getFirst(etMessageQueue* self){
-	ET_MSC_LOGGER_SYNC_ENTRY("etMessageQueue", "init")
+	ET_MSC_LOGGER_SYNC_ENTRY("etMessageQueue", "getFirst")
 	ET_MSC_LOGGER_SYNC_EXIT
 	return self->first;
 }
 
 etMessage* etMessageQueue_getLast(etMessageQueue* self){
-	ET_MSC_LOGGER_SYNC_ENTRY("etMessageQueue", "init")
+	ET_MSC_LOGGER_SYNC_ENTRY("etMessageQueue", "getLast")
 	ET_MSC_LOGGER_SYNC_EXIT
 	return self->last;
 }
 
 etBool etMessageQueue_isNotEmpty(etMessageQueue* self){
-	ET_MSC_LOGGER_SYNC_ENTRY("etMessageQueue", "init")
+	ET_MSC_LOGGER_SYNC_ENTRY("etMessageQueue", "isNotEmpty")
 	ET_MSC_LOGGER_SYNC_EXIT
 	return self->last != NULL;
 }
 
 etInt16 etMessageQueue_getHightWaterMark(etMessageQueue* self) {
-	ET_MSC_LOGGER_SYNC_ENTRY("etMessageQueue", "init")
+	ET_MSC_LOGGER_SYNC_ENTRY("etMessageQueue", "getHightWaterMark")
 	ET_MSC_LOGGER_SYNC_EXIT
 	return self->highWaterMark;
 }
