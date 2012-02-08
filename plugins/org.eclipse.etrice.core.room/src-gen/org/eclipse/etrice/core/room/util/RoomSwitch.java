@@ -525,6 +525,16 @@ public class RoomSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case RoomPackage.TRANSITION_CHAIN_START_TRANSITION:
+      {
+        TransitionChainStartTransition transitionChainStartTransition = (TransitionChainStartTransition)theEObject;
+        T result = caseTransitionChainStartTransition(transitionChainStartTransition);
+        if (result == null) result = caseNonInitialTransition(transitionChainStartTransition);
+        if (result == null) result = caseTransition(transitionChainStartTransition);
+        if (result == null) result = caseStateGraphItem(transitionChainStartTransition);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case RoomPackage.INITIAL_TRANSITION:
       {
         InitialTransition initialTransition = (InitialTransition)theEObject;
@@ -548,6 +558,7 @@ public class RoomSwitch<T> extends Switch<T>
       {
         TriggeredTransition triggeredTransition = (TriggeredTransition)theEObject;
         T result = caseTriggeredTransition(triggeredTransition);
+        if (result == null) result = caseTransitionChainStartTransition(triggeredTransition);
         if (result == null) result = caseNonInitialTransition(triggeredTransition);
         if (result == null) result = caseTransition(triggeredTransition);
         if (result == null) result = caseStateGraphItem(triggeredTransition);
@@ -558,6 +569,7 @@ public class RoomSwitch<T> extends Switch<T>
       {
         GuardedTransition guardedTransition = (GuardedTransition)theEObject;
         T result = caseGuardedTransition(guardedTransition);
+        if (result == null) result = caseTransitionChainStartTransition(guardedTransition);
         if (result == null) result = caseNonInitialTransition(guardedTransition);
         if (result == null) result = caseTransition(guardedTransition);
         if (result == null) result = caseStateGraphItem(guardedTransition);
@@ -1558,6 +1570,22 @@ public class RoomSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseNonInitialTransition(NonInitialTransition object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Transition Chain Start Transition</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Transition Chain Start Transition</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseTransitionChainStartTransition(TransitionChainStartTransition object)
   {
     return null;
   }

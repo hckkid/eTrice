@@ -31,7 +31,7 @@ import org.eclipse.etrice.core.room.RoomPackage;
  *
  * @generated
  */
-public class GuardedTransitionImpl extends NonInitialTransitionImpl implements GuardedTransition
+public class GuardedTransitionImpl extends TransitionChainStartTransitionImpl implements GuardedTransition
 {
   /**
    * The cached value of the '{@link #getGuard() <em>Guard</em>}' containment reference.

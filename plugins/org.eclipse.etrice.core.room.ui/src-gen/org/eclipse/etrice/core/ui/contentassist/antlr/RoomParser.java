@@ -61,6 +61,7 @@ public class RoomParser extends AbstractContentAssistParser {
 					put(grammarAccess.getTrPointAccess().getAlternatives(), "rule__TrPoint__Alternatives");
 					put(grammarAccess.getTransitionAccess().getAlternatives(), "rule__Transition__Alternatives");
 					put(grammarAccess.getNonInitialTransitionAccess().getAlternatives(), "rule__NonInitialTransition__Alternatives");
+					put(grammarAccess.getTransitionChainStartTransitionAccess().getAlternatives(), "rule__TransitionChainStartTransition__Alternatives");
 					put(grammarAccess.getTransitionTerminalAccess().getAlternatives(), "rule__TransitionTerminal__Alternatives");
 					put(grammarAccess.getImportAccess().getAlternatives_1(), "rule__Import__Alternatives_1");
 					put(grammarAccess.getMULTIPLICITYAccess().getAlternatives_1(), "rule__MULTIPLICITY__Alternatives_1");

@@ -125,6 +125,7 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
       case RoomPackage.CHOICE_POINT: return createChoicePoint();
       case RoomPackage.TRANSITION: return createTransition();
       case RoomPackage.NON_INITIAL_TRANSITION: return createNonInitialTransition();
+      case RoomPackage.TRANSITION_CHAIN_START_TRANSITION: return createTransitionChainStartTransition();
       case RoomPackage.INITIAL_TRANSITION: return createInitialTransition();
       case RoomPackage.CONTINUATION_TRANSITION: return createContinuationTransition();
       case RoomPackage.TRIGGERED_TRANSITION: return createTriggeredTransition();
@@ -799,6 +800,17 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
   {
     NonInitialTransitionImpl nonInitialTransition = new NonInitialTransitionImpl();
     return nonInitialTransition;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public TransitionChainStartTransition createTransitionChainStartTransition()
+  {
+    TransitionChainStartTransitionImpl transitionChainStartTransition = new TransitionChainStartTransitionImpl();
+    return transitionChainStartTransition;
   }
 
   /**

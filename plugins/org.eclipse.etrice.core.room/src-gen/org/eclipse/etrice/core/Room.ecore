@@ -346,13 +346,14 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="from" eType="#//TransitionTerminal"
         containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TransitionChainStartTransition" eSuperTypes="#//NonInitialTransition"/>
   <eClassifiers xsi:type="ecore:EClass" name="InitialTransition" eSuperTypes="#//Transition"/>
   <eClassifiers xsi:type="ecore:EClass" name="ContinuationTransition" eSuperTypes="#//NonInitialTransition"/>
-  <eClassifiers xsi:type="ecore:EClass" name="TriggeredTransition" eSuperTypes="#//NonInitialTransition">
+  <eClassifiers xsi:type="ecore:EClass" name="TriggeredTransition" eSuperTypes="#//TransitionChainStartTransition">
     <eStructuralFeatures xsi:type="ecore:EReference" name="triggers" upperBound="-1"
         eType="#//Trigger" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="GuardedTransition" eSuperTypes="#//NonInitialTransition">
+  <eClassifiers xsi:type="ecore:EClass" name="GuardedTransition" eSuperTypes="#//TransitionChainStartTransition">
     <eStructuralFeatures xsi:type="ecore:EReference" name="guard" eType="#//DetailCode"
         containment="true"/>
   </eClassifiers>

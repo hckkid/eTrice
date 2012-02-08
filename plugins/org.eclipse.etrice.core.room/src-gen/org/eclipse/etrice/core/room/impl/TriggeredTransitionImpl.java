@@ -35,7 +35,7 @@ import org.eclipse.etrice.core.room.TriggeredTransition;
  *
  * @generated
  */
-public class TriggeredTransitionImpl extends NonInitialTransitionImpl implements TriggeredTransition
+public class TriggeredTransitionImpl extends TransitionChainStartTransitionImpl implements TriggeredTransition
 {
   /**
    * The cached value of the '{@link #getTriggers() <em>Triggers</em>}' containment reference list.

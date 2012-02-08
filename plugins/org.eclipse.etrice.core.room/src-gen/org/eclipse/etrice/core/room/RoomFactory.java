@@ -531,6 +531,15 @@ public interface RoomFactory extends EFactory
   NonInitialTransition createNonInitialTransition();
 
   /**
+   * Returns a new object of class '<em>Transition Chain Start Transition</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Transition Chain Start Transition</em>'.
+   * @generated
+   */
+  TransitionChainStartTransition createTransitionChainStartTransition();
+
+  /**
    * Returns a new object of class '<em>Initial Transition</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
