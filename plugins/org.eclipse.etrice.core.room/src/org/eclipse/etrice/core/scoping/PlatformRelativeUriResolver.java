@@ -88,12 +88,19 @@ public class PlatformRelativeUriResolver extends ImportUriResolver {
 			URI base = baseUri.trimSegments(1);
 			if (base.isPlatformResource()) {
 				IFolder folder = ResourcesPlugin.getWorkspace().getRoot().getFolder(new Path(base.toPlatformString(true)));
-				// URI.resolve expects a trailing separator for some reason...
 				String abs = folder.getRawLocationURI().toString();
 				base = URI.createURI(abs);
 			}
+			else if (base.isRelative()) {
+				base = URI.createFileURI(new File(base.toString()).getAbsolutePath());
+			}
+			// URI.resolve expects a trailing separator for some reason...
 			base = base.appendSegment("");
-			uri = uri.resolve(base);
+			try {
+				uri = uri.resolve(base);
+			}
+			catch (IllegalArgumentException e) {
+			}
 			resolve = uri.toString();
 			File file = new File(uri.toFileString());
 			if (file.isDirectory())

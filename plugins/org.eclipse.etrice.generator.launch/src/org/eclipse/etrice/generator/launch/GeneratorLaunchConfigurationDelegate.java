@@ -152,7 +152,7 @@ public abstract class GeneratorLaunchConfigurationDelegate extends AbstractJavaL
 		@SuppressWarnings("unchecked")
 		ArrayList<String> models = (ArrayList<String>) configuration.getAttribute("ModelFiles", Collections.EMPTY_LIST);
 		for (String model : models){
-			argString.append(" file://"+model);
+			argString.append(" "+model);
 		}
 	}
 	
