@@ -63,7 +63,10 @@ public class DependencyManager {
 			URI uri = FileSystemHelpers.getMarkerFileURI(model, projectMarker);
 			if (uri!=null && !uri.equals(main)) {
 				String relativePath = FileSystemHelpers.getRelativePath(main, uri, true);
-				refmodel2relpath.put(model.getName(), relativePath);
+				if (relativePath!=null)
+					refmodel2relpath.put(model.getName(), relativePath);
+				else
+					refmodel2relpath.put(model.getName(), uri.toFileString());
 			}
 		}
 	}

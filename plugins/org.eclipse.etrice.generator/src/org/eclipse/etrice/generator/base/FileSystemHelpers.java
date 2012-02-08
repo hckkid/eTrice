@@ -59,7 +59,8 @@ public class FileSystemHelpers {
 				parent = new File(osString);
 			}
 			else {
-				parent = new File(mainPath.toFileString());
+				parent = new File(mainPath.toFileString()).getAbsoluteFile();
+				mainPath = URI.createFileURI(parent.getAbsolutePath());
 			}
 			
 			boolean isProject = false;
@@ -154,6 +155,9 @@ public class FileSystemHelpers {
 		if (!path.hasAbsolutePath())
 			return null;
 		
+		if (!path.device().equals(base.device()))
+			return null;
+		
 		StringBuffer result = new StringBuffer();
 		if (goUpIfNeeded) {
 			int max = base.segmentCount()<path.segmentCount()? base.segmentCount():path.segmentCount();
@@ -168,7 +172,10 @@ public class FileSystemHelpers {
 			for (int i=common; i<path.segmentCount(); ++i) {
 				result.append(path.segment(i)+"/");
 			}
-
+			
+			if(result.length()==0)
+				return "";
+			
 			return result.substring(0, result.length()-1);
 		}
 		else {
@@ -183,6 +190,9 @@ public class FileSystemHelpers {
 			for (int i=base.segmentCount(); i<path.segmentCount(); ++i) {
 				result.append(path.segment(i)+"/");
 			}
+
+			if(result.length()==0)
+				return "";
 			
 			return result.substring(0, result.length()-1);
 		}

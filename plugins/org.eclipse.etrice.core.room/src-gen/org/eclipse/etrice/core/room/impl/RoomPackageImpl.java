@@ -86,6 +86,7 @@ import org.eclipse.etrice.core.room.SubSystemRef;
 import org.eclipse.etrice.core.room.TrPoint;
 import org.eclipse.etrice.core.room.TrPointTerminal;
 import org.eclipse.etrice.core.room.Transition;
+import org.eclipse.etrice.core.room.TransitionChainStartTransition;
 import org.eclipse.etrice.core.room.TransitionPoint;
 import org.eclipse.etrice.core.room.TransitionTerminal;
 import org.eclipse.etrice.core.room.Trigger;
@@ -491,6 +492,13 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * @generated
    */
   private EClass nonInitialTransitionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass transitionChainStartTransitionEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -2553,6 +2561,16 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getTransitionChainStartTransition()
+  {
+    return transitionChainStartTransitionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getInitialTransition()
   {
     return initialTransitionEClass;
@@ -3210,6 +3228,8 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
     nonInitialTransitionEClass = createEClass(NON_INITIAL_TRANSITION);
     createEReference(nonInitialTransitionEClass, NON_INITIAL_TRANSITION__FROM);
 
+    transitionChainStartTransitionEClass = createEClass(TRANSITION_CHAIN_START_TRANSITION);
+
     initialTransitionEClass = createEClass(INITIAL_TRANSITION);
 
     continuationTransitionEClass = createEClass(CONTINUATION_TRANSITION);
@@ -3329,10 +3349,11 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
     choicePointEClass.getESuperTypes().add(this.getStateGraphNode());
     transitionEClass.getESuperTypes().add(this.getStateGraphItem());
     nonInitialTransitionEClass.getESuperTypes().add(this.getTransition());
+    transitionChainStartTransitionEClass.getESuperTypes().add(this.getNonInitialTransition());
     initialTransitionEClass.getESuperTypes().add(this.getTransition());
     continuationTransitionEClass.getESuperTypes().add(this.getNonInitialTransition());
-    triggeredTransitionEClass.getESuperTypes().add(this.getNonInitialTransition());
-    guardedTransitionEClass.getESuperTypes().add(this.getNonInitialTransition());
+    triggeredTransitionEClass.getESuperTypes().add(this.getTransitionChainStartTransition());
+    guardedTransitionEClass.getESuperTypes().add(this.getTransitionChainStartTransition());
     cpBranchTransitionEClass.getESuperTypes().add(this.getNonInitialTransition());
     stateTerminalEClass.getESuperTypes().add(this.getTransitionTerminal());
     trPointTerminalEClass.getESuperTypes().add(this.getTransitionTerminal());
@@ -3587,6 +3608,8 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
 
     initEClass(nonInitialTransitionEClass, NonInitialTransition.class, "NonInitialTransition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getNonInitialTransition_From(), this.getTransitionTerminal(), null, "from", null, 0, 1, NonInitialTransition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(transitionChainStartTransitionEClass, TransitionChainStartTransition.class, "TransitionChainStartTransition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(initialTransitionEClass, InitialTransition.class, "InitialTransition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

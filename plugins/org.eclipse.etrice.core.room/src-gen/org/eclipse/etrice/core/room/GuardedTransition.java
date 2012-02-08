@@ -23,7 +23,7 @@ package org.eclipse.etrice.core.room;
  * @model
  * @generated
  */
-public interface GuardedTransition extends NonInitialTransition
+public interface GuardedTransition extends TransitionChainStartTransition
 {
   /**
    * Returns the value of the '<em><b>Guard</b></em>' containment reference.

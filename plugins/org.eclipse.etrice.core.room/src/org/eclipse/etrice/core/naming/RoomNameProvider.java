@@ -464,9 +464,9 @@ public class RoomNameProvider {
 			String where = "?";
 			if (code==tr.getAction())
 				where = "action";
-			else if (tr instanceof CPBranchTransition)
+			else if (tr instanceof CPBranchTransition && code==((CPBranchTransition)tr).getCondition())
 				where = "condition";
-			else if (tr instanceof GuardedTransition)
+			else if (tr instanceof GuardedTransition && code==((GuardedTransition)tr).getGuard())
 				where = "guard";
 			return "transition "+tr.getName()+": "+RoomNameProvider.getTransitionName(tr)+" "+where+" code";
 		}
@@ -479,7 +479,7 @@ public class RoomNameProvider {
 			String where = "?";
 			if (code==state.getEntryCode())
 				where = "entry";
-			else if (code==state.getEntryCode())
+			else if (code==state.getExitCode())
 				where = "exit";
 			else
 				where = "do";

@@ -359,6 +359,11 @@ public class RoomAdapterFactory extends AdapterFactoryImpl
         return createNonInitialTransitionAdapter();
       }
       @Override
+      public Adapter caseTransitionChainStartTransition(TransitionChainStartTransition object)
+      {
+        return createTransitionChainStartTransitionAdapter();
+      }
+      @Override
       public Adapter caseInitialTransition(InitialTransition object)
       {
         return createInitialTransitionAdapter();
@@ -1301,6 +1306,21 @@ public class RoomAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createNonInitialTransitionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.TransitionChainStartTransition <em>Transition Chain Start Transition</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.etrice.core.room.TransitionChainStartTransition
+   * @generated
+   */
+  public Adapter createTransitionChainStartTransitionAdapter()
   {
     return null;
   }

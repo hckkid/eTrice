@@ -13,23 +13,22 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-import org.eclipse.etrice.core.room.State;
-import org.eclipse.etrice.core.room.TriggeredTransition;
-import org.eclipse.etrice.generator.etricegen.ETriceGenPackage;
 import org.eclipse.etrice.core.naming.RoomNameProvider;
-
 import org.eclipse.etrice.core.room.CPBranchTransition;
 import org.eclipse.etrice.core.room.ChoicePoint;
 import org.eclipse.etrice.core.room.ContinuationTransition;
 import org.eclipse.etrice.core.room.EntryPoint;
 import org.eclipse.etrice.core.room.ExitPoint;
 import org.eclipse.etrice.core.room.NonInitialTransition;
+import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraphNode;
 import org.eclipse.etrice.core.room.SubStateTrPointTerminal;
 import org.eclipse.etrice.core.room.TrPoint;
 import org.eclipse.etrice.core.room.TrPointTerminal;
 import org.eclipse.etrice.core.room.Transition;
+import org.eclipse.etrice.core.room.TransitionChainStartTransition;
 import org.eclipse.etrice.core.room.TransitionPoint;
+import org.eclipse.etrice.generator.etricegen.ETriceGenPackage;
 import org.eclipse.etrice.generator.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.generator.etricegen.ITransitionChainVisitor;
 import org.eclipse.etrice.generator.etricegen.TransitionChain;
@@ -174,19 +173,18 @@ public class TransitionChainImpl extends EObjectImpl implements TransitionChain 
 	 * @generated NOT
 	 */
 	public boolean isHandler() {
-		if (!(getTransition() instanceof TriggeredTransition))
-			return false;
-		
-		TriggeredTransition trans = (TriggeredTransition)getTransition();
-		if (trans.getFrom() instanceof TrPointTerminal) {
-			TrPoint tp = ((TrPointTerminal)trans.getFrom()).getTrPoint();
-			if (tp instanceof TransitionPoint)
-				return ((TransitionPoint)tp).isHandler();
-		}
-		else if (trans.getFrom() instanceof SubStateTrPointTerminal) {
-			TrPoint tp = ((SubStateTrPointTerminal)trans.getFrom()).getTrPoint();
-			if (tp instanceof TransitionPoint)
-				return ((TransitionPoint)tp).isHandler();
+		if (getTransition() instanceof TransitionChainStartTransition) {
+			TransitionChainStartTransition trans = (TransitionChainStartTransition)getTransition();
+			if (trans.getFrom() instanceof TrPointTerminal) {
+				TrPoint tp = ((TrPointTerminal)trans.getFrom()).getTrPoint();
+				if (tp instanceof TransitionPoint)
+					return ((TransitionPoint)tp).isHandler();
+			}
+			else if (trans.getFrom() instanceof SubStateTrPointTerminal) {
+				TrPoint tp = ((SubStateTrPointTerminal)trans.getFrom()).getTrPoint();
+				if (tp instanceof TransitionPoint)
+					assert(false): "not allowed to connect TransitionPoint to exterior";
+			}
 		}
 		return false;
 	}

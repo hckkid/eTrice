@@ -88,23 +88,24 @@ protected class ThisRootNode extends RootToken {
 			case 54: return new ChoicePoint_Group(this, this, 54, inst);
 			case 55: return new Transition_Alternatives(this, this, 55, inst);
 			case 56: return new NonInitialTransition_Alternatives(this, this, 56, inst);
-			case 57: return new InitialTransition_Group(this, this, 57, inst);
-			case 58: return new ContinuationTransition_Group(this, this, 58, inst);
-			case 59: return new TriggeredTransition_Group(this, this, 59, inst);
-			case 60: return new GuardedTransition_Group(this, this, 60, inst);
-			case 61: return new CPBranchTransition_Group(this, this, 61, inst);
-			case 62: return new TransitionTerminal_Alternatives(this, this, 62, inst);
-			case 63: return new StateTerminal_StateAssignment(this, this, 63, inst);
-			case 64: return new TrPointTerminal_Group(this, this, 64, inst);
-			case 65: return new SubStateTrPointTerminal_Group(this, this, 65, inst);
-			case 66: return new ChoicepointTerminal_Group(this, this, 66, inst);
-			case 67: return new Trigger_Group(this, this, 67, inst);
-			case 68: return new MessageFromIf_Group(this, this, 68, inst);
-			case 69: return new Guard_Group(this, this, 69, inst);
-			case 70: return new Documentation_Group(this, this, 70, inst);
-			case 71: return new Annotation_Group(this, this, 71, inst);
-			case 72: return new KeyValue_Group(this, this, 72, inst);
-			case 73: return new Import_Group(this, this, 73, inst);
+			case 57: return new TransitionChainStartTransition_Alternatives(this, this, 57, inst);
+			case 58: return new InitialTransition_Group(this, this, 58, inst);
+			case 59: return new ContinuationTransition_Group(this, this, 59, inst);
+			case 60: return new TriggeredTransition_Group(this, this, 60, inst);
+			case 61: return new GuardedTransition_Group(this, this, 61, inst);
+			case 62: return new CPBranchTransition_Group(this, this, 62, inst);
+			case 63: return new TransitionTerminal_Alternatives(this, this, 63, inst);
+			case 64: return new StateTerminal_StateAssignment(this, this, 64, inst);
+			case 65: return new TrPointTerminal_Group(this, this, 65, inst);
+			case 66: return new SubStateTrPointTerminal_Group(this, this, 66, inst);
+			case 67: return new ChoicepointTerminal_Group(this, this, 67, inst);
+			case 68: return new Trigger_Group(this, this, 68, inst);
+			case 69: return new MessageFromIf_Group(this, this, 69, inst);
+			case 70: return new Guard_Group(this, this, 70, inst);
+			case 71: return new Documentation_Group(this, this, 71, inst);
+			case 72: return new Annotation_Group(this, this, 72, inst);
+			case 73: return new KeyValue_Group(this, this, 73, inst);
+			case 74: return new Import_Group(this, this, 74, inst);
 			default: return null;
 		}	
 	}	
@@ -15854,11 +15855,11 @@ protected class Transition_NonInitialTransitionParserRuleCall_1 extends RuleCall
 /************ begin Rule NonInitialTransition ****************
  *
  * NonInitialTransition:
- * 	TriggeredTransition | GuardedTransition | ContinuationTransition | CPBranchTransition;
+ * 	TransitionChainStartTransition | ContinuationTransition | CPBranchTransition;
  *
  **/
 
-// TriggeredTransition | GuardedTransition | ContinuationTransition | CPBranchTransition
+// TransitionChainStartTransition | ContinuationTransition | CPBranchTransition
 protected class NonInitialTransition_Alternatives extends AlternativesToken {
 
 	public NonInitialTransition_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -15873,10 +15874,9 @@ protected class NonInitialTransition_Alternatives extends AlternativesToken {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new NonInitialTransition_TriggeredTransitionParserRuleCall_0(lastRuleCallOrigin, this, 0, inst);
-			case 1: return new NonInitialTransition_GuardedTransitionParserRuleCall_1(lastRuleCallOrigin, this, 1, inst);
-			case 2: return new NonInitialTransition_ContinuationTransitionParserRuleCall_2(lastRuleCallOrigin, this, 2, inst);
-			case 3: return new NonInitialTransition_CPBranchTransitionParserRuleCall_3(lastRuleCallOrigin, this, 3, inst);
+			case 0: return new NonInitialTransition_TransitionChainStartTransitionParserRuleCall_0(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new NonInitialTransition_ContinuationTransitionParserRuleCall_1(lastRuleCallOrigin, this, 1, inst);
+			case 2: return new NonInitialTransition_CPBranchTransitionParserRuleCall_2(lastRuleCallOrigin, this, 2, inst);
 			default: return null;
 		}	
 	}
@@ -15893,67 +15893,32 @@ protected class NonInitialTransition_Alternatives extends AlternativesToken {
 
 }
 
-// TriggeredTransition
-protected class NonInitialTransition_TriggeredTransitionParserRuleCall_0 extends RuleCallToken {
+// TransitionChainStartTransition
+protected class NonInitialTransition_TransitionChainStartTransitionParserRuleCall_0 extends RuleCallToken {
 	
-	public NonInitialTransition_TriggeredTransitionParserRuleCall_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public NonInitialTransition_TransitionChainStartTransitionParserRuleCall_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public RuleCall getGrammarElement() {
-		return grammarAccess.getNonInitialTransitionAccess().getTriggeredTransitionParserRuleCall_0();
+		return grammarAccess.getNonInitialTransitionAccess().getTransitionChainStartTransitionParserRuleCall_0();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new TriggeredTransition_Group(this, this, 0, inst);
+			case 0: return new TransitionChainStartTransition_Alternatives(this, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override
 	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getTriggeredTransitionRule().getType().getClassifier())
+		if(getEObject().eClass() != grammarAccess.getGuardedTransitionRule().getType().getClassifier() && 
+		   getEObject().eClass() != grammarAccess.getTriggeredTransitionRule().getType().getClassifier())
 			return null;
-		if(checkForRecursion(TriggeredTransition_Group.class, eObjectConsumer)) return null;
-		return eObjectConsumer;
-	}
-	
-    @Override
-	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
-		switch(index) {
-			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index, inst);
-		}	
-	}	
-}
-
-// GuardedTransition
-protected class NonInitialTransition_GuardedTransitionParserRuleCall_1 extends RuleCallToken {
-	
-	public NonInitialTransition_GuardedTransitionParserRuleCall_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
-		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
-	}
-	
-	@Override
-	public RuleCall getGrammarElement() {
-		return grammarAccess.getNonInitialTransitionAccess().getGuardedTransitionParserRuleCall_1();
-	}
-
-    @Override
-	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
-		switch(index) {
-			case 0: return new GuardedTransition_Group(this, this, 0, inst);
-			default: return null;
-		}	
-	}
-
-    @Override
-	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getGuardedTransitionRule().getType().getClassifier())
-			return null;
-		if(checkForRecursion(GuardedTransition_Group.class, eObjectConsumer)) return null;
+		if(checkForRecursion(TransitionChainStartTransition_Alternatives.class, eObjectConsumer)) return null;
 		return eObjectConsumer;
 	}
 	
@@ -15966,15 +15931,15 @@ protected class NonInitialTransition_GuardedTransitionParserRuleCall_1 extends R
 }
 
 // ContinuationTransition
-protected class NonInitialTransition_ContinuationTransitionParserRuleCall_2 extends RuleCallToken {
+protected class NonInitialTransition_ContinuationTransitionParserRuleCall_1 extends RuleCallToken {
 	
-	public NonInitialTransition_ContinuationTransitionParserRuleCall_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public NonInitialTransition_ContinuationTransitionParserRuleCall_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public RuleCall getGrammarElement() {
-		return grammarAccess.getNonInitialTransitionAccess().getContinuationTransitionParserRuleCall_2();
+		return grammarAccess.getNonInitialTransitionAccess().getContinuationTransitionParserRuleCall_1();
 	}
 
     @Override
@@ -16002,15 +15967,15 @@ protected class NonInitialTransition_ContinuationTransitionParserRuleCall_2 exte
 }
 
 // CPBranchTransition
-protected class NonInitialTransition_CPBranchTransitionParserRuleCall_3 extends RuleCallToken {
+protected class NonInitialTransition_CPBranchTransitionParserRuleCall_2 extends RuleCallToken {
 	
-	public NonInitialTransition_CPBranchTransitionParserRuleCall_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public NonInitialTransition_CPBranchTransitionParserRuleCall_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public RuleCall getGrammarElement() {
-		return grammarAccess.getNonInitialTransitionAccess().getCPBranchTransitionParserRuleCall_3();
+		return grammarAccess.getNonInitialTransitionAccess().getCPBranchTransitionParserRuleCall_2();
 	}
 
     @Override
@@ -16039,6 +16004,120 @@ protected class NonInitialTransition_CPBranchTransitionParserRuleCall_3 extends 
 
 
 /************ end Rule NonInitialTransition ****************/
+
+
+/************ begin Rule TransitionChainStartTransition ****************
+ *
+ * TransitionChainStartTransition:
+ * 	TriggeredTransition | GuardedTransition;
+ *
+ **/
+
+// TriggeredTransition | GuardedTransition
+protected class TransitionChainStartTransition_Alternatives extends AlternativesToken {
+
+	public TransitionChainStartTransition_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Alternatives getGrammarElement() {
+		return grammarAccess.getTransitionChainStartTransitionAccess().getAlternatives();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new TransitionChainStartTransition_TriggeredTransitionParserRuleCall_0(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new TransitionChainStartTransition_GuardedTransitionParserRuleCall_1(lastRuleCallOrigin, this, 1, inst);
+			default: return null;
+		}	
+	}
+
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getGuardedTransitionRule().getType().getClassifier() && 
+		   getEObject().eClass() != grammarAccess.getTriggeredTransitionRule().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
+	}
+
+}
+
+// TriggeredTransition
+protected class TransitionChainStartTransition_TriggeredTransitionParserRuleCall_0 extends RuleCallToken {
+	
+	public TransitionChainStartTransition_TriggeredTransitionParserRuleCall_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public RuleCall getGrammarElement() {
+		return grammarAccess.getTransitionChainStartTransitionAccess().getTriggeredTransitionParserRuleCall_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new TriggeredTransition_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getTriggeredTransitionRule().getType().getClassifier())
+			return null;
+		if(checkForRecursion(TriggeredTransition_Group.class, eObjectConsumer)) return null;
+		return eObjectConsumer;
+	}
+	
+    @Override
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index, inst);
+		}	
+	}	
+}
+
+// GuardedTransition
+protected class TransitionChainStartTransition_GuardedTransitionParserRuleCall_1 extends RuleCallToken {
+	
+	public TransitionChainStartTransition_GuardedTransitionParserRuleCall_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public RuleCall getGrammarElement() {
+		return grammarAccess.getTransitionChainStartTransitionAccess().getGuardedTransitionParserRuleCall_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new GuardedTransition_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getGuardedTransitionRule().getType().getClassifier())
+			return null;
+		if(checkForRecursion(GuardedTransition_Group.class, eObjectConsumer)) return null;
+		return eObjectConsumer;
+	}
+	
+    @Override
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index, inst);
+		}	
+	}	
+}
+
+
+/************ end Rule TransitionChainStartTransition ****************/
 
 
 /************ begin Rule InitialTransition ****************

@@ -744,7 +744,7 @@ public class ValidationUtil {
 						tr.eContainer(),
 						RoomPackage.eINSTANCE.getStateGraph_Transitions(),
 						((StateGraph)tr.eContainer()).getTransitions().indexOf(tr));
-			if (tr instanceof ContinuationTransition) {
+			else if (tr instanceof ContinuationTransition) {
 				// if at this point no continuation transition is allowed it probably should be a guarded transition
 				TransitionTerminal term = ((ContinuationTransition) tr).getFrom();
 				if (term instanceof StateTerminal || (term instanceof TrPointTerminal && ((TrPointTerminal)term).getTrPoint() instanceof TransitionPoint))
@@ -753,7 +753,7 @@ public class ValidationUtil {
 							RoomPackage.eINSTANCE.getStateGraph_Transitions(),
 							((StateGraph)tr.eContainer()).getTransitions().indexOf(tr));
 			}
-			if (tr instanceof GuardedTransition)
+			else if (tr instanceof GuardedTransition)
 				if (!RoomHelpers.hasDetailCode(((GuardedTransition) tr).getGuard()))
 					return Result.error("guard must not be empty", tr, RoomPackage.eINSTANCE.getGuardedTransition_Guard());
 		}
@@ -763,7 +763,7 @@ public class ValidationUtil {
 						tr.eContainer(),
 						RoomPackage.eINSTANCE.getStateGraph_Transitions(),
 						((StateGraph)tr.eContainer()).getTransitions().indexOf(tr));
-			if (tr instanceof ContinuationTransition) {
+			else if (tr instanceof ContinuationTransition) {
 				// if at this point no continuation transition is allowed it probably should be a triggered transition
 				TransitionTerminal term = ((ContinuationTransition) tr).getFrom();
 				if (term instanceof StateTerminal || (term instanceof TrPointTerminal && ((TrPointTerminal)term).getTrPoint() instanceof TransitionPoint))
