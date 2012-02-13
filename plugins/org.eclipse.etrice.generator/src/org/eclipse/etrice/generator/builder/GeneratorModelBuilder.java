@@ -343,17 +343,19 @@ public class GeneratorModelBuilder {
 					if (!external) {
 						relayPorts.add(port);
 						
-						// check whether relay port is multiply connected
-						int count = 0;
-						for (Binding b : ac.getBindings()) {
-							if (b.getEndpoint1().getPort()==port)
-								++count;
-							if (b.getEndpoint2().getPort()==port)
-								++count;
-						}
-						if (count>1) {
-							int idx = ac.getIfPorts().indexOf(port);
-							diagnostician.error("relay port is multiply connected inside its actor class", port, RoomPackage.eINSTANCE.getActorClass_IfPorts(), idx);
+						if (port.getProtocol().getCommType()==CommunicationType.EVENT_DRIVEN) {
+							// check whether relay port is multiply connected
+							int count = 0;
+							for (Binding b : ac.getBindings()) {
+								if (b.getEndpoint1().getPort()==port)
+									++count;
+								if (b.getEndpoint2().getPort()==port)
+									++count;
+							}
+							if (count>1) {
+								int idx = ac.getIfPorts().indexOf(port);
+								diagnostician.error("relay port is multiply connected inside its actor class", ac, RoomPackage.eINSTANCE.getActorClass_IfPorts(), idx);
+							}
 						}
 					}
 				}
