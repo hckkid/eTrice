@@ -68,7 +68,7 @@ public class Main extends AbstractGenerator {
 		for (int i=0; i<args.length; ++i) {
 			if (args[i].equals(OPTION_SAVE_GEN_MODEL)) {
 				if (++i<args.length) {
-					genModelPath = convertToURI(args[i]+"/genmodel.egm");
+					genModelPath = args[i]+"/genmodel.egm";
 				}
 			}
 			else if (args[i].equals(OPTION_GEN_INST_DIAG)) {
@@ -78,7 +78,7 @@ public class Main extends AbstractGenerator {
 				asLibrary = true;
 			}
 			else {
-				uriList.add(convertToURI(args[i]));
+				uriList.add(args[i]);
 			}
 		}
 
