@@ -200,7 +200,7 @@ class SubSystemClassGen {
 		
 		/* declarations of all ActorClass instances (const and variable structs) */
 
-		/* forward declaration of varible actor structs */
+		/* forward declaration of variable actor structs */
 		«FOR ai : ssi.allContainedInstances»
 			static «ai.actorClass.name» «ai.path.getPathName()»;
 		«ENDFOR»
@@ -254,7 +254,7 @@ class SubSystemClassGen {
 		#include "etLogger.h"
 		#include "etMSCLogger.h"
 		
-		void MsgDispatcher_Thread1_receiveMessage(const etMessage* msg){
+		static void MsgDispatcher_Thread1_receiveMessage(const etMessage* msg){
 			ET_MSC_LOGGER_SYNC_ENTRY("MsgDispatcher_Thread1", "receiveMessage")
 			switch(msg->address){
 			

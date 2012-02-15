@@ -14,7 +14,9 @@
 
 void ReceiverManual_init(ReceiverManual* self){
 	ET_MSC_LOGGER_SYNC_ENTRY("ReceiverManual", "init")
-	CommunicationProtocolPort_receivedData(&self->constData->dataIn);
+	CommunicationProtocolPort_outMessage1(&self->constData->dataIn);
+	CommunicationProtocolPort_outMessage2(&self->constData->dataIn);
+	CommunicationProtocolPort_outMessage123456789(&self->constData->dataIn);
 	ET_MSC_LOGGER_SYNC_EXIT
 }
 

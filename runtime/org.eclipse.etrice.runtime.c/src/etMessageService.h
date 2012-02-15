@@ -44,5 +44,4 @@ void etMessageService_returnMessageBuffer(etMessageService* self, etMessage* buf
 
 void etMessageService_execute(etMessageService* self);
 
-
 #endif /* RMESSAGESERVICE_H_ */

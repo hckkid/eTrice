@@ -11,30 +11,46 @@
 
 /*--------------------- port classes */
 
-void CommunicationProtocolPort_receivedData(const CommunicationProtocolPort* self){
-	ET_MSC_LOGGER_SYNC_ENTRY("CommunicationProtocolPort", "receivedData")
+void CommunicationProtocolPort_outMessage1(const CommunicationProtocolPort* self){
+	ET_MSC_LOGGER_SYNC_ENTRY("CommunicationProtocolPort", "outMessage1")
 	etMessage* msg = etMessageService_getMessageBuffer(self->msgService, sizeof(etMessage));
 	msg->address = self->peerAddress;
-	msg->evtID = CommunicationProtocol_OUT_receivedData;
+	msg->evtID = CommunicationProtocol_OUT_outMessage1;
+	etMessageService_pushMessage(self->msgService, msg);
+	ET_MSC_LOGGER_SYNC_EXIT
+}
+void CommunicationProtocolPort_outMessage2(const CommunicationProtocolPort* self){
+	ET_MSC_LOGGER_SYNC_ENTRY("CommunicationProtocolPort", "outMessage2")
+	etMessage* msg = etMessageService_getMessageBuffer(self->msgService, sizeof(etMessage));
+	msg->address = self->peerAddress;
+	msg->evtID = CommunicationProtocol_OUT_outMessage2;
+	etMessageService_pushMessage(self->msgService, msg);
+	ET_MSC_LOGGER_SYNC_EXIT
+}
+void CommunicationProtocolPort_outMessage123456789(const CommunicationProtocolPort* self){
+	ET_MSC_LOGGER_SYNC_ENTRY("CommunicationProtocolPort", "outMessage123456789")
+	etMessage* msg = etMessageService_getMessageBuffer(self->msgService, sizeof(etMessage));
+	msg->address = self->peerAddress;
+	msg->evtID = CommunicationProtocol_OUT_outMessage123456789;
 	etMessageService_pushMessage(self->msgService, msg);
 	ET_MSC_LOGGER_SYNC_EXIT
 }
 
 
 
-void CommunicationProtocolConjPort_sendData(const CommunicationProtocolConjPort* self){
-	ET_MSC_LOGGER_SYNC_ENTRY("CommunicationProtocolConjPort", "sendData")
+void CommunicationProtocolConjPort_inMessage1(const CommunicationProtocolConjPort* self){
+	ET_MSC_LOGGER_SYNC_ENTRY("CommunicationProtocolConjPort", "inMessage1")
 	etMessage* msg = etMessageService_getMessageBuffer(self->msgService, sizeof(etMessage));
 	msg->address = self->peerAddress;
-	msg->evtID = CommunicationProtocol_IN_sendData;
+	msg->evtID = CommunicationProtocol_IN_inMessage1;
 	etMessageService_pushMessage(self->msgService, msg);
 	ET_MSC_LOGGER_SYNC_EXIT
 }
-void CommunicationProtocolConjPort_sendData2(const CommunicationProtocolConjPort* self){
-	ET_MSC_LOGGER_SYNC_ENTRY("CommunicationProtocolConjPort", "sendData2")
+void CommunicationProtocolConjPort_inMessage2(const CommunicationProtocolConjPort* self){
+	ET_MSC_LOGGER_SYNC_ENTRY("CommunicationProtocolConjPort", "inMessage2")
 	etMessage* msg = etMessageService_getMessageBuffer(self->msgService, sizeof(etMessage));
 	msg->address = self->peerAddress;
-	msg->evtID = CommunicationProtocol_IN_sendData2;
+	msg->evtID = CommunicationProtocol_IN_inMessage2;
 	etMessageService_pushMessage(self->msgService, msg);
 	ET_MSC_LOGGER_SYNC_EXIT
 }
@@ -45,7 +61,7 @@ void CommunicationProtocolConjPort_sendData2(const CommunicationProtocolConjPort
 
 /* TODO: make this optional or different for smaller footprint */
 /* message names as strings for debugging (generate MSC) */
-static const char* CommunicationProtocol_messageStrings[] = {"MIN", "receivedData","sendData", "sendData2", "MAX"};
+static const char* CommunicationProtocol_messageStrings[] = {"MIN", "outMessage1","outMessage2","outMessage123456789","inMessage1", "inMessage2", "MAX"};
 
 const char* CommunicationProtocol_getMessageString(int msg_id) {
 	if (msg_id<CommunicationProtocol_MSG_MIN || msg_id>CommunicationProtocol_MSG_MAX+1){

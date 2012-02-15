@@ -15,6 +15,38 @@
 #include "etMessageService.h"
 
 
+/* mocking for MessageDispatcher */
+
+static etInt16 receivedEventIDs[2] = {0,0};
+static etInt16 receivedEventIDCounter = 0;
+
+void MessageReceiver1(const etMessage* msg){
+	receivedEventIDs[receivedEventIDCounter] = msg->evtID;
+	receivedEventIDCounter++;
+}
+
+void MessageReceiver2(const etMessage* msg){
+	receivedEventIDs[receivedEventIDCounter] = msg->evtID;
+	receivedEventIDCounter++;
+}
+
+/* dummy message dispatcher */
+void DummyMessageDispatcher(const etMessage* msg){
+	switch(msg->address){
+		case 11:
+			MessageReceiver1(msg);
+			break;
+		case 22:
+			MessageReceiver2(msg);
+			break;
+		default:
+			break;
+	}
+}
+
+
+
+
 void TestEtMessageService_init(void){
 
 	etMessageService msgService;
@@ -23,7 +55,7 @@ void TestEtMessageService_init(void){
 
 	uint8 msgBuffer[max*blockSize];
 
-	etMessageService_init(&msgService, msgBuffer, max, blockSize);
+	etMessageService_init(&msgService, msgBuffer, max, blockSize, DummyMessageDispatcher);
 
 	EXPECT_EQUAL_PTR("msgService.messagePool.first", msgBuffer, msgService.messagePool.first);
 	EXPECT_EQUAL_PTR("msgService.messagePool in between", &msgBuffer[3*blockSize], msgService.messagePool.first->next->next->next);
@@ -40,7 +72,7 @@ void TestEtMessageService_GetPushPopReturn(void){
 	uint16 blockSize = 32;
 	uint8 msgBuffer[max*blockSize];
 
-	etMessageService_init(&msgService, msgBuffer, max, blockSize);
+	etMessageService_init(&msgService, msgBuffer, max, blockSize, DummyMessageDispatcher);
 
 	// get messages from pool
 	etMessage* msg1 = etMessageService_getMessageBuffer(&msgService, sizeof(etMessage));
@@ -86,9 +118,9 @@ void TestEtMessageService_GetReturn(void){
 	uint16 blockSize = 32;
 	uint8 msgBuffer[max*blockSize];
 
-	etMessageService_init(&msgService, msgBuffer, max, blockSize);
+	etMessageService_init(&msgService, msgBuffer, max, blockSize, DummyMessageDispatcher);
 
-	// get on message too much from pool
+	// get one message too much from pool
 	etMessage* msg1 = etMessageService_getMessageBuffer(&msgService, sizeof(etMessage));
 	etMessage* msg2 = etMessageService_getMessageBuffer(&msgService, sizeof(etMessage));
 	etMessage* msg3 = etMessageService_getMessageBuffer(&msgService, sizeof(etMessage));
@@ -107,10 +139,40 @@ void TestEtMessageService_GetReturn(void){
 
 }
 
+void TestEtMessageService_execute(void){
+	etMessageService msgService;
+	uint16 max = 6;
+	uint16 blockSize = 32;
+	uint8 msgBuffer[max*blockSize];
+
+	etMessageService_init(&msgService, msgBuffer, max, blockSize, DummyMessageDispatcher);
+
+	// get messages from pool
+	etMessage* msg1 = etMessageService_getMessageBuffer(&msgService, sizeof(etMessage));
+	etMessage* msg2 = etMessageService_getMessageBuffer(&msgService, sizeof(etMessage));
+
+	// define content
+	msg1->address = 11;
+	msg1->evtID = 111;
+	msg2->address = 22;
+	msg2->evtID = 222;
+
+	// push messages to queue
+	etMessageService_pushMessage(&msgService, msg1);
+	etMessageService_pushMessage(&msgService, msg2);
+
+	/* make sure that receivedEventIDCounter==0 and receivedEventIDs[n]==0*/
+	etMessageService_execute(&msgService);
+	EXPECT_EQUAL_INT16("deliverAllMessages msg1", msg1->evtID, receivedEventIDs[0]);
+	EXPECT_EQUAL_INT16("deliverAllMessages msg2", msg2->evtID, receivedEventIDs[1]);
+	EXPECT_EQUAL_INT16("deliverAllMessages receivedEventIDCounter", 2, receivedEventIDCounter);
+}
+
 void TestEtMessageService_runSuite(void){
 	etUnit_openTestSuite("TestEtMessageService");
 	ADD_TESTCASE(TestEtMessageService_init);
 	ADD_TESTCASE(TestEtMessageService_GetPushPopReturn);
 	ADD_TESTCASE(TestEtMessageService_GetReturn);
+	ADD_TESTCASE(TestEtMessageService_execute);
 	etUnit_closeTestSuite();
 }
