@@ -63,17 +63,22 @@ public class RoomNameProvider {
 	
 	private static RoomSwitch<String> nameProvider = new RoomSwitch<String>() {
 		public String caseState(State object) { return RoomNameProvider.getStateName(object); }
-		public String caseChoicePoint(ChoicePoint object) { return object.getName(); };
-		public String caseTrPoint(TrPoint object) { return object.getName(); };
-		public String caseTransition(Transition object) { return RoomNameProvider.getTransitionName(object); };
-		public String caseActorRef(org.eclipse.etrice.core.room.ActorRef object) { return object.getName(); };
-		public String casePort(org.eclipse.etrice.core.room.Port object) { return "Port '"+object.getName()+"'"; };
-		public String caseSAPRef(org.eclipse.etrice.core.room.SAPRef object) { return "SAP '"+object.getName()+"'"; };
-		public String caseSPPRef(org.eclipse.etrice.core.room.SPPRef object) { return "SPP '"+object.getName()+"'"; };
+		public String caseChoicePoint(ChoicePoint object) { return object.getName(); }
+		public String caseTrPoint(TrPoint object) { return object.getName(); }
+		public String caseTransition(Transition object) { return RoomNameProvider.getTransitionName(object); }
+		public String caseActorRef(org.eclipse.etrice.core.room.ActorRef object) { return object.getName(); }
+		public String casePort(org.eclipse.etrice.core.room.Port object) { return "Port '"+object.getName()+"'"; }
+		public String caseSAPRef(org.eclipse.etrice.core.room.SAPRef object) { return "SAP '"+object.getName()+"'"; }
+		public String caseSPPRef(org.eclipse.etrice.core.room.SPPRef object) { return "SPP '"+object.getName()+"'"; }
+		public String caseActorClass(ActorClass object) { return "ActorClass "+object.getName(); }
+		public String caseSubSystemClass(SubSystemClass object) { return "SubsystemClass "+object.getName(); }
 	};
 	
 	public static String getName(EObject item) {
-		return nameProvider.doSwitch(item);
+		String name = nameProvider.doSwitch(item);
+		if (name==null)
+			name = item.toString();
+		return name;
 	}
 	
 	public static String getFullPath(StateGraphItem item) {

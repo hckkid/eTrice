@@ -14,6 +14,7 @@ package org.eclipse.etrice.generator.base;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.generator.etricegen.IDiagnostician;
 
 import com.google.inject.Inject;
@@ -24,36 +25,44 @@ import com.google.inject.Inject;
  */
 public class Diagnostician implements IDiagnostician {
 
+	public final static int INSIGNIFICANT_INDEX = -1;
 	private boolean validationFailed = false;
 
 	@Inject
 	private ILineOutputLogger logger;
 	
 	public void warning(String msg, EObject source, EStructuralFeature feature) {
-		logger.logInfo("Validation warning: " + getMsgTxt(msg, source, feature));
+		logger.logInfo("Validation warning: " + getMsgTxt(msg, source, feature, INSIGNIFICANT_INDEX));
 	}
 
 	public void warning(String msg, EObject source, EStructuralFeature feature, int idx) {
-		logger.logInfo("Validation warning: " + getMsgTxt(msg, source, feature) + " at index "+idx);
+		logger.logInfo("Validation warning: " + getMsgTxt(msg, source, feature, idx));
 	}
 
 	public void error(String msg, EObject source, EStructuralFeature feature) {
 		validationFailed = true;
-		logger.logInfo("Validation error: " + getMsgTxt(msg, source, feature));
+		logger.logInfo("Validation error: " + getMsgTxt(msg, source, feature, INSIGNIFICANT_INDEX));
 	}
 
 	public void error(String msg, EObject source, EStructuralFeature feature, int idx) {
 		validationFailed = true;
-		logger.logInfo("Validation error: " + getMsgTxt(msg, source, feature) + " at index "+idx);
+		logger.logInfo("Validation error: " + getMsgTxt(msg, source, feature, idx));
 	}
 
 	public boolean isFailed() {
 		return validationFailed;
 	}
 
-	private String getMsgTxt(String msg, EObject source, EStructuralFeature feature) {
-		return msg + " " + (source==null? "":source.toString()) + " "
-						+ (feature==null?"":feature.toString());
+	private String getMsgTxt(String msg, EObject source, EStructuralFeature feature, int idx) {
+		if (source==null || feature==null)
+			return msg;
+
+		if (idx==INSIGNIFICANT_INDEX)
+			return msg + " (" + RoomNameProvider.getName(source) + ", "
+							+ feature.getName()+")";
+		else
+			return msg + " (" + RoomNameProvider.getName(source) + ", "
+							+ feature.getName() + " at index "+idx+")";
 	}
 
 }
