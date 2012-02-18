@@ -9,7 +9,7 @@
 #include "etLogger.h"
 #include "etMSCLogger.h"
 
-void MsgDispatcher_Thread1_receiveMessage(const etMessage* msg){
+static void MsgDispatcher_Thread1_receiveMessage(const etMessage* msg){
 	ET_MSC_LOGGER_SYNC_ENTRY("MsgDispatcher_Thread1", "receiveMessage")
 	switch(msg->address){
 	

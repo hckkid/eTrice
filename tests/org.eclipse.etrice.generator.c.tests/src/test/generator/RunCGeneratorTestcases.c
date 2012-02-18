@@ -21,6 +21,8 @@
 
 #include "TestDataClass.h"
 #include "etUnit.h"
+#include "etMSCLogger.h"
+
 
 
 void RunCGeneratorTestcases(void){

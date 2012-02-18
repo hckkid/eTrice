@@ -335,7 +335,8 @@ ChoicePoint:
 	'ChoicePoint' name=ID (docu=Documentation)?;
 
 Transition: InitialTransition | NonInitialTransition;
-NonInitialTransition: TriggeredTransition | GuardedTransition | ContinuationTransition | CPBranchTransition;
+NonInitialTransition: TransitionChainStartTransition | ContinuationTransition | CPBranchTransition;
+TransitionChainStartTransition: TriggeredTransition | GuardedTransition;
 
 InitialTransition:
 	'Transition' (name=ID)? ':' 'initial' '->' to=TransitionTerminal 

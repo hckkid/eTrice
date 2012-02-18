@@ -3227,16 +3227,38 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	public class NonInitialTransitionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "NonInitialTransition");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cTriggeredTransitionParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall cGuardedTransitionParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
-		private final RuleCall cContinuationTransitionParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
-		private final RuleCall cCPBranchTransitionParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
+		private final RuleCall cTransitionChainStartTransitionParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cContinuationTransitionParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cCPBranchTransitionParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		
 		//NonInitialTransition:
-		//	TriggeredTransition | GuardedTransition | ContinuationTransition | CPBranchTransition;
+		//	TransitionChainStartTransition | ContinuationTransition | CPBranchTransition;
 		public ParserRule getRule() { return rule; }
 
-		//TriggeredTransition | GuardedTransition | ContinuationTransition | CPBranchTransition
+		//TransitionChainStartTransition | ContinuationTransition | CPBranchTransition
+		public Alternatives getAlternatives() { return cAlternatives; }
+
+		//TransitionChainStartTransition
+		public RuleCall getTransitionChainStartTransitionParserRuleCall_0() { return cTransitionChainStartTransitionParserRuleCall_0; }
+
+		//ContinuationTransition
+		public RuleCall getContinuationTransitionParserRuleCall_1() { return cContinuationTransitionParserRuleCall_1; }
+
+		//CPBranchTransition
+		public RuleCall getCPBranchTransitionParserRuleCall_2() { return cCPBranchTransitionParserRuleCall_2; }
+	}
+
+	public class TransitionChainStartTransitionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TransitionChainStartTransition");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cTriggeredTransitionParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cGuardedTransitionParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		
+		//TransitionChainStartTransition:
+		//	TriggeredTransition | GuardedTransition;
+		public ParserRule getRule() { return rule; }
+
+		//TriggeredTransition | GuardedTransition
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//TriggeredTransition
@@ -3244,12 +3266,6 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 
 		//GuardedTransition
 		public RuleCall getGuardedTransitionParserRuleCall_1() { return cGuardedTransitionParserRuleCall_1; }
-
-		//ContinuationTransition
-		public RuleCall getContinuationTransitionParserRuleCall_2() { return cContinuationTransitionParserRuleCall_2; }
-
-		//CPBranchTransition
-		public RuleCall getCPBranchTransitionParserRuleCall_3() { return cCPBranchTransitionParserRuleCall_3; }
 	}
 
 	public class InitialTransitionElements extends AbstractParserRuleElementFinder {
@@ -4399,6 +4415,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	private ChoicePointElements pChoicePoint;
 	private TransitionElements pTransition;
 	private NonInitialTransitionElements pNonInitialTransition;
+	private TransitionChainStartTransitionElements pTransitionChainStartTransition;
 	private InitialTransitionElements pInitialTransition;
 	private ContinuationTransitionElements pContinuationTransition;
 	private TriggeredTransitionElements pTriggeredTransition;
@@ -5096,13 +5113,23 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//NonInitialTransition:
-	//	TriggeredTransition | GuardedTransition | ContinuationTransition | CPBranchTransition;
+	//	TransitionChainStartTransition | ContinuationTransition | CPBranchTransition;
 	public NonInitialTransitionElements getNonInitialTransitionAccess() {
 		return (pNonInitialTransition != null) ? pNonInitialTransition : (pNonInitialTransition = new NonInitialTransitionElements());
 	}
 	
 	public ParserRule getNonInitialTransitionRule() {
 		return getNonInitialTransitionAccess().getRule();
+	}
+
+	//TransitionChainStartTransition:
+	//	TriggeredTransition | GuardedTransition;
+	public TransitionChainStartTransitionElements getTransitionChainStartTransitionAccess() {
+		return (pTransitionChainStartTransition != null) ? pTransitionChainStartTransition : (pTransitionChainStartTransition = new TransitionChainStartTransitionElements());
+	}
+	
+	public ParserRule getTransitionChainStartTransitionRule() {
+		return getTransitionChainStartTransitionAccess().getRule();
 	}
 
 	//InitialTransition:

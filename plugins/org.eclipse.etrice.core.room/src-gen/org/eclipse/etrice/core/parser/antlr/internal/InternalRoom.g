@@ -5045,7 +5045,57 @@ ruleNonInitialTransition returns [EObject current=null]
     @after { leaveRule(); }:
 (
     { 
-        newCompositeNode(grammarAccess.getNonInitialTransitionAccess().getTriggeredTransitionParserRuleCall_0()); 
+        newCompositeNode(grammarAccess.getNonInitialTransitionAccess().getTransitionChainStartTransitionParserRuleCall_0()); 
+    }
+    this_TransitionChainStartTransition_0=ruleTransitionChainStartTransition
+    { 
+        $current = $this_TransitionChainStartTransition_0.current; 
+        afterParserOrEnumRuleCall();
+    }
+
+    |
+    { 
+        newCompositeNode(grammarAccess.getNonInitialTransitionAccess().getContinuationTransitionParserRuleCall_1()); 
+    }
+    this_ContinuationTransition_1=ruleContinuationTransition
+    { 
+        $current = $this_ContinuationTransition_1.current; 
+        afterParserOrEnumRuleCall();
+    }
+
+    |
+    { 
+        newCompositeNode(grammarAccess.getNonInitialTransitionAccess().getCPBranchTransitionParserRuleCall_2()); 
+    }
+    this_CPBranchTransition_2=ruleCPBranchTransition
+    { 
+        $current = $this_CPBranchTransition_2.current; 
+        afterParserOrEnumRuleCall();
+    }
+)
+;
+
+
+
+
+
+// Entry rule entryRuleTransitionChainStartTransition
+entryRuleTransitionChainStartTransition returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getTransitionChainStartTransitionRule()); }
+	 iv_ruleTransitionChainStartTransition=ruleTransitionChainStartTransition 
+	 { $current=$iv_ruleTransitionChainStartTransition.current; } 
+	 EOF 
+;
+
+// Rule TransitionChainStartTransition
+ruleTransitionChainStartTransition returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(
+    { 
+        newCompositeNode(grammarAccess.getTransitionChainStartTransitionAccess().getTriggeredTransitionParserRuleCall_0()); 
     }
     this_TriggeredTransition_0=ruleTriggeredTransition
     { 
@@ -5055,31 +5105,11 @@ ruleNonInitialTransition returns [EObject current=null]
 
     |
     { 
-        newCompositeNode(grammarAccess.getNonInitialTransitionAccess().getGuardedTransitionParserRuleCall_1()); 
+        newCompositeNode(grammarAccess.getTransitionChainStartTransitionAccess().getGuardedTransitionParserRuleCall_1()); 
     }
     this_GuardedTransition_1=ruleGuardedTransition
     { 
         $current = $this_GuardedTransition_1.current; 
-        afterParserOrEnumRuleCall();
-    }
-
-    |
-    { 
-        newCompositeNode(grammarAccess.getNonInitialTransitionAccess().getContinuationTransitionParserRuleCall_2()); 
-    }
-    this_ContinuationTransition_2=ruleContinuationTransition
-    { 
-        $current = $this_ContinuationTransition_2.current; 
-        afterParserOrEnumRuleCall();
-    }
-
-    |
-    { 
-        newCompositeNode(grammarAccess.getNonInitialTransitionAccess().getCPBranchTransitionParserRuleCall_3()); 
-    }
-    this_CPBranchTransition_3=ruleCPBranchTransition
-    { 
-        $current = $this_CPBranchTransition_3.current; 
         afterParserOrEnumRuleCall();
     }
 )

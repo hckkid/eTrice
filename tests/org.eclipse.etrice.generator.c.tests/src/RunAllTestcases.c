@@ -14,17 +14,22 @@
 
 #include "test/generator/RunCGeneratorTestcases.h"
 #include "test/runtime/RunCRuntimeTestcases.h"
+#include "etMSCLogger.h"
 
 void runTestCases(void);
 
 int main(void){
+	ET_MSC_LOGGER_OPEN("RunAllTestcases")
 	runTestCases();
+	ET_MSC_LOGGER_CLOSE
 	return 0;
 }
 
 
 void runTestCases(void){
+	ET_MSC_LOGGER_SYNC_ENTRY("RunAllTestcases", "runTestCases")
 	RunCGeneratorTestcases();
 	RunCRuntimeTestcases();
+	ET_MSC_LOGGER_SYNC_EXIT
 }
 

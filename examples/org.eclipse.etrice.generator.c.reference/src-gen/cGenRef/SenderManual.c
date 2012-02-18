@@ -14,8 +14,8 @@
 
 void SenderManual_init(SenderManual* self){
 	ET_MSC_LOGGER_SYNC_ENTRY("SenderManual", "init")
-	CommunicationProtocolConjPort_sendData(&self->constData->dataOut);
-	CommunicationProtocolConjPort_sendData2(&self->constData->dataOut);
+	CommunicationProtocolConjPort_inMessage1(&self->constData->dataOut);
+	CommunicationProtocolConjPort_inMessage2(&self->constData->dataOut);
 	ET_MSC_LOGGER_SYNC_EXIT
 }
 

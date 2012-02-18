@@ -2989,6 +2989,70 @@ public interface RoomPackage extends EPackage
   int NON_INITIAL_TRANSITION_FEATURE_COUNT = TRANSITION_FEATURE_COUNT + 1;
 
   /**
+   * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.TransitionChainStartTransitionImpl <em>Transition Chain Start Transition</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.etrice.core.room.impl.TransitionChainStartTransitionImpl
+   * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getTransitionChainStartTransition()
+   * @generated
+   */
+  int TRANSITION_CHAIN_START_TRANSITION = 56;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TRANSITION_CHAIN_START_TRANSITION__NAME = NON_INITIAL_TRANSITION__NAME;
+
+  /**
+   * The feature id for the '<em><b>To</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TRANSITION_CHAIN_START_TRANSITION__TO = NON_INITIAL_TRANSITION__TO;
+
+  /**
+   * The feature id for the '<em><b>Docu</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TRANSITION_CHAIN_START_TRANSITION__DOCU = NON_INITIAL_TRANSITION__DOCU;
+
+  /**
+   * The feature id for the '<em><b>Action</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TRANSITION_CHAIN_START_TRANSITION__ACTION = NON_INITIAL_TRANSITION__ACTION;
+
+  /**
+   * The feature id for the '<em><b>From</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TRANSITION_CHAIN_START_TRANSITION__FROM = NON_INITIAL_TRANSITION__FROM;
+
+  /**
+   * The number of structural features of the '<em>Transition Chain Start Transition</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TRANSITION_CHAIN_START_TRANSITION_FEATURE_COUNT = NON_INITIAL_TRANSITION_FEATURE_COUNT + 0;
+
+  /**
    * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.InitialTransitionImpl <em>Initial Transition</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -2996,7 +3060,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getInitialTransition()
    * @generated
    */
-  int INITIAL_TRANSITION = 56;
+  int INITIAL_TRANSITION = 57;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3051,7 +3115,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getContinuationTransition()
    * @generated
    */
-  int CONTINUATION_TRANSITION = 57;
+  int CONTINUATION_TRANSITION = 58;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3115,7 +3179,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getTriggeredTransition()
    * @generated
    */
-  int TRIGGERED_TRANSITION = 58;
+  int TRIGGERED_TRANSITION = 59;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3124,7 +3188,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int TRIGGERED_TRANSITION__NAME = NON_INITIAL_TRANSITION__NAME;
+  int TRIGGERED_TRANSITION__NAME = TRANSITION_CHAIN_START_TRANSITION__NAME;
 
   /**
    * The feature id for the '<em><b>To</b></em>' containment reference.
@@ -3133,7 +3197,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int TRIGGERED_TRANSITION__TO = NON_INITIAL_TRANSITION__TO;
+  int TRIGGERED_TRANSITION__TO = TRANSITION_CHAIN_START_TRANSITION__TO;
 
   /**
    * The feature id for the '<em><b>Docu</b></em>' containment reference.
@@ -3142,7 +3206,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int TRIGGERED_TRANSITION__DOCU = NON_INITIAL_TRANSITION__DOCU;
+  int TRIGGERED_TRANSITION__DOCU = TRANSITION_CHAIN_START_TRANSITION__DOCU;
 
   /**
    * The feature id for the '<em><b>Action</b></em>' containment reference.
@@ -3151,7 +3215,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int TRIGGERED_TRANSITION__ACTION = NON_INITIAL_TRANSITION__ACTION;
+  int TRIGGERED_TRANSITION__ACTION = TRANSITION_CHAIN_START_TRANSITION__ACTION;
 
   /**
    * The feature id for the '<em><b>From</b></em>' containment reference.
@@ -3160,7 +3224,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int TRIGGERED_TRANSITION__FROM = NON_INITIAL_TRANSITION__FROM;
+  int TRIGGERED_TRANSITION__FROM = TRANSITION_CHAIN_START_TRANSITION__FROM;
 
   /**
    * The feature id for the '<em><b>Triggers</b></em>' containment reference list.
@@ -3169,7 +3233,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int TRIGGERED_TRANSITION__TRIGGERS = NON_INITIAL_TRANSITION_FEATURE_COUNT + 0;
+  int TRIGGERED_TRANSITION__TRIGGERS = TRANSITION_CHAIN_START_TRANSITION_FEATURE_COUNT + 0;
 
   /**
    * The number of structural features of the '<em>Triggered Transition</em>' class.
@@ -3178,7 +3242,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int TRIGGERED_TRANSITION_FEATURE_COUNT = NON_INITIAL_TRANSITION_FEATURE_COUNT + 1;
+  int TRIGGERED_TRANSITION_FEATURE_COUNT = TRANSITION_CHAIN_START_TRANSITION_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.GuardedTransitionImpl <em>Guarded Transition</em>}' class.
@@ -3188,7 +3252,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getGuardedTransition()
    * @generated
    */
-  int GUARDED_TRANSITION = 59;
+  int GUARDED_TRANSITION = 60;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3197,7 +3261,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int GUARDED_TRANSITION__NAME = NON_INITIAL_TRANSITION__NAME;
+  int GUARDED_TRANSITION__NAME = TRANSITION_CHAIN_START_TRANSITION__NAME;
 
   /**
    * The feature id for the '<em><b>To</b></em>' containment reference.
@@ -3206,7 +3270,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int GUARDED_TRANSITION__TO = NON_INITIAL_TRANSITION__TO;
+  int GUARDED_TRANSITION__TO = TRANSITION_CHAIN_START_TRANSITION__TO;
 
   /**
    * The feature id for the '<em><b>Docu</b></em>' containment reference.
@@ -3215,7 +3279,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int GUARDED_TRANSITION__DOCU = NON_INITIAL_TRANSITION__DOCU;
+  int GUARDED_TRANSITION__DOCU = TRANSITION_CHAIN_START_TRANSITION__DOCU;
 
   /**
    * The feature id for the '<em><b>Action</b></em>' containment reference.
@@ -3224,7 +3288,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int GUARDED_TRANSITION__ACTION = NON_INITIAL_TRANSITION__ACTION;
+  int GUARDED_TRANSITION__ACTION = TRANSITION_CHAIN_START_TRANSITION__ACTION;
 
   /**
    * The feature id for the '<em><b>From</b></em>' containment reference.
@@ -3233,7 +3297,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int GUARDED_TRANSITION__FROM = NON_INITIAL_TRANSITION__FROM;
+  int GUARDED_TRANSITION__FROM = TRANSITION_CHAIN_START_TRANSITION__FROM;
 
   /**
    * The feature id for the '<em><b>Guard</b></em>' containment reference.
@@ -3242,7 +3306,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int GUARDED_TRANSITION__GUARD = NON_INITIAL_TRANSITION_FEATURE_COUNT + 0;
+  int GUARDED_TRANSITION__GUARD = TRANSITION_CHAIN_START_TRANSITION_FEATURE_COUNT + 0;
 
   /**
    * The number of structural features of the '<em>Guarded Transition</em>' class.
@@ -3251,7 +3315,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int GUARDED_TRANSITION_FEATURE_COUNT = NON_INITIAL_TRANSITION_FEATURE_COUNT + 1;
+  int GUARDED_TRANSITION_FEATURE_COUNT = TRANSITION_CHAIN_START_TRANSITION_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.CPBranchTransitionImpl <em>CP Branch Transition</em>}' class.
@@ -3261,7 +3325,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getCPBranchTransition()
    * @generated
    */
-  int CP_BRANCH_TRANSITION = 60;
+  int CP_BRANCH_TRANSITION = 61;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3334,7 +3398,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getTransitionTerminal()
    * @generated
    */
-  int TRANSITION_TERMINAL = 61;
+  int TRANSITION_TERMINAL = 62;
 
   /**
    * The number of structural features of the '<em>Transition Terminal</em>' class.
@@ -3353,7 +3417,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getStateTerminal()
    * @generated
    */
-  int STATE_TERMINAL = 62;
+  int STATE_TERMINAL = 63;
 
   /**
    * The feature id for the '<em><b>State</b></em>' reference.
@@ -3381,7 +3445,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getTrPointTerminal()
    * @generated
    */
-  int TR_POINT_TERMINAL = 63;
+  int TR_POINT_TERMINAL = 64;
 
   /**
    * The feature id for the '<em><b>Tr Point</b></em>' reference.
@@ -3409,7 +3473,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getSubStateTrPointTerminal()
    * @generated
    */
-  int SUB_STATE_TR_POINT_TERMINAL = 64;
+  int SUB_STATE_TR_POINT_TERMINAL = 65;
 
   /**
    * The feature id for the '<em><b>Tr Point</b></em>' reference.
@@ -3446,7 +3510,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getChoicepointTerminal()
    * @generated
    */
-  int CHOICEPOINT_TERMINAL = 65;
+  int CHOICEPOINT_TERMINAL = 66;
 
   /**
    * The feature id for the '<em><b>Cp</b></em>' reference.
@@ -3474,7 +3538,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getTrigger()
    * @generated
    */
-  int TRIGGER = 66;
+  int TRIGGER = 67;
 
   /**
    * The feature id for the '<em><b>Msg From If Pairs</b></em>' containment reference list.
@@ -3511,7 +3575,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getMessageFromIf()
    * @generated
    */
-  int MESSAGE_FROM_IF = 67;
+  int MESSAGE_FROM_IF = 68;
 
   /**
    * The feature id for the '<em><b>Message</b></em>' reference.
@@ -3548,7 +3612,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getGuard()
    * @generated
    */
-  int GUARD = 68;
+  int GUARD = 69;
 
   /**
    * The feature id for the '<em><b>Guard</b></em>' containment reference.
@@ -3576,7 +3640,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getDocumentation()
    * @generated
    */
-  int DOCUMENTATION = 69;
+  int DOCUMENTATION = 70;
 
   /**
    * The feature id for the '<em><b>Text</b></em>' attribute list.
@@ -3604,7 +3668,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getAnnotation()
    * @generated
    */
-  int ANNOTATION = 70;
+  int ANNOTATION = 71;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3641,7 +3705,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getKeyValue()
    * @generated
    */
-  int KEY_VALUE = 71;
+  int KEY_VALUE = 72;
 
   /**
    * The feature id for the '<em><b>Key</b></em>' attribute.
@@ -3678,7 +3742,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getImport()
    * @generated
    */
-  int IMPORT = 72;
+  int IMPORT = 73;
 
   /**
    * The feature id for the '<em><b>Imported Namespace</b></em>' attribute.
@@ -3715,7 +3779,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getCommunicationType()
    * @generated
    */
-  int COMMUNICATION_TYPE = 73;
+  int COMMUNICATION_TYPE = 74;
 
   /**
    * The meta object id for the '{@link org.eclipse.etrice.core.room.ActorCommunicationType <em>Actor Communication Type</em>}' enum.
@@ -3725,7 +3789,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getActorCommunicationType()
    * @generated
    */
-  int ACTOR_COMMUNICATION_TYPE = 74;
+  int ACTOR_COMMUNICATION_TYPE = 75;
 
 
   /**
@@ -5717,6 +5781,16 @@ public interface RoomPackage extends EPackage
    * @generated
    */
   EReference getNonInitialTransition_From();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.etrice.core.room.TransitionChainStartTransition <em>Transition Chain Start Transition</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Transition Chain Start Transition</em>'.
+   * @see org.eclipse.etrice.core.room.TransitionChainStartTransition
+   * @generated
+   */
+  EClass getTransitionChainStartTransition();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.etrice.core.room.InitialTransition <em>Initial Transition</em>}'.
@@ -7750,6 +7824,16 @@ public interface RoomPackage extends EPackage
      * @generated
      */
     EReference NON_INITIAL_TRANSITION__FROM = eINSTANCE.getNonInitialTransition_From();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.etrice.core.room.impl.TransitionChainStartTransitionImpl <em>Transition Chain Start Transition</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.etrice.core.room.impl.TransitionChainStartTransitionImpl
+     * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getTransitionChainStartTransition()
+     * @generated
+     */
+    EClass TRANSITION_CHAIN_START_TRANSITION = eINSTANCE.getTransitionChainStartTransition();
 
     /**
      * The meta object literal for the '{@link org.eclipse.etrice.core.room.impl.InitialTransitionImpl <em>Initial Transition</em>}' class.

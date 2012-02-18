@@ -1522,6 +1522,34 @@ finally {
 
 
 
+// Entry rule entryRuleTransitionChainStartTransition
+entryRuleTransitionChainStartTransition 
+:
+{ before(grammarAccess.getTransitionChainStartTransitionRule()); }
+	 ruleTransitionChainStartTransition
+{ after(grammarAccess.getTransitionChainStartTransitionRule()); } 
+	 EOF 
+;
+
+// Rule TransitionChainStartTransition
+ruleTransitionChainStartTransition
+    @init {
+		int stackSize = keepStackSize();
+    }
+	:
+(
+{ before(grammarAccess.getTransitionChainStartTransitionAccess().getAlternatives()); }
+(rule__TransitionChainStartTransition__Alternatives)
+{ after(grammarAccess.getTransitionChainStartTransitionAccess().getAlternatives()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
+
 // Entry rule entryRuleInitialTransition
 entryRuleInitialTransition 
 :
@@ -2604,27 +2632,43 @@ rule__NonInitialTransition__Alternatives
     }
 :
 (
-{ before(grammarAccess.getNonInitialTransitionAccess().getTriggeredTransitionParserRuleCall_0()); }
-	ruleTriggeredTransition
-{ after(grammarAccess.getNonInitialTransitionAccess().getTriggeredTransitionParserRuleCall_0()); }
+{ before(grammarAccess.getNonInitialTransitionAccess().getTransitionChainStartTransitionParserRuleCall_0()); }
+	ruleTransitionChainStartTransition
+{ after(grammarAccess.getNonInitialTransitionAccess().getTransitionChainStartTransitionParserRuleCall_0()); }
 )
 
     |(
-{ before(grammarAccess.getNonInitialTransitionAccess().getGuardedTransitionParserRuleCall_1()); }
-	ruleGuardedTransition
-{ after(grammarAccess.getNonInitialTransitionAccess().getGuardedTransitionParserRuleCall_1()); }
-)
-
-    |(
-{ before(grammarAccess.getNonInitialTransitionAccess().getContinuationTransitionParserRuleCall_2()); }
+{ before(grammarAccess.getNonInitialTransitionAccess().getContinuationTransitionParserRuleCall_1()); }
 	ruleContinuationTransition
-{ after(grammarAccess.getNonInitialTransitionAccess().getContinuationTransitionParserRuleCall_2()); }
+{ after(grammarAccess.getNonInitialTransitionAccess().getContinuationTransitionParserRuleCall_1()); }
 )
 
     |(
-{ before(grammarAccess.getNonInitialTransitionAccess().getCPBranchTransitionParserRuleCall_3()); }
+{ before(grammarAccess.getNonInitialTransitionAccess().getCPBranchTransitionParserRuleCall_2()); }
 	ruleCPBranchTransition
-{ after(grammarAccess.getNonInitialTransitionAccess().getCPBranchTransitionParserRuleCall_3()); }
+{ after(grammarAccess.getNonInitialTransitionAccess().getCPBranchTransitionParserRuleCall_2()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__TransitionChainStartTransition__Alternatives
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getTransitionChainStartTransitionAccess().getTriggeredTransitionParserRuleCall_0()); }
+	ruleTriggeredTransition
+{ after(grammarAccess.getTransitionChainStartTransitionAccess().getTriggeredTransitionParserRuleCall_0()); }
+)
+
+    |(
+{ before(grammarAccess.getTransitionChainStartTransitionAccess().getGuardedTransitionParserRuleCall_1()); }
+	ruleGuardedTransition
+{ after(grammarAccess.getTransitionChainStartTransitionAccess().getGuardedTransitionParserRuleCall_1()); }
 )
 
 ;

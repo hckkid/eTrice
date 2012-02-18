@@ -63,17 +63,22 @@ public class RoomNameProvider {
 	
 	private static RoomSwitch<String> nameProvider = new RoomSwitch<String>() {
 		public String caseState(State object) { return RoomNameProvider.getStateName(object); }
-		public String caseChoicePoint(ChoicePoint object) { return object.getName(); };
-		public String caseTrPoint(TrPoint object) { return object.getName(); };
-		public String caseTransition(Transition object) { return RoomNameProvider.getTransitionName(object); };
-		public String caseActorRef(org.eclipse.etrice.core.room.ActorRef object) { return object.getName(); };
-		public String casePort(org.eclipse.etrice.core.room.Port object) { return "Port '"+object.getName()+"'"; };
-		public String caseSAPRef(org.eclipse.etrice.core.room.SAPRef object) { return "SAP '"+object.getName()+"'"; };
-		public String caseSPPRef(org.eclipse.etrice.core.room.SPPRef object) { return "SPP '"+object.getName()+"'"; };
+		public String caseChoicePoint(ChoicePoint object) { return object.getName(); }
+		public String caseTrPoint(TrPoint object) { return object.getName(); }
+		public String caseTransition(Transition object) { return RoomNameProvider.getTransitionName(object); }
+		public String caseActorRef(org.eclipse.etrice.core.room.ActorRef object) { return object.getName(); }
+		public String casePort(org.eclipse.etrice.core.room.Port object) { return "Port '"+object.getName()+"'"; }
+		public String caseSAPRef(org.eclipse.etrice.core.room.SAPRef object) { return "SAP '"+object.getName()+"'"; }
+		public String caseSPPRef(org.eclipse.etrice.core.room.SPPRef object) { return "SPP '"+object.getName()+"'"; }
+		public String caseActorClass(ActorClass object) { return "ActorClass "+object.getName(); }
+		public String caseSubSystemClass(SubSystemClass object) { return "SubsystemClass "+object.getName(); }
 	};
 	
 	public static String getName(EObject item) {
-		return nameProvider.doSwitch(item);
+		String name = nameProvider.doSwitch(item);
+		if (name==null)
+			name = item.toString();
+		return name;
 	}
 	
 	public static String getFullPath(StateGraphItem item) {
@@ -464,9 +469,9 @@ public class RoomNameProvider {
 			String where = "?";
 			if (code==tr.getAction())
 				where = "action";
-			else if (tr instanceof CPBranchTransition)
+			else if (tr instanceof CPBranchTransition && code==((CPBranchTransition)tr).getCondition())
 				where = "condition";
-			else if (tr instanceof GuardedTransition)
+			else if (tr instanceof GuardedTransition && code==((GuardedTransition)tr).getGuard())
 				where = "guard";
 			return "transition "+tr.getName()+": "+RoomNameProvider.getTransitionName(tr)+" "+where+" code";
 		}
@@ -479,7 +484,7 @@ public class RoomNameProvider {
 			String where = "?";
 			if (code==state.getEntryCode())
 				where = "entry";
-			else if (code==state.getEntryCode())
+			else if (code==state.getExitCode())
 				where = "exit";
 			else
 				where = "do";

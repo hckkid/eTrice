@@ -307,7 +307,7 @@ void etUnit_buildTestLogXML(char* xml, const char *testcase, etBool result, cons
 	} else {
 		sprintf(
 				xml,
-				"\t\t<testcase name=\"%s\" classname=\"none\" time=\"%ld\">\n\t\t<failure>%s</failure>\n\t</testcase>\n",
+				"\t\t<testcase name=\"%s\" classname=\"none\" time=\"%ld\">\n\t\t\t<failure>%s</failure>\n\t\t</testcase>\n",
 				testcase, time, resulttext);
 	}
 }

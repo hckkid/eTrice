@@ -256,6 +256,7 @@
     <genClasses ecoreClass="Room.ecore#//NonInitialTransition">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//NonInitialTransition/from"/>
     </genClasses>
+    <genClasses ecoreClass="Room.ecore#//TransitionChainStartTransition"/>
     <genClasses ecoreClass="Room.ecore#//InitialTransition"/>
     <genClasses ecoreClass="Room.ecore#//ContinuationTransition"/>
     <genClasses ecoreClass="Room.ecore#//TriggeredTransition">

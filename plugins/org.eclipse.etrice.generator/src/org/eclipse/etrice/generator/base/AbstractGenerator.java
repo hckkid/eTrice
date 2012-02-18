@@ -12,6 +12,7 @@
 
 package org.eclipse.etrice.generator.base;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -23,6 +24,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.etrice.core.room.RoomModel;
+import org.eclipse.etrice.core.scoping.PlatformRelativeUriResolver;
 import org.eclipse.etrice.generator.builder.GeneratorModelBuilder;
 import org.eclipse.etrice.generator.etricegen.IDiagnostician;
 import org.eclipse.etrice.generator.etricegen.Root;
@@ -64,15 +66,6 @@ public abstract class AbstractGenerator {
 		generator.runGenerator(args);
 	}
 
-	protected static String convertToURI(String uri) {
-		if (uri.startsWith("file:")) {
-			return uri.replace('\\', '/');
-		}
-		else {
-			return "file://"+uri.replace('\\', '/');
-		}
-	}
-
 	@Inject
 	protected Provider<ResourceSet> resourceSetProvider;
 
@@ -83,6 +76,9 @@ public abstract class AbstractGenerator {
 	
 	@Inject
 	protected JavaIoFileSystemAccess fileAccess;
+	
+	@Inject
+	protected PlatformRelativeUriResolver uriResolver;
 	
 	protected IResourceValidator validator;
 
@@ -176,6 +172,21 @@ public abstract class AbstractGenerator {
 		return true;
 	}
 
+	protected boolean loadModel(String uriString, ResourceSet rs)
+			throws RuntimeException, IOException {
+		String can = URI.createFileURI(uriString).toFileString();
+		File f = new File(can);
+		can = f.getCanonicalPath();	// e.g. remove embedded ../
+		if (rs.getResource(URI.createFileURI(can), false) != null)
+			// already loaded
+			return false;
+		
+		logger.logInfo("Loading " + can);
+		rs.getResource(URI.createFileURI(can), true);	// Could throw an exception...
+		return true;
+	}	
+	
+	
 	/**
 	 * load all models into a {@link ResourceSet}
 	 * 
@@ -186,11 +197,11 @@ public abstract class AbstractGenerator {
 		logger.logInfo("-- reading models");
 		boolean ok = true;
 		for (String uriString : uriList) {
-			logger.logInfo("Loading " + uriString);
+			//logger.logInfo("Loading " + uriString);
 			try {
-				rs.getResource(URI.createURI(uriString), true);
+				loadModel(uriString,rs);
 			}
-			catch (RuntimeException e) {
+			catch (Exception e) {
 				ok = false;
 				logger.logError("couldn't load '"+uriString+"'", null);
 			}
