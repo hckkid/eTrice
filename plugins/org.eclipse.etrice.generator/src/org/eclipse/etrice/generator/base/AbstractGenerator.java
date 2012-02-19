@@ -66,15 +66,6 @@ public abstract class AbstractGenerator {
 		generator.runGenerator(args);
 	}
 
-	protected static String convertToURI(String uri) {
-		if (uri.startsWith("file:")) {
-			return uri.replace('\\', '/');
-		}
-		else {
-			return "file://"+uri.replace('\\', '/');
-		}
-	}
-
 	@Inject
 	protected Provider<ResourceSet> resourceSetProvider;
 

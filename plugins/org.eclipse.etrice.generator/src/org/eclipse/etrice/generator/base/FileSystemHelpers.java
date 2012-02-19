@@ -155,7 +155,7 @@ public class FileSystemHelpers {
 		if (!path.hasAbsolutePath())
 			return null;
 		
-		if (!path.device().equals(base.device()))
+		if (!bothNullOrEqual(path.device(), base.device()))
 			return null;
 		
 		StringBuffer result = new StringBuffer();
@@ -173,7 +173,7 @@ public class FileSystemHelpers {
 				result.append(path.segment(i)+"/");
 			}
 			
-			if(result.length()==0)
+			if (result.length()==0)
 				return "";
 			
 			return result.substring(0, result.length()-1);

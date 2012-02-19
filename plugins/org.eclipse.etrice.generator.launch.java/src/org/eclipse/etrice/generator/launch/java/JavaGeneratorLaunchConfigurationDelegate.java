@@ -34,7 +34,7 @@ public class JavaGeneratorLaunchConfigurationDelegate extends GeneratorLaunchCon
 		}
 		if (configuration.getAttribute(JavaGeneratorConfigTab.SAVE_GEN_MODEL, false)) {
 			argString.append(" "+Main.OPTION_SAVE_GEN_MODEL);
-			argString.append(" file://"+configuration.getAttribute(JavaGeneratorConfigTab.GEN_MODEL_PATH, "?"));
+			argString.append(" "+configuration.getAttribute(JavaGeneratorConfigTab.GEN_MODEL_PATH, "?"));
 		}
 		if (configuration.getAttribute(JavaGeneratorConfigTab.GEN_INSTANCE_DIAGRAM, false))
 			argString.append(" "+Main.OPTION_GEN_INST_DIAG);

@@ -18,7 +18,7 @@ import java.util.List;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.etrice.generator.base.AbstractGenerator;
 import org.eclipse.etrice.generator.etricegen.Root;
-import org.eclipse.etrice.generator.doc.gen.InstanceDiagramGen;  // TODO: fix import
+import org.eclipse.etrice.generator.doc.gen.InstanceDiagramGen;
 import org.eclipse.etrice.generator.c.gen.Validator;
 import org.eclipse.etrice.generator.c.setup.GeneratorModule;
 import org.eclipse.xtext.generator.IGenerator;
@@ -71,7 +71,7 @@ public class Main extends AbstractGenerator {
 		for (int i=0; i<args.length; ++i) {
 			if (args[i].equals(OPTION_SAVE_GEN_MODEL)) {
 				if (++i<args.length) {
-					genModelPath = convertToURI(args[i]+"/genmodel.egm");
+					genModelPath = args[i]+"/genmodel.egm";
 				}
 			}
 			else if (args[i].equals(OPTION_GEN_INST_DIAG)) {
@@ -81,7 +81,7 @@ public class Main extends AbstractGenerator {
 				asLibrary = true;
 			}
 			else {
-				uriList.add(convertToURI(args[i]));
+				uriList.add(args[i]);
 			}
 		}
 

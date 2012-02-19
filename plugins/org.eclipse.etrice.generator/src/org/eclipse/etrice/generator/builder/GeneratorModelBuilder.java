@@ -12,7 +12,10 @@
 
 package org.eclipse.etrice.generator.builder;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -51,6 +54,7 @@ import org.eclipse.etrice.generator.etricegen.ETriceGenFactory;
 import org.eclipse.etrice.generator.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.generator.etricegen.IDiagnostician;
 import org.eclipse.etrice.generator.etricegen.InstanceBase;
+import org.eclipse.etrice.generator.etricegen.InterfaceItemInstance;
 import org.eclipse.etrice.generator.etricegen.PortInstance;
 import org.eclipse.etrice.generator.etricegen.PortKind;
 import org.eclipse.etrice.generator.etricegen.Root;
@@ -332,6 +336,8 @@ public class GeneratorModelBuilder {
 	private void determineRelayPorts(Root root) {
 		for (RoomModel model : root.getModels()) {
 			for (ActorClass ac : model.getActorClasses()) {
+				
+				// check own relay ports
 				for (Port port : ac.getIfPorts()) {
 					boolean external = false;
 					for (ExternalPort ep : ac.getExtPorts()) {
@@ -343,17 +349,21 @@ public class GeneratorModelBuilder {
 					if (!external) {
 						relayPorts.add(port);
 						
-						// check whether relay port is multiply connected
-						int count = 0;
-						for (Binding b : ac.getBindings()) {
-							if (b.getEndpoint1().getPort()==port)
-								++count;
-							if (b.getEndpoint2().getPort()==port)
-								++count;
-						}
-						if (count>1) {
-							int idx = ac.getIfPorts().indexOf(port);
-							diagnostician.error("relay port is multiply connected inside its actor class", port, RoomPackage.eINSTANCE.getActorClass_IfPorts(), idx);
+						if (port.getProtocol().getCommType()==CommunicationType.DATA_DRIVEN) {
+							if (port.isConjugated()) {
+								// check whether relay port is multiply connected
+								int count = 0;
+								for (Binding b : ac.getBindings()) {
+									if (b.getEndpoint1().getPort()==port)
+										++count;
+									if (b.getEndpoint2().getPort()==port)
+										++count;
+								}
+								if (count>1) {
+									int idx = ac.getIfPorts().indexOf(port);
+									diagnostician.error("data driven conjugate relay port is multiply connected inside its actor class", ac, RoomPackage.eINSTANCE.getActorClass_IfPorts(), idx);
+								}
+							}
 						}
 					}
 				}
@@ -722,8 +732,22 @@ public class GeneratorModelBuilder {
 				}
 			}
 		}
+		
+		// check for situations where bindings fan out on both sides of a relay port
+		// i.e. a port has several peers and each peer in turn has several peers
+		it = root.eAllContents();
+		while (it.hasNext()) {
+			EObject obj = it.next();
+			if (obj instanceof ActorInstance) {
+				for (PortInstance pi : ((ActorInstance) obj).getPorts()) {
+					if (pi.getKind()!=PortKind.RELAY && pi.getPeers().size()>1)
+						if (pi.getPeers().get(0).getPeers().size()>1)
+							connectPeersOneToOne(pi);
+				}
+			}
+		}
 	}
-	
+
 	/**
 	 * determine final peers of an end port
 	 * @param pi - a end port
@@ -752,6 +776,90 @@ public class GeneratorModelBuilder {
 				peers.add(end);
 		}
 		return peers;
+	}
+	
+	private void connectPeersOneToOne(PortInstance pi) {
+		HashSet<InterfaceItemInstance> thisSide = new HashSet<InterfaceItemInstance>(pi.getPeers());
+		HashSet<InterfaceItemInstance> thatSide = new HashSet<InterfaceItemInstance>(pi.getPeers().get(0).getPeers());
+		
+		// consistency checks
+		if (!Collections.disjoint(thisSide, thatSide)) {
+			assert(false): "sets expected to be disjoint";
+			return;
+		}
+		for (InterfaceItemInstance pi1 : thisSide) {
+			if (!isSameCollection(thatSide, pi1.getPeers())) {
+				assert(false): "expected reciprocal peer lists";
+			}
+		}
+		for (InterfaceItemInstance pi2 : thatSide) {
+			if (!isSameCollection(thisSide, pi2.getPeers())) {
+				assert(false): "expected reciprocal peer lists";
+			}
+		}
+		
+		// connect one to one (with multiplicity)
+		boolean thisGreaterThat = totalSize(thisSide)>totalSize(thatSide);
+		Iterator<InterfaceItemInstance> lit = thisGreaterThat? thisSide.iterator() : thatSide.iterator();
+		Iterator<InterfaceItemInstance> sit = thisGreaterThat? thatSide.iterator() : thisSide.iterator();
+		while (sit.hasNext() && lit.hasNext()) {
+			InterfaceItemInstance first = lit.next();
+			InterfaceItemInstance second = sit.next();
+			first.getPeers().clear();
+			first.getPeers().add(second);
+			second.getPeers().clear();
+			second.getPeers().add(first);
+		}
+		
+		// report unconnected ports
+		while (lit.hasNext()) {
+			InterfaceItemInstance item = lit.next();
+			reportPortInstanceError(item, "port '"+item.getPath()+"'could not be connected");
+		}
+	}
+
+	private void reportPortInstanceError(InterfaceItemInstance item, String msg) {
+		if (item.eContainer() instanceof ActorInstance) {
+			ActorClass ac = ((ActorInstance)item.eContainer()).getActorClass();
+			Port port = ((PortInstance)item).getPort();
+			EStructuralFeature feat = ac.getIfPorts().contains(port)?
+					RoomPackage.Literals.ACTOR_CLASS__INT_PORTS: RoomPackage.Literals.ACTOR_CLASS__IF_PORTS;
+			int idx = ac.getIfPorts().indexOf(port);
+			if (idx<0)
+				ac.getIntPorts().indexOf(port);
+			diagnostician.warning(msg, ac, feat, idx);
+		}
+		else {
+			assert(false): "SubSystems can only have relay ports";
+		}
+	}
+	
+	private int totalSize(Collection<InterfaceItemInstance> coll) {
+		int size = 0;
+		for (InterfaceItemInstance ii : coll) {
+			if (ii instanceof PortInstance) {
+				int multiplicity = ((PortInstance) ii).getPort().getMultiplicity();
+				if (multiplicity!=1)
+					reportPortInstanceError(ii, "port '"+ii.getPath()+"' must have multiplicity 1");
+				size += multiplicity;
+			}
+			else {
+				assert(false): "should be called with PortInstances onl";
+			}
+		}
+		return size;
+	}
+
+	private boolean isSameCollection(Collection<InterfaceItemInstance> coll1, Collection<InterfaceItemInstance> coll2) {
+		for (InterfaceItemInstance ii : coll1) {
+			if (!coll2.contains(ii))
+				return false;
+		}
+		for (InterfaceItemInstance ii : coll2) {
+			if (!coll1.contains(ii))
+				return false;
+		}
+		return true;
 	}
 
 	/**
