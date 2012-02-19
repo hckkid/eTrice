@@ -95,3 +95,9 @@ void etMessageService_execute(etMessageService* self){
 	ET_MSC_LOGGER_SYNC_EXIT
 }
 
+etInt16 etMessageService_getMessagePoolLowWaterMark(etMessageService* self){
+	ET_MSC_LOGGER_SYNC_ENTRY("etMessageService", "getMessagePoolLowWaterMark")
+	etInt16 lowWaterMark = self->messageBuffer.maxBlocks - etMessageQueue_getHighWaterMark(&self->messageQueue);
+	ET_MSC_LOGGER_SYNC_EXIT
+	return lowWaterMark;
+}

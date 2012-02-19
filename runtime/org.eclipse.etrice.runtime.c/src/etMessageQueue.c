@@ -92,7 +92,7 @@ etBool etMessageQueue_isNotEmpty(etMessageQueue* self){
 	return self->last != NULL;
 }
 
-etInt16 etMessageQueue_getHightWaterMark(etMessageQueue* self) {
+etInt16 etMessageQueue_getHighWaterMark(etMessageQueue* self) {
 	ET_MSC_LOGGER_SYNC_ENTRY("etMessageQueue", "getHightWaterMark")
 	ET_MSC_LOGGER_SYNC_EXIT
 	return self->highWaterMark;

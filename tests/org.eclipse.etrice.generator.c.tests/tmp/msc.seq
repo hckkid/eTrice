@@ -12179,4 +12179,130 @@ etMessageService ==> etMessageQueue isNotEmpty
 etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 RunAllTestcases <== etMessageService
+RunAllTestcases ==> etMessageService init
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
+etMessageService ==> etMessageQueue init
+etMessageService <== etMessageQueue
+etMessageService ==> etMessageService initMessagePool
+etMessageService ==> etMessageQueue push
+etMessageService <== etMessageQueue
+etMessageService ==> etMessageQueue push
+etMessageService <== etMessageQueue
+etMessageService ==> etMessageQueue push
+etMessageService <== etMessageQueue
+etMessageService ==> etMessageQueue push
+etMessageService <== etMessageQueue
+etMessageService ==> etMessageQueue push
+etMessageService <== etMessageQueue
+etMessageService ==> etMessageQueue push
+etMessageService <== etMessageQueue
+etMessageService <== etMessageService
+RunAllTestcases <== etMessageService
+RunAllTestcases ==> etMessageService getMessagePoolLowWaterMark
+etMessageService ==> etMessageQueue getHightWaterMark
+etMessageService <== etMessageQueue
+RunAllTestcases <== etMessageService
+RunAllTestcases ==> etMessageService getMessageBuffer
+etMessageService ==> etMessageQueue pop
+etMessageService <== etMessageQueue
+RunAllTestcases <== etMessageService
+RunAllTestcases ==> etMessageService getMessageBuffer
+etMessageService ==> etMessageQueue pop
+etMessageService <== etMessageQueue
+RunAllTestcases <== etMessageService
+RunAllTestcases ==> etMessageService pushMessage
+etMessageService ==> etMessageQueue push
+etMessageService <== etMessageQueue
+RunAllTestcases <== etMessageService
+RunAllTestcases ==> etMessageService pushMessage
+etMessageService ==> etMessageQueue push
+etMessageService <== etMessageQueue
+RunAllTestcases <== etMessageService
+RunAllTestcases ==> etMessageService getMessagePoolLowWaterMark
+etMessageService ==> etMessageQueue getHightWaterMark
+etMessageService <== etMessageQueue
+RunAllTestcases <== etMessageService
+RunAllTestcases ==> etMessageService popMessage
+etMessageService ==> etMessageQueue pop
+etMessageService <== etMessageQueue
+RunAllTestcases <== etMessageService
+RunAllTestcases ==> etMessageService popMessage
+etMessageService ==> etMessageQueue pop
+etMessageService <== etMessageQueue
+RunAllTestcases <== etMessageService
+RunAllTestcases ==> etMessageService returnMessageBuffer
+etMessageService ==> etMessageQueue push
+etMessageService <== etMessageQueue
+RunAllTestcases <== etMessageService
+RunAllTestcases ==> etMessageService returnMessageBuffer
+etMessageService ==> etMessageQueue push
+etMessageService <== etMessageQueue
+RunAllTestcases <== etMessageService
+RunAllTestcases ==> etMessageService getMessagePoolLowWaterMark
+etMessageService ==> etMessageQueue getHightWaterMark
+etMessageService <== etMessageQueue
+RunAllTestcases <== etMessageService
+RunAllTestcases ==> etMessageService getMessageBuffer
+etMessageService ==> etMessageQueue pop
+etMessageService <== etMessageQueue
+RunAllTestcases <== etMessageService
+RunAllTestcases ==> etMessageService getMessageBuffer
+etMessageService ==> etMessageQueue pop
+etMessageService <== etMessageQueue
+RunAllTestcases <== etMessageService
+RunAllTestcases ==> etMessageService pushMessage
+etMessageService ==> etMessageQueue push
+etMessageService <== etMessageQueue
+RunAllTestcases <== etMessageService
+RunAllTestcases ==> etMessageService pushMessage
+etMessageService ==> etMessageQueue push
+etMessageService <== etMessageQueue
+RunAllTestcases <== etMessageService
+RunAllTestcases ==> etMessageService getMessagePoolLowWaterMark
+etMessageService ==> etMessageQueue getHightWaterMark
+etMessageService <== etMessageQueue
+RunAllTestcases <== etMessageService
+RunAllTestcases ==> etMessageService getMessageBuffer
+etMessageService ==> etMessageQueue pop
+etMessageService <== etMessageQueue
+RunAllTestcases <== etMessageService
+RunAllTestcases ==> etMessageService pushMessage
+etMessageService ==> etMessageQueue push
+etMessageService <== etMessageQueue
+RunAllTestcases <== etMessageService
+RunAllTestcases ==> etMessageService getMessageBuffer
+etMessageService ==> etMessageQueue pop
+etMessageService <== etMessageQueue
+RunAllTestcases <== etMessageService
+RunAllTestcases ==> etMessageService pushMessage
+etMessageService ==> etMessageQueue push
+etMessageService <== etMessageQueue
+RunAllTestcases <== etMessageService
+RunAllTestcases ==> etMessageService getMessageBuffer
+etMessageService ==> etMessageQueue pop
+etMessageService <== etMessageQueue
+RunAllTestcases <== etMessageService
+RunAllTestcases ==> etMessageService pushMessage
+etMessageService ==> etMessageQueue push
+etMessageService <== etMessageQueue
+RunAllTestcases <== etMessageService
+RunAllTestcases ==> etMessageService getMessageBuffer
+etMessageService ==> etMessageQueue pop
+etMessageService <== etMessageQueue
+RunAllTestcases <== etMessageService
+RunAllTestcases ==> etMessageService pushMessage
+etMessageService ==> etMessageQueue push
+etMessageService <== etMessageQueue
+RunAllTestcases <== etMessageService
+RunAllTestcases ==> etMessageService getMessagePoolLowWaterMark
+etMessageService ==> etMessageQueue getHightWaterMark
+etMessageService <== etMessageQueue
+RunAllTestcases <== etMessageService
+RunAllTestcases ==> etMessageService getMessageBuffer
+RunAllTestcases <== etMessageService
+RunAllTestcases ==> etMessageService getMessagePoolLowWaterMark
+etMessageService ==> etMessageQueue getHightWaterMark
+etMessageService <== etMessageQueue
+RunAllTestcases <== etMessageService
 RunAllTestcases <== RunAllTestcases

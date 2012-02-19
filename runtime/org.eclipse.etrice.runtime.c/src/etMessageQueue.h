@@ -36,7 +36,7 @@ etMessage* etMessageQueue_getLast(etMessageQueue* self);
 
 etBool etMessageQueue_isNotEmpty(etMessageQueue* self);
 
-etInt16 etMessageQueue_getHightWaterMark(etMessageQueue* self);
+etInt16 etMessageQueue_getHighWaterMark(etMessageQueue* self);
 
 etInt16 etMessageQueue_getSize(etMessageQueue* self);
 
