@@ -38,10 +38,13 @@ void etMessageService_initMessagePool(etMessageService* self);
 void etMessageService_pushMessage(etMessageService* self, etMessage* msg);
 etMessage* etMessageService_popMessage(etMessageService* self);
 
-
 etMessage* etMessageService_getMessageBuffer(etMessageService* self, etUInt16 size);
 void etMessageService_returnMessageBuffer(etMessageService* self, etMessage* buffer);
 
 void etMessageService_execute(etMessageService* self);
+
+/* functions for debug and service information  */
+etInt16 etMessageService_getMessagePoolLowWaterMark(etMessageService* self);
+
 
 #endif /* RMESSAGESERVICE_H_ */

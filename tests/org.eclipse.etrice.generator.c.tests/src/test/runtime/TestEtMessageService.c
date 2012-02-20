@@ -44,9 +44,6 @@ void DummyMessageDispatcher(const etMessage* msg){
 	}
 }
 
-
-
-
 void TestEtMessageService_init(void){
 
 	etMessageService msgService;
@@ -168,11 +165,77 @@ void TestEtMessageService_execute(void){
 	EXPECT_EQUAL_INT16("deliverAllMessages receivedEventIDCounter", 2, receivedEventIDCounter);
 }
 
+void TestEtMessageService_getMessagePoolLowWaterMark(void){
+	etMessageService msgService;
+	uint16 max = 6;
+	uint16 blockSize = 32;
+	uint8 msgBuffer[max*blockSize];
+
+	etMessageService_init(&msgService, msgBuffer, max, blockSize, DummyMessageDispatcher);
+
+	EXPECT_EQUAL_INT16("inital low water mark", max, etMessageService_getMessagePoolLowWaterMark(&msgService));
+
+	// get messages from pool
+	etMessage* msg1 = etMessageService_getMessageBuffer(&msgService, sizeof(etMessage));
+	etMessage* msg2 = etMessageService_getMessageBuffer(&msgService, sizeof(etMessage));
+
+	// define content
+	msg1->address = 11;
+	msg1->evtID = 111;
+	msg2->address = 22;
+	msg2->evtID = 222;
+
+	// push messages to queue
+	etMessageService_pushMessage(&msgService, msg2);
+	etMessageService_pushMessage(&msgService, msg1);
+
+	EXPECT_EQUAL_INT16("low water mark 1", max-2, etMessageService_getMessagePoolLowWaterMark(&msgService));
+
+	// pop messages from queue
+	etMessage* rcvMsg1 = etMessageService_popMessage(&msgService);
+	etMessage* rcvMsg2 = etMessageService_popMessage(&msgService);
+
+	etMessageService_returnMessageBuffer(&msgService, rcvMsg1);
+	etMessageService_returnMessageBuffer(&msgService, rcvMsg2);
+
+	EXPECT_EQUAL_INT16("low water mark 2", max-2, etMessageService_getMessagePoolLowWaterMark(&msgService));
+
+	msg1 = etMessageService_getMessageBuffer(&msgService, sizeof(etMessage));
+	msg2 = etMessageService_getMessageBuffer(&msgService, sizeof(etMessage));
+	etMessageService_pushMessage(&msgService, msg2);
+	etMessageService_pushMessage(&msgService, msg1);
+
+	/*still the same*/
+	EXPECT_EQUAL_INT16("low water mark 3", max-2, etMessageService_getMessagePoolLowWaterMark(&msgService));
+
+	msg1 = etMessageService_getMessageBuffer(&msgService, sizeof(etMessage));
+	etMessageService_pushMessage(&msgService, msg2);
+	msg1 = etMessageService_getMessageBuffer(&msgService, sizeof(etMessage));
+	etMessageService_pushMessage(&msgService, msg2);
+	msg1 = etMessageService_getMessageBuffer(&msgService, sizeof(etMessage));
+	etMessageService_pushMessage(&msgService, msg2);
+	msg1 = etMessageService_getMessageBuffer(&msgService, sizeof(etMessage));
+	etMessageService_pushMessage(&msgService, msg2);
+
+	/*  no message left */
+	EXPECT_EQUAL_INT16("low water mark 4", 0, etMessageService_getMessagePoolLowWaterMark(&msgService));
+
+	msg1 = etMessageService_getMessageBuffer(&msgService, sizeof(etMessage));
+	EXPECT_EQUAL_PTR("check message for NULL", NULL, msg1);
+
+	/*  still no message left */
+	EXPECT_EQUAL_INT16("low water mark 6", 0, etMessageService_getMessagePoolLowWaterMark(&msgService));
+
+
+}
+
+
 void TestEtMessageService_runSuite(void){
 	etUnit_openTestSuite("TestEtMessageService");
 	ADD_TESTCASE(TestEtMessageService_init);
 	ADD_TESTCASE(TestEtMessageService_GetPushPopReturn);
 	ADD_TESTCASE(TestEtMessageService_GetReturn);
 	ADD_TESTCASE(TestEtMessageService_execute);
+	ADD_TESTCASE(TestEtMessageService_getMessagePoolLowWaterMark)
 	etUnit_closeTestSuite();
 }
