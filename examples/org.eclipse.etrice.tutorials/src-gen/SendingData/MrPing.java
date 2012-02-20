@@ -22,12 +22,12 @@ public class MrPing extends ActorClassBase {
 	//--------------------- services
 
 	//--------------------- interface item IDs
-	protected static final int IFITEM_PingPongPort = 1;
-	
+	public static final int IFITEM_PingPongPort = 1;
+		
 	//--------------------- attributes
 	//--------------------- operations
-	public void printData (DemoData d){
-			System.out.printf("d.int32Val: %d\n",d.int32Val);
+	public void printData(DemoData d) {
+		System.out.printf("d.int32Val: %d\n",d.int32Val);
 		System.out.printf("d.float64Val: %f\n",d.float64Val);
 		System.out.printf("d.int8Array: ");
 		for(int i = 0; i<d.int8Array.length; i++) {
@@ -66,99 +66,64 @@ public class MrPing extends ActorClassBase {
 		destroyUser();
 	}	
 
-	//******************************************
-	// START of generated code for FSM
-	//******************************************
 	
-	// State IDs for FSM
-	protected static final int STATE_waitForPong = 2;
-	protected static final int STATE_waitForPongSimple = 3;
-		protected static final String stateStrings[] = {"<no state>","<top>","waitForPong",
-			"waitForPongSimple"
-			};
+	/* state IDs */
+	public static final int STATE_waitForPong = 2;
+	public static final int STATE_waitForPongSimple = 3;
+	
+	/* transition chains */
+	public static final int CHAIN_TRANS_INITIAL_TO__waitForPongSimple = 1;
+	public static final int CHAIN_TRANS_waitForPongSimple_TO_waitForPongSimple_BY_pongSimplePingPongPort_wait1 = 2;
+	public static final int CHAIN_TRANS_waitForPongSimple_TO_waitForPong_BY_pongSimplePingPongPort = 3;
+	public static final int CHAIN_TRANS_waitForPong_TO_waitForPong_BY_pongPingPongPort_wait2 = 4;
+	
+	/* triggers */
+	public static final int TRIG_PingPongPort__pong = IFITEM_PingPongPort + EVT_SHIFT*PingPongProtocol.OUT_pong;
+	public static final int TRIG_PingPongPort__pongSimple = IFITEM_PingPongPort + EVT_SHIFT*PingPongProtocol.OUT_pongSimple;
+	
+	// state names
+	protected static final String stateStrings[] = {"<no state>","<top>","waitForPong",
+	"waitForPongSimple"
+	};
 	
 	// history
-	// TODOHRR: history defined in ActorClassBase, init in constructor
-	//		history = new int[5];
-	//		for (int i = 0; i < history.length; i++) {
-	//			history[i] = NO_STATE;
-	//		}
 	protected int history[] = {NO_STATE,NO_STATE,NO_STATE,NO_STATE};
-	
-	// transition chains
-	protected static final int CHAIN_TRANS_INITIAL_TO__waitForPongSimple = 1;
-	protected static final int CHAIN_TRANS_waitForPongSimple_TO_waitForPongSimple_BY_pongSimplePingPongPort_wait1 = 2;
-	protected static final int CHAIN_TRANS_waitForPongSimple_TO_waitForPong_BY_pongSimplePingPongPort = 3;
-	protected static final int CHAIN_TRANS_waitForPong_TO_waitForPong_BY_pongPingPongPort_wait2 = 4;
-	
-	// triggers for FSM
-	protected static final int TRIG_PingPongPort__pong = IFITEM_PingPongPort + EVT_SHIFT*PingPongProtocol.OUT_pong;
-	protected static final int TRIG_PingPongPort__pongSimple = IFITEM_PingPongPort + EVT_SHIFT*PingPongProtocol.OUT_pongSimple;
-	
-	// receiveEvent contains the main implementation of the FSM
-	@Override
-	public void receiveEvent(InterfaceItemBase ifitem, int evt, Object generic_data) {
-		int trigger = ifitem.getLocalId() + EVT_SHIFT*evt;
-		int chain = NOT_CAUGHT;
-		int catching_state = NO_STATE;
-		boolean is_handler = false;
-		boolean skip_entry = false;
-		
-		if (!handleSystemEvent(ifitem, evt, generic_data)) {
-			switch (state) {
-				case STATE_waitForPong:
-					switch(trigger) {
-					case TRIG_PingPongPort__pong:
-						{
-							chain = CHAIN_TRANS_waitForPong_TO_waitForPong_BY_pongPingPongPort_wait2;
-							catching_state = STATE_TOP;
-						}
-					break;
-					}
-					break;
-				case STATE_waitForPongSimple:
-					switch(trigger) {
-					case TRIG_PingPongPort__pongSimple:
-						{ int data = (Integer) generic_data;
-						if (data < 10
-						)
-						{
-							chain = CHAIN_TRANS_waitForPongSimple_TO_waitForPongSimple_BY_pongSimplePingPongPort_wait1;
-							catching_state = STATE_TOP;
-						} else 
-						{
-							chain = CHAIN_TRANS_waitForPongSimple_TO_waitForPong_BY_pongSimplePingPongPort;
-							catching_state = STATE_TOP;
-						}
-						}
-					break;
-					}
-					break;
-			}
-		}
-		if (chain != NOT_CAUGHT) {
-			exitTo(state, catching_state, is_handler);
-			int next = executeTransitionChain(chain, ifitem, generic_data);
-			next = enterHistory(next, is_handler, skip_entry);
-			setState(next);
-		}
-	}
 	
 	private void setState(int new_state) {
 		DebuggingService.getInstance().addActorState(this,stateStrings[new_state]);
 		if (stateStrings[new_state]!="Idle") {
-			// TODOTS: model switch for activation
 			System.out.println(getInstancePath() + " -> " + stateStrings[new_state]);
 		}	
 		this.state = new_state;
 	}
 	
-	@Override
-	public void executeInitTransition() {
-		int chain = CHAIN_TRANS_INITIAL_TO__waitForPongSimple;
-		int next = executeTransitionChain(chain, null, null);
-		next = enterHistory(next, false, false);
-		setState(next);
+	//*** Entry and Exit Codes
+	
+	//*** Action Codes
+	protected void action_TRANS_waitForPong_TO_waitForPong_BY_pongPingPongPort_wait2(InterfaceItemBase ifitem, DemoData data) {
+		printData(data);
+	}
+	protected void action_TRANS_waitForPongSimple_TO_waitForPongSimple_BY_pongSimplePingPongPort_wait1(InterfaceItemBase ifitem, int data) {
+		// keep in mind that MrPong increments
+		PingPongPort.pingSimple(data);
+		System.out.printf("data: %d\n",data);
+	}
+	protected void action_TRANS_waitForPongSimple_TO_waitForPong_BY_pongSimplePingPongPort(InterfaceItemBase ifitem, int data) {
+		System.out.printf("data: %d\n",data);
+		
+		DemoData d = new DemoData();
+		// send the default values
+		PingPongPort.ping(d);
+		d.int32Val=815;
+		for (int i = 0; i<d.int8Array.length;i++){
+			d.int8Array[i]=(byte)(i+100);
+			}
+		d.stringVal="some contents";
+		d.float64Val=3.141234;
+		PingPongPort.ping(d);
+	}
+	protected void action_TRANS_INITIAL_TO__waitForPongSimple() {
+		PingPongPort.pingSimple(0);
 	}
 	
 	/**
@@ -172,16 +137,17 @@ public class MrPing extends ActorClassBase {
 		while (current!=to) {
 			switch (current) {
 				case STATE_waitForPong:
-					history[STATE_TOP] = STATE_waitForPong;
+					this.history[STATE_TOP] = STATE_waitForPong;
 					current = STATE_TOP;
 					break;
 				case STATE_waitForPongSimple:
-					history[STATE_TOP] = STATE_waitForPongSimple;
+					this.history[STATE_TOP] = STATE_waitForPongSimple;
 					current = STATE_TOP;
 					break;
 			}
 		}
 	}
+	
 	/**
 	 * calls action, entry and exit codes along a transition chain. The generic data are cast to typed data
 	 * matching the trigger of this chain. The ID of the final state is returned
@@ -217,6 +183,7 @@ public class MrPing extends ActorClassBase {
 		}
 		return NO_STATE;
 	}
+	
 	/**
 	 * calls entry codes while entering a state's history. The ID of the final leaf state is returned
 	 * @param state - the state which is entered
@@ -233,7 +200,7 @@ public class MrPing extends ActorClassBase {
 					// in leaf state: return state id
 					return STATE_waitForPongSimple;
 				case STATE_TOP:
-					state = history[STATE_TOP];
+					state = this.history[STATE_TOP];
 					break;
 			}
 			skip_entry = false;
@@ -241,33 +208,59 @@ public class MrPing extends ActorClassBase {
 		//return NO_STATE; // required by CDT but detected as unreachable by JDT because of while (true)
 	}
 	
-	//*** Entry and Exit Codes
+	public void executeInitTransition() {
+		int chain = CHAIN_TRANS_INITIAL_TO__waitForPongSimple;
+		int next = executeTransitionChain(chain, null, null);
+		next = enterHistory(next, false, false);
+		setState(next);
+	}
 	
-	//*** Action Codes
-	protected void action_TRANS_waitForPong_TO_waitForPong_BY_pongPingPongPort_wait2(InterfaceItemBase ifitem, DemoData data) {
-		printData(data);
-	}
-	protected void action_TRANS_waitForPongSimple_TO_waitForPongSimple_BY_pongSimplePingPongPort_wait1(InterfaceItemBase ifitem, int data) {
-		// keep in mind that MrPong increments
-		PingPongPort.pingSimple(data);
-		System.out.printf("data: %d\n",data);
-	}
-	protected void action_TRANS_waitForPongSimple_TO_waitForPong_BY_pongSimplePingPongPort(InterfaceItemBase ifitem, int data) {
-		System.out.printf("data: %d\n",data);
+	/* receiveEvent contains the main implementation of the FSM */
+	public void receiveEvent(InterfaceItemBase ifitem, int evt, Object generic_data) {
+		int trigger = ifitem.getLocalId() + EVT_SHIFT*evt;
+		int chain = NOT_CAUGHT;
+		int catching_state = NO_STATE;
+		boolean is_handler = false;
+		boolean skip_entry = false;
 		
-		DemoData d = new DemoData();
-		// send the default values
-		PingPongPort.ping(d);
-		d.int32Val=815;
-		for (int i = 0; i<d.int8Array.length;i++){
-			d.int8Array[i]=(byte)(i+100);
+		if (!handleSystemEvent(ifitem, evt, generic_data)) {
+			switch (this.state) {
+				case STATE_waitForPong:
+					switch(trigger) {
+					case TRIG_PingPongPort__pong:
+						{
+							chain = CHAIN_TRANS_waitForPong_TO_waitForPong_BY_pongPingPongPort_wait2;
+							catching_state = STATE_TOP;
+						}
+					break;
+					}
+					break;
+				case STATE_waitForPongSimple:
+					switch(trigger) {
+					case TRIG_PingPongPort__pongSimple:
+						{ int data = (Integer) generic_data;
+						if (data < 10
+						)
+						{
+							chain = CHAIN_TRANS_waitForPongSimple_TO_waitForPongSimple_BY_pongSimplePingPongPort_wait1;
+							catching_state = STATE_TOP;
+						} else 
+						{
+							chain = CHAIN_TRANS_waitForPongSimple_TO_waitForPong_BY_pongSimplePingPongPort;
+							catching_state = STATE_TOP;
+						}
+						}
+					break;
+					}
+					break;
 			}
-		d.stringVal="some contents";
-		d.float64Val=3.141234;
-		PingPongPort.ping(d);
-	}
-	protected void action_TRANS_INITIAL_TO__waitForPongSimple() {
-		PingPongPort.pingSimple(0);
+		}
+		if (chain != NOT_CAUGHT) {
+			exitTo(this.state, catching_state, is_handler);
+			int next = executeTransitionChain(chain, ifitem, generic_data);
+			next = enterHistory(next, is_handler, skip_entry);
+			setState(next);
+		}
 	}
 		 
 	//******************************************

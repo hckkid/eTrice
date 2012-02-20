@@ -20,7 +20,7 @@ public class PedLightsTop extends ActorClassBase {
 	//--------------------- services
 
 	//--------------------- interface item IDs
-	
+		
 	//--------------------- attributes
 	//--------------------- operations
 

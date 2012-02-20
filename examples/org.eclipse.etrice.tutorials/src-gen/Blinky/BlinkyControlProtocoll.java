@@ -11,21 +11,16 @@ import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
 
 public class BlinkyControlProtocoll {
 	// message IDs
-	// TODO: separate class for message IDs: class MSG{public static volatile int MSG_MIN = 0; ...} -> better structure
-	// error if msgID <= MSG_MIN
-	public static final int MSG_MIN = 0;   
-	//IDs for outgoing messages
-	//IDs for incoming messages
+	public static final int MSG_MIN = 0;
 	public static final int IN_start = 1;
 	public static final int IN_stop = 2;
-	//error if msgID >= MSG_MAX
-	public static final int MSG_MAX = 3;  
+	public static final int MSG_MAX = 3;
 
 
 	private static String messageStrings[] = {"MIN",  "start","stop","MAX"};
 
 	public String getMessageString(int msg_id) {
-		if (msg_id<0 || msg_id>MSG_MAX+1){
+		if (msg_id<MSG_MIN || msg_id>MSG_MAX+1){
 			// id out of range
 			return "Message ID out of range";
 		}
@@ -56,7 +51,6 @@ public class BlinkyControlProtocoll {
 					System.out.println("unknown");
 				else {
 					if (messageStrings[msg.getEvtId()] != "timerTick"){
-						// TODOTS: model switch for activation
 						DebuggingService.getInstance().addMessageAsyncIn(getPeerAddress(), getAddress(), messageStrings[msg.getEvtId()]);
 					}
 						if (msg instanceof EventWithDataMessage)
@@ -100,14 +94,6 @@ public class BlinkyControlProtocoll {
 		// outgoing messages
 	}
 	
-	// interface for port class
-	public interface IBlinkyControlProtocollPort{
-		// incoming messages
-		 public void start ()
-		;
-	 public void stop ()
-		;
-	}
 	
 	// port class
 	static public class BlinkyControlProtocollConjPort extends PortBase {
@@ -130,7 +116,6 @@ public class BlinkyControlProtocoll {
 					System.out.println("unknown");
 				else {
 					if (messageStrings[msg.getEvtId()] != "timerTick"){
-						// TODOTS: model switch for activation
 						DebuggingService.getInstance().addMessageAsyncIn(getPeerAddress(), getAddress(), messageStrings[msg.getEvtId()]);
 					}
 						if (msg instanceof EventWithDataMessage)
@@ -142,24 +127,20 @@ public class BlinkyControlProtocoll {
 	
 		
 		// sent messages
-		public void start ()
-		{
+		public void start() {
 			if (messageStrings[ IN_start] != "timerTick"){
-				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_start]);
 			}
 			if (getPeerAddress()!=null)
-			getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), IN_start));
-			}
-		public void stop ()
-		{
+				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), IN_start));
+				}
+		public void stop() {
 			if (messageStrings[ IN_stop] != "timerTick"){
-				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_stop]);
 			}
 			if (getPeerAddress()!=null)
-			getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), IN_stop));
-			}
+				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), IN_stop));
+				}
 	}
 	
 	// replicated port class
@@ -190,24 +171,16 @@ public class BlinkyControlProtocoll {
 		}
 		
 		// incoming messages
-		public void start ()
-		{
+		public void start(){
 			for (int i=0; i<replication; ++i) {
-				ports.get(i).start()
-				;
+				ports.get(i).start();
 			}
 		}
-		public void stop ()
-		{
+		public void stop(){
 			for (int i=0; i<replication; ++i) {
-				ports.get(i).stop()
-				;
+				ports.get(i).stop();
 			}
 		}
 	}
 	
-	// interface for port class
-	public interface IBlinkyControlProtocollConjPort{
-		// outgoing messages
-		}
 }

@@ -20,7 +20,7 @@ public class HelloWorldTop extends ActorClassBase {
 	//--------------------- services
 
 	//--------------------- interface item IDs
-	
+		
 	//--------------------- attributes
 	//--------------------- operations
 
@@ -54,66 +54,35 @@ public class HelloWorldTop extends ActorClassBase {
 		destroyUser();
 	}	
 
-	//******************************************
-	// START of generated code for FSM
-	//******************************************
 	
-	// State IDs for FSM
-	protected static final int STATE_state0 = 2;
-		protected static final String stateStrings[] = {"<no state>","<top>","state0"
-			};
+	/* state IDs */
+	public static final int STATE_state0 = 2;
+	
+	/* transition chains */
+	public static final int CHAIN_TRANS_INITIAL_TO__state0 = 1;
+	
+	/* triggers */
+	
+	// state names
+	protected static final String stateStrings[] = {"<no state>","<top>","state0"
+	};
 	
 	// history
-	// TODOHRR: history defined in ActorClassBase, init in constructor
-	//		history = new int[5];
-	//		for (int i = 0; i < history.length; i++) {
-	//			history[i] = NO_STATE;
-	//		}
 	protected int history[] = {NO_STATE,NO_STATE,NO_STATE};
-	
-	// transition chains
-	protected static final int CHAIN_TRANS_INITIAL_TO__state0 = 1;
-	
-	// triggers for FSM
-	
-	// receiveEvent contains the main implementation of the FSM
-	@Override
-	public void receiveEvent(InterfaceItemBase ifitem, int evt, Object generic_data) {
-		int trigger = ifitem.getLocalId() + EVT_SHIFT*evt;
-		int chain = NOT_CAUGHT;
-		int catching_state = NO_STATE;
-		boolean is_handler = false;
-		boolean skip_entry = false;
-		
-		if (!handleSystemEvent(ifitem, evt, generic_data)) {
-			switch (state) {
-				case STATE_state0:
-					break;
-			}
-		}
-		if (chain != NOT_CAUGHT) {
-			exitTo(state, catching_state, is_handler);
-			int next = executeTransitionChain(chain, ifitem, generic_data);
-			next = enterHistory(next, is_handler, skip_entry);
-			setState(next);
-		}
-	}
 	
 	private void setState(int new_state) {
 		DebuggingService.getInstance().addActorState(this,stateStrings[new_state]);
 		if (stateStrings[new_state]!="Idle") {
-			// TODOTS: model switch for activation
 			System.out.println(getInstancePath() + " -> " + stateStrings[new_state]);
 		}	
 		this.state = new_state;
 	}
 	
-	@Override
-	public void executeInitTransition() {
-		int chain = CHAIN_TRANS_INITIAL_TO__state0;
-		int next = executeTransitionChain(chain, null, null);
-		next = enterHistory(next, false, false);
-		setState(next);
+	//*** Entry and Exit Codes
+	
+	//*** Action Codes
+	protected void action_TRANS_INITIAL_TO__state0() {
+		System.out.println("HelloWorld !");
 	}
 	
 	/**
@@ -127,12 +96,13 @@ public class HelloWorldTop extends ActorClassBase {
 		while (current!=to) {
 			switch (current) {
 				case STATE_state0:
-					history[STATE_TOP] = STATE_state0;
+					this.history[STATE_TOP] = STATE_state0;
 					current = STATE_TOP;
 					break;
 			}
 		}
 	}
+	
 	/**
 	 * calls action, entry and exit codes along a transition chain. The generic data are cast to typed data
 	 * matching the trigger of this chain. The ID of the final state is returned
@@ -150,6 +120,7 @@ public class HelloWorldTop extends ActorClassBase {
 		}
 		return NO_STATE;
 	}
+	
 	/**
 	 * calls entry codes while entering a state's history. The ID of the final leaf state is returned
 	 * @param state - the state which is entered
@@ -163,7 +134,7 @@ public class HelloWorldTop extends ActorClassBase {
 					// in leaf state: return state id
 					return STATE_state0;
 				case STATE_TOP:
-					state = history[STATE_TOP];
+					state = this.history[STATE_TOP];
 					break;
 			}
 			skip_entry = false;
@@ -171,11 +142,33 @@ public class HelloWorldTop extends ActorClassBase {
 		//return NO_STATE; // required by CDT but detected as unreachable by JDT because of while (true)
 	}
 	
-	//*** Entry and Exit Codes
+	public void executeInitTransition() {
+		int chain = CHAIN_TRANS_INITIAL_TO__state0;
+		int next = executeTransitionChain(chain, null, null);
+		next = enterHistory(next, false, false);
+		setState(next);
+	}
 	
-	//*** Action Codes
-	protected void action_TRANS_INITIAL_TO__state0() {
-		System.out.println("HelloWorld !");
+	/* receiveEvent contains the main implementation of the FSM */
+	public void receiveEvent(InterfaceItemBase ifitem, int evt, Object generic_data) {
+		int trigger = ifitem.getLocalId() + EVT_SHIFT*evt;
+		int chain = NOT_CAUGHT;
+		int catching_state = NO_STATE;
+		boolean is_handler = false;
+		boolean skip_entry = false;
+		
+		if (!handleSystemEvent(ifitem, evt, generic_data)) {
+			switch (this.state) {
+				case STATE_state0:
+					break;
+			}
+		}
+		if (chain != NOT_CAUGHT) {
+			exitTo(this.state, catching_state, is_handler);
+			int next = executeTransitionChain(chain, ifitem, generic_data);
+			next = enterHistory(next, is_handler, skip_entry);
+			setState(next);
+		}
 	}
 		 
 	//******************************************

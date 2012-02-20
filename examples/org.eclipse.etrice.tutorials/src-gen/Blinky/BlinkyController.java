@@ -25,9 +25,9 @@ public class BlinkyController extends ActorClassBase {
 	//--------------------- services
 
 	//--------------------- interface item IDs
-	protected static final int IFITEM_ControlPort = 1;
-	protected static final int IFITEM_timer = 2;
-	
+	public static final int IFITEM_ControlPort = 1;
+	public static final int IFITEM_timer = 2;
+		
 	//--------------------- attributes
 	//--------------------- operations
 
@@ -63,89 +63,49 @@ public class BlinkyController extends ActorClassBase {
 		destroyUser();
 	}	
 
-	//******************************************
-	// START of generated code for FSM
-	//******************************************
 	
-	// State IDs for FSM
-	protected static final int STATE_on = 2;
-	protected static final int STATE_off = 3;
-		protected static final String stateStrings[] = {"<no state>","<top>","on",
-			"off"
-			};
+	/* state IDs */
+	public static final int STATE_on = 2;
+	public static final int STATE_off = 3;
+	
+	/* transition chains */
+	public static final int CHAIN_TRANS_INITIAL_TO__on = 1;
+	public static final int CHAIN_TRANS_off_TO_on_BY_timeoutTicktimer = 2;
+	public static final int CHAIN_TRANS_on_TO_off_BY_timeoutTicktimer = 3;
+	
+	/* triggers */
+	public static final int TRIG_timer__timeoutTick = IFITEM_timer + EVT_SHIFT*PTimeout.OUT_timeoutTick;
+	
+	// state names
+	protected static final String stateStrings[] = {"<no state>","<top>","on",
+	"off"
+	};
 	
 	// history
-	// TODOHRR: history defined in ActorClassBase, init in constructor
-	//		history = new int[5];
-	//		for (int i = 0; i < history.length; i++) {
-	//			history[i] = NO_STATE;
-	//		}
 	protected int history[] = {NO_STATE,NO_STATE,NO_STATE,NO_STATE};
-	
-	// transition chains
-	protected static final int CHAIN_TRANS_INITIAL_TO__on = 1;
-	protected static final int CHAIN_TRANS_off_TO_on_BY_timeoutTicktimer = 2;
-	protected static final int CHAIN_TRANS_on_TO_off_BY_timeoutTicktimer = 3;
-	
-	// triggers for FSM
-	protected static final int TRIG_timer__timeoutTick = IFITEM_timer + EVT_SHIFT*PTimeout.OUT_timeoutTick;
-	
-	// receiveEvent contains the main implementation of the FSM
-	@Override
-	public void receiveEvent(InterfaceItemBase ifitem, int evt, Object generic_data) {
-		int trigger = ifitem.getLocalId() + EVT_SHIFT*evt;
-		int chain = NOT_CAUGHT;
-		int catching_state = NO_STATE;
-		boolean is_handler = false;
-		boolean skip_entry = false;
-		
-		if (!handleSystemEvent(ifitem, evt, generic_data)) {
-			switch (state) {
-				case STATE_on:
-					switch(trigger) {
-					case TRIG_timer__timeoutTick:
-						{
-							chain = CHAIN_TRANS_on_TO_off_BY_timeoutTicktimer;
-							catching_state = STATE_TOP;
-						}
-					break;
-					}
-					break;
-				case STATE_off:
-					switch(trigger) {
-					case TRIG_timer__timeoutTick:
-						{
-							chain = CHAIN_TRANS_off_TO_on_BY_timeoutTicktimer;
-							catching_state = STATE_TOP;
-						}
-					break;
-					}
-					break;
-			}
-		}
-		if (chain != NOT_CAUGHT) {
-			exitTo(state, catching_state, is_handler);
-			int next = executeTransitionChain(chain, ifitem, generic_data);
-			next = enterHistory(next, is_handler, skip_entry);
-			setState(next);
-		}
-	}
 	
 	private void setState(int new_state) {
 		DebuggingService.getInstance().addActorState(this,stateStrings[new_state]);
 		if (stateStrings[new_state]!="Idle") {
-			// TODOTS: model switch for activation
 			System.out.println(getInstancePath() + " -> " + stateStrings[new_state]);
 		}	
 		this.state = new_state;
 	}
 	
-	@Override
-	public void executeInitTransition() {
-		int chain = CHAIN_TRANS_INITIAL_TO__on;
-		int next = executeTransitionChain(chain, null, null);
-		next = enterHistory(next, false, false);
-		setState(next);
+	//*** Entry and Exit Codes
+	
+	//*** Action Codes
+	protected void action_TRANS_INITIAL_TO__on() {
+		timer.Start(5000);
+		ControlPort.start();
+	}
+	protected void action_TRANS_on_TO_off_BY_timeoutTicktimer(InterfaceItemBase ifitem) {
+		ControlPort.stop();
+		timer.Start(5000);
+	}
+	protected void action_TRANS_off_TO_on_BY_timeoutTicktimer(InterfaceItemBase ifitem) {
+		ControlPort.start();
+		timer.Start(5000);
 	}
 	
 	/**
@@ -159,16 +119,17 @@ public class BlinkyController extends ActorClassBase {
 		while (current!=to) {
 			switch (current) {
 				case STATE_on:
-					history[STATE_TOP] = STATE_on;
+					this.history[STATE_TOP] = STATE_on;
 					current = STATE_TOP;
 					break;
 				case STATE_off:
-					history[STATE_TOP] = STATE_off;
+					this.history[STATE_TOP] = STATE_off;
 					current = STATE_TOP;
 					break;
 			}
 		}
 	}
+	
 	/**
 	 * calls action, entry and exit codes along a transition chain. The generic data are cast to typed data
 	 * matching the trigger of this chain. The ID of the final state is returned
@@ -196,6 +157,7 @@ public class BlinkyController extends ActorClassBase {
 		}
 		return NO_STATE;
 	}
+	
 	/**
 	 * calls entry codes while entering a state's history. The ID of the final leaf state is returned
 	 * @param state - the state which is entered
@@ -212,7 +174,7 @@ public class BlinkyController extends ActorClassBase {
 					// in leaf state: return state id
 					return STATE_off;
 				case STATE_TOP:
-					state = history[STATE_TOP];
+					state = this.history[STATE_TOP];
 					break;
 			}
 			skip_entry = false;
@@ -220,20 +182,51 @@ public class BlinkyController extends ActorClassBase {
 		//return NO_STATE; // required by CDT but detected as unreachable by JDT because of while (true)
 	}
 	
-	//*** Entry and Exit Codes
+	public void executeInitTransition() {
+		int chain = CHAIN_TRANS_INITIAL_TO__on;
+		int next = executeTransitionChain(chain, null, null);
+		next = enterHistory(next, false, false);
+		setState(next);
+	}
 	
-	//*** Action Codes
-	protected void action_TRANS_INITIAL_TO__on() {
-		timer.Start(5000);
-		ControlPort.start();
-	}
-	protected void action_TRANS_on_TO_off_BY_timeoutTicktimer(InterfaceItemBase ifitem) {
-		ControlPort.stop();
-		timer.Start(5000);
-	}
-	protected void action_TRANS_off_TO_on_BY_timeoutTicktimer(InterfaceItemBase ifitem) {
-		ControlPort.start();
-		timer.Start(5000);
+	/* receiveEvent contains the main implementation of the FSM */
+	public void receiveEvent(InterfaceItemBase ifitem, int evt, Object generic_data) {
+		int trigger = ifitem.getLocalId() + EVT_SHIFT*evt;
+		int chain = NOT_CAUGHT;
+		int catching_state = NO_STATE;
+		boolean is_handler = false;
+		boolean skip_entry = false;
+		
+		if (!handleSystemEvent(ifitem, evt, generic_data)) {
+			switch (this.state) {
+				case STATE_on:
+					switch(trigger) {
+					case TRIG_timer__timeoutTick:
+						{
+							chain = CHAIN_TRANS_on_TO_off_BY_timeoutTicktimer;
+							catching_state = STATE_TOP;
+						}
+					break;
+					}
+					break;
+				case STATE_off:
+					switch(trigger) {
+					case TRIG_timer__timeoutTick:
+						{
+							chain = CHAIN_TRANS_off_TO_on_BY_timeoutTicktimer;
+							catching_state = STATE_TOP;
+						}
+					break;
+					}
+					break;
+			}
+		}
+		if (chain != NOT_CAUGHT) {
+			exitTo(this.state, catching_state, is_handler);
+			int next = executeTransitionChain(chain, ifitem, generic_data);
+			next = enterHistory(next, is_handler, skip_entry);
+			setState(next);
+		}
 	}
 		 
 	//******************************************
