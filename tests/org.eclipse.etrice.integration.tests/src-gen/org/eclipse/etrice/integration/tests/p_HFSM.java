@@ -84,7 +84,6 @@ public class p_HFSM {
 					System.out.println("unknown");
 				else {
 					if (messageStrings[msg.getEvtId()] != "timerTick"){
-						// TODOTS: model switch for activation
 						DebuggingService.getInstance().addMessageAsyncIn(getPeerAddress(), getAddress(), messageStrings[msg.getEvtId()]);
 					}
 						if (msg instanceof EventWithDataMessage)
@@ -98,7 +97,6 @@ public class p_HFSM {
 		// sent messages
 		public void init_action() {
 			if (messageStrings[ OUT_init_action] != "timerTick"){
-				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_init_action]);
 			}
 			if (getPeerAddress()!=null)
@@ -106,7 +104,6 @@ public class p_HFSM {
 				}
 		public void s1_entry() {
 			if (messageStrings[ OUT_s1_entry] != "timerTick"){
-				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_s1_entry]);
 			}
 			if (getPeerAddress()!=null)
@@ -114,7 +111,6 @@ public class p_HFSM {
 				}
 		public void s1_exit() {
 			if (messageStrings[ OUT_s1_exit] != "timerTick"){
-				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_s1_exit]);
 			}
 			if (getPeerAddress()!=null)
@@ -122,7 +118,6 @@ public class p_HFSM {
 				}
 		public void s2_entry() {
 			if (messageStrings[ OUT_s2_entry] != "timerTick"){
-				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_s2_entry]);
 			}
 			if (getPeerAddress()!=null)
@@ -130,7 +125,6 @@ public class p_HFSM {
 				}
 		public void s2_exit() {
 			if (messageStrings[ OUT_s2_exit] != "timerTick"){
-				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_s2_exit]);
 			}
 			if (getPeerAddress()!=null)
@@ -138,7 +132,6 @@ public class p_HFSM {
 				}
 		public void s3_entry() {
 			if (messageStrings[ OUT_s3_entry] != "timerTick"){
-				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_s3_entry]);
 			}
 			if (getPeerAddress()!=null)
@@ -146,7 +139,6 @@ public class p_HFSM {
 				}
 		public void s3_exit() {
 			if (messageStrings[ OUT_s3_exit] != "timerTick"){
-				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_s3_exit]);
 			}
 			if (getPeerAddress()!=null)
@@ -154,7 +146,6 @@ public class p_HFSM {
 				}
 		public void s4_entry() {
 			if (messageStrings[ OUT_s4_entry] != "timerTick"){
-				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_s4_entry]);
 			}
 			if (getPeerAddress()!=null)
@@ -162,7 +153,6 @@ public class p_HFSM {
 				}
 		public void s4_exit() {
 			if (messageStrings[ OUT_s4_exit] != "timerTick"){
-				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_s4_exit]);
 			}
 			if (getPeerAddress()!=null)
@@ -170,7 +160,6 @@ public class p_HFSM {
 				}
 		public void s2s1_entry() {
 			if (messageStrings[ OUT_s2s1_entry] != "timerTick"){
-				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_s2s1_entry]);
 			}
 			if (getPeerAddress()!=null)
@@ -178,7 +167,6 @@ public class p_HFSM {
 				}
 		public void s2s1_exit() {
 			if (messageStrings[ OUT_s2s1_exit] != "timerTick"){
-				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_s2s1_exit]);
 			}
 			if (getPeerAddress()!=null)
@@ -186,7 +174,6 @@ public class p_HFSM {
 				}
 		public void s2s2_entry() {
 			if (messageStrings[ OUT_s2s2_entry] != "timerTick"){
-				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_s2s2_entry]);
 			}
 			if (getPeerAddress()!=null)
@@ -194,7 +181,6 @@ public class p_HFSM {
 				}
 		public void s2s2_exit() {
 			if (messageStrings[ OUT_s2s2_exit] != "timerTick"){
-				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_s2s2_exit]);
 			}
 			if (getPeerAddress()!=null)
@@ -202,7 +188,6 @@ public class p_HFSM {
 				}
 		public void s1_m1_s2_action() {
 			if (messageStrings[ OUT_s1_m1_s2_action] != "timerTick"){
-				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_s1_m1_s2_action]);
 			}
 			if (getPeerAddress()!=null)
@@ -210,7 +195,6 @@ public class p_HFSM {
 				}
 		public void s2_m1_s2s1_action() {
 			if (messageStrings[ OUT_s2_m1_s2s1_action] != "timerTick"){
-				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_s2_m1_s2s1_action]);
 			}
 			if (getPeerAddress()!=null)
@@ -218,7 +202,6 @@ public class p_HFSM {
 				}
 		public void s2s1_m2_s2s2_action() {
 			if (messageStrings[ OUT_s2s1_m2_s2s2_action] != "timerTick"){
-				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_s2s1_m2_s2s2_action]);
 			}
 			if (getPeerAddress()!=null)
@@ -226,7 +209,6 @@ public class p_HFSM {
 				}
 		public void s2s2_m3_action() {
 			if (messageStrings[ OUT_s2s2_m3_action] != "timerTick"){
-				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_s2s2_m3_action]);
 			}
 			if (getPeerAddress()!=null)
@@ -234,7 +216,6 @@ public class p_HFSM {
 				}
 		public void s2_m4_s4_action() {
 			if (messageStrings[ OUT_s2_m4_s4_action] != "timerTick"){
-				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_s2_m4_s4_action]);
 			}
 			if (getPeerAddress()!=null)
@@ -242,7 +223,6 @@ public class p_HFSM {
 				}
 		public void s2_m5_s2_action() {
 			if (messageStrings[ OUT_s2_m5_s2_action] != "timerTick"){
-				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_s2_m5_s2_action]);
 			}
 			if (getPeerAddress()!=null)
@@ -250,7 +230,6 @@ public class p_HFSM {
 				}
 		public void s2_m6_s2_action() {
 			if (messageStrings[ OUT_s2_m6_s2_action] != "timerTick"){
-				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_s2_m6_s2_action]);
 			}
 			if (getPeerAddress()!=null)
@@ -258,7 +237,6 @@ public class p_HFSM {
 				}
 		public void s2__s3_action() {
 			if (messageStrings[ OUT_s2__s3_action] != "timerTick"){
-				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_s2__s3_action]);
 			}
 			if (getPeerAddress()!=null)
@@ -266,7 +244,6 @@ public class p_HFSM {
 				}
 		public void s2_m7_s2_action() {
 			if (messageStrings[ OUT_s2_m7_s2_action] != "timerTick"){
-				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_s2_m7_s2_action]);
 			}
 			if (getPeerAddress()!=null)
@@ -274,7 +251,6 @@ public class p_HFSM {
 				}
 		public void top_s8_top_action() {
 			if (messageStrings[ OUT_top_s8_top_action] != "timerTick"){
-				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_top_s8_top_action]);
 			}
 			if (getPeerAddress()!=null)
@@ -282,7 +258,6 @@ public class p_HFSM {
 				}
 		public void top_s9_top_action() {
 			if (messageStrings[ OUT_top_s9_top_action] != "timerTick"){
-				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_top_s9_top_action]);
 			}
 			if (getPeerAddress()!=null)
@@ -290,7 +265,6 @@ public class p_HFSM {
 				}
 		public void top_reset_s2_action() {
 			if (messageStrings[ OUT_top_reset_s2_action] != "timerTick"){
-				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_top_reset_s2_action]);
 			}
 			if (getPeerAddress()!=null)
@@ -475,7 +449,6 @@ public class p_HFSM {
 					System.out.println("unknown");
 				else {
 					if (messageStrings[msg.getEvtId()] != "timerTick"){
-						// TODOTS: model switch for activation
 						DebuggingService.getInstance().addMessageAsyncIn(getPeerAddress(), getAddress(), messageStrings[msg.getEvtId()]);
 					}
 						if (msg instanceof EventWithDataMessage)
@@ -489,7 +462,6 @@ public class p_HFSM {
 		// sent messages
 		public void m1() {
 			if (messageStrings[ IN_m1] != "timerTick"){
-				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_m1]);
 			}
 			if (getPeerAddress()!=null)
@@ -497,7 +469,6 @@ public class p_HFSM {
 				}
 		public void m2() {
 			if (messageStrings[ IN_m2] != "timerTick"){
-				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_m2]);
 			}
 			if (getPeerAddress()!=null)
@@ -505,7 +476,6 @@ public class p_HFSM {
 				}
 		public void m3() {
 			if (messageStrings[ IN_m3] != "timerTick"){
-				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_m3]);
 			}
 			if (getPeerAddress()!=null)
@@ -513,7 +483,6 @@ public class p_HFSM {
 				}
 		public void m4() {
 			if (messageStrings[ IN_m4] != "timerTick"){
-				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_m4]);
 			}
 			if (getPeerAddress()!=null)
@@ -521,7 +490,6 @@ public class p_HFSM {
 				}
 		public void m5() {
 			if (messageStrings[ IN_m5] != "timerTick"){
-				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_m5]);
 			}
 			if (getPeerAddress()!=null)
@@ -529,7 +497,6 @@ public class p_HFSM {
 				}
 		public void m6() {
 			if (messageStrings[ IN_m6] != "timerTick"){
-				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_m6]);
 			}
 			if (getPeerAddress()!=null)
@@ -537,7 +504,6 @@ public class p_HFSM {
 				}
 		public void reset() {
 			if (messageStrings[ IN_reset] != "timerTick"){
-				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_reset]);
 			}
 			if (getPeerAddress()!=null)
@@ -545,7 +511,6 @@ public class p_HFSM {
 				}
 		public void m7() {
 			if (messageStrings[ IN_m7] != "timerTick"){
-				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_m7]);
 			}
 			if (getPeerAddress()!=null)
@@ -553,7 +518,6 @@ public class p_HFSM {
 				}
 		public void m8() {
 			if (messageStrings[ IN_m8] != "timerTick"){
-				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_m8]);
 			}
 			if (getPeerAddress()!=null)
@@ -561,7 +525,6 @@ public class p_HFSM {
 				}
 		public void m9() {
 			if (messageStrings[ IN_m9] != "timerTick"){
-				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_m9]);
 			}
 			if (getPeerAddress()!=null)

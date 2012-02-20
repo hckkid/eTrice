@@ -54,7 +54,6 @@ public class TestProtocol {
 					System.out.println("unknown");
 				else {
 					if (messageStrings[msg.getEvtId()] != "timerTick"){
-						// TODOTS: model switch for activation
 						DebuggingService.getInstance().addMessageAsyncIn(getPeerAddress(), getAddress(), messageStrings[msg.getEvtId()]);
 					}
 						if (msg instanceof EventWithDataMessage)
@@ -120,7 +119,6 @@ public class TestProtocol {
 					System.out.println("unknown");
 				else {
 					if (messageStrings[msg.getEvtId()] != "timerTick"){
-						// TODOTS: model switch for activation
 						DebuggingService.getInstance().addMessageAsyncIn(getPeerAddress(), getAddress(), messageStrings[msg.getEvtId()]);
 					}
 						if (msg instanceof EventWithDataMessage)
@@ -134,7 +132,6 @@ public class TestProtocol {
 		// sent messages
 		public void msg1() {
 			if (messageStrings[ IN_msg1] != "timerTick"){
-				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_msg1]);
 			}
 			if (getPeerAddress()!=null)
@@ -142,7 +139,6 @@ public class TestProtocol {
 				}
 		public void msg2() {
 			if (messageStrings[ IN_msg2] != "timerTick"){
-				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_msg2]);
 			}
 			if (getPeerAddress()!=null)
@@ -150,7 +146,6 @@ public class TestProtocol {
 				}
 		public void msg3() {
 			if (messageStrings[ IN_msg3] != "timerTick"){
-				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_msg3]);
 			}
 			if (getPeerAddress()!=null)
@@ -158,7 +153,6 @@ public class TestProtocol {
 				}
 		public void msg4() {
 			if (messageStrings[ IN_msg4] != "timerTick"){
-				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_msg4]);
 			}
 			if (getPeerAddress()!=null)
@@ -166,7 +160,6 @@ public class TestProtocol {
 				}
 		public void msg5() {
 			if (messageStrings[ IN_msg5] != "timerTick"){
-				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_msg5]);
 			}
 			if (getPeerAddress()!=null)

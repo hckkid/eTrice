@@ -53,7 +53,6 @@ public class PingPongProtocol {
 					System.out.println("unknown");
 				else {
 					if (messageStrings[msg.getEvtId()] != "timerTick"){
-						// TODOTS: model switch for activation
 						DebuggingService.getInstance().addMessageAsyncIn(getPeerAddress(), getAddress(), messageStrings[msg.getEvtId()]);
 					}
 						if (msg instanceof EventWithDataMessage)
@@ -67,7 +66,6 @@ public class PingPongProtocol {
 		// sent messages
 		public void pong(PingPongData p) {
 			if (messageStrings[ OUT_pong] != "timerTick"){
-				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_pong]);
 			}
 			if (getPeerAddress()!=null)
@@ -78,7 +76,6 @@ public class PingPongProtocol {
 		}
 		public void pongSimple(int p) {
 			if (messageStrings[ OUT_pongSimple] != "timerTick"){
-				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_pongSimple]);
 			}
 			if (getPeerAddress()!=null)
@@ -148,7 +145,6 @@ public class PingPongProtocol {
 					System.out.println("unknown");
 				else {
 					if (messageStrings[msg.getEvtId()] != "timerTick"){
-						// TODOTS: model switch for activation
 						DebuggingService.getInstance().addMessageAsyncIn(getPeerAddress(), getAddress(), messageStrings[msg.getEvtId()]);
 					}
 						if (msg instanceof EventWithDataMessage)
@@ -162,7 +158,6 @@ public class PingPongProtocol {
 		// sent messages
 		public void ping(PingPongData p) {
 			if (messageStrings[ IN_ping] != "timerTick"){
-				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_ping]);
 			}
 			if (getPeerAddress()!=null)
@@ -173,7 +168,6 @@ public class PingPongProtocol {
 		}
 		public void pingSimple(int p) {
 			if (messageStrings[ IN_pingSimple] != "timerTick"){
-				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_pingSimple]);
 			}
 			if (getPeerAddress()!=null)

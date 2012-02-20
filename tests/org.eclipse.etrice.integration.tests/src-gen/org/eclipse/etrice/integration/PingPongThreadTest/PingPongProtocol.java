@@ -51,7 +51,6 @@ public class PingPongProtocol {
 					System.out.println("unknown");
 				else {
 					if (messageStrings[msg.getEvtId()] != "timerTick"){
-						// TODOTS: model switch for activation
 						DebuggingService.getInstance().addMessageAsyncIn(getPeerAddress(), getAddress(), messageStrings[msg.getEvtId()]);
 					}
 						if (msg instanceof EventWithDataMessage)
@@ -65,7 +64,6 @@ public class PingPongProtocol {
 		// sent messages
 		public void pong() {
 			if (messageStrings[ OUT_pong] != "timerTick"){
-				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_pong]);
 			}
 			if (getPeerAddress()!=null)
@@ -130,7 +128,6 @@ public class PingPongProtocol {
 					System.out.println("unknown");
 				else {
 					if (messageStrings[msg.getEvtId()] != "timerTick"){
-						// TODOTS: model switch for activation
 						DebuggingService.getInstance().addMessageAsyncIn(getPeerAddress(), getAddress(), messageStrings[msg.getEvtId()]);
 					}
 						if (msg instanceof EventWithDataMessage)
@@ -144,7 +141,6 @@ public class PingPongProtocol {
 		// sent messages
 		public void ping() {
 			if (messageStrings[ IN_ping] != "timerTick"){
-				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_ping]);
 			}
 			if (getPeerAddress()!=null)
