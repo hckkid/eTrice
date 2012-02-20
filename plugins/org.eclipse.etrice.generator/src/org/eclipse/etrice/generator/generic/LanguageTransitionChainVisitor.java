@@ -24,10 +24,13 @@ import org.eclipse.etrice.generator.etricegen.ITransitionChainVisitor;
 import org.eclipse.etrice.generator.etricegen.TransitionChain;
 import org.eclipse.etrice.generator.extensions.Extensions;
 
+import com.google.inject.Inject;
+
 public class LanguageTransitionChainVisitor implements ITransitionChainVisitor {
 
 	private ExpandedActorClass ac;
 	private LanguageGenerator javaGen = new LanguageGenerator();
+	@Inject ILanguageExtension langExt;
 	private String typedData = "";
 	private String dataArg = "";
 
@@ -49,19 +52,19 @@ public class LanguageTransitionChainVisitor implements ITransitionChainVisitor {
 	public String genActionOperationCall(Transition tr) {
 		if (tr.getAction()!=null && !tr.getAction().getCommands().isEmpty()) {
 			if (tr instanceof InitialTransition)
-				return Extensions.getActionCodeOperationName(tr)+"();\n";
+				return Extensions.getActionCodeOperationName(tr)+"("+langExt.selfPointer(false)+");\n";
 			else
-				return Extensions.getActionCodeOperationName(tr)+"(ifitem"+dataArg+");\n";
+				return Extensions.getActionCodeOperationName(tr)+"("+langExt.selfPointer(true)+"ifitem"+dataArg+");\n";
 		}
 		return "";
 	}
 
 	public String genEntryOperationCall(State state) {
-		return Extensions.getEntryCodeOperationName(state)+"();\n";
+		return Extensions.getEntryCodeOperationName(state)+"("+langExt.selfPointer(false)+");\n";
 	}
 
 	public String genExitOperationCall(State state) {
-		return Extensions.getExitCodeOperationName(state)+"();\n";
+		return Extensions.getExitCodeOperationName(state)+"("+langExt.selfPointer(false)+");\n";
 	}
 
 	public String genElseIfBranch(CPBranchTransition tr, boolean isFirst) {

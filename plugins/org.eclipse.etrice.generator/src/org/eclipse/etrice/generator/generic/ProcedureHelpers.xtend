@@ -36,10 +36,10 @@ class ProcedureHelpers {
 
 	def userCode(DetailCode dc) {'''
 		«IF dc!=null»
-			//--------------------- begin user code
+			/*--------------------- begin user code ---------------------*/
 			«FOR command : dc.commands»	«command»
 			«ENDFOR»
-			//--------------------- end user code
+			/*--------------------- end user code ---------------------*/
 		«ENDIF»
 	'''
 	}
@@ -47,12 +47,12 @@ class ProcedureHelpers {
 	// Attributes 
 	/* TODO: add ref type */
 	def attributes(List<Attribute> attribs) {'''
-		//--------------------- attributes
+		/*--------------------- attributes ---------------------*/
 		«FOR attribute : attribs»
 			«IF attribute.size==0»
-				«languageExt.accessLevelProtected()»«attribute.refType.type.typeName» «attribute.name»;
+				«attribute.refType.type.typeName» «attribute.name»;
 			«ELSE»
-				«languageExt.accessLevelProtected()»«attribute.refType.type.typeName»[] «attribute.name»;
+				«attribute.refType.type.typeName»[] «attribute.name»;
 			«ENDIF» 
 		«ENDFOR»
 	'''
@@ -144,7 +144,7 @@ class ProcedureHelpers {
 	
 	// Operations
 	def operationsDeclaration(List<? extends Operation> operations, String classname) {'''
-		//--------------------- operations
+		/*--------------------- operations ---------------------*/
 		«FOR operation : operations»
 			«operationSignature(operation, classname, true)»;
 		«ENDFOR»
@@ -152,7 +152,7 @@ class ProcedureHelpers {
 	}
 
 	def operationsImplementation(List<? extends Operation> operations, String classname) {'''
-		//--------------------- operations
+		/*--------------------- operations ---------------------*/
 		«FOR operation : operations»
 			«operationSignature(operation, classname, false)» {
 				«FOR command : operation.detailCode.commands»

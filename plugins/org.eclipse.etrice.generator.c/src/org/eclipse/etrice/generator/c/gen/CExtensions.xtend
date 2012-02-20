@@ -108,6 +108,9 @@ class CExtensions implements ILanguageExtension {
 	}
 	
 	override String genEnumeration(String name, List<Pair<String, String>> entries) {
+		if (entries.empty)
+			return "/* empty enum not generated */"
+			
 		'''
 		enum «name» {
 			«FOR entry: entries SEPARATOR ","»

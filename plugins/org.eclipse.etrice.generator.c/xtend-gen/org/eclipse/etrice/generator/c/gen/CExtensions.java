@@ -142,32 +142,40 @@ public class CExtensions implements ILanguageExtension {
   }
   
   public String genEnumeration(final String name, final List<Pair<String,String>> entries) {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("enum ");
-    _builder.append(name, "");
-    _builder.append(" {");
-    _builder.newLineIfNotEmpty();
+    String _xblockexpression = null;
     {
-      boolean hasAnyElements = false;
-      for(final Pair<String,String> entry : entries) {
-        if (!hasAnyElements) {
-          hasAnyElements = true;
-        } else {
-          _builder.appendImmediate(",", "	");
-        }
-        _builder.append("\t");
-        String _first = entry.getFirst();
-        _builder.append(_first, "	");
-        _builder.append(" = ");
-        String _second = entry.getSecond();
-        _builder.append(_second, "	");
-        _builder.newLineIfNotEmpty();
+      boolean _isEmpty = entries.isEmpty();
+      if (_isEmpty) {
+        return "/* empty enum not generated */";
       }
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("enum ");
+      _builder.append(name, "");
+      _builder.append(" {");
+      _builder.newLineIfNotEmpty();
+      {
+        boolean hasAnyElements = false;
+        for(final Pair<String,String> entry : entries) {
+          if (!hasAnyElements) {
+            hasAnyElements = true;
+          } else {
+            _builder.appendImmediate(",", "	");
+          }
+          _builder.append("\t");
+          String _first = entry.getFirst();
+          _builder.append(_first, "	");
+          _builder.append(" = ");
+          String _second = entry.getSecond();
+          _builder.append(_second, "	");
+          _builder.newLineIfNotEmpty();
+        }
+      }
+      _builder.append("};");
+      _builder.newLine();
+      String _string = _builder.toString();
+      _xblockexpression = (_string);
     }
-    _builder.append("};");
-    _builder.newLine();
-    String _string = _builder.toString();
-    return _string;
+    return _xblockexpression;
   }
   
   public String booleanConstant(final boolean b) {

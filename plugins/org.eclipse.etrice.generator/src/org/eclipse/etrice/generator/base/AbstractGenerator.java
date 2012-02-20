@@ -48,6 +48,7 @@ import com.google.inject.Provider;
 public abstract class AbstractGenerator {
 
 	protected static ILineOutput output = new StdLineOutput();
+	private static Injector injector;
 
 	public static void setOutput(ILineOutput out) {
 		if (out!=null)
@@ -60,12 +61,16 @@ public abstract class AbstractGenerator {
 	 * @return
 	 */
 	protected static void createAndRunGenerator(Module generatorModule, String[] args) {
-		Injector injector = Guice.createInjector(generatorModule);
+		injector = Guice.createInjector(generatorModule);
 		AbstractGenerator generator = injector.getInstance(AbstractGenerator.class);
 		generator.logger.setOutput(output);
 		generator.runGenerator(args);
 	}
 
+	public static Injector getInjector() {
+		return injector;
+	}
+	
 	@Inject
 	protected Provider<ResourceSet> resourceSetProvider;
 

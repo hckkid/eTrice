@@ -7,6 +7,7 @@ import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.Annotation;
+import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.Port;
@@ -154,6 +155,9 @@ public class ActorClassGen extends GenericActorClassGenerator {
     _builder.newLine();
     _builder.append("#include \"etDatatypes.h\"");
     _builder.newLine();
+    _builder.append("#include \"etMessage.h\"");
+    _builder.newLine();
+    _builder.newLine();
     {
       HashSet<DataClass> _referencedDataClasses = root.getReferencedDataClasses(ac);
       for(final DataClass dataClass : _referencedDataClasses) {
@@ -237,6 +241,11 @@ public class ActorClassGen extends GenericActorClassGenerator {
     String _name_11 = xpac.getName();
     _builder.append(_name_11, "	");
     _builder.append("_const* constData;");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    EList<Attribute> _attributes = ac.getAttributes();
+    StringConcatenation _attributes_1 = this.helpers.attributes(_attributes);
+    _builder.append(_attributes_1, "	");
     _builder.newLineIfNotEmpty();
     {
       boolean _hasNonEmptyStateMachine = this.roomExt.hasNonEmptyStateMachine(xpac);

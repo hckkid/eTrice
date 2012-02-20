@@ -38,7 +38,7 @@ public class ProcedureHelpers {
     {
       boolean _operator_notEquals = ObjectExtensions.operator_notEquals(dc, null);
       if (_operator_notEquals) {
-        _builder.append("//--------------------- begin user code");
+        _builder.append("/*--------------------- begin user code ---------------------*/");
         _builder.newLine();
         {
           EList<String> _commands = dc.getCommands();
@@ -48,7 +48,7 @@ public class ProcedureHelpers {
             _builder.newLineIfNotEmpty();
           }
         }
-        _builder.append("//--------------------- end user code");
+        _builder.append("/*--------------------- end user code ---------------------*/");
         _builder.newLine();
       }
     }
@@ -60,7 +60,7 @@ public class ProcedureHelpers {
    */
   public StringConcatenation attributes(final List<Attribute> attribs) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("//--------------------- attributes");
+    _builder.append("/*--------------------- attributes ---------------------*/");
     _builder.newLine();
     {
       for(final Attribute attribute : attribs) {
@@ -68,8 +68,6 @@ public class ProcedureHelpers {
           int _size = attribute.getSize();
           boolean _operator_equals = ObjectExtensions.operator_equals(((Integer)_size), ((Integer)0));
           if (_operator_equals) {
-            String _accessLevelProtected = this.languageExt.accessLevelProtected();
-            _builder.append(_accessLevelProtected, "");
             RefableType _refType = attribute.getRefType();
             DataType _type = _refType.getType();
             String _typeName = this._typeHelpers.typeName(_type);
@@ -80,8 +78,6 @@ public class ProcedureHelpers {
             _builder.append(";");
             _builder.newLineIfNotEmpty();
           } else {
-            String _accessLevelProtected_1 = this.languageExt.accessLevelProtected();
-            _builder.append(_accessLevelProtected_1, "");
             RefableType _refType_1 = attribute.getRefType();
             DataType _type_1 = _refType_1.getType();
             String _typeName_1 = this._typeHelpers.typeName(_type_1);
@@ -426,7 +422,7 @@ public class ProcedureHelpers {
   
   public StringConcatenation operationsDeclaration(final List<? extends Operation> operations, final String classname) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("//--------------------- operations");
+    _builder.append("/*--------------------- operations ---------------------*/");
     _builder.newLine();
     {
       for(final Operation operation : operations) {
@@ -441,7 +437,7 @@ public class ProcedureHelpers {
   
   public StringConcatenation operationsImplementation(final List<? extends Operation> operations, final String classname) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("//--------------------- operations");
+    _builder.append("/*--------------------- operations ---------------------*/");
     _builder.newLine();
     {
       for(final Operation operation : operations) {

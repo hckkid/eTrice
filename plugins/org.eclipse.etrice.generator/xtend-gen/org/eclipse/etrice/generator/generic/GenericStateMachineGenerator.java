@@ -264,10 +264,15 @@ public class GenericStateMachineGenerator {
             _operator_and = BooleanExtensions.operator_and(_isOwnObject_1, _hasActionCode);
           }
           if (_operator_and) {
-            _builder.append("protected void ");
+            String _accessLevelProtected_2 = this.langExt.accessLevelProtected();
+            _builder.append(_accessLevelProtected_2, "");
+            _builder.append("void ");
             String _actionCodeOperationName = RoomNameProv.getActionCodeOperationName(tr);
             _builder.append(_actionCodeOperationName, "");
             _builder.append("(");
+            String _name_2 = ac.getName();
+            String _selfPointer_2 = this.langExt.selfPointer(_name_2, (tr instanceof NonInitialTransition));
+            _builder.append(_selfPointer_2, "");
             {
               if ((tr instanceof NonInitialTransition)) {
                 _builder.append("InterfaceItemBase ifitem");
@@ -311,9 +316,9 @@ public class GenericStateMachineGenerator {
     String _accessLevelPrivate = this.langExt.accessLevelPrivate();
     _builder.append(_accessLevelPrivate, "");
     _builder.append("void exitTo(");
-    String _name_2 = ac.getName();
-    String _selfPointer_2 = this.langExt.selfPointer(_name_2, true);
-    _builder.append(_selfPointer_2, "");
+    String _name_3 = ac.getName();
+    String _selfPointer_3 = this.langExt.selfPointer(_name_3, true);
+    _builder.append(_selfPointer_3, "");
     _builder.append("int current, int to, boolean handler) {");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
@@ -340,7 +345,10 @@ public class GenericStateMachineGenerator {
             _builder.append("if (!handler) ");
             String _exitCodeOperationName_1 = RoomNameProv.getExitCodeOperationName(state_1);
             _builder.append(_exitCodeOperationName_1, "				");
-            _builder.append("();");
+            _builder.append("(");
+            String _selfPointer_4 = this.langExt.selfPointer(false);
+            _builder.append(_selfPointer_4, "				");
+            _builder.append(");");
           }
         }
         _builder.newLineIfNotEmpty();
@@ -401,9 +409,9 @@ public class GenericStateMachineGenerator {
     String _accessLevelPrivate_1 = this.langExt.accessLevelPrivate();
     _builder.append(_accessLevelPrivate_1, "");
     _builder.append("int executeTransitionChain(");
-    String _name_3 = ac.getName();
-    String _selfPointer_3 = this.langExt.selfPointer(_name_3, true);
-    _builder.append(_selfPointer_3, "");
+    String _name_4 = ac.getName();
+    String _selfPointer_5 = this.langExt.selfPointer(_name_4, true);
+    _builder.append(_selfPointer_5, "");
     _builder.append("int chain, InterfaceItemBase ifitem, ");
     String _voidPointer = this.langExt.voidPointer();
     _builder.append(_voidPointer, "");
@@ -466,9 +474,9 @@ public class GenericStateMachineGenerator {
     String _accessLevelPrivate_2 = this.langExt.accessLevelPrivate();
     _builder.append(_accessLevelPrivate_2, "");
     _builder.append("int enterHistory(");
-    String _name_4 = ac.getName();
-    String _selfPointer_4 = this.langExt.selfPointer(_name_4, true);
-    _builder.append(_selfPointer_4, "");
+    String _name_5 = ac.getName();
+    String _selfPointer_6 = this.langExt.selfPointer(_name_5, true);
+    _builder.append(_selfPointer_6, "");
     _builder.append("int state, boolean handler, boolean skip_entry) {");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
@@ -498,7 +506,10 @@ public class GenericStateMachineGenerator {
             _builder.append("if (!(skip_entry || handler)) ");
             String _entryCodeOperationName_1 = RoomNameProv.getEntryCodeOperationName(state_2);
             _builder.append(_entryCodeOperationName_1, "				");
-            _builder.append("();");
+            _builder.append("(");
+            String _selfPointer_7 = this.langExt.selfPointer(false);
+            _builder.append(_selfPointer_7, "				");
+            _builder.append(");");
           }
         }
         _builder.newLineIfNotEmpty();
@@ -550,8 +561,8 @@ public class GenericStateMachineGenerator {
                 _builder.append("\t");
                 _builder.append("\t");
                 _builder.append("state = executeTransitionChain(");
-                String _selfPointer_5 = this.langExt.selfPointer(true);
-                _builder.append(_selfPointer_5, "					");
+                String _selfPointer_8 = this.langExt.selfPointer(true);
+                _builder.append(_selfPointer_8, "					");
                 TransitionChain _chain = xpac.getChain(sub_initt);
                 String _chainId_1 = this.roomExt.getChainId(_chain);
                 _builder.append(_chainId_1, "					");
@@ -652,9 +663,9 @@ public class GenericStateMachineGenerator {
       }
     }
     _builder.append("void executeInitTransition(");
-    String _name_5 = ac.getName();
-    String _selfPointer_6 = this.langExt.selfPointer(_name_5, false);
-    _builder.append(_selfPointer_6, "");
+    String _name_6 = ac.getName();
+    String _selfPointer_9 = this.langExt.selfPointer(_name_6, false);
+    _builder.append(_selfPointer_9, "");
     _builder.append(") {");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
@@ -671,8 +682,8 @@ public class GenericStateMachineGenerator {
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
     _builder.append("int next = executeTransitionChain(");
-    String _selfPointer_7 = this.langExt.selfPointer(true);
-    _builder.append(_selfPointer_7, "	");
+    String _selfPointer_10 = this.langExt.selfPointer(true);
+    _builder.append(_selfPointer_10, "	");
     _builder.append("chain, ");
     String _nullPointer_2 = this.langExt.nullPointer();
     _builder.append(_nullPointer_2, "	");
@@ -683,8 +694,8 @@ public class GenericStateMachineGenerator {
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
     _builder.append("next = enterHistory(");
-    String _selfPointer_8 = this.langExt.selfPointer(true);
-    _builder.append(_selfPointer_8, "	");
+    String _selfPointer_11 = this.langExt.selfPointer(true);
+    _builder.append(_selfPointer_11, "	");
     _builder.append("next, ");
     String _booleanConstant_2 = this.langExt.booleanConstant(false);
     _builder.append(_booleanConstant_2, "	");
@@ -695,8 +706,8 @@ public class GenericStateMachineGenerator {
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
     _builder.append("setState(");
-    String _selfPointer_9 = this.langExt.selfPointer(true);
-    _builder.append(_selfPointer_9, "	");
+    String _selfPointer_12 = this.langExt.selfPointer(true);
+    _builder.append(_selfPointer_12, "	");
     _builder.append("next);");
     _builder.newLineIfNotEmpty();
     _builder.append("}");
@@ -715,9 +726,9 @@ public class GenericStateMachineGenerator {
       }
     }
     _builder.append("void receiveEvent(");
-    String _name_6 = ac.getName();
-    String _selfPointer_10 = this.langExt.selfPointer(_name_6, true);
-    _builder.append(_selfPointer_10, "");
+    String _name_7 = ac.getName();
+    String _selfPointer_13 = this.langExt.selfPointer(_name_7, true);
+    _builder.append(_selfPointer_13, "");
     _builder.append("InterfaceItemBase ifitem, int evt, ");
     String _voidPointer_1 = this.langExt.voidPointer();
     _builder.append(_voidPointer_1, "");
@@ -868,7 +879,10 @@ public class GenericStateMachineGenerator {
                     {
                       boolean _isHandler = chain.isHandler();
                       if (_isHandler) {
-                        _builder.append("is_handler = true;");
+                        _builder.append("is_handler = ");
+                        String _booleanConstant_6 = this.langExt.booleanConstant(true);
+                        _builder.append(_booleanConstant_6, "						");
+                        _builder.append(";");
                       }
                     }
                     _builder.newLineIfNotEmpty();
@@ -879,7 +893,10 @@ public class GenericStateMachineGenerator {
                     {
                       boolean _isSkipEntry = chain.isSkipEntry();
                       if (_isSkipEntry) {
-                        _builder.append("skip_entry = true;");
+                        _builder.append("skip_entry = ");
+                        String _booleanConstant_7 = this.langExt.booleanConstant(true);
+                        _builder.append(_booleanConstant_7, "						");
+                        _builder.append(";");
                       }
                     }
                     _builder.newLineIfNotEmpty();
@@ -928,28 +945,28 @@ public class GenericStateMachineGenerator {
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("exitTo(");
-    String _selfPointer_11 = this.langExt.selfPointer(true);
-    _builder.append(_selfPointer_11, "		");
+    String _selfPointer_14 = this.langExt.selfPointer(true);
+    _builder.append(_selfPointer_14, "		");
     String _memberAccess_6 = this.langExt.memberAccess();
     _builder.append(_memberAccess_6, "		");
     _builder.append("state, catching_state, is_handler);");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t");
     _builder.append("int next = executeTransitionChain(");
-    String _selfPointer_12 = this.langExt.selfPointer(true);
-    _builder.append(_selfPointer_12, "		");
+    String _selfPointer_15 = this.langExt.selfPointer(true);
+    _builder.append(_selfPointer_15, "		");
     _builder.append("chain, ifitem, generic_data);");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t");
     _builder.append("next = enterHistory(");
-    String _selfPointer_13 = this.langExt.selfPointer(true);
-    _builder.append(_selfPointer_13, "		");
+    String _selfPointer_16 = this.langExt.selfPointer(true);
+    _builder.append(_selfPointer_16, "		");
     _builder.append("next, is_handler, skip_entry);");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t");
     _builder.append("setState(");
-    String _selfPointer_14 = this.langExt.selfPointer(true);
-    _builder.append(_selfPointer_14, "		");
+    String _selfPointer_17 = this.langExt.selfPointer(true);
+    _builder.append(_selfPointer_17, "		");
     _builder.append("next);");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");

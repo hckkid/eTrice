@@ -20,6 +20,7 @@ import org.eclipse.etrice.core.room.Transition;
 import org.eclipse.etrice.core.room.Trigger;
 import org.eclipse.etrice.core.room.TriggeredTransition;
 import org.eclipse.etrice.core.room.VarDecl;
+import org.eclipse.etrice.generator.base.AbstractGenerator;
 import org.eclipse.etrice.generator.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.generator.etricegen.TransitionChain;
 
@@ -27,6 +28,7 @@ public class LanguageGenerator {
 
 	public String getExecuteChain(ExpandedActorClass ac, TransitionChain tc) {
 		LanguageTransitionChainVisitor tcv = new LanguageTransitionChainVisitor(ac, tc);
+		AbstractGenerator.getInjector().injectMembers(tcv);
 		return tc.genExecuteChain(tcv);
 	}
 

@@ -112,7 +112,7 @@ class GenericStateMachineGenerator {
 		//*** Action Codes
 		«FOR tr : xpac.stateMachine.getTransitionList()»
 			«IF xpac.isOwnObject(tr) && tr.hasActionCode()»
-				protected void «tr.getActionCodeOperationName()»(«IF tr instanceof NonInitialTransition»InterfaceItemBase ifitem«languageGen.getArgumentList(xpac, tr)»«ENDIF») {
+				«langExt.accessLevelProtected»void «tr.getActionCodeOperationName()»(«langExt.selfPointer(ac.name, tr instanceof NonInitialTransition)»«IF tr instanceof NonInitialTransition»InterfaceItemBase ifitem«languageGen.getArgumentList(xpac, tr)»«ENDIF») {
 					«xpac.getActionCode(tr)»
 				}
 			«ENDIF»
@@ -130,7 +130,7 @@ class GenericStateMachineGenerator {
 				switch (current) {
 					«FOR state : xpac.stateMachine.getBaseStateList()»
 						case «state.getStateId()»:
-							«IF state.hasExitCode()»if (!handler) «state.getExitCodeOperationName()»();«ENDIF»
+							«IF state.hasExitCode()»if (!handler) «state.getExitCodeOperationName()»(«langExt.selfPointer(false)»);«ENDIF»
 							«langExt.memberAccess»history[«state.getParentStateId()»] = «state.getStateId()»;
 							current = «state.getParentStateId()»;
 							break;
@@ -170,7 +170,7 @@ class GenericStateMachineGenerator {
 				switch (state) {
 					«FOR state : xpac.stateMachine.getBaseStateList()»
 					case «state.getStateId()»:
-						«IF state.hasEntryCode()»if (!(skip_entry || handler)) «state.getEntryCodeOperationName()»();«ENDIF»
+						«IF state.hasEntryCode()»if (!(skip_entry || handler)) «state.getEntryCodeOperationName()»(«langExt.selfPointer(false)»);«ENDIF»
 						«IF state.isLeaf()»
 							// in leaf state: return state id
 							return «state.getStateId()»;
@@ -234,8 +234,8 @@ class GenericStateMachineGenerator {
 										{
 											chain = «chain.getChainId()»;
 											catching_state = «chain.getContextId()»;
-											«IF chain.isHandler()»is_handler = true;«ENDIF»
-											«IF chain.skipEntry»skip_entry = true;«ENDIF»
+											«IF chain.isHandler()»is_handler = «langExt.booleanConstant(true)»;«ENDIF»
+											«IF chain.skipEntry»skip_entry = «langExt.booleanConstant(true)»;«ENDIF»
 										}
 									«ENDFOR»
 									«IF needData»}«ENDIF»

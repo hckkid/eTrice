@@ -80,6 +80,8 @@ class ActorClassGen extends GenericActorClassGenerator {
 		«generateIncludeGuardBegin(xpac.name)»
 		
 		#include "etDatatypes.h"
+		#include "etMessage.h"
+		
 		«FOR dataClass : root.getReferencedDataClasses(ac)»
 			#include "«dataClass.name».h"
 		«ENDFOR»
@@ -103,6 +105,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 		/* variable part of ActorClass (RAM) */
 		struct «xpac.name» {
 			const «xpac.name»_const* constData;
+			«helpers.attributes(ac.attributes)»
 			«IF xpac.hasNonEmptyStateMachine»
 				«stateMachineGen.genDataMembers(xpac, ac)»
 			«ENDIF»
