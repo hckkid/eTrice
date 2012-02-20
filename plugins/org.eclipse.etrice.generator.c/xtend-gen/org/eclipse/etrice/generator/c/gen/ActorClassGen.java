@@ -11,7 +11,6 @@ import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.ProtocolClass;
-import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.generator.base.ILogger;
 import org.eclipse.etrice.generator.c.gen.CExtensions;
 import org.eclipse.etrice.generator.c.gen.StateMachineGen;
@@ -240,9 +239,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
     _builder.append("_const* constData;");
     _builder.newLineIfNotEmpty();
     {
-      StateGraph _stateMachine = xpac.getStateMachine();
-      boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_stateMachine, null);
-      if (_operator_notEquals) {
+      boolean _hasNonEmptyStateMachine = this.roomExt.hasNonEmptyStateMachine(xpac);
+      if (_hasNonEmptyStateMachine) {
         _builder.append("\t");
         StringConcatenation _genDataMembers = this.stateMachineGen.genDataMembers(xpac, ac);
         _builder.append(_genDataMembers, "	");
@@ -338,9 +336,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     {
-      StateGraph _stateMachine = xpac.getStateMachine();
-      boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_stateMachine, null);
-      if (_operator_notEquals) {
+      boolean _hasNonEmptyStateMachine = this.roomExt.hasNonEmptyStateMachine(xpac);
+      if (_hasNonEmptyStateMachine) {
         StringConcatenation _genStateMachine = this.stateMachineGen.genStateMachine(xpac, ac);
         _builder.append(_genStateMachine, "");
         _builder.newLineIfNotEmpty();
@@ -362,9 +359,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
     _builder.append("\", \"init\")");
     _builder.newLineIfNotEmpty();
     {
-      StateGraph _stateMachine_1 = xpac.getStateMachine();
-      boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(_stateMachine_1, null);
-      if (_operator_notEquals_1) {
+      boolean _hasNonEmptyStateMachine_1 = this.roomExt.hasNonEmptyStateMachine(xpac);
+      if (_hasNonEmptyStateMachine_1) {
         _builder.append("\t");
         StringConcatenation _genInitialization = this.stateMachineGen.genInitialization(xpac, ac);
         _builder.append(_genInitialization, "	");
@@ -390,9 +386,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
     _builder.append("\", \"ReceiveMessage\")");
     _builder.newLineIfNotEmpty();
     {
-      StateGraph _stateMachine_2 = xpac.getStateMachine();
-      boolean _operator_notEquals_2 = ObjectExtensions.operator_notEquals(_stateMachine_2, null);
-      if (_operator_notEquals_2) {
+      boolean _hasNonEmptyStateMachine_2 = this.roomExt.hasNonEmptyStateMachine(xpac);
+      if (_hasNonEmptyStateMachine_2) {
         _builder.append("\t");
         _builder.newLine();
         _builder.append("\t");

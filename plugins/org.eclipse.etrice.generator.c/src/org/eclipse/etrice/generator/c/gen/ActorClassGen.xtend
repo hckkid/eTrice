@@ -103,7 +103,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 		/* variable part of ActorClass (RAM) */
 		struct «xpac.name» {
 			const «xpac.name»_const* constData;
-			«IF xpac.stateMachine!=null»
+			«IF xpac.hasNonEmptyStateMachine»
 				«stateMachineGen.genDataMembers(xpac, ac)»
 			«ENDIF»
 		};
@@ -142,13 +142,13 @@ class ActorClassGen extends GenericActorClassGenerator {
 		/* interface item IDs */
 		«genInterfaceItemConstants(xpac, ac)»
 
-		«IF xpac.stateMachine != null»
+		«IF xpac.hasNonEmptyStateMachine»
 			«stateMachineGen.genStateMachine(xpac, ac)»
 		«ENDIF»
 		
 		void «xpac.name»_init(«xpac.name»* self){
 			ET_MSC_LOGGER_SYNC_ENTRY("«xpac.name»", "init")
-			«IF xpac.stateMachine != null»
+			«IF xpac.hasNonEmptyStateMachine»
 				«stateMachineGen.genInitialization(xpac, ac)»
 			«ENDIF»
 			ET_MSC_LOGGER_SYNC_EXIT
@@ -157,7 +157,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 		
 		void «xpac.name»_ReceiveMessage(void* self, void* ifitem, const etMessage* msg){
 			ET_MSC_LOGGER_SYNC_ENTRY("«xpac.name»", "ReceiveMessage")
-			«IF xpac.stateMachine != null»
+			«IF xpac.hasNonEmptyStateMachine»
 				
 				receiveEvent(self, (etPort*)ifitem, msg->evtID, (void*)(&msg[1]));
 			«ENDIF»

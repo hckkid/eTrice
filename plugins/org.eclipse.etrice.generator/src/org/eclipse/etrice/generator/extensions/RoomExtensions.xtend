@@ -479,6 +479,10 @@ class RoomExtensions {
 		return false
 	}
 	
+	def boolean hasNonEmptyStateMachine(ActorClass ac) {
+		ac.stateMachine!=null && !ac.stateMachine.states.empty
+	}
+	
 	def List<Transition> getTransitionList(State s) {
 		if (s.isLeaf())
 			return new ArrayList<Transition>()

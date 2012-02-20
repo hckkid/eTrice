@@ -5,7 +5,7 @@
 	<!-- ========= org.eclipse.etrice.runtime.c ========= -->
 	<extension point="org.eclipse.ui.newWizards">
 		<wizard	id="org.eclipse.etrice.ui.runtime.NewCRuntimeWizard" 
-			name="eTrice Java Runtime" 
+			name="eTrice C Runtime" 
 			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
 			category="org.eclipse.etrice.core.ui.wizardCategory"
 			icon="icons/genproject.gif" 
