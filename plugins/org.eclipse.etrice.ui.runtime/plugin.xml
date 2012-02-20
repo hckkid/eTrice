@@ -2,9 +2,26 @@
 <?eclipse version="3.4"?>
 <plugin>
 
+	<!-- ========= org.eclipse.etrice.runtime.c ========= -->
+	<extension point="org.eclipse.ui.newWizards">
+		<wizard	id="org.eclipse.etrice.ui.runtime.NewCRuntimeWizard" 
+			name="eTrice Java Runtime" 
+			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
+			category="org.eclipse.etrice.core.ui.wizardCategory"
+			icon="icons/genproject.gif" 
+			project="true">
+			<description>The C Runtime required by eTrice C projects</description>
+		</wizard>
+	</extension>
+	<extension point="org.eclipse.emf.common.ui.examples">
+	   <example wizardID="org.eclipse.etrice.ui.runtime.NewCRuntimeWizard" pageImage="icons/genproject.gif">
+		 <projectDescriptor name="org.eclipse.etrice.runtime.c" contentURI="contents/org.eclipse.etrice.runtime.c.zip" description="eTrice Runtime for C"/>
+	  </example>
+	</extension>   
+
 	<!-- ========= org.eclipse.etrice.runtime.java ========= -->
 	<extension point="org.eclipse.ui.newWizards">
-		<wizard	id="org.eclipse.etrice.ui.runtime.NewRuntimeWizard" 
+		<wizard	id="org.eclipse.etrice.ui.runtime.NewJavaRuntimeWizard" 
 			name="eTrice Java Runtime" 
 			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
 			category="org.eclipse.etrice.core.ui.wizardCategory"
@@ -14,7 +31,7 @@
 		</wizard>
 	</extension>
 	<extension point="org.eclipse.emf.common.ui.examples">
-	   <example wizardID="org.eclipse.etrice.ui.runtime.NewRuntimeWizard" pageImage="icons/genproject.gif">
+	   <example wizardID="org.eclipse.etrice.ui.runtime.NewJavaRuntimeWizard" pageImage="icons/genproject.gif">
 		 <projectDescriptor name="org.eclipse.etrice.runtime.java" contentURI="contents/org.eclipse.etrice.runtime.java.zip" description="eTrice Runtime for Java"/>
 	  </example>
 	</extension>   
