@@ -96,7 +96,6 @@ public class PTimeout {
 					System.out.println("unknown");
 				else {
 					if (messageStrings[msg.getEvtId()] != "timerTick"){
-						// TODOTS: model switch for activation
 						DebuggingService.getInstance().addMessageAsyncIn(getPeerAddress(), getAddress(), messageStrings[msg.getEvtId()]);
 					}
 					switch (msg.getEvtId()) {
@@ -142,7 +141,6 @@ public class PTimeout {
 		// sent messages
 		public void timeoutTick() {
 			if (messageStrings[ OUT_timeoutTick] != "timerTick"){
-				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_timeoutTick]);
 			}
 			if (getPeerAddress()!=null)
@@ -211,7 +209,6 @@ public class PTimeout {
 					System.out.println("unknown");
 				else {
 					if (messageStrings[msg.getEvtId()] != "timerTick"){
-						// TODOTS: model switch for activation
 						DebuggingService.getInstance().addMessageAsyncIn(getPeerAddress(), getAddress(), messageStrings[msg.getEvtId()]);
 					}
 					switch (msg.getEvtId()) {

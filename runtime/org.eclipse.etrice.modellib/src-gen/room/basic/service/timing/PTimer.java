@@ -96,7 +96,6 @@ public class PTimer {
 					System.out.println("unknown");
 				else {
 					if (messageStrings[msg.getEvtId()] != "timerTick"){
-						// TODOTS: model switch for activation
 						DebuggingService.getInstance().addMessageAsyncIn(getPeerAddress(), getAddress(), messageStrings[msg.getEvtId()]);
 					}
 					switch (msg.getEvtId()) {
@@ -142,7 +141,6 @@ public class PTimer {
 		// sent messages
 		public void timerTick() {
 			if (messageStrings[ OUT_timerTick] != "timerTick"){
-				// TODOTS: model switch for activation
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_timerTick]);
 			}
 			if (getPeerAddress()!=null)
@@ -211,7 +209,6 @@ public class PTimer {
 					System.out.println("unknown");
 				else {
 					if (messageStrings[msg.getEvtId()] != "timerTick"){
-						// TODOTS: model switch for activation
 						DebuggingService.getInstance().addMessageAsyncIn(getPeerAddress(), getAddress(), messageStrings[msg.getEvtId()]);
 					}
 					switch (msg.getEvtId()) {
