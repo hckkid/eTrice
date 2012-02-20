@@ -6,18 +6,19 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  * CONTRIBUTORS:
- * 		Thomas Schuetz (initial contribution)
+ * 		Henrik Rentz-Reichert (initial contribution)
  *
  *******************************************************************************/
 
+#ifndef _ETACTOR_H_
+#define _ETACTOR_H_
 
+#include "etDataTypes.h"
+#include "etPort.h"
 
-#ifndef _ETMESSAGERECEIVER_H_
-#define _ETMESSAGERECEIVER_H_
+#define NOT_CAUGHT 0
+#define EVT_SHIFT 100
 
-#include "etMessage.h"
+boolean handleSystemEvent(InterfaceItemBase ifitem, int evt, void* generic_data);
 
-typedef void (*etActorReceiveMessage)(void* self, void* ifitem, const etMessage*  msg);
-typedef void (*etDispatcherReceiveMessage)(const etMessage* msg);
-
-#endif /* _ETMESSAGERECEIVER_H_ */
+#endif /* _ETACTOR_H_ */

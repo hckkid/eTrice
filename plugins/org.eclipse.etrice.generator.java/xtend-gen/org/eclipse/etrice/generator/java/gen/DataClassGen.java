@@ -88,8 +88,8 @@ public class DataClassGen {
     }
     _builder.newLine();
     DetailCode _userCode1 = dc.getUserCode1();
-    StringConcatenation _UserCode = this.helpers.UserCode(_userCode1);
-    _builder.append(_UserCode, "");
+    StringConcatenation _userCode = this.helpers.userCode(_userCode1);
+    _builder.append(_userCode, "");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.newLine();
@@ -112,31 +112,31 @@ public class DataClassGen {
     _builder.newLine();
     _builder.append("\t");
     DetailCode _userCode2 = dc.getUserCode2();
-    StringConcatenation _UserCode_1 = this.helpers.UserCode(_userCode2);
-    _builder.append(_UserCode_1, "	");
+    StringConcatenation _userCode_1 = this.helpers.userCode(_userCode2);
+    _builder.append(_userCode_1, "	");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
     _builder.newLine();
     _builder.append("\t");
     EList<Attribute> _attributes = dc.getAttributes();
-    StringConcatenation _Attributes = this.helpers.Attributes(_attributes);
-    _builder.append(_Attributes, "	");
+    StringConcatenation _attributes_1 = this.helpers.attributes(_attributes);
+    _builder.append(_attributes_1, "	");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
     _builder.newLine();
     _builder.append("\t");
-    EList<Attribute> _attributes_1 = dc.getAttributes();
+    EList<Attribute> _attributes_2 = dc.getAttributes();
     String _name_3 = dc.getName();
-    StringConcatenation _AttributeSettersGettersImplementation = this.helpers.AttributeSettersGettersImplementation(_attributes_1, _name_3);
-    _builder.append(_AttributeSettersGettersImplementation, "	");
+    StringConcatenation _attributeSettersGettersImplementation = this.helpers.attributeSettersGettersImplementation(_attributes_2, _name_3);
+    _builder.append(_attributeSettersGettersImplementation, "	");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
     _builder.newLine();
     _builder.append("\t");
     EList<StandardOperation> _operations = dc.getOperations();
     String _name_4 = dc.getName();
-    StringConcatenation _OperationsImplementation = this.helpers.OperationsImplementation(_operations, _name_4);
-    _builder.append(_OperationsImplementation, "	");
+    StringConcatenation _operationsImplementation = this.helpers.operationsImplementation(_operations, _name_4);
+    _builder.append(_operationsImplementation, "	");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
     _builder.newLine();
@@ -155,8 +155,8 @@ public class DataClassGen {
     _builder.append("\t\t");
     _builder.newLine();
     _builder.append("\t\t");
-    EList<Attribute> _attributes_2 = dc.getAttributes();
-    StringConcatenation _attributeInitialization = this.helpers.attributeInitialization(_attributes_2);
+    EList<Attribute> _attributes_3 = dc.getAttributes();
+    StringConcatenation _attributeInitialization = this.helpers.attributeInitialization(_attributes_3);
     _builder.append(_attributeInitialization, "		");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
@@ -196,8 +196,8 @@ public class DataClassGen {
     _builder.append("\t\t");
     _builder.newLine();
     {
-      EList<Attribute> _attributes_3 = dc.getAttributes();
-      for(final Attribute a : _attributes_3) {
+      EList<Attribute> _attributes_4 = dc.getAttributes();
+      for(final Attribute a : _attributes_4) {
         _builder.append("\t\t");
         _builder.append("this.");
         String _name_7 = a.getName();

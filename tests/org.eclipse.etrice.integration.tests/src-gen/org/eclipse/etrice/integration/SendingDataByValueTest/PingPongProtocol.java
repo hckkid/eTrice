@@ -11,17 +11,12 @@ import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
 
 public class PingPongProtocol {
 	// message IDs
-	// TODO: separate class for message IDs: class MSG{public static volatile int MSG_MIN = 0; ...} -> better structure
-	// error if msgID <= MSG_MIN
-	public static final int MSG_MIN = 0;   
-	//IDs for outgoing messages
+	public static final int MSG_MIN = 0;
 	public static final int OUT_pong = 1;
 	public static final int OUT_pongSimple = 2;
-	//IDs for incoming messages
 	public static final int IN_ping = 3;
 	public static final int IN_pingSimple = 4;
-	//error if msgID >= MSG_MAX
-	public static final int MSG_MAX = 5;  
+	public static final int MSG_MAX = 5;
 
 
 	private static String messageStrings[] = {"MIN", "pong","pongSimple", "ping","pingSimple","MAX"};

@@ -14,16 +14,11 @@ import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
 
 public class PTimer {
 	// message IDs
-	// TODO: separate class for message IDs: class MSG{public static volatile int MSG_MIN = 0; ...} -> better structure
-	// error if msgID <= MSG_MIN
-	public static final int MSG_MIN = 0;   
-	//IDs for outgoing messages
+	public static final int MSG_MIN = 0;
 	public static final int OUT_timerTick = 1;
-	//IDs for incoming messages
 	public static final int IN_Start = 2;
 	public static final int IN_Kill = 3;
-	//error if msgID >= MSG_MAX
-	public static final int MSG_MAX = 4;  
+	public static final int MSG_MAX = 4;
 
 	//--------------------- begin user code
 		static protected class FireTimerTask extends TimerTask {
@@ -137,11 +132,11 @@ public class PTimer {
 		//--------------------- operations
 		public void timer(Integer id) {
 			//regular PortClass Operation timer
-						DebuggingService.getInstance().addMessageAsyncOut(getAddress(),
-								getPeerAddress(), messageStrings[OUT_timerTick]);
-			
-						getPeerMsgReceiver().receive(
-								new EventWithDataMessage(getPeerAddress(), OUT_timerTick, id));
+							DebuggingService.getInstance().addMessageAsyncOut(getAddress(),
+									getPeerAddress(), messageStrings[OUT_timerTick]);
+				
+							getPeerMsgReceiver().receive(
+									new EventWithDataMessage(getPeerAddress(), OUT_timerTick, id));
 		}
 		
 		// sent messages

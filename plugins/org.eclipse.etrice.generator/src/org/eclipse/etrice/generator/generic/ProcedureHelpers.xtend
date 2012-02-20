@@ -34,7 +34,7 @@ class ProcedureHelpers {
 	@Inject extension TypeHelpers
 	@Inject ILogger logger
 
-	def UserCode(DetailCode dc) {'''
+	def userCode(DetailCode dc) {'''
 		«IF dc!=null»
 			//--------------------- begin user code
 			«FOR command : dc.commands»	«command»
@@ -46,7 +46,7 @@ class ProcedureHelpers {
 	
 	// Attributes 
 	/* TODO: add ref type */
-	def Attributes(List<Attribute> attribs) {'''
+	def attributes(List<Attribute> attribs) {'''
 		//--------------------- attributes
 		«FOR attribute : attribs»
 			«IF attribute.size==0»
@@ -109,32 +109,32 @@ class ProcedureHelpers {
 	}
 	
 	// Attribute setters & getters
-	def AttributeSettersGettersDeclaration(List<Attribute> attribs, String classname) {'''
+	def attributeSettersGettersDeclaration(List<Attribute> attribs, String classname) {'''
 		//--------------------- attribute setters and getters
 		«FOR attribute : attribs»
-			«SetterHeader(attribute, classname)»;
-			«GetterHeader(attribute, classname)»;
+			«setterHeader(attribute, classname)»;
+			«getterHeader(attribute, classname)»;
 		«ENDFOR»
 	'''
 	}
 	
-	def AttributeSettersGettersImplementation(List<Attribute> attribs, String classname) {'''
+	def attributeSettersGettersImplementation(List<Attribute> attribs, String classname) {'''
 		//--------------------- attribute setters and getters
-		«FOR attribute : attribs»«SetterHeader(attribute, classname)» {
+		«FOR attribute : attribs»«setterHeader(attribute, classname)» {
 			 «languageExt.memberAccess()»«attribute.name» = «attribute.name»;
 		}
-		«GetterHeader(attribute, classname)» {
+		«getterHeader(attribute, classname)» {
 			return «languageExt.memberAccess()»«attribute.name»;
 		}
 		«ENDFOR»
 	'''
 	}
 	
-	def private SetterHeader(Attribute attribute, String classname){'''
-		«languageExt.accessLevelPublic()»void set«attribute.name.toFirstUpper()» («languageExt.selfPointer(classname, 1)»«attribute.refType.type.typeName»«IF attribute.size!=0»[]«ENDIF» «attribute.name»)'''
+	def private setterHeader(Attribute attribute, String classname){'''
+		«languageExt.accessLevelPublic()»void set«attribute.name.toFirstUpper()» («languageExt.selfPointer(classname, true)»«attribute.refType.type.typeName»«IF attribute.size!=0»[]«ENDIF» «attribute.name»)'''
 	}
-	def private GetterHeader(Attribute attribute, String classname){'''
-		«languageExt.accessLevelPublic()»«attribute.refType.type.typeName»«IF attribute.size!=0»[]«ENDIF» get«attribute.name.toFirstUpper()» («languageExt.selfPointer(classname, 0)»)'''
+	def private getterHeader(Attribute attribute, String classname){'''
+		«languageExt.accessLevelPublic()»«attribute.refType.type.typeName»«IF attribute.size!=0»[]«ENDIF» get«attribute.name.toFirstUpper()» («languageExt.selfPointer(classname, false)»)'''
 	}
 	
 	def argList(List<Attribute> attributes) {
@@ -143,34 +143,36 @@ class ProcedureHelpers {
 
 	
 	// Operations
-	def OperationsDeclaration(List<? extends Operation> operations, String classname) {'''
+	def operationsDeclaration(List<? extends Operation> operations, String classname) {'''
 		//--------------------- operations
-		«FOR operation : operations»«OperationSignature(operation, classname, true)»;
+		«FOR operation : operations»
+			«operationSignature(operation, classname, true)»;
 		«ENDFOR»
 		'''
 	}
 
-	def OperationsImplementation(List<? extends Operation> operations, String classname) {'''
+	def operationsImplementation(List<? extends Operation> operations, String classname) {'''
 		//--------------------- operations
-		«FOR operation : operations»«OperationSignature(operation, classname, false)» {
-		«FOR command : operation.detailCode.commands»	«command»
-			«ENDFOR»
-		}
+		«FOR operation : operations»
+			«operationSignature(operation, classname, false)» {
+				«FOR command : operation.detailCode.commands»
+					«command»
+				«ENDFOR»
+			}
 		«ENDFOR»
 		'''
 	}
 	
 	
-	def private OperationSignature(Operation operation, String classname, boolean isDeclaration) {
-		ClassOperationSignature(classname, operation.name, BuildArgumentList(operation.arguments).toString, DataTypeToString(operation.returntype), isDeclaration);
+	def private operationSignature(Operation operation, String classname, boolean isDeclaration) {
+		classOperationSignature(classname, operation.name, BuildArgumentList(operation.arguments).toString, dataTypeToString(operation.returntype), isDeclaration);
 	}
 
-	def private DataTypeToString(RefableType type){
-		
-		if(type==null)
-			return "void"
+	def private dataTypeToString(RefableType type) {
+		return if (type==null)
+			"void"
 		else 
-			return type.type.typeName
+			type.type.typeName
 	}
 
 	/*
@@ -180,9 +182,8 @@ class ProcedureHelpers {
 		'''«FOR argument : arguments SEPARATOR ", "»«argument.refType.type.typeName» «argument.name»«ENDFOR»'''
 	}
 	
-//	def ClassFunctionSignature(String classname, String functionname, EList<VarDecl> arguments, ){
-	def ClassOperationSignature(String classname, String operationname, String argumentList, String returnType, boolean isDeclaration){'''
-		«languageExt.accessLevelPublic()»«IF returnType==""»void«ELSE»«returnType»«ENDIF» «languageExt.operationScope(classname, isDeclaration)»«operationname»(«languageExt.selfPointer(classname, argumentList.length)»«argumentList»)'''
+	def private classOperationSignature(String classname, String operationname, String argumentList, String returnType, boolean isDeclaration){
+		'''«languageExt.accessLevelPublic()»«returnType» «memberInDeclaration(classname, operationname)»(«languageExt.selfPointer(classname, !argumentList.empty)»«argumentList»)'''
 	}
 	
 }

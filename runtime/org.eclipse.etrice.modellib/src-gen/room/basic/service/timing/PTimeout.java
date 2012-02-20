@@ -14,16 +14,11 @@ import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
 
 public class PTimeout {
 	// message IDs
-	// TODO: separate class for message IDs: class MSG{public static volatile int MSG_MIN = 0; ...} -> better structure
-	// error if msgID <= MSG_MIN
-	public static final int MSG_MIN = 0;   
-	//IDs for outgoing messages
+	public static final int MSG_MIN = 0;
 	public static final int OUT_timeoutTick = 1;
-	//IDs for incoming messages
 	public static final int IN_Start = 2;
 	public static final int IN_Kill = 3;
-	//error if msgID >= MSG_MAX
-	public static final int MSG_MAX = 4;  
+	public static final int MSG_MAX = 4;
 
 	//--------------------- begin user code
 		static protected class FireTimeoutTask extends TimerTask {
@@ -137,11 +132,11 @@ public class PTimeout {
 		//--------------------- operations
 		public void timeout(Integer id) {
 			//regular PortClass Operation timeout
-						DebuggingService.getInstance().addMessageAsyncOut(getAddress(),
-								getPeerAddress(), messageStrings[OUT_timeoutTick]);
-			
-						getPeerMsgReceiver().receive(
-								new EventWithDataMessage(getPeerAddress(), OUT_timeoutTick, id));
+							DebuggingService.getInstance().addMessageAsyncOut(getAddress(),
+									getPeerAddress(), messageStrings[OUT_timeoutTick]);
+				
+							getPeerMsgReceiver().receive(
+									new EventWithDataMessage(getPeerAddress(), OUT_timeoutTick, id));
 		}
 		
 		// sent messages

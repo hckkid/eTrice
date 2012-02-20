@@ -98,8 +98,6 @@ public class DataClassGen {
     _builder.append("#include \"etDatatypes.h\"");
     _builder.newLine();
     _builder.newLine();
-    _builder.append("/* TODO: includes only for used DataClasses, also for other models */");
-    _builder.newLine();
     {
       HashSet<DataClass> _referencedDataClasses = root.getReferencedDataClasses(dc);
       for(final DataClass dataClass : _referencedDataClasses) {
@@ -112,8 +110,8 @@ public class DataClassGen {
     }
     _builder.newLine();
     DetailCode _userCode1 = dc.getUserCode1();
-    StringConcatenation _UserCode = this.helpers.UserCode(_userCode1);
-    _builder.append(_UserCode, "");
+    StringConcatenation _userCode = this.helpers.userCode(_userCode1);
+    _builder.append(_userCode, "");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t");
     _builder.newLine();
@@ -121,13 +119,13 @@ public class DataClassGen {
     _builder.newLine();
     _builder.append("\t");
     DetailCode _userCode2 = dc.getUserCode2();
-    StringConcatenation _UserCode_1 = this.helpers.UserCode(_userCode2);
-    _builder.append(_UserCode_1, "	");
+    StringConcatenation _userCode_1 = this.helpers.userCode(_userCode2);
+    _builder.append(_userCode_1, "	");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
     EList<Attribute> _attributes = dc.getAttributes();
-    StringConcatenation _Attributes = this.helpers.Attributes(_attributes);
-    _builder.append(_Attributes, "	");
+    StringConcatenation _attributes_1 = this.helpers.attributes(_attributes);
+    _builder.append(_attributes_1, "	");
     _builder.newLineIfNotEmpty();
     _builder.append("} ");
     String _name_3 = dc.getName();
@@ -145,13 +143,11 @@ public class DataClassGen {
     _builder.append(";");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
-    _builder.append("// TODO: do we need setters and getters for C and C++ ?");
-    _builder.newLine();
     _builder.newLine();
     EList<StandardOperation> _operations = dc.getOperations();
     String _name_5 = dc.getName();
-    StringConcatenation _OperationsDeclaration = this.helpers.OperationsDeclaration(_operations, _name_5);
-    _builder.append(_OperationsDeclaration, "");
+    StringConcatenation _operationsDeclaration = this.helpers.operationsDeclaration(_operations, _name_5);
+    _builder.append(_operationsDeclaration, "");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("// deep copy");
@@ -208,17 +204,15 @@ public class DataClassGen {
     _builder.newLine();
     _builder.newLine();
     DetailCode _userCode3 = dc.getUserCode3();
-    StringConcatenation _UserCode = this.helpers.UserCode(_userCode3);
-    _builder.append(_UserCode, "");
+    StringConcatenation _userCode = this.helpers.userCode(_userCode3);
+    _builder.append(_userCode, "");
     _builder.newLineIfNotEmpty();
-    _builder.newLine();
-    _builder.append("// TODO: do we need setters and getters for C and C++ ?");
     _builder.newLine();
     _builder.newLine();
     EList<StandardOperation> _operations = dc.getOperations();
     String _name_1 = dc.getName();
-    StringConcatenation _OperationsImplementation = this.helpers.OperationsImplementation(_operations, _name_1);
-    _builder.append(_OperationsImplementation, "");
+    StringConcatenation _operationsImplementation = this.helpers.operationsImplementation(_operations, _name_1);
+    _builder.append(_operationsImplementation, "");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("// deep copy");

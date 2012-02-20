@@ -14,7 +14,6 @@ import org.eclipse.etrice.runtime.java.messaging.Message;
 import org.eclipse.etrice.runtime.java.messaging.MessageService;
 import org.eclipse.etrice.runtime.java.messaging.RTServices;
 import org.eclipse.etrice.runtime.java.modelbase.ActorClassBase;
-import org.eclipse.etrice.runtime.java.modelbase.InterfaceItemBase;
 
 import junit.framework.TestCase;
 

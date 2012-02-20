@@ -110,8 +110,8 @@ public class SubSystemClassGen {
     _builder.newLine();
     _builder.newLine();
     DetailCode _userCode1 = cc.getUserCode1();
-    StringConcatenation _UserCode = this.helpers.UserCode(_userCode1);
-    _builder.append(_UserCode, "");
+    StringConcatenation _userCode = this.helpers.userCode(_userCode1);
+    _builder.append(_userCode, "");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("public class ");
@@ -122,8 +122,8 @@ public class SubSystemClassGen {
     _builder.newLine();
     _builder.append("\t");
     DetailCode _userCode2 = cc.getUserCode2();
-    StringConcatenation _UserCode_1 = this.helpers.UserCode(_userCode2);
-    _builder.append(_UserCode_1, "	");
+    StringConcatenation _userCode_1 = this.helpers.userCode(_userCode2);
+    _builder.append(_userCode_1, "	");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
     _builder.newLine();

@@ -20,7 +20,7 @@ public class PingPongTop extends ActorClassBase {
 	//--------------------- services
 
 	//--------------------- interface item IDs
-	
+		
 	//--------------------- attributes
 	//--------------------- operations
 

@@ -2,13 +2,14 @@ package org.eclipse.etrice.generator.c.gen;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import java.util.List;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.RoomClass;
 import org.eclipse.etrice.generator.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.generator.etricegen.TransitionChain;
 import org.eclipse.etrice.generator.generic.ILanguageExtension;
 import org.eclipse.etrice.generator.generic.LanguageGenerator;
-import org.eclipse.xtext.xbase.lib.ComparableExtensions;
+import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 
@@ -24,11 +25,11 @@ public class CExtensions implements ILanguageExtension {
   }
   
   public String accessLevelPrivate() {
-    return "";
+    return "static ";
   }
   
   public String accessLevelProtected() {
-    return "";
+    return "static ";
   }
   
   public String accessLevelPublic() {
@@ -39,15 +40,23 @@ public class CExtensions implements ILanguageExtension {
     return "self->";
   }
   
-  public String selfPointer(final String classname, final int argumentCount) {
+  public String selfPointer(final String classname, final boolean hasArgs) {
     String _xifexpression = null;
-    boolean _operator_greaterThan = ComparableExtensions.<Integer>operator_greaterThan(((Integer)argumentCount), ((Integer)0));
-    if (_operator_greaterThan) {
-      String _operator_plus = StringExtensions.operator_plus(classname, "* self, ");
-      _xifexpression = _operator_plus;
+    if (hasArgs) {
+      _xifexpression = "* self, ";
     } else {
-      String _operator_plus_1 = StringExtensions.operator_plus(classname, "* self");
-      _xifexpression = _operator_plus_1;
+      _xifexpression = "* self";
+    }
+    String _operator_plus = StringExtensions.operator_plus(classname, _xifexpression);
+    return _operator_plus;
+  }
+  
+  public String selfPointer(final boolean hasArgs) {
+    String _xifexpression = null;
+    if (hasArgs) {
+      _xifexpression = "self, ";
+    } else {
+      _xifexpression = "self";
     }
     return _xifexpression;
   }
@@ -57,18 +66,15 @@ public class CExtensions implements ILanguageExtension {
     return _operator_plus;
   }
   
-  /**
-   * TODO: unify OUT and in an add for loop (also for Java)
-   */
-  public String outMessageId(final String classname, final String messagename) {
-    String _operator_plus = StringExtensions.operator_plus(classname, "_OUT_");
-    String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, messagename);
+  public String memberInDeclaration(final String namespace, final String member) {
+    String _operator_plus = StringExtensions.operator_plus(namespace, "_");
+    String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, member);
     return _operator_plus_1;
   }
   
-  public String inMessageId(final String classname, final String messagename) {
-    String _operator_plus = StringExtensions.operator_plus(classname, "_IN_");
-    String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, messagename);
+  public String memberInUse(final String namespace, final String member) {
+    String _operator_plus = StringExtensions.operator_plus(namespace, "_");
+    String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, member);
     return _operator_plus_1;
   }
   
@@ -129,6 +135,57 @@ public class CExtensions implements ILanguageExtension {
     _builder.append(" */");
     _builder.newLineIfNotEmpty();
     return _builder;
+  }
+  
+  public boolean usesInheritance() {
+    return false;
+  }
+  
+  public String genEnumeration(final String name, final List<Pair<String,String>> entries) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("enum ");
+    _builder.append(name, "");
+    _builder.append(" {");
+    _builder.newLineIfNotEmpty();
+    {
+      boolean hasAnyElements = false;
+      for(final Pair<String,String> entry : entries) {
+        if (!hasAnyElements) {
+          hasAnyElements = true;
+        } else {
+          _builder.appendImmediate(",", "	");
+        }
+        _builder.append("\t");
+        String _first = entry.getFirst();
+        _builder.append(_first, "	");
+        _builder.append(" = ");
+        String _second = entry.getSecond();
+        _builder.append(_second, "	");
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    _builder.append("};");
+    _builder.newLine();
+    String _string = _builder.toString();
+    return _string;
+  }
+  
+  public String booleanConstant(final boolean b) {
+    String _xifexpression = null;
+    if (b) {
+      _xifexpression = "TRUE";
+    } else {
+      _xifexpression = "FALSE";
+    }
+    return _xifexpression;
+  }
+  
+  public String nullPointer() {
+    return "NULL";
+  }
+  
+  public String voidPointer() {
+    return "void*";
   }
   
   public String getExecuteChainCode(final ExpandedActorClass ac, final TransitionChain tc) {

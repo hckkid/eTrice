@@ -17,17 +17,17 @@ import org.eclipse.etrice.generator.base.ILogger;
 import org.eclipse.etrice.generator.c.gen.CExtensions;
 import org.eclipse.etrice.generator.etricegen.Root;
 import org.eclipse.etrice.generator.extensions.RoomExtensions;
+import org.eclipse.etrice.generator.generic.GenericProtocolClassGenerator;
 import org.eclipse.etrice.generator.generic.ProcedureHelpers;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
 import org.eclipse.xtext.xbase.lib.BooleanExtensions;
-import org.eclipse.xtext.xbase.lib.IntegerExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 
 @SuppressWarnings("all")
 @Singleton
-public class ProtocolClassGen {
+public class ProtocolClassGen extends GenericProtocolClassGenerator {
   @Inject
   private JavaIoFileSystemAccess fileAccess;
   
@@ -108,8 +108,8 @@ public class ProtocolClassGen {
     _builder.newLine();
     _builder.newLine();
     DetailCode _userCode1 = pc.getUserCode1();
-    StringConcatenation _UserCode = this.helpers.UserCode(_userCode1);
-    _builder.append(_UserCode, "");
+    StringConcatenation _userCode = this.helpers.userCode(_userCode1);
+    _builder.append(_userCode, "");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     {
@@ -125,73 +125,9 @@ public class ProtocolClassGen {
     _builder.newLine();
     _builder.append("/* message IDs */");
     _builder.newLine();
-    _builder.append("enum {");
-    _builder.newLine();
-    _builder.append("\t");
-    String _name_3 = pc.getName();
-    _builder.append(_name_3, "	");
-    _builder.append("_MSG_MIN = 0, ");
+    String _genMessageIDs = this.genMessageIDs(pc);
+    _builder.append(_genMessageIDs, "");
     _builder.newLineIfNotEmpty();
-    _builder.append("\t");
-    _builder.append("/* IDs for outgoing messages */");
-    _builder.newLine();
-    {
-      List<Message> _allOutgoingMessages = this.roomExt.getAllOutgoingMessages(pc);
-      for(final Message message : _allOutgoingMessages) {
-        _builder.append("\t");
-        String _name_4 = pc.getName();
-        String _name_5 = message.getName();
-        String _outMessageId = this.stdExt.outMessageId(_name_4, _name_5);
-        _builder.append(_outMessageId, "	");
-        _builder.append(" = ");
-        List<Message> _allOutgoingMessages_1 = this.roomExt.getAllOutgoingMessages(pc);
-        int _indexOf = _allOutgoingMessages_1.indexOf(message);
-        int _operator_plus = IntegerExtensions.operator_plus(((Integer)_indexOf), ((Integer)1));
-        _builder.append(_operator_plus, "	");
-        _builder.append(",");
-        _builder.newLineIfNotEmpty();
-      }
-    }
-    _builder.append("\t");
-    _builder.append("/* IDs for incoming messages */");
-    _builder.newLine();
-    {
-      List<Message> _allIncomingMessages = this.roomExt.getAllIncomingMessages(pc);
-      for(final Message message_1 : _allIncomingMessages) {
-        _builder.append("\t");
-        String _name_6 = pc.getName();
-        String _name_7 = message_1.getName();
-        String _inMessageId = this.stdExt.inMessageId(_name_6, _name_7);
-        _builder.append(_inMessageId, "	");
-        _builder.append(" = ");
-        List<Message> _allIncomingMessages_1 = this.roomExt.getAllIncomingMessages(pc);
-        int _indexOf_1 = _allIncomingMessages_1.indexOf(message_1);
-        List<Message> _allOutgoingMessages_2 = this.roomExt.getAllOutgoingMessages(pc);
-        int _size = _allOutgoingMessages_2.size();
-        int _operator_plus_1 = IntegerExtensions.operator_plus(((Integer)_indexOf_1), ((Integer)_size));
-        int _operator_plus_2 = IntegerExtensions.operator_plus(((Integer)_operator_plus_1), ((Integer)1));
-        _builder.append(_operator_plus_2, "	");
-        _builder.append(",");
-        _builder.newLineIfNotEmpty();
-      }
-    }
-    _builder.append("\t");
-    _builder.append("/* error if msgID >= MSG_MAX */");
-    _builder.newLine();
-    _builder.append("\t");
-    String _name_8 = pc.getName();
-    _builder.append(_name_8, "	");
-    _builder.append("_MSG_MAX = ");
-    List<Message> _allOutgoingMessages_3 = this.roomExt.getAllOutgoingMessages(pc);
-    int _size_1 = _allOutgoingMessages_3.size();
-    List<Message> _allIncomingMessages_2 = this.roomExt.getAllIncomingMessages(pc);
-    int _size_2 = _allIncomingMessages_2.size();
-    int _operator_plus_3 = IntegerExtensions.operator_plus(((Integer)_size_1), ((Integer)_size_2));
-    int _operator_plus_4 = IntegerExtensions.operator_plus(((Integer)_operator_plus_3), ((Integer)1));
-    _builder.append(_operator_plus_4, "	");
-    _builder.newLineIfNotEmpty();
-    _builder.append("};");
-    _builder.newLine();
     _builder.newLine();
     _builder.append("/*--------------------- port classes */");
     _builder.newLine();
@@ -208,19 +144,19 @@ public class ProtocolClassGen {
     _builder.append("/* get message string for message id */");
     _builder.newLine();
     _builder.append("const char* ");
-    String _name_9 = pc.getName();
-    _builder.append(_name_9, "");
+    String _name_3 = pc.getName();
+    _builder.append(_name_3, "");
     _builder.append("_getMessageString(int msg_id);");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     DetailCode _userCode2 = pc.getUserCode2();
-    StringConcatenation _UserCode_1 = this.helpers.UserCode(_userCode2);
-    _builder.append(_UserCode_1, "");
+    StringConcatenation _userCode_1 = this.helpers.userCode(_userCode2);
+    _builder.append(_userCode_1, "");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.newLine();
-    String _name_10 = pc.getName();
-    StringConcatenation _generateIncludeGuardEnd = this.stdExt.generateIncludeGuardEnd(_name_10);
+    String _name_4 = pc.getName();
+    StringConcatenation _generateIncludeGuardEnd = this.stdExt.generateIncludeGuardEnd(_name_4);
     _builder.append(_generateIncludeGuardEnd, "");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
@@ -383,8 +319,9 @@ public class ProtocolClassGen {
             _builder.append("msg->evtID = ");
             String _name_2 = pc.getName();
             String _name_3 = message.getName();
-            String _outMessageId = this.stdExt.outMessageId(_name_2, _name_3);
-            _builder.append(_outMessageId, "	");
+            String _operator_plus = StringExtensions.operator_plus("OUT_", _name_3);
+            String _memberInUse = this.stdExt.memberInUse(_name_2, _operator_plus);
+            _builder.append(_memberInUse, "	");
             _builder.append(";");
             _builder.newLineIfNotEmpty();
             _builder.append("\t");
@@ -428,8 +365,9 @@ public class ProtocolClassGen {
             _builder.append("msg->evtID = ");
             String _name_6 = pc.getName();
             String _name_7 = message_1.getName();
-            String _inMessageId = this.stdExt.inMessageId(_name_6, _name_7);
-            _builder.append(_inMessageId, "	");
+            String _operator_plus_1 = StringExtensions.operator_plus("IN_", _name_7);
+            String _memberInUse_1 = this.stdExt.memberInUse(_name_6, _operator_plus_1);
+            _builder.append(_memberInUse_1, "	");
             _builder.append(";");
             _builder.newLineIfNotEmpty();
             _builder.append("\t");
@@ -500,8 +438,6 @@ public class ProtocolClassGen {
   
   public StringConcatenation generateDebugHelpersImplementation(final Root root, final ProtocolClass pc) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.newLine();
-    _builder.append("/* TODO: make this optional or different for smaller footprint */");
     _builder.newLine();
     _builder.append("/* message names as strings for debugging (generate MSC) */");
     _builder.newLine();

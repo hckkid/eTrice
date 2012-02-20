@@ -20,20 +20,20 @@ import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.generator.base.ILogger;
 import org.eclipse.etrice.generator.etricegen.Root;
 import org.eclipse.etrice.generator.extensions.RoomExtensions;
+import org.eclipse.etrice.generator.generic.GenericProtocolClassGenerator;
 import org.eclipse.etrice.generator.generic.ProcedureHelpers;
 import org.eclipse.etrice.generator.generic.TypeHelpers;
 import org.eclipse.etrice.generator.java.gen.JavaExtensions;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
 import org.eclipse.xtext.xbase.lib.BooleanExtensions;
 import org.eclipse.xtext.xbase.lib.ComparableExtensions;
-import org.eclipse.xtext.xbase.lib.IntegerExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 
 @SuppressWarnings("all")
 @Singleton
-public class ProtocolClassGen {
+public class ProtocolClassGen extends GenericProtocolClassGenerator {
   @Inject
   private JavaIoFileSystemAccess fileAccess;
   
@@ -95,8 +95,8 @@ public class ProtocolClassGen {
     _builder.newLine();
     _builder.newLine();
     DetailCode _userCode1 = pc.getUserCode1();
-    StringConcatenation _UserCode = this.helpers.UserCode(_userCode1);
-    _builder.append(_UserCode, "");
+    StringConcatenation _userCode = this.helpers.userCode(_userCode1);
+    _builder.append(_userCode, "");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     EList<RoomModel> _referencedModels = root.getReferencedModels(pc);
@@ -121,98 +121,34 @@ public class ProtocolClassGen {
     _builder.append("// message IDs");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("// TODO: separate class for message IDs: class MSG{public static volatile int MSG_MIN = 0; ...} -> better structure");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("// error if msgID <= MSG_MIN");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("public static final int MSG_MIN = 0;   ");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("//IDs for outgoing messages");
-    _builder.newLine();
-    {
-      List<Message> _allOutgoingMessages = this.roomExt.getAllOutgoingMessages(pc);
-      for(final Message message : _allOutgoingMessages) {
-        _builder.append("\t");
-        _builder.append("public static final int ");
-        String _name_2 = pc.getName();
-        String _name_3 = message.getName();
-        String _outMessageId = this.stdExt.outMessageId(_name_2, _name_3);
-        _builder.append(_outMessageId, "	");
-        _builder.append(" = ");
-        List<Message> _allOutgoingMessages_1 = this.roomExt.getAllOutgoingMessages(pc);
-        int _indexOf = _allOutgoingMessages_1.indexOf(message);
-        int _operator_plus = IntegerExtensions.operator_plus(((Integer)_indexOf), ((Integer)1));
-        _builder.append(_operator_plus, "	");
-        _builder.append(";");
-        _builder.newLineIfNotEmpty();
-      }
-    }
-    _builder.append("\t");
-    _builder.append("//IDs for incoming messages");
-    _builder.newLine();
-    {
-      List<Message> _allIncomingMessages = this.roomExt.getAllIncomingMessages(pc);
-      for(final Message message_1 : _allIncomingMessages) {
-        _builder.append("\t");
-        _builder.append("public static final int ");
-        String _name_4 = pc.getName();
-        String _name_5 = message_1.getName();
-        String _inMessageId = this.stdExt.inMessageId(_name_4, _name_5);
-        _builder.append(_inMessageId, "	");
-        _builder.append(" = ");
-        List<Message> _allIncomingMessages_1 = this.roomExt.getAllIncomingMessages(pc);
-        int _indexOf_1 = _allIncomingMessages_1.indexOf(message_1);
-        List<Message> _allOutgoingMessages_2 = this.roomExt.getAllOutgoingMessages(pc);
-        int _size = _allOutgoingMessages_2.size();
-        int _operator_plus_1 = IntegerExtensions.operator_plus(((Integer)_indexOf_1), ((Integer)_size));
-        int _operator_plus_2 = IntegerExtensions.operator_plus(((Integer)_operator_plus_1), ((Integer)1));
-        _builder.append(_operator_plus_2, "	");
-        _builder.append(";");
-        _builder.newLineIfNotEmpty();
-      }
-    }
-    _builder.append("\t");
-    _builder.append("//error if msgID >= MSG_MAX");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("public static final int MSG_MAX = ");
-    List<Message> _allOutgoingMessages_3 = this.roomExt.getAllOutgoingMessages(pc);
-    int _size_1 = _allOutgoingMessages_3.size();
-    List<Message> _allIncomingMessages_2 = this.roomExt.getAllIncomingMessages(pc);
-    int _size_2 = _allIncomingMessages_2.size();
-    int _operator_plus_3 = IntegerExtensions.operator_plus(((Integer)_size_1), ((Integer)_size_2));
-    int _operator_plus_4 = IntegerExtensions.operator_plus(((Integer)_operator_plus_3), ((Integer)1));
-    _builder.append(_operator_plus_4, "	");
-    _builder.append(";  ");
+    String _genMessageIDs = this.genMessageIDs(pc);
+    _builder.append(_genMessageIDs, "	");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("\t");
     DetailCode _userCode2 = pc.getUserCode2();
-    StringConcatenation _UserCode_1 = this.helpers.UserCode(_userCode2);
-    _builder.append(_UserCode_1, "	");
+    StringConcatenation _userCode_1 = this.helpers.userCode(_userCode2);
+    _builder.append(_userCode_1, "	");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("\t");
     _builder.append("private static String messageStrings[] = {\"MIN\", ");
     {
-      List<Message> _allOutgoingMessages_4 = this.roomExt.getAllOutgoingMessages(pc);
-      for(final Message m : _allOutgoingMessages_4) {
+      List<Message> _allOutgoingMessages = this.roomExt.getAllOutgoingMessages(pc);
+      for(final Message m : _allOutgoingMessages) {
         _builder.append("\"");
-        String _name_6 = m.getName();
-        _builder.append(_name_6, "	");
+        String _name_2 = m.getName();
+        _builder.append(_name_2, "	");
         _builder.append("\",");
       }
     }
     _builder.append(" ");
     {
-      List<Message> _allIncomingMessages_3 = this.roomExt.getAllIncomingMessages(pc);
-      for(final Message m_1 : _allIncomingMessages_3) {
+      List<Message> _allIncomingMessages = this.roomExt.getAllIncomingMessages(pc);
+      for(final Message m_1 : _allIncomingMessages) {
         _builder.append("\"");
-        String _name_7 = m_1.getName();
-        _builder.append(_name_7, "	");
+        String _name_3 = m_1.getName();
+        _builder.append(_name_3, "	");
         _builder.append("\",");
       }
     }
@@ -280,8 +216,8 @@ public class ProtocolClassGen {
       if (_operator_notEquals) {
         _builder.append("\t");
         DetailCode _userCode = pclass.getUserCode();
-        StringConcatenation _UserCode = this.helpers.UserCode(_userCode);
-        _builder.append(_UserCode, "	");
+        StringConcatenation _userCode_1 = this.helpers.userCode(_userCode);
+        _builder.append(_userCode_1, "	");
         _builder.newLineIfNotEmpty();
       }
     }
@@ -343,9 +279,6 @@ public class ProtocolClassGen {
     _builder.newLine();
     _builder.append("\t\t\t\t");
     _builder.append("if (messageStrings[msg.getEvtId()] != \"timerTick\"){");
-    _builder.newLine();
-    _builder.append("\t\t\t\t\t");
-    _builder.append("// TODOTS: model switch for activation");
     _builder.newLine();
     _builder.append("\t\t\t\t\t");
     _builder.append("DebuggingService.getInstance().addMessageAsyncIn(getPeerAddress(), getAddress(), messageStrings[msg.getEvtId()]);");
@@ -433,13 +366,13 @@ public class ProtocolClassGen {
       if (_operator_notEquals_1) {
         _builder.append("\t");
         EList<Attribute> _attributes = pclass.getAttributes();
-        StringConcatenation _Attributes = this.helpers.Attributes(_attributes);
-        _builder.append(_Attributes, "	");
+        StringConcatenation _attributes_1 = this.helpers.attributes(_attributes);
+        _builder.append(_attributes_1, "	");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
         EList<PortOperation> _operations = pclass.getOperations();
-        StringConcatenation _OperationsImplementation = this.helpers.OperationsImplementation(_operations, name);
-        _builder.append(_OperationsImplementation, "	");
+        StringConcatenation _operationsImplementation = this.helpers.operationsImplementation(_operations, name);
+        _builder.append(_operationsImplementation, "	");
         _builder.newLineIfNotEmpty();
       }
     }
@@ -765,10 +698,6 @@ public class ProtocolClassGen {
           _builder.append(_name, "	");
           _builder.append("] != \"timerTick\"){");
           _builder.newLineIfNotEmpty();
-          _builder.append("\t");
-          _builder.append("\t");
-          _builder.append("// TODOTS: model switch for activation");
-          _builder.newLine();
           _builder.append("\t");
           _builder.append("DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[");
           _builder.append(dir, "	");

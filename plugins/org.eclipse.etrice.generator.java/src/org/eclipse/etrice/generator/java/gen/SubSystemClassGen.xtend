@@ -62,11 +62,11 @@ class SubSystemClassGen {
 		«FOR model : models»import «model.name».*;«ENDFOR»
 		
 		
-		«helpers.UserCode(cc.userCode1)»
+		«helpers.userCode(cc.userCode1)»
 		
 		public class «comp.name» extends SubSystemClassBase{
 		
-			«helpers.UserCode(cc.userCode2)»
+			«helpers.userCode(cc.userCode2)»
 			
 			public «comp.name»(IRTObject parent, String name) {
 				super(parent, name);

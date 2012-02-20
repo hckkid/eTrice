@@ -182,6 +182,57 @@ public class RoomExtensions {
     return _punion;
   }
   
+  public List<Port> getAllEndPorts(final ActorClass ac) {
+    List<Port> _xifexpression = null;
+    ActorClass _base = ac.getBase();
+    boolean _operator_equals = ObjectExtensions.operator_equals(_base, null);
+    if (_operator_equals) {
+      List<Port> _endPorts = this.getEndPorts(ac);
+      return _endPorts;
+    } else {
+      ActorClass _base_1 = ac.getBase();
+      List<Port> _allEndPorts = this.getAllEndPorts(_base_1);
+      List<Port> _endPorts_1 = this.getEndPorts(ac);
+      List<Port> _union = this.<Port>union(_allEndPorts, _endPorts_1);
+      _xifexpression = _union;
+    }
+    return _xifexpression;
+  }
+  
+  public List<SAPRef> getAllSAPs(final ActorClass ac) {
+    List<SAPRef> _xifexpression = null;
+    ActorClass _base = ac.getBase();
+    boolean _operator_equals = ObjectExtensions.operator_equals(_base, null);
+    if (_operator_equals) {
+      EList<SAPRef> _strSAPs = ac.getStrSAPs();
+      return _strSAPs;
+    } else {
+      ActorClass _base_1 = ac.getBase();
+      EList<SAPRef> _strSAPs_1 = _base_1.getStrSAPs();
+      EList<SAPRef> _strSAPs_2 = ac.getStrSAPs();
+      List<SAPRef> _union = this.<SAPRef>union(_strSAPs_1, _strSAPs_2);
+      _xifexpression = _union;
+    }
+    return _xifexpression;
+  }
+  
+  public List<ServiceImplementation> getAllServiceImplementations(final ActorClass ac) {
+    List<ServiceImplementation> _xifexpression = null;
+    ActorClass _base = ac.getBase();
+    boolean _operator_equals = ObjectExtensions.operator_equals(_base, null);
+    if (_operator_equals) {
+      EList<ServiceImplementation> _serviceImplementations = ac.getServiceImplementations();
+      return _serviceImplementations;
+    } else {
+      ActorClass _base_1 = ac.getBase();
+      EList<ServiceImplementation> _serviceImplementations_1 = _base_1.getServiceImplementations();
+      EList<ServiceImplementation> _serviceImplementations_2 = ac.getServiceImplementations();
+      List<ServiceImplementation> _union = this.<ServiceImplementation>union(_serviceImplementations_1, _serviceImplementations_2);
+      _xifexpression = _union;
+    }
+    return _xifexpression;
+  }
+  
   public String getPathName(final String path) {
     String _replaceAll = path.replaceAll("/", "_");
     return _replaceAll;
@@ -484,6 +535,23 @@ public class RoomExtensions {
       return ret;
   }
   
+  public ArrayList<State> getLeafStatesFirst(final List<State> states) {
+      ArrayList<State> _arrayList = new ArrayList<State>();
+      ArrayList<State> leaf = _arrayList;
+      ArrayList<State> _arrayList_1 = new ArrayList<State>();
+      ArrayList<State> nonLeaf = _arrayList_1;
+      for (final State state : states) {
+        boolean _isLeaf = this.isLeaf(state);
+        if (_isLeaf) {
+          leaf.add(state);
+        } else {
+          nonLeaf.add(state);
+        }
+      }
+      leaf.addAll(nonLeaf);
+      return leaf;
+  }
+  
   public List<State> getAllBaseStates(final ActorClass ac) {
     List<State> _xifexpression = null;
     ActorClass _base = ac.getBase();
@@ -498,6 +566,47 @@ public class RoomExtensions {
       StateGraph _stateMachine_1 = ac.getStateMachine();
       List<State> _baseStateList_1 = this.getBaseStateList(_stateMachine_1);
       List<State> _union = this.<State>union(_allBaseStates, _baseStateList_1);
+      _xifexpression = _union;
+    }
+    return _xifexpression;
+  }
+  
+  public List<State> getAllBaseStatesLeavesFirst(final ActorClass ac) {
+    List<State> _xifexpression = null;
+    ActorClass _base = ac.getBase();
+    boolean _operator_equals = ObjectExtensions.operator_equals(_base, null);
+    if (_operator_equals) {
+      StateGraph _stateMachine = ac.getStateMachine();
+      List<State> _baseStateList = this.getBaseStateList(_stateMachine);
+      ArrayList<State> _leafStatesFirst = this.getLeafStatesFirst(_baseStateList);
+      return _leafStatesFirst;
+    } else {
+      ActorClass _base_1 = ac.getBase();
+      List<State> _allBaseStates = this.getAllBaseStates(_base_1);
+      ArrayList<State> _leafStatesFirst_1 = this.getLeafStatesFirst(_allBaseStates);
+      StateGraph _stateMachine_1 = ac.getStateMachine();
+      List<State> _baseStateList_1 = this.getBaseStateList(_stateMachine_1);
+      ArrayList<State> _leafStatesFirst_2 = this.getLeafStatesFirst(_baseStateList_1);
+      List<State> _union = this.<State>union(_leafStatesFirst_1, _leafStatesFirst_2);
+      _xifexpression = _union;
+    }
+    return _xifexpression;
+  }
+  
+  public List<State> getAllLeafStates(final ActorClass ac) {
+    List<State> _xifexpression = null;
+    ActorClass _base = ac.getBase();
+    boolean _operator_equals = ObjectExtensions.operator_equals(_base, null);
+    if (_operator_equals) {
+      StateGraph _stateMachine = ac.getStateMachine();
+      List<State> _leafStateList = this.getLeafStateList(_stateMachine);
+      return _leafStateList;
+    } else {
+      ActorClass _base_1 = ac.getBase();
+      List<State> _allLeafStates = this.getAllLeafStates(_base_1);
+      StateGraph _stateMachine_1 = ac.getStateMachine();
+      List<State> _leafStateList_1 = this.getLeafStateList(_stateMachine_1);
+      List<State> _union = this.<State>union(_allLeafStates, _leafStateList_1);
       _xifexpression = _union;
     }
     return _xifexpression;

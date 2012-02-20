@@ -29,8 +29,8 @@ public class MrPing extends ActorClassBase {
 	//--------------------- services
 
 	//--------------------- interface item IDs
-	protected static final int IFITEM_PingPongPort = 1;
-	
+	public static final int IFITEM_PingPongPort = 1;
+		
 	//--------------------- attributes
 	protected int[] i32Array;
 	protected PingPongData data;
@@ -84,48 +84,311 @@ public class MrPing extends ActorClassBase {
 		destroyUser();
 	}	
 
-	//******************************************
-	// START of generated code for FSM
-	//******************************************
 	
-	// State IDs for FSM
-	protected static final int STATE_waitForPong = 2;
-	protected static final int STATE_state0 = 3;
-	protected static final int STATE_state1 = 4;
-	protected static final int STATE_state2 = 5;
-	protected static final int STATE_TestFalse = 6;
-	protected static final int STATE_TestOk = 7;
-		protected static final String stateStrings[] = {"<no state>","<top>","waitForPong",
-			"state0",
-			"state1",
-			"state2",
-			"TestFalse",
-			"TestOk"
-			};
+	/* state IDs */
+	public static final int STATE_waitForPong = 2;
+	public static final int STATE_state0 = 3;
+	public static final int STATE_state1 = 4;
+	public static final int STATE_state2 = 5;
+	public static final int STATE_TestFalse = 6;
+	public static final int STATE_TestOk = 7;
+	
+	/* transition chains */
+	public static final int CHAIN_TRANS_INITIAL_TO__waitForPong = 1;
+	public static final int CHAIN_TRANS_state0_TO_state1_BY_pongPingPongPort = 2;
+	public static final int CHAIN_TRANS_state1_TO_state2_BY_pongSimplePingPongPort = 3;
+	public static final int CHAIN_TRANS_state2_TO_cp1_BY_pongSimplePingPongPort = 4;
+	public static final int CHAIN_TRANS_tp0_TO_tp0_BY_pongPingPongPort_tr0 = 5;
+	public static final int CHAIN_TRANS_tp0_TO_tp0_BY_pongSimplePingPongPort_tr1 = 6;
+	public static final int CHAIN_TRANS_waitForPong_TO_cp0_BY_pongPingPongPort = 7;
+	
+	/* triggers */
+	public static final int TRIG_PingPongPort__pong = IFITEM_PingPongPort + EVT_SHIFT*PingPongProtocol.OUT_pong;
+	public static final int TRIG_PingPongPort__pongSimple = IFITEM_PingPongPort + EVT_SHIFT*PingPongProtocol.OUT_pongSimple;
+	
+	// state names
+	protected static final String stateStrings[] = {"<no state>","<top>","waitForPong",
+	"state0",
+	"state1",
+	"state2",
+	"TestFalse",
+	"TestOk"
+	};
 	
 	// history
-	// TODOHRR: history defined in ActorClassBase, init in constructor
-	//		history = new int[5];
-	//		for (int i = 0; i < history.length; i++) {
-	//			history[i] = NO_STATE;
-	//		}
 	protected int history[] = {NO_STATE,NO_STATE,NO_STATE,NO_STATE,NO_STATE,NO_STATE,NO_STATE,NO_STATE};
 	
-	// transition chains
-	protected static final int CHAIN_TRANS_INITIAL_TO__waitForPong = 1;
-	protected static final int CHAIN_TRANS_state0_TO_state1_BY_pongPingPongPort = 2;
-	protected static final int CHAIN_TRANS_state1_TO_state2_BY_pongSimplePingPongPort = 3;
-	protected static final int CHAIN_TRANS_state2_TO_cp1_BY_pongSimplePingPongPort = 4;
-	protected static final int CHAIN_TRANS_tp0_TO_tp0_BY_pongPingPongPort_tr0 = 5;
-	protected static final int CHAIN_TRANS_tp0_TO_tp0_BY_pongSimplePingPongPort_tr1 = 6;
-	protected static final int CHAIN_TRANS_waitForPong_TO_cp0_BY_pongPingPongPort = 7;
+	private void setState(int new_state) {
+		DebuggingService.getInstance().addActorState(this,stateStrings[new_state]);
+		if (stateStrings[new_state]!="Idle") {
+			System.out.println(getInstancePath() + " -> " + stateStrings[new_state]);
+		}	
+		this.state = new_state;
+	}
 	
-	// triggers for FSM
-	protected static final int TRIG_PingPongPort__pong = IFITEM_PingPongPort + EVT_SHIFT*PingPongProtocol.OUT_pong;
-	protected static final int TRIG_PingPongPort__pongSimple = IFITEM_PingPongPort + EVT_SHIFT*PingPongProtocol.OUT_pongSimple;
+	//*** Entry and Exit Codes
 	
-	// receiveEvent contains the main implementation of the FSM
-	@Override
+	//*** Action Codes
+	protected void action_TRANS_INITIAL_TO__waitForPong() {
+		int i;
+		int[] intArray;
+		this.data=new PingPongData();
+		
+		// send default data
+		PingPongData d = new PingPongData();
+		PingPongPort.ping(d);
+		
+		d.setI8Val((byte) 45);
+		d.setI16Val((short) 34);
+		d.setI32Val(2);
+		d.setF32Val((float)3.14);
+		d.setF64Val(7.12345);
+		d.setStringVal("Hase !");
+		
+		d.getOwnType().setI8Val((byte)10);
+		d.getOwnType().setI16Val((short)17);
+		d.getOwnType().setI32Val(4711);
+		d.getOwnType().setF32Val((float)3.0815);
+		d.getOwnType().setF64Val(123.45678);
+		d.getOwnType().setStringVal("Deep Hase !");
+		intArray = d.getOwnType().getArrayFromInt32();
+		for (i=0;i<intArray.length;i++) {intArray[i] = 10+i;}
+		d.getOwnType().setArrayFromInt32(intArray);
+		
+		PingPongPort.ping(d);
+		
+		d.setI8Val((byte) 55);
+		d.setI16Val((short) 44);
+		d.setI32Val(3);
+		d.setF32Val((float)24.4563458);
+		d.setF64Val(2347.2342312345);
+		d.setStringVal("Mein Hase !");
+		
+		d.getOwnType().setI8Val((byte)15);
+		d.getOwnType().setI16Val((short)23);
+		d.getOwnType().setI32Val(4812);
+		d.getOwnType().setF32Val((float)2453.30815);
+		d.getOwnType().setF64Val(125332.42342);
+		d.getOwnType().setStringVal("Mein Deep Hase !");
+		intArray = d.getOwnType().getArrayFromInt32();
+		for (i=0;i<intArray.length;i++) {intArray[i] = 30+i;}
+		d.getOwnType().setArrayFromInt32(intArray);
+		
+		PingPongPort.ping(d);
+		PingPongPort.ping(data);
+		
+		data.setI8Val((byte) 67);
+		data.setI16Val((short) 97);
+		data.setI32Val(70);
+		data.setF32Val((float)233.14);
+		data.setF64Val(723434.12345);
+		data.setStringVal("Falscher Hase !");
+		
+		crcGen.update(10);
+	}
+	protected void action_TRANS_tp0_TO_tp0_BY_pongPingPongPort_tr0(InterfaceItemBase ifitem, PingPongData p) {
+		System.out.printf("Top Level : \n");
+		printData(p);
+		crcGen.update(20);
+	}
+	protected void action_TRANS_tp0_TO_tp0_BY_pongSimplePingPongPort_tr1(InterfaceItemBase ifitem, int p) {
+		System.out.printf("Top Level Simple: \n");
+		crcGen.update(35);
+	}
+	protected void action_TRANS_waitForPong_TO_cp0_BY_pongPingPongPort(InterfaceItemBase ifitem, PingPongData p) {
+		printData(p);
+		crcGen.update(11);
+	}
+	protected void action_TRANS_cp0_TO_waitForPong(InterfaceItemBase ifitem, PingPongData p) {
+		crcGen.update(12);
+	}
+	protected void action_TRANS_cp0_TO_state0_COND_tr3(InterfaceItemBase ifitem, PingPongData p) {
+		// send default values
+		PingPongPort.ping(data);
+		
+		data.getOwnType().setI8Val((byte)10);
+		data.getOwnType().setI16Val((short)17);
+		data.getOwnType().setI32Val(4711);
+		data.getOwnType().setF32Val((float)3.0815);
+		data.getOwnType().setF64Val(123.45678);
+		data.getOwnType().setStringVal("Deep Hase !");
+		int[] intArray = data.getOwnType().getArrayFromInt32();
+		for (int i=0;i<intArray.length;i++) {intArray[i] = 10+i;}
+		data.getOwnType().setArrayFromInt32(intArray);
+		
+		// use convenient function
+		PingPongPort.ping((byte)45,(short)34,80,'c',(float)3.14,7.12345,"Hase !",intArray,data.getOwnType());
+		
+		crcGen.update(13);
+	}
+	protected void action_TRANS_state0_TO_state1_BY_pongPingPongPort(InterfaceItemBase ifitem, PingPongData p) {
+		printData(p);
+		PingPongPort.pingSimple(12);
+		PingPongPort.pingSimple(27);
+		crcGen.update(14);
+	}
+	protected void action_TRANS_state1_TO_state2_BY_pongSimplePingPongPort(InterfaceItemBase ifitem, int p) {
+		crcGen.update(15);
+	}
+	protected void action_TRANS_state2_TO_cp1_BY_pongSimplePingPongPort(InterfaceItemBase ifitem, int p) {
+		crcGen.update(16);
+		System.out.printf("CRC: %d \n", crcGen.getCrc());
+	}
+	protected void action_TRANS_cp1_TO_TestFalse(InterfaceItemBase ifitem, int p) {
+		RTServices.getInstance().getSubSystem().testFinished(1);
+	}
+	protected void action_TRANS_cp1_TO_TestOk_COND_tr9(InterfaceItemBase ifitem, int p) {
+		RTServices.getInstance().getSubSystem().testFinished(0);
+	}
+	
+	/**
+	 * calls exit codes while exiting from the current state to one of its
+	 * parent states while remembering the history
+	 * @param current - the current state
+	 * @param to - the final parent state
+	 * @param handler - entry and exit codes are called only if not handler (for handler TransitionPoints)
+	 */
+	private void exitTo(int current, int to, boolean handler) {
+		while (current!=to) {
+			switch (current) {
+				case STATE_waitForPong:
+					this.history[STATE_TOP] = STATE_waitForPong;
+					current = STATE_TOP;
+					break;
+				case STATE_state0:
+					this.history[STATE_TOP] = STATE_state0;
+					current = STATE_TOP;
+					break;
+				case STATE_state1:
+					this.history[STATE_TOP] = STATE_state1;
+					current = STATE_TOP;
+					break;
+				case STATE_state2:
+					this.history[STATE_TOP] = STATE_state2;
+					current = STATE_TOP;
+					break;
+				case STATE_TestFalse:
+					this.history[STATE_TOP] = STATE_TestFalse;
+					current = STATE_TOP;
+					break;
+				case STATE_TestOk:
+					this.history[STATE_TOP] = STATE_TestOk;
+					current = STATE_TOP;
+					break;
+			}
+		}
+	}
+	
+	/**
+	 * calls action, entry and exit codes along a transition chain. The generic data are cast to typed data
+	 * matching the trigger of this chain. The ID of the final state is returned
+	 * @param chain - the chain ID
+	 * @param generic_data - the generic data pointer
+	 * @return the ID of the final state
+	 */
+	private int executeTransitionChain(int chain, InterfaceItemBase ifitem, Object generic_data) {
+		switch (chain) {
+			case CHAIN_TRANS_INITIAL_TO__waitForPong:
+			{
+				action_TRANS_INITIAL_TO__waitForPong();
+				return STATE_waitForPong;
+			}
+			case CHAIN_TRANS_tp0_TO_tp0_BY_pongPingPongPort_tr0:
+			{
+				PingPongData p = (PingPongData) generic_data;
+				action_TRANS_tp0_TO_tp0_BY_pongPingPongPort_tr0(ifitem, p);
+				return STATE_TOP;
+			}
+			case CHAIN_TRANS_tp0_TO_tp0_BY_pongSimplePingPongPort_tr1:
+			{
+				int p = (Integer) generic_data;
+				action_TRANS_tp0_TO_tp0_BY_pongSimplePingPongPort_tr1(ifitem, p);
+				return STATE_TOP;
+			}
+			case CHAIN_TRANS_waitForPong_TO_cp0_BY_pongPingPongPort:
+			{
+				PingPongData p = (PingPongData) generic_data;
+				action_TRANS_waitForPong_TO_cp0_BY_pongPingPongPort(ifitem, p);
+				if ((p.i32Val==2) && (p.i8Val==46)
+				) {
+				action_TRANS_cp0_TO_state0_COND_tr3(ifitem, p);
+				return STATE_state0;}
+				else {
+				action_TRANS_cp0_TO_waitForPong(ifitem, p);
+				return STATE_waitForPong;}
+			}
+			case CHAIN_TRANS_state0_TO_state1_BY_pongPingPongPort:
+			{
+				PingPongData p = (PingPongData) generic_data;
+				action_TRANS_state0_TO_state1_BY_pongPingPongPort(ifitem, p);
+				return STATE_state1;
+			}
+			case CHAIN_TRANS_state1_TO_state2_BY_pongSimplePingPongPort:
+			{
+				int p = (Integer) generic_data;
+				action_TRANS_state1_TO_state2_BY_pongSimplePingPongPort(ifitem, p);
+				return STATE_state2;
+			}
+			case CHAIN_TRANS_state2_TO_cp1_BY_pongSimplePingPongPort:
+			{
+				int p = (Integer) generic_data;
+				action_TRANS_state2_TO_cp1_BY_pongSimplePingPongPort(ifitem, p);
+				if ((p==28) && (crcGen.getCrc()==1187)
+				) {
+				action_TRANS_cp1_TO_TestOk_COND_tr9(ifitem, p);
+				return STATE_TestOk;}
+				else {
+				action_TRANS_cp1_TO_TestFalse(ifitem, p);
+				return STATE_TestFalse;}
+			}
+		}
+		return NO_STATE;
+	}
+	
+	/**
+	 * calls entry codes while entering a state's history. The ID of the final leaf state is returned
+	 * @param state - the state which is entered
+	 * @param handler - entry code is executed if not handler
+	 * @return - the ID of the final leaf state
+	 */
+	private int enterHistory(int state, boolean handler, boolean skip_entry) {
+		while (true) {
+			switch (state) {
+				case STATE_waitForPong:
+					// in leaf state: return state id
+					return STATE_waitForPong;
+				case STATE_state0:
+					// in leaf state: return state id
+					return STATE_state0;
+				case STATE_state1:
+					// in leaf state: return state id
+					return STATE_state1;
+				case STATE_state2:
+					// in leaf state: return state id
+					return STATE_state2;
+				case STATE_TestFalse:
+					// in leaf state: return state id
+					return STATE_TestFalse;
+				case STATE_TestOk:
+					// in leaf state: return state id
+					return STATE_TestOk;
+				case STATE_TOP:
+					state = this.history[STATE_TOP];
+					break;
+			}
+			skip_entry = false;
+		}
+		//return NO_STATE; // required by CDT but detected as unreachable by JDT because of while (true)
+	}
+	
+	public void executeInitTransition() {
+		int chain = CHAIN_TRANS_INITIAL_TO__waitForPong;
+		int next = executeTransitionChain(chain, null, null);
+		next = enterHistory(next, false, false);
+		setState(next);
+	}
+	
+	/* receiveEvent contains the main implementation of the FSM */
 	public void receiveEvent(InterfaceItemBase ifitem, int evt, Object generic_data) {
 		int trigger = ifitem.getLocalId() + EVT_SHIFT*evt;
 		int chain = NOT_CAUGHT;
@@ -134,7 +397,7 @@ public class MrPing extends ActorClassBase {
 		boolean skip_entry = false;
 		
 		if (!handleSystemEvent(ifitem, evt, generic_data)) {
-			switch (state) {
+			switch (this.state) {
 				case STATE_waitForPong:
 					switch(trigger) {
 					case TRIG_PingPongPort__pong:
@@ -251,286 +514,11 @@ public class MrPing extends ActorClassBase {
 			}
 		}
 		if (chain != NOT_CAUGHT) {
-			exitTo(state, catching_state, is_handler);
+			exitTo(this.state, catching_state, is_handler);
 			int next = executeTransitionChain(chain, ifitem, generic_data);
 			next = enterHistory(next, is_handler, skip_entry);
 			setState(next);
 		}
-	}
-	
-	private void setState(int new_state) {
-		DebuggingService.getInstance().addActorState(this,stateStrings[new_state]);
-		if (stateStrings[new_state]!="Idle") {
-			// TODOTS: model switch for activation
-			System.out.println(getInstancePath() + " -> " + stateStrings[new_state]);
-		}	
-		this.state = new_state;
-	}
-	
-	@Override
-	public void executeInitTransition() {
-		int chain = CHAIN_TRANS_INITIAL_TO__waitForPong;
-		int next = executeTransitionChain(chain, null, null);
-		next = enterHistory(next, false, false);
-		setState(next);
-	}
-	
-	/**
-	 * calls exit codes while exiting from the current state to one of its
-	 * parent states while remembering the history
-	 * @param current - the current state
-	 * @param to - the final parent state
-	 * @param handler - entry and exit codes are called only if not handler (for handler TransitionPoints)
-	 */
-	private void exitTo(int current, int to, boolean handler) {
-		while (current!=to) {
-			switch (current) {
-				case STATE_waitForPong:
-					history[STATE_TOP] = STATE_waitForPong;
-					current = STATE_TOP;
-					break;
-				case STATE_state0:
-					history[STATE_TOP] = STATE_state0;
-					current = STATE_TOP;
-					break;
-				case STATE_state1:
-					history[STATE_TOP] = STATE_state1;
-					current = STATE_TOP;
-					break;
-				case STATE_state2:
-					history[STATE_TOP] = STATE_state2;
-					current = STATE_TOP;
-					break;
-				case STATE_TestFalse:
-					history[STATE_TOP] = STATE_TestFalse;
-					current = STATE_TOP;
-					break;
-				case STATE_TestOk:
-					history[STATE_TOP] = STATE_TestOk;
-					current = STATE_TOP;
-					break;
-			}
-		}
-	}
-	/**
-	 * calls action, entry and exit codes along a transition chain. The generic data are cast to typed data
-	 * matching the trigger of this chain. The ID of the final state is returned
-	 * @param chain - the chain ID
-	 * @param generic_data - the generic data pointer
-	 * @return the ID of the final state
-	 */
-	private int executeTransitionChain(int chain, InterfaceItemBase ifitem, Object generic_data) {
-		switch (chain) {
-			case CHAIN_TRANS_INITIAL_TO__waitForPong:
-			{
-				action_TRANS_INITIAL_TO__waitForPong();
-				return STATE_waitForPong;
-			}
-			case CHAIN_TRANS_tp0_TO_tp0_BY_pongPingPongPort_tr0:
-			{
-				PingPongData p = (PingPongData) generic_data;
-				action_TRANS_tp0_TO_tp0_BY_pongPingPongPort_tr0(ifitem, p);
-				return STATE_TOP;
-			}
-			case CHAIN_TRANS_tp0_TO_tp0_BY_pongSimplePingPongPort_tr1:
-			{
-				int p = (Integer) generic_data;
-				action_TRANS_tp0_TO_tp0_BY_pongSimplePingPongPort_tr1(ifitem, p);
-				return STATE_TOP;
-			}
-			case CHAIN_TRANS_waitForPong_TO_cp0_BY_pongPingPongPort:
-			{
-				PingPongData p = (PingPongData) generic_data;
-				action_TRANS_waitForPong_TO_cp0_BY_pongPingPongPort(ifitem, p);
-				if ((p.i32Val==2) && (p.i8Val==46)
-				) {
-				action_TRANS_cp0_TO_state0_COND_tr3(ifitem, p);
-				return STATE_state0;}
-				else {
-				action_TRANS_cp0_TO_waitForPong(ifitem, p);
-				return STATE_waitForPong;}
-			}
-			case CHAIN_TRANS_state0_TO_state1_BY_pongPingPongPort:
-			{
-				PingPongData p = (PingPongData) generic_data;
-				action_TRANS_state0_TO_state1_BY_pongPingPongPort(ifitem, p);
-				return STATE_state1;
-			}
-			case CHAIN_TRANS_state1_TO_state2_BY_pongSimplePingPongPort:
-			{
-				int p = (Integer) generic_data;
-				action_TRANS_state1_TO_state2_BY_pongSimplePingPongPort(ifitem, p);
-				return STATE_state2;
-			}
-			case CHAIN_TRANS_state2_TO_cp1_BY_pongSimplePingPongPort:
-			{
-				int p = (Integer) generic_data;
-				action_TRANS_state2_TO_cp1_BY_pongSimplePingPongPort(ifitem, p);
-				if ((p==28) && (crcGen.getCrc()==1187)
-				) {
-				action_TRANS_cp1_TO_TestOk_COND_tr9(ifitem, p);
-				return STATE_TestOk;}
-				else {
-				action_TRANS_cp1_TO_TestFalse(ifitem, p);
-				return STATE_TestFalse;}
-			}
-		}
-		return NO_STATE;
-	}
-	/**
-	 * calls entry codes while entering a state's history. The ID of the final leaf state is returned
-	 * @param state - the state which is entered
-	 * @param handler - entry code is executed if not handler
-	 * @return - the ID of the final leaf state
-	 */
-	private int enterHistory(int state, boolean handler, boolean skip_entry) {
-		while (true) {
-			switch (state) {
-				case STATE_waitForPong:
-					// in leaf state: return state id
-					return STATE_waitForPong;
-				case STATE_state0:
-					// in leaf state: return state id
-					return STATE_state0;
-				case STATE_state1:
-					// in leaf state: return state id
-					return STATE_state1;
-				case STATE_state2:
-					// in leaf state: return state id
-					return STATE_state2;
-				case STATE_TestFalse:
-					// in leaf state: return state id
-					return STATE_TestFalse;
-				case STATE_TestOk:
-					// in leaf state: return state id
-					return STATE_TestOk;
-				case STATE_TOP:
-					state = history[STATE_TOP];
-					break;
-			}
-			skip_entry = false;
-		}
-		//return NO_STATE; // required by CDT but detected as unreachable by JDT because of while (true)
-	}
-	
-	//*** Entry and Exit Codes
-	
-	//*** Action Codes
-	protected void action_TRANS_INITIAL_TO__waitForPong() {
-		int i;
-		int[] intArray;
-		this.data=new PingPongData();
-		
-		// send default data
-		PingPongData d = new PingPongData();
-		PingPongPort.ping(d);
-		
-		d.setI8Val((byte) 45);
-		d.setI16Val((short) 34);
-		d.setI32Val(2);
-		d.setF32Val((float)3.14);
-		d.setF64Val(7.12345);
-		d.setStringVal("Hase !");
-		
-		d.getOwnType().setI8Val((byte)10);
-		d.getOwnType().setI16Val((short)17);
-		d.getOwnType().setI32Val(4711);
-		d.getOwnType().setF32Val((float)3.0815);
-		d.getOwnType().setF64Val(123.45678);
-		d.getOwnType().setStringVal("Deep Hase !");
-		intArray = d.getOwnType().getArrayFromInt32();
-		for (i=0;i<intArray.length;i++) {intArray[i] = 10+i;}
-		d.getOwnType().setArrayFromInt32(intArray);
-		
-		PingPongPort.ping(d);
-		
-		d.setI8Val((byte) 55);
-		d.setI16Val((short) 44);
-		d.setI32Val(3);
-		d.setF32Val((float)24.4563458);
-		d.setF64Val(2347.2342312345);
-		d.setStringVal("Mein Hase !");
-		
-		d.getOwnType().setI8Val((byte)15);
-		d.getOwnType().setI16Val((short)23);
-		d.getOwnType().setI32Val(4812);
-		d.getOwnType().setF32Val((float)2453.30815);
-		d.getOwnType().setF64Val(125332.42342);
-		d.getOwnType().setStringVal("Mein Deep Hase !");
-		intArray = d.getOwnType().getArrayFromInt32();
-		for (i=0;i<intArray.length;i++) {intArray[i] = 30+i;}
-		d.getOwnType().setArrayFromInt32(intArray);
-		
-		PingPongPort.ping(d);
-		PingPongPort.ping(data);
-		
-		data.setI8Val((byte) 67);
-		data.setI16Val((short) 97);
-		data.setI32Val(70);
-		data.setF32Val((float)233.14);
-		data.setF64Val(723434.12345);
-		data.setStringVal("Falscher Hase !");
-		
-		crcGen.update(10);
-	}
-	protected void action_TRANS_tp0_TO_tp0_BY_pongPingPongPort_tr0(InterfaceItemBase ifitem, PingPongData p) {
-		System.out.printf("Top Level : \n");
-		printData(p);
-		crcGen.update(20);
-	}
-	protected void action_TRANS_tp0_TO_tp0_BY_pongSimplePingPongPort_tr1(InterfaceItemBase ifitem, int p) {
-		System.out.printf("Top Level Simple: \n");
-		crcGen.update(35);
-	}
-	protected void action_TRANS_waitForPong_TO_cp0_BY_pongPingPongPort(InterfaceItemBase ifitem, PingPongData p) {
-		printData(p);
-		crcGen.update(11);
-	}
-	protected void action_TRANS_cp0_TO_waitForPong(InterfaceItemBase ifitem, PingPongData p) {
-		crcGen.update(12);
-	}
-	protected void action_TRANS_cp0_TO_state0_COND_tr3(InterfaceItemBase ifitem, PingPongData p) {
-		// send default values
-		PingPongPort.ping(data);
-		
-		data.setI8Val((byte) 45);
-		data.setI16Val((short) 34);
-		data.setI32Val(80);
-		data.setF32Val((float)3.14);
-		data.setF64Val(7.12345);
-		data.setStringVal("Hase !");
-		
-		data.getOwnType().setI8Val((byte)10);
-		data.getOwnType().setI16Val((short)17);
-		data.getOwnType().setI32Val(4711);
-		data.getOwnType().setF32Val((float)3.0815);
-		data.getOwnType().setF64Val(123.45678);
-		data.getOwnType().setStringVal("Deep Hase !");
-		int[] intArray = data.getOwnType().getArrayFromInt32();
-		for (int i=0;i<intArray.length;i++) {intArray[i] = 10+i;}
-		data.getOwnType().setArrayFromInt32(intArray);
-		
-		PingPongPort.ping(data);
-		crcGen.update(13);
-	}
-	protected void action_TRANS_state0_TO_state1_BY_pongPingPongPort(InterfaceItemBase ifitem, PingPongData p) {
-		printData(p);
-		PingPongPort.pingSimple(12);
-		PingPongPort.pingSimple(27);
-		crcGen.update(14);
-	}
-	protected void action_TRANS_state1_TO_state2_BY_pongSimplePingPongPort(InterfaceItemBase ifitem, int p) {
-		crcGen.update(15);
-	}
-	protected void action_TRANS_state2_TO_cp1_BY_pongSimplePingPongPort(InterfaceItemBase ifitem, int p) {
-		crcGen.update(16);
-		System.out.printf("CRC: %d \n", crcGen.getCrc());
-	}
-	protected void action_TRANS_cp1_TO_TestFalse(InterfaceItemBase ifitem, int p) {
-		RTServices.getInstance().getSubSystem().testFinished(1);
-	}
-	protected void action_TRANS_cp1_TO_TestOk_COND_tr9(InterfaceItemBase ifitem, int p) {
-		RTServices.getInstance().getSubSystem().testFinished(0);
 	}
 		 
 	//******************************************

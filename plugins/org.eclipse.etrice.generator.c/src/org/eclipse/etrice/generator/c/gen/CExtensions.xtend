@@ -26,6 +26,8 @@ import org.eclipse.etrice.generator.etricegen.ExpandedActorClass
 import org.eclipse.etrice.generator.etricegen.TransitionChain
 import org.eclipse.etrice.generator.generic.ILanguageExtension
 import org.eclipse.etrice.generator.generic.LanguageGenerator
+import java.util.List
+import org.eclipse.xtext.util.Pair
 
 
 
@@ -40,32 +42,30 @@ class CExtensions implements ILanguageExtension {
 	}
 
 	// in C no access levels can be defined
-	override String accessLevelPrivate(){""}
-	override String accessLevelProtected(){""}
+	override String accessLevelPrivate(){"static "}
+	override String accessLevelProtected(){"static "}
 	override String accessLevelPublic(){""}
 	
 	override String memberAccess(){"self->"}
-	override String selfPointer(String classname, int argumentCount){
-		if (argumentCount>0){
-			classname+"* self, "
-		}
-		else {
-			classname+"* self"
-		}
+	override String selfPointer(String classname, boolean hasArgs){
+		classname+
+		if (hasArgs)
+			"* self, "
+		else
+			"* self"
 	}
+	
+	override String selfPointer(boolean hasArgs) { if (hasArgs) "self, " else "self" }
 
 	override String operationScope(String classname, boolean isDeclaration){classname+"_"}
 
-	/* TODO: unify OUT and in an add for loop (also for Java) */
-	override String outMessageId(String classname, String messagename){
-		return classname+"_OUT_"+messagename;
+	override String memberInDeclaration(String namespace, String member) {
+		return namespace+"_"+member
 	}
 	
-	override String inMessageId(String classname, String messagename){
-		return classname+"_IN_"+messagename;
+	override String memberInUse(String namespace, String member) {
+		return namespace+"_"+member
 	}
-
-
 
 
 	//****  C-Specific
@@ -102,7 +102,28 @@ class CExtensions implements ILanguageExtension {
 		#endif /* «filename.getIncludeGuardString» */
 		'''
 	}
+	
+	override boolean usesInheritance() {
+		return false
+	}
+	
+	override String genEnumeration(String name, List<Pair<String, String>> entries) {
+		'''
+		enum «name» {
+			«FOR entry: entries SEPARATOR ","»
+				«entry.first» = «entry.second»
+			«ENDFOR»
+		};
+		'''.toString
+	}
 
+	override String booleanConstant(boolean b) {
+		if (b) "TRUE" else "FALSE"
+	}
+	
+	override String nullPointer() { "NULL" }
+	override String voidPointer() { "void*" }
+	
 	//-------------------------------------------------------
 	// transition chain visitor
 		

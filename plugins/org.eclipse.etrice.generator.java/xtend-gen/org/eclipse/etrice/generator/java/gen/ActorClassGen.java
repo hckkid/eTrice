@@ -7,7 +7,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.DetailCode;
-import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RoomModel;
@@ -16,25 +15,24 @@ import org.eclipse.etrice.core.room.SPPRef;
 import org.eclipse.etrice.core.room.ServiceImplementation;
 import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.StateGraph;
-import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.generator.base.ILogger;
 import org.eclipse.etrice.generator.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.generator.etricegen.Root;
 import org.eclipse.etrice.generator.extensions.RoomExtensions;
+import org.eclipse.etrice.generator.generic.GenericActorClassGenerator;
 import org.eclipse.etrice.generator.generic.ProcedureHelpers;
 import org.eclipse.etrice.generator.generic.TypeHelpers;
 import org.eclipse.etrice.generator.java.gen.JavaExtensions;
 import org.eclipse.etrice.generator.java.gen.StateMachineGen;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
 import org.eclipse.xtext.xbase.lib.BooleanExtensions;
-import org.eclipse.xtext.xbase.lib.IntegerExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 
 @SuppressWarnings("all")
 @Singleton
-public class ActorClassGen {
+public class ActorClassGen extends GenericActorClassGenerator {
   @Inject
   private JavaIoFileSystemAccess fileAccess;
   
@@ -131,8 +129,8 @@ public class ActorClassGen {
     }
     _builder.newLine();
     DetailCode _userCode1 = ac.getUserCode1();
-    StringConcatenation _UserCode = this.helpers.UserCode(_userCode1);
-    _builder.append(_UserCode, "");
+    StringConcatenation _userCode = this.helpers.userCode(_userCode1);
+    _builder.append(_userCode, "");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.newLine();
@@ -163,8 +161,8 @@ public class ActorClassGen {
     _builder.newLine();
     _builder.append("\t");
     DetailCode _userCode2 = ac.getUserCode2();
-    StringConcatenation _UserCode_1 = this.helpers.UserCode(_userCode2);
-    _builder.append(_UserCode_1, "	");
+    StringConcatenation _userCode_1 = this.helpers.userCode(_userCode2);
+    _builder.append(_userCode_1, "	");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
     _builder.newLine();
@@ -224,65 +222,22 @@ public class ActorClassGen {
     _builder.append("\t");
     _builder.append("//--------------------- interface item IDs");
     _builder.newLine();
-    {
-      List<Port> _endPorts_1 = this.roomExt.getEndPorts(ac);
-      for(final Port ep_1 : _endPorts_1) {
-        _builder.append("\t");
-        _builder.append("protected static final int IFITEM_");
-        String _name_7 = ep_1.getName();
-        _builder.append(_name_7, "	");
-        _builder.append(" = ");
-        int _interfaceItemLocalId = xpac.getInterfaceItemLocalId(ep_1);
-        int _operator_plus = IntegerExtensions.operator_plus(((Integer)_interfaceItemLocalId), ((Integer)1));
-        _builder.append(_operator_plus, "	");
-        _builder.append(";");
-        _builder.newLineIfNotEmpty();
-      }
-    }
-    {
-      EList<SAPRef> _strSAPs_1 = ac.getStrSAPs();
-      for(final SAPRef sap_1 : _strSAPs_1) {
-        _builder.append("\t");
-        _builder.append("protected static final int IFITEM_");
-        String _name_8 = sap_1.getName();
-        _builder.append(_name_8, "	");
-        _builder.append(" = ");
-        int _interfaceItemLocalId_1 = xpac.getInterfaceItemLocalId(sap_1);
-        int _operator_plus_1 = IntegerExtensions.operator_plus(((Integer)_interfaceItemLocalId_1), ((Integer)1));
-        _builder.append(_operator_plus_1, "	");
-        _builder.append(";");
-        _builder.newLineIfNotEmpty();
-      }
-    }
-    {
-      EList<ServiceImplementation> _serviceImplementations_1 = ac.getServiceImplementations();
-      for(final ServiceImplementation svc_1 : _serviceImplementations_1) {
-        _builder.append("\t");
-        _builder.append("protected static final int IFITEM_");
-        SPPRef _spp_1 = svc_1.getSpp();
-        String _name_9 = _spp_1.getName();
-        _builder.append(_name_9, "	");
-        _builder.append(" = ");
-        SPPRef _spp_2 = svc_1.getSpp();
-        int _interfaceItemLocalId_2 = xpac.getInterfaceItemLocalId(_spp_2);
-        int _operator_plus_2 = IntegerExtensions.operator_plus(((Integer)_interfaceItemLocalId_2), ((Integer)1));
-        _builder.append(_operator_plus_2, "	");
-        _builder.append(";");
-        _builder.newLineIfNotEmpty();
-      }
-    }
     _builder.append("\t");
+    String _genInterfaceItemConstants = this.genInterfaceItemConstants(xpac, ac);
+    _builder.append(_genInterfaceItemConstants, "	");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t\t");
     _builder.newLine();
     _builder.append("\t");
     EList<Attribute> _attributes = ac.getAttributes();
-    StringConcatenation _Attributes = this.helpers.Attributes(_attributes);
-    _builder.append(_Attributes, "	");
+    StringConcatenation _attributes_1 = this.helpers.attributes(_attributes);
+    _builder.append(_attributes_1, "	");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
     EList<StandardOperation> _operations = ac.getOperations();
-    String _name_10 = ac.getName();
-    StringConcatenation _OperationsImplementation = this.helpers.OperationsImplementation(_operations, _name_10);
-    _builder.append(_OperationsImplementation, "	");
+    String _name_7 = ac.getName();
+    StringConcatenation _operationsImplementation = this.helpers.operationsImplementation(_operations, _name_7);
+    _builder.append(_operationsImplementation, "	");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("\t");
@@ -290,8 +245,8 @@ public class ActorClassGen {
     _builder.newLine();
     _builder.append("\t");
     _builder.append("public ");
-    String _name_11 = ac.getName();
-    _builder.append(_name_11, "	");
+    String _name_8 = ac.getName();
+    _builder.append(_name_8, "	");
     _builder.append("(IRTObject parent, String name, Address[][] port_addr, Address[][] peer_addr){");
     _builder.newLineIfNotEmpty();
     {
@@ -309,15 +264,15 @@ public class ActorClassGen {
     }
     _builder.append("\t\t");
     _builder.append("setClassName(\"");
-    String _name_12 = ac.getName();
-    _builder.append(_name_12, "		");
+    String _name_9 = ac.getName();
+    _builder.append(_name_9, "		");
     _builder.append("\");");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t");
     _builder.newLine();
     _builder.append("\t\t");
-    EList<Attribute> _attributes_1 = ac.getAttributes();
-    StringConcatenation _attributeInitialization = this.helpers.attributeInitialization(_attributes_1);
+    EList<Attribute> _attributes_2 = ac.getAttributes();
+    StringConcatenation _attributeInitialization = this.helpers.attributeInitialization(_attributes_2);
     _builder.append(_attributeInitialization, "		");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
@@ -325,45 +280,45 @@ public class ActorClassGen {
     _builder.append("// own ports");
     _builder.newLine();
     {
-      List<Port> _endPorts_2 = this.roomExt.getEndPorts(ac);
-      for(final Port ep_2 : _endPorts_2) {
+      List<Port> _endPorts_1 = this.roomExt.getEndPorts(ac);
+      for(final Port ep_1 : _endPorts_1) {
         _builder.append("\t\t");
-        String _name_13 = ep_2.getName();
-        _builder.append(_name_13, "		");
+        String _name_10 = ep_1.getName();
+        _builder.append(_name_10, "		");
         _builder.append(" = new ");
-        String _portClassName_3 = this.roomExt.getPortClassName(ep_2);
+        String _portClassName_3 = this.roomExt.getPortClassName(ep_1);
         _builder.append(_portClassName_3, "		");
         _builder.append("(this, \"");
-        String _name_14 = ep_2.getName();
-        _builder.append(_name_14, "		");
+        String _name_11 = ep_1.getName();
+        _builder.append(_name_11, "		");
         _builder.append("\", IFITEM_");
-        String _name_15 = ep_2.getName();
-        _builder.append(_name_15, "		");
+        String _name_12 = ep_1.getName();
+        _builder.append(_name_12, "		");
         _builder.append(", ");
         {
-          int _multiplicity = ep_2.getMultiplicity();
+          int _multiplicity = ep_1.getMultiplicity();
           boolean _operator_equals_1 = ObjectExtensions.operator_equals(((Integer)_multiplicity), ((Integer)1));
           if (_operator_equals_1) {
             _builder.append("0, ");
           }
         }
         _builder.append("port_addr[IFITEM_");
-        String _name_16 = ep_2.getName();
-        _builder.append(_name_16, "		");
+        String _name_13 = ep_1.getName();
+        _builder.append(_name_13, "		");
         _builder.append("]");
         {
-          int _multiplicity_1 = ep_2.getMultiplicity();
+          int _multiplicity_1 = ep_1.getMultiplicity();
           boolean _operator_equals_2 = ObjectExtensions.operator_equals(((Integer)_multiplicity_1), ((Integer)1));
           if (_operator_equals_2) {
             _builder.append("[0]");
           }
         }
         _builder.append(", peer_addr[IFITEM_");
-        String _name_17 = ep_2.getName();
-        _builder.append(_name_17, "		");
+        String _name_14 = ep_1.getName();
+        _builder.append(_name_14, "		");
         _builder.append("]");
         {
-          int _multiplicity_2 = ep_2.getMultiplicity();
+          int _multiplicity_2 = ep_1.getMultiplicity();
           boolean _operator_equals_3 = ObjectExtensions.operator_equals(((Integer)_multiplicity_2), ((Integer)1));
           if (_operator_equals_3) {
             _builder.append("[0]");
@@ -377,26 +332,26 @@ public class ActorClassGen {
     _builder.append("// own saps");
     _builder.newLine();
     {
-      EList<SAPRef> _strSAPs_2 = ac.getStrSAPs();
-      for(final SAPRef sap_2 : _strSAPs_2) {
+      EList<SAPRef> _strSAPs_1 = ac.getStrSAPs();
+      for(final SAPRef sap_1 : _strSAPs_1) {
         _builder.append("\t\t");
-        String _name_18 = sap_2.getName();
-        _builder.append(_name_18, "		");
+        String _name_15 = sap_1.getName();
+        _builder.append(_name_15, "		");
         _builder.append(" = new ");
-        String _portClassName_4 = this.roomExt.getPortClassName(sap_2);
+        String _portClassName_4 = this.roomExt.getPortClassName(sap_1);
         _builder.append(_portClassName_4, "		");
         _builder.append("(this, \"");
-        String _name_19 = sap_2.getName();
-        _builder.append(_name_19, "		");
+        String _name_16 = sap_1.getName();
+        _builder.append(_name_16, "		");
         _builder.append("\", IFITEM_");
-        String _name_20 = sap_2.getName();
-        _builder.append(_name_20, "		");
+        String _name_17 = sap_1.getName();
+        _builder.append(_name_17, "		");
         _builder.append(", 0, port_addr[IFITEM_");
-        String _name_21 = sap_2.getName();
-        _builder.append(_name_21, "		");
+        String _name_18 = sap_1.getName();
+        _builder.append(_name_18, "		");
         _builder.append("][0], peer_addr[IFITEM_");
-        String _name_22 = sap_2.getName();
-        _builder.append(_name_22, "		");
+        String _name_19 = sap_1.getName();
+        _builder.append(_name_19, "		");
         _builder.append("][0]); ");
         _builder.newLineIfNotEmpty();
       }
@@ -405,31 +360,31 @@ public class ActorClassGen {
     _builder.append("// own service implementations");
     _builder.newLine();
     {
-      EList<ServiceImplementation> _serviceImplementations_2 = ac.getServiceImplementations();
-      for(final ServiceImplementation svc_2 : _serviceImplementations_2) {
+      EList<ServiceImplementation> _serviceImplementations_1 = ac.getServiceImplementations();
+      for(final ServiceImplementation svc_1 : _serviceImplementations_1) {
         _builder.append("\t\t");
-        SPPRef _spp_3 = svc_2.getSpp();
-        String _name_23 = _spp_3.getName();
-        _builder.append(_name_23, "		");
+        SPPRef _spp_1 = svc_1.getSpp();
+        String _name_20 = _spp_1.getName();
+        _builder.append(_name_20, "		");
         _builder.append(" = new ");
-        String _portClassName_5 = this.roomExt.getPortClassName(svc_2);
+        String _portClassName_5 = this.roomExt.getPortClassName(svc_1);
         _builder.append(_portClassName_5, "		");
         _builder.append("(this, \"");
-        SPPRef _spp_4 = svc_2.getSpp();
-        String _name_24 = _spp_4.getName();
-        _builder.append(_name_24, "		");
+        SPPRef _spp_2 = svc_1.getSpp();
+        String _name_21 = _spp_2.getName();
+        _builder.append(_name_21, "		");
         _builder.append("\", IFITEM_");
-        SPPRef _spp_5 = svc_2.getSpp();
-        String _name_25 = _spp_5.getName();
-        _builder.append(_name_25, "		");
+        SPPRef _spp_3 = svc_1.getSpp();
+        String _name_22 = _spp_3.getName();
+        _builder.append(_name_22, "		");
         _builder.append(", port_addr[IFITEM_");
-        SPPRef _spp_6 = svc_2.getSpp();
-        String _name_26 = _spp_6.getName();
-        _builder.append(_name_26, "		");
+        SPPRef _spp_4 = svc_1.getSpp();
+        String _name_23 = _spp_4.getName();
+        _builder.append(_name_23, "		");
         _builder.append("], peer_addr[IFITEM_");
-        SPPRef _spp_7 = svc_2.getSpp();
-        String _name_27 = _spp_7.getName();
-        _builder.append(_name_27, "		");
+        SPPRef _spp_5 = svc_1.getSpp();
+        String _name_24 = _spp_5.getName();
+        _builder.append(_name_24, "		");
         _builder.append("]); ");
         _builder.newLineIfNotEmpty();
       }
@@ -534,20 +489,6 @@ public class ActorClassGen {
     }
     _builder.append("};");
     _builder.newLine();
-    return _builder;
-  }
-  
-  public StringConcatenation msgArgs(final Message msg) {
-    StringConcatenation _builder = new StringConcatenation();
-    {
-      VarDecl _data = msg.getData();
-      boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_data, null);
-      if (_operator_notEquals) {
-        VarDecl _data_1 = msg.getData();
-        String _defaultValue = this._typeHelpers.defaultValue(_data_1);
-        _builder.append(_defaultValue, "");
-      }
-    }
     return _builder;
   }
 }

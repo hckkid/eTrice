@@ -11,19 +11,14 @@ import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
 
 public class TestProtocol {
 	// message IDs
-	// TODO: separate class for message IDs: class MSG{public static volatile int MSG_MIN = 0; ...} -> better structure
-	// error if msgID <= MSG_MIN
-	public static final int MSG_MIN = 0;   
-	//IDs for outgoing messages
-	//IDs for incoming messages
+	public static final int MSG_MIN = 0;
 	public static final int IN_msg1 = 1;
 	public static final int IN_msg2 = 2;
 	public static final int IN_msg3 = 3;
 	public static final int IN_msg4 = 4;
 	public static final int IN_msg5 = 5;
 	public static final int IN_msg6 = 6;
-	//error if msgID >= MSG_MAX
-	public static final int MSG_MAX = 7;  
+	public static final int MSG_MAX = 7;
 
 
 	private static String messageStrings[] = {"MIN",  "msg1","msg2","msg3","msg4","msg5","msg6","MAX"};

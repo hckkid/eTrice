@@ -33,6 +33,8 @@ typedef struct {
 	#endif
 } etPort;
 
+typedef etPort* InterfaceItemBase;
+
 void etPort_receive(const etPort* self, const etMessage* msg);
 
 

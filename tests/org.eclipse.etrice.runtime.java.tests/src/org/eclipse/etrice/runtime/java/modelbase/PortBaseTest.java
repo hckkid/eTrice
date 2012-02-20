@@ -31,10 +31,7 @@ public class PortBaseTest extends TestCase {
 		}
 
 		@Override
-		public void receiveEvent(InterfaceItemBase ifitem, int evt,
-				Object data) {
-			// TODO Auto-generated method stub
-			
+		public void receiveEvent(InterfaceItemBase ifitem, int evt, Object data) {
 		}
 	
 	}

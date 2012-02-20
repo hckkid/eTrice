@@ -15,7 +15,6 @@ package org.eclipse.etrice.generator.java.gen
 import com.google.inject.Inject
 import com.google.inject.Singleton
 import org.eclipse.etrice.core.room.ActorClass
-import org.eclipse.etrice.core.room.Message
 import org.eclipse.etrice.generator.base.ILogger
 import org.eclipse.etrice.generator.etricegen.ExpandedActorClass
 import org.eclipse.etrice.generator.etricegen.Root
@@ -24,9 +23,10 @@ import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 import org.eclipse.etrice.generator.extensions.RoomExtensions
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.generator.generic.TypeHelpers
+import org.eclipse.etrice.generator.generic.GenericActorClassGenerator
 
 @Singleton
-class ActorClassGen {
+class ActorClassGen extends GenericActorClassGenerator {
 	
 	@Inject extension JavaIoFileSystemAccess fileAccess
 	@Inject extension JavaExtensions stdExt
@@ -58,18 +58,20 @@ class ActorClassGen {
 		import org.eclipse.etrice.runtime.java.modelbase.InterfaceItemBase;
 		import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
 		
-		«FOR model : root.getReferencedModels(ac)»import «model.name».*;
+		«FOR model : root.getReferencedModels(ac)»
+			import «model.name».*;
 		«ENDFOR»
 		
-		«FOR pc : root.getReferencedProtocolClasses(ac)»import «pc.^package».«pc.name».*;
+		«FOR pc : root.getReferencedProtocolClasses(ac)»
+			import «pc.^package».«pc.name».*;
 		«ENDFOR»
 		
-		«helpers.UserCode(ac.userCode1)»
+		«helpers.userCode(ac.userCode1)»
 		
 		
 		public «IF ac.abstract»abstract «ENDIF»class «ac.name» extends «IF ac.base!=null»«ac.base.name»«ELSE»ActorClassBase«ENDIF» {
 		
-			«helpers.UserCode(ac.userCode2)»
+			«helpers.userCode(ac.userCode2)»
 			
 			//--------------------- ports
 			«FOR ep : ac.getEndPorts()»
@@ -85,18 +87,10 @@ class ActorClassGen {
 			«ENDFOR»
 		
 			//--------------------- interface item IDs
-			«FOR ep : ac.getEndPorts()»
-				protected static final int IFITEM_«ep.name» = «xpac.getInterfaceItemLocalId(ep)+1»;
-			«ENDFOR»
-			«FOR sap : ac.strSAPs»
-				protected static final int IFITEM_«sap.name» = «xpac.getInterfaceItemLocalId(sap)+1»;
-			«ENDFOR»
-			«FOR svc : ac.serviceImplementations»
-				protected static final int IFITEM_«svc.spp.name» = «xpac.getInterfaceItemLocalId(svc.spp)+1»;
-			«ENDFOR»
-			
-			«helpers.Attributes(ac.attributes)»
-			«helpers.OperationsImplementation(ac.operations, ac.name)»
+			«genInterfaceItemConstants(xpac, ac)»
+				
+			«helpers.attributes(ac.attributes)»
+			«helpers.operationsImplementation(ac.operations, ac.name)»
 		
 			//--------------------- construction
 			public «ac.name»(IRTObject parent, String name, Address[][] port_addr, Address[][] peer_addr){
@@ -158,9 +152,5 @@ class ActorClassGen {
 			«ENDIF»
 		};
 	'''
-	}
-	
-	def msgArgs(Message msg) {
-		'''«IF msg.data!=null»«msg.data.defaultValue()»«ENDIF»'''
 	}
 }

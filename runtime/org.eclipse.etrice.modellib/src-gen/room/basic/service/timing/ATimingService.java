@@ -32,9 +32,9 @@ public class ATimingService extends ActorClassBase {
 	protected PTimeoutPortRepl timeout = null;
 
 	//--------------------- interface item IDs
-	protected static final int IFITEM_timer = 1;
-	protected static final int IFITEM_timeout = 2;
-	
+	public static final int IFITEM_timer = 1;
+	public static final int IFITEM_timeout = 2;
+		
 	//--------------------- attributes
 	//--------------------- operations
 	public void stop() {
@@ -72,100 +72,58 @@ public class ATimingService extends ActorClassBase {
 		destroyUser();
 	}	
 
-	//******************************************
-	// START of generated code for FSM
-	//******************************************
 	
-	// State IDs for FSM
-	protected static final int STATE_Operational = 2;
-		protected static final String stateStrings[] = {"<no state>","<top>","Operational"
-			};
+	/* state IDs */
+	public static final int STATE_Operational = 2;
+	
+	/* transition chains */
+	public static final int CHAIN_TRANS_INITIAL_TO__Operational = 1;
+	public static final int CHAIN_TRANS_Operational_TO_Operational_BY_Killtimeout_tr2 = 2;
+	public static final int CHAIN_TRANS_Operational_TO_Operational_BY_Killtimer_tr4 = 3;
+	public static final int CHAIN_TRANS_Operational_TO_Operational_BY_Starttimeout_tr1 = 4;
+	public static final int CHAIN_TRANS_Operational_TO_Operational_BY_Starttimer_tr3 = 5;
+	
+	/* triggers */
+	public static final int TRIG_timeout__Kill = IFITEM_timeout + EVT_SHIFT*PTimeout.IN_Kill;
+	public static final int TRIG_timeout__Start = IFITEM_timeout + EVT_SHIFT*PTimeout.IN_Start;
+	public static final int TRIG_timer__Kill = IFITEM_timer + EVT_SHIFT*PTimer.IN_Kill;
+	public static final int TRIG_timer__Start = IFITEM_timer + EVT_SHIFT*PTimer.IN_Start;
+	
+	// state names
+	protected static final String stateStrings[] = {"<no state>","<top>","Operational"
+	};
 	
 	// history
-	// TODOHRR: history defined in ActorClassBase, init in constructor
-	//		history = new int[5];
-	//		for (int i = 0; i < history.length; i++) {
-	//			history[i] = NO_STATE;
-	//		}
 	protected int history[] = {NO_STATE,NO_STATE,NO_STATE};
-	
-	// transition chains
-	protected static final int CHAIN_TRANS_INITIAL_TO__Operational = 1;
-	protected static final int CHAIN_TRANS_Operational_TO_Operational_BY_Killtimeout_tr2 = 2;
-	protected static final int CHAIN_TRANS_Operational_TO_Operational_BY_Killtimer_tr4 = 3;
-	protected static final int CHAIN_TRANS_Operational_TO_Operational_BY_Starttimeout_tr1 = 4;
-	protected static final int CHAIN_TRANS_Operational_TO_Operational_BY_Starttimer_tr3 = 5;
-	
-	// triggers for FSM
-	protected static final int TRIG_timeout__Kill = IFITEM_timeout + EVT_SHIFT*PTimeout.IN_Kill;
-	protected static final int TRIG_timeout__Start = IFITEM_timeout + EVT_SHIFT*PTimeout.IN_Start;
-	protected static final int TRIG_timer__Kill = IFITEM_timer + EVT_SHIFT*PTimer.IN_Kill;
-	protected static final int TRIG_timer__Start = IFITEM_timer + EVT_SHIFT*PTimer.IN_Start;
-	
-	// receiveEvent contains the main implementation of the FSM
-	@Override
-	public void receiveEvent(InterfaceItemBase ifitem, int evt, Object generic_data) {
-		int trigger = ifitem.getLocalId() + EVT_SHIFT*evt;
-		int chain = NOT_CAUGHT;
-		int catching_state = NO_STATE;
-		boolean is_handler = false;
-		boolean skip_entry = false;
-		
-		if (!handleSystemEvent(ifitem, evt, generic_data)) {
-			switch (state) {
-				case STATE_Operational:
-					switch(trigger) {
-					case TRIG_timeout__Start:
-						{
-							chain = CHAIN_TRANS_Operational_TO_Operational_BY_Starttimeout_tr1;
-							catching_state = STATE_TOP;
-						}
-					break;
-					case TRIG_timeout__Kill:
-						{
-							chain = CHAIN_TRANS_Operational_TO_Operational_BY_Killtimeout_tr2;
-							catching_state = STATE_TOP;
-						}
-					break;
-					case TRIG_timer__Start:
-						{
-							chain = CHAIN_TRANS_Operational_TO_Operational_BY_Starttimer_tr3;
-							catching_state = STATE_TOP;
-						}
-					break;
-					case TRIG_timer__Kill:
-						{
-							chain = CHAIN_TRANS_Operational_TO_Operational_BY_Killtimer_tr4;
-							catching_state = STATE_TOP;
-						}
-					break;
-					}
-					break;
-			}
-		}
-		if (chain != NOT_CAUGHT) {
-			exitTo(state, catching_state, is_handler);
-			int next = executeTransitionChain(chain, ifitem, generic_data);
-			next = enterHistory(next, is_handler, skip_entry);
-			setState(next);
-		}
-	}
 	
 	private void setState(int new_state) {
 		DebuggingService.getInstance().addActorState(this,stateStrings[new_state]);
 		if (stateStrings[new_state]!="Idle") {
-			// TODOTS: model switch for activation
 			System.out.println(getInstancePath() + " -> " + stateStrings[new_state]);
 		}	
 		this.state = new_state;
 	}
 	
-	@Override
-	public void executeInitTransition() {
-		int chain = CHAIN_TRANS_INITIAL_TO__Operational;
-		int next = executeTransitionChain(chain, null, null);
-		next = enterHistory(next, false, false);
-		setState(next);
+	//*** Entry and Exit Codes
+	protected void entry_Operational() {
+		// prepare
+	}
+	
+	//*** Action Codes
+	protected void action_TRANS_INITIAL_TO__Operational() {
+		timerService = new Timer();
+	}
+	protected void action_TRANS_Operational_TO_Operational_BY_Starttimeout_tr1(InterfaceItemBase ifitem, int time_ms) {
+		// start timeout
+		taskCount++;
+		if (taskCount>PURGE_LIMIT) timerService.purge();
+		timerService.schedule(((PTimeoutPort)ifitem).getTask(), time_ms);
+	}
+	protected void action_TRANS_Operational_TO_Operational_BY_Starttimer_tr3(InterfaceItemBase ifitem, int time_ms) {
+		// start timer
+		taskCount++;
+		if (taskCount>PURGE_LIMIT) timerService.purge();
+		timerService.scheduleAtFixedRate(((PTimerPort)ifitem).getTask(), time_ms, time_ms);
 	}
 	
 	/**
@@ -179,12 +137,13 @@ public class ATimingService extends ActorClassBase {
 		while (current!=to) {
 			switch (current) {
 				case STATE_Operational:
-					history[STATE_TOP] = STATE_Operational;
+					this.history[STATE_TOP] = STATE_Operational;
 					current = STATE_TOP;
 					break;
 			}
 		}
 	}
+	
 	/**
 	 * calls action, entry and exit codes along a transition chain. The generic data are cast to typed data
 	 * matching the trigger of this chain. The ID of the final state is returned
@@ -222,6 +181,7 @@ public class ATimingService extends ActorClassBase {
 		}
 		return NO_STATE;
 	}
+	
 	/**
 	 * calls entry codes while entering a state's history. The ID of the final leaf state is returned
 	 * @param state - the state which is entered
@@ -236,7 +196,7 @@ public class ATimingService extends ActorClassBase {
 					// in leaf state: return state id
 					return STATE_Operational;
 				case STATE_TOP:
-					state = history[STATE_TOP];
+					state = this.history[STATE_TOP];
 					break;
 			}
 			skip_entry = false;
@@ -244,26 +204,59 @@ public class ATimingService extends ActorClassBase {
 		//return NO_STATE; // required by CDT but detected as unreachable by JDT because of while (true)
 	}
 	
-	//*** Entry and Exit Codes
-	protected void entry_Operational() {
-		// prepare
+	public void executeInitTransition() {
+		int chain = CHAIN_TRANS_INITIAL_TO__Operational;
+		int next = executeTransitionChain(chain, null, null);
+		next = enterHistory(next, false, false);
+		setState(next);
 	}
 	
-	//*** Action Codes
-	protected void action_TRANS_INITIAL_TO__Operational() {
-		timerService = new Timer();
-	}
-	protected void action_TRANS_Operational_TO_Operational_BY_Starttimeout_tr1(InterfaceItemBase ifitem, int time_ms) {
-		// start timeout
-		taskCount++;
-		if (taskCount>PURGE_LIMIT) timerService.purge();
-		timerService.schedule(((PTimeoutPort)ifitem).getTask(), time_ms);
-	}
-	protected void action_TRANS_Operational_TO_Operational_BY_Starttimer_tr3(InterfaceItemBase ifitem, int time_ms) {
-		// start timer
-		taskCount++;
-		if (taskCount>PURGE_LIMIT) timerService.purge();
-		timerService.scheduleAtFixedRate(((PTimerPort)ifitem).getTask(), time_ms, time_ms);
+	/* receiveEvent contains the main implementation of the FSM */
+	public void receiveEvent(InterfaceItemBase ifitem, int evt, Object generic_data) {
+		int trigger = ifitem.getLocalId() + EVT_SHIFT*evt;
+		int chain = NOT_CAUGHT;
+		int catching_state = NO_STATE;
+		boolean is_handler = false;
+		boolean skip_entry = false;
+		
+		if (!handleSystemEvent(ifitem, evt, generic_data)) {
+			switch (this.state) {
+				case STATE_Operational:
+					switch(trigger) {
+					case TRIG_timeout__Start:
+						{
+							chain = CHAIN_TRANS_Operational_TO_Operational_BY_Starttimeout_tr1;
+							catching_state = STATE_TOP;
+						}
+					break;
+					case TRIG_timeout__Kill:
+						{
+							chain = CHAIN_TRANS_Operational_TO_Operational_BY_Killtimeout_tr2;
+							catching_state = STATE_TOP;
+						}
+					break;
+					case TRIG_timer__Start:
+						{
+							chain = CHAIN_TRANS_Operational_TO_Operational_BY_Starttimer_tr3;
+							catching_state = STATE_TOP;
+						}
+					break;
+					case TRIG_timer__Kill:
+						{
+							chain = CHAIN_TRANS_Operational_TO_Operational_BY_Killtimer_tr4;
+							catching_state = STATE_TOP;
+						}
+					break;
+					}
+					break;
+			}
+		}
+		if (chain != NOT_CAUGHT) {
+			exitTo(this.state, catching_state, is_handler);
+			int next = executeTransitionChain(chain, ifitem, generic_data);
+			next = enterHistory(next, is_handler, skip_entry);
+			setState(next);
+		}
 	}
 		 
 	//******************************************

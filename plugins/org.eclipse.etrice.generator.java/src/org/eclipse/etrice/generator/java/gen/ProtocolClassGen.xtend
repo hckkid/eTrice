@@ -25,10 +25,11 @@ import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 import org.eclipse.etrice.generator.extensions.RoomExtensions
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.generator.generic.TypeHelpers
+import org.eclipse.etrice.generator.generic.GenericProtocolClassGenerator
 
 
 @Singleton
-class ProtocolClassGen {
+class ProtocolClassGen extends GenericProtocolClassGenerator {
 
 	@Inject extension JavaIoFileSystemAccess fileAccess
 	@Inject extension JavaExtensions stdExt
@@ -57,7 +58,7 @@ class ProtocolClassGen {
 		import org.eclipse.etrice.runtime.java.modelbase.*;
 		import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
 		
-		«helpers.UserCode(pc.userCode1)»
+		«helpers.userCode(pc.userCode1)»
 		
 		«var models = root.getReferencedModels(pc)»
 		«FOR model : models»import «model.name».*;
@@ -65,21 +66,9 @@ class ProtocolClassGen {
 		
 		public class «pc.name» {
 			// message IDs
-			// TODO: separate class for message IDs: class MSG{public static volatile int MSG_MIN = 0; ...} -> better structure
-			// error if msgID <= MSG_MIN
-			public static final int MSG_MIN = 0;   
-			//IDs for outgoing messages
-			«FOR message : pc.getAllOutgoingMessages()»
-				public static final int «outMessageId(pc.name, message.name)» = «pc.getAllOutgoingMessages().indexOf(message)+1»;
-			«ENDFOR»
-			//IDs for incoming messages
-			«FOR message : pc.getAllIncomingMessages()»
-				public static final int «inMessageId(pc.name, message.name)» = «pc.getAllIncomingMessages().indexOf(message)+pc.getAllOutgoingMessages().size+1»;
-			«ENDFOR»
-			//error if msgID >= MSG_MAX
-			public static final int MSG_MAX = «pc.getAllOutgoingMessages().size + pc.getAllIncomingMessages().size+1»;  
+			«genMessageIDs(pc)»
 		
-			«helpers.UserCode(pc.userCode2)»
+			«helpers.userCode(pc.userCode2)»
 		
 			private static String messageStrings[] = {"MIN", «FOR m : pc.getAllOutgoingMessages()»"«m.name»",«ENDFOR» «FOR m : pc.getAllIncomingMessages()»"«m.name»",«ENDFOR»"MAX"};
 		
@@ -106,7 +95,7 @@ class ProtocolClassGen {
 		// port class
 		static public class «name» extends PortBase {
 			«IF pclass!=null»
-				«helpers.UserCode(pclass.userCode)»
+				«helpers.userCode(pclass.userCode)»
 			«ENDIF»
 			// constructors
 			public «name»(IEventReceiver actor, String name, int localId, Address addr, Address peerAddress) {
@@ -127,7 +116,7 @@ class ProtocolClassGen {
 						System.out.println("unknown");
 					else {
 						if (messageStrings[msg.getEvtId()] != "timerTick"){
-							// TODOTS: model switch for activation
+«««							TODOTS: model switch for activation
 							DebuggingService.getInstance().addMessageAsyncIn(getPeerAddress(), getAddress(), messageStrings[msg.getEvtId()]);
 						}
 						«IF pc.handlesReceive(conj)»
@@ -154,8 +143,8 @@ class ProtocolClassGen {
 			}
 		
 			«IF pclass!=null»
-				«helpers.Attributes(pclass.attributes)»
-				«helpers.OperationsImplementation(pclass.operations, name)»
+				«helpers.attributes(pclass.attributes)»
+				«helpers.operationsImplementation(pclass.operations, name)»
 			«ENDIF»
 			
 			// sent messages
@@ -250,7 +239,7 @@ class ProtocolClassGen {
 					«ENDFOR»
 				«ELSE»
 					if (messageStrings[ «dir»_«m.name»] != "timerTick"){
-						// TODOTS: model switch for activation
+«««						TODOTS: model switch for activation
 					DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[«dir»_«m.name»]);
 					}
 					if (getPeerAddress()!=null)

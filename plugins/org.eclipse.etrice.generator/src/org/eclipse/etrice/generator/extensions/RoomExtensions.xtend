@@ -145,6 +145,27 @@ class RoomExtensions {
 	def List<Port> getEndPorts(ActorClass ac) {
 		ac.intPorts.punion(ac.extPorts)
 	}
+
+	def List<Port> getAllEndPorts(ActorClass ac) {
+		if (ac.base==null)
+			return ac.getEndPorts()
+		else
+			ac.base.getAllEndPorts().union(ac.getEndPorts())
+	}
+
+	def List<SAPRef> getAllSAPs(ActorClass ac) {
+		if (ac.base==null)
+			return ac.strSAPs
+		else
+			ac.base.strSAPs.union(ac.strSAPs)
+	}
+
+	def List<ServiceImplementation> getAllServiceImplementations(ActorClass ac) {
+		if (ac.base==null)
+			return ac.serviceImplementations
+		else
+			ac.base.serviceImplementations.union(ac.serviceImplementations)
+	}
 	
 	// make a valid identifier from a path string
 	def String getPathName(String path){
@@ -330,11 +351,39 @@ class RoomExtensions {
 		return ret
 	}
 
+	def getLeafStatesFirst(List<State> states) {
+		var leaf = new ArrayList<State>()
+		var nonLeaf = new ArrayList<State>()
+		for (state : states) {
+			if (state.leaf)
+				leaf.add(state)
+			else
+				nonLeaf.add(state)
+		}
+		leaf.addAll(nonLeaf)
+		
+		return leaf
+	}
+
 	def List<State> getAllBaseStates(ActorClass ac) {
 		if (ac.base==null)
 			return ac.stateMachine.getBaseStateList()
 		else
 			ac.base.getAllBaseStates().union(ac.stateMachine.getBaseStateList())
+	}
+
+	def List<State> getAllBaseStatesLeavesFirst(ActorClass ac) {
+		if (ac.base==null)
+			return ac.stateMachine.getBaseStateList().getLeafStatesFirst
+		else
+			ac.base.getAllBaseStates().getLeafStatesFirst.union(ac.stateMachine.getBaseStateList().getLeafStatesFirst)
+	}
+
+	def List<State> getAllLeafStates(ActorClass ac) {
+		if (ac.base==null)
+			return ac.stateMachine.getLeafStateList()
+		else
+			ac.base.getAllLeafStates().union(ac.stateMachine.getLeafStateList())
 	}
 
 	def boolean overridesStop(ActorClass ac) {

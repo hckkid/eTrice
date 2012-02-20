@@ -469,8 +469,6 @@ public class SubSystemClassGen {
     _builder.newLine();
     _builder.append("/* include all used ActorClasses */");
     _builder.newLine();
-    _builder.append("/* TODO: only include used Actor Classes for current SubSystem */");
-    _builder.newLine();
     {
       EList<ActorClass> _usedActorClasses = root.getUsedActorClasses();
       for(final ActorClass actorClass : _usedActorClasses) {
@@ -550,9 +548,6 @@ public class SubSystemClassGen {
         {
           EList<PortInstance> _ports = ai_1.getPorts();
           for(final PortInstance pi : _ports) {
-            _builder.append("\t");
-            _builder.append("/* TODO: not robust if not connected and not implemented for replication */");
-            _builder.newLine();
             _builder.append("\t");
             _builder.append("{&");
             String _path_4 = ai_1.getPath();

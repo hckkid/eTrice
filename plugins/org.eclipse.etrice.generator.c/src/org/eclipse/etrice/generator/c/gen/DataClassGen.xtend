@@ -61,21 +61,21 @@ class DataClassGen {
 		
 		#include "etDatatypes.h"
 
-		/* TODO: includes only for used DataClasses, also for other models */
+«««		TODO: includes only for used DataClasses, also for other models
 		«FOR dataClass : root.getReferencedDataClasses(dc)»
 			#include "«dataClass.name».h"
 		«ENDFOR»
 		
-		«helpers.UserCode(dc.userCode1)»
+		«helpers.userCode(dc.userCode1)»
 				
 		typedef struct {
-			«helpers.UserCode(dc.userCode2)»
-			«helpers.Attributes(dc.attributes)»
+			«helpers.userCode(dc.userCode2)»
+			«helpers.attributes(dc.attributes)»
 		} «dc.name»«IF dc.base!=null» /* extends -> inheritance not implemented yet */ «dc.base.name»«ENDIF»;
 		
-		// TODO: do we need setters and getters for C and C++ ?
+«««		TODO: do we need setters and getters for C and C++ ?
 		
-		«helpers.OperationsDeclaration(dc.operations, dc.name)»
+		«helpers.operationsDeclaration(dc.operations, dc.name)»
 		
 		// deep copy
 		void «dc.name»_deepCopy(«dc.name»* source, «dc.name»* target);
@@ -97,11 +97,11 @@ class DataClassGen {
 		
 		#include <string.h>
 		
-		«helpers.UserCode(dc.userCode3)»
+		«helpers.userCode(dc.userCode3)»
 		
-		// TODO: do we need setters and getters for C and C++ ?
+«««		TODO: do we need setters and getters for C and C++ ?
 		
-		«helpers.OperationsImplementation(dc.operations, dc.name)»
+		«helpers.operationsImplementation(dc.operations, dc.name)»
 		
 		// deep copy
 		void «dc.name»_deepCopy(«dc.name»* source, «dc.name»* target) {

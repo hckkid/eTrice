@@ -189,7 +189,7 @@ class SubSystemClassGen {
 
 
 		/* include all used ActorClasses */
-		/* TODO: only include used Actor Classes for current SubSystem */
+«««		TODO: only include used Actor Classes for current SubSystem
 		«FOR actorClass : root.getUsedActorClasses()»#include "«actorClass.name».h"
 		«ENDFOR»
 
@@ -212,7 +212,7 @@ class SubSystemClassGen {
 				&«ai.path.getPathName()»,
 				/* Ports: {myActor, etReceiveMessage, msgService, peerAddress, localId} */
 				«FOR pi : ai.ports»
-				/* TODO: not robust if not connected and not implemented for replication */
+«««				TODO: not robust if not connected and not implemented for replication
 				{&«ai.path.getPathName()», «ai.actorClass.name»_ReceiveMessage, &msgService_Thread1, «pi.peers.get(0).objId», 123} /* Port «pi.name» */
 				«ENDFOR»
 				

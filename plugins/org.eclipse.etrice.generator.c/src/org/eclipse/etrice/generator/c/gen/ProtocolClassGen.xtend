@@ -23,10 +23,11 @@ import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 
 import org.eclipse.etrice.generator.extensions.RoomExtensions
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
+import org.eclipse.etrice.generator.generic.GenericProtocolClassGenerator
 
 
 @Singleton
-class ProtocolClassGen {
+class ProtocolClassGen extends GenericProtocolClassGenerator {
 
 	@Inject extension JavaIoFileSystemAccess fileAccess
 	@Inject extension CExtensions stdExt
@@ -63,25 +64,14 @@ class ProtocolClassGen {
 		#include "etDatatypes.h"
 		#include "etPort.h"
 		
-		«helpers.UserCode(pc.userCode1)»
+		«helpers.userCode(pc.userCode1)»
 		
-		«FOR dataClass : root.getReferencedDataClasses(pc)»#include "«dataClass.name».h"
+		«FOR dataClass : root.getReferencedDataClasses(pc)»
+			#include "«dataClass.name».h"
 		«ENDFOR»
 		
 		/* message IDs */
-		enum {
-			«pc.name»_MSG_MIN = 0, 
-			/* IDs for outgoing messages */
-			«FOR message : pc.getAllOutgoingMessages()»
-				«outMessageId(pc.name, message.name)» = «pc.getAllOutgoingMessages().indexOf(message)+1»,
-			«ENDFOR»
-			/* IDs for incoming messages */
-			«FOR message : pc.getAllIncomingMessages()»
-				«inMessageId(pc.name, message.name)» = «pc.getAllIncomingMessages().indexOf(message)+pc.getAllOutgoingMessages().size+1»,
-			«ENDFOR»
-			/* error if msgID >= MSG_MAX */
-			«pc.name»_MSG_MAX = «pc.getAllOutgoingMessages().size + pc.getAllIncomingMessages().size+1»
-		};
+		«genMessageIDs(pc)»
 
 		/*--------------------- port classes */
 		«portClassHeader(pc, false)»
@@ -94,7 +84,7 @@ class ProtocolClassGen {
 		/* get message string for message id */
 		const char* «pc.name»_getMessageString(int msg_id);
 
-		«helpers.UserCode(pc.userCode2)»
+		«helpers.userCode(pc.userCode2)»
 		
 		
 		«generateIncludeGuardEnd(pc.name)»
@@ -280,7 +270,7 @@ class ProtocolClassGen {
 					ET_MSC_LOGGER_SYNC_ENTRY("«portClassName»", "«message.name»")
 					etMessage* msg = etMessageService_getMessageBuffer(self->msgService, sizeof(etMessage));
 					msg->address = self->peerAddress;
-					msg->evtID = «outMessageId(pc.name, message.name)»;
+					msg->evtID = «memberInUse(pc.name, "OUT_"+message.name)»;
 					etMessageService_pushMessage(self->msgService, msg);
 					ET_MSC_LOGGER_SYNC_EXIT
 				}
@@ -292,7 +282,7 @@ class ProtocolClassGen {
 					ET_MSC_LOGGER_SYNC_ENTRY("«portClassName»", "«message.name»")
 					etMessage* msg = etMessageService_getMessageBuffer(self->msgService, sizeof(etMessage));
 					msg->address = self->peerAddress;
-					msg->evtID = «inMessageId(pc.name, message.name)»;
+					msg->evtID = «memberInUse(pc.name, "IN_"+message.name)»;
 					etMessageService_pushMessage(self->msgService, msg);
 					ET_MSC_LOGGER_SYNC_EXIT
 				}
@@ -327,7 +317,7 @@ class ProtocolClassGen {
 	
 	def generateDebugHelpersImplementation(Root root, ProtocolClass pc){'''
 		
-		/* TODO: make this optional or different for smaller footprint */
+«««		TODO: make this optional or different for smaller footprint
 		/* message names as strings for debugging (generate MSC) */
 		static const char* «pc.name»_messageStrings[] = {"MIN", «FOR m : pc.getAllOutgoingMessages()»"«m.name»",«ENDFOR»«FOR m : pc.getAllIncomingMessages()»"«m.name»", «ENDFOR»"MAX"};
 

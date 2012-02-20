@@ -11,10 +11,7 @@ import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
 
 public class p_HFSM {
 	// message IDs
-	// TODO: separate class for message IDs: class MSG{public static volatile int MSG_MIN = 0; ...} -> better structure
-	// error if msgID <= MSG_MIN
-	public static final int MSG_MIN = 0;   
-	//IDs for outgoing messages
+	public static final int MSG_MIN = 0;
 	public static final int OUT_init_action = 1;
 	public static final int OUT_s1_entry = 2;
 	public static final int OUT_s1_exit = 3;
@@ -40,7 +37,6 @@ public class p_HFSM {
 	public static final int OUT_top_s8_top_action = 23;
 	public static final int OUT_top_s9_top_action = 24;
 	public static final int OUT_top_reset_s2_action = 25;
-	//IDs for incoming messages
 	public static final int IN_m1 = 26;
 	public static final int IN_m2 = 27;
 	public static final int IN_m3 = 28;
@@ -51,8 +47,7 @@ public class p_HFSM {
 	public static final int IN_m7 = 33;
 	public static final int IN_m8 = 34;
 	public static final int IN_m9 = 35;
-	//error if msgID >= MSG_MAX
-	public static final int MSG_MAX = 36;  
+	public static final int MSG_MAX = 36;
 
 
 	private static String messageStrings[] = {"MIN", "init_action","s1_entry","s1_exit","s2_entry","s2_exit","s3_entry","s3_exit","s4_entry","s4_exit","s2s1_entry","s2s1_exit","s2s2_entry","s2s2_exit","s1_m1_s2_action","s2_m1_s2s1_action","s2s1_m2_s2s2_action","s2s2_m3_action","s2_m4_s4_action","s2_m5_s2_action","s2_m6_s2_action","s2__s3_action","s2_m7_s2_action","top_s8_top_action","top_s9_top_action","top_reset_s2_action", "m1","m2","m3","m4","m5","m6","reset","m7","m8","m9","MAX"};

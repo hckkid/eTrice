@@ -29,8 +29,8 @@ public class CPUser extends ActorClassBase {
 	//--------------------- services
 
 	//--------------------- interface item IDs
-	protected static final int IFITEM_TestPort1 = 1;
-	
+	public static final int IFITEM_TestPort1 = 1;
+		
 	//--------------------- attributes
 	protected int counter;
 	//--------------------- operations
@@ -67,290 +67,42 @@ public class CPUser extends ActorClassBase {
 		destroyUser();
 	}	
 
-	//******************************************
-	// START of generated code for FSM
-	//******************************************
 	
-	// State IDs for FSM
-	protected static final int STATE_state0 = 2;
-	protected static final int STATE_state1 = 3;
-	protected static final int STATE_state1_state0 = 4;
-	protected static final int STATE_testOk = 5;
-	protected static final int STATE_testFalse = 6;
-		protected static final String stateStrings[] = {"<no state>","<top>","state0",
-			"state1",
-			"state1_state0",
-			"testOk",
-			"testFalse"
-			};
+	/* state IDs */
+	public static final int STATE_state0 = 2;
+	public static final int STATE_state1_state0 = 3;
+	public static final int STATE_testOk = 4;
+	public static final int STATE_testFalse = 5;
+	public static final int STATE_state1 = 6;
+	
+	/* transition chains */
+	public static final int CHAIN_TRANS_INITIAL_TO__cp0 = 1;
+	public static final int CHAIN_TRANS_state0_TO_cp1_BY_msg1TestPort1 = 2;
+	public static final int CHAIN_TRANS_state1_TO_cp2_BY_msg1TestPort1 = 3;
+	public static final int CHAIN_TRANS_state1_TO_state0_BY_msg1TestPort1 = 4;
+	public static final int CHAIN_TRANS_tp0_TO_tp0_BY_msg1TestPort1_tr8 = 5;
+	public static final int CHAIN_state1_TRANS_INITIAL_TO__state0 = 6;
+	
+	/* triggers */
+	public static final int TRIG_TestPort1__msg1 = IFITEM_TestPort1 + EVT_SHIFT*TestProtocol.IN_msg1;
+	
+	// state names
+	protected static final String stateStrings[] = {"<no state>","<top>","state0",
+	"state1_state0",
+	"testOk",
+	"testFalse",
+	"state1"
+	};
 	
 	// history
-	// TODOHRR: history defined in ActorClassBase, init in constructor
-	//		history = new int[5];
-	//		for (int i = 0; i < history.length; i++) {
-	//			history[i] = NO_STATE;
-	//		}
 	protected int history[] = {NO_STATE,NO_STATE,NO_STATE,NO_STATE,NO_STATE,NO_STATE,NO_STATE};
-	
-	// transition chains
-	protected static final int CHAIN_TRANS_INITIAL_TO__cp0 = 1;
-	protected static final int CHAIN_TRANS_state0_TO_cp1_BY_msg1TestPort1 = 2;
-	protected static final int CHAIN_TRANS_state1_TO_cp2_BY_msg1TestPort1 = 3;
-	protected static final int CHAIN_TRANS_state1_TO_state0_BY_msg1TestPort1 = 4;
-	protected static final int CHAIN_TRANS_tp0_TO_tp0_BY_msg1TestPort1_tr8 = 5;
-	protected static final int CHAIN_state1_TRANS_INITIAL_TO__state0 = 6;
-	
-	// triggers for FSM
-	protected static final int TRIG_TestPort1__msg1 = IFITEM_TestPort1 + EVT_SHIFT*TestProtocol.IN_msg1;
-	
-	// receiveEvent contains the main implementation of the FSM
-	@Override
-	public void receiveEvent(InterfaceItemBase ifitem, int evt, Object generic_data) {
-		int trigger = ifitem.getLocalId() + EVT_SHIFT*evt;
-		int chain = NOT_CAUGHT;
-		int catching_state = NO_STATE;
-		boolean is_handler = false;
-		boolean skip_entry = false;
-		
-		if (!handleSystemEvent(ifitem, evt, generic_data)) {
-			switch (state) {
-				case STATE_state0:
-					switch(trigger) {
-					case TRIG_TestPort1__msg1:
-						{
-							chain = CHAIN_TRANS_state0_TO_cp1_BY_msg1TestPort1;
-							catching_state = STATE_TOP;
-						}
-					break;
-					}
-					break;
-				case STATE_state1_state0:
-					switch(trigger) {
-					case TRIG_TestPort1__msg1:
-						{ 
-						if (counter==2
-						)
-						{
-							chain = CHAIN_TRANS_state1_TO_cp2_BY_msg1TestPort1;
-							catching_state = STATE_TOP;
-						} else 
-						if (counter==1
-						)
-						{
-							chain = CHAIN_TRANS_state1_TO_state0_BY_msg1TestPort1;
-							catching_state = STATE_TOP;
-						} else 
-						{
-							chain = CHAIN_TRANS_tp0_TO_tp0_BY_msg1TestPort1_tr8;
-							catching_state = STATE_TOP;
-							is_handler = true;
-							skip_entry = true;
-						}
-						}
-					break;
-					}
-					break;
-				case STATE_testOk:
-					switch(trigger) {
-					case TRIG_TestPort1__msg1:
-						{
-							chain = CHAIN_TRANS_tp0_TO_tp0_BY_msg1TestPort1_tr8;
-							catching_state = STATE_TOP;
-							is_handler = true;
-							skip_entry = true;
-						}
-					break;
-					}
-					break;
-				case STATE_testFalse:
-					switch(trigger) {
-					case TRIG_TestPort1__msg1:
-						{
-							chain = CHAIN_TRANS_tp0_TO_tp0_BY_msg1TestPort1_tr8;
-							catching_state = STATE_TOP;
-							is_handler = true;
-							skip_entry = true;
-						}
-					break;
-					}
-					break;
-			}
-		}
-		if (chain != NOT_CAUGHT) {
-			exitTo(state, catching_state, is_handler);
-			int next = executeTransitionChain(chain, ifitem, generic_data);
-			next = enterHistory(next, is_handler, skip_entry);
-			setState(next);
-		}
-	}
 	
 	private void setState(int new_state) {
 		DebuggingService.getInstance().addActorState(this,stateStrings[new_state]);
 		if (stateStrings[new_state]!="Idle") {
-			// TODOTS: model switch for activation
 			System.out.println(getInstancePath() + " -> " + stateStrings[new_state]);
 		}	
 		this.state = new_state;
-	}
-	
-	@Override
-	public void executeInitTransition() {
-		int chain = CHAIN_TRANS_INITIAL_TO__cp0;
-		int next = executeTransitionChain(chain, null, null);
-		next = enterHistory(next, false, false);
-		setState(next);
-	}
-	
-	/**
-	 * calls exit codes while exiting from the current state to one of its
-	 * parent states while remembering the history
-	 * @param current - the current state
-	 * @param to - the final parent state
-	 * @param handler - entry and exit codes are called only if not handler (for handler TransitionPoints)
-	 */
-	private void exitTo(int current, int to, boolean handler) {
-		while (current!=to) {
-			switch (current) {
-				case STATE_state0:
-					if (!handler) exit_state0();
-					history[STATE_TOP] = STATE_state0;
-					current = STATE_TOP;
-					break;
-				case STATE_state1:
-					if (!handler) exit_state1();
-					history[STATE_TOP] = STATE_state1;
-					current = STATE_TOP;
-					break;
-				case STATE_state1_state0:
-					if (!handler) exit_state1_state0();
-					history[STATE_state1] = STATE_state1_state0;
-					current = STATE_state1;
-					break;
-				case STATE_testOk:
-					history[STATE_TOP] = STATE_testOk;
-					current = STATE_TOP;
-					break;
-				case STATE_testFalse:
-					history[STATE_TOP] = STATE_testFalse;
-					current = STATE_TOP;
-					break;
-			}
-		}
-	}
-	/**
-	 * calls action, entry and exit codes along a transition chain. The generic data are cast to typed data
-	 * matching the trigger of this chain. The ID of the final state is returned
-	 * @param chain - the chain ID
-	 * @param generic_data - the generic data pointer
-	 * @return the ID of the final state
-	 */
-	private int executeTransitionChain(int chain, InterfaceItemBase ifitem, Object generic_data) {
-		switch (chain) {
-			case CHAIN_TRANS_INITIAL_TO__cp0:
-			{
-				action_TRANS_INITIAL_TO__cp0();
-				if (counter == 0
-				) {
-				action_TRANS_cp0_TO_state0_COND_LastCheck(ifitem);
-				return STATE_state0;}
-				else {
-				action_TRANS_cp0_TO_state0(ifitem);
-				return STATE_state0;}
-			}
-			case CHAIN_TRANS_state0_TO_cp1_BY_msg1TestPort1:
-			{
-				action_TRANS_state0_TO_cp1_BY_msg1TestPort1(ifitem);
-				if (counter == 4
-				) {
-				action_TRANS_cp1_TO_state1_tp0_COND_tr3(ifitem);
-				entry_state1();
-				action_state1_TRANS_tp0_TO_cp0(ifitem);
-				if (counter == 4
-				) {
-				action_state1_TRANS_cp0_TO_state0_COND_tr0(ifitem);
-				return STATE_state1_state0;}
-				else {
-				action_state1_TRANS_cp0_TO_state0(ifitem);
-				return STATE_state1_state0;}
-				}
-				else if (counter == 3
-				) {
-				action_TRANS_cp1_TO_state1_COND_tr11(ifitem);
-				return STATE_state1;}
-				else {
-				action_TRANS_cp1_TO_state0(ifitem);
-				return STATE_state0;}
-			}
-			case CHAIN_TRANS_state1_TO_cp2_BY_msg1TestPort1:
-			{
-				action_TRANS_state1_TO_cp2_BY_msg1TestPort1(ifitem);
-				if (crcGen.getCrc()==26639
-				) {
-				action_TRANS_cp2_TO_testOk_COND_tr6(ifitem);
-				return STATE_testOk;}
-				else {
-				action_TRANS_cp2_TO_testFalse(ifitem);
-				return STATE_testFalse;}
-			}
-			case CHAIN_TRANS_state1_TO_state0_BY_msg1TestPort1:
-			{
-				action_TRANS_state1_TO_state0_BY_msg1TestPort1(ifitem);
-				return STATE_state0;
-			}
-			case CHAIN_TRANS_tp0_TO_tp0_BY_msg1TestPort1_tr8:
-			{
-				action_TRANS_tp0_TO_tp0_BY_msg1TestPort1_tr8(ifitem);
-				return STATE_TOP;
-			}
-			case CHAIN_state1_TRANS_INITIAL_TO__state0:
-			{
-				action_state1_TRANS_INITIAL_TO__state0();
-				return STATE_state1_state0;
-			}
-		}
-		return NO_STATE;
-	}
-	/**
-	 * calls entry codes while entering a state's history. The ID of the final leaf state is returned
-	 * @param state - the state which is entered
-	 * @param handler - entry code is executed if not handler
-	 * @return - the ID of the final leaf state
-	 */
-	private int enterHistory(int state, boolean handler, boolean skip_entry) {
-		while (true) {
-			switch (state) {
-				case STATE_state0:
-					if (!(skip_entry || handler)) entry_state0();
-					// in leaf state: return state id
-					return STATE_state0;
-				case STATE_state1:
-					if (!(skip_entry || handler)) entry_state1();
-					// state has a sub graph
-					// with init transition
-					if (history[STATE_state1]==NO_STATE) {
-						state = executeTransitionChain(CHAIN_state1_TRANS_INITIAL_TO__state0, null, null);
-					}
-					else {
-						state = history[STATE_state1];
-					}
-					break;
-				case STATE_state1_state0:
-					if (!(skip_entry || handler)) entry_state1_state0();
-					// in leaf state: return state id
-					return STATE_state1_state0;
-				case STATE_testOk:
-					// in leaf state: return state id
-					return STATE_testOk;
-				case STATE_testFalse:
-					// in leaf state: return state id
-					return STATE_testFalse;
-				case STATE_TOP:
-					state = history[STATE_TOP];
-					break;
-			}
-			skip_entry = false;
-		}
-		//return NO_STATE; // required by CDT but detected as unreachable by JDT because of while (true)
 	}
 	
 	//*** Entry and Exit Codes
@@ -450,6 +202,247 @@ public class CPUser extends ActorClassBase {
 	protected void action_state1_TRANS_INITIAL_TO__state0() {
 		System.out.println("state1 initial transition code");
 		crcGen.update(53);
+	}
+	
+	/**
+	 * calls exit codes while exiting from the current state to one of its
+	 * parent states while remembering the history
+	 * @param current - the current state
+	 * @param to - the final parent state
+	 * @param handler - entry and exit codes are called only if not handler (for handler TransitionPoints)
+	 */
+	private void exitTo(int current, int to, boolean handler) {
+		while (current!=to) {
+			switch (current) {
+				case STATE_state0:
+					if (!handler) exit_state0();
+					this.history[STATE_TOP] = STATE_state0;
+					current = STATE_TOP;
+					break;
+				case STATE_state1:
+					if (!handler) exit_state1();
+					this.history[STATE_TOP] = STATE_state1;
+					current = STATE_TOP;
+					break;
+				case STATE_state1_state0:
+					if (!handler) exit_state1_state0();
+					this.history[STATE_state1] = STATE_state1_state0;
+					current = STATE_state1;
+					break;
+				case STATE_testOk:
+					this.history[STATE_TOP] = STATE_testOk;
+					current = STATE_TOP;
+					break;
+				case STATE_testFalse:
+					this.history[STATE_TOP] = STATE_testFalse;
+					current = STATE_TOP;
+					break;
+			}
+		}
+	}
+	
+	/**
+	 * calls action, entry and exit codes along a transition chain. The generic data are cast to typed data
+	 * matching the trigger of this chain. The ID of the final state is returned
+	 * @param chain - the chain ID
+	 * @param generic_data - the generic data pointer
+	 * @return the ID of the final state
+	 */
+	private int executeTransitionChain(int chain, InterfaceItemBase ifitem, Object generic_data) {
+		switch (chain) {
+			case CHAIN_TRANS_INITIAL_TO__cp0:
+			{
+				action_TRANS_INITIAL_TO__cp0();
+				if (counter == 0
+				) {
+				action_TRANS_cp0_TO_state0_COND_LastCheck(ifitem);
+				return STATE_state0;}
+				else {
+				action_TRANS_cp0_TO_state0(ifitem);
+				return STATE_state0;}
+			}
+			case CHAIN_TRANS_state0_TO_cp1_BY_msg1TestPort1:
+			{
+				action_TRANS_state0_TO_cp1_BY_msg1TestPort1(ifitem);
+				if (counter == 4
+				) {
+				action_TRANS_cp1_TO_state1_tp0_COND_tr3(ifitem);
+				entry_state1();
+				action_state1_TRANS_tp0_TO_cp0(ifitem);
+				if (counter == 4
+				) {
+				action_state1_TRANS_cp0_TO_state0_COND_tr0(ifitem);
+				return STATE_state1_state0;}
+				else {
+				action_state1_TRANS_cp0_TO_state0(ifitem);
+				return STATE_state1_state0;}
+				}
+				else if (counter == 3
+				) {
+				action_TRANS_cp1_TO_state1_COND_tr11(ifitem);
+				return STATE_state1;}
+				else {
+				action_TRANS_cp1_TO_state0(ifitem);
+				return STATE_state0;}
+			}
+			case CHAIN_TRANS_state1_TO_cp2_BY_msg1TestPort1:
+			{
+				action_TRANS_state1_TO_cp2_BY_msg1TestPort1(ifitem);
+				if (crcGen.getCrc()==26639
+				) {
+				action_TRANS_cp2_TO_testOk_COND_tr6(ifitem);
+				return STATE_testOk;}
+				else {
+				action_TRANS_cp2_TO_testFalse(ifitem);
+				return STATE_testFalse;}
+			}
+			case CHAIN_TRANS_state1_TO_state0_BY_msg1TestPort1:
+			{
+				action_TRANS_state1_TO_state0_BY_msg1TestPort1(ifitem);
+				return STATE_state0;
+			}
+			case CHAIN_TRANS_tp0_TO_tp0_BY_msg1TestPort1_tr8:
+			{
+				action_TRANS_tp0_TO_tp0_BY_msg1TestPort1_tr8(ifitem);
+				return STATE_TOP;
+			}
+			case CHAIN_state1_TRANS_INITIAL_TO__state0:
+			{
+				action_state1_TRANS_INITIAL_TO__state0();
+				return STATE_state1_state0;
+			}
+		}
+		return NO_STATE;
+	}
+	
+	/**
+	 * calls entry codes while entering a state's history. The ID of the final leaf state is returned
+	 * @param state - the state which is entered
+	 * @param handler - entry code is executed if not handler
+	 * @return - the ID of the final leaf state
+	 */
+	private int enterHistory(int state, boolean handler, boolean skip_entry) {
+		while (true) {
+			switch (state) {
+				case STATE_state0:
+					if (!(skip_entry || handler)) entry_state0();
+					// in leaf state: return state id
+					return STATE_state0;
+				case STATE_state1:
+					if (!(skip_entry || handler)) entry_state1();
+					// state has a sub graph
+					// with init transition
+					if (this.history[STATE_state1]==NO_STATE) {
+						state = executeTransitionChain(CHAIN_state1_TRANS_INITIAL_TO__state0, null, null);
+					}
+					else {
+						state = this.history[STATE_state1];
+					}
+					break;
+				case STATE_state1_state0:
+					if (!(skip_entry || handler)) entry_state1_state0();
+					// in leaf state: return state id
+					return STATE_state1_state0;
+				case STATE_testOk:
+					// in leaf state: return state id
+					return STATE_testOk;
+				case STATE_testFalse:
+					// in leaf state: return state id
+					return STATE_testFalse;
+				case STATE_TOP:
+					state = this.history[STATE_TOP];
+					break;
+			}
+			skip_entry = false;
+		}
+		//return NO_STATE; // required by CDT but detected as unreachable by JDT because of while (true)
+	}
+	
+	public void executeInitTransition() {
+		int chain = CHAIN_TRANS_INITIAL_TO__cp0;
+		int next = executeTransitionChain(chain, null, null);
+		next = enterHistory(next, false, false);
+		setState(next);
+	}
+	
+	/* receiveEvent contains the main implementation of the FSM */
+	public void receiveEvent(InterfaceItemBase ifitem, int evt, Object generic_data) {
+		int trigger = ifitem.getLocalId() + EVT_SHIFT*evt;
+		int chain = NOT_CAUGHT;
+		int catching_state = NO_STATE;
+		boolean is_handler = false;
+		boolean skip_entry = false;
+		
+		if (!handleSystemEvent(ifitem, evt, generic_data)) {
+			switch (this.state) {
+				case STATE_state0:
+					switch(trigger) {
+					case TRIG_TestPort1__msg1:
+						{
+							chain = CHAIN_TRANS_state0_TO_cp1_BY_msg1TestPort1;
+							catching_state = STATE_TOP;
+						}
+					break;
+					}
+					break;
+				case STATE_state1_state0:
+					switch(trigger) {
+					case TRIG_TestPort1__msg1:
+						{ 
+						if (counter==2
+						)
+						{
+							chain = CHAIN_TRANS_state1_TO_cp2_BY_msg1TestPort1;
+							catching_state = STATE_TOP;
+						} else 
+						if (counter==1
+						)
+						{
+							chain = CHAIN_TRANS_state1_TO_state0_BY_msg1TestPort1;
+							catching_state = STATE_TOP;
+						} else 
+						{
+							chain = CHAIN_TRANS_tp0_TO_tp0_BY_msg1TestPort1_tr8;
+							catching_state = STATE_TOP;
+							is_handler = true;
+							skip_entry = true;
+						}
+						}
+					break;
+					}
+					break;
+				case STATE_testOk:
+					switch(trigger) {
+					case TRIG_TestPort1__msg1:
+						{
+							chain = CHAIN_TRANS_tp0_TO_tp0_BY_msg1TestPort1_tr8;
+							catching_state = STATE_TOP;
+							is_handler = true;
+							skip_entry = true;
+						}
+					break;
+					}
+					break;
+				case STATE_testFalse:
+					switch(trigger) {
+					case TRIG_TestPort1__msg1:
+						{
+							chain = CHAIN_TRANS_tp0_TO_tp0_BY_msg1TestPort1_tr8;
+							catching_state = STATE_TOP;
+							is_handler = true;
+							skip_entry = true;
+						}
+					break;
+					}
+					break;
+			}
+		}
+		if (chain != NOT_CAUGHT) {
+			exitTo(this.state, catching_state, is_handler);
+			int next = executeTransitionChain(chain, ifitem, generic_data);
+			next = enterHistory(next, is_handler, skip_entry);
+			setState(next);
+		}
 	}
 		 
 	//******************************************

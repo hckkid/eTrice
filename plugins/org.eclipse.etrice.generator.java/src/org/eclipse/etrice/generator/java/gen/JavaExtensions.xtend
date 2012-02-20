@@ -25,6 +25,8 @@ import org.eclipse.etrice.generator.etricegen.ExpandedActorClass
 import org.eclipse.etrice.generator.etricegen.TransitionChain
 import org.eclipse.etrice.generator.generic.LanguageGenerator
 import org.eclipse.etrice.generator.generic.ILanguageExtension
+import java.util.List
+import org.eclipse.xtext.util.Pair
 
 
 @Singleton
@@ -45,12 +47,38 @@ class JavaExtensions implements ILanguageExtension {
 	override String accessLevelPublic() {"public "}
 	
 	override String memberAccess() {"this."} 	 
-	override String selfPointer(String classname, int argumentCount) {""}
+	override String selfPointer(String classname, boolean hasArgs) {""}
+	override String selfPointer(boolean hasArgs) { "" }
 	
 	override String operationScope(String classname, boolean isDeclaration) {""}
 	
-	override String outMessageId(String classname, String messagename) {"OUT_"+messagename}
-	override String inMessageId(String classname, String messagename) {"IN_"+messagename}
+
+	override String memberInDeclaration(String namespace, String member) {
+		return member
+	}
+	
+	override String memberInUse(String namespace, String member) {
+		return namespace+"."+member
+	}
+	
+	override boolean usesInheritance() {
+		return true
+	}
+	
+	override String genEnumeration(String name, List<Pair<String, String>> entries) {
+		'''
+		«FOR entry: entries»
+			public static final int «entry.first» = «entry.second»;
+		«ENDFOR»
+		'''.toString
+	}
+
+	override String booleanConstant(boolean b) {
+		b.toString
+	}
+	
+	override String nullPointer() { "null" }
+	override String voidPointer() { "Object" }
 
 	//-------------------------------------------------------
 	// transition chain visitor

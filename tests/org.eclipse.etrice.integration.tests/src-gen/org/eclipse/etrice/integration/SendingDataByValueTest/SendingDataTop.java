@@ -20,7 +20,7 @@ public class SendingDataTop extends ActorClassBase {
 	//--------------------- services
 
 	//--------------------- interface item IDs
-	
+		
 	//--------------------- attributes
 	//--------------------- operations
 

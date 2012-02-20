@@ -53,18 +53,18 @@ class DataClassGen {
 		«FOR model : models»import «model.name».*;
 		«ENDFOR»
 		
-		«helpers.UserCode(dc.userCode1)»
+		«helpers.userCode(dc.userCode1)»
 		
 		
 		public class «dc.name»«IF dc.base!=null» extends «dc.base.name»«ENDIF» {
 			
-			«helpers.UserCode(dc.userCode2)»
+			«helpers.userCode(dc.userCode2)»
 			
-			«helpers.Attributes(dc.attributes)»
+			«helpers.attributes(dc.attributes)»
 			
-			«helpers.AttributeSettersGettersImplementation(dc.attributes, dc.name)»
+			«helpers.attributeSettersGettersImplementation(dc.attributes, dc.name)»
 			
-			«helpers.OperationsImplementation(dc.operations, dc.name)»
+			«helpers.operationsImplementation(dc.operations, dc.name)»
 			
 			// default constructor
 			public «dc.name»() {
