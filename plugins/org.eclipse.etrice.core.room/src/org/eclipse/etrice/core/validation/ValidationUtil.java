@@ -331,9 +331,14 @@ public class ValidationUtil {
 				
 				if (local.isConjugated()==sub.isConjugated())
 					return Result.error("internal end port must have opposite direction");
-				
-				if (local.isReplicated() && sub.isReplicated())
-					return Result.error("not both ports can be replicated");
+
+				Result result = isConnectable(sub, ref, sc, exclude);
+				if (!result.isOk())
+					return result;
+
+				result = isConnectable(local, null, sc, exclude);
+				if (!result.isOk())
+					return result;
 			}
 		}
 		
