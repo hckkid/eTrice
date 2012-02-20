@@ -243,9 +243,9 @@ public class ActorClassGen extends GenericActorClassGenerator {
     _builder.append("_const* constData;");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
-    EList<Attribute> _attributes = ac.getAttributes();
-    StringConcatenation _attributes_1 = this.helpers.attributes(_attributes);
-    _builder.append(_attributes_1, "	");
+    List<Attribute> _allAttributes = this.roomExt.getAllAttributes(ac);
+    StringConcatenation _attributes = this.helpers.attributes(_allAttributes);
+    _builder.append(_attributes, "	");
     _builder.newLineIfNotEmpty();
     {
       boolean _hasNonEmptyStateMachine = this.roomExt.hasNonEmptyStateMachine(xpac);

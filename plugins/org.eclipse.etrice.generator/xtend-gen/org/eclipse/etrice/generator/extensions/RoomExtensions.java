@@ -10,7 +10,9 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.etrice.core.room.ActorClass;
+import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.BaseState;
+import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.ExternalPort;
 import org.eclipse.etrice.core.room.Guard;
@@ -236,6 +238,40 @@ public class RoomExtensions {
   public String getPathName(final String path) {
     String _replaceAll = path.replaceAll("/", "_");
     return _replaceAll;
+  }
+  
+  public List<Attribute> getAllAttributes(final DataClass dc) {
+    List<Attribute> _xifexpression = null;
+    DataClass _base = dc.getBase();
+    boolean _operator_equals = ObjectExtensions.operator_equals(_base, null);
+    if (_operator_equals) {
+      EList<Attribute> _attributes = dc.getAttributes();
+      return _attributes;
+    } else {
+      DataClass _base_1 = dc.getBase();
+      EList<Attribute> _attributes_1 = _base_1.getAttributes();
+      List<Attribute> _allAttributes = this.getAllAttributes(dc);
+      List<Attribute> _union = this.<Attribute>union(_attributes_1, _allAttributes);
+      _xifexpression = _union;
+    }
+    return _xifexpression;
+  }
+  
+  public List<Attribute> getAllAttributes(final ActorClass ac) {
+    List<Attribute> _xifexpression = null;
+    ActorClass _base = ac.getBase();
+    boolean _operator_equals = ObjectExtensions.operator_equals(_base, null);
+    if (_operator_equals) {
+      EList<Attribute> _attributes = ac.getAttributes();
+      return _attributes;
+    } else {
+      ActorClass _base_1 = ac.getBase();
+      EList<Attribute> _attributes_1 = _base_1.getAttributes();
+      List<Attribute> _allAttributes = this.getAllAttributes(ac);
+      List<Attribute> _union = this.<Attribute>union(_attributes_1, _allAttributes);
+      _xifexpression = _union;
+    }
+    return _xifexpression;
   }
   
   public String getPortClassName(final ProtocolClass p, final boolean conj) {

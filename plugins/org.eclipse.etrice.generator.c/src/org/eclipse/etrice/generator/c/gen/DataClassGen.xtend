@@ -69,16 +69,17 @@ class DataClassGen {
 		«helpers.userCode(dc.userCode1)»
 				
 		typedef struct {
-			«helpers.userCode(dc.userCode2)»
-			«helpers.attributes(dc.attributes)»
-		} «dc.name»«IF dc.base!=null» /* extends -> inheritance not implemented yet */ «dc.base.name»«ENDIF»;
+			»«helpers.attributes(dc.allAttributes)»
+		} «dc.name»
 		
 «««		TODO: do we need setters and getters for C and C++ ?
 		
 		«helpers.operationsDeclaration(dc.operations, dc.name)»
 		
-		// deep copy
+		/* deep copy */
 		void «dc.name»_deepCopy(«dc.name»* source, «dc.name»* target);
+		
+		«helpers.userCode(dc.userCode2)»
 		
 		«generateIncludeGuardEnd(dc.name)»
 		

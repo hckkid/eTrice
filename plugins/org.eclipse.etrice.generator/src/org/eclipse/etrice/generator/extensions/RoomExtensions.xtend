@@ -23,7 +23,9 @@ import java.util.ArrayList
 import java.util.List
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.etrice.core.room.ActorClass
+import org.eclipse.etrice.core.room.Attribute
 import org.eclipse.etrice.core.room.BaseState
+import org.eclipse.etrice.core.room.DataClass
 import org.eclipse.etrice.core.room.ExternalPort
 import org.eclipse.etrice.core.room.InitialTransition
 import org.eclipse.etrice.core.room.Message
@@ -170,6 +172,20 @@ class RoomExtensions {
 	// make a valid identifier from a path string
 	def String getPathName(String path){
 		path.replaceAll("/","_");
+	}
+
+	def List<Attribute> getAllAttributes(DataClass dc) {
+		if (dc.base==null)
+			return dc.attributes
+		else
+			dc.base.attributes.union(dc.allAttributes)
+	}
+
+	def List<Attribute> getAllAttributes(ActorClass ac) {
+		if (ac.base==null)
+			return ac.attributes
+		else
+			ac.base.attributes.union(ac.allAttributes)
 	}
 
 	//-------------------------------------------------------

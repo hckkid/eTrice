@@ -105,7 +105,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 		/* variable part of ActorClass (RAM) */
 		struct «xpac.name» {
 			const «xpac.name»_const* constData;
-			«helpers.attributes(ac.attributes)»
+			«helpers.attributes(ac.allAttributes)»
 			«IF xpac.hasNonEmptyStateMachine»
 				«stateMachineGen.genDataMembers(xpac, ac)»
 			«ENDIF»
@@ -170,8 +170,4 @@ class ActorClassGen extends GenericActorClassGenerator {
 		
 		'''
 	}
-	
-//	def msgArgs(Message msg) {
-//		'''«IF msg.data!=null»«msg.data.defaultValue()»«ENDIF»'''
-//	}
 }
