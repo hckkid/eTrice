@@ -8,7 +8,7 @@
             delegateDescription="Generates Java source code from ROOM models"
             delegateName="eTrice Java Generator Delegate"
             id="org.eclipse.etrice.generator.launch.java.launchConfigurationType"
-            modes="run"
+            modes="run,debug"
             name="eTrice Java Generator">
       </launchConfigurationType>
    </extension>
