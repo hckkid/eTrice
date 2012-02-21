@@ -123,6 +123,20 @@ public class CGeneratorConfigTab extends AbstractLaunchConfigurationTab {
 		});
 		instanceDiagramButton = createCheckButton(mainComposite, "generate instance diagram");
 		instanceDiagramButton.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, false, false, 2, 1));
+		instanceDiagramButton.addSelectionListener(new SelectionListener() {
+			
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				validate();
+				setDirty(true);
+				updateLaunchConfigurationDialog();
+			}
+			
+			@Override
+			public void widgetDefaultSelected(SelectionEvent e) {
+				widgetSelected(e);
+			}
+		});
 	}
 
 	/**
