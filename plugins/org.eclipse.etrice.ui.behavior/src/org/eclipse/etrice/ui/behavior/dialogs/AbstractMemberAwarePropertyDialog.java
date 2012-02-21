@@ -17,6 +17,7 @@ import java.util.HashSet;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.Operation;
+import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.ui.behavior.dialogs.PortMessageSelectionDialog.MsgItemPair;
 import org.eclipse.etrice.ui.behavior.dialogs.PortMessageSelectionDialog.OperationItemPair;
@@ -166,7 +167,10 @@ public abstract class AbstractMemberAwarePropertyDialog extends AbstractProperty
 					MsgItemPair pair = (MsgItemPair) dlg.getMethodItemPair();
 					if (pair.out) {
 						String data = pair.msg.getData()!=null? pair.msg.getData().getName() : "";
-						insertText(pair.item.getName()+"."+pair.msg.getName()+"("+data+")");
+						String getter = "";
+						if (pair.item instanceof Port && ((Port)pair.item).getMultiplicity()!=1)
+							getter = "get(idx).";
+						insertText(pair.item.getName()+"."+getter+pair.msg.getName()+"("+data+")");
 					}
 					else
 						insertText(pair.item.getName()+"."+pair.msg.getName());
