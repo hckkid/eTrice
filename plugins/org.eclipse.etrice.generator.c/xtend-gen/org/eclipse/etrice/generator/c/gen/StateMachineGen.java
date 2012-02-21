@@ -8,6 +8,7 @@ import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.generator.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.generator.extensions.RoomExtensions;
 import org.eclipse.etrice.generator.generic.GenericStateMachineGenerator;
+import org.eclipse.xtext.xbase.lib.IntegerExtensions;
 import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 
 @SuppressWarnings("all")
@@ -25,7 +26,8 @@ public class StateMachineGen extends GenericStateMachineGenerator {
     _builder.append("etInt16 history[");
     List<State> _allLeafStates = this._roomExtensions.getAllLeafStates(xpac);
     int _size = _allLeafStates.size();
-    _builder.append(_size, "");
+    int _operator_plus = IntegerExtensions.operator_plus(((Integer)_size), ((Integer)1));
+    _builder.append(_operator_plus, "");
     _builder.append("];");
     _builder.newLineIfNotEmpty();
     return _builder;
