@@ -13,9 +13,9 @@ import room.basic.service.timing.*;
 import room.basic.service.timing.PTimeout.*;
 import org.eclipse.etrice.integration.PingPongThreadTest.PingPongProtocol.*;
 
-//--------------------- begin user code
+/*--------------------- begin user code ---------------------*/
 	import org.eclipse.etrice.runtime.java.messaging.RTServices;
-//--------------------- end user code
+/*--------------------- end user code ---------------------*/
 
 
 public class MrPingActor extends ActorClassBase {
@@ -35,10 +35,10 @@ public class MrPingActor extends ActorClassBase {
 	public static final int IFITEM_PingPongPort3 = 3;
 	public static final int IFITEM_timer = 4;
 		
-	//--------------------- attributes
-	protected int count;
-	protected int pongCount;
-	//--------------------- operations
+	/*--------------------- attributes ---------------------*/
+	int count;
+	int pongCount;
+	/*--------------------- operations ---------------------*/
 
 	//--------------------- construction
 	public MrPingActor(IRTObject parent, String name, Address[][] port_addr, Address[][] peer_addr){

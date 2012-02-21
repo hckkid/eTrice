@@ -11,17 +11,17 @@ import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
 
 import org.eclipse.etrice.integration.ChoicePointTest.TestProtocol.*;
 
-//--------------------- begin user code
+/*--------------------- begin user code ---------------------*/
 	import org.eclipse.etrice.integration.tests.helpers.*;
 	import org.eclipse.etrice.runtime.java.messaging.RTServices;
-//--------------------- end user code
+/*--------------------- end user code ---------------------*/
 
 
 public class CPUser extends ActorClassBase {
 
-	//--------------------- begin user code
+	/*--------------------- begin user code ---------------------*/
 		private CRC16Generator crcGen = new CRC16Generator();
-	//--------------------- end user code
+	/*--------------------- end user code ---------------------*/
 	
 	//--------------------- ports
 	protected TestProtocolPort TestPort1 = null;
@@ -31,9 +31,9 @@ public class CPUser extends ActorClassBase {
 	//--------------------- interface item IDs
 	public static final int IFITEM_TestPort1 = 1;
 		
-	//--------------------- attributes
-	protected int counter;
-	//--------------------- operations
+	/*--------------------- attributes ---------------------*/
+	int counter;
+	/*--------------------- operations ---------------------*/
 
 	//--------------------- construction
 	public CPUser(IRTObject parent, String name, Address[][] port_addr, Address[][] peer_addr){

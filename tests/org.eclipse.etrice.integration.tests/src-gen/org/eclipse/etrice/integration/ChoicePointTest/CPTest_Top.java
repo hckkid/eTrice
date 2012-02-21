@@ -21,8 +21,8 @@ public class CPTest_Top extends ActorClassBase {
 
 	//--------------------- interface item IDs
 		
-	//--------------------- attributes
-	//--------------------- operations
+	/*--------------------- attributes ---------------------*/
+	/*--------------------- operations ---------------------*/
 
 	//--------------------- construction
 	public CPTest_Top(IRTObject parent, String name, Address[][] port_addr, Address[][] peer_addr){

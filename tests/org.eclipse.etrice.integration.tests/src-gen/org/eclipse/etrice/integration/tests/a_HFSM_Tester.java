@@ -11,9 +11,9 @@ import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
 
 import org.eclipse.etrice.integration.tests.p_HFSM.*;
 
-//--------------------- begin user code
+/*--------------------- begin user code ---------------------*/
 	import org.eclipse.etrice.runtime.java.messaging.RTServices;
-//--------------------- end user code
+/*--------------------- end user code ---------------------*/
 
 
 public class a_HFSM_Tester extends ActorClassBase {
@@ -27,8 +27,8 @@ public class a_HFSM_Tester extends ActorClassBase {
 	//--------------------- interface item IDs
 	public static final int IFITEM_testee = 1;
 		
-	//--------------------- attributes
-	//--------------------- operations
+	/*--------------------- attributes ---------------------*/
+	/*--------------------- operations ---------------------*/
 
 	//--------------------- construction
 	public a_HFSM_Tester(IRTObject parent, String name, Address[][] port_addr, Address[][] peer_addr){

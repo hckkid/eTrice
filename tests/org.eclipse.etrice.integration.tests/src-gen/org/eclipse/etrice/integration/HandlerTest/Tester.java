@@ -28,8 +28,8 @@ public class Tester extends ActorClassBase {
 	public static final int IFITEM_TestPort1 = 1;
 	public static final int IFITEM_timer = 2;
 		
-	//--------------------- attributes
-	//--------------------- operations
+	/*--------------------- attributes ---------------------*/
+	/*--------------------- operations ---------------------*/
 
 	//--------------------- construction
 	public Tester(IRTObject parent, String name, Address[][] port_addr, Address[][] peer_addr){

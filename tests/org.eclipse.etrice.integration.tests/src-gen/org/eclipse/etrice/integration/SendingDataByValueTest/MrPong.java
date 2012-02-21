@@ -24,8 +24,8 @@ public class MrPong extends ActorClassBase {
 	//--------------------- interface item IDs
 	public static final int IFITEM_PingPongPort = 1;
 		
-	//--------------------- attributes
-	//--------------------- operations
+	/*--------------------- attributes ---------------------*/
+	/*--------------------- operations ---------------------*/
 	public void printData(PingPongData d) {
 		System.out.printf("\n");
 		System.out.printf("i8Val: %d \n",d.getI8Val());

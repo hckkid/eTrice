@@ -21,8 +21,8 @@ public class PingPongTop extends ActorClassBase {
 
 	//--------------------- interface item IDs
 		
-	//--------------------- attributes
-	//--------------------- operations
+	/*--------------------- attributes ---------------------*/
+	/*--------------------- operations ---------------------*/
 
 	//--------------------- construction
 	public PingPongTop(IRTObject parent, String name, Address[][] port_addr, Address[][] peer_addr){

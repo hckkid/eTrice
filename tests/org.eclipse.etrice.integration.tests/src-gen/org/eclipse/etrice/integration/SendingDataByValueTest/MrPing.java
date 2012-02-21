@@ -11,17 +11,17 @@ import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
 
 import org.eclipse.etrice.integration.SendingDataByValueTest.PingPongProtocol.*;
 
-//--------------------- begin user code
+/*--------------------- begin user code ---------------------*/
 	import org.eclipse.etrice.integration.tests.helpers.*;
 	import org.eclipse.etrice.runtime.java.messaging.RTServices;
-//--------------------- end user code
+/*--------------------- end user code ---------------------*/
 
 
 public class MrPing extends ActorClassBase {
 
-	//--------------------- begin user code
+	/*--------------------- begin user code ---------------------*/
 		private CRC16Generator crcGen = new CRC16Generator();
-	//--------------------- end user code
+	/*--------------------- end user code ---------------------*/
 	
 	//--------------------- ports
 	protected PingPongProtocolConjPort PingPongPort = null;
@@ -31,10 +31,10 @@ public class MrPing extends ActorClassBase {
 	//--------------------- interface item IDs
 	public static final int IFITEM_PingPongPort = 1;
 		
-	//--------------------- attributes
-	protected int[] i32Array;
-	protected PingPongData data;
-	//--------------------- operations
+	/*--------------------- attributes ---------------------*/
+	int[] i32Array;
+	PingPongData data;
+	/*--------------------- operations ---------------------*/
 	public void printData(PingPongData d) {
 		System.out.printf("MrPing:\n");
 		System.out.printf("i8Val: %d \n",d.getI8Val());

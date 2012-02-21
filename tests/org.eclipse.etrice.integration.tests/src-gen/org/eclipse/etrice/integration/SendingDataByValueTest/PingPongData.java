@@ -6,16 +6,16 @@ package org.eclipse.etrice.integration.SendingDataByValueTest;
 public class PingPongData {
 	
 	
-	//--------------------- attributes
-	protected byte i8Val;
-	protected short i16Val;
-	protected int i32Val;
-	protected char charVal;
-	protected float f32Val;
-	protected double f64Val;
-	protected String stringVal;
-	protected int[] arrayFromInt32;
-	protected PingPongDataDeep ownType;
+	/*--------------------- attributes ---------------------*/
+	byte i8Val;
+	short i16Val;
+	int i32Val;
+	char charVal;
+	float f32Val;
+	double f64Val;
+	String stringVal;
+	int[] arrayFromInt32;
+	PingPongDataDeep ownType;
 	
 	//--------------------- attribute setters and getters
 	public void setI8Val (byte i8Val) {
@@ -73,7 +73,7 @@ public class PingPongData {
 		return this.ownType;
 	}
 	
-	//--------------------- operations
+	/*--------------------- operations ---------------------*/
 	
 	// default constructor
 	public PingPongData() {
