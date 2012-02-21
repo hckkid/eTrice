@@ -6,12 +6,12 @@ package org.eclipse.etrice.modellib.Socket;
 public class DSocketConfiguration {
 	
 	
-	//--------------------- attributes
-	protected String serverName;
-	protected int portNumber;
-	protected int protocol;
-	protected boolean checkCookie;
-	protected int mode;
+	/*--------------------- attributes ---------------------*/
+	String serverName;
+	int portNumber;
+	int protocol;
+	boolean checkCookie;
+	int mode;
 	
 	//--------------------- attribute setters and getters
 	public void setServerName (String serverName) {
@@ -45,7 +45,7 @@ public class DSocketConfiguration {
 		return this.mode;
 	}
 	
-	//--------------------- operations
+	/*--------------------- operations ---------------------*/
 	
 	// default constructor
 	public DSocketConfiguration() {

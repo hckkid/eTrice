@@ -6,9 +6,9 @@ package org.eclipse.etrice.modellib.Socket;
 public class DSocketData {
 	
 	
-	//--------------------- attributes
-	protected int size;
-	protected String data;
+	/*--------------------- attributes ---------------------*/
+	int size;
+	String data;
 	
 	//--------------------- attribute setters and getters
 	public void setSize (int size) {
@@ -24,7 +24,7 @@ public class DSocketData {
 		return this.data;
 	}
 	
-	//--------------------- operations
+	/*--------------------- operations ---------------------*/
 	
 	// default constructor
 	public DSocketData() {

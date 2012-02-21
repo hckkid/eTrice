@@ -12,18 +12,18 @@ import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
 import room.basic.service.timing.PTimeout.*;
 import room.basic.service.timing.PTimer.*;
 
-//--------------------- begin user code
+/*--------------------- begin user code ---------------------*/
 	import java.util.Timer;
-//--------------------- end user code
+/*--------------------- end user code ---------------------*/
 
 
 public class ATimingService extends ActorClassBase {
 
-	//--------------------- begin user code
+	/*--------------------- begin user code ---------------------*/
 		private Timer timerService = null;
 		private int taskCount = 0;
 		private static final int PURGE_LIMIT = 1000;
-	//--------------------- end user code
+	/*--------------------- end user code ---------------------*/
 	
 	//--------------------- ports
 	//--------------------- saps
@@ -35,8 +35,8 @@ public class ATimingService extends ActorClassBase {
 	public static final int IFITEM_timer = 1;
 	public static final int IFITEM_timeout = 2;
 		
-	//--------------------- attributes
-	//--------------------- operations
+	/*--------------------- attributes ---------------------*/
+	/*--------------------- operations ---------------------*/
 	public void stop() {
 		System.out.println(toString() + "::stop()");
 		timerService.cancel();

@@ -7,9 +7,9 @@ import org.eclipse.etrice.runtime.java.messaging.Message;
 import org.eclipse.etrice.runtime.java.modelbase.*;
 import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
 
-//--------------------- begin user code
+/*--------------------- begin user code ---------------------*/
 	import java.util.TimerTask;
-//--------------------- end user code
+/*--------------------- end user code ---------------------*/
 
 
 public class PTimeout {
@@ -20,7 +20,7 @@ public class PTimeout {
 	public static final int IN_Kill = 3;
 	public static final int MSG_MAX = 4;
 
-	//--------------------- begin user code
+	/*--------------------- begin user code ---------------------*/
 		static protected class FireTimeoutTask extends TimerTask {
 		
 					private int time;
@@ -55,7 +55,7 @@ public class PTimeout {
 						this.id = id;
 					}
 				}
-	//--------------------- end user code
+	/*--------------------- end user code ---------------------*/
 
 	private static String messageStrings[] = {"MIN", "timeoutTick", "Start","Kill","MAX"};
 
@@ -72,11 +72,11 @@ public class PTimeout {
 	
 	// port class
 	static public class PTimeoutPort extends PortBase {
-		//--------------------- begin user code
+		/*--------------------- begin user code ---------------------*/
 			private FireTimeoutTask task = null;
 						
 						public TimerTask getTask() { return task; }
-		//--------------------- end user code
+		/*--------------------- end user code ---------------------*/
 		// constructors
 		public PTimeoutPort(IEventReceiver actor, String name, int localId, Address addr, Address peerAddress) {
 			super(actor, name, localId, 0, addr, peerAddress);
@@ -127,8 +127,8 @@ public class PTimeout {
 				}
 		}
 	
-		//--------------------- attributes
-		//--------------------- operations
+		/*--------------------- attributes ---------------------*/
+		/*--------------------- operations ---------------------*/
 		public void timeout(Integer id) {
 			//regular PortClass Operation timeout
 							DebuggingService.getInstance().addMessageAsyncOut(getAddress(),
@@ -186,10 +186,10 @@ public class PTimeout {
 	
 	// port class
 	static public class PTimeoutConjPort extends PortBase {
-		//--------------------- begin user code
+		/*--------------------- begin user code ---------------------*/
 			private int currentId = 0;
 						private boolean active = false;
-		//--------------------- end user code
+		/*--------------------- end user code ---------------------*/
 		// constructors
 		public PTimeoutConjPort(IEventReceiver actor, String name, int localId, Address addr, Address peerAddress) {
 			super(actor, name, localId, 0, addr, peerAddress);
@@ -232,8 +232,8 @@ public class PTimeout {
 				}
 		}
 	
-		//--------------------- attributes
-		//--------------------- operations
+		/*--------------------- attributes ---------------------*/
+		/*--------------------- operations ---------------------*/
 		
 		// sent messages
 		public void Start(int time_ms) {

@@ -11,19 +11,19 @@ import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
 
 import room.basic.service.logging.Log.*;
 
-//--------------------- begin user code
+/*--------------------- begin user code ---------------------*/
 	import java.io.*;
 	import java.util.*;
-//--------------------- end user code
+/*--------------------- end user code ---------------------*/
 
 
 public class ALogService extends ActorClassBase {
 
-	//--------------------- begin user code
+	/*--------------------- begin user code ---------------------*/
 		FileOutputStream file = null;
 		PrintStream p = null;
 		static long tStart = System.currentTimeMillis();
-	//--------------------- end user code
+	/*--------------------- end user code ---------------------*/
 	
 	//--------------------- ports
 	//--------------------- saps
@@ -33,8 +33,8 @@ public class ALogService extends ActorClassBase {
 	//--------------------- interface item IDs
 	public static final int IFITEM_log = 1;
 		
-	//--------------------- attributes
-	//--------------------- operations
+	/*--------------------- attributes ---------------------*/
+	/*--------------------- operations ---------------------*/
 	public void destroyUser() {
 		if (p!= null) {
 		p.flush();

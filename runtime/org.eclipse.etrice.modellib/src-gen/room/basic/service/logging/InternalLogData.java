@@ -6,10 +6,10 @@ package room.basic.service.logging;
 public class InternalLogData {
 	
 	
-	//--------------------- attributes
-	protected String userString;
-	protected String sender;
-	protected long timeStamp;
+	/*--------------------- attributes ---------------------*/
+	String userString;
+	String sender;
+	long timeStamp;
 	
 	//--------------------- attribute setters and getters
 	public void setUserString (String userString) {
@@ -31,7 +31,7 @@ public class InternalLogData {
 		return this.timeStamp;
 	}
 	
-	//--------------------- operations
+	/*--------------------- operations ---------------------*/
 	
 	// default constructor
 	public InternalLogData() {
