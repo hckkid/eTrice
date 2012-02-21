@@ -214,6 +214,14 @@ public interface Root extends EObject {
 	 */
 	EList<ProtocolClass> getReferencedProtocolClasses(ActorClass cls);
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	ExpandedActorClass getExpandedActorClass(ActorInstance ai);
+
 	// TODO: is this the right place ?
 	HashSet<DataClass> getReferencedDataClasses(DataClass cls);
 	HashSet<DataClass> getReferencedDataClasses(ActorClass cls);

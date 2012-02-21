@@ -364,6 +364,19 @@ public class RootImpl extends EObjectImpl implements Root {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public ExpandedActorClass getExpandedActorClass(ActorInstance ai) {
+		for (ExpandedActorClass xpac : getXpActorClasses()) {
+			if (xpac.getActorClass()==ai.getActorClass())
+				return xpac;
+		}
+		return null;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override

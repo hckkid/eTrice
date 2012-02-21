@@ -16,7 +16,8 @@
 
 void etPort_receive(const etPort* self, const etMessage* msg) {
 	ET_MSC_LOGGER_SYNC_ENTRY("etPort", "receive")
-	(self->receiveMessageFunc)(self->myActor, self->localId, msg);
+	if (self->receiveMessageFunc!=NULL)
+		(self->receiveMessageFunc)(self->myActor, (void*)self, msg);
 	ET_MSC_LOGGER_SYNC_EXIT
 }
 

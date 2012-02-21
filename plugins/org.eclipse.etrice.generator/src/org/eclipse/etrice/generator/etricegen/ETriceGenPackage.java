@@ -1430,6 +1430,15 @@ public interface ETriceGenPackage extends EPackage {
 	int EXPANDED_ACTOR_CLASS__ABSTRACT = RoomPackage.ACTOR_CLASS__ABSTRACT;
 
 	/**
+	 * The feature id for the '<em><b>Comm Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPANDED_ACTOR_CLASS__COMM_TYPE = RoomPackage.ACTOR_CLASS__COMM_TYPE;
+
+	/**
 	 * The feature id for the '<em><b>Base</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

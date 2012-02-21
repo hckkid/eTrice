@@ -260,37 +260,25 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 	}
 	
 	def portClassSource(ProtocolClass pc, Boolean conj){
+		var portClassName = pc.getPortClassName(conj)
+		var pClass = pc.getPortClass(conj)
+		var messages = if (conj) pc.allIncomingMessages else pc.allOutgoingMessages
+		var dir = if (conj) "IN_" else "OUT_"
+		
 		'''
-		«var portClassName = pc.getPortClassName(conj)»
-		«var pClass = pc.getPortClass(conj)»
-		
-		«IF !conj»
-«««			send functions for outgoing messages
-			«FOR message : pc.getAllOutgoingMessages()»
+			«FOR message : messages»
 				void «portClassName»_«message.name»(const «portClassName»* self){
 					ET_MSC_LOGGER_SYNC_ENTRY("«portClassName»", "«message.name»")
-					etMessage* msg = etMessageService_getMessageBuffer(self->msgService, sizeof(etMessage));
-					msg->address = self->peerAddress;
-					msg->evtID = «memberInUse(pc.name, "OUT_"+message.name)»;
-					etMessageService_pushMessage(self->msgService, msg);
+					if (self->receiveMessageFunc!=NULL) {
+						etMessage* msg = etMessageService_getMessageBuffer(self->msgService, sizeof(etMessage));
+						msg->address = self->peerAddress;
+						msg->evtID = «memberInUse(pc.name, dir+message.name)»;
+						etMessageService_pushMessage(self->msgService, msg);
+					}
 					ET_MSC_LOGGER_SYNC_EXIT
 				}
+				
 			«ENDFOR»
-		«ELSE»
-«««			send functions for incoming messages
-			«FOR message : pc.getAllIncomingMessages()»
-				void «portClassName»_«message.name»(const «portClassName»* self){
-					ET_MSC_LOGGER_SYNC_ENTRY("«portClassName»", "«message.name»")
-					etMessage* msg = etMessageService_getMessageBuffer(self->msgService, sizeof(etMessage));
-					msg->address = self->peerAddress;
-					msg->evtID = «memberInUse(pc.name, "IN_"+message.name)»;
-					etMessageService_pushMessage(self->msgService, msg);
-					ET_MSC_LOGGER_SYNC_EXIT
-				}
-			«ENDFOR»
-		«ENDIF»
-		
-		
 		'''
 	}
 	

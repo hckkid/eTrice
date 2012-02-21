@@ -282,113 +282,83 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
   }
   
   public StringConcatenation portClassSource(final ProtocolClass pc, final Boolean conj) {
-    StringConcatenation _builder = new StringConcatenation();
-    String _portClassName = this.roomExt.getPortClassName(pc, conj);
-    String portClassName = _portClassName;
-    _builder.newLineIfNotEmpty();
-    PortClass _portClass = this.roomExt.getPortClass(pc, conj);
-    PortClass pClass = _portClass;
-    _builder.newLineIfNotEmpty();
-    _builder.newLine();
+    StringConcatenation _xblockexpression = null;
     {
-      boolean _operator_not = BooleanExtensions.operator_not(conj);
-      if (_operator_not) {
-        {
-          List<Message> _allOutgoingMessages = this.roomExt.getAllOutgoingMessages(pc);
-          for(final Message message : _allOutgoingMessages) {
-            _builder.append("void ");
-            _builder.append(portClassName, "");
-            _builder.append("_");
-            String _name = message.getName();
-            _builder.append(_name, "");
-            _builder.append("(const ");
-            _builder.append(portClassName, "");
-            _builder.append("* self){");
-            _builder.newLineIfNotEmpty();
-            _builder.append("\t");
-            _builder.append("ET_MSC_LOGGER_SYNC_ENTRY(\"");
-            _builder.append(portClassName, "	");
-            _builder.append("\", \"");
-            String _name_1 = message.getName();
-            _builder.append(_name_1, "	");
-            _builder.append("\")");
-            _builder.newLineIfNotEmpty();
-            _builder.append("\t");
-            _builder.append("etMessage* msg = etMessageService_getMessageBuffer(self->msgService, sizeof(etMessage));");
-            _builder.newLine();
-            _builder.append("\t");
-            _builder.append("msg->address = self->peerAddress;");
-            _builder.newLine();
-            _builder.append("\t");
-            _builder.append("msg->evtID = ");
-            String _name_2 = pc.getName();
-            String _name_3 = message.getName();
-            String _operator_plus = StringExtensions.operator_plus("OUT_", _name_3);
-            String _memberInUse = this.stdExt.memberInUse(_name_2, _operator_plus);
-            _builder.append(_memberInUse, "	");
-            _builder.append(";");
-            _builder.newLineIfNotEmpty();
-            _builder.append("\t");
-            _builder.append("etMessageService_pushMessage(self->msgService, msg);");
-            _builder.newLine();
-            _builder.append("\t");
-            _builder.append("ET_MSC_LOGGER_SYNC_EXIT");
-            _builder.newLine();
-            _builder.append("}");
-            _builder.newLine();
-          }
-        }
+      String _portClassName = this.roomExt.getPortClassName(pc, conj);
+      String portClassName = _portClassName;
+      PortClass _portClass = this.roomExt.getPortClass(pc, conj);
+      PortClass pClass = _portClass;
+      List<Message> _xifexpression = null;
+      if (conj) {
+        List<Message> _allIncomingMessages = this.roomExt.getAllIncomingMessages(pc);
+        _xifexpression = _allIncomingMessages;
       } else {
-        {
-          List<Message> _allIncomingMessages = this.roomExt.getAllIncomingMessages(pc);
-          for(final Message message_1 : _allIncomingMessages) {
-            _builder.append("void ");
-            _builder.append(portClassName, "");
-            _builder.append("_");
-            String _name_4 = message_1.getName();
-            _builder.append(_name_4, "");
-            _builder.append("(const ");
-            _builder.append(portClassName, "");
-            _builder.append("* self){");
-            _builder.newLineIfNotEmpty();
-            _builder.append("\t");
-            _builder.append("ET_MSC_LOGGER_SYNC_ENTRY(\"");
-            _builder.append(portClassName, "	");
-            _builder.append("\", \"");
-            String _name_5 = message_1.getName();
-            _builder.append(_name_5, "	");
-            _builder.append("\")");
-            _builder.newLineIfNotEmpty();
-            _builder.append("\t");
-            _builder.append("etMessage* msg = etMessageService_getMessageBuffer(self->msgService, sizeof(etMessage));");
-            _builder.newLine();
-            _builder.append("\t");
-            _builder.append("msg->address = self->peerAddress;");
-            _builder.newLine();
-            _builder.append("\t");
-            _builder.append("msg->evtID = ");
-            String _name_6 = pc.getName();
-            String _name_7 = message_1.getName();
-            String _operator_plus_1 = StringExtensions.operator_plus("IN_", _name_7);
-            String _memberInUse_1 = this.stdExt.memberInUse(_name_6, _operator_plus_1);
-            _builder.append(_memberInUse_1, "	");
-            _builder.append(";");
-            _builder.newLineIfNotEmpty();
-            _builder.append("\t");
-            _builder.append("etMessageService_pushMessage(self->msgService, msg);");
-            _builder.newLine();
-            _builder.append("\t");
-            _builder.append("ET_MSC_LOGGER_SYNC_EXIT");
-            _builder.newLine();
-            _builder.append("}");
-            _builder.newLine();
-          }
+        List<Message> _allOutgoingMessages = this.roomExt.getAllOutgoingMessages(pc);
+        _xifexpression = _allOutgoingMessages;
+      }
+      List<Message> messages = _xifexpression;
+      String _xifexpression_1 = null;
+      if (conj) {
+        _xifexpression_1 = "IN_";
+      } else {
+        _xifexpression_1 = "OUT_";
+      }
+      String dir = _xifexpression_1;
+      StringConcatenation _builder = new StringConcatenation();
+      {
+        for(final Message message : messages) {
+          _builder.append("void ");
+          _builder.append(portClassName, "");
+          _builder.append("_");
+          String _name = message.getName();
+          _builder.append(_name, "");
+          _builder.append("(const ");
+          _builder.append(portClassName, "");
+          _builder.append("* self){");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t");
+          _builder.append("ET_MSC_LOGGER_SYNC_ENTRY(\"");
+          _builder.append(portClassName, "	");
+          _builder.append("\", \"");
+          String _name_1 = message.getName();
+          _builder.append(_name_1, "	");
+          _builder.append("\")");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t");
+          _builder.append("if (self->receiveMessageFunc!=NULL) {");
+          _builder.newLine();
+          _builder.append("\t\t");
+          _builder.append("etMessage* msg = etMessageService_getMessageBuffer(self->msgService, sizeof(etMessage));");
+          _builder.newLine();
+          _builder.append("\t\t");
+          _builder.append("msg->address = self->peerAddress;");
+          _builder.newLine();
+          _builder.append("\t\t");
+          _builder.append("msg->evtID = ");
+          String _name_2 = pc.getName();
+          String _name_3 = message.getName();
+          String _operator_plus = StringExtensions.operator_plus(dir, _name_3);
+          String _memberInUse = this.stdExt.memberInUse(_name_2, _operator_plus);
+          _builder.append(_memberInUse, "		");
+          _builder.append(";");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t\t");
+          _builder.append("etMessageService_pushMessage(self->msgService, msg);");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("}");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("ET_MSC_LOGGER_SYNC_EXIT");
+          _builder.newLine();
+          _builder.append("}");
+          _builder.newLine();
+          _builder.newLine();
         }
       }
+      _xblockexpression = (_builder);
     }
-    _builder.newLine();
-    _builder.newLine();
-    return _builder;
+    return _xblockexpression;
   }
   
   public StringConcatenation messageSignature(final ProtocolClass pc, final Message m) {

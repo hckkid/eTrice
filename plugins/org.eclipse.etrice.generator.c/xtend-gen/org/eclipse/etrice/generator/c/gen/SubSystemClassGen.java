@@ -5,11 +5,13 @@ import com.google.inject.Singleton;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.DetailCode;
+import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.generator.base.ILogger;
 import org.eclipse.etrice.generator.c.gen.CExtensions;
 import org.eclipse.etrice.generator.etricegen.ActorInstance;
+import org.eclipse.etrice.generator.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.generator.etricegen.InterfaceItemInstance;
 import org.eclipse.etrice.generator.etricegen.PortInstance;
 import org.eclipse.etrice.generator.etricegen.Root;
@@ -17,6 +19,7 @@ import org.eclipse.etrice.generator.etricegen.SubSystemInstance;
 import org.eclipse.etrice.generator.extensions.RoomExtensions;
 import org.eclipse.etrice.generator.generic.ProcedureHelpers;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
+import org.eclipse.xtext.xbase.lib.IntegerExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 
@@ -470,15 +473,19 @@ public class SubSystemClassGen {
     _builder.newLine();
     _builder.append("/* instantiation of message services */");
     _builder.newLine();
+    _builder.newLine();
+    _builder.append("/* pool and block size */");
+    _builder.newLine();
     _builder.append("#define MESSAGE_POOL_MAX 10");
     _builder.newLine();
     _builder.append("#define MESSAGE_BLOCK_SIZE 32");
     _builder.newLine();
+    _builder.newLine();
     _builder.append("/* MessageService for Thread1 */");
     _builder.newLine();
-    _builder.append("uint8 msgBuffer_Thread1[MESSAGE_POOL_MAX*MESSAGE_BLOCK_SIZE];");
+    _builder.append("static uint8 msgBuffer_Thread1[MESSAGE_POOL_MAX*MESSAGE_BLOCK_SIZE];");
     _builder.newLine();
-    _builder.append("etMessageService msgService_Thread1;");
+    _builder.append("static etMessageService msgService_Thread1;");
     _builder.newLine();
     _builder.newLine();
     _builder.newLine();
@@ -551,36 +558,14 @@ public class SubSystemClassGen {
         _builder.append("_const = {");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
-        _builder.append("&");
-        String _path_3 = ai_1.getPath();
-        String _pathName_3 = this.roomExt.getPathName(_path_3);
-        _builder.append(_pathName_3, "	");
-        _builder.append(",");
-        _builder.newLineIfNotEmpty();
-        _builder.append("\t");
         _builder.append("/* Ports: {myActor, etReceiveMessage, msgService, peerAddress, localId} */");
         _builder.newLine();
         {
           EList<PortInstance> _ports = ai_1.getPorts();
           for(final PortInstance pi : _ports) {
             _builder.append("\t");
-            _builder.append("{&");
-            String _path_4 = ai_1.getPath();
-            String _pathName_4 = this.roomExt.getPathName(_path_4);
-            _builder.append(_pathName_4, "	");
-            _builder.append(", ");
-            ActorClass _actorClass_2 = ai_1.getActorClass();
-            String _name_5 = _actorClass_2.getName();
-            _builder.append(_name_5, "	");
-            _builder.append("_ReceiveMessage, &msgService_Thread1, ");
-            EList<InterfaceItemInstance> _peers = pi.getPeers();
-            InterfaceItemInstance _get = _peers.get(0);
-            int _objId = _get.getObjId();
-            _builder.append(_objId, "	");
-            _builder.append(", 123} /* Port ");
-            String _name_6 = pi.getName();
-            _builder.append(_name_6, "	");
-            _builder.append(" */");
+            String _genPortInitializer = this.genPortInitializer(root, ai_1, pi);
+            _builder.append(_genPortInitializer, "	");
             _builder.newLineIfNotEmpty();
           }
         }
@@ -589,17 +574,17 @@ public class SubSystemClassGen {
         _builder.append("};");
         _builder.newLine();
         _builder.append("static ");
-        ActorClass _actorClass_3 = ai_1.getActorClass();
-        String _name_7 = _actorClass_3.getName();
-        _builder.append(_name_7, "");
+        ActorClass _actorClass_2 = ai_1.getActorClass();
+        String _name_5 = _actorClass_2.getName();
+        _builder.append(_name_5, "");
         _builder.append(" ");
-        String _path_5 = ai_1.getPath();
-        String _pathName_5 = this.roomExt.getPathName(_path_5);
-        _builder.append(_pathName_5, "");
+        String _path_3 = ai_1.getPath();
+        String _pathName_3 = this.roomExt.getPathName(_path_3);
+        _builder.append(_pathName_3, "");
         _builder.append(" = {&");
-        String _path_6 = ai_1.getPath();
-        String _pathName_6 = this.roomExt.getPathName(_path_6);
-        _builder.append(_pathName_6, "");
+        String _path_4 = ai_1.getPath();
+        String _pathName_4 = this.roomExt.getPathName(_path_4);
+        _builder.append(_pathName_4, "");
         _builder.append("_const};");
         _builder.newLineIfNotEmpty();
       }
@@ -610,6 +595,56 @@ public class SubSystemClassGen {
     _builder.newLine();
     _builder.newLine();
     return _builder;
+  }
+  
+  private String genPortInitializer(final Root root, final ActorInstance ai, final PortInstance pi) {
+    String _xblockexpression = null;
+    {
+      String _xifexpression = null;
+      EList<InterfaceItemInstance> _peers = pi.getPeers();
+      boolean _isEmpty = _peers.isEmpty();
+      if (_isEmpty) {
+        _xifexpression = "NULL";
+      } else {
+        ActorClass _actorClass = ai.getActorClass();
+        String _name = _actorClass.getName();
+        String _operator_plus = StringExtensions.operator_plus(_name, "_ReceiveMessage");
+        _xifexpression = _operator_plus;
+      }
+      String recvMsg = _xifexpression;
+      int _xifexpression_1 = (int) 0;
+      EList<InterfaceItemInstance> _peers_1 = pi.getPeers();
+      boolean _isEmpty_1 = _peers_1.isEmpty();
+      if (_isEmpty_1) {
+        _xifexpression_1 = 0;
+      } else {
+        EList<InterfaceItemInstance> _peers_2 = pi.getPeers();
+        InterfaceItemInstance _get = _peers_2.get(0);
+        int _objId = _get.getObjId();
+        _xifexpression_1 = _objId;
+      }
+      int objId = _xifexpression_1;
+      String _path = ai.getPath();
+      String _pathName = this.roomExt.getPathName(_path);
+      String _operator_plus_1 = StringExtensions.operator_plus("{&", _pathName);
+      String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, ", ");
+      String _operator_plus_3 = StringExtensions.operator_plus(_operator_plus_2, recvMsg);
+      String _operator_plus_4 = StringExtensions.operator_plus(_operator_plus_3, ", ");
+      String _operator_plus_5 = StringExtensions.operator_plus(_operator_plus_4, "&msgService_Thread1, ");
+      String _operator_plus_6 = StringExtensions.operator_plus(_operator_plus_5, ((Integer)objId));
+      String _operator_plus_7 = StringExtensions.operator_plus(_operator_plus_6, ", ");
+      ExpandedActorClass _expandedActorClass = root.getExpandedActorClass(ai);
+      Port _port = pi.getPort();
+      int _interfaceItemLocalId = _expandedActorClass.getInterfaceItemLocalId(_port);
+      int _operator_plus_8 = IntegerExtensions.operator_plus(((Integer)_interfaceItemLocalId), ((Integer)1));
+      String _operator_plus_9 = StringExtensions.operator_plus(_operator_plus_7, ((Integer)_operator_plus_8));
+      String _operator_plus_10 = StringExtensions.operator_plus(_operator_plus_9, "} /* Port ");
+      String _name_1 = pi.getName();
+      String _operator_plus_11 = StringExtensions.operator_plus(_operator_plus_10, _name_1);
+      String _operator_plus_12 = StringExtensions.operator_plus(_operator_plus_11, " */");
+      _xblockexpression = (_operator_plus_12);
+    }
+    return _xblockexpression;
   }
   
   public StringConcatenation generateDispatcherFile(final Root root, final SubSystemInstance ssi, final SubSystemClass ssc) {

@@ -95,7 +95,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 		
 		/* const part of ActorClass (ROM) */
 		typedef struct «xpac.name»_const {
-			const «xpac.name»* actor;
+««« TODO: needed?			const «xpac.name»* actor;
 			/* Ports */
 			«FOR ep : ac.getEndPorts()»
 				const «ep.getPortClassName()» «ep.name»;
