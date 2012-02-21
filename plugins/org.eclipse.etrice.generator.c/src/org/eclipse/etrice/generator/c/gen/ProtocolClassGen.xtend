@@ -101,8 +101,9 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 		 */
 
 		#include "«pc.getCHeaderFileName»"
-		
 		#include "etMSCLogger.h"
+
+		«helpers.userCode(pc.userCode3)»
 		
 		/*--------------------- port classes */
 		«portClassSource(pc, false)»

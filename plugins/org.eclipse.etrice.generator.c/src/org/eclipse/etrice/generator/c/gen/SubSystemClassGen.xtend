@@ -69,6 +69,8 @@ class SubSystemClassGen {
 		 */
 		
 		«generateIncludeGuardBegin(ssc.name)»
+
+		«helpers.userCode(ssc.userCode1)»
 		
 		
 		/* lifecycle functions
@@ -83,6 +85,7 @@ class SubSystemClassGen {
 		void «ssc.name»_stop(void); 	/* lifecycle stop	 */
 		void «ssc.name»_destroy(void); 	/* lifecycle destroy */
 		
+		«helpers.userCode(ssc.userCode2)»
 		
 		«generateIncludeGuardEnd(ssc.name)»
 		
@@ -107,6 +110,8 @@ class SubSystemClassGen {
 		#include "etLogger.h"
 		#include "etMSCLogger.h"
 		
+
+		«helpers.userCode(ssc.userCode3)»
 		
 		/* data for SubSysten «ssc.name» */
 		typedef struct «ssc.name» {

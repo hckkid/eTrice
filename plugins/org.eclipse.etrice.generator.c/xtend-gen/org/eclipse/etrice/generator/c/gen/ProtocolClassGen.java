@@ -190,9 +190,13 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
     _builder.append(_cHeaderFileName, "");
     _builder.append("\"");
     _builder.newLineIfNotEmpty();
-    _builder.newLine();
     _builder.append("#include \"etMSCLogger.h\"");
     _builder.newLine();
+    _builder.newLine();
+    DetailCode _userCode3 = pc.getUserCode3();
+    StringConcatenation _userCode = this.helpers.userCode(_userCode3);
+    _builder.append(_userCode, "");
+    _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("/*--------------------- port classes */");
     _builder.newLine();
