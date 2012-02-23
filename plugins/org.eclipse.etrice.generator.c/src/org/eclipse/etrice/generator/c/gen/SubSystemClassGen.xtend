@@ -273,11 +273,12 @@ class SubSystemClassGen {
 	def private String genPortInitializer(Root root, ActorInstance ai, PortInstance pi) {
 		var recvMsg = if (pi.peers.empty) "NULL" else ai.actorClass.name+"_ReceiveMessage"
 		var objId = if (pi.peers.empty) 0 else pi.peers.get(0).objId
+		var idx = pi.peers.get(0).peers.indexOf(pi)
 		
 		"{&"+ai.path.getPathName()+", "
 		+recvMsg+", " 
 		+"&msgService_Thread1, "
-		+objId+", "
+		+(objId+idx)+", "
 		+(root.getExpandedActorClass(ai).getInterfaceItemLocalId(pi.port)+1)
 		+"} /* Port "+pi.name+" */"
 	}

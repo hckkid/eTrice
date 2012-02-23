@@ -758,6 +758,11 @@ public class SubSystemClassGen {
         _xifexpression_1 = _objId;
       }
       int objId = _xifexpression_1;
+      EList<InterfaceItemInstance> _peers_3 = pi.getPeers();
+      InterfaceItemInstance _get_1 = _peers_3.get(0);
+      EList<InterfaceItemInstance> _peers_4 = _get_1.getPeers();
+      int _indexOf = _peers_4.indexOf(pi);
+      int idx = _indexOf;
       String _path = ai.getPath();
       String _pathName = this.roomExt.getPathName(_path);
       String _operator_plus_1 = StringExtensions.operator_plus("{&", _pathName);
@@ -765,18 +770,19 @@ public class SubSystemClassGen {
       String _operator_plus_3 = StringExtensions.operator_plus(_operator_plus_2, recvMsg);
       String _operator_plus_4 = StringExtensions.operator_plus(_operator_plus_3, ", ");
       String _operator_plus_5 = StringExtensions.operator_plus(_operator_plus_4, "&msgService_Thread1, ");
-      String _operator_plus_6 = StringExtensions.operator_plus(_operator_plus_5, ((Integer)objId));
-      String _operator_plus_7 = StringExtensions.operator_plus(_operator_plus_6, ", ");
+      int _operator_plus_6 = IntegerExtensions.operator_plus(((Integer)objId), ((Integer)idx));
+      String _operator_plus_7 = StringExtensions.operator_plus(_operator_plus_5, ((Integer)_operator_plus_6));
+      String _operator_plus_8 = StringExtensions.operator_plus(_operator_plus_7, ", ");
       ExpandedActorClass _expandedActorClass = root.getExpandedActorClass(ai);
       Port _port = pi.getPort();
       int _interfaceItemLocalId = _expandedActorClass.getInterfaceItemLocalId(_port);
-      int _operator_plus_8 = IntegerExtensions.operator_plus(((Integer)_interfaceItemLocalId), ((Integer)1));
-      String _operator_plus_9 = StringExtensions.operator_plus(_operator_plus_7, ((Integer)_operator_plus_8));
-      String _operator_plus_10 = StringExtensions.operator_plus(_operator_plus_9, "} /* Port ");
+      int _operator_plus_9 = IntegerExtensions.operator_plus(((Integer)_interfaceItemLocalId), ((Integer)1));
+      String _operator_plus_10 = StringExtensions.operator_plus(_operator_plus_8, ((Integer)_operator_plus_9));
+      String _operator_plus_11 = StringExtensions.operator_plus(_operator_plus_10, "} /* Port ");
       String _name_1 = pi.getName();
-      String _operator_plus_11 = StringExtensions.operator_plus(_operator_plus_10, _name_1);
-      String _operator_plus_12 = StringExtensions.operator_plus(_operator_plus_11, " */");
-      _xblockexpression = (_operator_plus_12);
+      String _operator_plus_12 = StringExtensions.operator_plus(_operator_plus_11, _name_1);
+      String _operator_plus_13 = StringExtensions.operator_plus(_operator_plus_12, " */");
+      _xblockexpression = (_operator_plus_13);
     }
     return _xblockexpression;
   }

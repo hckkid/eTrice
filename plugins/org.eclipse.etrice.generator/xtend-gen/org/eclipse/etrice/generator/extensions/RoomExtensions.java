@@ -310,16 +310,11 @@ public class RoomExtensions {
   }
   
   public String getPortClassName(final Port p) {
-      ProtocolClass _protocol = p.getProtocol();
-      boolean _isConjugated = p.isConjugated();
-      String _portClassName = this.getPortClassName(_protocol, _isConjugated);
-      String ret = _portClassName;
-      boolean _isReplicated = p.isReplicated();
-      if (_isReplicated) {
-        String _operator_plus = StringExtensions.operator_plus(ret, "Repl");
-        ret = _operator_plus;
-      }
-      return ret;
+    ProtocolClass _protocol = p.getProtocol();
+    boolean _isConjugated = p.isConjugated();
+    boolean _isReplicated = p.isReplicated();
+    String _portClassName = this.getPortClassName(_protocol, _isConjugated, _isReplicated);
+    return _portClassName;
   }
   
   public String getPortClassName(final ExternalPort p) {
