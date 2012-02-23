@@ -758,11 +758,19 @@ public class SubSystemClassGen {
         _xifexpression_1 = _objId;
       }
       int objId = _xifexpression_1;
+      int _xifexpression_2 = (int) 0;
       EList<InterfaceItemInstance> _peers_3 = pi.getPeers();
-      InterfaceItemInstance _get_1 = _peers_3.get(0);
-      EList<InterfaceItemInstance> _peers_4 = _get_1.getPeers();
-      int _indexOf = _peers_4.indexOf(pi);
-      int idx = _indexOf;
+      boolean _isEmpty_2 = _peers_3.isEmpty();
+      if (_isEmpty_2) {
+        _xifexpression_2 = 0;
+      } else {
+        EList<InterfaceItemInstance> _peers_4 = pi.getPeers();
+        InterfaceItemInstance _get_1 = _peers_4.get(0);
+        EList<InterfaceItemInstance> _peers_5 = _get_1.getPeers();
+        int _indexOf = _peers_5.indexOf(pi);
+        _xifexpression_2 = _indexOf;
+      }
+      int idx = _xifexpression_2;
       String _path = ai.getPath();
       String _pathName = this.roomExt.getPathName(_path);
       String _operator_plus_1 = StringExtensions.operator_plus("{&", _pathName);
