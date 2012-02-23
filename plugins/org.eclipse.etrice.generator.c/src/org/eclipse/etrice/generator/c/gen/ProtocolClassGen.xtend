@@ -102,13 +102,6 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 		#include "etMSCLogger.h"
 
 		«helpers.userCode(pc.userCode3)»
-
-		static void sendMessage(const etPort* self, etInt16 evtId) {
-			etMessage* msg = etMessageService_getMessageBuffer(self->msgService, sizeof(etMessage));
-			msg->address = self->peerAddress;
-			msg->evtID = evtId;
-			etMessageService_pushMessage(self->msgService, msg);
-		}
 		
 		/*--------------------- port classes */
 		«portClassSource(pc, false)»
@@ -269,7 +262,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 				void «portClassName»_«message.name»(const «portClassName»* self) {
 					ET_MSC_LOGGER_SYNC_ENTRY("«portClassName»", "«message.name»")
 					if (self->receiveMessageFunc!=NULL) {
-						sendMessage(self, «memberInUse(pc.name, dir+message.name)»);
+						etPort_sendMessage(self, «memberInUse(pc.name, dir+message.name)»);
 					}
 					ET_MSC_LOGGER_SYNC_EXIT
 				}
@@ -278,7 +271,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 					int i;
 					ET_MSC_LOGGER_SYNC_ENTRY("«replPortClassName»", "«message.name»")
 					for (i=0; i<self->size; ++i) {
-						sendMessage((etPort*)(&self->ports[i]), «memberInUse(pc.name, dir+message.name)»);
+						etPort_sendMessage((etPort*)(&self->ports[i]), «memberInUse(pc.name, dir+message.name)»);
 					}
 					ET_MSC_LOGGER_SYNC_EXIT
 				}
@@ -286,7 +279,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 				void «replPortClassName»_«message.name»(const «replPortClassName»* self, int idx) {
 					ET_MSC_LOGGER_SYNC_ENTRY("«replPortClassName»", "«message.name»")
 					if (0<=idx && idx<self->size) {
-						sendMessage((etPort*)(&self->ports[idx]), «memberInUse(pc.name, dir+message.name)»);
+						etPort_sendMessage((etPort*)(&self->ports[idx]), «memberInUse(pc.name, dir+message.name)»);
 					}
 					ET_MSC_LOGGER_SYNC_EXIT
 				}

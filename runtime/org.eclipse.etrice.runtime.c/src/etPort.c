@@ -21,3 +21,10 @@ void etPort_receive(const etPort* self, const etMessage* msg) {
 	ET_MSC_LOGGER_SYNC_EXIT
 }
 
+
+void etPort_sendMessage(const etPort* self, etInt16 evtId) {
+	etMessage* msg = etMessageService_getMessageBuffer(self->msgService, sizeof(etMessage));
+	msg->address = self->peerAddress;
+	msg->evtID = evtId;
+	etMessageService_pushMessage(self->msgService, msg);
+}

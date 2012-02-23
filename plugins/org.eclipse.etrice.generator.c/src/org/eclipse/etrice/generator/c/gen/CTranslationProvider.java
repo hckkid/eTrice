@@ -29,11 +29,9 @@ import com.google.inject.Inject;
 public class CTranslationProvider implements ITranslationProvider {
 
 	@Inject private RoomExtensions roomExt;
-	private ActorClass ac;
 	
 	@Override
 	public void setActorClass(ActorClass ac) {
-		this.ac = ac;
 	}
 
 	@Override
