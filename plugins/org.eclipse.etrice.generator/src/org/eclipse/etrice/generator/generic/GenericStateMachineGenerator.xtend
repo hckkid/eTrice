@@ -20,6 +20,8 @@ import org.eclipse.etrice.core.room.TriggeredTransition
 import org.eclipse.etrice.core.room.NonInitialTransition
 import org.eclipse.etrice.generator.etricegen.ExpandedActorClass
 import org.eclipse.etrice.generator.extensions.RoomExtensions
+import org.eclipse.etrice.generator.base.DetailCodeTranslator
+import org.eclipse.etrice.generator.base.ITranslationProvider
 import static extension org.eclipse.etrice.generator.extensions.RoomNameProv.*
 import org.eclipse.xtext.util.Pair
 import static org.eclipse.xtext.util.Tuples.*
@@ -30,6 +32,7 @@ class GenericStateMachineGenerator {
 	@Inject public extension RoomExtensions roomExt
 	@Inject public extension GenericProtocolClassGenerator pcGen
 	@Inject public extension LanguageGenerator languageGen
+	@Inject public ITranslationProvider translator
 
 	def private genStateIdConstants(ExpandedActorClass xpac, ActorClass ac) {
 		// with inheritance we exclude inherited base states
@@ -80,7 +83,11 @@ class GenericStateMachineGenerator {
 		return langExt.genEnumeration("triggers", list)
 	}
 	
-	def genStateMachine(ExpandedActorClass xpac, ActorClass ac) {'''
+	def genStateMachine(ExpandedActorClass xpac, ActorClass ac) {
+		translator.setActorClass(ac)
+		var dct = new DetailCodeTranslator(ac, translator)
+		
+	'''
 		
 		/* state IDs */
 		«genStateIdConstants(xpac, ac)»
@@ -98,12 +105,12 @@ class GenericStateMachineGenerator {
 			«IF xpac.isOwnObject(state)»
 				«IF state.hasEntryCode()»
 					«langExt.accessLevelProtected»void «state.getEntryCodeOperationName()»(«langExt.selfPointer(ac.name, false)») {
-						«xpac.getEntryCode(state)»
+						«xpac.getEntryCode(state, dct)»
 					}
 				«ENDIF»
 				«IF state.hasExitCode()»
 					«langExt.accessLevelProtected»void «state.getExitCodeOperationName()»(«langExt.selfPointer(ac.name, false)») {
-						«xpac.getExitCode(state)»
+						«xpac.getExitCode(state, dct)»
 					}
 				«ENDIF»
 			«ENDIF»
@@ -113,7 +120,7 @@ class GenericStateMachineGenerator {
 		«FOR tr : xpac.stateMachine.getTransitionList()»
 			«IF xpac.isOwnObject(tr) && tr.hasActionCode()»
 				«langExt.accessLevelProtected»void «tr.getActionCodeOperationName()»(«langExt.selfPointer(ac.name, tr instanceof NonInitialTransition)»«IF tr instanceof NonInitialTransition»InterfaceItemBase ifitem«languageGen.getArgumentList(xpac, tr)»«ENDIF») {
-					«xpac.getActionCode(tr)»
+					«xpac.getActionCode(tr, dct)»
 				}
 			«ENDIF»
 		«ENDFOR»
@@ -230,7 +237,7 @@ class GenericStateMachineGenerator {
 									«IF needData»{ «at.msg.getTypedDataDefinition()»«ENDIF»
 									«FOR tt : at.transitions SEPARATOR " else "»
 										«var chain = xpac.getChain(tt)»
-										«guard(chain.transition, at.trigger, xpac)»
+										«guard(chain.transition, at.trigger, xpac, dct)»
 										{
 											chain = «chain.getChainId()»;
 											catching_state = «chain.getContextId()»;
@@ -262,15 +269,17 @@ class GenericStateMachineGenerator {
 	
 	def genExtra(ExpandedActorClass xpac, ActorClass ac) {''''''}
 	
-	def private dispatch guard(TriggeredTransition tt, String trigger, ExpandedActorClass ac) {'''
-		«var tr = tt.triggers.findFirst(e|ac.isMatching(e, trigger))»
+	def private dispatch guard(TriggeredTransition tt, String trigger, ExpandedActorClass ac, DetailCodeTranslator dct) {
+		var tr = tt.triggers.findFirst(e|ac.isMatching(e, trigger))
+	'''
 		«IF tr.hasGuard()»
-			if («ac.getCode(tr.guard.guard)»)
+			if («dct.translateDetailCode(tr.guard.guard)»)
 		«ENDIF»
 	'''
 	}
 
-	def private dispatch guard(Transition t, String trigger, ExpandedActorClass ac) {'''
+	def private dispatch guard(Transition t, String trigger, ExpandedActorClass ac, DetailCodeTranslator dct) {
+	'''
 		/* error */
 	'''
 	}

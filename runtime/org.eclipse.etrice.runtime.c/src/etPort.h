@@ -33,6 +33,25 @@ typedef struct {
 	#endif
 } etPort;
 
+typedef struct {
+	void* myActor;
+	etActorReceiveMessage receiveMessageFunc;
+	etMessageService* msgService;
+	etAddressId peerAddress;
+	etAddressId localId;
+	etAddressId index;
+
+	#ifdef etDEBUG
+	etAddressId address;
+	/* thread ID from msg service: msgService->threadId */
+	#endif
+} etReplSubPort;
+
+typedef struct {
+	etInt16 size;
+	const etReplSubPort* ports;
+} etReplPort;
+
 typedef etPort* InterfaceItemBase;
 
 void etPort_receive(const etPort* self, const etMessage* msg);

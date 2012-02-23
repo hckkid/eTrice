@@ -94,19 +94,35 @@ class ActorClassGen extends GenericActorClassGenerator {
 		typedef struct «xpac.name» «xpac.name»;
 		
 		/* const part of ActorClass (ROM) */
-		typedef struct «xpac.name»_const {
-««« TODO: needed?			const «xpac.name»* actor;
-			/* Ports */
-			«FOR ep : ac.getEndPorts()»
-				const «ep.getPortClassName()» «ep.name»;
-			«ENDFOR»
-		} «xpac.name»_const;
+		«IF ac.allEndPorts.empty»
+			/* this actor class has no ports and thus no constant data */
+		«ELSE»
+			typedef struct «xpac.name»_const {
+				/* simple ports */
+				«FOR ep : ac.allEndPorts»
+					«IF ep.multiplicity==1»
+						const «ep.getPortClassName()» «ep.name»;
+					«ENDIF»
+				«ENDFOR»
+				
+				/* replicated ports */
+				«FOR ep : ac.allEndPorts»
+					«IF ep.multiplicity!=1»
+						const etReplPort «ep.name»;
+					«ENDIF»
+				«ENDFOR»
+			} «xpac.name»_const;
+		«ENDIF»
 		
 		/* variable part of ActorClass (RAM) */
 		struct «xpac.name» {
-			const «xpac.name»_const* constData;
+			«IF !ac.allEndPorts.empty»
+				const «xpac.name»_const* constData;
+				
+			«ENDIF»
 			«helpers.attributes(ac.allAttributes)»
 			«IF xpac.hasNonEmptyStateMachine»
+			
 				«stateMachineGen.genDataMembers(xpac, ac)»
 			«ENDIF»
 		};

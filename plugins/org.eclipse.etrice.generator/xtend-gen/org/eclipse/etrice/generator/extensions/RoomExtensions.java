@@ -36,11 +36,13 @@ import org.eclipse.etrice.core.room.Transition;
 import org.eclipse.etrice.core.room.Trigger;
 import org.eclipse.etrice.core.room.TriggeredTransition;
 import org.eclipse.etrice.core.room.VarDecl;
+import org.eclipse.etrice.generator.base.DetailCodeTranslator;
 import org.eclipse.etrice.generator.etricegen.ActiveTrigger;
 import org.eclipse.etrice.generator.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.generator.etricegen.TransitionChain;
 import org.eclipse.etrice.generator.extensions.RoomNameProv;
 import org.eclipse.xtext.xbase.lib.BooleanExtensions;
+import org.eclipse.xtext.xbase.lib.CollectionExtensions;
 import org.eclipse.xtext.xbase.lib.ComparableExtensions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IntegerExtensions;
@@ -59,6 +61,14 @@ public class RoomExtensions {
       ArrayList<T> ret = _arrayList;
       ret.addAll(l1);
       ret.addAll(l2);
+      return ret;
+  }
+  
+  public <T extends Object> Iterable<T> union(final Iterable<T> l1, final Iterable<T> l2) {
+      ArrayList<T> _arrayList = new ArrayList<T>();
+      ArrayList<T> ret = _arrayList;
+      CollectionExtensions.<T>addAll(ret, l1);
+      CollectionExtensions.<T>addAll(ret, l2);
       return ret;
   }
   
@@ -275,16 +285,28 @@ public class RoomExtensions {
   }
   
   public String getPortClassName(final ProtocolClass p, final boolean conj) {
-      String _name = p.getName();
-      String ret = _name;
-      if (conj) {
-        String _operator_plus = StringExtensions.operator_plus(ret, "ConjPort");
-        ret = _operator_plus;
-      } else {
-        String _operator_plus_1 = StringExtensions.operator_plus(ret, "Port");
-        ret = _operator_plus_1;
-      }
-      return ret;
+    String _portClassName = this.getPortClassName(p, conj, false);
+    return _portClassName;
+  }
+  
+  public String getPortClassName(final ProtocolClass p, final boolean conj, final boolean repl) {
+    String _name = p.getName();
+    String _xifexpression = null;
+    if (conj) {
+      _xifexpression = "Conj";
+    } else {
+      _xifexpression = "";
+    }
+    String _operator_plus = StringExtensions.operator_plus(_name, _xifexpression);
+    String _xifexpression_1 = null;
+    if (repl) {
+      _xifexpression_1 = "Repl";
+    } else {
+      _xifexpression_1 = "";
+    }
+    String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, _xifexpression_1);
+    String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, "Port");
+    return _operator_plus_2;
   }
   
   public String getPortClassName(final Port p) {
@@ -827,7 +849,8 @@ public class RoomExtensions {
     return _operator_and;
   }
   
-  public String getEntryCode(final ExpandedActorClass ac, final State s) {
+  public String getEntryCode(final ExpandedActorClass ac, final State s, final DetailCodeTranslator dct) {
+    String _xifexpression = null;
     if ((s instanceof RefinedState)) {
       String _entryCodeOperationName = RoomNameProv.getEntryCodeOperationName(s);
       String _operator_plus = StringExtensions.operator_plus("super.", _entryCodeOperationName);
@@ -835,15 +858,16 @@ public class RoomExtensions {
       DetailCode _entryCode = s.getEntryCode();
       String _code = ac.getCode(_entryCode);
       String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, _code);
-      return _operator_plus_2;
+      _xifexpression = _operator_plus_2;
     } else {
       DetailCode _entryCode_1 = s.getEntryCode();
-      String _code_1 = ac.getCode(_entryCode_1);
-      return _code_1;
+      String _translateDetailCode = dct.translateDetailCode(_entryCode_1);
+      _xifexpression = _translateDetailCode;
     }
+    return _xifexpression;
   }
   
-  public String getExitCode(final ExpandedActorClass ac, final State s) {
+  public String getExitCode(final ExpandedActorClass ac, final State s, final DetailCodeTranslator dct) {
     String _xifexpression = null;
     if ((s instanceof RefinedState)) {
       DetailCode _exitCode = s.getExitCode();
@@ -852,11 +876,11 @@ public class RoomExtensions {
       String _entryCodeOperationName = RoomNameProv.getEntryCodeOperationName(s);
       String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, _entryCodeOperationName);
       String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, "();\n");
-      return _operator_plus_2;
+      _xifexpression = _operator_plus_2;
     } else {
       DetailCode _exitCode_1 = s.getExitCode();
-      String _code_1 = ac.getCode(_exitCode_1);
-      _xifexpression = _code_1;
+      String _translateDetailCode = dct.translateDetailCode(_exitCode_1);
+      _xifexpression = _translateDetailCode;
     }
     return _xifexpression;
   }
@@ -877,10 +901,10 @@ public class RoomExtensions {
     return _operator_and;
   }
   
-  public String getActionCode(final ExpandedActorClass ac, final Transition t) {
+  public String getActionCode(final ExpandedActorClass ac, final Transition t, final DetailCodeTranslator dct) {
     DetailCode _action = t.getAction();
-    String _code = ac.getCode(_action);
-    return _code;
+    String _translateDetailCode = dct.translateDetailCode(_action);
+    return _translateDetailCode;
   }
   
   public String getContextId(final TransitionChain tc) {
