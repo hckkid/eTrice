@@ -46,7 +46,6 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 			logger.logInfo("generating ProtocolClass source '"+pc.getCSourceFileName+"' in '"+path+"'")
 			fileAccess.setOutputPath(path)
 			fileAccess.generateFile(pc.getCSourceFileName, root.generateSourceFile(pc))
-
 		}
 	}
 
@@ -85,7 +84,6 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 		const char* «pc.name»_getMessageString(int msg_id);
 
 		«helpers.userCode(pc.userCode2)»
-		
 		
 		«generateIncludeGuardEnd(pc.name)»
 		
@@ -233,51 +231,58 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 	}
 
 	def portClassHeader(ProtocolClass pc, Boolean conj){
+		var portClassName = pc.getPortClassName(conj)
+		var replPortClassName = pc.getPortClassName(conj, true)
+		var pClass = pc.getPortClass(conj)
+		var ports = if (conj) pc.getAllIncomingMessages() else pc.getAllOutgoingMessages()
+		
 		'''
-		«var portClassName = pc.getPortClassName(conj)»
-		«var pClass = pc.getPortClass(conj)»
 		
-		typedef etPort «portClassName»;
-		
-		«IF !conj»
-«««			send functions for outgoing messages
-			«FOR message : pc.getAllOutgoingMessages()»
+			typedef etPort «portClassName»;
+			typedef etReplPort «replPortClassName»;
+			
+			«FOR message : ports»
 				void «portClassName»_«message.name»(const «portClassName»* self);
+				void «replPortClassName»_«message.name»_broadcast(const «replPortClassName»* self);
+				void «replPortClassName»_«message.name»(const «replPortClassName»* self, int idx);
 			«ENDFOR»
-		«ELSE»
-«««			send functions for incoming messages
-			«FOR message : pc.getAllIncomingMessages()»
-				void «portClassName»_«message.name»(const «portClassName»* self);
-			«ENDFOR»
-		«ENDIF»
-		
-		
-«««		«ClassOperationSignature(portClassName, "MyOperation1", "int a, int b", "void", true)»
-«««		«ClassOperationSignature(portClassName, "MyOperation2", "", "int", false)»
-		
-		
 		'''
 	}
 	
 	def portClassSource(ProtocolClass pc, Boolean conj){
 		var portClassName = pc.getPortClassName(conj)
+		var replPortClassName = pc.getPortClassName(conj, true)
 		var pClass = pc.getPortClass(conj)
 		var messages = if (conj) pc.allIncomingMessages else pc.allOutgoingMessages
 		var dir = if (conj) "IN_" else "OUT_"
 		
 		'''
 			«FOR message : messages»
-				void «portClassName»_«message.name»(const «portClassName»* self){
+				
+				void «portClassName»_«message.name»(const «portClassName»* self) {
 					ET_MSC_LOGGER_SYNC_ENTRY("«portClassName»", "«message.name»")
 					if (self->receiveMessageFunc!=NULL) {
-						etMessage* msg = etMessageService_getMessageBuffer(self->msgService, sizeof(etMessage));
-						msg->address = self->peerAddress;
-						msg->evtID = «memberInUse(pc.name, dir+message.name)»;
-						etMessageService_pushMessage(self->msgService, msg);
+						etPort_sendMessage(self, «memberInUse(pc.name, dir+message.name)»);
 					}
 					ET_MSC_LOGGER_SYNC_EXIT
 				}
 				
+				void «replPortClassName»_«message.name»_broadcast(const «replPortClassName»* self) {
+					int i;
+					ET_MSC_LOGGER_SYNC_ENTRY("«replPortClassName»", "«message.name»")
+					for (i=0; i<self->size; ++i) {
+						etPort_sendMessage((etPort*)(&self->ports[i]), «memberInUse(pc.name, dir+message.name)»);
+					}
+					ET_MSC_LOGGER_SYNC_EXIT
+				}
+				
+				void «replPortClassName»_«message.name»(const «replPortClassName»* self, int idx) {
+					ET_MSC_LOGGER_SYNC_ENTRY("«replPortClassName»", "«message.name»")
+					if (0<=idx && idx<self->size) {
+						etPort_sendMessage((etPort*)(&self->ports[idx]), «memberInUse(pc.name, dir+message.name)»);
+					}
+					ET_MSC_LOGGER_SYNC_EXIT
+				}
 			«ENDFOR»
 		'''
 	}

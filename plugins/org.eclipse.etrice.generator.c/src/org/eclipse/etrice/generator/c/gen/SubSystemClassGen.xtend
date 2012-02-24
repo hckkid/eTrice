@@ -13,6 +13,8 @@
 
 package org.eclipse.etrice.generator.c.gen
 
+import java.util.HashMap
+import java.util.ArrayList
 import com.google.inject.Inject
 import com.google.inject.Singleton
 import org.eclipse.etrice.core.room.SubSystemClass
@@ -217,52 +219,87 @@ class SubSystemClassGen {
 		«FOR ai : ssi.allContainedInstances»
 			
 			/* instance «ai.path.getPathName()» */
-			static const «ai.actorClass.name»_const «ai.path.getPathName()»_const = {
-««« TODO: needed?				&«ai.path.getPathName()»,
-				/* Ports: {myActor, etReceiveMessage, msgService, peerAddress, localId} */
-				«FOR pi : ai.ports»
-					«genPortInitializer(root, ai, pi)»
-				«ENDFOR»
-				
-			};
-			static «ai.actorClass.name» «ai.path.getPathName()» = {&«ai.path.getPathName()»_const};
+			«IF ai.ports.empty»
+				/* no ports, nothing to initialize statically */
+			«ELSE»
+				«genActorInstanceInitializer(root, ai)»
+			«ENDIF»
 		«ENDFOR»
-		
-		
-		
-
-«««		«FOR ai : ssi.allContainedInstances»
-«««			// actor instance «ai.path» itself => Systemport Address
-«««			// TODOTJ: For each Actor, multiple addresses should be generated (actor?, systemport, debugport)
-«««			Address addr_item_«ai.path.getPathName()» = new Address(0,«ai.threadId»,«ai.objId»);
-«««			// interface items of «ai.path»
-«««			«FOR pi : ai.orderedIfItemInstances»
-«««				«IF pi instanceof ServiceImplInstance || pi.peers.size>1»
-«««					«FOR peer : pi.peers»
-«««						«var i = pi.peers.indexOf(peer)»
-«««						Address addr_item_«pi.path.getPathName()»_«i» = new Address(0,«pi.threadId»,«pi.objId+i»);
-«««					«ENDFOR»
-«««				«ELSE»
-«««					Address addr_item_«pi.path.getPathName()» = new Address(0,«ai.threadId»,«pi.objId»);
-«««				«ENDIF»
-«««			«ENDFOR»
-«««		«ENDFOR»
 		
 	'''
 	}
-	
+
+	def private genActorInstanceInitializer(Root root, ActorInstance ai) {
+		var instName = ai.path.pathName
+		
+		// list of replicated ports
+		var replPorts = new ArrayList<PortInstance>()
+		replPorts.addAll(ai.ports.filter(e|e.kind.literal!="RELAY" && e.port.multiplicity!=1))
+
+		// list of ports, simple first, then replicated
+		var ports = new ArrayList<PortInstance>()
+		ports.addAll(ai.ports.filter(e|e.kind.literal!="RELAY" && e.port.multiplicity==1).union(replPorts))
+
+		// compute replicated port offsets		
+		var offsets = new HashMap<PortInstance, Integer>()
+		var offset = 0
+		for (p: replPorts) {
+			offsets.put(p, offset)
+			offset = offset + p.peers.size
+		}
+		
+	'''
+		«IF !replPorts.empty»
+			static const etReplSubPort «instName»_repl_sub_ports[«offset»] = {
+				/* Replicated Sub Ports: {myActor, etReceiveMessage, msgService, peerAddress, localId, idx} */
+				«FOR pi : replPorts SEPARATOR ","»
+					«genReplSubPortInitializers(root, ai, pi)»
+				«ENDFOR»
+			};
+		«ENDIF»
+		static const «ai.actorClass.name»_const «instName»_const = {
+			/* Ports: {myActor, etReceiveMessage, msgService, peerAddress, localId} */
+			«FOR pi : ports SEPARATOR ","»
+				«IF pi.port.multiplicity==1»
+					«genPortInitializer(root, ai, pi)»
+				«ELSE»
+					{«pi.peers.size», «instName»_repl_sub_ports+«offsets.get(pi)»}
+				«ENDIF»
+			«ENDFOR»
+		};
+		static «ai.actorClass.name» «instName» = {&«instName»_const};
+	'''}
+		
 	def private String genPortInitializer(Root root, ActorInstance ai, PortInstance pi) {
 		var recvMsg = if (pi.peers.empty) "NULL" else ai.actorClass.name+"_ReceiveMessage"
 		var objId = if (pi.peers.empty) 0 else pi.peers.get(0).objId
-		
-		// TODO: no replicated ports yet
+		var idx = if (pi.peers.empty) 0 else pi.peers.get(0).peers.indexOf(pi)
 		
 		"{&"+ai.path.getPathName()+", "
 		+recvMsg+", " 
 		+"&msgService_Thread1, "
-		+objId+", "
+		+(objId+idx)+", "
 		+(root.getExpandedActorClass(ai).getInterfaceItemLocalId(pi.port)+1)
 		+"} /* Port "+pi.name+" */"
+	}
+	
+	def private String genReplSubPortInitializers(Root root, ActorInstance ai, PortInstance pi) {
+		var result = ""
+		
+		for (p: pi.peers) {
+			var idx = pi.peers.indexOf(p)
+			var comma = if (idx<pi.peers.size-1) "," else ""
+			result = result +
+				"{&"+ai.path.getPathName()+", "
+				+ai.actorClass.name+"_ReceiveMessage, " 
+				+"&msgService_Thread1, "
+				+p.objId+", "
+				+(root.getExpandedActorClass(ai).getInterfaceItemLocalId(pi.port)+1)+", "
+				+idx
+				+"}"+comma+" /* Repl Sub Port "+pi.name+" idx +"+idx+"*/\n"
+		}
+		
+		return result
 	}
 	
 	def generateDispatcherFile(Root root, SubSystemInstance ssi, SubSystemClass ssc) {'''
@@ -284,9 +321,17 @@ class SubSystemClassGen {
 				«FOR ai : ssi.allContainedInstances»
 					/* interface items of «ai.path» */
 					«FOR pi : ai.orderedIfItemInstances»
-						case «pi.objId»:
-							etPort_receive(&«ai.path.pathName»_const.«pi.name», msg);
-							break;
+						«IF pi instanceof PortInstance && (pi as PortInstance).port.multiplicity!=1»
+							«FOR peer: pi.peers»
+								case «pi.objId+pi.peers.indexOf(peer)»:
+									etPort_receive((etPort*)&«ai.path.pathName»_const.«pi.name».ports[«pi.peers.indexOf(peer)»], msg);
+									break;
+							«ENDFOR»
+						«ELSE»
+							case «pi.objId»:
+								etPort_receive(&«ai.path.pathName»_const.«pi.name», msg);
+								break;
+						«ENDIF»
 					«ENDFOR»
 				«ENDFOR»
 
@@ -298,122 +343,6 @@ class SubSystemClassGen {
 		}
 		'''
 	}
-
-//		«var models = root.getReferencedModels(ssc)»
-//		«FOR model : models»import «model.name».*;«ENDFOR»
-//		
-//		
-//		«helpers.UserCode(ssc.userCode1)»
-//		
-//		public class «ssi.name» extends SubSystemClassBase{
-//		
-//			«helpers.UserCode(ssc.userCode2)»
-//			
-//			public «ssi.name»(IRTObject parent, String name) {
-//				super(parent, name);
-//			}
-//			
-//			@Override
-//			public void receiveEvent(InterfaceItemBase ifitem, int evt, Object data){
-//			}
-//			
-//			@Override	
-//			public void instantiateMessageServices(){
-//			
-//				RTServices.getInstance().getMsgSvcCtrl().addMsgSvc(new MessageService(this, new Address(0, 0, 0),"MessageService_Main"));
-//				«FOR thread : ssc.threads»
-//					RTServices.getInstance().getMsgSvcCtrl().addMsgSvc(new MessageService(this, new Address(0, «ssc.threads.indexOf(thread)+1», 0),"MessageService_«thread.name»", «thread.prio»));
-//				«ENDFOR»
-//				}
-//		
-//			@Override
-//			public void instantiateActors(){
-//				// all addresses
-//				// Addresses for the Subsystem Systemport
-//				«FOR ai : ssi.allContainedInstances.indexed(ssi.maxObjId)»
-//					Address addr_item_SystemPort_«ssi.allContainedInstances.indexOf(ai.value)» = new Address(0,0,«ai.index1»);
-//				«ENDFOR»
-//				
-//				«FOR ai : ssi.allContainedInstances»
-//					// actor instance «ai.path» itself => Systemport Address
-//					// TODOTJ: For each Actor, multiple addresses should be generated (actor?, systemport, debugport)
-//					Address addr_item_«ai.path.getPathName()» = new Address(0,«ai.threadId»,«ai.objId»);
-//					// interface items of «ai.path»
-//					«FOR pi : ai.orderedIfItemInstances»
-//						«IF pi instanceof ServiceImplInstance || pi.peers.size>1»
-//							«FOR peer : pi.peers»
-//								«var i = pi.peers.indexOf(peer)»
-//								Address addr_item_«pi.path.getPathName()»_«i» = new Address(0,«pi.threadId»,«pi.objId+i»);
-//							«ENDFOR»
-//						«ELSE»
-//							Address addr_item_«pi.path.getPathName()» = new Address(0,«ai.threadId»,«pi.objId»);
-//						«ENDIF»
-//					«ENDFOR»
-//				«ENDFOR»
-//		
-//				// instantiate all actor instances
-//				instances = new ActorClassBase[«ssi.allContainedInstances.size»];
-//				«FOR ai : ssi.allContainedInstances»
-//					instances[«ssi.allContainedInstances.indexOf(ai)»] = new «ai.actorClass.name»(
-//						«IF ai.eContainer instanceof SubSystemInstance»
-//							this,
-//						«ELSE»
-//							instances[«ssi.allContainedInstances.indexOf(ai.eContainer)»],
-//						«ENDIF»
-//						"«ai.name»",
-//						// own interface item addresses
-//						new Address[][] {{addr_item_«ai.path.getPathName()»}«IF !ai.orderedIfItemInstances.empty»,«ENDIF»
-//						«FOR pi : ai.orderedIfItemInstances SEPARATOR ","»
-//							{
-//								«IF pi instanceof ServiceImplInstance || pi.peers.size>1»
-//									«FOR peer : pi.peers SEPARATOR ","»
-//										addr_item_«pi.path.getPathName()»_«pi.peers.indexOf(peer)»
-//									«ENDFOR»
-//								«ELSE»
-//									addr_item_«pi.path.getPathName()»
-//								«ENDIF»
-//							}
-//						«ENDFOR»
-//						},
-//						// peer interface item addresses
-//						new Address[][] {{addr_item_SystemPort_«ssi.allContainedInstances.indexOf(ai)»}«IF !ai.orderedIfItemInstances.empty»,«ENDIF»
-//							«FOR pi : ai.orderedIfItemInstances SEPARATOR ","»
-//							{
-//								«IF !(pi instanceof ServiceImplInstance) && pi.peers.isEmpty»
-//									null
-//								«ELSE»
-//									«FOR pp : pi.peers SEPARATOR ","»
-//										«IF pp instanceof ServiceImplInstance || pp.peers.size>1»
-//											addr_item_«pp.path.getPathName()»_«pp.peers.indexOf(pi)»
-//										«ELSE»
-//											addr_item_«pp.path.getPathName()»
-//										«ENDIF»
-//									«ENDFOR»
-//								«ENDIF»
-//							}
-//							«ENDFOR»
-//						}
-//					); 
-//				«ENDFOR»
-//		
-//				// create the subsystem system port	
-//				RTSystemPort = new RTSystemServicesProtocolConjPortRepl(this, "RTSystemPort",
-//						0, //local ID
-//						// own addresses
-//						new Address[]{
-//							«FOR ai : ssi.allContainedInstances SEPARATOR ","»
-//								addr_item_SystemPort_«ssi.allContainedInstances.indexOf(ai)»
-//							«ENDFOR»
-//						},
-//						// peer addresses
-//						new Address[]{
-//							«FOR ai : ssi.allContainedInstances SEPARATOR ","»
-//								addr_item_«ai.path.getPathName()»
-//							«ENDFOR»
-//						});
-//						
-//			}
-//		};
 
 	
 }

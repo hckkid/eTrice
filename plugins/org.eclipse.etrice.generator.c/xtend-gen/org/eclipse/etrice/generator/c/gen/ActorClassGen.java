@@ -22,6 +22,7 @@ import org.eclipse.etrice.generator.generic.GenericActorClassGenerator;
 import org.eclipse.etrice.generator.generic.ProcedureHelpers;
 import org.eclipse.etrice.generator.generic.TypeHelpers;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
+import org.eclipse.xtext.xbase.lib.BooleanExtensions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
@@ -195,47 +196,93 @@ public class ActorClassGen extends GenericActorClassGenerator {
     _builder.newLine();
     _builder.append("/* const part of ActorClass (ROM) */");
     _builder.newLine();
-    _builder.append("typedef struct ");
-    String _name_6 = xpac.getName();
-    _builder.append(_name_6, "");
-    _builder.append("_const {");
-    _builder.newLineIfNotEmpty();
-    _builder.append("\t");
-    _builder.append("/* Ports */");
-    _builder.newLine();
     {
-      List<Port> _endPorts = this.roomExt.getEndPorts(ac);
-      for(final Port ep : _endPorts) {
+      List<Port> _allEndPorts = this.roomExt.getAllEndPorts(ac);
+      boolean _isEmpty = _allEndPorts.isEmpty();
+      if (_isEmpty) {
+        _builder.append("/* this actor class has no ports and thus no constant data */");
+        _builder.newLine();
+      } else {
+        _builder.append("typedef struct ");
+        String _name_6 = xpac.getName();
+        _builder.append(_name_6, "");
+        _builder.append("_const {");
+        _builder.newLineIfNotEmpty();
         _builder.append("\t");
-        _builder.append("const ");
-        String _portClassName = this.roomExt.getPortClassName(ep);
-        _builder.append(_portClassName, "	");
-        _builder.append(" ");
-        String _name_7 = ep.getName();
-        _builder.append(_name_7, "	");
-        _builder.append(";");
+        _builder.append("/* simple ports */");
+        _builder.newLine();
+        {
+          List<Port> _allEndPorts_1 = this.roomExt.getAllEndPorts(ac);
+          for(final Port ep : _allEndPorts_1) {
+            {
+              int _multiplicity = ep.getMultiplicity();
+              boolean _operator_equals = ObjectExtensions.operator_equals(((Integer)_multiplicity), ((Integer)1));
+              if (_operator_equals) {
+                _builder.append("\t");
+                _builder.append("const ");
+                String _portClassName = this.roomExt.getPortClassName(ep);
+                _builder.append(_portClassName, "	");
+                _builder.append(" ");
+                String _name_7 = ep.getName();
+                _builder.append(_name_7, "	");
+                _builder.append(";");
+                _builder.newLineIfNotEmpty();
+              }
+            }
+          }
+        }
+        _builder.append("\t");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("/* replicated ports */");
+        _builder.newLine();
+        {
+          List<Port> _allEndPorts_2 = this.roomExt.getAllEndPorts(ac);
+          for(final Port ep_1 : _allEndPorts_2) {
+            {
+              int _multiplicity_1 = ep_1.getMultiplicity();
+              boolean _operator_notEquals = ObjectExtensions.operator_notEquals(((Integer)_multiplicity_1), ((Integer)1));
+              if (_operator_notEquals) {
+                _builder.append("\t");
+                _builder.append("const etReplPort ");
+                String _name_8 = ep_1.getName();
+                _builder.append(_name_8, "	");
+                _builder.append(";");
+                _builder.newLineIfNotEmpty();
+              }
+            }
+          }
+        }
+        _builder.append("} ");
+        String _name_9 = xpac.getName();
+        _builder.append(_name_9, "");
+        _builder.append("_const;");
         _builder.newLineIfNotEmpty();
       }
     }
-    _builder.append("} ");
-    String _name_8 = xpac.getName();
-    _builder.append(_name_8, "");
-    _builder.append("_const;");
-    _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("/* variable part of ActorClass (RAM) */");
     _builder.newLine();
     _builder.append("struct ");
-    String _name_9 = xpac.getName();
-    _builder.append(_name_9, "");
+    String _name_10 = xpac.getName();
+    _builder.append(_name_10, "");
     _builder.append(" {");
     _builder.newLineIfNotEmpty();
-    _builder.append("\t");
-    _builder.append("const ");
-    String _name_10 = xpac.getName();
-    _builder.append(_name_10, "	");
-    _builder.append("_const* constData;");
-    _builder.newLineIfNotEmpty();
+    {
+      List<Port> _allEndPorts_3 = this.roomExt.getAllEndPorts(ac);
+      boolean _isEmpty_1 = _allEndPorts_3.isEmpty();
+      boolean _operator_not = BooleanExtensions.operator_not(_isEmpty_1);
+      if (_operator_not) {
+        _builder.append("\t");
+        _builder.append("const ");
+        String _name_11 = xpac.getName();
+        _builder.append(_name_11, "	");
+        _builder.append("_const* constData;");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t");
+        _builder.newLine();
+      }
+    }
     _builder.append("\t");
     List<Attribute> _allAttributes = this.roomExt.getAllAttributes(ac);
     StringConcatenation _attributes = this.helpers.attributes(_allAttributes);
@@ -245,8 +292,11 @@ public class ActorClassGen extends GenericActorClassGenerator {
       boolean _hasNonEmptyStateMachine = this.roomExt.hasNonEmptyStateMachine(xpac);
       if (_hasNonEmptyStateMachine) {
         _builder.append("\t");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("\t");
         StringConcatenation _genDataMembers = this.stateMachineGen.genDataMembers(xpac, ac);
-        _builder.append(_genDataMembers, "	");
+        _builder.append(_genDataMembers, "		");
         _builder.newLineIfNotEmpty();
       }
     }
@@ -254,17 +304,17 @@ public class ActorClassGen extends GenericActorClassGenerator {
     _builder.newLine();
     _builder.newLine();
     _builder.append("void ");
-    String _name_11 = xpac.getName();
-    _builder.append(_name_11, "");
-    _builder.append("_init(");
     String _name_12 = xpac.getName();
     _builder.append(_name_12, "");
+    _builder.append("_init(");
+    String _name_13 = xpac.getName();
+    _builder.append(_name_13, "");
     _builder.append("* self);");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("void ");
-    String _name_13 = xpac.getName();
-    _builder.append(_name_13, "");
+    String _name_14 = xpac.getName();
+    _builder.append(_name_14, "");
     _builder.append("_ReceiveMessage(void* self, void* ifitem, const etMessage* msg);");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
@@ -273,8 +323,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
     _builder.append(_userCode_1, "");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
-    String _name_14 = xpac.getName();
-    StringConcatenation _generateIncludeGuardEnd = this.stdExt.generateIncludeGuardEnd(_name_14);
+    String _name_15 = xpac.getName();
+    StringConcatenation _generateIncludeGuardEnd = this.stdExt.generateIncludeGuardEnd(_name_15);
     _builder.append(_generateIncludeGuardEnd, "");
     _builder.newLineIfNotEmpty();
     _builder.newLine();

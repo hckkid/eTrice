@@ -33,17 +33,6 @@ public class DetailCodeTranslator {
 	public static final String TAG_START = "<|";
 	public static final String TAG_END = "|>";
 	
-	public static interface ITranslationProvider {
-		boolean translateMembers();
-		String getAttributeText(Attribute att, String orig);
-		String getOperationText(Operation op, ArrayList<String> args, String orig);
-		String getInterfaceItemMessageText(InterfaceItem item, Message msg, ArrayList<String> args, String orig);
-		String getInterfaceItemMessageValue(InterfaceItem item, Message msg, String orig);
-
-		boolean translateTags();
-		String translateTag(String tag, DetailCode code);
-	}
-
 	private static class Position {
 		int pos = 0;
 	}

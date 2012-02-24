@@ -40,7 +40,6 @@ import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.generator.InstanceTestsActivator;
-import org.eclipse.etrice.generator.base.DetailCodeTranslator.ITranslationProvider;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -99,6 +98,10 @@ public class TestDetailCodeTranslator {
 		@Override
 		public String translateTag(String tag, DetailCode code) {
 			return ">"+tag+"<";
+		}
+
+		@Override
+		public void setActorClass(ActorClass ac) {
 		}
 	}
 

@@ -45,6 +45,7 @@ import org.eclipse.etrice.core.room.RoomModel
 import org.eclipse.etrice.generator.etricegen.ActiveTrigger
 import org.eclipse.etrice.generator.etricegen.ExpandedActorClass
 import org.eclipse.etrice.generator.etricegen.TransitionChain
+import org.eclipse.etrice.generator.base.DetailCodeTranslator
 
 import static extension org.eclipse.etrice.generator.extensions.RoomNameProv.*
 
@@ -58,6 +59,13 @@ class RoomExtensions {
 	// union methods
 	
 	def <T> List<T> union(List<T> l1, List<T> l2) {
+		var ret = new ArrayList<T>()
+		ret.addAll(l1)
+		ret.addAll(l2)
+		return ret
+	}
+	
+	def <T> Iterable<T> union(Iterable<T> l1, Iterable<T> l2) {
 		var ret = new ArrayList<T>()
 		ret.addAll(l1)
 		ret.addAll(l2)
@@ -192,21 +200,15 @@ class RoomExtensions {
 	// protocol related methods
 	
 	def String getPortClassName(ProtocolClass p, boolean conj) {
-		var ret=p.name
-		if(conj) {
-			ret=ret+"ConjPort"
-		}else{
-			ret=ret+"Port"
-		}
-		return ret
+		getPortClassName(p, conj, false)
+	}
+	
+	def String getPortClassName(ProtocolClass p, boolean conj, boolean repl) {
+		p.name + (if (conj) "Conj" else "") + (if (repl) "Repl" else "") +"Port"
 	}
 
 	def String getPortClassName(Port p){
-		var ret=p.protocol.getPortClassName(p.conjugated)
-		if (p.replicated){
-			ret = ret+"Repl"
-		}
-		return ret
+		p.protocol.getPortClassName(p.conjugated, p.replicated)
 	}
 
 	def String getPortClassName(ExternalPort p){
@@ -446,37 +448,39 @@ class RoomExtensions {
 		return hasGuard
 	}
 	
+	// TODO. in the following methods handle inheritance language independent and proper
+	
 	def boolean hasEntryCode(State s) {
-		return s.entryCode!=null && s.entryCode.commands.size>0
+		s.entryCode!=null && s.entryCode.commands.size>0
 	}
 
 	def boolean hasExitCode(State s) {
-		return s.exitCode!=null && s.exitCode.commands.size>0
+		s.exitCode!=null && s.exitCode.commands.size>0
 	}
 
-	def String getEntryCode(ExpandedActorClass ac, State s) {
+	def String getEntryCode(ExpandedActorClass ac, State s, DetailCodeTranslator dct) {
 		if (s instanceof RefinedState)
-			return "super."+s.getEntryCodeOperationName()+"();\n"+ac.getCode(s.entryCode)
+			"super."+s.getEntryCodeOperationName()+"();\n"+ac.getCode(s.entryCode)
 		else
-			return ac.getCode(s.entryCode)
+			dct.translateDetailCode(s.entryCode)
 	}
 
-	def String getExitCode(ExpandedActorClass ac, State s) {
+	def String getExitCode(ExpandedActorClass ac, State s, DetailCodeTranslator dct) {
 		if (s instanceof RefinedState)
-			return ac.getCode(s.exitCode)+"super."+s.getEntryCodeOperationName()+"();\n"
+			ac.getCode(s.exitCode)+"super."+s.getEntryCodeOperationName()+"();\n"
 		else
-			ac.getCode(s.exitCode)
+			dct.translateDetailCode(s.exitCode)
 	}
 	
 	def boolean hasActionCode(Transition t) {
-		return t.action!=null && t.action.commands.size>0
+		t.action!=null && t.action.commands.size>0
 	}
-	def String getActionCode(ExpandedActorClass ac, Transition t) {
-		return ac.getCode(t.action)
+	def String getActionCode(ExpandedActorClass ac, Transition t, DetailCodeTranslator dct) {
+		dct.translateDetailCode(t.action)
 	}
 	
 	def String getContextId(TransitionChain tc) {
-		return tc.getStateContext().getStateId()
+		tc.getStateContext().getStateId()
 	}
 	
 	def Transition getInitTransition(StateGraph sg) {
