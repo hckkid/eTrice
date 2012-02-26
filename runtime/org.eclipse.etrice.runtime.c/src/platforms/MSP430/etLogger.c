@@ -10,6 +10,14 @@
  *
  *******************************************************************************/
 
+/*
+ * etLogger.c
+ *
+ *  Created on: 16.01.2012
+ *      Author: tschuetz
+ */
+
+
 #include "debugging/etLogger.h"
 
 #include <stdarg.h>

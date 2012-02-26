@@ -10,13 +10,17 @@
  *
  *******************************************************************************/
 
-#ifndef ETGLOBALFLAGS_H_
-#define ETGLOBALFLAGS_H_
 
-/* flags for debugging */
-#define ET_MSC_LOGGER_ACTIVATE  /* needs ET_LOGGER_ACTIVATE */
-#define ET_LOGGER_ACTIVATE
+/* implemenatation for eTrice interfaces*/
+
+void etUserEntry(void){ }
+
+void etUserPreRun(void){ }
+
+void etUserPostRun(void){ }
+
+void etUserExit(void){ }
 
 
+/* platform specific functions */
 
-#endif /* ETGLOBALFLAGS_H_ */

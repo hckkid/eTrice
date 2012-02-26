@@ -10,13 +10,18 @@
  *
  *******************************************************************************/
 
-#ifndef ETGLOBALFLAGS_H_
-#define ETGLOBALFLAGS_H_
+/*
+ * etPlatform.h defines a generic interface for platform specific implementations
+ *
+ * */
 
-/* flags for debugging */
-#define ET_MSC_LOGGER_ACTIVATE  /* needs ET_LOGGER_ACTIVATE */
-#define ET_LOGGER_ACTIVATE
+/*
+ * Platform startup and shutdown -> generated code for SubSystemClass uses these interfaces
+ * */
 
+void etUserEntry(void);
+void etUserPreRun(void);
+/* void etUserRun(void); */ /* TODO: do we need this function? */
+void etUserPostRun(void);
+void etUserExit(void);
 
-
-#endif /* ETGLOBALFLAGS_H_ */
