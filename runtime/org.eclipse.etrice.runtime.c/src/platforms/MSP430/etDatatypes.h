@@ -21,9 +21,6 @@
 
 #include <stdio.h>
 
-/* global definitions for datatypes */
-//#define HAS_64_BIT_TYPES
-
 /* unsigned integer datatypes */
 typedef unsigned char uint8;
 typedef unsigned short int uint16;

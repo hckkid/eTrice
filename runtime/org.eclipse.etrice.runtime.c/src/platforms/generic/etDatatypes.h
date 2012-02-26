@@ -15,6 +15,7 @@
 
 /*
  * typedefs for platform specific datatypes
+ * generic Version for most bigger 32 and 64 bit platforms like Linux an Windows
  *
  * */
 
