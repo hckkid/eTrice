@@ -103,7 +103,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
     _builder.newLine();
     _builder.append("#include \"etDatatypes.h\"");
     _builder.newLine();
-    _builder.append("#include \"etPort.h\"");
+    _builder.append("#include \"modelbase/etPort.h\"");
     _builder.newLine();
     _builder.newLine();
     DetailCode _userCode1 = pc.getUserCode1();
@@ -188,7 +188,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
     _builder.append(_cHeaderFileName, "");
     _builder.append("\"");
     _builder.newLineIfNotEmpty();
-    _builder.append("#include \"etMSCLogger.h\"");
+    _builder.append("#include \"debugging/etMSCLogger.h\"");
     _builder.newLine();
     _builder.newLine();
     DetailCode _userCode3 = pc.getUserCode3();

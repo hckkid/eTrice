@@ -2,8 +2,8 @@ RoomModel cGenRef {
 	import room.basic.types.c.* from "CTypes.room"
 	
 	SubSystemClass SubSys {
-		ActorRef Receiver: ReceiverManual
-		ActorRef Sender: SenderManual
+		ActorRef Sender: Sender
+		ActorRef Receiver: Receiver
 		Binding Sender.dataOut and Receiver.dataIn
 	}
 
@@ -39,7 +39,7 @@ RoomModel cGenRef {
 				Transition init: initial -> Idle { }
 				Transition tr0: Idle -> DataReceived {
 					triggers {
-						<inMessage1: dataIn>
+						<sendData: dataIn>
 					}
 					action {
 						"dataIn.receivedData();"
@@ -65,12 +65,10 @@ RoomModel cGenRef {
 				Transition init: initial -> Idle { }
 				Transition tr0: Idle -> tp0 of Sending {
 					triggers {
-						<inMessage1: dataIn>
+						<sendData: dataIn>
 					}
 					action {
-						"//dataOut.get(0).sendData(data);"
-						"//dataOut.get(1).sendData(data);"
-						"dataOut.sendData(data);"
+						"dataOut.sendData();"
 					}
 				}
 				Transition tr1: tp1 of Sending -> ReceivedBoth {
@@ -84,37 +82,18 @@ RoomModel cGenRef {
 						Transition tr0: my tp0 -> WaitingForReceived
 						Transition tr1: WaitingForReceived -> ReceivedOne {
 							triggers {
-								<outMessage1: dataOut guard {
-									"true"
-								}>
-							}
-						}
-						Transition tr2: WaitingForReceived -> ReceivedTheOther {
-							triggers {
-								<outMessage1: dataOut guard {
-									"false"
-								}>
+								<receivedData: dataOut>
 							}
 						}
 						Transition tr3: ReceivedOne -> my tp1 {
 							triggers {
-								<outMessage1: dataOut guard {
-									"true"
-								}>
-							}
-						}
-						Transition tr4: ReceivedTheOther -> my tp1 {
-							triggers {
-								<outMessage1: dataOut guard {
-									"false"
-								}>
+								<receivedData: dataOut>
 							}
 						}
 						EntryPoint tp0
 						ExitPoint tp1
 						State WaitingForReceived
 						State ReceivedOne
-						State ReceivedTheOther
 					}
 				}
 				State ReceivedBoth
@@ -160,12 +139,12 @@ RoomModel cGenRef {
 				Transition init: initial -> SendingData { }
 				Transition tr0: SendingData -> Done {
 					triggers {
-						<outMessage1: dataOut>
+						<receivedData: dataOut>
 					}
 				}
 				State SendingData {
 					entry {
-						"dataOut.sendData(1234);"
+						"dataOut.sendData();"
 					}
 				}
 				State Done
@@ -175,14 +154,11 @@ RoomModel cGenRef {
 
 	ProtocolClass CommunicationProtocol {
 		incoming {
-			Message inMessage1(data: int32)
-			Message inMessage2(data: DataClass1)
+			Message sendData()
 			
 		}
 		outgoing {
-			Message outMessage1()
-			Message outMessage2()
-			Message outMessage123456789()
+			Message receivedData()
 		}
 	}
 	

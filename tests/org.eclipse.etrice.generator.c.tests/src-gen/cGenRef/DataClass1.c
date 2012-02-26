@@ -9,13 +9,12 @@
 
 #include <string.h>
 
-//--------------------- begin user code
+/*--------------------- begin user code ---------------------*/
 	// usercode3
-//--------------------- end user code
+/*--------------------- end user code ---------------------*/
 
-// TODO: do we need setters and getters for C and C++ ?
 
-//--------------------- operations
+/*--------------------- operations ---------------------*/
 int32 DataClass1_MultiplyWithAttr1(DataClass1* self, int32 value) {
 	return self->Attr1*value;
 }

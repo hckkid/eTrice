@@ -111,8 +111,8 @@ class SubSystemClassGen {
 		#include "«ssc.getInstSourceFileName»"
 		#include "«ssc.getDispSourceFileName»"
 
-		#include "etLogger.h"
-		#include "etMSCLogger.h"
+		#include "debugging/etLogger.h"
+		#include "debugging/etMSCLogger.h"
 		
 
 		«helpers.userCode(ssc.userCode3)»
@@ -187,7 +187,7 @@ class SubSystemClassGen {
 		 * - configuration of data and connection of ports
 		 */
 
-		#include "etMessageService.h"
+		#include "messaging/etMessageService.h"
 		
 		/* instantiation of message services */
 		
@@ -310,9 +310,9 @@ class SubSystemClassGen {
 		 * - one generated dispatcher for each MessageService (Thread)
 		 */
 
-		#include "etMessageReceiver.h"
-		#include "etLogger.h"
-		#include "etMSCLogger.h"
+		#include "messaging/etMessageReceiver.h"
+		#include "debugging/etLogger.h"
+		#include "debugging/etMSCLogger.h"
 		
 		static void MsgDispatcher_Thread1_receiveMessage(const etMessage* msg){
 			ET_MSC_LOGGER_SYNC_ENTRY("MsgDispatcher_Thread1", "receiveMessage")

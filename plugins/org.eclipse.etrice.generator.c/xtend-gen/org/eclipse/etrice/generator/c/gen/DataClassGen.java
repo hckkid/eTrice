@@ -118,7 +118,6 @@ public class DataClassGen {
     _builder.append("typedef struct {");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("\u00BB");
     List<Attribute> _allAttributes = this.roomExt.getAllAttributes(dc);
     StringConcatenation _attributes = this.helpers.attributes(_allAttributes);
     _builder.append(_attributes, "	");
@@ -126,6 +125,7 @@ public class DataClassGen {
     _builder.append("} ");
     String _name_3 = dc.getName();
     _builder.append(_name_3, "");
+    _builder.append(";");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.newLine();

@@ -71,9 +71,9 @@ public class SubSystemRunnerGen {
     _builder.append(".h\"");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
-    _builder.append("#include \"etLogger.h\"");
+    _builder.append("#include \"debugging/etLogger.h\"");
     _builder.newLine();
-    _builder.append("#include \"etMSCLogger.h\"");
+    _builder.append("#include \"debugging/etMSCLogger.h\"");
     _builder.newLine();
     _builder.newLine();
     _builder.newLine();

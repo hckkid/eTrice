@@ -69,8 +69,8 @@ class DataClassGen {
 		«helpers.userCode(dc.userCode1)»
 				
 		typedef struct {
-			»«helpers.attributes(dc.allAttributes)»
-		} «dc.name»
+			«helpers.attributes(dc.allAttributes)»
+		} «dc.name»;
 		
 «««		TODO: do we need setters and getters for C and C++ ?
 		

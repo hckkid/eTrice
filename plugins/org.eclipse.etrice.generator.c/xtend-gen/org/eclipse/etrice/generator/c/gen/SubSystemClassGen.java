@@ -237,9 +237,9 @@ public class SubSystemClassGen {
     _builder.append("\"");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
-    _builder.append("#include \"etLogger.h\"");
+    _builder.append("#include \"debugging/etLogger.h\"");
     _builder.newLine();
-    _builder.append("#include \"etMSCLogger.h\"");
+    _builder.append("#include \"debugging/etMSCLogger.h\"");
     _builder.newLine();
     _builder.newLine();
     _builder.newLine();
@@ -477,7 +477,7 @@ public class SubSystemClassGen {
     _builder.append("*/");
     _builder.newLine();
     _builder.newLine();
-    _builder.append("#include \"etMessageService.h\"");
+    _builder.append("#include \"messaging/etMessageService.h\"");
     _builder.newLine();
     _builder.newLine();
     _builder.append("/* instantiation of message services */");
@@ -870,11 +870,11 @@ public class SubSystemClassGen {
     _builder.append("*/");
     _builder.newLine();
     _builder.newLine();
-    _builder.append("#include \"etMessageReceiver.h\"");
+    _builder.append("#include \"messaging/etMessageReceiver.h\"");
     _builder.newLine();
-    _builder.append("#include \"etLogger.h\"");
+    _builder.append("#include \"debugging/etLogger.h\"");
     _builder.newLine();
-    _builder.append("#include \"etMSCLogger.h\"");
+    _builder.append("#include \"debugging/etMSCLogger.h\"");
     _builder.newLine();
     _builder.newLine();
     _builder.append("static void MsgDispatcher_Thread1_receiveMessage(const etMessage* msg){");

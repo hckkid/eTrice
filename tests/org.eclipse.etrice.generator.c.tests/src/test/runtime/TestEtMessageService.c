@@ -11,8 +11,8 @@
  *******************************************************************************/
 
 #include "TestEtMessageService.h"
-#include "etUnit.h"
-#include "etMessageService.h"
+#include "etUnit/etUnit.h"
+#include "messaging/etMessageService.h"
 
 
 /* mocking for MessageDispatcher */

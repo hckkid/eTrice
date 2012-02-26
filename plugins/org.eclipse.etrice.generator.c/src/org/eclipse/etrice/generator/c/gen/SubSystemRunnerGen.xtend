@@ -45,8 +45,8 @@ class SubSystemRunnerGen {
 		
 		#include "«ssi.name».h"
 
-		#include "etLogger.h"
-		#include "etMSCLogger.h"
+		#include "debugging/etLogger.h"
+		#include "debugging/etMSCLogger.h"
 		
 		
 		/**

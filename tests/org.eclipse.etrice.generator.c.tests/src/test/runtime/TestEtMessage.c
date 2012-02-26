@@ -13,8 +13,8 @@
 #include "TestEtMessage.h"
 
 #include <stddef.h>
-#include "etUnit.h"
-#include "etMessage.h"
+#include "etUnit/etUnit.h"
+#include "messaging/etMessage.h"
 
 
 

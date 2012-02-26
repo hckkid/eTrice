@@ -10,7 +10,7 @@
  *
  *******************************************************************************/
 
-#include "etLogger.h"
+#include "debugging/etLogger.h"
 
 typedef struct SubSystem {
 	char *name;

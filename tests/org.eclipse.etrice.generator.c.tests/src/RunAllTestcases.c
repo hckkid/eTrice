@@ -14,7 +14,7 @@
 
 #include "test/generator/RunCGeneratorTestcases.h"
 #include "test/runtime/RunCRuntimeTestcases.h"
-#include "etMSCLogger.h"
+#include "debugging/etMSCLogger.h"
 
 void runTestCases(void);
 
