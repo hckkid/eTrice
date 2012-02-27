@@ -149,11 +149,11 @@ public class PTimeout {
 	}
 	
 	// replicated port class
-	static public class PTimeoutPortRepl {
+	static public class PTimeoutReplPort {
 		private ArrayList<PTimeoutPort> ports;
 		private int replication;
 	
-		public PTimeoutPortRepl(IEventReceiver actor, String name, int localId, Address[] addr,
+		public PTimeoutReplPort(IEventReceiver actor, String name, int localId, Address[] addr,
 				Address[] peerAddress) {
 			replication = addr.length;
 			ports = new ArrayList<PTimeout.PTimeoutPort>(replication);
@@ -264,11 +264,11 @@ public class PTimeout {
 	}
 	
 	// replicated port class
-	static public class PTimeoutConjPortRepl {
+	static public class PTimeoutConjReplPort {
 		private ArrayList<PTimeoutConjPort> ports;
 		private int replication;
 	
-		public PTimeoutConjPortRepl(IEventReceiver actor, String name, int localId, Address[] addr,
+		public PTimeoutConjReplPort(IEventReceiver actor, String name, int localId, Address[] addr,
 				Address[] peerAddress) {
 			replication = addr.length;
 			ports = new ArrayList<PTimeout.PTimeoutConjPort>(replication);

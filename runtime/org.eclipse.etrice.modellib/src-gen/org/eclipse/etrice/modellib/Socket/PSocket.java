@@ -106,11 +106,11 @@ public class PSocket {
 	}
 	
 	// replicated port class
-	static public class PSocketPortRepl {
+	static public class PSocketReplPort {
 		private ArrayList<PSocketPort> ports;
 		private int replication;
 	
-		public PSocketPortRepl(IEventReceiver actor, String name, int localId, Address[] addr,
+		public PSocketReplPort(IEventReceiver actor, String name, int localId, Address[] addr,
 				Address[] peerAddress) {
 			replication = addr.length;
 			ports = new ArrayList<PSocket.PSocketPort>(replication);
@@ -223,11 +223,11 @@ public class PSocket {
 	}
 	
 	// replicated port class
-	static public class PSocketConjPortRepl {
+	static public class PSocketConjReplPort {
 		private ArrayList<PSocketConjPort> ports;
 		private int replication;
 	
-		public PSocketConjPortRepl(IEventReceiver actor, String name, int localId, Address[] addr,
+		public PSocketConjReplPort(IEventReceiver actor, String name, int localId, Address[] addr,
 				Address[] peerAddress) {
 			replication = addr.length;
 			ports = new ArrayList<PSocket.PSocketConjPort>(replication);

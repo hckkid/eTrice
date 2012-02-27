@@ -149,11 +149,11 @@ public class PTimer {
 	}
 	
 	// replicated port class
-	static public class PTimerPortRepl {
+	static public class PTimerReplPort {
 		private ArrayList<PTimerPort> ports;
 		private int replication;
 	
-		public PTimerPortRepl(IEventReceiver actor, String name, int localId, Address[] addr,
+		public PTimerReplPort(IEventReceiver actor, String name, int localId, Address[] addr,
 				Address[] peerAddress) {
 			replication = addr.length;
 			ports = new ArrayList<PTimer.PTimerPort>(replication);
@@ -263,11 +263,11 @@ public class PTimer {
 	}
 	
 	// replicated port class
-	static public class PTimerConjPortRepl {
+	static public class PTimerConjReplPort {
 		private ArrayList<PTimerConjPort> ports;
 		private int replication;
 	
-		public PTimerConjPortRepl(IEventReceiver actor, String name, int localId, Address[] addr,
+		public PTimerConjReplPort(IEventReceiver actor, String name, int localId, Address[] addr,
 				Address[] peerAddress) {
 			replication = addr.length;
 			ports = new ArrayList<PTimer.PTimerConjPort>(replication);

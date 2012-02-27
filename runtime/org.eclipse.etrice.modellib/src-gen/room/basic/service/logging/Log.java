@@ -71,11 +71,11 @@ public class Log {
 	}
 	
 	// replicated port class
-	static public class LogPortRepl {
+	static public class LogReplPort {
 		private ArrayList<LogPort> ports;
 		private int replication;
 	
-		public LogPortRepl(IEventReceiver actor, String name, int localId, Address[] addr,
+		public LogReplPort(IEventReceiver actor, String name, int localId, Address[] addr,
 				Address[] peerAddress) {
 			replication = addr.length;
 			ports = new ArrayList<Log.LogPort>(replication);
@@ -180,11 +180,11 @@ public class Log {
 	}
 	
 	// replicated port class
-	static public class LogConjPortRepl {
+	static public class LogConjReplPort {
 		private ArrayList<LogConjPort> ports;
 		private int replication;
 	
-		public LogConjPortRepl(IEventReceiver actor, String name, int localId, Address[] addr,
+		public LogConjReplPort(IEventReceiver actor, String name, int localId, Address[] addr,
 				Address[] peerAddress) {
 			replication = addr.length;
 			ports = new ArrayList<Log.LogConjPort>(replication);
