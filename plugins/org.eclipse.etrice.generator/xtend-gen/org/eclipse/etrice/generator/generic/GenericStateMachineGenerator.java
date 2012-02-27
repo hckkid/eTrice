@@ -23,9 +23,9 @@ import org.eclipse.etrice.generator.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.generator.etricegen.TransitionChain;
 import org.eclipse.etrice.generator.extensions.RoomExtensions;
 import org.eclipse.etrice.generator.extensions.RoomNameProv;
+import org.eclipse.etrice.generator.generic.AbstractLanguageGenerator;
 import org.eclipse.etrice.generator.generic.GenericProtocolClassGenerator;
 import org.eclipse.etrice.generator.generic.ILanguageExtension;
-import org.eclipse.etrice.generator.generic.LanguageGenerator;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.xbase.lib.BooleanExtensions;
@@ -47,7 +47,7 @@ public class GenericStateMachineGenerator {
   public GenericProtocolClassGenerator pcGen;
   
   @Inject
-  public LanguageGenerator languageGen;
+  public AbstractLanguageGenerator languageGen;
   
   @Inject
   public ITranslationProvider translator;

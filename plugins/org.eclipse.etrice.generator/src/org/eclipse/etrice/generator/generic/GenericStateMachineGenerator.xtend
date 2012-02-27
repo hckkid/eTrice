@@ -31,7 +31,7 @@ class GenericStateMachineGenerator {
 	@Inject public extension ILanguageExtension langExt
 	@Inject public extension RoomExtensions roomExt
 	@Inject public extension GenericProtocolClassGenerator pcGen
-	@Inject public extension LanguageGenerator languageGen
+	@Inject public extension org.eclipse.etrice.generator.generic.AbstractLanguageGenerator languageGen
 	@Inject public ITranslationProvider translator
 
 	def private genStateIdConstants(ExpandedActorClass xpac, ActorClass ac) {

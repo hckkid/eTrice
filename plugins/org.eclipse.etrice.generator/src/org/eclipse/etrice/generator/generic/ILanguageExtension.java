@@ -119,4 +119,13 @@ public interface ILanguageExtension {
 	 * @return void* for C/C++, Object for Java
 	 */
 	String voidPointer();
+	
+	/**
+	 * array declarations differ in Java and C/C++
+	 * @param type
+	 * @param size
+	 * @param name
+	 * @return a string that represents the declaration
+	 */
+	String arrayDeclaration(String type, int size, String name);
 }

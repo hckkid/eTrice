@@ -45,8 +45,9 @@ class SubSystemRunnerGen {
 		
 		#include "«ssi.name».h"
 
-		#include "etLogger.h"
-		#include "etMSCLogger.h"
+		#include "debugging/etLogger.h"
+		#include "debugging/etMSCLogger.h"
+		#include "platform/etPlatform.h"
 		
 		
 		/**
@@ -55,7 +56,8 @@ class SubSystemRunnerGen {
 		 */
 		
 		int main(void) {
-		
+			etUserEntry(); /* platform specific */
+			
 			etLogger_logInfo("***   T H E   B E G I N   ***");
 			ET_MSC_LOGGER_OPEN("main");
 		
@@ -63,15 +65,21 @@ class SubSystemRunnerGen {
 			«ssi.name»_init(); 		/* lifecycle init */
 			«ssi.name»_start(); 	/* lifecycle start */
 		
+			etUserPreRun(); /* platform specific */
+
 			/* run Scheduler */
 			«ssi.name»_run();
 		
+			etUserPostRun(); /* platform specific */
+
 			/* shutdown sequence of lifecycle */
 			«ssi.name»_stop(); 		/* lifecycle stop */
 			«ssi.name»_destroy(); 	/* lifecycle destroy */
 		
 			ET_MSC_LOGGER_CLOSE
 			etLogger_logInfo("***   T H E   E N D   ***");
+		
+			etUserExit(); /* platform specific */
 		
 			return 0;
 		}

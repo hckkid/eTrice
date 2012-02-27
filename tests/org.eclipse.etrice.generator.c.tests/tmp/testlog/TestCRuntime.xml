@@ -4,7 +4,7 @@
 	</testsuite>
 	<testsuite name="TestEtMessageQueue" tests="0" failures="0" errors="0" time="0">
 		<testcase name="TestEtMessageQueue_testPushPop" time="0"/>
-		<testcase name="TestEtMessageQueue_testMassiveMessaging" time="0"/>
+		<testcase name="TestEtMessageQueue_testMassiveMessaging" time="15"/>
 	</testsuite>
 	<testsuite name="TestEtMessageService" tests="0" failures="0" errors="0" time="0">
 		<testcase name="TestEtMessageService_init" time="0"/>

@@ -71,9 +71,11 @@ public class SubSystemRunnerGen {
     _builder.append(".h\"");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
-    _builder.append("#include \"etLogger.h\"");
+    _builder.append("#include \"debugging/etLogger.h\"");
     _builder.newLine();
-    _builder.append("#include \"etMSCLogger.h\"");
+    _builder.append("#include \"debugging/etMSCLogger.h\"");
+    _builder.newLine();
+    _builder.append("#include \"platform/etPlatform.h\"");
     _builder.newLine();
     _builder.newLine();
     _builder.newLine();
@@ -91,6 +93,10 @@ public class SubSystemRunnerGen {
     _builder.newLine();
     _builder.append("int main(void) {");
     _builder.newLine();
+    _builder.append("\t");
+    _builder.append("etUserEntry(); /* platform specific */");
+    _builder.newLine();
+    _builder.append("\t");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("etLogger_logInfo(\"***   T H E   B E G I N   ***\");");
@@ -114,6 +120,10 @@ public class SubSystemRunnerGen {
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("\t");
+    _builder.append("etUserPreRun(); /* platform specific */");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t");
     _builder.append("/* run Scheduler */");
     _builder.newLine();
     _builder.append("\t");
@@ -121,6 +131,10 @@ public class SubSystemRunnerGen {
     _builder.append(_name_5, "	");
     _builder.append("_run();");
     _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("etUserPostRun(); /* platform specific */");
+    _builder.newLine();
     _builder.newLine();
     _builder.append("\t");
     _builder.append("/* shutdown sequence of lifecycle */");
@@ -141,6 +155,10 @@ public class SubSystemRunnerGen {
     _builder.newLine();
     _builder.append("\t");
     _builder.append("etLogger_logInfo(\"***   T H E   E N D   ***\");");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("etUserExit(); /* platform specific */");
     _builder.newLine();
     _builder.newLine();
     _builder.append("\t");

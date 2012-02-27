@@ -28,40 +28,8 @@ etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 SubSys <== etMessageService
 SubSys ==> SubSys initActorInstances
-SubSys ==> ReceiverManual init
-ReceiverManual ==> CommunicationProtocolPort outMessage1
-CommunicationProtocolPort ==> etMessageService getMessageBuffer
-etMessageService ==> etMessageQueue pop
-etMessageService <== etMessageQueue
-CommunicationProtocolPort <== etMessageService
-CommunicationProtocolPort ==> etMessageService pushMessage
-etMessageService ==> etMessageQueue push
-etMessageService <== etMessageQueue
-CommunicationProtocolPort <== etMessageService
-ReceiverManual <== CommunicationProtocolPort
-ReceiverManual ==> CommunicationProtocolPort outMessage2
-CommunicationProtocolPort ==> etMessageService getMessageBuffer
-etMessageService ==> etMessageQueue pop
-etMessageService <== etMessageQueue
-CommunicationProtocolPort <== etMessageService
-CommunicationProtocolPort ==> etMessageService pushMessage
-etMessageService ==> etMessageQueue push
-etMessageService <== etMessageQueue
-CommunicationProtocolPort <== etMessageService
-ReceiverManual <== CommunicationProtocolPort
-ReceiverManual ==> CommunicationProtocolPort outMessage123456789
-CommunicationProtocolPort ==> etMessageService getMessageBuffer
-etMessageService ==> etMessageQueue pop
-etMessageService <== etMessageQueue
-CommunicationProtocolPort <== etMessageService
-CommunicationProtocolPort ==> etMessageService pushMessage
-etMessageService ==> etMessageQueue push
-etMessageService <== etMessageQueue
-CommunicationProtocolPort <== etMessageService
-ReceiverManual <== CommunicationProtocolPort
-SubSys <== ReceiverManual
-SubSys ==> SenderManual init
-SenderManual ==> CommunicationProtocolConjPort inMessage1
+SubSys ==> Sender init
+Sender ==> CommunicationProtocolConjPort sendData
 CommunicationProtocolConjPort ==> etMessageService getMessageBuffer
 etMessageService ==> etMessageQueue pop
 etMessageService <== etMessageQueue
@@ -70,18 +38,10 @@ CommunicationProtocolConjPort ==> etMessageService pushMessage
 etMessageService ==> etMessageQueue push
 etMessageService <== etMessageQueue
 CommunicationProtocolConjPort <== etMessageService
-SenderManual <== CommunicationProtocolConjPort
-SenderManual ==> CommunicationProtocolConjPort inMessage2
-CommunicationProtocolConjPort ==> etMessageService getMessageBuffer
-etMessageService ==> etMessageQueue pop
-etMessageService <== etMessageQueue
-CommunicationProtocolConjPort <== etMessageService
-CommunicationProtocolConjPort ==> etMessageService pushMessage
-etMessageService ==> etMessageQueue push
-etMessageService <== etMessageQueue
-CommunicationProtocolConjPort <== etMessageService
-SenderManual <== CommunicationProtocolConjPort
-SubSys <== SenderManual
+Sender <== CommunicationProtocolConjPort
+SubSys <== Sender
+SubSys ==> Receiver init
+SubSys <== Receiver
 SubSys <== SubSys
 main <== SubSys
 main ==> SubSys start
@@ -97,8 +57,18 @@ etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 etMessageService ==> MsgDispatcher_Thread1 receiveMessage
 MsgDispatcher_Thread1 ==> etPort receive
-etPort ==> SenderManual ReceiveMessage
-etPort <== SenderManual
+etPort ==> Receiver ReceiveMessage
+Receiver ==> CommunicationProtocolPort receivedData
+CommunicationProtocolPort ==> etMessageService getMessageBuffer
+etMessageService ==> etMessageQueue pop
+etMessageService <== etMessageQueue
+CommunicationProtocolPort <== etMessageService
+CommunicationProtocolPort ==> etMessageService pushMessage
+etMessageService ==> etMessageQueue push
+etMessageService <== etMessageQueue
+CommunicationProtocolPort <== etMessageService
+Receiver <== CommunicationProtocolPort
+etPort <== Receiver
 MsgDispatcher_Thread1 <== etPort
 etMessageService <== MsgDispatcher_Thread1
 etMessageService ==> etMessageService returnMessageBuffer
@@ -113,56 +83,8 @@ etMessageService <== etMessageQueue
 etMessageService <== etMessageService
 etMessageService ==> MsgDispatcher_Thread1 receiveMessage
 MsgDispatcher_Thread1 ==> etPort receive
-etPort ==> SenderManual ReceiveMessage
-etPort <== SenderManual
-MsgDispatcher_Thread1 <== etPort
-etMessageService <== MsgDispatcher_Thread1
-etMessageService ==> etMessageService returnMessageBuffer
-etMessageService ==> etMessageQueue push
-etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-etMessageService ==> etMessageQueue isNotEmpty
-etMessageService <== etMessageQueue
-etMessageService ==> etMessageService popMessage
-etMessageService ==> etMessageQueue pop
-etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-etMessageService ==> MsgDispatcher_Thread1 receiveMessage
-MsgDispatcher_Thread1 ==> etPort receive
-etPort ==> SenderManual ReceiveMessage
-etPort <== SenderManual
-MsgDispatcher_Thread1 <== etPort
-etMessageService <== MsgDispatcher_Thread1
-etMessageService ==> etMessageService returnMessageBuffer
-etMessageService ==> etMessageQueue push
-etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-etMessageService ==> etMessageQueue isNotEmpty
-etMessageService <== etMessageQueue
-etMessageService ==> etMessageService popMessage
-etMessageService ==> etMessageQueue pop
-etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-etMessageService ==> MsgDispatcher_Thread1 receiveMessage
-MsgDispatcher_Thread1 ==> etPort receive
-etPort ==> ReceiverManual ReceiveMessage
-etPort <== ReceiverManual
-MsgDispatcher_Thread1 <== etPort
-etMessageService <== MsgDispatcher_Thread1
-etMessageService ==> etMessageService returnMessageBuffer
-etMessageService ==> etMessageQueue push
-etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-etMessageService ==> etMessageQueue isNotEmpty
-etMessageService <== etMessageQueue
-etMessageService ==> etMessageService popMessage
-etMessageService ==> etMessageQueue pop
-etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-etMessageService ==> MsgDispatcher_Thread1 receiveMessage
-MsgDispatcher_Thread1 ==> etPort receive
-etPort ==> ReceiverManual ReceiveMessage
-etPort <== ReceiverManual
+etPort ==> Sender ReceiveMessage
+etPort <== Sender
 MsgDispatcher_Thread1 <== etPort
 etMessageService <== MsgDispatcher_Thread1
 etMessageService ==> etMessageService returnMessageBuffer

@@ -156,7 +156,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
     _builder.newLine();
     _builder.append("#include \"etDatatypes.h\"");
     _builder.newLine();
-    _builder.append("#include \"etMessage.h\"");
+    _builder.append("#include \"messaging/etMessage.h\"");
     _builder.newLine();
     _builder.newLine();
     {
@@ -359,11 +359,13 @@ public class ActorClassGen extends GenericActorClassGenerator {
     _builder.append("\"");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
-    _builder.append("#include \"etActor.h\"");
+    _builder.append("#include \"modelbase/etActor.h\"");
     _builder.newLine();
-    _builder.append("#include \"etLogger.h\"");
+    _builder.append("#include \"debugging/etLogger.h\"");
     _builder.newLine();
-    _builder.append("#include \"etMSCLogger.h\"");
+    _builder.append("#include \"debugging/etMSCLogger.h\"");
+    _builder.newLine();
+    _builder.append("#include \"platform/etMemory.h\"");
     _builder.newLine();
     _builder.newLine();
     {
@@ -444,7 +446,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
         _builder.append("\t");
         _builder.newLine();
         _builder.append("\t");
-        _builder.append("receiveEvent(self, (etPort*)ifitem, msg->evtID, (void*)(&msg[1]));");
+        _builder.append("receiveEvent(self, (etPort*)ifitem, msg->evtID, (void*)(((char*)msg)+MEM_CEIL(sizeof(etMessage))));");
         _builder.newLine();
       }
     }

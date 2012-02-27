@@ -64,7 +64,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 		«generateIncludeGuardBegin(pc.name)»
 		
 		#include "etDatatypes.h"
-		#include "etPort.h"
+		#include "modelbase/etPort.h"
 		
 		«helpers.userCode(pc.userCode1)»
 		
@@ -102,7 +102,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 		 */
 
 		#include "«pc.getCHeaderFileName»"
-		#include "etMSCLogger.h"
+		#include "debugging/etMSCLogger.h"
 
 		«helpers.userCode(pc.userCode3)»
 		

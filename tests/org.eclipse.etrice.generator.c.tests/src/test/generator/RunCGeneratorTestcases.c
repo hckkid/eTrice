@@ -20,8 +20,8 @@
 #include "RunCGeneratorTestcases.h"
 
 #include "TestDataClass.h"
-#include "etUnit.h"
-#include "etMSCLogger.h"
+#include "etUnit/etUnit.h"
+#include "debugging/etMSCLogger.h"
 
 
 

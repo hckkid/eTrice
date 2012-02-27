@@ -8,14 +8,14 @@ import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.RefableType;
 import org.eclipse.etrice.core.room.VarDecl;
-import org.eclipse.etrice.generator.generic.LanguageGenerator;
+import org.eclipse.etrice.generator.generic.AbstractLanguageGenerator;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 @SuppressWarnings("all")
 @Singleton
 public class TypeHelpers {
   @Inject
-  private LanguageGenerator languageGen;
+  private AbstractLanguageGenerator languageGen;
   
   public String typeName(final DataType type) {
     if ((type instanceof PrimitiveType)) {

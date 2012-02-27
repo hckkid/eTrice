@@ -24,13 +24,13 @@ import org.eclipse.etrice.core.room.ExternalType
 import org.eclipse.etrice.core.room.PrimitiveType
 import org.eclipse.etrice.core.room.VarDecl
 import org.eclipse.etrice.core.room.Message
-import org.eclipse.etrice.generator.generic.LanguageGenerator
+import org.eclipse.etrice.generator.generic.AbstractLanguageGenerator
 
 
 @Singleton
 class TypeHelpers {
 
-	@Inject LanguageGenerator languageGen
+	@Inject AbstractLanguageGenerator languageGen
 	
 	def String typeName(DataType type) {
 		if (type instanceof PrimitiveType)

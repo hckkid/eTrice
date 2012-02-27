@@ -81,10 +81,10 @@ public class ProcedureHelpers {
             RefableType _refType_1 = attribute.getRefType();
             DataType _type_1 = _refType_1.getType();
             String _typeName_1 = this._typeHelpers.typeName(_type_1);
-            _builder.append(_typeName_1, "");
-            _builder.append("[] ");
+            int _size_1 = attribute.getSize();
             String _name_1 = attribute.getName();
-            _builder.append(_name_1, "");
+            String _arrayDeclaration = this.languageExt.arrayDeclaration(_typeName_1, _size_1, _name_1);
+            _builder.append(_arrayDeclaration, "");
             _builder.append(";");
             _builder.newLineIfNotEmpty();
           }

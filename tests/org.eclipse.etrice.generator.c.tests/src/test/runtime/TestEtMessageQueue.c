@@ -11,8 +11,8 @@
  *******************************************************************************/
 
 #include "TestEtMessageQueue.h"
-#include "etUnit.h"
-#include "etMessageQueue.h"
+#include "etUnit/etUnit.h"
+#include "messaging/etMessageQueue.h"
 
 void TestEtMessageQueue_testPushPop(void){
 

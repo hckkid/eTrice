@@ -88,21 +88,23 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 	'''
 	}
 	
-	def portClass(ProtocolClass pc, Boolean conj) {'''
-		«var name = pc.getPortClassName(conj)»
-		«var pclass = pc.getPortClass(conj)»
+	def portClass(ProtocolClass pc, Boolean conj) {
+		var pclass = pc.getPortClass(conj)
+		var portClassName = pc.getPortClassName(conj)
+		var replPortClassName = pc.getPortClassName(conj, true)
+	'''
 		
 		// port class
-		static public class «name» extends PortBase {
+		static public class «portClassName» extends PortBase {
 			«IF pclass!=null»
 				«helpers.userCode(pclass.userCode)»
 			«ENDIF»
 			// constructors
-			public «name»(IEventReceiver actor, String name, int localId, Address addr, Address peerAddress) {
+			public «portClassName»(IEventReceiver actor, String name, int localId, Address addr, Address peerAddress) {
 				super(actor, name, localId, 0, addr, peerAddress);
 				DebuggingService.getInstance().addPortInstance(this);
 			}
-			public «name»(IEventReceiver actor, String name, int localId, int idx, Address addr, Address peerAddress) {
+			public «portClassName»(IEventReceiver actor, String name, int localId, int idx, Address addr, Address peerAddress) {
 				super(actor, name, localId, idx, addr, peerAddress);
 				DebuggingService.getInstance().addPortInstance(this);
 			}
@@ -144,7 +146,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 		
 			«IF pclass!=null»
 				«helpers.attributes(pclass.attributes)»
-				«helpers.operationsImplementation(pclass.operations, name)»
+				«helpers.operationsImplementation(pclass.operations, portClassName)»
 			«ENDIF»
 			
 			// sent messages
@@ -154,16 +156,16 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 		}
 		
 		// replicated port class
-		static public class «name»Repl {
-			private ArrayList<«name»> ports;
+		static public class «replPortClassName» {
+			private ArrayList<«portClassName»> ports;
 			private int replication;
 		
-			public «name»Repl(IEventReceiver actor, String name, int localId, Address[] addr,
+			public «replPortClassName»(IEventReceiver actor, String name, int localId, Address[] addr,
 					Address[] peerAddress) {
 				replication = addr.length;
-				ports = new ArrayList<«pc.name».«name»>(replication);
+				ports = new ArrayList<«pc.name».«portClassName»>(replication);
 				for (int i=0; i<replication; ++i) {
-					ports.add(new «name»(
+					ports.add(new «portClassName»(
 							actor, name+i, localId, i, addr[i], peerAddress[i]));
 				}
 			}
@@ -176,7 +178,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 					return ifitem.getIdx();
 				}
 			
-			public «name» get(int i) {
+			public «portClassName» get(int i) {
 				return ports.get(i);
 			}
 			

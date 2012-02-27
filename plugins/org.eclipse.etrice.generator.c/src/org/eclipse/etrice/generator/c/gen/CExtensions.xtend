@@ -25,7 +25,7 @@ import org.eclipse.etrice.core.room.RoomClass
 import org.eclipse.etrice.generator.etricegen.ExpandedActorClass
 import org.eclipse.etrice.generator.etricegen.TransitionChain
 import org.eclipse.etrice.generator.generic.ILanguageExtension
-import org.eclipse.etrice.generator.generic.LanguageGenerator
+import org.eclipse.etrice.generator.generic.AbstractLanguageGenerator
 import java.util.List
 import org.eclipse.xtext.util.Pair
 
@@ -34,7 +34,7 @@ import org.eclipse.xtext.util.Pair
 @Singleton
 class CExtensions implements ILanguageExtension {
 
-	@Inject LanguageGenerator languageGen
+	@Inject AbstractLanguageGenerator languageGen
 	
 
 	override String getTypedDataDefinition(Message m) {
@@ -132,5 +132,9 @@ class CExtensions implements ILanguageExtension {
 		
 	def String getExecuteChainCode(ExpandedActorClass ac, TransitionChain tc) {
 		return languageGen.getExecuteChain(ac, tc)
+	}
+	
+	override String arrayDeclaration(String type, int size, String name) {
+		type+" "+name+"["+size+"]";
 	}
 }

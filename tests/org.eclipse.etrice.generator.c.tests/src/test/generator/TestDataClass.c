@@ -21,7 +21,7 @@
 
 #include "TestDataClass.h"
 
-#include "etUnit.h"
+#include "etUnit/etUnit.h"
 
 #include "../../../src-gen/cGenRef/DataClass1.h"
 

@@ -1,6 +1,6 @@
 
-#include "etLogger.h"
-#include "etMSCLogger.h"
+#include "debugging/etLogger.h"
+#include "debugging/etMSCLogger.h"
 
 void Class2_ff(void) {
 	ET_MSC_LOGGER_SYNC_ENTRY("Class2", "ff")

@@ -29,14 +29,16 @@ import com.google.inject.Inject;
 public class LanguageTransitionChainVisitor implements ITransitionChainVisitor {
 
 	private ExpandedActorClass ac;
-	private LanguageGenerator javaGen = new LanguageGenerator();
-	@Inject ILanguageExtension langExt;
+	@Inject private AbstractLanguageGenerator javaGen;
+	@Inject private ILanguageExtension langExt;
 	private String typedData = "";
 	private String dataArg = "";
 
-	LanguageTransitionChainVisitor(ExpandedActorClass ac, TransitionChain tc) {
+	LanguageTransitionChainVisitor(ExpandedActorClass ac) {
 		this.ac = ac;
-		
+	}
+	
+	void init(TransitionChain tc) {
 		if (tc.getTransition() instanceof TriggeredTransition) {
 			// we rely on the previous checking during the generator model creation
 			VarDecl data = ((TriggeredTransition)tc.getTransition()).getTriggers().get(0).getMsgFromIfPairs().get(0).getMessage().getData();

@@ -80,7 +80,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 		«generateIncludeGuardBegin(xpac.name)»
 		
 		#include "etDatatypes.h"
-		#include "etMessage.h"
+		#include "messaging/etMessage.h"
 		
 		«FOR dataClass : root.getReferencedDataClasses(ac)»
 			#include "«dataClass.name».h"
@@ -148,9 +148,10 @@ class ActorClassGen extends GenericActorClassGenerator {
 
 		#include "«xpac.getCHeaderFileName»"
 		
-		#include "etActor.h"
-		#include "etLogger.h"
-		#include "etMSCLogger.h"
+		#include "modelbase/etActor.h"
+		#include "debugging/etLogger.h"
+		#include "debugging/etMSCLogger.h"
+		#include "platform/etMemory.h"
 
 		«FOR pc : root.getReferencedProtocolClasses(ac)»
 			#include "«pc.getCHeaderFileName»"
@@ -178,7 +179,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 			ET_MSC_LOGGER_SYNC_ENTRY("«xpac.name»", "ReceiveMessage")
 			«IF xpac.hasNonEmptyStateMachine»
 				
-				receiveEvent(self, (etPort*)ifitem, msg->evtID, (void*)(&msg[1]));
+				receiveEvent(self, (etPort*)ifitem, msg->evtID, (void*)(((char*)msg)+MEM_CEIL(sizeof(etMessage))));
 			«ENDIF»
 			
 			ET_MSC_LOGGER_SYNC_EXIT

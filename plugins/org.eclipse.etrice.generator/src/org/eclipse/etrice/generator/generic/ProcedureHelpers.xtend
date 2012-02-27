@@ -52,7 +52,7 @@ class ProcedureHelpers {
 			«IF attribute.size==0»
 				«attribute.refType.type.typeName» «attribute.name»;
 			«ELSE»
-				«attribute.refType.type.typeName»[] «attribute.name»;
+				«languageExt.arrayDeclaration(attribute.refType.type.typeName, attribute.size, attribute.name)»;
 			«ENDIF» 
 		«ENDFOR»
 	'''

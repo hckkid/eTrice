@@ -27,7 +27,7 @@
 #include "TestEtMessageService.h"
 #include "TestEtUnit.h"
 
-#include "etUnit.h"
+#include "etUnit/etUnit.h"
 
 
 void RunCRuntimeTestcases(void){

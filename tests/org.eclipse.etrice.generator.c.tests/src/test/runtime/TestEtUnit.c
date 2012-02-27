@@ -19,7 +19,7 @@
  */
 
 #include "TestEtUnit.h"
-#include "etUnit.h"
+#include "etUnit/etUnit.h"
 
 void TestEtUnit_Expect(void){
 	EXPECT_TRUE("EXPECT_TRUE", TRUE);
@@ -37,7 +37,7 @@ void TestEtUnit_Expect(void){
 
 	/* float values */
 	EXPECT_EQUAL_FLOAT32("EXPECT_EQUAL_FLOAT32", (etFloat32) 123.456, (etFloat32) 123.456, (etFloat32) 0.0001);
-	EXPECT_EQUAL_FLOAT64("EXPECT_EQUAL_FLOAT64", (etFloat64) 123.456, (etFloat64) 123.456, (etFloat64) 0.0001);
+	EXPECT_EQUAL_FLOAT32("EXPECT_EQUAL_FLOAT32", (etFloat32) 123.456, (etFloat32) 123.456, (etFloat32) 0.0001);
 
 	/* Pointers */
 	etUInt16 value;
