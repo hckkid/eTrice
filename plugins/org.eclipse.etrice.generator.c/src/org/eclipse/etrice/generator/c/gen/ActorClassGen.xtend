@@ -156,7 +156,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 			#include "«pc.getCHeaderFileName»"
 		«ENDFOR»
 		
-		«helpers.userCode(xpac.userCode3)»
+		«helpers.userCode(ac.userCode3)»
 
 		/* interface item IDs */
 		«genInterfaceItemConstants(xpac, ac)»
