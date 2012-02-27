@@ -60,10 +60,14 @@ public class CTranslationProvider implements ITranslationProvider {
 		String result = orig;
 		if (item instanceof Port) {
 			Port p = (Port) item;
+			StringBuilder argtext = new StringBuilder();
+			for (String arg : args) {
+				argtext.append(", "+arg);
+			}
 			if (p.getMultiplicity()==1)
-				result = roomExt.getPortClassName(p)+"_"+msg.getName()+"(&self->constData->"+item.getName()+")";
+				result = roomExt.getPortClassName(p)+"_"+msg.getName()+"(&self->constData->"+item.getName()+argtext+")";
 			else
-				result = roomExt.getPortClassName(p)+"_"+msg.getName()+"_broadcast(&self->constData->"+item.getName()+")";
+				result = roomExt.getPortClassName(p)+"_"+msg.getName()+"_broadcast(&self->constData->"+item.getName()+argtext+")";
 			
 			result += " /* "+orig+" */";
 		}
