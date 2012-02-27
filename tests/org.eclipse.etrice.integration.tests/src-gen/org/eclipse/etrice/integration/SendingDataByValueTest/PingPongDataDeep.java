@@ -14,7 +14,7 @@ public class PingPongDataDeep {
 	float f32Val;
 	double f64Val;
 	String stringVal;
-	int[] arrayFromInt32;
+	int arrayFromInt32[];
 	
 	//--------------------- attribute setters and getters
 	public void setI8Val (byte i8Val) {

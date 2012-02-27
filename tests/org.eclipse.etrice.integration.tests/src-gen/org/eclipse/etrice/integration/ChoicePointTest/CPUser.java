@@ -389,14 +389,12 @@ public class CPUser extends ActorClassBase {
 					switch(trigger) {
 					case TRIG_TestPort1__msg1:
 						{ 
-						if (counter==2
-						)
+						if (counter==2)
 						{
 							chain = CHAIN_TRANS_state1_TO_cp2_BY_msg1TestPort1;
 							catching_state = STATE_TOP;
 						} else 
-						if (counter==1
-						)
+						if (counter==1)
 						{
 							chain = CHAIN_TRANS_state1_TO_state0_BY_msg1TestPort1;
 							catching_state = STATE_TOP;

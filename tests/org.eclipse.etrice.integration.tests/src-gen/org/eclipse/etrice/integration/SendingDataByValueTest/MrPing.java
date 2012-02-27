@@ -32,7 +32,7 @@ public class MrPing extends ActorClassBase {
 	public static final int IFITEM_PingPongPort = 1;
 		
 	/*--------------------- attributes ---------------------*/
-	int[] i32Array;
+	int i32Array[];
 	PingPongData data;
 	/*--------------------- operations ---------------------*/
 	public void printData(PingPongData d) {
@@ -419,8 +419,7 @@ public class MrPing extends ActorClassBase {
 					switch(trigger) {
 					case TRIG_PingPongPort__pong:
 						{ PingPongData p = (PingPongData) generic_data;
-						if (p.getI32Val()==3
-						)
+						if (p.getI32Val()==3)
 						{
 							chain = CHAIN_TRANS_state0_TO_state1_BY_pongPingPongPort;
 							catching_state = STATE_TOP;

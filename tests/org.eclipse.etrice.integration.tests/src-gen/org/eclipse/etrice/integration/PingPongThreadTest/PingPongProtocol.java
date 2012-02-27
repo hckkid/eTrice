@@ -72,11 +72,11 @@ public class PingPongProtocol {
 	}
 	
 	// replicated port class
-	static public class PingPongProtocolPortRepl {
+	static public class PingPongProtocolReplPort {
 		private ArrayList<PingPongProtocolPort> ports;
 		private int replication;
 	
-		public PingPongProtocolPortRepl(IEventReceiver actor, String name, int localId, Address[] addr,
+		public PingPongProtocolReplPort(IEventReceiver actor, String name, int localId, Address[] addr,
 				Address[] peerAddress) {
 			replication = addr.length;
 			ports = new ArrayList<PingPongProtocol.PingPongProtocolPort>(replication);
@@ -149,11 +149,11 @@ public class PingPongProtocol {
 	}
 	
 	// replicated port class
-	static public class PingPongProtocolConjPortRepl {
+	static public class PingPongProtocolConjReplPort {
 		private ArrayList<PingPongProtocolConjPort> ports;
 		private int replication;
 	
-		public PingPongProtocolConjPortRepl(IEventReceiver actor, String name, int localId, Address[] addr,
+		public PingPongProtocolConjReplPort(IEventReceiver actor, String name, int localId, Address[] addr,
 				Address[] peerAddress) {
 			replication = addr.length;
 			ports = new ArrayList<PingPongProtocol.PingPongProtocolConjPort>(replication);

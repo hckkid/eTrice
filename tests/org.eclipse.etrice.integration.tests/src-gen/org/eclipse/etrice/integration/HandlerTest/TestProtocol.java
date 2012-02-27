@@ -69,11 +69,11 @@ public class TestProtocol {
 	}
 	
 	// replicated port class
-	static public class TestProtocolPortRepl {
+	static public class TestProtocolReplPort {
 		private ArrayList<TestProtocolPort> ports;
 		private int replication;
 	
-		public TestProtocolPortRepl(IEventReceiver actor, String name, int localId, Address[] addr,
+		public TestProtocolReplPort(IEventReceiver actor, String name, int localId, Address[] addr,
 				Address[] peerAddress) {
 			replication = addr.length;
 			ports = new ArrayList<TestProtocol.TestProtocolPort>(replication);
@@ -176,11 +176,11 @@ public class TestProtocol {
 	}
 	
 	// replicated port class
-	static public class TestProtocolConjPortRepl {
+	static public class TestProtocolConjReplPort {
 		private ArrayList<TestProtocolConjPort> ports;
 		private int replication;
 	
-		public TestProtocolConjPortRepl(IEventReceiver actor, String name, int localId, Address[] addr,
+		public TestProtocolConjReplPort(IEventReceiver actor, String name, int localId, Address[] addr,
 				Address[] peerAddress) {
 			replication = addr.length;
 			ports = new ArrayList<TestProtocol.TestProtocolConjPort>(replication);

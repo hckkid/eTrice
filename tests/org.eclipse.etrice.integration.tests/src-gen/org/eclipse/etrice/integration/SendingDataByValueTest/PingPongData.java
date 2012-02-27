@@ -14,7 +14,7 @@ public class PingPongData {
 	float f32Val;
 	double f64Val;
 	String stringVal;
-	int[] arrayFromInt32;
+	int arrayFromInt32[];
 	PingPongDataDeep ownType;
 	
 	//--------------------- attribute setters and getters

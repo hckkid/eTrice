@@ -22,7 +22,7 @@ public class MrPingActor extends ActorClassBase {
 
 	
 	//--------------------- ports
-	protected PingPongProtocolConjPortRepl PingPongPort = null;
+	protected PingPongProtocolConjReplPort PingPongPort = null;
 	//--------------------- saps
 	protected PTimeoutConjPort timer = null;
 	//--------------------- services
@@ -46,7 +46,7 @@ public class MrPingActor extends ActorClassBase {
 		pongCount = 0;
 
 		// own ports
-		PingPongPort = new PingPongProtocolConjPortRepl(this, "PingPongPort", IFITEM_PingPongPort, port_addr[IFITEM_PingPongPort], peer_addr[IFITEM_PingPongPort]); 
+		PingPongPort = new PingPongProtocolConjReplPort(this, "PingPongPort", IFITEM_PingPongPort, port_addr[IFITEM_PingPongPort], peer_addr[IFITEM_PingPongPort]); 
 		// own saps
 		timer = new PTimeoutConjPort(this, "timer", IFITEM_timer, 0, port_addr[IFITEM_timer][0], peer_addr[IFITEM_timer][0]); 
 		// own service implementations

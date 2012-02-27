@@ -273,11 +273,11 @@ public class p_HFSM {
 	}
 	
 	// replicated port class
-	static public class p_HFSMPortRepl {
+	static public class p_HFSMReplPort {
 		private ArrayList<p_HFSMPort> ports;
 		private int replication;
 	
-		public p_HFSMPortRepl(IEventReceiver actor, String name, int localId, Address[] addr,
+		public p_HFSMReplPort(IEventReceiver actor, String name, int localId, Address[] addr,
 				Address[] peerAddress) {
 			replication = addr.length;
 			ports = new ArrayList<p_HFSM.p_HFSMPort>(replication);
@@ -533,11 +533,11 @@ public class p_HFSM {
 	}
 	
 	// replicated port class
-	static public class p_HFSMConjPortRepl {
+	static public class p_HFSMConjReplPort {
 		private ArrayList<p_HFSMConjPort> ports;
 		private int replication;
 	
-		public p_HFSMConjPortRepl(IEventReceiver actor, String name, int localId, Address[] addr,
+		public p_HFSMConjReplPort(IEventReceiver actor, String name, int localId, Address[] addr,
 				Address[] peerAddress) {
 			replication = addr.length;
 			ports = new ArrayList<p_HFSM.p_HFSMConjPort>(replication);
