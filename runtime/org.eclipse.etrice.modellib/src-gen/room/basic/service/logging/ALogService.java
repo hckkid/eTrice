@@ -28,7 +28,7 @@ public class ALogService extends ActorClassBase {
 	//--------------------- ports
 	//--------------------- saps
 	//--------------------- services
-	protected LogPortRepl log = null;
+	protected LogReplPort log = null;
 
 	//--------------------- interface item IDs
 	public static final int IFITEM_log = 1;
@@ -53,7 +53,7 @@ public class ALogService extends ActorClassBase {
 		// own ports
 		// own saps
 		// own service implementations
-		log = new LogPortRepl(this, "log", IFITEM_log, port_addr[IFITEM_log], peer_addr[IFITEM_log]); 
+		log = new LogReplPort(this, "log", IFITEM_log, port_addr[IFITEM_log], peer_addr[IFITEM_log]); 
 	}
 	
 

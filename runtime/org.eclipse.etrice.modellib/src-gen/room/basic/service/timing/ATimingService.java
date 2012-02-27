@@ -28,8 +28,8 @@ public class ATimingService extends ActorClassBase {
 	//--------------------- ports
 	//--------------------- saps
 	//--------------------- services
-	protected PTimerPortRepl timer = null;
-	protected PTimeoutPortRepl timeout = null;
+	protected PTimerReplPort timer = null;
+	protected PTimeoutReplPort timeout = null;
 
 	//--------------------- interface item IDs
 	public static final int IFITEM_timer = 1;
@@ -53,8 +53,8 @@ public class ATimingService extends ActorClassBase {
 		// own ports
 		// own saps
 		// own service implementations
-		timer = new PTimerPortRepl(this, "timer", IFITEM_timer, port_addr[IFITEM_timer], peer_addr[IFITEM_timer]); 
-		timeout = new PTimeoutPortRepl(this, "timeout", IFITEM_timeout, port_addr[IFITEM_timeout], peer_addr[IFITEM_timeout]); 
+		timer = new PTimerReplPort(this, "timer", IFITEM_timer, port_addr[IFITEM_timer], peer_addr[IFITEM_timer]); 
+		timeout = new PTimeoutReplPort(this, "timeout", IFITEM_timeout, port_addr[IFITEM_timeout], peer_addr[IFITEM_timeout]); 
 	}
 	
 
