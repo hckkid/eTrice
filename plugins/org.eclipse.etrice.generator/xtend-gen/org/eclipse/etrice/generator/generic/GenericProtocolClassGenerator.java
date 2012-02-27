@@ -69,7 +69,9 @@ public class GenericProtocolClassGenerator {
       String _string_3 = ((Integer)offset).toString();
       Pair<String,String> _pair_3 = Tuples.<String, String>pair(_memberInDeclaration_3, _string_3);
       list.add(_pair_3);
-      String _genEnumeration = this.langExt.genEnumeration("msg_ids", list);
+      String _name_6 = pc.getName();
+      String _memberInDeclaration_4 = this.langExt.memberInDeclaration(_name_6, "msg_ids");
+      String _genEnumeration = this.langExt.genEnumeration(_memberInDeclaration_4, list);
       return _genEnumeration;
   }
   

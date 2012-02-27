@@ -47,7 +47,7 @@ class GenericProtocolClassGenerator {
 		offset = offset+1
 		list.add(pair(memberInDeclaration(pc.name, "MSG_MAX"), offset.toString))
 		
-		return langExt.genEnumeration("msg_ids", list)
+		return langExt.genEnumeration(langExt.memberInDeclaration(pc.name, "msg_ids"), list)
 	}
 	
 	def getMessageID(MessageFromIf mif) {
