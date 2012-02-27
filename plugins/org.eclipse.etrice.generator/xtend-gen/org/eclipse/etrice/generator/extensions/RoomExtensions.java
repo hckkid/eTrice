@@ -332,9 +332,8 @@ public class RoomExtensions {
   public String getPortClassName(final ServiceImplementation svc) {
     SPPRef _spp = svc.getSpp();
     ProtocolClass _protocol = _spp.getProtocol();
-    String _portClassName = this.getPortClassName(_protocol, false);
-    String _operator_plus = StringExtensions.operator_plus(_portClassName, "Repl");
-    return _operator_plus;
+    String _portClassName = this.getPortClassName(_protocol, false, true);
+    return _portClassName;
   }
   
   public List<Message> getAllIncomingMessages(final ProtocolClass pc) {

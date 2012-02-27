@@ -220,7 +220,7 @@ class RoomExtensions {
 	}
 
 	def String getPortClassName(ServiceImplementation svc) {
-		return svc.spp.protocol.getPortClassName(false)+"Repl"
+		return svc.spp.protocol.getPortClassName(false, true)
 	}
 	// message lists with super class messages, super classes first
 	def List<Message> getAllIncomingMessages(ProtocolClass pc) {
