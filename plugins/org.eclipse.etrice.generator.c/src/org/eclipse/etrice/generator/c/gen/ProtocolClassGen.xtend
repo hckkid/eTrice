@@ -17,12 +17,14 @@ import com.google.inject.Inject
 import com.google.inject.Singleton
 import org.eclipse.etrice.core.room.Message
 import org.eclipse.etrice.core.room.ProtocolClass
+import org.eclipse.etrice.core.room.PrimitiveType
 import org.eclipse.etrice.generator.base.ILogger
 import org.eclipse.etrice.generator.etricegen.Root
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 
 import org.eclipse.etrice.generator.extensions.RoomExtensions
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
+import org.eclipse.etrice.generator.generic.TypeHelpers
 import org.eclipse.etrice.generator.generic.GenericProtocolClassGenerator
 
 
@@ -33,6 +35,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 	@Inject extension CExtensions stdExt
 	@Inject extension RoomExtensions roomExt
 	@Inject extension ProcedureHelpers helpers
+	@Inject extension TypeHelpers
 	@Inject ILogger logger
 	
 	def doGenerate(Root root) {
@@ -233,18 +236,21 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 	def portClassHeader(ProtocolClass pc, Boolean conj){
 		var portClassName = pc.getPortClassName(conj)
 		var replPortClassName = pc.getPortClassName(conj, true)
-		var pClass = pc.getPortClass(conj)
-		var ports = if (conj) pc.getAllIncomingMessages() else pc.getAllOutgoingMessages()
+		var messages = if (conj) pc.allIncomingMessages else pc.allOutgoingMessages
 		
 		'''
 		
 			typedef etPort «portClassName»;
 			typedef etReplPort «replPortClassName»;
 			
-			«FOR message : ports»
-				void «portClassName»_«message.name»(const «portClassName»* self);
-				void «replPortClassName»_«message.name»_broadcast(const «replPortClassName»* self);
-				void «replPortClassName»_«message.name»(const «replPortClassName»* self, int idx);
+			«FOR message : messages»
+				«var hasData = message.data!=null»
+				«var typeName = if (hasData) message.data.refType.type.typeName else ""»
+				«var refp = if (hasData && !(message.data.refType.type instanceof PrimitiveType)) "*" else ""»
+				«var data = if (hasData) ", "+typeName+refp+" data" else ""»
+				«messageSignature(portClassName, message.name, "", data)»;
+				«messageSignature(replPortClassName, message.name, "_broadcast", data)»;
+				«messageSignature(replPortClassName, message.name, "", ", int idx"+data)»;
 			«ENDFOR»
 		'''
 	}
@@ -252,48 +258,57 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 	def portClassSource(ProtocolClass pc, Boolean conj){
 		var portClassName = pc.getPortClassName(conj)
 		var replPortClassName = pc.getPortClassName(conj, true)
-		var pClass = pc.getPortClass(conj)
 		var messages = if (conj) pc.allIncomingMessages else pc.allOutgoingMessages
 		var dir = if (conj) "IN_" else "OUT_"
 		
 		'''
 			«FOR message : messages»
+				«var hasData = message.data!=null»
+				«var typeName = if (hasData) message.data.refType.type.typeName else ""»
+				«var refp = if (hasData && !(message.data.refType.type instanceof PrimitiveType)) "*" else ""»
+				«var refa = if (hasData && (message.data.refType.type instanceof PrimitiveType)) "&" else ""»
+				«var data = if (hasData) ", "+typeName+refp+" data" else ""»
 				
-				void «portClassName»_«message.name»(const «portClassName»* self) {
+				«messageSignature(portClassName, message.name, "", data)» {
 					ET_MSC_LOGGER_SYNC_ENTRY("«portClassName»", "«message.name»")
 					if (self->receiveMessageFunc!=NULL) {
-						etPort_sendMessage(self, «memberInUse(pc.name, dir+message.name)»);
+						«sendMessageCall(hasData, "self", memberInUse(pc.name, dir+message.name), typeName, refa+"data")»
 					}
 					ET_MSC_LOGGER_SYNC_EXIT
 				}
 				
-				void «replPortClassName»_«message.name»_broadcast(const «replPortClassName»* self) {
+				«messageSignature(replPortClassName, message.name, "_broadcast", data)» {
 					int i;
 					ET_MSC_LOGGER_SYNC_ENTRY("«replPortClassName»", "«message.name»")
 					for (i=0; i<self->size; ++i) {
-						etPort_sendMessage((etPort*)(&self->ports[i]), «memberInUse(pc.name, dir+message.name)»);
+						«sendMessageCall(hasData, "(etPort*)(&self->ports[i])", memberInUse(pc.name, dir+message.name), typeName, refa+"data")»
 					}
 					ET_MSC_LOGGER_SYNC_EXIT
 				}
 				
-				void «replPortClassName»_«message.name»(const «replPortClassName»* self, int idx) {
+				«messageSignature(replPortClassName, message.name, "", ", int idx"+data)» {
 					ET_MSC_LOGGER_SYNC_ENTRY("«replPortClassName»", "«message.name»")
 					if (0<=idx && idx<self->size) {
-						etPort_sendMessage((etPort*)(&self->ports[idx]), «memberInUse(pc.name, dir+message.name)»);
+						«sendMessageCall(hasData, "(etPort*)(&self->ports[idx])", memberInUse(pc.name, dir+message.name), typeName, refa+"data")»
 					}
 					ET_MSC_LOGGER_SYNC_EXIT
 				}
 			«ENDFOR»
 		'''
 	}
-	
 
-	def messageSignature(ProtocolClass pc, Message m) {'''
-		void «pc.name»_«m.name» («IF m.data!=null»«m.data.refType.type.name» «m.data.name»«ENDIF»)
-	'''
+	def private sendMessageCall(boolean hasData, String self, String msg, String typeName, String data) {
+		if (hasData)
+			"etPort_sendMessage("+self+", "+msg+", sizeof("+typeName+"), "+data+");"
+		else
+			"etPort_sendMessage("+self+", "+msg+", 0, NULL);"
+	}
+	
+	def private messageSignature(String className, String messageName, String methodSuffix, String data) {
+		"void "+className+"_"+messageName+methodSuffix+"(const "+className+"* self"+data+")"
 	}
 
-	def messageCall(Message m) {'''
+	def private messageCall(Message m) {'''
 	«m.name»(«IF m.data!=null» «m.data.name»«ENDIF»)
 	'''}
 	

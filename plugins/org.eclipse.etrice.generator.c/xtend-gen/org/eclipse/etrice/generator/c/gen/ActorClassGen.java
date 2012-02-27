@@ -377,7 +377,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
       }
     }
     _builder.newLine();
-    DetailCode _userCode3 = xpac.getUserCode3();
+    DetailCode _userCode3 = ac.getUserCode3();
     StringConcatenation _userCode = this.helpers.userCode(_userCode3);
     _builder.append(_userCode, "");
     _builder.newLineIfNotEmpty();
