@@ -12,7 +12,24 @@
 
 package org.eclipse.etrice.ui.structure.support;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import org.eclipse.core.runtime.OperationCanceledException;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature.Setting;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.etrice.core.naming.RoomNameProvider;
+import org.eclipse.etrice.core.room.ActorContainerClass;
+import org.eclipse.etrice.core.room.InterfaceItem;
+import org.eclipse.etrice.core.room.LayerConnection;
+import org.eclipse.etrice.core.room.RelaySAPoint;
+import org.eclipse.etrice.core.room.RoomFactory;
+import org.eclipse.etrice.core.room.RoomPackage;
+import org.eclipse.etrice.core.room.SPPRef;
+import org.eclipse.etrice.core.room.SPPoint;
+import org.eclipse.etrice.core.room.ServiceImplementation;
+import org.eclipse.etrice.core.room.StructureClass;
 import org.eclipse.etrice.core.validation.ValidationUtil;
 import org.eclipse.etrice.ui.common.support.NoResizeFeature;
 import org.eclipse.etrice.ui.structure.DiagramTypeProvider;
@@ -22,6 +39,7 @@ import org.eclipse.graphiti.dt.IDiagramTypeProvider;
 import org.eclipse.graphiti.features.IAddFeature;
 import org.eclipse.graphiti.features.ICreateConnectionFeature;
 import org.eclipse.graphiti.features.ICreateFeature;
+import org.eclipse.graphiti.features.IDeleteFeature;
 import org.eclipse.graphiti.features.IFeatureProvider;
 import org.eclipse.graphiti.features.IMoveShapeFeature;
 import org.eclipse.graphiti.features.IResizeShapeFeature;
@@ -29,12 +47,15 @@ import org.eclipse.graphiti.features.IUpdateFeature;
 import org.eclipse.graphiti.features.context.IAddContext;
 import org.eclipse.graphiti.features.context.ICreateContext;
 import org.eclipse.graphiti.features.context.ICustomContext;
+import org.eclipse.graphiti.features.context.IDeleteContext;
 import org.eclipse.graphiti.features.context.IDoubleClickContext;
 import org.eclipse.graphiti.features.context.IMoveShapeContext;
 import org.eclipse.graphiti.features.context.IPictogramElementContext;
 import org.eclipse.graphiti.features.context.IResizeShapeContext;
 import org.eclipse.graphiti.features.context.IUpdateContext;
 import org.eclipse.graphiti.features.context.impl.CreateConnectionContext;
+import org.eclipse.graphiti.features.context.impl.DeleteContext;
+import org.eclipse.graphiti.features.context.impl.MultiDeleteInfo;
 import org.eclipse.graphiti.features.custom.ICustomFeature;
 import org.eclipse.graphiti.mm.algorithms.Ellipse;
 import org.eclipse.graphiti.mm.algorithms.GraphicsAlgorithm;
@@ -51,18 +72,12 @@ import org.eclipse.graphiti.services.IPeCreateService;
 import org.eclipse.graphiti.tb.ContextButtonEntry;
 import org.eclipse.graphiti.tb.IContextButtonPadData;
 import org.eclipse.graphiti.tb.IToolBehaviorProvider;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
-
-import org.eclipse.etrice.core.naming.RoomNameProvider;
-import org.eclipse.etrice.core.room.ActorContainerClass;
-import org.eclipse.etrice.core.room.InterfaceItem;
-import org.eclipse.etrice.core.room.RoomFactory;
-import org.eclipse.etrice.core.room.RoomPackage;
-import org.eclipse.etrice.core.room.SPPRef;
 
 public class SPPSupport extends InterfaceItemSupport {
 	
@@ -92,7 +107,7 @@ public class SPPSupport extends InterfaceItemSupport {
 		        IScopeProvider scopeProvider = ((DiagramTypeProvider)getFeatureProvider().getDiagramTypeProvider()).getScopeProvider();
 		        IScope scope = scopeProvider.getScope(spp.eContainer().eContainer(), RoomPackage.eINSTANCE.getInterfaceItem_Protocol());
 		        Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-		        SPPPropertyDialog dlg = new SPPPropertyDialog(shell, spp, scope, acc, true, false);
+		        SPPPropertyDialog dlg = new SPPPropertyDialog(shell, spp, scope, true, false);
 				if (dlg.open()!=Window.OK) {
 					acc.getIfSPPs().remove(spp);
 					return EMPTY;
@@ -158,13 +173,12 @@ public class SPPSupport extends InterfaceItemSupport {
 			@Override
 			public void execute(ICustomContext context) {
 				SPPRef spp = (SPPRef) getBusinessObjectForPictogramElement(context.getPictogramElements()[0]);
-				ActorContainerClass acc = (ActorContainerClass)spp.eContainer();
 				boolean refport = isRefItem(context.getPictogramElements()[0]);
 				
 		        IScopeProvider scopeProvider = ((DiagramTypeProvider)getFeatureProvider().getDiagramTypeProvider()).getScopeProvider();
 		        IScope scope = scopeProvider.getScope(spp.eContainer().eContainer(), RoomPackage.eINSTANCE.getInterfaceItem_Protocol());
 		        Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-				SPPPropertyDialog dlg = new SPPPropertyDialog(shell, spp, scope, acc, false, refport);
+				SPPPropertyDialog dlg = new SPPPropertyDialog(shell, spp, scope, false, refport);
 				if (dlg.open()!=Window.OK)
 					throw new OperationCanceledException();
 				
@@ -201,6 +215,88 @@ public class SPPSupport extends InterfaceItemSupport {
 			
 		}
 		
+		private static class DeleteFeature extends InterfaceItemSupport.FeatureProvider.DeleteFeature {
+
+			private ArrayList<LayerConnection> external = new ArrayList<LayerConnection>();
+			private ArrayList<LayerConnection> internal = new ArrayList<LayerConnection>();
+			
+			public DeleteFeature(IFeatureProvider fp) {
+				super(fp);
+			}
+			
+			@Override
+			public boolean canDelete(IDeleteContext context) {
+				if (!super.canDelete(context))
+					return false;
+
+				ContainerShape shape = (ContainerShape) context.getPictogramElement();
+				Object bo = getBusinessObjectForPictogramElement(shape);
+				if (bo instanceof EObject && ((EObject)bo).eIsProxy())
+					return true;
+				
+				if (!(bo instanceof SPPRef))
+					return false;
+				
+				return true;
+			}
+
+			@Override
+			public void delete(IDeleteContext context) {
+				// check for bindings first
+				external.clear();
+				internal.clear();
+				SPPRef spp = (SPPRef) getBusinessObjectForPictogramElement(context.getPictogramElement());
+				StructureClass sc = (StructureClass) spp.eContainer();
+				Collection<Setting> refs = EcoreUtil.UsageCrossReferencer.find(spp, spp.eResource().getResourceSet());
+				for (Setting ref : refs) {
+					if (ref.getEObject() instanceof RelaySAPoint || ref.getEObject() instanceof SPPoint) {
+						if (ref.getEObject().eContainer().eContainer() instanceof StructureClass
+								&& ref.getEObject().eContainer().eContainer()==sc)
+							internal.add((LayerConnection) ref.getEObject().eContainer());
+						else
+							external.add((LayerConnection) ref.getEObject().eContainer());
+					}
+					else if (ref.getEObject() instanceof ServiceImplementation) {
+						MessageDialog.openInformation(
+								PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(),
+								"Delete SPP",
+								"This spp cannot be deleted since it is referenced by a service implementation.");
+						return;
+					}
+				}
+				if (!external.isEmpty()) {
+					boolean proceed = MessageDialog.openQuestion(
+							PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(),
+							"Delete SPP",
+							"This spp is connected externally.\n"
+							+"It can only be deleted if the external layer connections are also deleted.\n\n"
+							+"Proceed?");
+					if (!proceed)
+						return;
+				}
+				
+				super.delete(context);
+			}
+			
+			@Override
+			public void preDelete(IDeleteContext context) {
+				// delete all bindings
+				for (LayerConnection bind: internal) {
+					PictogramElement connection = getFeatureProvider().getPictogramElementForBusinessObject(bind);
+					DeleteContext ctx = new DeleteContext(connection);
+					ctx.setMultiDeleteInfo(new MultiDeleteInfo(false, false, 1));
+					IDeleteFeature deleteFeature = getFeatureProvider().getDeleteFeature(ctx);
+					if (deleteFeature!=null)
+						deleteFeature.delete(ctx);
+				}
+				for (LayerConnection bind: external) {
+					EcoreUtil.delete(bind);
+				}
+
+				super.preDelete(context);
+			}
+		}
+		
 		public FeatureProvider(IDiagramTypeProvider dtp, IFeatureProvider fp) {
 			super(dtp, fp);
 		}
@@ -233,6 +329,11 @@ public class SPPSupport extends InterfaceItemSupport {
 		@Override
 		public IUpdateFeature getUpdateFeature(IUpdateContext context) {
 			return new UpdateFeature(fp);
+		}
+		
+		@Override
+		public IDeleteFeature getDeleteFeature(IDeleteContext context) {
+			return new DeleteFeature(fp);
 		}
 
 		protected static void createSPPFigure(SPPRef spp, boolean refspp,
