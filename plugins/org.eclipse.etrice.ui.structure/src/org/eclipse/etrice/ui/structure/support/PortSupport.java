@@ -12,7 +12,26 @@
 
 package org.eclipse.etrice.ui.structure.support;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import org.eclipse.core.runtime.OperationCanceledException;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature.Setting;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.etrice.core.naming.RoomNameProvider;
+import org.eclipse.etrice.core.room.ActorClass;
+import org.eclipse.etrice.core.room.ActorContainerClass;
+import org.eclipse.etrice.core.room.Binding;
+import org.eclipse.etrice.core.room.BindingEndPoint;
+import org.eclipse.etrice.core.room.ExternalPort;
+import org.eclipse.etrice.core.room.InterfaceItem;
+import org.eclipse.etrice.core.room.MessageFromIf;
+import org.eclipse.etrice.core.room.Port;
+import org.eclipse.etrice.core.room.RoomFactory;
+import org.eclipse.etrice.core.room.RoomPackage;
+import org.eclipse.etrice.core.room.StructureClass;
+import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.core.validation.ValidationUtil;
 import org.eclipse.etrice.ui.structure.DiagramTypeProvider;
 import org.eclipse.etrice.ui.structure.ImageProvider;
@@ -32,6 +51,8 @@ import org.eclipse.graphiti.features.context.IDoubleClickContext;
 import org.eclipse.graphiti.features.context.IPictogramElementContext;
 import org.eclipse.graphiti.features.context.IUpdateContext;
 import org.eclipse.graphiti.features.context.impl.CreateConnectionContext;
+import org.eclipse.graphiti.features.context.impl.DeleteContext;
+import org.eclipse.graphiti.features.context.impl.MultiDeleteInfo;
 import org.eclipse.graphiti.features.custom.ICustomFeature;
 import org.eclipse.graphiti.mm.algorithms.Ellipse;
 import org.eclipse.graphiti.mm.algorithms.GraphicsAlgorithm;
@@ -49,21 +70,12 @@ import org.eclipse.graphiti.services.IPeCreateService;
 import org.eclipse.graphiti.tb.ContextButtonEntry;
 import org.eclipse.graphiti.tb.IContextButtonPadData;
 import org.eclipse.graphiti.tb.IToolBehaviorProvider;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
-
-import org.eclipse.etrice.core.naming.RoomNameProvider;
-import org.eclipse.etrice.core.room.ActorClass;
-import org.eclipse.etrice.core.room.ActorContainerClass;
-import org.eclipse.etrice.core.room.ExternalPort;
-import org.eclipse.etrice.core.room.InterfaceItem;
-import org.eclipse.etrice.core.room.Port;
-import org.eclipse.etrice.core.room.RoomFactory;
-import org.eclipse.etrice.core.room.RoomPackage;
-import org.eclipse.etrice.core.room.SubSystemClass;
 
 public class PortSupport extends InterfaceItemSupport {
 	
@@ -244,8 +256,83 @@ public class PortSupport extends InterfaceItemSupport {
 		
 		private static class DeleteFeature extends InterfaceItemSupport.FeatureProvider.DeleteFeature {
 
+			private ArrayList<Binding> external = new ArrayList<Binding>();
+			private ArrayList<Binding> internal = new ArrayList<Binding>();
+			
 			public DeleteFeature(IFeatureProvider fp) {
 				super(fp);
+			}
+			
+			@Override
+			public boolean canDelete(IDeleteContext context) {
+				if (!super.canDelete(context))
+					return false;
+
+				ContainerShape shape = (ContainerShape) context.getPictogramElement();
+				Object bo = getBusinessObjectForPictogramElement(shape);
+				if (bo instanceof EObject && ((EObject)bo).eIsProxy())
+					return true;
+				
+				if (!(bo instanceof Port))
+					return false;
+				
+				return true;
+			}
+
+			@Override
+			public void delete(IDeleteContext context) {
+				// check for bindings first
+				external.clear();
+				internal.clear();
+				Port port = (Port) getBusinessObjectForPictogramElement(context.getPictogramElement());
+				StructureClass sc = (StructureClass) port.eContainer();
+				Collection<Setting> refs = EcoreUtil.UsageCrossReferencer.find(port, port.eResource().getResourceSet());
+				for (Setting ref : refs) {
+					if (ref.getEObject() instanceof BindingEndPoint) {
+						if (ref.getEObject().eContainer().eContainer() instanceof StructureClass
+								&& ref.getEObject().eContainer().eContainer()==sc)
+							internal.add((Binding) ref.getEObject().eContainer());
+						else
+							external.add((Binding) ref.getEObject().eContainer());
+					}
+					else if (ref.getEObject() instanceof MessageFromIf) {
+						MessageDialog.openInformation(
+								PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(),
+								"Delete Port",
+								"This port cannot be deleted since it is referenced from the state machine.");
+						return;
+					}
+				}
+				if (!external.isEmpty()) {
+					boolean proceed = MessageDialog.openQuestion(
+							PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(),
+							"Delete Port",
+							"This port is connected externally.\n"
+							+"It can only be deleted if the external bindings are also deleted.\n\n"
+							+"Proceed?");
+					if (!proceed)
+						return;
+				}
+				
+				super.delete(context);
+			}
+			
+			@Override
+			public void preDelete(IDeleteContext context) {
+				// delete all bindings
+				for (Binding bind: internal) {
+					PictogramElement connection = getFeatureProvider().getPictogramElementForBusinessObject(bind);
+					DeleteContext ctx = new DeleteContext(connection);
+					ctx.setMultiDeleteInfo(new MultiDeleteInfo(false, false, 1));
+					IDeleteFeature deleteFeature = getFeatureProvider().getDeleteFeature(ctx);
+					if (deleteFeature!=null)
+						deleteFeature.delete(ctx);
+				}
+				for (Binding bind: external) {
+					EcoreUtil.delete(bind);
+				}
+
+				super.preDelete(context);
 			}
 			
 			/* (non-Javadoc)
