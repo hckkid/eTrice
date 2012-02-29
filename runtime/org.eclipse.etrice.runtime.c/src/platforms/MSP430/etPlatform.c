@@ -12,6 +12,8 @@
 
 #include "msp430f5438a.h"
 #include "hal_MSP-EXP430F5438.h"
+#include "platform/etTimer.h"
+
 
 /* forward declarations */
 static void prvSetupHardware(void);
@@ -22,10 +24,11 @@ void initIO(void);
 
 void etUserEntry(void){
 	prvSetupHardware();
+	etTimer_init();
 }
 
 void etUserPreRun(void){
-	//_enable_interrupt();
+	_enable_interrupt();
 }
 
 void etUserPostRun(void){ }
@@ -64,20 +67,7 @@ static void prvSetupHardware(void) {
 
 	halLcdPrintLine(" eTrice on MSP430", 1, OVERWRITE_TEXT);
 
-	//initIO();
+	SFRIE1 |= WDTIE;
+
 }
 
-
-#pragma INTERRUPT(wdt_isr)
-#pragma vector=WDT_VECTOR
-void wdt_isr(void) {
-// this interrupt will be called every 15,625ms
-	static unsigned char secCounter = 0;
-
-	secCounter++;
-
-	if (secCounter >= 64) {
-		secCounter = 0;
-		P1OUT ^= 0x01;
-	}
-} // end interrupt
