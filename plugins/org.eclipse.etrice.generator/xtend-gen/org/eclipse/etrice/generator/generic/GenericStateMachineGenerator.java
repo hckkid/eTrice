@@ -75,8 +75,8 @@ public class GenericStateMachineGenerator {
         _xifexpression_1 = _baseStateList_1;
       }
       List<State> baseStates = _xifexpression_1;
-      ArrayList<State> _leafStatesFirst = this.roomExt.getLeafStatesFirst(baseStates);
-      baseStates = _leafStatesFirst;
+      ArrayList<State> _leafStatesLast = this.roomExt.getLeafStatesLast(baseStates);
+      baseStates = _leafStatesLast;
       ArrayList<Pair<String,String>> _arrayList = new ArrayList<Pair<String,String>>();
       ArrayList<Pair<String,String>> list = _arrayList;
       boolean _usesInheritance_2 = this.langExt.usesInheritance();

@@ -27,7 +27,7 @@ class StateMachineGen extends GenericStateMachineGenerator {
 
 	override genExtra(ExpandedActorClass xpac, ActorClass ac) {'''
 		// state names
-		protected static final String stateStrings[] = {"<no state>","<top>",«FOR state : ac.getAllBaseStatesLeavesFirst() SEPARATOR ","»"«state.getStatePathName()»"
+		protected static final String stateStrings[] = {"<no state>","<top>",«FOR state : ac.getAllBaseStatesLeavesLast() SEPARATOR ","»"«state.getStatePathName()»"
 		«ENDFOR»};
 		
 «««	 	TODOHRR: history defined in ActorClassBase, init in constructor

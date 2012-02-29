@@ -27,7 +27,7 @@ class StateMachineGen extends GenericStateMachineGenerator {
 	def genDataMembers(ExpandedActorClass xpac, ActorClass ac) {'''
 		/* state machine variables */
 		etInt16 state;
-		etInt16 history[«xpac.allLeafStates.size+1/* TODO: can save one entry if NO_STATE=-1 but influences Java */»];
+		etInt16 history[«xpac.allBaseStates.size - xpac.allLeafStates.size + 2/* TODO: can save one entry if NO_STATE=-1 but influences Java */»];
 	'''}
 	
 	def genInitialization(ExpandedActorClass xpac, ActorClass ac) {'''

@@ -24,9 +24,12 @@ public class StateMachineGen extends GenericStateMachineGenerator {
     _builder.append("etInt16 state;");
     _builder.newLine();
     _builder.append("etInt16 history[");
+    List<State> _allBaseStates = this._roomExtensions.getAllBaseStates(xpac);
+    int _size = _allBaseStates.size();
     List<State> _allLeafStates = this._roomExtensions.getAllLeafStates(xpac);
-    int _size = _allLeafStates.size();
-    int _operator_plus = IntegerExtensions.operator_plus(((Integer)_size), ((Integer)1));
+    int _size_1 = _allLeafStates.size();
+    int _operator_minus = IntegerExtensions.operator_minus(((Integer)_size), ((Integer)_size_1));
+    int _operator_plus = IntegerExtensions.operator_plus(((Integer)_operator_minus), ((Integer)2));
     _builder.append(_operator_plus, "");
     _builder.append("];");
     _builder.newLineIfNotEmpty();

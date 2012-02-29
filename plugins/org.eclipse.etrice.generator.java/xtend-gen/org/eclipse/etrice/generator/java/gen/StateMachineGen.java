@@ -22,9 +22,9 @@ public class StateMachineGen extends GenericStateMachineGenerator {
     _builder.newLine();
     _builder.append("protected static final String stateStrings[] = {\"<no state>\",\"<top>\",");
     {
-      List<State> _allBaseStatesLeavesFirst = this._roomExtensions.getAllBaseStatesLeavesFirst(ac);
+      List<State> _allBaseStatesLeavesLast = this._roomExtensions.getAllBaseStatesLeavesLast(ac);
       boolean hasAnyElements = false;
-      for(final State state : _allBaseStatesLeavesFirst) {
+      for(final State state : _allBaseStatesLeavesLast) {
         if (!hasAnyElements) {
           hasAnyElements = true;
         } else {

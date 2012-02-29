@@ -369,7 +369,7 @@ class RoomExtensions {
 		return ret
 	}
 
-	def getLeafStatesFirst(List<State> states) {
+	def getLeafStatesLast(List<State> states) {
 		var leaf = new ArrayList<State>()
 		var nonLeaf = new ArrayList<State>()
 		for (state : states) {
@@ -378,9 +378,9 @@ class RoomExtensions {
 			else
 				nonLeaf.add(state)
 		}
-		leaf.addAll(nonLeaf)
+		nonLeaf.addAll(leaf)
 		
-		return leaf
+		return nonLeaf
 	}
 
 	def List<State> getAllBaseStates(ActorClass ac) {
@@ -390,11 +390,11 @@ class RoomExtensions {
 			ac.base.getAllBaseStates().union(ac.stateMachine.getBaseStateList())
 	}
 
-	def List<State> getAllBaseStatesLeavesFirst(ActorClass ac) {
+	def List<State> getAllBaseStatesLeavesLast(ActorClass ac) {
 		if (ac.base==null)
-			return ac.stateMachine.getBaseStateList().getLeafStatesFirst
+			return ac.stateMachine.getBaseStateList().getLeafStatesLast
 		else
-			ac.base.getAllBaseStates().getLeafStatesFirst.union(ac.stateMachine.getBaseStateList().getLeafStatesFirst)
+			ac.base.getAllBaseStates().getLeafStatesLast.union(ac.stateMachine.getBaseStateList().getLeafStatesLast)
 	}
 
 	def List<State> getAllLeafStates(ActorClass ac) {
