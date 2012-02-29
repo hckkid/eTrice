@@ -153,11 +153,7 @@ class SubSystemClassGen {
 				if (etTimer_executeNeeded()){
 					etMessageService_execute(&msgService_Thread1);
 					«FOR ai : ssi.allContainedInstances»
-						«IF ai.actorClass.commType == ActorCommunicationType::ASYNCHRONOUS»
-							«ai.actorClass.name»_execute(&«ai.path.getPathName()»);
-						«ENDIF»
-«««						TODO: only one if needed here
-						«IF ai.actorClass.commType == ActorCommunicationType::DATA_DRIVEN»
+						«IF ai.actorClass.commType == ActorCommunicationType::ASYNCHRONOUS || ai.actorClass.commType == ActorCommunicationType::DATA_DRIVEN»
 							«ai.actorClass.name»_execute(&«ai.path.getPathName()»);
 						«ENDIF»
 					«ENDFOR»
