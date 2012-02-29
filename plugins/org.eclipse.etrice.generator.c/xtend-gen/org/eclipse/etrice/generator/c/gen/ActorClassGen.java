@@ -12,6 +12,7 @@ import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.ProtocolClass;
+import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.generator.base.ILogger;
 import org.eclipse.etrice.generator.c.gen.CExtensions;
 import org.eclipse.etrice.generator.c.gen.StateMachineGen;
@@ -288,6 +289,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
     StringConcatenation _attributes = this.helpers.attributes(_allAttributes);
     _builder.append(_attributes, "	");
     _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.newLine();
     {
       boolean _hasNonEmptyStateMachine = this.roomExt.hasNonEmptyStateMachine(xpac);
       if (_hasNonEmptyStateMachine) {
@@ -318,13 +321,19 @@ public class ActorClassGen extends GenericActorClassGenerator {
     _builder.append("_ReceiveMessage(void* self, void* ifitem, const etMessage* msg);");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
+    EList<StandardOperation> _operations = ac.getOperations();
+    String _name_15 = ac.getName();
+    StringConcatenation _operationsDeclaration = this.helpers.operationsDeclaration(_operations, _name_15);
+    _builder.append(_operationsDeclaration, "");
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
     DetailCode _userCode2 = ac.getUserCode2();
     StringConcatenation _userCode_1 = this.helpers.userCode(_userCode2);
     _builder.append(_userCode_1, "");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
-    String _name_15 = xpac.getName();
-    StringConcatenation _generateIncludeGuardEnd = this.stdExt.generateIncludeGuardEnd(_name_15);
+    String _name_16 = xpac.getName();
+    StringConcatenation _generateIncludeGuardEnd = this.stdExt.generateIncludeGuardEnd(_name_16);
     _builder.append(_generateIncludeGuardEnd, "");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
@@ -457,6 +466,12 @@ public class ActorClassGen extends GenericActorClassGenerator {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
+    _builder.newLine();
+    EList<StandardOperation> _operations = ac.getOperations();
+    String _name_6 = ac.getName();
+    StringConcatenation _operationsImplementation = this.helpers.operationsImplementation(_operations, _name_6);
+    _builder.append(_operationsImplementation, "");
+    _builder.newLineIfNotEmpty();
     _builder.newLine();
     return _builder;
   }

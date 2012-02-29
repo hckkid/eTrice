@@ -121,6 +121,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 				
 			«ENDIF»
 			«helpers.attributes(ac.allAttributes)»
+			
 			«IF xpac.hasNonEmptyStateMachine»
 			
 				«stateMachineGen.genDataMembers(xpac, ac)»
@@ -130,6 +131,8 @@ class ActorClassGen extends GenericActorClassGenerator {
 		void «xpac.name»_init(«xpac.name»* self);
 
 		void «xpac.name»_ReceiveMessage(void* self, void* ifitem, const etMessage* msg);
+
+		«helpers.operationsDeclaration(ac.operations, ac.name)»
 		
 		«helpers.userCode(ac.userCode2)»
 		
@@ -184,6 +187,8 @@ class ActorClassGen extends GenericActorClassGenerator {
 			
 			ET_MSC_LOGGER_SYNC_EXIT
 		}
+		
+		«helpers.operationsImplementation(ac.operations, ac.name)»
 		
 		'''
 	}
