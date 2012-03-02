@@ -538,9 +538,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
     _builder.append("}");
     _builder.newLine();
     _builder.newLine();
-    EList<StandardOperation> _operations = ac.getOperations();
     String _name_6 = ac.getName();
-    StringConcatenation _operationsImplementation = this.helpers.operationsImplementation(_operations, _name_6);
+    StringConcatenation _operationsImplementation = this.helpers.operationsImplementation(ac, _name_6);
     _builder.append(_operationsImplementation, "");
     _builder.newLineIfNotEmpty();
     _builder.newLine();

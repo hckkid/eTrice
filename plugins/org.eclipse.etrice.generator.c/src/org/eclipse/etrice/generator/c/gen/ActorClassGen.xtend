@@ -198,7 +198,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 			ET_MSC_LOGGER_SYNC_EXIT
 		}
 		
-		«helpers.operationsImplementation(ac.operations, ac.name)»
+		«helpers.operationsImplementation(ac, ac.name)»
 		
 		'''
 	}

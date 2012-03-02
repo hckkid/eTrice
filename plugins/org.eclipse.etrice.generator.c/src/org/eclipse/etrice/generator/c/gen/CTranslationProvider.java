@@ -22,11 +22,13 @@ import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.Operation;
 import org.eclipse.etrice.core.room.Port;
+import org.eclipse.etrice.core.room.RoomClass;
 import org.eclipse.etrice.core.room.SAPRef;
 import org.eclipse.etrice.core.room.SPPRef;
 import org.eclipse.etrice.generator.base.ILogger;
 import org.eclipse.etrice.generator.base.ITranslationProvider;
 import org.eclipse.etrice.generator.extensions.RoomExtensions;
+import org.eclipse.etrice.generator.generic.ILanguageExtension;
 
 import com.google.inject.Inject;
 
@@ -34,6 +36,7 @@ public class CTranslationProvider implements ITranslationProvider {
 
 	@Inject private RoomExtensions roomExt;
 	@Inject ILogger logger;
+	@Inject ILanguageExtension langExt;
 	
 	@Override
 	public void setActorClass(ActorClass ac) {
@@ -52,7 +55,7 @@ public class CTranslationProvider implements ITranslationProvider {
 	@Override
 	public String getOperationText(Operation op, ArrayList<String> args, String orig) {
 		StringBuilder result = new StringBuilder();
-		result.append(op.getName()+"(self");
+		result.append(langExt.memberInUse(((RoomClass)op.eContainer()).getName(), op.getName())+"(self");
 		for (String arg : args) {
 			result.append(", "+arg);
 		}

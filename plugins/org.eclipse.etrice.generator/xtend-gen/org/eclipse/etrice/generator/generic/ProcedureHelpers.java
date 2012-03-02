@@ -4,13 +4,17 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.DataType;
 import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.Operation;
 import org.eclipse.etrice.core.room.RefableType;
+import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.VarDecl;
+import org.eclipse.etrice.generator.base.DetailCodeTranslator;
 import org.eclipse.etrice.generator.base.ILogger;
+import org.eclipse.etrice.generator.base.ITranslationProvider;
 import org.eclipse.etrice.generator.generic.ILanguageExtension;
 import org.eclipse.etrice.generator.generic.TypeHelpers;
 import org.eclipse.xtext.xbase.lib.BooleanExtensions;
@@ -26,6 +30,9 @@ import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 public class ProcedureHelpers {
   @Inject
   private ILanguageExtension languageExt;
+  
+  @Inject
+  public ITranslationProvider translator;
   
   @Inject
   private TypeHelpers _typeHelpers;
@@ -459,6 +466,36 @@ public class ProcedureHelpers {
       }
     }
     return _builder;
+  }
+  
+  public StringConcatenation operationsImplementation(final ActorClass ac, final String classname) {
+    StringConcatenation _xblockexpression = null;
+    {
+      this.translator.setActorClass(ac);
+      DetailCodeTranslator _detailCodeTranslator = new DetailCodeTranslator(ac, this.translator);
+      DetailCodeTranslator dct = _detailCodeTranslator;
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("/*--------------------- operations ---------------------*/");
+      _builder.newLine();
+      {
+        EList<StandardOperation> _operations = ac.getOperations();
+        for(final StandardOperation operation : _operations) {
+          StringConcatenation _operationSignature = this.operationSignature(operation, classname, false);
+          _builder.append(_operationSignature, "");
+          _builder.append(" {");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t");
+          DetailCode _detailCode = operation.getDetailCode();
+          String _translateDetailCode = dct.translateDetailCode(_detailCode);
+          _builder.append(_translateDetailCode, "	");
+          _builder.newLineIfNotEmpty();
+          _builder.append("}");
+          _builder.newLine();
+        }
+      }
+      _xblockexpression = (_builder);
+    }
+    return _xblockexpression;
   }
   
   private StringConcatenation operationSignature(final Operation operation, final String classname, final boolean isDeclaration) {

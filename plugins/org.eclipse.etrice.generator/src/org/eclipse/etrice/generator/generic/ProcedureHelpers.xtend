@@ -16,12 +16,15 @@ package org.eclipse.etrice.generator.generic
 import com.google.inject.Inject
 import com.google.inject.Singleton
 import java.util.List
+import org.eclipse.etrice.core.room.ActorClass
 import org.eclipse.etrice.core.room.Attribute
 import org.eclipse.etrice.core.room.DetailCode
 import org.eclipse.etrice.core.room.Operation
 import org.eclipse.etrice.core.room.VarDecl
 
+import org.eclipse.etrice.generator.base.DetailCodeTranslator
 import org.eclipse.etrice.generator.base.ILogger
+import org.eclipse.etrice.generator.base.ITranslationProvider
 import org.eclipse.emf.common.util.EList
 import org.eclipse.etrice.core.room.RefableType
 
@@ -31,6 +34,7 @@ import org.eclipse.etrice.core.room.RefableType
 class ProcedureHelpers {
 
 	@Inject extension ILanguageExtension languageExt
+	@Inject public ITranslationProvider translator
 	@Inject extension TypeHelpers
 	@Inject ILogger logger
 
@@ -151,13 +155,28 @@ class ProcedureHelpers {
 		'''
 	}
 
-	def operationsImplementation(List<? extends Operation> operations, String classname) {'''
+	def operationsImplementation(List<? extends Operation> operations, String classname) {
+	'''
 		/*--------------------- operations ---------------------*/
 		«FOR operation : operations»
 			«operationSignature(operation, classname, false)» {
 				«FOR command : operation.detailCode.commands»
 					«command»
 				«ENDFOR»
+			}
+		«ENDFOR»
+		'''
+	}
+
+	def operationsImplementation(ActorClass ac, String classname) {
+		translator.setActorClass(ac)
+		var dct = new DetailCodeTranslator(ac, translator)
+		
+	'''
+		/*--------------------- operations ---------------------*/
+		«FOR operation : ac.operations»
+			«operationSignature(operation, classname, false)» {
+				«dct.translateDetailCode(operation.detailCode)»
 			}
 		«ENDFOR»
 		'''
