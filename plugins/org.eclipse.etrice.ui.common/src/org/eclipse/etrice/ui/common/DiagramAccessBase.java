@@ -31,6 +31,7 @@ import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.transaction.util.TransactionUtil;
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.StructureClass;
+import org.eclipse.etrice.ui.common.editor.RoomDiagramEditor;
 import org.eclipse.etrice.ui.common.preferences.PreferenceConstants;
 import org.eclipse.graphiti.mm.pictograms.Diagram;
 import org.eclipse.graphiti.services.Graphiti;
@@ -169,7 +170,25 @@ public abstract class DiagramAccessBase {
 		editingDomain.dispose();
 	}
 
-	public void openDiagramEditor(StructureClass sc) {
+	public RoomDiagramEditor findDiagramEditor(StructureClass sc) {
+		IFileEditorInput input = getEditorInput(sc);
+	
+		return (RoomDiagramEditor) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().findEditor(input);
+	}
+
+	public RoomDiagramEditor openDiagramEditor(StructureClass sc) {
+		IFileEditorInput input = getEditorInput(sc);
+	
+		try {
+			return (RoomDiagramEditor) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().openEditor(input, getEditorId());
+		} catch (PartInitException e) {
+			String error = "Error while opening diagram editor";
+			System.err.println(error);
+		}
+		return null;
+	}
+
+	private IFileEditorInput getEditorInput(StructureClass sc) {
 		Diagram diagram = getDiagram(sc);
 		
 		URI uri = diagram.eResource().getURI();
@@ -187,13 +206,7 @@ public abstract class DiagramAccessBase {
 		}
 		IFile file = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(platformString));
 		IFileEditorInput input = new FileEditorInput(file);
-	
-		try {
-			PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().openEditor(input, getEditorId());
-		} catch (PartInitException e) {
-			String error = "Error while opening diagram editor";
-			System.err.println(error);
-		}
+		return input;
 	}
 
 	abstract protected String getDiagramName(StructureClass sc);
