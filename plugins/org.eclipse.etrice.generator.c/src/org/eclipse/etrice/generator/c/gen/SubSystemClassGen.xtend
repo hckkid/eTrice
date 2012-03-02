@@ -26,6 +26,7 @@ import org.eclipse.etrice.generator.etricegen.SubSystemInstance
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 import org.eclipse.etrice.generator.extensions.RoomExtensions
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
+import org.eclipse.etrice.core.room.ActorCommunicationType
 
 import static extension org.eclipse.etrice.generator.base.Indexed.*
 
@@ -114,6 +115,7 @@ class SubSystemClassGen {
 		#include "debugging/etLogger.h"
 		#include "debugging/etMSCLogger.h"
 		
+		#include "platform/etTimer.h"
 
 		«helpers.userCode(ssc.userCode3)»
 		
@@ -147,10 +149,16 @@ class SubSystemClassGen {
 		
 		void «ssc.name»_run(void){
 			ET_MSC_LOGGER_SYNC_ENTRY("SubSys", "run")
-			int32 i;
-			for (i=0; i<100; i++){
-				etLogger_logInfoF("%s Scheduler tick %d", «ssc.name»Inst.name, i);
-				etMessageService_execute(&msgService_Thread1);
+			while(TRUE){
+				if (etTimer_executeNeeded()){
+					etMessageService_execute(&msgService_Thread1);
+					«FOR ai : ssi.allContainedInstances»
+						«IF ai.actorClass.commType == ActorCommunicationType::ASYNCHRONOUS || ai.actorClass.commType == ActorCommunicationType::DATA_DRIVEN»
+							«ai.actorClass.name»_execute(&«ai.path.getPathName()»);
+						«ENDIF»
+					«ENDFOR»
+					
+				}
 			}
 			ET_MSC_LOGGER_SYNC_EXIT
 		}
@@ -232,7 +240,8 @@ class SubSystemClassGen {
 		// list of replicated ports
 		var replPorts = new ArrayList<PortInstance>()
 		replPorts.addAll(ai.ports.filter(e|e.kind.literal!="RELAY" && e.port.multiplicity!=1))
-
+		var haveReplSubPorts = replPorts.findFirst(e|!e.peers.empty)!=null
+		
 		// list of ports, simple first, then replicated
 		var ports = new ArrayList<PortInstance>()
 		ports.addAll(ai.ports.filter(e|e.kind.literal!="RELAY" && e.port.multiplicity==1).union(replPorts))
@@ -245,10 +254,12 @@ class SubSystemClassGen {
 			offset = offset + p.peers.size
 		}
 		
+		var replSubPortsArray = if (haveReplSubPorts) instName+"_repl_sub_ports" else "NULL"
+		
 	'''
-		«IF !replPorts.empty»
-			static const etReplSubPort «instName»_repl_sub_ports[«offset»] = {
-				/* Replicated Sub Ports: {myActor, etReceiveMessage, msgService, peerAddress, localId, idx} */
+		«IF haveReplSubPorts»
+			static const etReplSubPort «replSubPortsArray»[«offset»] = {
+				/* Replicated Sub Ports: {myActor, etReceiveMessage, msgService, peerAddress, localId, index} */
 				«FOR pi : replPorts SEPARATOR ","»
 					«genReplSubPortInitializers(root, ai, pi)»
 				«ENDFOR»
@@ -260,7 +271,7 @@ class SubSystemClassGen {
 				«IF pi.port.multiplicity==1»
 					«genPortInitializer(root, ai, pi)»
 				«ELSE»
-					{«pi.peers.size», «instName»_repl_sub_ports+«offsets.get(pi)»}
+					{«pi.peers.size», «replSubPortsArray»+«offsets.get(pi)»}
 				«ENDIF»
 			«ENDFOR»
 		};

@@ -41,7 +41,7 @@ class GenericStateMachineGenerator {
 		var baseStates = if (langExt.usesInheritance)
 			ac.stateMachine.getBaseStateList else xpac.stateMachine.getBaseStateList
 		
-		baseStates = baseStates.leafStatesFirst
+		baseStates = baseStates.leafStatesLast
 		
 		var list = new ArrayList<Pair<String, String>>()
 		if (!langExt.usesInheritance) {

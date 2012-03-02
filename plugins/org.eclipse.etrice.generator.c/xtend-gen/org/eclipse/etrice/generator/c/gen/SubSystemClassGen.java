@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.etrice.core.room.ActorClass;
+import org.eclipse.etrice.core.room.ActorCommunicationType;
 import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.ProtocolClass;
@@ -242,6 +243,8 @@ public class SubSystemClassGen {
     _builder.append("#include \"debugging/etMSCLogger.h\"");
     _builder.newLine();
     _builder.newLine();
+    _builder.append("#include \"platform/etTimer.h\"");
+    _builder.newLine();
     _builder.newLine();
     DetailCode _userCode3 = ssc.getUserCode3();
     StringConcatenation _userCode = this.helpers.userCode(_userCode3);
@@ -354,19 +357,49 @@ public class SubSystemClassGen {
     _builder.append("ET_MSC_LOGGER_SYNC_ENTRY(\"SubSys\", \"run\")");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("int32 i;");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("for (i=0; i<100; i++){");
+    _builder.append("while(TRUE){");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("etLogger_logInfoF(\"%s Scheduler tick %d\", ");
-    String _name_14 = ssc.getName();
-    _builder.append(_name_14, "		");
-    _builder.append("Inst.name, i);");
-    _builder.newLineIfNotEmpty();
-    _builder.append("\t\t");
+    _builder.append("if (etTimer_executeNeeded()){");
+    _builder.newLine();
+    _builder.append("\t\t\t");
     _builder.append("etMessageService_execute(&msgService_Thread1);");
+    _builder.newLine();
+    {
+      EList<ActorInstance> _allContainedInstances = ssi.getAllContainedInstances();
+      for(final ActorInstance ai : _allContainedInstances) {
+        {
+          boolean _operator_or = false;
+          ActorClass _actorClass = ai.getActorClass();
+          ActorCommunicationType _commType = _actorClass.getCommType();
+          boolean _operator_equals = ObjectExtensions.operator_equals(_commType, ActorCommunicationType.ASYNCHRONOUS);
+          if (_operator_equals) {
+            _operator_or = true;
+          } else {
+            ActorClass _actorClass_1 = ai.getActorClass();
+            ActorCommunicationType _commType_1 = _actorClass_1.getCommType();
+            boolean _operator_equals_1 = ObjectExtensions.operator_equals(_commType_1, ActorCommunicationType.DATA_DRIVEN);
+            _operator_or = BooleanExtensions.operator_or(_operator_equals, _operator_equals_1);
+          }
+          if (_operator_or) {
+            _builder.append("\t\t\t");
+            ActorClass _actorClass_2 = ai.getActorClass();
+            String _name_14 = _actorClass_2.getName();
+            _builder.append(_name_14, "			");
+            _builder.append("_execute(&");
+            String _path = ai.getPath();
+            String _pathName = this.roomExt.getPathName(_path);
+            _builder.append(_pathName, "			");
+            _builder.append(");");
+            _builder.newLineIfNotEmpty();
+          }
+        }
+      }
+    }
+    _builder.append("\t\t\t");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("}");
@@ -429,16 +462,16 @@ public class SubSystemClassGen {
     _builder.append("\", \"initActorInstances\")");
     _builder.newLineIfNotEmpty();
     {
-      EList<ActorInstance> _allContainedInstances = ssi.getAllContainedInstances();
-      for(final ActorInstance ai : _allContainedInstances) {
+      EList<ActorInstance> _allContainedInstances_1 = ssi.getAllContainedInstances();
+      for(final ActorInstance ai_1 : _allContainedInstances_1) {
         _builder.append("\t");
-        ActorClass _actorClass = ai.getActorClass();
-        String _name_21 = _actorClass.getName();
+        ActorClass _actorClass_3 = ai_1.getActorClass();
+        String _name_21 = _actorClass_3.getName();
         _builder.append(_name_21, "	");
         _builder.append("_init(&");
-        String _path = ai.getPath();
-        String _pathName = this.roomExt.getPathName(_path);
-        _builder.append(_pathName, "	");
+        String _path_1 = ai_1.getPath();
+        String _pathName_1 = this.roomExt.getPathName(_path_1);
+        _builder.append(_pathName_1, "	");
         _builder.append(");");
         _builder.newLineIfNotEmpty();
       }
@@ -597,10 +630,21 @@ public class SubSystemClassGen {
         };
       Iterable<PortInstance> _filter = IterableExtensions.<PortInstance>filter(_ports, _function);
       CollectionExtensions.<PortInstance>addAll(replPorts, _filter);
+      final Function1<PortInstance,Boolean> _function_1 = new Function1<PortInstance,Boolean>() {
+          public Boolean apply(final PortInstance e) {
+            EList<InterfaceItemInstance> _peers = e.getPeers();
+            boolean _isEmpty = _peers.isEmpty();
+            boolean _operator_not = BooleanExtensions.operator_not(_isEmpty);
+            return ((Boolean)_operator_not);
+          }
+        };
+      PortInstance _findFirst = IterableExtensions.<PortInstance>findFirst(replPorts, _function_1);
+      boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_findFirst, null);
+      boolean haveReplSubPorts = _operator_notEquals;
       ArrayList<PortInstance> _arrayList_1 = new ArrayList<PortInstance>();
       ArrayList<PortInstance> ports = _arrayList_1;
       EList<PortInstance> _ports_1 = ai.getPorts();
-      final Function1<PortInstance,Boolean> _function_1 = new Function1<PortInstance,Boolean>() {
+      final Function1<PortInstance,Boolean> _function_2 = new Function1<PortInstance,Boolean>() {
           public Boolean apply(final PortInstance e) {
             boolean _operator_and = false;
             PortKind _kind = e.getKind();
@@ -617,7 +661,7 @@ public class SubSystemClassGen {
             return ((Boolean)_operator_and);
           }
         };
-      Iterable<PortInstance> _filter_1 = IterableExtensions.<PortInstance>filter(_ports_1, _function_1);
+      Iterable<PortInstance> _filter_1 = IterableExtensions.<PortInstance>filter(_ports_1, _function_2);
       Iterable<PortInstance> _union = this.roomExt.<PortInstance>union(_filter_1, replPorts);
       CollectionExtensions.<PortInstance>addAll(ports, _union);
       HashMap<PortInstance,Integer> _hashMap = new HashMap<PortInstance,Integer>();
@@ -632,19 +676,25 @@ public class SubSystemClassGen {
           offset = _operator_plus;
         }
       }
+      String _xifexpression = null;
+      if (haveReplSubPorts) {
+        String _operator_plus_1 = StringExtensions.operator_plus(instName, "_repl_sub_ports");
+        _xifexpression = _operator_plus_1;
+      } else {
+        _xifexpression = "NULL";
+      }
+      String replSubPortsArray = _xifexpression;
       StringConcatenation _builder = new StringConcatenation();
       {
-        boolean _isEmpty = replPorts.isEmpty();
-        boolean _operator_not = BooleanExtensions.operator_not(_isEmpty);
-        if (_operator_not) {
+        if (haveReplSubPorts) {
           _builder.append("static const etReplSubPort ");
-          _builder.append(instName, "");
-          _builder.append("_repl_sub_ports[");
+          _builder.append(replSubPortsArray, "");
+          _builder.append("[");
           _builder.append(offset, "");
           _builder.append("] = {");
           _builder.newLineIfNotEmpty();
           _builder.append("\t");
-          _builder.append("/* Replicated Sub Ports: {myActor, etReceiveMessage, msgService, peerAddress, localId, idx} */");
+          _builder.append("/* Replicated Sub Ports: {myActor, etReceiveMessage, msgService, peerAddress, localId, index} */");
           _builder.newLine();
           {
             boolean hasAnyElements = false;
@@ -699,8 +749,8 @@ public class SubSystemClassGen {
               int _size_1 = _peers_1.size();
               _builder.append(_size_1, "	");
               _builder.append(", ");
-              _builder.append(instName, "	");
-              _builder.append("_repl_sub_ports+");
+              _builder.append(replSubPortsArray, "	");
+              _builder.append("+");
               Integer _get = offsets.get(pi_1);
               _builder.append(_get, "	");
               _builder.append("}");

@@ -587,7 +587,7 @@ public class RoomExtensions {
       return ret;
   }
   
-  public ArrayList<State> getLeafStatesFirst(final List<State> states) {
+  public ArrayList<State> getLeafStatesLast(final List<State> states) {
       ArrayList<State> _arrayList = new ArrayList<State>();
       ArrayList<State> leaf = _arrayList;
       ArrayList<State> _arrayList_1 = new ArrayList<State>();
@@ -600,8 +600,8 @@ public class RoomExtensions {
           nonLeaf.add(state);
         }
       }
-      leaf.addAll(nonLeaf);
-      return leaf;
+      nonLeaf.addAll(leaf);
+      return nonLeaf;
   }
   
   public List<State> getAllBaseStates(final ActorClass ac) {
@@ -623,23 +623,23 @@ public class RoomExtensions {
     return _xifexpression;
   }
   
-  public List<State> getAllBaseStatesLeavesFirst(final ActorClass ac) {
+  public List<State> getAllBaseStatesLeavesLast(final ActorClass ac) {
     List<State> _xifexpression = null;
     ActorClass _base = ac.getBase();
     boolean _operator_equals = ObjectExtensions.operator_equals(_base, null);
     if (_operator_equals) {
       StateGraph _stateMachine = ac.getStateMachine();
       List<State> _baseStateList = this.getBaseStateList(_stateMachine);
-      ArrayList<State> _leafStatesFirst = this.getLeafStatesFirst(_baseStateList);
-      return _leafStatesFirst;
+      ArrayList<State> _leafStatesLast = this.getLeafStatesLast(_baseStateList);
+      return _leafStatesLast;
     } else {
       ActorClass _base_1 = ac.getBase();
       List<State> _allBaseStates = this.getAllBaseStates(_base_1);
-      ArrayList<State> _leafStatesFirst_1 = this.getLeafStatesFirst(_allBaseStates);
+      ArrayList<State> _leafStatesLast_1 = this.getLeafStatesLast(_allBaseStates);
       StateGraph _stateMachine_1 = ac.getStateMachine();
       List<State> _baseStateList_1 = this.getBaseStateList(_stateMachine_1);
-      ArrayList<State> _leafStatesFirst_2 = this.getLeafStatesFirst(_baseStateList_1);
-      List<State> _union = this.<State>union(_leafStatesFirst_1, _leafStatesFirst_2);
+      ArrayList<State> _leafStatesLast_2 = this.getLeafStatesLast(_baseStateList_1);
+      List<State> _union = this.<State>union(_leafStatesLast_1, _leafStatesLast_2);
       _xifexpression = _union;
     }
     return _xifexpression;
