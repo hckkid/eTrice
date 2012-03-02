@@ -25,6 +25,7 @@ void etLogger_logWarning(const char* message){
 
 void etLogger_logInfo(const char* message){
 	printf("INFO:    %s\n", message);
+	fflush(stdout);
 }
 
 void etLogger_logErrorF(const char* format, ... ){

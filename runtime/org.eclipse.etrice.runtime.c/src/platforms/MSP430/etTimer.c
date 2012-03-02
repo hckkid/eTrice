@@ -6,7 +6,7 @@
 
 static etTargetTime_t targetTime;
 static etTargetTime_t lastTargetTime;
-static etBool etTimer_executeFlag = FALSE;
+static volatile etBool etTimer_executeFlag = FALSE;
 
 void etTimer_init(void){
 	targetTime.nSec=0;
@@ -67,6 +67,23 @@ void getTimeFromTarget(etTargetTime_t *t) {
 	_enable_interrupt();
 }
 
+#define ET_TIMER_TIME_BASE_NS 15625000L
+#define ET_TIMER_TIME_BASE_US ET_TIMER_TIME_BASE_NS / 1000L
+#define ET_TIMER_TIME_BASE_MS ET_TIMER_TIME_BASE_US / 1000L
+
+uint32 getTimeBaseNS(void){
+	return ET_TIMER_TIME_BASE_NS;
+}
+
+uint32 getTimeBaseUS(void){
+	return ET_TIMER_TIME_BASE_US;
+}
+
+uint32 getTimeBaseMS(void){
+	return ET_TIMER_TIME_BASE_MS;
+}
+
+
 /* the timer interrupt */
 #pragma INTERRUPT(wdt_isr)
 
@@ -88,7 +105,6 @@ void wdt_isr(void) {
 
 	if (secCounter >= 64) {
 		secCounter = 0;
-		//P1OUT ^= 0x01;
 	}
 
 } // end interrupt

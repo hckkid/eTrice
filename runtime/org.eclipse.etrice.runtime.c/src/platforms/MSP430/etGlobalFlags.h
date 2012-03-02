@@ -19,4 +19,10 @@
 
 #define STRUCT_ALIGN		2
 
+/* timing and scheduling */
+//#define FREQUENCY 100L
+//#define ET_RUNTIME_MAXLOOP 100000
+#define ET_RUNTIME_ENDLESS
+
+
 #endif /* ETGLOBALFLAGS_H_ */

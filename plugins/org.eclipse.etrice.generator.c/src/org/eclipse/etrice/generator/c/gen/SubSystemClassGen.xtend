@@ -116,6 +116,7 @@ class SubSystemClassGen {
 		#include "debugging/etMSCLogger.h"
 		
 		#include "platform/etTimer.h"
+		#include "etGlobalFlags.h"
 
 		«helpers.userCode(ssc.userCode3)»
 		
@@ -149,17 +150,28 @@ class SubSystemClassGen {
 		
 		void «ssc.name»_run(void){
 			ET_MSC_LOGGER_SYNC_ENTRY("SubSys", "run")
-			while(TRUE){
-				if (etTimer_executeNeeded()){
-					etMessageService_execute(&msgService_Thread1);
-					«FOR ai : ssi.allContainedInstances»
-						«IF ai.actorClass.commType == ActorCommunicationType::ASYNCHRONOUS || ai.actorClass.commType == ActorCommunicationType::DATA_DRIVEN»
-							«ai.actorClass.name»_execute(&«ai.path.getPathName()»);
-						«ENDIF»
-					«ENDFOR»
-					
+			
+			#ifdef ET_RUNTIME_ENDLESS
+				while(TRUE){
+					if (etTimer_executeNeeded()){
+						etMessageService_execute(&msgService_Thread1);
+						«generateDatadrivenExecutes(root, ssi)»
+					}
 				}
-			}
+			#else
+				uint32 loopCounter = 0;
+				while(TRUE){
+					if (etTimer_executeNeeded()){
+						etMessageService_execute(&msgService_Thread1);
+						«generateDatadrivenExecutes(root, ssi)»
+						etLogger_logInfo("Execute");
+						if (loopCounter++ > ET_RUNTIME_MAXLOOP){
+							break;
+						}
+					}
+				}
+			#endif
+			
 			ET_MSC_LOGGER_SYNC_EXIT
 		}
 		
@@ -352,5 +364,13 @@ class SubSystemClassGen {
 		'''
 	}
 
+	def generateDatadrivenExecutes(Root root, SubSystemInstance ssi) {'''
+		«FOR ai : ssi.allContainedInstances»
+			«IF ai.actorClass.commType == ActorCommunicationType::ASYNCHRONOUS || ai.actorClass.commType == ActorCommunicationType::DATA_DRIVEN»
+				«ai.actorClass.name»_execute(&«ai.path.getPathName()»);
+			«ENDIF»
+		«ENDFOR»
+	'''
+	}
 	
 }
