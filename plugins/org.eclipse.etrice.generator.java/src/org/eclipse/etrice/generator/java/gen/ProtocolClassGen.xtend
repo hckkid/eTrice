@@ -162,7 +162,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 		
 			public «replPortClassName»(IEventReceiver actor, String name, int localId, Address[] addr,
 					Address[] peerAddress) {
-				replication = addr.length;
+				replication = addr==null? 0:addr.length;
 				ports = new ArrayList<«pc.name».«portClassName»>(replication);
 				for (int i=0; i<replication; ++i) {
 					ports.add(new «portClassName»(

@@ -419,7 +419,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       _builder.append("Address[] peerAddress) {");
       _builder.newLine();
       _builder.append("\t\t");
-      _builder.append("replication = addr.length;");
+      _builder.append("replication = addr==null? 0:addr.length;");
       _builder.newLine();
       _builder.append("\t\t");
       _builder.append("ports = new ArrayList<");

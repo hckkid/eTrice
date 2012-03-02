@@ -17,7 +17,6 @@ import com.google.inject.Singleton
 import org.eclipse.etrice.core.room.SubSystemClass
 import org.eclipse.etrice.generator.base.ILogger
 import org.eclipse.etrice.generator.etricegen.Root
-import org.eclipse.etrice.generator.etricegen.ServiceImplInstance
 import org.eclipse.etrice.generator.etricegen.SubSystemInstance
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 import org.eclipse.etrice.generator.extensions.RoomExtensions
@@ -99,7 +98,7 @@ class SubSystemClassGen {
 					Address addr_item_«ai.path.getPathName()» = new Address(0,«ai.threadId»,«ai.objId»);
 					// interface items of «ai.path»
 					«FOR pi : ai.orderedIfItemInstances»
-						«IF pi instanceof ServiceImplInstance || pi.peers.size>1»
+						«IF pi.replicated»
 							«FOR peer : pi.peers»
 								«var i = pi.peers.indexOf(peer)»
 								Address addr_item_«pi.path.getPathName()»_«i» = new Address(0,«pi.threadId»,«pi.objId+i»);
@@ -122,34 +121,44 @@ class SubSystemClassGen {
 						"«ai.name»",
 						// own interface item addresses
 						new Address[][] {{addr_item_«ai.path.getPathName()»}«IF !ai.orderedIfItemInstances.empty»,«ENDIF»
-						«FOR pi : ai.orderedIfItemInstances SEPARATOR ","»
-							{
-								«IF pi instanceof ServiceImplInstance || pi.peers.size>1»
-									«FOR peer : pi.peers SEPARATOR ","»
-										addr_item_«pi.path.getPathName()»_«pi.peers.indexOf(peer)»
-									«ENDFOR»
+							«FOR pi : ai.orderedIfItemInstances SEPARATOR ","»
+								«IF pi.replicated»
+									«IF pi.peers.empty»
+										null
+									«ELSE»
+										{
+											«FOR peer : pi.peers SEPARATOR ","»
+												addr_item_«pi.path.getPathName()»_«pi.peers.indexOf(peer)»
+											«ENDFOR»
+										}
+									«ENDIF»
 								«ELSE»
-									addr_item_«pi.path.getPathName()»
+									{
+										addr_item_«pi.path.getPathName()»
+									}
 								«ENDIF»
-							}
-						«ENDFOR»
+							«ENDFOR»
 						},
 						// peer interface item addresses
 						new Address[][] {{addr_item_SystemPort_«comp.allContainedInstances.indexOf(ai)»}«IF !ai.orderedIfItemInstances.empty»,«ENDIF»
 							«FOR pi : ai.orderedIfItemInstances SEPARATOR ","»
-							{
-								«IF !(pi instanceof ServiceImplInstance) && pi.peers.isEmpty»
+								«IF pi.replicated && pi.peers.isEmpty»
 									null
 								«ELSE»
-									«FOR pp : pi.peers SEPARATOR ","»
-										«IF pp instanceof ServiceImplInstance || pp.peers.size>1»
-											addr_item_«pp.path.getPathName()»_«pp.peers.indexOf(pi)»
+									{
+										«IF pi.peers.empty»
+											null
 										«ELSE»
-											addr_item_«pp.path.getPathName()»
+											«FOR pp : pi.peers SEPARATOR ","»
+												«IF pp.replicated»
+													addr_item_«pp.path.getPathName()»_«pp.peers.indexOf(pi)»
+												«ELSE»
+													addr_item_«pp.path.getPathName()»
+												«ENDIF»
+											«ENDFOR»
 										«ENDIF»
-									«ENDFOR»
+									}
 								«ENDIF»
-							}
 							«ENDFOR»
 						}
 					); 

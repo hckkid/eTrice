@@ -14,14 +14,12 @@ import org.eclipse.etrice.generator.base.Indexed;
 import org.eclipse.etrice.generator.etricegen.ActorInstance;
 import org.eclipse.etrice.generator.etricegen.InterfaceItemInstance;
 import org.eclipse.etrice.generator.etricegen.Root;
-import org.eclipse.etrice.generator.etricegen.ServiceImplInstance;
 import org.eclipse.etrice.generator.etricegen.SubSystemInstance;
 import org.eclipse.etrice.generator.extensions.RoomExtensions;
 import org.eclipse.etrice.generator.generic.ProcedureHelpers;
 import org.eclipse.etrice.generator.java.gen.JavaExtensions;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
 import org.eclipse.xtext.xbase.lib.BooleanExtensions;
-import org.eclipse.xtext.xbase.lib.ComparableExtensions;
 import org.eclipse.xtext.xbase.lib.IntegerExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xtend2.lib.StringConcatenation;
@@ -252,22 +250,14 @@ public class SubSystemClassGen {
           EList<InterfaceItemInstance> _orderedIfItemInstances = ai_1.getOrderedIfItemInstances();
           for(final InterfaceItemInstance pi : _orderedIfItemInstances) {
             {
-              boolean _operator_or = false;
-              if ((pi instanceof ServiceImplInstance)) {
-                _operator_or = true;
-              } else {
-                EList<InterfaceItemInstance> _peers = pi.getPeers();
-                int _size = _peers.size();
-                boolean _operator_greaterThan = ComparableExtensions.<Integer>operator_greaterThan(((Integer)_size), ((Integer)1));
-                _operator_or = BooleanExtensions.operator_or((pi instanceof ServiceImplInstance), _operator_greaterThan);
-              }
-              if (_operator_or) {
+              boolean _isReplicated = pi.isReplicated();
+              if (_isReplicated) {
                 {
-                  EList<InterfaceItemInstance> _peers_1 = pi.getPeers();
-                  for(final InterfaceItemInstance peer : _peers_1) {
+                  EList<InterfaceItemInstance> _peers = pi.getPeers();
+                  for(final InterfaceItemInstance peer : _peers) {
                     _builder.append("\t\t");
-                    EList<InterfaceItemInstance> _peers_2 = pi.getPeers();
-                    int _indexOf_2 = _peers_2.indexOf(peer);
+                    EList<InterfaceItemInstance> _peers_1 = pi.getPeers();
+                    int _indexOf_2 = _peers_1.indexOf(peer);
                     int i = _indexOf_2;
                     _builder.newLineIfNotEmpty();
                     _builder.append("\t\t");
@@ -315,8 +305,8 @@ public class SubSystemClassGen {
     _builder.append("\t\t");
     _builder.append("instances = new ActorClassBase[");
     EList<ActorInstance> _allContainedInstances_3 = comp.getAllContainedInstances();
-    int _size_1 = _allContainedInstances_3.size();
-    _builder.append(_size_1, "		");
+    int _size = _allContainedInstances_3.size();
+    _builder.append(_size, "		");
     _builder.append("];");
     _builder.newLineIfNotEmpty();
     {
@@ -386,61 +376,72 @@ public class SubSystemClassGen {
             if (!hasAnyElements) {
               hasAnyElements = true;
             } else {
-              _builder.appendImmediate(",", "			");
+              _builder.appendImmediate(",", "				");
             }
-            _builder.append("\t\t");
-            _builder.append("\t");
-            _builder.append("{");
-            _builder.newLine();
             {
-              boolean _operator_or_1 = false;
-              if ((pi_1 instanceof ServiceImplInstance)) {
-                _operator_or_1 = true;
-              } else {
-                EList<InterfaceItemInstance> _peers_3 = pi_1.getPeers();
-                int _size_2 = _peers_3.size();
-                boolean _operator_greaterThan_1 = ComparableExtensions.<Integer>operator_greaterThan(((Integer)_size_2), ((Integer)1));
-                _operator_or_1 = BooleanExtensions.operator_or((pi_1 instanceof ServiceImplInstance), _operator_greaterThan_1);
-              }
-              if (_operator_or_1) {
+              boolean _isReplicated_1 = pi_1.isReplicated();
+              if (_isReplicated_1) {
                 {
-                  EList<InterfaceItemInstance> _peers_4 = pi_1.getPeers();
-                  boolean hasAnyElements_1 = false;
-                  for(final InterfaceItemInstance peer_1 : _peers_4) {
-                    if (!hasAnyElements_1) {
-                      hasAnyElements_1 = true;
-                    } else {
-                      _builder.appendImmediate(",", "				");
+                  EList<InterfaceItemInstance> _peers_2 = pi_1.getPeers();
+                  boolean _isEmpty_1 = _peers_2.isEmpty();
+                  if (_isEmpty_1) {
+                    _builder.append("\t\t");
+                    _builder.append("\t\t");
+                    _builder.append("null");
+                    _builder.newLine();
+                  } else {
+                    _builder.append("\t\t");
+                    _builder.append("\t\t");
+                    _builder.append("{");
+                    _builder.newLine();
+                    {
+                      EList<InterfaceItemInstance> _peers_3 = pi_1.getPeers();
+                      boolean hasAnyElements_1 = false;
+                      for(final InterfaceItemInstance peer_1 : _peers_3) {
+                        if (!hasAnyElements_1) {
+                          hasAnyElements_1 = true;
+                        } else {
+                          _builder.appendImmediate(",", "					");
+                        }
+                        _builder.append("\t\t");
+                        _builder.append("\t\t");
+                        _builder.append("\t");
+                        _builder.append("addr_item_");
+                        String _path_6 = pi_1.getPath();
+                        String _pathName_4 = this.roomExt.getPathName(_path_6);
+                        _builder.append(_pathName_4, "					");
+                        _builder.append("_");
+                        EList<InterfaceItemInstance> _peers_4 = pi_1.getPeers();
+                        int _indexOf_5 = _peers_4.indexOf(peer_1);
+                        _builder.append(_indexOf_5, "					");
+                        _builder.newLineIfNotEmpty();
+                      }
                     }
                     _builder.append("\t\t");
-                    _builder.append("\t");
-                    _builder.append("\t");
-                    _builder.append("addr_item_");
-                    String _path_6 = pi_1.getPath();
-                    String _pathName_4 = this.roomExt.getPathName(_path_6);
-                    _builder.append(_pathName_4, "				");
-                    _builder.append("_");
-                    EList<InterfaceItemInstance> _peers_5 = pi_1.getPeers();
-                    int _indexOf_5 = _peers_5.indexOf(peer_1);
-                    _builder.append(_indexOf_5, "				");
-                    _builder.newLineIfNotEmpty();
+                    _builder.append("\t\t");
+                    _builder.append("}");
+                    _builder.newLine();
                   }
                 }
               } else {
                 _builder.append("\t\t");
-                _builder.append("\t");
+                _builder.append("\t\t");
+                _builder.append("{");
+                _builder.newLine();
+                _builder.append("\t\t");
+                _builder.append("\t\t");
                 _builder.append("\t");
                 _builder.append("addr_item_");
                 String _path_7 = pi_1.getPath();
                 String _pathName_5 = this.roomExt.getPathName(_path_7);
-                _builder.append(_pathName_5, "				");
+                _builder.append(_pathName_5, "					");
                 _builder.newLineIfNotEmpty();
+                _builder.append("\t\t");
+                _builder.append("\t\t");
+                _builder.append("}");
+                _builder.newLine();
               }
             }
-            _builder.append("\t\t");
-            _builder.append("\t");
-            _builder.append("}");
-            _builder.newLine();
           }
         }
         _builder.append("\t\t");
@@ -460,8 +461,8 @@ public class SubSystemClassGen {
         _builder.append("}");
         {
           EList<InterfaceItemInstance> _orderedIfItemInstances_3 = ai_2.getOrderedIfItemInstances();
-          boolean _isEmpty_1 = _orderedIfItemInstances_3.isEmpty();
-          boolean _operator_not_1 = BooleanExtensions.operator_not(_isEmpty_1);
+          boolean _isEmpty_2 = _orderedIfItemInstances_3.isEmpty();
+          boolean _operator_not_1 = BooleanExtensions.operator_not(_isEmpty_2);
           if (_operator_not_1) {
             _builder.append(",");
           }
@@ -476,78 +477,81 @@ public class SubSystemClassGen {
             } else {
               _builder.appendImmediate(",", "				");
             }
-            _builder.append("\t\t");
-            _builder.append("\t\t");
-            _builder.append("{");
-            _builder.newLine();
             {
               boolean _operator_and = false;
-              boolean _operator_not_2 = BooleanExtensions.operator_not((pi_2 instanceof ServiceImplInstance));
-              if (!_operator_not_2) {
+              boolean _isReplicated_2 = pi_2.isReplicated();
+              if (!_isReplicated_2) {
                 _operator_and = false;
               } else {
-                EList<InterfaceItemInstance> _peers_6 = pi_2.getPeers();
-                boolean _isEmpty_2 = _peers_6.isEmpty();
-                _operator_and = BooleanExtensions.operator_and(_operator_not_2, _isEmpty_2);
+                EList<InterfaceItemInstance> _peers_5 = pi_2.getPeers();
+                boolean _isEmpty_3 = _peers_5.isEmpty();
+                _operator_and = BooleanExtensions.operator_and(_isReplicated_2, _isEmpty_3);
               }
               if (_operator_and) {
                 _builder.append("\t\t");
                 _builder.append("\t\t");
-                _builder.append("\t");
                 _builder.append("null");
                 _builder.newLine();
               } else {
+                _builder.append("\t\t");
+                _builder.append("\t\t");
+                _builder.append("{");
+                _builder.newLine();
                 {
-                  EList<InterfaceItemInstance> _peers_7 = pi_2.getPeers();
-                  boolean hasAnyElements_3 = false;
-                  for(final InterfaceItemInstance pp : _peers_7) {
-                    if (!hasAnyElements_3) {
-                      hasAnyElements_3 = true;
-                    } else {
-                      _builder.appendImmediate(",", "					");
-                    }
+                  EList<InterfaceItemInstance> _peers_6 = pi_2.getPeers();
+                  boolean _isEmpty_4 = _peers_6.isEmpty();
+                  if (_isEmpty_4) {
+                    _builder.append("\t\t");
+                    _builder.append("\t\t");
+                    _builder.append("\t");
+                    _builder.append("null");
+                    _builder.newLine();
+                  } else {
                     {
-                      boolean _operator_or_2 = false;
-                      if ((pp instanceof ServiceImplInstance)) {
-                        _operator_or_2 = true;
-                      } else {
-                        EList<InterfaceItemInstance> _peers_8 = pp.getPeers();
-                        int _size_3 = _peers_8.size();
-                        boolean _operator_greaterThan_2 = ComparableExtensions.<Integer>operator_greaterThan(((Integer)_size_3), ((Integer)1));
-                        _operator_or_2 = BooleanExtensions.operator_or((pp instanceof ServiceImplInstance), _operator_greaterThan_2);
-                      }
-                      if (_operator_or_2) {
-                        _builder.append("\t\t");
-                        _builder.append("\t\t");
-                        _builder.append("\t");
-                        _builder.append("addr_item_");
-                        String _path_8 = pp.getPath();
-                        String _pathName_6 = this.roomExt.getPathName(_path_8);
-                        _builder.append(_pathName_6, "					");
-                        _builder.append("_");
-                        EList<InterfaceItemInstance> _peers_9 = pp.getPeers();
-                        int _indexOf_7 = _peers_9.indexOf(pi_2);
-                        _builder.append(_indexOf_7, "					");
-                        _builder.newLineIfNotEmpty();
-                      } else {
-                        _builder.append("\t\t");
-                        _builder.append("\t\t");
-                        _builder.append("\t");
-                        _builder.append("addr_item_");
-                        String _path_9 = pp.getPath();
-                        String _pathName_7 = this.roomExt.getPathName(_path_9);
-                        _builder.append(_pathName_7, "					");
-                        _builder.newLineIfNotEmpty();
+                      EList<InterfaceItemInstance> _peers_7 = pi_2.getPeers();
+                      boolean hasAnyElements_3 = false;
+                      for(final InterfaceItemInstance pp : _peers_7) {
+                        if (!hasAnyElements_3) {
+                          hasAnyElements_3 = true;
+                        } else {
+                          _builder.appendImmediate(",", "					");
+                        }
+                        {
+                          boolean _isReplicated_3 = pp.isReplicated();
+                          if (_isReplicated_3) {
+                            _builder.append("\t\t");
+                            _builder.append("\t\t");
+                            _builder.append("\t");
+                            _builder.append("addr_item_");
+                            String _path_8 = pp.getPath();
+                            String _pathName_6 = this.roomExt.getPathName(_path_8);
+                            _builder.append(_pathName_6, "					");
+                            _builder.append("_");
+                            EList<InterfaceItemInstance> _peers_8 = pp.getPeers();
+                            int _indexOf_7 = _peers_8.indexOf(pi_2);
+                            _builder.append(_indexOf_7, "					");
+                            _builder.newLineIfNotEmpty();
+                          } else {
+                            _builder.append("\t\t");
+                            _builder.append("\t\t");
+                            _builder.append("\t");
+                            _builder.append("addr_item_");
+                            String _path_9 = pp.getPath();
+                            String _pathName_7 = this.roomExt.getPathName(_path_9);
+                            _builder.append(_pathName_7, "					");
+                            _builder.newLineIfNotEmpty();
+                          }
+                        }
                       }
                     }
                   }
                 }
+                _builder.append("\t\t");
+                _builder.append("\t\t");
+                _builder.append("}");
+                _builder.newLine();
               }
             }
-            _builder.append("\t\t");
-            _builder.append("\t\t");
-            _builder.append("}");
-            _builder.newLine();
           }
         }
         _builder.append("\t\t");
