@@ -77,7 +77,7 @@ public class Log {
 	
 		public LogReplPort(IEventReceiver actor, String name, int localId, Address[] addr,
 				Address[] peerAddress) {
-			replication = addr.length;
+			replication = addr==null? 0:addr.length;
 			ports = new ArrayList<Log.LogPort>(replication);
 			for (int i=0; i<replication; ++i) {
 				ports.add(new LogPort(
@@ -186,7 +186,7 @@ public class Log {
 	
 		public LogConjReplPort(IEventReceiver actor, String name, int localId, Address[] addr,
 				Address[] peerAddress) {
-			replication = addr.length;
+			replication = addr==null? 0:addr.length;
 			ports = new ArrayList<Log.LogConjPort>(replication);
 			for (int i=0; i<replication; ++i) {
 				ports.add(new LogConjPort(

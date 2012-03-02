@@ -69,9 +69,9 @@ public class SubSystem_CPTest extends SubSystemClassBase{
 			"cp_tester",
 			// own interface item addresses
 			new Address[][] {{addr_item__SubSystem_CPTest_HandlerTest_Top_cp_tester},
-			{
-				addr_item__SubSystem_CPTest_HandlerTest_Top_cp_tester_TestPort1
-			}
+				{
+					addr_item__SubSystem_CPTest_HandlerTest_Top_cp_tester_TestPort1
+				}
 			},
 			// peer interface item addresses
 			new Address[][] {{addr_item_SystemPort_1},
@@ -85,9 +85,9 @@ public class SubSystem_CPTest extends SubSystemClassBase{
 			"cp_user",
 			// own interface item addresses
 			new Address[][] {{addr_item__SubSystem_CPTest_HandlerTest_Top_cp_user},
-			{
-				addr_item__SubSystem_CPTest_HandlerTest_Top_cp_user_TestPort1
-			}
+				{
+					addr_item__SubSystem_CPTest_HandlerTest_Top_cp_user_TestPort1
+				}
 			},
 			// peer interface item addresses
 			new Address[][] {{addr_item_SystemPort_2},

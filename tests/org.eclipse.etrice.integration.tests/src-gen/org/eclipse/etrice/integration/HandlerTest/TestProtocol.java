@@ -75,7 +75,7 @@ public class TestProtocol {
 	
 		public TestProtocolReplPort(IEventReceiver actor, String name, int localId, Address[] addr,
 				Address[] peerAddress) {
-			replication = addr.length;
+			replication = addr==null? 0:addr.length;
 			ports = new ArrayList<TestProtocol.TestProtocolPort>(replication);
 			for (int i=0; i<replication; ++i) {
 				ports.add(new TestProtocolPort(
@@ -182,7 +182,7 @@ public class TestProtocol {
 	
 		public TestProtocolConjReplPort(IEventReceiver actor, String name, int localId, Address[] addr,
 				Address[] peerAddress) {
-			replication = addr.length;
+			replication = addr==null? 0:addr.length;
 			ports = new ArrayList<TestProtocol.TestProtocolConjPort>(replication);
 			for (int i=0; i<replication; ++i) {
 				ports.add(new TestProtocolConjPort(

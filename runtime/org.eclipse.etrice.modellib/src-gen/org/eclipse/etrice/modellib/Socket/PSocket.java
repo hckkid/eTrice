@@ -112,7 +112,7 @@ public class PSocket {
 	
 		public PSocketReplPort(IEventReceiver actor, String name, int localId, Address[] addr,
 				Address[] peerAddress) {
-			replication = addr.length;
+			replication = addr==null? 0:addr.length;
 			ports = new ArrayList<PSocket.PSocketPort>(replication);
 			for (int i=0; i<replication; ++i) {
 				ports.add(new PSocketPort(
@@ -229,7 +229,7 @@ public class PSocket {
 	
 		public PSocketConjReplPort(IEventReceiver actor, String name, int localId, Address[] addr,
 				Address[] peerAddress) {
-			replication = addr.length;
+			replication = addr==null? 0:addr.length;
 			ports = new ArrayList<PSocket.PSocketConjPort>(replication);
 			for (int i=0; i<replication; ++i) {
 				ports.add(new PSocketConjPort(

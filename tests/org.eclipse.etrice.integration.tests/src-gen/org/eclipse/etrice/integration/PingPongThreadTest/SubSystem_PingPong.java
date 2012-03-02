@@ -95,18 +95,18 @@ public class SubSystem_PingPong extends SubSystemClassBase{
 			"MrPing",
 			// own interface item addresses
 			new Address[][] {{addr_item__SubSystem_PingPong_application_MrPing},
-			{
-				addr_item__SubSystem_PingPong_application_MrPing_PingPongPort
-			},
-			{
-				addr_item__SubSystem_PingPong_application_MrPing_PingPongPort2
-			},
-			{
-				addr_item__SubSystem_PingPong_application_MrPing_PingPongPort3
-			},
-			{
-				addr_item__SubSystem_PingPong_application_MrPing_timer
-			}
+				{
+					addr_item__SubSystem_PingPong_application_MrPing_PingPongPort
+				},
+				{
+					addr_item__SubSystem_PingPong_application_MrPing_PingPongPort2
+				},
+				{
+					addr_item__SubSystem_PingPong_application_MrPing_PingPongPort3
+				},
+				{
+					addr_item__SubSystem_PingPong_application_MrPing_timer
+				}
 			},
 			// peer interface item addresses
 			new Address[][] {{addr_item_SystemPort_1},
@@ -129,9 +129,9 @@ public class SubSystem_PingPong extends SubSystemClassBase{
 			"MrPong1",
 			// own interface item addresses
 			new Address[][] {{addr_item__SubSystem_PingPong_application_MrPong1},
-			{
-				addr_item__SubSystem_PingPong_application_MrPong1_PingPongPort
-			}
+				{
+					addr_item__SubSystem_PingPong_application_MrPong1_PingPongPort
+				}
 			},
 			// peer interface item addresses
 			new Address[][] {{addr_item_SystemPort_2},
@@ -145,9 +145,9 @@ public class SubSystem_PingPong extends SubSystemClassBase{
 			"MrPong2",
 			// own interface item addresses
 			new Address[][] {{addr_item__SubSystem_PingPong_application_MrPong2},
-			{
-				addr_item__SubSystem_PingPong_application_MrPong2_PingPongPort
-			}
+				{
+					addr_item__SubSystem_PingPong_application_MrPong2_PingPongPort
+				}
 			},
 			// peer interface item addresses
 			new Address[][] {{addr_item_SystemPort_3},
@@ -161,9 +161,9 @@ public class SubSystem_PingPong extends SubSystemClassBase{
 			"MrPong3",
 			// own interface item addresses
 			new Address[][] {{addr_item__SubSystem_PingPong_application_MrPong3},
-			{
-				addr_item__SubSystem_PingPong_application_MrPong3_PingPongPort
-			}
+				{
+					addr_item__SubSystem_PingPong_application_MrPong3_PingPongPort
+				}
 			},
 			// peer interface item addresses
 			new Address[][] {{addr_item_SystemPort_4},
@@ -177,16 +177,14 @@ public class SubSystem_PingPong extends SubSystemClassBase{
 			"services",
 			// own interface item addresses
 			new Address[][] {{addr_item__SubSystem_PingPong_services},
-			{
-			},
-			{
-				addr_item__SubSystem_PingPong_services_timeout_0
-			}
+				null,
+				{
+					addr_item__SubSystem_PingPong_services_timeout_0
+				}
 			},
 			// peer interface item addresses
 			new Address[][] {{addr_item_SystemPort_5},
-				{
-				},
+				null,
 				{
 					addr_item__SubSystem_PingPong_application_MrPing_timer
 				}

@@ -77,12 +77,12 @@ public class SubSystem_HandlerTest extends SubSystemClassBase{
 			"tester",
 			// own interface item addresses
 			new Address[][] {{addr_item__SubSystem_HandlerTest_HandlerTest_Top_tester},
-			{
-				addr_item__SubSystem_HandlerTest_HandlerTest_Top_tester_TestPort1
-			},
-			{
-				addr_item__SubSystem_HandlerTest_HandlerTest_Top_tester_timer
-			}
+				{
+					addr_item__SubSystem_HandlerTest_HandlerTest_Top_tester_TestPort1
+				},
+				{
+					addr_item__SubSystem_HandlerTest_HandlerTest_Top_tester_timer
+				}
 			},
 			// peer interface item addresses
 			new Address[][] {{addr_item_SystemPort_1},
@@ -99,9 +99,9 @@ public class SubSystem_HandlerTest extends SubSystemClassBase{
 			"handlerUser",
 			// own interface item addresses
 			new Address[][] {{addr_item__SubSystem_HandlerTest_HandlerTest_Top_handlerUser},
-			{
-				addr_item__SubSystem_HandlerTest_HandlerTest_Top_handlerUser_TestPort1
-			}
+				{
+					addr_item__SubSystem_HandlerTest_HandlerTest_Top_handlerUser_TestPort1
+				}
 			},
 			// peer interface item addresses
 			new Address[][] {{addr_item_SystemPort_2},
@@ -115,16 +115,14 @@ public class SubSystem_HandlerTest extends SubSystemClassBase{
 			"timerService",
 			// own interface item addresses
 			new Address[][] {{addr_item__SubSystem_HandlerTest_timerService},
-			{
-			},
-			{
-				addr_item__SubSystem_HandlerTest_timerService_timeout_0
-			}
+				null,
+				{
+					addr_item__SubSystem_HandlerTest_timerService_timeout_0
+				}
 			},
 			// peer interface item addresses
 			new Address[][] {{addr_item_SystemPort_3},
-				{
-				},
+				null,
 				{
 					addr_item__SubSystem_HandlerTest_HandlerTest_Top_tester_timer
 				}

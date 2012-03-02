@@ -69,9 +69,9 @@ public class SubSys_SendingData extends SubSystemClassBase{
 			"mrPing",
 			// own interface item addresses
 			new Address[][] {{addr_item__SubSys_SendingData_top_mrPing},
-			{
-				addr_item__SubSys_SendingData_top_mrPing_PingPongPort
-			}
+				{
+					addr_item__SubSys_SendingData_top_mrPing_PingPongPort
+				}
 			},
 			// peer interface item addresses
 			new Address[][] {{addr_item_SystemPort_1},
@@ -85,9 +85,9 @@ public class SubSys_SendingData extends SubSystemClassBase{
 			"mrPong",
 			// own interface item addresses
 			new Address[][] {{addr_item__SubSys_SendingData_top_mrPong},
-			{
-				addr_item__SubSys_SendingData_top_mrPong_PingPongPort
-			}
+				{
+					addr_item__SubSys_SendingData_top_mrPong_PingPongPort
+				}
 			},
 			// peer interface item addresses
 			new Address[][] {{addr_item_SystemPort_2},

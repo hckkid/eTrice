@@ -155,7 +155,7 @@ public class PTimeout {
 	
 		public PTimeoutReplPort(IEventReceiver actor, String name, int localId, Address[] addr,
 				Address[] peerAddress) {
-			replication = addr.length;
+			replication = addr==null? 0:addr.length;
 			ports = new ArrayList<PTimeout.PTimeoutPort>(replication);
 			for (int i=0; i<replication; ++i) {
 				ports.add(new PTimeoutPort(
@@ -270,7 +270,7 @@ public class PTimeout {
 	
 		public PTimeoutConjReplPort(IEventReceiver actor, String name, int localId, Address[] addr,
 				Address[] peerAddress) {
-			replication = addr.length;
+			replication = addr==null? 0:addr.length;
 			ports = new ArrayList<PTimeout.PTimeoutConjPort>(replication);
 			for (int i=0; i<replication; ++i) {
 				ports.add(new PTimeoutConjPort(

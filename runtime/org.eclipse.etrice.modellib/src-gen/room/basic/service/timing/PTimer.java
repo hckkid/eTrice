@@ -155,7 +155,7 @@ public class PTimer {
 	
 		public PTimerReplPort(IEventReceiver actor, String name, int localId, Address[] addr,
 				Address[] peerAddress) {
-			replication = addr.length;
+			replication = addr==null? 0:addr.length;
 			ports = new ArrayList<PTimer.PTimerPort>(replication);
 			for (int i=0; i<replication; ++i) {
 				ports.add(new PTimerPort(
@@ -269,7 +269,7 @@ public class PTimer {
 	
 		public PTimerConjReplPort(IEventReceiver actor, String name, int localId, Address[] addr,
 				Address[] peerAddress) {
-			replication = addr.length;
+			replication = addr==null? 0:addr.length;
 			ports = new ArrayList<PTimer.PTimerConjPort>(replication);
 			for (int i=0; i<replication; ++i) {
 				ports.add(new PTimerConjPort(

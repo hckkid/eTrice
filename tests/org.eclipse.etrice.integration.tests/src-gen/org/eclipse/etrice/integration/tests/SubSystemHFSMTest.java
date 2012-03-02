@@ -90,9 +90,9 @@ public class SubSystemHFSMTest extends SubSystemClassBase{
 			"HFSM",
 			// own interface item addresses
 			new Address[][] {{addr_item__SubSystemHFSMTest_application_HFSM_Tests_HFSM},
-			{
-				addr_item__SubSystemHFSMTest_application_HFSM_Tests_HFSM_fct
-			}
+				{
+					addr_item__SubSystemHFSMTest_application_HFSM_Tests_HFSM_fct
+				}
 			},
 			// peer interface item addresses
 			new Address[][] {{addr_item_SystemPort_2},
@@ -106,9 +106,9 @@ public class SubSystemHFSMTest extends SubSystemClassBase{
 			"Tester",
 			// own interface item addresses
 			new Address[][] {{addr_item__SubSystemHFSMTest_application_HFSM_Tests_Tester},
-			{
-				addr_item__SubSystemHFSMTest_application_HFSM_Tests_Tester_testee
-			}
+				{
+					addr_item__SubSystemHFSMTest_application_HFSM_Tests_Tester_testee
+				}
 			},
 			// peer interface item addresses
 			new Address[][] {{addr_item_SystemPort_3},
@@ -122,17 +122,13 @@ public class SubSystemHFSMTest extends SubSystemClassBase{
 			"services",
 			// own interface item addresses
 			new Address[][] {{addr_item__SubSystemHFSMTest_services},
-			{
-			},
-			{
-			}
+				null,
+				null
 			},
 			// peer interface item addresses
 			new Address[][] {{addr_item_SystemPort_4},
-				{
-				},
-				{
-				}
+				null,
+				null
 			}
 		); 
 

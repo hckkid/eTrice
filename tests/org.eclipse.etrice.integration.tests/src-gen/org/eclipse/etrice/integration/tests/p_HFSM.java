@@ -279,7 +279,7 @@ public class p_HFSM {
 	
 		public p_HFSMReplPort(IEventReceiver actor, String name, int localId, Address[] addr,
 				Address[] peerAddress) {
-			replication = addr.length;
+			replication = addr==null? 0:addr.length;
 			ports = new ArrayList<p_HFSM.p_HFSMPort>(replication);
 			for (int i=0; i<replication; ++i) {
 				ports.add(new p_HFSMPort(
@@ -539,7 +539,7 @@ public class p_HFSM {
 	
 		public p_HFSMConjReplPort(IEventReceiver actor, String name, int localId, Address[] addr,
 				Address[] peerAddress) {
-			replication = addr.length;
+			replication = addr==null? 0:addr.length;
 			ports = new ArrayList<p_HFSM.p_HFSMConjPort>(replication);
 			for (int i=0; i<replication; ++i) {
 				ports.add(new p_HFSMConjPort(

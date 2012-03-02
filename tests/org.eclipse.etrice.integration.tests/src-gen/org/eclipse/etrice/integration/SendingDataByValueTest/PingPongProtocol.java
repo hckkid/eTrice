@@ -90,7 +90,7 @@ public class PingPongProtocol {
 	
 		public PingPongProtocolReplPort(IEventReceiver actor, String name, int localId, Address[] addr,
 				Address[] peerAddress) {
-			replication = addr.length;
+			replication = addr==null? 0:addr.length;
 			ports = new ArrayList<PingPongProtocol.PingPongProtocolPort>(replication);
 			for (int i=0; i<replication; ++i) {
 				ports.add(new PingPongProtocolPort(
@@ -182,7 +182,7 @@ public class PingPongProtocol {
 	
 		public PingPongProtocolConjReplPort(IEventReceiver actor, String name, int localId, Address[] addr,
 				Address[] peerAddress) {
-			replication = addr.length;
+			replication = addr==null? 0:addr.length;
 			ports = new ArrayList<PingPongProtocol.PingPongProtocolConjPort>(replication);
 			for (int i=0; i<replication; ++i) {
 				ports.add(new PingPongProtocolConjPort(
