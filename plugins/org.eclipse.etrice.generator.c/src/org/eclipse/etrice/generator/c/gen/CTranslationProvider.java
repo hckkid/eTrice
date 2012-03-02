@@ -65,10 +65,10 @@ public class CTranslationProvider implements ITranslationProvider {
 
 	@Override
 	public String getInterfaceItemMessageText(InterfaceItem item, Message msg, ArrayList<String> args, String index, String orig) {
-			StringBuilder argtext = new StringBuilder();
-			for (String arg : args) {
-				argtext.append(", "+arg);
-			}
+		StringBuilder argtext = new StringBuilder();
+		for (String arg : args) {
+			argtext.append(", "+arg);
+		}
 
 		String result = orig;
 		if (item instanceof Port) {
