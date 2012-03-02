@@ -29,9 +29,6 @@ import org.eclipse.etrice.core.room.util.RoomHelpers;
  *
  */
 public class DetailCodeTranslator {
-
-	public static final String TAG_START = "<|";
-	public static final String TAG_END = "|>";
 	
 	private static class Position {
 		int pos = 0;
@@ -113,6 +110,9 @@ public class DetailCodeTranslator {
 						InterfaceItem item = name2item.get(token);
 						if (item!=null) {
 							int start = curr.pos;
+							String index = getPortIndex(text, curr, item);
+							if (index==null)
+								curr.pos = start;
 							Message msg = getMessage(text, curr, item, true);
 							if (msg!=null) {
 								ArrayList<String> args = getArgs(text, curr);
@@ -124,7 +124,7 @@ public class DetailCodeTranslator {
 											args.add(i, transArg);
 										}
 										String orig = text.substring(last, curr.pos);
-										translated = provider.getInterfaceItemMessageText(item, msg, args, orig);
+										translated = provider.getInterfaceItemMessageText(item, msg, args, index, orig);
 									}
 								}
 							}
@@ -151,6 +151,22 @@ public class DetailCodeTranslator {
 		}
 		
 		return result.toString();
+	}
+
+	private String getPortIndex(String text, Position curr, InterfaceItem item) {
+		proceedToToken(text, curr);
+
+		if (text.charAt(curr.pos)!='[')
+			return null;
+		++curr.pos;
+		
+		String token = getIndex(text, curr);
+
+		if (text.charAt(curr.pos)!=']')
+			return null;
+		++curr.pos;
+		
+		return token;
 	}
 
 	/**
@@ -283,6 +299,24 @@ public class DetailCodeTranslator {
 		return token;
 	}
 
+	private String getIndex(String text, Position curr) {
+		int begin = curr.pos;
+		int parenthesisLevel = 0;
+		while (curr.pos<text.length()) {
+			if (text.charAt(curr.pos)=='[')
+				++parenthesisLevel;
+			else if (text.charAt(curr.pos)==']') {
+				if (parenthesisLevel==0)
+					break;
+				else
+					--parenthesisLevel;
+			}
+			++curr.pos;
+		}
+		String token = text.substring(begin, curr.pos).trim();
+		return token;
+	}
+
 	private void skipWhiteSpace(String text, Position curr) {
 		while (curr.pos<text.length() && Character.isWhitespace(text.charAt(curr.pos)))
 			++curr.pos;
@@ -340,19 +374,19 @@ public class DetailCodeTranslator {
 		StringBuilder result = new StringBuilder();
 		
 		int last = 0;
-		int next = text.indexOf(TAG_START, last);
+		int next = text.indexOf(ITranslationProvider.TAG_START, last);
 		while (next>=0) {
 			result.append(text.substring(last, next));
-			last = next+TAG_START.length();
-			next = text.indexOf(TAG_END, last);
+			last = next+ITranslationProvider.TAG_START.length();
+			next = text.indexOf(ITranslationProvider.TAG_END, last);
 			if (next<0)
 				break;
 			
 			String tag = text.substring(last, next);
 			result.append(provider.translateTag(tag, code));
-			last = next+TAG_END.length();
+			last = next+ITranslationProvider.TAG_END.length();
 			
-			next = text.indexOf(TAG_START, last);
+			next = text.indexOf(ITranslationProvider.TAG_START, last);
 		}
 		result.append(text.substring(last));
 		return result.toString();

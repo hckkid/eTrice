@@ -14,6 +14,7 @@ package org.eclipse.etrice.generator.c.gen;
 
 import java.util.ArrayList;
 
+import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.DetailCode;
@@ -23,6 +24,7 @@ import org.eclipse.etrice.core.room.Operation;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.SAPRef;
 import org.eclipse.etrice.core.room.SPPRef;
+import org.eclipse.etrice.generator.base.ILogger;
 import org.eclipse.etrice.generator.base.ITranslationProvider;
 import org.eclipse.etrice.generator.extensions.RoomExtensions;
 
@@ -31,6 +33,7 @@ import com.google.inject.Inject;
 public class CTranslationProvider implements ITranslationProvider {
 
 	@Inject private RoomExtensions roomExt;
+	@Inject ILogger logger;
 	
 	@Override
 	public void setActorClass(ActorClass ac) {
@@ -58,7 +61,7 @@ public class CTranslationProvider implements ITranslationProvider {
 	}
 
 	@Override
-	public String getInterfaceItemMessageText(InterfaceItem item, Message msg, ArrayList<String> args, String orig) {
+	public String getInterfaceItemMessageText(InterfaceItem item, Message msg, ArrayList<String> args, String index, String orig) {
 			StringBuilder argtext = new StringBuilder();
 			for (String arg : args) {
 				argtext.append(", "+arg);
@@ -69,8 +72,12 @@ public class CTranslationProvider implements ITranslationProvider {
 			Port p = (Port) item;
 			if (p.getMultiplicity()==1)
 				result = roomExt.getPortClassName(p)+"_"+msg.getName()+"(&self->constData->"+item.getName()+argtext+")";
-			else
-				result = roomExt.getPortClassName(p)+"_"+msg.getName()+"_broadcast(&self->constData->"+item.getName()+argtext+")";
+			else {
+				if (index==null)
+					result = roomExt.getPortClassName(p)+"_"+msg.getName()+"_broadcast(&self->constData->"+item.getName()+argtext+")";
+				else
+					result = roomExt.getPortClassName(p)+"_"+msg.getName()+"(&self->constData->"+item.getName()+argtext+", "+index+")";
+			}
 			
 			result += " /* "+orig+" */";
 		}
@@ -78,7 +85,10 @@ public class CTranslationProvider implements ITranslationProvider {
 			result = roomExt.getPortClassName(((SAPRef)item))+"_"+msg.getName()+"(&self->constData->"+item.getName()+argtext+")";
 		}
 		else if (item instanceof SPPRef) {
-			result = roomExt.getPortClassName(((SPPRef)item))+"_"+msg.getName()+"(&self->constData->"+item.getName()+argtext+")";
+			if (index==null)
+				result = roomExt.getPortClassName(((SPPRef)item))+"_"+msg.getName()+"_broadcast(&self->constData->"+item.getName()+argtext+")";
+			else
+				result = roomExt.getPortClassName(((SPPRef)item))+"_"+msg.getName()+"(&self->constData->"+item.getName()+argtext+", "+index+")";
 		}
 		return result;
 	}
@@ -90,12 +100,18 @@ public class CTranslationProvider implements ITranslationProvider {
 
 	@Override
 	public boolean translateTags() {
-		return false;
+		return true;
 	}
 
 	@Override
 	public String translateTag(String tag, DetailCode code) {
-		return null;
+		if (tag.equals("ifitem.index"))
+			return "((etReplSubPort*)ifitem)->index";
+		
+		logger.logInfo("unrecognized tag '"+tag+"' in "
+				+RoomNameProvider.getDetailCodeLocation(code)+" of "
+				+RoomNameProvider.getClassLocation(RoomNameProvider.getModelClass(code)));
+		return TAG_START+"?"+tag+"?"+TAG_END;
 	}
 
 }

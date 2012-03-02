@@ -72,8 +72,11 @@ public class TestDetailCodeTranslator {
 		}
 
 		@Override
-		public String getInterfaceItemMessageText(InterfaceItem item, Message msg, ArrayList<String> args, String orig) {
-			return ">"+item.getName()+"."+msg.getName()+"("+getArgList(args)+")<";
+		public String getInterfaceItemMessageText(InterfaceItem item, Message msg, ArrayList<String> args, String index, String orig) {
+			if (index==null)
+				return ">"+item.getName()+"."+msg.getName()+"("+getArgList(args)+")<";
+			else
+				return ">"+item.getName()+"["+index+"]."+msg.getName()+"("+getArgList(args)+")<";
 		}
 		
 		@Override
@@ -226,6 +229,26 @@ public class TestDetailCodeTranslator {
 		assertEquals("port.message replacement", ">fct.out1()<;", result);
 	}
 	
+	@Test
+	public void testIndexedPortMsg() {
+		DetailCode dc = RoomFactory.eINSTANCE.createDetailCode();
+		dc.getCommands().add("fct[2].out1();");
+		
+		String result = translator.translateDetailCode(dc);
+		
+		assertEquals("port.message replacement", ">fct[2].out1()<;", result);
+	}
+	
+	@Test
+	public void testIndexedPortMsgComplex() {
+		DetailCode dc = RoomFactory.eINSTANCE.createDetailCode();
+		dc.getCommands().add("fct[self->index[2]].out1();");
+		
+		String result = translator.translateDetailCode(dc);
+		
+		assertEquals("port.message replacement", ">fct[self->index[2]].out1()<;", result);
+	}
+
 	@Test
 	public void testPortMsgValue() {
 		DetailCode dc = RoomFactory.eINSTANCE.createDetailCode();

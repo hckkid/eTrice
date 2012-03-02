@@ -39,7 +39,7 @@ public class DefaultTranslationProvider implements ITranslationProvider {
 	}
 
 	@Override
-	public String getInterfaceItemMessageText(InterfaceItem item, Message msg, ArrayList<String> args, String orig) {
+	public String getInterfaceItemMessageText(InterfaceItem item, Message msg, ArrayList<String> args, String index, String orig) {
 		return orig;
 	}
 
@@ -55,7 +55,7 @@ public class DefaultTranslationProvider implements ITranslationProvider {
 
 	@Override
 	public String translateTag(String tag, DetailCode code) {
-		return DetailCodeTranslator.TAG_START+tag+DetailCodeTranslator.TAG_END;
+		return TAG_START+tag+TAG_END;
 	}
 
 	@Override

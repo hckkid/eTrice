@@ -22,12 +22,16 @@ import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.Operation;
 
 public interface ITranslationProvider {
+
+	public static final String TAG_START = "<|";
+	public static final String TAG_END = "|>";
+
 	void setActorClass(ActorClass ac);
 	
 	boolean translateMembers();
 	String getAttributeText(Attribute att, String orig);
 	String getOperationText(Operation op, ArrayList<String> args, String orig);
-	String getInterfaceItemMessageText(InterfaceItem item, Message msg, ArrayList<String> args, String orig);
+	String getInterfaceItemMessageText(InterfaceItem item, Message msg, ArrayList<String> args, String index, String orig);
 	String getInterfaceItemMessageValue(InterfaceItem item, Message msg, String orig);
 
 	boolean translateTags();

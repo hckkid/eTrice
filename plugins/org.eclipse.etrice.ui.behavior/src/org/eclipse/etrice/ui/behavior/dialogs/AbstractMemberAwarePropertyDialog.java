@@ -167,10 +167,10 @@ public abstract class AbstractMemberAwarePropertyDialog extends AbstractProperty
 					MsgItemPair pair = (MsgItemPair) dlg.getMethodItemPair();
 					if (pair.out) {
 						String data = pair.msg.getData()!=null? pair.msg.getData().getName() : "";
-						String getter = "";
+						String index = "";
 						if (pair.item instanceof Port && ((Port)pair.item).getMultiplicity()!=1)
-							getter = "get(idx).";
-						insertText(pair.item.getName()+"."+getter+pair.msg.getName()+"("+data+")");
+							index = "[idx]";
+						insertText(pair.item.getName()+index+"."+pair.msg.getName()+"("+data+")");
 					}
 					else
 						insertText(pair.item.getName()+"."+pair.msg.getName());
