@@ -336,6 +336,12 @@ public class RoomExtensions {
     return _portClassName;
   }
   
+  public String getPortClassName(final SPPRef spp) {
+    ProtocolClass _protocol = spp.getProtocol();
+    String _portClassName = this.getPortClassName(_protocol, false, true);
+    return _portClassName;
+  }
+  
   public List<Message> getAllIncomingMessages(final ProtocolClass pc) {
     ProtocolClass _base = pc.getBase();
     boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_base, null);

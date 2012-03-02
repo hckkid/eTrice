@@ -7,6 +7,7 @@
 package org.eclipse.etrice.generator.etricegen;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.etrice.core.room.InterfaceItem;
 
 /**
  * <!-- begin-user-doc -->
@@ -40,5 +41,37 @@ public interface InterfaceItemInstance extends InstanceBase {
 	 * @generated
 	 */
 	EList<InterfaceItemInstance> getPeers();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 * @generated
+	 */
+	boolean isReplicated();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 * @generated
+	 */
+	boolean isSimple();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 * @generated
+	 */
+	boolean isRelay();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 * @generated
+	 */
+	InterfaceItem getInterfaceItem();
 
 } // InterfaceItemInstance

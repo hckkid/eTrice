@@ -35,6 +35,7 @@ import org.eclipse.etrice.core.room.PortClass
 import org.eclipse.etrice.core.room.ProtocolClass
 import org.eclipse.etrice.core.room.RefinedState
 import org.eclipse.etrice.core.room.SAPRef
+import org.eclipse.etrice.core.room.SPPRef
 import org.eclipse.etrice.core.room.ServiceImplementation
 import org.eclipse.etrice.core.room.State
 import org.eclipse.etrice.core.room.StateGraph
@@ -222,6 +223,11 @@ class RoomExtensions {
 	def String getPortClassName(ServiceImplementation svc) {
 		return svc.spp.protocol.getPortClassName(false, true)
 	}
+
+	def String getPortClassName(SPPRef spp) {
+		return spp.protocol.getPortClassName(false, true)
+	}
+
 	// message lists with super class messages, super classes first
 	def List<Message> getAllIncomingMessages(ProtocolClass pc) {
 		if (pc.base!=null)

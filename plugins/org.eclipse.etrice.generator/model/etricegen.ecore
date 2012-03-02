@@ -80,6 +80,10 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="actorClass" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//ActorClass"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="InterfaceItemInstance" eSuperTypes="#//InstanceBase">
+    <eOperations name="isReplicated" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eOperations name="isSimple" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eOperations name="isRelay" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eOperations name="getInterfaceItem" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//InterfaceItem"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="peers" upperBound="-1"
         eType="#//InterfaceItemInstance"/>
   </eClassifiers>
