@@ -44,30 +44,14 @@ static void prvSetupHardware(void) {
 
 	/* Disable the watchdog. */
 	WDTCTL = WDTPW + 0x36;
+	SFRIE1 |= WDTIE;
 
+	/* select port pin functions */
 	halBoardInit();
 
-	LFXT_Start(XT1DRIVE_0);
-	Init_FLL_Settle((unsigned short) ulCPU_Clock_KHz, 488);
+	LFXT_Start(XT1DRIVE_0); 								/* enable oszillator */
+	Init_FLL_Settle((unsigned short) ulCPU_Clock_KHz, 488);	/* clock divisor */
 
-	halButtonsInit(BUTTON_ALL);
-	halButtonsInterruptEnable(BUTTON_SELECT);
-
-	/* Initialise the LCD, but note that the backlight is not used as the
-	 library function uses timer A0 to modulate the backlight, and this file
-	 defines	vApplicationSetupTimerInterrupt() to also use timer A0 to generate
-	 the tick interrupt.  If the backlight is required, then change either the
-	 halLCD library or vApplicationSetupTimerInterrupt() to use a different
-	 timer.  Timer A1 is used for the run time stats time base6. */
-	halLcdInit();
-	halLcdSetContrast(105);
-	halLcdClearScreen();
-	halLcdBackLightInit();
-	halLcdSetBackLight(10);
-
-	halLcdPrintLine(" eTrice on MSP430", 1, OVERWRITE_TEXT);
-
-	SFRIE1 |= WDTIE;
 
 }
 

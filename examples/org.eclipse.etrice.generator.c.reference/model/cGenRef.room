@@ -84,6 +84,9 @@ RoomModel cGenRef {
 							triggers {
 								<receivedData: dataOut>
 							}
+							action {
+								"// Kommentar"
+							}
 						}
 						Transition tr3: ReceivedOne -> my tp1 {
 							triggers {
