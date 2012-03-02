@@ -111,7 +111,7 @@ public abstract class AbstractEditHandler extends AbstractHandler {
 							}
 							obj = obj.eContainer();
 						}
-						return "";
+						return null;
 					}
 				});
 				if (checkPrerequisites(xed, document, fragment)) {

@@ -23,6 +23,11 @@
             id="org.eclipse.etrice.core.room.ui.editBehavior"
             name="Edit Behavior">
       </command>
+      <command
+            description="export all structure and behavior diagrams as files"
+            id="org.eclipse.etrice.core.room.ui.exportDiagrams"
+            name="Export Diagrams">
+      </command>
    </extension>
    <extension
          point="org.eclipse.ui.handlers">
@@ -77,6 +82,18 @@
 	               </equals>
 	            </with>
             </or>
+         </activeWhen>
+      </handler>
+      <handler
+            commandId="org.eclipse.etrice.core.room.ui.exportDiagrams"
+            class="org.eclipse.etrice.ui.commands.handlers.ExportDiagramsHandler">
+         <activeWhen>
+            <with
+                  variable="activeEditorId">
+               <equals
+                     value="org.eclipse.etrice.core.Room">
+               </equals>
+            </with>
          </activeWhen>
       </handler>
    </extension>
@@ -155,6 +172,23 @@
      <command
            commandId="org.eclipse.etrice.core.room.ui.editStructure"
            label="Edit Structure"
+           style="push">
+        <visibleWhen
+              checkEnabled="true">
+           <iterate>
+              <adapt
+                    type="org.eclipse.xtext.ui.editor.outline.IOutlineNode">
+              </adapt>
+           </iterate>
+        </visibleWhen>
+     </command>
+  </menuContribution>
+  <menuContribution
+        allPopups="false"
+        locationURI="popup:org.eclipse.etrice.core.room.outline?after=additions">
+     <command
+           commandId="org.eclipse.etrice.core.room.ui.exportDiagrams"
+           label="Export Diagrams..."
            style="push">
         <visibleWhen
               checkEnabled="true">

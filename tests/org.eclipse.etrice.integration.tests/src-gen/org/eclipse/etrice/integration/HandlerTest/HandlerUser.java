@@ -69,13 +69,13 @@ public class HandlerUser extends ActorClassBase {
 
 	
 	/* state IDs */
-	public static final int STATE_state0_state1_state7 = 2;
-	public static final int STATE_state0_state2 = 3;
-	public static final int STATE_testOk = 4;
-	public static final int STATE_testFalse = 5;
-	public static final int STATE_state1 = 6;
-	public static final int STATE_state0 = 7;
-	public static final int STATE_state0_state1 = 8;
+	public static final int STATE_state0 = 2;
+	public static final int STATE_state0_state1 = 3;
+	public static final int STATE_state0_state1_state7 = 4;
+	public static final int STATE_state0_state2 = 5;
+	public static final int STATE_testOk = 6;
+	public static final int STATE_testFalse = 7;
+	public static final int STATE_state1 = 8;
 	
 	/* transition chains */
 	public static final int CHAIN_TRANS_INITIAL_TO__state0_tp2 = 1;
@@ -106,13 +106,13 @@ public class HandlerUser extends ActorClassBase {
 	public static final int TRIG_TestPort1__msg6 = IFITEM_TestPort1 + EVT_SHIFT*TestProtocol.IN_msg6;
 	
 	// state names
-	protected static final String stateStrings[] = {"<no state>","<top>","state0_state1_state7",
+	protected static final String stateStrings[] = {"<no state>","<top>","state0",
+	"state0_state1",
+	"state0_state1_state7",
 	"state0_state2",
 	"testOk",
 	"testFalse",
-	"state1",
-	"state0",
-	"state0_state1"
+	"state1"
 	};
 	
 	// history

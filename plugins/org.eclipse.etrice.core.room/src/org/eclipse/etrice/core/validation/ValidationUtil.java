@@ -13,10 +13,13 @@
 package org.eclipse.etrice.core.validation;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.EStructuralFeature.Setting;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorCommunicationType;
 import org.eclipse.etrice.core.room.ActorContainerClass;
@@ -36,6 +39,7 @@ import org.eclipse.etrice.core.room.GuardedTransition;
 import org.eclipse.etrice.core.room.InitialTransition;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.LayerConnection;
+import org.eclipse.etrice.core.room.MessageFromIf;
 import org.eclipse.etrice.core.room.NonInitialTransition;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.ProtocolClass;
@@ -43,6 +47,7 @@ import org.eclipse.etrice.core.room.RefSAPoint;
 import org.eclipse.etrice.core.room.RelaySAPoint;
 import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.etrice.core.room.SPPRef;
+import org.eclipse.etrice.core.room.SPPoint;
 import org.eclipse.etrice.core.room.ServiceImplementation;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraph;
@@ -345,6 +350,18 @@ public class ValidationUtil {
 		return Result.ok();
 	}
 
+	public static boolean isReferencedInModel(Port port) {
+		Collection<Setting> refs = EcoreUtil.UsageCrossReferencer.find(port, port.eResource().getResourceSet());
+		for (Setting ref : refs) {
+			if (ref.getEObject() instanceof BindingEndPoint)
+				return true;
+			else if (ref.getEObject() instanceof MessageFromIf)
+				return true;
+		}
+		
+		return false;
+	}
+	
 	public static boolean isConnected(Port port, ActorContainerRef ref, StructureClass sc) {
 		return isConnected(port, ref, sc, null);
 	}
@@ -446,6 +463,20 @@ public class ValidationUtil {
 		}
 		
 		return true;
+	}
+
+	public static boolean isReferencedInModel(SPPRef spp) {
+		Collection<Setting> refs = EcoreUtil.UsageCrossReferencer.find(spp, spp.eResource().getResourceSet());
+		for (Setting ref : refs) {
+			if (ref.getEObject() instanceof ServiceImplementation)
+				return true;
+			else if (ref.getEObject() instanceof RelaySAPoint)
+				return true;
+			else if (ref.getEObject() instanceof SPPoint)
+				return true;
+		}
+		
+		return false;
 	}
 	
 	public static boolean isConnectedSrc(SPPRef src, StructureClass sc) {

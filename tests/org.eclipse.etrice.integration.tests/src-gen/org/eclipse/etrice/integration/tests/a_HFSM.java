@@ -60,12 +60,12 @@ public class a_HFSM extends ActorClassBase {
 
 	
 	/* state IDs */
-	public static final int STATE_State1 = 2;
-	public static final int STATE_State2_State1 = 3;
-	public static final int STATE_State2_State2 = 4;
-	public static final int STATE_State3 = 5;
-	public static final int STATE_State4 = 6;
-	public static final int STATE_State2 = 7;
+	public static final int STATE_State2 = 2;
+	public static final int STATE_State1 = 3;
+	public static final int STATE_State2_State1 = 4;
+	public static final int STATE_State2_State2 = 5;
+	public static final int STATE_State3 = 6;
+	public static final int STATE_State4 = 7;
 	
 	/* transition chains */
 	public static final int CHAIN_State2_TRANS_State1_TO_State2_BY_m2fct = 1;
@@ -93,12 +93,12 @@ public class a_HFSM extends ActorClassBase {
 	public static final int TRIG_fct__reset = IFITEM_fct + EVT_SHIFT*p_HFSM.IN_reset;
 	
 	// state names
-	protected static final String stateStrings[] = {"<no state>","<top>","State1",
+	protected static final String stateStrings[] = {"<no state>","<top>","State2",
+	"State1",
 	"State2_State1",
 	"State2_State2",
 	"State3",
-	"State4",
-	"State2"
+	"State4"
 	};
 	
 	// history

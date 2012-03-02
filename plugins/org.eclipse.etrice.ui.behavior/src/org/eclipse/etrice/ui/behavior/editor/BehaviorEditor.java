@@ -13,6 +13,7 @@ import java.util.ArrayList;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.command.Command;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.transaction.RecordingCommand;
@@ -58,6 +59,25 @@ public class BehaviorEditor extends RoomDiagramEditor {
 		};
 		getEditingDomain().getCommandStack().execute(cmd);
 		getEditingDomain().getCommandStack().flush();
+	}
+	
+	@SuppressWarnings("restriction")
+	public boolean showStateGraph(StateGraph sg) {
+		URI boUri = EcoreUtil.getURI(sg);
+		final StateGraph mySG = (StateGraph) getEditingDomain().getResourceSet().getEObject(boUri, true);
+		if (mySG==null)
+			return false;
+		
+		Command cmd = new RecordingCommand(getEditingDomain()) {
+			@Override
+			protected void doExecute() {
+				ContextSwitcher.switchTo(getDiagramTypeProvider().getDiagram(), mySG);
+			}
+		};
+		getEditingDomain().getCommandStack().execute(cmd);
+		getEditingDomain().getCommandStack().flush();
+		
+		return true;
 	}
 
 	/**

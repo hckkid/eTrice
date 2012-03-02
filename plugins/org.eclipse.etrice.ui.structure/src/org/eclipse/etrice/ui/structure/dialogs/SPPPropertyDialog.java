@@ -21,7 +21,6 @@ import org.eclipse.core.databinding.validation.ValidationStatus;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.etrice.core.room.ActorContainerClass;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.etrice.core.room.SPPRef;
@@ -71,15 +70,13 @@ public class SPPPropertyDialog extends AbstractPropertyDialog {
 	
 	private SPPRef spp;
 	private IScope scope;
-	private ActorContainerClass acc;
 	private boolean newSPP;
 	private boolean refitem;
 
-	public SPPPropertyDialog(Shell shell, SPPRef spp, IScope scope, ActorContainerClass acc, boolean newSPP, boolean refitem) {
+	public SPPPropertyDialog(Shell shell, SPPRef spp, IScope scope, boolean newSPP, boolean refitem) {
 		super(shell, "Edit SPP");
 		this.spp = spp;
 		this.scope = scope;
-		this.acc = acc;
 		this.newSPP = newSPP;
 		this.refitem = refitem;
 	}
@@ -93,7 +90,7 @@ public class SPPPropertyDialog extends AbstractPropertyDialog {
 	
 	@Override
 	protected void createContent(IManagedForm mform, Composite body, DataBindingContext bindingContext) {
-		boolean connected = ValidationUtil.isConnectedSrc(spp, acc);
+		boolean connected = ValidationUtil.isReferencedInModel(spp);
 		NameValidator nv = new NameValidator();
 		ProtocolValidator pv = new ProtocolValidator();
 

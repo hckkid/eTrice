@@ -188,7 +188,7 @@ public class PortPropertyDialog extends AbstractPropertyDialog {
 	
 	@Override
 	protected void createContent(IManagedForm mform, Composite body, DataBindingContext bindingContext) {
-		boolean connected = ValidationUtil.isConnected(port, null, acc);
+		boolean connected = ValidationUtil.isReferencedInModel(port);
 		NameValidator nv = new NameValidator();
 		ProtocolValidator pv = new ProtocolValidator();
 		MultiplicityValidator mv = new MultiplicityValidator(newPort || !connected, port.getMultiplicity());
@@ -206,7 +206,7 @@ public class PortPropertyDialog extends AbstractPropertyDialog {
 		Combo protocol = createComboUsingDesc(body, "Protocol:", port, ProtocolClass.class, RoomPackage.eINSTANCE.getInterfaceItem_Protocol(), protocols, RoomPackage.eINSTANCE.getRoomClass_Name(), pv);
 		Button conj = createCheck(body, "Conjugated:", port, RoomPackage.eINSTANCE.getPort_Conjugated());
 		if (!internal && !refitem && (acc instanceof ActorClass))
-			createRelayCheck(body, mform.getToolkit());
+			createRelayCheck(body, !connected, mform.getToolkit());
 		
 		Multiplicity2StringConverter m2s = new Multiplicity2StringConverter();
 		String2MultiplicityConverter s2m = new String2MultiplicityConverter();
@@ -237,16 +237,14 @@ public class PortPropertyDialog extends AbstractPropertyDialog {
 		name.setFocus();
 	}
 
-	private void createRelayCheck(Composite parent, FormToolkit toolkit) {
+	private void createRelayCheck(Composite parent, boolean enabled, FormToolkit toolkit) {
 		Label l = toolkit.createLabel(parent, "Is Relay Port:", SWT.NONE);
 		l.setLayoutData(new GridData(SWT.NONE));
 		
 		relayCheck = toolkit.createButton(parent, "", SWT.CHECK);
 		relayCheck.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		relayCheck.setSelection(relay);
-		
-		if (ValidationUtil.isConnected(port, null, acc))
-			relayCheck.setEnabled(false);
+		relayCheck.setEnabled(enabled);
 	}
 	
 	@Override

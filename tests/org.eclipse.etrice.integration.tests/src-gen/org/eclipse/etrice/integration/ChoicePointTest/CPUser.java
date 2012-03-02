@@ -69,11 +69,11 @@ public class CPUser extends ActorClassBase {
 
 	
 	/* state IDs */
-	public static final int STATE_state0 = 2;
-	public static final int STATE_state1_state0 = 3;
-	public static final int STATE_testOk = 4;
-	public static final int STATE_testFalse = 5;
-	public static final int STATE_state1 = 6;
+	public static final int STATE_state1 = 2;
+	public static final int STATE_state0 = 3;
+	public static final int STATE_state1_state0 = 4;
+	public static final int STATE_testOk = 5;
+	public static final int STATE_testFalse = 6;
 	
 	/* transition chains */
 	public static final int CHAIN_TRANS_INITIAL_TO__cp0 = 1;
@@ -87,11 +87,11 @@ public class CPUser extends ActorClassBase {
 	public static final int TRIG_TestPort1__msg1 = IFITEM_TestPort1 + EVT_SHIFT*TestProtocol.IN_msg1;
 	
 	// state names
-	protected static final String stateStrings[] = {"<no state>","<top>","state0",
+	protected static final String stateStrings[] = {"<no state>","<top>","state1",
+	"state0",
 	"state1_state0",
 	"testOk",
-	"testFalse",
-	"state1"
+	"testFalse"
 	};
 	
 	// history
