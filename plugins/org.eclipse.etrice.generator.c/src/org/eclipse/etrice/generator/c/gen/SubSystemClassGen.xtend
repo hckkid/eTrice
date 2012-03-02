@@ -21,7 +21,7 @@ import org.eclipse.etrice.core.room.SubSystemClass
 import org.eclipse.etrice.generator.base.ILogger
 import org.eclipse.etrice.generator.etricegen.Root
 import org.eclipse.etrice.generator.etricegen.ActorInstance
-import org.eclipse.etrice.generator.etricegen.PortInstance
+import org.eclipse.etrice.generator.etricegen.InterfaceItemInstance
 import org.eclipse.etrice.generator.etricegen.SubSystemInstance
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 import org.eclipse.etrice.generator.extensions.RoomExtensions
@@ -224,8 +224,8 @@ class SubSystemClassGen {
 		«FOR ai : ssi.allContainedInstances»
 			
 			/* instance «ai.path.getPathName()» */
-			«IF ai.ports.empty»
-				/* no ports, nothing to initialize statically */
+			«IF ai.orderedIfItemInstances.empty»
+				/* no ports/saps/services - nothing to initialize statically */
 			«ELSE»
 				«genActorInstanceInitializer(root, ai)»
 			«ENDIF»
@@ -238,16 +238,16 @@ class SubSystemClassGen {
 		var instName = ai.path.pathName
 		
 		// list of replicated ports
-		var replPorts = new ArrayList<PortInstance>()
-		replPorts.addAll(ai.ports.filter(e|e.kind.literal!="RELAY" && e.port.multiplicity!=1))
+		var replPorts = new ArrayList<InterfaceItemInstance>()
+		replPorts.addAll(ai.orderedIfItemInstances.filter(e|e.replicated))
 		var haveReplSubPorts = replPorts.findFirst(e|!e.peers.empty)!=null
 		
 		// list of ports, simple first, then replicated
-		var ports = new ArrayList<PortInstance>()
-		ports.addAll(ai.ports.filter(e|e.kind.literal!="RELAY" && e.port.multiplicity==1).union(replPorts))
+		var ports = new ArrayList<InterfaceItemInstance>()
+		ports.addAll(ai.orderedIfItemInstances.filter(e|e.simple).union(replPorts))
 
 		// compute replicated port offsets		
-		var offsets = new HashMap<PortInstance, Integer>()
+		var offsets = new HashMap<InterfaceItemInstance, Integer>()
 		var offset = 0
 		for (p: replPorts) {
 			offsets.put(p, offset)
@@ -268,7 +268,7 @@ class SubSystemClassGen {
 		static const «ai.actorClass.name»_const «instName»_const = {
 			/* Ports: {myActor, etReceiveMessage, msgService, peerAddress, localId} */
 			«FOR pi : ports SEPARATOR ","»
-				«IF pi.port.multiplicity==1»
+				«IF pi.simple»
 					«genPortInitializer(root, ai, pi)»
 				«ELSE»
 					{«pi.peers.size», «replSubPortsArray»+«offsets.get(pi)»}
@@ -278,7 +278,7 @@ class SubSystemClassGen {
 		static «ai.actorClass.name» «instName» = {&«instName»_const};
 	'''}
 		
-	def private String genPortInitializer(Root root, ActorInstance ai, PortInstance pi) {
+	def private String genPortInitializer(Root root, ActorInstance ai, InterfaceItemInstance pi) {
 		var recvMsg = if (pi.peers.empty) "NULL" else ai.actorClass.name+"_ReceiveMessage"
 		var objId = if (pi.peers.empty) 0 else pi.peers.get(0).objId
 		var idx = if (pi.peers.empty) 0 else pi.peers.get(0).peers.indexOf(pi)
@@ -287,11 +287,11 @@ class SubSystemClassGen {
 		+recvMsg+", " 
 		+"&msgService_Thread1, "
 		+(objId+idx)+", "
-		+(root.getExpandedActorClass(ai).getInterfaceItemLocalId(pi.port)+1)
+		+(root.getExpandedActorClass(ai).getInterfaceItemLocalId(pi.interfaceItem)+1)
 		+"} /* Port "+pi.name+" */"
 	}
 	
-	def private String genReplSubPortInitializers(Root root, ActorInstance ai, PortInstance pi) {
+	def private String genReplSubPortInitializers(Root root, ActorInstance ai, InterfaceItemInstance pi) {
 		var result = ""
 		
 		for (p: pi.peers) {
@@ -302,7 +302,7 @@ class SubSystemClassGen {
 				+ai.actorClass.name+"_ReceiveMessage, " 
 				+"&msgService_Thread1, "
 				+p.objId+", "
-				+(root.getExpandedActorClass(ai).getInterfaceItemLocalId(pi.port)+1)+", "
+				+(root.getExpandedActorClass(ai).getInterfaceItemLocalId(pi.interfaceItem)+1)+", "
 				+idx
 				+"}"+comma+" /* Repl Sub Port "+pi.name+" idx +"+idx+"*/\n"
 		}
@@ -329,7 +329,7 @@ class SubSystemClassGen {
 				«FOR ai : ssi.allContainedInstances»
 					/* interface items of «ai.path» */
 					«FOR pi : ai.orderedIfItemInstances»
-						«IF pi instanceof PortInstance && (pi as PortInstance).port.multiplicity!=1»
+						«IF pi.replicated»
 							«FOR peer: pi.peers»
 								case «pi.objId+pi.peers.indexOf(peer)»:
 									etPort_receive((etPort*)&«ai.path.pathName»_const.«pi.name».ports[«pi.peers.indexOf(peer)»], msg);

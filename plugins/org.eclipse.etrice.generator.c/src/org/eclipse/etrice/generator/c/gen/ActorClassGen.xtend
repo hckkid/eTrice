@@ -94,7 +94,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 		typedef struct «xpac.name» «xpac.name»;
 		
 		/* const part of ActorClass (ROM) */
-		«IF ac.allEndPorts.empty»
+		«IF ac.allEndPorts.empty && ac.allSAPs.empty && ac.allServiceImplementations.empty»
 			/* this actor class has no ports and thus no constant data */
 		«ELSE»
 			typedef struct «xpac.name»_const {
@@ -105,18 +105,28 @@ class ActorClassGen extends GenericActorClassGenerator {
 					«ENDIF»
 				«ENDFOR»
 				
+				/* saps */
+				«FOR sap: ac.allSAPs»
+					const «sap.getPortClassName()» «sap.name»;
+				«ENDFOR»
+				
 				/* replicated ports */
 				«FOR ep : ac.allEndPorts»
 					«IF ep.multiplicity!=1»
 						const etReplPort «ep.name»;
 					«ENDIF»
 				«ENDFOR»
+				
+				/* services */
+				«FOR svc : ac.allServiceImplementations»
+					const etReplPort «svc.spp.name»;
+				«ENDFOR»
 			} «xpac.name»_const;
 		«ENDIF»
 		
 		/* variable part of ActorClass (RAM) */
 		struct «xpac.name» {
-			«IF !ac.allEndPorts.empty»
+			«IF !(ac.allEndPorts.empty && ac.allSAPs.empty && ac.allServiceImplementations.empty)»
 				const «xpac.name»_const* constData;
 				
 			«ENDIF»

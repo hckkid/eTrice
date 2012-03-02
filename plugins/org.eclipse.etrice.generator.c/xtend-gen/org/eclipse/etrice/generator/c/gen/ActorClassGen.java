@@ -12,6 +12,9 @@ import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.ProtocolClass;
+import org.eclipse.etrice.core.room.SAPRef;
+import org.eclipse.etrice.core.room.SPPRef;
+import org.eclipse.etrice.core.room.ServiceImplementation;
 import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.generator.base.ILogger;
 import org.eclipse.etrice.generator.c.gen.CExtensions;
@@ -198,9 +201,25 @@ public class ActorClassGen extends GenericActorClassGenerator {
     _builder.append("/* const part of ActorClass (ROM) */");
     _builder.newLine();
     {
+      boolean _operator_and = false;
+      boolean _operator_and_1 = false;
       List<Port> _allEndPorts = this.roomExt.getAllEndPorts(ac);
       boolean _isEmpty = _allEndPorts.isEmpty();
-      if (_isEmpty) {
+      if (!_isEmpty) {
+        _operator_and_1 = false;
+      } else {
+        List<SAPRef> _allSAPs = this.roomExt.getAllSAPs(ac);
+        boolean _isEmpty_1 = _allSAPs.isEmpty();
+        _operator_and_1 = BooleanExtensions.operator_and(_isEmpty, _isEmpty_1);
+      }
+      if (!_operator_and_1) {
+        _operator_and = false;
+      } else {
+        List<ServiceImplementation> _allServiceImplementations = this.roomExt.getAllServiceImplementations(ac);
+        boolean _isEmpty_2 = _allServiceImplementations.isEmpty();
+        _operator_and = BooleanExtensions.operator_and(_operator_and_1, _isEmpty_2);
+      }
+      if (_operator_and) {
         _builder.append("/* this actor class has no ports and thus no constant data */");
         _builder.newLine();
       } else {
@@ -235,6 +254,25 @@ public class ActorClassGen extends GenericActorClassGenerator {
         _builder.append("\t");
         _builder.newLine();
         _builder.append("\t");
+        _builder.append("/* saps */");
+        _builder.newLine();
+        {
+          List<SAPRef> _allSAPs_1 = this.roomExt.getAllSAPs(ac);
+          for(final SAPRef sap : _allSAPs_1) {
+            _builder.append("\t");
+            _builder.append("const ");
+            String _portClassName_1 = this.roomExt.getPortClassName(sap);
+            _builder.append(_portClassName_1, "	");
+            _builder.append(" ");
+            String _name_8 = sap.getName();
+            _builder.append(_name_8, "	");
+            _builder.append(";");
+            _builder.newLineIfNotEmpty();
+          }
+        }
+        _builder.append("\t");
+        _builder.newLine();
+        _builder.append("\t");
         _builder.append("/* replicated ports */");
         _builder.newLine();
         {
@@ -246,17 +284,34 @@ public class ActorClassGen extends GenericActorClassGenerator {
               if (_operator_notEquals) {
                 _builder.append("\t");
                 _builder.append("const etReplPort ");
-                String _name_8 = ep_1.getName();
-                _builder.append(_name_8, "	");
+                String _name_9 = ep_1.getName();
+                _builder.append(_name_9, "	");
                 _builder.append(";");
                 _builder.newLineIfNotEmpty();
               }
             }
           }
         }
+        _builder.append("\t");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("/* services */");
+        _builder.newLine();
+        {
+          List<ServiceImplementation> _allServiceImplementations_1 = this.roomExt.getAllServiceImplementations(ac);
+          for(final ServiceImplementation svc : _allServiceImplementations_1) {
+            _builder.append("\t");
+            _builder.append("const etReplPort ");
+            SPPRef _spp = svc.getSpp();
+            String _name_10 = _spp.getName();
+            _builder.append(_name_10, "	");
+            _builder.append(";");
+            _builder.newLineIfNotEmpty();
+          }
+        }
         _builder.append("} ");
-        String _name_9 = xpac.getName();
-        _builder.append(_name_9, "");
+        String _name_11 = xpac.getName();
+        _builder.append(_name_11, "");
         _builder.append("_const;");
         _builder.newLineIfNotEmpty();
       }
@@ -265,19 +320,35 @@ public class ActorClassGen extends GenericActorClassGenerator {
     _builder.append("/* variable part of ActorClass (RAM) */");
     _builder.newLine();
     _builder.append("struct ");
-    String _name_10 = xpac.getName();
-    _builder.append(_name_10, "");
+    String _name_12 = xpac.getName();
+    _builder.append(_name_12, "");
     _builder.append(" {");
     _builder.newLineIfNotEmpty();
     {
+      boolean _operator_and_2 = false;
+      boolean _operator_and_3 = false;
       List<Port> _allEndPorts_3 = this.roomExt.getAllEndPorts(ac);
-      boolean _isEmpty_1 = _allEndPorts_3.isEmpty();
-      boolean _operator_not = BooleanExtensions.operator_not(_isEmpty_1);
+      boolean _isEmpty_3 = _allEndPorts_3.isEmpty();
+      if (!_isEmpty_3) {
+        _operator_and_3 = false;
+      } else {
+        List<SAPRef> _allSAPs_2 = this.roomExt.getAllSAPs(ac);
+        boolean _isEmpty_4 = _allSAPs_2.isEmpty();
+        _operator_and_3 = BooleanExtensions.operator_and(_isEmpty_3, _isEmpty_4);
+      }
+      if (!_operator_and_3) {
+        _operator_and_2 = false;
+      } else {
+        List<ServiceImplementation> _allServiceImplementations_2 = this.roomExt.getAllServiceImplementations(ac);
+        boolean _isEmpty_5 = _allServiceImplementations_2.isEmpty();
+        _operator_and_2 = BooleanExtensions.operator_and(_operator_and_3, _isEmpty_5);
+      }
+      boolean _operator_not = BooleanExtensions.operator_not(_operator_and_2);
       if (_operator_not) {
         _builder.append("\t");
         _builder.append("const ");
-        String _name_11 = xpac.getName();
-        _builder.append(_name_11, "	");
+        String _name_13 = xpac.getName();
+        _builder.append(_name_13, "	");
         _builder.append("_const* constData;");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
@@ -307,23 +378,23 @@ public class ActorClassGen extends GenericActorClassGenerator {
     _builder.newLine();
     _builder.newLine();
     _builder.append("void ");
-    String _name_12 = xpac.getName();
-    _builder.append(_name_12, "");
+    String _name_14 = xpac.getName();
+    _builder.append(_name_14, "");
     _builder.append("_init(");
-    String _name_13 = xpac.getName();
-    _builder.append(_name_13, "");
+    String _name_15 = xpac.getName();
+    _builder.append(_name_15, "");
     _builder.append("* self);");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("void ");
-    String _name_14 = xpac.getName();
-    _builder.append(_name_14, "");
+    String _name_16 = xpac.getName();
+    _builder.append(_name_16, "");
     _builder.append("_ReceiveMessage(void* self, void* ifitem, const etMessage* msg);");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     EList<StandardOperation> _operations = ac.getOperations();
-    String _name_15 = ac.getName();
-    StringConcatenation _operationsDeclaration = this.helpers.operationsDeclaration(_operations, _name_15);
+    String _name_17 = ac.getName();
+    StringConcatenation _operationsDeclaration = this.helpers.operationsDeclaration(_operations, _name_17);
     _builder.append(_operationsDeclaration, "");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
@@ -332,8 +403,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
     _builder.append(_userCode_1, "");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
-    String _name_16 = xpac.getName();
-    StringConcatenation _generateIncludeGuardEnd = this.stdExt.generateIncludeGuardEnd(_name_16);
+    String _name_18 = xpac.getName();
+    StringConcatenation _generateIncludeGuardEnd = this.stdExt.generateIncludeGuardEnd(_name_18);
     _builder.append(_generateIncludeGuardEnd, "");
     _builder.newLineIfNotEmpty();
     _builder.newLine();

@@ -21,6 +21,8 @@ import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.Operation;
 import org.eclipse.etrice.core.room.Port;
+import org.eclipse.etrice.core.room.SAPRef;
+import org.eclipse.etrice.core.room.SPPRef;
 import org.eclipse.etrice.generator.base.ITranslationProvider;
 import org.eclipse.etrice.generator.extensions.RoomExtensions;
 
@@ -57,19 +59,26 @@ public class CTranslationProvider implements ITranslationProvider {
 
 	@Override
 	public String getInterfaceItemMessageText(InterfaceItem item, Message msg, ArrayList<String> args, String orig) {
-		String result = orig;
-		if (item instanceof Port) {
-			Port p = (Port) item;
 			StringBuilder argtext = new StringBuilder();
 			for (String arg : args) {
 				argtext.append(", "+arg);
 			}
+
+		String result = orig;
+		if (item instanceof Port) {
+			Port p = (Port) item;
 			if (p.getMultiplicity()==1)
 				result = roomExt.getPortClassName(p)+"_"+msg.getName()+"(&self->constData->"+item.getName()+argtext+")";
 			else
 				result = roomExt.getPortClassName(p)+"_"+msg.getName()+"_broadcast(&self->constData->"+item.getName()+argtext+")";
 			
 			result += " /* "+orig+" */";
+		}
+		else if (item instanceof SAPRef) {
+			result = roomExt.getPortClassName(((SAPRef)item))+"_"+msg.getName()+"(&self->constData->"+item.getName()+argtext+")";
+		}
+		else if (item instanceof SPPRef) {
+			result = roomExt.getPortClassName(((SPPRef)item))+"_"+msg.getName()+"(&self->constData->"+item.getName()+argtext+")";
 		}
 		return result;
 	}

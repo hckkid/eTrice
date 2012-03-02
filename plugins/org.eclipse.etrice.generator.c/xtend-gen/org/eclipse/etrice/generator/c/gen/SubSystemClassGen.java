@@ -8,7 +8,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorCommunicationType;
 import org.eclipse.etrice.core.room.DetailCode;
-import org.eclipse.etrice.core.room.Port;
+import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.generator.base.ILogger;
@@ -16,8 +16,6 @@ import org.eclipse.etrice.generator.c.gen.CExtensions;
 import org.eclipse.etrice.generator.etricegen.ActorInstance;
 import org.eclipse.etrice.generator.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.generator.etricegen.InterfaceItemInstance;
-import org.eclipse.etrice.generator.etricegen.PortInstance;
-import org.eclipse.etrice.generator.etricegen.PortKind;
 import org.eclipse.etrice.generator.etricegen.Root;
 import org.eclipse.etrice.generator.etricegen.SubSystemInstance;
 import org.eclipse.etrice.generator.extensions.RoomExtensions;
@@ -585,10 +583,10 @@ public class SubSystemClassGen {
         _builder.append(" */");
         _builder.newLineIfNotEmpty();
         {
-          EList<PortInstance> _ports = ai_1.getPorts();
-          boolean _isEmpty = _ports.isEmpty();
+          EList<InterfaceItemInstance> _orderedIfItemInstances = ai_1.getOrderedIfItemInstances();
+          boolean _isEmpty = _orderedIfItemInstances.isEmpty();
           if (_isEmpty) {
-            _builder.append("/* no ports, nothing to initialize statically */");
+            _builder.append("/* no ports/saps/services - nothing to initialize statically */");
             _builder.newLine();
           } else {
             StringConcatenation _genActorInstanceInitializer = this.genActorInstanceInitializer(root, ai_1);
@@ -608,66 +606,44 @@ public class SubSystemClassGen {
       String _path = ai.getPath();
       String _pathName = this.roomExt.getPathName(_path);
       String instName = _pathName;
-      ArrayList<PortInstance> _arrayList = new ArrayList<PortInstance>();
-      ArrayList<PortInstance> replPorts = _arrayList;
-      EList<PortInstance> _ports = ai.getPorts();
-      final Function1<PortInstance,Boolean> _function = new Function1<PortInstance,Boolean>() {
-          public Boolean apply(final PortInstance e) {
-            boolean _operator_and = false;
-            PortKind _kind = e.getKind();
-            String _literal = _kind.getLiteral();
-            boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_literal, "RELAY");
-            if (!_operator_notEquals) {
-              _operator_and = false;
-            } else {
-              Port _port = e.getPort();
-              int _multiplicity = _port.getMultiplicity();
-              boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(((Integer)_multiplicity), ((Integer)1));
-              _operator_and = BooleanExtensions.operator_and(_operator_notEquals, _operator_notEquals_1);
-            }
-            return ((Boolean)_operator_and);
+      ArrayList<InterfaceItemInstance> _arrayList = new ArrayList<InterfaceItemInstance>();
+      ArrayList<InterfaceItemInstance> replPorts = _arrayList;
+      EList<InterfaceItemInstance> _orderedIfItemInstances = ai.getOrderedIfItemInstances();
+      final Function1<InterfaceItemInstance,Boolean> _function = new Function1<InterfaceItemInstance,Boolean>() {
+          public Boolean apply(final InterfaceItemInstance e) {
+            boolean _isReplicated = e.isReplicated();
+            return ((Boolean)_isReplicated);
           }
         };
-      Iterable<PortInstance> _filter = IterableExtensions.<PortInstance>filter(_ports, _function);
-      CollectionExtensions.<PortInstance>addAll(replPorts, _filter);
-      final Function1<PortInstance,Boolean> _function_1 = new Function1<PortInstance,Boolean>() {
-          public Boolean apply(final PortInstance e) {
+      Iterable<InterfaceItemInstance> _filter = IterableExtensions.<InterfaceItemInstance>filter(_orderedIfItemInstances, _function);
+      CollectionExtensions.<InterfaceItemInstance>addAll(replPorts, _filter);
+      final Function1<InterfaceItemInstance,Boolean> _function_1 = new Function1<InterfaceItemInstance,Boolean>() {
+          public Boolean apply(final InterfaceItemInstance e) {
             EList<InterfaceItemInstance> _peers = e.getPeers();
             boolean _isEmpty = _peers.isEmpty();
             boolean _operator_not = BooleanExtensions.operator_not(_isEmpty);
             return ((Boolean)_operator_not);
           }
         };
-      PortInstance _findFirst = IterableExtensions.<PortInstance>findFirst(replPorts, _function_1);
+      InterfaceItemInstance _findFirst = IterableExtensions.<InterfaceItemInstance>findFirst(replPorts, _function_1);
       boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_findFirst, null);
       boolean haveReplSubPorts = _operator_notEquals;
-      ArrayList<PortInstance> _arrayList_1 = new ArrayList<PortInstance>();
-      ArrayList<PortInstance> ports = _arrayList_1;
-      EList<PortInstance> _ports_1 = ai.getPorts();
-      final Function1<PortInstance,Boolean> _function_2 = new Function1<PortInstance,Boolean>() {
-          public Boolean apply(final PortInstance e) {
-            boolean _operator_and = false;
-            PortKind _kind = e.getKind();
-            String _literal = _kind.getLiteral();
-            boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_literal, "RELAY");
-            if (!_operator_notEquals) {
-              _operator_and = false;
-            } else {
-              Port _port = e.getPort();
-              int _multiplicity = _port.getMultiplicity();
-              boolean _operator_equals = ObjectExtensions.operator_equals(((Integer)_multiplicity), ((Integer)1));
-              _operator_and = BooleanExtensions.operator_and(_operator_notEquals, _operator_equals);
-            }
-            return ((Boolean)_operator_and);
+      ArrayList<InterfaceItemInstance> _arrayList_1 = new ArrayList<InterfaceItemInstance>();
+      ArrayList<InterfaceItemInstance> ports = _arrayList_1;
+      EList<InterfaceItemInstance> _orderedIfItemInstances_1 = ai.getOrderedIfItemInstances();
+      final Function1<InterfaceItemInstance,Boolean> _function_2 = new Function1<InterfaceItemInstance,Boolean>() {
+          public Boolean apply(final InterfaceItemInstance e) {
+            boolean _isSimple = e.isSimple();
+            return ((Boolean)_isSimple);
           }
         };
-      Iterable<PortInstance> _filter_1 = IterableExtensions.<PortInstance>filter(_ports_1, _function_2);
-      Iterable<PortInstance> _union = this.roomExt.<PortInstance>union(_filter_1, replPorts);
-      CollectionExtensions.<PortInstance>addAll(ports, _union);
-      HashMap<PortInstance,Integer> _hashMap = new HashMap<PortInstance,Integer>();
-      HashMap<PortInstance,Integer> offsets = _hashMap;
+      Iterable<InterfaceItemInstance> _filter_1 = IterableExtensions.<InterfaceItemInstance>filter(_orderedIfItemInstances_1, _function_2);
+      Iterable<InterfaceItemInstance> _union = this.roomExt.<InterfaceItemInstance>union(_filter_1, replPorts);
+      CollectionExtensions.<InterfaceItemInstance>addAll(ports, _union);
+      HashMap<InterfaceItemInstance,Integer> _hashMap = new HashMap<InterfaceItemInstance,Integer>();
+      HashMap<InterfaceItemInstance,Integer> offsets = _hashMap;
       int offset = 0;
-      for (final PortInstance p : replPorts) {
+      for (final InterfaceItemInstance p : replPorts) {
         {
           offsets.put(p, ((Integer)offset));
           EList<InterfaceItemInstance> _peers = p.getPeers();
@@ -698,7 +674,7 @@ public class SubSystemClassGen {
           _builder.newLine();
           {
             boolean hasAnyElements = false;
-            for(final PortInstance pi : replPorts) {
+            for(final InterfaceItemInstance pi : replPorts) {
               if (!hasAnyElements) {
                 hasAnyElements = true;
               } else {
@@ -727,17 +703,15 @@ public class SubSystemClassGen {
       _builder.newLine();
       {
         boolean hasAnyElements_1 = false;
-        for(final PortInstance pi_1 : ports) {
+        for(final InterfaceItemInstance pi_1 : ports) {
           if (!hasAnyElements_1) {
             hasAnyElements_1 = true;
           } else {
             _builder.appendImmediate(",", "	");
           }
           {
-            Port _port = pi_1.getPort();
-            int _multiplicity = _port.getMultiplicity();
-            boolean _operator_equals = ObjectExtensions.operator_equals(((Integer)_multiplicity), ((Integer)1));
-            if (_operator_equals) {
+            boolean _isSimple = pi_1.isSimple();
+            if (_isSimple) {
               _builder.append("\t");
               String _genPortInitializer = this.genPortInitializer(root, ai, pi_1);
               _builder.append(_genPortInitializer, "	");
@@ -776,7 +750,7 @@ public class SubSystemClassGen {
     return _xblockexpression;
   }
   
-  private String genPortInitializer(final Root root, final ActorInstance ai, final PortInstance pi) {
+  private String genPortInitializer(final Root root, final ActorInstance ai, final InterfaceItemInstance pi) {
     String _xblockexpression = null;
     {
       String _xifexpression = null;
@@ -827,8 +801,8 @@ public class SubSystemClassGen {
       String _operator_plus_7 = StringExtensions.operator_plus(_operator_plus_5, ((Integer)_operator_plus_6));
       String _operator_plus_8 = StringExtensions.operator_plus(_operator_plus_7, ", ");
       ExpandedActorClass _expandedActorClass = root.getExpandedActorClass(ai);
-      Port _port = pi.getPort();
-      int _interfaceItemLocalId = _expandedActorClass.getInterfaceItemLocalId(_port);
+      InterfaceItem _interfaceItem = pi.getInterfaceItem();
+      int _interfaceItemLocalId = _expandedActorClass.getInterfaceItemLocalId(_interfaceItem);
       int _operator_plus_9 = IntegerExtensions.operator_plus(((Integer)_interfaceItemLocalId), ((Integer)1));
       String _operator_plus_10 = StringExtensions.operator_plus(_operator_plus_8, ((Integer)_operator_plus_9));
       String _operator_plus_11 = StringExtensions.operator_plus(_operator_plus_10, "} /* Port ");
@@ -840,7 +814,7 @@ public class SubSystemClassGen {
     return _xblockexpression;
   }
   
-  private String genReplSubPortInitializers(final Root root, final ActorInstance ai, final PortInstance pi) {
+  private String genReplSubPortInitializers(final Root root, final ActorInstance ai, final InterfaceItemInstance pi) {
       String result = "";
       EList<InterfaceItemInstance> _peers = pi.getPeers();
       for (final InterfaceItemInstance p : _peers) {
@@ -873,8 +847,8 @@ public class SubSystemClassGen {
           String _operator_plus_6 = StringExtensions.operator_plus(_operator_plus_5, ((Integer)_objId));
           String _operator_plus_7 = StringExtensions.operator_plus(_operator_plus_6, ", ");
           ExpandedActorClass _expandedActorClass = root.getExpandedActorClass(ai);
-          Port _port = pi.getPort();
-          int _interfaceItemLocalId = _expandedActorClass.getInterfaceItemLocalId(_port);
+          InterfaceItem _interfaceItem = pi.getInterfaceItem();
+          int _interfaceItemLocalId = _expandedActorClass.getInterfaceItemLocalId(_interfaceItem);
           int _operator_plus_8 = IntegerExtensions.operator_plus(((Integer)_interfaceItemLocalId), ((Integer)1));
           String _operator_plus_9 = StringExtensions.operator_plus(_operator_plus_7, ((Integer)_operator_plus_8));
           String _operator_plus_10 = StringExtensions.operator_plus(_operator_plus_9, ", ");
@@ -945,16 +919,8 @@ public class SubSystemClassGen {
           EList<InterfaceItemInstance> _orderedIfItemInstances = ai.getOrderedIfItemInstances();
           for(final InterfaceItemInstance pi : _orderedIfItemInstances) {
             {
-              boolean _operator_and = false;
-              if (!(pi instanceof PortInstance)) {
-                _operator_and = false;
-              } else {
-                Port _port = ((PortInstance) pi).getPort();
-                int _multiplicity = _port.getMultiplicity();
-                boolean _operator_notEquals = ObjectExtensions.operator_notEquals(((Integer)_multiplicity), ((Integer)1));
-                _operator_and = BooleanExtensions.operator_and((pi instanceof PortInstance), _operator_notEquals);
-              }
-              if (_operator_and) {
+              boolean _isReplicated = pi.isReplicated();
+              if (_isReplicated) {
                 {
                   EList<InterfaceItemInstance> _peers = pi.getPeers();
                   for(final InterfaceItemInstance peer : _peers) {
